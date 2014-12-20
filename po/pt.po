@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-19 20:54+0000\n"
-"PO-Revision-Date: 2014-12-19 21:12+0100\n"
+"POT-Creation-Date: 2014-12-20 22:04+0000\n"
+"PO-Revision-Date: 2014-12-20 22:45+0100\n"
 "Last-Translator: Ari Constancio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "Language: \n"
@@ -32,7 +32,7 @@ msgstr "socket de servidor"
 
 #: ../src/biblesync/biblesync.cc:371
 msgid "bad magic"
-msgstr "má chave"
+msgstr "má 'magia'"
 
 #: ../src/biblesync/biblesync.cc:375
 msgid "bad protocol version"
@@ -60,7 +60,7 @@ msgstr "cabeçalho necessário em falta"
 
 #: ../src/biblesync/biblesync.cc:474
 msgid "Spoof stopped: "
-msgstr ""
+msgstr "Forjamento parado:"
 
 #: ../src/biblesync/biblesync.cc:505
 msgid "Ignoring echo."
@@ -178,11 +178,11 @@ msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework.\n"
 "\n"
 " Books can be downloaded from the SWORD Project."
-msgstr "O Projecto SWORD é uma iniciativa para criar um pacote de software expansível para pesquisa e estudo de Deus e da Sua Palavra. A Plataforma do Projecto SWORD permite fácil manipulação de textos da Bíblia, comentários, léxicos, dicionários e outros livros. Várias interfaces são construídas com base nesta plataforma. Um conjunto de módulos instalados pode ser partilhado entre quaisquer dessas interfaces."
+msgstr "O Projeto SWORD é uma iniciativa para criar um pacote de software expansível para pesquisa e estudo de Deus e da Sua Palavra. A Plataforma do Projeto SWORD permite fácil manipulação de textos da Bíblia, comentários, léxicos, dicionários e outros livros. Várias interfaces são construídas com base nesta plataforma. Um conjunto de módulos instalados pode ser partilhado entre quaisquer dessas interfaces."
 
 #: ../src/gnome2/about_sword.c:106
 msgid "The SWORD Project"
-msgstr "O Projecto SWORD"
+msgstr "O Projeto SWORD"
 
 #: ../src/gnome2/about_trans.c:84
 msgid ""
@@ -1132,7 +1132,7 @@ msgstr "Seleção de mod falhou.\n"
 #: ../src/gnome2/preferences_dialog.c:1017
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
-msgstr ""
+msgstr "BibleSync: %s (frase-passe \"%s\")."
 
 #: ../src/gnome2/preferences_dialog.c:1019
 msgid "Disabled"
@@ -1588,6 +1588,8 @@ msgid ""
 "Presence announcement:\n"
 "\n"
 msgstr ""
+"Anúncio de presença:\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:137
 msgid ""
@@ -1606,10 +1608,12 @@ msgid ""
 ".\n"
 "Navigated indirectly using verse list."
 msgstr ""
+".\n"
+"Navegado indiretamente usando lista de versículos."
 
 #: ../src/main/biblesync_glue.cc:281
 msgid "ERROR: unknown BibleSync indicator: "
-msgstr ""
+msgstr "ERRO: indicador BibleSync desconhecido: "
 
 #: ../src/main/biblesync_glue.cc:284
 msgid "Other indications are:"
@@ -1629,7 +1633,7 @@ msgstr "D/I"
 
 #: ../src/main/biblesync_glue.cc:611
 msgid "Last navigation was Direct or Indirect"
-msgstr ""
+msgstr "Última navegação foi Direta ou Indireta"
 
 #: ../src/main/biblesync_glue.cc:620
 msgid "Last Navigation"
@@ -2188,6 +2192,8 @@ msgid ""
 "Module error: Unusable xref encoding.\n"
 "Please report this, with module & verse"
 msgstr ""
+"Erro de módulo: Codificação xref não-utilizável.\n"
+"Reporte isto por favor, juntamente com módulo e versículo"
 
 #: ../src/main/sidebar.cc:422
 msgid "verse"
@@ -2251,6 +2257,9 @@ msgid ""
 "%s.\n"
 "Would you like to open these as well?%s"
 msgstr ""
+"Módulo %s tem módulos associados:\n"
+"%s.\n"
+"Deseja abri-los também?%s"
 
 #: ../src/main/sword.cc:1056
 #: ../src/main/sword.cc:1227
@@ -2371,9 +2380,9 @@ msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "tipo errado, root node != SwordBookmarks\n"
 
 #: ../src/main/xml.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "wrong type, root node != Copy_Export\n"
-msgstr "tipo errado, root node != %s\n"
+msgstr "tipo errado, nó raíz != Copiar_Exportar\n"
 
 #: ../src/main/xml.c:497
 #, c-format
@@ -2870,15 +2879,13 @@ msgstr "Indica se a referência é colocada no início ou no fim."
 
 #: ../ui/export-dialog.glade.h:29
 #: ../ui/export-dialog.gtkbuilder.h:28
-#, fuzzy
 msgid "Reference last"
-msgstr "Entrada de Referência"
+msgstr "Referência Último"
 
 #: ../ui/export-dialog.glade.h:30
 #: ../ui/export-dialog.gtkbuilder.h:30
-#, fuzzy
 msgid "Reference last button"
-msgstr "Entrada de Referência"
+msgstr "Último botão de Referência"
 
 #: ../ui/export-dialog.glade.h:31
 #: ../ui/export-dialog.gtkbuilder.h:32
@@ -2886,9 +2893,8 @@ msgid "Indicates whether or not version name is included in reference."
 msgstr "Indica se o nome de versão é incluído na referência."
 
 #: ../ui/export-dialog.glade.h:32
-#, fuzzy
 msgid "Include Version"
-msgstr "Versão Sword"
+msgstr "Versão Include"
 
 #: ../ui/export-dialog.glade.h:33
 #: ../ui/export-dialog.gtkbuilder.h:33
@@ -2904,9 +2910,8 @@ msgid "Indicates whether verse numbers should appear inline in the text."
 msgstr "Indica se números de versículo devem aparecer dentro do texto."
 
 #: ../ui/export-dialog.gtkbuilder.h:31
-#, fuzzy
 msgid "Include version"
-msgstr "Versão Sword"
+msgstr "Versão Include"
 
 #: ../ui/gtk2_webedit.ui.h:1
 #: ../ui/gtk_webedit.ui.h:1
@@ -3069,9 +3074,8 @@ msgstr "Inserir uma ligação"
 
 #: ../ui/gtk2_webedit.ui.h:34
 #: ../ui/gtk_webedit.ui.h:34
-#, fuzzy
 msgid "Insert Outline"
-msgstr "Inserir Ligação"
+msgstr "Inserir Alinhamento"
 
 #: ../ui/gtk2_webedit.ui.h:35
 #: ../ui/gtk_webedit.ui.h:35
@@ -3151,12 +3155,12 @@ msgstr "Justificar parágrafo ao centro"
 #: ../ui/gtk2_webedit.ui.h:50
 #: ../ui/gtk_webedit.ui.h:50
 msgid "Full"
-msgstr ""
+msgstr "Completo"
 
 #: ../ui/gtk2_webedit.ui.h:51
 #: ../ui/gtk_webedit.ui.h:51
 msgid "full justify"
-msgstr ""
+msgstr "Justificar totalmente"
 
 #: ../ui/gtk2_webedit.ui.h:52
 #: ../ui/gtk_webedit.ui.h:52
@@ -3286,12 +3290,12 @@ msgstr "Guardar ficheiro como..."
 #: ../ui/gtk2_webedit.ui.h:79
 #: ../ui/gtk_webedit.ui.h:79
 msgid "Strikethrough"
-msgstr ""
+msgstr "Atravessar"
 
 #: ../ui/gtk2_webedit.ui.h:80
 #: ../ui/gtk_webedit.ui.h:80
 msgid "Strikethrough selection"
-msgstr ""
+msgstr "Atravessar seleção"
 
 #: ../ui/gtk2_webedit.ui.h:81
 #: ../ui/gtk_webedit.ui.h:81
@@ -3347,37 +3351,37 @@ msgstr "A_juda"
 #: ../ui/gtk2_webedit.ui.h:91
 #: ../ui/gtk_webedit.ui.h:91
 msgid "toolbutton1"
-msgstr ""
+msgstr "toolbutton1"
 
 #: ../ui/gtk2_webedit.ui.h:92
 #: ../ui/gtk_webedit.ui.h:92
 msgid "toolbutton10"
-msgstr ""
+msgstr "toolbutton10"
 
 #: ../ui/gtk2_webedit.ui.h:93
 #: ../ui/gtk_webedit.ui.h:93
 msgid "toolbutton3"
-msgstr ""
+msgstr "toolbutton3"
 
 #: ../ui/gtk2_webedit.ui.h:94
 #: ../ui/gtk_webedit.ui.h:94
 msgid "toolbutton2"
-msgstr ""
+msgstr "toolbutton2"
 
 #: ../ui/gtk2_webedit.ui.h:95
 #: ../ui/gtk_webedit.ui.h:95
 msgid "toolbutton4"
-msgstr ""
+msgstr "toolbutton4"
 
 #: ../ui/gtk2_webedit.ui.h:96
 #: ../ui/gtk_webedit.ui.h:96
 msgid "toolbutton6"
-msgstr ""
+msgstr "toolbutton6"
 
 #: ../ui/gtk2_webedit.ui.h:97
 #: ../ui/gtk_webedit.ui.h:97
 msgid "toolbutton7"
-msgstr ""
+msgstr "toolbutton7"
 
 #: ../ui/gtk2_webedit.ui.h:98
 #: ../ui/gtk_webedit.ui.h:98
@@ -3432,7 +3436,7 @@ msgstr "Lista"
 #: ../ui/gtk2_webedit.ui.h:108
 #: ../ui/gtk_webedit.ui.h:108
 msgid "Roman Numeral List"
-msgstr ""
+msgstr "Lista de numeral romano"
 
 #: ../ui/gtk2_webedit.ui.h:109
 #: ../ui/gtk_webedit.ui.h:109
@@ -3442,32 +3446,32 @@ msgstr "Lista Numerada"
 #: ../ui/gtk2_webedit.ui.h:110
 #: ../ui/gtk_webedit.ui.h:110
 msgid "Alphabetical List"
-msgstr ""
+msgstr "Lista alfabética"
 
 #: ../ui/gtk2_webedit.ui.h:111
 #: ../ui/gtk_webedit.ui.h:111
 msgid "toolbutton11"
-msgstr ""
+msgstr "toolbutton11"
 
 #: ../ui/gtk2_webedit.ui.h:112
 #: ../ui/gtk_webedit.ui.h:112
 msgid "toolbutton12"
-msgstr ""
+msgstr "toolbutton12"
 
 #: ../ui/gtk2_webedit.ui.h:113
 #: ../ui/gtk_webedit.ui.h:113
 msgid "Set font color of selected text."
-msgstr ""
+msgstr "Definir cor da fonte no texto selecionado."
 
 #: ../ui/gtk2_webedit.ui.h:114
 #: ../ui/gtk_webedit.ui.h:114
 msgid "Highlight selected text by setting background color."
-msgstr ""
+msgstr "Sublinhar o texto selecionado definindo a cor de fundo."
 
 #: ../ui/gtk2_webedit.ui.h:115
 #: ../ui/gtk_webedit.ui.h:115
 msgid "toolbutton9"
-msgstr ""
+msgstr "toolbutton9"
 
 #: ../ui/markverse.glade.h:1
 #: ../ui/markverse.gtkbuilder.h:1
@@ -3735,7 +3739,7 @@ msgstr "Fundo"
 #: ../ui/prefs.glade.h:5
 #: ../ui/prefs.gtkbuilder.h:13
 msgid " "
-msgstr ""
+msgstr " "
 
 #: ../ui/prefs.glade.h:6
 #: ../ui/prefs.gtkbuilder.h:14
@@ -3860,7 +3864,7 @@ msgstr "<b>BibleSync</b>"
 #: ../ui/prefs.glade.h:34
 #: ../ui/prefs.gtkbuilder.h:34
 msgid "Xiphos is the first Bible study program to provide an implementation of BibleSync, a synchronization protocol for Bible programs. If you work with multiple Bible programs, or if you work in a team, or if you have classroom activities using shared study, BibleSync can be a useful tool for you. BibleSync operates in 1 of 3 modes: Personal, to synchronize multiple Bible applications of your own, or in a working team; Speaker, to drive a lecture audience's Bible programs to follow along; Audience, to receive the speaker's navigation."
-msgstr ""
+msgstr "Xiphos é o primeiro programa de estudo bíblico a fornecer uma implementação de BibleSync, um protocolo de sincronização de programas bíblicos. Se trabalha com múltiplos programas bíblicos, ou  trabalha numa equipa, ou tem atividades de sala de aula com estudo partilhado, BibleSync pode ser uma ferramenta útil para si. BibleSync opera em um de 3 modos: Pessoal, para sincronizar múltiplas aplicações bíblicas na sua posse, ou na sua equipa; Oradpr, para dirigir os programas bíblicos da sua audiência; Audiência, para receber a navegação do orador."
 
 #: ../ui/prefs.glade.h:35
 #: ../ui/prefs.gtkbuilder.h:35
@@ -3870,7 +3874,7 @@ msgstr "<i>Modo:</i>"
 #: ../ui/prefs.glade.h:36
 #: ../ui/prefs.gtkbuilder.h:36
 msgid "Select the mode in which BibleSync should operate."
-msgstr ""
+msgstr "Selecionar o modo segundo o qual BibleSync deve operar."
 
 #: ../ui/prefs.glade.h:37
 #: ../ui/prefs.gtkbuilder.h:37
@@ -3884,9 +3888,8 @@ msgstr "Desativar BibleSync."
 
 #: ../ui/prefs.glade.h:39
 #: ../ui/prefs.gtkbuilder.h:39
-#, fuzzy
 msgid "BSP off radio button"
-msgstr "Botão de Rádio de Livro"
+msgstr "Botão de Rádio de BSP desligado"
 
 #: ../ui/prefs.glade.h:40
 #: ../ui/prefs.gtkbuilder.h:40
@@ -3900,9 +3903,8 @@ msgstr "Ativar BibleSync como orador."
 
 #: ../ui/prefs.glade.h:42
 #: ../ui/prefs.gtkbuilder.h:42
-#, fuzzy
 msgid "BSP speaker radio button"
-msgstr "Rádio Frase exacta"
+msgstr "Botão de Rádio de orador BSP"
 
 #: ../ui/prefs.glade.h:43
 #: ../ui/prefs.gtkbuilder.h:43
@@ -3912,13 +3914,12 @@ msgstr "_Audiência"
 #: ../ui/prefs.glade.h:44
 #: ../ui/prefs.gtkbuilder.h:44
 msgid "Enable BibleSync as a member of the audience."
-msgstr ""
+msgstr "Ativar BibleSync como membro da audiência."
 
 #: ../ui/prefs.glade.h:45
 #: ../ui/prefs.gtkbuilder.h:45
-#, fuzzy
 msgid "BSP audience radio button"
-msgstr "Botão de Rádio para Texto Simples"
+msgstr "Botão de Rádio de audiência BSP"
 
 #: ../ui/prefs.glade.h:46
 #: ../ui/prefs.gtkbuilder.h:46
@@ -3932,9 +3933,8 @@ msgstr "Ativar BibleSync para uso pessoal ou de equipa."
 
 #: ../ui/prefs.glade.h:48
 #: ../ui/prefs.gtkbuilder.h:48
-#, fuzzy
 msgid "BSP personal radio button"
-msgstr "Rádio Expressão Regular"
+msgstr "Botão de Rádio de BSP pessoal"
 
 #: ../ui/prefs.glade.h:49
 #: ../ui/prefs.gtkbuilder.h:49
@@ -3944,13 +3944,12 @@ msgstr "Privado"
 #: ../ui/prefs.glade.h:50
 #: ../ui/prefs.gtkbuilder.h:50
 msgid "When in Personal mode, only programs running on this machine will hear your navigation."
-msgstr ""
+msgstr "Em modo pessoal, apenas programas que correm nesta máquina escutarão a sua navegação."
 
 #: ../ui/prefs.glade.h:51
 #: ../ui/prefs.gtkbuilder.h:51
-#, fuzzy
 msgid "BSP privacy button"
-msgstr "Botão de Rádio de Versículo"
+msgstr "Botão de Rádio de privacidade BSP"
 
 #: ../ui/prefs.glade.h:52
 #: ../ui/prefs.gtkbuilder.h:52
@@ -3960,7 +3959,7 @@ msgstr "<i>Navegar:</i>"
 #: ../ui/prefs.glade.h:53
 #: ../ui/prefs.gtkbuilder.h:53
 msgid "Choose how to accept incoming navigation synchronization."
-msgstr ""
+msgstr "Escolher como aceitar sincronização recebida de navegação."
 
 #: ../ui/prefs.glade.h:54
 #: ../ui/prefs.gtkbuilder.h:54
@@ -3970,13 +3969,12 @@ msgstr "_Direto"
 #: ../ui/prefs.glade.h:55
 #: ../ui/prefs.gtkbuilder.h:55
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
-msgstr ""
+msgstr "Navegação BibleSync enviará Xiphos diretamente para o versículo indicado."
 
 #: ../ui/prefs.glade.h:56
 #: ../ui/prefs.gtkbuilder.h:56
-#, fuzzy
 msgid "BSP nav direct radio button"
-msgstr "Rádio Módulo singular"
+msgstr "Botão de Rádio de navegação direta BSP"
 
 #: ../ui/prefs.glade.h:57
 #: ../ui/prefs.gtkbuilder.h:57
@@ -3986,13 +3984,12 @@ msgstr "Lista de _versículos"
 #: ../ui/prefs.glade.h:58
 #: ../ui/prefs.gtkbuilder.h:58
 msgid "BibleSync navigation will use Xiphos' sidebar verse list."
-msgstr ""
+msgstr "Navegação BibleSync usará lista lateral de versículos de Xiphos."
 
 #: ../ui/prefs.glade.h:59
 #: ../ui/prefs.gtkbuilder.h:59
-#, fuzzy
 msgid "BSP nav verse list radio button"
-msgstr "Rádio Lista de Módulos"
+msgstr "Botão de Rádio de navegação na lista de versículos BSP"
 
 #: ../ui/prefs.glade.h:60
 #: ../ui/prefs.gtkbuilder.h:60
@@ -4002,7 +3999,7 @@ msgstr "<i>Escutar:</i>"
 #: ../ui/prefs.glade.h:61
 #: ../ui/prefs.gtkbuilder.h:61
 msgid "Xiphos will listen to Speakers according to choice here."
-msgstr ""
+msgstr "Xiphos seguirá oradores de acordo com esta escolha."
 
 #: ../ui/prefs.glade.h:62
 #: ../ui/prefs.gtkbuilder.h:62
@@ -4012,13 +4009,12 @@ msgstr "Seletivo"
 #: ../ui/prefs.glade.h:63
 #: ../ui/prefs.gtkbuilder.h:63
 msgid "Choose the Speakers to be followed."
-msgstr ""
+msgstr "Escolhar os oradores a seguir."
 
 #: ../ui/prefs.glade.h:64
 #: ../ui/prefs.gtkbuilder.h:64
-#, fuzzy
 msgid "BSP listen some radio button"
-msgstr "Botão de Rádio para Texto Simples"
+msgstr "Botão de Rádio de BSP à escuta de alguns"
 
 #: ../ui/prefs.glade.h:65
 #: ../ui/prefs.gtkbuilder.h:65
@@ -4028,13 +4024,12 @@ msgstr "Todos"
 #: ../ui/prefs.glade.h:66
 #: ../ui/prefs.gtkbuilder.h:66
 msgid "All Speakers will be followed."
-msgstr ""
+msgstr "Todos os oradores serão seguidos."
 
 #: ../ui/prefs.glade.h:67
 #: ../ui/prefs.gtkbuilder.h:67
-#, fuzzy
 msgid "BSP listen all radio button"
-msgstr "Rádio Expressão Regular"
+msgstr "Botão de Rádio de BSP à escuta de todos"
 
 #: ../ui/prefs.glade.h:68
 #: ../ui/prefs.gtkbuilder.h:68
@@ -4044,13 +4039,12 @@ msgstr "Nenhum"
 #: ../ui/prefs.glade.h:69
 #: ../ui/prefs.gtkbuilder.h:69
 msgid "No Speakers will be followed."
-msgstr ""
+msgstr "Nenhum orador será seguido."
 
 #: ../ui/prefs.glade.h:70
 #: ../ui/prefs.gtkbuilder.h:70
-#, fuzzy
 msgid "BSP listen none radio button"
-msgstr "Botão de Rádio para Texto Simples"
+msgstr "Botão de Rádio de BSP não à escuta"
 
 #: ../ui/prefs.glade.h:71
 #: ../ui/prefs.gtkbuilder.h:71
@@ -4060,7 +4054,7 @@ msgstr "<i>Especial:</i>"
 #: ../ui/prefs.glade.h:72
 #: ../ui/prefs.gtkbuilder.h:72
 msgid "Additional traces can be presented during BibleSync operation by enabling presence, mismatch, and debug. Beware enabling these, they can be very chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
-msgstr ""
+msgstr "Detalhes adicionais podem ser apresentados durante a operação de BibleSync ativando presença, mismatch e depurar. Tenha atenção de que estes elementos acrescentam muita informação. Decida ainda se deve permitir o parâmetro de grupo como número de aba Xiphos."
 
 #: ../ui/prefs.glade.h:73
 #: ../ui/prefs.gtkbuilder.h:73
@@ -4070,13 +4064,12 @@ msgstr "Presença"
 #: ../ui/prefs.glade.h:74
 #: ../ui/prefs.gtkbuilder.h:74
 msgid "Presence announcements will be shown in dialogs."
-msgstr ""
+msgstr "Anúncios de presença será mostrados em diálogos."
 
 #: ../ui/prefs.glade.h:75
 #: ../ui/prefs.gtkbuilder.h:75
-#, fuzzy
 msgid "BSP presence button"
-msgstr "Botão de Rádio de Versículo"
+msgstr "Botão de Rádio de presença BSP"
 
 #: ../ui/prefs.glade.h:76
 #: ../ui/prefs.gtkbuilder.h:76
@@ -4086,12 +4079,12 @@ msgstr "Imcompatibilidade"
 #: ../ui/prefs.glade.h:77
 #: ../ui/prefs.gtkbuilder.h:77
 msgid "Mismatches from your session will be shown in dialogs."
-msgstr ""
+msgstr "Mismatches da sua sessão serão mostrados em diálogos."
 
 #: ../ui/prefs.glade.h:78
 #: ../ui/prefs.gtkbuilder.h:78
 msgid "BSP mismatch button"
-msgstr ""
+msgstr "Botão de mismatch BSP"
 
 #: ../ui/prefs.glade.h:79
 #: ../ui/prefs.gtkbuilder.h:79
@@ -4101,28 +4094,27 @@ msgstr "Depurar"
 #: ../ui/prefs.glade.h:80
 #: ../ui/prefs.gtkbuilder.h:80
 msgid "Packet tracing."
-msgstr ""
+msgstr "Traçamento de pacote."
 
 #: ../ui/prefs.glade.h:81
 #: ../ui/prefs.gtkbuilder.h:81
 msgid "BSP event debug button"
-msgstr ""
+msgstr "Botão para depurar evento BSP"
 
 #: ../ui/prefs.glade.h:82
 #: ../ui/prefs.gtkbuilder.h:82
 msgid "_Group as tab"
-msgstr ""
+msgstr "_Grupo como aba"
 
 #: ../ui/prefs.glade.h:83
 #: ../ui/prefs.gtkbuilder.h:83
 msgid "Interpret the protocol's group number parameter as Xiphos' tab number. Disabling this may be necessary if some Speakers' use of group number is not appropriate as a tab number."
-msgstr ""
+msgstr "Interpretar o parâmetro de número de grupo do protocolo como número de aba Xiphos. Pode ser necessário desativar isto se o uso do número de grupo por alguns Oradores não for adequado como número de aba."
 
 #: ../ui/prefs.glade.h:84
 #: ../ui/prefs.gtkbuilder.h:84
-#, fuzzy
 msgid "BSP event group-as-tab button"
-msgstr "Rádio Módulo singular"
+msgstr "Botão de rádio de evento grupo-como-aba BSP"
 
 #: ../ui/prefs.glade.h:86
 #: ../ui/prefs.gtkbuilder.h:86
@@ -4272,7 +4264,7 @@ msgstr "Número de Versículo"
 #: ../ui/prefs.glade.h:115
 #: ../ui/prefs.gtkbuilder.h:115
 msgid "Offset the verse number in several ways"
-msgstr ""
+msgstr "Deslocar o número de versículo de várias formas"
 
 #: ../ui/prefs.glade.h:117
 #: ../ui/prefs.gtkbuilder.h:117
@@ -4292,7 +4284,7 @@ msgstr "Parêntesis"
 #: ../ui/prefs.glade.h:120
 #: ../ui/prefs.gtkbuilder.h:120
 msgid "Show verse number with [surrounding brackets]"
-msgstr ""
+msgstr "Mostrar número de versículo com [parêntesis retos]"
 
 #: ../ui/prefs.glade.h:121
 #: ../ui/prefs.gtkbuilder.h:121
@@ -5272,11 +5264,11 @@ msgstr "Saiba como traduzir a interface de Xiphos para outras línguas"
 #: ../ui/xi-menus.glade.h:51
 #: ../ui/xi-menus.gtkbuilder.h:31
 msgid "_About The SWORD Project"
-msgstr "_Sobre o Projecto SWORD"
+msgstr "_Sobre o Projeto SWORD"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr "Aprender sobre o Projecto Sword, do qual Xiphos é uma aplicação"
+msgstr "Aprender sobre o Projeto Sword, do qual Xiphos é uma aplicação"
 
 #: ../ui/xi-menus.glade.h:53
 #: ../ui/xi-menus.gtkbuilder.h:32
@@ -5315,11 +5307,11 @@ msgstr "Versículo por linha"
 #: ../ui/xi-menus.glade.h:73
 #: ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnote/Cross-ref Markers"
-msgstr ""
+msgstr "Marcadores de Nota de Rodapé/Referência Cruzada"
 
 #: ../ui/xi-menus.glade.h:74
 msgid "Show non-anonymous markers e.g. \"*n23\""
-msgstr ""
+msgstr "Mostrar marcadores não-anónimos, ex. \"*n23\""
 
 #: ../ui/xi-menus.glade.h:79
 #: ../ui/xi-menus-popup.gtkbuilder.h:56
@@ -5413,7 +5405,7 @@ msgstr "Guardar lista como uma série de marcas"
 #: ../ui/xi-menus.glade.h:102
 #: ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Provide a dialog in which to paste a line of verse references, to fill the verse list."
-msgstr ""
+msgstr "Fornecer um diálogo no qual cola uma linha de referências de versículos, para preencher a lista de versículos."
 
 #: ../ui/xi-menus.glade.h:103
 #: ../ui/xi-menus-popup.gtkbuilder.h:90
@@ -5423,7 +5415,7 @@ msgstr "Preencher lista de versículos"
 #: ../ui/xi-menus.glade.h:104
 #: ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid "Push the entire verse list contents directly into the history list."
-msgstr ""
+msgstr "Enviar o conteúdo completo da lista de versículos para a lista de histórico."
 
 #: ../ui/xi-menus.glade.h:105
 #: ../ui/xi-menus-popup.gtkbuilder.h:92
@@ -5433,7 +5425,7 @@ msgstr "Carregar histórico da lista de versículos"
 #: ../ui/xi-menus.glade.h:106
 #: ../ui/xi-menus-popup.gtkbuilder.h:95
 msgid "Send this verse list via BibleSync to others, if you are in Personal or Speaker mode."
-msgstr ""
+msgstr "Enviar esta lista de versículos via BibleSync para outros, em modo Pessoal ou Orador."
 
 #: ../ui/xi-menus.glade.h:107
 #: ../ui/xi-menus-popup.gtkbuilder.h:94
@@ -5557,7 +5549,7 @@ msgid ""
 "\tseparate ['dialog'] window"
 msgstr ""
 "Abrir módulo seleccionado numa\n"
-"      janela ['diálogo'] separada"
+"\tjanela ['diálogo'] separada      "
 
 #: ../ui/xi-menus.glade.h:134
 #: ../ui/xi-menus-popup.gtkbuilder.h:31
@@ -5617,7 +5609,7 @@ msgstr "Alinhado"
 #: ../ui/xi-menus.glade.h:145
 #: ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Open module in editor or plain display window"
-msgstr ""
+msgstr "Abrir módulo em editor ou janela de visualização simples"
 
 #: ../ui/xi-menus.glade.h:146
 #: ../ui/xi-menus-popup.gtkbuilder.h:84
