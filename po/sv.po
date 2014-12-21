@@ -1,105 +1,102 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-17 07:30-0400\n"
-"PO-Revision-Date: 2009-12-15 14:54+0000\n"
+"PO-Revision-Date: 2014-12-21 21:09+0100\n"
 "Last-Translator: Matthew Talbert <ransom1982@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language-Team: Xiphos Dev Team <gnomesword-developers@lists.sourceforge.net>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-03-21 04:50+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: ../src/biblesync/biblesync.cc:129
 msgid "network setup errors."
-msgstr ""
+msgstr "anslutningsproblem."
 
 #: ../src/biblesync/biblesync.cc:175
 msgid " client socket"
-msgstr ""
+msgstr " socket på klientsidan"
 
 #: ../src/biblesync/biblesync.cc:225
 msgid " server socket"
-msgstr ""
+msgstr " socket på serversidan"
 
 #: ../src/biblesync/biblesync.cc:370
 msgid "bad magic"
-msgstr ""
+msgstr "felaktigt kontrollvärde"
 
 #: ../src/biblesync/biblesync.cc:373
 msgid "bad protocol version"
-msgstr ""
+msgstr "felaktig protokollversion"
 
 #: ../src/biblesync/biblesync.cc:378
 msgid "bad msg type"
-msgstr ""
+msgstr "felaktig meddelandetyp"
 
 #: ../src/biblesync/biblesync.cc:381
 msgid "bad packet count"
-msgstr ""
+msgstr "felaktigt antal paket"
 
 #: ../src/biblesync/biblesync.cc:384
 msgid "bad packet index"
-msgstr ""
+msgstr "felaktigt paketindex"
 
 #: ../src/biblesync/biblesync.cc:427
 msgid "bad body format"
-msgstr ""
+msgstr "felaktigt format"
 
 #: ../src/biblesync/biblesync.cc:441
 msgid "missing required header "
-msgstr ""
+msgstr "saknar nödvändig header"
 
 #: ../src/biblesync/biblesync.cc:466
 msgid "UUID spoofed: wrong ipaddr."
-msgstr ""
+msgstr "UUID förfalskat: Felaktig IP-adress."
 
 #: ../src/biblesync/biblesync.cc:493
 msgid "Ignoring echo."
-msgstr ""
+msgstr "Ignorerar eko."
 
 #: ../src/biblesync/biblesync.cc:522
 msgid "Domain not 'BIBLE-VERSE': "
-msgstr ""
+msgstr "Domänen är ej 'BIBLE-VERSE':"
 
 #: ../src/biblesync/biblesync.cc:530
 msgid "Invalid group: "
-msgstr ""
+msgstr "Felaktig grupp:"
 
 #: ../src/biblesync/biblesync.cc:560
 msgid " present at "
-msgstr ""
+msgstr " på adress"
 
 #: ../src/biblesync/biblesync.cc:562
 msgid " using "
-msgstr ""
+msgstr " med grupp"
 
 #: ../src/biblesync/biblesync.cc:685
-#, fuzzy
 msgid "[no dump ready]"
-msgstr "Hela modulen"
+msgstr "[ingen dump redo]"
 
 #: ../src/biblesync/biblesync.cc:692
 msgid "select < 0"
-msgstr ""
+msgstr "select < 0"
 
 #: ../src/biblesync/biblesync.cc:702
 msgid "recvfrom < 0"
-msgstr ""
+msgstr "recvfrom < 0"
 
 #: ../src/biblesync/biblesync.cc:791
-#, fuzzy
 msgid "Transmit failed.\n"
-msgstr "%s misslyckades"
+msgstr "Transmissionen misslyckades.\n"
 
 #: ../src/biblesync/biblesync.cc:792
-msgid ""
-"Unable to multicast; BibleSync is now disabled. If your network connection "
-"changed while this program was active, it may be sufficient to re-enable."
-msgstr ""
+msgid "Unable to multicast; BibleSync is now disabled. If your network connection changed while this program was active, it may be sufficient to re-enable."
+msgstr "Multicast misslyckades; Bibelsynk är nu avstängt. Om din nätverksanslutning ändrades medan detta program var aktivt, så kan det hjälpa att försöka igen."
 
 #: ../src/backend/sword_main.cc:740
 msgid ""
@@ -107,6 +104,8 @@ msgid ""
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
+"Xiphos-fel: \"ska inte kunna hända\", display_mod: null\n"
+"Vänligen "
 
 #: ../src/backend/sword_main.cc:1091
 msgid "Configuration not found"
@@ -134,7 +133,7 @@ msgstr "Namnlöst dokument"
 
 #: ../src/editor/slib-editor.c:644 ../src/editor/webkit_editor.c:310
 msgid "Are you sure you want to delete the note for"
-msgstr ""
+msgstr "Är du säker på att du vill ta bort noteringen för"
 
 #: ../src/editor/slib-editor.c:687
 msgid "HTML Output"
@@ -172,7 +171,7 @@ msgstr "_Spara"
 
 #: ../src/editor/slib-editor.c:746
 msgid "Save _As..."
-msgstr "Spara _som..."
+msgstr "Spara s_om..."
 
 #: ../src/editor/slib-editor.c:752 ../ui/gtk2_webedit.ui.h:56
 #: ../ui/gtk_webedit.ui.h:56
@@ -190,7 +189,7 @@ msgstr "Radera"
 
 #: ../src/editor/slib-editor.c:760
 msgid "Delete current note"
-msgstr ""
+msgstr "Ta bort aktuell anteckning"
 
 #: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
@@ -226,24 +225,22 @@ msgstr "Spara"
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
 #: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
-msgstr ""
+msgstr "Infoga länk"
 
 #: ../src/editor/slib-editor.c:1254 ../src/editor/slib-editor.c:1292
 #: ../src/editor/webkit_editor.c:1336 ../src/editor/webkit_editor.c:1374
 msgid "Save the changes to document"
-msgstr "Spara ändringarna till dokumentet"
+msgstr "Spara ändringarna i dokumentet"
 
 #: ../src/editor/slib-editor.c:1255 ../src/editor/slib-editor.c:1293
 #: ../src/editor/webkit_editor.c:1337 ../src/editor/webkit_editor.c:1375
 msgid "before closing?"
-msgstr ""
+msgstr "innan det stängs?"
 
 #: ../src/editor/slib-editor.c:1262 ../src/editor/slib-editor.c:1300
 #: ../src/editor/webkit_editor.c:1344 ../src/editor/webkit_editor.c:1382
 msgid "If you don't save, changes will be permanently lost."
-msgstr ""
-"Om du inte sparar så kommer alla förändringar du har gjort att försvinna "
-"permanent."
+msgstr "Om du inte sparar så kommer alla förändringar du har gjort att försvinna permanent."
 
 #: ../src/editor/slib-editor.c:1291 ../src/editor/webkit_editor.c:1373
 #: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:38
@@ -256,11 +253,11 @@ msgstr "StudyPad"
 
 #: ../src/editor/slib-editor.c:1363 ../src/editor/webkit_editor.c:1438
 msgid "Note Editor"
-msgstr "Notisredigerare"
+msgstr "Anteckningsredigerare"
 
 #: ../src/editor/slib-editor.c:1379 ../src/editor/webkit_editor.c:1453
 msgid "Prayer List/Journal Editor"
-msgstr "Bönelista/journal-redigerare"
+msgstr "Bönelista/Journal-redigerare"
 
 #: ../src/gecko/gecko-html.cpp:177
 msgid "Unlock "
@@ -302,57 +299,57 @@ msgstr "Om Sword-modul"
 
 #: ../src/gnome2/about_modules.c:347 ../src/gnome2/mod_mgr.c:322
 msgid "The module has no About information."
-msgstr ""
+msgstr "Denna modul har inget om-avsnitt."
 
 #: ../src/gnome2/about_sword.c:81
 msgid ""
-"The SWORD Project is an effort to create an ever-expanding software package "
-"for research and study of God and His Word. The SWORD Project framework "
-"allows easy use and study of Bible texts, commentaries, lexicons, "
-"dictionaries, and other books. Many frontends are built using this "
-"framework. An installed set of books may be shared among all frontends using "
-"the framework.\n"
+"The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework.\n"
 "\n"
 " Books can be downloaded from the SWORD Project."
 msgstr ""
+"The SWORD Project är en satsning för att skapa ett ständigt växande mjukvarupaket för att studera Gud och Hans Ord. The SWORD Projects ramverk gör det enkelt att använda och studera bibeltexter, kommentarer, uppslagsverk, ordböcker och andra böcker. Många applikationer är uppbygda på detta ramverk. En uppsättning installerade böcker kan delas mellan alla applikationer som använder ramverket.\n"
+"\n"
+"Böcker kan laddas ner från the SWORD Project."
 
 #: ../src/gnome2/about_sword.c:106
 msgid "The SWORD Project"
-msgstr "SWORD Project"
+msgstr "The SWORD Project"
 
 #: ../src/gnome2/about_trans.c:84
 msgid ""
-"Do you like using Xiphos to study the Bible? Would you like to see its "
-"display using your native language? You could translate Xiphos! \n"
+"Do you like using Xiphos to study the Bible? Would you like to see its display using your native language? You could translate Xiphos! \n"
 "\n"
-"We are always looking for contributions of new translations of Xiphos into "
-"other languages. If you are able to translate for us, please see the link "
-"below, contact us, and get involved with our efforts."
+"We are always looking for contributions of new translations of Xiphos into other languages. If you are able to translate for us, please see the link below, contact us, and get involved with our efforts."
 msgstr ""
+"Gillar du att använda Xiphos för att studera bibeln? Skulle du vilja se menyerna i ett annat språk? Du kan översätta Xiphos!\n"
+"\n"
+"Vi letar alltid efter bidrag till nya översättningar av Xiphos till nya språk. Om du är villig och har förmågan att översätta åt oss, vänligen följ länken nedan, kontakta oss, och involvera dig i arbetet."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
-msgstr ""
+msgstr "Om Xiphos-översättning"
 
 #: ../src/gnome2/about_trans.c:140
 msgid "See TRANSLATION-HOWTO in Xiphos source"
-msgstr ""
+msgstr "Se TRANSLATION-HOWTO i Xiphos-källkoden"
 
 #: ../src/gnome2/about_trans.c:146
 msgid "Xiphos development"
-msgstr ""
+msgstr "Xiphos-utveckling"
 
 #: ../src/gnome2/about_xiphos.c:122
 msgid "Copyright © 2000-2014 Xiphos Development Team"
-msgstr ""
+msgstr "Upphovsrätt © 2000-2014 Xiphos Development Team"
 
 #: ../src/gnome2/about_xiphos.c:125
 msgid ""
 "\n"
 "Powered by The SWORD Project.\n"
-"We would like to thank Troy Griffitts and all the other folks who have given "
-"us The SWORD Project."
+"We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
 msgstr ""
+"\n"
+"Powered by The SWORD Project.\n"
+"Vi vill rikta ett stort tack till Troy Griffitts och alla andra inblandade som har gett oss The SWORD Project."
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:369
@@ -377,9 +374,8 @@ msgid "Folder: "
 msgstr "Mapp: "
 
 #: ../src/gnome2/bookmarks_menu.c:212
-#, fuzzy
 msgid "Specify bookmarks file"
-msgstr "Redigera bokmärkesobjekt"
+msgstr "Ange bokmärkesfil"
 
 #: ../src/gnome2/bookmarks_menu.c:355 ../ui/xi-menus.glade.h:61
 #: ../ui/xi-menus-popup.gtkbuilder.h:28
@@ -426,13 +422,15 @@ msgstr "Etikett: "
 #: ../src/gnome2/export_bookmarks.c:254
 #, c-format
 msgid "Search result: %s"
-msgstr ""
+msgstr "Sökresultat: %s"
 
 #: ../src/gnome2/bookmarks_treeview.c:754
 msgid ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
 msgstr ""
+"Multi-referensbokmärken kan inte öppnas\n"
+"i separata flikar."
 
 #: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1493
 #: ../src/gnome2/sidebar.c:1526
@@ -440,16 +438,15 @@ msgid "Bookmarks"
 msgstr "Bokmärken"
 
 #: ../src/gnome2/cipher_key_dialog.c:60
-#, fuzzy, c-format
+#, c-format
 msgid "Cipher key for module %s"
-msgstr "Letar efter SWORD-moduler"
+msgstr "Krypteringsnyckel för modul %s"
 
 #: ../src/gnome2/cipher_key_dialog.c:61
 msgid "for:"
-msgstr ""
+msgstr "för:"
 
 #: ../src/gnome2/cipher_key_dialog.c:64
-#, fuzzy
 msgid "Enter Key: "
 msgstr "Ange krypteringsnyckel: "
 
@@ -473,16 +470,16 @@ msgstr "Verslista"
 
 #: ../src/gnome2/export_bookmarks.c:694
 msgid "VerseList"
-msgstr ""
+msgstr "Verslista"
 
 #: ../src/gnome2/export_bookmarks.c:699
 msgid "SearchResults"
-msgstr ""
+msgstr "Sökresultat"
 
 #: ../src/gnome2/export_dialog.c:319 ../ui/export-dialog.glade.h:4
 #: ../ui/export-dialog.gtkbuilder.h:4
 msgid "Please check copyright before exporting!"
-msgstr "Vänligen kontrollera copyright före export!"
+msgstr "Vänligen kontrollera upphovsrätt innan du exporterar!"
 
 #: ../src/gnome2/find_dialog.c:186 ../src/gnome2/find_dialog.c:344
 #: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
@@ -491,7 +488,7 @@ msgstr "Hitta"
 
 #: ../src/gnome2/find_dialog.c:205
 msgid "Enter Word or Phrase"
-msgstr ""
+msgstr "Fyll i ett ord eller en fras"
 
 #: ../src/gnome2/find_dialog.c:220
 msgid "Search backwards"
@@ -528,33 +525,32 @@ msgstr "Använd standardtypsnittet för denna modul"
 
 #: ../src/gnome2/gui.c:186
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr ""
+msgstr "BUG! Xiphos är på väg att krascha på grund av ett \"STRDUP\"-fel (strängduplicering)."
 
 #: ../src/gnome2/gui.c:187 ../src/gnome2/gui.c:222
 msgid "Please report this error to the Xiphos team with:"
-msgstr ""
+msgstr "Vänligen rapportera felet till Xiphos-teamet med:"
 
 #: ../src/gnome2/gui.c:221
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
-msgstr ""
+msgstr "BUG! Xiphos är på väg att krascha på grund av ett \"STRING\"-fel (strängfel)."
 
 #: ../src/gnome2/main_window.c:570
 #, c-format
 msgid "Module has no support for %s."
-msgstr ""
+msgstr "Modulen har inget stöd för %s."
 
 #: ../src/gnome2/main_window.c:640
-#, fuzzy
 msgid "Xiphos: No windows."
-msgstr "Xiphos:"
+msgstr "Xiphos: Inga fönster."
 
 #: ../src/gnome2/main_window.c:696
 msgid "BibleSync: Current navigation sent."
-msgstr ""
+msgstr "BibleSync: Nuvarande navigering skickad."
 
 #: ../src/gnome2/main_window.c:700
 msgid "BibleSync: Not speaking."
-msgstr ""
+msgstr "BibleSync: Talar ej."
 
 #: ../src/gnome2/main_window.c:884
 msgid "Xiphos - Bible Study Software"
@@ -581,7 +577,7 @@ msgstr "Bok-vy"
 
 #: ../src/gnome2/main_window.c:1124
 msgid "Welcome to Xiphos"
-msgstr ""
+msgstr "Välkommen till Xiphos"
 
 #: ../src/gnome2/menu_popup.c:1207
 msgid ""
@@ -594,14 +590,21 @@ msgid ""
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
 msgstr ""
+"Namnändringar är inte tillgängliga i Windows.\n"
+"\n"
+"Xiphos är begränsat av Windows filsystem,\n"
+"eftersom det inte tillåter ändring av namn\n"
+"på filer som är öpnnade av ett program.\n"
+"Det går därför inte att byta namn på\n"
+"kommentarer i Windows-miljö."
 
 #: ../src/gnome2/menu_popup.c:1226
 msgid "Rename Commentary"
-msgstr ""
+msgstr "Byt namn på kommentar"
 
 #: ../src/gnome2/menu_popup.c:1229
 msgid "Choose Commentary Name"
-msgstr ""
+msgstr "Namnge kommentar"
 
 #: ../src/gnome2/menu_popup.c:1231
 msgid "New Name"
@@ -627,16 +630,20 @@ msgid ""
 "Failed to create new configuration:\n"
 "%s"
 msgstr ""
+"Misslyckades med att skapa ny konfiguration:\n"
+"%s"
 
 #: ../src/gnome2/menu_popup.c:1299
 msgid ""
 "Configuration build error:\n"
 "\n"
 msgstr ""
+"Konfigurationsbyggfel:\n"
+"\n"
 
 #: ../src/gnome2/menu_popup.c:1885
 msgid "No module in this pane."
-msgstr ""
+msgstr "Ingen modul i denna vy."
 
 #. *****************************************************************************
 #. * defines
@@ -648,62 +655,79 @@ msgid ""
 "This is Xiphos' mechanism to get new and updated content.\n"
 "If you have never been here before, please take a moment to look it over.\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
-"Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/Remove</b> will show you what repositories are currently known.\n"
 "\n"
-"<b>Module Sources: Choose</b> is for deciding from where modules should "
-"come, that is, from which repository Xiphos should obtain them, as well as "
-"where they should be placed on your system. Set <i>Install Source</i> and "
-"<i>Install Destination</i>, then click <i>Refresh</i>.\n"
+"<b>Module Sources: Choose</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system. Set <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n"
 "\n"
-"<b>Modules: Install/Update</b> is for selecting and obtaining modules after "
-"choosing source and destination.\n"
+"<b>Modules: Install/Update</b> is for selecting and obtaining modules after choosing source and destination.\n"
 "\n"
 "<b>Modules: Maintenance</b> is for archive and index creation.\n"
 "\n"
-"See section 5 of our manual for Module Manager detail, or ask for help via "
-"Live Chat, or (if no one is responsive in chat) send mail to our users' "
-"mailing list.\n"
+"See section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n"
 msgstr ""
+"<b>Översikt av Modulhanteraren.</b>\n"
+"\n"
+"Det här är Xiphos mekanism för att hämta och uppdatera innehåll.\n"
+"Om du aldrig har använt Modulhanteraren förut, så ägna gärna en\n"
+"stund åt att titta runt här.\n"
+"\n"
+"Moduler kommer från olika <u>repositories</u> (källor). <b>Modulkällor: Lägg till/Ta bort</b> visar vilka repositories (källor) som för stunden är kända.\n"
+"\n"
+"<b>Modulkällor: Välj</b> används för att välja var moduler ska hämtas ifrån, det villl säga, vilka repositories (källor) Xiphos ska hämta dom från, och var dom ska sparas i ditt filsystem. Ställ in <i>Installationskälla</i> och <i>Installationsdestination</i> (Installera till). Klicka sedan på <i>Uppdatera</i>.\n"
+"\n"
+"<b>Moduler: Installera/Uppdatera</b> används för att välja och hämta moduler efter att ha valt källa och destination.\n"
+"\n"
+"<b>Moduler: Underhåll</b> används för att skapa arkiv och index.\n"
+"\n"
+"Se avsnitt 5 i manualen för Modulhanteraren för detaljer, eller fråga i livechatten, eller (om ingen svarar i chatten) skicka ett mail till vår användarmailinglista.\n"
 
 #: ../src/gnome2/mod_mgr.c:67
 msgid ""
 "<b>Welcome to Xiphos.</b>\n"
 "\n"
-"There are no Bibles installed. In order to initialize, Xiphos needs at least "
-"one Bible module. To facilitate this, the Module Manager has been opened so "
-"that you may install one or more Bibles, either from a local module set "
-"(cdrom, flash drive) or over the network from CrossWire Bible Society. "
-"Please refer to these step-by-step instructions, and to the general module "
-"manager overview that has also been opened.\n"
+"There are no Bibles installed. In order to initialize, Xiphos needs at least one Bible module. To facilitate this, the Module Manager has been opened so that you may install one or more Bibles, either from a local module set (cdrom, flash drive) or over the network from CrossWire Bible Society. Please refer to these step-by-step instructions, and to the general module manager overview that has also been opened.\n"
 "\n"
 "<u>For local install:</u>\n"
-"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where "
-"modules can be found.\n"
+"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where modules can be found.\n"
 "  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n"
-"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select "
-"your folder from the pulldown.\n"
+"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select your folder from the pulldown.\n"
 "\n"
 "<u>For network install from CrossWire:</u>\n"
-"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select "
-"CrossWire from the pulldown.\n"
+"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select CrossWire from the pulldown.\n"
 "- Click the \"Refresh\" button at the bottom.\n"
 "\n"
 "<u>In either case:</u>\n"
-"- In <i>Modules: Install/Update</i>, select Bibles and other modules of your "
-"preference.\n"
+"- In <i>Modules: Install/Update</i>, select Bibles and other modules of your preference.\n"
 "- Click \"Install\".\n"
 "- Close the Module Manager when you are done.\n"
 "\n"
 "<u>Warning</u>: If you live in a persecuted country, use with care.\n"
 "\n"
-"Both this step-by-step instruction dialog and the general introduction "
-"dialog may be closed at any time."
+"Both this step-by-step instruction dialog and the general introduction dialog may be closed at any time."
 msgstr ""
+"<b>Välkommen till Xiphos.</b>\n"
+"\n"
+"Det finns inga installerade biblar. För att kunna starta behöver Xiphos minst en bibelmodul. Modulhanteraren har öppnats så att du ska kunna installera en eller flera biblar, antingen från ett lokalt medium (CD, DVD, USB-sticka) eller via nätverk från CrossWire Bible Society. Vänligen följ dessa steg-för-steg-instruktioner, och se även modulhanterarens översiktsfönster som också har öppnats.\n"
+"\n"
+"<u>För lokal installation av moduler:</u>\n"
+"- I <i>Modulkällor: Lägg till/Ta bort</i>, lägg till en ny lokal katalog där det finns moduler.\n"
+"  (Välj en sökväg där det finns kataloger med namn <i>mods.d</i> och <i>modules</i>.)\n"
+"- I <i>Modulkällor: Välj</i> klicka på \"Lokalt\"-knappen, och välj katalog i dropdown-menyn.\n"
+"\n"
+"<u>För nätverksinstallation från CrossWire:</u>\n"
+"- I <i>Modulkällor: Välj</i>, klicka på \"Nätverkskälla\"-knappen, och välj CrossWire i dropdown-menyn.\n"
+"- Klicka på \"Uppdatera\"-knappen längst ner.\n"
+"\n"
+"<u>I båda fallen:</u>\n"
+"- I <i> Moduler: Installera/Uppdatera</i>, välj biblar och andra moduler du vill installera.\n"
+"- Klicka på \"Installera\".\n"
+"- Stäng Modulhanteraren när du är klar.\n"
+"\n"
+"Både denna steg-för-steg-instruktion och den generella instruktionen kan stängas när du vill."
 
 #: ../src/gnome2/mod_mgr.c:189
 msgid "Remove these modules?"
-msgstr ""
+msgstr "Ta bort dessa moduler?"
 
 #: ../src/gnome2/mod_mgr.c:190
 msgid "Preparing to remove"
@@ -720,7 +744,7 @@ msgstr "Ta bort"
 
 #: ../src/gnome2/mod_mgr.c:195
 msgid "Install these modules?"
-msgstr ""
+msgstr "Installera dessa moduler?"
 
 #: ../src/gnome2/mod_mgr.c:196
 msgid "Preparing to install"
@@ -736,7 +760,7 @@ msgstr "Installera"
 
 #: ../src/gnome2/mod_mgr.c:201
 msgid "Archive these modules?"
-msgstr ""
+msgstr "Arkivera dessa moduler?"
 
 #: ../src/gnome2/mod_mgr.c:202
 msgid "Preparing to archive"
@@ -755,10 +779,12 @@ msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
 msgstr ""
+"Indexera dessa moduler för snabbsökning?\n"
+"(kan ta några minuter per modul)"
 
 #: ../src/gnome2/mod_mgr.c:208
 msgid "Preparing to index"
-msgstr "Förbered för indexering"
+msgstr "Förbereder för indexering"
 
 #: ../src/gnome2/mod_mgr.c:209
 msgid "Indexing"
@@ -770,7 +796,7 @@ msgstr "Indexera"
 
 #: ../src/gnome2/mod_mgr.c:213
 msgid "Delete fast-search index for these modules?"
-msgstr ""
+msgstr "Ta bort snabbsökningsindex från dessa moduler?"
 
 #: ../src/gnome2/mod_mgr.c:214
 msgid "Preparing to delete index"
@@ -790,31 +816,27 @@ msgstr "Modulnamn"
 
 #: ../src/gnome2/mod_mgr.c:531
 msgid "A checkmark means this module is already installed"
-msgstr ""
+msgstr "Moduler som har en bock är redan installerade"
 
 #: ../src/gnome2/mod_mgr.c:553
 msgid "Click the box to work on this module"
-msgstr ""
+msgstr "Klicka i rutan för att arbeta med denna modul"
 
 #: ../src/gnome2/mod_mgr.c:554
 msgid "Click the box to select this module for install/update"
-msgstr ""
+msgstr "Klicka i rutan för att installera/uppdatera denna modul"
 
 #: ../src/gnome2/mod_mgr.c:573
 msgid "Installed"
 msgstr "Installerad"
 
 #: ../src/gnome2/mod_mgr.c:583
-msgid ""
-"The index icon means you have built an optimized ('lucene') index for this "
-"module for fast searching (see the Maintenance pane for this function)"
-msgstr ""
+msgid "The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"
+msgstr "Indexsymbolen betyder att du har byggt ett optimerat index ('lucene') för denna modul, som gör att det går fortare att söka i den (see Underhålls-panelen för denna funktion)"
 
 #: ../src/gnome2/mod_mgr.c:601
-msgid ""
-"The lock icon means this module is encrypted, and requires that you purchase "
-"an unlock key from the content owner"
-msgstr ""
+msgid "The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"
+msgstr "Låssymbolen betyder att den här modulen är krypterad, och att du behöver köpa en upplåsningsnyckel från ägaren av innehållet för att kunna öppna den"
 
 #: ../src/gnome2/mod_mgr.c:618 ../ui/gtk2_webedit.ui.h:2
 #: ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:55
@@ -823,10 +845,8 @@ msgid "About"
 msgstr "Om"
 
 #: ../src/gnome2/mod_mgr.c:638
-msgid ""
-"The refresh icon means the Installed module is older than the newer "
-"Available module: You should update the module"
-msgstr ""
+msgid "The refresh icon means the Installed module is older than the newer Available module: You should update the module"
+msgstr "Uppdateringssymbolen betyder att den installerade modulen är äldre än den nyaste tillgängliga versionen av den: Du bör uppdatera modulen"
 
 #: ../src/gnome2/mod_mgr.c:650
 msgid "Available"
@@ -851,11 +871,11 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:848
 msgid " archived in: \n"
-msgstr ""
+msgstr "arkiverad i:\n"
 
 #: ../src/gnome2/mod_mgr.c:903
 msgid "Journals and prayer lists cannot be indexed."
-msgstr ""
+msgstr "Journaler och bönelistor kan inte indexeras."
 
 #: ../src/gnome2/mod_mgr.c:924
 #, c-format
@@ -881,6 +901,8 @@ msgid ""
 "Repository:\n"
 "%s"
 msgstr ""
+"Repository (källa):\n"
+"%s"
 
 #: ../src/gnome2/mod_mgr.c:1411
 msgid ""
@@ -904,12 +926,12 @@ msgstr "Kommentarer"
 #: ../src/gnome2/mod_mgr.c:1424 ../src/gnome2/utilities.c:621
 #: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
 msgid "Dictionaries"
-msgstr "Uppslagsböcker"
+msgstr "Ordböcker"
 
 #: ../src/gnome2/mod_mgr.c:1428 ../src/gnome2/utilities.c:628
 #: ../src/main/sidebar.cc:1031 ../src/main/sidebar.cc:1033
 msgid "Glossaries"
-msgstr ""
+msgstr "Ordlistor"
 
 #: ../src/gnome2/mod_mgr.c:1432 ../src/gnome2/utilities.c:635
 #: ../src/main/sidebar.cc:1040 ../src/main/sidebar.cc:1042
@@ -935,14 +957,14 @@ msgstr "Bilder"
 #: ../src/gnome2/mod_mgr.c:1448 ../src/gnome2/utilities.c:663
 #: ../src/main/sidebar.cc:1076 ../src/main/sidebar.cc:1078
 msgid "Cult/Unorthodox"
-msgstr ""
+msgstr "Kult/Oortodoxt"
 
 #: ../src/gnome2/mod_mgr.c:1456
 msgid ""
 "Categorized by\n"
 "Availability"
 msgstr ""
-"Kategoriserat via\n"
+"Kategoriserat efter\n"
 "tillgänglighet"
 
 #: ../src/gnome2/mod_mgr.c:1461
@@ -957,15 +979,15 @@ msgstr "Avinstallerade"
 #: ../src/gnome2/utilities.c:671 ../src/main/prayerlists.cc:229
 #: ../src/main/sidebar.cc:1086 ../src/main/sidebar.cc:1088
 msgid "Prayer List/Journal"
-msgstr "Bönelista/journal"
+msgstr "Bönelista/Journal"
 
 #: ../src/gnome2/mod_mgr.c:1665
 msgid "Refreshing from remote source"
-msgstr ""
+msgstr "Uppdaterar nätverkskälla"
 
 #: ../src/gnome2/mod_mgr.c:1675
 msgid "Remote source not found"
-msgstr ""
+msgstr "Nätverkskällan hittades inte"
 
 #: ../src/gnome2/mod_mgr.c:1745
 msgid "Configure"
@@ -1001,7 +1023,7 @@ msgstr "UID"
 
 #: ../src/gnome2/mod_mgr.c:1840
 msgid "Module Sources"
-msgstr ""
+msgstr "Modulkällor"
 
 #: ../src/gnome2/mod_mgr.c:1843
 msgid "Add/Remove"
@@ -1038,20 +1060,24 @@ msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
+"Du har avinstallerat samtliga biblar.\n"
+"Xiphos behöver minst en bibel."
 
 #: ../src/gnome2/mod_mgr.c:2415
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
+"Det finns fortfarande inga installerade biblar.\n"
+"Xiphos kan inte fortsätta utan en bibel."
 
 #: ../src/gnome2/mod_mgr.c:2508
 msgid "Standard remote sources have been loaded."
-msgstr ""
+msgstr "Standardnätverkskällor har öppnats."
 
 #: ../src/gnome2/mod_mgr.c:2514
 msgid "Could not load standard sources from CrossWire."
-msgstr ""
+msgstr "Kunde inte öppna standardnärtverkskällor från CrossWire."
 
 #: ../src/gnome2/mod_mgr.c:2682 ../src/gnome2/mod_mgr.c:2928
 msgid "Remove the selected source"
@@ -1059,7 +1085,7 @@ msgstr "Ta bort vald källa"
 
 #: ../src/gnome2/mod_mgr.c:2742
 msgid "Enter a remote source"
-msgstr "Ange en fjärr-källa"
+msgstr "Ange en nätverkskälla"
 
 #: ../src/gnome2/mod_mgr.c:2746
 msgid "Caption:"
@@ -1079,7 +1105,7 @@ msgstr "Mapp:"
 
 #: ../src/gnome2/mod_mgr.c:2750
 msgid "User (optional):"
-msgstr ""
+msgstr "Användare (valfritt):"
 
 #: ../src/gnome2/mod_mgr.c:2751
 msgid "Password (optional):"
@@ -1088,20 +1114,19 @@ msgstr "Lösenord (valfritt):"
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2778
 msgid "A source by that name already exists."
-msgstr "En källa med detta namnet finns redan."
+msgstr "En källa med det här namnet finns redan."
 
 #: ../src/gnome2/mod_mgr.c:2925
 msgid "Delete a remote source"
-msgstr ""
+msgstr "Ta bort nätverkskälla"
 
 #: ../src/gnome2/mod_mgr.c:3430
-#, fuzzy
 msgid "[no module]"
-msgstr "Hela modulen"
+msgstr "[ingen modul]"
 
 #: ../src/gnome2/navbar_book.c:363 ../src/gnome2/navbar_book_dialog.c:304
 msgid "Go outward, to the section containing this one"
-msgstr ""
+msgstr "Stega utåt, till sektionen som innehåller denna"
 
 #: ../src/gnome2/navbar_book.c:378 ../src/gnome2/navbar_book_dialog.c:319
 msgid "Go to previous item"
@@ -1113,13 +1138,13 @@ msgstr "Gå till nästa objekt"
 
 #: ../src/gnome2/navbar_book.c:406 ../src/gnome2/navbar_book_dialog.c:347
 msgid "Go inward, to the first subsection"
-msgstr ""
+msgstr "Stega inåt, till första subsektionen"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:888
 #: ../src/gnome2/navbar_versekey_editor.c:929
 #: ../src/gnome2/navbar_versekey_parallel.c:840
 msgid "Synchronize this window's scrolling with the main window"
-msgstr ""
+msgstr "Synkronisera fönstrets scroller mot huvudfönstret"
 
 #: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:2070
 msgid "Parallel"
@@ -1127,7 +1152,7 @@ msgstr "Parallell"
 
 #: ../src/gnome2/parallel_view.c:115
 msgid "Detach/Attach"
-msgstr "Koppla loss/fäst"
+msgstr "Koppla loss/Fäst"
 
 #: ../src/gnome2/parallel_view.c:121 ../ui/xi-menus.glade.h:64
 #: ../ui/xi-menus-popup.gtkbuilder.h:42
@@ -1143,11 +1168,11 @@ msgstr "Parallell vy"
 
 #: ../src/gnome2/preferences_dialog.c:867
 msgid "BibleSync session passphrase"
-msgstr ""
+msgstr "Passerfras för BibleSync-sessionen"
 
 #: ../src/gnome2/preferences_dialog.c:869
 msgid "Phrase:"
-msgstr ""
+msgstr "Fras:"
 
 #. mode selection failed? probably dead interface
 #: ../src/gnome2/preferences_dialog.c:947
@@ -1155,32 +1180,33 @@ msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
+"Val av läge misslyckades.\n"
+"Slå på \"Debug\" och försök igen för att se varför."
 
 #: ../src/gnome2/preferences_dialog.c:1008
-#, fuzzy
 msgid "Mode selection failed.\n"
-msgstr "Ta bort markerat objekt"
+msgstr "Kunde inte byta läge.\n"
 
 #: ../src/gnome2/preferences_dialog.c:1014
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
-msgstr ""
+msgstr "BibleSync: %s (passerfras \"%s\")."
 
 #: ../src/gnome2/preferences_dialog.c:1016
 msgid "Disabled"
-msgstr ""
+msgstr "Inaktiverad"
 
 #: ../src/gnome2/preferences_dialog.c:1018 ../src/main/xml.c:93
 msgid "Personal"
-msgstr "Personliga"
+msgstr "Personlig"
 
 #: ../src/gnome2/preferences_dialog.c:1020
 msgid "Speaker"
-msgstr ""
+msgstr "Talare"
 
 #: ../src/gnome2/preferences_dialog.c:1021
 msgid "Audience"
-msgstr ""
+msgstr "Åhörare"
 
 #: ../src/gnome2/preferences_dialog.c:1592
 #: ../src/gnome2/preferences_dialog.c:1629
@@ -1198,7 +1224,7 @@ msgstr "-- Välj --"
 
 #: ../src/gnome2/preferences_dialog.c:1886
 msgid "Locale will take effect after restart."
-msgstr ""
+msgstr "Systemspråket kommer uppdateras efter nästa omstart."
 
 #: ../src/gnome2/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
@@ -1215,9 +1241,8 @@ msgstr "Alternativ"
 
 #: ../src/gnome2/preferences_dialog.c:2049 ../ui/prefs.glade.h:85
 #: ../ui/prefs.gtkbuilder.h:85
-#, fuzzy
 msgid "BibleSync"
-msgstr "Bibel"
+msgstr "BibleSync"
 
 #: ../src/gnome2/preferences_dialog.c:2053
 msgid "Fonts"
@@ -1229,7 +1254,7 @@ msgstr "Färg"
 
 #: ../src/gnome2/preferences_dialog.c:2059
 msgid "Sizes and Faces"
-msgstr ""
+msgstr "Storlekar och typsnitt"
 
 #: ../src/gnome2/preferences_dialog.c:2073 ../ui/prefs.glade.h:71
 #: ../ui/prefs.gtkbuilder.h:71
@@ -1268,13 +1293,13 @@ msgid "found in "
 msgstr "hittades i "
 
 #: ../src/gnome2/search_dialog.c:459
-#, fuzzy, c-format
+#, c-format
 msgid "New List %s"
-msgstr "Spara lista"
+msgstr "Ny lista %s"
 
 #: ../src/gnome2/search_dialog.c:683
 msgid "The last module list may not be deleted"
-msgstr ""
+msgstr "Den sista modullistan kan inte tas bort"
 
 #: ../src/gnome2/search_dialog.c:701
 msgid "Delete list?"
@@ -1328,6 +1353,31 @@ msgid ""
 "\n"
 "For complete details, search the web for \"lucene search syntax\"."
 msgstr ""
+"<b>Syntaxöversikt för optimerad \"lucene\"-sökning</b>\n"
+"Sök efter verser som innehåller...\n"
+"\n"
+"högt älskad\n"
+"\t \"högt\" eller \"älskad\"\n"
+"\tDet är samma sak som att söka efter högt OR älskad\n"
+"\"högt älskad\"\n"
+"\tExakta frasen \"högt älskad\"\n"
+"älska*\n"
+"\tEtt ord som börjar med \"älska\"\n"
+"\t(älska OR älskar OR älskad OR älskade osv...)\n"
+"högt AND älskade\n"
+"\tOrdet \"högt\" och ordet \"älskad\"\n"
+"\t&amp;&amp; kan användas istället för AND\n"
+"+högt älskad\n"
+"\tVerses that <b>must</b> contain \"högt\" and <b>may</b> contain \"älskad\"\n"
+"högt NOT älskade\n"
+"\t\"högt\" men inte \"älskade\"\n"
+"(högt älskade) AND Gud\n"
+"\t\"högt\" eller \"älskade\" och \"Gud\"\n"
+"lemma:G2316\n"
+"\tSök i Strong's Greek (\"G\") ord nummer 2316.\n"
+"\tDessutom, välj Strong's vy i <i>Attributsökning</i>-fliken.\n"
+"\n"
+"För mer detaljer, sök på internet efter \"lucene search syntax\"."
 
 #. *****************************************************************************
 #. * Name
@@ -1348,44 +1398,49 @@ msgstr ""
 #: ../src/gnome2/search_dialog.c:888
 msgid ""
 "<b>Attribute-based searches</b>\n"
-"Searches for content contained in markup outside the main text. Attributes "
-"are footnotes, Strong's numbers, and morphological symbols.\n"
+"Searches for content contained in markup outside the main text. Attributes are footnotes, Strong's numbers, and morphological symbols.\n"
 "\n"
-"Be aware that most such searches can now be done faster via optimized "
-"\"lucene\" searches using keyword qualifiers.\n"
+"Be aware that most such searches can now be done faster via optimized \"lucene\" searches using keyword qualifiers.\n"
 "\n"
-"To use attribute searches, you must select the appropriate button on the "
-"<i>Attribute Search</i> tab.\n"
+"To use attribute searches, you must select the appropriate button on the <i>Attribute Search</i> tab.\n"
 "* Footnote text is searched just like regular text.\n"
-"* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) "
-"and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
-"* Morphological tags are identified literally, e.g. N-ASF for \"noun, "
-"accusative singular feminine\" -- see the Robinson module for details."
+"* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
+"* Morphological tags are identified literally, e.g. N-ASF for \"noun, accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
+"<b>Attributbaserad sökning</b>\n"
+"Söker efter innehåll i dolda tecken utanför huvudtexten. Attribut kan vara fotnoter, Strong's-numrering, och morfologiska symboler.\n"
+"\n"
+"Notera att de flesta sådana sökningar kan göras snabbare med optimerad \"lucene\"-sökning med nyckelord.\n"
+"\n"
+"För att använda attributsökning, välj alternativ enligt nedan i <i>Attributsöknings</u>-fliken.\n"
+"* Fotnoter söks likadant som vanlig text.\n"
+"* Strong's-ord anges som ett prefix i form av en bokstav (H för hebreiska, G för grekiska) och ordets identitetsnummer. T ex, G2316 för att hitta \"?e??\" (\"Gud\").\n"
+"* Morfologiska taggar tolkas bokstavligt, t ex N-ASF (\"substantiv, ackusativ singular femininum\") -- see Ronbinson-modulen för detaljer."
 
 #: ../src/gnome2/search_dialog.c:1190
 msgid "Module is neither Bible nor commentary"
-msgstr ""
+msgstr "Modulen är ingen bibel eller kommentar"
 
 #: ../src/gnome2/search_dialog.c:1213 ../src/gnome2/sidebar.c:998
 msgid "BibleSync is not active for transmit."
-msgstr ""
+msgstr "BibleSync-transmission är inte aktiverad."
 
 #: ../src/gnome2/search_sidebar.c:185
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr ""
+"Det här är en inklusiv sökning (\"logisk OCH\"):\n"
+"Träffar som innehåller samtliga sökord visas."
 
 #. button to open advanced search
 #: ../src/gnome2/search_sidebar.c:194
-#, fuzzy
 msgid "_Open Advanced Search"
 msgstr "_Avancerad sökning"
 
 #: ../src/gnome2/search_sidebar.c:198
 msgid "Open the separate Advanced Search dialog."
-msgstr ""
+msgstr "Öppna den avancerade sökdialogen"
 
 #: ../src/gnome2/search_sidebar.c:210
 msgid "Search Module"
@@ -1407,7 +1462,7 @@ msgstr "Söktyp"
 #: ../src/gnome2/search_sidebar.c:261 ../ui/search-dialog.glade.h:39
 #: ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi word"
-msgstr ""
+msgstr "Flerordssökning"
 
 #: ../src/gnome2/search_sidebar.c:272 ../ui/search-dialog.glade.h:41
 #: ../ui/search-dialog.gtkbuilder.h:41
@@ -1434,7 +1489,7 @@ msgstr "Sökomfattning"
 
 #: ../src/gnome2/search_sidebar.c:335
 msgid "No scope"
-msgstr ""
+msgstr "Inga avgränsningar"
 
 #: ../src/gnome2/search_sidebar.c:345
 msgid "Use bounds"
@@ -1457,22 +1512,20 @@ msgid "Upper"
 msgstr "Övre"
 
 #: ../src/gnome2/sidebar.c:850
-#, fuzzy
 msgid "Open module in editor?"
-msgstr "Öppna i redigerare"
+msgstr "Öppna modulen i redigerare?"
 
 #: ../src/gnome2/sidebar.c:850
 msgid "If no, it will open for display only."
-msgstr ""
+msgstr "Om nej, så öppnas den endast för visning."
 
 #: ../src/gnome2/sidebar.c:952
-#, fuzzy
 msgid "Paste verse references"
-msgstr "Inställningar"
+msgstr "Klistra in versreferens"
 
 #: ../src/gnome2/sidebar.c:954
 msgid "List:"
-msgstr ""
+msgstr "Lista:"
 
 #: ../src/gnome2/sidebar.c:1499 ../src/gnome2/sidebar.c:1534
 msgid "Search"
@@ -1488,12 +1541,12 @@ msgstr "Byggt på SWORD Project"
 
 #: ../src/gnome2/tabbed_browser.c:360
 msgid "Can't create tabs dir."
-msgstr ""
+msgstr "Kan ej skapa flik-katalog."
 
 #: ../src/gnome2/treekey-editor.c:141 ../src/gnome2/treekey-editor.c:200
 #: ../src/gnome2/treekey-editor.c:286
 msgid "Prayer List/Journal Item"
-msgstr ""
+msgstr "Bönelista/Journalnotering"
 
 #: ../src/gnome2/treekey-editor.c:142 ../src/gnome2/treekey-editor.c:201
 #: ../src/gnome2/treekey-editor.c:287
@@ -1557,6 +1610,9 @@ msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
 msgstr ""
+"En bilds filstorlek kunde inte avgöras.\n"
+"Xiphos kan därför inte skala om bilder\n"
+"för att få plats i fönstret."
 
 #: ../src/main/display.cc:237
 #, c-format
@@ -1564,6 +1620,8 @@ msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
+"Felaktigt kodad egen noteringsetikett:\n"
+"'%s'"
 
 #: ../src/main/display.cc:1032 ../src/main/display.cc:1073
 #: ../src/main/display.cc:1158 ../ui/export-dialog.glade.h:14
@@ -1576,9 +1634,8 @@ msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos förstår inte mer än ett argument."
 
 #: ../src/main/main.c:245
-#, fuzzy
 msgid "Initiating HTML"
-msgstr "Initierar Gecko"
+msgstr "Initierar HTML"
 
 #: ../src/main/main.c:250
 msgid "Building Interface"
@@ -1614,7 +1671,7 @@ msgstr "Korsreferens"
 #: ../src/main/module_dialogs.cc:365 ../src/main/module_dialogs.cc:377
 #: ../src/main/previewer.cc:202 ../src/main/previewer.cc:221
 msgid "Strongs"
-msgstr "Strongs"
+msgstr "Strong's"
 
 #: ../src/main/module_dialogs.cc:262 ../src/main/module_dialogs.cc:281
 #: ../src/main/module_dialogs.cc:370 ../src/main/module_dialogs.cc:387
@@ -1641,22 +1698,22 @@ msgstr "Fotnoter"
 #: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:70
 #: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Morphological Tags"
-msgstr ""
+msgstr "Morfologiska symboler"
 
 #: ../src/main/parallel_view.cc:413 ../ui/xi-menus.glade.h:76
 #: ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Hebrew Vowel Points"
-msgstr ""
+msgstr "Hebreiska vokal-punkter (nikkud)"
 
 #: ../src/main/parallel_view.cc:423 ../ui/xi-menus.glade.h:77
 #: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Hebrew Cantillation"
-msgstr ""
+msgstr "Hebreisk kantillation"
 
 #: ../src/main/parallel_view.cc:433 ../ui/xi-menus.glade.h:75
 #: ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Greek Accents"
-msgstr ""
+msgstr "Grekiska dialekter"
 
 #: ../src/main/parallel_view.cc:443 ../ui/xi-menus.glade.h:72
 #: ../ui/xi-menus-popup.gtkbuilder.h:50
@@ -1666,7 +1723,7 @@ msgstr "Korsreferens"
 #: ../src/main/parallel_view.cc:453 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Lemmas"
-msgstr ""
+msgstr "Lemman"
 
 #: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:66
 #: ../ui/xi-menus-popup.gtkbuilder.h:44
@@ -1675,36 +1732,36 @@ msgstr "Överskrifter"
 
 #: ../src/main/parallel_view.cc:473
 msgid "Morpheme Segmentation"
-msgstr ""
+msgstr "Morfem segmentering"
 
 #: ../src/main/parallel_view.cc:487 ../ui/xi-menus.glade.h:67
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Words of Christ in Red"
-msgstr ""
+msgstr "Kristi ord i rött"
 
 #: ../src/main/parallel_view.cc:497 ../ui/xi-menus.glade.h:78
 #: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Transliteration"
-msgstr ""
+msgstr "Translitteration"
 
 #: ../src/main/parallel_view.cc:507
 msgid "Textual Variants"
-msgstr ""
+msgstr "Variationer av grundtexten"
 
 #: ../src/main/parallel_view.cc:515 ../ui/xi-menus.glade.h:80
 #: ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Primary Reading"
-msgstr ""
+msgstr "Primär tolkning"
 
 #: ../src/main/parallel_view.cc:524 ../ui/xi-menus.glade.h:81
 #: ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Secondary Reading"
-msgstr ""
+msgstr "Sekundär tolkning"
 
 #: ../src/main/parallel_view.cc:533 ../ui/xi-menus.glade.h:82
 #: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "All Readings"
-msgstr ""
+msgstr "Alla tolkningar"
 
 #: ../src/main/parallel_view.cc:700
 msgid "view context"
@@ -1715,99 +1772,88 @@ msgid "Growth"
 msgstr "Tillväxt"
 
 #: ../src/main/prayerlists.cc:113
-#, fuzzy
 msgid "<b>For Growth</b><br/>"
-msgstr "<b>För tillväxt</b><br>"
+msgstr "<b>För tillväxt</b><br/>"
 
 #: ../src/main/prayerlists.cc:114 ../src/main/prayerlists.cc:371
 msgid "Salvation"
 msgstr "Frälsning"
 
 #: ../src/main/prayerlists.cc:115
-#, fuzzy
 msgid "<b>For Salvation</b><br/>"
-msgstr "<b>För frälsning</b><br>"
+msgstr "<b>För frälsning</b><br/>"
 
 #: ../src/main/prayerlists.cc:116 ../src/main/prayerlists.cc:375
 msgid "Health"
 msgstr "Hälsa"
 
 #: ../src/main/prayerlists.cc:117
-#, fuzzy
 msgid "<b>For Health</b><br/>"
-msgstr "<b>För hälsa</b><br>"
+msgstr "<b>För hälsa</b><br/>"
 
 #: ../src/main/prayerlists.cc:118
 msgid "Misc"
 msgstr "Övrigt"
 
 #: ../src/main/prayerlists.cc:119
-#, fuzzy
 msgid "<b>Miscellaneous</b><br/>"
-msgstr "<b>Övrigt</b><br>"
+msgstr "<b>Övrigt</b><br/>"
 
 #: ../src/main/prayerlists.cc:127
 msgid "Point x"
 msgstr "Punkt x"
 
 #: ../src/main/prayerlists.cc:128
-#, fuzzy
 msgid "<b>(x)</b><br/>"
-msgstr "<b>För tillväxt</b><br>"
+msgstr "<b>(x)</b><br/>"
 
 #: ../src/main/prayerlists.cc:129
 msgid "Point y"
 msgstr "Punkt y"
 
 #: ../src/main/prayerlists.cc:130
-#, fuzzy
 msgid "<b>(y)</b><br/>"
-msgstr "<b>För tillväxt</b><br>"
+msgstr "<b>(y)</b><br/>"
 
 #: ../src/main/prayerlists.cc:131
 msgid "Point z"
 msgstr "Punkt z"
 
 #: ../src/main/prayerlists.cc:132
-#, fuzzy
 msgid "<b>(z)</b><br/>"
-msgstr "<b>För tillväxt</b><br>"
+msgstr "<b>(z)</b><br/>"
 
 #: ../src/main/prayerlists.cc:140
 msgid "Minor Topic 1"
-msgstr ""
+msgstr "Underrubrik 1"
 
 #: ../src/main/prayerlists.cc:141
-#, fuzzy
 msgid "<b>Subtopic 1</b><br/>"
-msgstr "<b>För frälsning</b><br>"
+msgstr "<b>Underrubrik 1</b><br/>"
 
 #: ../src/main/prayerlists.cc:143
 msgid "Minor Topic 2"
-msgstr ""
+msgstr "Underrubrik 2"
 
 #: ../src/main/prayerlists.cc:144
-#, fuzzy
 msgid "<b>Subtopic 2</b><br/>"
-msgstr "<b>För frälsning</b><br>"
+msgstr "<b>Underrubrik 2</b><br/>"
 
 #: ../src/main/prayerlists.cc:146
 msgid "Minor Topic 3"
-msgstr ""
+msgstr "Underrubrik 3"
 
 #: ../src/main/prayerlists.cc:147
-#, fuzzy
 msgid "<b>Subtopic 3</b><br/>"
-msgstr "<b>För frälsning</b><br>"
+msgstr "<b>Underrubrik 3</b><br/>"
 
 #: ../src/main/prayerlists.cc:149
 msgid "Minor Topic 4"
-msgstr ""
+msgstr "Underrubrik 4"
 
 #: ../src/main/prayerlists.cc:150
-#, fuzzy
 msgid "<b>Subtopic 4</b><br/>"
-msgstr "<b>För frälsning</b><br>"
+msgstr "<b>Underrubrik 4</b><br/>"
 
 #: ../src/main/prayerlists.cc:230
 msgid "Name for new prayer list or journal"
@@ -1815,7 +1861,7 @@ msgstr "Namn på ny bönelista/journal"
 
 #: ../src/main/prayerlists.cc:261
 msgid "Xiphos finds that prayer list already."
-msgstr ""
+msgstr "Xiphos hittar redan detta i bönelistan."
 
 #: ../src/main/prayerlists.cc:274
 #, c-format
@@ -1823,6 +1869,8 @@ msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
 msgstr ""
+"Xiphos kan inte skapa modulsökväg:\n"
+"%s"
 
 #: ../src/main/prayerlists.cc:314
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
@@ -1830,20 +1878,15 @@ msgstr "En enkel bönelista. \\par\\par Modul skapad av Xiphos."
 
 #: ../src/main/prayerlists.cc:315
 msgid "BasicPrayerList"
-msgstr ""
+msgstr "Enkel bönelista"
 
 #: ../src/main/prayerlists.cc:329
 msgid "MyPrayerList"
-msgstr "MinBönelista"
+msgstr "Min bönelista"
 
 #: ../src/main/prayerlists.cc:330
-#, fuzzy
-msgid ""
-"<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
-">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
-msgstr ""
-"<b>Personer:</b><br>Anna<br>Johannes<br>Lars<br><br><b>Kyrkan:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+msgid "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/>fellowship<br/>Bibles for missionaries<br/><br/><br/>"
+msgstr "<b>Personer:</b><br/>Anna<br/>Johannes<br/>Lars<br/><br/><b>Kyrkan:</b><br/>Kyrkbänkar<br/>Gemenskap<br/>Biblar åt missionärer<br/><br/><br/>"
 
 #: ../src/main/prayerlists.cc:356
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1851,26 +1894,23 @@ msgstr "En ämnebaserad bönelista. \\par\\par Modul skapad av Xiphos."
 
 #: ../src/main/prayerlists.cc:357
 msgid "SubjectPrayerList"
-msgstr ""
+msgstr "Ämnesbönelista"
 
 #: ../src/main/prayerlists.cc:372
-#, fuzzy
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
-msgstr "Bob<br>Samuel<br>Birgitta<br>Stefan<br>"
+msgstr "Robert<br/>Samuel<br/>Birgitta<br/>Stefan<br/>"
 
 #: ../src/main/prayerlists.cc:373
 msgid "Spiritual Growth"
 msgstr "Andlig tillväxt"
 
 #: ../src/main/prayerlists.cc:374
-#, fuzzy
 msgid "Mike<br/>Steve<br/>"
-msgstr "Adam<br>Dennis<br>"
+msgstr "Adam<br/>Dennis<br/>"
 
 #: ../src/main/prayerlists.cc:376
-#, fuzzy
 msgid "Sue<br/>John<br/>"
-msgstr "Josefin<br>Bertil<br>"
+msgstr "Birgitta<br/>Stefan<br/>"
 
 #: ../src/main/prayerlists.cc:402
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
@@ -1878,7 +1918,7 @@ msgstr "En månatlig bönelista. \\par\\par Modul skapad av Xiphos."
 
 #: ../src/main/prayerlists.cc:403
 msgid "MonthlyPrayerList"
-msgstr ""
+msgstr "Månagtlig bönelista"
 
 #: ../src/main/prayerlists.cc:454
 msgid "A daily journal. \\par\\par Module created by Xiphos."
@@ -1886,7 +1926,7 @@ msgstr "En daglig journal. \\par\\par Modul skapad av Xiphos."
 
 #: ../src/main/prayerlists.cc:455
 msgid "DailyJournal"
-msgstr ""
+msgstr "Daglig journal"
 
 #: ../src/main/prayerlists.cc:519
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
@@ -1894,43 +1934,40 @@ msgstr "An outlined topic (t.ex. predikan). \\par\\par Modul skapad av Xiphos."
 
 #: ../src/main/prayerlists.cc:520
 msgid "OutlinedTopic"
-msgstr ""
+msgstr "Ämne"
 
 #: ../src/main/prayerlists.cc:534
 msgid "Major Topic A"
-msgstr ""
+msgstr "Rubrik A"
 
 #: ../src/main/prayerlists.cc:535
-#, fuzzy
 msgid "<b>Major Topic A</b><br/>"
-msgstr "<b>För tillväxt</b><br>"
+msgstr "<b>Rubrik A</b><br/>"
 
 #: ../src/main/prayerlists.cc:537
 msgid "Major Topic B"
-msgstr ""
+msgstr "Rubrik B"
 
 #: ../src/main/prayerlists.cc:538
-#, fuzzy
 msgid "<b>Major Topic B</b><br/>"
-msgstr "<b>För tillväxt</b><br>"
+msgstr "<b>Rubrik B</b><br/>"
 
 #: ../src/main/prayerlists.cc:540
 msgid "Major Topic C"
-msgstr ""
+msgstr "Rubrik C"
 
 #: ../src/main/prayerlists.cc:541
-#, fuzzy
 msgid "<b>Major Topic C</b><br/>"
-msgstr "<b>För tillväxt</b><br>"
+msgstr "<b>Rubrik C</b><br/>"
 
 #: ../src/main/previewer.cc:190
 msgid "User Annotation"
-msgstr ""
+msgstr "Egen kommentar"
 
 #: ../src/main/search_dialog.cc:193
 #, c-format
 msgid "Search result %s: %s"
-msgstr ""
+msgstr "Sökresultat %s: %s"
 
 #: ../src/main/search_dialog.cc:425
 msgid "Delete Range?"
@@ -1938,7 +1975,7 @@ msgstr "Ta bort spännvid?"
 
 #: ../src/main/search_dialog.cc:426
 msgid "Are you sure you want to delete this range?"
-msgstr "Är du säker på att du vill ta bort denna spännvidden?"
+msgstr "Är du säker på att du vill ta bort denna spännvidd?"
 
 #: ../src/main/search_dialog.cc:640 ../src/main/search_dialog.cc:1062
 #: ../src/main/search_dialog.cc:1065 ../src/main/search_dialog.cc:1087
@@ -1964,19 +2001,23 @@ msgstr "Vänligen justera modullistan."
 #: ../src/main/search_dialog.cc:1447
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr ""
+msgstr "Ingen snabbsökningsindex för %s.%s%s"
 
 #: ../src/main/search_dialog.cc:1449
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
 msgstr ""
+"\n"
+"Sökning i denna modul är nu av slaget 'multiord'."
 
 #: ../src/main/search_dialog.cc:1450
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
 msgstr ""
+"\n"
+"Se Modulhanteraren, underhållspanelen."
 
 #: ../src/main/search_dialog.cc:1513
 msgid "Search finished"
@@ -1987,9 +2028,8 @@ msgid "matches"
 msgstr "matchar"
 
 #: ../src/main/search_sidebar.cc:207
-#, fuzzy
 msgid "There is no commentary module."
-msgstr "Antal kommentarmoduler"
+msgstr "Det finns ingen modul med kommentarer."
 
 #: ../src/main/settings.c:107
 msgid "$HOME is not set!"
@@ -2011,20 +2051,21 @@ msgstr ""
 #: ../src/main/settings.c:133 ../src/main/settings.c:142
 #: ../src/main/settings.c:151
 msgid "can not create "
-msgstr ""
+msgstr "kan inte skapa"
 
 #: ../src/main/settings.c:181
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
+"Tom inställningsfil -- Återskapat från backup.\n"
+"Information kan ha förlorats."
 
 #: ../src/main/settings.c:184
 msgid "Empty settings file -- no backup?!? Information lost!"
-msgstr ""
+msgstr "Tom inställningsfil -- Ingen backup?! Information har gått förlorad!"
 
 #: ../src/main/settings.c:212
-#, fuzzy
 msgid ""
 "There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -2033,12 +2074,12 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
-"There are still no Bibles installed.\n"
-"Evidently, you declined to install any.\n"
+"Det finns inga installerade biblar.\n"
+"Det verkar som att du avstod att installera några.\n"
 "\n"
-"Without any Bible modules to display,\n"
-"Xiphos cannot proceed,\n"
-"and will now exit."
+"Utan bibelmoduler att visa\n"
+"kan Xiphos inte fortsätta\n"
+"och kommer nu att avslutas."
 
 #: ../src/main/settings.c:218
 msgid "Bible module installation complete."
@@ -2049,6 +2090,8 @@ msgid ""
 "Module error: Unusable xref encoding.\n"
 "Please report this, with module & verse"
 msgstr ""
+"Modulfel: Oanvändbar xref-kodning.\n"
+"Vänligen rapportera detta, med modul och vers."
 
 #: ../src/main/sidebar.cc:411
 msgid "verse"
@@ -2063,24 +2106,32 @@ msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
+"Xiphos fil för\n"
+"språkförkortningar saknas"
 
 #: ../src/main/sword.cc:561
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
+"Xiphos språkförkortningsfil\n"
+"kan inte öppnas."
 
 #: ../src/main/sword.cc:574
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
+"Xiphos kan inte allokera utrymme\n"
+"för språkförkortningar."
 
 #: ../src/main/sword.cc:581
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
+"Xiphos kan inte läsa\n"
+"språkförkortningsfilen."
 
 #. either we were given a null sys_locale, or it didn't match anything.
 #: ../src/main/sword.cc:663
@@ -2089,10 +2140,12 @@ msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr ""
+"Kunde inte hitta något systemspråk som matchar `%s'.\n"
+"%s"
 
 #: ../src/main/sword.cc:665
 msgid "Book names and menus may not be translated."
-msgstr ""
+msgstr "Boknamn och menyer kan vara oöversatta."
 
 #: ../src/main/sword.cc:1014 ../src/main/sword.cc:1179
 #, c-format
@@ -2101,6 +2154,9 @@ msgid ""
 "%s.\n"
 "Would you like to open these as well?%s"
 msgstr ""
+"Modulen %s har samhörande moduler:\n"
+"%s.\n"
+"Vill du öppna dessa också?%s"
 
 #: ../src/main/sword.cc:1018 ../src/main/sword.cc:1183
 msgid ""
@@ -2109,6 +2165,10 @@ msgid ""
 "The first will open in the main window\n"
 "and others in separate windows."
 msgstr ""
+"\n"
+"\n"
+"Den första kommer att öppnas i huvudfönstret\n"
+"coh de andra i separata fönster."
 
 #: ../src/main/sword.cc:1309
 msgid "Daily devotional was requested, but there are none installed."
@@ -2120,13 +2180,17 @@ msgid ""
 "\n"
 "<u>You are opening a module which requires a <i>key</i>.</u>\n"
 "\n"
-"The module is locked, meaning that the content is encrypted by its "
-"publisher, and you must enter its key in order for the content to become "
-"useful.  This key should have been received by you on the web page which "
-"confirmed your purchase, or perhaps sent via email after purchase.\n"
+"The module is locked, meaning that the content is encrypted by its publisher, and you must enter its key in order for the content to become useful.  This key should have been received by you on the web page which confirmed your purchase, or perhaps sent via email after purchase.\n"
 "\n"
 "Please enter the key in the dialog."
 msgstr ""
+"<b>Låst modul.</b>\n"
+"\n"
+"<u>Du försöker öppna en modul som kräver en <i>nyckel</i>.</u>\n"
+"\n"
+"Denna modul är låst, vilket betyder att innehållet är krypterat av utgivaren, och du måste ange dess krypteringsnyckel för att få tillgång till innehållet. Nyckeln kan du t ex ha fått på webbsidan där du köpte modulen, eller kanske med e-post efter köpet.\n"
+"\n"
+"Vänligen fyll i krypteringsnyckeln i rutan."
 
 #: ../src/main/tab_history.c:219
 msgid "Clear History"
@@ -2143,7 +2207,7 @@ msgstr "Xiphos kunde inte köra %s"
 
 #: ../src/main/url.cc:201
 msgid "Viewer error:\n"
-msgstr ""
+msgstr "Visningsfel:\n"
 
 #: ../src/main/url.cc:274
 #, c-format
@@ -2153,11 +2217,11 @@ msgstr "Visa %s i huvudfönstret"
 #: ../src/main/xml.c:84 ../src/main/xml.c:476 ../src/main/xml.c:567
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr ""
+msgstr "Dokumentet kunde inte skapas korrekt.\n"
 
 #: ../src/main/xml.c:94
 msgid "What must I do to be saved?"
-msgstr "Vad måste jag göra för att bli räddad?"
+msgstr "Vad behöver jag göra för att bli frälst?"
 
 #: ../src/main/xml.c:96 ../src/main/xml.c:97
 msgid "Acts 16:31"
@@ -2165,7 +2229,7 @@ msgstr "Apg 16:31"
 
 #: ../src/main/xml.c:101 ../src/main/xml.c:102
 msgid "Eph 2:8,9"
-msgstr ""
+msgstr "Ef 2:8,9"
 
 #: ../src/main/xml.c:106 ../src/main/xml.c:107
 msgid "Romans 1:16"
@@ -2182,7 +2246,7 @@ msgstr "1 Kor 15:1-4"
 #: ../src/main/xml.c:268 ../src/main/xml.c:414 ../src/main/xml.c:1291
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr ""
+msgstr "Dokumentet kunde inte läsas korrekt.\n"
 
 #: ../src/main/xml.c:274 ../src/main/xml.c:420 ../src/main/xml.c:442
 #: ../src/main/xml.c:862 ../src/main/xml.c:1176 ../src/main/xml.c:1370
@@ -2193,45 +2257,53 @@ msgstr "tomt dokument \n"
 #: ../src/main/xml.c:280
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr ""
+msgstr "fel typ, rotnod != SwordBookmarks\n"
 
 #: ../src/main/xml.c:426
 #, c-format
 msgid "wrong type, root node != Copy_Export\n"
-msgstr ""
+msgstr "fel typ, rotnod != Copy_Export\n"
 
 #: ../src/main/xml.c:495
 #, c-format
 msgid "%s<center>%s<br>Chapter %d</center><br>"
-msgstr ""
+msgstr "%s<center>%s<br>Kapitel %d</center><br>"
 
 #: ../src/main/xml.c:496
 #, c-format
 msgid "<br><center>Chapter %d</center><br>"
-msgstr ""
+msgstr "<br><center>Kapitel %d</center><br>"
 
 #: ../src/main/xml.c:497
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Kapitel"
+msgstr ""
+"%s\n"
+"\n"
+"Kapitel %d\n"
+"\n"
 
 #: ../src/main/xml.c:498
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Kapitel"
+msgstr ""
+"\n"
+"\n"
+"Kapitel %d\n"
+"\n"
 
 #: ../src/main/xml.c:504
 #, c-format
 msgid "%s%s: %s Chapter %d<br><br>"
-msgstr ""
+msgstr "%s%s: %s Kapitel %d<br><br>"
 
 #: ../src/main/xml.c:505
 #, c-format
@@ -2239,56 +2311,58 @@ msgid ""
 "%s: %s Chapter %d\n"
 "\n"
 msgstr ""
+"%s: %s Kapitel %d\n"
+"\n"
 
 #: ../src/main/xml.c:510
 #, c-format
 msgid "&nbsp;&nbsp;[%d]"
-msgstr ""
+msgstr "&nbsp;&nbsp;[%d]"
 
 #: ../src/main/xml.c:511
 #, c-format
 msgid " [%d]"
-msgstr ""
+msgstr " [%d]"
 
 #: ../src/main/xml.c:517
 #, c-format
 msgid "%s%s (%s %d:%d%s)</body></html>"
-msgstr ""
+msgstr "%s%s (%s %d:%d%s)</body></html>"
 
 #: ../src/main/xml.c:518
 #, c-format
 msgid "%s(%s %d:%d%s)%s </body></html>"
-msgstr ""
+msgstr "%s(%s %d:%d%s)%s </body></html>"
 
 #: ../src/main/xml.c:519
 #, c-format
 msgid "%s (%s %d:%d%s)"
-msgstr ""
+msgstr "%s (%s %d:%d%s)"
 
 #: ../src/main/xml.c:520
 #, c-format
 msgid "(%s %d:%d%s) %s"
-msgstr ""
+msgstr "(%s %d:%d%s) %s"
 
 #: ../src/main/xml.c:526
 #, c-format
 msgid " %s%s"
-msgstr ""
+msgstr " %s%s"
 
 #: ../src/main/xml.c:527 ../src/main/xml.c:529
 #, c-format
 msgid "%s(%s %d:%d-%d%s)"
-msgstr ""
+msgstr "%s(%s %d:%d-%d%s)"
 
 #: ../src/main/xml.c:528
 #, c-format
 msgid "(%s %d:%d-%d%s)<br>"
-msgstr ""
+msgstr "(%s %d:%d-%d%s)<br>"
 
 #: ../src/main/xml.c:530
 #, c-format
 msgid "(%s %d:%d-%d%s)\n"
-msgstr ""
+msgstr "(%s %d:%d-%d%s)\n"
 
 #: ../src/main/xml.c:579
 msgid "Old Testament"
@@ -2308,12 +2382,12 @@ msgstr "Mat - Upp"
 
 #: ../src/main/xml.c:592
 msgid "Sample Module List"
-msgstr ""
+msgstr "Exempellista av moduler"
 
 #: ../src/main/xml.c:868 ../src/main/xml.c:1182
 #, c-format
 msgid "wrong type, root node != %s\n"
-msgstr ""
+msgstr "fel typ, rotnod != %s\n"
 
 #: ../src/main/xml.c:1332
 #, c-format
@@ -2321,10 +2395,12 @@ msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
+"Misslyckades att spara inställningar! Status %d, storlek %d\n"
+"%s"
 
 #: ../src/main/xml.c:1334
 msgid "Attempting to revert to previous save."
-msgstr ""
+msgstr "Försöker återgå till föregående sparläge."
 
 #: ../ui/bookmarks.glade.h:1 ../ui/bookmarks.gtkbuilder.h:1
 msgid "Add Bookmark"
@@ -2333,7 +2409,7 @@ msgstr "Lägg till bokmärke"
 #: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:13
 #: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:11
 msgid "Bookmark Dialog"
-msgstr ""
+msgstr "Bokmärk"
 
 #: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
 #: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:6
@@ -2353,7 +2429,7 @@ msgstr "Ny ..."
 #: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:5
 #: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:10
 msgid "Cancel Bookmark"
-msgstr ""
+msgstr "Avbryt bokmärkning"
 
 #: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:6
 msgid "Label:"
@@ -2361,7 +2437,7 @@ msgstr "Etikett:"
 
 #: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:7
 msgid "Label Entry"
-msgstr ""
+msgstr "Etikettens innehåll"
 
 #: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:8
 #: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:2
@@ -2371,7 +2447,7 @@ msgstr "Vers:"
 #: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:9
 #: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:3
 msgid "Verse Entry"
-msgstr ""
+msgstr "Versens innehåll"
 
 #: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:10
 #: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:4
@@ -2381,11 +2457,11 @@ msgstr "Modul:"
 #: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:11
 #: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:5
 msgid "Module Entry"
-msgstr ""
+msgstr "Modulens innehåll"
 
 #: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:12
 msgid "Bookmark Folder Treeview"
-msgstr ""
+msgstr "Bokmärk katalogträdvy"
 
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:16
@@ -2393,22 +2469,20 @@ msgid "Verse"
 msgstr "Vers"
 
 #: ../ui/editor_link_dialog.xml.h:4
-#, fuzzy
 msgid "Link Text"
-msgstr "Vanlig text"
+msgstr "Länka text"
 
 #: ../ui/editor_link_dialog.xml.h:5
 msgid "Link directly"
-msgstr ""
+msgstr "Länka direkt"
 
 #: ../ui/editor_link_dialog.xml.h:6
 msgid "Link via verse list"
-msgstr ""
+msgstr "Länka via verslista"
 
 #: ../ui/editor_link_dialog.xml.h:7
-#, fuzzy
 msgid "Test Link"
-msgstr "Länkar"
+msgstr "Testa länk"
 
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
@@ -2420,15 +2494,15 @@ msgstr "Avsluta"
 
 #: ../ui/editor_note.xml.h:3
 msgid "Print this note"
-msgstr ""
+msgstr "Skriv ut denna anteckning"
 
 #: ../ui/editor_note.xml.h:4
 msgid "Preview the note to be printed"
-msgstr ""
+msgstr "Förhandsgranska anteckningen för utskrift"
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
 msgid "HTML Format switch"
-msgstr ""
+msgstr "Byte av HTML-format"
 
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:6
 msgid "HTML mode"
@@ -2436,19 +2510,19 @@ msgstr "HTML-läge"
 
 #: ../ui/editor_note.xml.h:7
 msgid "Delete the current note"
-msgstr ""
+msgstr "Ta bort nuvarande anteckning"
 
 #: ../ui/editor_note.xml.h:8
 msgid "_Delete Personal Comment"
-msgstr "_Ta bort personlig kommentar"
+msgstr "Ta _bort egen kommentar"
 
 #: ../ui/editor_note.xml.h:10
 msgid "Save the current note"
-msgstr ""
+msgstr "Spara nuvarande anteckning"
 
 #: ../ui/editor_note.xml.h:11
 msgid "_Save (Personal Comment)"
-msgstr "_Spara (personlig kommentar)"
+msgstr "_Spara (egen kommentar)"
 
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 msgid "E_xit"
@@ -2456,7 +2530,7 @@ msgstr "_Avsluta"
 
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
 msgid "For_mat"
-msgstr "For_mat"
+msgstr "For_matera"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Print this document"
@@ -2472,7 +2546,7 @@ msgstr "Öppna en fil i StudyPad"
 
 #: ../ui/editor_studypad.xml.h:10
 msgid "Save the current file"
-msgstr "Spara den aktuella fil"
+msgstr "Spara den aktuella filen"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Save the current file as"
@@ -2480,7 +2554,7 @@ msgstr "Spara nuvarande fil som"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Save AS"
-msgstr "Spara SOM"
+msgstr "Spara som"
 
 #: ../ui/editor_studypad.xml.h:14
 msgid "Add this file to your bookmarks"
@@ -2497,15 +2571,15 @@ msgstr "Nytt dokument"
 #: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
 #: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Copy/Export Passage"
-msgstr ""
+msgstr "Kopiera/Exportera stycke"
 
 #: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:2
 msgid "Export Passage Cancel"
-msgstr ""
+msgstr "Avbryt exportera stycke"
 
 #: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:3
 msgid "Export Passage OK"
-msgstr ""
+msgstr "Exportera stycke OK"
 
 #: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:5
 msgid "Version"
@@ -2521,7 +2595,7 @@ msgstr "Nyckel"
 
 #: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:8
 msgid "<b>Copy</b>"
-msgstr ""
+msgstr "<b>Kopiera</b>"
 
 #: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:9
 msgid "<b>Export</b>"
@@ -2538,7 +2612,7 @@ msgstr "Bok"
 
 #: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Book Radio Button"
-msgstr ""
+msgstr "Book Radio Button"
 
 #: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:14
 msgid "Export complete chapter"
@@ -2546,7 +2620,7 @@ msgstr "Exportera hela kapitlet"
 
 #: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Chapter Radio Button"
-msgstr ""
+msgstr "Chapter Radio Button"
 
 #: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:17
 msgid "Export single verse"
@@ -2554,11 +2628,11 @@ msgstr "Exportera enstaka vers"
 
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
-msgstr ""
+msgstr "Verse Radio Button"
 
 #: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse range"
-msgstr ""
+msgstr "Versomfång"
 
 #: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:20
 msgid "<b>Format</b>"
@@ -2566,11 +2640,11 @@ msgstr "<b>Format</b>"
 
 #: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:21
 msgid "Plain Text"
-msgstr "Vanlig text"
+msgstr "Endast text"
 
 #: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text Radio Button"
-msgstr ""
+msgstr "Plain Text Radio Button"
 
 #: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:23
 msgid "HTML"
@@ -2578,82 +2652,72 @@ msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML Radio Button"
-msgstr ""
+msgstr "HTML-alternativknapp"
 
 #: ../ui/export-dialog.glade.h:25
-msgid ""
-"Indicates whether verse numbers should appear inline in the text for more "
-"than 1 verse."
-msgstr ""
+msgid "Indicates whether verse numbers should appear inline in the text for more than 1 verse."
+msgstr "Indikerar huruvida en vers versnummer ska visas i texten för mer än en vers."
 
 #: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:25
-#, fuzzy
 msgid "_Verse numbers in text"
-msgstr "Verslista"
+msgstr "_Versnummer i texten"
 
 #: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:27
-#, fuzzy
 msgid "Verse Number button"
-msgstr "Visa versnumrering"
+msgstr "Versnummerknapp"
 
 #: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Indicates whether reference is placed first or last."
-msgstr ""
+msgstr "Indikerar huruvida en referens är placerad först eller sist."
 
 #: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
-#, fuzzy
 msgid "Reference last"
-msgstr "Inställningar"
+msgstr "Referera senaste"
 
 #: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
 msgid "Reference last button"
-msgstr ""
+msgstr "Referera senste-knapp"
 
 #: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
 msgid "Indicates whether or not version name is included in reference."
-msgstr ""
+msgstr "Indikerar huruvida versionsbenämning ska inkluderas i referenser."
 
 #: ../ui/export-dialog.glade.h:32
-#, fuzzy
 msgid "Include Version"
-msgstr "Sword-version"
+msgstr "Inkludera versionsbenämning"
 
 #: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
-#, fuzzy
 msgid "Version button"
-msgstr "Visa versnumrering"
+msgstr "Versionsknapp"
 
 #: ../ui/export-dialog.glade.h:34
 msgid "Save Export As"
-msgstr "Spara export som"
+msgstr "Exportera som"
 
 #: ../ui/export-dialog.gtkbuilder.h:26
 msgid "Indicates whether verse numbers should appear inline in the text."
-msgstr ""
+msgstr "Indikerar huruvida versnummer ska visas i texten."
 
 #: ../ui/export-dialog.gtkbuilder.h:31
-#, fuzzy
 msgid "Include version"
-msgstr "Sword-version"
+msgstr "Inkludera versionsbenämning"
 
 #: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
-#, fuzzy
 msgid "About Studypad"
-msgstr "StudyPad"
+msgstr "Om StudyPad"
 
 #: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
-#, fuzzy
 msgid "Open about dialog"
-msgstr "Öppna i ett dialogfönster"
+msgstr "Öppna \"om\"-fönster"
 
 #: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:116
 #: ../ui/prefs.gtkbuilder.h:116
 msgid "Bold"
-msgstr ""
+msgstr "Fetstil"
 
 #: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
 msgid "Make selection bold"
-msgstr ""
+msgstr "Fetstila markerad text"
 
 #: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
 msgid "Copy"
@@ -2661,38 +2725,35 @@ msgstr "Kopiera"
 
 #: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
 msgid "Copy selection to clipboard"
-msgstr ""
+msgstr "Kopiera markering till klippbord"
 
 #: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
 msgid "Cut"
-msgstr ""
+msgstr "Klipp ut"
 
 #: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
-#, fuzzy
 msgid "Cut selection"
-msgstr "Radering"
+msgstr "Klipp ut markering"
 
 #: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
 msgid "Decrease indent"
-msgstr ""
+msgstr "Minska indentering"
 
 #: ../ui/gtk2_webedit.ui.h:11 ../ui/gtk_webedit.ui.h:11
 msgid "Decrease"
-msgstr ""
+msgstr "Minska"
 
 #: ../ui/gtk2_webedit.ui.h:12 ../ui/gtk_webedit.ui.h:12
 msgid "Decrease paragraph indent"
-msgstr ""
+msgstr "Minska styckets indentering"
 
 #: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
-#, fuzzy
 msgid "Delete selection"
-msgstr "Ta bort vald spännvid"
+msgstr "Ta bort valda"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
-#, fuzzy
 msgid "Remove selection"
-msgstr "Ta bort markerat objekt"
+msgstr "Ta bort valda"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
 #: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:11
@@ -2700,297 +2761,268 @@ msgid "Delete Item"
 msgstr "Ta bort objekt"
 
 #: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
-#, fuzzy
 msgid "Delete current item"
-msgstr "Ta bort objekt"
+msgstr "Ta bort nuvarande objekt"
 
 #: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
-#, fuzzy
 msgid "Search current document"
-msgstr "Sök igenom hela modulen"
+msgstr "Sök igenom nuvarande dokument"
 
 #: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
-#, fuzzy
 msgid "Font"
 msgstr "Typsnitt"
 
 #: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
-#, fuzzy
 msgid "Change font"
-msgstr "Ändra typsnitt för"
+msgstr "Ändra typsnitt"
 
 #: ../ui/gtk2_webedit.ui.h:22 ../ui/gtk_webedit.ui.h:22
 msgid "Increase indent"
-msgstr ""
+msgstr "Öka indentering"
 
 #: ../ui/gtk2_webedit.ui.h:23 ../ui/gtk_webedit.ui.h:23
 msgid "Increase"
-msgstr ""
+msgstr "Öka"
 
 #: ../ui/gtk2_webedit.ui.h:24 ../ui/gtk_webedit.ui.h:24
 msgid "Increase paragraph indent"
-msgstr ""
+msgstr "Öka styckets indentering"
 
 #: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
-#, fuzzy
 msgid "Insert emoticon"
-msgstr "Infoga bokmärke"
+msgstr "Infoga smiley"
 
 #: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
 msgid "Emoticon"
-msgstr ""
+msgstr "Smiley"
 
 #: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
 msgid "Insert an emoticon"
-msgstr ""
+msgstr "Infoga en smiley"
 
 #: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
-#, fuzzy
 msgid "Insert image"
-msgstr "Infoga bokmärke"
+msgstr "Infoga bild"
 
 #: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
-#, fuzzy
 msgid "Image"
-msgstr "Bilder"
+msgstr "Bild"
 
 #: ../ui/gtk2_webedit.ui.h:30 ../ui/gtk_webedit.ui.h:30
 msgid "Insert image at cursor"
-msgstr ""
+msgstr "Infoga bild vid markör"
 
 #: ../ui/gtk2_webedit.ui.h:31 ../ui/gtk_webedit.ui.h:31
-#, fuzzy
 msgid "Insert link"
-msgstr "Infoga bokmärke"
+msgstr "Infoga länk"
 
 #: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
-#, fuzzy
 msgid "Link"
-msgstr "Länkar"
+msgstr "Länk"
 
 #: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
-#, fuzzy
 msgid "Insert a link"
-msgstr "Infoga bokmärke"
+msgstr "Infoga en länk"
 
 #: ../ui/gtk2_webedit.ui.h:34 ../ui/gtk_webedit.ui.h:34
-#, fuzzy
 msgid "Insert Outline"
-msgstr "Konturerad"
+msgstr "Infoga innehållsförteckning"
 
 #: ../ui/gtk2_webedit.ui.h:35 ../ui/gtk_webedit.ui.h:35
-#, fuzzy
 msgid "Outline"
-msgstr "Konturerad"
+msgstr "Innehållsförteckning"
 
 #: ../ui/gtk2_webedit.ui.h:36 ../ui/gtk_webedit.ui.h:36
 msgid "Insert outline"
-msgstr ""
+msgstr "Infoga innehållsförteckning"
 
 #: ../ui/gtk2_webedit.ui.h:37 ../ui/gtk_webedit.ui.h:37
-#, fuzzy
 msgid "Insert rule"
-msgstr "Infoga bokmärke"
+msgstr "Infoga linjal"
 
 #: ../ui/gtk2_webedit.ui.h:38 ../ui/gtk_webedit.ui.h:38
 msgid "Rule"
-msgstr ""
+msgstr "Linjal"
 
 #: ../ui/gtk2_webedit.ui.h:39 ../ui/gtk_webedit.ui.h:39
 msgid "Insert horizontal rule"
-msgstr ""
+msgstr "Infoga horisontell linjal"
 
 #: ../ui/gtk2_webedit.ui.h:40 ../ui/gtk_webedit.ui.h:40
-#, fuzzy
 msgid "Xiphos Link"
-msgstr "Xiphos:"
+msgstr "Xiphos-länk"
 
 #: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
-#, fuzzy
 msgid "Xiphos"
-msgstr "Xiphos:"
+msgstr "Xiphos"
 
 #: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
 msgid "Insert a link to a sword module"
-msgstr ""
+msgstr "Infoga länk till Sword-modul"
 
 #: ../ui/gtk2_webedit.ui.h:43 ../ui/gtk_webedit.ui.h:43
 msgid "Insert table"
-msgstr ""
+msgstr "Infoga tabell"
 
 #: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
 msgid "Table"
-msgstr ""
+msgstr "Tabell"
 
 #: ../ui/gtk2_webedit.ui.h:45 ../ui/gtk_webedit.ui.h:45
 msgid "Insert a table"
-msgstr ""
+msgstr "Infoga en tabell"
 
 #: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
 msgid "Italic"
-msgstr ""
+msgstr "Kursiv"
 
 #: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
 msgid "Change selection to italic font"
-msgstr ""
+msgstr "Kursera markerad text"
 
 #: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
 msgid "Center"
-msgstr ""
+msgstr "Centrera"
 
 #: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
 msgid "Center justify paragraph"
-msgstr ""
+msgstr "Centerjustera stycke"
 
 #: ../ui/gtk2_webedit.ui.h:50 ../ui/gtk_webedit.ui.h:50
 msgid "Full"
-msgstr ""
+msgstr "Fyll rader"
 
 #: ../ui/gtk2_webedit.ui.h:51 ../ui/gtk_webedit.ui.h:51
 msgid "full justify"
-msgstr ""
+msgstr "Fyll rader"
 
 #: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
 msgid "Left"
-msgstr ""
+msgstr "Vänster"
 
 #: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
 msgid "Left justify paragraph"
-msgstr ""
+msgstr "Vänsterjustera stycke"
 
 #: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
 msgid "Right"
-msgstr ""
+msgstr "Höger"
 
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
-msgstr ""
+msgstr "Högerjustera stycke"
 
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
-#, fuzzy
 msgid "Create new file"
-msgstr "Skapa ny mapp"
+msgstr "Skapa ny fil"
 
 #: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
-#, fuzzy
 msgid "Open file"
-msgstr "Öppna fil..."
+msgstr "Öppna fil"
 
 #: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
 msgid "Paste"
-msgstr ""
+msgstr "Klistra in"
 
 #: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
 msgid "Paste clipboard at cursor."
-msgstr ""
+msgstr "Klistra in klippbord vid markören."
 
 #: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
-#, fuzzy
 msgid "Print Document"
-msgstr "Skriv ut detta dokument"
+msgstr "Skriv ut dokument"
 
 #: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
 msgid "Print"
 msgstr "Skriv ut"
 
 #: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
-#, fuzzy
 msgid "Print the current document"
-msgstr "Skriv ut detta dokument"
+msgstr "Skriv ut nuvarande dokument"
 
 #: ../ui/gtk2_webedit.ui.h:65 ../ui/gtk_webedit.ui.h:65
 msgid "Print Preview"
 msgstr "Förhandsgranska utskrift"
 
 #: ../ui/gtk2_webedit.ui.h:66 ../ui/gtk_webedit.ui.h:66
-#, fuzzy
 msgid "Preview"
-msgstr "_Förhandsvisning"
+msgstr "Förhandgranska"
 
 #: ../ui/gtk2_webedit.ui.h:67 ../ui/gtk_webedit.ui.h:67
-#, fuzzy
 msgid "Print preview of current document"
-msgstr "Skriv ut detta dokument"
+msgstr "Förhandsgranskning för utskrift av nuvarande dokumment"
 
 #: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
-#, fuzzy
 msgid "Quit"
-msgstr "_Avsluta"
+msgstr "Avsluta"
 
 #: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
-#, fuzzy
 msgid "Shut down editor"
-msgstr "Öppna i redigerare"
+msgstr "Stäng redigerare"
 
 #: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
 msgid "Redo"
-msgstr ""
+msgstr "Gör om"
 
 #: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
 msgid "Redo last undo"
-msgstr ""
+msgstr "Gör om senaste ångra"
 
 #: ../ui/gtk2_webedit.ui.h:72 ../ui/gtk_webedit.ui.h:72
 msgid "Find and replace"
-msgstr ""
+msgstr "Sök och ersätt"
 
 #: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
 msgid "Replace"
-msgstr ""
+msgstr "Ersätt"
 
 #: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
-#, fuzzy
 msgid "Search and replace"
-msgstr "Sökkriterier"
+msgstr "Sök och ersätt"
 
 #: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
-#, fuzzy
 msgid "Save changes to file"
-msgstr "Spara ändringarna till dokumentet"
+msgstr "Spara ändringarna till fil"
 
 #: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
-#, fuzzy
 msgid "Save as"
 msgstr "Spara som"
 
 #: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
-#, fuzzy
 msgid "Save file as ..."
 msgstr "Spara fil som..."
 
 #: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
 msgid "Strikethrough"
-msgstr ""
+msgstr "Genomstruken"
 
 #: ../ui/gtk2_webedit.ui.h:80 ../ui/gtk_webedit.ui.h:80
 msgid "Strikethrough selection"
-msgstr ""
+msgstr "Genomstryk markerad text"
 
 #: ../ui/gtk2_webedit.ui.h:81 ../ui/gtk_webedit.ui.h:81
 msgid "Underline"
-msgstr ""
+msgstr "Understruken"
 
 #: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
 msgid "Underline selection"
-msgstr ""
+msgstr "Understryk markerad text"
 
 #: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
 msgid "Undo"
-msgstr ""
+msgstr "Ångra"
 
 #: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
 msgid "Undo last change"
-msgstr ""
+msgstr "Ångra senaste ändring"
 
 #: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:85
-#, fuzzy
 msgid "Editor"
-msgstr "Redigera"
+msgstr "Redigerare"
 
 #: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:87
-#, fuzzy
 msgid "Recent files"
-msgstr "Spara nuvarande fil som"
+msgstr "Nyligen använda filer"
 
 #: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:88
 #: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
@@ -3004,109 +3036,107 @@ msgstr "_Hjälp"
 
 #: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
 msgid "toolbutton1"
-msgstr ""
+msgstr "toolbutton1"
 
 #: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
 msgid "toolbutton10"
-msgstr ""
+msgstr "toolbutton10"
 
 #: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
 msgid "toolbutton3"
-msgstr ""
+msgstr "toolbutton3"
 
 #: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
 msgid "toolbutton2"
-msgstr ""
+msgstr "toolbutton2"
 
 #: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
 msgid "toolbutton4"
-msgstr ""
+msgstr "toolbutton4"
 
 #: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
 msgid "toolbutton6"
-msgstr ""
+msgstr "toolbutton6"
 
 #: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
 msgid "toolbutton7"
-msgstr ""
+msgstr "toolbutton7"
 
 #: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
 msgid "Normal"
-msgstr ""
+msgstr "Brödtext"
 
 #: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
 msgid "Header 1"
-msgstr ""
+msgstr "Rubrik 1"
 
 #: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
 msgid "Header 2"
-msgstr ""
+msgstr "Rubrik 2"
 
 #: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
 msgid "Header 3"
-msgstr ""
+msgstr "Rubrik 3"
 
 #: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
 msgid "Header 4"
-msgstr ""
+msgstr "Rubrik 4"
 
 #: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
 msgid "Header 5"
-msgstr ""
+msgstr "Rubrik 5"
 
 #: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
 msgid "Header 6"
-msgstr ""
+msgstr "Rubrik 6"
 
 #: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
 msgid "Address"
-msgstr ""
+msgstr "Adress"
 
 #: ../ui/gtk2_webedit.ui.h:106 ../ui/gtk_webedit.ui.h:106
 msgid "Preformatted"
-msgstr ""
+msgstr "Förformatterad"
 
 #: ../ui/gtk2_webedit.ui.h:107 ../ui/gtk_webedit.ui.h:107
-#, fuzzy
 msgid "Bulleted List"
-msgstr "Ta bort lista?"
+msgstr "Punktlista"
 
 #: ../ui/gtk2_webedit.ui.h:108 ../ui/gtk_webedit.ui.h:108
 msgid "Roman Numeral List"
-msgstr ""
+msgstr "Numrerad lista (romersk)"
 
 #: ../ui/gtk2_webedit.ui.h:109 ../ui/gtk_webedit.ui.h:109
-#, fuzzy
 msgid "Numbered List"
-msgstr "Verslista"
+msgstr "Numrerad lista"
 
 #: ../ui/gtk2_webedit.ui.h:110 ../ui/gtk_webedit.ui.h:110
 msgid "Alphabetical List"
-msgstr ""
+msgstr "Alfabetisk lista"
 
 #: ../ui/gtk2_webedit.ui.h:111 ../ui/gtk_webedit.ui.h:111
 msgid "toolbutton11"
-msgstr ""
+msgstr "toolbutton11"
 
 #: ../ui/gtk2_webedit.ui.h:112 ../ui/gtk_webedit.ui.h:112
 msgid "toolbutton12"
-msgstr ""
+msgstr "toolbutton12"
 
 #: ../ui/gtk2_webedit.ui.h:113 ../ui/gtk_webedit.ui.h:113
 msgid "Set font color of selected text."
-msgstr ""
+msgstr "Ändra den markerade textens färg."
 
 #: ../ui/gtk2_webedit.ui.h:114 ../ui/gtk_webedit.ui.h:114
 msgid "Highlight selected text by setting background color."
-msgstr ""
+msgstr "Understryk markerad text med annan bakgrundsfärg."
 
 #: ../ui/gtk2_webedit.ui.h:115 ../ui/gtk_webedit.ui.h:115
 msgid "toolbutton9"
-msgstr ""
+msgstr "toolbutton9"
 
 #: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
-msgstr ""
+msgstr "Markera/Avmarkera vers"
 
 #: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:7
 msgid "Mark"
@@ -3121,74 +3151,60 @@ msgid "Module Manager"
 msgstr "Modulhanterare"
 
 #: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
-#, fuzzy
 msgid "_View Intro"
-msgstr "_Visa"
+msgstr "_Visa introduktion"
 
 #: ../ui/module-manager.glade.h:3 ../ui/module-manager.gtkbuilder.h:3
 msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
+msgstr "Öppna en kort förklaring om hur Modulhanteraren fungerar."
 
 #: ../ui/module-manager.glade.h:4 ../ui/module-manager.gtkbuilder.h:4
 msgid "_Load Standard"
-msgstr ""
+msgstr "_Ladda standard"
 
 #: ../ui/module-manager.glade.h:5 ../ui/module-manager.gtkbuilder.h:5
-msgid ""
-"Load and synchronize the standard set of known repositories, as maintained "
-"at crosswire.org, with your current remote sources."
-msgstr ""
+msgid "Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources."
+msgstr "Ladda in och synkronisera standarduppsättningen av kända repositories (källor) från crosswire.org mot dina nuvarande källor."
 
 #: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
-msgid ""
-"Refresh Xiphos' knowledge of what modules are available at the selected "
-"remote repository"
-msgstr ""
+msgid "Refresh Xiphos' knowledge of what modules are available at the selected remote repository"
+msgstr "Uppdatera Xiphos kännedom om tillgängliga moduler hos det valda repositoriet (källan)"
 
 #: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
-#, fuzzy
 msgid "_Install"
-msgstr "Installera"
+msgstr "_Installera"
 
 #: ../ui/module-manager.glade.h:8 ../ui/module-manager.gtkbuilder.h:7
-#, fuzzy
 msgid "Install or update the selected modules"
-msgstr "Installera följande moduler:"
+msgstr "Installera eller uppdatera dom valda modulerna"
 
 #: ../ui/module-manager.glade.h:9 ../ui/module-manager.gtkbuilder.h:9
-#, fuzzy
 msgid "Remove the selected modules from your system"
-msgstr "Ta bort vald modul från listan"
+msgstr "Ta bort vald modul från datorn"
 
 #: ../ui/module-manager.glade.h:10 ../ui/module-manager.gtkbuilder.h:10
-#, fuzzy
 msgid "_Archive"
-msgstr "Arkivera"
+msgstr "_Arkivera"
 
 #: ../ui/module-manager.glade.h:11 ../ui/module-manager.gtkbuilder.h:11
-#, fuzzy
 msgid "Create a zip archive of the selected modules."
-msgstr "Är du säker på att du vill ta bort vald modul?"
+msgstr "Skapa ziparkiv med dom valda modulerna."
 
 #: ../ui/module-manager.glade.h:12 ../ui/module-manager.gtkbuilder.h:12
-#, fuzzy
 msgid "_Index"
-msgstr "Indexera"
+msgstr "_Indexera"
 
 #: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
-msgid ""
-"Build an index of the selected modules, for optimized (\"lucene\") searching."
-msgstr ""
+msgid "Build an index of the selected modules, for optimized (\"lucene\") searching."
+msgstr "Indexera valda moduler för optimerad \"lucene\"-sökning."
 
 #: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
-#, fuzzy
 msgid "_Delete Index"
-msgstr "Ta bort index"
+msgstr "Ta _bort index"
 
 #: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
-#, fuzzy
 msgid "Delete the fast-search index of the selected modules."
-msgstr "Ta bort snabbsök-index för följande moduler:"
+msgstr "Ta bort snabbsöknings-index från dom valda modulerna."
 
 #: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
 msgid "Continue"
@@ -3205,9 +3221,7 @@ msgstr "<b>Modulhanterare</b>"
 
 #: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:20
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
-"<b>VARNING:</b> Om du lever i ett land med förföljelse så använd detta med "
-"försiktighet."
+msgstr "<b>VARNING:</b> Om du lever i ett land där förföljelse förekommer så använd detta med försiktighet."
 
 #: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:21
 msgid "<b>Add and Remove Sources</b>"
@@ -3218,29 +3232,24 @@ msgid "Current local sources"
 msgstr "Nuvarande lokala källor"
 
 #: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:23
-msgid ""
-"Add a local folder as an install source, typically on a cdrom or flash "
-"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
-msgstr ""
+msgid "Add a local folder as an install source, typically on a cdrom or flash drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
+msgstr "Lägg till en lokal katalog som installtionskälla, t ex från en CD-skiva eller ett USB-minne. En sådan katalog måste innehålla underkatalogerna  \"mods.d\" och \"modules\"."
 
 #: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:24
 msgid "Remove one of your local folders as an install source."
-msgstr ""
+msgstr "Ta bort en av dina lokala kataloger från listan av installationskällor."
 
 #: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:25
 msgid "Current Remote Sources"
-msgstr "Nuvarande fjärr-källor"
+msgstr "Nuvarande nätverkskällor"
 
 #: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:26
-msgid ""
-"Add a custom remote install source. You must know its hostname and the "
-"folder where its repository lives."
-msgstr ""
+msgid "Add a custom remote install source. You must know its hostname and the folder where its repository lives."
+msgstr "Lägg till en specifik fjärrkälla. Du måste ange hostnamnet och katalogen där repositoriet finns."
 
 #: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:27
-#, fuzzy
 msgid "Remove a remote install source."
-msgstr "Ta bort vald källa"
+msgstr "Ta bort en nätverkskälla."
 
 #: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:28
 msgid "<b>Install Source</b>"
@@ -3252,7 +3261,7 @@ msgstr "Lokalt"
 
 #: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:30
 msgid "Remote"
-msgstr "Fjärr"
+msgstr "Nätverkskälla"
 
 #: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:31
 msgid "<b>Install Destination</b>"
@@ -3260,43 +3269,39 @@ msgstr "<b>Installera till</b>"
 
 #: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:32
 msgid "<i>Personal area, for your use only:</i>"
-msgstr ""
+msgstr "<i>Personlig area, endast för din egen användning:</i>"
 
 #: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:33
 msgid "Home dir"
-msgstr "Hemmamapp"
+msgstr "Hemkatalog"
 
 #: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:34
 msgid "<i>System area, for all users:</i>"
-msgstr ""
+msgstr "<i>Systemarea, för alla användare:</i>"
 
 #: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:35
 msgid "Sword sys dir"
-msgstr ""
+msgstr "Systemkatalog för Sword"
 
 #: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:36
-msgid ""
-"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
-"detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>VARNING:</b> Om du lever i ett land med förföljelse och inte vill riskera "
-"att bli upptäckt så ska du inte använda fjärr-installations-funktionen. "
+msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
+msgstr "<b>VARNING:</b> Om du lever i ett land där förföljelse förekommer och inte vill riskera att bli upptäckt så bör du inte använda fjärrinstallationsfunktionen. "
 
 #: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:37
 msgid "Local Install Folder"
-msgstr ""
+msgstr "Lokal installationskatalog"
 
 #: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
 msgid "Drop down history list"
-msgstr ""
+msgstr "Dropdownlista över historik"
 
 #: ../ui/navbar_versekey.glade.h:2
 msgid "Choose book to display"
-msgstr ""
+msgstr "Välj bok att visa"
 
 #: ../ui/navbar_versekey.glade.h:3 ../ui/navbar_versekey.gtkbuilder.h:2
 msgid "Book Selector Button"
-msgstr ""
+msgstr "Book Selector Button"
 
 #: ../ui/navbar_versekey.glade.h:4 ../ui/navbar_versekey.gtkbuilder.h:3
 msgid "<b>Revelation of John</b>"
@@ -3304,11 +3309,11 @@ msgstr "<b>Uppenbarelseboken</b>"
 
 #: ../ui/navbar_versekey.glade.h:5
 msgid "Choose chapter to display"
-msgstr ""
+msgstr "Välj kapitel att visa"
 
 #: ../ui/navbar_versekey.glade.h:6 ../ui/navbar_versekey.gtkbuilder.h:4
 msgid "Toggle Chapter Button"
-msgstr ""
+msgstr "Toggle Chapter Button"
 
 #: ../ui/navbar_versekey.glade.h:7 ../ui/navbar_versekey.gtkbuilder.h:5
 msgid "1"
@@ -3316,20 +3321,19 @@ msgstr "1"
 
 #: ../ui/navbar_versekey.glade.h:8
 msgid "Choose Verse to display"
-msgstr ""
+msgstr "Välj vers att visa"
 
 #: ../ui/navbar_versekey.glade.h:9 ../ui/navbar_versekey.gtkbuilder.h:6
 msgid "Toggle Verse Button"
-msgstr ""
+msgstr "Toggle Verse Button"
 
 #: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
-msgstr ""
-"Ange en versreferens som i Bok 1:1-formatet och tryck på Return-tangenten"
+msgstr "Ange en versreferens som i Bok 1:1-formatet och tryck på Return-tangenten"
 
 #: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
 msgid "Reference Entry"
-msgstr ""
+msgstr "Bok, kapitel och vers"
 
 #: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:10
 msgid "Cover"
@@ -3344,9 +3348,8 @@ msgid "Background"
 msgstr "Bakgrund"
 
 #: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
-#, fuzzy
 msgid " "
-msgstr ": "
+msgstr " "
 
 #: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
 msgid "Foreground"
@@ -3354,11 +3357,11 @@ msgstr "Förgrund"
 
 #: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
 msgid "Current Verse"
-msgstr ""
+msgstr "Nuvarande vers"
 
 #: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
 msgid "Verse Number"
-msgstr ""
+msgstr "Versnummer"
 
 #: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
 msgid "Links"
@@ -3370,21 +3373,19 @@ msgstr "Markera förgrund"
 
 #: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
 msgid "Highlight Background"
-msgstr "Markera bakgrunden"
+msgstr "Markera bakgrund"
 
 #: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
-#, fuzzy
 msgid "Invert color pairs"
-msgstr "Infoga bokmärke"
+msgstr "Invertera färger"
 
 #: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
 msgid "Normal Text"
-msgstr ""
+msgstr "Text"
 
 #: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
-#, fuzzy
 msgid "Highlight"
-msgstr "Markera bakgrunden"
+msgstr "Markeringar"
 
 #: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
 msgid "Font Colors"
@@ -3392,15 +3393,15 @@ msgstr "Typsnittsfärger"
 
 #: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
 msgid "<b>Font Sizes</b>"
-msgstr ""
+msgstr "<b>Textstorlekar</b>"
 
 #: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
 msgid "All displayed font sizes are relative to this choice"
-msgstr ""
+msgstr "Alla textstorlekar visas relativt detta val"
 
 #: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:26
 msgid "Base font size"
-msgstr ""
+msgstr "Bastextstorlek"
 
 #: ../ui/prefs.glade.h:19
 msgid ""
@@ -3424,308 +3425,271 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
 msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr ""
+msgstr "Oftast -1, för att versnummer ska bli mindre påträngande"
 
 #: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
 msgid "Verse number size"
-msgstr ""
+msgstr "Versnummerstorlek"
 
 #: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
-msgid ""
-"Name and size choice for any module in a given language; still overridden by "
-"a specific choice on a particular module"
-msgstr ""
+msgid "Name and size choice for any module in a given language; still overridden by a specific choice on a particular module"
+msgstr "Övergripande typsnittsinställningar per språk; Överskrids av specifika inställningar per modul"
 
 #: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
 msgid "Font preferences, per language"
-msgstr ""
+msgstr "Typsnittsinställningar per språk"
 
 #: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
 msgid "Language Font Combo"
-msgstr ""
+msgstr "Språk/Typsnitt-kombination"
 
 #: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
 msgid "Font Misc"
 msgstr "Typsnitt övrigt"
 
 #: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
-#, fuzzy
 msgid "<b>BibleSync</b>"
-msgstr "<b>Sökomfattning</b>"
+msgstr "<b>BibleSync</b>"
 
 #: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:34
-msgid ""
-"Xiphos is the first Bible study program to provide an implementation of "
-"BibleSync, a synchronization protocol for Bible programs. If you work with "
-"multiple Bible programs, or if you work in a team, or if you have classroom "
-"activities using shared study, BibleSync can be a useful tool for you. "
-"BibleSync operates in 1 of 3 modes: Personal, to synchronize multiple Bible "
-"applications of your own, or in a working team; Speaker, to drive a lecture "
-"audience's Bible programs to follow along; Audience, to receive the "
-"speaker's navigation."
-msgstr ""
+msgid "Xiphos is the first Bible study program to provide an implementation of BibleSync, a synchronization protocol for Bible programs. If you work with multiple Bible programs, or if you work in a team, or if you have classroom activities using shared study, BibleSync can be a useful tool for you. BibleSync operates in 1 of 3 modes: Personal, to synchronize multiple Bible applications of your own, or in a working team; Speaker, to drive a lecture audience's Bible programs to follow along; Audience, to receive the speaker's navigation."
+msgstr "Xiphos är det första bibelstudieprogrammet som implementerar BibleSync, ett protokoll för synkronisering av bibelprogram. Om du använder flera bibelprogram, eller om du studerar bibeln i grupp, eller om du har klassrumsaktiviteter med delade studier, så kan BibleSync vara ett användbart verktyg för dig. BibleSync arbetare i ett av tre lägen: Personlig, för att synkronisera flera bibelprogram du själv använder, eller inom en grupp; Talare, för att synkronisera åhörares bibelprogram att följa det du visar,Åhörare, för att följa en talares navigering."
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:35
 msgid "Mode"
-msgstr ""
+msgstr "Läge"
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:36
 msgid "Select the mode in which BibleSync should operate."
-msgstr ""
+msgstr "Välj vilket läge BibleSync ska köras i."
 
 #: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
 msgid "_Off"
-msgstr ""
+msgstr "_Av"
 
 #: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
 msgid "Disable BibleSync."
-msgstr ""
+msgstr "Inaktivera BibleSync."
 
 #: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
 msgid "BSP off radio button"
-msgstr ""
+msgstr "BSP off radio button"
 
 #: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
 msgid "_Speaker"
-msgstr ""
+msgstr "_Talare"
 
 #: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
 msgid "Enable BibleSync as the speaker."
-msgstr ""
+msgstr "Aktivera BibleSync i talar-läge."
 
 #: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
 msgid "BSP speaker radio button"
-msgstr ""
+msgstr "BSP speaker radio button"
 
 #: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
 msgid "_Audience"
-msgstr ""
+msgstr "_Åhörare"
 
 #: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
 msgid "Enable BibleSync as a member of the audience."
-msgstr ""
+msgstr "Aktivera BibleSync som åhörare."
 
 #: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
 msgid "BSP audience radio button"
-msgstr ""
+msgstr "BSP audience radio button"
 
 #: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
-#, fuzzy
 msgid "_Personal"
-msgstr "Personliga"
+msgstr "_Personlig"
 
 #: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
 msgid "Enable BibleSync for personal or team use."
-msgstr ""
+msgstr "Aktivera BibleSync för personlig användning."
 
 #: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
-#, fuzzy
 msgid "BSP personal radio button"
-msgstr "Visa versnumrering"
+msgstr "BSP personal radio button"
 
 #: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
 msgid "Private"
-msgstr ""
+msgstr "Privat"
 
 #: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
-msgid ""
-"When in Personal mode, only programs running on this machine will hear your "
-"navigation."
-msgstr ""
+msgid "When in Personal mode, only programs running on this machine will hear your navigation."
+msgstr "I personligt läge kommer bara program som körs på denna maskin följa din navigering."
 
 #: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
-#, fuzzy
 msgid "BSP privacy button"
-msgstr "Visa versnumrering"
+msgstr "BSP privacy button"
 
 #: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:52
-#, fuzzy
 msgid "Navigate"
-msgstr "Frälsning"
+msgstr "Navigera"
 
 #: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:53
 msgid "Choose how to accept incoming navigation synchronization."
-msgstr ""
+msgstr "Välj hur du vill hantera inkommande navigering."
 
 #: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
-#, fuzzy
 msgid "_Direct"
-msgstr "Mapp"
+msgstr "_Direkt"
 
 #: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
-msgstr ""
+msgstr "BibleSync-navigering kommer att ta Xiphos direkt till den indikerade versen."
 
 #: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
 msgid "BSP nav direct radio button"
-msgstr ""
+msgstr "BSP nav direct radio button"
 
 #: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
-#, fuzzy
 msgid "_Verse list"
-msgstr "Verslista"
+msgstr "_Verslista"
 
 #: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
 msgid "BibleSync navigation will use Xiphos' sidebar verse list."
-msgstr ""
+msgstr "BibleSync-navigering kommer att använda verslistan i Xiphos sidomeny."
 
 #: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
 msgid "BSP nav verse list radio button"
-msgstr ""
+msgstr "BSP nav verse list radio button"
 
 #: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
 msgid "Listen"
-msgstr ""
+msgstr "Lyssna"
 
 #: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
 msgid "Xiphos will listen to Speakers according to choice here."
-msgstr ""
+msgstr "Xiphos kommer att lyssna till talare enligt vad som väljs här."
 
 #: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
 msgid "Selective"
-msgstr ""
+msgstr "Selektiv"
 
 #: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
 msgid "Choose the Speakers to be followed."
-msgstr ""
+msgstr "Välj vilken talare som ska följas."
 
 #: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
-#, fuzzy
 msgid "BSP listen some radio button"
-msgstr "Visa versnumrering"
+msgstr "BSP listen some radio button"
 
 #: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
 msgid "All"
-msgstr ""
+msgstr "Alla"
 
 #: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
 msgid "All Speakers will be followed."
-msgstr ""
+msgstr "Alla talare kommer att följas."
 
 #: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
-#, fuzzy
 msgid "BSP listen all radio button"
-msgstr "Visa versnumrering"
+msgstr "BSP listen all radio button"
 
 #: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
 msgid "No Speakers will be followed."
-msgstr ""
+msgstr "Inga talare kommer att följas."
 
 #: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
-#, fuzzy
 msgid "BSP listen none radio button"
-msgstr "Visa versnumrering"
+msgstr "BSP listen none radio button"
 
 #: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
-msgid ""
-"Additional traces can be presented during BibleSync operation by enabling "
-"presence, mismatch, and debug. Beware enabling these, they can be very "
-"chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
-msgstr ""
+msgid "Additional traces can be presented during BibleSync operation by enabling presence, mismatch, and debug. Beware enabling these, they can be very chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
+msgstr "Ytterligare utskrifter kan förekomma i BibleSync-sessioner genom att slå på närvaro, missmatch och debug. Var medveten om att dessa är väldigt pratiga om du slår på dom. Välj också om du vill använda grupp-paramentern för att välja vilken flik som ska följa navigeringen."
 
 #: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
-#, fuzzy
 msgid "Presence"
-msgstr "Inställningar"
+msgstr "Närvaro"
 
 #: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
 msgid "Presence announcements will be shown in dialogs."
-msgstr ""
+msgstr "Närvaroanmälan kommer visas i fönster."
 
 #: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
-#, fuzzy
 msgid "BSP presence button"
-msgstr "Visa versnumrering"
+msgstr "BSP presence button"
 
 #: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
-#, fuzzy
 msgid "Mismatch"
-msgstr "matchar"
+msgstr "Missmatch"
 
 #: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Mismatches from your session will be shown in dialogs."
-msgstr ""
+msgstr "Missmatchning från din session kommer att visas i fönster."
 
 #: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
 msgid "BSP mismatch button"
-msgstr ""
+msgstr "BSP mismatch button"
 
 #: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
 msgid "Debug"
-msgstr ""
+msgstr "Debug"
 
 #: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
 msgid "Packet tracing."
-msgstr ""
+msgstr "Paketutskrifter."
 
 #: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
 msgid "BSP event debug button"
-msgstr ""
+msgstr "BSP event debug button"
 
 #: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
 msgid "_Group as tab"
-msgstr ""
+msgstr "_Gruppera som flik"
 
 #: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
-msgid ""
-"Interpret the protocol's group number parameter as Xiphos' tab number. "
-"Disabling this may be necessary if some Speakers' use of group number is not "
-"appropriate as a tab number."
-msgstr ""
+msgid "Interpret the protocol's group number parameter as Xiphos' tab number. Disabling this may be necessary if some Speakers' use of group number is not appropriate as a tab number."
+msgstr "Tolka protokollets gruppnummer-paramenter som Xiphos fliknummer. Det kan vara nödvändigt att inaktivera detta om en eller flera talare använder gruppnummer som inte passar som fliknummer."
 
 #: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 msgid "BSP event group-as-tab button"
-msgstr ""
+msgstr "BSP event group-as-tab button"
 
 #: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
 msgid "<b>General</b>"
 msgstr "<b>Allmänt</b>"
 
 #: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
-msgid ""
-"Select a particular language for interface display, other than your usual "
-"setting"
-msgstr ""
+msgid "Select a particular language for interface display, other than your usual setting"
+msgstr "Välj ett specifikt språk att visa menyer i, annat än din normala inställning"
 
 #: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
 msgid "Special Locale (requires restart)"
-msgstr ""
+msgstr "Systemspråk för Xiphos (kräver omstart)"
 
 #: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "Special Locale Combo"
-msgstr ""
+msgstr "Systemspråkskombination för Xiphos"
 
 #: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
 msgid "Show splash screen at start up"
-msgstr ""
+msgstr "Visa laddningsbild vid uppstart"
 
 #: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
 msgid "Show Daily Devotion at start up"
 msgstr "Visa daglig andakt vid uppstart"
 
 #: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
-msgid ""
-"If you have set a preferred daily devotion module, its entry for today will "
-"be shown at startup."
-msgstr ""
+msgid "If you have set a preferred daily devotion module, its entry for today will be shown at startup."
+msgstr "Om du har valt en föredragen modul för daglig andakt, så visas dagens innehåll från den vid uppstart."
 
 #: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Use default Dictionary"
-msgstr "Använd förvald uppslagsbok"
+msgstr "Använd förvald ordbok"
 
 #: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
-msgid ""
-"Make double-click of a word always use default dictionary instead of "
-"dictionary currently displayed"
-msgstr ""
+msgid "Make double-click of a word always use default dictionary instead of dictionary currently displayed"
+msgstr "Låt dubbelklick på ett ord slå upp det i standardordboken istället för nuvarande ordbok"
 
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
 msgid "Use default Dictionary Checkbox"
-msgstr ""
+msgstr "Use default Dictionary Checkbox"
 
 #: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
 msgid "Scroll to Previous/Next Chapter"
@@ -3733,11 +3697,11 @@ msgstr "Rulla till föregående/nästa kapitel"
 
 #: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr ""
+msgstr "Använd bibeltext-scrollern för att scrolla till föregående eller nästkommande kapitel"
 
 #: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr ""
+msgstr "Scroll to Previous/Next Chapter Checkbox"
 
 #: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
 msgid "Resize images"
@@ -3745,51 +3709,47 @@ msgstr "Ändra storlek på bilder"
 
 #: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 msgid "Automatically resize image content to fit the pane"
-msgstr ""
+msgstr "Skala automatiskt bildinnehåll till att få plats i fönstret"
 
 #: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 msgid "Resize images checkbox"
-msgstr ""
+msgstr "Resize images checkbox"
 
 #: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 msgid "Highlight current verse"
 msgstr "Markera aktuell vers"
 
 #: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
-#, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr "Lägg på markering med hög konstrast på aktuell vers"
+msgstr "Lägg på markering med hög konstrast på aktuell vers - se färgval"
 
 #: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "Highlight current verse check box"
-msgstr ""
+msgstr "Highlight current verse check box"
 
 #: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
-#, fuzzy
 msgid "Highlight user annotations"
-msgstr "Markera aktuell vers"
+msgstr "Markera egna kommentarer"
 
 #: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
-#, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
-msgstr "Lägg på markering med hög konstrast på aktuell vers"
+msgstr "Lägg på markering med hög konstrast på verser med egna kommentarer"
 
 #: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
 msgid "Highlight user annotations check box"
-msgstr ""
+msgstr "Highlight user annotations check box"
 
 #: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
-#, fuzzy
 msgid "Cross-references in verse list"
-msgstr "Korsreferens"
+msgstr "Korsreferens i verslistan"
 
 #: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr ""
+msgstr "Använd verslistan istället för förhandsgranskaren för att visa korsrefernser"
 
 #: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 msgid "Xrefs in verse list check box"
-msgstr ""
+msgstr "Xrefs in verse list check box"
 
 #: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
 msgid "Enable Prayer Lists"
@@ -3797,60 +3757,55 @@ msgstr "Aktivera bönelistor"
 
 #: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Make journals/prayer lists available"
-msgstr ""
+msgstr "Tillgängliggör journaler/bönelistor"
 
 #: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
 msgid "Enable Prayer Lists Checkbox"
-msgstr ""
+msgstr "Enable Prayer Lists Checkbox"
 
 #: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
-#, fuzzy
 msgid "Verse number"
-msgstr "Visa versnumrering"
+msgstr "Visning av versnumrering"
 
 #: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
 msgid "Offset the verse number in several ways"
-msgstr ""
+msgstr "Alternativ för hur versnumrering visas"
 
 #: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
-#, fuzzy
 msgid "Show verse number in bold text"
-msgstr "Visa versnumrering"
+msgstr "Fetmarkera versnummer"
 
 #: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
 msgid "Verse number bold checkbox"
-msgstr ""
+msgstr "Verse number bold checkbox"
 
 #: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
 msgid "Brackets"
-msgstr ""
+msgstr "Hakparenteser"
 
 #: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 msgid "Show verse number with [surrounding brackets]"
-msgstr ""
+msgstr "Visa versnummer inom [hakparenteser]"
 
 #: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
 msgid "Verse number bracket checkbox"
-msgstr ""
+msgstr "Verse number bracket checkbox"
 
 #: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
-#, fuzzy
 msgid "Superscript"
-msgstr "Beskrivning"
+msgstr "Upphöjd versnumrering"
 
 #: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
-#, fuzzy
 msgid "Show verse number as a superscript"
-msgstr "Visa versnumrering"
+msgstr "Visa versnumrering som upphöjd text"
 
 #: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
 msgid "Verse number superscript checkbox"
-msgstr ""
+msgstr "Verse number superscript checkbox"
 
 #: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
-#, fuzzy
 msgid "StudyPad default directory"
-msgstr "<b>StudyPad standardsökväg</b>"
+msgstr "Standardsökväg för StudyPad"
 
 #: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Select A Directory"
@@ -3858,7 +3813,7 @@ msgstr "Välj en mapp"
 
 #: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 msgid "StudyPad default directory combo"
-msgstr ""
+msgstr "Standardsökvägskombination för StudyPad"
 
 #: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "General Misc"
@@ -3866,31 +3821,31 @@ msgstr "Allmänt övrigt"
 
 #: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 msgid "<b>Main Window Modules</b>"
-msgstr ""
+msgstr "<b>Huvudfönstermoduler</b>"
 
 #: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 msgid "Biblical Text"
-msgstr "Bibel"
+msgstr "Bibeltext"
 
 #: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
 msgid "Change Biblical Text Combo"
-msgstr ""
+msgstr "Byt kombination av bibeltexter"
 
 #: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 msgid "Change Commentary Combo"
-msgstr ""
+msgstr "Byt kombination av kommentarer"
 
 #: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 msgid "Dictionary"
-msgstr "Uppslagsbok"
+msgstr "Ordbok"
 
 #: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "Change Dictionary Combo"
-msgstr ""
+msgstr "Byt kombination av ordböcker"
 
 #: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "Change Book Combo"
-msgstr ""
+msgstr "Byt kombination av böcker"
 
 #: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
@@ -3900,12 +3855,12 @@ msgstr "<b>Moduler</b>"
 #: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
-msgstr "Ta bort alla moduler från listan"
+msgstr "Rensa "
 
 #: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
-msgstr ""
+msgstr "Clear Modules from List Button"
 
 #: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
@@ -3915,11 +3870,11 @@ msgstr "Ta bort vald modul från listan"
 #: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
-msgstr ""
+msgstr "Delete Selected Module From List Button"
 
 #: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
 msgid "Open a dialog to select modules"
-msgstr ""
+msgstr "Öppna ett fönster för att välja moduler"
 
 #: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
@@ -3929,7 +3884,7 @@ msgstr "Lägg till moduler"
 #: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
-msgstr ""
+msgstr "Open Selection Dialog Button"
 
 #: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 msgid "Modules Parallel"
@@ -3937,7 +3892,7 @@ msgstr "Moduler parallell"
 
 #: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 msgid "<b>Special Purpose Modules</b>"
-msgstr ""
+msgstr "<b>Specialmoduler</b>"
 
 #: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 msgid "Daily Devotional"
@@ -3945,7 +3900,7 @@ msgstr "Dagliga andakter"
 
 #: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 msgid "Daily Devotional Combo"
-msgstr ""
+msgstr "Kombination av dagliga andakter"
 
 #: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 msgid "Hebrew Lexicon"
@@ -3953,7 +3908,7 @@ msgstr "Hebreiskt lexikon"
 
 #: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
 msgid "Hebrew Lexicon Combo"
-msgstr ""
+msgstr "Kombination av hebreiska lexikon"
 
 #: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
 msgid "Greek Lexicon"
@@ -3961,23 +3916,23 @@ msgstr "Grekiskt lexikon"
 
 #: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
 msgid "Greek Lexicon Combo"
-msgstr ""
+msgstr "Kombination av grekiska lexikon"
 
 #: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
 msgid "Default Dictionary"
-msgstr "Förvald uppslagsbok"
+msgstr "Förvald ordbok"
 
 #: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
 msgid "Change Default Dictionary Combo"
-msgstr ""
+msgstr "Byt förvald kombination av ordböcker"
 
 #: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
 msgid "Personal Notes"
-msgstr "Personliga anteckningar"
+msgstr "Egna anteckningar"
 
 #: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Change Personal Notes Combo"
-msgstr ""
+msgstr "Ändra kombination av egna noteringar"
 
 #: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Modules Misc"
@@ -3986,7 +3941,7 @@ msgstr "Moduler övrigt"
 #: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
 #: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 msgid "Module Selection"
-msgstr ""
+msgstr "Modulval"
 
 #: ../ui/prefs.gtkbuilder.h:1
 msgid "-2"
@@ -4022,22 +3977,19 @@ msgstr "Avancerad sökning"
 
 #: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
 msgid "_Lucene Search Syntax"
-msgstr ""
+msgstr "_Lucenesökningssyntax"
 
 #: ../ui/search-dialog.glade.h:3 ../ui/search-dialog.gtkbuilder.h:3
-msgid ""
-"Open a brief explanation of the syntax used for optimized \"lucene\" "
-"searches."
-msgstr ""
+msgid "Open a brief explanation of the syntax used for optimized \"lucene\" searches."
+msgstr "Öppna en kort förklaring av av optimerad \"lucene\"-sökning."
 
 #: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
-#, fuzzy
 msgid "_Attribute Search"
-msgstr "Attributsökning"
+msgstr "_Attributsökning"
 
 #: ../ui/search-dialog.glade.h:5 ../ui/search-dialog.gtkbuilder.h:5
 msgid "Open a brief explanation of attribute-based searches."
-msgstr ""
+msgstr "Öppna en kort förklaring av attributbaserad sökning."
 
 #: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
 msgid "for "
@@ -4045,19 +3997,19 @@ msgstr "efter "
 
 #: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
 msgid "Main Search Entry"
-msgstr ""
+msgstr "Huvudsökfras"
 
 #: ../ui/search-dialog.glade.h:8 ../ui/search-dialog.gtkbuilder.h:9
 msgid "Start/stop searching"
-msgstr "Starta/stoppa sökning"
+msgstr "Starta/Stoppa sökning"
 
 #: ../ui/search-dialog.glade.h:9 ../ui/search-dialog.gtkbuilder.h:10
 msgid "Find Button"
-msgstr ""
+msgstr "Find Button"
 
 #: ../ui/search-dialog.glade.h:10 ../ui/search-dialog.gtkbuilder.h:11
 msgid "Search Criteria Treeview"
-msgstr ""
+msgstr "Trädvy över sökkriterier"
 
 #: ../ui/search-dialog.glade.h:11 ../ui/search-dialog.gtkbuilder.h:12
 msgid "<b>Scope</b>"
@@ -4073,36 +4025,35 @@ msgstr "Hela modulen"
 
 #: ../ui/search-dialog.glade.h:14 ../ui/search-dialog.gtkbuilder.h:15
 msgid "Entire module radiobutton"
-msgstr ""
+msgstr "Entire module radiobutton"
 
 #: ../ui/search-dialog.glade.h:15 ../ui/search-dialog.gtkbuilder.h:17
 msgid "Use the results of the last search as the scope of the search"
-msgstr ""
-"Använd resultaten från föregående sökning som omfattningen för sökningen"
+msgstr "Använd resultaten från föregående sökning som omfattningen för sökningen"
 
 #: ../ui/search-dialog.glade.h:16 ../ui/search-dialog.gtkbuilder.h:16
 msgid "Current results"
-msgstr ""
+msgstr "Nuvarande resultat"
 
 #: ../ui/search-dialog.glade.h:17 ../ui/search-dialog.gtkbuilder.h:18
 msgid "Current results radiobutton"
-msgstr ""
+msgstr "Current results radiobutton"
 
 #: ../ui/search-dialog.glade.h:18 ../ui/search-dialog.gtkbuilder.h:20
 msgid "Use a custom range for the scope of the search"
-msgstr ""
+msgstr "Använd en anpassad spännvidd för sökningen"
 
 #: ../ui/search-dialog.glade.h:19 ../ui/search-dialog.gtkbuilder.h:19
 msgid "Custom verse range"
-msgstr "Egen spännvid"
+msgstr "Egen spännvidd"
 
 #: ../ui/search-dialog.glade.h:20 ../ui/search-dialog.gtkbuilder.h:21
 msgid "Custom verse range radiobutton"
-msgstr ""
+msgstr "Custom verse range radiobutton"
 
 #: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
 msgid "Custom Range Selector Combo"
-msgstr ""
+msgstr "Valkombination för anpassad spännvidd"
 
 #: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
 msgid "Use a single module for the search"
@@ -4114,7 +4065,7 @@ msgstr "Enskild modul"
 
 #: ../ui/search-dialog.glade.h:25 ../ui/search-dialog.gtkbuilder.h:26
 msgid "Single module radiobutton"
-msgstr ""
+msgstr "Single module radiobutton"
 
 #: ../ui/search-dialog.glade.h:26 ../ui/search-dialog.gtkbuilder.h:28
 msgid "Use the current module list for the search"
@@ -4126,7 +4077,7 @@ msgstr "Modullista"
 
 #: ../ui/search-dialog.glade.h:28 ../ui/search-dialog.gtkbuilder.h:29
 msgid "Module list radiobutton"
-msgstr ""
+msgstr "Module list radiobutton"
 
 #: ../ui/search-dialog.glade.h:29 ../ui/search-dialog.gtkbuilder.h:31
 msgid "Use a custom module list for the search"
@@ -4138,11 +4089,11 @@ msgstr "Egen modullista"
 
 #: ../ui/search-dialog.glade.h:31 ../ui/search-dialog.gtkbuilder.h:32
 msgid "Custom module list radiobutton"
-msgstr ""
+msgstr "Custom module list radiobutton"
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Module List Combo"
-msgstr ""
+msgstr "Kombination av egna modullistor"
 
 #: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
 msgid "<b>Search Type</b>"
@@ -4154,6 +4105,9 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
+"Snabb, index-baserad sökning med många funktioner\n"
+"Indexering måste ha gjorts i förväg:\n"
+"Se Modulhanterarens underhållsfunktioner"
 
 #: ../ui/search-dialog.glade.h:37 ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
@@ -4161,23 +4115,23 @@ msgstr "Optimerad (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr ""
+msgstr "Optimized (\"Lucene\") radiobutton"
 
 #: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
 msgid "Multi word radiobutton"
-msgstr ""
+msgstr "Multi word radiobutton"
 
 #: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
 msgid "Regular expression radiobutton"
-msgstr ""
+msgstr "Regular expression radiobutton"
 
 #: ../ui/search-dialog.glade.h:44 ../ui/search-dialog.gtkbuilder.h:44
 msgid "Exact phrase radiobutton"
-msgstr ""
+msgstr "Exact phrase radiobutton"
 
 #: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
 msgid "Make selections on the Attribute Search tab"
-msgstr ""
+msgstr "Gör dina val i attributsökningsfliken"
 
 #: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
 msgid "Attributes"
@@ -4185,7 +4139,7 @@ msgstr "Attributer"
 
 #: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
 msgid "Attributes radiobutton"
-msgstr ""
+msgstr "Attributes radiobutton"
 
 #: ../ui/search-dialog.glade.h:48 ../ui/search-dialog.gtkbuilder.h:48
 msgid "<b>Options</b>"
@@ -4193,7 +4147,7 @@ msgstr "<b>Alternativ</b>"
 
 #: ../ui/search-dialog.glade.h:50 ../ui/search-dialog.gtkbuilder.h:50
 msgid "Match case checkbox"
-msgstr ""
+msgstr "Match case checkbox"
 
 #: ../ui/search-dialog.glade.h:51 ../ui/search-dialog.gtkbuilder.h:51
 msgid "Search  Criteria"
@@ -4209,7 +4163,7 @@ msgstr "Spara sökresultat som bokmärken"
 
 #: ../ui/search-dialog.glade.h:54 ../ui/search-dialog.gtkbuilder.h:54
 msgid "Export current search results"
-msgstr ""
+msgstr "Exportera nuvarande sökresultat"
 
 #: ../ui/search-dialog.glade.h:55 ../ui/search-dialog.gtkbuilder.h:55
 msgid "Export"
@@ -4225,11 +4179,11 @@ msgstr "<b>Hittade</b>"
 
 #: ../ui/search-dialog.glade.h:58 ../ui/search-dialog.gtkbuilder.h:58
 msgid "Result Summary Window"
-msgstr ""
+msgstr "Resultatsummeringsfönster"
 
 #: ../ui/search-dialog.glade.h:59 ../ui/search-dialog.gtkbuilder.h:59
 msgid "Result Summary Table"
-msgstr ""
+msgstr "Resultatsummeringstabell"
 
 #: ../ui/search-dialog.glade.h:60 ../ui/search-dialog.gtkbuilder.h:60
 msgid "<b>Search Results</b>"
@@ -4249,7 +4203,7 @@ msgstr "Skapa en ny egen spännvidd"
 
 #: ../ui/search-dialog.glade.h:64 ../ui/search-dialog.gtkbuilder.h:64
 msgid "New Range Button"
-msgstr ""
+msgstr "New Range Button"
 
 #: ../ui/search-dialog.glade.h:65 ../ui/search-dialog.gtkbuilder.h:65
 msgid "Save custom range"
@@ -4257,7 +4211,7 @@ msgstr "Spara egen spännvidd"
 
 #: ../ui/search-dialog.glade.h:66 ../ui/search-dialog.gtkbuilder.h:66
 msgid "Save Range Button"
-msgstr ""
+msgstr "Save Range Button"
 
 #: ../ui/search-dialog.glade.h:67 ../ui/search-dialog.gtkbuilder.h:67
 msgid "Delete selected range"
@@ -4265,7 +4219,7 @@ msgstr "Ta bort vald spännvid"
 
 #: ../ui/search-dialog.glade.h:68 ../ui/search-dialog.gtkbuilder.h:68
 msgid "Delete Range Button"
-msgstr ""
+msgstr "Delete Range Button"
 
 #: ../ui/search-dialog.glade.h:69 ../ui/search-dialog.gtkbuilder.h:69
 msgid "<b>Ranges</b>"
@@ -4277,23 +4231,23 @@ msgstr "<b>Namn på spännvid</b>"
 
 #: ../ui/search-dialog.glade.h:71 ../ui/search-dialog.gtkbuilder.h:71
 msgid "Range Name Entry"
-msgstr ""
+msgstr "Spännviddsnamn"
 
 #: ../ui/search-dialog.glade.h:72 ../ui/search-dialog.gtkbuilder.h:72
 msgid "<b>Range Definition</b>"
-msgstr ""
+msgstr "<b>Spännvidd</b>"
 
 #: ../ui/search-dialog.glade.h:73 ../ui/search-dialog.gtkbuilder.h:73
 msgid "Range Definition Entry"
-msgstr ""
+msgstr "Spännvidd"
 
 #: ../ui/search-dialog.glade.h:74 ../ui/search-dialog.gtkbuilder.h:74
 msgid "e.g. Matt-John;Rev4"
-msgstr "t.ex Rom-Ef;Upp4"
+msgstr "t.ex Mat-Joh;Upp4"
 
 #: ../ui/search-dialog.glade.h:75 ../ui/search-dialog.gtkbuilder.h:75
 msgid "Custom Range Preview"
-msgstr ""
+msgstr "Förhandsgranskning för anpassad spännvidd"
 
 #: ../ui/search-dialog.glade.h:76 ../ui/search-dialog.gtkbuilder.h:76
 msgid "Custom Verse Ranges"
@@ -4305,7 +4259,7 @@ msgstr "Skapa en ny modullista"
 
 #: ../ui/search-dialog.glade.h:78 ../ui/search-dialog.gtkbuilder.h:78
 msgid "New Custom Module List Button"
-msgstr ""
+msgstr "New Custom Module List Button"
 
 #: ../ui/search-dialog.glade.h:79 ../ui/search-dialog.gtkbuilder.h:79
 msgid "Save the module list"
@@ -4313,7 +4267,7 @@ msgstr "Spara modullistan"
 
 #: ../ui/search-dialog.glade.h:80 ../ui/search-dialog.gtkbuilder.h:80
 msgid "Save Custom Module List Button"
-msgstr ""
+msgstr "Save Custom Module List Button"
 
 #: ../ui/search-dialog.glade.h:81 ../ui/search-dialog.gtkbuilder.h:81
 msgid "Delete the selected list"
@@ -4321,7 +4275,7 @@ msgstr "Ta bort den valda listan"
 
 #: ../ui/search-dialog.glade.h:82 ../ui/search-dialog.gtkbuilder.h:82
 msgid "Clear Custom Module List Button"
-msgstr ""
+msgstr "Clear Custom Module List Button"
 
 #: ../ui/search-dialog.glade.h:83 ../ui/search-dialog.gtkbuilder.h:83
 msgid "<b>Module Lists</b>"
@@ -4333,11 +4287,11 @@ msgstr "<b>Listnamn</b>"
 
 #: ../ui/search-dialog.glade.h:85 ../ui/search-dialog.gtkbuilder.h:85
 msgid "Custom Module List Name Entry"
-msgstr ""
+msgstr "Namn på egen modullista"
 
 #: ../ui/search-dialog.glade.h:90 ../ui/search-dialog.gtkbuilder.h:90
 msgid "Open a dialog to select modules to add to the list"
-msgstr ""
+msgstr "Öppna dialogfönster för att välja moduler att lägga till i listan"
 
 #: ../ui/search-dialog.glade.h:93 ../ui/search-dialog.gtkbuilder.h:93
 msgid "Custom Module Lists"
@@ -4349,23 +4303,23 @@ msgstr "<b>Attribut</b>"
 
 #: ../ui/search-dialog.glade.h:95 ../ui/search-dialog.gtkbuilder.h:96
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr ""
+msgstr "Sök efter Strong's-nummer, t ex G442 eller H1121"
 
 #: ../ui/search-dialog.glade.h:96 ../ui/search-dialog.gtkbuilder.h:95
 msgid "Strongs Numbers"
-msgstr ""
+msgstr "Strong's-nummer"
 
 #: ../ui/search-dialog.glade.h:97 ../ui/search-dialog.gtkbuilder.h:97
 msgid "Strongs Numbers radiobutton"
-msgstr ""
+msgstr "Strongs Numbers radiobutton"
 
 #: ../ui/search-dialog.glade.h:98 ../ui/search-dialog.gtkbuilder.h:99
 msgid "Search for Morphological tags"
-msgstr ""
+msgstr "Sök efter morfologiska symboler"
 
 #: ../ui/search-dialog.glade.h:100 ../ui/search-dialog.gtkbuilder.h:100
 msgid "Morphological Tags radiobutton"
-msgstr ""
+msgstr "Morphological Tags radiobutton"
 
 #: ../ui/search-dialog.glade.h:101 ../ui/search-dialog.gtkbuilder.h:102
 msgid "Search in footnotes"
@@ -4373,39 +4327,39 @@ msgstr "Sök i fotnoter"
 
 #: ../ui/search-dialog.glade.h:103 ../ui/search-dialog.gtkbuilder.h:103
 msgid "Footnotes radiobutton"
-msgstr ""
+msgstr "Footnotes radiobutton"
 
 #: ../ui/search-dialog.glade.h:104 ../ui/search-dialog.gtkbuilder.h:104
 msgid "<b>Results Display Options</b>"
-msgstr ""
+msgstr "<b>Resultatvisningsinställningar</b>"
 
 #: ../ui/search-dialog.glade.h:105 ../ui/search-dialog.gtkbuilder.h:106
 msgid "In modules that have Strong's Numbers"
-msgstr ""
+msgstr "I moduler som använder Strong's-numrering"
 
 #: ../ui/search-dialog.glade.h:106 ../ui/search-dialog.gtkbuilder.h:105
 msgid "Show Strong's Numbers"
-msgstr ""
+msgstr "Visa Strong's-nummer"
 
 #: ../ui/search-dialog.glade.h:107 ../ui/search-dialog.gtkbuilder.h:107
 msgid "Show Strong's Numbers checkbox"
-msgstr ""
+msgstr "Show Strong's Numbers checkbox"
 
 #: ../ui/search-dialog.glade.h:108 ../ui/search-dialog.gtkbuilder.h:109
 msgid "In modules that have Morphological Tags"
-msgstr ""
+msgstr "I moduler som använder morfologiska symboler"
 
 #: ../ui/search-dialog.glade.h:109 ../ui/search-dialog.gtkbuilder.h:108
 msgid "Show Morphological Tags"
-msgstr ""
+msgstr "Visa morfologiska symboler"
 
 #: ../ui/search-dialog.glade.h:110 ../ui/search-dialog.gtkbuilder.h:110
 msgid "Show Morphological Tags checkbox"
-msgstr ""
+msgstr "Show Morphological Tags checkbox"
 
 #: ../ui/search-dialog.glade.h:111 ../ui/search-dialog.gtkbuilder.h:112
 msgid "In modules that have Footnotes"
-msgstr "I moduler som har fotnoter"
+msgstr "I moduler som använder fotnoter"
 
 #: ../ui/search-dialog.glade.h:112 ../ui/search-dialog.gtkbuilder.h:111
 msgid "Show Footnotes"
@@ -4413,61 +4367,59 @@ msgstr "Visa fotnoter"
 
 #: ../ui/search-dialog.glade.h:113 ../ui/search-dialog.gtkbuilder.h:113
 msgid "Show Footnotes checkbox"
-msgstr ""
+msgstr "Show Footnotes checkbox"
 
 #: ../ui/search-dialog.glade.h:114 ../ui/search-dialog.gtkbuilder.h:114
 msgid "Attribute Search"
 msgstr "Attributsökning"
 
 #: ../ui/search-dialog.gtkbuilder.h:6
-#, fuzzy
 msgid "<b>search module</b>"
 msgstr "<b>Söktyp</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "Export Bookmark Folder"
-msgstr ""
+msgstr "Exportera bokmärkeskatalog"
 
 #: ../ui/xi-export-bookmarks.glade.h:2
 msgid "<b>Export to:</b>"
-msgstr ""
+msgstr "<b>Exportera till:</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Xiphos bookmarks"
-msgstr ""
+msgstr "Xiphos-bokmärken"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Html"
-msgstr ""
+msgstr "Html"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
-msgstr ""
+msgstr "Endast text"
 
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Include Bible text"
-msgstr ""
+msgstr "Inkludera bibeltext"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-avbryt"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #: ../ui/xi-menus.glade.h:2 ../ui/xi-menus.gtkbuilder.h:2
 msgid "Open Study_pad"
-msgstr ""
+msgstr "Öppna Study_Pad"
 
 #: ../ui/xi-menus.glade.h:3 ../ui/xi-menus.gtkbuilder.h:3
 msgid "_Open Session"
 msgstr "_Öppna session"
 
 #: ../ui/xi-menus.glade.h:4
-#, fuzzy
 msgid "Open a saved tab settings collection"
-msgstr "Öppna en sparad session"
+msgstr "Öppna en sparad fliksession"
 
 #: ../ui/xi-menus.glade.h:5 ../ui/xi-menus.gtkbuilder.h:4
 msgid "_Save Session"
@@ -4475,17 +4427,15 @@ msgstr "_Spara session"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Save this collection of tab settings"
-msgstr ""
+msgstr "Spara denna sammansättning av flikinställningar"
 
 #: ../ui/xi-menus.glade.h:7 ../ui/xi-menus.gtkbuilder.h:5
-#, fuzzy
 msgid "_New Prayerlist/Journal"
-msgstr "Bönelista/journal"
+msgstr "_Ny Bönelista/journal"
 
 #: ../ui/xi-menus.glade.h:8
-#, fuzzy
 msgid "Create a new journal or prayerlist from a template"
-msgstr "Skapa en ny bönelista"
+msgstr "Skapa en ny journal eller bönelista från en mall"
 
 #: ../ui/xi-menus.glade.h:10 ../ui/xi-menus.gtkbuilder.h:7
 msgid "_Search"
@@ -4493,7 +4443,7 @@ msgstr "_Sök"
 
 #: ../ui/xi-menus.glade.h:11
 msgid "Bring the simple sidebar search forward"
-msgstr ""
+msgstr "Ta fram den enkla sökfunktionen i sidorutan"
 
 #: ../ui/xi-menus.glade.h:12 ../ui/xi-menus.gtkbuilder.h:8
 msgid "_Advanced Search"
@@ -4501,11 +4451,11 @@ msgstr "_Avancerad sökning"
 
 #: ../ui/xi-menus.glade.h:13
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
+msgstr "Öppna den avancerade sökrutan, för mer specifika sökningar"
 
 #: ../ui/xi-menus.glade.h:14 ../ui/xi-menus.gtkbuilder.h:9
 msgid "_Preferences"
-msgstr "In_ställningar"
+msgstr "_Inställningar"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Use module manager to install and remove Sword modules"
@@ -4517,11 +4467,11 @@ msgstr "_Modulhanterare"
 
 #: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
-msgstr ""
+msgstr "Förhandsgranska _daglig personlig andakt"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr ""
+msgstr "Visa dagens innehåll i din valda dagliga andakt i förhandsgranskaren"
 
 #: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
 msgid "_Bible"
@@ -4533,27 +4483,27 @@ msgstr "_Förhandsvisning"
 
 #: ../ui/xi-menus.glade.h:22 ../ui/xi-menus.gtkbuilder.h:15
 msgid "_Commentary/Book"
-msgstr ""
+msgstr "_Kommentar/Bok"
 
 #: ../ui/xi-menus.glade.h:23 ../ui/xi-menus.gtkbuilder.h:16
 msgid "Dictionar_y"
-msgstr "Dictionar_y"
+msgstr "_Ordbok"
 
 #: ../ui/xi-menus.glade.h:24 ../ui/xi-menus.gtkbuilder.h:17
 msgid "L_ink Tabs"
-msgstr "Länkade flikar"
+msgstr "_Länkade flikar"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Make all tabs' Bibles navigate together"
-msgstr ""
+msgstr "Bläddra alla bibelflikar parallellt"
 
 #: ../ui/xi-menus.glade.h:26 ../ui/xi-menus.gtkbuilder.h:18
 msgid "_Read Aloud"
-msgstr ""
+msgstr "_Högläs"
 
 #: ../ui/xi-menus.glade.h:27
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
+msgstr "Slå på text-till-tal-läsning av bibelverser när de markeras"
 
 #: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
 msgid "Show Verse _Numbers"
@@ -4561,41 +4511,39 @@ msgstr "Visa versnumrering"
 
 #: ../ui/xi-menus.glade.h:29
 msgid "Display verse numbers in the text"
-msgstr ""
+msgstr "Visa versnummer i texten"
 
 #: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
 msgid "_Highlight Current Verse"
 msgstr "_Markera aktuell vers"
 
 #: ../ui/xi-menus.glade.h:31
-#, fuzzy
 msgid "Apply a high-contrast highlight to the current verse"
-msgstr "Lägg på markering med hög konstrast på aktuell vers"
+msgstr "Lägg till markering med hög konstrast över aktuell vers"
 
 #: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
 msgid "_Attach/Detach Sidebar"
-msgstr "_Fäst/koppla loss sidomeny"
+msgstr "_Fäst/Koppla loss sidomeny"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Operate the sidebar as a separate window"
-msgstr ""
+msgstr "Öppna sidomenyn som separat fönster"
 
 #: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "_Show/Hide Attached Sidebar"
-msgstr ""
+msgstr "_Visa/Dölj påkopplat sidofönster"
 
 #: ../ui/xi-menus.glade.h:35
-#, fuzzy
 msgid "Remove the sidebar entirely from view"
-msgstr "Ta bort vald mapp"
+msgstr "Dölj sidomenyn"
 
 #: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Parallel View in a _Tab"
-msgstr ""
+msgstr "Visa parallellvy i en _flik"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
+msgstr "Visa parallellt bibelfönster i en annan flik"
 
 #: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "Show Previe_wer in the Sidebar"
@@ -4603,32 +4551,31 @@ msgstr "_Visa förhandsgranskare i sidomenyn"
 
 #: ../ui/xi-menus.glade.h:39
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr ""
+msgstr "Visa förhandsgranskaren i sidomenyn eller under bibeltexten"
 
 #: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Contents"
 msgstr "_Innehåll"
 
 #: ../ui/xi-menus.glade.h:42
-#, fuzzy
 msgid "Open the help viewer on the Xiphos manual"
 msgstr "Öppna manualen för Xiphos"
 
 #: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Mailing List"
-msgstr ""
+msgstr "_Mailinglista"
 
 #: ../ui/xi-menus.glade.h:44
 msgid "Open a browser on the users' mailing list webpage"
-msgstr ""
+msgstr "Öppna användarmailinglista i ett webbläsarfönster"
 
 #: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Live Chat"
-msgstr ""
+msgstr "_Livechat"
 
 #: ../ui/xi-menus.glade.h:46
 msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
+msgstr "Öppna livechat i en webbläsare"
 
 #: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "_Report Bug"
@@ -4636,35 +4583,35 @@ msgstr "_Rapportera fel"
 
 #: ../ui/xi-menus.glade.h:48
 msgid "Open a browser on our bug tracker"
-msgstr ""
+msgstr "Öppna vår bugtracker i en browser"
 
 #: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "About _Translation"
-msgstr ""
+msgstr "Om _översättning"
 
 #: ../ui/xi-menus.glade.h:50
 msgid "Learn about translating the Xiphos interface to other languages"
-msgstr ""
+msgstr "Information om översättning av menyerna i Xiphos till andra språk"
 
 #: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
 msgid "_About The SWORD Project"
-msgstr ""
+msgstr "_Om The SWORD Project"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
+msgstr "Mer om The Sword Project, ramverket som Xiphos bygger på"
 
 #: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "About _Xiphos"
-msgstr ""
+msgstr "Om_Xiphos"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Learn about Xiphos"
-msgstr ""
+msgstr "Mer om Xiphos"
 
 #: ../ui/xi-menus.glade.h:57 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Annotate Verse"
-msgstr ""
+msgstr "Kommentera vers"
 
 #: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "Open Module"
@@ -4679,17 +4626,16 @@ msgid "Open in editor"
 msgstr "Öppna i redigerare"
 
 #: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:43
-#, fuzzy
 msgid "Verse Per Line"
-msgstr "Verslista"
+msgstr "Vers per rad"
 
 #: ../ui/xi-menus.glade.h:73 ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnote/Cross-ref Markers"
-msgstr ""
+msgstr "Fotnot-/Korsreferensmarkör"
 
 #: ../ui/xi-menus.glade.h:74
 msgid "Show non-anonymous markers e.g. \"*n23\""
-msgstr ""
+msgstr "Visa icke-anonyma  markörer, t ex \"*n23\""
 
 #: ../ui/xi-menus.glade.h:79 ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Variants"
@@ -4697,32 +4643,31 @@ msgstr "Varianter"
 
 #: ../ui/xi-menus.glade.h:83 ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "Image Content"
-msgstr ""
+msgstr "Bildinnehåll"
 
 #: ../ui/xi-menus.glade.h:84 ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "Respect Font Faces"
-msgstr ""
+msgstr "Respektera typsnitt"
 
 #: ../ui/xi-menus.glade.h:85 ../ui/xi-menus-popup.gtkbuilder.h:62
 msgid "Commentary by Chapter"
-msgstr ""
+msgstr "Kommentar per kapitel"
 
 #: ../ui/xi-menus.glade.h:86 ../ui/xi-menus-popup.gtkbuilder.h:63
-#, fuzzy
 msgid "Doublespace"
-msgstr "_Dubbelt radavstånd"
+msgstr "Dubbelt radavstånd"
 
 #: ../ui/xi-menus.glade.h:87 ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Lookup Selection"
-msgstr ""
+msgstr "Uppslag"
 
 #: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Use Current Dictionary"
-msgstr "Använd nuvarande uppslagsbok"
+msgstr "Använd nuvarande ordbok"
 
 #: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Browse in BibleMap.org"
-msgstr ""
+msgstr "Surfa på BibleMap.org"
 
 #: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Unlock This Module"
@@ -4738,52 +4683,47 @@ msgstr "Visa kapitelöverskrift"
 
 #: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Rename Pers.Comm."
-msgstr ""
+msgstr "Byt namn på egen kommentar"
 
 #: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Dump Pers.Comm."
-msgstr ""
+msgstr "Dumpa egen kommentar"
 
 #: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Read Selection Aloud"
-msgstr ""
+msgstr "Läs sektionen högt"
 
 #: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Save these results as a single bookmark"
-msgstr ""
+msgstr "Spara resultaten som enskilt bokmärke"
 
 #: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Save list as a single bookmark"
-msgstr ""
+msgstr "Spara listan som enskilt bokmärke"
 
 #: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr ""
+msgstr "Spara resultaten som serie av bokmärken i deras egen katalog"
 
 #: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Save list as a series of bookmarks"
-msgstr ""
+msgstr "Spara listan som serie av bokmärken"
 
 #: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:89
-msgid ""
-"Provide a dialog in which to paste a line of verse references, to fill the "
-"verse list."
-msgstr ""
+msgid "Provide a dialog in which to paste a line of verse references, to fill the verse list."
+msgstr "Visa en ruta att klistra in versreferenser i, för att fylla verslistan."
 
 #: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
-#, fuzzy
 msgid "Populate verse list"
-msgstr "Verslista"
+msgstr "Populera verslista"
 
 #: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
-msgid ""
-"Send this verse list via BibleSync to others, if you are in Personal or "
-"Speaker mode."
-msgstr ""
+msgid "Send this verse list via BibleSync to others, if you are in Personal or Speaker mode."
+msgstr "Skicka denna vers via BibleSync till andra, om du är i Personlig- eller Talar-läge."
 
 #: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Send list via BibleSync"
-msgstr ""
+msgstr "Skicka lista via BibleSync"
 
 #: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Export List"
@@ -4854,14 +4794,12 @@ msgid "Allow Reordering"
 msgstr "Tillåt flyttning"
 
 #: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:20
-#, fuzzy
 msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr "Ladda bokmärken från Bibletime"
+msgstr "Ladda in andra bokmärken (standardval: från BibleTime)"
 
 #: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:19
-#, fuzzy
 msgid "Import Bookmarks"
-msgstr "Infoga bokmärke"
+msgstr "Importera bokmärken"
 
 #: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
@@ -4880,10 +4818,12 @@ msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
+"Öppna vald modul i ett\n"
+"\tseparat ['dialogfönster'] "
 
 #: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open in a separate window"
-msgstr ""
+msgstr "Öppna i separat fönster"
 
 #: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Create a new simple prayer list"
@@ -4895,15 +4835,15 @@ msgstr "Enkel"
 
 #: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Create a new subject prayer list"
-msgstr ""
+msgstr "Skapa en ny ämnesbönelista"
 
 #: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Subject"
-msgstr "Rubrik"
+msgstr "Ämne"
 
 #: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Create a new monthly journal"
-msgstr ""
+msgstr "Skapa en ny månatlig journal"
 
 #: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Monthly"
@@ -4911,7 +4851,7 @@ msgstr "Månatlig"
 
 #: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new daily journal"
-msgstr ""
+msgstr "Skapa en ny daglig journal"
 
 #: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Daily"
@@ -4919,28 +4859,27 @@ msgstr "Daglig"
 
 #: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new outlined topic"
-msgstr ""
+msgstr "Skapa nytt ämne med innehållsförteckning"
 
 #: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Outlined"
-msgstr "Konturerad"
+msgstr "Med innehållsförteckning"
 
 #: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Open module in editor or plain display window"
-msgstr ""
+msgstr "Öppna modul i editor eller visningsfönster"
 
 #: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:82
-#, fuzzy
 msgid "Open in separate window"
-msgstr "Öppna i ett dialogfönster"
+msgstr "Öppna i ett separat fönster"
 
 #: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add a sub-item"
-msgstr ""
+msgstr "Lägg till ett underobjekt"
 
 #: ../ui/xi-menus.glade.h:144
 msgid "Add Sub-Item"
-msgstr ""
+msgstr "Lägg till underobjekt"
 
 #: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add an item"
@@ -4960,7 +4899,7 @@ msgstr "Ändra detta objekt"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Xiphos Bible Guide"
-msgstr "Xiphos Bibelguide"
+msgstr "Xiphos bibelguide"
 
 #: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
@@ -4970,7 +4909,7 @@ msgstr "Studera bibeln"
 #~ msgstr "<b>Flikar</b>"
 
 #~ msgid "Use tabbed browsing"
-#~ msgstr "Använd flikad navigation"
+#~ msgstr "Använd flikar"
 
 #~ msgid "<b>Show</b>"
 #~ msgstr "<b>Visa</b>"
@@ -4979,7 +4918,7 @@ msgstr "Studera bibeln"
 #~ msgstr "Bibeltexter"
 
 #~ msgid "Dictionary/Lexicon"
-#~ msgstr "Uppslagsbok/Lexikon"
+#~ msgstr "Ordbok/Lexikon"
 
 #~ msgid ""
 #~ "Xiphos has successfully set itself\n"
@@ -4993,8 +4932,7 @@ msgstr "Studera bibeln"
 #~ "för sword:// och bible:// URL:er.\n"
 #~ "\n"
 #~ "Du kan köra programmet \"gconf-editor\"\n"
-#~ "för att granska nycklar under /desktop/gnome/url-handlers om du behöver "
-#~ "ändra dessa."
+#~ "för att granska nycklar under /desktop/gnome/url-handlers om du behöver ändra dessa."
 
 #~ msgid "Go to "
 #~ msgstr "Gå till "
@@ -5041,11 +4979,9 @@ msgstr "Studera bibeln"
 #~ msgid ""
 #~ "Welcome to Xiphos.\n"
 #~ "\n"
-#~ "There are no Bible modules installed. In order to initialize, Xiphos "
-#~ "needs you to install at least one Bible.\n"
+#~ "There are no Bible modules installed. In order to initialize, Xiphos needs you to install at least one Bible.\n"
 #~ "\n"
-#~ "With your permission, Xiphos will invoke the Module Manager so that you "
-#~ "may install from Crosswire:\n"
+#~ "With your permission, Xiphos will invoke the Module Manager so that you may install from Crosswire:\n"
 #~ "1. Configure remote install.\n"
 #~ "2. Connect.\n"
 #~ "3. Select a Bible text of your language preference.\n"
@@ -5058,19 +4994,16 @@ msgstr "Studera bibeln"
 #~ msgstr ""
 #~ "Välkommen till Xiphos.\n"
 #~ "\n"
-#~ "Det finns inga bibelmoduler installerade. För att kunna starta Xiphos så "
-#~ "krävs det att du installerar åtminstonde en Bibel.\n"
+#~ "Det finns inga bibelmoduler installerade. För att kunna starta Xiphos så krävs det att du installerar åtminstonde en Bibel.\n"
 #~ "\n"
-#~ "Med din tillåtelse kan Xiphos starta modulhanteraren så att du kan "
-#~ "installera från Crosswire:\n"
+#~ "Med din tillåtelse kan Xiphos starta modulhanteraren så att du kan installera från Crosswire:\n"
 #~ "1. Konfigurera fjärr-installation.\n"
 #~ "2. Anslut.\n"
 #~ "3. Välj en bibel på ditt föredragna språk.\n"
 #~ "4. Klicka på `installera'.\n"
 #~ "Sträng modulhanteraren när du är klar.\n"
 #~ "\n"
-#~ "<b>VARNING:</b> Om du lever i ett land med förföljelse så använd detta "
-#~ "med försiktighet.\n"
+#~ "<b>VARNING:</b> Om du lever i ett land med förföljelse så använd detta med försiktighet.\n"
 #~ "\n"
 #~ "Får Xiphos starta modulhanteraren så att du kan installera en Bibel?"
 
@@ -5129,10 +5062,10 @@ msgstr "Studera bibeln"
 #~ msgstr "Xiphos kunde inte köra arkiveraren"
 
 #~ msgid "Refreshing remote"
-#~ msgstr "Uppdaterar fjärr-källa"
+#~ msgstr "Uppdaterar nätverkskälla"
 
 #~ msgid "Remote not found"
-#~ msgstr "Fjärr-källa kunde inte hittas"
+#~ msgstr "Nätverkskälla kunde inte hittas"
 
 #~ msgid "Sources"
 #~ msgstr "Källor"
@@ -5159,7 +5092,7 @@ msgstr "Studera bibeln"
 #~ msgstr "Ef 2:8"
 
 #~ msgid "H_istory/C_lear"
-#~ msgstr "H_istorik/Rensa"
+#~ msgstr "Historik/_Rensa"
 
 #~ msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
 #~ msgstr "Xiphos har ändrat namn på .xiphos-2.0 till .xiphos"
@@ -5179,7 +5112,7 @@ msgstr "Studera bibeln"
 #~ msgstr "Öppna filen i StudyPad"
 
 #~ msgid "Dictionary/_Lexicon"
-#~ msgstr "Uppslagsbok/_Lexikon"
+#~ msgstr "Ordbok/_Lexikon"
 
 #~ msgid "Remove - Restore"
 #~ msgstr "Ta bort - Återställ"
@@ -5191,7 +5124,7 @@ msgstr "Studera bibeln"
 #~ msgstr "_Kommentar"
 
 #~ msgid "_Show/Hide Sidebar"
-#~ msgstr "_Visa/göm sidomeny"
+#~ msgstr "_Visa/Göm sidomeny"
 
 #~ msgid "Open StudyPad File"
 #~ msgstr "Öppna StudyPad-fil"
@@ -5263,7 +5196,7 @@ msgstr "Studera bibeln"
 #~ msgstr "Visa/dölj kommentarer"
 
 #~ msgid "Show or hide - dictionaries and lexicons"
-#~ msgstr "Visa/dölj - uppslagsböcker och lexikon"
+#~ msgstr "Visa/dölj - ordböcker och lexikon"
 
 #~ msgid "More information about the SWORD Project"
 #~ msgstr "Mer information om SWORD Project"
@@ -5323,7 +5256,7 @@ msgstr "Studera bibeln"
 #~ msgstr "Antal textmoduler"
 
 #~ msgid "Number of Dict/lex modules"
-#~ msgstr "Antal uppslagsb./lexikon-moduler"
+#~ msgstr "Antal ordb./lexikon-moduler"
 
 #~ msgid "Number of Book modules"
 #~ msgstr "Antal bokmoduler"
@@ -5358,8 +5291,7 @@ msgstr "Studera bibeln"
 #~ "Would you like Xiphos to install itself\n"
 #~ "as the program to handle these URLs?"
 #~ msgstr ""
-#~ "Det finns för närvarande inget program som hanterar \"sword://\" och "
-#~ "liknande URL:er.\n"
+#~ "Det finns för närvarande inget program som hanterar \"sword://\" och liknande URL:er.\n"
 #~ "Vill du att Xiphos ska ställa in sig själv som\n"
 #~ "hanterare för dessa URL:er?"
 
