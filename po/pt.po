@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-20 22:04+0000\n"
-"PO-Revision-Date: 2014-12-20 22:45+0100\n"
+"POT-Creation-Date: 2014-12-21 21:51+0000\n"
+"PO-Revision-Date: 2014-12-21 22:01+0100\n"
 "Last-Translator: Ari Constancio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "Language: \n"
@@ -217,8 +217,8 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
 msgstr ""
 "\n"
-"Movido pelo Projecto SWORD.\n"
-"Gostaríamos de agradecer a Troy Griffitts e aos outros colaboradores que nos deram o Projecto SWORD."
+"Movido pelo Projeto SWORD.\n"
+"Gostaríamos de agradecer a Troy Griffitts e aos outros colaboradores que nos deram o Projeto SWORD."
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:175
@@ -413,7 +413,7 @@ msgstr "Usar a fonte por omissão para este módulo"
 
 #: ../src/gnome2/gui.c:186
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr "ERRO! Xiphos está a estourar devido a um erro \"STRDUP\"."
+msgstr "ERRO! Xiphos está prestes a estourar devido a um erro \"STRDUP\"."
 
 #: ../src/gnome2/gui.c:187
 #: ../src/gnome2/gui.c:222
@@ -422,7 +422,7 @@ msgstr "Por favor, comunique este erro à equipa Xiphos com:"
 
 #: ../src/gnome2/gui.c:221
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
-msgstr "ERRO! Xiphos está a estourar devido a um erro \"STRING\".<"
+msgstr "ERRO! Xiphos está prestes a estourar devido a um erro \"STRING\".<"
 
 #: ../src/gnome2/main_window.c:594
 #, c-format
@@ -485,9 +485,11 @@ msgstr ""
 "Renomear não está disponível em Windows.\n"
 "\n"
 "Xiphos está limitado pelo sistema de ficheiros de Windows,\n"
-"porque impede a renomeação de componentes do nome de ficheiro para ficheiros presentemente abertos,\n"
+"porque impede a renomeação de componentes\n"
+"do nome de ficheiro para ficheiros presentemente abertos,\n"
 "tal como os conteúdos deste comentário.\n"
-"Por isso, não é possível renomear comentários pessoais no ambiente Windows."
+"Por isso, não é possível renomear\n"
+"comentários pessoais no ambiente Windows."
 
 #: ../src/gnome2/menu_popup.c:1266
 msgid "Rename Commentary"
@@ -562,12 +564,12 @@ msgid ""
 msgstr ""
 "<b>Vista geral do Gestor de Módulos.</b>\n"
 "\n"
-"Este é o mecanismo de Xiphos para obter conteúdo novo e actualizado.\n"
+"Este é o mecanismo de Xiphos para obter conteúdo novo e atualizado.\n"
 "Aparentemente, nunca esteve aqui. Por isso, gaste um momento para analisar.\n"
 "\n"
 "Os módulos vêm de diferentes <u>repositórios</u>. <b>Fontes de Módulos: Adicionar/Remover</b> mostra quais os repositórios conhecidos presentemente.\n"
 "\n"
-"<b>Fontes de Módulos: Escolher</b> permite decidir de onde devem vir os módulos (isto é, de que repositório Xiphos deve obtê-los), bem como onde guardá-los no sistema. Active <i>Fonte de Instalação</i> e <i>Destino de Instalação</i>, e clique <i>Actualizar</i>.\n"
+"<b>Fontes de Módulos: Escolher</b> permite decidir de onde devem vir os módulos (isto é, de que repositório Xiphos deve obtê-los), bem como onde guardá-los no sistema. Active <i>Fonte de Instalação</i> e <i>Destino de Instalação</i>, e clique <i>Atualizar</i>.\n"
 "\n"
 "<b>Módulos: Instalar/Actualizar</b> permite seleccionar e obter módulos depois de escolher a fonte e o destino.\n"
 "\n"
@@ -612,10 +614,10 @@ msgstr ""
 "\n"
 "<u>Para instalação via rede de Crosswire:</u>\n"
 "- Em <i>Fontes de Módulos: Escolher</i>, clique no botão \"Remoto\" e seleccione Crosswire.\n"
-"- Clique no botão \"Actualizar\" ao fundo.\n"
+"- Clique no botão \"Atualizar\" ao fundo.\n"
 "\n"
 "<u>Em qualquer dos casos:</u>\n"
-" - Em <i>Módulos: Instalar/Actualizar</i>, escolha Bíblias da sua preferência.\n"
+" - Em <i>Módulos: Instalar/Atualizar</i>, escolha Bíblias da sua preferência.\n"
 " - Clique \"Instalar\".\n"
 " - Feche o Gestor de Módulos quando terminar.\n"
 "\n"
@@ -723,7 +725,7 @@ msgstr "Clique na caixa para trabalhar neste módulo"
 
 #: ../src/gnome2/mod_mgr.c:599
 msgid "Click the box to select this module for install/update"
-msgstr "Clique na caixa para seleccionar este módulo para instalar/actualizar"
+msgstr "Clique na caixa para seleccionar este módulo para instalar/atualizar"
 
 #: ../src/gnome2/mod_mgr.c:618
 msgid "Installed"
@@ -748,7 +750,7 @@ msgstr "Sobre"
 
 #: ../src/gnome2/mod_mgr.c:689
 msgid "The refresh icon means the Installed module is older than the newer Available module: You should update the module"
-msgstr "O ícone de refrescar significa que o módulo instalado é mais antigo do que o módulo disponível: deve actualizar o módulo"
+msgstr "O ícone de refrescar significa que o módulo instalado é mais antigo do que o módulo disponível: deve atualizar o módulo"
 
 #: ../src/gnome2/mod_mgr.c:701
 msgid "Available"
@@ -896,7 +898,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1558
 msgid "Updates"
-msgstr "Actualizações"
+msgstr "Atualizações"
 
 #: ../src/gnome2/mod_mgr.c:1562
 msgid "Uninstalled"
@@ -913,7 +915,7 @@ msgstr "Lista de Oração/Diário"
 
 #: ../src/gnome2/mod_mgr.c:1762
 msgid "Refreshing from remote source"
-msgstr "Actualizando de fonte remota"
+msgstr "Atualizando de fonte remota"
 
 #: ../src/gnome2/mod_mgr.c:1772
 msgid "Remote source not found"
@@ -972,7 +974,7 @@ msgstr "Módulos"
 
 #: ../src/gnome2/mod_mgr.c:1948
 msgid "Install/Update"
-msgstr "Instalar/Actualizar"
+msgstr "Instalar/Atualizar"
 
 #: ../src/gnome2/mod_mgr.c:1950
 msgid "Maintenance"
@@ -980,11 +982,11 @@ msgstr "Manutenção"
 
 #: ../src/gnome2/mod_mgr.c:2186
 msgid "Please Refresh"
-msgstr "Por favor actualize"
+msgstr "Por favor atualize"
 
 #: ../src/gnome2/mod_mgr.c:2187
 msgid "Your module list is not up to date!"
-msgstr "A sua lista de módulos não está actual!"
+msgstr "A sua lista de módulos não está atualizada!"
 
 #: ../src/gnome2/mod_mgr.c:2513
 msgid ""
@@ -1110,7 +1112,7 @@ msgstr "Vista Paralela"
 
 #: ../src/gnome2/preferences_dialog.c:870
 msgid "BibleSync session passphrase"
-msgstr "Palavra-frase de sessão BibleSync"
+msgstr "Frase-passe de sessão BibleSync"
 
 #: ../src/gnome2/preferences_dialog.c:872
 msgid "Phrase:"
@@ -1304,6 +1306,7 @@ msgid ""
 "\n"
 "For complete details, search the web for \"lucene search syntax\"."
 msgstr ""
+"<b>Vista geral da syntaxe de pesquisas otimizadas \"lucene\"</b>\n"
 "Pesquisar versículos que contêm...\n"
 "\n"
 "loved one\n"
@@ -1497,7 +1500,7 @@ msgstr "Barra Lateral"
 
 #: ../src/gnome2/splash.c:403
 msgid "Powered by the SWORD Project"
-msgstr "Movido pelo Projecto SWORD"
+msgstr "Movido pelo Projeto SWORD"
 
 #: ../src/gnome2/tabbed_browser.c:359
 msgid "Can't create tabs dir."
@@ -2727,11 +2730,11 @@ msgstr "Abrir ficheiro no StudyPad"
 
 #: ../ui/editor_studypad.xml.h:10
 msgid "Save the current file"
-msgstr "Guardar o ficheiro actual"
+msgstr "Guardar o ficheiro atual"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Save the current file as"
-msgstr "Guardar o ficheiro actual como"
+msgstr "Guardar o ficheiro atual como"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Save AS"
@@ -3516,7 +3519,7 @@ msgstr "Carregar e sincronizar o conjunto padrão de repositórios conhecidos, m
 #: ../ui/module-manager.glade.h:6
 #: ../ui/module-manager.gtkbuilder.h:6
 msgid "Refresh Xiphos' knowledge of what modules are available at the selected remote repository"
-msgstr "Actualizar Xiphos quanto aos módulos disponíveis no repositório remoto escolhido"
+msgstr "Atualizar Xiphos quanto aos módulos disponíveis no repositório remoto escolhido"
 
 #: ../ui/module-manager.glade.h:7
 #: ../ui/module-manager.gtkbuilder.h:8
@@ -3526,7 +3529,7 @@ msgstr "_Instalar"
 #: ../ui/module-manager.glade.h:8
 #: ../ui/module-manager.gtkbuilder.h:7
 msgid "Install or update the selected modules"
-msgstr "Instalar ou actualizar os módulos seleccionados"
+msgstr "Instalar ou atualizar os módulos seleccionados"
 
 #: ../ui/module-manager.glade.h:9
 #: ../ui/module-manager.gtkbuilder.h:9
@@ -4631,7 +4634,7 @@ msgstr "Rádio Módulo singular"
 #: ../ui/search-dialog.glade.h:26
 #: ../ui/search-dialog.gtkbuilder.h:28
 msgid "Use the current module list for the search"
-msgstr "Usar a lista actual de módulos na pesquisa"
+msgstr "Usar a lista atual de módulos na pesquisa"
 
 #: ../ui/search-dialog.glade.h:27
 #: ../ui/search-dialog.gtkbuilder.h:27
@@ -4746,7 +4749,7 @@ msgstr "Guardar resultados da pesquisa como marcas"
 #: ../ui/search-dialog.glade.h:54
 #: ../ui/search-dialog.gtkbuilder.h:54
 msgid "Export current search results"
-msgstr "Exportar os resultados da pesquisa actual"
+msgstr "Exportar os resultados da pesquisa atual"
 
 #: ../ui/search-dialog.glade.h:55
 #: ../ui/search-dialog.gtkbuilder.h:55
