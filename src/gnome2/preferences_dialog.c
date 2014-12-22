@@ -1891,9 +1891,10 @@ on_combobox16_changed(GtkComboBox * combobox,
 	if (clear)
 		*buf = '\0';
 
-	xml_set_value("Xiphos", "locale", "special", (clear ? NONE : buf));
+	/* NOTE: These 2 uses of "None" are NOT TRANSLATABLE. */
+	xml_set_value("Xiphos", "locale", "special", (clear ? "None" : buf));
 	g_free(settings.special_locale);	/* dispose of old content */
-	settings.special_locale = (clear ? g_strdup(NONE) : g_strdup(buf));
+	settings.special_locale = (clear ? g_strdup("None") : g_strdup(buf));
 }
 
 
