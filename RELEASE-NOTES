@@ -3,7 +3,7 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Intermediate Test Release 3.9.17
+Intermediate Test Release 3.9.20
 18 Dec 2014
 
 - Bug#508 + feat.req#133: Added alternate versification support (av11n):
@@ -25,7 +25,7 @@ Intermediate Test Release 3.9.17
   aware that this has effects on all displayed modules.
 
 - Added direct load of history from verse list contents (right-click),
-  plus direct verse list load from history content (history menu).
+  plus direct load of verse list from history contents (history menu).
 
 - Added Feature=NoParagraphs support, default for verse-per-line.
 
@@ -37,8 +37,15 @@ Intermediate Test Release 3.9.17
 
 - Added --chatty configure flag to distinguish tracing from debug build.
 
-- Changed options for Hebrew vowel points, Hebrew cantillation, and Greek
-  accents to default on.
+- Changed options to default on for Hebrew vowel points, Hebrew
+  cantillation, and Greek accents.
+
+- NOTE: There are some problems with the editor component under Windows,
+  problems which have apparently gone unnoticed for quite a while.
+  Translations of the interface are weirdly inconsistent, and it is not
+  useful at this time on journals.  These will be researched and a
+  Windows-specific update will be issued soon.  It was decided that av11n
+  and other matters had been waiting too long to delay this release.
 
 - Updated navbar behavior: All books potentially available within the
   module's versification are included.  Formerly, books lacking content
@@ -59,9 +66,7 @@ Intermediate Test Release 3.9.17
 - Fixed crash caused by having a (lexdict|genbook) without (dict|book) key.
 
 - Fixed incompatibility with GTK3.14's unstable interface, preventing
-  Preferences window from opening.  Also, related stock icon name changes.
-
-- Removed all remaining gtkhtml3-isms.  All.  Forever.
+  Preferences window from opening.  Fixed many related incompatibilities.
 
 - Cleaned up internal settings structures.
 
