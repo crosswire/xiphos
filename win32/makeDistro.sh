@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #Copyright (c) 2009-2011 Matthew Talbert
 
@@ -24,6 +24,10 @@
 #OTHER DEALINGS IN THE SOFTWARE.
 
 set -e
+
+# get in the right directory
+dir=~0
+[ "${dir##*/}" != win32 ] && echo -e '\n\n*** NOT IN WIN32 DIR -- CD WIN32 ***\n\n' && cd win32
 
 # copy sword utils and libs
 outdir=win32/binaries/Xiphos/32/
