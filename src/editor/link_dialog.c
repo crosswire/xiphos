@@ -28,8 +28,16 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+
+
+#ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
+#else
+#include <editor/gtkhtml-editor.h>
+#include <gtkhtml/gtkhtml-stream.h>
+#include "editor/slib-editor.h"
+#endif
 
 #include "editor/link_dialog.h"
 
@@ -90,7 +98,11 @@ void button_ok_clicked_cb(GObject *object, EDITOR *e)
 
 	XI_message (("link: %s", str->str));
 
+#ifdef USE_WEBKIT_EDITOR
 	editor_insert_html(str->str, e);
+#else
+	gtkhtml_editor_insert_html (GTKHTML_EDITOR (e->window), str->str);
+#endif
 	g_string_free (str, TRUE);
 	g_free((gchar*)encoded_mod);
 	g_free((gchar*)encoded_verse);
@@ -137,6 +149,13 @@ editor_link_dialog (EDITOR *e)
 {
         GtkBuilder *builder;
 	gchar *gbuilder_file;
+#ifdef USE_WEBKIT_EDITOR
+	
+#else
+	GtkHTML  *html = gtkhtml_editor_get_html (GTKHTML_EDITOR(e->window));
+	if (html->pointer_url)  /* are we in a link */
+		return;		/* if so don't do anything */
+#endif
         builder = gtk_builder_new ();
 	gbuilder_file = gui_general_user_file ("editor_link_dialog.xml", FALSE);
         gtk_builder_add_from_file (builder, gbuilder_file, NULL);

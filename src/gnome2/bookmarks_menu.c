@@ -56,7 +56,11 @@
 #include "main/module_dialogs.h"
 #include "main/url.hh"
 
+#ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
+#else
+#include "editor/slib-editor.h"
+#endif
 
 #include "gui/debug_glib_null.h"
 

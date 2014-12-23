@@ -34,6 +34,7 @@ enum {
 	TYPE_NOTE,
 	NOTE_NUM
 };
+//gint main_url_handler_gecko(const gchar * url);
 gint sword_uri(const gchar * url, gboolean clicked);
 gint main_url_handler(const gchar * url, gboolean clicked);
 gint main_main_get_mod_type_from_url(const gchar * url);
