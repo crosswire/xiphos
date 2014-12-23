@@ -57,6 +57,8 @@
 #include "gui/menu_popup.h"
 #include "gui/preferences_dialog.h"
 
+#include "editor/slib-editor.h"
+
 #include "gui/debug_glib_null.h"
 
 /* X keyboard #definitions, to handle shortcuts */

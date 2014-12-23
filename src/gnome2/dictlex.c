@@ -77,8 +77,9 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  * Description
  *    an ugly hack to get the selection from widget on a dbl click
  *    and display text in dictionary pane using default dictionary if set or
- *    current dictionary - this is called by wk-html.c button_press_handler()
- *    -- ugly
+ *    current dictionary - this called by (gecko|wk)/Yelper.cpp 
+ *    Yelper::ProcessMouseDblClickEvent (void* aEvent)
+ *    also called by wk-html.c   button_press_handler() -- still ugly
  *
  * Return value
  *   void

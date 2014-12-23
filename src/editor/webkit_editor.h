@@ -30,6 +30,9 @@ extern "C"
 {
 #endif
 
+	
+#ifdef USE_WEBKIT_EDITOR
+
 #include <gtk/gtk.h>
 
 #include "main/navbar_versekey.h"
@@ -180,5 +183,6 @@ void combo_box_changed_cb (GtkComboBox *widget, EDITOR * e);
 
 #ifdef __cplusplus
 }
+#endif /* USE_WEBKIT_EDITOR */
 #endif
 #endif /* _WEBKIT_EDITOR_H */
