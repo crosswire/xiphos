@@ -30,7 +30,11 @@ extern "C"
 #endif
 	
 #include <gtk/gtk.h> 
+
+#ifdef USE_WEBKIT_EDITOR
+	
 #include "editor/webkit_editor.h"
+
 
 gchar * editor_get_selected_text (EDITOR * e);
 void editor_find_string (gchar * needle, EDITOR * e);
@@ -47,6 +51,8 @@ void editor_insert_link_ok (void);
 void editor_execute_script (gchar * script, EDITOR * e);
 void editor_insert_html(const gchar * html, EDITOR * e);
 void create_editor_window (GtkWidget * scrollwindow, EDITOR * e);
+
+#endif /* USE_WEBKIT_EDITOR */
 
 #ifdef __cplusplus
 }

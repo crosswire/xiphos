@@ -29,6 +29,8 @@
 
 #include "xiphos_html/xiphos_html.h"
 
+#include "editor/slib-editor.h"
+
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/gbs.h"

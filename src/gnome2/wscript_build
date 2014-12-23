@@ -15,6 +15,10 @@ sub = Utils.subst_vars
 objects = 'backend editor main xiphos_html'
 objects += ' %s' % 'webkit'
 
+# GTKHTML
+gtkhtml = 'GTKHTML'
+if env['HAVE_GTKHTML_EDITOR']:
+    gtkhtml += ' %s' % 'GTKHTML_EDITOR'
 
 # on WIN32 compile Xiphos icon into executable
 winresource = ''
@@ -50,6 +54,8 @@ lib = bld.new_task_gen(
     defines = defines,
     source = '%s' % winresource,
     target = 'xiphos',
+    #uselib = 'GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
+    #uselib = 'WSOCK GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
     uselib= bld.env['ALL_LIBS'],
     staticlib = staticlib, # like cflag -lsword
     add_objects = objects, # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a

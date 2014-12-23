@@ -25,6 +25,8 @@
 #  include <config.h>
 #endif
 
+#ifdef USE_WEBKIT_EDITOR
+    
 /* X keyboard #definitions, to handle shortcuts */
 /* we must define the categories of #definitions we need. */
 #define XK_MISCELLANY
@@ -1175,3 +1177,5 @@ void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 			  		 e);
 	
 }
+
+#endif /* USE_WEBKIT_EDITOR */
