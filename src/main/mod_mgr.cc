@@ -29,6 +29,7 @@
 #include <swlocale.h>
 #include "main/mod_mgr.h"
 #include "main/sword.h"
+#include "main/parallel_view.h"
 
 #include "gui/mod_mgr.h"
 
@@ -69,6 +70,10 @@ void main_update_module_lists(void)
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	main_init_lists();
+
+	// parallel backend needs to know, too.
+	main_delete_parallel_view();
+	main_init_parallel_view();
 }
 
 
