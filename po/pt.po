@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-24 16:33+0000\n"
-"PO-Revision-Date: 2014-12-24 16:33+0100\n"
+"PO-Revision-Date: 2014-12-24 16:44+0100\n"
 "Last-Translator: Ari Constancio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "Language: \n"
@@ -279,7 +279,7 @@ msgstr "Módulo: "
 
 #: ../src/gnome2/bookmarks_menu.c:506
 msgid "Remove the selected folder"
-msgstr "Remover a pasta seleccionada"
+msgstr "Remover a pasta selecionada"
 
 #: ../src/gnome2/bookmarks_menu.c:508
 msgid "(and all its contents)?"
@@ -287,7 +287,7 @@ msgstr "(e todo o seu conteúdo)?"
 
 #: ../src/gnome2/bookmarks_menu.c:511
 msgid "Remove the selected bookmark"
-msgstr "Remover a marca seleccionada"
+msgstr "Remover a marca selecionada"
 
 #: ../src/gnome2/bookmarks_menu.c:675
 msgid "Add"
@@ -569,9 +569,9 @@ msgstr ""
 "\n"
 "Os módulos vêm de diferentes <u>repositórios</u>. <b>Fontes de Módulos: Adicionar/Remover</b> mostra quais os repositórios conhecidos presentemente.\n"
 "\n"
-"<b>Fontes de Módulos: Escolher</b> permite decidir de onde devem vir os módulos (isto é, de que repositório Xiphos deve obtê-los), bem como onde guardá-los no sistema. Active <i>Fonte de Instalação</i> e <i>Destino de Instalação</i>, e clique <i>Atualizar</i>.\n"
+"<b>Fontes de Módulos: Escolher</b> permite decidir de onde devem vir os módulos (isto é, de que repositório Xiphos deve obtê-los), bem como onde guardá-los no sistema. Ative <i>Fonte de Instalação</i> e <i>Destino de Instalação</i>, e clique <i>Atualizar</i>.\n"
 "\n"
-"<b>Módulos: Instalar/Atualizar</b> permite seleccionar e obter módulos depois de escolher a fonte e o destino.\n"
+"<b>Módulos: Instalar/Atualizar</b> permite selecionar e obter módulos depois de escolher a fonte e o destino.\n"
 "\n"
 "<b>Módulos: Manutenção</b> é para criação de arquivo e índices.\n"
 "\n"
@@ -610,10 +610,10 @@ msgstr ""
 "<u>Para instalação local:</u>\n"
 "- Em <i>Fontes de Módulos: Adicionar/Remover</i>, adicione uma nova pasta local para localizar módulos.\n"
 "  (Haverá aí pastas designadas <i>mods.d</i> e <i>modules</i>.)\n"
-"- Em <i>Fontes de Módulos: Escolher</i>, clique no botão \"Local\" e seleccione a sua pasta.\n"
+"- Em <i>Fontes de Módulos: Escolher</i>, clique no botão \"Local\" e selecione a sua pasta.\n"
 "\n"
 "<u>Para instalação via rede de Crosswire:</u>\n"
-"- Em <i>Fontes de Módulos: Escolher</i>, clique no botão \"Remoto\" e seleccione Crosswire.\n"
+"- Em <i>Fontes de Módulos: Escolher</i>, clique no botão \"Remoto\" e selecione Crosswire.\n"
 "- Clique no botão \"Atualizar\" ao fundo.\n"
 "\n"
 "<u>Em qualquer dos casos:</u>\n"
@@ -725,7 +725,7 @@ msgstr "Clique na caixa para trabalhar neste módulo"
 
 #: ../src/gnome2/mod_mgr.c:599
 msgid "Click the box to select this module for install/update"
-msgstr "Clique na caixa para seleccionar este módulo para instalar/atualizar"
+msgstr "Clique na caixa para selecionar este módulo para instalar/atualizar"
 
 #: ../src/gnome2/mod_mgr.c:618
 msgid "Installed"
@@ -733,7 +733,7 @@ msgstr "Instalado"
 
 #: ../src/gnome2/mod_mgr.c:628
 msgid "The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"
-msgstr "O ícone de índice significa que tem um índice optimizado ('lucene') para este módulo para pesquisa rápida (veja no painel de Manutenção sobre esta função)"
+msgstr "O ícone de índice significa que tem um índice otimizado ('lucene') para este módulo para pesquisa rápida (veja no painel de Manutenção sobre esta função)"
 
 #: ../src/gnome2/mod_mgr.c:646
 msgid "The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"
@@ -1015,7 +1015,7 @@ msgstr "Não foi possível carregar as fontes habituais de CrossWire."
 #: ../src/gnome2/mod_mgr.c:2787
 #: ../src/gnome2/mod_mgr.c:3050
 msgid "Remove the selected source"
-msgstr "Remover a fonte seleccionada"
+msgstr "Remover a fonte selecionada"
 
 #: ../src/gnome2/mod_mgr.c:2854
 msgid "Enter a remote source"
@@ -1165,7 +1165,7 @@ msgstr "Audiência"
 #: ../src/gnome2/preferences_dialog.c:1927
 #: ../src/gnome2/preferences_dialog.c:2404
 msgid "-- Select --"
-msgstr "-- Seleccionar --"
+msgstr "-- Selecionar --"
 
 #: ../src/gnome2/preferences_dialog.c:1889
 msgid "Locale will take effect after restart."
@@ -1225,7 +1225,7 @@ msgstr "Remover Módulo?"
 #: ../src/gnome2/preferences_dialog.c:2839
 #: ../src/main/search_dialog.cc:691
 msgid "Are you sure you want to remove the selected module?"
-msgstr "Tem a certeza de que pretende remover o módulo seleccionado?"
+msgstr "Tem a certeza de que pretende remover o módulo selecionado?"
 
 #: ../src/gnome2/search_dialog.c:62
 #: ../src/main/search_dialog.cc:52
@@ -1328,7 +1328,7 @@ msgstr ""
 "       \"loved\" ou \"one\" e \"God\"\n"
 "lemma:G2316\n"
 "        Procura a palavra número 2316 do Strong's Greek (\"G\").\n"
-"        Também selecciona a vista de Strong's na aba <i>Pesquisar Atributo</i>.\n"
+"        Também seleciona a vista de Strong's na aba <i>Pesquisar Atributo</i>.\n"
 "\n"
 "Para detalhes completos, pesquise na web por \"lucene search syntax\"."
 
@@ -1363,9 +1363,9 @@ msgstr ""
 "<b>Pesquisas baseadas em atributos</b>\n"
 "Pesquisas de conteúdo inserido em markup fora do texto principal. Atributos são notas de rodapé, números de Strong e símbolos morfológicos.\n"
 "\n"
-"Saiba que grande parte destas pesquisas pode ser feita mais rapidamente através de pesquisas optimizadas \"lucene\" usando qualificadores de palavra-chave.\n"
+"Saiba que grande parte destas pesquisas pode ser feita mais rapidamente através de pesquisas otimizadas \"lucene\" usando qualificadores de palavra-chave.\n"
 "\n"
-"Para usar pesquisas com atributos, deve seleccionar o botão apropriado na aba <i>Pesquisa por Atributo</i>.\n"
+"Para usar pesquisas com atributos, deve selecionar o botão apropriado na aba <i>Pesquisa por Atributo</i>.\n"
 "* Texto de nota de rodapé é pesquisado tal como o texto regular.\n"
 "* Palavras de Strong são especificados com uma letra de prefixo H ou G (Hebraico ou Grego) e o identificador numérico, p.ex. G2316 para encontrar \\\"θεός\\\" (\\\"Deus\").\n"
 "* Etiquetas morfológicas são identificadas literalmente, p.ex. N-ASF para \"nome, aucsativo singular feminino\" -- veja o módulo de Robinson para detalhes."
@@ -1430,7 +1430,7 @@ msgstr "Expressão Regular"
 #: ../ui/search-dialog.glade.h:43
 #: ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
-msgstr "Frase exacta"
+msgstr "Frase exata"
 
 #: ../src/gnome2/search_sidebar.c:320
 msgid "Search Options"
@@ -1520,7 +1520,7 @@ msgstr "Novo Nome"
 
 #: ../src/gnome2/treekey-editor.c:266
 msgid "Remove the selected item"
-msgstr "Remover o item seleccionado"
+msgstr "Remover o item selecionado"
 
 #: ../src/gnome2/utilities.c:82
 msgid "January"
@@ -2339,7 +2339,7 @@ msgstr "O que preciso de fazer para ser salvo?"
 #: ../src/main/xml.c:98
 #: ../src/main/xml.c:99
 msgid "Acts 16:31"
-msgstr "Actos 16:31"
+msgstr "Atos 16:31"
 
 #: ../src/main/xml.c:103
 #: ../src/main/xml.c:104
@@ -3514,7 +3514,7 @@ msgstr "_Carregar Padrão"
 #: ../ui/module-manager.glade.h:5
 #: ../ui/module-manager.gtkbuilder.h:5
 msgid "Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources."
-msgstr "Carregar e sincronizar o conjunto padrão de repositórios conhecidos, mantidos em crosswire.org, com as suas fontes remotas actuais."
+msgstr "Carregar e sincronizar o conjunto padrão de repositórios conhecidos, mantidos em crosswire.org, com as suas fontes remotas atuais."
 
 #: ../ui/module-manager.glade.h:6
 #: ../ui/module-manager.gtkbuilder.h:6
@@ -3529,12 +3529,12 @@ msgstr "_Instalar"
 #: ../ui/module-manager.glade.h:8
 #: ../ui/module-manager.gtkbuilder.h:7
 msgid "Install or update the selected modules"
-msgstr "Instalar ou atualizar os módulos seleccionados"
+msgstr "Instalar ou atualizar os módulos selecionados"
 
 #: ../ui/module-manager.glade.h:9
 #: ../ui/module-manager.gtkbuilder.h:9
 msgid "Remove the selected modules from your system"
-msgstr "Remover os módulos seleccionados do seu sistema"
+msgstr "Remover os módulos selecionados do seu sistema"
 
 #: ../ui/module-manager.glade.h:10
 #: ../ui/module-manager.gtkbuilder.h:10
@@ -3544,7 +3544,7 @@ msgstr "_Arquivar"
 #: ../ui/module-manager.glade.h:11
 #: ../ui/module-manager.gtkbuilder.h:11
 msgid "Create a zip archive of the selected modules."
-msgstr "Criar um arquivo zip dos módulos seleccionados."
+msgstr "Criar um arquivo zip dos módulos selecionados."
 
 #: ../ui/module-manager.glade.h:12
 #: ../ui/module-manager.gtkbuilder.h:12
@@ -3554,7 +3554,7 @@ msgstr "_Indexar"
 #: ../ui/module-manager.glade.h:13
 #: ../ui/module-manager.gtkbuilder.h:13
 msgid "Build an index of the selected modules, for optimized (\"lucene\") searching."
-msgstr "Criar um índice dos módulos seleccionados, para pesquisa optimizada (\"lucene\")."
+msgstr "Criar um índice dos módulos selecionados, para pesquisa otimizada (\"lucene\")."
 
 #: ../ui/module-manager.glade.h:14
 #: ../ui/module-manager.gtkbuilder.h:14
@@ -3564,7 +3564,7 @@ msgstr "Apa_gar Índice"
 #: ../ui/module-manager.glade.h:15
 #: ../ui/module-manager.gtkbuilder.h:15
 msgid "Delete the fast-search index of the selected modules."
-msgstr "Apagar índice de busca rápida dos módulos seleccionados."
+msgstr "Apagar índice de busca rápida dos módulos selecionados."
 
 #: ../ui/module-manager.glade.h:16
 #: ../ui/module-manager.gtkbuilder.h:16
@@ -3595,7 +3595,7 @@ msgstr "<b>Adicionar e remover fontes</b>"
 #: ../ui/module-manager.glade.h:22
 #: ../ui/module-manager.gtkbuilder.h:22
 msgid "Current local sources"
-msgstr "Fontes Locais actuais"
+msgstr "Fontes Locais atuais"
 
 #: ../ui/module-manager.glade.h:23
 #: ../ui/module-manager.gtkbuilder.h:23
@@ -3610,7 +3610,7 @@ msgstr "Remover uma das pastas locais como fonte de instalação."
 #: ../ui/module-manager.glade.h:25
 #: ../ui/module-manager.gtkbuilder.h:25
 msgid "Current Remote Sources"
-msgstr "Fontes Remotas actuais"
+msgstr "Fontes Remotas atuais"
 
 #: ../ui/module-manager.glade.h:26
 #: ../ui/module-manager.gtkbuilder.h:26
@@ -4127,7 +4127,7 @@ msgstr "<b>Geral</b>"
 #: ../ui/prefs.glade.h:87
 #: ../ui/prefs.gtkbuilder.h:87
 msgid "Select a particular language for interface display, other than your usual setting"
-msgstr "Seleccionar uma dada linguagem para a interface, além da definição habitual"
+msgstr "Selecionar uma dada linguagem para a interface, além da definição habitual"
 
 #: ../ui/prefs.glade.h:88
 #: ../ui/prefs.gtkbuilder.h:88
@@ -4247,7 +4247,7 @@ msgstr "Xrefs em visto de lista de versículos"
 #: ../ui/prefs.glade.h:111
 #: ../ui/prefs.gtkbuilder.h:111
 msgid "Enable Prayer Lists"
-msgstr "Activar Listas de Oração"
+msgstr "Ativar Listas de Oração"
 
 #: ../ui/prefs.glade.h:112
 #: ../ui/prefs.gtkbuilder.h:112
@@ -4257,7 +4257,7 @@ msgstr "Disponibilizar listas de oração/diários"
 #: ../ui/prefs.glade.h:113
 #: ../ui/prefs.gtkbuilder.h:113
 msgid "Enable Prayer Lists Checkbox"
-msgstr "Visto para Activar Listas de Oração"
+msgstr "Visto para Ativar Listas de Oração"
 
 #: ../ui/prefs.glade.h:114
 #: ../ui/prefs.gtkbuilder.h:114
@@ -4317,7 +4317,7 @@ msgstr "Directório StudyPad por omissão"
 #: ../ui/prefs.glade.h:126
 #: ../ui/prefs.gtkbuilder.h:126
 msgid "Select A Directory"
-msgstr "Seleccionar um directório"
+msgstr "Selecionar um directório"
 
 #: ../ui/prefs.glade.h:127
 #: ../ui/prefs.gtkbuilder.h:127
@@ -4390,19 +4390,19 @@ msgstr "Botão para limpar módulos da lista"
 #: ../ui/search-dialog.glade.h:88
 #: ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
-msgstr "Remover o módulo seleccionado da lista"
+msgstr "Remover o módulo selecionado da lista"
 
 #: ../ui/prefs.glade.h:142
 #: ../ui/prefs.gtkbuilder.h:142
 #: ../ui/search-dialog.glade.h:89
 #: ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
-msgstr "Botão Remover o módulo seleccionado da lista"
+msgstr "Botão Remover o módulo selecionado da lista"
 
 #: ../ui/prefs.glade.h:143
 #: ../ui/prefs.gtkbuilder.h:143
 msgid "Open a dialog to select modules"
-msgstr "Abrir um diálogo para seleccionar módulos"
+msgstr "Abrir um diálogo para selecionar módulos"
 
 #: ../ui/prefs.glade.h:144
 #: ../ui/prefs.gtkbuilder.h:144
@@ -4524,7 +4524,7 @@ msgstr "Sintaxe de pesquisa _Lucene"
 #: ../ui/search-dialog.glade.h:3
 #: ../ui/search-dialog.gtkbuilder.h:3
 msgid "Open a brief explanation of the syntax used for optimized \"lucene\" searches."
-msgstr "Abrir uma breve explicação introdutória sobre a sintaxe usada na pesquisa optimizada (\"lucene\")."
+msgstr "Abrir uma breve explicação introdutória sobre a sintaxe usada na pesquisa otimizada (\"lucene\")."
 
 #: ../ui/search-dialog.glade.h:4
 #: ../ui/search-dialog.gtkbuilder.h:4
@@ -4684,12 +4684,12 @@ msgstr ""
 #: ../ui/search-dialog.glade.h:37
 #: ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
-msgstr "Optimizada (\"Lucene\")"
+msgstr "Otimizada (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:38
 #: ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr "Rádio Optimizada (\"Lucene\")"
+msgstr "Rádio Otimizada (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:40
 #: ../ui/search-dialog.gtkbuilder.h:40
@@ -4704,7 +4704,7 @@ msgstr "Rádio Expressão Regular"
 #: ../ui/search-dialog.glade.h:44
 #: ../ui/search-dialog.gtkbuilder.h:44
 msgid "Exact phrase radiobutton"
-msgstr "Rádio Frase exacta"
+msgstr "Botão de Rádio Frase exata"
 
 #: ../ui/search-dialog.glade.h:45
 #: ../ui/search-dialog.gtkbuilder.h:46
@@ -4814,7 +4814,7 @@ msgstr "Botão de Guardar Extensão"
 #: ../ui/search-dialog.glade.h:67
 #: ../ui/search-dialog.gtkbuilder.h:67
 msgid "Delete selected range"
-msgstr "Apagar extensão seleccionada"
+msgstr "Apagar extensão selecionada"
 
 #: ../ui/search-dialog.glade.h:68
 #: ../ui/search-dialog.gtkbuilder.h:68
@@ -4884,7 +4884,7 @@ msgstr "Botão Guardar Listas de Módulos personalizadas"
 #: ../ui/search-dialog.glade.h:81
 #: ../ui/search-dialog.gtkbuilder.h:81
 msgid "Delete the selected list"
-msgstr "Apagar a lista seleccionada"
+msgstr "Apagar a lista selecionada"
 
 #: ../ui/search-dialog.glade.h:82
 #: ../ui/search-dialog.gtkbuilder.h:82
@@ -4909,7 +4909,7 @@ msgstr "Entrada Listas de módulos personalizadas"
 #: ../ui/search-dialog.glade.h:90
 #: ../ui/search-dialog.gtkbuilder.h:90
 msgid "Open a dialog to select modules to add to the list"
-msgstr "Abrir um diálogo para seleccionar módulos a adicionar à lista"
+msgstr "Abrir um diálogo para selecionar módulos a adicionar à lista"
 
 #: ../ui/search-dialog.glade.h:93
 #: ../ui/search-dialog.gtkbuilder.h:93
@@ -5163,7 +5163,7 @@ msgstr "Le_r em voz alta"
 
 #: ../ui/xi-menus.glade.h:27
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr "Activar leitura de texto-para-voz de versículos bíblicos quando são seleccionados"
+msgstr "Ativar leitura de texto-para-voz de versículos bíblicos quando são selecionados"
 
 #: ../ui/xi-menus.glade.h:28
 #: ../ui/xi-menus.gtkbuilder.h:19
@@ -5217,7 +5217,7 @@ msgstr "Mostrar Pre_visualizador na Barra Lateral"
 
 #: ../ui/xi-menus.glade.h:39
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr "Seleccionar posição do pré-visualizador entre barra lateral ou por baixo da Bíblia"
+msgstr "Selecionar posição do pré-visualizador entre barra lateral ou por baixo da Bíblia"
 
 #: ../ui/xi-menus.glade.h:41
 #: ../ui/xi-menus.gtkbuilder.h:26
@@ -5463,7 +5463,7 @@ msgstr "Abrir num diálogo"
 #: ../ui/xi-menus.glade.h:113
 #: ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
-msgstr "Adicionar nova pasta à pasta seleccionada"
+msgstr "Adicionar nova pasta à pasta selecionada"
 
 #: ../ui/xi-menus.glade.h:115
 #: ../ui/xi-menus-popup.gtkbuilder.h:8
@@ -5543,7 +5543,7 @@ msgstr "Exportar Pasta"
 #: ../ui/xi-menus.glade.h:131
 #: ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Open selected module in a new tab"
-msgstr "Abrir módulo seleccionado numa nova aba"
+msgstr "Abrir módulo selecionado numa nova aba"
 
 #: ../ui/xi-menus.glade.h:132
 #: ../ui/xi-menus-popup.gtkbuilder.h:32
@@ -5551,7 +5551,7 @@ msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
-"Abrir módulo seleccionado numa\n"
+"Abrir módulo selecionado numa\n"
 "\tjanela ['diálogo'] separada      "
 
 #: ../ui/xi-menus.glade.h:134
