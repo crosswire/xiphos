@@ -670,7 +670,7 @@ void main_update_parallel_page(void)
 			// if a module was deleted, but still in parallels list,
 			// we will segfault when looking for content for the
 			// nonexistent module.  avoid this.
-			if (!main_is_module(mod_name)) {
+			if (!backend->is_module(mod_name)) {
 				gui_generic_warning((unknown_parallel +
 						     (SWBuf)mod_name).c_str());
 				continue;
