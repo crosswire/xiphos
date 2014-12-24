@@ -3,8 +3,8 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Intermediate Test Release 3.9.20
-18 Dec 2014
+Release 4.0.0
+24 Dec 2014
 
 - Bug#508 + feat.req#133: Added alternate versification support (av11n):
   Xiphos understands book/chapter/verse (BCV) schemes other than KJV.
@@ -67,6 +67,10 @@ Intermediate Test Release 3.9.20
 
 - Fixed incompatibility with GTK3.14's unstable interface, preventing
   Preferences window from opening.  Fixed many related incompatibilities.
+
+- Fixed several inconsistencies between main & parallel views.
+
+- Fixed inadvertent realignment-induced re-navigation.
 
 - Cleaned up internal settings structures.
 
