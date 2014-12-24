@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-21 21:51+0000\n"
-"PO-Revision-Date: 2014-12-21 22:01+0100\n"
+"POT-Creation-Date: 2014-12-24 15:27+0000\n"
+"PO-Revision-Date: 2014-12-24 15:28+0100\n"
 "Last-Translator: Ari Constancio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "Language: \n"
@@ -116,51 +116,51 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "Configuração não encontrada"
 
-#: ../src/editor/webkit_editor.c:311
+#: ../src/editor/webkit_editor.c:316
 msgid "Are you sure you want to delete the note for"
 msgstr "Tem a certeza de que quer apagar a nota para"
 
-#: ../src/editor/webkit_editor.c:593
+#: ../src/editor/webkit_editor.c:598
 #: ../ui/editor_studypad.xml.h:9
 #: ../ui/gtk2_webedit.ui.h:58
 #: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Abrir"
 
-#: ../src/editor/webkit_editor.c:685
+#: ../src/editor/webkit_editor.c:825
 msgid "Untitled document"
 msgstr "Documento sem título"
 
-#: ../src/editor/webkit_editor.c:1227
-#: ../src/editor/webkit_editor.c:1270
+#: ../src/editor/webkit_editor.c:1367
+#: ../src/editor/webkit_editor.c:1410
 msgid "Save the changes to document"
 msgstr "Guardar as alterações ao documento"
 
-#: ../src/editor/webkit_editor.c:1228
-#: ../src/editor/webkit_editor.c:1271
+#: ../src/editor/webkit_editor.c:1368
+#: ../src/editor/webkit_editor.c:1411
 msgid "before closing?"
 msgstr "antes de fechar?"
 
-#: ../src/editor/webkit_editor.c:1235
-#: ../src/editor/webkit_editor.c:1278
+#: ../src/editor/webkit_editor.c:1375
+#: ../src/editor/webkit_editor.c:1418
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Se não guardar, as alterações serão definitivamente perdidas."
 
-#: ../src/editor/webkit_editor.c:1269
+#: ../src/editor/webkit_editor.c:1409
 #: ../ui/xi-menus.glade.h:59
 #: ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "File"
 msgstr "Ficheiro"
 
-#: ../src/editor/webkit_editor.c:1319
+#: ../src/editor/webkit_editor.c:1459
 msgid "StudyPad"
 msgstr "StudyPad"
 
-#: ../src/editor/webkit_editor.c:1334
+#: ../src/editor/webkit_editor.c:1474
 msgid "Note Editor"
 msgstr "Editor de Notas"
 
-#: ../src/editor/webkit_editor.c:1349
+#: ../src/editor/webkit_editor.c:1489
 msgid "Prayer List/Journal Editor"
 msgstr "Lista de Oração/Editor de Diário"
 
@@ -222,9 +222,9 @@ msgstr ""
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:175
-#: ../src/gnome2/bookmarks_menu.c:370
-#: ../src/gnome2/bookmarks_menu.c:670
-#: ../src/gnome2/bookmarks_menu.c:769
+#: ../src/gnome2/bookmarks_menu.c:374
+#: ../src/gnome2/bookmarks_menu.c:674
+#: ../src/gnome2/bookmarks_menu.c:773
 #: ../src/gnome2/bookmarks_treeview.c:135
 #: ../ui/editor_studypad.xml.h:15
 #: ../ui/xi-menus.glade.h:56
@@ -233,67 +233,67 @@ msgid "Bookmark"
 msgstr "Marca"
 
 #: ../src/gnome2/bookmark_dialog.c:177
-#: ../src/gnome2/bookmarks_menu.c:771
+#: ../src/gnome2/bookmarks_menu.c:775
 #: ../src/gnome2/bookmarks_treeview.c:136
 msgid "Enter Folder Name"
 msgstr "Introduzir Nome da Pasta"
 
 #: ../src/gnome2/bookmark_dialog.c:179
-#: ../src/gnome2/bookmarks_menu.c:773
+#: ../src/gnome2/bookmarks_menu.c:777
 msgid "Folder Name"
 msgstr "Nome da Pasta"
 
 #: ../src/gnome2/bookmark_dialog.c:180
-#: ../src/gnome2/bookmarks_menu.c:774
+#: ../src/gnome2/bookmarks_menu.c:778
 #: ../src/gnome2/bookmarks_treeview.c:138
 msgid "Folder: "
 msgstr "Pasta: "
 
-#: ../src/gnome2/bookmarks_menu.c:208
+#: ../src/gnome2/bookmarks_menu.c:212
 msgid "Specify bookmarks file"
 msgstr "Especificar ficheiro de marca"
 
-#: ../src/gnome2/bookmarks_menu.c:356
+#: ../src/gnome2/bookmarks_menu.c:360
 #: ../ui/xi-menus.glade.h:61
 #: ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Edit"
 msgstr "Editar"
 
-#: ../src/gnome2/bookmarks_menu.c:373
+#: ../src/gnome2/bookmarks_menu.c:377
 msgid "Folder name: "
 msgstr "Nome de pasta: "
 
-#: ../src/gnome2/bookmarks_menu.c:376
+#: ../src/gnome2/bookmarks_menu.c:380
 msgid "Bookmark name: "
 msgstr "Nome de marca: "
 
-#: ../src/gnome2/bookmarks_menu.c:379
-#: ../src/gnome2/bookmarks_menu.c:678
+#: ../src/gnome2/bookmarks_menu.c:383
+#: ../src/gnome2/bookmarks_menu.c:682
 msgid "Verse: "
 msgstr "Versículo: "
 
-#: ../src/gnome2/bookmarks_menu.c:380
-#: ../src/gnome2/bookmarks_menu.c:679
+#: ../src/gnome2/bookmarks_menu.c:384
+#: ../src/gnome2/bookmarks_menu.c:683
 msgid "Module: "
 msgstr "Módulo: "
 
-#: ../src/gnome2/bookmarks_menu.c:502
+#: ../src/gnome2/bookmarks_menu.c:506
 msgid "Remove the selected folder"
 msgstr "Remover a pasta seleccionada"
 
-#: ../src/gnome2/bookmarks_menu.c:504
+#: ../src/gnome2/bookmarks_menu.c:508
 msgid "(and all its contents)?"
 msgstr "(e todo o seu conteúdo)?"
 
-#: ../src/gnome2/bookmarks_menu.c:507
+#: ../src/gnome2/bookmarks_menu.c:511
 msgid "Remove the selected bookmark"
 msgstr "Remover a marca seleccionada"
 
-#: ../src/gnome2/bookmarks_menu.c:671
+#: ../src/gnome2/bookmarks_menu.c:675
 msgid "Add"
 msgstr "Adicionar"
 
-#: ../src/gnome2/bookmarks_menu.c:677
+#: ../src/gnome2/bookmarks_menu.c:681
 msgid "Label: "
 msgstr "Rótulo: "
 
@@ -313,8 +313,8 @@ msgstr ""
 "abas separadas não é suportado."
 
 #: ../src/gnome2/bookmarks_treeview.c:867
-#: ../src/gnome2/sidebar.c:1508
-#: ../src/gnome2/sidebar.c:1541
+#: ../src/gnome2/sidebar.c:1515
+#: ../src/gnome2/sidebar.c:1548
 msgid "Bookmarks"
 msgstr "Marcas"
 
@@ -345,8 +345,8 @@ msgstr "Fechar se_m Guardar"
 
 #: ../src/gnome2/export_bookmarks.c:197
 #: ../src/gnome2/export_bookmarks.c:256
-#: ../src/gnome2/sidebar.c:1520
-#: ../src/gnome2/sidebar.c:1557
+#: ../src/gnome2/sidebar.c:1527
+#: ../src/gnome2/sidebar.c:1564
 #, c-format
 msgid "Verse List"
 msgstr "Lista de Versículos"
@@ -424,34 +424,34 @@ msgstr "Por favor, comunique este erro à equipa Xiphos com:"
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "ERRO! Xiphos está prestes a estourar devido a um erro \"STRING\".<"
 
-#: ../src/gnome2/main_window.c:594
+#: ../src/gnome2/main_window.c:596
 #, c-format
 msgid "Module has no support for %s."
 msgstr "Módulo sem suporte para %s."
 
-#: ../src/gnome2/main_window.c:664
+#: ../src/gnome2/main_window.c:666
 msgid "Xiphos: No windows."
 msgstr "Xiphos: Sem janelas."
 
-#: ../src/gnome2/main_window.c:720
+#: ../src/gnome2/main_window.c:722
 msgid "BibleSync: Current navigation sent."
 msgstr "BibleSync: Navegação corrente enviada."
 
-#: ../src/gnome2/main_window.c:724
+#: ../src/gnome2/main_window.c:726
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: Não falando."
 
-#: ../src/gnome2/main_window.c:908
+#: ../src/gnome2/main_window.c:910
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Software de Estudo Bíblico"
 
-#: ../src/gnome2/main_window.c:971
+#: ../src/gnome2/main_window.c:973
 msgid "Open a new tab"
 msgstr "Abrir uma nova aba"
 
-#: ../src/gnome2/main_window.c:1051
-#: ../src/gnome2/sidebar.c:621
-#: ../src/gnome2/sidebar.c:627
+#: ../src/gnome2/main_window.c:1053
+#: ../src/gnome2/sidebar.c:628
+#: ../src/gnome2/sidebar.c:634
 #: ../src/main/sidebar.cc:674
 #: ../src/main/sidebar.cc:1019
 #: ../src/main/sidebar.cc:1020
@@ -459,19 +459,19 @@ msgstr "Abrir uma nova aba"
 msgid "Standard View"
 msgstr "Vista Normal"
 
-#: ../src/gnome2/main_window.c:1112
+#: ../src/gnome2/main_window.c:1114
 msgid "Commentary View"
 msgstr "Vista de Comentário"
 
-#: ../src/gnome2/main_window.c:1128
+#: ../src/gnome2/main_window.c:1130
 msgid "Book View"
 msgstr "Vista de Livro"
 
-#: ../src/gnome2/main_window.c:1155
+#: ../src/gnome2/main_window.c:1157
 msgid "Welcome to Xiphos"
-msgstr "Bem-vindo a Xiphos"
+msgstr "Bem-vindo(a) a Xiphos"
 
-#: ../src/gnome2/menu_popup.c:1247
+#: ../src/gnome2/menu_popup.c:1251
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -491,37 +491,37 @@ msgstr ""
 "Por isso, não é possível renomear\n"
 "comentários pessoais no ambiente Windows."
 
-#: ../src/gnome2/menu_popup.c:1266
+#: ../src/gnome2/menu_popup.c:1270
 msgid "Rename Commentary"
 msgstr "Renomear Comentário"
 
-#: ../src/gnome2/menu_popup.c:1269
+#: ../src/gnome2/menu_popup.c:1273
 msgid "Choose Commentary Name"
 msgstr "Escolher Nome de Comentário"
 
-#: ../src/gnome2/menu_popup.c:1271
+#: ../src/gnome2/menu_popup.c:1275
 msgid "New Name"
 msgstr "Novo Nome"
 
-#: ../src/gnome2/menu_popup.c:1272
-#: ../src/gnome2/treekey-editor.c:141
-#: ../src/gnome2/treekey-editor.c:204
-#: ../src/gnome2/treekey-editor.c:300
+#: ../src/gnome2/menu_popup.c:1276
+#: ../src/gnome2/treekey-editor.c:147
+#: ../src/gnome2/treekey-editor.c:210
+#: ../src/gnome2/treekey-editor.c:306
 #: ../src/main/prayerlists.cc:236
 msgid "Name: "
 msgstr "Nome: "
 
-#: ../src/gnome2/menu_popup.c:1282
+#: ../src/gnome2/menu_popup.c:1286
 #: ../src/main/prayerlists.cc:250
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Os nomes de módulos devem conter apenas [A-Za-z0-9_]."
 
-#: ../src/gnome2/menu_popup.c:1289
+#: ../src/gnome2/menu_popup.c:1293
 #: ../src/main/prayerlists.cc:257
 msgid "Xiphos already knows a module by that name."
 msgstr "Xiphos já conhece um módulo por esse nome."
 
-#: ../src/gnome2/menu_popup.c:1330
+#: ../src/gnome2/menu_popup.c:1334
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -530,7 +530,7 @@ msgstr ""
 "Falhou a criação de nova configuração:\n"
 "%s"
 
-#: ../src/gnome2/menu_popup.c:1339
+#: ../src/gnome2/menu_popup.c:1343
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -538,7 +538,7 @@ msgstr ""
 "Erro de compilação da configuração:\n"
 "\n"
 
-#: ../src/gnome2/menu_popup.c:1939
+#: ../src/gnome2/menu_popup.c:1943
 msgid "No module in this pane."
 msgstr "Sem módulo nesta vista"
 
@@ -601,7 +601,7 @@ msgid ""
 "\n"
 "Both this step-by-step instruction dialog and the general introduction dialog may be closed at any time."
 msgstr ""
-"<b>Benvindo a Xiphos.</b>\n"
+"<b>Bem-vindo(a) a Xiphos.</b>\n"
 "\n"
 "Não há Bíblias instaladas. Para inicializar, Xiphos precisa no mínimo de um módulo de Bíblia.\n"
 "Para isso, Xiphos lançou o Gestor de Módulos para instalar uma ou mais Bíblias de um conjunto local (cdrom, drive flash) ou pela rede da CrossWire Bible Society.\n"
@@ -905,7 +905,7 @@ msgid "Uninstalled"
 msgstr "Desinstalado"
 
 #: ../src/gnome2/mod_mgr.c:1566
-#: ../src/gnome2/sidebar.c:637
+#: ../src/gnome2/sidebar.c:644
 #: ../src/gnome2/utilities.c:671
 #: ../src/main/prayerlists.cc:234
 #: ../src/main/sidebar.cc:1101
@@ -966,9 +966,9 @@ msgid "Choose"
 msgstr "Escolher"
 
 #: ../src/gnome2/mod_mgr.c:1946
-#: ../src/gnome2/preferences_dialog.c:2066
-#: ../src/gnome2/sidebar.c:1526
-#: ../src/gnome2/sidebar.c:1565
+#: ../src/gnome2/preferences_dialog.c:2067
+#: ../src/gnome2/sidebar.c:1533
+#: ../src/gnome2/sidebar.c:1572
 msgid "Modules"
 msgstr "Módulos"
 
@@ -1079,13 +1079,13 @@ msgid "Go inward, to the first subsection"
 msgstr "Ir para dentro, para a primeira subsecção"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:893
-#: ../src/gnome2/navbar_versekey_editor.c:929
+#: ../src/gnome2/navbar_versekey_editor.c:935
 #: ../src/gnome2/navbar_versekey_parallel.c:855
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Sincronizar esta janela com a janela principal"
 
 #: ../src/gnome2/parallel_dialog.c:356
-#: ../src/gnome2/preferences_dialog.c:2073
+#: ../src/gnome2/preferences_dialog.c:2074
 msgid "Parallel"
 msgstr "Paralelo"
 
@@ -1100,9 +1100,9 @@ msgid "Module Options"
 msgstr "Opções do Módulo"
 
 #: ../src/gnome2/parallel_view.c:215
-#: ../src/gnome2/sidebar.c:620
-#: ../src/gnome2/sidebar.c:626
-#: ../src/gnome2/tabbed_browser.c:250
+#: ../src/gnome2/sidebar.c:627
+#: ../src/gnome2/sidebar.c:633
+#: ../src/gnome2/tabbed_browser.c:252
 #: ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:1011
 #: ../src/main/sidebar.cc:1012
@@ -1162,8 +1162,8 @@ msgstr "Audiência"
 #: ../src/gnome2/preferences_dialog.c:1804
 #: ../src/gnome2/preferences_dialog.c:1839
 #: ../src/gnome2/preferences_dialog.c:1875
-#: ../src/gnome2/preferences_dialog.c:1926
-#: ../src/gnome2/preferences_dialog.c:2403
+#: ../src/gnome2/preferences_dialog.c:1927
+#: ../src/gnome2/preferences_dialog.c:2404
 msgid "-- Select --"
 msgstr "-- Seleccionar --"
 
@@ -1171,58 +1171,58 @@ msgstr "-- Seleccionar --"
 msgid "Locale will take effect after restart."
 msgstr "Locale tem efeito após reinício do programa."
 
-#: ../src/gnome2/preferences_dialog.c:1961
+#: ../src/gnome2/preferences_dialog.c:1962
 #: ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "Preferências"
 
-#: ../src/gnome2/preferences_dialog.c:2046
+#: ../src/gnome2/preferences_dialog.c:2047
 msgid "General"
 msgstr "Geral"
 
-#: ../src/gnome2/preferences_dialog.c:2049
+#: ../src/gnome2/preferences_dialog.c:2050
 msgid "Options"
 msgstr "Opções"
 
-#: ../src/gnome2/preferences_dialog.c:2052
+#: ../src/gnome2/preferences_dialog.c:2053
 #: ../ui/prefs.glade.h:85
 #: ../ui/prefs.gtkbuilder.h:85
 msgid "BibleSync"
 msgstr "BibleSync"
 
-#: ../src/gnome2/preferences_dialog.c:2056
+#: ../src/gnome2/preferences_dialog.c:2057
 msgid "Fonts"
 msgstr "Fontes"
 
-#: ../src/gnome2/preferences_dialog.c:2059
+#: ../src/gnome2/preferences_dialog.c:2060
 msgid "Color"
 msgstr "Cor"
 
-#: ../src/gnome2/preferences_dialog.c:2062
+#: ../src/gnome2/preferences_dialog.c:2063
 msgid "Sizes and Faces"
 msgstr "Tamanhos e faces"
 
-#: ../src/gnome2/preferences_dialog.c:2076
+#: ../src/gnome2/preferences_dialog.c:2077
 msgid "Special"
 msgstr "Especial"
 
-#: ../src/gnome2/preferences_dialog.c:2785
+#: ../src/gnome2/preferences_dialog.c:2786
 #: ../src/gnome2/search_dialog.c:522
 msgid "Clear List?"
 msgstr "Limpar Lista?"
 
-#: ../src/gnome2/preferences_dialog.c:2786
+#: ../src/gnome2/preferences_dialog.c:2787
 #: ../src/gnome2/search_dialog.c:523
 msgid "Are you sure you want to clear the module list?"
 msgstr "Tem a certeza de que pretende limpar a lista de módulos?"
 
-#: ../src/gnome2/preferences_dialog.c:2837
+#: ../src/gnome2/preferences_dialog.c:2838
 #: ../src/main/search_dialog.cc:690
 msgid "Remove Module?"
 msgstr "Remover Módulo?"
 
-#: ../src/gnome2/preferences_dialog.c:2838
+#: ../src/gnome2/preferences_dialog.c:2839
 #: ../src/main/search_dialog.cc:691
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Tem a certeza de que pretende remover o módulo seleccionado?"
@@ -1375,7 +1375,7 @@ msgid "Module is neither Bible nor commentary"
 msgstr "Módulo não é Bíblia nem comentário"
 
 #: ../src/gnome2/search_dialog.c:1247
-#: ../src/gnome2/sidebar.c:996
+#: ../src/gnome2/sidebar.c:1003
 msgid "BibleSync is not active for transmit."
 msgstr "BibleSync não está ativo para transmissão."
 
@@ -1472,24 +1472,24 @@ msgstr "Inferior"
 msgid "Upper"
 msgstr "Superior"
 
-#: ../src/gnome2/sidebar.c:843
+#: ../src/gnome2/sidebar.c:850
 msgid "Open module in editor?"
 msgstr "Abrir módulo no editor?"
 
-#: ../src/gnome2/sidebar.c:843
+#: ../src/gnome2/sidebar.c:850
 msgid "If no, it will open for display only."
 msgstr "Se não, abrirá apenas para visualização."
 
-#: ../src/gnome2/sidebar.c:950
+#: ../src/gnome2/sidebar.c:957
 msgid "Paste verse references"
 msgstr "Colar referência de versíclo"
 
-#: ../src/gnome2/sidebar.c:952
+#: ../src/gnome2/sidebar.c:959
 msgid "List:"
 msgstr "Lista:"
 
-#: ../src/gnome2/sidebar.c:1514
-#: ../src/gnome2/sidebar.c:1549
+#: ../src/gnome2/sidebar.c:1521
+#: ../src/gnome2/sidebar.c:1556
 msgid "Search"
 msgstr "Pesquisar"
 
@@ -1502,23 +1502,23 @@ msgstr "Barra Lateral"
 msgid "Powered by the SWORD Project"
 msgstr "Movido pelo Projeto SWORD"
 
-#: ../src/gnome2/tabbed_browser.c:359
+#: ../src/gnome2/tabbed_browser.c:361
 msgid "Can't create tabs dir."
 msgstr "Não é possível criar directório de abas."
 
-#: ../src/gnome2/treekey-editor.c:139
-#: ../src/gnome2/treekey-editor.c:202
-#: ../src/gnome2/treekey-editor.c:298
+#: ../src/gnome2/treekey-editor.c:145
+#: ../src/gnome2/treekey-editor.c:208
+#: ../src/gnome2/treekey-editor.c:304
 msgid "Prayer List/Journal Item"
 msgstr "Lista de oração/Item de Diário"
 
-#: ../src/gnome2/treekey-editor.c:140
-#: ../src/gnome2/treekey-editor.c:203
-#: ../src/gnome2/treekey-editor.c:299
+#: ../src/gnome2/treekey-editor.c:146
+#: ../src/gnome2/treekey-editor.c:209
+#: ../src/gnome2/treekey-editor.c:305
 msgid "New name"
 msgstr "Novo Nome"
 
-#: ../src/gnome2/treekey-editor.c:260
+#: ../src/gnome2/treekey-editor.c:266
 msgid "Remove the selected item"
 msgstr "Remover o item seleccionado"
 
@@ -1755,7 +1755,7 @@ msgid "Morphology"
 msgstr "Morfologia"
 
 #: ../src/main/module_dialogs.cc:1012
-#: ../src/main/url.cc:529
+#: ../src/main/url.cc:534
 msgid "Back to "
 msgstr "Voltar a "
 
@@ -2307,20 +2307,20 @@ msgstr "Limpar Histórico"
 msgid "History ➛ Verse List"
 msgstr "Histórico ➛ Lista de Versículos"
 
-#: ../src/main/url.cc:103
+#: ../src/main/url.cc:108
 msgid "URL not found:"
 msgstr "URL não encontrado:"
 
-#: ../src/main/url.cc:193
+#: ../src/main/url.cc:198
 #, c-format
 msgid "Xiphos could not execute %s"
 msgstr "Xiphos não conseguiu executar %s"
 
-#: ../src/main/url.cc:201
+#: ../src/main/url.cc:206
 msgid "Viewer error:\n"
 msgstr "Erro de visualizador:\n"
 
-#: ../src/main/url.cc:274
+#: ../src/main/url.cc:279
 #, c-format
 msgid "Show %s in main window"
 msgstr "Mostrar %s na janela principal"
