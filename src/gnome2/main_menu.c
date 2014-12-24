@@ -651,14 +651,18 @@ redisplay_to_realign()
 				     settings.currentverse);
 	main_url_handler(url, TRUE);
 	g_free(url);
-	if (settings.DictWindowModule && settings.dictkey) {
+	if (settings.DictWindowModule
+	    && *settings.DictWindowModule	/* not empty */
+	    && settings.dictkey) {
 		url = g_strdup_printf("sword://%s/%s",
 				      settings.DictWindowModule,
 				      settings.dictkey);
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
-	if (settings.book_mod && settings.book_key) {
+	if (settings.book_mod
+	    && *settings.book_mod		/* not empty */
+	    && settings.book_key) {
 		url = g_strdup_printf("sword://%s/%s",
 				      settings.book_mod,
 				      settings.book_key);
