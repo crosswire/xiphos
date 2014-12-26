@@ -114,7 +114,7 @@ for f in libsword.dll \
 	libjavascriptcoregtk-1.0-0.dll libwebkitgtk-1.0-0.dll \
 	libgconf-2-4.dll \
 	libdbus-1-3.dll libdbus-glib-1-2.dll \
-	imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe \
+	emptyvss.exe imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe \
 	installmgr.exe  diatheke.exe vs2osisreftxt.exe \
 	uconv.exe icui18n50.dll icuuc50.dll icudata50.dll icule50.dll \
 	libcairo-gobject-2.dll iconv.dll \
