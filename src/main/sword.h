@@ -66,6 +66,10 @@ extern gboolean companion_activity;
 
 /*** function prototypes ***/
 
+void main_add_abbreviation(const char * name, const char * abbreviation);
+const char * main_get_abbreviation(const char * name);
+const char * main_get_name(const char * abbreviation);
+
 void main_book_heading(char * mod_name);
 void main_chapter_heading(char * mod_name);
 void main_delete_note(	const gchar * module_name,

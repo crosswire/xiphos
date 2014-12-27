@@ -2625,11 +2625,16 @@ void ps_setup_listview()
 
 	if (settings.parallel_list) {
 		for (i = 0; settings.parallel_list[i]; ++i) {
+			const char *abbreviation =
+			    main_get_abbreviation(settings.parallel_list[i]);
 			gtk_list_store_append(list_store, &iter);
 			gtk_list_store_set(list_store, &iter,
 					   0, main_get_module_description
 						(settings.parallel_list[i]),
-					   1, (gchar *)settings.parallel_list[i],
+					   1,
+					   (abbreviation
+					    ? abbreviation
+					    : (gchar *)settings.parallel_list[i]),
 					   -1);
 		}
 	}
@@ -2718,12 +2723,14 @@ static void on_mod_sel_add_clicked(GtkWidget * button, gchar * user_data)
 	GtkListStore *list_store;
 	GtkTreeIter iter;
 	char *parallels = g_strdup(""), *newhold;
+	const char *abbreviation;
 	int count;
 
 	if (!module_selected) {
 		g_free(parallels);
 		return;
 	}
+	abbreviation = main_get_abbreviation(module_selected);
 
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview));
 	list_store = GTK_LIST_STORE(model);
@@ -2731,7 +2738,7 @@ static void on_mod_sel_add_clicked(GtkWidget * button, gchar * user_data)
 	gtk_list_store_append(list_store, &iter);
 	gtk_list_store_set(list_store, &iter,
 			   0, main_get_module_description(module_selected),
-			   1, module_selected,
+			   1, (abbreviation ? abbreviation : module_selected),
 			   -1);
 
 	if (settings.parallel_list == NULL) {
