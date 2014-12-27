@@ -547,9 +547,15 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 		gtk_tree_model_get(model, &iter_iter, 0, &str_data, -1);
 		if (!strcmp(language, str_data)) {
 			gchar *content;
+			const gchar *abbreviation = main_get_abbreviation(module_name);
+
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
-			content = g_strdup_printf("%s: %s", module_name, description);
+			content = g_strdup_printf("%s: %s",
+						  (abbreviation
+						   ? abbreviation
+						   : module_name),
+						  description);
 			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
 					   UTIL_COL_CAPTION, (gchar *) content,
 					   UTIL_COL_MODULE, (gchar *) module_name,

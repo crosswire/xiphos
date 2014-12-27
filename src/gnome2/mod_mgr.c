@@ -841,8 +841,20 @@ remove_install_modules(GList * modules,
 
 	tmp = modules;
 	while (tmp) {
+		char *module_name, *s;
+
 		buf = (gchar *) tmp->data;
-		current_mod = buf;
+
+		/* for "Abbreviation (Real)", we must */
+		/* get the real name for internal use. */
+		if ((s = strstr(buf, " (")) != NULL) {
+			module_name = g_strdup(s+2);
+			*(strchr(module_name, ')')) = '\0';
+		}
+		else
+			module_name = g_strdup(buf);	/* no abbreviation */
+		
+		current_mod = module_name;
 		g_string_printf(mods, "%s: %s",
 				gettext(verbs[activity][PHRASE_DOING]), buf);
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
@@ -869,11 +881,12 @@ remove_install_modules(GList * modules,
 					dir, strerror(errno));
 				g_free(dir);
 				gui_generic_warning(msg);
+				g_free(module_name);
 				return;
 			}
 
-			zipfile = g_strdup_printf("%s/%s.zip", dir, buf);
-			datapath = main_get_mod_config_entry(buf, "DataPath");
+			zipfile = g_strdup_printf("%s/%s.zip", dir, module_name);
+			datapath = main_get_mod_config_entry(module_name, "DataPath");
 
 			// for modules whose DataPath ends in .../xyz/abc
 			// where abc is the file prefix (abc.dat, abc.idx, &c)
@@ -888,15 +901,15 @@ remove_install_modules(GList * modules,
 			    datapath[dlen-1] = '\0';
 			
 			conf_file = main_get_mod_config_file
-					    (buf, (destination
-						   ? destination
-						   : settings.path_to_mods));
+					    (module_name, (destination
+							   ? destination
+							   : settings.path_to_mods));
 			g_remove(zipfile);
 
 			xiphos_create_archive(conf_file, datapath, zipfile,
 					      destination ?
 					      destination : settings.path_to_mods);
-			g_string_append(cmd, buf);
+			g_string_append(cmd, module_name);
 			g_string_append(cmd, _(" archived in: \n"));
 			g_string_append(cmd, zipfile);
 			gui_generic_warning(cmd->str);
@@ -911,22 +924,22 @@ remove_install_modules(GList * modules,
 		if ((activity == REMOVE) ||	// just delete it
 		    (!first_time_user &&	// don't trip on "no modules".
 		     (activity == INSTALL) &&
-		     main_is_module(buf))) {	// delete before re-install
-			XI_print(("remove %s from %s\n", buf,
+		     main_is_module(module_name))) {	// delete before re-install
+			XI_print(("remove %s from %s\n", module_name,
 				  (destination
 				   ? destination
 				   : settings.path_to_mods)));
 
 			/* hang onto the old key, if available. */
 			preserved_cipherkey =
-			    main_get_mod_config_entry(buf, "CipherKey");
+			    main_get_mod_config_entry(module_name, "CipherKey");
 			if (preserved_cipherkey && (*preserved_cipherkey == '\0')) {
 				/* present but empty -> nothingness */
 				g_free(preserved_cipherkey);
 				preserved_cipherkey = NULL;
 			}
 
-			failed = mod_mgr_uninstall(destination, buf);
+			failed = mod_mgr_uninstall(destination, module_name);
 			if (failed == -1) {
 				//mod_mgr_shut_down();
 				if (destination) {
@@ -937,27 +950,27 @@ remove_install_modules(GList * modules,
 					XI_warning(("%s",new_dest));
 				}
 				XI_print(("removing %s from %s\n",
-					  buf,
+					  module_name,
 					  (new_dest
 					   ? new_dest
 					   : settings.path_to_mods)));
 				failed =
-				    mod_mgr_uninstall(new_dest, buf);
+				    mod_mgr_uninstall(new_dest, module_name);
 			}
 
 			// annihilate cache of removed module.
-			ModuleCacheErase((const char *)buf);
+			ModuleCacheErase((const char *)module_name);
 		}
 
 		if (activity == INSTALL) {
 			XI_print(("install %s, source=%s\n", buf, source));
 			failed = ((local)
-				  ? mod_mgr_local_install_module(destination, source, buf)
-				  : mod_mgr_remote_install(destination, source, buf));
+				  ? mod_mgr_local_install_module(destination, source, module_name)
+				  : mod_mgr_remote_install(destination, source, module_name));
 
 			/* try to re-use a saved key. */
 			if ((failed != -1) && preserved_cipherkey) {
-				main_save_module_key(buf, preserved_cipherkey);
+				main_save_module_key(module_name, preserved_cipherkey);
 				XI_print(("re-use key %s\n", preserved_cipherkey));
 			}
 		}
@@ -966,18 +979,18 @@ remove_install_modules(GList * modules,
 			XI_print(("index %s\n", buf));
 #if 0
 			// why did we ever preclude indexing these?
-			if (main_get_mod_config_entry(buf, "GSType"))
+			if (main_get_mod_config_entry(module_name, "GSType"))
 				gui_generic_warning
 				    (_("Journals and prayer lists cannot be indexed."));
 			else
 #endif
-				failed = ((main_module_mgr_index_mod(buf))
+				failed = ((main_module_mgr_index_mod(module_name))
 					  ? 0 : 1);
 		}
 
 		if (activity == DELFAST) {
 			XI_print(("deleting index %s\n", buf));
-			failed = ((main_module_mgr_delete_index_mod(buf))
+			failed = ((main_module_mgr_delete_index_mod(module_name))
 				  ? 0 : 1);
 		}
 
@@ -986,6 +999,7 @@ remove_install_modules(GList * modules,
 			preserved_cipherkey = NULL;
 		}
 
+		g_free(module_name);
 		g_free(tmp->data);
 		tmp = g_list_next(tmp);
 	}
@@ -1207,8 +1221,17 @@ add_module_to_language_folder(GtkTreeView * tree,
 
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
+
+			gchar *caption;
+			if (info->abbreviation)
+				caption = g_strdup_printf("%s (%s)",
+							  info->abbreviation,
+							  info->name);
+			else
+				caption = g_strdup(info->name);
+
 			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
-					   COLUMN_NAME, info->name,
+					   COLUMN_NAME, caption,
 					   COLUMN_INSTALLED,
 					   (checkmark ? installed : BLANK),
 					   COLUMN_FIXED, FALSE,
@@ -1224,6 +1247,7 @@ add_module_to_language_folder(GtkTreeView * tree,
 					   info->installsize,
 					   COLUMN_DESC, description,
 					   COLUMN_VISIBLE, TRUE, -1);
+			g_free(caption);
 			g_free(str_data);
 			return;
 		}

@@ -91,6 +91,89 @@ gboolean companion_activity = FALSE;
 
 extern gboolean valid_scripture_key;
 
+// these track together.  when one changes, so does the other.
+static std::map < string, string > abbrev_name2abbrev, abbrev_abbrev2name;
+typedef std::map < string, string >::iterator abbrev_iter;
+
+/******************************************************************************
+ * Name
+ *   main_add_abbreviation
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   void main_add_abbreviation(char *name, char *abbreviation)
+ *
+ * Description
+ *   adds an element to each of the abbreviation maps.
+ *
+ * Return value
+ *   void
+ */
+
+void main_add_abbreviation(const char * name, const char * abbreviation)
+{
+	abbrev_name2abbrev[name] = abbreviation;
+	abbrev_abbrev2name[abbreviation] = name;
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_get_abbreviation
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   const char * main_get_abbreviation(const char *name)
+ *
+ * Description
+ *   gets abbreviation, if available.
+ *
+ * Return value
+ *   const char *
+ */
+
+const char * main_get_abbreviation(const char * name)
+{
+	if (name == NULL)
+		return NULL;
+	abbrev_iter it = abbrev_name2abbrev.find(name);
+	if (it != abbrev_name2abbrev.end()) {
+		return it->second.c_str();
+	}
+	return NULL;
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_get_name
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   const char * main_get_name(const char *abbreviation)
+ *
+ * Description
+ *   gets abbreviation, if available.
+ *
+ * Return value
+ *   const char *
+ */
+
+const char * main_get_name(const char * abbreviation)
+{
+	if (abbreviation == NULL)
+		return NULL;
+	abbrev_iter it = abbrev_abbrev2name.find(abbreviation);
+	if (it != abbrev_abbrev2name.end()) {
+		return it->second.c_str();
+	}
+	return NULL;
+}
+
+
 /******************************************************************************
  * Name
  *   main_book_heading

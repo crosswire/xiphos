@@ -35,6 +35,7 @@ extern "C" {
 typedef struct _mm MOD_MGR;
 struct  _mm {
 	char *name;
+	char *abbreviation;
 	char *type;
 	const char *language;
 	char *old_version;
