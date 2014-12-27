@@ -248,6 +248,11 @@ pick_tab_label(PASSAGE_TAB_INFO *pt)
 {
 	GString *str = g_string_new(NULL);
 
+	const char *abbrev_text = main_get_abbreviation(pt->text_mod);
+	const char *abbrev_comm = main_get_abbreviation(pt->commentary_mod);
+	const char *abbrev_dict = main_get_abbreviation(pt->dictlex_mod);
+	const char *abbrev_book = main_get_abbreviation(pt->book_mod);
+
 	if (pt->showparallel) {
 		g_string_printf(str, "%s", _("Parallel View"));
 		return str;
@@ -256,19 +261,19 @@ pick_tab_label(PASSAGE_TAB_INFO *pt)
 	if (pt->showtexts || (pt->showcomms && pt->comm_showing)) {
 		g_string_printf(str, "%s: %s",
 				(pt->showtexts
-				 ? pt->text_mod
+				 ? (abbrev_text ? abbrev_text : pt->text_mod)
 				 : (pt->commentary_mod
-				    ? pt->commentary_mod
+				    ? (abbrev_comm ? abbrev_comm : pt->commentary_mod)
 				    : "[no commentary]")),
 				pt->text_commentary_key);
 	} else {
 		g_string_printf(str, "%s",
 				(pt->showcomms
 				 ? (pt->book_mod
-				    ? pt->book_mod
+				    ? (abbrev_book ? abbrev_book : pt->book_mod)
 				    : "[no book]")
 				 : (pt->dictlex_mod
-				    ? pt->dictlex_mod
+				    ? (abbrev_dict ? abbrev_dict : pt->dictlex_mod)
 				    : "[no dict]")));
 	}
 	return str;
@@ -640,6 +645,7 @@ void gui_load_tabs(const gchar *filename)
 							}
 							else
 								pt->paratab = NULL;
+
 							/*
 							 * load per-tab "show" state.
 							 * includes backward compatibility:
@@ -1363,7 +1369,6 @@ void gui_open_module_in_new_tab(gchar *module)
 		pt->showcomms = TRUE;
 		pt->comm_showing = 0;
 		break;
-
 	}
 
 	pt->text_commentary_key = g_strdup(settings.currentverse);

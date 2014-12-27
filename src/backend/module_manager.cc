@@ -172,6 +172,13 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 
 		if (name) {
 			mod_info->name = g_strdup(name);
+
+			mod_info->abbreviation = (char *)module->getConfigEntry("Abbreviation");
+			if (mod_info->abbreviation) {
+				mod_info->abbreviation = g_strdup(mod_info->abbreviation);
+				main_add_abbreviation(mod_info->name, mod_info->abbreviation);
+			}
+
 			mod_info->language =
 			    main_get_language_map(module->getLanguage());
 			mod_info->type = g_strdup(module->getType());

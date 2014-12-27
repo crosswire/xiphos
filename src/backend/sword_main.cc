@@ -57,7 +57,7 @@ using namespace std;
 BackEnd *backend = NULL;
 
 // rule of thumb for VerseKey usage: you can use
-//    VerseKey k = (VerseKey *)(SWKey *)(*mod);
+//    VerseKey k = dynamic_cast<VerseKey *>(mod->getKey());
 // if you intend to do nothing more than setText() once plus
 // some gets (getTestament, getBook, getChapter, getVerse),
 // with no need to garbage collect when you're done.
@@ -81,7 +81,6 @@ BackEnd::BackEnd()
 #endif
 
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_XHTML));
-	//main_mgr->augmentModules("/home/terry/Dropbox/sword/");
 
 #ifdef CHATTY
 	g_timer_stop(t);
@@ -140,7 +139,8 @@ void BackEnd::init_SWORD(int gsType)
 	if (gsType == 0) {
 		main_setup_displays();
 		for (it = main_mgr->Modules.begin();
-					it != main_mgr->Modules.end(); it++) {
+		     it != main_mgr->Modules.end();
+		     it++) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->getType(), TEXT_MODS)) {
 				display_mod->setDisplay(textDisplay);
@@ -156,7 +156,9 @@ void BackEnd::init_SWORD(int gsType)
 			}
 		}
 	} else if (gsType == 1) { // dialogs
-		for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++) {
+		for (it = main_mgr->Modules.begin();
+		     it != main_mgr->Modules.end();
+		     it++) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->getType(), TEXT_MODS)) {
 				display_mod->setDisplay(chapDisplay);
@@ -165,7 +167,9 @@ void BackEnd::init_SWORD(int gsType)
 			}
 		}
 	} else if (gsType == 2) { // search
-		for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++) {
+		for (it = main_mgr->Modules.begin();
+		     it != main_mgr->Modules.end();
+		     it++) {
 			display_mod = (*it).second;
 			display_mod->setDisplay(entryDisplay);
 		}
@@ -177,75 +181,81 @@ void BackEnd::init_lists(MOD_LISTS * mods)
 	ModMap::iterator it;
 
 	for (it = main_mgr->Modules.begin();
-				it != main_mgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->getType(), TEXT_MODS)) {
+	     it != main_mgr->Modules.end();
+	     it++) {
+		SWModule *m = it->second;
+		const char *modtype = m->getType();
+		const char *modname = m->getName();
+		const char *abbreviation = m->getConfigEntry("Abbreviation");
+
+		if (abbreviation) {
+			main_add_abbreviation(modname, abbreviation);
+		}
+
+		if (!strcmp(modtype, TEXT_MODS)) {
 			mods->biblemods =
 			    g_list_append(mods->biblemods,
-					  strdup((char *) (*it).second->getName()));
+					  strdup((char *) modname));
 			mods->text_descriptions =
 			    g_list_append(mods->text_descriptions,
-				strdup((char *) (*it).second->
-				       getDescription()));
+				strdup((char *) m->getDescription()));
 		}
-		if (!strcmp((*it).second->getType(), COMM_MODS)) {
+		if (!strcmp(modtype, COMM_MODS)) {
 			mods->commentarymods =
 			    g_list_append(mods->commentarymods,
-					  strdup((char *) (*it).second->getName()));
+					  strdup((char *) modname));
 			mods->comm_descriptions =
 			    g_list_append(mods->comm_descriptions,
-					  strdup((char *) (*it).second->
-						 getDescription()));
-			if (!strcmp((*it).second->getConfigEntry("ModDrv"), "RawFiles")) {
+					  strdup((char *) m->getDescription()));
+			if (!strcmp(m->getConfigEntry("ModDrv"), "RawFiles")) {
 			    mods->percommods = g_list_append(mods->percommods,
-							     strdup((char *) (*it).second->getName()));
+							     strdup((char *) modname));
 			}
 		}
-		if (!strcmp((*it).second->getType(), DICT_MODS)) {
+		if (!strcmp(modtype, DICT_MODS)) {
 			char *feature =
-			    (char *) (*it).second->getConfigEntry("Feature");
+			    (char *) m->getConfigEntry("Feature");
 
 			if (feature && !strcmp(feature, "DailyDevotion")) {
 				mods->devotionmods =
 				    g_list_append(mods->devotionmods,
-						  strdup((char *) (*it).second->getName()));
+						  strdup((char *) modname));
 			} else {
 				mods->dictionarymods =
 				    g_list_append(mods->dictionarymods,
-						  strdup((char *) (*it).second->getName()));
+						  strdup((char *) modname));
 				mods->dict_descriptions =
 				    g_list_append(mods->dict_descriptions,
-						  strdup((char *) (*it).second->
-							 getDescription()));
+						  strdup((char *) m->getDescription()));
 			}
 		}
-		if (!strcmp((*it).second->getType(), BOOK_MODS)) {
-			if ((*it).second->getConfigEntry("GSType") &&
-			    !strcmp((*it).second->getConfigEntry("GSType"), "PrayerList")) {
+		if (!strcmp(modtype, BOOK_MODS)) {
+			if (m->getConfigEntry("GSType") &&
+			    !strcmp(m->getConfigEntry("GSType"), "PrayerList")) {
 			    mods->prayermods =
 				g_list_append(mods->prayermods,
-					      strdup((char *) (*it).second->getName()));
+					      strdup((char *) modname));
 			} else {
 				mods->bookmods =
 				    g_list_append(mods->bookmods,
-						  strdup((char *) (*it).second->getName()));
+						  strdup((char *) modname));
 				mods->book_descriptions =
 				    g_list_append(mods->book_descriptions,
-						  strdup((char *) (*it).second->
-							 getDescription()));
+						  strdup((char *) m->getDescription()));
 			}
 		}
 
-		char *category = (char *) (*it).second->getConfigEntry("Category");
+		char *category = (char *) m->getConfigEntry("Category");
 		if (!category)
 			continue;
 		if (!strcmp(category, "Maps"))
 			mods->mapmods =
 			    g_list_append(mods->mapmods,
-					  strdup((char *) (*it).second->getName()));
+					  strdup((char *) modname));
 		if (!strcmp(category, "Images"))
 			mods->imagemods =
 			    g_list_append(mods->imagemods,
-					  strdup((char *) (*it).second->getName()));
+					  strdup((char *) modname));
 	}
 }
 
