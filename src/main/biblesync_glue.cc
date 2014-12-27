@@ -78,6 +78,7 @@ biblesync_navigate(char cmd, string speaker_uuid,
     bool speaker_display_update = false;
     bool is_module;
     string message;
+    const char *real_name = NULL;
 
     // parameter overload usage.
     string &presence = alt;
@@ -138,10 +139,17 @@ biblesync_navigate(char cmd, string speaker_uuid,
 	    gui_generic_warning((char *)message.c_str());
 	}
 
-	// Xiphos does nothing with "alt", the alternate reference.
-
 	is_module = backend->is_module(bible.c_str());
+	real_name = main_get_name(bible.c_str());
 
+	// if the offered name isn't known,
+	// maybe it's an abbreviation for something we do know.
+	if (!is_module && real_name)
+	{
+	    bible = real_name;
+	    is_module = backend->is_module(bible.c_str());
+	}
+	
 	// direct navigation, or via verse list?
 	if (is_module &&
 	    settings.bs_navdirect &&
@@ -839,8 +847,18 @@ const char *biblesync_get_passphrase()
  */
 void biblesync_transmit_verse_list(char *modname, char *vlist)
 {
-    biblesync->Transmit(BSP_SYNC, (string)modname, (string)vlist);
-    // remaining args irrelevant => defaulted.
+    // see comment below in biblesync_prep_and_xmit() on abbreviation use.
+    const char *abbreviation = main_get_abbreviation(modname);
+
+    biblesync->Transmit(BSP_SYNC,
+			(abbreviation
+			 ? (string)abbreviation
+			 : (string)modname),
+			(string)vlist,
+			(abbreviation
+			 ? (string)modname	// fallback, real module name.
+			 : (string)""));
+    // group & domain defaulted.
 }
 
 
@@ -902,8 +920,25 @@ void biblesync_prep_and_xmit(const char *mod_name, const char *key)
 
 	// ** this key is not to be freed. **
 	char *osis_key = (char *)main_get_osisref_from_key(mod_name, key);
+	const char *abbreviation = main_get_abbreviation(mod_name);
+
+	// => longstanding behavioral premise of the Internet:
+	// - be conservative in what you xmit.
+	// - be liberal in what you recv.
+
+	// offer a common Bible abbreviation if it's available.
+	// this is because we in Sword have very inconvenient
+	// module names for what are, in non-English locales,
+	// perfectly ordinary, locally common Bible names.
+	// interoperability with non-Sword apps requires that
+	// we attempt to be locally friendly in name use.
+
 	biblesync->Transmit(BSP_SYNC,
-			    (string)mod_name, (string)osis_key,
-			    (string)"", group);
+			    (string)(abbreviation
+				     ? abbreviation
+				     : mod_name),
+			    (string)osis_key,
+			    (string)"",
+			    group);
     }
 }
