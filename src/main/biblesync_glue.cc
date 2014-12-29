@@ -854,11 +854,8 @@ void biblesync_transmit_verse_list(char *modname, char *vlist)
 			(abbreviation
 			 ? (string)abbreviation
 			 : (string)modname),
-			(string)vlist,
-			(abbreviation
-			 ? (string)modname	// fallback, real module name.
-			 : (string)""));
-    // group & domain defaulted.
+			(string)vlist);
+    // alt, group, & domain defaulted.
 }
 
 
