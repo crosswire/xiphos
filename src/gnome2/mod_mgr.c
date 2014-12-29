@@ -790,7 +790,7 @@ remove_install_modules(GList * modules,
 	GList *tmp;
 	gchar *buf;
 	const gchar *new_dest = NULL;
-	gint failed = 1;
+	gint result = 1;
 	GString *mods;
 	gchar *dialog_text = NULL;
 	gchar *preserved_cipherkey = NULL;
@@ -918,7 +918,7 @@ remove_install_modules(GList * modules,
 			g_free(zipfile);
 			g_free(dir);
 			g_string_free(cmd, TRUE);
-			failed = 0;
+			result = 0;
 		}
 
 		if ((activity == REMOVE) ||	// just delete it
@@ -939,8 +939,8 @@ remove_install_modules(GList * modules,
 				preserved_cipherkey = NULL;
 			}
 
-			failed = mod_mgr_uninstall(destination, module_name);
-			if (failed == -1) {
+			result = mod_mgr_uninstall(destination, module_name);
+			if (result == -1) {
 				//mod_mgr_shut_down();
 				if (destination) {
 					new_dest = NULL;
@@ -954,7 +954,7 @@ remove_install_modules(GList * modules,
 					  (new_dest
 					   ? new_dest
 					   : settings.path_to_mods)));
-				failed =
+				result =
 				    mod_mgr_uninstall(new_dest, module_name);
 			}
 
@@ -964,12 +964,12 @@ remove_install_modules(GList * modules,
 
 		if (activity == INSTALL) {
 			XI_print(("install %s, source=%s\n", buf, source));
-			failed = ((local)
+			result = ((local)
 				  ? mod_mgr_local_install_module(destination, source, module_name)
 				  : mod_mgr_remote_install(destination, source, module_name));
 
 			/* try to re-use a saved key. */
-			if ((failed != -1) && preserved_cipherkey) {
+			if ((result != -1) && preserved_cipherkey) {
 				main_save_module_key(module_name, preserved_cipherkey);
 				XI_print(("re-use key %s\n", preserved_cipherkey));
 			}
@@ -984,13 +984,13 @@ remove_install_modules(GList * modules,
 				    (_("Journals and prayer lists cannot be indexed."));
 			else
 #endif
-				failed = ((main_module_mgr_index_mod(module_name))
+				result = ((main_module_mgr_index_mod(module_name))
 					  ? 0 : 1);
 		}
 
 		if (activity == DELFAST) {
 			XI_print(("deleting index %s\n", buf));
-			failed = ((main_module_mgr_delete_index_mod(module_name))
+			result = ((main_module_mgr_delete_index_mod(module_name))
 				  ? 0 : 1);
 		}
 
@@ -1007,13 +1007,13 @@ remove_install_modules(GList * modules,
 	have_changes = TRUE;
 	g_list_free(modules);
 
-	if (failed) {
+	if (result) {
 		g_string_printf(mods, _("%s failed"),
 				gettext(verbs[activity][PHRASE_COMPLETE]));
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));
 	}
-	if (!failed &&
+	if (!result &&
 	    ((activity == REMOVE) ||
 	     (activity == FASTMOD) ||
 	     (activity == DELFAST)))
@@ -1693,6 +1693,7 @@ load_module_tree(GtkTreeView * treeview,
 
 		g_free(info->name);
 		g_free(info->about);
+		g_free(info->abbreviation);
 		g_free(info->type);
 		g_free(info->new_version);
 		g_free(info->old_version);
@@ -1769,7 +1770,7 @@ remove_install_wrapper(int activity)
 static void
 response_refresh(void)
 {
-	gint failed;
+	gint result;
 	gchar *buf;
 
 	if (working) return;
@@ -1789,9 +1790,9 @@ response_refresh(void)
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 	gtk_widget_show(progressbar_refresh);
 	sync_windows();
-	failed = mod_mgr_refresh_remote_source(remote_source);
+	result = mod_mgr_refresh_remote_source(remote_source);
 
-	if (failed) {
+	if (result) {
 		gtk_progress_bar_set_text(
 			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote source not found"));
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
