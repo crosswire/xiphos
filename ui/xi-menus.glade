@@ -1105,6 +1105,16 @@
 	  </child>
 
 	  <child>
+	    <widget class="GtkCheckMenuItem" id="glosses">
+	      <property name="visible">False</property>
+	      <property name="label" translatable="yes">Glosses</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_glosses_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
 	    <widget class="GtkCheckMenuItem" id="image_content">
 	      <property name="visible">False</property>
 	      <property name="label" translatable="yes">Image Content</property>

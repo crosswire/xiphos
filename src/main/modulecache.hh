@@ -49,6 +49,8 @@ namespace ModuleCache {
 
 	// bitwise cache type indicators:
 	// if flags change (=> new display choice), text becomes invalid.
+
+	// options known to Sword.
 	static const int Footnotes          = (1<<0);
 	static const int GreekAccents       = (1<<1);
 	static const int Headings           = (1<<2);
@@ -65,11 +67,15 @@ namespace ModuleCache {
 	static const int VariantsPrimary    = (1<<13);
 	static const int VariantsSecondary  = (1<<14);
 	static const int Transliteration    = (1<<15);
-	static const int CommentaryChapter  = (1<<16);
-	static const int Doublespace        = (1<<17);
-	static const int XrefNoteNumbers    = (1<<18);
-	static const int Xlit               = (1<<19);
-	static const int Enumerated         = (1<<20);
+	static const int Xlit               = (1<<16);
+	static const int Enumerated         = (1<<17);
+	static const int Glosses            = (1<<18);
+	// 19-23 yet to be assigned.
+
+	// options known only within Xiphos.
+	static const int CommentaryChapter  = (1<<24);
+	static const int Doublespace        = (1<<25);
+	static const int XrefNoteNumbers    = (1<<26);
 
 	class CacheVerse {
 	public:

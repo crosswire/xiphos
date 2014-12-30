@@ -948,6 +948,28 @@ G_MODULE_EXPORT void on_enumerated_activate (GtkCheckMenuItem * menuitem, gpoint
  *
  */
 
+G_MODULE_EXPORT void on_glosses_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+{
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Glosses"); /* string not seen by user */
+}
+
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
 G_MODULE_EXPORT void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	gchar *key = NULL;
@@ -1609,6 +1631,14 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 	if (main_check_for_global_option((gchar*) mod_name, "OSISEnum")) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->enumerated);
+	}
+
+    	item = UI_GET_ITEM(gxml, "glosses");
+
+	if (main_check_for_global_option((gchar*) mod_name, "OSISGlosses") ||
+	    main_check_for_global_option((gchar*) mod_name, "OSISRuby")) {
+		gtk_widget_show(item);
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->glosses);
 	}
 
 	item = UI_GET_ITEM(gxml, "image_content");

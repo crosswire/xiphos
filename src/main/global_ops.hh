@@ -45,12 +45,15 @@ struct  _global_ops {
 	gboolean variants_secondary;
 	gboolean variants_all;
 	gboolean transliteration;
+	gboolean xlit;
+	gboolean enumerated;
+	gboolean glosses;
+
 	gboolean commentary_by_chapter;
 	gboolean doublespace;
 	gboolean verse_per_line;
 	gboolean xrefnotenumbers;
-	gboolean xlit;
-	gboolean enumerated;
+
 	gint image_content;
 	gint respect_font_faces;
 };

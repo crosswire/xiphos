@@ -161,6 +161,7 @@ void main_set_global_options(GLOBAL_OPS * ops)
 	_set_global_option("Words of Christ in Red", ops->words_in_red);
 	_set_global_option("Transliterated Forms", ops->xlit);
 	_set_global_option("Enumerations", ops->enumerated);
+	_set_global_option("Glosses", ops->glosses);
 
 	_set_global_textual("Transliteration", (ops->transliteration
 						? "Latin" : "Off"));
@@ -212,6 +213,8 @@ GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 	    gui_of2tf(module_options[mod_name]["Transliterated Forms"].c_str());
 	ops->enumerated =
 	    gui_of2tf(module_options[mod_name]["Enumerations"].c_str());
+	ops->glosses =
+	    gui_of2tf(module_options[mod_name]["Glosses"].c_str());
 
 	ops->variants_all =
 	    gui_of2tf(module_options[mod_name]["All Readings"].c_str());

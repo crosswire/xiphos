@@ -634,6 +634,16 @@
               </object>
             </child>
             <child>
+              <object class="GtkCheckMenuItem" id="glosses">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Glosses</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_glosses_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
               <object class="GtkCheckMenuItem" id="image_content">
                 <property name="visible">False</property>
                 <property name="can_focus">False</property>
