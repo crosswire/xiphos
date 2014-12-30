@@ -113,8 +113,11 @@ typedef std::map < string, string >::iterator abbrev_iter;
 
 void main_add_abbreviation(const char * name, const char * abbreviation)
 {
+    // let's not be stupid about abbreviations chosen, ok?
+    if (!strchr(abbreviation, '(')) {
 	abbrev_name2abbrev[name] = abbreviation;
 	abbrev_abbrev2name[abbreviation] = name;
+    }
 }
 
 
