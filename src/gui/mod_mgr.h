@@ -60,6 +60,8 @@ void on_index_clicked(GtkButton * button, gpointer  user_data);
 void on_delete_index_clicked(GtkButton * button, gpointer  user_data);
 void on_load_sources_clicked(GtkButton * button, gpointer  user_data);
 void on_mod_mgr_intro_clicked(GtkButton * button, gpointer  user_data);
+void delete_obsolete(char *module, int *counter);
+void on_scan_obsolete(GtkButton * button, gpointer user_data);
 void on_cancel_clicked(GtkButton * button, gpointer  user_data);
 void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_data);
 void on_button_add_local_clicked(GtkButton * button, gpointer user_data);
