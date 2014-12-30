@@ -122,13 +122,12 @@ ModuleManager::~ModuleManager() {
 
 }
 
-char *backend_mod_mgr_get_config_entry(const char *module_name,
+char *backend_mod_mgr_get_config_entry(char *module_name,
 				       const char *entry) {
 	SWModule *mod;
 	ModMap::iterator it;	//-- iteratior
-	//-- iterate through the modules until we find modName
+
 	it = mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != mgr->Modules.end()) {
 		mod = (*it).second;
 		return g_strdup((char *) mod->getConfigEntry(entry));
@@ -168,7 +167,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 	if (list_it != list_end) {
 		module = list_it->second;
 		mod_info = g_new(MOD_MGR, 1);
-		const gchar *name = module->getName();
+		gchar *name = g_strdup(module->getName());
 
 		if (name) {
 			mod_info->name = g_strdup(name);
@@ -224,6 +223,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->locked =
 			    ((module->getConfigEntry("CipherKey")) ? 1 : 0);
 			list_it++;
+			g_free(name);
 			return (MOD_MGR *) mod_info;
 		}
 	}

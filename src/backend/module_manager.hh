@@ -22,6 +22,8 @@
 #ifndef __MODULE_MANAGER_HH__
 #define __MODULE_MANAGER_HH__
 
+#ifdef __cplusplus
+
 #include <swmgr.h>
 #include <swmodule.h>
 #include <installmgr.h>
@@ -52,18 +54,18 @@ public:
 
 };
 
-
-#ifdef __cplusplus
 extern "C" {
+
+void backend_module_mgr_list_local_modules_init(bool for_install);
+
 #endif
 #include "main/mod_mgr.h"
 
-char *backend_mod_mgr_get_config_entry(const char * module_name, char * entry);
+char *backend_mod_mgr_get_config_entry(char * module_name, const char * entry);
 void backend_mod_mgr_init_language_map(void);
 MOD_MGR *backend_module_mgr_get_next_module(void);
 GList *backend_module_mgr_list_remote_sources(void);
 GList *backend_module_mgr_list_local_sources(void);
-void backend_module_mgr_list_local_modules_init(bool for_install);
 int backend_local_install_module(const char *destdir,
 				 const char *srcdir,
 				 const char *mod_name);

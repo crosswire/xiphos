@@ -187,6 +187,23 @@
               </packing>
             </child>
             <child>
+              <object class="GtkButton" id="button_scan_obsolete">
+                <property name="label" translatable="yes">Scan _Obsolete</property>
+                <property name="visible">False</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="receives_default">False</property>
+                <property name="tooltip_text" translatable="yes">Scan for obsolete modules and offer to delete them.</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">8</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkButton" id="button_close">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
@@ -199,7 +216,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">8</property>
+                <property name="position">9</property>
               </packing>
             </child>
             <child>
@@ -214,7 +231,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">9</property>
+                <property name="position">10</property>
               </packing>
             </child>
             <child>
@@ -266,7 +283,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">10</property>
+                <property name="position">11</property>
               </packing>
             </child>
           </object>
@@ -1047,6 +1064,7 @@
       <action-widget response="304">button_archive</action-widget>
       <action-widget response="305">button_index</action-widget>
       <action-widget response="306">button_delete_index</action-widget>
+      <action-widget response="309">button_scan_obsolete</action-widget>
       <action-widget response="-7">button_close</action-widget>
       <action-widget response="-6">button_cancel</action-widget>
       <action-widget response="0">button4</action-widget>

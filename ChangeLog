@@ -2,6 +2,8 @@
 
 	* added support for Abbreviation conf directive:
 	  module lists, parallel list, tab headings.
+	* added deletion of obsolete modules when installing what supercedes.
+	* added scanned deletion of obsolete modules on demand (i.e. audit).
 
 2014-12-24  karl <charcoal@users.sf.net>
 
