@@ -55,6 +55,7 @@ void on_greek_accents_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 void on_lemmas_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_xlit_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_enumerated_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
+void on_glosses_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_scripture_cross_references_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_hebrew_vowel_points_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_hebrew_cantillation_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
