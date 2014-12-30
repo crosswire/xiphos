@@ -202,6 +202,20 @@
 	  </child>
 
 	  <child>
+	    <widget class="GtkButton" id="button_scan_obsolete">
+	      <property name="visible">False</property>
+	      <property name="can_default">True</property>
+	      <property name="can_focus">True</property>
+	      <property name="label" translatable="yes">Scan _Obsolete</property>
+	      <property name="tooltip" translatable="yes">Scan for obsolete modules and offer to delete them.</property>
+	      <property name="use_stock">True</property>
+	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="focus_on_click">True</property>
+	      <property name="response_id">309</property>
+	    </widget>
+	  </child>
+
+	  <child>
 	    <widget class="GtkButton" id="button_close">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>

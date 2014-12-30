@@ -51,7 +51,9 @@
 #include "main/sidebar.h"
 #include "main/sword.h"
 #include "main/xml.h"
+
 #include "main/modulecache.hh"
+#include "backend/module_manager.hh"
 
 #include "gui/debug_glib_null.h"
 
@@ -66,18 +68,20 @@ _("<b>Overview of the Module Manager.</b>\n\nThis is Xiphos' mechanism to get ne
 #define XI_FIRST_INSTALL	\
 _("<b>Welcome to Xiphos.</b>\n\nThere are no Bibles installed. In order to initialize, Xiphos needs at least one Bible module. To facilitate this, the Module Manager has been opened so that you may install one or more Bibles, either from a local module set (cdrom, flash drive) or over the network from CrossWire Bible Society. Please refer to these step-by-step instructions, and to the general module manager overview that has also been opened.\n\n<u>For local install:</u>\n- In <i>Module Sources: Add/Remove</i>, add a new local folder name where modules can be found.\n  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select your folder from the pulldown.\n\n<u>For network install from CrossWire:</u>\n- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select CrossWire from the pulldown.\n- Click the \"Refresh\" button at the bottom.\n\n<u>In either case:</u>\n- In <i>Modules: Install/Update</i>, select Bibles and other modules of your preference.\n- Click \"Install\".\n- Close the Module Manager when you are done.\n\n<u>Warning</u>: If you live in a persecuted country, use with care.\n\nBoth this step-by-step instruction dialog and the general introduction dialog may be closed at any time.")
 
-#define GTK_RESPONSE_REFRESH 301
-#define GTK_RESPONSE_REMOVE  302
-#define GTK_RESPONSE_INSTALL 303
-#define GTK_RESPONSE_ARCHIVE 304
-#define GTK_RESPONSE_FASTMOD 305
-#define GTK_RESPONSE_DELFAST 306
-#define GTK_RESPONSE_SOURCES 307
-#define GTK_RESPONSE_INTRO   308
+#define GTK_RESPONSE_REFRESH	301
+#define GTK_RESPONSE_REMOVE	302
+#define GTK_RESPONSE_INSTALL	303
+#define GTK_RESPONSE_ARCHIVE	304
+#define GTK_RESPONSE_FASTMOD	305
+#define GTK_RESPONSE_DELFAST	306
+#define GTK_RESPONSE_SOURCES	307
+#define GTK_RESPONSE_INTRO	308
+#define GTK_RESPONSE_OBSOLETE	309
 /* see these codes' use in ui/module-manager.glade. */
 
 /* activity codes */
 enum {
+	ALL_MODULES = -1, /* for obsolescence search-&-destroy */
 	REMOVE  = 0,
 	INSTALL = 1,
 	ARCHIVE = 2,
@@ -138,6 +142,7 @@ static GtkWidget *button_remove_remote;
 static GtkWidget *button_arch;
 static GtkWidget *button_idx;
 static GtkWidget *button_delidx;
+static GtkWidget *button_obsolete;
 static GtkWidget *button_load_sources;
 static GtkWidget *button_intro;
 static GtkWidget *label_home;
@@ -814,12 +819,7 @@ remove_install_modules(GList * modules,
 				      gettext (verbs[activity][PHRASE_INQUIRY]), mods->str);
 
 	if (!gui_yes_no_dialog(dialog_text, NULL)) {
-		tmp = modules; /* free list data */
-		while (tmp) {
-			g_free((gchar*)tmp->data);
-			tmp = g_list_next(tmp);
-		}
-		g_list_free(modules);
+		g_list_free_full(modules, g_free);
 		g_free(dialog_text);
 		return;
 	}
@@ -836,6 +836,7 @@ remove_install_modules(GList * modules,
 	gtk_widget_hide(button_arch);
 	gtk_widget_hide(button_idx);
 	gtk_widget_hide(button_delidx);
+	gtk_widget_hide(button_obsolete);
 	gtk_widget_hide(button_load_sources);
 	gtk_widget_show(button_cancel);
 
@@ -847,8 +848,8 @@ remove_install_modules(GList * modules,
 
 		/* for "Abbreviation (Real)", we must */
 		/* get the real name for internal use. */
-		if ((s = strstr(buf, " (")) != NULL) {
-			module_name = g_strdup(s+2);
+		if ((s = strchr(buf, '(')) != NULL) {
+			module_name = g_strdup(s+1);
 			*(strchr(module_name, ')')) = '\0';
 		}
 		else
@@ -941,13 +942,11 @@ remove_install_modules(GList * modules,
 
 			result = mod_mgr_uninstall(destination, module_name);
 			if (result == -1) {
-				//mod_mgr_shut_down();
 				if (destination) {
 					new_dest = NULL;
 				} else {
 					new_dest = gtk_label_get_text
 					    (GTK_LABEL(label_home));
-					XI_warning(("%s",new_dest));
 				}
 				XI_print(("removing %s from %s\n",
 					  module_name,
@@ -973,6 +972,10 @@ remove_install_modules(GList * modules,
 				main_save_module_key(module_name, preserved_cipherkey);
 				XI_print(("re-use key %s\n", preserved_cipherkey));
 			}
+
+			/* ask to eliminate old/dead/obsolete modules. */
+			if (result != -1)
+			    delete_obsolete(module_name, NULL);
 		}
 
 		if (activity == FASTMOD) {
@@ -1013,11 +1016,14 @@ remove_install_modules(GList * modules,
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));
 	}
+
 	if (!result &&
 	    ((activity == REMOVE) ||
 	     (activity == FASTMOD) ||
-	     (activity == DELFAST)))
+	     (activity == DELFAST))) {
 		load_module_tree(GTK_TREE_VIEW(treeview2), 0);
+	}
+
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), mods->str);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 	g_string_free(mods, TRUE);
@@ -1030,6 +1036,7 @@ remove_install_modules(GList * modules,
 			gtk_widget_hide(button_arch);
 			gtk_widget_hide(button_idx);
 			gtk_widget_hide(button_delidx);
+			gtk_widget_hide(button_obsolete);
 			gtk_widget_hide(button_load_sources);
 		break;
 		case 4:
@@ -1037,6 +1044,7 @@ remove_install_modules(GList * modules,
 			gtk_widget_show(button_arch);
 			gtk_widget_show(button_idx);
 			gtk_widget_show(button_delidx);
+			gtk_widget_show(button_obsolete);
 			gtk_widget_hide(button_load_sources);
 		break;
 	}
@@ -1063,7 +1071,8 @@ remove_install_modules(GList * modules,
 static GList *
 parse_treeview(GList *list,
 	       GtkTreeModel *model,
-	       GtkTreeIter *tree_parent)
+	       GtkTreeIter *tree_parent,
+	       int activity)
 {
 	GtkTreeIter child;
 	gchar *name = NULL;
@@ -1077,10 +1086,16 @@ parse_treeview(GList *list,
 				   &name, -1);
 		if (gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &child)) {
-			list = parse_treeview(list, model, &child);
+			list = parse_treeview(list, model, &child, activity);
 		} else {
-			if (fixed) {
-				list = g_list_append(list, (gchar *) name);
+			/* handle the abbreviated case, "abbrev (real)". */
+			char *n, *s = strchr(name, '(');
+			if (s) {
+				n = g_strdup(s+1);
+				*(strchr(n, ')')) = '\0';
+			}
+			if (fixed || (activity == ALL_MODULES)) {
+				list = g_list_append(list, (s ? n : (gchar *) name));
 			}
 		}
 	} while (gtk_tree_model_iter_next(model, &child));
@@ -1099,7 +1114,7 @@ parse_treeview(GList *list,
  *   void get_list_mods_to_remove_install(void)
  *
  * Description
- *
+ *   return a GList of modules, either all or those checked.
  *
  * Return value
  *   void
@@ -1128,9 +1143,9 @@ get_list_mods_to_remove_install(int activity)
 				   COLUMN_FIXED, &fixed, COLUMN_NAME,
 				   &name, -1);
 		if (gtk_tree_model_iter_has_child(model, &root)) {
-			retval = parse_treeview(retval, model, &root);
+			retval = parse_treeview(retval, model, &root, activity);
 		} else {
-			if (fixed) {
+			if (fixed || (activity == ALL_MODULES)) {
 				retval = g_list_append(retval, (gchar *)name);
 			}
 
@@ -1796,12 +1811,12 @@ response_refresh(void)
 		gtk_progress_bar_set_text(
 			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote source not found"));
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
-		working = FALSE;
-		return;
 	}
-	load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), _("Finished"));
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
+	else {
+		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), _("Finished"));
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
+	}
 
 	working = FALSE;
 }
@@ -2629,6 +2644,136 @@ on_delete_index_clicked(GtkButton * button, gpointer  user_data)
 	remove_install_wrapper(DELFAST);
 }
 
+
+/******************************************************************************
+ * Name
+ *   delete_obsolete
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void delete_obsolete(char *module)
+ *
+ * Description
+ *   look for "Obsoletes=OldModule" and ask to get rid of it.
+ *
+ * Return value
+ *   void
+ */
+
+void delete_obsolete(char *module, int *counter)
+{
+    char *obsolete = backend_mod_mgr_get_config_entry(module, "Obsoletes");
+
+    if (obsolete && main_is_module(obsolete)) {
+	if (counter)
+	    (*counter)++;
+
+	/* targeting coordinates acquired. */
+	char *mod_display_name, *obs_display_name, *question;
+	const char *new_dest;
+	const char *mod_abbrev = main_get_abbreviation((const char *)module);
+	const char *obs_abbrev = main_get_abbreviation((const char *)obsolete);
+
+	if (mod_abbrev)
+	    mod_display_name = g_strdup_printf("%s (%s)",
+					       mod_abbrev,
+					       module);
+	else
+	    mod_display_name = g_strdup(module);
+
+	if (obs_abbrev)
+	    obs_display_name = g_strdup_printf("%s (%s)",
+					       obs_abbrev,
+					       obsolete);
+	else
+	    obs_display_name = g_strdup(obsolete);
+
+	question = g_strdup_printf(_("%s obsoletes %s.\n"
+				     "Would you like to delete %s?\n"
+				     "Beware: This cannot be undone."),
+				   mod_display_name, obs_display_name,
+				   (obs_abbrev ? obs_abbrev : obsolete));
+	if (gui_yes_no_dialog(question, NULL)) {
+	    /* lay the axe at the root. */
+	    if (mod_mgr_uninstall(destination, obsolete) == -1) {
+		if (destination)
+		    new_dest = NULL;
+		else
+		    new_dest = gtk_label_get_text(GTK_LABEL(label_home));
+		mod_mgr_uninstall(new_dest, obsolete);
+	    }
+	}
+	
+	g_free(question);
+	g_free(mod_display_name);
+	g_free(obs_display_name);
+
+	ModuleCacheErase((const char *)obsolete);
+    }
+}
+
+/******************************************************************************
+ * Name
+ *   on_scan_obsolete
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_scan_obsolete(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *   scan all modules to try to eliminate obsolescences.
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_scan_obsolete(GtkButton * button, gpointer user_data)
+{
+    GList *modules = NULL;
+    int counter = 0;
+
+    if (working) return;
+    working = TRUE;
+
+    modules = get_list_mods_to_remove_install(ALL_MODULES);
+
+    /*
+     * walk the module list to find
+     * those that obsolete something else.
+     * verify each first, because previous
+     * obsolescences may delete some farther down.
+     */
+    GList *tmp = modules;
+    while (tmp) {
+	if (main_is_module((gchar *) tmp->data))
+	    delete_obsolete((gchar *) tmp->data, &counter);
+	tmp = g_list_next(tmp);
+    }
+    g_list_free_full(modules, g_free);
+
+    if (counter == 0)
+	gui_generic_warning(_("No obsolete modules were found."));
+    else {
+	mod_mgr_shut_down();
+	mod_mgr_init(destination, FALSE, TRUE);
+	load_module_tree(GTK_TREE_VIEW(treeview2), 0);
+    }
+    
+    working = FALSE;
+    return;
+}
+
+void
+on_cancel_clicked(GtkButton * button, gpointer  user_data)
+{
+	mod_mgr_terminate();
+	sync_windows();
+}
+
+
 void
 on_load_sources_clicked(GtkButton * button, gpointer  user_data)
 {
@@ -2659,14 +2804,6 @@ on_mod_mgr_intro_clicked(GtkButton * button, gpointer user_data)
 				  dialog);
 	gtk_widget_show(dialog);
 }
-
-void
-on_cancel_clicked(GtkButton * button, gpointer  user_data)
-{
-	mod_mgr_terminate();
-	sync_windows();
-}
-
 
 /******************************************************************************
  * Name
@@ -2720,6 +2857,9 @@ on_mod_mgr_response(GtkDialog * dialog,
 		break;
 	case GTK_RESPONSE_INTRO:
 		on_mod_mgr_intro_clicked(NULL, NULL);
+		break;
+	case GTK_RESPONSE_OBSOLETE:
+		on_scan_obsolete(NULL, NULL);
 		break;
 	}
 }
@@ -3148,6 +3288,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button_arch);
 				gtk_widget_hide(button_idx);
 				gtk_widget_hide(button_delidx);
+				gtk_widget_hide(button_obsolete);
 				if (first_time_user)
 					gtk_widget_hide(button_load_sources);
 				else
@@ -3163,6 +3304,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button_arch);
 				gtk_widget_hide(button_idx);
 				gtk_widget_hide(button_delidx);
+				gtk_widget_hide(button_obsolete);
 				gtk_widget_hide(button_load_sources);
 				break;
 			case 3:
@@ -3175,6 +3317,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button_arch);
 				gtk_widget_hide(button_idx);
 				gtk_widget_hide(button_delidx);
+				gtk_widget_hide(button_obsolete);
 				gtk_widget_hide(button_load_sources);
 				break;
 			case 4:
@@ -3182,6 +3325,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_show(button_arch);
 				gtk_widget_show(button_idx);
 				gtk_widget_show(button_delidx);
+				gtk_widget_show(button_obsolete);
 				gtk_widget_hide(button_load_sources);
 				gtk_widget_hide(button_refresh);
 				gtk_widget_hide(button_install);
@@ -3257,6 +3401,7 @@ setup_dialog_action_area(GtkDialog * dialog)
 	g_signal_connect(button_arch, "clicked", G_CALLBACK(on_archive_clicked), NULL);
 	g_signal_connect(button_idx, "clicked", G_CALLBACK(on_index_clicked), NULL);
 	g_signal_connect(button_delidx, "clicked", G_CALLBACK(on_delete_index_clicked), NULL);
+	g_signal_connect(button_obsolete, "clicked", G_CALLBACK(on_scan_obsolete), NULL);
 	g_signal_connect(button_load_sources, "clicked", G_CALLBACK(on_load_sources_clicked), NULL);
 	g_signal_connect(button_intro, "clicked", G_CALLBACK(on_mod_mgr_intro_clicked), NULL);
 	g_signal_connect(button_cancel, "clicked", G_CALLBACK(on_cancel_clicked), NULL);
@@ -3379,6 +3524,7 @@ create_module_manager_dialog(gboolean first_run)
 	button_arch = UI_GET_ITEM(gxml, "button_archive");
 	button_idx = UI_GET_ITEM(gxml, "button_index");
 	button_delidx = UI_GET_ITEM(gxml, "button_delete_index");
+	button_obsolete = UI_GET_ITEM(gxml, "button_scan_obsolete");
 	button_load_sources = UI_GET_ITEM(gxml, "button_load_sources");
 	button_intro = UI_GET_ITEM(gxml, "button_view_intro");
 
