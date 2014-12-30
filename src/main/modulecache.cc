@@ -58,11 +58,14 @@ ConstructFlags(GLOBAL_OPS *ops)
 	flags |= (ops->variants_primary      ? VariantsPrimary : 0);
 	flags |= (ops->variants_secondary    ? VariantsSecondary : 0);
 	flags |= (ops->transliteration       ? Transliteration : 0);
+	flags |= (ops->xlit                  ? Xlit : 0);
+	flags |= (ops->enumerated            ? Enumerated : 0);
+	flags |= (ops->glosses               ? Glosses : 0);
+
 	flags |= (ops->commentary_by_chapter ? CommentaryChapter : 0);
 	flags |= (ops->doublespace           ? Doublespace : 0);
 	flags |= (ops->xrefnotenumbers       ? XrefNoteNumbers : 0);
-	flags |= (ops->xlit                  ? Xlit : 0);
-	flags |= (ops->enumerated            ? Enumerated : 0);
+
 	return flags;
 }
 
