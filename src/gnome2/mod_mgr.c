@@ -2671,21 +2671,16 @@ void delete_obsolete(char *module, int *counter)
 
 	/* targeting coordinates acquired. */
 	char *mod_display_name, *obs_display_name, *question;
-	const char *new_dest;
 	const char *mod_abbrev = main_get_abbreviation((const char *)module);
 	const char *obs_abbrev = main_get_abbreviation((const char *)obsolete);
 
 	if (mod_abbrev)
-	    mod_display_name = g_strdup_printf("%s (%s)",
-					       mod_abbrev,
-					       module);
+	    mod_display_name = g_strdup_printf("%s (%s)", mod_abbrev, module);
 	else
 	    mod_display_name = g_strdup(module);
 
 	if (obs_abbrev)
-	    obs_display_name = g_strdup_printf("%s (%s)",
-					       obs_abbrev,
-					       obsolete);
+	    obs_display_name = g_strdup_printf("%s (%s)", obs_abbrev, obsolete);
 	else
 	    obs_display_name = g_strdup(obsolete);
 
@@ -2697,11 +2692,10 @@ void delete_obsolete(char *module, int *counter)
 	if (gui_yes_no_dialog(question, NULL)) {
 	    /* lay the axe at the root. */
 	    if (mod_mgr_uninstall(destination, obsolete) == -1) {
-		if (destination)
-		    new_dest = NULL;
-		else
-		    new_dest = gtk_label_get_text(GTK_LABEL(label_home));
-		mod_mgr_uninstall(new_dest, obsolete);
+		mod_mgr_uninstall((destination
+				   ? NULL
+				   : gtk_label_get_text(GTK_LABEL(label_home))),
+				  obsolete);
 	    }
 	}
 	
