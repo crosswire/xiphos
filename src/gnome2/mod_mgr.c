@@ -552,7 +552,7 @@ add_columns(GtkTreeView * treeview,
 	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
 					GTK_TREE_VIEW_COLUMN_FIXED);
 	gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN
-					     (column), 200);
+					     (column), 275);
 	gtk_tree_view_append_column(treeview, column);
 
 	/* -- installed -- */
