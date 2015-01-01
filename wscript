@@ -407,8 +407,8 @@ def configure(conf):
     conf.check_cfg(package='biblesync',
                    args='"biblesync >= 1.1.2" --cflags --libs',
                    uselib_store='BIBLESYNC',
-                   errmsg='no: using local (possibly out of date) version.',
-                   mandatory=False)
+                   errmsg='fail',
+                   mandatory=True)
     env.append_value('ALL_LIBS', 'BIBLESYNC')
 
     if not env["IS_WIN32"]:
@@ -477,11 +477,6 @@ def build(bld):
         src/xiphos_html
         ui
     """)
-
-    if not env['HAVE_BIBLESYNC']:
-        bld.add_subdirs('src/biblesync')
-        # following is repulsive. why doesn't it link on its own? how was it lost?
-        env.prepend_value('LINKFLAGS', 'default/src/biblesync/biblesync_1.o')
 
     bld.add_subdirs('src/webkit')
             
