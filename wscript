@@ -355,7 +355,7 @@ def configure(conf):
     else:
         # 
         common_libs += ' "gtk+-3.0" '
-        common_libs += ' "webkitgtk-3.0" ' 
+        common_libs += ' "webkit2gtk-4.0" ' 
         conf.check_cfg(package="gtk+-3.0",
                        atleast_version = "3.2",
                        uselib_store="GTK_32") 

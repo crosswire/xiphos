@@ -20,10 +20,8 @@
  */
 
 #include <string.h>
-#include <webkit/webkitwebframe.h>
-#include <webkit/webkitnetworkrequest.h>
-#include <webkit/webkitwebview.h>
-#include <webkit/webkitwebsettings.h>
+#include <gio/gio.h>
+#include <gtk/gtk.h>
 
 #include "main/url.hh"
 #include "main/module_dialogs.h"
@@ -60,7 +58,9 @@ static gboolean button_release_handler (GtkWidget *widget,
          if(event->type ==  GDK_BUTTON_RELEASE && db_click) {
 		XI_message((" button 1 = %s" , "double click!\n"));
 
-		if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (widget))) {
+		printf("Need to add this feature back in.\n"); // FIXME:: do what the printf says.
+
+		/*if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (widget))) {
 			webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (widget));
 
 			clipboard = gtk_widget_get_clipboard (widget,
@@ -69,7 +69,7 @@ static gboolean button_release_handler (GtkWidget *widget,
 			gtk_clipboard_request_text  (clipboard,
 						     gui_get_clipboard_text_for_lookup,
 						     NULL);
-		}
+		}*/
 	}
 	return FALSE;
 }
@@ -302,7 +302,7 @@ void
 wk_html_open_stream (WkHtml *html, const gchar *mime)
 {
 	wk_html_set_base_uri (html, NULL);
-	webkit_web_view_set_transparent(WEBKIT_WEB_VIEW(html), TRUE);
+	//webkit_web_view_set_transparent(WEBKIT_WEB_VIEW(html), TRUE);
 
 	html->priv->frames_enabled = FALSE;
 	g_free (html->priv->content);
@@ -358,13 +358,12 @@ wk_html_close (WkHtml *html)
 
 	if (!html->priv->initialised) {
 		html->priv->initialised = TRUE;
-		webkit_web_view_set_maintains_back_forward_list (WEBKIT_WEB_VIEW (html), FALSE);
+		//webkit_web_view_set_maintains_back_forward_list (WEBKIT_WEB_VIEW (html), FALSE);
 	}
 
-	webkit_web_view_load_string (WEBKIT_WEB_VIEW (html),
+	printf("%s\n", html->priv->mime);
+	webkit_web_view_load_html (WEBKIT_WEB_VIEW (html),
 				     html->priv->content,
-				     html->priv->mime,
-				     NULL,
 				     html->priv->base_uri);
 	g_free (html->priv->content);
 	html->priv->content = NULL;
@@ -389,19 +388,19 @@ wk_html_find (WkHtml    *html,
 	if (html->priv->find_string)
 		g_free(html->priv->find_string);
 	html->priv->find_string = g_strdup (find_string);
-	return webkit_web_view_search_text (WEBKIT_WEB_VIEW (html),
-					    find_string, FALSE,
-					    TRUE, TRUE);
+	return 0;//webkit_web_view_search_text (WEBKIT_WEB_VIEW (html),
+				//	    find_string, FALSE,
+				//	    TRUE, TRUE);
 }
 
 gboolean
 wk_html_find_again (WkHtml    *html,
 		    gboolean     forward)
 {
-	return webkit_web_view_search_text (WEBKIT_WEB_VIEW (html),
-					    html->priv->find_string,
-					    FALSE,
-					    forward, TRUE);
+	return 0;//webkit_web_view_search_text (WEBKIT_WEB_VIEW (html),
+				//	    html->priv->find_string,
+				//	    FALSE,
+				//	    forward, TRUE);
 }
 
 void
@@ -440,20 +439,23 @@ void ClipboardTextReceivedFunc (GtkClipboard *clipboard,
 void
 wk_html_copy_selection (WkHtml *html)
 {
-	if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (html)))
-		webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (html));
+	printf("Need to add this feature back in.\n"); //FIXME:: do what printf says.
+	//if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (html)))
+	//	webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (html));
 }
 
 void
 wk_html_select_all (WkHtml *html)
 {
-	webkit_web_view_select_all (WEBKIT_WEB_VIEW (html));
+	printf("Need to add this feature back in.\n"); //FIXME:: do what printf says.
+	//webkit_web_view_select_all (WEBKIT_WEB_VIEW (html));
 }
 
 void
 wk_html_print (WkHtml *html)
 {
-	webkit_web_frame_print (webkit_web_view_get_main_frame (WEBKIT_WEB_VIEW (html)));
+	printf("Need to add this feature back in.\n"); //FIXME:: do what printf says.
+	//webkit_web_frame_print (webkit_web_view_get_main_frame (WEBKIT_WEB_VIEW (html)));
 	//webkit_web_view_execute_script (WEBKIT_WEB_VIEW (html), "print();");
 }
 
