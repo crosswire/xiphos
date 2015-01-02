@@ -111,10 +111,12 @@ static gboolean button_press_handler (GtkWidget *widget,
 }
 
 static void link_handler (GtkWidget *widget,
-			  gchar     *title,
-			  gchar     *uri,
+			  WebKitHitTestResult *hit_test_result,
+			  guint		 modifiers,
 			  gpointer   user_data)
-{
+{	
+	const char *uri;
+	uri = webkit_hit_test_result_get_link_uri(hit_test_result);
 	WkHtmlPriv *priv;
 	priv = WK_HTML_GET_PRIVATE(WK_HTML(widget));
 	XI_message(("html_link_message: uri = %s", (uri ? uri : "-none-")));
@@ -157,7 +159,7 @@ html_realize (GtkWidget *widget)
 	g_signal_connect (G_OBJECT (widget), "button-release-event",
 			  G_CALLBACK (button_release_handler),
 			  NULL);
-	g_signal_connect (G_OBJECT (widget), "hovering-over-link",
+	g_signal_connect (G_OBJECT (widget), "mouse-target-changed",
 			  G_CALLBACK (link_handler),
 			  NULL);
 }
@@ -361,7 +363,6 @@ wk_html_close (WkHtml *html)
 		//webkit_web_view_set_maintains_back_forward_list (WEBKIT_WEB_VIEW (html), FALSE);
 	}
 
-	printf("%s\n", html->priv->mime);
 	webkit_web_view_load_html (WEBKIT_WEB_VIEW (html),
 				     html->priv->content,
 				     html->priv->base_uri);
