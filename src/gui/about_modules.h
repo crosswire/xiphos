@@ -30,12 +30,11 @@ extern "C" {
 
 void gui_display_about_module_dialog(gchar * modname);
 void gui_core_display_about_dialog(const gchar *desc,
-				   gchar *abouttext,
-				   const gchar *version,
-				   gchar *modname);
+				   const gchar *abouttext,
+				   const gchar *modname);
 void about_module_display(GString * str,
-			  gchar * text,
-			  gboolean tooltip);
+			  const gchar * text,
+			  const gboolean tooltip);
 
 #ifdef __cplusplus
 }
