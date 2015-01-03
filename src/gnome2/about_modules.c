@@ -537,10 +537,18 @@ gui_display_about_module_dialog(gchar *modname)
 	}
 
 	if (promo) {
+	    /* if promo looks like an undecorated url, hotlink it. */
+	    gboolean just_url = ((strncmp(promo, "http", 4) == 0) &&
+				 (strchr(promo, ' ') == 0));
+
 	    info = g_string_append(info, "<br/><center>");
 	    info = g_string_append(info, _("<b>Promotional:</b> "));
 	    info = g_string_append(info, "<br/>");
+	    if (just_url) g_string_append(info, "<a href=\"");
 	    info = g_string_append(info, promo);
+	    if (just_url) g_string_append(info, "\">");
+	    info = g_string_append(info, promo);
+	    if (just_url) g_string_append(info, "</a>");
 	    info = g_string_append(info, "</a></center>");
 	}
 
