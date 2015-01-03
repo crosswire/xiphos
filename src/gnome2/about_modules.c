@@ -418,7 +418,7 @@ gui_display_about_module_dialog(gchar *modname)
 	info = g_string_append(info, _("<b>Language:</b> "));
 	info = g_string_append(info, (language
 				      ? language
-				      : _ ("Not specified")));
+				      : _("Not specified")));
 	info = g_string_append(info, "&nbsp;(");
 	info = g_string_append(info, (langtoken
 				      ? langtoken
@@ -537,16 +537,21 @@ gui_display_about_module_dialog(gchar *modname)
 	}
 
 	if (promo) {
-	    /* if promo looks like an undecorated url, hotlink it. */
-	    gboolean just_url = ((strncmp(promo, "http", 4) == 0) &&
+	    /* if promo looks like just an undecorated url, hotlink it. */
+	    gboolean just_url = (((strncmp(promo, "http", 4) == 0) ||
+				  (strncmp(promo, "www.", 4) == 0)) &&
 				 (strchr(promo, ' ') == 0));
 
 	    info = g_string_append(info, "<br/><center>");
 	    info = g_string_append(info, _("<b>Promotional:</b> "));
 	    info = g_string_append(info, "<br/>");
-	    if (just_url) g_string_append(info, "<a href=\"");
-	    info = g_string_append(info, promo);
-	    if (just_url) g_string_append(info, "\">");
+	    if (just_url) {
+		g_string_append(info, "<a href=\"");
+		if (*promo == 'w')
+		    info = g_string_append(info, "http://");
+		info = g_string_append(info, promo);
+		g_string_append(info, "\">");
+	    }
 	    info = g_string_append(info, promo);
 	    if (just_url) g_string_append(info, "</a>");
 	    info = g_string_append(info, "</a></center>");
