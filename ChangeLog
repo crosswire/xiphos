@@ -5,6 +5,7 @@
 	* added deletion of obsolete modules when installing what supercedes.
 	* added scanned deletion of obsolete modules on demand (i.e. audit).
 	* added OSISGlosses module support.
+	* additions to "about modules" display.
 
 2014-12-24  karl <charcoal@users.sf.net>
 
