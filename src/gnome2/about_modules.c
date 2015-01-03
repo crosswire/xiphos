@@ -146,19 +146,16 @@ gui_create_about_modules(void)
 			  "dialog_about_mods", dialog_about_mods);
 	gtk_window_set_title(GTK_WINDOW(dialog_about_mods),
 			     _("About Sword Module"));
-	gtk_window_set_default_size(GTK_WINDOW(dialog_about_mods), 324,
-				    304);
+	gtk_window_set_default_size(GTK_WINDOW(dialog_about_mods), 500, 400);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_about_mods), TRUE);
 
 	dialog_vbox28 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_about_mods));
-	g_object_set_data(G_OBJECT(dialog_about_mods),
-			  "dialog_vbox28", dialog_vbox28);
+	g_object_set_data(G_OBJECT(dialog_about_mods), "dialog_vbox28", dialog_vbox28);
 	gtk_widget_show(dialog_vbox28);
 
 	UI_VBOX(vbox25, FALSE, 0);
 	gtk_widget_show(vbox25);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox28), vbox25, TRUE, TRUE,
-			   0);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox28), vbox25, TRUE, TRUE, 0);
 
 	UI_HBOX(hbox21, FALSE, 0);
 	gtk_widget_show(hbox21);
@@ -181,7 +178,7 @@ gui_create_about_modules(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow30,
-                                             settings.shadow_type);
+					    settings.shadow_type);
 
 	text_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 12));
 	gtk_widget_show(text_html);
@@ -197,13 +194,12 @@ gui_create_about_modules(void)
 			  "dialog_action_area28",
 			  dialog_action_area28);
 	gtk_widget_show(dialog_action_area28);
-	gtk_container_set_border_width(GTK_CONTAINER
-				       (dialog_action_area28), 10);
+	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area28), 10);
 
 #ifdef USE_GTK_3
-    hbuttonbox7 = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+	hbuttonbox7 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 #else
-    hbuttonbox7 = gtk_hbutton_box_new();
+	hbuttonbox7 = gtk_hbutton_box_new();
 #endif
 	gtk_widget_show(hbuttonbox7);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area28), hbuttonbox7,
@@ -257,8 +253,8 @@ gui_create_about_modules(void)
 
 void
 about_module_display(GString * str,
-		     gchar * text,
-		     gboolean tooltip)
+		     const gchar * text,
+		     const gboolean tooltip)
 {
 	gboolean center = FALSE;
 
@@ -324,9 +320,8 @@ about_module_display(GString * str,
 
 void
 gui_core_display_about_dialog(const gchar * desc,
-			      gchar * abouttext,
-			      const gchar * version,
-			      gchar * modname)
+			      const gchar * abouttext,
+			      const gchar * modname)
 {
 	GtkWidget *aboutbox;	//-- pointer to about dialog
 	GString *str = g_string_new(NULL);
@@ -345,23 +340,17 @@ gui_core_display_about_dialog(const gchar * desc,
 	free_font(mf);
                          
 	g_string_printf(description,
-			"<center><font color=\"#000fcf\"><b>%s</b></font><hr/>%s %s</center><br/>",
-			(desc ? desc : "No module present"),
-			(version ? "<br/>Sword module version" : ""),
-			(version ? version : ""));
+			"<center><font color=\"#000fcf\"><br/><b>%s</b></font></center><br/><hr width=\"80%%\"/><br/>",
+			(desc ? desc : "No module present"));
 	aboutbox = gui_create_about_modules();
 	gtk_widget_show(aboutbox);
 
-	about_module_display(str,
-			     ((abouttext && *abouttext)
-			      ? abouttext
-			      : _("The module has no About information.")),
-			     FALSE);
+	about_module_display(str, abouttext, FALSE);
 
-	g_string_append_len(text, html_start->str, strlen(html_start->str));
-	g_string_append_len(text, description->str, strlen(description->str));
-	g_string_append_len(text, str->str, strlen(str->str));
-	g_string_append_len(text, html_end, strlen(html_end));
+	g_string_append(text, html_start->str);
+	g_string_append(text, description->str);
+	g_string_append(text, str->str);
+	g_string_append(text, html_end);
 	HtmlOutput(text->str, text_html, NULL, NULL);
 
 	g_string_free(text, TRUE);
@@ -389,16 +378,168 @@ gui_core_display_about_dialog(const gchar * desc,
 void
 gui_display_about_module_dialog(gchar *modname)
 {
-	const gchar *buf;	//-- pointer to text buffer for label (mod name)
-	gchar *bufabout;	//-- pointer to text buffer for text widget (mod about)
-	const gchar * version;
+	const gchar *desc;
+	gchar *about;
+	const gchar *version, *language, *abbreviation, *size, *promo, *dist;
+	int feature_count = 0;
+	GString *info = g_string_new("");
 
-	buf = main_get_module_description(modname);
-	bufabout = main_get_mod_about_info(modname);
+	desc = main_get_mod_config_entry(modname, "Description");
+	about = main_get_mod_config_entry(modname, "About");
 	version = main_get_mod_config_entry(modname, "Version");
+	size = main_get_mod_config_entry(modname, "InstallSize");
+	promo = main_get_mod_config_entry(modname, "ShortPromo");
+	dist = main_get_mod_config_entry(modname, "DistributionLicense");
+	language = main_get_module_language(modname);
+	abbreviation = main_get_abbreviation(modname);
 
-	gui_core_display_about_dialog(buf, bufabout, version, modname);
+	info = g_string_append(info,
+			       "<center><table border=\"0\" cellpadding=\"5\" cellspacing=\"0\">");
+	info = g_string_append(info, "<tr><td valign=\"top\">");
 
-	if (bufabout)
-		g_free(bufabout);
+	info = g_string_append(info, _("<b>Module name:</b> "));
+	info = g_string_append(info, modname);
+	info = g_string_append(info, "<br/>");
+
+	info = g_string_append(info, _("<b>Version:</b> "));
+	info = g_string_append(info,
+			       (version
+				? version
+				: _("No version stamp found")));
+	info = g_string_append(info, "<br/>");
+
+	if (abbreviation) {
+	    info = g_string_append(info, _("<b>Module abbreviation:</b> "));
+	    info = g_string_append(info, abbreviation);
+	    info = g_string_append(info, "<br/>");
+	}
+
+	info = g_string_append(info, _("<b>Language:</b> "));
+	info = g_string_append(info, (language
+				      ? language
+				      : _ ("Not specified")));
+	info = g_string_append(info, "<br/>");
+
+	if (size) {
+	    info = g_string_append(info, _("<b>Installed size:</b> "));
+	    info = g_string_append(info, size);
+	    info = g_string_append(info, "<br/>");
+	}
+
+	info = g_string_append(info,
+			       "</td>"
+			       "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>"
+			       "<td valign=\"top\">");
+
+	info = g_string_append(info, _("<b>Features:</b>"));
+	info = g_string_append(info, "<br/>");
+	if (main_check_for_global_option ((gchar*) modname, "ThMLHeadings") ||
+	    main_check_for_global_option ((gchar*) modname, "OSISHeadings")) {
+	    info = g_string_append(info, _("* Headings"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option((gchar*) modname, "GBFFootnotes") ||
+	    main_check_for_global_option((gchar*) modname, "ThMLFootnotes") ||
+	    main_check_for_global_option((gchar*) modname, "OSISFootnotes")) {
+	    info = g_string_append(info, _("* Footnotes"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option((gchar*) modname, "ThMLScripref") ||
+	    main_check_for_global_option((gchar*) modname, "OSISScripref")) {
+	    info = g_string_append(info, _("* Cross references"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if ((main_check_for_global_option((gchar*) modname, "GBFStrongs")) ||
+	    (main_check_for_global_option((gchar*) modname, "ThMLStrongs")) ||
+	    (main_check_for_global_option((gchar*) modname, "OSISStrongs"))) {
+	    info = g_string_append(info, _("* Strong's numbers"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option((gchar*) modname, "GBFMorph") ||
+	    main_check_for_global_option((gchar*) modname, "ThMLMorph") ||
+	    main_check_for_global_option((gchar*) modname, "OSISMorph")) {
+	    info = g_string_append(info, _("* Morphological tags"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option((gchar*) modname, "ThMLLemma") ||
+	    main_check_for_global_option((gchar*) modname, "OSISLemma")) {
+	    info = g_string_append(info, _("* Lemmas"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if ((main_check_for_global_option ((gchar*) modname, "GBFRedLetterWords")) ||
+	    (main_check_for_global_option ((gchar*) modname, "OSISRedLetterWords"))) {
+	    info = g_string_append(info, _("* Words of Christ in red"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option((gchar*) modname, "UTF8GreekAccents")) {
+	    info = g_string_append(info, _("* Greek accents"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option((gchar*) modname, "UTF8HebrewPoints")) {
+	    info = g_string_append(info, _("* Hebrew Vowel Points"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option ((gchar*) modname, "UTF8Cantillation")) {
+	    info = g_string_append(info, _("* Hebrew Cantillation"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option ((gchar*) modname, "ThMLVariants") ||
+	    main_check_for_global_option ((gchar*) modname, "OSISVariants")) {
+	    info = g_string_append(info, _("* Variant readings"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option((gchar*) modname, "OSISXlit")) {
+	    info = g_string_append(info, _("* Transliteration forms"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option((gchar*) modname, "OSISEnum")) {
+	    info = g_string_append(info, _("* Enumerations"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (main_check_for_global_option((gchar*) modname, "OSISGlosses") ||
+	    main_check_for_global_option((gchar*) modname, "OSISRuby")) {
+	    info = g_string_append(info, _("* Glosses"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
+	if (feature_count == 0) {
+	    info = g_string_append(info, _("* <i>No features found</i>"));
+	    info = g_string_append(info, "<br/>");
+	}
+
+	info = g_string_append(info, "</td></tr></table></center>");
+
+	if (dist && *dist) {
+	    info = g_string_append(info, "<br/><center>");
+	    info = g_string_append(info, _("<b>Distribution license:</b>"));
+	    info = g_string_append(info, "<br/>");
+	    info = g_string_append(info, dist);
+	    info = g_string_append(info, "</a></center>");
+	}
+
+	if (promo) {
+	    info = g_string_append(info, "<br/><center>");
+	    info = g_string_append(info, _("<b>Promotional:</b> "));
+	    info = g_string_append(info, "<br/>");
+	    info = g_string_append(info, promo);
+	    info = g_string_append(info, "</a></center>");
+	}
+
+	info = g_string_append(info, "<br/><hr width=\"80%%\"/><br/>");
+	info = g_string_append(info, about);
+
+	gui_core_display_about_dialog(desc, info->str, modname);
 }
