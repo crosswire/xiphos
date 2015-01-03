@@ -380,7 +380,7 @@ gui_display_about_module_dialog(gchar *modname)
 {
 	const gchar *desc;
 	gchar *about;
-	const gchar *version, *language, *abbreviation, *size, *promo, *dist;
+	const gchar *version, *language, *abbreviation, *size, *promo, *dist, *langtoken;
 	int feature_count = 0;
 	GString *info = g_string_new("");
 
@@ -390,6 +390,7 @@ gui_display_about_module_dialog(gchar *modname)
 	size = main_get_mod_config_entry(modname, "InstallSize");
 	promo = main_get_mod_config_entry(modname, "ShortPromo");
 	dist = main_get_mod_config_entry(modname, "DistributionLicense");
+	langtoken = main_get_mod_config_entry(modname, "Lang");
 	language = main_get_module_language(modname);
 	abbreviation = main_get_abbreviation(modname);
 
@@ -418,6 +419,11 @@ gui_display_about_module_dialog(gchar *modname)
 	info = g_string_append(info, (language
 				      ? language
 				      : _ ("Not specified")));
+	info = g_string_append(info, "&nbsp;(");
+	info = g_string_append(info, (langtoken
+				      ? langtoken
+				      : "?"));
+	info = g_string_append(info, ")");
 	info = g_string_append(info, "<br/>");
 
 	if (size) {
@@ -442,81 +448,81 @@ gui_display_about_module_dialog(gchar *modname)
 	if (main_check_for_global_option((gchar*) modname, "GBFFootnotes") ||
 	    main_check_for_global_option((gchar*) modname, "ThMLFootnotes") ||
 	    main_check_for_global_option((gchar*) modname, "OSISFootnotes")) {
-	    info = g_string_append(info, _("* Footnotes"));
+	    info = g_string_append(info, _("*&nbsp;Footnotes"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option((gchar*) modname, "ThMLScripref") ||
 	    main_check_for_global_option((gchar*) modname, "OSISScripref")) {
-	    info = g_string_append(info, _("* Cross references"));
+	    info = g_string_append(info, _("*&nbsp;Cross references"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if ((main_check_for_global_option((gchar*) modname, "GBFStrongs")) ||
 	    (main_check_for_global_option((gchar*) modname, "ThMLStrongs")) ||
 	    (main_check_for_global_option((gchar*) modname, "OSISStrongs"))) {
-	    info = g_string_append(info, _("* Strong's numbers"));
+	    info = g_string_append(info, _("*&nbsp;Strong's numbers"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option((gchar*) modname, "GBFMorph") ||
 	    main_check_for_global_option((gchar*) modname, "ThMLMorph") ||
 	    main_check_for_global_option((gchar*) modname, "OSISMorph")) {
-	    info = g_string_append(info, _("* Morphological tags"));
+	    info = g_string_append(info, _("*&nbsp;Morphological tags"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option((gchar*) modname, "ThMLLemma") ||
 	    main_check_for_global_option((gchar*) modname, "OSISLemma")) {
-	    info = g_string_append(info, _("* Lemmas"));
+	    info = g_string_append(info, _("*&nbsp;Lemmas"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if ((main_check_for_global_option ((gchar*) modname, "GBFRedLetterWords")) ||
 	    (main_check_for_global_option ((gchar*) modname, "OSISRedLetterWords"))) {
-	    info = g_string_append(info, _("* Words of Christ in red"));
+	    info = g_string_append(info, _("*&nbsp;Words of Christ in red"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option((gchar*) modname, "UTF8GreekAccents")) {
-	    info = g_string_append(info, _("* Greek accents"));
+	    info = g_string_append(info, _("*&nbsp;Greek accents"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option((gchar*) modname, "UTF8HebrewPoints")) {
-	    info = g_string_append(info, _("* Hebrew Vowel Points"));
+	    info = g_string_append(info, _("*&nbsp;Hebrew Vowel Points"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option ((gchar*) modname, "UTF8Cantillation")) {
-	    info = g_string_append(info, _("* Hebrew Cantillation"));
+	    info = g_string_append(info, _("*&nbsp;Hebrew Cantillation"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option ((gchar*) modname, "ThMLVariants") ||
 	    main_check_for_global_option ((gchar*) modname, "OSISVariants")) {
-	    info = g_string_append(info, _("* Variant readings"));
+	    info = g_string_append(info, _("*&nbsp;Variant readings"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option((gchar*) modname, "OSISXlit")) {
-	    info = g_string_append(info, _("* Transliteration forms"));
+	    info = g_string_append(info, _("*&nbsp;Transliteration forms"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option((gchar*) modname, "OSISEnum")) {
-	    info = g_string_append(info, _("* Enumerations"));
+	    info = g_string_append(info, _("*&nbsp;Enumerations"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (main_check_for_global_option((gchar*) modname, "OSISGlosses") ||
 	    main_check_for_global_option((gchar*) modname, "OSISRuby")) {
-	    info = g_string_append(info, _("* Glosses"));
+	    info = g_string_append(info, _("*&nbsp;Glosses"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
 	if (feature_count == 0) {
-	    info = g_string_append(info, _("* <i>No features found</i>"));
+	    info = g_string_append(info, _("*&nbsp;<i>No features found</i>"));
 	    info = g_string_append(info, "<br/>");
 	}
 
