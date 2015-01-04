@@ -57,10 +57,10 @@ def set_options(opt):
 
     miscgroup.add_option('-d', '--debug-level',
                 action = 'store',
-		default = ccroot.DEBUG_LEVELS.ULTRADEBUG,
-		help = "Specify the debugging level ['ultradebug', 'debug', 'release', 'optimized']",
-		choices = ['ultradebug', 'debug', 'release', 'optimized'],
-		dest = 'debug_level')
+        default = ccroot.DEBUG_LEVELS.ULTRADEBUG,
+        help = "Specify the debugging level ['ultradebug', 'debug', 'release', 'optimized']",
+        choices = ['ultradebug', 'debug', 'release', 'optimized'],
+        dest = 'debug_level')
 
     miscgroup.add_option('--strip', action='store_true', default=False,
                     help='Strip resulting binary')
@@ -76,7 +76,7 @@ def set_options(opt):
     miscgroup.add_option('--enable-webkit-editor', action='store_true', default=False,
             dest='webkit_editor',
             help='Use webkit editor [default: disabled]')
-			
+            
     miscgroup.add_option('--disable-dbus',
                    action = 'store_true',
                    default = False,
@@ -98,16 +98,16 @@ def set_options(opt):
             dest='no_console')
 
     w32.add_option('--pkgconf-libdir',
-		action = 'store',
-		default = os.path.join(ROOTDIR_WIN32, 'local', 'lib', 'pkgconfig'),
-		help = "Specify dir with *.pc files for cross-compilation",
-		dest = 'pkg_conf_libdir')
+        action = 'store',
+        default = os.path.join(ROOTDIR_WIN32, 'local', 'lib', 'pkgconfig'),
+        help = "Specify dir with *.pc files for cross-compilation",
+        dest = 'pkg_conf_libdir')
 
     w32.add_option('--pkgconf-prefix',
-		action = 'store',
-		default = os.path.join(ROOTDIR_WIN32, 'local'),
-		help = "Specify prefix with folders for headers and libraries for cross-compilation",
-		dest = 'pkg_conf_prefix')
+        action = 'store',
+        default = os.path.join(ROOTDIR_WIN32, 'local'),
+        help = "Specify prefix with folders for headers and libraries for cross-compilation",
+        dest = 'pkg_conf_prefix')
 
     ######### end of windows options.
 
@@ -238,7 +238,7 @@ def configure(conf):
                            msg='Auto detecting gtk 2', mandatory=True)
             opt.gtkver = '2'
 
-	# FIXME: Find out why we still need this!
+    # FIXME: Find out why we still need this!
     dfn('WEBKIT', 1) 
     
     #gtk
@@ -353,9 +353,7 @@ def configure(conf):
             common_libs += ' "gtkhtml-editor" '
             common_libs += ' "libgtkhtml-3.14 >= 3.23" '
     else:
-        # 
         common_libs += ' "gtk+-3.0" '
-        common_libs += ' "webkit2gtk-4.0" ' 
         conf.check_cfg(package="gtk+-3.0",
                        atleast_version = "3.2",
                        uselib_store="GTK_32") 
@@ -374,16 +372,22 @@ def configure(conf):
         conf.define('USE_GTK_3', 1)
         conf.define('USE_GTKBUILDER', 1)
         if opt.webkit_editor:
-           conf.define('USE_WEBKIT_EDITOR', 1)
-           env['ENABLE_WEBKIT_EDITOR'] = True
-           # FC15 and Oneiric have this, Natty does not
+            conf.define('USE_WEBKIT_EDITOR', 1)
+            env['ENABLE_WEBKIT_EDITOR'] = True
+            common_libs += ' "webkitgtk-3.0" '
+            # FC15 and Oneiric have this, Natty does not
         else:
-           if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4', okmsg='ok', errmsg='fail'):
-               common_libs += ' "libgtkhtml-4.0" '
-           # FC15 and Oneiric have this, Natty does not
-           if conf.check_cfg(modversion="gtkhtml-editor-4.0", msg="Checking for GtkHTML Editor 4.0", okmsg='ok', errmsg='fail', mandatory=True):
-               common_libs += ' "gtkhtml-editor-4.0" '
-    
+            if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4', okmsg='ok', errmsg='fail'):
+                common_libs += ' "libgtkhtml-4.0" '
+            # FC15 and Oneiric have this, Natty does not
+            if conf.check_cfg(modversion="gtkhtml-editor-4.0", msg="Checking for GtkHTML Editor 4.0", okmsg='ok', errmsg='fail', mandatory=True):
+                common_libs += ' "gtkhtml-editor-4.0" '
+            if conf.check_cfg(modversion='webkit2gtk-4.0', msg='Checking for WebKit2', okmsg='ok', errmsg='fail'):
+                common_libs += ' "webkit2gtk-4.0" '
+                conf.define('USE_WEBKIT2', 1)
+            elif conf.check_cfg(modversion='webkitgtk-3.0', msg='Checking for WebKit', okmsg='ok', errmsg='fail'):
+                common_libs += ' "webkitgtk-3.0" '
+
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
                    package='',
@@ -492,14 +496,14 @@ def build(bld):
 
 
     bld.install_files('${PACKAGE_DOC_DIR}', """
-        README
-	RELEASE-NOTES
-	COPYING
-	AUTHORS
-	ChangeLog
-	INSTALL
-	TODO
-	Xiphos.ogg
+    README
+    RELEASE-NOTES
+    COPYING
+    AUTHORS
+    ChangeLog
+    INSTALL
+    TODO
+    Xiphos.ogg
     """)
 
     bld.install_files('${PACKAGE_PIXMAPS_DIR}',bld.path.ant_glob('pixmaps/*.png'))
