@@ -23,7 +23,11 @@
 #define __WK_HTML_H__
 
 #undef DATADIR
-#include <webkit2/webkit2.h>  
+#ifdef USE_WEBKIT2
+	#include <webkit2/webkit2.h>
+#else
+	#include <webkit/webkit.h>
+#endif
 #include "main/module_dialogs.h"
 
 #include "main/module_dialogs.h"
