@@ -380,7 +380,8 @@ gui_display_about_module_dialog(gchar *modname)
 {
 	const gchar *desc;
 	gchar *about;
-	const gchar *version, *language, *abbreviation, *size, *promo, *dist, *langtoken;
+	const gchar *version, *language, *abbreviation,
+	    *size, *promo, *dist, *langtoken, *companion;
 	int feature_count = 0;
 	GString *info = g_string_new("");
 
@@ -390,6 +391,7 @@ gui_display_about_module_dialog(gchar *modname)
 	size = main_get_mod_config_entry(modname, "InstallSize");
 	promo = main_get_mod_config_entry(modname, "ShortPromo");
 	dist = main_get_mod_config_entry(modname, "DistributionLicense");
+	companion = main_get_mod_config_entry(modname, "Companion");
 	langtoken = main_get_mod_config_entry(modname, "Lang");
 	language = main_get_module_language(modname);
 	abbreviation = main_get_abbreviation(modname);
@@ -429,6 +431,12 @@ gui_display_about_module_dialog(gchar *modname)
 	if (size) {
 	    info = g_string_append(info, _("<b>Installed size:</b> "));
 	    info = g_string_append(info, size);
+	    info = g_string_append(info, "<br/>");
+	}
+
+	if (companion) {
+	    info = g_string_append(info, _("<b>Companion module(s):</b></br>"));
+	    info = g_string_append(info, companion);
 	    info = g_string_append(info, "<br/>");
 	}
 

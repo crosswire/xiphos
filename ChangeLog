@@ -6,6 +6,7 @@
 	* added scanned deletion of obsolete modules on demand (i.e. audit).
 	* added OSISGlosses module support.
 	* additions to "about modules" display.
+	* added OSISMorphSegmentation module support.
 
 2014-12-24  karl <charcoal@users.sf.net>
 

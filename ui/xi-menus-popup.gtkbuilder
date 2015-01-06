@@ -644,6 +644,16 @@
               </object>
             </child>
             <child>
+              <object class="GtkCheckMenuItem" id="morphseg">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Morpheme Segmentation</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_morphseg_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
               <object class="GtkCheckMenuItem" id="image_content">
                 <property name="visible">False</property>
                 <property name="can_focus">False</property>
