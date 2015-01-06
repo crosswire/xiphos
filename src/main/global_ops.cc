@@ -162,6 +162,7 @@ void main_set_global_options(GLOBAL_OPS * ops)
 	_set_global_option("Transliterated Forms", ops->xlit);
 	_set_global_option("Enumerations", ops->enumerated);
 	_set_global_option("Glosses", ops->glosses);
+	_set_global_option("Morpheme Segmentation", ops->morphseg);
 
 	_set_global_textual("Transliteration", (ops->transliteration
 						? "Latin" : "Off"));
@@ -215,6 +216,8 @@ GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 	    gui_of2tf(module_options[mod_name]["Enumerations"].c_str());
 	ops->glosses =
 	    gui_of2tf(module_options[mod_name]["Glosses"].c_str());
+	ops->morphseg =
+	    gui_of2tf(module_options[mod_name]["Morpheme Segmentation"].c_str());
 
 	ops->variants_all =
 	    gui_of2tf(module_options[mod_name]["All Readings"].c_str());

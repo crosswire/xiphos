@@ -970,6 +970,28 @@ G_MODULE_EXPORT void on_glosses_activate (GtkCheckMenuItem * menuitem, gpointer 
  *
  */
 
+G_MODULE_EXPORT void on_morphseg_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+{
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Morpheme Segmentation"); /* string not seen by user */
+}
+
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
 G_MODULE_EXPORT void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	gchar *key = NULL;
@@ -1639,6 +1661,13 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 	    main_check_for_global_option((gchar*) mod_name, "OSISRuby")) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->glosses);
+	}
+
+    	item = UI_GET_ITEM(gxml, "morphseg");
+
+	if (main_check_for_global_option((gchar*) mod_name, "OSISMorphSegmentation")) {
+		gtk_widget_show(item);
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->morphseg);
 	}
 
 	item = UI_GET_ITEM(gxml, "image_content");

@@ -879,6 +879,13 @@ void load_settings_structure(void)
 		settings.parallel_glosses = 0;
 	}
 
+	if ((buf = xml_get_value("parallel", "Morpheme_Segmentation")))
+		settings.parallel_morphseg = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Morpheme_Segmentation", "0");
+		settings.parallel_morphseg = 0;
+	}
+
 	/*  Misc stuff  */
 
 	settings.showtexts = atoi((buf = xml_get_value("misc", "showtexts")) ? buf : "1");
