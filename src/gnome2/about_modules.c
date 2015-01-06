@@ -529,6 +529,11 @@ gui_display_about_module_dialog(gchar *modname)
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
+	if (main_check_for_global_option((gchar*) modname, "OSISMorphSegmentation")) {
+	    info = g_string_append(info, _("*&nbsp;Morpheme Segmentation"));
+	    info = g_string_append(info, "<br/>");
+	    feature_count++;
+	}
 	if (feature_count == 0) {
 	    info = g_string_append(info, _("*&nbsp;<i>No features found</i>"));
 	    info = g_string_append(info, "<br/>");
