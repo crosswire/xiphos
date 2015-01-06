@@ -48,6 +48,7 @@ struct  _global_ops {
 	gboolean xlit;
 	gboolean enumerated;
 	gboolean glosses;
+	gboolean morphseg;
 
 	gboolean commentary_by_chapter;
 	gboolean doublespace;

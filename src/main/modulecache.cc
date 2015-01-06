@@ -61,6 +61,7 @@ ConstructFlags(GLOBAL_OPS *ops)
 	flags |= (ops->xlit                  ? Xlit : 0);
 	flags |= (ops->enumerated            ? Enumerated : 0);
 	flags |= (ops->glosses               ? Glosses : 0);
+	flags |= (ops->morphseg              ? MorphSegmentation : 0);
 
 	flags |= (ops->commentary_by_chapter ? CommentaryChapter : 0);
 	flags |= (ops->doublespace           ? Doublespace : 0);
