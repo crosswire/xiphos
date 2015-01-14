@@ -335,7 +335,8 @@ def configure(conf):
         elif conf.check_cfg(modversion='gtkhtml-editor-3.14',
                           msg='Checking for GNOME3 gtkhtml-editor',
                           okmsg='Definitely',
-                          errmsg='Probably not'
+                          errmsg='Probably not',
+                          mandatory=True
                           ):
             common_libs += ' "gtk+-2.0 >= 2.14" '
             common_libs += ' "gtkhtml-editor-3.14" '
