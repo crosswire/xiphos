@@ -432,7 +432,12 @@ wk_html_find (WkHtml    *html,
 		g_free(html->priv->find_string);
 	html->priv->find_string = g_strdup (find_string);
 #ifdef USE_WEBKIT2
-	// add this feature
+    WebKitFindController *find_controller;
+    find_controller = webkit_web_view_get_find_controller(WEBKIT_WEB_VIEW (html));
+    webkit_find_controller_search(find_controller,
+                                  find_string,
+                                  WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE,
+                                  G_MAXUINT);
 #else
 	return webkit_web_view_search_text (WEBKIT_WEB_VIEW (html),
 					    find_string, FALSE,
@@ -445,7 +450,12 @@ wk_html_find_again (WkHtml    *html,
 		    gboolean     forward)
 {
 #ifdef USE_WEBKIT2
-	// add this feature
+    WebKitFindController *find_controller;
+    find_controller = webkit_web_view_get_find_controller(WEBKIT_WEB_VIEW (html));
+    webkit_find_controller_search(find_controller,
+                                  html->priv->find_string,
+                                  WEBKIT_FIND_OPTIONS_NONE,
+                                  G_MAXUINT);
 #else
 	return webkit_web_view_search_text (WEBKIT_WEB_VIEW (html),
 					    html->priv->find_string,
