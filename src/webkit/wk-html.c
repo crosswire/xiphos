@@ -59,48 +59,34 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 static GObjectClass *parent_class = NULL;
 
+static gboolean button_release_handler (GtkWidget *widget,
+                GdkEventButton *event)
+{
+     GtkClipboard * clipboard;
+        if(event->type ==  GDK_BUTTON_RELEASE && db_click) {
+            XI_message((" button 1 = %s" , "double click!\n"));
+
 #ifdef USE_WEBKIT2
-    static gboolean button_release_handler (GtkWidget *widget,
-                    GdkEventButton *event)
-    {
-         GtkClipboard * clipboard;
-            if(event->type ==  GDK_BUTTON_RELEASE && db_click) {
-                XI_message((" button 1 = %s" , "double click!\n"));
-
-                webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW (widget), WEBKIT_EDITING_COMMAND_COPY);
-
-                clipboard = gtk_widget_get_clipboard (widget,
-                                      GDK_SELECTION_CLIPBOARD );
-
-                gtk_clipboard_request_text  (clipboard,
-                                 gui_get_clipboard_text_for_lookup,
-                                 NULL);
-            }
-
-        return FALSE;
-    }
+            webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW (widget), WEBKIT_EDITING_COMMAND_COPY);
 #else
-	static gboolean button_release_handler (GtkWidget *widget,
-					GdkEventButton *event)
-	{
-		 GtkClipboard * clipboard;
-	         if(event->type ==  GDK_BUTTON_RELEASE && db_click) {
-			XI_message((" button 1 = %s" , "double click!\n"));
-
-			if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (widget))) {
-				webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (widget));
-
-				clipboard = gtk_widget_get_clipboard (widget,
-								      GDK_SELECTION_CLIPBOARD );
-
-				gtk_clipboard_request_text  (clipboard,
-							     gui_get_clipboard_text_for_lookup,
-							     NULL);
-			}
-		}
-		return FALSE;
-	}
+            if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (widget))) {
+                webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (widget));
 #endif
+
+            clipboard = gtk_widget_get_clipboard (widget,
+                                  GDK_SELECTION_CLIPBOARD );
+
+            gtk_clipboard_request_text  (clipboard,
+                             gui_get_clipboard_text_for_lookup,
+                             NULL);
+#ifdef USE_WEBKIT2
+#else
+            }
+#endif
+    }
+
+    return FALSE;
+}
 
 static gboolean button_press_handler (GtkWidget *widget,
 				      GdkEventButton *event)
