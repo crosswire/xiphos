@@ -62,6 +62,25 @@ static GObjectClass *parent_class = NULL;
 #ifdef USE_WEBKIT2
     // We need to add this back in. What should happen is copy the selected
     // text, which will be used to lookup in the dictionary. -- cjbayliss 2015-01
+    static gboolean button_release_handler (GtkWidget *widget,
+                    GdkEventButton *event)
+    {
+         GtkClipboard * clipboard;
+            if(event->type ==  GDK_BUTTON_RELEASE && db_click) {
+                XI_message((" button 1 = %s" , "double click!\n"));
+
+                webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW (widget), WEBKIT_EDITING_COMMAND_COPY);
+
+                clipboard = gtk_widget_get_clipboard (widget,
+                                      GDK_SELECTION_CLIPBOARD );
+
+                gtk_clipboard_request_text  (clipboard,
+                                 gui_get_clipboard_text_for_lookup,
+                                 NULL);
+            }
+
+        return FALSE;
+    }
 #else
 	static gboolean button_release_handler (GtkWidget *widget,
 					GdkEventButton *event)
@@ -178,6 +197,10 @@ html_realize (GtkWidget *widget)
 			  G_CALLBACK (button_press_handler),
 			  NULL);
 #ifdef USE_WEBKIT2
+    g_signal_connect (G_OBJECT (widget), "button-release-event",
+              G_CALLBACK (button_release_handler),
+              NULL);
+
 	g_signal_connect (G_OBJECT (widget), "mouse-target-changed",
 #else
 	g_signal_connect (G_OBJECT (widget), "button-release-event",
@@ -500,7 +523,7 @@ void
 wk_html_copy_selection (WkHtml *html)
 {
 #ifdef USE_WEBKIT2
-	// add this feature back in.
+    webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW (html), WEBKIT_EDITING_COMMAND_COPY);
 #else
 	if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (html)))
 		webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (html));
@@ -511,7 +534,7 @@ void
 wk_html_select_all (WkHtml *html)
 {
 #ifdef USE_WEBKIT2
-	// add this feature back in.
+    webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW (html), WEBKIT_EDITING_COMMAND_SELECT_ALL);
 #else
 	webkit_web_view_select_all (WEBKIT_WEB_VIEW (html));
 #endif
