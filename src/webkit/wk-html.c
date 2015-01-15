@@ -60,9 +60,8 @@ static guint signals[LAST_SIGNAL] = { 0 };
 static GObjectClass *parent_class = NULL;
 
 #ifdef USE_WEBKIT2
-	// We don't need to implement the double click copy, X11 already does this for
-	// us. And in the future, when wayland is a thing, then the window manager will
-	// do this work. I have no idea why we needed it in WebKit1. -- cjbayliss, 2015-01-04.
+    // We need to add this back in. What should happen is copy the selected
+    // text, which will be used to lookup in the dictionary. -- cjbayliss 2015-01
 #else
 	static gboolean button_release_handler (GtkWidget *widget,
 					GdkEventButton *event)
