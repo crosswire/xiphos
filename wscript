@@ -331,7 +331,6 @@ def configure(conf):
             conf.define('USE_WEBKIT_EDITOR', 1)
             env['ENABLE_WEBKIT_EDITOR'] = True
             common_libs += ' "gtk+-2.0 >= 2.24" '
-           # FC15 and Oneiric have this, Natty does not
         elif conf.check_cfg(modversion='gtkhtml-editor-3.14',
                           msg='Checking for GNOME3 gtkhtml-editor',
                           okmsg='Definitely',
@@ -340,18 +339,6 @@ def configure(conf):
                           ):
             common_libs += ' "gtk+-2.0 >= 2.14" '
             common_libs += ' "gtkhtml-editor-3.14" '
-            common_libs += ' "libgtkhtml-3.14 >= 3.23" '
-        elif conf.check_cfg(modversion='gtkhtml-editor-4.0',
-                          msg='Checking for GNOME3 gtkhtml-editor',
-                          okmsg='Definitely',
-                          errmsg='Probably not'
-                          ):
-            common_libs += ' "gtk+-2.0 >= 2.14" '
-            common_libs += ' "gtkhtml-editor-4.0" '
-            common_libs += ' "libgtkhtml-4.0 >= 3.23" '
-        else:
-            common_libs += ' "gtk+-2.0 >= 2.14" '
-            common_libs += ' "gtkhtml-editor" '
             common_libs += ' "libgtkhtml-3.14 >= 3.23" '
     else:
         # 
