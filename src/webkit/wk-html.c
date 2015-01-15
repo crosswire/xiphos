@@ -60,8 +60,6 @@ static guint signals[LAST_SIGNAL] = { 0 };
 static GObjectClass *parent_class = NULL;
 
 #ifdef USE_WEBKIT2
-    // We need to add this back in. What should happen is copy the selected
-    // text, which will be used to lookup in the dictionary. -- cjbayliss 2015-01
     static gboolean button_release_handler (GtkWidget *widget,
                     GdkEventButton *event)
     {
@@ -196,17 +194,13 @@ html_realize (GtkWidget *widget)
 	g_signal_connect (G_OBJECT (widget), "button-press-event",
 			  G_CALLBACK (button_press_handler),
 			  NULL);
-#ifdef USE_WEBKIT2
     g_signal_connect (G_OBJECT (widget), "button-release-event",
               G_CALLBACK (button_release_handler),
               NULL);
 
+#ifdef USE_WEBKIT2
 	g_signal_connect (G_OBJECT (widget), "mouse-target-changed",
 #else
-	g_signal_connect (G_OBJECT (widget), "button-release-event",
-			  G_CALLBACK (button_release_handler),
-			  NULL);
-
 	g_signal_connect (G_OBJECT (widget), "hovering-over-link",
 #endif
 			  G_CALLBACK (link_handler),
