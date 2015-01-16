@@ -1,3 +1,4 @@
+#define CHATTY 1
 /*
  * Xiphos Bible Study Tool
  * webkit_editor.c - html editor using webkit
@@ -102,49 +103,47 @@ void  editor_set_filename(EDITOR * e, const gchar * new_filename)
 }
 */
 
-void action_about_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_about_activate_cb (GtkWidget *widget, EDITOR * e)
 {
 
 }
 
-void action_increase_indent_activate_cb (GtkWidget *widget, EDITOR * e)  
+G_MODULE_EXPORT void
+action_increase_indent_activate_cb (GtkWidget *widget, EDITOR * e)  
 {   
- 		gchar * script = NULL;
-	
-		script = g_strdup ("document.execCommand('Indent', false, false);");
-		editor_execute_script (script, e);
-		editor_insert_new_outline_level (e->toolitems.outline_level, e);		
+    editor_execute_script ("document.execCommand('Indent', false, false);", e);
+    editor_insert_new_outline_level (e->toolitems.outline_level, e);		
 }
 
-void action_decrease_indent_activate_cb (GtkWidget *widget, EDITOR * e)     
+G_MODULE_EXPORT void
+action_decrease_indent_activate_cb (GtkWidget *widget, EDITOR * e)     
 {   
- 		gchar * script = NULL;
-
-		script = g_strdup ("document.execCommand('Outdent', false, false);");
-		editor_execute_script (script, e);
+    editor_execute_script ("document.execCommand('Outdent', false, false);", e);
 }
 
 
-void action_insert_rule_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_insert_rule_activate_cb (GtkWidget *widget, EDITOR * e)
 {
-		gchar * html = NULL;
-		html = g_strdup("<hr>");
-		editor_insert_html (html, e);
-		if (html) g_free(html);
+    editor_insert_html("<hr>", e);
 }
 
-void action_insert_table_activate_cb (GtkWidget *widget,EDITOR * e) 
+G_MODULE_EXPORT void
+action_insert_table_activate_cb (GtkWidget *widget,EDITOR * e) 
 {
 
 }
 
-void action_insert_emoticon_activate_cb (GtkWidget *widget, EDITOR * e) 
+G_MODULE_EXPORT void
+action_insert_emoticon_activate_cb (GtkWidget *widget, EDITOR * e) 
 {
 	//script = g_strdup ("document.execCommand('', null, \"\");");  
 }
 
 
-void action_insert_image_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_insert_image_activate_cb (GtkWidget *widget, EDITOR * e)
 {	
 	gchar * script = NULL; 
 	gchar * filename = NULL;
@@ -174,7 +173,8 @@ void action_insert_image_activate_cb (GtkWidget *widget, EDITOR * e)
 }
 
 
-void action_insert_outline_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_insert_outline_activate_cb (GtkWidget *widget, EDITOR * e)
 {
  		gchar * script = NULL;
 
@@ -184,7 +184,8 @@ void action_insert_outline_activate_cb (GtkWidget *widget, EDITOR * e)
 } 
 
 
-void action_justify_right_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_justify_right_activate_cb (GtkWidget *widget, EDITOR * e)
 {      	
 		gchar * script = NULL;
 
@@ -193,7 +194,8 @@ void action_justify_right_activate_cb (GtkWidget *widget, EDITOR * e)
 
 }
 
-void action_justify_left_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_justify_left_activate_cb (GtkWidget *widget, EDITOR * e)
 {    
 		gchar * script = NULL;
 
@@ -201,7 +203,8 @@ void action_justify_left_activate_cb (GtkWidget *widget, EDITOR * e)
 		editor_execute_script (script, e);
 }
 
-void action_justify_center_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_justify_center_activate_cb (GtkWidget *widget, EDITOR * e)
 {
  		gchar * script = NULL;
 
@@ -209,7 +212,8 @@ void action_justify_center_activate_cb (GtkWidget *widget, EDITOR * e)
 		editor_execute_script (script, e);
 }
 
-void action_justify_full_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_justify_full_activate_cb (GtkWidget *widget, EDITOR * e)
 {
  		gchar * script = NULL;
 
@@ -218,7 +222,8 @@ void action_justify_full_activate_cb (GtkWidget *widget, EDITOR * e)
 
 }
 
-void action_bold_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_bold_activate_cb (GtkWidget *widget, EDITOR * e)
 {
 		gchar * script = NULL;
 		if(buttons_state.nochange)
@@ -228,7 +233,8 @@ void action_bold_activate_cb (GtkWidget *widget, EDITOR * e)
 		editor_execute_script (script, e);
 }
       
-void action_italic_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_italic_activate_cb (GtkWidget *widget, EDITOR * e)
 {
 		//extern BUTTONS_STATE buttons_state;
 		gchar * script = NULL;
@@ -239,7 +245,8 @@ void action_italic_activate_cb (GtkWidget *widget, EDITOR * e)
 		editor_execute_script (script, e);
 }
  
-void action_undo_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_undo_activate_cb (GtkWidget *widget, EDITOR * e)
 {     
 		gchar * script = NULL;
 
@@ -247,7 +254,8 @@ void action_undo_activate_cb (GtkWidget *widget, EDITOR * e)
 		editor_execute_script (script, e);
 }
 
-void action_redo_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_redo_activate_cb (GtkWidget *widget, EDITOR * e)
 {  
 		gchar * script = NULL;
 
@@ -255,7 +263,8 @@ void action_redo_activate_cb (GtkWidget *widget, EDITOR * e)
 		editor_execute_script (script, e);
 }
 
-void action_underline_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_underline_activate_cb (GtkWidget *widget, EDITOR * e)
 {  
 		//extern BUTTONS_STATE buttons_state;
 		gchar * script = NULL;
@@ -266,7 +275,8 @@ void action_underline_activate_cb (GtkWidget *widget, EDITOR * e)
 		editor_execute_script (script, e);
 }
 
-void action_strikethrough_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_strikethrough_activate_cb (GtkWidget *widget, EDITOR * e)
 {    
 		//extern BUTTONS_STATE buttons_state;
 		gchar * script = NULL;
@@ -279,13 +289,15 @@ void action_strikethrough_activate_cb (GtkWidget *widget, EDITOR * e)
 }
 
 
-void action_cut_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_cut_activate_cb (GtkWidget *widget, EDITOR * e)
 {
 		editor_cut(e);
 }
 
     
-void action_copy_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_copy_activate_cb (GtkWidget *widget, EDITOR * e)
 {
 		if(editor_copy(e))
 				XI_message(("%s", "copy sucess"));
@@ -293,17 +305,20 @@ void action_copy_activate_cb (GtkWidget *widget, EDITOR * e)
 				XI_message(("%s", "copy failed"));
 }
 
-void action_paste_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_paste_activate_cb (GtkWidget *widget, EDITOR * e)
 {  
 		editor_paste(e);
 }
 
-void action_delete_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_delete_activate_cb (GtkWidget *widget, EDITOR * e)
 {
 
 }
 
-void action_delete_item_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_delete_item_activate_cb (GtkWidget *widget, EDITOR * e)
 {
 	gchar *buf = NULL;
 	gchar *uri = NULL;
@@ -326,7 +341,14 @@ void action_delete_item_activate_cb (GtkWidget *widget, EDITOR * e)
 		main_delete_note(e->module, e->key);
 						
 		/* open with new empty document */	
-		uri = g_strdup_printf("file://%s/%s",settings.gSwordDir,"studypad.spt");
+#ifdef WIN32
+		uri = g_strdup_printf("http://127.0.0.1:7878%s/%s",
+				      settings.gSwordDir, "studypad.spt");
+#else
+		uri = g_strdup_printf("file://%s/%s",
+				      settings.gSwordDir, "studypad.spt");
+#endif
+XI_message (("delete item activate cb open new empty\n[%s]", uri));
 		webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget), uri); 
 		g_free (uri);		
 	}
@@ -360,7 +382,8 @@ void set_button_state(BUTTONS_STATE state, EDITOR * e)
 }
 
 
-void  colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e )
+G_MODULE_EXPORT void
+colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e )
 {
 #ifdef HAVE_GTK_34
 	GdkRGBA color;
@@ -383,7 +406,8 @@ void  colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e )
 }
 
 
-void  colorbutton_highlight_color_set_cb (GtkColorButton *widget, EDITOR * e )
+G_MODULE_EXPORT void
+colorbutton_highlight_color_set_cb (GtkColorButton *widget, EDITOR * e )
 {
 
 #ifdef HAVE_GTK_34
@@ -426,7 +450,8 @@ gchar *get_font_size_from_name(GString * fontname)
 	return g_strdup(buf);
 }
 
-void action_font_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_font_activate_cb (GtkWidget *widget, EDITOR * e)
 { 
 	GtkWidget * dialog;
     GString *  name;
@@ -475,7 +500,8 @@ void action_font_activate_cb (GtkWidget *widget, EDITOR * e)
 }
 
 
-void find_replace_response_cb (GtkDialog *dialog, gint response_id,
+G_MODULE_EXPORT void
+find_replace_response_cb (GtkDialog *dialog, gint response_id,
                                                   EDITOR * e)
 {
 	switch (response_id) {
@@ -497,14 +523,16 @@ void find_replace_response_cb (GtkDialog *dialog, gint response_id,
 }
 
 
-void action_find_activate_cb (GtkWidget *widget, EDITOR * e)  
+G_MODULE_EXPORT void
+action_find_activate_cb (GtkWidget *widget, EDITOR * e)  
 {
 	gtk_widget_show (find_dialog.window);
 	gtk_widget_hide (find_dialog.box_replace);
 	gtk_widget_hide (find_dialog.button_replace);
 }
 
-void action_replace_activate_cb (GtkWidget *widget, EDITOR * e) 
+G_MODULE_EXPORT void
+action_replace_activate_cb (GtkWidget *widget, EDITOR * e) 
 {
 	gtk_widget_show (find_dialog.window);
 	gtk_widget_show (find_dialog.box_replace);
@@ -520,8 +548,8 @@ handle_error (GError **error)
 	}
 }
 
-static
-void do_exit(EDITOR * e)
+static void
+do_exit(EDITOR * e)
 {
 	if (e->filename) {
 		g_free(e->filename);
@@ -537,8 +565,8 @@ void do_exit(EDITOR * e)
 	g_free(e);
 }
 
-static
-void recent_item_cb (GtkRecentChooser *chooser, EDITOR * e)
+static void
+recent_item_cb (GtkRecentChooser *chooser, EDITOR * e)
 {
 	gchar * file_uri = gtk_recent_chooser_get_current_uri (chooser);
 
@@ -685,108 +713,34 @@ save_dialog (EDITOR * e)
 }
 */
 
-/* Helper for view_source_dialog() */
-/*
-static gboolean
-view_source_dialog_receiver (HTMLEngine *engine,
-                             const gchar *data,
-                             guint length,
-                             GString *string)
-{
-	g_string_append_len (string, data, length);
-
-	return TRUE;
-}
-
-static void
-view_source_dialog (GtkhtmlEditor *editor,
-                    const gchar *title,
-                    const gchar *content_type,
-                    gboolean show_output)
-{
-	GtkWidget *dialog;
-	GtkWidget *content;
-	GtkWidget *scrolled_window;
-	GString *string;
-
-	dialog = gtk_dialog_new_with_buttons (
-		title, GTK_WINDOW (editor),
-		GTK_DIALOG_DESTROY_WITH_PARENT,
-		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-		NULL);
-
-	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (
-		GTK_SCROLLED_WINDOW (scrolled_window),
-		GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (
-		GTK_SCROLLED_WINDOW (scrolled_window), GTK_SHADOW_IN);
-	gtk_box_pack_start (
-		GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))),
-		scrolled_window, TRUE, TRUE, 0);
-
-	gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
-	gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 6);
-	gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
-
-	string = g_string_sized_new (4096);
-
-	gtk_html_export (
-		gtkhtml_editor_get_html (editor),
-		content_type, (GtkHTMLSaveReceiverFn)
-		view_source_dialog_receiver, string);
-
-	if (show_output) {
-		GtkHTMLStream *stream;
-
-		content = gtk_html_new ();
-		stream = gtk_html_begin (GTK_HTML (content));
-		gtk_html_stream_write (stream, string->str, string->len);
-		gtk_html_stream_close (stream, GTK_HTML_STREAM_OK);
-	} else {
-		GtkTextBuffer *buffer;
-
-		content = gtk_text_view_new ();
-		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (content));
-		gtk_text_buffer_set_text (buffer, string->str, string->len);
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (content), FALSE);
-	}
-
-	g_string_free (string, TRUE);
-
-	gtk_container_add (GTK_CONTAINER (scrolled_window), content);
-	gtk_widget_show_all (scrolled_window);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (dialog);
-}
-*/
-void
+G_MODULE_EXPORT void
 action_print_cb (GtkAction *action,
                  EDITOR *e)
 {
 	print ( WEBKIT_WEB_VIEW(e->html_widget), GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG );
 }
 
-void
+G_MODULE_EXPORT void
 action_print_preview_cb (GtkAction *action,
                          EDITOR *e)
 {
 	print (WEBKIT_WEB_VIEW(e->html_widget), GTK_PRINT_OPERATION_ACTION_PREVIEW);
 }
 
-void action_quit_activate_cb (GtkWidget *widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_quit_activate_cb (GtkWidget *widget, EDITOR * e)
 {
 	delete_event (NULL, NULL,e);
 }
 
-void action_open_activate_cb (GtkWidget * widget, EDITOR * e)
+G_MODULE_EXPORT void
+action_open_activate_cb (GtkWidget * widget, EDITOR * e)
 {
 		open_dialog(e); 
 }
 
 
-void
+G_MODULE_EXPORT void
 action_save_activate_cb (GtkWidget * widget, EDITOR *e)
 {
 	switch (e->type) {
@@ -806,7 +760,7 @@ action_save_activate_cb (GtkWidget * widget, EDITOR *e)
 }
 
 
-void
+G_MODULE_EXPORT void
 action_new_activate_cb ( GtkWidget * widget,
             			EDITOR *e)	/* for studypad only */
 {
@@ -815,8 +769,7 @@ action_new_activate_cb ( GtkWidget * widget,
 	if (e->is_changed)
 		ask_about_saving (e);
 
-	filename = g_strdup_printf("%s/%s",settings.gSwordDir,"studypad.spt");
-
+	filename = g_strdup_printf("%s/%s", settings.gSwordDir, "studypad.spt");
 	
 	_load_file(e, filename);
 
@@ -833,20 +786,19 @@ action_new_activate_cb ( GtkWidget * widget,
 }
 
 
-void 
+G_MODULE_EXPORT void 
 action_insert_sword_link_activate_cb (GtkWidget * widget, gpointer data)
 {    
 		editor_link_dialog (data); //editor_insert_sword_link();
 }
 
-void
+G_MODULE_EXPORT void
 action_insert_link_activate_cb (GtkWidget * widget, EDITOR *e)
 {
 	editor_link_dialog (e);
 }
 
-
-void
+G_MODULE_EXPORT void
 action_save_as_activate_cb (GtkWidget * widget, EDITOR *e)
 {	
 	if (e->filename)
@@ -854,97 +806,78 @@ action_save_as_activate_cb (GtkWidget * widget, EDITOR *e)
 	e->filename = NULL;
 	_save_file(e);	
 }
-/*
-static void
-action_view_html_output (GtkAction *action,
-                         GtkhtmlEditor *editor)
-{
-	view_source_dialog (editor, _("HTML Output"), "text/html", TRUE);
-}
 
-static void
-action_view_html_source (GtkAction *action,
-                         GtkhtmlEditor *editor)
+G_MODULE_EXPORT void
+combo_box_changed_cb (GtkComboBox *widget, EDITOR * e)
 {
-	view_source_dialog (editor, _("HTML Source"), "text/html", FALSE);
-}
-
-static void
-action_view_plain_source (GtkAction *action,
-                          GtkhtmlEditor *editor)
-{
-	view_source_dialog (editor, _("Plain Source"), "text/plain", FALSE);
-}
-*/
-
-
-void combo_box_changed_cb (GtkComboBox *widget, EDITOR * e)
-{
-		gchar * script = NULL;
-		gint choice = gtk_combo_box_get_active(widget);
-		/* we need the line of text where the cursor is */
-		//extern BUTTONS_STATE buttons_state;
+    gchar * script = NULL;
+    gint choice = gtk_combo_box_get_active(widget);
+    /* we need the line of text where the cursor is */
+    //extern BUTTONS_STATE buttons_state;
 	
-		if(buttons_state.nochange) return;
+    if (buttons_state.nochange) return;
 	
-		switch (choice) {
-			case 0: /* Normal  */
-				script = g_strdup ("document.execCommand('formatBlock', false, \"div\");");
-				break;
-			case 1: /* H1  */
-				script = g_strdup ("document.execCommand('formatBlock', null, \"H1\");");
-				break;
-			case 2: /* H2 */
-				script = g_strdup ("document.execCommand('formatBlock', null, \"H2\");");
-				break;
-			case 3: /* H3  */
-				script = g_strdup ("document.execCommand('formatBlock', null, \"H3\");");
+    switch (choice) {
+    case 0: /* Normal  */
+	script = "document.execCommand('formatBlock', false, \"div\");";
+	break;
 
-				break;
-			case 4: /* H4  */
-				script = g_strdup ("document.execCommand('formatBlock', null, \"H4\");");
+    case 1: /* H1  */
+	script = "document.execCommand('formatBlock', null, \"H1\");";
+	break;
 
-				break;
-			case 5: /* H5 */
-				script = g_strdup ("document.execCommand('formatBlock', null, \"H5\");");
+    case 2: /* H2 */
+	script = "document.execCommand('formatBlock', null, \"H2\");";
+	break;
 
-				break;
-			case 6: /* H6  */
-				script = g_strdup ("document.execCommand('formatBlock', null, \"H6\");");
+    case 3: /* H3  */
+	script = "document.execCommand('formatBlock', null, \"H3\");";
+	break;
 
-				break;
-			case 7: /* Address  */
-				script = g_strdup ("document.execCommand('formatBlock', null, \"ADDRESS\");");
+    case 4: /* H4  */
+	script = "document.execCommand('formatBlock', null, \"H4\");";
+	break;
 
-				break;
-			case 8: /* Preformatted  */
-				script = g_strdup ("document.execCommand('formatBlock', null, \"PRE\");");
+    case 5: /* H5 */
+	script = "document.execCommand('formatBlock', null, \"H5\");";
+	break;
 
-				break;
-			case 9: /* Bulleted List  insertUnorderedList*/
-				script = g_strdup ("document.execCommand('insertUnorderedList', null, \"\");");
+    case 6: /* H6  */
+	script = "document.execCommand('formatBlock', null, \"H6\");";
+	break;
 
-				break;
-			case 10: /* Roman Numeral List  */
-				script = g_strdup ("document.execCommand('insertHTML', null, \"<OL type=I><LI> </LI></OL> \");");  
-				
-				break;
-			case 11: /* Numbered List  insertOrderedList*/
-				script = g_strdup ("document.execCommand('insertOrderedList', null, \"\");");
+    case 7: /* Address  */
+	script = "document.execCommand('formatBlock', null, \"ADDRESS\");";
+	break;
 
-				break;
-			case 12: /* Alphabetical List  */
-				script = g_strdup ("document.execCommand('insertHTML', null, \"<OL type=A><LI> </LI></OL> \");");  
+    case 8: /* Preformatted  */
+	script = "document.execCommand('formatBlock', null, \"PRE\");";
+	break;
 
-				break;
-			default:
-				return;
-				break;
-		}
-		if (script) {
-				XI_message(("%s",script));
-				editor_execute_script (script, e);
-		}
+    case 9: /* Bulleted List  insertUnorderedList*/
+	script = "document.execCommand('insertUnorderedList', null, \"\");";
+	break;
+
+    case 10: /* Roman Numeral List  */
+	script = "document.execCommand('insertHTML', null, \"<OL type=I><LI> </LI></OL> \");";  
+	break;
+
+    case 11: /* Numbered List  insertOrderedList*/
+	script = "document.execCommand('insertOrderedList', null, \"\");";
+	break;
+
+    case 12: /* Alphabetical List  */
+	script = "document.execCommand('insertHTML', null, \"<OL type=A><LI> </LI></OL> \");";  
+	break;
+
+    default:
+	break;
+    }
+
+    if (script) {
+	XI_message(("%s", script));
+	editor_execute_script(script, e);
+    }
 }
 
 /* need note toolbars when type is note */
@@ -1165,11 +1098,24 @@ _load_file (EDITOR * e, const gchar * filename)
 	    xml_get_value("studypad", "lastfile");
 	
 	change_window_title(e->window, e->filename);
-	if (g_strstr_len (filename,6,"file:")) 
-		uri = g_strdup_printf("%s",filename);
-	else
-		uri = g_strdup_printf("file://%s",filename);
+	if (g_strstr_len (filename,6,"file:")) {
+XI_message (("then case"));
+#ifdef WIN32
+		uri = g_strdup_printf("http://127.0.0.1:7878%s", filename+5);
+#else
+		uri = g_strdup_printf("%s", filename);
+#endif
+	}
+	else {
+XI_message (("else case"));
+#ifdef WIN32
+		uri = g_strdup_printf("http://127.0.0.1:7878%s", filename);
+#else
+		uri = g_strdup_printf("file://%s", filename);
+#endif
+	}
 		
+XI_message (("load file web view load uri [%s]", uri));
 	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget),uri); 
 	
 	g_free (uri);
@@ -1215,7 +1161,14 @@ void editor_load_book(EDITOR * e)
                                          "file://" ); //const gchar          *base_uri);
 	} else {
 		/* open with new empty document */	
-		uri = g_strdup_printf("file://%s/%s",settings.gSwordDir,"studypad.spt");
+#ifdef WIN32
+		uri = g_strdup_printf("http://127.0.0.1:7878%s/%s",
+				      settings.gSwordDir, "studypad.spt");
+#else
+		uri = g_strdup_printf("file://%s/%s",
+				      settings.gSwordDir, "studypad.spt");
+#endif
+XI_message (("editor load BOOK [%s]", uri));
 		webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget), uri); 
 		g_free (uri);			
 	}
@@ -1302,7 +1255,14 @@ editor_load_note(EDITOR * e, const gchar * module_name,
                                                  "file://" ); //const gchar          *base_uri);
 	} else {	
 		/* open with new empty document */	
-		uri = g_strdup_printf("file://%s/%s",settings.gSwordDir,"studypad.spt");
+#ifdef WIN32
+		uri = g_strdup_printf("http://127.0.0.1:7878%s/%s",
+				      settings.gSwordDir, "studypad.spt");
+#else
+		uri = g_strdup_printf("file://%s/%s",
+				      settings.gSwordDir, "studypad.spt");
+#endif
+XI_message (("editor load NOTE [%s]", uri));
 		webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget), uri); 
 		g_free (uri);	
 	}
@@ -1326,14 +1286,13 @@ delete_event (GtkWidget *widget, GdkEvent  *event, EDITOR * e)
 	if (e->is_changed) {
 		switch (ask_about_saving(e)) {
 		case GS_YES:	/* exit saving */
-
 			break;
+
 		case GS_NO:	/* exit without saving */
-
 			break;
+
 		case GS_CANCEL:
 			return TRUE;
-			break;
 		}
 	}
 	editors_all = g_list_remove(editors_all, e);
