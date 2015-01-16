@@ -668,7 +668,7 @@
                     <property name="related_action">action_new</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton1</property>
+                    <property name="label" translatable="yes">New</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-new</property>
                   </object>
@@ -682,7 +682,7 @@
                     <property name="related_action">action_open</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton1</property>
+                    <property name="label" translatable="yes">Open</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-open</property>
                   </object>
@@ -696,7 +696,7 @@
                     <property name="related_action">action_save</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton1</property>
+                    <property name="label" translatable="yes">Save</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-save</property>
                   </object>
@@ -710,7 +710,7 @@
                     <property name="related_action">action_delete_item</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton10</property>
+                    <property name="label" translatable="yes">Delete</property>
                     <property name="use_underline">True</property>
                   </object>
                   <packing>
@@ -733,7 +733,7 @@
                     <property name="related_action">action_undo</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton3</property>
+                    <property name="label" translatable="yes">Undo</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-undo</property>
                   </object>
@@ -747,7 +747,7 @@
                     <property name="related_action">action_redo</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton3</property>
+                    <property name="label" translatable="yes">Redo</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-redo</property>
                   </object>
@@ -771,7 +771,7 @@
                     <property name="related_action">action_cut</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton2</property>
+                    <property name="label" translatable="yes">Cut</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-cut</property>
                   </object>
@@ -785,7 +785,7 @@
                     <property name="related_action">action_copy</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton3</property>
+                    <property name="label" translatable="yes">Copy</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-copy</property>
                   </object>
@@ -799,7 +799,7 @@
                     <property name="related_action">action_paste</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton4</property>
+                    <property name="label" translatable="yes">Paste</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-paste</property>
                   </object>
@@ -823,7 +823,7 @@
                     <property name="related_action">action_find</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton10</property>
+                    <property name="label" translatable="yes">Find</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-find</property>
                   </object>
@@ -837,7 +837,7 @@
                     <property name="related_action">action_replace</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton10</property>
+                    <property name="label" translatable="yes">Replace</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-find-and-replace</property>
                   </object>
@@ -861,7 +861,7 @@
                     <property name="related_action">action_justify_left</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton6</property>
+                    <property name="label" translatable="yes">Left</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-justify-left</property>
                   </object>
@@ -875,7 +875,7 @@
                     <property name="related_action">action_justify_right</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton6</property>
+                    <property name="label" translatable="yes">Right</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-justify-right</property>
                   </object>
@@ -889,7 +889,7 @@
                     <property name="related_action">action_justify_center</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton6</property>
+                    <property name="label" translatable="yes">Center</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-justify-center</property>
                   </object>
@@ -903,7 +903,7 @@
                     <property name="related_action">action_justify_full</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton7</property>
+                    <property name="label" translatable="yes">Full</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-justify-fill</property>
                   </object>
@@ -927,7 +927,7 @@
                     <property name="related_action">action_decrease_indent</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton10</property>
+                    <property name="label" translatable="yes">Decrease</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-unindent</property>
                   </object>
@@ -941,7 +941,7 @@
                     <property name="related_action">action_increase_indent</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton10</property>
+                    <property name="label" translatable="yes">Increase</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-indent</property>
                   </object>
@@ -1018,7 +1018,7 @@
                     <property name="related_action">action_bold</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton10</property>
+                    <property name="label" translatable="yes">Bold</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">format-text-bold</property>
                   </object>
@@ -1032,7 +1032,7 @@
                     <property name="related_action">action_italic</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton10</property>
+                    <property name="label" translatable="yes">Italic</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-italic</property>
                   </object>
@@ -1046,7 +1046,7 @@
                     <property name="related_action">action_underline</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton11</property>
+                    <property name="label" translatable="yes">Underline</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-underline</property>
                   </object>
@@ -1060,7 +1060,7 @@
                     <property name="related_action">action_strikethrough</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton12</property>
+                    <property name="label" translatable="yes">Strike</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-strikethrough</property>
                   </object>
@@ -1084,7 +1084,7 @@
                     <property name="related_action">action_font</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton4</property>
+                    <property name="label" translatable="yes">Font</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-select-font</property>
                   </object>
@@ -1147,7 +1147,7 @@
                     <property name="related_action">action_insert_image</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton6</property>
+                    <property name="label" translatable="yes">Image</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">insert-image</property>
                   </object>
@@ -1161,7 +1161,7 @@
                     <property name="related_action">action_insert_sword_link</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton9</property>
+                    <property name="label" translatable="yes">Link</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">insert-link</property>
                   </object>
@@ -1175,7 +1175,7 @@
                     <property name="related_action">action_insert_rule</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton9</property>
+                    <property name="label" translatable="yes">Rule</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">insert-object</property>
                   </object>
@@ -1189,7 +1189,7 @@
                     <property name="related_action">action_insert_table</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton9</property>
+                    <property name="label" translatable="yes">Table</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">insert-object</property>
                   </object>
@@ -1203,7 +1203,7 @@
                     <property name="related_action">action_insert_emoticon</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">toolbutton9</property>
+                    <property name="label" translatable="yes">Emoticon</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">face-smile</property>
                   </object>
