@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * template.h - data for studypad template (webkit editor)
  *
- *  ** this is only used by settings if studypad.spt does not exist **
+ *  ** this is used by settings only if studypad.spt does not exist **
  * 
  * Copyright (C) 2005-2014 Xiphos Developer Team
  *
@@ -21,52 +21,52 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
 #define studypad_template \
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"> \n \
-<html> \n \
-<head>  \n \
-<title>studypad template</title> \n \
-<meta name=\"generator\" content=\"Studypad\" > \n \
-<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"> \n \
-<meta http-equiv=\"content-type\" content=\"application/xhtml+xml; charset=UTF-8\"> \n \
-<meta http-equiv=\"content-style-type\" content=\"text/css\"> \n \
-<meta http-equiv=\"expires\" content=\"0\"> \n \
-<style content=\"text/css\"> \n \
- a { \n \
-	text-decoration:none;  \n \
- } \n \
- span.M1 {  \n \
- 	font-family:Droid Sans,sans-serif;  \n \
- 	font-size: 14px;  \n \
- 	font-weight: normal;  \n \
- }  \n \
- span.transChangeSupplied  {  \n \
- 	font-style: italic; \n \
- }  \n \
-ol.L1 { \n \
-	list-style-type: upper-roman; \n \
-	font-weight: normal; \n \
-	margin-left: -10px; \n \
-} \n \
-ol.L2 { \n \
-	list-style-type: upper-alpha; \n \
-	font-weight: normal; \n \
-	margin-left: -6px; \n \
-} \n \
-ol.L3 { \n \
-	list-style-type: decimal; \n \
-	font-weight: normal; \n \
-	margin-left: 5px; \n \
-} \n \
-ol.L4 { \n \
-	list-style-type: lower-alpha; \n \
-	font-weight: normal; \n \
-	margin-left: 10px; \n \
-} \n \
-</style> \n \
-</head> \n \
-<body contenteditable=\"true\"> \n \
-\n \
-</body> \n \
-</html>"
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\
+<html>\n\
+<head>\n\
+<title>studypad template</title>\n\
+<meta name=\"generator\" content=\"Studypad\">\n\
+<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\n\
+<meta http-equiv=\"content-type\" content=\"application/xhtml+xml; charset=UTF-8\">\n\
+<meta http-equiv=\"content-style-type\" content=\"text/css\">\n\
+<meta http-equiv=\"expires\" content=\"0\">\n\
+<style content=\"text/css\">\n\
+ a { text-decoration:none; } \n\
+ span.M1 { \n\
+ 	font-family:Droid Sans,sans-serif; \n\
+ 	font-size: 14px; \n\
+ 	font-weight: normal; \n\
+ } \n\
+ span.acrostic             { text-align: center; } \n\
+ span.divineName           { font-variant: small-caps; } \n\
+ span.selah                { text-align: right; width: 50%; margin: 0; padding: 0; } \n\
+ span.small-caps           { font-variant: small-caps; } \n\
+ span.transChangeSupplied  { font-style: italic; } \n\
+ span.wordsOfJesus         { color: red; } \n\
+ol.L1 { \n\
+	list-style-type: upper-roman; \n\
+	font-weight: normal; \n\
+	margin-left: -10px; \n\
+} \n\
+ol.L2 { \n\
+	list-style-type: upper-alpha; \n\
+	font-weight: normal; \n\
+	margin-left: -6px; \n\
+} \n\
+ol.L3 { \n\
+	list-style-type: decimal; \n\
+	font-weight: normal; \n\
+	margin-left: 5px; \n\
+} \n\
+ol.L4 { \n\
+	list-style-type: lower-alpha; \n\
+	font-weight: normal; \n\
+	margin-left: 10px; \n\
+} \n\
+</style>\n\
+</head>\n\
+<body contenteditable=\"true\">\n\
+\n\
+</body>\n\
+</html>\n"
