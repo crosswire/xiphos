@@ -1,3 +1,4 @@
+#define CHATTY 1
 /*
  * Xiphos Bible Study Tool
  * editor.c - webkit stuff
@@ -1152,7 +1153,14 @@ void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 	webkit_web_view_set_settings (WEBKIT_WEB_VIEW(webview), setting);
 
 	/* open with new empty document */	
-	uri = g_strdup_printf("file://%s/%s",settings.gSwordDir,"studypad.spt");
+#ifdef WIN32
+	uri = g_strdup_printf("http://127.0.0.1:7878/%s/%s",
+			      settings.gSwordDir, "studypad.spt");
+#else
+	uri = g_strdup_printf("file://%s/%s",
+			      settings.gSwordDir, "studypad.spt");
+#endif
+XI_message (("create editor window [%s]", uri));
 	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(webview), uri); 
 	g_free (uri);
 	
