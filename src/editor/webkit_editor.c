@@ -320,40 +320,40 @@ action_delete_activate_cb (GtkWidget *widget, EDITOR * e)
 G_MODULE_EXPORT void
 action_delete_item_activate_cb (GtkWidget *widget, EDITOR * e)
 {
-	gchar *buf = NULL;
-	gchar *uri = NULL;
-	
-	if (e->studypad)
-		return;
+    gchar *buf = NULL, *text = NULL, *fname = NULL;
 
-	buf = g_strdup_printf
-	    ("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
-	    _("Are you sure you want to delete the note for") , e->key);
+    if (e->studypad)
+	return;
 
-	if (gui_yes_no_dialog(buf, 
+    buf = g_strdup_printf
+	("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
+	 _("Are you sure you want to delete the note for") , e->key);
+
+    if (gui_yes_no_dialog(buf, 
 #ifdef HAVE_GTK_310 
-	            "dialog-warning"          
+			  "dialog-warning"          
 #else
-	            GTK_STOCK_DIALOG_WARNING
+			  GTK_STOCK_DIALOG_WARNING
 #endif	
-                    )) {
+	    )) {
 		
-		main_delete_note(e->module, e->key);
+	main_delete_note(e->module, e->key);
 						
-		/* open with new empty document */	
-#ifdef WIN32
-		uri = g_strdup_printf("http://127.0.0.1:7878%s/%s",
-				      settings.gSwordDir, "studypad.spt");
-#else
-		uri = g_strdup_printf("file://%s/%s",
-				      settings.gSwordDir, "studypad.spt");
-#endif
-XI_message (("delete item activate cb open new empty\n[%s]", uri));
-		webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget), uri); 
-		g_free (uri);		
+	/* new empty document from template */	
+	fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
+	XI_message(("action delete item [%s]", fname));
+	text = inhale_text_from_file(fname);
+	g_free(fname);
+
+	if (text && strlen(text)) {
+	    webkit_web_view_load_string((WebKitWebView*)e->html_widget,
+					text, "text/html", "utf_8", "file://");
 	}
-	e->is_changed = FALSE;
-	g_free(buf);	
+	if (text) g_free(text);
+    }
+
+    g_free(buf);	
+    e->is_changed = FALSE;
 }
 
 
@@ -897,11 +897,13 @@ GtkWidget* editor_new (const gchar * title, EDITOR * e)
 
 	buttons_state.nochange = 1;
 
+	gbuilder_file = gui_general_user_file(
 #ifdef USE_GTK_3
-	gbuilder_file = gui_general_user_file ("gtk_webedit.ui", FALSE);
+						"gtk_webedit.ui"
 #else
-    gbuilder_file = gui_general_user_file ("gtk2_webedit.ui", FALSE);
+						"gtk2_webedit.ui"
 #endif
+						, FALSE);
 	builder = gtk_builder_new ();   
 	
 	if (!gtk_builder_add_from_file (builder, gbuilder_file, &error))
@@ -1079,108 +1081,82 @@ _save_file (EDITOR * e)
 static void
 _load_file (EDITOR * e, const gchar * filename)
 {
-	char *uri;
-	//gsize length;
-	GtkRecentManager * rm = NULL;
+    char *text = NULL;
+    GtkRecentManager *rm = NULL;
 	
-	rm = gtk_recent_manager_get_default ();
-	gtk_recent_manager_add_item (rm, filename);
+    rm = gtk_recent_manager_get_default();
+    gtk_recent_manager_add_item(rm, filename);
 	
-	if (e->filename)
-		g_free(e->filename);
-	e->filename = g_strdup(filename);
+    if (e->filename)
+	g_free(e->filename);
+    e->filename = g_strdup(filename);
 
-	XI_message(("_load_file filename: %s",filename));
+    XI_message(("_load_file filename: %s",filename));
 
-	xml_set_value("Xiphos", "studypad", "lastfile",
-		      e->filename);
-	settings.studypadfilename =
-	    xml_get_value("studypad", "lastfile");
+    xml_set_value("Xiphos", "studypad", "lastfile", e->filename);
+    settings.studypadfilename = xml_get_value("studypad", "lastfile");
 	
-	change_window_title(e->window, e->filename);
-	if (g_strstr_len (filename,6,"file:")) {
-XI_message (("then case"));
-#ifdef WIN32
-		uri = g_strdup_printf("http://127.0.0.1:7878%s", filename+5);
-#else
-		uri = g_strdup_printf("%s", filename);
-#endif
-	}
-	else {
-XI_message (("else case"));
-#ifdef WIN32
-		uri = g_strdup_printf("http://127.0.0.1:7878%s", filename);
-#else
-		uri = g_strdup_printf("file://%s", filename);
-#endif
-	}
-		
-XI_message (("load file web view load uri [%s]", uri));
-	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget),uri); 
+    change_window_title(e->window, e->filename);
+    text = inhale_text_from_file(!strncmp(filename, "file:", 5)
+				 ? filename+5
+				 : filename);
+
+    XI_message(("load file web view load uri [%s]", text));
+    webkit_web_view_load_string(WEBKIT_WEB_VIEW(e->html_widget),
+				text, "text/html", "utf_8", "file://"); 
 	
-	g_free (uri);
-	e->is_changed =FALSE;
+    g_free(text);
+    e->is_changed =FALSE;
 }
 
 gboolean editor_is_dirty(EDITOR * e)
 {
-	return e->is_changed;
+    return e->is_changed;
 }
 
 
 void editor_save_book(EDITOR * e)
 {
-	if (editor_is_dirty(e)) {
-		_save_book(e);
-	}
+    if (editor_is_dirty(e))
+	_save_book(e);
 }
 
 /* save if needed is done in treeky-editor.c before calling editor_load_book() */
 void editor_load_book(EDITOR * e)
 {
-	gchar *title = NULL;
-	gchar *text = NULL;
-	gchar *uri = NULL;
+    gchar *title = NULL, *text = NULL, *fname = NULL;
 
-	if (!g_ascii_isdigit(e->key[0])) return; /* make sure is a number (offset) */
+    if (!g_ascii_isdigit(e->key[0])) return; /* make sure is a number (offset) */
 
+    XI_message (("book: %s\noffset :%s", e->module, e->key));
 
-	title = g_strdup_printf("%s", e->module);
-	XI_message (("book: %s\noffset :%s", e->module, e->key));
+    if (atol(e->key) != 0)
+	text = main_get_book_raw_text (e->module, e->key);
+    else
+	text = g_strdup(e->module);
 
-	if (atol(e->key) != 0)
-		text = main_get_book_raw_text (e->module, e->key);
-	else
-		text = g_strdup(e->module);
+    if ((text == NULL) || strlen(text) == 0) {
+	if (text) g_free(text);
 
-	if (strlen(text)) {
-		webkit_web_view_load_string ((WebKitWebView*)e->html_widget,
-                                         text, //const gchar          *content,
-                                         "text/html", //const gchar          *mime_type,
-                                         "utf_8", //const gchar          *encoding,
-                                         "file://" ); //const gchar          *base_uri);
-	} else {
-		/* open with new empty document */	
-#ifdef WIN32
-		uri = g_strdup_printf("http://127.0.0.1:7878%s/%s",
-				      settings.gSwordDir, "studypad.spt");
-#else
-		uri = g_strdup_printf("file://%s/%s",
-				      settings.gSwordDir, "studypad.spt");
-#endif
-XI_message (("editor load BOOK [%s]", uri));
-		webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget), uri); 
-		g_free (uri);			
-	}
+	/* new empty document from template */	
+	fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
+	XI_message (("editor load BOOK [%s]", fname));
+	text = inhale_text_from_file(fname);
+	g_free(fname);
+    }
 
+    if (text && strlen(text)) {
+	webkit_web_view_load_string((WebKitWebView*)e->html_widget,
+				    text, "text/html", "utf_8", "file://");
+    }
 
-	change_window_title(e->window, title);
-	e->is_changed = FALSE;
+    if (text) g_free(text);
 
-	if (text)
-		g_free(text);
-	if (title)
-		g_free(title);
+    title = g_strdup_printf("%s", e->module);
+    change_window_title(e->window, title);
+    g_free(title);
+
+    e->is_changed = FALSE;
 }
 
 /******************************************************************************
@@ -1225,62 +1201,52 @@ void
 editor_load_note(EDITOR * e, const gchar * module_name,
 		 const gchar * key)
 {
-	gchar *title = NULL;
-	gchar *text = NULL;
-	gchar *uri = NULL;
+    gchar *title = NULL, *text = NULL, *fname = NULL;
 
+    if (e->is_changed)
+	_save_note(e);
 
-	if (e->is_changed)
-		_save_note (e);
+    if (module_name) {
+	if (e->module) g_free(e->module);
+	e->module = g_strdup(module_name);
+    }
+    if (key) {
+	if (e->key) g_free(e->key);
+	e->key = g_strdup(key);
+    }
 
-	if (module_name) {
-		if (e->module)
-			g_free(e->module);
-		e->module = g_strdup(module_name);
-	}
-	if (key) {
-		if (e->key)
-			g_free(e->key);
-		e->key = g_strdup(key);
-	}
+    text = main_get_raw_text((gchar *) e->module, (gchar *) e->key);
 
+    if ((text == NULL) || strlen(text) == 0) {
+	if (text) g_free(text);
 
-	title = g_strdup_printf("%s - %s", e->module, e->key);
-	text = main_get_raw_text((gchar *) e->module, (gchar *) e->key);
-	if (strlen(text)) {
-		webkit_web_view_load_string  ((WebKitWebView*)e->html_widget,
-                                                 text, //const gchar          *content,
-                                                 "text/html", //const gchar          *mime_type,
-                                                 "utf_8", //const gchar          *encoding,
-                                                 "file://" ); //const gchar          *base_uri);
-	} else {	
-		/* open with new empty document */	
-#ifdef WIN32
-		uri = g_strdup_printf("http://127.0.0.1:7878%s/%s",
-				      settings.gSwordDir, "studypad.spt");
-#else
-		uri = g_strdup_printf("file://%s/%s",
-				      settings.gSwordDir, "studypad.spt");
-#endif
-XI_message (("editor load NOTE [%s]", uri));
-		webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget), uri); 
-		g_free (uri);	
-	}
-	e->is_changed = FALSE;
-	change_window_title(e->window, title);
-	if (e->type == NOTE_EDITOR) {
-		e->navbar.valid_key = TRUE;
-		main_navbar_versekey_set(e->navbar, e->key);
-	}
+	/* new empty document from template */	
+	fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
+	XI_message (("editor load NOTE [%s]", fname));
+	text = inhale_text_from_file(fname);
+	g_free(fname);
+    }
 
-	if (text)
-		g_free(text);
-	if (title)
-		g_free(title);
+    if (text && strlen(text)) {
+	webkit_web_view_load_string((WebKitWebView*)e->html_widget,
+				    text, "text/html", "utf_8", "file://");
+    }
+
+    e->is_changed = FALSE;
+    if (e->type == NOTE_EDITOR) {
+	e->navbar.valid_key = TRUE;
+	main_navbar_versekey_set(e->navbar, e->key);
+    }
+
+    if (text) g_free(text);
+
+    title = g_strdup_printf("%s - %s", e->module, e->key);
+    change_window_title(e->window, title);
+    g_free(title);
 }
 
 
-int
+G_MODULE_EXPORT int
 delete_event (GtkWidget *widget, GdkEvent  *event, EDITOR * e)
 {
 	if (e->is_changed) {
