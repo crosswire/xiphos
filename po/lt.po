@@ -9,106 +9,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 07:30-0400\n"
+"POT-Creation-Date: 2015-01-18 09:35-0500\n"
 "PO-Revision-Date: 2014-12-21 14:43-0500\n"
 "Last-Translator: Moo <EMAIL@ADDRESS>\n"
 "Language-Team: Lithuanian <>\n"
+"Language: Lithuanian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
-"Language: Lithuanian\n"
 
-#: ../src/biblesync/biblesync.cc:129
-msgid "network setup errors."
-msgstr "tinklo nustatymo klaidos."
-
-#: ../src/biblesync/biblesync.cc:175
-msgid " client socket"
-msgstr "kliento jungtis"
-
-#: ../src/biblesync/biblesync.cc:225
-msgid " server socket"
-msgstr "serverio jungtis"
-
-#: ../src/biblesync/biblesync.cc:370
-msgid "bad magic"
-msgstr "bloga magija"
-
-#: ../src/biblesync/biblesync.cc:373
-msgid "bad protocol version"
-msgstr "bloga protokolo versija"
-
-#: ../src/biblesync/biblesync.cc:378
-msgid "bad msg type"
-msgstr "blogas msg tipas"
-
-#: ../src/biblesync/biblesync.cc:381
-msgid "bad packet count"
-msgstr "blogas duomenų paketo skaičiavimas"
-
-#: ../src/biblesync/biblesync.cc:384
-msgid "bad packet index"
-msgstr "blogas duomenų paketo indeksas"
-
-#: ../src/biblesync/biblesync.cc:427
-msgid "bad body format"
-msgstr "blogas laiško teksto formatas"
-
-#: ../src/biblesync/biblesync.cc:441
-msgid "missing required header "
-msgstr "trūksta reikiamos antraštės"
-
-#: ../src/biblesync/biblesync.cc:466
-msgid "UUID spoofed: wrong ipaddr."
-msgstr "UUID apsimeta kitu: neteisingas ipaddr."
-
-#: ../src/biblesync/biblesync.cc:493
-msgid "Ignoring echo."
-msgstr "Aidas ignoruojamas."
-
-#: ../src/biblesync/biblesync.cc:522
-msgid "Domain not 'BIBLE-VERSE': "
-msgstr "Domenas ne 'BIBLE-VERSE':"
-
-#: ../src/biblesync/biblesync.cc:530
-msgid "Invalid group: "
-msgstr "Neteisinga grupė:"
-
-#: ../src/biblesync/biblesync.cc:560
-msgid " present at "
-msgstr ""
-
-#: ../src/biblesync/biblesync.cc:562
-msgid " using "
-msgstr ""
-
-#: ../src/biblesync/biblesync.cc:685
-msgid "[no dump ready]"
-msgstr "[nėra paruoštos atminties išklotinės]"
-
-#: ../src/biblesync/biblesync.cc:692
-msgid "select < 0"
-msgstr "select < 0"
-
-#: ../src/biblesync/biblesync.cc:702
-msgid "recvfrom < 0"
-msgstr "recvfrom < 0"
-
-#: ../src/biblesync/biblesync.cc:791
-msgid "Transmit failed.\n"
-msgstr "Perdavimas nepavyko.\n"
-
-#: ../src/biblesync/biblesync.cc:792
-msgid ""
-"Unable to multicast; BibleSync is now disabled. If your network connection "
-"changed while this program was active, it may be sufficient to re-enable."
-msgstr ""
-"Nepavyko daugiaabonentis transliavimas; BibleSync dabar yra išjungtas. "
-"Jeigu, kol ši programa buvo įjungta, pasikeitė jūsų tinklo ryšys, gali "
-"užtekti tik įjungti iš naujo."
-
-#: ../src/backend/sword_main.cc:740
+#: ../src/backend/sword_main.cc:802
 msgid ""
 "Xiphos failure: \"can't happen\", display_mod: null\n"
 "Please report this. sword_main.cc:set_treekey\n"
@@ -118,199 +29,184 @@ msgstr ""
 "Prašome pranešti tai. sword_main.cc:set_treekey\n"
 "Ką jūs darėte, kai visa tai atsirado?"
 
-#: ../src/backend/sword_main.cc:1091
+#: ../src/backend/sword_main.cc:1165
 msgid "Configuration not found"
 msgstr "Sąranka nerasta"
 
-#: ../src/editor/slib-editor.c:224
-#, c-format
-msgid "Page %d of %d"
-msgstr "Puslapis %d iš %d"
-
-#: ../src/editor/slib-editor.c:393 ../src/editor/webkit_editor.c:585
-#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
-#: ../ui/gtk_webedit.ui.h:58
-msgid "Open"
-msgstr "Atidaryti"
-
-#: ../src/editor/slib-editor.c:435
-msgid "Save As"
-msgstr "Išsaugoti Kaip"
-
-#: ../src/editor/slib-editor.c:453 ../src/editor/slib-editor.c:619
-#: ../src/editor/webkit_editor.c:806
-msgid "Untitled document"
-msgstr "Dokumentas be pavadinimo"
-
-#: ../src/editor/slib-editor.c:644 ../src/editor/webkit_editor.c:310
+#: ../src/editor/webkit_editor.c:330
 msgid "Are you sure you want to delete the note for"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:687
-msgid "HTML Output"
-msgstr "HTML Išvestis"
+#: ../src/editor/webkit_editor.c:626 ../ui/editor_studypad.xml.h:9
+#: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
+msgid "Open"
+msgstr "Atidaryti"
 
-#: ../src/editor/slib-editor.c:694
-msgid "HTML Source"
-msgstr "HTML Šaltinis"
+#: ../src/editor/webkit_editor.c:778
+msgid "Untitled document"
+msgstr "Dokumentas be pavadinimo"
 
-#: ../src/editor/slib-editor.c:701
-msgid "Plain Source"
-msgstr "Paprastas Šaltinis"
-
-#: ../src/editor/slib-editor.c:711 ../ui/editor_note.xml.h:13
-#: ../ui/editor_studypad.xml.h:19
-msgid "_Print..."
-msgstr "S_pausdinti..."
-
-#: ../src/editor/slib-editor.c:718 ../ui/editor_note.xml.h:12
-#: ../ui/editor_studypad.xml.h:18
-msgid "Print Pre_view"
-msgstr "Spaudinio Pe_ržiūra"
-
-#: ../src/editor/slib-editor.c:725
-msgid "_Quit"
-msgstr "_Išeiti"
-
-#: ../src/editor/slib-editor.c:732
-msgid "_Open"
-msgstr "_Atidaryti"
-
-#: ../src/editor/slib-editor.c:739
-msgid "_Save"
-msgstr "Iš_saugoti"
-
-#: ../src/editor/slib-editor.c:746
-msgid "Save _As..."
-msgstr "Išsaugoti _Kaip..."
-
-#: ../src/editor/slib-editor.c:752 ../ui/gtk2_webedit.ui.h:56
-#: ../ui/gtk_webedit.ui.h:56
-msgid "New"
-msgstr "Naujas"
-
-#: ../src/editor/slib-editor.c:754
-msgid "Open new document"
-msgstr "Atidaryti naują dokumentą"
-
-#: ../src/editor/slib-editor.c:758 ../ui/gtk2_webedit.ui.h:14
-#: ../ui/gtk_webedit.ui.h:14
-msgid "Delete"
-msgstr "Ištrinti"
-
-#: ../src/editor/slib-editor.c:760
-msgid "Delete current note"
-msgstr "Ištrinti esamą užrašą"
-
-#: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:9
-#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
-#: ../ui/gtk_webedit.ui.h:86 ../ui/xi-menus.glade.h:1
-#: ../ui/xi-menus.gtkbuilder.h:1
-msgid "_File"
-msgstr "_Failas"
-
-#: ../src/editor/slib-editor.c:820
-msgid "HTML _Output"
-msgstr "HTML Išv_estis"
-
-#: ../src/editor/slib-editor.c:827
-msgid "_HTML Source"
-msgstr "_HTML Šaltinis"
-
-#: ../src/editor/slib-editor.c:834
-msgid "_Plain Source"
-msgstr "_Paprastas Šaltinis"
-
-#: ../src/editor/slib-editor.c:841 ../ui/gtk2_webedit.ui.h:89
-#: ../ui/gtk_webedit.ui.h:89 ../ui/xi-menus.glade.h:17
-#: ../ui/xi-menus.gtkbuilder.h:11
-msgid "_View"
-msgstr "_Rodinys"
-
-#: ../src/editor/slib-editor.c:852 ../ui/editor_note.xml.h:16
-#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
-#: ../ui/gtk_webedit.ui.h:75
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
-#: ../ui/editor_link_dialog.xml.h:1
-msgid "Insert Link"
-msgstr "Įterpti Nuorodą"
-
-#: ../src/editor/slib-editor.c:1254 ../src/editor/slib-editor.c:1292
-#: ../src/editor/webkit_editor.c:1336 ../src/editor/webkit_editor.c:1374
+#: ../src/editor/webkit_editor.c:1292 ../src/editor/webkit_editor.c:1335
 msgid "Save the changes to document"
 msgstr "Išsaugoti dokumento pakeitimus"
 
-#: ../src/editor/slib-editor.c:1255 ../src/editor/slib-editor.c:1293
-#: ../src/editor/webkit_editor.c:1337 ../src/editor/webkit_editor.c:1375
+#: ../src/editor/webkit_editor.c:1293 ../src/editor/webkit_editor.c:1336
 msgid "before closing?"
 msgstr "prieš uždarant?"
 
-#: ../src/editor/slib-editor.c:1262 ../src/editor/slib-editor.c:1300
-#: ../src/editor/webkit_editor.c:1344 ../src/editor/webkit_editor.c:1382
+#: ../src/editor/webkit_editor.c:1300 ../src/editor/webkit_editor.c:1343
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Jeigu neišsaugosite, pakeitimai bus negrįžtamai prarasti."
 
-#: ../src/editor/slib-editor.c:1291 ../src/editor/webkit_editor.c:1373
-#: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:38
+#: ../src/editor/webkit_editor.c:1334 ../ui/xi-menus.glade.h:59
+#: ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "File"
 msgstr "Failas"
 
-#: ../src/editor/slib-editor.c:1348 ../src/editor/webkit_editor.c:1423
+#: ../src/editor/webkit_editor.c:1384
 msgid "StudyPad"
 msgstr "StudyPad"
 
-#: ../src/editor/slib-editor.c:1363 ../src/editor/webkit_editor.c:1438
+#: ../src/editor/webkit_editor.c:1399
 msgid "Note Editor"
 msgstr "Užrašų Redaktorius"
 
-#: ../src/editor/slib-editor.c:1379 ../src/editor/webkit_editor.c:1453
+#: ../src/editor/webkit_editor.c:1414
 msgid "Prayer List/Journal Editor"
 msgstr "Maldos sąrašo/Žurnalo Redaktorius"
 
-#: ../src/gecko/gecko-html.cpp:177
-msgid "Unlock "
-msgstr "Atrakinti"
-
-#: ../src/gecko/gecko-print.c:172
-msgid "Preparing to print"
-msgstr "Ruošiamasi spausdinti"
-
-#: ../src/gecko/gecko-print.c:266
-msgid "Printing is not supported on this printer"
-msgstr "Spausdinimas šiuo spausdintuvu nepalaikomas"
-
-#: ../src/gecko/gecko-print.c:269
-#, c-format
-msgid "Printer %s does not support PostScript printing."
-msgstr "Spausdintuvas %s nepalaiko PostScript spausdinimo."
-
-#: ../src/gecko/gecko-print.c:342 ../src/gecko/gecko-print.c:370
-msgid "Printing"
-msgstr "Spausdinama"
-
-#: ../src/gecko/gecko-print.c:372
-msgid "Waiting to print"
-msgstr "Laukiama spausdinti"
-
-#: ../src/gecko/gecko-print.c:584
-msgid "An error occurred while printing"
-msgstr "Spausdinant, įvyko klaida"
-
-#: ../src/gecko/gecko-print.c:588
-#, c-format
-msgid "It was not possible to print your document: %s"
-msgstr "Neįmanoma atspausdinti jūsų dokumento: %s"
-
-#: ../src/gnome2/about_modules.c:143
+#: ../src/gnome2/about_modules.c:148
 msgid "About Sword Module"
 msgstr "Apie Sword Modulį"
 
-#: ../src/gnome2/about_modules.c:347 ../src/gnome2/mod_mgr.c:322
-msgid "The module has no About information."
-msgstr "Šis modulis neturi Apie informacijos."
+#: ../src/gnome2/about_modules.c:403
+#, fuzzy
+msgid "<b>Module name:</b> "
+msgstr "<b>Modulių Tvarkytuvė</b>"
+
+#: ../src/gnome2/about_modules.c:407
+#, fuzzy
+msgid "<b>Version:</b> "
+msgstr "<b>Parinktys</b>"
+
+#: ../src/gnome2/about_modules.c:411
+msgid "No version stamp found"
+msgstr ""
+
+#: ../src/gnome2/about_modules.c:415
+#, fuzzy
+msgid "<b>Module abbreviation:</b> "
+msgstr "<b>Modulių Sąrašai</b>"
+
+#: ../src/gnome2/about_modules.c:420
+#, fuzzy
+msgid "<b>Language:</b> "
+msgstr "<b>Ribos</b>"
+
+#: ../src/gnome2/about_modules.c:423
+msgid "Not specified"
+msgstr ""
+
+#: ../src/gnome2/about_modules.c:432
+#, fuzzy
+msgid "<b>Installed size:</b> "
+msgstr "<b>Diegimo Šaltinis</b>"
+
+#: ../src/gnome2/about_modules.c:438
+#, fuzzy
+msgid "<b>Companion module(s):</b></br>"
+msgstr "<b>Pagrindinio Lango Moduliai</b>"
+
+#: ../src/gnome2/about_modules.c:448
+#, fuzzy
+msgid "<b>Features:</b>"
+msgstr "<b>Formatas</b>"
+
+#: ../src/gnome2/about_modules.c:452
+#, fuzzy
+msgid "*&nbsp;Headings"
+msgstr "Antraštės"
+
+#: ../src/gnome2/about_modules.c:459
+#, fuzzy
+msgid "*&nbsp;Footnotes"
+msgstr "Išnašos"
+
+#: ../src/gnome2/about_modules.c:465
+#, fuzzy
+msgid "*&nbsp;Cross references"
+msgstr "Kryžminės nuorodos"
+
+#: ../src/gnome2/about_modules.c:472
+#, fuzzy
+msgid "*&nbsp;Strong's numbers"
+msgstr "Strongo Numeriai"
+
+#: ../src/gnome2/about_modules.c:479
+#, fuzzy
+msgid "*&nbsp;Morphological tags"
+msgstr "Morfologinės Žymės"
+
+#: ../src/gnome2/about_modules.c:485
+#, fuzzy
+msgid "*&nbsp;Lemmas"
+msgstr "Lemos"
+
+#: ../src/gnome2/about_modules.c:491
+#, fuzzy
+msgid "*&nbsp;Words of Christ in red"
+msgstr "Kristaus Žodžiai Raudona spalva"
+
+#: ../src/gnome2/about_modules.c:496
+#, fuzzy
+msgid "*&nbsp;Greek accents"
+msgstr "Graikų kirčiai"
+
+#: ../src/gnome2/about_modules.c:501
+#, fuzzy
+msgid "*&nbsp;Hebrew Vowel Points"
+msgstr "Hebrajų Balsių Taškai"
+
+#: ../src/gnome2/about_modules.c:506
+#, fuzzy
+msgid "*&nbsp;Hebrew Cantillation"
+msgstr "Hebrajų Kantiliacija"
+
+#: ../src/gnome2/about_modules.c:512
+msgid "*&nbsp;Variant readings"
+msgstr ""
+
+#: ../src/gnome2/about_modules.c:517
+#, fuzzy
+msgid "*&nbsp;Transliteration forms"
+msgstr "Transliteracija"
+
+#: ../src/gnome2/about_modules.c:522
+msgid "*&nbsp;Enumerations"
+msgstr ""
+
+#: ../src/gnome2/about_modules.c:528
+msgid "*&nbsp;Glosses"
+msgstr ""
+
+#: ../src/gnome2/about_modules.c:533
+#, fuzzy
+msgid "*&nbsp;Morpheme Segmentation"
+msgstr "Morfemų Segmentavimas"
+
+#: ../src/gnome2/about_modules.c:538
+msgid "*&nbsp;<i>No features found</i>"
+msgstr ""
+
+#: ../src/gnome2/about_modules.c:546
+#, fuzzy
+msgid "<b>Distribution license:</b>"
+msgstr "<b>Požymis</b>"
+
+#: ../src/gnome2/about_modules.c:559
+#, fuzzy
+msgid "<b>Promotional:</b> "
+msgstr "<b>Parinktys</b>"
 
 #: ../src/gnome2/about_sword.c:81
 msgid ""
@@ -369,8 +265,8 @@ msgid "Copyright © 2000-2014 Xiphos Development Team"
 msgstr "Autorinės Teisės © 2000-2014 Xiphos Kūrėjų Komanda"
 
 #: ../src/gnome2/about_xiphos.c:125
+#, fuzzy
 msgid ""
-"(formerly known as GnomeSword)\n"
 "\n"
 "Powered by The SWORD Project.\n"
 "We would like to thank Troy Griffitts and all the other folks who have given "
@@ -383,24 +279,24 @@ msgstr ""
 "padovanojo mums The SWORD Projektą."
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:369
-#: ../src/gnome2/bookmarks_menu.c:664 ../src/gnome2/bookmarks_menu.c:763
-#: ../src/gnome2/bookmarks_treeview.c:130 ../ui/editor_studypad.xml.h:15
+#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:374
+#: ../src/gnome2/bookmarks_menu.c:674 ../src/gnome2/bookmarks_menu.c:773
+#: ../src/gnome2/bookmarks_treeview.c:135 ../ui/editor_studypad.xml.h:15
 #: ../ui/xi-menus.glade.h:56 ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "Bookmark"
 msgstr "Įtraukti į adresyną"
 
-#: ../src/gnome2/bookmark_dialog.c:177 ../src/gnome2/bookmarks_menu.c:765
-#: ../src/gnome2/bookmarks_treeview.c:131
+#: ../src/gnome2/bookmark_dialog.c:177 ../src/gnome2/bookmarks_menu.c:775
+#: ../src/gnome2/bookmarks_treeview.c:136
 msgid "Enter Folder Name"
 msgstr "Įveskite Aplanko Pavadinimą"
 
-#: ../src/gnome2/bookmark_dialog.c:179 ../src/gnome2/bookmarks_menu.c:767
+#: ../src/gnome2/bookmark_dialog.c:179 ../src/gnome2/bookmarks_menu.c:777
 msgid "Folder Name"
 msgstr "Aplanko Pavadinimas"
 
-#: ../src/gnome2/bookmark_dialog.c:180 ../src/gnome2/bookmarks_menu.c:768
-#: ../src/gnome2/bookmarks_treeview.c:133
+#: ../src/gnome2/bookmark_dialog.c:180 ../src/gnome2/bookmarks_menu.c:778
+#: ../src/gnome2/bookmarks_treeview.c:138
 msgid "Folder: "
 msgstr "Aplankas:"
 
@@ -408,44 +304,44 @@ msgstr "Aplankas:"
 msgid "Specify bookmarks file"
 msgstr "Nurodykite adresyno failą"
 
-#: ../src/gnome2/bookmarks_menu.c:355 ../ui/xi-menus.glade.h:61
+#: ../src/gnome2/bookmarks_menu.c:360 ../ui/xi-menus.glade.h:61
 #: ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Edit"
 msgstr "Redaguoti"
 
-#: ../src/gnome2/bookmarks_menu.c:372
+#: ../src/gnome2/bookmarks_menu.c:377
 msgid "Folder name: "
 msgstr "Aplanko pavadinimas:"
 
-#: ../src/gnome2/bookmarks_menu.c:375
+#: ../src/gnome2/bookmarks_menu.c:380
 msgid "Bookmark name: "
 msgstr "Adresyno įrašo pavadinimas:"
 
-#: ../src/gnome2/bookmarks_menu.c:378 ../src/gnome2/bookmarks_menu.c:672
+#: ../src/gnome2/bookmarks_menu.c:383 ../src/gnome2/bookmarks_menu.c:682
 msgid "Verse: "
 msgstr "Eilutė:"
 
-#: ../src/gnome2/bookmarks_menu.c:379 ../src/gnome2/bookmarks_menu.c:673
+#: ../src/gnome2/bookmarks_menu.c:384 ../src/gnome2/bookmarks_menu.c:683
 msgid "Module: "
 msgstr "Modulis:"
 
-#: ../src/gnome2/bookmarks_menu.c:501
+#: ../src/gnome2/bookmarks_menu.c:506
 msgid "Remove the selected folder"
 msgstr "Šalinti pasirinktą aplanką"
 
-#: ../src/gnome2/bookmarks_menu.c:503
+#: ../src/gnome2/bookmarks_menu.c:508
 msgid "(and all its contents)?"
 msgstr "(ir visą jo turinį)?"
 
-#: ../src/gnome2/bookmarks_menu.c:506
+#: ../src/gnome2/bookmarks_menu.c:511
 msgid "Remove the selected bookmark"
 msgstr "Ištrinti pasirinktą adresyno įrašą"
 
-#: ../src/gnome2/bookmarks_menu.c:665
+#: ../src/gnome2/bookmarks_menu.c:675
 msgid "Add"
 msgstr "Pridėti"
 
-#: ../src/gnome2/bookmarks_menu.c:671
+#: ../src/gnome2/bookmarks_menu.c:681
 msgid "Label: "
 msgstr "Etiketė:"
 
@@ -455,7 +351,7 @@ msgstr "Etiketė:"
 msgid "Search result: %s"
 msgstr "Paieškos rezultatas: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:754
+#: ../src/gnome2/bookmarks_treeview.c:772
 msgid ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
@@ -463,38 +359,38 @@ msgstr ""
 "Kelių nuorodų adresyno įrašo atidarymas\n"
 "atskirose kortelėse nėra palaikomas."
 
-#: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1493
-#: ../src/gnome2/sidebar.c:1526
+#: ../src/gnome2/bookmarks_treeview.c:867 ../src/gnome2/sidebar.c:1515
+#: ../src/gnome2/sidebar.c:1548
 msgid "Bookmarks"
 msgstr "Adresynas"
 
-#: ../src/gnome2/cipher_key_dialog.c:60
+#: ../src/gnome2/cipher_key_dialog.c:64
 #, c-format
 msgid "Cipher key for module %s"
 msgstr "Šifro raktas moduliui %s"
 
-#: ../src/gnome2/cipher_key_dialog.c:61
+#: ../src/gnome2/cipher_key_dialog.c:65
 msgid "for:"
 msgstr ""
 
-#: ../src/gnome2/cipher_key_dialog.c:64
+#: ../src/gnome2/cipher_key_dialog.c:68
 msgid "Enter Key: "
 msgstr "Įveskite Raktą:"
 
-#: ../src/gnome2/dialog.c:262
+#: ../src/gnome2/dialog.c:291
 msgid "Close without Saving"
 msgstr "Uždaryti ir neišsaugoti"
 
-#: ../src/gnome2/dialog.c:679
+#: ../src/gnome2/dialog.c:736
 msgid "Xiphos:"
 msgstr "Xiphos:"
 
-#: ../src/gnome2/dialog.c:781
+#: ../src/gnome2/dialog.c:872
 msgid "Close _without Saving"
 msgstr "_Uždaryti ir neišsaugoti"
 
 #: ../src/gnome2/export_bookmarks.c:197 ../src/gnome2/export_bookmarks.c:256
-#: ../src/gnome2/sidebar.c:1505 ../src/gnome2/sidebar.c:1542
+#: ../src/gnome2/sidebar.c:1527 ../src/gnome2/sidebar.c:1564
 #, c-format
 msgid "Verse List"
 msgstr "Eilučių Sąrašas"
@@ -507,25 +403,25 @@ msgstr "EilučiųSąrašas"
 msgid "SearchResults"
 msgstr "PaieškosRezultatai"
 
-#: ../src/gnome2/export_dialog.c:319 ../ui/export-dialog.glade.h:4
+#: ../src/gnome2/export_dialog.c:324 ../ui/export-dialog.glade.h:4
 #: ../ui/export-dialog.gtkbuilder.h:4
 msgid "Please check copyright before exporting!"
 msgstr "Prašome prieš eksportuojant, patikrinti autorines teises!"
 
-#: ../src/gnome2/find_dialog.c:186 ../src/gnome2/find_dialog.c:344
+#: ../src/gnome2/find_dialog.c:188 ../src/gnome2/find_dialog.c:367
 #: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
 msgid "Find"
 msgstr "Rasti"
 
-#: ../src/gnome2/find_dialog.c:205
+#: ../src/gnome2/find_dialog.c:207
 msgid "Enter Word or Phrase"
 msgstr "Įveskite Žodį ar Frazę"
 
-#: ../src/gnome2/find_dialog.c:220
+#: ../src/gnome2/find_dialog.c:222
 msgid "Search backwards"
 msgstr "Ieškoti atvirkštine tvarka"
 
-#: ../src/gnome2/find_dialog.c:266
+#: ../src/gnome2/find_dialog.c:283
 msgid "Find Next"
 msgstr "Rasti Kitą"
 
@@ -533,24 +429,24 @@ msgstr "Rasti Kitą"
 msgid "Set Module Font"
 msgstr "Nustatyti Modulio Šriftą"
 
-#: ../src/gnome2/font_dialog.c:332
+#: ../src/gnome2/font_dialog.c:338
 msgid "Change font for"
 msgstr "Pakeisti šriftą moduliui"
 
-#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
+#: ../src/gnome2/font_dialog.c:342 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Modulis"
 
-#: ../src/gnome2/font_dialog.c:340
+#: ../src/gnome2/font_dialog.c:346
 msgid "Current font: "
 msgstr "Dabartinis šriftas:"
 
-#: ../src/gnome2/font_dialog.c:372 ../src/gnome2/font_dialog.c:388
+#: ../src/gnome2/font_dialog.c:378 ../src/gnome2/font_dialog.c:394
 #: ../ui/prefs.gtkbuilder.h:3
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:392
+#: ../src/gnome2/font_dialog.c:398
 msgid "Use the default font for this module"
 msgstr "Šiam moduliui naudoti numatytąjį šriftą"
 
@@ -566,51 +462,51 @@ msgstr ""
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "KLAIDA! Xiphos tuoj užstrigs dėl \"STRING\" klaidos."
 
-#: ../src/gnome2/main_window.c:570
+#: ../src/gnome2/main_window.c:596
 #, c-format
 msgid "Module has no support for %s."
 msgstr "Modulis nepalaiko %s."
 
-#: ../src/gnome2/main_window.c:640
+#: ../src/gnome2/main_window.c:666
 msgid "Xiphos: No windows."
 msgstr "Xiphos: Nėra langų."
 
-#: ../src/gnome2/main_window.c:696
+#: ../src/gnome2/main_window.c:722
 msgid "BibleSync: Current navigation sent."
 msgstr "BibleSync: Dabartinis naršymas išsiųstas."
 
-#: ../src/gnome2/main_window.c:700
+#: ../src/gnome2/main_window.c:726
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: Nekalba."
 
-#: ../src/gnome2/main_window.c:884
+#: ../src/gnome2/main_window.c:910
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Biblijos Studijavimo Programinė Įranga"
 
-#: ../src/gnome2/main_window.c:940
+#: ../src/gnome2/main_window.c:973
 msgid "Open a new tab"
 msgstr "Atverti naujoje kortelėje"
 
-#: ../src/gnome2/main_window.c:1020 ../src/gnome2/sidebar.c:628
-#: ../src/gnome2/sidebar.c:634 ../src/main/sidebar.cc:659
-#: ../src/main/sidebar.cc:1004 ../src/main/sidebar.cc:1005
-#: ../src/main/sidebar.cc:1006
+#: ../src/gnome2/main_window.c:1053 ../src/gnome2/sidebar.c:628
+#: ../src/gnome2/sidebar.c:634 ../src/main/sidebar.cc:674
+#: ../src/main/sidebar.cc:1024 ../src/main/sidebar.cc:1025
+#: ../src/main/sidebar.cc:1026
 msgid "Standard View"
 msgstr "Standartinis Rodinys"
 
-#: ../src/gnome2/main_window.c:1081
+#: ../src/gnome2/main_window.c:1114
 msgid "Commentary View"
 msgstr "Komentarų Rodinys"
 
-#: ../src/gnome2/main_window.c:1097
+#: ../src/gnome2/main_window.c:1130
 msgid "Book View"
 msgstr "Knygos Rodinys"
 
-#: ../src/gnome2/main_window.c:1124
+#: ../src/gnome2/main_window.c:1157
 msgid "Welcome to Xiphos"
 msgstr "Sveiki atvykę į Xiphos"
 
-#: ../src/gnome2/menu_popup.c:1207
+#: ../src/gnome2/menu_popup.c:1295
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -629,33 +525,33 @@ msgstr ""
 "Dėl to, asmeninių komentarų pervadinimas\n"
 "Windows aplinkoje yra negalimas."
 
-#: ../src/gnome2/menu_popup.c:1226
+#: ../src/gnome2/menu_popup.c:1314
 msgid "Rename Commentary"
 msgstr "Pervadinti Komentarą"
 
-#: ../src/gnome2/menu_popup.c:1229
+#: ../src/gnome2/menu_popup.c:1317
 msgid "Choose Commentary Name"
 msgstr "Pasirinkite Komentaro Pavadinimą"
 
-#: ../src/gnome2/menu_popup.c:1231
+#: ../src/gnome2/menu_popup.c:1319
 msgid "New Name"
 msgstr "Naujas Pavadinimas"
 
-#: ../src/gnome2/menu_popup.c:1232 ../src/gnome2/treekey-editor.c:143
-#: ../src/gnome2/treekey-editor.c:202 ../src/gnome2/treekey-editor.c:288
-#: ../src/main/prayerlists.cc:231
+#: ../src/gnome2/menu_popup.c:1320 ../src/gnome2/treekey-editor.c:147
+#: ../src/gnome2/treekey-editor.c:210 ../src/gnome2/treekey-editor.c:306
+#: ../src/main/prayerlists.cc:236
 msgid "Name: "
 msgstr "Pavadinimas:"
 
-#: ../src/gnome2/menu_popup.c:1242 ../src/main/prayerlists.cc:245
+#: ../src/gnome2/menu_popup.c:1330 ../src/main/prayerlists.cc:250
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Modulio pavadinime turi būti tik [A-Za-z0-9_]."
 
-#: ../src/gnome2/menu_popup.c:1249 ../src/main/prayerlists.cc:252
+#: ../src/gnome2/menu_popup.c:1337 ../src/main/prayerlists.cc:257
 msgid "Xiphos already knows a module by that name."
 msgstr "Xiphos jau žino modulį tokiu pavadinimu."
 
-#: ../src/gnome2/menu_popup.c:1290
+#: ../src/gnome2/menu_popup.c:1378
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -664,7 +560,7 @@ msgstr ""
 "Nepavyko sukurti naujos konfigūracijos:\n"
 "%s"
 
-#: ../src/gnome2/menu_popup.c:1299
+#: ../src/gnome2/menu_popup.c:1387
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -672,14 +568,14 @@ msgstr ""
 "Konfigūracijos kūrimo klaida:\n"
 "\n"
 
-#: ../src/gnome2/menu_popup.c:1885
+#: ../src/gnome2/menu_popup.c:2002
 msgid "No module in this pane."
 msgstr "Šiame polangyje modulio nėra."
 
 #. *****************************************************************************
 #. * defines
 #.
-#: ../src/gnome2/mod_mgr.c:64
+#: ../src/gnome2/mod_mgr.c:66
 msgid ""
 "<b>Overview of the Module Manager.</b>\n"
 "\n"
@@ -727,7 +623,7 @@ msgstr ""
 "arba prašykite pagalbos per pokalbį internetu, arba (jei pokalbyje niekas "
 "neatsako) siųskite laišką mūsų naudotojų elektroninio pašto grupei.\n"
 
-#: ../src/gnome2/mod_mgr.c:67
+#: ../src/gnome2/mod_mgr.c:69
 msgid ""
 "<b>Welcome to Xiphos.</b>\n"
 "\n"
@@ -795,56 +691,56 @@ msgstr ""
 "Šį pažingsninių nurodymų langą ir bendrą įžangos langą, galite užverti bet "
 "kuriuo metu."
 
-#: ../src/gnome2/mod_mgr.c:189
+#: ../src/gnome2/mod_mgr.c:194
 msgid "Remove these modules?"
 msgstr "Šalinti šiuos modulius?"
 
-#: ../src/gnome2/mod_mgr.c:190
+#: ../src/gnome2/mod_mgr.c:195
 msgid "Preparing to remove"
 msgstr "Ruošiamasi šalinti"
 
-#: ../src/gnome2/mod_mgr.c:191
+#: ../src/gnome2/mod_mgr.c:196
 msgid "Removing"
 msgstr "Šalinama"
 
-#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:148
+#: ../src/gnome2/mod_mgr.c:197 ../ui/xi-menus.glade.h:154
 #: ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Remove"
 msgstr "Šalinti"
 
-#: ../src/gnome2/mod_mgr.c:195
+#: ../src/gnome2/mod_mgr.c:200
 msgid "Install these modules?"
 msgstr "Įdiegti šiuos modulius?"
 
-#: ../src/gnome2/mod_mgr.c:196
+#: ../src/gnome2/mod_mgr.c:201
 msgid "Preparing to install"
 msgstr "Ruošiamasi įdiegti"
 
-#: ../src/gnome2/mod_mgr.c:197
+#: ../src/gnome2/mod_mgr.c:202
 msgid "Installing"
 msgstr "Įdiegiama"
 
-#: ../src/gnome2/mod_mgr.c:198
+#: ../src/gnome2/mod_mgr.c:203
 msgid "Install"
 msgstr "Įdiegti"
 
-#: ../src/gnome2/mod_mgr.c:201
+#: ../src/gnome2/mod_mgr.c:206
 msgid "Archive these modules?"
 msgstr "Archyvuoti šiuos modulius?"
 
-#: ../src/gnome2/mod_mgr.c:202
+#: ../src/gnome2/mod_mgr.c:207
 msgid "Preparing to archive"
 msgstr "Ruošiamasi archyvuoti"
 
-#: ../src/gnome2/mod_mgr.c:203
+#: ../src/gnome2/mod_mgr.c:208
 msgid "Archiving"
 msgstr "Archyvuojama"
 
-#: ../src/gnome2/mod_mgr.c:204
+#: ../src/gnome2/mod_mgr.c:209
 msgid "Archive"
 msgstr "Archyvuoti"
 
-#: ../src/gnome2/mod_mgr.c:207
+#: ../src/gnome2/mod_mgr.c:212
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
@@ -852,56 +748,60 @@ msgstr ""
 "Sukurti šiems moduliams greitos paieškos\n"
 "indeksą (gali užtrukti minutes/moduliui)?"
 
-#: ../src/gnome2/mod_mgr.c:208
+#: ../src/gnome2/mod_mgr.c:213
 msgid "Preparing to index"
 msgstr "Ruošiamasi indeksuoti"
 
-#: ../src/gnome2/mod_mgr.c:209
+#: ../src/gnome2/mod_mgr.c:214
 msgid "Indexing"
 msgstr "Indeksuojama"
 
-#: ../src/gnome2/mod_mgr.c:210
+#: ../src/gnome2/mod_mgr.c:215
 msgid "Index"
 msgstr "Indeksas"
 
-#: ../src/gnome2/mod_mgr.c:213
+#: ../src/gnome2/mod_mgr.c:218
 msgid "Delete fast-search index for these modules?"
 msgstr "Ištrinti greitos paieškos indeksą šiems moduliams?"
 
-#: ../src/gnome2/mod_mgr.c:214
+#: ../src/gnome2/mod_mgr.c:219
 msgid "Preparing to delete index"
 msgstr "Ruošiamasi ištrinti indeksą"
 
-#: ../src/gnome2/mod_mgr.c:215
+#: ../src/gnome2/mod_mgr.c:220
 msgid "Deleting index"
 msgstr "Ištrinamas indeksas"
 
-#: ../src/gnome2/mod_mgr.c:216
+#: ../src/gnome2/mod_mgr.c:221
 msgid "Deletion"
 msgstr "Ištrynimas"
 
-#: ../src/gnome2/mod_mgr.c:510
+#: ../src/gnome2/mod_mgr.c:327
+msgid "The module has no About information."
+msgstr "Šis modulis neturi Apie informacijos."
+
+#: ../src/gnome2/mod_mgr.c:548
 msgid "Module Name"
 msgstr "Modulio Pavadinimas"
 
-#: ../src/gnome2/mod_mgr.c:531
+#: ../src/gnome2/mod_mgr.c:575
 msgid "A checkmark means this module is already installed"
 msgstr "Varnelė reiškia, kad šis modulis jau įdiegtas"
 
-#: ../src/gnome2/mod_mgr.c:553
+#: ../src/gnome2/mod_mgr.c:603
 msgid "Click the box to work on this module"
 msgstr "Spustelėkite langelį, kad pradėtumėte darbą su šiuo moduliu"
 
-#: ../src/gnome2/mod_mgr.c:554
+#: ../src/gnome2/mod_mgr.c:604
 msgid "Click the box to select this module for install/update"
 msgstr ""
 "Spustelėkite ant langelio, kad pasirinktumėte įdiegti/atnaujinti šį modulį"
 
-#: ../src/gnome2/mod_mgr.c:573
+#: ../src/gnome2/mod_mgr.c:623
 msgid "Installed"
 msgstr "Įdiegtas"
 
-#: ../src/gnome2/mod_mgr.c:583
+#: ../src/gnome2/mod_mgr.c:633
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
@@ -909,7 +809,7 @@ msgstr ""
 "Indekso piktograma reiškia, kad greitai paieškai, šiam moduliui esatę sukūrę "
 "optimizuotą ('lucene') indeksą (šiai funkcijai žr. Priežūros polangį)"
 
-#: ../src/gnome2/mod_mgr.c:601
+#: ../src/gnome2/mod_mgr.c:651
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
@@ -917,13 +817,13 @@ msgstr ""
 "Spynos piktograma reiškia, kad šis modulis yra užšifruotas ir reikalauja, "
 "kad jūs įsigytumėte iššifravimo raktą, kurį galima gauti iš turinio savininko"
 
-#: ../src/gnome2/mod_mgr.c:618 ../ui/gtk2_webedit.ui.h:2
-#: ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:55
-#: ../ui/xi-menus-popup.gtkbuilder.h:34
+#: ../src/gnome2/mod_mgr.c:668 ../src/main/biblesync_glue.cc:637
+#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2
+#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus-popup.gtkbuilder.h:34
 msgid "About"
 msgstr "Apie"
 
-#: ../src/gnome2/mod_mgr.c:638
+#: ../src/gnome2/mod_mgr.c:694
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
@@ -931,19 +831,19 @@ msgstr ""
 "Naujinimo piktograma reiškia, kad įdiegtas modulis yra senesnis negu "
 "Prieinamas naujesnis modulis: Jūs turėtumėte atnaujinti modulį"
 
-#: ../src/gnome2/mod_mgr.c:650
+#: ../src/gnome2/mod_mgr.c:706
 msgid "Available"
 msgstr "Pasiekiamas"
 
-#: ../src/gnome2/mod_mgr.c:659
+#: ../src/gnome2/mod_mgr.c:715
 msgid "Size"
 msgstr "Dydis"
 
-#: ../src/gnome2/mod_mgr.c:668
+#: ../src/gnome2/mod_mgr.c:724
 msgid "Description"
 msgstr "Aprašas"
 
-#: ../src/gnome2/mod_mgr.c:816
+#: ../src/gnome2/mod_mgr.c:881
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -952,33 +852,33 @@ msgstr ""
 "`mkdir %s' nepavyko:\n"
 "%s."
 
-#: ../src/gnome2/mod_mgr.c:848
+#: ../src/gnome2/mod_mgr.c:914
 msgid " archived in: \n"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:903
+#: ../src/gnome2/mod_mgr.c:987
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Žurnalai ir maldos sąrašai negali būti indeksuojami."
 
-#: ../src/gnome2/mod_mgr.c:924
+#: ../src/gnome2/mod_mgr.c:1014
 #, c-format
 msgid "%s failed"
 msgstr "%s nepavyko"
 
-#: ../src/gnome2/mod_mgr.c:927 ../src/gnome2/mod_mgr.c:1681
+#: ../src/gnome2/mod_mgr.c:1017 ../src/gnome2/mod_mgr.c:1817
 msgid "Finished"
 msgstr "Užbaigta"
 
-#: ../src/gnome2/mod_mgr.c:1095 ../src/gnome2/mod_mgr.c:1097
-#: ../src/gnome2/mod_mgr.c:1199 ../src/gnome2/mod_mgr.c:1234
-#: ../src/gnome2/mod_mgr.c:1236 ../src/gnome2/utilities.c:472
-#: ../src/gnome2/utilities.c:538 ../src/gnome2/utilities.c:540
-#: ../src/gnome2/utilities.c:1105 ../src/main/sidebar.cc:838
-#: ../src/main/sidebar.cc:910 ../src/main/sidebar.cc:912
+#: ../src/gnome2/mod_mgr.c:1197 ../src/gnome2/mod_mgr.c:1199
+#: ../src/gnome2/mod_mgr.c:1311 ../src/gnome2/mod_mgr.c:1346
+#: ../src/gnome2/mod_mgr.c:1348 ../src/gnome2/utilities.c:475
+#: ../src/gnome2/utilities.c:541 ../src/gnome2/utilities.c:543
+#: ../src/gnome2/utilities.c:1114 ../src/main/sidebar.cc:853
+#: ../src/main/sidebar.cc:925 ../src/main/sidebar.cc:927
 msgid "Unknown"
 msgstr "Nežinoma"
 
-#: ../src/gnome2/mod_mgr.c:1399
+#: ../src/gnome2/mod_mgr.c:1535
 #, c-format
 msgid ""
 "Repository:\n"
@@ -987,7 +887,7 @@ msgstr ""
 "Saugykla:\n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1411
+#: ../src/gnome2/mod_mgr.c:1547
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -995,54 +895,54 @@ msgstr ""
 "Sugrupuota pagal\n"
 "Modulių Tipus"
 
-#: ../src/gnome2/mod_mgr.c:1416 ../src/gnome2/utilities.c:606
-#: ../src/main/sidebar.cc:988 ../src/main/sidebar.cc:990
+#: ../src/gnome2/mod_mgr.c:1552 ../src/gnome2/utilities.c:615
+#: ../src/main/sidebar.cc:1008 ../src/main/sidebar.cc:1010
 msgid "Biblical Texts"
 msgstr "Bibliniai Tekstai"
 
-#: ../src/gnome2/mod_mgr.c:1420 ../src/gnome2/utilities.c:613
-#: ../src/main/sidebar.cc:671 ../src/main/sidebar.cc:1013
-#: ../src/main/sidebar.cc:1015
+#: ../src/gnome2/mod_mgr.c:1556 ../src/gnome2/utilities.c:622
+#: ../src/main/sidebar.cc:686 ../src/main/sidebar.cc:1033
+#: ../src/main/sidebar.cc:1035
 msgid "Commentaries"
 msgstr "Komentarai"
 
-#: ../src/gnome2/mod_mgr.c:1424 ../src/gnome2/utilities.c:621
-#: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
+#: ../src/gnome2/mod_mgr.c:1560 ../src/gnome2/utilities.c:630
+#: ../src/main/sidebar.cc:1042 ../src/main/sidebar.cc:1044
 msgid "Dictionaries"
 msgstr "Žodynai"
 
-#: ../src/gnome2/mod_mgr.c:1428 ../src/gnome2/utilities.c:628
-#: ../src/main/sidebar.cc:1031 ../src/main/sidebar.cc:1033
+#: ../src/gnome2/mod_mgr.c:1564 ../src/gnome2/utilities.c:637
+#: ../src/main/sidebar.cc:1051 ../src/main/sidebar.cc:1053
 msgid "Glossaries"
 msgstr "Aiškinamieji/Terminų Žodynai"
 
-#: ../src/gnome2/mod_mgr.c:1432 ../src/gnome2/utilities.c:635
-#: ../src/main/sidebar.cc:1040 ../src/main/sidebar.cc:1042
+#: ../src/gnome2/mod_mgr.c:1568 ../src/gnome2/utilities.c:644
+#: ../src/main/sidebar.cc:1060 ../src/main/sidebar.cc:1062
 msgid "Daily Devotionals"
 msgstr "Kasdieniai Pašventimai"
 
-#: ../src/gnome2/mod_mgr.c:1436 ../src/gnome2/utilities.c:642
-#: ../src/main/sidebar.cc:681 ../src/main/sidebar.cc:1049
-#: ../src/main/sidebar.cc:1051
+#: ../src/gnome2/mod_mgr.c:1572 ../src/gnome2/utilities.c:651
+#: ../src/main/sidebar.cc:696 ../src/main/sidebar.cc:1069
+#: ../src/main/sidebar.cc:1071
 msgid "General Books"
 msgstr "Bendros Knygos"
 
-#: ../src/gnome2/mod_mgr.c:1440 ../src/gnome2/utilities.c:649
-#: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
+#: ../src/gnome2/mod_mgr.c:1576 ../src/gnome2/utilities.c:658
+#: ../src/main/sidebar.cc:1078 ../src/main/sidebar.cc:1080
 msgid "Maps"
 msgstr "Žemėlapiai"
 
-#: ../src/gnome2/mod_mgr.c:1444 ../src/gnome2/utilities.c:656
-#: ../src/main/sidebar.cc:1067 ../src/main/sidebar.cc:1069
+#: ../src/gnome2/mod_mgr.c:1580 ../src/gnome2/utilities.c:665
+#: ../src/main/sidebar.cc:1087 ../src/main/sidebar.cc:1089
 msgid "Images"
 msgstr "Paveikslai"
 
-#: ../src/gnome2/mod_mgr.c:1448 ../src/gnome2/utilities.c:663
-#: ../src/main/sidebar.cc:1076 ../src/main/sidebar.cc:1078
+#: ../src/gnome2/mod_mgr.c:1584 ../src/gnome2/utilities.c:672
+#: ../src/main/sidebar.cc:1096 ../src/main/sidebar.cc:1098
 msgid "Cult/Unorthodox"
 msgstr "Kultai/Netradiciniai"
 
-#: ../src/gnome2/mod_mgr.c:1456
+#: ../src/gnome2/mod_mgr.c:1592
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -1050,95 +950,94 @@ msgstr ""
 "Sugrupuota pagal\n"
 "Pasiekiamumą"
 
-#: ../src/gnome2/mod_mgr.c:1461
+#: ../src/gnome2/mod_mgr.c:1597
 msgid "Updates"
 msgstr "Atnaujinimai"
 
-#: ../src/gnome2/mod_mgr.c:1465
+#: ../src/gnome2/mod_mgr.c:1601
 msgid "Uninstalled"
 msgstr "Neįdiegta"
 
-#: ../src/gnome2/mod_mgr.c:1469 ../src/gnome2/sidebar.c:644
-#: ../src/gnome2/utilities.c:671 ../src/main/prayerlists.cc:229
-#: ../src/main/sidebar.cc:1086 ../src/main/sidebar.cc:1088
+#: ../src/gnome2/mod_mgr.c:1605 ../src/gnome2/sidebar.c:644
+#: ../src/gnome2/utilities.c:680 ../src/main/prayerlists.cc:234
+#: ../src/main/sidebar.cc:1106 ../src/main/sidebar.cc:1108
 msgid "Prayer List/Journal"
 msgstr "Maldos Sąrašas/Žurnalas"
 
-#: ../src/gnome2/mod_mgr.c:1665
+#: ../src/gnome2/mod_mgr.c:1802
 msgid "Refreshing from remote source"
 msgstr "Atnaujinamas nuotolinis šaltinis"
 
-#: ../src/gnome2/mod_mgr.c:1675
+#: ../src/gnome2/mod_mgr.c:1812
 msgid "Remote source not found"
 msgstr "Nuotolinis šaltinis nerastas"
 
-#: ../src/gnome2/mod_mgr.c:1745
+#: ../src/gnome2/mod_mgr.c:1882
 msgid "Configure"
 msgstr "Konfigūruoti"
 
-#: ../src/gnome2/mod_mgr.c:1776
+#: ../src/gnome2/mod_mgr.c:1913
 msgid "Type"
 msgstr "Tipas"
 
-#: ../src/gnome2/mod_mgr.c:1783
+#: ../src/gnome2/mod_mgr.c:1920
 msgid "Caption"
 msgstr "Pavadinimas"
 
-#: ../src/gnome2/mod_mgr.c:1791
+#: ../src/gnome2/mod_mgr.c:1928
 msgid "Source"
 msgstr "Šaltinis"
 
-#: ../src/gnome2/mod_mgr.c:1799
+#: ../src/gnome2/mod_mgr.c:1936
 msgid "Directory"
 msgstr "Katalogas"
 
-#: ../src/gnome2/mod_mgr.c:1807
+#: ../src/gnome2/mod_mgr.c:1944
 msgid "User"
 msgstr "Naudotojas"
 
-#: ../src/gnome2/mod_mgr.c:1815
+#: ../src/gnome2/mod_mgr.c:1952
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: ../src/gnome2/mod_mgr.c:1823
+#: ../src/gnome2/mod_mgr.c:1960
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1840
+#: ../src/gnome2/mod_mgr.c:1977
 msgid "Module Sources"
 msgstr "Modulių šaltiniai"
 
-#: ../src/gnome2/mod_mgr.c:1843
+#: ../src/gnome2/mod_mgr.c:1980
 msgid "Add/Remove"
 msgstr "Pridėti/Šalinti"
 
-#: ../src/gnome2/mod_mgr.c:1845
+#: ../src/gnome2/mod_mgr.c:1982
 msgid "Choose"
 msgstr "Pasirinkti"
 
-#: ../src/gnome2/mod_mgr.c:1849 ../src/gnome2/preferences_dialog.c:2063
-#: ../src/gnome2/sidebar.c:1511 ../src/gnome2/sidebar.c:1550
+#: ../src/gnome2/mod_mgr.c:1986 ../src/gnome2/preferences_dialog.c:2067
+#: ../src/gnome2/sidebar.c:1533 ../src/gnome2/sidebar.c:1572
 msgid "Modules"
 msgstr "Moduliai"
 
-#: ../src/gnome2/mod_mgr.c:1851
+#: ../src/gnome2/mod_mgr.c:1988
 msgid "Install/Update"
 msgstr "Įdiegti/Atnaujinti"
 
-#: ../src/gnome2/mod_mgr.c:1853
+#: ../src/gnome2/mod_mgr.c:1990
 msgid "Maintenance"
 msgstr "Priežiūra"
 
-#: ../src/gnome2/mod_mgr.c:2089
+#: ../src/gnome2/mod_mgr.c:2226
 msgid "Please Refresh"
 msgstr "Prašome Naujinti"
 
-#: ../src/gnome2/mod_mgr.c:2090
+#: ../src/gnome2/mod_mgr.c:2227
 msgid "Your module list is not up to date!"
 msgstr "Jūsų modulių sąrašas nėra atnaujintas!"
 
-#. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2409
+#: ../src/gnome2/mod_mgr.c:2553
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -1146,7 +1045,7 @@ msgstr ""
 "Jūs pašalinote paskutinę savo Bibliją.\n"
 "Xiphos reikalauja bent vienos."
 
-#: ../src/gnome2/mod_mgr.c:2415
+#: ../src/gnome2/mod_mgr.c:2560
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -1154,82 +1053,94 @@ msgstr ""
 "Vis dar nėra įdiegtų Biblijų.\n"
 "Xiphos negali tęsti be Biblijos."
 
-#: ../src/gnome2/mod_mgr.c:2508
+#: ../src/gnome2/mod_mgr.c:2687
+#, c-format
+msgid ""
+"%s obsoletes %s.\n"
+"Would you like to delete %s?\n"
+"Beware: This cannot be undone."
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:2752
+msgid "No obsolete modules were found."
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:2777
 msgid "Standard remote sources have been loaded."
 msgstr "Standartiniai nuotoliniai šaltiniai įkelti."
 
-#: ../src/gnome2/mod_mgr.c:2514
+#: ../src/gnome2/mod_mgr.c:2783
 msgid "Could not load standard sources from CrossWire."
 msgstr "Nepavyko iš CrossWire įkelti standartinių šaltinių."
 
-#: ../src/gnome2/mod_mgr.c:2682 ../src/gnome2/mod_mgr.c:2928
+#: ../src/gnome2/mod_mgr.c:2946 ../src/gnome2/mod_mgr.c:3209
 msgid "Remove the selected source"
 msgstr "Šalinti pasirinktą šaltinį"
 
-#: ../src/gnome2/mod_mgr.c:2742
+#: ../src/gnome2/mod_mgr.c:3013
 msgid "Enter a remote source"
 msgstr "Įveskite nuotolinį šaltinį"
 
-#: ../src/gnome2/mod_mgr.c:2746
+#: ../src/gnome2/mod_mgr.c:3022
 msgid "Caption:"
 msgstr "Pavadinimas:"
 
-#: ../src/gnome2/mod_mgr.c:2747
+#: ../src/gnome2/mod_mgr.c:3023
 msgid "Type:"
 msgstr "Tipas:"
 
-#: ../src/gnome2/mod_mgr.c:2748
+#: ../src/gnome2/mod_mgr.c:3024
 msgid "Host:"
 msgstr "Serveris:"
 
-#: ../src/gnome2/mod_mgr.c:2749
+#: ../src/gnome2/mod_mgr.c:3025
 msgid "Directory:"
 msgstr "Katalogas:"
 
-#: ../src/gnome2/mod_mgr.c:2750
+#: ../src/gnome2/mod_mgr.c:3026
 msgid "User (optional):"
 msgstr "Naudotojas (nebūtinas):"
 
-#: ../src/gnome2/mod_mgr.c:2751
+#: ../src/gnome2/mod_mgr.c:3027
 msgid "Password (optional):"
 msgstr "Slaptažodis (nebūtinas):"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2778
+#: ../src/gnome2/mod_mgr.c:3054
 msgid "A source by that name already exists."
 msgstr "Šaltinis tokiu pavadinimu jau yra."
 
-#: ../src/gnome2/mod_mgr.c:2925
+#: ../src/gnome2/mod_mgr.c:3206
 msgid "Delete a remote source"
 msgstr "Ištrinti nuotolinį šaltinį"
 
-#: ../src/gnome2/mod_mgr.c:3430
+#: ../src/gnome2/mod_mgr.c:3719
 msgid "[no module]"
 msgstr "[nėra modulio]"
 
-#: ../src/gnome2/navbar_book.c:363 ../src/gnome2/navbar_book_dialog.c:304
+#: ../src/gnome2/navbar_book.c:371 ../src/gnome2/navbar_book_dialog.c:312
 msgid "Go outward, to the section containing this one"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:378 ../src/gnome2/navbar_book_dialog.c:319
+#: ../src/gnome2/navbar_book.c:393 ../src/gnome2/navbar_book_dialog.c:333
 msgid "Go to previous item"
 msgstr "Pereiti prie ankstesnio elemento"
 
-#: ../src/gnome2/navbar_book.c:392 ../src/gnome2/navbar_book_dialog.c:333
+#: ../src/gnome2/navbar_book.c:414 ../src/gnome2/navbar_book_dialog.c:352
 msgid "Go to next item"
 msgstr "Pereiti prie kito elemento"
 
-#: ../src/gnome2/navbar_book.c:406 ../src/gnome2/navbar_book_dialog.c:347
+#: ../src/gnome2/navbar_book.c:436 ../src/gnome2/navbar_book_dialog.c:372
 msgid "Go inward, to the first subsection"
 msgstr ""
 
-#: ../src/gnome2/navbar_versekey_dialog.c:888
-#: ../src/gnome2/navbar_versekey_editor.c:929
-#: ../src/gnome2/navbar_versekey_parallel.c:840
+#: ../src/gnome2/navbar_versekey_dialog.c:893
+#: ../src/gnome2/navbar_versekey_editor.c:935
+#: ../src/gnome2/navbar_versekey_parallel.c:855
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Sinchronizuoti šio lango slinktį su pagrindiniu langu"
 
-#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:2070
+#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:2074
 msgid "Parallel"
 msgstr "Lygiagretus"
 
@@ -1243,22 +1154,22 @@ msgid "Module Options"
 msgstr "Modulio Parametrai"
 
 #: ../src/gnome2/parallel_view.c:215 ../src/gnome2/sidebar.c:627
-#: ../src/gnome2/sidebar.c:633 ../src/gnome2/tabbed_browser.c:251
-#: ../src/main/sidebar.cc:640 ../src/main/sidebar.cc:996
-#: ../src/main/sidebar.cc:997 ../src/main/sidebar.cc:998
+#: ../src/gnome2/sidebar.c:633 ../src/gnome2/tabbed_browser.c:257
+#: ../src/main/sidebar.cc:655 ../src/main/sidebar.cc:1016
+#: ../src/main/sidebar.cc:1017 ../src/main/sidebar.cc:1018
 msgid "Parallel View"
 msgstr "Lygiagretus Rodinys"
 
-#: ../src/gnome2/preferences_dialog.c:867
+#: ../src/gnome2/preferences_dialog.c:870
 msgid "BibleSync session passphrase"
 msgstr "BibleSync sesijos slapta frazė"
 
-#: ../src/gnome2/preferences_dialog.c:869
+#: ../src/gnome2/preferences_dialog.c:872
 msgid "Phrase:"
 msgstr "Frazė:"
 
 #. mode selection failed? probably dead interface
-#: ../src/gnome2/preferences_dialog.c:947
+#: ../src/gnome2/preferences_dialog.c:950
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
@@ -1266,97 +1177,96 @@ msgstr ""
 "Veiksenos pasirinkimas nepavyko.\n"
 "Nustatykite \"Debug\" ir bandykite vėl, norėdami sužinoti kodėl."
 
-#: ../src/gnome2/preferences_dialog.c:1008
+#: ../src/gnome2/preferences_dialog.c:1011
 msgid "Mode selection failed.\n"
 msgstr "Veiksenos pasirinkimas nepavyko.\n"
 
-#: ../src/gnome2/preferences_dialog.c:1014
+#: ../src/gnome2/preferences_dialog.c:1017
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr "BibleSync: %s (slapta frazė \"%s\")."
 
-#: ../src/gnome2/preferences_dialog.c:1016
+#: ../src/gnome2/preferences_dialog.c:1019
 msgid "Disabled"
 msgstr "Išjungta"
 
-#: ../src/gnome2/preferences_dialog.c:1018 ../src/main/xml.c:93
+#: ../src/gnome2/preferences_dialog.c:1021 ../src/main/xml.c:95
 msgid "Personal"
 msgstr "Asmeninė"
 
-#: ../src/gnome2/preferences_dialog.c:1020
+#: ../src/gnome2/preferences_dialog.c:1023
 msgid "Speaker"
 msgstr "Kalbėtojo"
 
-#: ../src/gnome2/preferences_dialog.c:1021
+#: ../src/gnome2/preferences_dialog.c:1024
 msgid "Audience"
 msgstr "Klausytojo"
 
-#: ../src/gnome2/preferences_dialog.c:1592
-#: ../src/gnome2/preferences_dialog.c:1629
-#: ../src/gnome2/preferences_dialog.c:1665
-#: ../src/gnome2/preferences_dialog.c:1699
-#: ../src/gnome2/preferences_dialog.c:1733
-#: ../src/gnome2/preferences_dialog.c:1767
-#: ../src/gnome2/preferences_dialog.c:1801
-#: ../src/gnome2/preferences_dialog.c:1836
-#: ../src/gnome2/preferences_dialog.c:1872
-#: ../src/gnome2/preferences_dialog.c:1923
-#: ../src/gnome2/preferences_dialog.c:2400
+#: ../src/gnome2/preferences_dialog.c:1595
+#: ../src/gnome2/preferences_dialog.c:1632
+#: ../src/gnome2/preferences_dialog.c:1668
+#: ../src/gnome2/preferences_dialog.c:1702
+#: ../src/gnome2/preferences_dialog.c:1736
+#: ../src/gnome2/preferences_dialog.c:1770
+#: ../src/gnome2/preferences_dialog.c:1804
+#: ../src/gnome2/preferences_dialog.c:1839
+#: ../src/gnome2/preferences_dialog.c:1875
+#: ../src/gnome2/preferences_dialog.c:1927
+#: ../src/gnome2/preferences_dialog.c:2404
 msgid "-- Select --"
 msgstr "-- Pasirinkite --"
 
-#: ../src/gnome2/preferences_dialog.c:1886
+#: ../src/gnome2/preferences_dialog.c:1889
 msgid "Locale will take effect after restart."
 msgstr "Lokalė įsigalios po programos paleidimo iš naujo."
 
-#: ../src/gnome2/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
+#: ../src/gnome2/preferences_dialog.c:1962 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "Nuostatos"
 
-#: ../src/gnome2/preferences_dialog.c:2043
+#: ../src/gnome2/preferences_dialog.c:2047
 msgid "General"
 msgstr "Bendra"
 
-#: ../src/gnome2/preferences_dialog.c:2046
+#: ../src/gnome2/preferences_dialog.c:2050
 msgid "Options"
 msgstr "Parinktys"
 
-#: ../src/gnome2/preferences_dialog.c:2049 ../ui/prefs.glade.h:85
+#: ../src/gnome2/preferences_dialog.c:2053 ../ui/prefs.glade.h:85
 #: ../ui/prefs.gtkbuilder.h:85
 msgid "BibleSync"
 msgstr "BibleSync"
 
-#: ../src/gnome2/preferences_dialog.c:2053
+#: ../src/gnome2/preferences_dialog.c:2057
 msgid "Fonts"
 msgstr "Šriftai"
 
-#: ../src/gnome2/preferences_dialog.c:2056
+#: ../src/gnome2/preferences_dialog.c:2060
 msgid "Color"
 msgstr "Spalva"
 
-#: ../src/gnome2/preferences_dialog.c:2059
+#: ../src/gnome2/preferences_dialog.c:2063
 msgid "Sizes and Faces"
 msgstr "Dydžiai ir Išvaizda"
 
-#: ../src/gnome2/preferences_dialog.c:2073 ../ui/prefs.glade.h:71
-#: ../ui/prefs.gtkbuilder.h:71
+#: ../src/gnome2/preferences_dialog.c:2077
 msgid "Special"
 msgstr "Ypatinga"
 
-#: ../src/gnome2/preferences_dialog.c:2782 ../src/gnome2/search_dialog.c:500
+#: ../src/gnome2/preferences_dialog.c:2793 ../src/gnome2/search_dialog.c:522
 msgid "Clear List?"
 msgstr "Išvalyti Sąrašą?"
 
-#: ../src/gnome2/preferences_dialog.c:2783 ../src/gnome2/search_dialog.c:501
+#: ../src/gnome2/preferences_dialog.c:2794 ../src/gnome2/search_dialog.c:523
 msgid "Are you sure you want to clear the module list?"
 msgstr "Ar tikrai norite išvalyti modulių sąrašą?"
 
-#: ../src/gnome2/preferences_dialog.c:2828 ../src/main/search_dialog.cc:685
+#: ../src/gnome2/preferences_dialog.c:2845 ../src/main/search_dialog.cc:690
 msgid "Remove Module?"
 msgstr "Šalinti Modulį?"
 
-#: ../src/gnome2/preferences_dialog.c:2829 ../src/main/search_dialog.cc:686
+#: ../src/gnome2/preferences_dialog.c:2846 ../src/main/search_dialog.cc:691
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Ar tikrai norite pašalinti pasirinktą modulį?"
 
@@ -1375,20 +1285,20 @@ msgstr "Modulis"
 msgid "found in "
 msgstr "rasta modulyje"
 
-#: ../src/gnome2/search_dialog.c:459
+#: ../src/gnome2/search_dialog.c:481
 #, c-format
 msgid "New List %s"
 msgstr "Naujas Sąrašas %s"
 
-#: ../src/gnome2/search_dialog.c:683
+#: ../src/gnome2/search_dialog.c:709
 msgid "The last module list may not be deleted"
 msgstr "Paskutinysis modulių sąrašas gali būti neištrintas"
 
-#: ../src/gnome2/search_dialog.c:701
+#: ../src/gnome2/search_dialog.c:727
 msgid "Delete list?"
 msgstr "Ištrinti sąrašą?"
 
-#: ../src/gnome2/search_dialog.c:702
+#: ../src/gnome2/search_dialog.c:728
 msgid "Are you sure you want to delete:"
 msgstr "Ar tikrai norite ištrinti:"
 
@@ -1408,7 +1318,7 @@ msgstr "Ar tikrai norite ištrinti:"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:825
+#: ../src/gnome2/search_dialog.c:859
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1480,7 +1390,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:888
+#: ../src/gnome2/search_dialog.c:922
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1515,15 +1425,15 @@ msgstr ""
 "\"noun, accusative singular feminine\" (daiktavardis, moteriškos giminės "
 "vienaskaitos galininkas) -- išsamiau apie tai žiūrėkite Robinson modulyje."
 
-#: ../src/gnome2/search_dialog.c:1190
+#: ../src/gnome2/search_dialog.c:1224
 msgid "Module is neither Bible nor commentary"
 msgstr "Modulis nėra nei Biblija, nei komentarai"
 
-#: ../src/gnome2/search_dialog.c:1213 ../src/gnome2/sidebar.c:998
+#: ../src/gnome2/search_dialog.c:1247 ../src/gnome2/sidebar.c:1003
 msgid "BibleSync is not active for transmit."
 msgstr "BibleSync nėra aktyvus perdavimui."
 
-#: ../src/gnome2/search_sidebar.c:185
+#: ../src/gnome2/search_sidebar.c:211
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
@@ -1532,80 +1442,80 @@ msgstr ""
 "Rasti atiti"
 
 #. button to open advanced search
-#: ../src/gnome2/search_sidebar.c:194
+#: ../src/gnome2/search_sidebar.c:220
 msgid "_Open Advanced Search"
 msgstr "_Atidaryti Išsamią Paiešką"
 
-#: ../src/gnome2/search_sidebar.c:198
+#: ../src/gnome2/search_sidebar.c:224
 msgid "Open the separate Advanced Search dialog."
 msgstr "Atidaryti atskirą Išsamios Paieškos langelį."
 
-#: ../src/gnome2/search_sidebar.c:210
+#: ../src/gnome2/search_sidebar.c:236
 msgid "Search Module"
 msgstr "Paieška Modulyje"
 
-#: ../src/gnome2/search_sidebar.c:224
+#: ../src/gnome2/search_sidebar.c:250
 msgid "Bible"
 msgstr "Biblija"
 
-#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:132
+#: ../src/gnome2/search_sidebar.c:259 ../ui/prefs.glade.h:132
 #: ../ui/prefs.gtkbuilder.h:132
 msgid "Commentary"
 msgstr "Komentarai"
 
-#: ../src/gnome2/search_sidebar.c:247
+#: ../src/gnome2/search_sidebar.c:273
 msgid "Search Type"
 msgstr "Paieškos Tipas"
 
-#: ../src/gnome2/search_sidebar.c:261 ../ui/search-dialog.glade.h:39
+#: ../src/gnome2/search_sidebar.c:287 ../ui/search-dialog.glade.h:39
 #: ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi word"
 msgstr "Keli žodžiai"
 
-#: ../src/gnome2/search_sidebar.c:272 ../ui/search-dialog.glade.h:41
+#: ../src/gnome2/search_sidebar.c:298 ../ui/search-dialog.glade.h:41
 #: ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "Reguliari išraiška"
 
-#: ../src/gnome2/search_sidebar.c:280 ../ui/search-dialog.glade.h:43
+#: ../src/gnome2/search_sidebar.c:306 ../ui/search-dialog.glade.h:43
 #: ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "Tiksli frazė"
 
-#: ../src/gnome2/search_sidebar.c:294
+#: ../src/gnome2/search_sidebar.c:320
 msgid "Search Options"
 msgstr "Paieškos Parinktys"
 
-#: ../src/gnome2/search_sidebar.c:307 ../ui/search-dialog.glade.h:49
+#: ../src/gnome2/search_sidebar.c:333 ../ui/search-dialog.glade.h:49
 #: ../ui/search-dialog.gtkbuilder.h:49
 msgid "Match case"
 msgstr "Skirti raidžių registrą"
 
-#: ../src/gnome2/search_sidebar.c:322
+#: ../src/gnome2/search_sidebar.c:348
 msgid "Search Scope"
 msgstr "Paieškos Sritis"
 
-#: ../src/gnome2/search_sidebar.c:335
+#: ../src/gnome2/search_sidebar.c:361
 msgid "No scope"
 msgstr "Nėra srities"
 
-#: ../src/gnome2/search_sidebar.c:345
+#: ../src/gnome2/search_sidebar.c:371
 msgid "Use bounds"
 msgstr "Naudoti rėžius"
 
-#: ../src/gnome2/search_sidebar.c:354
+#: ../src/gnome2/search_sidebar.c:380
 msgid "Last search"
 msgstr "Paskutinė paieška"
 
-#: ../src/gnome2/search_sidebar.c:369
+#: ../src/gnome2/search_sidebar.c:395
 msgid "Bounds"
 msgstr "Rėžiai"
 
-#: ../src/gnome2/search_sidebar.c:384 ../src/gnome2/search_sidebar.c:413
+#: ../src/gnome2/search_sidebar.c:410 ../src/gnome2/search_sidebar.c:443
 msgid "Lower"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:394 ../src/gnome2/search_sidebar.c:420
+#: ../src/gnome2/search_sidebar.c:422 ../src/gnome2/search_sidebar.c:450
 msgid "Upper"
 msgstr ""
 
@@ -1617,19 +1527,19 @@ msgstr "Atidaryti modulį redaktoriuje?"
 msgid "If no, it will open for display only."
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:952
+#: ../src/gnome2/sidebar.c:957
 msgid "Paste verse references"
 msgstr "Įdėkite eilučių nuorodas"
 
-#: ../src/gnome2/sidebar.c:954
+#: ../src/gnome2/sidebar.c:959
 msgid "List:"
 msgstr "Sąrašas:"
 
-#: ../src/gnome2/sidebar.c:1499 ../src/gnome2/sidebar.c:1534
+#: ../src/gnome2/sidebar.c:1521 ../src/gnome2/sidebar.c:1556
 msgid "Search"
 msgstr "Paieška"
 
-#: ../src/gnome2/sidebar_dialog.c:157 ../src/gnome2/sidebar_dialog.c:166
+#: ../src/gnome2/sidebar_dialog.c:164 ../src/gnome2/sidebar_dialog.c:173
 msgid "Sidebar"
 msgstr "Parankinė"
 
@@ -1637,73 +1547,73 @@ msgstr "Parankinė"
 msgid "Powered by the SWORD Project"
 msgstr "Veikia su SWORD Project"
 
-#: ../src/gnome2/tabbed_browser.c:360
+#: ../src/gnome2/tabbed_browser.c:366
 msgid "Can't create tabs dir."
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:141 ../src/gnome2/treekey-editor.c:200
-#: ../src/gnome2/treekey-editor.c:286
+#: ../src/gnome2/treekey-editor.c:145 ../src/gnome2/treekey-editor.c:208
+#: ../src/gnome2/treekey-editor.c:304
 msgid "Prayer List/Journal Item"
 msgstr "Maldos Sąrašo/Žurnalo Elementas"
 
-#: ../src/gnome2/treekey-editor.c:142 ../src/gnome2/treekey-editor.c:201
-#: ../src/gnome2/treekey-editor.c:287
+#: ../src/gnome2/treekey-editor.c:146 ../src/gnome2/treekey-editor.c:209
+#: ../src/gnome2/treekey-editor.c:305
 msgid "New name"
 msgstr "Naujas pavadinimas"
 
-#: ../src/gnome2/treekey-editor.c:257
+#: ../src/gnome2/treekey-editor.c:266
 msgid "Remove the selected item"
 msgstr "Šalinti pasirinktą elementą"
 
-#: ../src/gnome2/utilities.c:82
+#: ../src/gnome2/utilities.c:85
 msgid "January"
 msgstr "Sausis"
 
-#: ../src/gnome2/utilities.c:83
+#: ../src/gnome2/utilities.c:86
 msgid "February"
 msgstr "Vasaris"
 
-#: ../src/gnome2/utilities.c:84
+#: ../src/gnome2/utilities.c:87
 msgid "March"
 msgstr "Kovas"
 
-#: ../src/gnome2/utilities.c:85
+#: ../src/gnome2/utilities.c:88
 msgid "April"
 msgstr "Balandis"
 
-#: ../src/gnome2/utilities.c:86
+#: ../src/gnome2/utilities.c:89
 msgid "May"
 msgstr "Gegužė"
 
-#: ../src/gnome2/utilities.c:87
+#: ../src/gnome2/utilities.c:90
 msgid "June"
 msgstr "Birželis"
 
-#: ../src/gnome2/utilities.c:88
+#: ../src/gnome2/utilities.c:91
 msgid "July"
 msgstr "Liepa"
 
-#: ../src/gnome2/utilities.c:89
+#: ../src/gnome2/utilities.c:92
 msgid "August"
 msgstr "Rugpjūtis"
 
-#: ../src/gnome2/utilities.c:90
+#: ../src/gnome2/utilities.c:93
 msgid "September"
 msgstr "Rugsėjis"
 
-#: ../src/gnome2/utilities.c:91
+#: ../src/gnome2/utilities.c:94
 msgid "October"
 msgstr "Spalis"
 
-#: ../src/gnome2/utilities.c:92
+#: ../src/gnome2/utilities.c:95
 msgid "November"
 msgstr "Lapkritis"
 
-#: ../src/gnome2/utilities.c:93
+#: ../src/gnome2/utilities.c:96
 msgid "December"
 msgstr "Gruodis"
 
-#: ../src/gnome2/utilities.c:2087
+#: ../src/gnome2/utilities.c:2096
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -1711,7 +1621,99 @@ msgstr ""
 "Nepavyko nustatyti paveikslo failo dydį.\n"
 "Xiphos negali pakeisti paveikslo dydį, kad priderintų paveikslą prie lango."
 
-#: ../src/main/display.cc:237
+#: ../src/main/biblesync_glue.cc:108
+msgid ""
+"Mismatched packet\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:127
+msgid ""
+"Presence announcement:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:138
+msgid ""
+"Navigation packet:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:199
+#, fuzzy
+msgid "Unknown module "
+msgstr "[nėra modulio]"
+
+#: ../src/main/biblesync_glue.cc:200
+msgid ""
+".\n"
+"Navigated indirectly using verse list."
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:289
+msgid "ERROR: unknown BibleSync indicator: "
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:292
+msgid "Other indications are:"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:587
+#, fuzzy
+msgid "Check the box to listen to this Speaker"
+msgstr "Spustelėkite langelį, kad pradėtumėte darbą su šiuo moduliu"
+
+#: ../src/main/biblesync_glue.cc:600
+#, fuzzy
+msgid "Available Speakers"
+msgstr "Pasiekiamas"
+
+#: ../src/main/biblesync_glue.cc:609
+msgid "D/I"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:619
+msgid "Last navigation was Direct or Indirect"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:628
+#, fuzzy
+msgid "Last Navigation"
+msgstr "Naršyti"
+
+#: ../src/main/biblesync_glue.cc:647
+msgid "UUID"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:669
+#, fuzzy
+msgid "IP address: "
+msgstr "Adresas"
+
+#: ../src/main/biblesync_glue.cc:670
+msgid ""
+"\n"
+"Application: "
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:671
+msgid ""
+"\n"
+"Device: "
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:672
+msgid ""
+"\n"
+"UUID: "
+msgstr ""
+
+#: ../src/main/display.cc:88
+msgid ""
+"<br/><br/><center><i>This module has no content at this point.</i></center>"
+msgstr ""
+
+#: ../src/main/display.cc:247
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
@@ -1720,147 +1722,169 @@ msgstr ""
 "Netinkamai koduota asmeninės pastabos etiketė:\n"
 "'%s'"
 
-#: ../src/main/display.cc:1032 ../src/main/display.cc:1073
-#: ../src/main/display.cc:1158 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1110 ../src/main/display.cc:1151
+#: ../src/main/display.cc:1236 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr "Skyrius"
 
-#: ../src/main/main.c:131
+#: ../src/main/main.c:132
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos nesupranta daugiau negu vieną argumentą."
 
-#: ../src/main/main.c:245
+#: ../src/main/main.c:246
 msgid "Initiating HTML"
 msgstr "Pradedamas HTML"
 
-#: ../src/main/main.c:250
+#: ../src/main/main.c:251
 msgid "Building Interface"
 msgstr "Kuriama sąsaja"
 
-#: ../src/main/main.c:253
+#: ../src/main/main.c:254
 msgid "Starting Sword"
 msgstr "Paleidžiamas Sword"
 
-#: ../src/main/main.c:256
+#: ../src/main/main.c:257
 msgid "Loading Settings"
 msgstr "Įkeliami Nustatymai"
 
-#: ../src/main/main.c:259
+#: ../src/main/main.c:260
 msgid "Displaying Xiphos"
 msgstr "Rodoma Xiphos"
 
-#: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:97
+#: ../src/main/module_dialogs.cc:188 ../src/main/previewer.cc:97
 msgid "Previewer"
 msgstr "Peržiūros langelis"
 
-#: ../src/main/module_dialogs.cc:244 ../src/main/module_dialogs.cc:355
+#: ../src/main/module_dialogs.cc:243 ../src/main/module_dialogs.cc:354
 #: ../src/main/previewer.cc:184
 msgid "Footnote"
 msgstr "Išnaša"
 
-#: ../src/main/module_dialogs.cc:250 ../src/main/module_dialogs.cc:360
+#: ../src/main/module_dialogs.cc:249 ../src/main/module_dialogs.cc:359
 #: ../src/main/previewer.cc:196
 msgid "Cross Reference"
 msgstr "Kryžminė nuoroda"
 
-#: ../src/main/module_dialogs.cc:256 ../src/main/module_dialogs.cc:270
-#: ../src/main/module_dialogs.cc:365 ../src/main/module_dialogs.cc:377
+#: ../src/main/module_dialogs.cc:255 ../src/main/module_dialogs.cc:269
+#: ../src/main/module_dialogs.cc:364 ../src/main/module_dialogs.cc:376
 #: ../src/main/previewer.cc:202 ../src/main/previewer.cc:221
 msgid "Strongs"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:262 ../src/main/module_dialogs.cc:281
-#: ../src/main/module_dialogs.cc:370 ../src/main/module_dialogs.cc:387
+#: ../src/main/module_dialogs.cc:261 ../src/main/module_dialogs.cc:280
+#: ../src/main/module_dialogs.cc:369 ../src/main/module_dialogs.cc:386
 #: ../src/main/previewer.cc:208 ../src/main/previewer.cc:227
 msgid "Morphology"
 msgstr "Morfologija"
 
-#: ../src/main/module_dialogs.cc:1013 ../src/main/url.cc:521
+#: ../src/main/module_dialogs.cc:1012 ../src/main/url.cc:534
 msgid "Back to "
 msgstr "Grįžti į"
 
-#: ../src/main/parallel_view.cc:383 ../ui/xi-menus.glade.h:68
+#: ../src/main/parallel_view.cc:61
+msgid "Unknown parallel module: "
+msgstr ""
+
+#: ../src/main/parallel_view.cc:409 ../ui/xi-menus.glade.h:68
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Strong's Numbers"
 msgstr "Strongo Numeriai"
 
-#: ../src/main/parallel_view.cc:393 ../ui/search-dialog.glade.h:102
+#: ../src/main/parallel_view.cc:419 ../ui/search-dialog.glade.h:102
 #: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:71
 #: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Footnotes"
 msgstr "Išnašos"
 
-#: ../src/main/parallel_view.cc:403 ../ui/search-dialog.glade.h:99
+#: ../src/main/parallel_view.cc:429 ../ui/search-dialog.glade.h:99
 #: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:70
 #: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Morphological Tags"
 msgstr "Morfologinės Žymės"
 
-#: ../src/main/parallel_view.cc:413 ../ui/xi-menus.glade.h:76
+#: ../src/main/parallel_view.cc:439 ../ui/xi-menus.glade.h:76
 #: ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Hebrew Vowel Points"
 msgstr "Hebrajų Balsių Taškai"
 
-#: ../src/main/parallel_view.cc:423 ../ui/xi-menus.glade.h:77
+#: ../src/main/parallel_view.cc:449 ../ui/xi-menus.glade.h:77
 #: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Hebrew Cantillation"
 msgstr "Hebrajų Kantiliacija"
 
-#: ../src/main/parallel_view.cc:433 ../ui/xi-menus.glade.h:75
+#: ../src/main/parallel_view.cc:459 ../ui/xi-menus.glade.h:75
 #: ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Greek Accents"
 msgstr "Graikų kirčiai"
 
-#: ../src/main/parallel_view.cc:443 ../ui/xi-menus.glade.h:72
+#: ../src/main/parallel_view.cc:469 ../ui/xi-menus.glade.h:72
 #: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Cross-references"
 msgstr "Kryžminės nuorodos"
 
-#: ../src/main/parallel_view.cc:453 ../ui/xi-menus.glade.h:69
+#: ../src/main/parallel_view.cc:479 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Lemmas"
 msgstr "Lemos"
 
-#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:66
+#: ../src/main/parallel_view.cc:489 ../ui/xi-menus.glade.h:66
 #: ../ui/xi-menus-popup.gtkbuilder.h:44
 msgid "Headings"
 msgstr "Antraštės"
 
-#: ../src/main/parallel_view.cc:473
+#: ../src/main/parallel_view.cc:499 ../src/main/parallel_view.cc:595
+#: ../ui/xi-menus.glade.h:86 ../ui/xi-menus-popup.gtkbuilder.h:63
 msgid "Morpheme Segmentation"
 msgstr "Morfemų Segmentavimas"
 
-#: ../src/main/parallel_view.cc:487 ../ui/xi-menus.glade.h:67
+#: ../src/main/parallel_view.cc:513 ../ui/xi-menus.glade.h:67
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Words of Christ in Red"
 msgstr "Kristaus Žodžiai Raudona spalva"
 
-#: ../src/main/parallel_view.cc:497 ../ui/xi-menus.glade.h:78
+#: ../src/main/parallel_view.cc:523 ../ui/xi-menus.glade.h:78
 #: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Transliteration"
 msgstr "Transliteracija"
 
-#: ../src/main/parallel_view.cc:507
+#: ../src/main/parallel_view.cc:533
 msgid "Textual Variants"
 msgstr "Teksto Variantai"
 
-#: ../src/main/parallel_view.cc:515 ../ui/xi-menus.glade.h:80
+#: ../src/main/parallel_view.cc:541 ../ui/xi-menus.glade.h:80
 #: ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Primary Reading"
 msgstr "Pirminis Skaitymas"
 
-#: ../src/main/parallel_view.cc:524 ../ui/xi-menus.glade.h:81
+#: ../src/main/parallel_view.cc:550 ../ui/xi-menus.glade.h:81
 #: ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Secondary Reading"
 msgstr "Antrinis Skaitymas"
 
-#: ../src/main/parallel_view.cc:533 ../ui/xi-menus.glade.h:82
+#: ../src/main/parallel_view.cc:559 ../ui/xi-menus.glade.h:82
 #: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "All Readings"
 msgstr "Visi Skaitymai"
 
-#: ../src/main/parallel_view.cc:700
+#: ../src/main/parallel_view.cc:568 ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus-popup.gtkbuilder.h:60
+#, fuzzy
+msgid "Transliterated Forms"
+msgstr "Transliteracija"
+
+#: ../src/main/parallel_view.cc:577 ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus-popup.gtkbuilder.h:61
+msgid "Enumerations"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:586 ../ui/xi-menus.glade.h:85
+#: ../ui/xi-menus-popup.gtkbuilder.h:62
+#, fuzzy
+msgid "Glosses"
+msgstr "Aiškinamieji/Terminų Žodynai"
+
+#: ../src/main/parallel_view.cc:770
 msgid "view context"
 msgstr "žiūrėti kontekstą"
 
@@ -1872,7 +1896,7 @@ msgstr "Augimas"
 msgid "<b>For Growth</b><br/>"
 msgstr "<b>Už Augimą</b><br/>"
 
-#: ../src/main/prayerlists.cc:114 ../src/main/prayerlists.cc:371
+#: ../src/main/prayerlists.cc:114 ../src/main/prayerlists.cc:376
 msgid "Salvation"
 msgstr "Išgelbėjimas"
 
@@ -1880,7 +1904,7 @@ msgstr "Išgelbėjimas"
 msgid "<b>For Salvation</b><br/>"
 msgstr "<b>Už Išgelbėjimą</b><br/>"
 
-#: ../src/main/prayerlists.cc:116 ../src/main/prayerlists.cc:375
+#: ../src/main/prayerlists.cc:116 ../src/main/prayerlists.cc:380
 msgid "Health"
 msgstr "Sveikata"
 
@@ -1952,15 +1976,15 @@ msgstr "Antraeilė Tema 4"
 msgid "<b>Subtopic 4</b><br/>"
 msgstr "<b>Potemė 4</b><br/>"
 
-#: ../src/main/prayerlists.cc:230
+#: ../src/main/prayerlists.cc:235
 msgid "Name for new prayer list or journal"
 msgstr "Naujo maldos sąrašo ar žurnalo pavadinimas"
 
-#: ../src/main/prayerlists.cc:261
+#: ../src/main/prayerlists.cc:266
 msgid "Xiphos finds that prayer list already."
 msgstr "Xiphos jau randa tokį maldos sąrašą."
 
-#: ../src/main/prayerlists.cc:274
+#: ../src/main/prayerlists.cc:279
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
@@ -1969,19 +1993,19 @@ msgstr ""
 "Xiphos nepavyko sukurti modulio kelio:\n"
 "%s"
 
-#: ../src/main/prayerlists.cc:314
+#: ../src/main/prayerlists.cc:319
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
 msgstr "Elementarus maldos sąrašas. \\par\\par Xiphos sukurtas modulis."
 
-#: ../src/main/prayerlists.cc:315
+#: ../src/main/prayerlists.cc:320
 msgid "BasicPrayerList"
 msgstr "PaprastasMaldosSarasas"
 
-#: ../src/main/prayerlists.cc:329
+#: ../src/main/prayerlists.cc:334
 msgid "MyPrayerList"
 msgstr "ManoMaldosSarasas"
 
-#: ../src/main/prayerlists.cc:330
+#: ../src/main/prayerlists.cc:335
 msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
 ">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
@@ -1989,75 +2013,75 @@ msgstr ""
 "<b>Žmonės:</b><br/>Jonas<br/>Gintaras<br/>Judita<br/><br/><b>Bažnyčia:</"
 "b><br/>suolai<br/>bendravimas<br/>Biblijos misionieriams<br/><br/><br/>"
 
-#: ../src/main/prayerlists.cc:356
+#: ../src/main/prayerlists.cc:361
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr "Teminis maldos sąrašas. \\par\\par Xiphos sukurtas modulis."
 
-#: ../src/main/prayerlists.cc:357
+#: ../src/main/prayerlists.cc:362
 msgid "SubjectPrayerList"
 msgstr "TeminisMaldosSarasas"
 
-#: ../src/main/prayerlists.cc:372
+#: ../src/main/prayerlists.cc:377
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
 msgstr "Jonas<br/>Gintaras<br/>Judita<br/>Andrius<br/>"
 
-#: ../src/main/prayerlists.cc:373
+#: ../src/main/prayerlists.cc:378
 msgid "Spiritual Growth"
 msgstr "Dvasinis Augimas"
 
-#: ../src/main/prayerlists.cc:374
+#: ../src/main/prayerlists.cc:379
 msgid "Mike<br/>Steve<br/>"
 msgstr "Romanas<br/>Audrius<br/>"
 
-#: ../src/main/prayerlists.cc:376
+#: ../src/main/prayerlists.cc:381
 msgid "Sue<br/>John<br/>"
 msgstr "Judita<br/>Andrius<br/>"
 
-#: ../src/main/prayerlists.cc:402
+#: ../src/main/prayerlists.cc:407
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr "Mėnesinis maldos sąrašas. \\par\\par Xiphos sukurtas modulis."
 
-#: ../src/main/prayerlists.cc:403
+#: ../src/main/prayerlists.cc:408
 msgid "MonthlyPrayerList"
 msgstr "MenesinisMaldosSarasas"
 
-#: ../src/main/prayerlists.cc:454
+#: ../src/main/prayerlists.cc:459
 msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr "Kasdienis žurnalas. \\par\\par Xiphos sukurtas modulis."
 
-#: ../src/main/prayerlists.cc:455
+#: ../src/main/prayerlists.cc:460
 msgid "DailyJournal"
 msgstr "KasdienisZurnalas"
 
-#: ../src/main/prayerlists.cc:519
+#: ../src/main/prayerlists.cc:524
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr "Temos kontūrai (pvz. pamokslo). \\par\\par Xiphos sukurtas modulis."
 
-#: ../src/main/prayerlists.cc:520
+#: ../src/main/prayerlists.cc:525
 msgid "OutlinedTopic"
 msgstr "TemosKonturai"
 
-#: ../src/main/prayerlists.cc:534
+#: ../src/main/prayerlists.cc:539
 msgid "Major Topic A"
 msgstr "Pagrindinė Tema A"
 
-#: ../src/main/prayerlists.cc:535
+#: ../src/main/prayerlists.cc:540
 msgid "<b>Major Topic A</b><br/>"
 msgstr "<b>Pagrindinė Tema A</b><br/>"
 
-#: ../src/main/prayerlists.cc:537
+#: ../src/main/prayerlists.cc:542
 msgid "Major Topic B"
 msgstr "Pagrindinė Tema B"
 
-#: ../src/main/prayerlists.cc:538
+#: ../src/main/prayerlists.cc:543
 msgid "<b>Major Topic B</b><br/>"
 msgstr "<b>Pagrindinė Tema B</b><br/>"
 
-#: ../src/main/prayerlists.cc:540
+#: ../src/main/prayerlists.cc:545
 msgid "Major Topic C"
 msgstr "Pagrindinė Tema C"
 
-#: ../src/main/prayerlists.cc:541
+#: ../src/main/prayerlists.cc:546
 msgid "<b>Major Topic C</b><br/>"
 msgstr "<b>Pagrindinė Tema C</b><br/>"
 
@@ -2070,21 +2094,21 @@ msgstr "Vartotojo Pastaba"
 msgid "Search result %s: %s"
 msgstr "Paieškos rezultatas %s: %s"
 
-#: ../src/main/search_dialog.cc:425
+#: ../src/main/search_dialog.cc:424
 msgid "Delete Range?"
 msgstr "Ištrinti Rėžį?"
 
-#: ../src/main/search_dialog.cc:426
+#: ../src/main/search_dialog.cc:425
 msgid "Are you sure you want to delete this range?"
 msgstr "Ar tikrai norite ištrinti šį rėžį?"
 
-#: ../src/main/search_dialog.cc:640 ../src/main/search_dialog.cc:1062
-#: ../src/main/search_dialog.cc:1065 ../src/main/search_dialog.cc:1087
-#: ../src/main/search_dialog.cc:1090
+#: ../src/main/search_dialog.cc:645 ../src/main/search_dialog.cc:1073
+#: ../src/main/search_dialog.cc:1076 ../src/main/search_dialog.cc:1098
+#: ../src/main/search_dialog.cc:1101
 msgid "Search: "
 msgstr "Paieška:"
 
-#: ../src/main/search_dialog.cc:1429
+#: ../src/main/search_dialog.cc:1443
 #, c-format
 msgid ""
 "%s:\n"
@@ -2095,16 +2119,16 @@ msgstr ""
 "Tokio įdiegto modulio nėra.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1431
+#: ../src/main/search_dialog.cc:1445
 msgid "Please adjust the module list."
 msgstr "Prašome priderinti modulių sąrašą."
 
-#: ../src/main/search_dialog.cc:1447
+#: ../src/main/search_dialog.cc:1461
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Nėra greitos paieškos indekso moduliui %s.%s%s"
 
-#: ../src/main/search_dialog.cc:1449
+#: ../src/main/search_dialog.cc:1463
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -2112,7 +2136,7 @@ msgstr ""
 "\n"
 "Paieška šiame modulyje dabar yra `keli žodžiai'."
 
-#: ../src/main/search_dialog.cc:1450
+#: ../src/main/search_dialog.cc:1464
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -2120,7 +2144,7 @@ msgstr ""
 "\n"
 "Žr. Modulių Tvarkytuvės, Priežiūros polangį."
 
-#: ../src/main/search_dialog.cc:1513
+#: ../src/main/search_dialog.cc:1527
 msgid "Search finished"
 msgstr "Paieška užbaigta"
 
@@ -2137,24 +2161,18 @@ msgid "$HOME is not set!"
 msgstr "$HOME yra nenustatyti!"
 
 #: ../src/main/settings.c:120
-#, c-format
-msgid ""
-"Xiphos can not create  .xiphos:\n"
-"%s\n"
-"\n"
-"Xiphos cannot continue."
+#, fuzzy, c-format
+msgid "Xiphos can not create directory "
 msgstr ""
-"Xiphos negali sukurti  .xiphos:\n"
-"%s\n"
-"\n"
-"Xiphos negali tęsti."
+"Xiphos nepavyko sukurti modulio kelio:\n"
+"%s"
 
-#: ../src/main/settings.c:133 ../src/main/settings.c:142
-#: ../src/main/settings.c:151
+#: ../src/main/settings.c:135 ../src/main/settings.c:144
+#: ../src/main/settings.c:153
 msgid "can not create "
 msgstr "nepavyko sukurti"
 
-#: ../src/main/settings.c:181
+#: ../src/main/settings.c:184
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
@@ -2162,12 +2180,12 @@ msgstr ""
 "Tuščias nustatymų failas - bandoma atkurti atsarginę kopiją.\n"
 "Kai kuri informacija gali būti prarasta."
 
-#: ../src/main/settings.c:184
+#: ../src/main/settings.c:190
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 "Tuščias nustatymų failas - nėra atsarginės kopijos?!? Informacija prarasta!"
 
-#: ../src/main/settings.c:212
+#: ../src/main/settings.c:219
 msgid ""
 "There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -2183,7 +2201,7 @@ msgstr ""
 "Xiphos negali tęsti\n"
 "ir tuoj pat išeis."
 
-#: ../src/main/settings.c:218
+#: ../src/main/settings.c:225
 msgid "Bible module installation complete."
 msgstr "Biblijos modulio diegimas baigtas."
 
@@ -2195,15 +2213,15 @@ msgstr ""
 "Modulio klaida: Netinkama xref koduotė.\n"
 "Prašome apie tai pranešti, nurodant modulį ir eilutę"
 
-#: ../src/main/sidebar.cc:411
+#: ../src/main/sidebar.cc:422
 msgid "verse"
 msgstr "eilutė"
 
-#: ../src/main/sidebar.cc:472
+#: ../src/main/sidebar.cc:483
 msgid "chapter"
 msgstr "skyrius"
 
-#: ../src/main/sword.cc:554
+#: ../src/main/sword.cc:668
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -2211,7 +2229,7 @@ msgstr ""
 "Nėra Xiphos programos failo,\n"
 "skirto kalbos santrumpoms."
 
-#: ../src/main/sword.cc:561
+#: ../src/main/sword.cc:675
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -2219,7 +2237,7 @@ msgstr ""
 "Nepavyko atidaryti Xiphos programos\n"
 "kalbos santrumpų failo."
 
-#: ../src/main/sword.cc:574
+#: ../src/main/sword.cc:688
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -2227,7 +2245,7 @@ msgstr ""
 "Xiphos negali paskirstyti vietos\n"
 "kalbos santrumpoms."
 
-#: ../src/main/sword.cc:581
+#: ../src/main/sword.cc:695
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -2236,7 +2254,7 @@ msgstr ""
 "kalbos santrumpų failo."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:663
+#: ../src/main/sword.cc:777
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
@@ -2245,11 +2263,11 @@ msgstr ""
 "`%s' atitinkanti lokalė nerasta.\n"
 "%s"
 
-#: ../src/main/sword.cc:665
+#: ../src/main/sword.cc:779
 msgid "Book names and menus may not be translated."
 msgstr "Knygų pavadinimai ir meniu gali būti neišversti."
 
-#: ../src/main/sword.cc:1014 ../src/main/sword.cc:1179
+#: ../src/main/sword.cc:1138 ../src/main/sword.cc:1309
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2260,7 +2278,7 @@ msgstr ""
 "%s.\n"
 "Ar norėtumėte atidaryti ir juos?%s"
 
-#: ../src/main/sword.cc:1018 ../src/main/sword.cc:1183
+#: ../src/main/sword.cc:1142 ../src/main/sword.cc:1313
 msgid ""
 "\n"
 "\n"
@@ -2268,11 +2286,11 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1309
+#: ../src/main/sword.cc:1434
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Buvo užklaustas kasdienis pašventimas, tačiau nėra jokio įdiegta."
 
-#: ../src/main/sword.cc:1539
+#: ../src/main/sword.cc:1685
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2296,89 +2314,94 @@ msgstr ""
 "\n"
 "Prašome įrašyti raktą į langelį."
 
-#: ../src/main/tab_history.c:219
+#: ../src/main/tab_history.c:298
 msgid "Clear History"
 msgstr "Išvalyti Žurnalą"
 
-#: ../src/main/url.cc:103
+#: ../src/main/tab_history.c:304
+#, fuzzy
+msgid "History ➛ Verse List"
+msgstr "Eilučių Sąrašas"
+
+#: ../src/main/url.cc:108
 msgid "URL not found:"
 msgstr "URL nerasta:"
 
-#: ../src/main/url.cc:193
+#: ../src/main/url.cc:198
 #, c-format
 msgid "Xiphos could not execute %s"
 msgstr "Xiphos nepavyko įvykdyti %s"
 
-#: ../src/main/url.cc:201
+#: ../src/main/url.cc:206
 msgid "Viewer error:\n"
 msgstr "Žiūryklės klaida:\n"
 
-#: ../src/main/url.cc:274
+#: ../src/main/url.cc:279
 #, c-format
 msgid "Show %s in main window"
 msgstr "Rodyti %s pagrindiniame lange"
 
-#: ../src/main/xml.c:84 ../src/main/xml.c:476 ../src/main/xml.c:567
+#: ../src/main/xml.c:86 ../src/main/xml.c:478 ../src/main/xml.c:567
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr ""
 
-#: ../src/main/xml.c:94
+#: ../src/main/xml.c:96
 msgid "What must I do to be saved?"
 msgstr "Ką aš turiu daryti, kad būčiau išgelbėtas?"
 
-#: ../src/main/xml.c:96 ../src/main/xml.c:97
+#: ../src/main/xml.c:98 ../src/main/xml.c:99
 msgid "Acts 16:31"
 msgstr "Apašalų darbai 16:31"
 
-#: ../src/main/xml.c:101 ../src/main/xml.c:102
+#: ../src/main/xml.c:103 ../src/main/xml.c:104
 msgid "Eph 2:8,9"
 msgstr "Ef. 2:8,9"
 
-#: ../src/main/xml.c:106 ../src/main/xml.c:107
+#: ../src/main/xml.c:108 ../src/main/xml.c:109
 msgid "Romans 1:16"
 msgstr "Romiečiams 1:16"
 
-#: ../src/main/xml.c:110
+#: ../src/main/xml.c:112
 msgid "What is the Gospel?"
 msgstr "Kas yra Evangelija?"
 
-#: ../src/main/xml.c:112 ../src/main/xml.c:113
+#: ../src/main/xml.c:114 ../src/main/xml.c:115
 msgid "1 Cor 15:1-4"
 msgstr "1 Kor 15:1-4"
 
-#: ../src/main/xml.c:268 ../src/main/xml.c:414 ../src/main/xml.c:1291
+#: ../src/main/xml.c:270 ../src/main/xml.c:416 ../src/main/xml.c:1291
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr ""
 
-#: ../src/main/xml.c:274 ../src/main/xml.c:420 ../src/main/xml.c:442
-#: ../src/main/xml.c:862 ../src/main/xml.c:1176 ../src/main/xml.c:1370
+#: ../src/main/xml.c:276 ../src/main/xml.c:422 ../src/main/xml.c:444
+#: ../src/main/xml.c:862 ../src/main/xml.c:1176 ../src/main/xml.c:1375
 #, c-format
 msgid "empty document \n"
 msgstr "tuščias dokumentas \n"
 
-#: ../src/main/xml.c:280
+#: ../src/main/xml.c:282
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr ""
 
-#: ../src/main/xml.c:426
+#: ../src/main/xml.c:428
 #, c-format
 msgid "wrong type, root node != Copy_Export\n"
 msgstr ""
 
-#: ../src/main/xml.c:495
+#: ../src/main/xml.c:497
 #, c-format
 msgid "%s<center>%s<br>Chapter %d</center><br>"
 msgstr "%s<center>%s<br>Skyrius %d</center><br>"
 
-#: ../src/main/xml.c:496
+#: ../src/main/xml.c:498
 #, c-format
 msgid "<br><center>Chapter %d</center><br>"
 msgstr "<br><center>Skyrius %d</center><br>"
 
-#: ../src/main/xml.c:497
+#: ../src/main/xml.c:499
 #, c-format
 msgid ""
 "%s\n"
@@ -2391,7 +2414,7 @@ msgstr ""
 "Skyrius %d\n"
 "\n"
 
-#: ../src/main/xml.c:498
+#: ../src/main/xml.c:500
 #, c-format
 msgid ""
 "\n"
@@ -2404,12 +2427,12 @@ msgstr ""
 "Skyrius %d\n"
 "\n"
 
-#: ../src/main/xml.c:504
+#: ../src/main/xml.c:506
 #, c-format
 msgid "%s%s: %s Chapter %d<br><br>"
 msgstr "%s%s: %s Skyrius %d<br><br>"
 
-#: ../src/main/xml.c:505
+#: ../src/main/xml.c:507
 #, c-format
 msgid ""
 "%s: %s Chapter %d\n"
@@ -2418,52 +2441,52 @@ msgstr ""
 "%s: %s Skyrius %d\n"
 "\n"
 
-#: ../src/main/xml.c:510
+#: ../src/main/xml.c:512
 #, c-format
 msgid "&nbsp;&nbsp;[%d]"
 msgstr "&nbsp;&nbsp;[%d]"
 
-#: ../src/main/xml.c:511
+#: ../src/main/xml.c:513
 #, c-format
 msgid " [%d]"
 msgstr " [%d]"
 
-#: ../src/main/xml.c:517
+#: ../src/main/xml.c:519
 #, c-format
 msgid "%s%s (%s %d:%d%s)</body></html>"
 msgstr "%s%s (%s %d:%d%s)</body></html>"
 
-#: ../src/main/xml.c:518
+#: ../src/main/xml.c:520
 #, c-format
 msgid "%s(%s %d:%d%s)%s </body></html>"
 msgstr "%s(%s %d:%d%s)%s </body></html>"
 
-#: ../src/main/xml.c:519
+#: ../src/main/xml.c:521
 #, c-format
 msgid "%s (%s %d:%d%s)"
 msgstr "%s (%s %d:%d%s)"
 
-#: ../src/main/xml.c:520
+#: ../src/main/xml.c:522
 #, c-format
 msgid "(%s %d:%d%s) %s"
 msgstr "(%s %d:%d%s) %s"
 
-#: ../src/main/xml.c:526
+#: ../src/main/xml.c:528
 #, c-format
 msgid " %s%s"
 msgstr " %s%s"
 
-#: ../src/main/xml.c:527 ../src/main/xml.c:529
+#: ../src/main/xml.c:529 ../src/main/xml.c:531
 #, c-format
 msgid "%s(%s %d:%d-%d%s)"
 msgstr "%s(%s %d:%d-%d%s)"
 
-#: ../src/main/xml.c:528
+#: ../src/main/xml.c:530
 #, c-format
 msgid "(%s %d:%d-%d%s)<br>"
 msgstr "(%s %d:%d-%d%s)<br>"
 
-#: ../src/main/xml.c:530
+#: ../src/main/xml.c:532
 #, c-format
 msgid "(%s %d:%d-%d%s)\n"
 msgstr "(%s %d:%d-%d%s)\n"
@@ -2493,7 +2516,7 @@ msgstr "Pavyzdinis Modulių Sąrašas"
 msgid "wrong type, root node != %s\n"
 msgstr ""
 
-#: ../src/main/xml.c:1332
+#: ../src/main/xml.c:1336
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
@@ -2502,7 +2525,7 @@ msgstr ""
 "Nustatymų išsaugojimas nepavyko! stat %d, size %d\n"
 "%s"
 
-#: ../src/main/xml.c:1334
+#: ../src/main/xml.c:1338
 msgid "Attempting to revert to previous save."
 msgstr "Bandoma atkurti ankstesnį išsaugotą įrašą."
 
@@ -2522,7 +2545,7 @@ msgstr "Sukurti naują aplanką"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
 #: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:8
-#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:5
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Naujas Aplankas"
 
@@ -2566,6 +2589,10 @@ msgstr "Modulio Įrašas"
 #: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:12
 msgid "Bookmark Folder Treeview"
 msgstr "Bookmark Folder Treeview"
+
+#: ../ui/editor_link_dialog.xml.h:1
+msgid "Insert Link"
+msgstr "Įterpti Nuorodą"
 
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:16
@@ -2620,6 +2647,12 @@ msgstr "Ištrinti esamą užrašą"
 msgid "_Delete Personal Comment"
 msgstr "Iš_trinti Asmeninį Komentarą"
 
+#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:7
+#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:86
+#: ../ui/xi-menus.glade.h:1 ../ui/xi-menus.gtkbuilder.h:1
+msgid "_File"
+msgstr "_Failas"
+
 #: ../ui/editor_note.xml.h:10
 msgid "Save the current note"
 msgstr "Išsaugoti esamą užrašą"
@@ -2628,6 +2661,14 @@ msgstr "Išsaugoti esamą užrašą"
 msgid "_Save (Personal Comment)"
 msgstr "Iš_saugoti (Asmeninį Komentarą)"
 
+#: ../ui/editor_note.xml.h:12 ../ui/editor_studypad.xml.h:18
+msgid "Print Pre_view"
+msgstr "Spaudinio Pe_ržiūra"
+
+#: ../ui/editor_note.xml.h:13 ../ui/editor_studypad.xml.h:19
+msgid "_Print..."
+msgstr "S_pausdinti..."
+
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 msgid "E_xit"
 msgstr "_Išeiti"
@@ -2635,6 +2676,11 @@ msgstr "_Išeiti"
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
 msgid "For_mat"
 msgstr ""
+
+#: ../ui/editor_note.xml.h:16 ../ui/editor_studypad.xml.h:11
+#: ../ui/gtk2_webedit.ui.h:75 ../ui/gtk_webedit.ui.h:75
+msgid "Save"
+msgstr "Išsaugoti"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Print this document"
@@ -2859,12 +2905,16 @@ msgstr "Mažinti pastraipos įtrauką"
 msgid "Delete selection"
 msgstr "Ištrinti žymėjimą"
 
+#: ../ui/gtk2_webedit.ui.h:14 ../ui/gtk_webedit.ui.h:14
+msgid "Delete"
+msgstr "Ištrinti"
+
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 msgid "Remove selection"
 msgstr "Pašalinti pasirinkimą"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
-#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:11
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
 msgstr "Ištrinti Elementą"
 
@@ -3020,6 +3070,10 @@ msgstr ""
 msgid "Right justify paragraph"
 msgstr ""
 
+#: ../ui/gtk2_webedit.ui.h:56 ../ui/gtk_webedit.ui.h:56
+msgid "New"
+msgstr "Naujas"
+
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
 msgid "Create new file"
 msgstr "Sukurti naują failą"
@@ -3137,110 +3191,75 @@ msgstr "Paskiausiai naudoti failai"
 msgid "_Edit"
 msgstr "_Keisti"
 
-#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:90
+#: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:89
 #: ../ui/xi-menus.glade.h:40 ../ui/xi-menus.gtkbuilder.h:25
 msgid "_Help"
 msgstr "_Pagalba"
 
-#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
-msgid "toolbutton1"
-msgstr "toolbutton1"
-
-#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
-msgid "toolbutton10"
-msgstr "toolbutton10"
-
-#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
-msgid "toolbutton3"
-msgstr "toolbutton3"
-
-#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
-msgid "toolbutton2"
-msgstr "toolbutton2"
-
-#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
-msgid "toolbutton4"
-msgstr "toolbutton4"
-
-#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
-msgid "toolbutton6"
-msgstr "toolbutton6"
-
-#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
-msgid "toolbutton7"
-msgstr "toolbutton7"
-
-#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
+#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:90
 msgid "Normal"
 msgstr "Normal"
 
-#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
+#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
 msgid "Header 1"
 msgstr "Antraštė 1"
 
-#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
+#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
 msgid "Header 2"
 msgstr "Antraštė 2"
 
-#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
+#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
 msgid "Header 3"
 msgstr "Antraštė 3"
 
-#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
+#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
 msgid "Header 4"
 msgstr "Antraštė 4"
 
-#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
+#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
 msgid "Header 5"
 msgstr "Antraštė 5"
 
-#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
+#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
 msgid "Header 6"
 msgstr "Antraštė 6"
 
-#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
+#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
 msgid "Address"
 msgstr "Adresas"
 
-#: ../ui/gtk2_webedit.ui.h:106 ../ui/gtk_webedit.ui.h:106
+#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
 msgid "Preformatted"
 msgstr "Preformatted"
 
-#: ../ui/gtk2_webedit.ui.h:107 ../ui/gtk_webedit.ui.h:107
+#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
 msgid "Bulleted List"
 msgstr "Suženklintasis Sąrašas"
 
-#: ../ui/gtk2_webedit.ui.h:108 ../ui/gtk_webedit.ui.h:108
+#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
 msgid "Roman Numeral List"
 msgstr "Numeruojamas Sąrašas"
 
-#: ../ui/gtk2_webedit.ui.h:109 ../ui/gtk_webedit.ui.h:109
+#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
 msgid "Numbered List"
 msgstr "Numeruotas Sąrašas"
 
-#: ../ui/gtk2_webedit.ui.h:110 ../ui/gtk_webedit.ui.h:110
+#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
 msgid "Alphabetical List"
 msgstr "Abėcėlinis sąrašas"
 
-#: ../ui/gtk2_webedit.ui.h:111 ../ui/gtk_webedit.ui.h:111
-msgid "toolbutton11"
-msgstr "toolbutton11"
+#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
+#, fuzzy
+msgid "Strike"
+msgstr "Perbraukti"
 
-#: ../ui/gtk2_webedit.ui.h:112 ../ui/gtk_webedit.ui.h:112
-msgid "toolbutton12"
-msgstr "toolbutton12"
-
-#: ../ui/gtk2_webedit.ui.h:113 ../ui/gtk_webedit.ui.h:113
+#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
 msgid "Set font color of selected text."
 msgstr "Nustatyti pažymėto teksto spalvą"
 
-#: ../ui/gtk2_webedit.ui.h:114 ../ui/gtk_webedit.ui.h:114
+#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
 msgid "Highlight selected text by setting background color."
 msgstr "Paryškinti pažymėtą tekstą, nustatant fono spalvą."
-
-#: ../ui/gtk2_webedit.ui.h:115 ../ui/gtk_webedit.ui.h:115
-msgid "toolbutton9"
-msgstr "toolbutton9"
 
 #: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
@@ -3326,33 +3345,41 @@ msgid "Delete the fast-search index of the selected modules."
 msgstr "Ištrinti pasirinktų modulių greitos paieškos indeksą."
 
 #: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
+msgid "Scan _Obsolete"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:17 ../ui/module-manager.gtkbuilder.h:17
+msgid "Scan for obsolete modules and offer to delete them."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:18
 msgid "Continue"
 msgstr "Tęsti"
 
 #. do not translate <b> and </b> they are html formating
-#: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:18
+#: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:20
 msgid "<b>Sword</b>"
 msgstr "<b>Sword</b>"
 
-#: ../ui/module-manager.glade.h:19 ../ui/module-manager.gtkbuilder.h:19
+#: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:21
 msgid "<b>Module Manager</b>"
 msgstr "<b>Modulių Tvarkytuvė</b>"
 
-#: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:20
+#: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:22
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr ""
 "<b>ĮSPĖJIMAS:</b> Jei gyvenate šalyje, kurioje yra persekiojimai, programa "
 "naudokitės atsargiai."
 
-#: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:21
+#: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:23
 msgid "<b>Add and Remove Sources</b>"
 msgstr "<b>Pridėti ir Šalinti Šaltinius</b>"
 
-#: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:22
+#: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:24
 msgid "Current local sources"
 msgstr "Esami vietiniai šaltiniai"
 
-#: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:23
+#: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:25
 msgid ""
 "Add a local folder as an install source, typically on a cdrom or flash "
 "drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
@@ -3361,15 +3388,15 @@ msgstr ""
 "USB atmintinės. Tokiame aplanke yra vidiniai aplankai \"mods.d\" ir \"modules"
 "\"."
 
-#: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:24
+#: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:26
 msgid "Remove one of your local folders as an install source."
 msgstr "Pašalinti viena iš jūsų vietinių aplankų iš diegimo šaltinių."
 
-#: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:25
+#: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:27
 msgid "Current Remote Sources"
 msgstr "Esami Nuotoliniai Šaltiniai"
 
-#: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:26
+#: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:28
 msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
@@ -3377,43 +3404,43 @@ msgstr ""
 "Pridėti tinkintą nuotolinio diegimo šaltinį. Jūs privalote žinoti šaltinio "
 "kompiuterio pavadinimą ir aplanką kuriame yra jo saugyklos."
 
-#: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:27
+#: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:29
 msgid "Remove a remote install source."
 msgstr "Pašalinti nuotolinį diegimo šaltinį."
 
-#: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:28
+#: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:30
 msgid "<b>Install Source</b>"
 msgstr "<b>Diegimo Šaltinis</b>"
 
-#: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:29
+#: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:31
 msgid "Local"
 msgstr "Vietinis"
 
-#: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:30
+#: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:32
 msgid "Remote"
 msgstr "Nuotolinis"
 
-#: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:31
+#: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:33
 msgid "<b>Install Destination</b>"
 msgstr "<b>Diegimo Paskirtis</b>"
 
-#: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:32
+#: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:34
 msgid "<i>Personal area, for your use only:</i>"
 msgstr "<i>Asmeninė sritis, tik jūsų naudojimui:</i>"
 
-#: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:33
+#: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:35
 msgid "Home dir"
 msgstr "Namų kat"
 
-#: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:34
+#: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:36
 msgid "<i>System area, for all users:</i>"
 msgstr "<i>Sistemos sritis, visiems naudotojams:</i>"
 
-#: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:35
+#: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:37
 msgid "Sword sys dir"
 msgstr "Sword sis kat"
 
-#: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:36
+#: ../ui/module-manager.glade.h:38 ../ui/module-manager.gtkbuilder.h:38
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
@@ -3422,7 +3449,7 @@ msgstr ""
 "nenorite rizikuoti bei būti aptikti, jūs NETURĖTUMĖTE naudoti nuotolinio "
 "diegimo funkcijos!"
 
-#: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:37
+#: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:39
 msgid "Local Install Folder"
 msgstr "Vietinis Diegimo Aplankas"
 
@@ -3613,8 +3640,9 @@ msgstr ""
 "kad gauti kalbėtojo nuorodas."
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:35
-msgid "Mode"
-msgstr "Veiksena"
+#, fuzzy
+msgid "<i>Mode:</i>"
+msgstr "<b>Moduliai</b>"
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:36
 msgid "Select the mode in which BibleSync should operate."
@@ -3685,7 +3713,8 @@ msgid "BSP privacy button"
 msgstr "BSP privacy button"
 
 #: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:52
-msgid "Navigate"
+#, fuzzy
+msgid "<i>Navigate:</i>"
 msgstr "Naršyti"
 
 #: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:53
@@ -3717,8 +3746,9 @@ msgid "BSP nav verse list radio button"
 msgstr "BSP nav verse list radio button"
 
 #: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
-msgid "Listen"
-msgstr "Klausyti"
+#, fuzzy
+msgid "<i>Listen:</i>"
+msgstr "<b>Sąrašo Pavadinimas</b>"
 
 #: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
 msgid "Xiphos will listen to Speakers according to choice here."
@@ -3759,6 +3789,11 @@ msgstr "Nebus sekamas nei vienas kalbėtojas"
 #: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
 msgid "BSP listen none radio button"
 msgstr "BSP listen none radio button"
+
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
+#, fuzzy
+msgid "<i>Special:</i>"
+msgstr "Ypatinga"
 
 #: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
 msgid ""
@@ -4127,11 +4162,6 @@ msgstr "Change Personal Notes Combo"
 #: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Modules Misc"
 msgstr "Modules Misc"
-
-#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
-#: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
-msgid "Module Selection"
-msgstr "Modulių Pasirinkimas"
 
 #: ../ui/prefs.gtkbuilder.h:1
 msgid "-2"
@@ -4567,6 +4597,11 @@ msgstr "Show Footnotes checkbox"
 msgid "Attribute Search"
 msgstr "Požymių Paieška"
 
+#: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
+#: ../ui/selector-prefs.glade.h:1 ../ui/selector-prefs.gtkbuilder.h:1
+msgid "Module Selection"
+msgstr "Modulių Pasirinkimas"
+
 #: ../ui/search-dialog.gtkbuilder.h:6
 msgid "<b>search module</b>"
 msgstr "<b>paieškos modulis</b>"
@@ -4659,6 +4694,10 @@ msgstr ""
 #: ../ui/xi-menus.glade.h:16 ../ui/xi-menus.gtkbuilder.h:10
 msgid "_Module Manager"
 msgstr "_Modulių Tvarkytuvė"
+
+#: ../ui/xi-menus.glade.h:17 ../ui/xi-menus.gtkbuilder.h:11
+msgid "_View"
+msgstr "_Rodinys"
 
 #: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
@@ -4841,76 +4880,76 @@ msgstr "Rodyti neanoniminius žymeklius, pvz., \"*n23\""
 msgid "Variants"
 msgstr "Variantai"
 
-#: ../ui/xi-menus.glade.h:83 ../ui/xi-menus-popup.gtkbuilder.h:60
+#: ../ui/xi-menus.glade.h:87 ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Image Content"
 msgstr "Paveikslo Turinys"
 
-#: ../ui/xi-menus.glade.h:84 ../ui/xi-menus-popup.gtkbuilder.h:61
+#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Respect Font Faces"
 msgstr "Atsižvelgti į Šrifto Išvaizdą"
 
-#: ../ui/xi-menus.glade.h:85 ../ui/xi-menus-popup.gtkbuilder.h:62
+#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Commentary by Chapter"
 msgstr "Komentarai pagal Skyrių"
 
-#: ../ui/xi-menus.glade.h:86 ../ui/xi-menus-popup.gtkbuilder.h:63
+#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Doublespace"
 msgstr "Dvigubi intervalai"
 
-#: ../ui/xi-menus.glade.h:87 ../ui/xi-menus-popup.gtkbuilder.h:64
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:68
 msgid "Lookup Selection"
 msgstr "Ieškoti Žymėjimo"
 
-#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:65
+#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Use Current Dictionary"
 msgstr "Naudoti Esamą Žodyną"
 
-#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:66
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Browse in BibleMap.org"
 msgstr "Naršyti BibleMap.org"
 
-#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:67
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Unlock This Module"
 msgstr "Atrakinti Šį Modulį"
 
-#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:68
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Display Book Heading"
 msgstr "Rodyti Knygos Antraštę"
 
-#: ../ui/xi-menus.glade.h:92
+#: ../ui/xi-menus.glade.h:96
 msgid "Display Chapter Heading"
 msgstr "Rodyti Skyriaus Antraštę"
 
-#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Rename Pers.Comm."
 msgstr "Pervadinti Asm. Koment."
 
-#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Dump Pers.Comm."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Read Selection Aloud"
 msgstr "Garsiai Skaityti Žymėjimą"
 
-#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:85
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:89
 msgid "Save these results as a single bookmark"
 msgstr "Išsaugoti šiuos rezultatus kaip vieną adresyno įrašą"
 
-#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:84
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Save list as a single bookmark"
 msgstr "Išsaugoti sąrašą kaip vieną adresyno įrašą"
 
-#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:87
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr ""
 "Išsaugoti šiuos rezultatus kaip adresyno įrašų seriją atskirame aplanke"
 
-#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:86
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Save list as a series of bookmarks"
 msgstr "Išsaugoti sąrašą kaip adresyno įrašų seriją"
 
-#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:89
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid ""
 "Provide a dialog in which to paste a line of verse references, to fill the "
 "verse list."
@@ -4918,11 +4957,20 @@ msgstr ""
 "Pateikti langą, į kurį įdėti Biblijos eilučių nuorodas, kurios užpildys "
 "eilučių sąrašą."
 
-#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Populate verse list"
 msgstr "Užpildyti eilučių sąrašą"
 
-#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:95
+msgid "Push the entire verse list contents directly into the history list."
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:94
+#, fuzzy
+msgid "Preload history from verse list"
+msgstr "Išskleidžiamasis žurnalo sąrašas"
+
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:97
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
@@ -4930,99 +4978,99 @@ msgstr ""
 "Siųsti šį eilučių sąrašą kitiems per BibleSync, jeigu esate Asmeninėje arba "
 "Kalbėtojo veiksenoje."
 
-#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:96
 msgid "Send list via BibleSync"
 msgstr "Siųsti sąrašą per BibleSync"
 
-#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:92
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:98
 msgid "Export List"
 msgstr "Eksportuoti Sąrašą"
 
-#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:2
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "Atidaryti šį adresyno įrašą naujoje kortelėje"
 
-#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "Atverti naujoje kortelėje"
 
-#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "Atidaryti šį adresyno įrašą lange"
 
-#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:3
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "Atidaryti lange"
 
-#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:6
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "Į pasirinktą aplanką pridėti naują aplanką"
 
-#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "Įterpti čia naują adresyno įrašą"
 
-#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:7
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Įterpti Adresyno Įrašą"
 
-#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:10
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "Redaguoti adresyno įrašo elementą"
 
-#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:9
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "R_edaguoti Elementą"
 
-#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:12
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Ištrinti elementą"
 
-#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:14
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "Išskleisti visas Adresyno įrašų grupes"
 
-#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:13
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Viską Išskleisti"
 
-#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:16
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "Suskleisti visas Adresyno įrašų grupes"
 
-#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:15
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Viską Suskleisti"
 
-#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:17
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "Leisti perkelti elementus iš vieno aplanko į kitą"
 
-#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:18
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "Leisti Pertvarkymą"
 
-#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:20
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Įkelti kitų adresyno įrašų failą (pagal numatymą: iš BibleTime)"
 
-#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:19
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:19
 msgid "Import Bookmarks"
 msgstr "Importuoti Adresyno Įrašus"
 
-#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:22
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:21
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr "Eksportuoti Aplanką"
 
-#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Open selected module in a new tab"
 msgstr "Atverti pasirinktą modulį naujoje kortelėje"
 
-#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:32
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
@@ -5030,79 +5078,79 @@ msgstr ""
 "Atidaryti pasirinktą modulį\n"
 "\tatskirame ['dialogo'] lange"
 
-#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open in a separate window"
 msgstr "Atverti atskirame lange"
 
-#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:73
+#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Create a new simple prayer list"
 msgstr "Sukurti naują paprastą maldos sąrašą"
 
-#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:72
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Simple"
 msgstr "Paprastas"
 
-#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:75
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new subject prayer list"
 msgstr "Sukurti naują teminį maldos sąrašą"
 
-#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:74
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Subject"
 msgstr "Teminis"
 
-#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:77
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new monthly journal"
 msgstr "Sukurti naują mėnesinį žurnalą"
 
-#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:76
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Monthly"
 msgstr "Mėnesinis"
 
-#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:79
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Create a new daily journal"
 msgstr "Sukurti naują kasdienį žurnalą"
 
-#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:78
+#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Daily"
 msgstr "Kasdienis"
 
-#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:81
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Create a new outlined topic"
 msgstr "Sukurti naujos temos kontūrus"
 
-#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:80
+#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Outlined"
 msgstr "Kontūrų"
 
-#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:83
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Open module in editor or plain display window"
 msgstr "Atidaryti modulį redaktoriuje arba paprastame rodymo lange"
 
-#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:82
+#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Open in separate window"
 msgstr "Atidaryti atskirame lange"
 
-#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add a sub-item"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:144
+#: ../ui/xi-menus.glade.h:150
 msgid "Add Sub-Item"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add an item"
 msgstr "Pridėti elementą"
 
-#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add Item"
 msgstr "Pridėti Elementą"
 
-#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:27
+#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove this item"
 msgstr "Šalinti šį elementą"
 
-#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:29
+#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit this item"
 msgstr "Redaguoti šį elementą"
 
@@ -5113,3 +5161,179 @@ msgstr "Xiphos Biblijos Gidas"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr "Studijuoti Bibliją"
+
+#~ msgid "network setup errors."
+#~ msgstr "tinklo nustatymo klaidos."
+
+#~ msgid " client socket"
+#~ msgstr "kliento jungtis"
+
+#~ msgid " server socket"
+#~ msgstr "serverio jungtis"
+
+#~ msgid "bad magic"
+#~ msgstr "bloga magija"
+
+#~ msgid "bad protocol version"
+#~ msgstr "bloga protokolo versija"
+
+#~ msgid "bad msg type"
+#~ msgstr "blogas msg tipas"
+
+#~ msgid "bad packet count"
+#~ msgstr "blogas duomenų paketo skaičiavimas"
+
+#~ msgid "bad packet index"
+#~ msgstr "blogas duomenų paketo indeksas"
+
+#~ msgid "bad body format"
+#~ msgstr "blogas laiško teksto formatas"
+
+#~ msgid "missing required header "
+#~ msgstr "trūksta reikiamos antraštės"
+
+#~ msgid "UUID spoofed: wrong ipaddr."
+#~ msgstr "UUID apsimeta kitu: neteisingas ipaddr."
+
+#~ msgid "Ignoring echo."
+#~ msgstr "Aidas ignoruojamas."
+
+#~ msgid "Domain not 'BIBLE-VERSE': "
+#~ msgstr "Domenas ne 'BIBLE-VERSE':"
+
+#~ msgid "Invalid group: "
+#~ msgstr "Neteisinga grupė:"
+
+#~ msgid "[no dump ready]"
+#~ msgstr "[nėra paruoštos atminties išklotinės]"
+
+#~ msgid "select < 0"
+#~ msgstr "select < 0"
+
+#~ msgid "recvfrom < 0"
+#~ msgstr "recvfrom < 0"
+
+#~ msgid "Transmit failed.\n"
+#~ msgstr "Perdavimas nepavyko.\n"
+
+#~ msgid ""
+#~ "Unable to multicast; BibleSync is now disabled. If your network "
+#~ "connection changed while this program was active, it may be sufficient to "
+#~ "re-enable."
+#~ msgstr ""
+#~ "Nepavyko daugiaabonentis transliavimas; BibleSync dabar yra išjungtas. "
+#~ "Jeigu, kol ši programa buvo įjungta, pasikeitė jūsų tinklo ryšys, gali "
+#~ "užtekti tik įjungti iš naujo."
+
+#~ msgid "Page %d of %d"
+#~ msgstr "Puslapis %d iš %d"
+
+#~ msgid "Save As"
+#~ msgstr "Išsaugoti Kaip"
+
+#~ msgid "HTML Output"
+#~ msgstr "HTML Išvestis"
+
+#~ msgid "HTML Source"
+#~ msgstr "HTML Šaltinis"
+
+#~ msgid "Plain Source"
+#~ msgstr "Paprastas Šaltinis"
+
+#~ msgid "_Quit"
+#~ msgstr "_Išeiti"
+
+#~ msgid "_Open"
+#~ msgstr "_Atidaryti"
+
+#~ msgid "_Save"
+#~ msgstr "Iš_saugoti"
+
+#~ msgid "Save _As..."
+#~ msgstr "Išsaugoti _Kaip..."
+
+#~ msgid "Open new document"
+#~ msgstr "Atidaryti naują dokumentą"
+
+#~ msgid "Delete current note"
+#~ msgstr "Ištrinti esamą užrašą"
+
+#~ msgid "HTML _Output"
+#~ msgstr "HTML Išv_estis"
+
+#~ msgid "_HTML Source"
+#~ msgstr "_HTML Šaltinis"
+
+#~ msgid "_Plain Source"
+#~ msgstr "_Paprastas Šaltinis"
+
+#~ msgid "Unlock "
+#~ msgstr "Atrakinti"
+
+#~ msgid "Preparing to print"
+#~ msgstr "Ruošiamasi spausdinti"
+
+#~ msgid "Printing is not supported on this printer"
+#~ msgstr "Spausdinimas šiuo spausdintuvu nepalaikomas"
+
+#~ msgid "Printer %s does not support PostScript printing."
+#~ msgstr "Spausdintuvas %s nepalaiko PostScript spausdinimo."
+
+#~ msgid "Printing"
+#~ msgstr "Spausdinama"
+
+#~ msgid "Waiting to print"
+#~ msgstr "Laukiama spausdinti"
+
+#~ msgid "An error occurred while printing"
+#~ msgstr "Spausdinant, įvyko klaida"
+
+#~ msgid "It was not possible to print your document: %s"
+#~ msgstr "Neįmanoma atspausdinti jūsų dokumento: %s"
+
+#~ msgid ""
+#~ "Xiphos can not create  .xiphos:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Xiphos cannot continue."
+#~ msgstr ""
+#~ "Xiphos negali sukurti  .xiphos:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Xiphos negali tęsti."
+
+#~ msgid "toolbutton1"
+#~ msgstr "toolbutton1"
+
+#~ msgid "toolbutton10"
+#~ msgstr "toolbutton10"
+
+#~ msgid "toolbutton3"
+#~ msgstr "toolbutton3"
+
+#~ msgid "toolbutton2"
+#~ msgstr "toolbutton2"
+
+#~ msgid "toolbutton4"
+#~ msgstr "toolbutton4"
+
+#~ msgid "toolbutton6"
+#~ msgstr "toolbutton6"
+
+#~ msgid "toolbutton7"
+#~ msgstr "toolbutton7"
+
+#~ msgid "toolbutton11"
+#~ msgstr "toolbutton11"
+
+#~ msgid "toolbutton12"
+#~ msgstr "toolbutton12"
+
+#~ msgid "toolbutton9"
+#~ msgstr "toolbutton9"
+
+#~ msgid "Mode"
+#~ msgstr "Veiksena"
+
+#~ msgid "Listen"
+#~ msgstr "Klausyti"
