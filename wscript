@@ -14,10 +14,7 @@ preproc.strict_quotes=0
 import waffles.misc
 import waffles.gnome as gnome
 
-bzrrevno = '$CurRevno$'
-bzrrevid = '$CurRevid$'
-
-VERSION='4.0.0'
+VERSION='4.0.0f'
 
 APPNAME='xiphos'
 PACKAGE='xiphos'

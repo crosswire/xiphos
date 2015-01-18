@@ -1,3 +1,9 @@
+xiphos-svn (4.0.0f-0~svn) unstable; urgency=low
+
+  * Test bundle
+
+ -- Karl Kleinpaste <charcoal@users.sf.net>  Sun, 30 Dec 2014 07:15:00 +0000
+
 xiphos-svn (4.0.0-0~svn) unstable; urgency=low
 
   * New upstream release (long-time catch-up, see bug#521)
