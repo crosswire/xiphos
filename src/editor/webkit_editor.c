@@ -103,10 +103,67 @@ void  editor_set_filename(EDITOR * e, const gchar * new_filename)
 }
 */
 
+/******************************************************************************
+ * Name
+ *   on_about_dialog_response
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void on_about_dialog_response(GtkDialog * dialog, gint response_id,
+ *			           gpointer user_data)
+ *
+ * Description
+ *
+ * Return value
+ *   void
+ */
+
+static void
+on_about_dialog_response(GtkDialog * dialog,
+			 gint response_id,
+			 gpointer user_data)
+{
+    gtk_widget_destroy(GTK_WIDGET(dialog));
+}
+
+/******************************************************************************
+ * Name
+ *   action_about_activate_cb
+ *
+ * Synopsis
+ *   #include "gui/about_sword.h"
+ *
+ *   void action_about_activate_cb(GtkWidget *widget, EDITOR *e);
+ *
+ * Description
+ *   Create brief dialog for webkit editor.
+ *
+ * Return value
+ *   void
+ */
+
 G_MODULE_EXPORT void
 action_about_activate_cb (GtkWidget *widget, EDITOR * e)
 {
+	GtkWidget *about;
+	GdkPixbuf *about_logo;
 
+	about_logo = pixbuf_finder("xiphos-button-125.png", 0, NULL);
+	about = gtk_about_dialog_new();
+
+	g_signal_connect(about, "response",
+			 G_CALLBACK(on_about_dialog_response), NULL);
+	gtk_about_dialog_set_program_name
+	    (GTK_ABOUT_DIALOG(about), "WebKit editor, Xiphos");
+	gtk_about_dialog_set_version
+	    (GTK_ABOUT_DIALOG(about), (gchar *)PACKAGE_VERSION);
+	gtk_about_dialog_set_comments
+	    (GTK_ABOUT_DIALOG(about), "Replacement for gtkhtml editor");
+	gtk_about_dialog_set_logo
+	    (GTK_ABOUT_DIALOG(about), about_logo);
+	set_window_icon(GTK_WINDOW(about));
+	gtk_widget_show(about);
 }
 
 G_MODULE_EXPORT void
@@ -599,16 +656,13 @@ print (WebKitWebView * html, GtkPrintOperationAction action)
 	GError *error = NULL;
 	WebKitWebFrame *frame;
 
-	frame = webkit_web_view_get_main_frame ( html );
-	operation = gtk_print_operation_new ();
+	frame = webkit_web_view_get_main_frame(html);
+	operation = gtk_print_operation_new();
 	
-	result = webkit_web_frame_print_full(frame,
-                                     operation,
-                                     action,
-                                     &error);
+	result = webkit_web_frame_print_full(frame, operation, action, &error);
 
-	g_object_unref (operation);
-	handle_error (&error);
+	g_object_unref(operation);
+	handle_error(&error);
 
 	return result;
 }
@@ -618,11 +672,11 @@ open_dialog (EDITOR * e)
 {
 	GtkWidget *dialog;
 	gint response;
-	GtkFileFilter *filter = gtk_file_filter_new ();
+	GtkFileFilter *filter = gtk_file_filter_new();
 	
-	gtk_file_filter_add_mime_type (filter,"text/html");
+	gtk_file_filter_add_mime_type(filter,"text/html");
 	
-	dialog = gtk_file_chooser_dialog_new (
+	dialog = gtk_file_chooser_dialog_new(
 		_("Open"), GTK_WINDOW (e->window),
 		GTK_FILE_CHOOSER_ACTION_OPEN,
 #ifdef HAVE_GTK_310                
@@ -639,17 +693,17 @@ open_dialog (EDITOR * e)
 			GTK_FILE_CHOOSER (dialog), settings.studypaddir); 
 	gtk_file_chooser_set_filter ((GtkFileChooser*)dialog, filter);
 	
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	response = gtk_dialog_run(GTK_DIALOG(dialog));
 
 	if (response == GTK_RESPONSE_ACCEPT) {
 		gchar *new_filename;
 
-		new_filename = gtk_file_chooser_get_filename ( GTK_FILE_CHOOSER (dialog));
+		new_filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
 		_load_file(e, new_filename);
 		g_free (new_filename);
 	}
 
-	gtk_widget_destroy (dialog);
+	gtk_widget_destroy(dialog);
 
 	return response;
 }

@@ -66,7 +66,7 @@ ol.L4 { \n\
 } \n\
 </style>\n\
 </head>\n\
-<body contenteditable=\"true\">\n\
+<body>\n\
 \n\
 </body>\n\
 </html>\n"
