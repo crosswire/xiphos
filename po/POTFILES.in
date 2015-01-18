@@ -1,6 +1,4 @@
 [encoding: UTF-8]
-## Legacy BibleSync class
-src/biblesync/biblesync.cc
 ## Backend source files
 src/backend/gs_stringmgr.cpp
 src/backend/module_manager.cc
