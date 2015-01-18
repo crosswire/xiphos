@@ -163,10 +163,9 @@ void editor_get_document_content (GString * data, EDITOR * e)
 	WebKitDOMHTMLElement* html;
 	WebKitDOMHTMLHeadElement* header;
 	WebKitDOMDocument* dom_document = NULL;
-	//gchar * filename = NULL;
 	gchar* body = NULL;
 	gchar* head = NULL;
-	
+
 	dom_document = webkit_web_view_get_dom_document ((WebKitWebView*) e->html_widget);
 	if(!dom_document)
 		return;
@@ -174,13 +173,13 @@ void editor_get_document_content (GString * data, EDITOR * e)
 	/* get document <head> info */
 	header = webkit_dom_document_get_head(dom_document);
 	head = webkit_dom_html_element_get_inner_html((WebKitDOMHTMLElement*)header);
-	
+
 	/* get document <body> info */
 	html = webkit_dom_document_get_body(dom_document);
 	body = webkit_dom_html_element_get_inner_html(html);
-	
-	
-	g_string_printf (data, "%s%s</head><body contenteditable=\"true\">%s</body>\n</html>",html_start, head, body); 
+
+	g_string_printf (data, "%s%s</head><body>%s</body>\n</html>",
+			 html_start, head, body); 
 }
 
 
