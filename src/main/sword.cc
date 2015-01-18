@@ -670,7 +670,7 @@ void main_init_language_map() {
 	}
 	XI_message(("%s",language_file));
 
-	if ((language = fopen(language_file, "r")) == NULL) {
+	if ((language = g_fopen(language_file, "r")) == NULL) {
 		gui_generic_warning
 		    (_("Xiphos's language abbreviation\nfile cannot be opened."));
 		g_free(language_file);
