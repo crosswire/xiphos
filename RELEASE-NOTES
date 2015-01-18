@@ -3,6 +3,23 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Intermediate Test Release 4.0.0f
+18 Jan 2015
+
+- Completed webkit editor, due to replace gtkhtml editor.
+
+- Added Abbreviation module configuration support.
+
+- Added Glosses (Ruby) and Morpheme Segmentation display support.
+
+- Added obsolete module audit, during install and on maintenance page.
+
+- Added more informative "About" for modules.
+
+- Removed BibleSync from Xiphos' source tree. It must be referenced as a
+  proper library.
+________________________________________________________________
+
 Release 4.0.0
 24 Dec 2014
 
