@@ -1,4 +1,3 @@
-#define CHATTY 1
 /*
  * Xiphos Bible Study Tool
  * webkit_editor.c - html editor using webkit
