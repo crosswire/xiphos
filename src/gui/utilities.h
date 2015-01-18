@@ -101,6 +101,8 @@ void StartFestival(void);
 void StopFestival(int *tts_socket);
 gboolean FestivalSpeak(gchar *text, int length, int tts_socket);
 
+char *inhale_text_from_file(const char *filename);
+
 #ifndef HAVE_STRCASESTR
 const char *strcasestr(const char *haystack, const char *needle);
 #endif
