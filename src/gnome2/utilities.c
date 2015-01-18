@@ -32,6 +32,9 @@
 #include <ctype.h>
 #include <assert.h>
 
+#include <glib.h>
+#include <glib/gstdio.h>
+
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <gtk/gtk.h>
@@ -2115,6 +2118,52 @@ AnalyzeForImageSize(const char *origtext,
 
 	resized = g_string_append(resized, trail);	// remainder of text appended.
 	return resized->str;
+}
+
+/******************************************************************************
+ * Name
+ *   inhale_text_from_file
+ *
+ * Synopsis
+ *   char *inhale_text_from_file(const char *filename)
+ *
+ * Description
+ *   reads content from a file using stdio, for use anywhere.
+ *
+ * Return value
+ *   char *
+ *   to be freed by caller.
+ */
+
+char *inhale_text_from_file(const char *filename)
+{
+    FILE *handle;
+    size_t length;
+    gchar *blob = NULL;
+
+    if ((handle = g_fopen(filename, "r")) == NULL)
+	return NULL;
+
+    (void) fseek(handle, 0L, SEEK_END);
+    length = ftell(handle);
+    rewind(handle);
+
+    if ((length != 0) &&
+	((blob = (gchar*)g_malloc(length+2)) != NULL) &&
+	(fread(blob, 1, length, handle) == length))
+    {
+	/* success. bound the text as a C string. */
+	*(blob + length) = '\0';
+    }
+    else
+    {
+	if (blob)
+	    g_free(blob);
+	blob = NULL;
+    }
+
+    fclose(handle);
+    return blob;
 }
 
 /******   end of file   ******/
