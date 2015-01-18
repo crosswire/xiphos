@@ -449,7 +449,7 @@ gui_display_about_module_dialog(gchar *modname)
 	info = g_string_append(info, "<br/>");
 	if (main_check_for_global_option ((gchar*) modname, "ThMLHeadings") ||
 	    main_check_for_global_option ((gchar*) modname, "OSISHeadings")) {
-	    info = g_string_append(info, _("* Headings"));
+	    info = g_string_append(info, _("*&nbsp;Headings"));
 	    info = g_string_append(info, "<br/>");
 	    feature_count++;
 	}
