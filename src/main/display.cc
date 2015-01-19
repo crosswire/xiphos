@@ -323,12 +323,9 @@ const gchar *get_css_references(SWModule& module)
     // assume nothing will be available.
     css = "";
     
-    // construct path to module's CSS.
-    char *datapath = main_get_mod_config_entry(module.getName(), "AbsoluteDataPath");
-    char *prefcss  = main_get_mod_config_entry(module.getName(), "PreferredCSSXHTML");
-
-    // module-specific CSS.
-    char *css_file = g_build_filename(datapath, (prefcss ? prefcss : stylefile), NULL);
+    // non-specific CSS for all module displays.
+    char *css_file = g_build_filename(settings.gSwordDir,
+				      default_stylefile, NULL);
 
     if (g_file_test(css_file, G_FILE_TEST_EXISTS))
     {
@@ -340,23 +337,28 @@ const gchar *get_css_references(SWModule& module)
 #endif
 	    + css_file
 	    + "\" />";
-    } else {
-    	g_free(css_file);	// get rid of old one first.
-    	css_file = g_build_filename(settings.gSwordDir, default_stylefile, NULL);
+    }
+    g_free(css_file);
 
-    	if (g_file_test(css_file, G_FILE_TEST_EXISTS))
- 		{
-	    	css += (string)"<link rel=\"stylesheet\" type=\"text/css\" href=\""
+    // construct path to module's CSS.
+    char *datapath = main_get_mod_config_entry(module.getName(), "AbsoluteDataPath");
+    char *prefcss  = main_get_mod_config_entry(module.getName(), "PreferredCSSXHTML");
+
+    // module-specific CSS.
+    css_file = g_build_filename(datapath, (prefcss ? prefcss : stylefile), NULL);
+
+    if (g_file_test(css_file, G_FILE_TEST_EXISTS))
+    {
+	css += (string)"<link rel=\"stylesheet\" type=\"text/css\" href=\""
 #ifdef WIN32
-    		+ "http://127.0.0.1:7878/"  // see main.c (sob)
+	    + "http://127.0.0.1:7878/"	// see main.c (sob)
 #else
-    		+ "file:"
+	    + "file:"
 #endif
-    		+ css_file
-    		+ "\" />";
-    	}
-        g_free(css_file);
-	}
+	    + css_file
+	    + "\" />";
+    }
+    g_free(css_file);	// get rid of old one first.
     
     return css.c_str();
 }
