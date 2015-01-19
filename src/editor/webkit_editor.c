@@ -671,9 +671,9 @@ open_dialog (EDITOR * e)
 {
 	GtkWidget *dialog;
 	gint response;
-	GtkFileFilter *filter = gtk_file_filter_new();
+//	GtkFileFilter *filter = gtk_file_filter_new();
 	
-	gtk_file_filter_add_mime_type(filter,"text/html");
+//	gtk_file_filter_add_mime_type(filter,"text/html");
 	
 	dialog = gtk_file_chooser_dialog_new(
 		_("Open"), GTK_WINDOW (e->window),
@@ -690,7 +690,7 @@ open_dialog (EDITOR * e)
 	
 	gtk_file_chooser_set_current_folder (
 			GTK_FILE_CHOOSER (dialog), settings.studypaddir); 
-	gtk_file_chooser_set_filter ((GtkFileChooser*)dialog, filter);
+//	gtk_file_chooser_set_filter ((GtkFileChooser*)dialog, filter);
 	
 	response = gtk_dialog_run(GTK_DIALOG(dialog));
 
