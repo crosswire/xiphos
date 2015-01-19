@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: Xiphos 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-18 09:35-0500\n"
-"PO-Revision-Date: 2014-12-22 18:05-0500\n"
+"PO-Revision-Date: 2015-01-18 19:40-0500\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Xiphos-developers <xiphos-developers@lists>\n"
-"Language: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -80,134 +80,112 @@ msgid "About Sword Module"
 msgstr "Module over SWORD"
 
 #: ../src/gnome2/about_modules.c:403
-#, fuzzy
 msgid "<b>Module name:</b> "
-msgstr "<b>Modulebeheer</b>"
+msgstr "<b>Module naam:</b> "
 
 #: ../src/gnome2/about_modules.c:407
-#, fuzzy
 msgid "<b>Version:</b> "
-msgstr "<b>Opties</b>"
+msgstr "<b>Versie:</b> "
 
 #: ../src/gnome2/about_modules.c:411
 msgid "No version stamp found"
-msgstr ""
+msgstr "Geen versie stempel gevonden"
 
 #: ../src/gnome2/about_modules.c:415
-#, fuzzy
 msgid "<b>Module abbreviation:</b> "
-msgstr "<b>Modulelijsten</b>"
+msgstr "<b>Module afkorting:</b> "
 
 #: ../src/gnome2/about_modules.c:420
-#, fuzzy
 msgid "<b>Language:</b> "
-msgstr "<b>Reeksen</b>"
+msgstr "<b>Taal:</b> "
 
 #: ../src/gnome2/about_modules.c:423
 msgid "Not specified"
-msgstr ""
+msgstr "Niet gespecificeerd"
 
 #: ../src/gnome2/about_modules.c:432
-#, fuzzy
 msgid "<b>Installed size:</b> "
-msgstr "<b>Installatiebron</b>"
+msgstr "<b>Geïnstalleerd grootte:</b> "
 
 #: ../src/gnome2/about_modules.c:438
-#, fuzzy
 msgid "<b>Companion module(s):</b></br>"
-msgstr "<b>Algemeen Modulescherm</b>"
+msgstr "<b>Metgezel module(s):</b></br>"
 
 #: ../src/gnome2/about_modules.c:448
-#, fuzzy
 msgid "<b>Features:</b>"
-msgstr "<b>Formaat</b>"
+msgstr "<b>Kenmerken:</b>"
 
 #: ../src/gnome2/about_modules.c:452
-#, fuzzy
 msgid "*&nbsp;Headings"
-msgstr "Rubrieken"
+msgstr "*&nbsp;Rubrieken"
 
 #: ../src/gnome2/about_modules.c:459
-#, fuzzy
 msgid "*&nbsp;Footnotes"
-msgstr "Voetnoten"
+msgstr "*&nbsp;Voetnoten"
 
 #: ../src/gnome2/about_modules.c:465
-#, fuzzy
 msgid "*&nbsp;Cross references"
-msgstr "Kruisverwijzingen"
+msgstr "*&nbsp;Kruisverwijzingen"
 
 #: ../src/gnome2/about_modules.c:472
-#, fuzzy
 msgid "*&nbsp;Strong's numbers"
-msgstr "Strongs getallen"
+msgstr "*&nbsp;Strong's nummers"
 
 #: ../src/gnome2/about_modules.c:479
-#, fuzzy
 msgid "*&nbsp;Morphological tags"
-msgstr "Morfologische Markeringen"
+msgstr "*&nbsp;Morfologische markeringen"
 
 #: ../src/gnome2/about_modules.c:485
-#, fuzzy
 msgid "*&nbsp;Lemmas"
-msgstr "Lemmas"
+msgstr "*&nbsp;Lemmas"
 
 #: ../src/gnome2/about_modules.c:491
-#, fuzzy
 msgid "*&nbsp;Words of Christ in red"
-msgstr "Uitspraken van Jezus rood weergeven"
+msgstr "*&nbsp;Uitspraken van Jezus rood weergeven"
 
 #: ../src/gnome2/about_modules.c:496
-#, fuzzy
 msgid "*&nbsp;Greek accents"
-msgstr "Griekse Leestekens"
+msgstr "*&nbsp;Griekse Leestekens"
 
 #: ../src/gnome2/about_modules.c:501
-#, fuzzy
 msgid "*&nbsp;Hebrew Vowel Points"
-msgstr "Hebreeuwse Klinkertekens"
+msgstr "*&nbsp;Hebreeuwse Klinkertekens"
 
 #: ../src/gnome2/about_modules.c:506
-#, fuzzy
 msgid "*&nbsp;Hebrew Cantillation"
-msgstr "Hebreeuwse Cantillation"
+msgstr "*&nbsp;Hebreeuwse Cantillation"
 
 #: ../src/gnome2/about_modules.c:512
 msgid "*&nbsp;Variant readings"
-msgstr ""
+msgstr "*&nbsp;Variant lezingen"
 
 #: ../src/gnome2/about_modules.c:517
-#, fuzzy
 msgid "*&nbsp;Transliteration forms"
-msgstr "Getranslitereerde Formulieren"
+msgstr "*&nbsp;Getranslitereerde Formulieren"
 
 #: ../src/gnome2/about_modules.c:522
-#, fuzzy
 msgid "*&nbsp;Enumerations"
-msgstr "Opsommingen"
+msgstr "*&nbsp;Opsommingen"
 
 #: ../src/gnome2/about_modules.c:528
 msgid "*&nbsp;Glosses"
-msgstr ""
+msgstr "*&nbsp;Glossen"
 
 #: ../src/gnome2/about_modules.c:533
-#, fuzzy
 msgid "*&nbsp;Morpheme Segmentation"
-msgstr "Morfeem Segmentatie"
+msgstr "*&nbsp;Morfeem Segmentatie"
 
 #: ../src/gnome2/about_modules.c:538
 msgid "*&nbsp;<i>No features found</i>"
-msgstr ""
+msgstr "*&nbsp;<i>Er zijn geen kenmerken gevonden</ i>"
 
 #: ../src/gnome2/about_modules.c:546
-#, fuzzy
 msgid "<b>Distribution license:</b>"
-msgstr "<b>Eigenschappen</b>"
+msgstr "<b>Distributie licentie:</b>"
 
 #: ../src/gnome2/about_modules.c:559
-#, fuzzy
 msgid "<b>Promotional:</b> "
-msgstr "<b>Opties</b>"
+msgstr "<b>Promotionele:</b> "
 
 #: ../src/gnome2/about_sword.c:81
 msgid ""
@@ -1056,10 +1034,13 @@ msgid ""
 "Would you like to delete %s?\n"
 "Beware: This cannot be undone."
 msgstr ""
+"%s obsoletes %s.\n"
+"Wilt u %s wilt verwijderen?\n"
+"Let op: Dit kan niet ongedaan gemaakt worden."
 
 #: ../src/gnome2/mod_mgr.c:2752
 msgid "No obsolete modules were found."
-msgstr ""
+msgstr "Geen verouderde modules werden gevonden."
 
 #: ../src/gnome2/mod_mgr.c:2777
 msgid "Standard remote sources have been loaded."
@@ -1885,7 +1866,6 @@ msgstr "Opsommingen"
 
 #: ../src/main/parallel_view.cc:586 ../ui/xi-menus.glade.h:85
 #: ../ui/xi-menus-popup.gtkbuilder.h:62
-#, fuzzy
 msgid "Glosses"
 msgstr "Woordenlijsten"
 
@@ -3258,7 +3238,6 @@ msgid "Alphabetical List"
 msgstr "Alfabetische lijst"
 
 #: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
-#, fuzzy
 msgid "Strike"
 msgstr "Doorhalen"
 
@@ -3355,11 +3334,11 @@ msgstr "Verwijder fast-search-index voor deze modules?"
 
 #: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
 msgid "Scan _Obsolete"
-msgstr ""
+msgstr "Scan _Verouderde"
 
 #: ../ui/module-manager.glade.h:17 ../ui/module-manager.gtkbuilder.h:17
 msgid "Scan for obsolete modules and offer to delete them."
-msgstr ""
+msgstr "Scannen op verouderde modules en bieden om ze te verwijderen."
 
 #: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:18
 msgid "Continue"
