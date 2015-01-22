@@ -408,6 +408,8 @@ wk_html_close (WkHtml *html)
 					html->priv->mime,
 					NULL,
 					html->priv->base_uri);
+
+	g_bytes_unref(html_bytes);
 #else
 	webkit_web_view_load_string (WEBKIT_WEB_VIEW (html),
 					html->priv->content,
