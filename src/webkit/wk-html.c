@@ -400,9 +400,14 @@ wk_html_close (WkHtml *html)
 #endif
 	}
 #ifdef USE_WEBKIT2
-	webkit_web_view_load_html (WEBKIT_WEB_VIEW (html),
-				     html->priv->content,
-				     html->priv->base_uri);
+	GBytes *html_bytes;
+	html_bytes = g_bytes_new(html->priv->content, strlen(html->priv->content));
+
+	webkit_web_view_load_bytes (WEBKIT_WEB_VIEW (html),
+					html_bytes,
+					html->priv->mime,
+					NULL,
+					html->priv->base_uri);
 #else
 	webkit_web_view_load_string (WEBKIT_WEB_VIEW (html),
 					html->priv->content,
