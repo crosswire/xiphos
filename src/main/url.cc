@@ -739,6 +739,7 @@ gint sword_uri(const gchar * url, gboolean clicked)
 	gint mod_type;
 	gint verse_count;
 	gchar **work_buf = NULL;
+	gchar *mod;
 
 	// don't recurse between paratab and here.
 	static gboolean handling_uri = FALSE;
@@ -787,13 +788,14 @@ gint sword_uri(const gchar * url, gboolean clicked)
 		    work_buf[MODULE],
 		    (work_buf[KEY] ? work_buf[KEY] : "-null-")));
 
-	if (tmpkey && strpbrk(tmpkey, "-;,")) {	// >1 verse marked
-		main_display_verse_list_in_sidebar
-		    (settings.currentverse,
-		     (work_buf[MODULE] && *work_buf[MODULE]
-		      ? work_buf[MODULE]
-		      : settings.MainWindowModule),
-		     tmpkey);
+	mod = (work_buf[MODULE] && *work_buf[MODULE]
+	       ? work_buf[MODULE]
+	       : settings.MainWindowModule);
+
+	if (tmpkey &&
+	    strpbrk(tmpkey, "-;,") &&	// >1 verse marked
+	    (main_get_mod_type(mod) == TEXT_TYPE)) {
+		main_display_verse_list_in_sidebar(settings.currentverse, mod, tmpkey);
 		handling_uri = FALSE;
 		return 1;
 	}
