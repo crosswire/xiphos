@@ -1,3 +1,8 @@
+2015-01-24  karl <charcoal@users.sf.net>
+
+	* bug#524: immediate cause fixed long ago, but uncovered a
+	  different bug in url.cc: no verse list for non-bible module.
+
 2014-12-26  karl <charcoal@users.sf.net>
 
 	* added support for Abbreviation conf directive:
