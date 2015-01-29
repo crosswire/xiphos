@@ -209,8 +209,7 @@ gui_create_about_modules(void)
 
 	button = 
 #ifdef HAVE_GTK_310
-		gtk_button_new_from_icon_name ("window-close",
-                               GTK_ICON_SIZE_BUTTON);
+		gtk_button_new_with_mnemonic(_("Close"));
 #else                        
 		gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 #endif		
