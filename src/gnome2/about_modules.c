@@ -136,7 +136,10 @@ gui_create_about_modules(void)
 	GtkWidget *hbox21;
 	GtkWidget *pixmap;
 	GtkWidget *frame73;
+#ifdef USE_WEBKIT2
+#else
 	GtkWidget *scrolledwindow30;
+#endif
 	GtkWidget *dialog_action_area28;
 	GtkWidget *hbuttonbox7;
 	GtkWidget *button;
@@ -172,6 +175,8 @@ gui_create_about_modules(void)
 	gtk_widget_show(frame73);
 	gtk_box_pack_start(GTK_BOX(vbox25), frame73, TRUE, TRUE, 0);
 
+#ifdef USE_WEBKIT2
+#else
 	scrolledwindow30 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow30);
 	gtk_container_add(GTK_CONTAINER(frame73), scrolledwindow30);
@@ -182,6 +187,7 @@ gui_create_about_modules(void)
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow30,
                                              settings.shadow_type);
+#endif
 
 	text_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 12));
 	gtk_widget_show(text_html);
@@ -189,8 +195,11 @@ gui_create_about_modules(void)
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-
+#ifdef USE_WEBKIT2
+	gtk_container_add(GTK_CONTAINER(frame73), text_html);
+#else
 	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
+#endif
 	dialog_action_area28 =
                 gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_mods));
 	g_object_set_data(G_OBJECT(dialog_about_mods),
