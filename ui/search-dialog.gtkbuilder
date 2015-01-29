@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
+  <requires lib="gtk+" version="3.0"/>
   <object class="GtkDialog" id="dialog">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -20,12 +21,12 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button_intro_lucene">
-                <property name="label" translatable="yes">_Lucene Search Syntax</property>
+                <property name="label">_Lucene Search Syntax</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Open a brief explanation of the syntax used for optimized "lucene" searches.</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -36,12 +37,12 @@
             </child>
             <child>
               <object class="GtkButton" id="button_intro_attributes">
-                <property name="label" translatable="yes">_Attribute Search</property>
+                <property name="label">_Attribute Search</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Open a brief explanation of attribute-based searches.</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -53,11 +54,11 @@
             <child>
               <object class="GtkButton" id="closebutton1">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -138,11 +139,11 @@
                     <child>
                       <object class="GtkButton" id="button1">
                         <property name="label">gtk-find</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">Start/stop searching</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_stock">True</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="button1-atkobject">
@@ -190,13 +191,13 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="headers_visible">False</property>
+                            <child internal-child="selection">
+                              <object class="GtkTreeSelection" id="treeview-selection1"/>
+                            </child>
                             <child internal-child="accessible">
                               <object class="AtkObject" id="treeview1-atkobject">
                                 <property name="AtkObject::accessible-name" translatable="yes">Search Criteria Treeview</property>
                               </object>
-                            </child>
-                            <child internal-child="selection">
-                              <object class="GtkTreeSelection" id="treeview-selection1"/>
                             </child>
                           </object>
                         </child>
@@ -211,6 +212,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">16</property>
+                        <property name="baseline_position">bottom</property>
                         <child>
                           <object class="GtkVBox" id="vbox4">
                             <property name="visible">True</property>
@@ -245,12 +247,13 @@
                                     <child>
                                       <object class="GtkRadioButton" id="radiobutton1">
                                         <property name="label" translatable="yes">Entire module</property>
+                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="tooltip_text" translatable="yes">Search entire module</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="use_underline">True</property>
+                                        <property name="xalign">0.5</property>
                                         <property name="draw_indicator">True</property>
                                         <child internal-child="accessible">
                                           <object class="AtkObject" id="radiobutton1-atkobject">
@@ -267,12 +270,13 @@
                                     <child>
                                       <object class="GtkRadioButton" id="radiobutton2">
                                         <property name="label" translatable="yes">Current results</property>
+                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="tooltip_text" translatable="yes">Use the results of the last search as the scope of the search</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="use_underline">True</property>
+                                        <property name="xalign">0.5</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">radiobutton1</property>
                                         <child internal-child="accessible">
@@ -290,12 +294,13 @@
                                     <child>
                                       <object class="GtkRadioButton" id="radiobutton3">
                                         <property name="label" translatable="yes">Custom verse range</property>
+                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="tooltip_text" translatable="yes">Use a custom range for the scope of the search</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="use_underline">True</property>
+                                        <property name="xalign">0.5</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">radiobutton1</property>
                                         <child internal-child="accessible">
@@ -330,14 +335,14 @@
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">False</property>
                                     <property name="has_entry">True</property>
-                                    <child internal-child="accessible">
-                                      <object class="AtkObject" id="comboboxentry1-atkobject">
-                                        <property name="AtkObject::accessible-name" translatable="yes">Custom Range Selector Combo</property>
-                                      </object>
-                                    </child>
                                     <child internal-child="entry">
                                       <object class="GtkEntry" id="combobox-entry">
                                         <property name="can_focus">False</property>
+                                      </object>
+                                    </child>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="comboboxentry1-atkobject">
+                                        <property name="AtkObject::accessible-name" translatable="yes">Custom Range Selector Combo</property>
                                       </object>
                                     </child>
                                   </object>
@@ -390,12 +395,13 @@
                                     <child>
                                       <object class="GtkRadioButton" id="radiobutton4">
                                         <property name="label" translatable="yes">Single module</property>
+                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="tooltip_text" translatable="yes">Use a single module for the search</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="use_underline">True</property>
+                                        <property name="xalign">0.5</property>
                                         <property name="draw_indicator">True</property>
                                         <child internal-child="accessible">
                                           <object class="AtkObject" id="radiobutton4-atkobject">
@@ -412,12 +418,13 @@
                                     <child>
                                       <object class="GtkRadioButton" id="radiobutton5">
                                         <property name="label" translatable="yes">Module list</property>
+                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="tooltip_text" translatable="yes">Use the current module list for the search</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="use_underline">True</property>
+                                        <property name="xalign">0.5</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">radiobutton4</property>
                                         <child internal-child="accessible">
@@ -435,12 +442,13 @@
                                     <child>
                                       <object class="GtkRadioButton" id="radiobutton6">
                                         <property name="label" translatable="yes">Custom module list</property>
+                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="tooltip_text" translatable="yes">Use a custom module list for the search</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="use_underline">True</property>
+                                        <property name="xalign">0.5</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">radiobutton4</property>
                                         <child internal-child="accessible">
@@ -487,14 +495,14 @@
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">False</property>
                                     <property name="has_entry">True</property>
-                                    <child internal-child="accessible">
-                                      <object class="AtkObject" id="comboboxentry2-atkobject">
-                                        <property name="AtkObject::accessible-name" translatable="yes">Custom Range Selector Combo</property>
-                                      </object>
-                                    </child>
                                     <child internal-child="entry">
                                       <object class="GtkEntry" id="combobox-entry1">
                                         <property name="can_focus">False</property>
+                                      </object>
+                                    </child>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="comboboxentry2-atkobject">
+                                        <property name="AtkObject::accessible-name" translatable="yes">Custom Range Selector Combo</property>
                                       </object>
                                     </child>
                                   </object>
@@ -549,14 +557,15 @@
                                         <child>
                                           <object class="GtkRadioButton" id="radiobutton16">
                                             <property name="label" translatable="yes">Optimized ("Lucene")</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="tooltip_text" translatable="yes">Fast, featureful, index-based search
 Indexes must have been built beforehand:
 See Module Manager's maintenance functions</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="use_underline">True</property>
+                                            <property name="xalign">0.5</property>
                                             <property name="draw_indicator">True</property>
                                             <child internal-child="accessible">
                                               <object class="AtkObject" id="radiobutton16-atkobject">
@@ -573,11 +582,12 @@ See Module Manager's maintenance functions</property>
                                         <child>
                                           <object class="GtkRadioButton" id="radiobutton9">
                                             <property name="label" translatable="yes">Multi word</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="use_underline">True</property>
+                                            <property name="xalign">0.5</property>
                                             <property name="draw_indicator">True</property>
                                             <property name="group">radiobutton16</property>
                                             <child internal-child="accessible">
@@ -595,11 +605,12 @@ See Module Manager's maintenance functions</property>
                                         <child>
                                           <object class="GtkRadioButton" id="radiobutton10">
                                             <property name="label" translatable="yes">Regular expression</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="use_underline">True</property>
+                                            <property name="xalign">0.5</property>
                                             <property name="draw_indicator">True</property>
                                             <property name="group">radiobutton16</property>
                                             <child internal-child="accessible">
@@ -617,11 +628,12 @@ See Module Manager's maintenance functions</property>
                                         <child>
                                           <object class="GtkRadioButton" id="radiobutton11">
                                             <property name="label" translatable="yes">Exact phrase</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="use_underline">True</property>
+                                            <property name="xalign">0.5</property>
                                             <property name="draw_indicator">True</property>
                                             <property name="group">radiobutton16</property>
                                             <child internal-child="accessible">
@@ -639,12 +651,13 @@ See Module Manager's maintenance functions</property>
                                         <child>
                                           <object class="GtkRadioButton" id="radiobutton12">
                                             <property name="label" translatable="yes">Attributes</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="tooltip_text" translatable="yes">Make selections on the Attribute Search tab</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="use_underline">True</property>
+                                            <property name="xalign">0.5</property>
                                             <property name="draw_indicator">True</property>
                                             <property name="group">radiobutton16</property>
                                             <child internal-child="accessible">
@@ -705,11 +718,12 @@ See Module Manager's maintenance functions</property>
                                         <child>
                                           <object class="GtkCheckButton" id="checkbutton1">
                                             <property name="label" translatable="yes">Match case</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="use_underline">True</property>
+                                            <property name="xalign">0.5</property>
                                             <property name="draw_indicator">True</property>
                                             <child internal-child="accessible">
                                               <object class="AtkObject" id="checkbutton1-atkobject">
@@ -793,12 +807,13 @@ See Module Manager's maintenance functions</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="toolbar_style">icons</property>
+                        <property name="icon_size">2</property>
                         <child>
                           <object class="GtkToggleToolButton" id="toggletoolbutton1">
+                            <property name="use_action_appearance">False</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Show in main window</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="stock_id">gtk-jump-to</property>
+                            <property name="icon_name">go-jump-symbolic</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -807,11 +822,11 @@ See Module Manager's maintenance functions</property>
                         </child>
                         <child>
                           <object class="GtkToolButton" id="toolbutton1">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Save search results as bookmarks</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="stock_id">gtk-save</property>
+                            <property name="icon_name">document-save-symbolic</property>
                             <signal name="clicked" handler="on_results_save_clicked" swapped="no"/>
                           </object>
                           <packing>
@@ -821,13 +836,13 @@ See Module Manager's maintenance functions</property>
                         </child>
                         <child>
                           <object class="GtkToolButton" id="toolbutton_export">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Export current search results</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="label" translatable="yes">Export</property>
                             <property name="use_underline">True</property>
-                            <property name="stock_id">gtk-goto-bottom</property>
+                            <property name="icon_name">go-bottom-symbolic</property>
                             <signal name="clicked" handler="on_toolbutton_export_clicked" swapped="no"/>
                           </object>
                           <packing>
@@ -837,11 +852,11 @@ See Module Manager's maintenance functions</property>
                         </child>
                         <child>
                           <object class="GtkToolButton" id="toolbutton2">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Clear lists for new search</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="stock_id">gtk-clear</property>
+                            <property name="icon_name">edit-clear-symbolic</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -883,24 +898,24 @@ See Module Manager's maintenance functions</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="shadow_type">in</property>
-                                <child internal-child="accessible">
-                                  <object class="AtkObject" id="scrolledwindow9-atkobject">
-                                    <property name="AtkObject::accessible-name" translatable="yes">Result Summary Window</property>
-                                  </object>
-                                </child>
                                 <child>
                                   <object class="GtkTreeView" id="treeview9">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="headers_visible">False</property>
+                                    <child internal-child="selection">
+                                      <object class="GtkTreeSelection" id="treeview-selection2"/>
+                                    </child>
                                     <child internal-child="accessible">
                                       <object class="AtkObject" id="treeview9-atkobject">
                                         <property name="AtkObject::accessible-name" translatable="yes">Result Summary Table</property>
                                       </object>
                                     </child>
-                                    <child internal-child="selection">
-                                      <object class="GtkTreeSelection" id="treeview-selection2"/>
-                                    </child>
+                                  </object>
+                                </child>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="scrolledwindow9-atkobject">
+                                    <property name="AtkObject::accessible-name" translatable="yes">Result Summary Window</property>
                                   </object>
                                 </child>
                               </object>
@@ -949,9 +964,9 @@ See Module Manager's maintenance functions</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="headers_visible">False</property>
+                                        <signal name="drag-begin" handler="on_treeview10_drag_begin" swapped="no"/>
                                         <signal name="drag-leave" handler="on_treeview10_drag_leave" swapped="no"/>
                                         <signal name="drag-motion" handler="on_treeview10_drag_motion" swapped="no"/>
-                                        <signal name="drag-begin" handler="on_treeview10_drag_begin" swapped="no"/>
                                         <child internal-child="selection">
                                           <object class="GtkTreeSelection" id="treeview-selection3"/>
                                         </child>
@@ -1049,13 +1064,14 @@ See Module Manager's maintenance functions</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="toolbar_style">icons</property>
+                        <property name="icon_size">2</property>
                         <child>
                           <object class="GtkToolButton" id="toolbutton3">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Create new custom range</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="stock_id">gtk-new</property>
+                            <property name="icon_name">document-new-symbolic</property>
                             <child internal-child="accessible">
                               <object class="AtkObject" id="toolbutton3-atkobject">
                                 <property name="AtkObject::accessible-name" translatable="yes">New Range Button</property>
@@ -1069,11 +1085,11 @@ See Module Manager's maintenance functions</property>
                         </child>
                         <child>
                           <object class="GtkToolButton" id="toolbutton4">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Save custom range</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="stock_id">gtk-save</property>
+                            <property name="icon_name">document-save-symbolic</property>
                             <child internal-child="accessible">
                               <object class="AtkObject" id="toolbutton4-atkobject">
                                 <property name="AtkObject::accessible-name" translatable="yes">Save Range Button</property>
@@ -1087,11 +1103,11 @@ See Module Manager's maintenance functions</property>
                         </child>
                         <child>
                           <object class="GtkToolButton" id="toolbutton5">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Delete selected range</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="stock_id">gtk-cut</property>
+                            <property name="icon_name">edit-cut-symbolic</property>
                             <child internal-child="accessible">
                               <object class="AtkObject" id="toolbutton5-atkobject">
                                 <property name="AtkObject::accessible-name" translatable="yes">Delete Range Button</property>
@@ -1250,13 +1266,13 @@ See Module Manager's maintenance functions</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="headers_visible">False</property>
+                                    <child internal-child="selection">
+                                      <object class="GtkTreeSelection" id="treeview-selection5"/>
+                                    </child>
                                     <child internal-child="accessible">
                                       <object class="AtkObject" id="treeview5-atkobject">
                                         <property name="AtkObject::accessible-name" translatable="yes">Custom Range Preview</property>
                                       </object>
-                                    </child>
-                                    <child internal-child="selection">
-                                      <object class="GtkTreeSelection" id="treeview-selection5"/>
                                     </child>
                                   </object>
                                 </child>
@@ -1308,13 +1324,14 @@ See Module Manager's maintenance functions</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="toolbar_style">icons</property>
+                        <property name="icon_size">2</property>
                         <child>
                           <object class="GtkToolButton" id="toolbutton6">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Create a new module list</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="stock_id">gtk-new</property>
+                            <property name="icon_name">document-new-symbolic</property>
                             <child internal-child="accessible">
                               <object class="AtkObject" id="toolbutton6-atkobject">
                                 <property name="AtkObject::accessible-name" translatable="yes">New Custom Module List Button</property>
@@ -1328,11 +1345,11 @@ See Module Manager's maintenance functions</property>
                         </child>
                         <child>
                           <object class="GtkToolButton" id="toolbutton7">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Save the module list</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="stock_id">gtk-save</property>
+                            <property name="icon_name">document-save-symbolic</property>
                             <child internal-child="accessible">
                               <object class="AtkObject" id="toolbutton7-atkobject">
                                 <property name="AtkObject::accessible-name" translatable="yes">Save Custom Module List Button</property>
@@ -1346,11 +1363,11 @@ See Module Manager's maintenance functions</property>
                         </child>
                         <child>
                           <object class="GtkToolButton" id="toolbutton8">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Delete the selected list</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="stock_id">gtk-cut</property>
+                            <property name="icon_name">edit-cut-symbolic</property>
                             <child internal-child="accessible">
                               <object class="AtkObject" id="toolbutton8-atkobject">
                                 <property name="AtkObject::accessible-name" translatable="yes">Clear Custom Module List Button</property>
@@ -1476,13 +1493,14 @@ See Module Manager's maintenance functions</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="toolbar_style">icons</property>
+                                <property name="icon_size">2</property>
                                 <child>
                                   <object class="GtkToolButton" id="toolbutton10">
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="tooltip_text" translatable="yes">Clear all modules from the list</property>
-                                    <property name="use_action_appearance">False</property>
-                                    <property name="stock_id">gtk-clear</property>
+                                    <property name="icon_name">edit-clear-symbolic</property>
                                     <child internal-child="accessible">
                                       <object class="AtkObject" id="toolbutton10-atkobject">
                                         <property name="AtkObject::accessible-name" translatable="yes">Clear Modules from List Button</property>
@@ -1496,12 +1514,12 @@ See Module Manager's maintenance functions</property>
                                 </child>
                                 <child>
                                   <object class="GtkToolButton" id="toolbutton11">
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="tooltip_text" translatable="yes">Remove the selected module from the list</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
-                                    <property name="stock_id">gtk-cut</property>
+                                    <property name="icon_name">edit-cut-symbolic</property>
                                     <child internal-child="accessible">
                                       <object class="AtkObject" id="toolbutton11-atkobject">
                                         <property name="AtkObject::accessible-name" translatable="yes">Delete Selected Module From List Button</property>
@@ -1520,17 +1538,18 @@ See Module Manager's maintenance functions</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
+                                    <property name="homogeneous">False</property>
                                   </packing>
                                 </child>
                                 <child>
                                   <object class="GtkToolButton" id="toolbutton12">
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="tooltip_text" translatable="yes">Open a dialog to select modules to add to the list</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="label" translatable="yes">Add Modules</property>
                                     <property name="use_underline">True</property>
-                                    <property name="stock_id">gtk-add</property>
+                                    <property name="icon_name">list-add-symbolic</property>
                                     <child internal-child="accessible">
                                       <object class="AtkObject" id="toolbutton12-atkobject">
                                         <property name="AtkObject::accessible-name" translatable="yes">Open Selection Dialog Button</property>
@@ -1559,8 +1578,8 @@ See Module Manager's maintenance functions</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="headers_visible">False</property>
-                                    <signal name="drag-drop" handler="on_treeview7_drag_drop" swapped="no"/>
                                     <signal name="drag-data-received" handler="on_treeview7_drag_data_received" swapped="no"/>
+                                    <signal name="drag-drop" handler="on_treeview7_drag_drop" swapped="no"/>
                                     <signal name="drag-end" handler="on_treeview7_drag_end" swapped="no"/>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection" id="treeview-selection7"/>
@@ -1634,12 +1653,13 @@ See Module Manager's maintenance functions</property>
                             <child>
                               <object class="GtkRadioButton" id="radiobutton13">
                                 <property name="label" translatable="yes">Strongs Numbers</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">Search for Strongs Numbers like G4442 or H1121</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0.5</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <child internal-child="accessible">
@@ -1657,12 +1677,13 @@ See Module Manager's maintenance functions</property>
                             <child>
                               <object class="GtkRadioButton" id="radiobutton15">
                                 <property name="label" translatable="yes">Morphological Tags</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">Search for Morphological tags</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0.5</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">radiobutton13</property>
                                 <child internal-child="accessible">
@@ -1680,12 +1701,13 @@ See Module Manager's maintenance functions</property>
                             <child>
                               <object class="GtkRadioButton" id="radiobutton14">
                                 <property name="label" translatable="yes">Footnotes</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">Search in footnotes</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0.5</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">radiobutton13</property>
                                 <child internal-child="accessible">
@@ -1746,12 +1768,13 @@ See Module Manager's maintenance functions</property>
                             <child>
                               <object class="GtkCheckButton" id="checkbutton2">
                                 <property name="label" translatable="yes">Show Strong's Numbers</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">In modules that have Strong's Numbers</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0.5</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <child internal-child="accessible">
@@ -1769,12 +1792,13 @@ See Module Manager's maintenance functions</property>
                             <child>
                               <object class="GtkCheckButton" id="checkbutton3">
                                 <property name="label" translatable="yes">Show Morphological Tags</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">In modules that have Morphological Tags</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0.5</property>
                                 <property name="draw_indicator">True</property>
                                 <child internal-child="accessible">
                                   <object class="AtkObject" id="checkbutton3-atkobject">
@@ -1791,12 +1815,13 @@ See Module Manager's maintenance functions</property>
                             <child>
                               <object class="GtkCheckButton" id="checkbutton4">
                                 <property name="label" translatable="yes">Show Footnotes</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">In modules that have Footnotes</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0.5</property>
                                 <property name="draw_indicator">True</property>
                                 <child internal-child="accessible">
                                   <object class="AtkObject" id="checkbutton4-atkobject">
@@ -1892,11 +1917,11 @@ See Module Manager's maintenance functions</property>
             <child>
               <object class="GtkButton" id="closebutton2">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_closebutton2_clicked" swapped="no"/>
               </object>
@@ -1909,11 +1934,11 @@ See Module Manager's maintenance functions</property>
             <child>
               <object class="GtkButton" id="button2">
                 <property name="label">gtk-add</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -1940,8 +1965,8 @@ See Module Manager's maintenance functions</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="headers_visible">False</property>
-                <signal name="drag-data-get" handler="on_treeview8_drag_data_get" swapped="no"/>
                 <signal name="drag-begin" handler="on_treeview8_drag_begin" swapped="no"/>
+                <signal name="drag-data-get" handler="on_treeview8_drag_data_get" swapped="no"/>
                 <child internal-child="selection">
                   <object class="GtkTreeSelection" id="treeview-selection8"/>
                 </child>

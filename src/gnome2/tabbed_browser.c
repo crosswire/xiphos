@@ -799,15 +799,14 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 
 	g_return_val_if_fail(label_text != NULL, NULL);
 #ifdef HAVE_GTK_310
-	tmp_toolbar_icon = gtk_image_new_from_icon_name ("window-close",
-                              GTK_ICON_SIZE_MENU);
+	tbinf->button_close = gtk_button_new_from_icon_name("window-close-symbolic", GTK_ICON_SIZE_MENU);
 #else
 	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLOSE, 
 	                       GTK_ICON_SIZE_MENU);
-#endif
 	tbinf->button_close = gtk_button_new();
 	gtk_button_set_image(GTK_BUTTON(tbinf->button_close), tmp_toolbar_icon);
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
+#endif
 
 #ifndef USE_GTK_3
 	gtk_rc_parse_string (
@@ -823,12 +822,11 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 		"}\n"
 		"widget \"*.button-close\" style \"tab-button-style\"");
         gtk_widget_set_name(GTK_WIDGET (tbinf->button_close), "button-close");
+#else
+	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
 #endif
 
-	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
-
 #ifdef USE_GTK_3
-	gtk_widget_get_preferred_size(tbinf->button_close,  &r0, &r);
 #else	
 	gtk_widget_size_request(tbinf->button_close, &r);
 #endif
@@ -843,11 +841,6 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	color.blue = 0;
 		 
 #ifdef USE_GTK_3
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_NORMAL, &color);
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_INSENSITIVE, &color);
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_ACTIVE, &color);
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_PRELIGHT, &color);
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_SELECTED, &color);
 #else
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_NORMAL, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_INSENSITIVE, &color);

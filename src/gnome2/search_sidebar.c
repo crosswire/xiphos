@@ -201,7 +201,7 @@ void gui_create_search_sidebar(void)
 
 	/* find button */	
 #ifdef HAVE_GTK_310	
-	remember_search = gtk_button_new_from_icon_name ("edit-find", GTK_ICON_SIZE_BUTTON);
+	remember_search = gtk_button_new_from_icon_name ("edit-find-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 	remember_search = gtk_button_new_from_stock(GTK_STOCK_FIND);	
 #endif
