@@ -379,7 +379,7 @@ GtkWidget *gui_create_dictionary_pane(void)
   	gtk_widget_show (widgets.entry_dict);
 	gtk_box_pack_start(GTK_BOX(hbox2), widgets.entry_dict, TRUE, TRUE, 0);
 
-#ifndef HAVE_GTK310
+#ifdef HAVE_GTK_310
 	dict_drop_down = gtk_button_new_from_icon_name("pan-down-symbolic",
 													GTK_ICON_SIZE_BUTTON);
 #else
