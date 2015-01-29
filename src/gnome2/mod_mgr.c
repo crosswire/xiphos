@@ -636,7 +636,7 @@ add_columns(GtkTreeView * treeview,
 
 	/* -- fast index ready -- */
 	column = gtk_tree_view_column_new();
-#ifndef HAVE_GTK310
+#ifdef HAVE_GTK_310
 	image = gtk_image_new_from_icon_name("edit-find-symbolic", GTK_ICON_SIZE_MENU);
 #else
 	image = pixmap_finder("indexed-16.png");
@@ -658,7 +658,7 @@ add_columns(GtkTreeView * treeview,
 
 	/* -- locked -- */
 	column = gtk_tree_view_column_new();
-#ifndef HAVE_GTK310
+#ifdef HAVE_GTK_310
 	image = gtk_image_new_from_icon_name("changes-prevent-symbolic", GTK_ICON_SIZE_MENU);
 #else
 	image = pixmap_finder("epiphany-secure.png");
