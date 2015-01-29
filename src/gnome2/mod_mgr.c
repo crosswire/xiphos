@@ -379,29 +379,37 @@ create_pixbufs(void)
 	
 	INSTALLED = gtk_icon_theme_load_icon (icon_theme,
                           "_Apply",
-                          GTK_ICON_SIZE_MENU,
+                          16,
                           GTK_ICON_LOOKUP_FORCE_SIZE,
                           NULL);
 	
-	FASTICON  = pixbuf_finder("indexed-16.png", 0, NULL);
+	FASTICON  = gtk_icon_theme_load_icon (icon_theme,
+                          "edit-find-symbolic",
+                          16,
+                          GTK_ICON_LOOKUP_FORCE_SIZE,
+                          NULL);
 
-	NO_INDEX = gtk_icon_theme_load_icon (icon_theme,
+	NO_INDEX  = gtk_icon_theme_load_icon (icon_theme,
                           "_Cancel",
-                          GTK_ICON_SIZE_MENU,
+                          16,
                           GTK_ICON_LOOKUP_FORCE_SIZE,
                           NULL);
-	
-	LOCKED    = pixbuf_finder("epiphany-secure.png", 0, NULL);
-	
-	REFRESH   =  gtk_icon_theme_load_icon (icon_theme,
-                          "view-refresh",
-                          GTK_ICON_SIZE_MENU,
+
+	LOCKED    = gtk_icon_theme_load_icon (icon_theme,
+                          "changes-prevent-symbolic",
+                          16,
+                          GTK_ICON_LOOKUP_FORCE_SIZE,
+                          NULL);
+
+	REFRESH   = gtk_icon_theme_load_icon (icon_theme,
+                          "view-refresh-symbolic",
+                          16,
                           GTK_ICON_LOOKUP_FORCE_SIZE,
                           NULL);
 	
 	BLANK     = gtk_icon_theme_load_icon (icon_theme,
                           "gnome-stock-blank", // FIXME:
-                          GTK_ICON_SIZE_MENU,
+                          16,
                           GTK_ICON_LOOKUP_FORCE_SIZE,
                           NULL);
 #else
@@ -559,7 +567,7 @@ add_columns(GtkTreeView * treeview,
 	column = gtk_tree_view_column_new();
 	image = 
 #ifdef HAVE_GTK_310
-		 gtk_image_new_from_icon_name("gtk-apply",
+		 gtk_image_new_from_icon_name("emblem-ok-symbolic",
 					    GTK_ICON_SIZE_MENU);
 #else
             (remove
@@ -589,7 +597,7 @@ add_columns(GtkTreeView * treeview,
 	column = gtk_tree_view_column_new(); 
 	image = 
 #ifdef HAVE_GTK_310
-		 gtk_image_new_from_icon_name ("list-add",
+		 gtk_image_new_from_icon_name ("list-add-symbolic",
 					 GTK_ICON_SIZE_MENU);
 #else
 		 gtk_image_new_from_stock((remove
@@ -628,7 +636,11 @@ add_columns(GtkTreeView * treeview,
 
 	/* -- fast index ready -- */
 	column = gtk_tree_view_column_new();
+#ifndef HAVE_GTK310
+	image = gtk_image_new_from_icon_name("edit-find-symbolic", GTK_ICON_SIZE_MENU);
+#else
 	image = pixmap_finder("indexed-16.png");
+#endif
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image, _("The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
@@ -646,7 +658,11 @@ add_columns(GtkTreeView * treeview,
 
 	/* -- locked -- */
 	column = gtk_tree_view_column_new();
+#ifndef HAVE_GTK310
+	image = gtk_image_new_from_icon_name("changes-prevent-symbolic", GTK_ICON_SIZE_MENU);
+#else
 	image = pixmap_finder("epiphany-secure.png");
+#endif
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image, _("The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
@@ -685,7 +701,7 @@ add_columns(GtkTreeView * treeview,
 	image =   
 #ifdef HAVE_GTK_310
 		gtk_image_new_from_icon_name 
-				("view-refresh", GTK_ICON_SIZE_MENU);
+				("view-refresh-symbolic", GTK_ICON_SIZE_MENU);
 #else
 		gtk_image_new_from_stock
 				(GTK_STOCK_REFRESH, GTK_ICON_SIZE_MENU);

@@ -379,22 +379,22 @@ GtkWidget *gui_create_dictionary_pane(void)
   	gtk_widget_show (widgets.entry_dict);
 	gtk_box_pack_start(GTK_BOX(hbox2), widgets.entry_dict, TRUE, TRUE, 0);
 
-
+#ifndef HAVE_GTK310
+	dict_drop_down = gtk_button_new_from_icon_name("pan-down-symbolic",
+													GTK_ICON_SIZE_BUTTON);
+#else
   	dict_drop_down = gtk_toggle_button_new ();
+#endif
 	gtk_widget_show (dict_drop_down);
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
 
 #ifdef HAVE_GTK_310
-	{
-		gchar *arrow_path = image_locator("arrow_down_box.png");
-		arrow1 = gtk_image_new_from_file(arrow_path);
-		g_free(arrow_path);
-	}
+	gtk_container_add(GTK_CONTAINER(dict_drop_down), NULL);
 #else
 	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+  	gtk_widget_show(arrow1);
+  	gtk_container_add(GTK_CONTAINER(dict_drop_down), arrow1);
 #endif
-  	gtk_widget_show (arrow1);
-  	gtk_container_add (GTK_CONTAINER (dict_drop_down), arrow1);
 
 	button10 = gtk_button_new();
 	gtk_widget_show(button10);
@@ -403,7 +403,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 
 	image1 = 
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name("go-up",
+	    gtk_image_new_from_icon_name("go-up-symbolic",
 					 GTK_ICON_SIZE_BUTTON);
 #else                        
 		
@@ -420,7 +420,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 
 	image2 = 
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name ("go-down",
+	    gtk_image_new_from_icon_name ("go-down-symbolic",
 					  GTK_ICON_SIZE_BUTTON);
 #else                        
 		
