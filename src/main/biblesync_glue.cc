@@ -577,7 +577,7 @@ void biblesync_update_speaker()
     column = gtk_tree_view_column_new();
     image = 
 #ifdef HAVE_GTK_310
-        gtk_image_new_from_icon_name("gtk-apply", GTK_ICON_SIZE_MENU); 
+        gtk_image_new_from_icon_name("emblem-ok-symbolic", GTK_ICON_SIZE_MENU); 
 #else
         gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_MENU);
 #endif	
@@ -610,7 +610,7 @@ void biblesync_update_speaker()
     					      "text", COLUMN_DIRECT, NULL);
     image = 
 #ifdef HAVE_GTK_310
-        gtk_image_new_from_icon_name("gtk-yes", GTK_ICON_SIZE_MENU); 
+        gtk_image_new_from_icon_name("emblem-default", GTK_ICON_SIZE_MENU); 
 #else
         gtk_image_new_from_stock("gtk-yes", GTK_ICON_SIZE_MENU);	// XXX
 #endif	
