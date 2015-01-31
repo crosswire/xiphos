@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.18.3 -->
 <interface>
-  <requires lib="gtk+" version="3.0"/>
-  <object class="GtkHBox" id="navbar">
+  <requires lib="gtk+" version="3.12"/>
+  <object class="GtkBox" id="navbar">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="border_width">3</property>
+    <property name="valign">center</property>
+    <property name="margin_top">3</property>
+    <property name="margin_bottom">3</property>
     <child>
       <object class="GtkToggleButton" id="togglebutton_sync">
         <property name="use_action_appearance">False</property>
@@ -48,9 +50,10 @@
       </packing>
     </child>
     <child>
-      <object class="GtkVBox" id="vbox5">
+      <object class="GtkBox" id="vbox5">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <property name="homogeneous">True</property>
         <child>
           <object class="GtkToggleButton" id="togglebutton_history_list">
@@ -65,7 +68,7 @@
               <object class="GtkImage" id="image17">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="icon_name">pan-down-symbolic</property>
+                <property name="icon_name">open-menu-symbolic</property>
               </object>
             </child>
           </object>
@@ -78,7 +81,7 @@
       </object>
       <packing>
         <property name="expand">False</property>
-        <property name="fill">False</property>
+        <property name="fill">True</property>
         <property name="position">2</property>
       </packing>
     </child>
@@ -104,7 +107,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkHBox" id="hbox2">
+      <object class="GtkBox" id="hbox2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -119,10 +122,9 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox5">
+                  <object class="GtkBox" id="hbox5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="spacing">2</property>
                     <child>
                       <object class="GtkLabel" id="label_book">
                         <property name="width_request">150</property>
@@ -155,22 +157,21 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox7">
+          <object class="GtkBox" id="vbox7">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="border_width">3</property>
+            <property name="orientation">vertical</property>
             <child>
               <object class="GtkEventBox" id="eventbox9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox12">
+                  <object class="GtkBox" id="hbox12">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image12">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image13">
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-up-symbolic</property>
                       </object>
@@ -181,7 +182,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image13">
+                      <object class="GtkImage" id="image12">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-up-symbolic</property>
                       </object>
@@ -206,12 +208,11 @@
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox13">
+                  <object class="GtkBox" id="hbox13">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image14">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image15">
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-down-symbolic</property>
                       </object>
@@ -222,7 +223,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image15">
+                      <object class="GtkImage" id="image14">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-down-symbolic</property>
                       </object>
@@ -244,7 +246,8 @@
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">False</property>
+            <property name="fill">True</property>
+            <property name="padding">1</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -252,11 +255,11 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">5</property>
+        <property name="position">4</property>
       </packing>
     </child>
     <child>
-      <object class="GtkHBox" id="hbox3">
+      <object class="GtkBox" id="hbox3">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -271,7 +274,7 @@
                 <property name="receives_default">True</property>
                 <property name="xalign">1</property>
                 <child>
-                  <object class="GtkHBox" id="hbox6">
+                  <object class="GtkBox" id="hbox6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -306,22 +309,21 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox6">
+          <object class="GtkBox" id="vbox6">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="border_width">3</property>
+            <property name="orientation">vertical</property>
             <child>
               <object class="GtkEventBox" id="eventbox8">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox10">
+                  <object class="GtkBox" id="hbox10">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image8">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image9">
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-up-symbolic</property>
                       </object>
@@ -332,7 +334,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image9">
+                      <object class="GtkImage" id="image8">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-up-symbolic</property>
                       </object>
@@ -357,12 +360,11 @@
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox11">
+                  <object class="GtkBox" id="hbox11">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image10">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image11">
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-down-symbolic</property>
                       </object>
@@ -373,7 +375,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image11">
+                      <object class="GtkImage" id="image10">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-down-symbolic</property>
                       </object>
@@ -396,6 +399,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="padding">1</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -403,11 +407,11 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">7</property>
+        <property name="position">5</property>
       </packing>
     </child>
     <child>
-      <object class="GtkHBox" id="hbox4">
+      <object class="GtkBox" id="hbox4">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -421,9 +425,10 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox7">
+                  <object class="GtkBox" id="hbox7">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="label_verse">
                         <property name="visible">True</property>
@@ -456,21 +461,20 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox4">
+          <object class="GtkBox" id="vbox4">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="border_width">3</property>
+            <property name="orientation">vertical</property>
             <child>
               <object class="GtkEventBox" id="eventbox7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkHBox" id="hbox9">
+                  <object class="GtkBox" id="hbox9">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image6">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image7">
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-up-symbolic</property>
                       </object>
@@ -481,7 +485,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image7">
+                      <object class="GtkImage" id="image6">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-up-symbolic</property>
                       </object>
@@ -505,16 +510,12 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
-                <signal name="button-release-event" handler="on_eventbox1_button_release_event" swapped="no"/>
-                <signal name="enter-notify-event" handler="on_eventbox1_enter_notify_event" swapped="no"/>
-                <signal name="leave-notify-event" handler="on_eventbox1_leave_notify_event" swapped="no"/>
                 <child>
-                  <object class="GtkHBox" id="hbox8">
+                  <object class="GtkBox" id="hbox8">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image5">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image16">
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-down-symbolic</property>
                       </object>
@@ -525,7 +526,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image16">
+                      <object class="GtkImage" id="image5">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">pan-down-symbolic</property>
                       </object>
@@ -548,6 +550,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="padding">1</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -555,7 +558,7 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">9</property>
+        <property name="position">6</property>
       </packing>
     </child>
     <child>
@@ -575,7 +578,7 @@
       <packing>
         <property name="expand">True</property>
         <property name="fill">True</property>
-        <property name="position">11</property>
+        <property name="position">7</property>
       </packing>
     </child>
   </object>
