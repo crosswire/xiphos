@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
+  <requires lib="gtk+" version="3.14"/>
   <object class="GtkDialog" id="dialog">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -21,13 +22,13 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button_view_intro">
-                <property name="label" translatable="yes">_View Intro</property>
+                <property name="label">_View Intro</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Open a brief introductory explanation of how the Module Manager works.</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -38,12 +39,12 @@
             </child>
             <child>
               <object class="GtkButton" id="button_load_sources">
-                <property name="label" translatable="yes">_Load Standard</property>
+                <property name="label">_Load Standard</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources.</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -55,11 +56,11 @@
             <child>
               <object class="GtkButton" id="button_refresh">
                 <property name="label">gtk-refresh</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Refresh Xiphos' knowledge of what modules are available at the selected remote repository</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -70,10 +71,10 @@
             </child>
             <child>
               <object class="GtkButton" id="button_install">
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <child>
                   <object class="GtkAlignment" id="alignment1">
                     <property name="visible">True</property>
@@ -81,7 +82,7 @@
                     <property name="xscale">0</property>
                     <property name="yscale">0</property>
                     <child>
-                      <object class="GtkHBox" id="hbox1">
+                      <object class="GtkBox" id="hbox1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">2</property>
@@ -89,7 +90,7 @@
                           <object class="GtkImage" id="image1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="stock">gtk-add</property>
+                            <property name="icon_name">list-add-symbolic</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -125,11 +126,11 @@
             <child>
               <object class="GtkButton" id="button_remove">
                 <property name="label">gtk-remove</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Remove the selected modules from your system</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -140,12 +141,12 @@
             </child>
             <child>
               <object class="GtkButton" id="button_archive">
-                <property name="label" translatable="yes">_Archive</property>
+                <property name="label">_Archive</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Create a zip archive of the selected modules.</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -156,12 +157,12 @@
             </child>
             <child>
               <object class="GtkButton" id="button_index">
-                <property name="label" translatable="yes">_Index</property>
+                <property name="label">_Index</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Build an index of the selected modules, for optimized ("lucene") searching.</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -172,12 +173,12 @@
             </child>
             <child>
               <object class="GtkButton" id="button_delete_index">
-                <property name="label" translatable="yes">_Delete Index</property>
+                <property name="label">_Delete Index</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Delete the fast-search index of the selected modules.</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -188,13 +189,12 @@
             </child>
             <child>
               <object class="GtkButton" id="button_scan_obsolete">
-                <property name="label" translatable="yes">Scan _Obsolete</property>
-                <property name="visible">False</property>
+                <property name="label">Scan _Obsolete</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Scan for obsolete modules and offer to delete them.</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -206,11 +206,11 @@
             <child>
               <object class="GtkButton" id="button_close">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -222,10 +222,10 @@
             <child>
               <object class="GtkButton" id="button_cancel">
                 <property name="label">_Cancel</property>
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -236,9 +236,9 @@
             </child>
             <child>
               <object class="GtkButton" id="button4">
+                <property name="use_action_appearance">False</property>
                 <property name="can_focus">False</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <child>
                   <object class="GtkAlignment" id="alignment4">
                     <property name="visible">True</property>
@@ -246,7 +246,7 @@
                     <property name="xscale">0</property>
                     <property name="yscale">0</property>
                     <child>
-                      <object class="GtkHBox" id="hbox5">
+                      <object class="GtkBox" id="hbox5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">2</property>
@@ -254,7 +254,7 @@
                           <object class="GtkImage" id="image4">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="stock">gtk-go-forward</property>
+                            <property name="icon_name">go-next-symbolic</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -295,7 +295,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHPaned" id="hpaned1">
+          <object class="GtkPaned" id="hpaned1">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="border_width">8</property>
@@ -323,10 +323,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vbox9">
+              <object class="GtkBox" id="vbox9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">6</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkNotebook" id="notebook1">
@@ -335,10 +336,11 @@
                     <property name="show_tabs">False</property>
                     <property name="show_border">False</property>
                     <child>
-                      <object class="GtkVBox" id="vbox1">
+                      <object class="GtkBox" id="vbox1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">6</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="label7">
@@ -407,9 +409,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox5">
+                      <object class="GtkBox" id="vbox5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
                           <object class="GtkLabel" id="label14">
@@ -440,7 +443,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox7">
+                          <object class="GtkBox" id="hbox7">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">6</property>
@@ -474,18 +477,19 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkVBox" id="vbox6">
+                              <object class="GtkBox" id="vbox6">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkButton" id="button_add_local">
                                     <property name="label">gtk-add</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="tooltip_text" translatable="yes">Add a local folder as an install source, typically on a cdrom or flash drive.  Such a folder contains subfolders "mods.d" and "modules".</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_stock">True</property>
                                   </object>
                                   <packing>
@@ -497,11 +501,11 @@
                                 <child>
                                   <object class="GtkButton" id="button_remove_local">
                                     <property name="label">gtk-remove</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="tooltip_text" translatable="yes">Remove one of your local folders as an install source.</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_stock">True</property>
                                   </object>
                                   <packing>
@@ -539,7 +543,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox8">
+                          <object class="GtkBox" id="hbox8">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">7</property>
@@ -573,18 +577,19 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkVBox" id="vbox7">
+                              <object class="GtkBox" id="vbox7">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkButton" id="button_add_remote">
                                     <property name="label">gtk-add</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="tooltip_text" translatable="yes">Add a custom remote install source. You must know its hostname and the folder where its repository lives.</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_stock">True</property>
                                   </object>
                                   <packing>
@@ -596,11 +601,11 @@
                                 <child>
                                   <object class="GtkButton" id="button_remove_remote">
                                     <property name="label">gtk-remove</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="tooltip_text" translatable="yes">Remove a remote install source.</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_stock">True</property>
                                   </object>
                                   <packing>
@@ -640,9 +645,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox2">
+                      <object class="GtkBox" id="vbox2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">3</property>
                         <child>
                           <object class="GtkLabel" id="label10">
@@ -660,7 +666,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox2">
+                          <object class="GtkBox" id="hbox2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="border_width">1</property>
@@ -673,11 +679,12 @@
                                 <child>
                                   <object class="GtkRadioButton" id="radiobutton1">
                                     <property name="label" translatable="yes">Local</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
+                                    <property name="xalign">0.5</property>
                                     <property name="draw_indicator">True</property>
                                   </object>
                                 </child>
@@ -713,7 +720,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox3">
+                          <object class="GtkBox" id="hbox3">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="border_width">1</property>
@@ -726,11 +733,12 @@
                                 <child>
                                   <object class="GtkRadioButton" id="radiobutton2">
                                     <property name="label" translatable="yes">Remote</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
+                                    <property name="xalign">0.5</property>
                                     <property name="draw_indicator">True</property>
                                     <property name="group">radiobutton1</property>
                                   </object>
@@ -782,16 +790,17 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkVBox" id="vbox3">
+                          <object class="GtkBox" id="vbox3">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkAlignment" id="alignment7">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="left_padding">8</property>
                                 <child>
-                                  <object class="GtkVBox" id="vbox4">
+                                  <object class="GtkBox" id="vbox4">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
@@ -811,10 +820,11 @@
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="radiobutton3">
+                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
-                                        <property name="use_action_appearance">False</property>
+                                        <property name="xalign">0.5</property>
                                         <property name="draw_indicator">True</property>
                                         <child>
                                           <object class="GtkLabel" id="label_home">
@@ -847,10 +857,11 @@
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="radiobutton4">
+                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
-                                        <property name="use_action_appearance">False</property>
+                                        <property name="xalign">0.5</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">radiobutton3</property>
                                         <child>
@@ -884,7 +895,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox4">
+                          <object class="GtkBox" id="hbox4">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
@@ -892,8 +903,8 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
-                                <property name="stock">gtk-dialog-warning</property>
-                                <property name="icon-size">6</property>
+                                <property name="icon_name">dialog-warning-symbolic</property>
+                                <property name="icon_size">6</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -939,9 +950,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox8">
+                      <object class="GtkBox" id="vbox8">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkScrolledWindow" id="scrolledwindow4">
@@ -981,9 +993,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox10">
+                      <object class="GtkBox" id="vbox10">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkScrolledWindow" id="scrolledwindow5">
@@ -1077,8 +1090,8 @@
     <property name="icon">xiphos-x-16.png</property>
     <property name="type_hint">dialog</property>
     <property name="action">select-folder</property>
-    <signal name="selection-changed" handler="on_filechooserdialog_selection_changed" swapped="no"/>
     <signal name="response" handler="on_filechooserdialog_response" swapped="no"/>
+    <signal name="selection-changed" handler="on_filechooserdialog_selection_changed" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
@@ -1092,11 +1105,11 @@
             <child>
               <object class="GtkButton" id="button10">
                 <property name="label">_Cancel</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -1108,12 +1121,12 @@
             <child>
               <object class="GtkButton" id="button11">
                 <property name="label">gtk-open</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="has_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>

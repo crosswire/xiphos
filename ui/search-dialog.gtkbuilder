@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.18.3 -->
 <interface>
-  <requires lib="gtk+" version="3.0"/>
+  <requires lib="gtk+" version="3.14"/>
   <object class="GtkDialog" id="dialog">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -76,15 +76,17 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox1">
+          <object class="GtkBox" id="vbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="border_width">6</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">6</property>
             <child>
-              <object class="GtkVBox" id="vbox2">
+              <object class="GtkBox" id="vbox2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">4</property>
                 <child>
                   <object class="GtkLabel" id="label5">
@@ -102,7 +104,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox1">
+                  <object class="GtkBox" id="hbox1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="spacing">6</property>
@@ -177,7 +179,7 @@
                 <property name="can_focus">True</property>
                 <property name="show_border">False</property>
                 <child>
-                  <object class="GtkHPaned" id="hpaned1">
+                  <object class="GtkPaned" id="hpaned1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="position">166</property>
@@ -208,16 +210,18 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox3">
+                      <object class="GtkBox" id="vbox3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">16</property>
                         <property name="baseline_position">bottom</property>
                         <child>
-                          <object class="GtkVBox" id="vbox4">
+                          <object class="GtkBox" id="vbox4">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="border_width">4</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">4</property>
                             <child>
                               <object class="GtkLabel" id="label7">
@@ -239,7 +243,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="left_padding">8</property>
                                 <child>
-                                  <object class="GtkHBox" id="hbox2">
+                                  <object class="GtkBox" id="hbox2">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="spacing">6</property>
@@ -362,10 +366,11 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkVBox" id="vbox5">
+                          <object class="GtkBox" id="vbox5">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="border_width">4</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">4</property>
                             <child>
                               <object class="GtkLabel" id="label8">
@@ -387,7 +392,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="left_padding">8</property>
                                 <child>
-                                  <object class="GtkHBox" id="hbox3">
+                                  <object class="GtkBox" id="hbox3">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="spacing">6</property>
@@ -522,15 +527,16 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox4">
+                          <object class="GtkBox" id="hbox4">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="border_width">4</property>
                             <property name="spacing">35</property>
                             <child>
-                              <object class="GtkVBox" id="vbox6">
+                              <object class="GtkBox" id="vbox6">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkLabel" id="label9">
                                     <property name="visible">True</property>
@@ -551,9 +557,10 @@
                                     <property name="can_focus">False</property>
                                     <property name="left_padding">8</property>
                                     <child>
-                                      <object class="GtkVBox" id="vbox8">
+                                      <object class="GtkBox" id="vbox8">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
+                                        <property name="orientation">vertical</property>
                                         <child>
                                           <object class="GtkRadioButton" id="radiobutton16">
                                             <property name="label" translatable="yes">Optimized ("Lucene")</property>
@@ -689,9 +696,10 @@ See Module Manager's maintenance functions</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkVBox" id="vbox7">
+                              <object class="GtkBox" id="vbox7">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkLabel" id="label10">
                                     <property name="visible">True</property>
@@ -712,9 +720,10 @@ See Module Manager's maintenance functions</property>
                                     <property name="can_focus">False</property>
                                     <property name="left_padding">8</property>
                                     <child>
-                                      <object class="GtkVBox" id="vbox9">
+                                      <object class="GtkBox" id="vbox9">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
+                                        <property name="orientation">vertical</property>
                                         <child>
                                           <object class="GtkCheckButton" id="checkbutton1">
                                             <property name="label" translatable="yes">Match case</property>
@@ -797,10 +806,11 @@ See Module Manager's maintenance functions</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox10">
+                  <object class="GtkBox" id="vbox10">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="border_width">4</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkToolbar" id="toolbar1">
@@ -871,14 +881,15 @@ See Module Manager's maintenance functions</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHPaned" id="hpaned2">
+                      <object class="GtkPaned" id="hpaned2">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="position">148</property>
                         <child>
-                          <object class="GtkVBox" id="vbox13">
+                          <object class="GtkBox" id="vbox13">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkLabel" id="label13">
                                 <property name="visible">True</property>
@@ -932,14 +943,16 @@ See Module Manager's maintenance functions</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkVPaned" id="vpaned1">
+                          <object class="GtkPaned" id="vpaned1">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="position">148</property>
                             <child>
-                              <object class="GtkVBox" id="vbox11">
+                              <object class="GtkBox" id="vbox11">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkLabel" id="label11">
                                     <property name="visible">True</property>
@@ -986,9 +999,10 @@ See Module Manager's maintenance functions</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkVBox" id="vbox12">
+                              <object class="GtkBox" id="vbox12">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkLabel" id="label12">
                                     <property name="visible">True</property>
@@ -1054,10 +1068,11 @@ See Module Manager's maintenance functions</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox14">
+                  <object class="GtkBox" id="vbox14">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="border_width">6</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkToolbar" id="toolbar2">
@@ -1127,15 +1142,16 @@ See Module Manager's maintenance functions</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox5">
+                      <object class="GtkBox" id="hbox5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">7</property>
                         <property name="homogeneous">True</property>
                         <child>
-                          <object class="GtkVBox" id="vbox16">
+                          <object class="GtkBox" id="vbox16">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkLabel" id="label17">
                                 <property name="visible">True</property>
@@ -1180,9 +1196,10 @@ See Module Manager's maintenance functions</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkVBox" id="vbox15">
+                          <object class="GtkBox" id="vbox15">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel" id="label14">
@@ -1314,10 +1331,11 @@ See Module Manager's maintenance functions</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox17">
+                  <object class="GtkBox" id="vbox17">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="border_width">6</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkToolbar" id="toolbar3">
@@ -1387,15 +1405,16 @@ See Module Manager's maintenance functions</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox6">
+                      <object class="GtkBox" id="hbox6">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">7</property>
                         <property name="homogeneous">True</property>
                         <child>
-                          <object class="GtkVBox" id="vbox18">
+                          <object class="GtkBox" id="vbox18">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkLabel" id="label18">
                                 <property name="visible">True</property>
@@ -1440,9 +1459,10 @@ See Module Manager's maintenance functions</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkVBox" id="vbox19">
+                          <object class="GtkBox" id="vbox19">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel" id="label19">
@@ -1624,13 +1644,14 @@ See Module Manager's maintenance functions</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox7">
+                  <object class="GtkBox" id="hbox7">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkVBox" id="vbox23">
+                      <object class="GtkBox" id="vbox23">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkLabel" id="label23">
                             <property name="visible">True</property>
@@ -1646,10 +1667,11 @@ See Module Manager's maintenance functions</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkVBox" id="vbox21">
+                          <object class="GtkBox" id="vbox21">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="border_width">6</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkRadioButton" id="radiobutton13">
                                 <property name="label" translatable="yes">Strongs Numbers</property>
@@ -1743,9 +1765,10 @@ See Module Manager's maintenance functions</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox22">
+                      <object class="GtkBox" id="vbox22">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkLabel" id="label21">
                             <property name="visible">True</property>
@@ -1761,10 +1784,11 @@ See Module Manager's maintenance functions</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkVBox" id="vbox20">
+                          <object class="GtkBox" id="vbox20">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="border_width">6</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkCheckButton" id="checkbutton2">
                                 <property name="label" translatable="yes">Show Strong's Numbers</property>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.18.3 -->
 <interface>
-  <requires lib="gtk+" version="3.0"/>
+  <requires lib="gtk+" version="3.14"/>
   <object class="GtkListStore" id="model1">
     <columns>
       <!-- column-name gchararray -->
@@ -108,7 +108,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHBox" id="hbox1">
+          <object class="GtkBox" id="hbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="border_width">6</property>
@@ -161,10 +161,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox1">
+                  <object class="GtkBox" id="vbox1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="border_width">6</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="label9">
                         <property name="visible">True</property>
@@ -180,13 +181,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox2">
+                      <object class="GtkBox" id="vbox2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">3</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkHBox" id="hbox2">
+                          <object class="GtkBox" id="hbox2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -237,7 +239,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox6">
+                          <object class="GtkBox" id="hbox6">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -288,7 +290,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox7">
+                          <object class="GtkBox" id="hbox7">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -339,7 +341,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox8">
+                          <object class="GtkBox" id="hbox8">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -390,7 +392,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox9">
+                          <object class="GtkBox" id="hbox9">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -441,7 +443,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox27">
+                          <object class="GtkBox" id="hbox27">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -492,7 +494,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox28">
+                          <object class="GtkBox" id="hbox28">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -543,7 +545,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox29">
+                          <object class="GtkBox" id="hbox29">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -561,7 +563,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHBox" id="hbox29a">
+                              <object class="GtkBox" id="hbox29a">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="homogeneous">True</property>
@@ -645,10 +647,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox3">
+                  <object class="GtkBox" id="vbox3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="border_width">6</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="label15">
                         <property name="visible">True</property>
@@ -664,7 +667,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="basehbox10">
+                      <object class="GtkBox" id="basehbox10">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">8</property>
@@ -709,7 +712,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox11">
+                      <object class="GtkBox" id="hbox11">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">8</property>
@@ -754,7 +757,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox31">
+                      <object class="GtkBox" id="hbox31">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -813,12 +816,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox4">
+                  <object class="GtkBox" id="vbox4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="border_width">6</property>
+                    <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkHBox" id="box-BSP-header">
+                      <object class="GtkBox" id="box-BSP-header">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -901,7 +905,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="box-BSP-mode">
+                      <object class="GtkBox" id="box-BSP-mode">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -1027,7 +1031,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="box-BSP-private">
+                      <object class="GtkBox" id="box-BSP-private">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -1119,7 +1123,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="box-BSP-nav">
+                      <object class="GtkBox" id="box-BSP-nav">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -1223,7 +1227,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="box-BSP-listen">
+                      <object class="GtkBox" id="box-BSP-listen">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -1338,7 +1342,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="box-BSP-speaker-set">
+                      <object class="GtkBox" id="box-BSP-speaker-set">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -1364,7 +1368,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="box-BSP-toggles">
+                      <object class="GtkBox" id="box-BSP-toggles">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -1504,10 +1508,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox6">
+                  <object class="GtkBox" id="vbox6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="border_width">6</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="label19">
                         <property name="visible">True</property>
@@ -1523,13 +1528,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox7">
+                      <object class="GtkBox" id="vbox7">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">8</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="GtkHBox" id="hbox30">
+                          <object class="GtkBox" id="hbox30">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -1768,7 +1774,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox3">
+                          <object class="GtkBox" id="hbox3">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -1787,7 +1793,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHBox" id="verseboxes">
+                              <object class="GtkBox" id="verseboxes">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="homogeneous">True</property>
@@ -1878,7 +1884,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox-studypad">
+                          <object class="GtkBox" id="hbox-studypad">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -1897,7 +1903,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHBox" id="hbox12">
+                              <object class="GtkBox" id="hbox12">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
@@ -1955,9 +1961,10 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox8">
+                  <object class="GtkBox" id="vbox8">
                     <property name="can_focus">False</property>
                     <property name="border_width">6</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="label21">
                         <property name="visible">True</property>
@@ -1973,13 +1980,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox9">
+                      <object class="GtkBox" id="vbox9">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">8</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkHBox" id="hbox13">
+                          <object class="GtkBox" id="hbox13">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -2020,7 +2028,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox14">
+                          <object class="GtkBox" id="hbox14">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -2061,7 +2069,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox15">
+                          <object class="GtkBox" id="hbox15">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -2102,7 +2110,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox26">
+                          <object class="GtkBox" id="hbox26">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -2154,11 +2162,15 @@
                     <property name="position">5</property>
                   </packing>
                 </child>
+                <child type="tab">
+                  <placeholder/>
+                </child>
                 <child>
-                  <object class="GtkVBox" id="vbox10">
+                  <object class="GtkBox" id="vbox10">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="border_width">6</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="ps_label">
                         <property name="visible">True</property>
@@ -2289,10 +2301,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox12">
+                  <object class="GtkBox" id="vbox12">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="border_width">6</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="label33">
                         <property name="visible">True</property>
@@ -2308,13 +2321,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="vbox13">
+                      <object class="GtkBox" id="vbox13">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">8</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkHBox" id="hbox23">
+                          <object class="GtkBox" id="hbox23">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -2355,7 +2369,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox24">
+                          <object class="GtkBox" id="hbox24">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -2396,7 +2410,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox25">
+                          <object class="GtkBox" id="hbox25">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -2437,7 +2451,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox16">
+                          <object class="GtkBox" id="hbox16">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
@@ -2478,7 +2492,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox17">
+                          <object class="GtkBox" id="hbox17">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="homogeneous">True</property>
