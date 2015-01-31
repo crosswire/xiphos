@@ -334,7 +334,11 @@ create_edit_tree_menu (EDITOR * editor)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
+#ifdef HAVE_GTK_314
 	glade_file = gui_general_user_file ("xi-menus-popup.gtkbuilder", FALSE);
+#else
+	glade_file = gui_general_user_file ("xi-menus-popup_old.gtkbuilder", FALSE);
+#endif
 #else
 	GladeXML *gxml;
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);

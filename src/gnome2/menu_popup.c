@@ -1831,7 +1831,11 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
 		return NULL;
 
 #ifdef USE_GTKBUILDER
+#ifdef HAVE_GTK_314
 	glade_file = gui_general_user_file ("xi-menus-popup.gtkbuilder", FALSE);
+#else
+	glade_file = gui_general_user_file ("xi-menus-popup_old.gtkbuilder", FALSE);
+#endif
 #else
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
 #endif
