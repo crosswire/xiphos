@@ -351,7 +351,7 @@ GtkWidget *gui_navbar_book_new(void)
 			   FALSE, 0);
 
 #ifdef HAVE_GTK_314
-	arrow1 = gtk_image_new_from_icon_name("view-list-symbolic", GTK_ICON_SIZE_BUTTON);
+	arrow1 = gtk_image_new_from_icon_name("open-menu-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
   	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
 #endif
