@@ -379,22 +379,17 @@ GtkWidget *gui_create_dictionary_pane(void)
   	gtk_widget_show (widgets.entry_dict);
 	gtk_box_pack_start(GTK_BOX(hbox2), widgets.entry_dict, TRUE, TRUE, 0);
 
-#ifdef HAVE_GTK_310
-	dict_drop_down = gtk_button_new_from_icon_name("pan-down-symbolic",
-													GTK_ICON_SIZE_BUTTON);
-#else
   	dict_drop_down = gtk_toggle_button_new ();
-#endif
 	gtk_widget_show (dict_drop_down);
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
 
 #ifdef HAVE_GTK_310
-	gtk_container_add(GTK_CONTAINER(dict_drop_down), NULL);
+	arrow1 = gtk_image_new_from_icon_name("view-list-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+#endif
   	gtk_widget_show(arrow1);
   	gtk_container_add(GTK_CONTAINER(dict_drop_down), arrow1);
-#endif
 
 	button10 = gtk_button_new();
 	gtk_widget_show(button10);
