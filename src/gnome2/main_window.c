@@ -959,7 +959,7 @@ void create_mainwindow(void)
 
 	tab_button_icon =  
 #ifdef HAVE_GTK_310
-		gtk_image_new_from_icon_name ("list-add-symbolic",
+		gtk_image_new_from_icon_name ("tab-new-symbolic",
                               GTK_ICON_SIZE_SMALL_TOOLBAR);
 #else
 		gtk_image_new_from_stock(GTK_STOCK_ADD, 

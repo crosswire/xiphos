@@ -68,7 +68,7 @@
               <object class="GtkImage" id="image17">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="icon_name">open-menu-symbolic</property>
+                <property name="icon_name">view-list-symbolic</property>
               </object>
             </child>
           </object>
@@ -173,7 +173,7 @@
                     <child>
                       <object class="GtkImage" id="image13">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="icon_name">go-up-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -185,7 +185,7 @@
                       <object class="GtkImage" id="image12">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="icon_name">go-up-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -214,7 +214,7 @@
                     <child>
                       <object class="GtkImage" id="image15">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="icon_name">go-down-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -226,7 +226,7 @@
                       <object class="GtkImage" id="image14">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="icon_name">go-down-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -325,7 +325,7 @@
                     <child>
                       <object class="GtkImage" id="image9">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="icon_name">go-up-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -337,7 +337,7 @@
                       <object class="GtkImage" id="image8">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="icon_name">go-up-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -366,7 +366,7 @@
                     <child>
                       <object class="GtkImage" id="image11">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="icon_name">go-down-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -378,7 +378,7 @@
                       <object class="GtkImage" id="image10">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="icon_name">go-down-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -476,7 +476,7 @@
                     <child>
                       <object class="GtkImage" id="image7">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="icon_name">go-up-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -488,7 +488,7 @@
                       <object class="GtkImage" id="image6">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="icon_name">go-up-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -517,7 +517,7 @@
                     <child>
                       <object class="GtkImage" id="image16">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="icon_name">go-down-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -529,7 +529,7 @@
                       <object class="GtkImage" id="image5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="icon_name">go-down-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>

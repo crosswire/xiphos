@@ -349,14 +349,9 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_widget_show(navbar_book.button_list);
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.button_list, FALSE,
 			   FALSE, 0);
-	//gtk_button_set_relief (GTK_BUTTON (navbar_book.button_list), GTK_RELIEF_NONE);
 
 #ifdef HAVE_GTK_310
-	{
-		gchar *arrow_path = image_locator("arrow_down_box.png");
-		arrow1 = gtk_image_new_from_file(arrow_path);
-		g_free(arrow_path);
-	}
+	arrow1 = gtk_image_new_from_icon_name("view-list-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
   	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
 #endif
@@ -378,7 +373,7 @@ GtkWidget *gui_navbar_book_new(void)
 	image1 =  
 #ifdef HAVE_GTK_310
 		gtk_image_new_from_icon_name 
-				("go-previous", GTK_ICON_SIZE_BUTTON);
+				("go-previous-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 		gtk_image_new_from_stock
 				(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_BUTTON);
@@ -399,7 +394,7 @@ GtkWidget *gui_navbar_book_new(void)
 	image1 = 
 #ifdef HAVE_GTK_310
 		gtk_image_new_from_icon_name 
-				("go-up", GTK_ICON_SIZE_BUTTON);
+				("go-up-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 		gtk_image_new_from_stock
 				(GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
@@ -420,7 +415,7 @@ GtkWidget *gui_navbar_book_new(void)
 	image2 = 
 #ifdef HAVE_GTK_310
 		gtk_image_new_from_icon_name 
-				("go-down", GTK_ICON_SIZE_BUTTON);
+				("go-down-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 		gtk_image_new_from_stock
 				(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
@@ -443,7 +438,7 @@ GtkWidget *gui_navbar_book_new(void)
 	image1 = 
 #ifdef HAVE_GTK_310
 		gtk_image_new_from_icon_name 
-				("go-next", GTK_ICON_SIZE_BUTTON);
+				("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 		gtk_image_new_from_stock
 				(GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_BUTTON);
