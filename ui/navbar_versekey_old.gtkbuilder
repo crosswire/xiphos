@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 -->
 <interface>
-  <requires lib="gtk+" version="3.12"/>
-  <object class="GtkBox" id="navbar">
+  <requires lib="gtk+" version="2.20"/>
+  <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkHBox" id="navbar">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="valign">center</property>
-    <property name="margin_top">3</property>
-    <property name="margin_bottom">3</property>
+    <property name="border_width">3</property>
+    <property name="spacing">1</property>
     <child>
       <object class="GtkToggleButton" id="togglebutton_sync">
-        <property name="use_action_appearance">False</property>
         <property name="can_focus">True</property>
         <property name="receives_default">False</property>
+        <property name="use_action_appearance">False</property>
         <property name="relief">none</property>
         <child>
           <object class="GtkImage" id="image3">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="icon_name">view-refresh-symbolic</property>
+            <property name="stock">gtk-refresh</property>
           </object>
         </child>
       </object>
@@ -30,16 +29,16 @@
     </child>
     <child>
       <object class="GtkButton" id="button_history_back">
-        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">False</property>
+        <property name="use_action_appearance">False</property>
         <property name="relief">none</property>
         <child>
           <object class="GtkImage" id="image2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="icon_name">go-previous-symbolic</property>
+            <property name="stock">gtk-go-back</property>
           </object>
         </child>
       </object>
@@ -50,25 +49,24 @@
       </packing>
     </child>
     <child>
-      <object class="GtkBox" id="vbox5">
+      <object class="GtkVBox" id="vbox5">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
         <property name="homogeneous">True</property>
         <child>
           <object class="GtkToggleButton" id="togglebutton_history_list">
-            <property name="use_action_appearance">False</property>
             <property name="height_request">26</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="tooltip_text" translatable="yes">Drop down history list</property>
+            <property name="use_action_appearance">False</property>
             <property name="relief">none</property>
             <child>
               <object class="GtkImage" id="image17">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="icon_name">open-menu-symbolic</property>
+                <property name="pixbuf">arrow_down.png</property>
               </object>
             </child>
           </object>
@@ -81,22 +79,22 @@
       </object>
       <packing>
         <property name="expand">False</property>
-        <property name="fill">True</property>
+        <property name="fill">False</property>
         <property name="position">2</property>
       </packing>
     </child>
     <child>
       <object class="GtkButton" id="button_history_foward">
-        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">False</property>
+        <property name="use_action_appearance">False</property>
         <property name="relief">none</property>
         <child>
           <object class="GtkImage" id="image1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="icon_name">go-next-symbolic</property>
+            <property name="stock">gtk-go-forward</property>
           </object>
         </child>
       </object>
@@ -107,7 +105,18 @@
       </packing>
     </child>
     <child>
-      <object class="GtkBox" id="hbox2">
+      <object class="GtkVSeparator" id="vseparator1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkHBox" id="hbox2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -116,15 +125,21 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkToggleButton" id="togglebutton_book">
-                <property name="use_action_appearance">False</property>
                 <property name="width_request">160</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="togglebutton_book-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Book Selector Button</property>
+                  </object>
+                </child>
                 <child>
-                  <object class="GtkBox" id="hbox5">
+                  <object class="GtkHBox" id="hbox5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="spacing">2</property>
                     <child>
                       <object class="GtkLabel" id="label_book">
                         <property name="width_request">150</property>
@@ -142,11 +157,6 @@
                     </child>
                   </object>
                 </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="togglebutton_book-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Book Selector Button</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -157,23 +167,24 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="vbox7">
+          <object class="GtkVBox" id="vbox7">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
+            <property name="border_width">3</property>
             <child>
               <object class="GtkEventBox" id="eventbox9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkBox" id="hbox12">
+                  <object class="GtkHBox" id="hbox12">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image13">
+                      <object class="GtkImage" id="image12">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="pixbuf">arrow_up.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -182,10 +193,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image12">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image13">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="pixbuf">arrow_up_box.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -208,13 +218,14 @@
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkBox" id="hbox13">
+                  <object class="GtkHBox" id="hbox13">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image15">
+                      <object class="GtkImage" id="image14">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="pixbuf">arrow_down.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -223,10 +234,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image14">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image15">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="pixbuf">arrow_down_box.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -246,8 +256,7 @@
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="padding">1</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -255,11 +264,22 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">4</property>
+        <property name="position">5</property>
       </packing>
     </child>
     <child>
-      <object class="GtkBox" id="hbox3">
+      <object class="GtkVSeparator" id="vseparator2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">6</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkHBox" id="hbox3">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -268,13 +288,18 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkToggleButton" id="togglebutton_chapter">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="xalign">1</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="togglebutton_chapter-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Toggle Chapter Button</property>
+                  </object>
+                </child>
                 <child>
-                  <object class="GtkBox" id="hbox6">
+                  <object class="GtkHBox" id="hbox6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -294,11 +319,6 @@
                     </child>
                   </object>
                 </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="togglebutton_chapter-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Toggle Chapter Button</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -309,23 +329,24 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="vbox6">
+          <object class="GtkVBox" id="vbox6">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
+            <property name="border_width">3</property>
             <child>
               <object class="GtkEventBox" id="eventbox8">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkBox" id="hbox10">
+                  <object class="GtkHBox" id="hbox10">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image9">
+                      <object class="GtkImage" id="image8">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="pixbuf">arrow_up.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -334,10 +355,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image8">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image9">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="pixbuf">arrow_up_box.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -360,13 +380,14 @@
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkBox" id="hbox11">
+                  <object class="GtkHBox" id="hbox11">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image11">
+                      <object class="GtkImage" id="image10">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="pixbuf">arrow_down.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -375,10 +396,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image10">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image11">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="pixbuf">arrow_down_box.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -399,7 +419,6 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="padding">1</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -407,11 +426,22 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">5</property>
+        <property name="position">7</property>
       </packing>
     </child>
     <child>
-      <object class="GtkBox" id="hbox4">
+      <object class="GtkVSeparator" id="vseparator3">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">8</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkHBox" id="hbox4">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -420,15 +450,19 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkToggleButton" id="togglebutton_verse">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="togglebutton_verse-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Toggle Verse Button</property>
+                  </object>
+                </child>
                 <child>
-                  <object class="GtkBox" id="hbox7">
+                  <object class="GtkHBox" id="hbox7">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="label_verse">
                         <property name="visible">True</property>
@@ -446,11 +480,6 @@
                     </child>
                   </object>
                 </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="togglebutton_verse-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Toggle Verse Button</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -461,22 +490,23 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="vbox4">
+          <object class="GtkVBox" id="vbox4">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
+            <property name="border_width">3</property>
             <child>
               <object class="GtkEventBox" id="eventbox7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkBox" id="hbox9">
+                  <object class="GtkHBox" id="hbox9">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image7">
+                      <object class="GtkImage" id="image6">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="pixbuf">arrow_up.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -485,10 +515,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image6">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image7">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-up-symbolic</property>
+                        <property name="pixbuf">arrow_up_box.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -510,14 +539,18 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
+                <signal name="leave-notify-event" handler="on_eventbox1_leave_notify_event" swapped="no"/>
+                <signal name="button-release-event" handler="on_eventbox1_button_release_event" swapped="no"/>
+                <signal name="enter-notify-event" handler="on_eventbox1_enter_notify_event" swapped="no"/>
                 <child>
-                  <object class="GtkBox" id="hbox8">
+                  <object class="GtkHBox" id="hbox8">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image16">
+                      <object class="GtkImage" id="image5">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="pixbuf">arrow_down.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -526,10 +559,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image5">
-                        <property name="visible">True</property>
+                      <object class="GtkImage" id="image16">
                         <property name="can_focus">False</property>
-                        <property name="icon_name">pan-down-symbolic</property>
+                        <property name="pixbuf">arrow_down_box.png</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -550,7 +582,6 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="padding">1</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -558,7 +589,19 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">6</property>
+        <property name="position">9</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkVSeparator" id="vseparator4">
+        <property name="width_request">8</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">10</property>
       </packing>
     </child>
     <child>
@@ -569,6 +612,8 @@
         <property name="invisible_char">●</property>
         <property name="primary_icon_activatable">False</property>
         <property name="secondary_icon_activatable">False</property>
+        <property name="primary_icon_sensitive">True</property>
+        <property name="secondary_icon_sensitive">True</property>
         <child internal-child="accessible">
           <object class="AtkObject" id="entry_lookup-atkobject">
             <property name="AtkObject::accessible-name" translatable="yes">Reference Entry</property>
@@ -578,7 +623,7 @@
       <packing>
         <property name="expand">True</property>
         <property name="fill">True</property>
-        <property name="position">7</property>
+        <property name="position">11</property>
       </packing>
     </child>
   </object>

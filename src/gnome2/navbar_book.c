@@ -350,7 +350,7 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.button_list, FALSE,
 			   FALSE, 0);
 
-#ifdef HAVE_GTK_310
+#ifdef HAVE_GTK_314
 	arrow1 = gtk_image_new_from_icon_name("view-list-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
   	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
@@ -371,7 +371,7 @@ GtkWidget *gui_navbar_book_new(void)
 				      FALSE);
 
 	image1 =  
-#ifdef HAVE_GTK_310
+#ifdef HAVE_GTK_314
 		gtk_image_new_from_icon_name 
 				("go-previous-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
@@ -392,7 +392,7 @@ GtkWidget *gui_navbar_book_new(void)
 				      FALSE);
 
 	image1 = 
-#ifdef HAVE_GTK_310
+#ifdef HAVE_GTK_314
 		gtk_image_new_from_icon_name 
 				("go-up-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
@@ -413,7 +413,7 @@ GtkWidget *gui_navbar_book_new(void)
 				      FALSE);
 
 	image2 = 
-#ifdef HAVE_GTK_310
+#ifdef HAVE_GTK_314
 		gtk_image_new_from_icon_name 
 				("go-down-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
@@ -436,7 +436,7 @@ GtkWidget *gui_navbar_book_new(void)
 				      FALSE);
 
 	image1 = 
-#ifdef HAVE_GTK_310
+#ifdef HAVE_GTK_314
 		gtk_image_new_from_icon_name 
 				("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
 #else

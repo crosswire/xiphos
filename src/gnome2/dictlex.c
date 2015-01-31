@@ -383,8 +383,8 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show (dict_drop_down);
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
 
-#ifdef HAVE_GTK_310
-	arrow1 = gtk_image_new_from_icon_name("view-list-symbolic", GTK_ICON_SIZE_BUTTON);
+#ifdef HAVE_GTK_314
+	arrow1 = gtk_image_new_from_icon_name("open-menu-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
 #endif
@@ -397,11 +397,10 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_button_set_relief(GTK_BUTTON(button10), GTK_RELIEF_NONE);
 
 	image1 = 
-#ifdef HAVE_GTK_310
+#ifdef HAVE_GTK_314
 	    gtk_image_new_from_icon_name("go-up-symbolic",
 					 GTK_ICON_SIZE_BUTTON);
 #else                        
-		
 	    gtk_image_new_from_stock(GTK_STOCK_GO_UP,
 				     GTK_ICON_SIZE_BUTTON);
 #endif	 
@@ -414,11 +413,10 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_button_set_relief(GTK_BUTTON(button11), GTK_RELIEF_NONE);
 
 	image2 = 
-#ifdef HAVE_GTK_310
+#ifdef HAVE_GTK_314
 	    gtk_image_new_from_icon_name ("go-down-symbolic",
 					  GTK_ICON_SIZE_BUTTON);
 #else                        
-		
 	    gtk_image_new_from_stock(GTK_STOCK_GO_DOWN,
 				     GTK_ICON_SIZE_BUTTON);
 #endif	 	
