@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <requires lib="gtk+" version="3.14"/>
   <object class="GtkMenu" id="menu_bookmark">
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="open_in_new_tab">
-        <property name="label" translatable="yes">Open in new tab</property>
+        <property name="label">Open in new tab</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open this bookmark in a new tab</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_open_in_tab_activate" swapped="no"/>
@@ -17,11 +18,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="open_in_a_dialog">
-        <property name="label" translatable="yes">Open in a dialog</property>
+        <property name="label">Open in a dialog</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open this bookmark in a dialog</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_dialog_activate" swapped="no"/>
@@ -29,11 +30,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="new_folder">
-        <property name="label" translatable="yes">New Folder</property>
+        <property name="label">New Folder</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Add new folder to selected folder</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_new_folder_activate" swapped="no"/>
@@ -41,11 +42,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="insert_bookmark">
-        <property name="label" translatable="yes">Insert Bookmark</property>
+        <property name="label">Insert Bookmark</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Insert new bookmark here</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_insert_bookmark_activate" swapped="no"/>
@@ -53,11 +54,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="edit_item">
-        <property name="label" translatable="yes">_Edit Item</property>
+        <property name="label">_Edit Item</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Edit bookmark item</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_edit_item_activate" swapped="no"/>
@@ -65,11 +66,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="delete_item">
-        <property name="label" translatable="yes">Delete Item</property>
+        <property name="label">Delete Item</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Delete item</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_delete_item_activate" swapped="no"/>
@@ -83,11 +84,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="expand_all">
-        <property name="label" translatable="yes">Expand All</property>
+        <property name="label">Expand All</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Expand all Bookmarks groups</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_expand_activate" swapped="no"/>
@@ -95,11 +96,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="collapse_all">
-        <property name="label" translatable="yes">Collapse All</property>
+        <property name="label">Collapse All</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Collapse all Bookmarks groups</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_collapse_activate" swapped="no"/>
@@ -113,10 +114,10 @@
     </child>
     <child>
       <object class="GtkCheckMenuItem" id="allow_reordering">
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Allow items to be moved from one folder to another</property>
-        <property name="use_action_appearance">False</property>
         <property name="label" translatable="yes">Allow Reordering</property>
         <property name="use_underline">True</property>
         <signal name="activate" handler="on_allow_reordering_activate" swapped="no"/>
@@ -130,11 +131,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="import_bibletime_bookmarks1">
-        <property name="label" translatable="yes">Import Bookmarks</property>
+        <property name="label">Import Bookmarks</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Load other bookmarks file (default: from BibleTime)</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="bibletime_bookmarks_activate" swapped="no"/>
@@ -142,11 +143,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="remove_folder">
-        <property name="label" translatable="yes">Export Folder</property>
+        <property name="label">Export Folder</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Remove folder and save it</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_export_folder_activate" swapped="no"/>
@@ -158,10 +159,10 @@
     <child>
       <object class="GtkImageMenuItem" id="add_child">
         <property name="label">Add Sub-Item</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Add a sub-item</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_add_child_activate" swapped="no"/>
@@ -169,11 +170,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="add_sibling">
-        <property name="label" translatable="yes">Add Item</property>
+        <property name="label">Add Item</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Add an item</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_add_sibling_activate" swapped="no"/>
@@ -181,11 +182,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="remove">
-        <property name="label" translatable="yes">Remove</property>
+        <property name="label">Remove</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Remove this item</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_remove_activate" swapped="no"/>
@@ -193,11 +194,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="edit">
-        <property name="label" translatable="yes">Edit</property>
+        <property name="label">Edit</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Edit this item</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_edit_activate2" swapped="no"/>
@@ -208,11 +209,11 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="open_in_new_tab1">
-        <property name="label" translatable="yes">Open in new tab</property>
+        <property name="label">Open in new tab</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open selected module in a new tab</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_open_in_tab_activate2" swapped="no"/>
@@ -220,12 +221,12 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="open_in_a_dialog1">
-        <property name="label" translatable="yes">Open in a separate window</property>
+        <property name="label">Open in a separate window</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open selected module in a
 	separate ['dialog'] window</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_open_in_dialog_activate" swapped="no"/>
@@ -233,10 +234,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="about1">
-        <property name="label" translatable="yes">About</property>
+        <property name="label">About</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_about2_activate" swapped="no"/>
@@ -247,10 +248,10 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="about">
-        <property name="label" translatable="yes">About</property>
+        <property name="label">About</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_popup_about_activate" swapped="no"/>
@@ -258,10 +259,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="bookmark">
-        <property name="label" translatable="yes">Bookmark</property>
+        <property name="label">Bookmark</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_popup_bookmark_activate" swapped="no"/>
@@ -269,10 +270,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="mark_verse">
-        <property name="label" translatable="yes">Annotate Verse</property>
+        <property name="label">Annotate Verse</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_mark_verse_activate" swapped="no"/>
@@ -286,10 +287,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="export_passage">
-        <property name="label" translatable="yes">Copy/Export Passage</property>
+        <property name="label">Copy/Export Passage</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_popup_export_passage_activate" swapped="no"/>
@@ -303,10 +304,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="file1">
-        <property name="label" translatable="yes">File</property>
+        <property name="label">File</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <child type="submenu">
@@ -314,10 +315,10 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkImageMenuItem" id="open_module2">
-                <property name="label" translatable="yes">Open Module</property>
+                <property name="label">Open Module</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
               </object>
@@ -331,9 +332,9 @@
             <child>
               <object class="GtkImageMenuItem" id="print">
                 <property name="label">gtk-print</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
                 <signal name="activate" handler="on_popup_print_activate" swapped="no"/>
@@ -342,9 +343,9 @@
             <child>
               <object class="GtkImageMenuItem" id="close">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
                 <signal name="activate" handler="on_close_activate" swapped="no"/>
@@ -356,10 +357,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="edit1">
-        <property name="label" translatable="yes">Edit</property>
+        <property name="label">Edit</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <child type="submenu">
@@ -368,9 +369,9 @@
             <child>
               <object class="GtkImageMenuItem" id="copy">
                 <property name="label">gtk-copy</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
                 <signal name="activate" handler="on_popup_copy_activate" swapped="no"/>
@@ -379,9 +380,9 @@
             <child>
               <object class="GtkImageMenuItem" id="find">
                 <property name="label">gtk-find</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
                 <signal name="activate" handler="on_popup_find_activate" swapped="no"/>
@@ -389,20 +390,20 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="note">
-                <property name="label" translatable="yes">Note</property>
+                <property name="label">Note</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
               </object>
             </child>
             <child>
               <object class="GtkImageMenuItem" id="open_in_editor">
-                <property name="label" translatable="yes">Open in editor</property>
+                <property name="label">Open in editor</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
               </object>
@@ -413,10 +414,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="module_options">
-        <property name="label" translatable="yes">Module Options</property>
+        <property name="label">Module Options</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <child type="submenu">
@@ -425,9 +426,9 @@
             <child>
               <object class="GtkImageMenuItem" id="font">
                 <property name="label">gtk-select-font</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
                 <signal name="activate" handler="on_popup_font_activate" swapped="no"/>
@@ -441,9 +442,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="verse_per_line">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Verse Per Line</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_verse_per_line_activate" swapped="no"/>
@@ -451,9 +451,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="headings">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Headings</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_headings_activate" swapped="no"/>
@@ -461,9 +460,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="words_of_christ_in_red">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Words of Christ in Red</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_words_of_christ_in_red_activate" swapped="no"/>
@@ -471,9 +469,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="strongs_numbers">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Strong's Numbers</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_strong_s_numbers_activate" swapped="no"/>
@@ -481,9 +478,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="lemmas">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Lemmas</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_lemmas_activate" swapped="no"/>
@@ -491,9 +487,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="morphological_tags">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Morphological Tags</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_morphological_tags_activate" swapped="no"/>
@@ -501,9 +496,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="footnotes">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Footnotes</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_footnotes_activate" swapped="no"/>
@@ -511,9 +505,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="cross-references">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Cross-references</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_scripture_cross_references_activate" swapped="no"/>
@@ -521,9 +514,9 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="xrefnotenumbers">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Footnote/Cross-ref Markers</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_xrefnotenumbers_activate" swapped="no"/>
@@ -531,9 +524,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="greek_accents">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Greek Accents</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_greek_accents_activate" swapped="no"/>
@@ -541,9 +533,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="hebrew_vowel_points">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Hebrew Vowel Points</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_hebrew_vowel_points_activate" swapped="no"/>
@@ -551,9 +542,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="hebrew_cantillation">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Hebrew Cantillation</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_hebrew_cantillation_activate" swapped="no"/>
@@ -561,9 +551,9 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="transliteration">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Transliteration</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_transliteration_activate" swapped="no"/>
@@ -571,9 +561,8 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="variants">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Variants</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
@@ -581,9 +570,9 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkCheckMenuItem" id="primary_reading">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">Primary Reading</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_primary_reading_activate" swapped="no"/>
@@ -591,9 +580,9 @@
                     </child>
                     <child>
                       <object class="GtkCheckMenuItem" id="secondary_reading">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">Secondary Reading</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_secondary_reading_activate" swapped="no"/>
@@ -601,9 +590,9 @@
                     </child>
                     <child>
                       <object class="GtkCheckMenuItem" id="all_readings">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">All Readings</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_all_readings_activate" swapped="no"/>
@@ -615,9 +604,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="xlit">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Transliterated Forms</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_xlit_activate" swapped="no"/>
@@ -625,9 +613,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="enumerated">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Enumerations</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_enumerated_activate" swapped="no"/>
@@ -635,9 +622,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="glosses">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Glosses</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_glosses_activate" swapped="no"/>
@@ -645,9 +631,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="morphseg">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Morpheme Segmentation</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_morphseg_activate" swapped="no"/>
@@ -655,9 +640,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="image_content">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Image Content</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_image_content_activate" swapped="no"/>
@@ -665,9 +649,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="respect_font_faces">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Respect Font Faces</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_respect_font_faces_activate" swapped="no"/>
@@ -675,9 +658,8 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="commentary_by_chapter">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Commentary by Chapter</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_commentary_by_chapter_activate" swapped="no"/>
@@ -685,9 +667,9 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="doublespace">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Doublespace</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_doublespace_activate" swapped="no"/>
@@ -699,10 +681,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="lookup_selection1">
-        <property name="label" translatable="yes">Lookup Selection</property>
+        <property name="label">Lookup Selection</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <child type="submenu">
@@ -710,9 +692,9 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkMenuItem" id="use_current_dictionary">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Use Current Dictionary</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_use_current_dictionary_activate" swapped="no"/>
@@ -720,9 +702,9 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="lookup_google">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Browse in BibleMap.org</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_lookup_google_activate" swapped="no"/>
@@ -740,10 +722,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="unlock_this_module">
-        <property name="label" translatable="yes">Unlock This Module</property>
+        <property name="label">Unlock This Module</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_unlock_this_module_activate" swapped="no"/>
@@ -751,10 +733,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="display_book_heading">
-        <property name="label" translatable="yes">Display Book Heading</property>
+        <property name="label">Display Book Heading</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_display_book_heading_activate" swapped="no"/>
@@ -763,9 +745,9 @@
     <child>
       <object class="GtkImageMenuItem" id="display_chapter_heading">
         <property name="label">Display Chapter Heading</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_display_chapter_heading_activate" swapped="no"/>
@@ -773,10 +755,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="rename_perscomm">
-        <property name="label" translatable="yes">Rename Pers.Comm.</property>
+        <property name="label">Rename Pers.Comm.</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_rename_perscomm_activate" swapped="no"/>
@@ -784,10 +766,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="dump_perscomm">
-        <property name="label" translatable="yes">Dump Pers.Comm.</property>
+        <property name="label">Dump Pers.Comm.</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_dump_perscomm_activate" swapped="no"/>
@@ -795,10 +777,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="read_selection_aloud">
-        <property name="label" translatable="yes">Read Selection Aloud</property>
+        <property name="label">Read Selection Aloud</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_read_selection_aloud_activate" swapped="no"/>
@@ -809,11 +791,11 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="create_simple_prayer_list">
-        <property name="label" translatable="yes">Simple</property>
+        <property name="label">Simple</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new simple prayer list</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_simple_activate" swapped="no"/>
@@ -821,11 +803,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="create_subject_prayer_list">
-        <property name="label" translatable="yes">Subject</property>
+        <property name="label">Subject</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new subject prayer list</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_subject_activate" swapped="no"/>
@@ -833,11 +815,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="create_monthly_prayer_list">
-        <property name="label" translatable="yes">Monthly</property>
+        <property name="label">Monthly</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new monthly journal</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_monthly_activate" swapped="no"/>
@@ -845,11 +827,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="create_daily_journal">
-        <property name="label" translatable="yes">Daily</property>
+        <property name="label">Daily</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new daily journal</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_journal_activate" swapped="no"/>
@@ -857,11 +839,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="create_outlined_topic_list">
-        <property name="label" translatable="yes">Outlined</property>
+        <property name="label">Outlined</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new outlined topic</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_outlined_topic_activate" swapped="no"/>
@@ -872,11 +854,11 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="open_in_new_tab2">
-        <property name="label" translatable="yes">Open in new tab</property>
+        <property name="label">Open in new tab</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open selected module in a new tab</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_open_in_tab_activate2" swapped="no"/>
@@ -884,11 +866,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="open_in_a_dialog2">
-        <property name="label" translatable="yes">Open in separate window</property>
+        <property name="label">Open in separate window</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open module in editor or plain display window</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_open_in_dialog_activate" swapped="no"/>
@@ -896,10 +878,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="about3">
-        <property name="label" translatable="yes">About</property>
+        <property name="label">About</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_about2_activate" swapped="no"/>
@@ -910,11 +892,11 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="save_list_as_a_single_bookmark">
-        <property name="label" translatable="yes">Save list as a single bookmark</property>
+        <property name="label">Save list as a single bookmark</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Save these results as a single bookmark</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_save_list_as_a_single_bookmark_activate" swapped="no"/>
@@ -922,11 +904,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="save_list_as_a_series_of_bookmarks">
-        <property name="label" translatable="yes">Save list as a series of bookmarks</property>
+        <property name="label">Save list as a series of bookmarks</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Save these results as a series of bookmarks in their own folder</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_save_list_as_a_series_of_bookmarks_activate" swapped="no"/>
@@ -940,11 +922,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="populate_verse_list">
-        <property name="label" translatable="yes">Populate verse list</property>
+        <property name="label">Populate verse list</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Provide a dialog in which to paste a line of verse references, to fill the verse list.</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_populate_verse_list_activate" swapped="no"/>
@@ -952,11 +934,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="preload_history">
-        <property name="label" translatable="yes">Preload history from verse list</property>
+        <property name="label">Preload history from verse list</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Push the entire verse list contents directly into the history list.</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_preload_history_from_verse_list_activate" swapped="no"/>
@@ -970,11 +952,11 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="send_list_via_biblesync">
-        <property name="label" translatable="yes">Send list via BibleSync</property>
+        <property name="label">Send list via BibleSync</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Send this verse list via BibleSync to others, if you are in Personal or Speaker mode.</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_send_list_via_biblesync_activate" swapped="no"/>
@@ -982,10 +964,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="export_list1">
-        <property name="label" translatable="yes">Export List</property>
+        <property name="label">Export List</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_export_verselist_activate" swapped="no"/>
@@ -996,11 +978,11 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="send_list_via_biblesync_advsearch">
-        <property name="label" translatable="yes">Send list via BibleSync</property>
+        <property name="label">Send list via BibleSync</property>
+        <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Send this verse list via BibleSync to others, if you are in Personal or Speaker mode.</property>
-        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_send_list_via_biblesync_advsearch_activate" swapped="no"/>
