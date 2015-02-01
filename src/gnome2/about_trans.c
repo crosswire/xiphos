@@ -82,13 +82,14 @@ gui_create_about_trans(void)
 	GtkWidget *button;
 	gchar *about =
 	    _("Do you like using Xiphos to study the Bible? "
-	      "Would you like to see its display using your native language? "
+	      "Would you like to see its user interface in your native language? "
 	      "You could translate Xiphos! "
 	      "\n\n"
 	      "We are always looking for contributions of new "
 	      "translations of Xiphos into other languages. "
 	      "If you are able to translate for us, please see the link "
-	      "below, contact us, and get involved with our efforts."
+		  "below, contact us, and get involved with our efforts. Your help will "
+          "be much appreciated!"
 	      );
 
 	dialog_about_trans = gtk_dialog_new();
