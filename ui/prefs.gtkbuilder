@@ -1910,6 +1910,7 @@
                                   <object class="GtkFileChooserButton" id="filechooserbutton1">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <property name="action">select-folder</property>
                                     <property name="title" translatable="yes">Select A Directory</property>
                                     <child internal-child="accessible">
                                       <object class="AtkObject" id="filechooserbutton1-atkobject">
