@@ -403,7 +403,12 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_box_pack_start(GTK_BOX(vbox56), checkbutton_no_font, FALSE,
 			   FALSE, 0);
 
-	dialog_action_area21 = gtk_dialog_get_action_area (GTK_DIALOG(dialog_mod_font));
+	dialog_action_area21 =
+#ifdef HAVE_GTK_312
+		gtk_dialog_get_content_area(GTK_DIALOG(dialog_mod_font));
+#else
+		gtk_dialog_get_action_area(GTK_DIALOG(dialog_mod_font));
+#endif
 	g_object_set_data(G_OBJECT(dialog_mod_font),
 			  "dialog_action_area21",
 			  dialog_action_area21);

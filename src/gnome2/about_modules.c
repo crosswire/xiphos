@@ -189,7 +189,11 @@ gui_create_about_modules(void)
 
 	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
 	dialog_action_area28 =
-                gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_mods));
+#ifdef HAVE_GTK_312
+		gtk_dialog_get_content_area(GTK_DIALOG(dialog_about_mods));
+#else
+		gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_mods));
+#endif
 	g_object_set_data(G_OBJECT(dialog_about_mods),
 			  "dialog_action_area28",
 			  dialog_action_area28);

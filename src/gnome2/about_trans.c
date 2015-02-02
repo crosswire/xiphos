@@ -149,7 +149,11 @@ gui_create_about_trans(void)
 	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
 
 	dialog_action_area =
-                gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_trans));
+#ifdef HAVE_GTK_312
+		gtk_dialog_get_content_area(GTK_DIALOG(dialog_about_trans));
+#else
+		gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_trans));
+#endif
 	g_object_set_data(G_OBJECT(dialog_about_trans),
 			    "dialog_action_area",
 			    dialog_action_area);
