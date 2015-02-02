@@ -246,7 +246,12 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 #endif
 	}
 
-	dialog_action_area2 = gtk_dialog_get_action_area(GTK_DIALOG(dialog_alert));
+	dialog_action_area2 =
+#ifdef HAVE_GTK_312
+		gtk_dialog_get_content_area(GTK_DIALOG(dialog_alert));
+#else
+		gtk_dialog_get_action_area(GTK_DIALOG(dialog_alert));
+#endif
 	gtk_widget_show(dialog_action_area2);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area2),
 				  GTK_BUTTONBOX_END);
@@ -629,7 +634,12 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	}
 	
 #endif
-	dialog_action_area3 = gtk_dialog_get_action_area(GTK_DIALOG(dialog_request));
+	dialog_action_area3 =
+#ifdef HAVE_GTK_312
+        gtk_dialog_get_content_area(GTK_DIALOG(dialog_request));
+#else
+		gtk_dialog_get_action_area(GTK_DIALOG(dialog_request));
+#endif
 	gtk_widget_show(dialog_action_area3);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area3),
 				  GTK_BUTTONBOX_END);
