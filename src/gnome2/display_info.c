@@ -217,7 +217,11 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	//gtk_container_add(GTK_CONTAINER(scrolledwindow70), html_widget);
 
 	dialog_action_area23 =
-	   gtk_dialog_get_action_area (GTK_DIALOG (dialog_display_info));
+#ifdef HAVE_GTK_312
+		gtk_dialog_get_content_area(GTK_DIALOG (dialog_display_info));
+#else
+		gtk_dialog_get_action_area(GTK_DIALOG (dialog_display_info));
+#endif
 	g_object_set_data(G_OBJECT(dialog_display_info),
 			  "dialog_action_area23",
 			  dialog_action_area23);

@@ -3396,7 +3396,12 @@ set_combobox(GtkComboBox * combo)
 static void
 setup_dialog_action_area(GtkDialog * dialog)
 {
-	GtkWidget *dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
+	GtkWidget *dialog_action_area1 =
+#ifdef HAVE_GTK_312
+		gtk_dialog_get_content_area(GTK_DIALOG (dialog));
+#else
+		gtk_dialog_get_action_area(GTK_DIALOG (dialog));
+#endif
 
 	gtk_widget_show (dialog_action_area1);
 	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);

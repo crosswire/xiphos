@@ -226,7 +226,12 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (dialog->backward), FALSE);
 
-	dialog_action_area29 = gtk_dialog_get_action_area (GTK_DIALOG(dialog->dialog));
+	dialog_action_area29 =
+#ifdef HAVE_GTK_312
+		gtk_dialog_get_content_area(GTK_DIALOG(dialog->dialog));
+#else
+		gtk_dialog_get_action_area(GTK_DIALOG(dialog->dialog));
+#endif
 	g_object_set_data(G_OBJECT(dialog->dialog),
 			  "dialog_action_area29",
 			  dialog_action_area29);

@@ -426,7 +426,11 @@ GtkWidget *create_parallel_dialog(void)
 			 NULL);
 
 	dialog_action_area25 =
-	    gtk_dialog_get_action_area (GTK_DIALOG(dialog_parallel));
+#ifdef HAVE_GTK_312
+		gtk_dialog_get_content_area(GTK_DIALOG(dialog_parallel));
+#else
+	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_parallel));
+#endif
 	g_object_set_data(G_OBJECT(dialog_parallel),
 			  "dialog_action_area25",
 			  dialog_action_area25);
