@@ -3,8 +3,8 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Intermediate Test Release 4.0.0f
-18 Jan 2015
+Intermediate Test Bundle 4.0.0g
+03 Feb 2015
 
 - Completed webkit editor, due to replace gtkhtml editor.
 
@@ -18,6 +18,18 @@ Intermediate Test Release 4.0.0f
 
 - Removed BibleSync from Xiphos' source tree. It must be referenced as a
   proper library.
+
+- Fixed studypad directory choice.
+
+- Fixed mis-handling of unreal "multiple verse" reference in URL handling.
+
+- Fixed editor's mis-handling of the link editor subdialog.
+
+- Updated Win32 URL clickability; updated "About Sword" URL properly.
+
+- Huge GTK3 compatibility cleanliness hackery.
+
+- WebKit2 compatibility hackery.
 ________________________________________________________________
 
 Release 4.0.0
