@@ -149,16 +149,21 @@ editor_link_dialog (EDITOR *e)
 {
         GtkBuilder *builder;
 	gchar *gbuilder_file;
-#ifdef USE_WEBKIT_EDITOR
-	
-#else
-	GtkHTML  *html = gtkhtml_editor_get_html (GTKHTML_EDITOR(e->window));
+
+#ifndef USE_WEBKIT_EDITOR
+	GtkHTML *html = gtkhtml_editor_get_html(GTKHTML_EDITOR(e->window));
 	if (html->pointer_url)  /* are we in a link */
 		return;		/* if so don't do anything */
 #endif
-        builder = gtk_builder_new ();
-	gbuilder_file = gui_general_user_file ("editor_link_dialog.xml", FALSE);
-        gtk_builder_add_from_file (builder, gbuilder_file, NULL);
+
+	gbuilder_file = gui_general_user_file("editor_link_dialog.xml", FALSE);
+
+#ifdef HAVE_GTK_310
+        builder = gtk_builder_new_from_file(gbuilder_file);
+#else
+        builder = gtk_builder_new();
+        gtk_builder_add_from_file(builder, gbuilder_file, NULL);
+#endif
 
         window = GTK_WIDGET (gtk_builder_get_object (builder, "dialog1"));
 	set_window_icon (GTK_WINDOW(window));
