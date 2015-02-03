@@ -73,7 +73,7 @@ def set_options(opt):
     miscgroup.add_option('--enable-webkit-editor', action='store_true', default=False,
             dest='webkit_editor',
             help='Use webkit editor [default: disabled]')
-			
+
     miscgroup.add_option('--disable-dbus',
                    action = 'store_true',
                    default = False,
@@ -235,7 +235,7 @@ def configure(conf):
                            msg='Auto detecting gtk 2', mandatory=True)
             opt.gtkver = '2'
 
-	# FIXME: Find out why we still need this!
+    # FIXME: Find out why we still need this!
     dfn('WEBKIT', 1) 
     
     #gtk
@@ -338,9 +338,7 @@ def configure(conf):
             common_libs += ' "gtkhtml-editor-3.14" '
             common_libs += ' "libgtkhtml-3.14 >= 3.23" '
     else:
-        # 
         common_libs += ' "gtk+-3.0" '
-        common_libs += ' "webkitgtk-3.0" ' 
         conf.check_cfg(package="gtk+-3.0",
                        atleast_version = "3.2",
                        uselib_store="GTK_32") 
@@ -362,15 +360,32 @@ def configure(conf):
         conf.define('USE_GTK_3', 1)
         conf.define('USE_GTKBUILDER', 1)
         if opt.webkit_editor:
-           conf.define('USE_WEBKIT_EDITOR', 1)
-           env['ENABLE_WEBKIT_EDITOR'] = True
-           # FC15 and Oneiric have this, Natty does not
+            conf.define('USE_WEBKIT_EDITOR', 1)
+            env['ENABLE_WEBKIT_EDITOR'] = True
+            common_libs += ' "webkitgtk-3.0" '
         else:
-           if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4', okmsg='ok', errmsg='fail'):
-               common_libs += ' "libgtkhtml-4.0" '
-           # FC15 and Oneiric have this, Natty does not
-           if conf.check_cfg(modversion="gtkhtml-editor-4.0", msg="Checking for GtkHTML Editor 4.0", okmsg='ok', errmsg='fail', mandatory=True):
-               common_libs += ' "gtkhtml-editor-4.0" '
+            if conf.check_cfg(modversion='libgtkhtml-4.0',
+                              msg='Checking for libgtkhtml4',
+                              okmsg='ok',
+                              errmsg='fail'):
+                common_libs += ' "libgtkhtml-4.0" '
+            if conf.check_cfg(modversion="gtkhtml-editor-4.0",
+                              msg="Checking for GtkHTML Editor 4.0",
+                              okmsg='ok',
+                              errmsg='fail',
+                              mandatory=True):
+                common_libs += ' "gtkhtml-editor-4.0" '
+            if conf.check_cfg(modversion='webkit2gtk-4.0',
+                              msg='Checking for WebKit2',
+                              okmsg='ok',
+                              errmsg='fail'):
+                common_libs += ' "webkit2gtk-4.0" '
+                conf.define('USE_WEBKIT2', 1)
+            elif conf.check_cfg(modversion='webkitgtk-3.0',
+                                msg='Checking for WebKit',
+                                okmsg='ok',
+                                errmsg='fail'):
+                common_libs += ' "webkitgtk-3.0" '
     
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
