@@ -292,10 +292,10 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 
 	dialog->close = 
 #ifdef HAVE_GTK_310
-		gtk_button_new_from_icon_name ("window-close",
-                              GTK_ICON_SIZE_BUTTON );
+	    // Don't use an icon with GTK3
+	    gtk_button_new_with_label(_("Close"));
 #else 
-		gtk_button_new_from_stock(GTK_STOCK_CLOSE);	//gtk_button_new_with_label(_("Close")); 
+	    gtk_button_new_from_stock(GTK_STOCK_CLOSE);
 #endif					      
 	gtk_widget_show(dialog->close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->close);
