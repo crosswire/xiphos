@@ -214,8 +214,13 @@ gui_create_about_modules(void)
 	hbuttonbox7 = gtk_hbutton_box_new();
 #endif
 	gtk_widget_show(hbuttonbox7);
+#ifdef HAVE_GTK_312
+	gtk_box_pack_start(GTK_BOX(dialog_action_area28), hbuttonbox7,
+               FALSE, TRUE, 3);
+#else
 	gtk_box_pack_start(GTK_BOX(dialog_action_area28), hbuttonbox7,
 			   TRUE, TRUE, 0);
+#endif
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox7),
 				  GTK_BUTTONBOX_END);
 
