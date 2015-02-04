@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * slib-editor.h - the html editor using gtkhtml-editor (slib)
  *
- * Copyright (C) 2005-2014 Xiphos Developer Team
+ * Copyright (C) 2005-2015 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

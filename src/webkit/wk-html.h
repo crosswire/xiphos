@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * wk-html.h - webkit-specific html support
  *
- * Copyright (C) 2010-2014 Xiphos Developer Team
+ * Copyright (C) 2010-2015 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

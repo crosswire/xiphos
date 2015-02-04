@@ -1,8 +1,8 @@
 /*
  * Xiphos Bible Study Tool
- * about_modules.h - About dialogs for Xiphos
+ * about_modules.h - About dialogs for modules
  *
- * Copyright (C) 2000-2014 Xiphos Developer Team
+ * Copyright (C) 2000-2015 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
