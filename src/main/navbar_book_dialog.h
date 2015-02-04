@@ -1,8 +1,8 @@
 /*
  * Xiphos Bible Study Tool
- * navbar_book.h - glue between all navbar_book and sword
+ * navbar_book_dialog.h - glue between all navbar_book and sword
  *
- * Copyright (C) 2000-2014 Xiphos Developer Team
+ * Copyright (C) 2000-2015 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
