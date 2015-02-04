@@ -42,6 +42,8 @@
 #include "main/sword.h"
 #include "main/settings.h" 
 
+#include "gui/utilities.h"
+
 #define html_start "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"><html><head>" 
 
 BUTTONS_STATE buttons_state;
@@ -1134,7 +1136,7 @@ void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 {
 	WebKitWebSettings *setting;
 	GtkWidget *webview;
-	gchar *uri = NULL;
+	gchar *text = NULL, *fname = NULL;
 	
 	webview = webkit_web_view_new();
 	e->html_widget = webview;
@@ -1150,17 +1152,17 @@ void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 	/* Apply the result */
 	webkit_web_view_set_settings (WEBKIT_WEB_VIEW(webview), setting);
 
-	/* open with new empty document */	
-#ifdef WIN32
-	uri = g_strdup_printf("http://127.0.0.1:7878/%s/%s",
-			      settings.gSwordDir, "studypad.spt");
-#else
-	uri = g_strdup_printf("file://%s/%s",
-			      settings.gSwordDir, "studypad.spt");
-#endif
-XI_message (("create editor window [%s]", uri));
-	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(webview), uri); 
-	g_free (uri);
+	/* new empty document from template */	
+	fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
+	XI_message(("action delete item [%s]", fname));
+	text = inhale_text_from_file(fname);
+	g_free(fname);
+
+	if (text && strlen(text)) {
+	    webkit_web_view_load_string((WebKitWebView*)e->html_widget,
+					text, "text/html", "utf_8", "file://");
+	}
+	if (text) g_free(text);
 	
 	e->is_changed = FALSE;	
 	
