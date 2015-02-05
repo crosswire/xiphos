@@ -397,7 +397,8 @@ gui_display_about_module_dialog(gchar *modname)
 	const gchar *desc;
 	gchar *about;
 	const gchar *version, *language, *abbreviation,
-	    *size, *promo, *dist, *langtoken, *companion;
+	    *size, *promo, *dist, *langtoken, *companion,
+	    *category, *feature;
 	int feature_count = 0;
 	GString *info = g_string_new("");
 
@@ -408,6 +409,8 @@ gui_display_about_module_dialog(gchar *modname)
 	promo = main_get_mod_config_entry(modname, "ShortPromo");
 	dist = main_get_mod_config_entry(modname, "DistributionLicense");
 	companion = main_get_mod_config_entry(modname, "Companion");
+	category = main_get_mod_config_entry(modname, "Category");
+	feature = main_get_mod_config_entry(modname, "Feature");
 	langtoken = main_get_mod_config_entry(modname, "Lang");
 	language = main_get_module_language(modname);
 	abbreviation = main_get_abbreviation(modname);
@@ -422,35 +425,75 @@ gui_display_about_module_dialog(gchar *modname)
 
 	info = g_string_append(info, _("<b>Version:</b> "));
 	info = g_string_append(info,
-			       (version
+			       ((version && *version)
 				? version
 				: _("No version stamp found")));
 	info = g_string_append(info, "<br/>");
 
-	if (abbreviation) {
+	info = g_string_append(info, _("<b>Type:</b> "));
+	if (feature && !strcmp(feature, "DailyDevotion"))
+	    info = g_string_append(info, _("Daily Devotion"));
+	else if (category && !strcmp(category, "Maps"))
+	    info = g_string_append(info, _("Maps"));
+	else if (category && !strcmp(category, "Images"))
+	    info = g_string_append(info, _("Images"));
+	else if (category && !strcmp(category, "Glossaries"))
+	    info = g_string_append(info, _("Glossary"));
+	else if (category &&
+		 !strcmp(category, "Cults / Unorthodox / Questionable Material"))
+	    info = g_string_append(info, _("Cult"));
+	else {
+	    switch (main_get_mod_type(modname))
+	    {
+	    case TEXT_TYPE:
+		info = g_string_append(info, _("Bible"));
+		break;
+	    case COMMENTARY_TYPE:
+		info = g_string_append(info, _("Commentary"));
+		break;
+	    case DICTIONARY_TYPE:
+		info = g_string_append(info, _("Dictionary"));
+		break;
+	    case BOOK_TYPE:
+		info = g_string_append(info, _("General Book"));
+		break;
+	    case PERCOM_TYPE:
+		info = g_string_append(info, _("Personal Commentary"));
+		break;
+	    case PRAYERLIST_TYPE:
+		info = g_string_append(info, _("Journal"));
+		break;
+	    default:
+		info = g_string_append(info, _("Unknown type"));
+		break;
+	    }
+	}
+	info = g_string_append(info, "<br/>");
+
+	if (abbreviation && *abbreviation) {
 	    info = g_string_append(info, _("<b>Module abbreviation:</b> "));
 	    info = g_string_append(info, abbreviation);
 	    info = g_string_append(info, "<br/>");
 	}
 
 	info = g_string_append(info, _("<b>Language:</b> "));
-	info = g_string_append(info, (language
+	info = g_string_append(info, ((language && *language)
 				      ? language
 				      : _("Not specified")));
 	info = g_string_append(info, "&nbsp;(");
-	info = g_string_append(info, (langtoken
+	info = g_string_append(info, ((langtoken && *langtoken)
 				      ? langtoken
 				      : "?"));
 	info = g_string_append(info, ")");
 	info = g_string_append(info, "<br/>");
 
-	if (size) {
+	if (size && *size) {
 	    info = g_string_append(info, _("<b>Installed size:</b> "));
 	    info = g_string_append(info, size);
 	    info = g_string_append(info, "<br/>");
 	}
 
-	if (companion) {
+	if (companion && *companion) {
 	    info = g_string_append(info, _("<b>Companion module(s):</b></br>"));
 	    info = g_string_append(info, companion);
 	    info = g_string_append(info, "<br/>");
@@ -583,7 +626,7 @@ gui_display_about_module_dialog(gchar *modname)
 	    }
 	    info = g_string_append(info, promo);
 	    if (just_url) g_string_append(info, "</a>");
-	    info = g_string_append(info, "</a></center>");
+	    info = g_string_append(info, "</center>");
 	}
 
 	info = g_string_append(info, "<br/><hr width=\"80%%\"/><br/>");
