@@ -36,41 +36,42 @@ using namespace std;
 
 extern "C" {
 
-typedef struct _speaker {
-    string uuid;
-    string user;
-    string ipaddr;
-    string app;
-    string device;
-    string ref;
-    string direct;
-    bool   listen;
-} BSP_Speaker;
+	typedef struct _speaker {
+		string uuid;
+		string user;
+		string ipaddr;
+		string app;
+		string device;
+		string ref;
+		string direct;
+		bool listen;
+	} BSP_Speaker;
 
-typedef std::map < string, BSP_Speaker > BSP_SpeakerMap;
-typedef BSP_SpeakerMap::iterator BSP_SpeakerMapIterator;
+	typedef std::map < string, BSP_Speaker > BSP_SpeakerMap;
+	typedef BSP_SpeakerMap::iterator BSP_SpeakerMapIterator;
 
-int biblesync_compare_speaker(const void *Lvoid, const void *Rvoid);
+	int biblesync_compare_speaker(const void *Lvoid,
+				      const void *Rvoid);
 
-#endif // __cplusplus
+#endif				// __cplusplus
 
-void biblesync_navigate(char cmd, char *speaker,
-			char *bible, char *verse, char *alt,
-			char *group, char *domain,
-			char *info, char *dump);
-void biblesync_update_speaker();
-int biblesync_mode_select(int m, char *p);
-int biblesync_personal();
-int biblesync_active();
-int biblesync_active_xmit_allowed();
-const char *biblesync_get_passphrase();
-void biblesync_transmit_verse_list(char *modname, char *vlist);
-void biblesync_privacy(gboolean privacy);
-void biblesync_prep_and_xmit(const char *mod_name, const char *key);
-void biblesync_set_clear_all_listen(gboolean listen);
+	void biblesync_navigate(char cmd, char *speaker,
+				char *bible, char *verse, char *alt,
+				char *group, char *domain,
+				char *info, char *dump);
+	void biblesync_update_speaker();
+	int biblesync_mode_select(int m, char *p);
+	int biblesync_personal();
+	int biblesync_active();
+	int biblesync_active_xmit_allowed();
+	const char *biblesync_get_passphrase();
+	void biblesync_transmit_verse_list(char *modname, char *vlist);
+	void biblesync_privacy(gboolean privacy);
+	void biblesync_prep_and_xmit(const char *mod_name,
+				     const char *key);
+	void biblesync_set_clear_all_listen(gboolean listen);
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* _BIBLESYNC_GLUE_H__ */
+#endif				/* _BIBLESYNC_GLUE_H__ */

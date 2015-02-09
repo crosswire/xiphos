@@ -28,10 +28,9 @@ extern "C" {
 
 #include <gtk/gtk.h>
 
-GtkWidget *gui_create_about_trans(void);
+	GtkWidget *gui_create_about_trans(void);
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif

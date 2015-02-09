@@ -27,16 +27,16 @@ extern "C" {
 #endif
 
 
-void gui_parallel_tab_sync(const gchar * key);
-GtkWidget *gui_create_parallel_tab(void);
-void gui_keep_parallel_tab_in_sync(void);
-void gui_force_parallel_tab_sync(void);
-void gui_destroy_parallel_tab(void);
-void gui_parallel_close_tab(GtkButton * button, gpointer user_data);
-GtkWidget *_create_parallel_tab(void);
+	void gui_parallel_tab_sync(const gchar * key);
+	GtkWidget *gui_create_parallel_tab(void);
+	void gui_keep_parallel_tab_in_sync(void);
+	void gui_force_parallel_tab_sync(void);
+	void gui_destroy_parallel_tab(void);
+	void gui_parallel_close_tab(GtkButton * button,
+				    gpointer user_data);
+	GtkWidget *_create_parallel_tab(void);
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif   /*  __parallel_TAB_H__  */
+#endif				/*  __parallel_TAB_H__  */

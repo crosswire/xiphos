@@ -23,15 +23,13 @@
 #define _TREEKEY_EDITOR_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-GtkWidget *gui_create_editor_tree(EDITOR * editor);
-GtkWidget *create_edit_tree_menu (EDITOR * editor);
+	GtkWidget *gui_create_editor_tree(EDITOR * editor);
+	GtkWidget *create_edit_tree_menu(EDITOR * editor);
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* _TREEKEY_EDITOR_H */
+#endif				/* _TREEKEY_EDITOR_H */

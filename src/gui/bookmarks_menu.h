@@ -25,47 +25,59 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-struct _bookmark_menu {
-	GtkWidget *menu;
-	GtkWidget *in_tab;
-	GtkWidget *in_dialog;
-	GtkWidget *new;
-	GtkWidget *insert;
-	GtkWidget *add;
-	GtkWidget *edit;
-	GtkWidget *point;
-	GtkWidget *delete;
-	GtkWidget *reorder;
-	GtkWidget *save;
-	GtkWidget *bibletime;
-	GtkWidget *rr_submenu;
-	GtkWidget *remove;
-};
-typedef struct _bookmark_menu BOOKMARK_MENU;
-extern BOOKMARK_MENU menu;
-extern GtkTreeSelection *current_selection;
-extern GtkTreeStore *model;
-extern gboolean use_dialog;
-extern gboolean bookmarks_changed;
+	struct _bookmark_menu {
+		GtkWidget *menu;
+		GtkWidget *in_tab;
+		GtkWidget *in_dialog;
+		GtkWidget *new;
+		GtkWidget *insert;
+		GtkWidget *add;
+		GtkWidget *edit;
+		GtkWidget *point;
+		GtkWidget *delete;
+		GtkWidget *reorder;
+		GtkWidget *save;
+		GtkWidget *bibletime;
+		GtkWidget *rr_submenu;
+		GtkWidget *remove;
+	};
+	typedef struct _bookmark_menu BOOKMARK_MENU;
+	extern BOOKMARK_MENU menu;
+	extern GtkTreeSelection *current_selection;
+	extern GtkTreeStore *model;
+	extern gboolean use_dialog;
+	extern gboolean bookmarks_changed;
 
-void gui_save_bookmarks(GtkMenuItem * menuitem, gpointer user_data);
-void gui_create_bookmark_menu(void);
-void gui_save_bookmarks_treeview(void);
-void bibletime_bookmarks_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_allow_reordering_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_export_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_expand_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_add_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_insert_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data);
+	void gui_save_bookmarks(GtkMenuItem * menuitem,
+				gpointer user_data);
+	void gui_create_bookmark_menu(void);
+	void gui_save_bookmarks_treeview(void);
+	void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
+					  gpointer user_data);
+	void on_allow_reordering_activate(GtkMenuItem * menuitem,
+					  gpointer user_data);
+	void on_dialog_activate(GtkMenuItem * menuitem,
+				gpointer user_data);
+	void on_edit_item_activate(GtkMenuItem * menuitem,
+				   gpointer user_data);
+	void on_export_folder_activate(GtkMenuItem * menuitem,
+				       gpointer user_data);
+	void on_delete_item_activate(GtkMenuItem * menuitem,
+				     gpointer user_data);
+	void on_expand_activate(GtkMenuItem * menuitem,
+				gpointer user_data);
+	void on_collapse_activate(GtkMenuItem * menuitem,
+				  gpointer user_data);
+	void on_add_bookmark_activate(GtkMenuItem * menuitem,
+				      gpointer user_data);
+	void on_insert_bookmark_activate(GtkMenuItem * menuitem,
+					 gpointer user_data);
+	void on_new_folder_activate(GtkMenuItem * menuitem,
+				    gpointer user_data);
+	void on_open_in_tab_activate(GtkMenuItem * menuitem,
+				     gpointer user_data);
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif

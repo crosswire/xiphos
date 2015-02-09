@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gtk/gtk.h>
@@ -50,7 +50,7 @@
  *   gboolean
  */
 
-gchar *gui_add_cipher_key(const char *mod_name, gchar *cipher_old)
+gchar *gui_add_cipher_key(const char *mod_name, gchar * cipher_old)
 {
 	gchar *retval = NULL;
 	GS_DIALOG *info;
@@ -58,12 +58,13 @@ gchar *gui_add_cipher_key(const char *mod_name, gchar *cipher_old)
 	info = gui_new_dialog();
 #ifdef HAVE_GTK_310
 	info->stock_icon = "dialog-warning";
-#else   	
+#else
 	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
-#endif	 
-	info->label_top = g_strdup_printf(_("Cipher key for module %s"), mod_name);
+#endif
+	info->label_top =
+	    g_strdup_printf(_("Cipher key for module %s"), mod_name);
 	info->label_middle = _("for:");
-	info->label_bottom = (char*)mod_name;
+	info->label_bottom = (char *) mod_name;
 	info->text1 = g_strdup(cipher_old);
 	info->label1 = _("Enter Key: ");
 	info->ok = TRUE;

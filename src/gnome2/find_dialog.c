@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gtk/gtk.h>
@@ -91,10 +91,10 @@ static void dialog_destroy(GObject * object, gpointer data)
 
 static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-	gchar *text = (gchar*)gtk_entry_get_text(GTK_ENTRY(d->entry));
+	gchar *text = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->entry));
 	sprintf(settings.findText, "%s", text);
 
-	XIPHOS_HTML_FIND((void *)d->htmlwidget, text);
+	XIPHOS_HTML_FIND((void *) d->htmlwidget, text);
 }
 
 
@@ -116,8 +116,8 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 
 static void next_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-	XIPHOS_HTML_FIND_AGAIN((void *)d->htmlwidget, 1);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(d->backward), 0);
+	XIPHOS_HTML_FIND_AGAIN((void *) d->htmlwidget, 1);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d->backward), 0);
 }
 
 
@@ -188,21 +188,21 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_window_set_title(GTK_WINDOW(dialog->dialog), _("Find"));
 	//GTK_WINDOW(dialog->dialog)->type = GTK_WINDOW_TOPLEVEL;
 	/*gtk_window_set_policy(GTK_WINDOW(dialog->dialog), TRUE, TRUE,
-			      FALSE);*/
-  	gtk_container_set_border_width (GTK_CONTAINER (dialog->dialog), 6);
-  	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+	   FALSE); */
+	gtk_container_set_border_width(GTK_CONTAINER(dialog->dialog), 6);
+	gtk_window_set_resizable(GTK_WINDOW(dialog->dialog), FALSE);
 #ifndef USE_GTK_3
-  	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
+	gtk_dialog_set_has_separator(GTK_DIALOG(dialog->dialog), FALSE);
 #endif
-	dialog_vbox29 = gtk_dialog_get_content_area (GTK_DIALOG(dialog->dialog));
+	dialog_vbox29 =
+	    gtk_dialog_get_content_area(GTK_DIALOG(dialog->dialog));
 	g_object_set_data(G_OBJECT(dialog->dialog), "dialog_vbox29",
 			  dialog_vbox29);
 	gtk_widget_show(dialog_vbox29);
 
 	UI_VBOX(vbox45, FALSE, 12);
 	gtk_widget_show(vbox45);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox29), vbox45, TRUE, TRUE,
-			   0);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox29), vbox45, TRUE, TRUE, 0);
 
 	label180 = gtk_label_new(_("Enter Word or Phrase"));
 	gtk_widget_show(label180);
@@ -228,33 +228,32 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 
 	dialog_action_area29 =
 #ifdef HAVE_GTK_312
-		gtk_dialog_get_content_area(GTK_DIALOG(dialog->dialog));
+	    gtk_dialog_get_content_area(GTK_DIALOG(dialog->dialog));
 #else
-		gtk_dialog_get_action_area(GTK_DIALOG(dialog->dialog));
+	    gtk_dialog_get_action_area(GTK_DIALOG(dialog->dialog));
 #endif
 	g_object_set_data(G_OBJECT(dialog->dialog),
-			  "dialog_action_area29",
-			  dialog_action_area29);
+			  "dialog_action_area29", dialog_action_area29);
 	gtk_widget_show(dialog_action_area29);
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area29), 10);
 
 #ifdef USE_GTK_3
-    hbuttonbox8 = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+	hbuttonbox8 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 #else
-    hbuttonbox8 = gtk_hbutton_box_new();
+	hbuttonbox8 = gtk_hbutton_box_new();
 #endif
 	gtk_widget_show(hbuttonbox8);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area29), hbuttonbox8,
 			   TRUE, TRUE, 0);
 
-	dialog->find = 
+	dialog->find =
 #ifdef HAVE_GTK_310
-		gtk_button_new_from_icon_name ("edit-find",
-                              GTK_ICON_SIZE_BUTTON);
-#else                      
-		gtk_button_new_from_stock(GTK_STOCK_FIND);	//gtk_button_new_with_label(_("Find"));
-#endif					      
+	    gtk_button_new_from_icon_name("edit-find",
+					  GTK_ICON_SIZE_BUTTON);
+#else
+	    gtk_button_new_from_stock(GTK_STOCK_FIND);	//gtk_button_new_with_label(_("Find"));
+#endif
 	gtk_widget_show(dialog->find);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->find);
 
@@ -277,11 +276,11 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 
 	image =
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name ("edit-find",
-                               GTK_ICON_SIZE_BUTTON);
-#else                 
+	    gtk_image_new_from_icon_name("edit-find",
+					 GTK_ICON_SIZE_BUTTON);
+#else
 	    gtk_image_new_from_stock(GTK_STOCK_FIND, GTK_ICON_SIZE_BUTTON);
-#endif					      
+#endif
 	gtk_widget_show(image);
 	gtk_box_pack_start(GTK_BOX(hbox5), image, FALSE, FALSE, 0);
 
@@ -290,29 +289,29 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_box_pack_start(GTK_BOX(hbox5), label12, FALSE, FALSE, 0);
 	gtk_label_set_justify(GTK_LABEL(label12), GTK_JUSTIFY_LEFT);
 
-	dialog->close = 
+	dialog->close =
 #ifdef HAVE_GTK_310
 	    // Don't use an icon with GTK3
 	    gtk_button_new_with_label(_("Close"));
-#else 
+#else
 	    gtk_button_new_from_stock(GTK_STOCK_CLOSE);
-#endif					      
+#endif
 	gtk_widget_show(dialog->close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->close);
 	//GTK_WIDGET_SET_FLAGS(dialog->close, GTK_CAN_DEFAULT);
-	gtk_widget_set_can_default (dialog->find, 1);
+	gtk_widget_set_can_default(dialog->find, 1);
 
 
 
 
 	g_signal_connect(G_OBJECT(dialog->dialog), "destroy",
-			   G_CALLBACK(dialog_destroy), dialog);
+			 G_CALLBACK(dialog_destroy), dialog);
 	g_signal_connect(G_OBJECT(dialog->find), "clicked",
-			   G_CALLBACK(find_clicked), dialog);
+			 G_CALLBACK(find_clicked), dialog);
 	g_signal_connect(G_OBJECT(dialog->next), "clicked",
-			   G_CALLBACK(next_clicked), dialog);
+			 G_CALLBACK(next_clicked), dialog);
 	g_signal_connect(G_OBJECT(dialog->close), "clicked",
-			   G_CALLBACK(close_clicked), dialog);
+			 G_CALLBACK(close_clicked), dialog);
 }
 
 
@@ -338,7 +337,8 @@ static void find_dialog(GtkWidget * htmlwidget, const gchar * title)
 		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
 		dialog->htmlwidget = htmlwidget;
 		gtk_widget_show(GTK_WIDGET(dialog->dialog));
-		gdk_window_raise(gtk_widget_get_window (GTK_WIDGET(dialog->dialog)));
+		gdk_window_raise(gtk_widget_get_window
+				 (GTK_WIDGET(dialog->dialog)));
 	} else {
 		create_find_dialog(htmlwidget);
 		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);

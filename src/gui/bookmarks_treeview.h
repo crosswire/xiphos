@@ -27,53 +27,54 @@ extern "C" {
 #endif
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
-enum {
-	COL_OPEN_PIXBUF,
-	COL_CLOSED_PIXBUF,
-	COL_CAPTION,
-	COL_KEY,
-	COL_MODULE,
-	COL_MODULE_DESC,
-	COL_DESCRIPTION,
-	N_COLUMNS
-};
+	enum {
+		COL_OPEN_PIXBUF,
+		COL_CLOSED_PIXBUF,
+		COL_CAPTION,
+		COL_KEY,
+		COL_MODULE,
+		COL_MODULE_DESC,
+		COL_DESCRIPTION,
+		N_COLUMNS
+	};
 
 
-typedef struct {
-	GdkPixbuf *pixbuf_opened;
-	GdkPixbuf *pixbuf_closed;
-	GdkPixbuf *pixbuf_helpdoc;
-} BookMarksPixbufs;
+	typedef struct {
+		GdkPixbuf *pixbuf_opened;
+		GdkPixbuf *pixbuf_closed;
+		GdkPixbuf *pixbuf_helpdoc;
+	} BookMarksPixbufs;
 
-struct _bookmark_data {
-	xmlNodePtr parent;
-	gchar *caption;
-	gchar *key;
-	gchar *module;
-	gchar *module_desc;
-	gchar *description;
-	gboolean is_leaf;
-	GdkPixbuf *opened;
-	GdkPixbuf *closed;
-};
-typedef struct _bookmark_data BOOKMARK_DATA;
+	struct _bookmark_data {
+		xmlNodePtr parent;
+		gchar *caption;
+		gchar *key;
+		gchar *module;
+		gchar *module_desc;
+		gchar *description;
+		gboolean is_leaf;
+		GdkPixbuf *opened;
+		GdkPixbuf *closed;
+	};
+	typedef struct _bookmark_data BOOKMARK_DATA;
 
-extern BookMarksPixbufs *bm_pixbufs;
-extern GtkTreeView *bookmark_tree;
+	extern BookMarksPixbufs *bm_pixbufs;
+	extern GtkTreeView *bookmark_tree;
 
-void gui_load_removed(const xmlChar * file);
-void gui_add_columns(GtkTreeView * tree);
-void gui_add_item_to_tree(GtkTreeIter * iter, GtkTreeIter * parent,
-			     BOOKMARK_DATA * data);
-void gui_verselist_to_bookmarks(GList * verses, gint save_as_single);
-GtkWidget *gui_create_bookmark_tree(void);
-void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar * file,
-			    GtkTreeIter *parent);
-GtkWidget* gui_create_dialog_add_bookmark(gchar * label,
-				gchar * module_name, gchar * key);
+	void gui_load_removed(const xmlChar * file);
+	void gui_add_columns(GtkTreeView * tree);
+	void gui_add_item_to_tree(GtkTreeIter * iter, GtkTreeIter * parent,
+				  BOOKMARK_DATA * data);
+	void gui_verselist_to_bookmarks(GList * verses,
+					gint save_as_single);
+	GtkWidget *gui_create_bookmark_tree(void);
+	void gui_parse_bookmarks(GtkTreeView * tree, const xmlChar * file,
+				 GtkTreeIter * parent);
+	GtkWidget *gui_create_dialog_add_bookmark(gchar * label,
+						  gchar * module_name,
+						  gchar * key);
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif

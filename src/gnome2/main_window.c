@@ -108,7 +108,7 @@ void gui_show_hide_texts(gboolean choice)
 		xml_set_value("Xiphos", "misc", "showtexts", "1");
 	}
 	/*if (main_window_created)
-		gui_set_bible_comm_layout();*/
+	   gui_set_bible_comm_layout(); */
 }
 
 
@@ -135,7 +135,7 @@ void gui_show_hide_preview(gboolean choice)
 	if (choice == FALSE) {
 		if (main_window_created)
 			gtk_widget_hide(widgets.box_side_preview);
-			gtk_widget_hide(widgets.vbox_previewer);
+		gtk_widget_hide(widgets.vbox_previewer);
 		xml_set_value("Xiphos", "misc", "showpreview", "0");
 	} else {
 		if (main_window_created) {
@@ -239,32 +239,30 @@ void gui_show_hide_dicts(gboolean choice)
 void gui_set_bible_comm_layout(void)
 {
 	gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-				       settings.biblepane_width);
+			       settings.biblepane_width);
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned),
-				       settings.biblepane_height);
+			       settings.biblepane_height);
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
-				       settings.commpane_height);
+			       settings.commpane_height);
 
-	if ((settings.showcomms == TRUE)  ||  (settings.showdicts == TRUE)) {
+	if ((settings.showcomms == TRUE) || (settings.showdicts == TRUE)) {
 		gtk_widget_show(widgets.vpaned2);
 	}
 
 	gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 			       (settings.showtexts
-				? settings.biblepane_width
-				: 0));
+				? settings.biblepane_width : 0));
 
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
 			       (settings.showcomms
-				? settings.commpane_height
-				: 0));
+				? settings.commpane_height : 0));
 
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
 			       (settings.showdicts
 				? settings.commpane_height
 				: settings.gs_height));
 
-	if ((settings.showcomms == FALSE)  && (settings.showdicts == FALSE)) {
+	if ((settings.showcomms == FALSE) && (settings.showdicts == FALSE)) {
 		gtk_widget_hide(widgets.vpaned2);
 		gtk_paned_set_position(GTK_PANED
 				       (widgets.hpaned),
@@ -272,18 +270,21 @@ void gui_set_bible_comm_layout(void)
 	}
 
 	if ((settings.showcomms == TRUE)
-		   || (settings.showdicts == TRUE)) {
+	    || (settings.showdicts == TRUE)) {
 		gtk_paned_set_position(GTK_PANED
 				       (widgets.hpaned),
 				       settings.biblepane_width);
 	}
-	if (((settings.showcomms == FALSE) && (settings.showtexts == FALSE)) ||
-	   ((settings.comm_showing == FALSE) && (settings.showtexts == FALSE)))
+	if (((settings.showcomms == FALSE)
+	     && (settings.showtexts == FALSE))
+	    || ((settings.comm_showing == FALSE)
+		&& (settings.showtexts == FALSE)))
 		gtk_widget_hide(nav_toolbar);
 	else
 		gtk_widget_show(nav_toolbar);
 
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.notebook_comm_book),
 				      (settings.comm_showing ? 0 : 1));
 
 }
@@ -312,12 +313,14 @@ void gui_change_window_title(gchar * module_name)
 	if (cur_passage_tab) {
 		/* borrowed from tabbed_browser.c:pick_tab_label() */
 		/* echo the current tab's module (full name) in title bar */
-		if (cur_passage_tab->showtexts || cur_passage_tab->comm_showing) {
-			title = (cur_passage_tab->showtexts
-				 ? cur_passage_tab->text_mod
-				 : (cur_passage_tab->commentary_mod
-				    ? cur_passage_tab->commentary_mod
-				    : "[no commentary]"));
+		if (cur_passage_tab->showtexts
+		    || cur_passage_tab->comm_showing) {
+			title =
+			    (cur_passage_tab->showtexts ? cur_passage_tab->
+			     text_mod : (cur_passage_tab->
+					 commentary_mod ? cur_passage_tab->
+					 commentary_mod :
+					 "[no commentary]"));
 		} else {
 			title = (cur_passage_tab->showcomms
 				 ? (cur_passage_tab->book_mod
@@ -335,17 +338,19 @@ void gui_change_window_title(gchar * module_name)
 	 */
 	title = g_strdup(main_get_module_description(title));
 	if (!title)
-		title = g_strdup(main_get_module_description(settings.MainWindowModule));
-	title = g_strdup_printf("%s - %s", (title ? title : "[no title]"),
-				settings.program_title);
+		title =
+		    g_strdup(main_get_module_description
+			     (settings.MainWindowModule));
+	title =
+	    g_strdup_printf("%s - %s", (title ? title : "[no title]"),
+			    settings.program_title);
 	gtk_window_set_title(GTK_WINDOW(widgets.app), title);
 	g_free(title);
 }
 
 
-static gboolean  delete_event (GtkWidget *widget,
-			       GdkEvent *event,
-			       gpointer user_data)
+static gboolean delete_event(GtkWidget * widget,
+			     GdkEvent * event, gpointer user_data)
 {
 	on_quit_activate(NULL, NULL);
 	return TRUE;
@@ -428,10 +433,14 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 
 void final_pane_sizes()
 {
-    epaned_button_release_event(GTK_WIDGET(widgets.epaned), NULL, (gchar *) "epaned");
-    epaned_button_release_event(GTK_WIDGET(widgets.vpaned), NULL, (gchar *) "vpaned");
-    epaned_button_release_event(GTK_WIDGET(widgets.vpaned2),NULL, (gchar *) "vpaned2");
-    epaned_button_release_event(GTK_WIDGET(widgets.hpaned), NULL, (gchar *) "hpaned1");
+	epaned_button_release_event(GTK_WIDGET(widgets.epaned), NULL,
+				    (gchar *) "epaned");
+	epaned_button_release_event(GTK_WIDGET(widgets.vpaned), NULL,
+				    (gchar *) "vpaned");
+	epaned_button_release_event(GTK_WIDGET(widgets.vpaned2), NULL,
+				    (gchar *) "vpaned2");
+	epaned_button_release_event(GTK_WIDGET(widgets.hpaned), NULL,
+				    (gchar *) "hpaned1");
 }
 
 /******************************************************************************
@@ -460,7 +469,8 @@ static gboolean on_configure_event(GtkWidget * widget,
 	gint x;
 	gint y;
 
- 	gdk_window_get_root_origin(gtk_widget_get_window (widgets.app), &x, &y);
+	gdk_window_get_root_origin(gtk_widget_get_window(widgets.app), &x,
+				   &y);
 
 	settings.gs_width = event->width;
 	settings.gs_height = event->height;
@@ -484,24 +494,25 @@ static gboolean on_configure_event(GtkWidget * widget,
 }
 
 static void on_notebook_bible_parallel_switch_page(GtkNotebook * notebook,
-					gint page_num, GList **tl)
+						   gint page_num,
+						   GList ** tl)
 {
 #if 0
 	if (page_num == 0)
 		gui_set_drop_target(widgets.html_text);
 	else
 		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_text));
-#endif /* 0 */
+#endif				/* 0 */
 }
 
 #ifdef USE_GTK_3
 static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 					      gpointer arg,
-					      gint page_num, GList **tl)
+					      gint page_num, GList ** tl)
 #else
 static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 					      GtkNotebookPage * page,
-					      gint page_num, GList **tl)
+					      gint page_num, GList ** tl)
 #endif
 {
 	gchar *url = NULL;
@@ -510,14 +521,14 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 #if 0
 		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_book));
 		gui_set_drop_target(widgets.html_comm);
-#endif /* 0 */
+#endif				/* 0 */
 		settings.comm_showing = TRUE;
 		gtk_widget_show(nav_toolbar);
 	} else {
 #if 0
 		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_comm));
 		gui_set_drop_target(widgets.html_book);
-#endif /* 0 */
+#endif				/* 0 */
 		settings.comm_showing = FALSE;
 		if (!settings.showtexts)
 			gtk_widget_hide(nav_toolbar);
@@ -532,13 +543,13 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 			      settings.comm_showing,
 			      settings.showtexts,
 			      settings.showpreview,
-			      settings.showcomms,
-			      settings.showdicts);
+			      settings.showcomms, settings.showdicts);
 	if (settings.comm_showing)
-		main_display_commentary(settings.CommWindowModule, settings.currentverse);
+		main_display_commentary(settings.CommWindowModule,
+					settings.currentverse);
 	else if (settings.book_mod && *settings.book_mod) {
 		url = g_strdup_printf("sword://%s/%ld", settings.book_mod,
-						        settings.book_offset);
+				      settings.book_offset);
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
@@ -546,8 +557,7 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 }
 
 
-static void
-new_base_font_size(gboolean up)
+static void new_base_font_size(gboolean up)
 {
 	if (up) {
 		settings.base_font_size++;
@@ -561,7 +571,8 @@ new_base_font_size(gboolean up)
 
 	if (settings.base_font_size_str)
 		g_free(settings.base_font_size_str);
-	settings.base_font_size_str = g_strdup_printf("%+d", settings.base_font_size);
+	settings.base_font_size_str =
+	    g_strdup_printf("%+d", settings.base_font_size);
 
 	xml_set_value("Xiphos", "fontsize", "basefontsize",
 		      settings.base_font_size_str);
@@ -577,7 +588,7 @@ new_base_font_size(gboolean up)
 #define	sV	settings.currentverse
 
 static
-void kbd_toggle_option(gboolean cond, gchar *option)
+void kbd_toggle_option(gboolean cond, gchar * option)
 {
 	gchar *msg;
 
@@ -587,12 +598,11 @@ void kbd_toggle_option(gboolean cond, gchar *option)
 		gchar *url = g_strdup_printf("sword://%s/%s", sM, sV);
 		main_url_handler(url, TRUE);
 		g_free(url);
-		msg = g_strdup_printf("%s %s", option, (opt ? "on" : "off"));
+		msg =
+		    g_strdup_printf("%s %s", option, (opt ? "on" : "off"));
 		gui_set_statusbar(msg);
 		g_free(msg);
-	}
-	else
-	{
+	} else {
 		msg = g_strdup_printf(_("Module has no support for %s."),
 				      option);
 		gui_generic_warning(msg);
@@ -605,7 +615,10 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 				  gpointer user_data)
 {
 	/* these are the mods we actually use for global keys, we always only check for these set */
-	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
+	guint state =
+	    event->
+	    state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK |
+		     GDK_MOD4_MASK);
 
 	switch (event->keyval) {
 	case XK_Shift_L:	/* shift keys - we need this for locking strongs (and */
@@ -615,10 +628,11 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 
 	case XK_a:
 	case XK_A:
-		if (state == GDK_MOD1_MASK) {	 // Alt-A  annotation
+		if (state == GDK_MOD1_MASK) {	// Alt-A  annotation
 			gui_mark_verse_dialog(sM, sV);
-		}
-		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
+		} else if (state ==
+			   (GDK_CONTROL_MASK | GDK_MOD1_MASK |
+			    GDK_SHIFT_MASK))
 			on_biblesync_kbd(3);	// BSP audience
 		break;
 
@@ -634,8 +648,12 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_c:
 	case XK_C:
 		if (state == GDK_MOD1_MASK) {	// Alt-C  commentary pane
-			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
-			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
+			gtk_widget_grab_focus(navbar_versekey.
+					      lookup_entry);
+			gtk_notebook_set_current_page(GTK_NOTEBOOK
+						      (widgets.
+						       notebook_comm_book),
+						      0);
 		}
 		break;
 
@@ -647,7 +665,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 
 	case XK_f:
 	case XK_F:
-		if (state == GDK_CONTROL_MASK) { // Ctrl-F  find text
+		if (state == GDK_CONTROL_MASK) {	// Ctrl-F  find text
 			if (settings.showtexts) {
 				gui_find_dlg(widgets.html_text,
 					     sM, FALSE, NULL);
@@ -663,32 +681,39 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 				gui_find_dlg(widgets.html_dict,
 					     sD, FALSE, NULL);
 			} else
-			    gui_generic_warning(_("Xiphos: No windows."));
+				gui_generic_warning(_
+						    ("Xiphos: No windows."));
 		}
 		break;
 
 	case XK_g:
 	case XK_G:
 		if (state == GDK_MOD1_MASK) {	// Alt-G  genbook entry
-			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
+			gtk_notebook_set_current_page(GTK_NOTEBOOK
+						      (widgets.
+						       notebook_comm_book),
+						      1);
 			gtk_widget_grab_focus(navbar_book.lookup_entry);
 		}
 		break;
 
 	case XK_j:
-		if (state == 0)			// J    "next verse"
-			access_on_down_eventbox_button_release_event(VERSE_BUTTON);
+		if (state == 0)	// J    "next verse"
+			access_on_down_eventbox_button_release_event
+			    (VERSE_BUTTON);
 		break;
 
 	case XK_k:
-		if (state == 0)			// K    "previous verse"
-			access_on_up_eventbox_button_release_event(VERSE_BUTTON);
+		if (state == 0)	// K    "previous verse"
+			access_on_up_eventbox_button_release_event
+			    (VERSE_BUTTON);
 		break;
 
 	case XK_l:
 	case XK_L:
 		if (state == GDK_CONTROL_MASK)	// Ctrl-L  verse entry
-			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
+			gtk_widget_grab_focus(navbar_versekey.
+					      lookup_entry);
 		break;
 
 	case XK_m:
@@ -696,9 +721,11 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == GDK_MOD1_MASK)	// Alt-M morph
 		{
 			kbd_toggle_option
-			    ((main_check_for_global_option(sM, "GBFMorph") ||
-			      main_check_for_global_option(sM, "ThMLMorph") ||
-			      main_check_for_global_option(sM, "OSISMorph")),
+			    ((main_check_for_global_option(sM, "GBFMorph")
+			      || main_check_for_global_option(sM,
+							      "ThMLMorph")
+			      || main_check_for_global_option(sM,
+							      "OSISMorph")),
 			     "Morphological Tags");
 		}
 		break;
@@ -708,29 +735,28 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == GDK_CONTROL_MASK)	// Ctrl-N verse
 			access_on_down_eventbox_button_release_event
 			    (VERSE_BUTTON);
-		else if (state == 0)		// n chapter
+		else if (state == 0)	// n chapter
 			access_on_down_eventbox_button_release_event
 			    (CHAPTER_BUTTON);
-		else if (state == GDK_SHIFT_MASK) // N book
+		else if (state == GDK_SHIFT_MASK)	// N book
 			access_on_down_eventbox_button_release_event
 			    (BOOK_BUTTON);
-		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
-		{				// BSP transient navigate
-		    if (biblesync_active_xmit_allowed())
-		    {
-			biblesync_prep_and_xmit(sM, sV);
-			gui_set_statusbar(_("BibleSync: Current navigation sent."));
-		    }
-		    else
-		    {
-			gui_generic_warning(_("BibleSync: Not speaking."));
-		    }
+		else if (state == (GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_SHIFT_MASK)) {	// BSP transient navigate
+			if (biblesync_active_xmit_allowed()) {
+				biblesync_prep_and_xmit(sM, sV);
+				gui_set_statusbar(_
+						  ("BibleSync: Current navigation sent."));
+			} else {
+				gui_generic_warning(_
+						    ("BibleSync: Not speaking."));
+			}
 		}
 		break;
 
 	case XK_o:
 	case XK_O:
-		if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
+		if (state ==
+		    (GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_SHIFT_MASK))
 			on_biblesync_kbd(0);	// BSP off
 		break;
 
@@ -739,46 +765,56 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == GDK_CONTROL_MASK)	// Ctrl-P verse
 			access_on_up_eventbox_button_release_event
 			    (VERSE_BUTTON);
-		else if (state == 0)		// p chapter
+		else if (state == 0)	// p chapter
 			access_on_up_eventbox_button_release_event
 			    (CHAPTER_BUTTON);
-		else if (state == GDK_SHIFT_MASK) // P book
+		else if (state == GDK_SHIFT_MASK)	// P book
 			access_on_up_eventbox_button_release_event
 			    (BOOK_BUTTON);
-		else if (state == GDK_MOD1_MASK) // Alt-P  parallel detach
+		else if (state == GDK_MOD1_MASK)	// Alt-P  parallel detach
 			on_undockInt_activate(NULL);
-		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
+		else if (state ==
+			 (GDK_CONTROL_MASK | GDK_MOD1_MASK |
+			  GDK_SHIFT_MASK))
 			on_biblesync_kbd(1);	// BSP personal
 		break;
 
 	case XK_q:
 	case XK_Q:
-		if (state == GDK_CONTROL_MASK)		// Ctrl-Q quit
-			delete_event (NULL, NULL, NULL);
+		if (state == GDK_CONTROL_MASK)	// Ctrl-Q quit
+			delete_event(NULL, NULL, NULL);
 		break;
 
 	case XK_r:
 	case XK_R:
-		if (state == GDK_MOD1_MASK)		// Alt-R red words
+		if (state == GDK_MOD1_MASK)	// Alt-R red words
 		{
 			kbd_toggle_option
-			    (((main_check_for_global_option(sM, "GBFRedLetterWords")) ||
-			      (main_check_for_global_option(sM, "OSISRedLetterWords"))),
+			    (((main_check_for_global_option
+			       (sM, "GBFRedLetterWords"))
+			      ||
+			      (main_check_for_global_option
+			       (sM, "OSISRedLetterWords"))),
 			     "Words of Christ in Red");
 		}
 		break;
 
 	case XK_s:
 	case XK_S:
-		if (state == GDK_MOD1_MASK)		// Alt-S strong's
+		if (state == GDK_MOD1_MASK)	// Alt-S strong's
 		{
 			kbd_toggle_option
-			    (((main_check_for_global_option(sM, "GBFStrongs")) ||
-			      (main_check_for_global_option(sM, "ThMLStrongs")) ||
-			      (main_check_for_global_option(sM, "OSISStrongs"))),
-			     "Strong's Numbers");
-		}
-		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
+			    (((main_check_for_global_option
+			       (sM, "GBFStrongs"))
+			      ||
+			      (main_check_for_global_option
+			       (sM, "ThMLStrongs"))
+			      ||
+			      (main_check_for_global_option
+			       (sM, "OSISStrongs"))), "Strong's Numbers");
+		} else if (state ==
+			   (GDK_CONTROL_MASK | GDK_MOD1_MASK |
+			    GDK_SHIFT_MASK))
 			on_biblesync_kbd(2);	// BSP speaker
 		break;
 
@@ -794,15 +830,15 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			access_to_edit_percomm();
 		break;
 
-	case XK_plus : // Ctrl-Plus  Increase base font size
-		if (state == (GDK_CONTROL_MASK|GDK_SHIFT_MASK))
+	case XK_plus:		// Ctrl-Plus  Increase base font size
+		if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK))
 			new_base_font_size(TRUE);
 		break;
-	case XK_minus: // Ctrl-Minus  Decrease base font size
+	case XK_minus:		// Ctrl-Minus  Decrease base font size
 		if (state == GDK_CONTROL_MASK)
 			new_base_font_size(FALSE);
 		break;
-	case XK_0: // Ctrl-0 (zero)  Neutralize base font size.
+	case XK_0:		// Ctrl-0 (zero)  Neutralize base font size.
 		if (state == GDK_CONTROL_MASK) {
 			settings.base_font_size = 1;
 			new_base_font_size(FALSE);
@@ -810,56 +846,63 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 
 		// ctrl-DIGIT [1-9] selects DIGIT-th tab.
-	case XK_1: case XK_2: case XK_3:
-	case XK_4: case XK_5: case XK_6:
-	case XK_7: case XK_8: case XK_9:
+	case XK_1:
+	case XK_2:
+	case XK_3:
+	case XK_4:
+	case XK_5:
+	case XK_6:
+	case XK_7:
+	case XK_8:
+	case XK_9:
 		if (state == GDK_CONTROL_MASK)
 			gui_select_nth_tab((event->keyval - XK_0) - 1);	/* 0-based list */
 
-	case XK_F1: // F1 help
+	case XK_F1:		// F1 help
 		if (state == 0)
 			on_help_contents_activate(NULL, NULL);
 		break;
-	case XK_F2: // F2 preferences
+	case XK_F2:		// F2 preferences
 		if (state == 0)
 			on_preferences_activate(NULL, NULL);
 		break;
-	case XK_F3: // F3 search
+	case XK_F3:		// F3 search
 		if (state == 0)
 			main_open_search_dialog();
 		else if (state == GDK_CONTROL_MASK)
-			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
-								   notebook_sidebar), 2);
+			gtk_notebook_set_current_page(GTK_NOTEBOOK
+						      (widgets.notebook_sidebar),
+						      2);
 		break;
-	case XK_F4: // F4 module manager
+	case XK_F4:		// F4 module manager
 		if (state == 0)
-			on_module_manager_activate (NULL, NULL);
+			on_module_manager_activate(NULL, NULL);
 		else if (state == GDK_CONTROL_MASK)
 			gui_close_passage_tab(gtk_notebook_page_num
-					      (GTK_NOTEBOOK(widgets.notebook_main),
-					       ((PASSAGE_TAB_INFO*)cur_passage_tab)->
-					       page_widget));
+					      (GTK_NOTEBOOK
+					       (widgets.notebook_main),
+					       ((PASSAGE_TAB_INFO *)
+						cur_passage_tab)->page_widget));
 		break;
-	case XK_F10: // Shift-F10 bible module right click
+	case XK_F10:		// Shift-F10 bible module right click
 		if (state == GDK_SHIFT_MASK)
 			gui_menu_popup(NULL, sM, NULL);
-			/* FIXME: needs the html widget as first pram */
+		/* FIXME: needs the html widget as first pram */
 		break;
 	}
-	XI_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d",
-		    event->hardware_keycode, event->keyval, state));
+	XI_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d", event->hardware_keycode, event->keyval, state));
 	return FALSE;
 }
 
 static
 gboolean on_vbox1_key_release_event(GtkWidget * widget,
-                                        GdkEventKey * event,
-                                        gpointer user_data)
+				    GdkEventKey * event,
+				    gpointer user_data)
 {
-        switch (event->keyval) {
-		case XK_Shift_L:
-		case XK_Shift_R:
-			shift_key_pressed = FALSE;
+	switch (event->keyval) {
+	case XK_Shift_L:
+	case XK_Shift_R:
+		shift_key_pressed = FALSE;
 		break;
 	}
 	return FALSE;
@@ -891,14 +934,14 @@ void create_mainwindow(void)
 	GtkWidget *label;
 	GtkWidget *scrolledwindow;
 	GtkWidget *box_book;
-	GdkPixbuf* pixbuf;
+	GdkPixbuf *pixbuf;
 	/*
-	GTK_SHADOW_NONE
-  	GTK_SHADOW_IN
-  	GTK_SHADOW_OUT
-  	GTK_SHADOW_ETCHED_IN
-  	GTK_SHADOW_ETCHED_OUT
-	*/
+	   GTK_SHADOW_NONE
+	   GTK_SHADOW_IN
+	   GTK_SHADOW_OUT
+	   GTK_SHADOW_ETCHED_IN
+	   GTK_SHADOW_ETCHED_OUT
+	 */
 	settings.shadow_type = GTK_SHADOW_IN;
 
 	XI_print(("%s xiphos-%s\n", "Starting", VERSION));
@@ -907,24 +950,25 @@ void create_mainwindow(void)
 	widgets.studypad_dialog = NULL;
 
 	widgets.app = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_title (GTK_WINDOW (widgets.app), _("Xiphos - Bible Study Software"));
+	gtk_window_set_title(GTK_WINDOW(widgets.app),
+			     _("Xiphos - Bible Study Software"));
 
 	g_object_set_data(G_OBJECT(widgets.app),
 			  "widgets.app", widgets.app);
 	gtk_widget_set_size_request(widgets.app, 680, 425);
-	gtk_widget_set_can_focus (widgets.app, 1);
+	gtk_widget_set_can_focus(widgets.app, 1);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
 
 	imagename = image_locator("gs2-48x48.png");
-	pixbuf = gdk_pixbuf_new_from_file (imagename, NULL);
+	pixbuf = gdk_pixbuf_new_from_file(imagename, NULL);
 	g_free(imagename);
-	gtk_window_set_icon (GTK_WINDOW(widgets.app), pixbuf);
+	gtk_window_set_icon(GTK_WINDOW(widgets.app), pixbuf);
 
 	UI_VBOX(vbox_gs, FALSE, 0);
 	gtk_widget_show(vbox_gs);
-	gtk_container_add (GTK_CONTAINER (widgets.app), vbox_gs);
+	gtk_container_add(GTK_CONTAINER(widgets.app), vbox_gs);
 
-	menu = gui_create_main_menu ();
+	menu = gui_create_main_menu();
 
 	gtk_box_pack_start(GTK_BOX(vbox_gs), menu, FALSE, TRUE, 0);
 
@@ -935,7 +979,7 @@ void create_mainwindow(void)
 /**widgets.epaned********/
 	widgets.epaned = UI_HPANE();
 	gtk_widget_show(widgets.epaned);
-	gtk_container_set_border_width (GTK_CONTAINER (widgets.epaned), 4);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.epaned), 4);
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE, 0);
 
 	UI_VBOX(widgets.vboxMain, FALSE, 0);
@@ -952,35 +996,41 @@ void create_mainwindow(void)
 	UI_HBOX(widgets.hboxtb, FALSE, 0);
 	if (settings.browsing)
 		gtk_widget_show(widgets.hboxtb);
-	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.hboxtb, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.hboxtb,
+			   FALSE, FALSE, 0);
 
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
 
-	tab_button_icon =  
+	tab_button_icon =
 #ifdef HAVE_GTK_310
-		gtk_image_new_from_icon_name ("tab-new-symbolic",
-                              GTK_ICON_SIZE_SMALL_TOOLBAR);
+	    gtk_image_new_from_icon_name("tab-new-symbolic",
+					 GTK_ICON_SIZE_SMALL_TOOLBAR);
 #else
-		gtk_image_new_from_stock(GTK_STOCK_ADD, 
-		              GTK_ICON_SIZE_SMALL_TOOLBAR);
-#endif	
+	    gtk_image_new_from_stock(GTK_STOCK_ADD,
+				     GTK_ICON_SIZE_SMALL_TOOLBAR);
+#endif
 
 	gtk_widget_show(tab_button_icon);
-	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);
-	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab), GTK_RELIEF_NONE);
-	gtk_box_pack_start(GTK_BOX(widgets.hboxtb), widgets.button_new_tab, FALSE, FALSE, 0);
-	gtk_widget_set_tooltip_text(widgets.button_new_tab, _("Open a new tab"));
+	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab),
+			  tab_button_icon);
+	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab),
+			      GTK_RELIEF_NONE);
+	gtk_box_pack_start(GTK_BOX(widgets.hboxtb), widgets.button_new_tab,
+			   FALSE, FALSE, 0);
+	gtk_widget_set_tooltip_text(widgets.button_new_tab,
+				    _("Open a new tab"));
 
 	widgets.notebook_main = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_main);
 	gtk_box_pack_start(GTK_BOX(widgets.hboxtb),
 			   widgets.notebook_main, TRUE, TRUE, 0);
 	gtk_widget_set_size_request(widgets.notebook_main, -1, 25);
-	gtk_notebook_set_scrollable (GTK_NOTEBOOK(widgets.notebook_main),
-                                             TRUE);
+	gtk_notebook_set_scrollable(GTK_NOTEBOOK(widgets.notebook_main),
+				    TRUE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_main));
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main), FALSE);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main),
+				     FALSE);
 	/* main passage tabbed notebook end */
 
 	UI_VBOX(widgets.page, FALSE, 0);
@@ -1000,18 +1050,21 @@ void create_mainwindow(void)
 /**widgets.hpaned********/
 	widgets.hpaned = UI_HPANE();
 	gtk_widget_show(widgets.hpaned);
-	gtk_box_pack_start(GTK_BOX(widgets.page), widgets.hpaned, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.page), widgets.hpaned, TRUE,
+			   TRUE, 0);
 
 /**widgets.vpaned********/
 	widgets.vpaned = UI_VPANE();
 	gtk_widget_show(widgets.vpaned);
 	gtk_widget_set_size_request(widgets.vpaned, 50, -1);
-	gtk_paned_pack1(GTK_PANED(widgets.hpaned), widgets.vpaned, TRUE, FALSE);
+	gtk_paned_pack1(GTK_PANED(widgets.hpaned), widgets.vpaned, TRUE,
+			FALSE);
 
 	widgets.vpaned2 = UI_VPANE();
 	gtk_widget_show(widgets.vpaned2);
 	gtk_widget_set_size_request(widgets.vpaned2, 50, -1);
-	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, FALSE);
+	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE,
+			FALSE);
 
 /**widgets.hpaned********/
 	UI_VBOX(widgets.vbox_text, FALSE, 0);
@@ -1025,23 +1078,24 @@ void create_mainwindow(void)
 	widgets.notebook_bible_parallel = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_bible_parallel);
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_text),
-			   widgets.notebook_bible_parallel, TRUE,
-			   TRUE, 0);
-	gtk_notebook_set_tab_pos(
-		GTK_NOTEBOOK(widgets.notebook_bible_parallel),
+			   widgets.notebook_bible_parallel, TRUE, TRUE, 0);
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK
+				 (widgets.notebook_bible_parallel),
 				 GTK_POS_BOTTOM);
-	gtk_notebook_set_show_tabs(
-		GTK_NOTEBOOK(widgets.notebook_bible_parallel), TRUE);
-	gtk_notebook_set_show_border(
-		GTK_NOTEBOOK(widgets.notebook_bible_parallel), FALSE);
-	gtk_container_set_border_width (
-		GTK_CONTAINER (widgets.notebook_bible_parallel), 1);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
+				   (widgets.notebook_bible_parallel),
+				   TRUE);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK
+				     (widgets.notebook_bible_parallel),
+				     FALSE);
+	gtk_container_set_border_width(GTK_CONTAINER
+				       (widgets.notebook_bible_parallel),
+				       1);
 
 	g_signal_connect(G_OBJECT(widgets.notebook_bible_parallel),
-			   "change-current-page",
-			   G_CALLBACK
-			   (on_notebook_bible_parallel_switch_page),
-			   NULL);
+			 "change-current-page",
+			 G_CALLBACK
+			 (on_notebook_bible_parallel_switch_page), NULL);
 	/*
 	 * text notebook
 	 */
@@ -1052,37 +1106,40 @@ void create_mainwindow(void)
 
 	label = gtk_label_new(_("Standard View"));
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK
-				    (widgets.notebook_bible_parallel),
-				    0),
-				   label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK
+				   (widgets.notebook_bible_parallel),
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							     (widgets.
+							      notebook_bible_parallel),
+							     0), label);
 
 	/*
 	 * previewer
 	 */
 	UI_VBOX(widgets.vbox_previewer, FALSE, 0);
 	gtk_widget_show(widgets.vbox_previewer);
-	gtk_container_set_border_width (GTK_CONTAINER (widgets.vbox_previewer), 1);
-	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, TRUE, TRUE);
+	gtk_container_set_border_width(GTK_CONTAINER
+				       (widgets.vbox_previewer), 1);
+	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer,
+			TRUE, TRUE);
 
-	gtk_container_set_border_width(GTK_CONTAINER(widgets.vbox_previewer), 2);
+	gtk_container_set_border_width(GTK_CONTAINER
+				       (widgets.vbox_previewer), 2);
 
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), scrolledwindow, TRUE, TRUE,
-			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), scrolledwindow,
+			   TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
 	widgets.html_previewer_text
-			= GTK_WIDGET ( XIPHOS_HTML_NEW( NULL, FALSE, VIEWER_TYPE));
-	gtk_container_add(GTK_CONTAINER(scrolledwindow), widgets.html_previewer_text);
+	    = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, VIEWER_TYPE));
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			  widgets.html_previewer_text);
 
 	gtk_widget_show(widgets.html_previewer_text);
 
@@ -1094,47 +1151,48 @@ void create_mainwindow(void)
 
 	gtk_paned_pack1(GTK_PANED(widgets.vpaned2),
 			widgets.notebook_comm_book, TRUE, TRUE);
-	gtk_container_set_border_width (GTK_CONTAINER (widgets.notebook_comm_book), 1);
+	gtk_container_set_border_width(GTK_CONTAINER
+				       (widgets.notebook_comm_book), 1);
 
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(widgets.notebook_comm_book),
-                                             GTK_POS_BOTTOM);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.
-				    notebook_comm_book), TRUE);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.
-				     notebook_comm_book), FALSE);
+				 GTK_POS_BOTTOM);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
+				   (widgets.notebook_comm_book), TRUE);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK
+				     (widgets.notebook_comm_book), FALSE);
 
 	/*
 	 * commentary pane
 	 */
 	widgets.box_comm = gui_create_commentary_pane();
 
-        gtk_container_add(GTK_CONTAINER(widgets.notebook_comm_book),
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm_book),
 			  widgets.box_comm);
 
 	label = gtk_label_new(_("Commentary View"));
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm_book),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK
-				    (widgets.notebook_comm_book),
-				    0),
-				   label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK
+				   (widgets.notebook_comm_book),
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							     (widgets.
+							      notebook_comm_book),
+							     0), label);
 
 	/*
 	 * book pane
 	 */
 	box_book = gui_create_book_pane();
-        gtk_container_add(GTK_CONTAINER(widgets.notebook_comm_book),
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm_book),
 			  box_book);
 
 	label = gtk_label_new(_("Book View"));
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm_book),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK
-				    (widgets.notebook_comm_book),
-				    1),
-				   label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK
+				   (widgets.notebook_comm_book),
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							     (widgets.
+							      notebook_comm_book),
+							     1), label);
 
 	/*
 	 * dict/lex
@@ -1146,61 +1204,58 @@ void create_mainwindow(void)
 	 * end  dict/lex
 	 */
 
-	widgets.appbar = gtk_statusbar_new ();
+	widgets.appbar = gtk_statusbar_new();
 
 	gtk_widget_show(widgets.appbar);
 #ifndef USE_GTK_3
-	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR(widgets.appbar),
-                                           TRUE);
+	gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(widgets.appbar),
+					  TRUE);
 #endif
-	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE, 0);
-	gui_set_statusbar (_("Welcome to Xiphos"));
+	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE,
+			   0);
+	gui_set_statusbar(_("Welcome to Xiphos"));
 
-	g_signal_connect ((gpointer) vbox_gs, "key_press_event",
-		    G_CALLBACK (on_vbox1_key_press_event),
-		    NULL);
-	g_signal_connect ((gpointer) vbox_gs, "key_release_event",
-		    G_CALLBACK (on_vbox1_key_release_event),
-		    NULL);
+	g_signal_connect((gpointer) vbox_gs, "key_press_event",
+			 G_CALLBACK(on_vbox1_key_press_event), NULL);
+	g_signal_connect((gpointer) vbox_gs, "key_release_event",
+			 G_CALLBACK(on_vbox1_key_release_event), NULL);
 
 	g_signal_connect(G_OBJECT(widgets.notebook_comm_book),
-			   "switch_page",
-			   G_CALLBACK
-			   (on_notebook_comm_book_switch_page),
-			   NULL);	
+			 "switch_page",
+			 G_CALLBACK
+			 (on_notebook_comm_book_switch_page), NULL);
 
 	g_signal_connect(G_OBJECT(widgets.app), "delete_event",
-			   G_CALLBACK(delete_event), NULL);
+			 G_CALLBACK(delete_event), NULL);
 
 	g_signal_connect((gpointer) widgets.app,
 			 "configure_event",
 			 G_CALLBACK(on_configure_event), NULL);
 	g_signal_connect(G_OBJECT(widgets.epaned),
-			   "button_release_event",
-			   G_CALLBACK
-			   (epaned_button_release_event),
-			   (gchar *) "epaned");
+			 "button_release_event",
+			 G_CALLBACK
+			 (epaned_button_release_event),
+			 (gchar *) "epaned");
 	g_signal_connect(G_OBJECT(widgets.vpaned),
-			   "button_release_event",
-			   G_CALLBACK
-			   (epaned_button_release_event),
-			   (gchar *) "vpaned");
+			 "button_release_event",
+			 G_CALLBACK
+			 (epaned_button_release_event),
+			 (gchar *) "vpaned");
 	g_signal_connect(G_OBJECT(widgets.vpaned2),
-			   "button_release_event",
-			   G_CALLBACK
-			   (epaned_button_release_event),
-			   (gchar *) "vpaned2");
+			 "button_release_event",
+			 G_CALLBACK
+			 (epaned_button_release_event),
+			 (gchar *) "vpaned2");
 	g_signal_connect(G_OBJECT(widgets.hpaned),
-			   "button_release_event",
-			   G_CALLBACK
-			   (epaned_button_release_event),
-			   (gchar *) "hpaned1");
+			 "button_release_event",
+			 G_CALLBACK
+			 (epaned_button_release_event),
+			 (gchar *) "hpaned1");
 
 	gtk_widget_grab_focus(navbar_versekey.lookup_entry);
 
-	gtk_window_set_default_size((GtkWindow *)widgets.app,
-                                             settings.gs_width,
-                                             settings.gs_height);
+	gtk_window_set_default_size((GtkWindow *) widgets.app,
+				    settings.gs_width, settings.gs_height);
 	main_window_created = TRUE;
 }
 

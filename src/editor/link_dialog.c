@@ -54,31 +54,29 @@ static GtkWidget *entry_text;
 static GtkWidget *linkage_verse_list;
 
 
-G_MODULE_EXPORT
-void entry_verse_changed_cb(GObject *object, EDITOR *e)
+G_MODULE_EXPORT void entry_verse_changed_cb(GObject * object, EDITOR * e)
 {
 	const gchar *verse_str = NULL;
 
-	verse_str = gtk_entry_get_text (GTK_ENTRY (object));
-	gtk_entry_set_text(GTK_ENTRY (entry_text),verse_str);
+	verse_str = gtk_entry_get_text(GTK_ENTRY(object));
+	gtk_entry_set_text(GTK_ENTRY(entry_text), verse_str);
 }
 
-G_MODULE_EXPORT
-void button_ok_clicked_cb(GObject *object, EDITOR *e)
+G_MODULE_EXPORT void button_ok_clicked_cb(GObject * object, EDITOR * e)
 {
 	const gchar *mod_str = NULL;
 	const gchar *verse_str = NULL;
 	const gchar *text_str = NULL;
 	const gchar *encoded_mod = NULL;
 	const gchar *encoded_verse = NULL;
-	GString *str = g_string_new (NULL);
+	GString *str = g_string_new(NULL);
 	gint type = 0;
 
-	mod_str = gtk_entry_get_text (GTK_ENTRY (entry_module));
-	verse_str = gtk_entry_get_text (GTK_ENTRY (entry_verse));
-	text_str = gtk_entry_get_text (GTK_ENTRY (entry_text));
+	mod_str = gtk_entry_get_text(GTK_ENTRY(entry_module));
+	verse_str = gtk_entry_get_text(GTK_ENTRY(entry_verse));
+	text_str = gtk_entry_get_text(GTK_ENTRY(entry_text));
 
-	type = main_get_mod_type((gchar*)mod_str);
+	type = main_get_mod_type((gchar *) mod_str);
 
 	if (mod_str)
 		encoded_mod = main_url_encode(mod_str);
@@ -86,41 +84,42 @@ void button_ok_clicked_cb(GObject *object, EDITOR *e)
 		encoded_verse = main_url_encode(verse_str);
 
 	g_string_printf(str,
-			(((gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(linkage_verse_list))) &&
-			  ((type == -1) ||
-			   (type == TEXT_TYPE) ||
-			   (type == COMMENTARY_TYPE)))
-			 ? "<a href=\"passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s\">%s</a>"
+			(((gtk_toggle_button_get_active
+			   (GTK_TOGGLE_BUTTON(linkage_verse_list)))
+			  && ((type == -1) || (type == TEXT_TYPE)
+			      || (type == COMMENTARY_TYPE)))
+			 ?
+			 "<a href=\"passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s\">%s</a>"
 			 : "<a href=\"sword://%s/%s\">%s</a>"),
-			(encoded_mod   ? encoded_mod   : ""),
+			(encoded_mod ? encoded_mod : ""),
 			(encoded_verse ? encoded_verse : ""),
-			(text_str      ? text_str      : ""));
+			(text_str ? text_str : ""));
 
-	XI_message (("link: %s", str->str));
+	XI_message(("link: %s", str->str));
 
 #ifdef USE_WEBKIT_EDITOR
 	editor_insert_html(str->str, e);
 #else
-	gtkhtml_editor_insert_html (GTKHTML_EDITOR (e->window), str->str);
+	gtkhtml_editor_insert_html(GTKHTML_EDITOR(e->window), str->str);
 #endif
-	g_string_free (str, TRUE);
-	g_free((gchar*)encoded_mod);
-	g_free((gchar*)encoded_verse);
+	g_string_free(str, TRUE);
+	g_free((gchar *) encoded_mod);
+	g_free((gchar *) encoded_verse);
 
 	gtk_widget_destroy(GTK_WIDGET(window));
 }
 
 G_MODULE_EXPORT
-void button_test_clicked_cb(GObject *object, gpointer user_data)
+    void button_test_clicked_cb(GObject * object, gpointer user_data)
 {
- 	const gchar *mod_str = NULL;
+	const gchar *mod_str = NULL;
 	const gchar *verse_str = NULL;
 	const gchar *encoded_mod = NULL;
 	const gchar *encoded_verse = NULL;
-	GString *str = g_string_new (NULL);
+	GString *str = g_string_new(NULL);
 
-	mod_str = gtk_entry_get_text (GTK_ENTRY (entry_module));
-	verse_str = gtk_entry_get_text (GTK_ENTRY (entry_verse));
+	mod_str = gtk_entry_get_text(GTK_ENTRY(entry_module));
+	verse_str = gtk_entry_get_text(GTK_ENTRY(entry_verse));
 
 	if (mod_str)
 		encoded_mod = main_url_encode(mod_str);
@@ -129,52 +128,58 @@ void button_test_clicked_cb(GObject *object, gpointer user_data)
 
 	g_string_printf(str,
 			"passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s",
-			(encoded_mod   ? encoded_mod   : ""),
+			(encoded_mod ? encoded_mod : ""),
 			(encoded_verse ? encoded_verse : ""));
-	XI_message (("link: %s", str->str));
+	XI_message(("link: %s", str->str));
 	main_url_handler(str->str, TRUE);
-	g_string_free (str, TRUE);
-	g_free((gchar*)encoded_mod);
-	g_free((gchar*)encoded_verse);
+	g_string_free(str, TRUE);
+	g_free((gchar *) encoded_mod);
+	g_free((gchar *) encoded_verse);
 }
 
 G_MODULE_EXPORT
-void button_cancel_clicked_cb(GObject *object, gpointer user_data)
+    void button_cancel_clicked_cb(GObject * object, gpointer user_data)
 {
-        gtk_widget_destroy(GTK_WIDGET(window));
+	gtk_widget_destroy(GTK_WIDGET(window));
 }
 
-void
-editor_link_dialog (EDITOR *e)
+void editor_link_dialog(EDITOR * e)
 {
-        GtkBuilder *builder;
+	GtkBuilder *builder;
 	gchar *gbuilder_file;
 
 #ifndef USE_WEBKIT_EDITOR
 	GtkHTML *html = gtkhtml_editor_get_html(GTKHTML_EDITOR(e->window));
-	if (html->pointer_url)  /* are we in a link */
+	if (html->pointer_url)	/* are we in a link */
 		return;		/* if so don't do anything */
 #endif
 
-	gbuilder_file = gui_general_user_file("editor_link_dialog.xml", FALSE);
+	gbuilder_file =
+	    gui_general_user_file("editor_link_dialog.xml", FALSE);
 
 #ifdef HAVE_GTK_310
-        builder = gtk_builder_new_from_file(gbuilder_file);
+	builder = gtk_builder_new_from_file(gbuilder_file);
 #else
-        builder = gtk_builder_new();
-        gtk_builder_add_from_file(builder, gbuilder_file, NULL);
+	builder = gtk_builder_new();
+	gtk_builder_add_from_file(builder, gbuilder_file, NULL);
 #endif
 
-        window = GTK_WIDGET (gtk_builder_get_object (builder, "dialog1"));
-	set_window_icon (GTK_WINDOW(window));
-        gtk_builder_connect_signals (builder,(EDITOR*) e);
+	window = GTK_WIDGET(gtk_builder_get_object(builder, "dialog1"));
+	set_window_icon(GTK_WINDOW(window));
+	gtk_builder_connect_signals(builder, (EDITOR *) e);
 
-	entry_module       = GTK_WIDGET (gtk_builder_get_object (builder, "entry_module"));
-	entry_verse        = GTK_WIDGET (gtk_builder_get_object (builder, "entry_verse"));
-	entry_text         = GTK_WIDGET (gtk_builder_get_object (builder, "entry_text"));
-	linkage_verse_list = GTK_WIDGET (gtk_builder_get_object (builder, "radio_verse_list"));
+	entry_module =
+	    GTK_WIDGET(gtk_builder_get_object(builder, "entry_module"));
+	entry_verse =
+	    GTK_WIDGET(gtk_builder_get_object(builder, "entry_verse"));
+	entry_text =
+	    GTK_WIDGET(gtk_builder_get_object(builder, "entry_text"));
+	linkage_verse_list =
+	    GTK_WIDGET(gtk_builder_get_object
+		       (builder, "radio_verse_list"));
 
-        g_object_unref (G_OBJECT (builder));
-        gtk_widget_show (window);
+	g_object_unref(G_OBJECT(builder));
+	gtk_widget_show(window);
 }
+
 /************* end link dialog ****************/

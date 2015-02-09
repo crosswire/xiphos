@@ -41,8 +41,8 @@ static GtkWidget *entry5 = NULL;
 static GtkWidget *entry6 = NULL;
 static gint retval = 3;
 
-GS_DIALOG * standard_info;
-GtkWidget * dialog_request;
+GS_DIALOG *standard_info;
+GtkWidget *dialog_request;
 
 /******************************************************************************
  * Name
@@ -119,7 +119,8 @@ static void get_entry_text(GS_DIALOG * info)
  *   void
  */
 
-static void on_dialog_response(GtkDialog * dialog, gint response_id, GS_DIALOG * info)
+static void on_dialog_response(GtkDialog * dialog, gint response_id,
+			       GS_DIALOG * info)
 {
 	switch (response_id) {
 	case GTK_RESPONSE_OK:
@@ -158,7 +159,8 @@ static void on_dialog_response(GtkDialog * dialog, gint response_id, GS_DIALOG *
 
 static void on_dialog_enter(void)
 {
-	on_dialog_response(GTK_DIALOG(dialog_request), GTK_RESPONSE_OK, standard_info);
+	on_dialog_response(GTK_DIALOG(dialog_request), GTK_RESPONSE_OK,
+			   standard_info);
 	gtk_widget_destroy(GTK_WIDGET(dialog_request));
 }
 
@@ -179,12 +181,13 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	dialog_alert = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_alert), 5);
 	gtk_window_set_title(GTK_WINDOW(dialog_alert), " ");
-    
+
 #ifndef USE_GTK_3
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_alert), FALSE);
 #endif
 
-	dialog_vbox2 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_alert));
+	dialog_vbox2 =
+	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_alert));
 	gtk_widget_show(dialog_vbox2);
 
 	UI_HBOX(hbox3, FALSE, 12);
@@ -195,15 +198,13 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	if (info->stock_icon) {
 		image5 =
 #ifdef HAVE_GTK_310
-			gtk_image_new_from_icon_name
-#else		    
-			gtk_image_new_from_stock
-#endif	
-					(info->stock_icon,
-					     GTK_ICON_SIZE_DIALOG);	
+		    gtk_image_new_from_icon_name
+#else
+		    gtk_image_new_from_stock
+#endif
+		    (info->stock_icon, GTK_ICON_SIZE_DIALOG);
 		gtk_widget_show(image5);
-		gtk_box_pack_start(GTK_BOX(hbox3), image5, FALSE, TRUE,
-				   0);
+		gtk_box_pack_start(GTK_BOX(hbox3), image5, FALSE, TRUE, 0);
 #ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(image5), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image5), 12, 0);
@@ -226,21 +227,26 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 #endif
 
 	if (info->label2) {
-		gtk_window_set_default_size (GTK_WINDOW (dialog_alert), 380, 200);
-		scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-		gtk_widget_show (scrolledwindow);
-		gtk_box_pack_start (GTK_BOX (vbox2), scrolledwindow, TRUE, TRUE, 0);
-		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow),
-				GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+		gtk_window_set_default_size(GTK_WINDOW(dialog_alert), 380,
+					    200);
+		scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+		gtk_widget_show(scrolledwindow);
+		gtk_box_pack_start(GTK_BOX(vbox2), scrolledwindow, TRUE,
+				   TRUE, 0);
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+					       (scrolledwindow),
+					       GTK_POLICY_AUTOMATIC,
+					       GTK_POLICY_AUTOMATIC);
 
-		viewport = gtk_viewport_new (NULL, NULL);
-		gtk_widget_show (viewport);
-		gtk_container_add (GTK_CONTAINER (scrolledwindow), viewport);
+		viewport = gtk_viewport_new(NULL, NULL);
+		gtk_widget_show(viewport);
+		gtk_container_add(GTK_CONTAINER(scrolledwindow), viewport);
 
 		label10 = gtk_label_new(info->label2);
 		gtk_widget_show(label10);
-		gtk_container_add (GTK_CONTAINER (viewport), label10);
-		gtk_label_set_justify(GTK_LABEL(label10), GTK_JUSTIFY_LEFT);
+		gtk_container_add(GTK_CONTAINER(viewport), label10);
+		gtk_label_set_justify(GTK_LABEL(label10),
+				      GTK_JUSTIFY_LEFT);
 #ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
 #endif
@@ -248,9 +254,9 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 
 	dialog_action_area2 =
 #ifdef HAVE_GTK_312
-		gtk_dialog_get_content_area(GTK_DIALOG(dialog_alert));
+	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_alert));
 #else
-		gtk_dialog_get_action_area(GTK_DIALOG(dialog_alert));
+	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_alert));
 #endif
 	gtk_widget_show(dialog_action_area2);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area2),
@@ -270,9 +276,8 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 				      "_No", GTK_RESPONSE_NO);
 	if (info->cancel)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      "_Cancel",
-				      GTK_RESPONSE_CANCEL);
-#else	
+				      "_Cancel", GTK_RESPONSE_CANCEL);
+#else
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_OK, GTK_RESPONSE_OK);
@@ -281,8 +286,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 				      GTK_STOCK_YES, GTK_RESPONSE_YES);
 	if (info->save)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-                                             GTK_STOCK_SAVE,
-                                             GTK_RESPONSE_YES);
+				      GTK_STOCK_SAVE, GTK_RESPONSE_YES);
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_NO, GTK_RESPONSE_NO);
@@ -290,11 +294,11 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_CANCEL,
 				      GTK_RESPONSE_CANCEL);
-#endif	
+#endif
 	if (info->no_save)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-                                             _("Close without Saving"),
-                                             GTK_RESPONSE_NO);
+				      _("Close without Saving"),
+				      GTK_RESPONSE_NO);
 
 	g_signal_connect((gpointer) dialog_alert, "response",
 			 G_CALLBACK(on_dialog_response), info);
@@ -348,7 +352,8 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 #ifndef USE_GTK_3
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_request), FALSE);
 #endif
-	dialog_vbox3 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_request));
+	dialog_vbox3 =
+	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_request));
 	gtk_widget_show(dialog_vbox3);
 
 	UI_HBOX(hbox4, FALSE, 12);
@@ -358,9 +363,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 
 	if (info->stock_icon) {
 #ifdef HAVE_GTK_310
-		image6 = 
-		     gtk_image_new_from_icon_name (info->stock_icon,
-                                            GTK_ICON_SIZE_DIALOG);
+		image6 =
+		    gtk_image_new_from_icon_name(info->stock_icon,
+						 GTK_ICON_SIZE_DIALOG);
 
 #else
 		image6 =
@@ -368,8 +373,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 					     GTK_ICON_SIZE_DIALOG);
 #endif
 		gtk_widget_show(image6);
-		gtk_box_pack_start(GTK_BOX(hbox4), image6, FALSE, TRUE,
-				   0);
+		gtk_box_pack_start(GTK_BOX(hbox4), image6, FALSE, TRUE, 0);
 #ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(image6), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image6), 12, 0);
@@ -392,8 +396,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	if (info->label1) {
 		label9 = gtk_label_new(info->label1);
 		gtk_widget_show(label9);
-		gtk_label_set_justify(GTK_LABEL(label9),
-				      GTK_JUSTIFY_LEFT);
+		gtk_label_set_justify(GTK_LABEL(label9), GTK_JUSTIFY_LEFT);
 #ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(label9), 0, 0.5);
 #endif
@@ -401,8 +404,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		entry1 = gtk_entry_new();
 		gtk_widget_show(entry1);
 		if (info->text1)
-			gtk_entry_set_text(GTK_ENTRY(entry1),
-					   info->text1);
+			gtk_entry_set_text(GTK_ENTRY(entry1), info->text1);
 		g_signal_connect((gpointer) entry1, "activate",
 				 G_CALLBACK(on_dialog_enter), info);
 	}
@@ -419,8 +421,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		entry2 = gtk_entry_new();
 		gtk_widget_show(entry2);
 		if (info->text2)
-			gtk_entry_set_text(GTK_ENTRY(entry2),
-					   info->text2);
+			gtk_entry_set_text(GTK_ENTRY(entry2), info->text2);
 		g_signal_connect((gpointer) entry2, "activate",
 				 G_CALLBACK(on_dialog_enter), info);
 	}
@@ -437,8 +438,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		entry3 = gtk_entry_new();
 		gtk_widget_show(entry3);
 		if (info->text3)
-			gtk_entry_set_text(GTK_ENTRY(entry3),
-					   info->text3);
+			gtk_entry_set_text(GTK_ENTRY(entry3), info->text3);
 		g_signal_connect((gpointer) entry3, "activate",
 				 G_CALLBACK(on_dialog_enter), info);
 	}
@@ -454,10 +454,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 
 		entry4 = gtk_entry_new();
 		gtk_widget_show(entry4);
-		
+
 		if (info->text4)
-			gtk_entry_set_text(GTK_ENTRY(entry4),
-					   info->text4);
+			gtk_entry_set_text(GTK_ENTRY(entry4), info->text4);
 		g_signal_connect((gpointer) entry4, "activate",
 				 G_CALLBACK(on_dialog_enter), info);
 	}
@@ -473,10 +472,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 
 		entry5 = gtk_entry_new();
 		gtk_widget_show(entry5);
-		
+
 		if (info->text5)
-			gtk_entry_set_text(GTK_ENTRY(entry5),
-					   info->text5);
+			gtk_entry_set_text(GTK_ENTRY(entry5), info->text5);
 		g_signal_connect((gpointer) entry5, "activate",
 				 G_CALLBACK(on_dialog_enter), info);
 	}
@@ -492,73 +490,71 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 
 		entry6 = gtk_entry_new();
 		gtk_widget_show(entry6);
-		
+
 		if (info->text6)
-			gtk_entry_set_text(GTK_ENTRY(entry6),
-					   info->text6);
+			gtk_entry_set_text(GTK_ENTRY(entry6), info->text6);
 		g_signal_connect((gpointer) entry6, "activate",
 				 G_CALLBACK(on_dialog_enter), info);
 	}
-	
 #ifdef HAVE_GTK_34
 	table2 = gtk_grid_new();
 	gtk_widget_show(table2);
 	gtk_box_pack_start(GTK_BOX(vbox3), table2, TRUE, TRUE, 0);
-	gtk_grid_set_row_spacing (GTK_GRID(table2), 3);
-	gtk_grid_set_column_spacing (GTK_GRID(table2), 3);
+	gtk_grid_set_row_spacing(GTK_GRID(table2), 3);
+	gtk_grid_set_column_spacing(GTK_GRID(table2), 3);
 
 	if (info->label1) {
 		gtk_grid_attach(GTK_GRID(table2), label9, 0, 0, 1, 1);
 
-		gtk_grid_attach(GTK_GRID(table2), entry1, 1, 0, 1, 1); 
+		gtk_grid_attach(GTK_GRID(table2), entry1, 1, 0, 1, 1);
 		++nextrow;
 
 	}
 
 	if (info->label2) {
-		gtk_grid_insert_row (GTK_GRID(table2),nextrow);
-		
+		gtk_grid_insert_row(GTK_GRID(table2), nextrow);
+
 		gtk_grid_attach(GTK_GRID(table2), label10, 0, 1, 1, 1);
-		
+
 		gtk_grid_attach(GTK_GRID(table2), entry2, 1, 1, 1, 1);
 		++nextrow;
 	}
 
 	if (info->label3) {
-		gtk_grid_insert_row (GTK_GRID(table2),nextrow);
-		
+		gtk_grid_insert_row(GTK_GRID(table2), nextrow);
+
 		gtk_grid_attach(GTK_GRID(table2), label11, 0, 2, 1, 1);
-		
+
 		gtk_grid_attach(GTK_GRID(table2), entry3, 1, 2, 1, 1);
 		++nextrow;
 	}
 
 	if (info->label4) {
-		gtk_grid_insert_row (GTK_GRID(table2),nextrow);
-		
+		gtk_grid_insert_row(GTK_GRID(table2), nextrow);
+
 		gtk_grid_attach(GTK_GRID(table2), label12, 0, 3, 1, 1);
-		
+
 		gtk_grid_attach(GTK_GRID(table2), entry4, 1, 3, 1, 1);
 		++nextrow;
 	}
 
 	if (info->label5) {
-		gtk_grid_insert_row (GTK_GRID(table2),nextrow);
-		
+		gtk_grid_insert_row(GTK_GRID(table2), nextrow);
+
 		gtk_grid_attach(GTK_GRID(table2), label13, 0, 4, 1, 1);
-		
+
 		gtk_grid_attach(GTK_GRID(table2), entry5, 1, 4, 1, 1);
 		++nextrow;
 	}
 
 	if (info->label6) {
-		gtk_grid_insert_row (GTK_GRID(table2),nextrow);
-		
+		gtk_grid_insert_row(GTK_GRID(table2), nextrow);
+
 		gtk_grid_attach(GTK_GRID(table2), label14, 0, 5, 1, 1);
-		
+
 		gtk_grid_attach(GTK_GRID(table2), entry6, 1, 5, 1, 1);
 	}
-#else 
+#else
 	table2 = gtk_table_new(3, 2, FALSE);
 	gtk_widget_show(table2);
 	gtk_box_pack_start(GTK_BOX(vbox3), table2, TRUE, TRUE, 0);
@@ -580,7 +576,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_table_attach(GTK_TABLE(table2), label10, 0, 1, 1, 2,
 				 (GtkAttachOptions) (GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
-		
+
 		gtk_table_attach(GTK_TABLE(table2), entry2, 1, 2, 1, 2,
 				 (GtkAttachOptions) (GTK_EXPAND |
 						     GTK_FILL),
@@ -591,7 +587,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_table_attach(GTK_TABLE(table2), label11, 0, 1, 2, 3,
 				 (GtkAttachOptions) (GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
-		
+
 		gtk_table_attach(GTK_TABLE(table2), entry3, 1, 2, 2, 3,
 				 (GtkAttachOptions) (GTK_EXPAND |
 						     GTK_FILL),
@@ -602,7 +598,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_table_attach(GTK_TABLE(table2), label12, 0, 1, 3, 4,
 				 (GtkAttachOptions) (GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
-		
+
 		gtk_table_attach(GTK_TABLE(table2), entry4, 1, 2, 3, 4,
 				 (GtkAttachOptions) (GTK_EXPAND |
 						     GTK_FILL),
@@ -610,11 +606,11 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	}
 
 	if (info->label5) {
-		
+
 		gtk_table_attach(GTK_TABLE(table2), label13, 0, 1, 4, 5,
 				 (GtkAttachOptions) (GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
-		
+
 		gtk_table_attach(GTK_TABLE(table2), entry5, 1, 2, 4, 5,
 				 (GtkAttachOptions) (GTK_EXPAND |
 						     GTK_FILL),
@@ -622,23 +618,22 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	}
 
 	if (info->label6) {
-		
+
 		gtk_table_attach(GTK_TABLE(table2), label14, 0, 1, 5, 6,
 				 (GtkAttachOptions) (GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
-		
+
 		gtk_table_attach(GTK_TABLE(table2), entry6, 1, 2, 5, 6,
 				 (GtkAttachOptions) (GTK_EXPAND |
 						     GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
 	}
-	
 #endif
 	dialog_action_area3 =
 #ifdef HAVE_GTK_312
-        gtk_dialog_get_content_area(GTK_DIALOG(dialog_request));
+	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_request));
 #else
-		gtk_dialog_get_action_area(GTK_DIALOG(dialog_request));
+	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_request));
 #endif
 	gtk_widget_show(dialog_action_area3);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area3),
@@ -652,12 +647,11 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 				      "_Yes", GTK_RESPONSE_YES);
 	if (info->cancel)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
-				      "_Cancel",
-				      GTK_RESPONSE_CANCEL);
+				      "_Cancel", GTK_RESPONSE_CANCEL);
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
 				      "_OK", GTK_RESPONSE_OK);
-#else	
+#else
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
 				      GTK_STOCK_NO, GTK_RESPONSE_NO);
@@ -737,15 +731,15 @@ void gui_generic_warning_modal(const char *message)
 	dialog = gui_new_dialog();
 	dialog->stock_icon =
 #ifdef HAVE_GTK_310
-		"dialog-information";
+	    "dialog-information";
 #else
-		GTK_STOCK_DIALOG_INFO;
+	    GTK_STOCK_DIALOG_INFO;
 #endif
 
 	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>",
 				      _("Xiphos:"));
 	dialog->label_top = dialog_text;
-	dialog->label2 = (char *)message;
+	dialog->label2 = (char *) message;
 	dialog->ok = TRUE;
 
 	gui_alert_dialog(dialog);
@@ -775,16 +769,15 @@ void gui_generic_warning(const char *message)
 {
 	GtkWidget *dialog;
 
-	dialog = gtk_message_dialog_new_with_markup
-	    (NULL,	/* no need for a parent window */
-	     GTK_DIALOG_DESTROY_WITH_PARENT,
-	     GTK_MESSAGE_INFO,
-	     GTK_BUTTONS_OK,
-	     "<b><big>Xiphos</big></b>\n\n%s", message);
+	dialog = gtk_message_dialog_new_with_markup(NULL,	/* no need for a parent window */
+						    GTK_DIALOG_DESTROY_WITH_PARENT,
+						    GTK_MESSAGE_INFO,
+						    GTK_BUTTONS_OK,
+						    "<b><big>Xiphos</big></b>\n\n%s",
+						    message);
 
-	g_signal_connect_swapped (dialog, "response",
-				  G_CALLBACK (gtk_widget_destroy),
-				  dialog);
+	g_signal_connect_swapped(dialog, "response",
+				 G_CALLBACK(gtk_widget_destroy), dialog);
 	gtk_widget_show(dialog);
 }
 
@@ -878,17 +871,19 @@ gint gui_close_confirmation_dialog(GS_DIALOG * info)
 
 	if (!is_running) {
 		dialog = create_dialog_alert(info);
-		gtk_dialog_add_button (GTK_DIALOG (dialog),
-				       _("Close _without Saving"),
-				       GTK_RESPONSE_NO);
-#ifdef HAVE_GTK_310	
-		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-					"_Cancel", GTK_RESPONSE_CANCEL,
-					"document-save", GTK_RESPONSE_YES, NULL);
-#else	
-		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					GTK_STOCK_SAVE, GTK_RESPONSE_YES, NULL);
+		gtk_dialog_add_button(GTK_DIALOG(dialog),
+				      _("Close _without Saving"),
+				      GTK_RESPONSE_NO);
+#ifdef HAVE_GTK_310
+		gtk_dialog_add_buttons(GTK_DIALOG(dialog),
+				       "_Cancel", GTK_RESPONSE_CANCEL,
+				       "document-save", GTK_RESPONSE_YES,
+				       NULL);
+#else
+		gtk_dialog_add_buttons(GTK_DIALOG(dialog),
+				       GTK_STOCK_CANCEL,
+				       GTK_RESPONSE_CANCEL, GTK_STOCK_SAVE,
+				       GTK_RESPONSE_YES, NULL);
 #endif
 		retval = 4;
 		is_running = TRUE;
@@ -922,11 +917,11 @@ gint gui_yes_no_dialog(char *question, char *icon)
 	gint result;
 
 	yes_no = gui_new_dialog();
-#ifdef HAVE_GTK_310	
+#ifdef HAVE_GTK_310
 	yes_no->stock_icon = (icon ? icon : "dialog-question");
-#else	
+#else
 	yes_no->stock_icon = (icon ? icon : GTK_STOCK_DIALOG_QUESTION);
-#endif	
+#endif
 	yes_no->label_top = question;
 	yes_no->yes = TRUE;
 	yes_no->no = TRUE;

@@ -20,19 +20,19 @@
  */
 
 
-      
+
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #ifdef USE_WEBKIT_EDITOR
-    
+
 /* X keyboard #definitions, to handle shortcuts */
 /* we must define the categories of #definitions we need. */
 #define XK_MISCELLANY
 #define XK_LATIN1
 #include <X11/keysymdef.h>
- 
+
 #include <gtk/gtk.h>
 #include <webkit/webkit.h>
 
@@ -40,11 +40,11 @@
 #include "editor/editor.h"
 
 #include "main/sword.h"
-#include "main/settings.h" 
+#include "main/settings.h"
 
 #include "gui/utilities.h"
 
-#define html_start "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"><html><head>" 
+#define html_start "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"><html><head>"
 
 BUTTONS_STATE buttons_state;
 
@@ -74,72 +74,82 @@ glong mouse_y;
  *   gint
  */
 
-gint editor_insert_new_outline_level (gint level, EDITOR * e)
+gint editor_insert_new_outline_level(gint level, EDITOR * e)
 {
-	WebKitDOMDocument * doc;
-	WebKitDOMElement * element_anchor = NULL;
-	WebKitDOMElement * element = NULL;
-	WebKitDOMElement * parent_ol_element = NULL;
-	WebKitDOMDOMWindow* window;
-	WebKitDOMDOMSelection* selection = NULL;
+	WebKitDOMDocument *doc;
+	WebKitDOMElement *element_anchor = NULL;
+	WebKitDOMElement *element = NULL;
+	WebKitDOMElement *parent_ol_element = NULL;
+	WebKitDOMDOMWindow *window;
+	WebKitDOMDOMSelection *selection = NULL;
 	GError *error = NULL;
-	gchar * name = NULL;
-	gchar * class = NULL;
-	gchar * level_str = NULL;
+	gchar *name = NULL;
+	gchar *class = NULL;
+	gchar *level_str = NULL;
 
-	XI_message(("\n%s\n","editor_insert_new_outline_level"));
-	
-	doc = webkit_web_view_get_dom_document ((WebKitWebView*) e->html_widget);
-	
-	if(!doc)
+	XI_message(("\n%s\n", "editor_insert_new_outline_level"));
+
+	doc =
+	    webkit_web_view_get_dom_document((WebKitWebView *) e->
+					     html_widget);
+
+	if (!doc)
 		return 0;
-	
+
 	window = webkit_dom_document_get_default_view(doc);
 	selection = webkit_dom_dom_window_get_selection(window);
-	if(selection == NULL) {
-		XI_message(("\n%s\n","failed to get selection"));
+	if (selection == NULL) {
+		XI_message(("\n%s\n", "failed to get selection"));
 		return 0;
 	}
-	
-	element_anchor = (WebKitDOMElement*)webkit_dom_dom_selection_get_anchor_node(selection);
-	if(element_anchor == NULL) {
-		XI_message(("\n%s\n","failed to get anchor"));
+
+	element_anchor =
+	    (WebKitDOMElement *)
+	    webkit_dom_dom_selection_get_anchor_node(selection);
+	if (element_anchor == NULL) {
+		XI_message(("\n%s\n", "failed to get anchor"));
 		return 0;
 	}
-	
+
 	name = webkit_dom_element_get_tag_name(element_anchor);
-	if (!g_strcmp0 ("LI",name) || !g_strcmp0 ("li",name)) {
-		XI_message(("current element: %s",name));
-		element = webkit_dom_node_get_parent_element((WebKitDOMNode*)element_anchor);
-	} else return 1;
-	
-	parent_ol_element = webkit_dom_node_get_parent_element((WebKitDOMNode*)element);
+	if (!g_strcmp0("LI", name) || !g_strcmp0("li", name)) {
+		XI_message(("current element: %s", name));
+		element =
+		    webkit_dom_node_get_parent_element((WebKitDOMNode *)
+						       element_anchor);
+	} else
+		return 1;
+
+	parent_ol_element =
+	    webkit_dom_node_get_parent_element((WebKitDOMNode *) element);
 	name = webkit_dom_element_get_tag_name(parent_ol_element);
-	class = webkit_dom_element_get_attribute(parent_ol_element, "class");
-	XI_message(("\nparent_ol_element: %s\nclass: %s\n",name,class));
-	
+	class =
+	    webkit_dom_element_get_attribute(parent_ol_element, "class");
+	XI_message(("\nparent_ol_element: %s\nclass: %s\n", name, class));
+
 	if (class) {
-		if (!g_strcmp0 ("L1",class))
+		if (!g_strcmp0("L1", class))
 			level_str = g_strdup("L2");
-		if (!g_strcmp0 ("L2",class))
+		if (!g_strcmp0("L2", class))
 			level_str = g_strdup("L3");
-		if (!g_strcmp0 ("L3",class))
+		if (!g_strcmp0("L3", class))
 			level_str = g_strdup("L4");
-		if (!g_strcmp0 ("L4",class))
+		if (!g_strcmp0("L4", class))
 			level_str = g_strdup("L4");
-		if(!level_str) {
+		if (!level_str) {
 			return 0;
 		}
 	}
-	
-	webkit_dom_element_set_attribute(element, "class", level_str, &error);
-	if (error)
-	{
-      	fprintf(stderr, "Failed to create new attribute: %s\n", error->message);
-      	g_error_free(error);
-      	error = NULL;
+
+	webkit_dom_element_set_attribute(element, "class", level_str,
+					 &error);
+	if (error) {
+		fprintf(stderr, "Failed to create new attribute: %s\n",
+			error->message);
+		g_error_free(error);
+		error = NULL;
 		return 0;
-	}	
+	}
 
 	return 1;
 }
@@ -160,28 +170,32 @@ gint editor_insert_new_outline_level (gint level, EDITOR * e)
  *   void
  */
 
-void editor_get_document_content (GString * data, EDITOR * e)
+void editor_get_document_content(GString * data, EDITOR * e)
 {
-	WebKitDOMHTMLElement* html;
-	WebKitDOMHTMLHeadElement* header;
-	WebKitDOMDocument* dom_document = NULL;
-	gchar* body = NULL;
-	gchar* head = NULL;
+	WebKitDOMHTMLElement *html;
+	WebKitDOMHTMLHeadElement *header;
+	WebKitDOMDocument *dom_document = NULL;
+	gchar *body = NULL;
+	gchar *head = NULL;
 
-	dom_document = webkit_web_view_get_dom_document ((WebKitWebView*) e->html_widget);
-	if(!dom_document)
+	dom_document =
+	    webkit_web_view_get_dom_document((WebKitWebView *) e->
+					     html_widget);
+	if (!dom_document)
 		return;
 
 	/* get document <head> info */
 	header = webkit_dom_document_get_head(dom_document);
-	head = webkit_dom_html_element_get_inner_html((WebKitDOMHTMLElement*)header);
+	head =
+	    webkit_dom_html_element_get_inner_html((WebKitDOMHTMLElement *)
+						   header);
 
 	/* get document <body> info */
 	html = webkit_dom_document_get_body(dom_document);
 	body = webkit_dom_html_element_get_inner_html(html);
 
-	g_string_printf (data, "%s%s</head><body>%s</body>\n</html>",
-			 html_start, head, body); 
+	g_string_printf(data, "%s%s</head><body>%s</body>\n</html>",
+			html_start, head, body);
 }
 
 
@@ -201,35 +215,41 @@ void editor_get_document_content (GString * data, EDITOR * e)
  *   gchar *
  */
 
-gchar * editor_get_selected_text (EDITOR * e)
-	{
-	WebKitDOMDocument * dom_document;
-	WebKitDOMDOMWindow* window = NULL;
-	WebKitDOMDOMSelection* selection = NULL;
-	WebKitDOMRange* range = NULL;	
+gchar *editor_get_selected_text(EDITOR * e)
+{
+	WebKitDOMDocument *dom_document;
+	WebKitDOMDOMWindow *window = NULL;
+	WebKitDOMDOMSelection *selection = NULL;
+	WebKitDOMRange *range = NULL;
 	gchar *text = NULL;
 	GError *error = NULL;
 
-	dom_document = webkit_web_view_get_dom_document ((WebKitWebView*) e->html_widget);
-	if(!dom_document)
+	dom_document =
+	    webkit_web_view_get_dom_document((WebKitWebView *) e->
+					     html_widget);
+	if (!dom_document)
 		return NULL;
 	window = webkit_dom_document_get_default_view(dom_document);
 	selection = webkit_dom_dom_window_get_selection(window);
-	if(selection) {
-		range = webkit_dom_dom_selection_get_range_at(selection, 0, &error);
+	if (selection) {
+		range =
+		    webkit_dom_dom_selection_get_range_at(selection, 0,
+							  &error);
 		if (error) {
-		      	fprintf(stderr, "Failed to get range: %s\n", error->message);
-		      	g_error_free(error);
-		      	error = NULL;
+			fprintf(stderr, "Failed to get range: %s\n",
+				error->message);
+			g_error_free(error);
+			error = NULL;
 			//return;
-		}	
+		}
 		text = webkit_dom_range_to_string(range, &error);
 		if (error) {
-		      	fprintf(stderr, "Failed range text: %s\n", error->message);
-		      	g_error_free(error);
-		      	error = NULL;
+			fprintf(stderr, "Failed range text: %s\n",
+				error->message);
+			g_error_free(error);
+			error = NULL;
 			return NULL;
-		}	
+		}
 	}
 	return g_strdup(text);
 }
@@ -250,13 +270,10 @@ gchar * editor_get_selected_text (EDITOR * e)
  *   void
  */
 
-void editor_find_string (gchar * needle, EDITOR * e)
+void editor_find_string(gchar * needle, EDITOR * e)
 {
-	webkit_web_view_search_text ((WebKitWebView*)e->html_widget,
-                                                 needle,
-                                                 FALSE,
-                                                 TRUE,
-                                                 TRUE);
+	webkit_web_view_search_text((WebKitWebView *) e->html_widget,
+				    needle, FALSE, TRUE, TRUE);
 
 }
 
@@ -277,17 +294,17 @@ void editor_find_string (gchar * needle, EDITOR * e)
  *   void
  */
 
-void editor_replace_string (gchar * old_string, gchar * new_string, EDITOR * e)
+void editor_replace_string(gchar * old_string, gchar * new_string,
+			   EDITOR * e)
 {
-	WebKitWebFrame * frame = NULL;
+	WebKitWebFrame *frame = NULL;
 
-	frame = webkit_web_view_get_main_frame ((WebKitWebView*) e->html_widget);
-	webkit_web_view_search_text ((WebKitWebView*) e->html_widget,
-                                                 old_string,
-                                                 FALSE,
-                                                 TRUE,
-                                                 FALSE);
-	webkit_web_frame_replace_selection (frame, new_string);
+	frame =
+	    webkit_web_view_get_main_frame((WebKitWebView *) e->
+					   html_widget);
+	webkit_web_view_search_text((WebKitWebView *) e->html_widget,
+				    old_string, FALSE, TRUE, FALSE);
+	webkit_web_frame_replace_selection(frame, new_string);
 
 }
 
@@ -312,9 +329,10 @@ void editor_replace_string (gchar * old_string, gchar * new_string, EDITOR * e)
 void editor_execute_script(gchar * script, EDITOR * e)
 {
 	if (script) {
-		webkit_web_view_execute_script (WEBKIT_WEB_VIEW (e->html_widget), script);
-		XI_message(("script: %s",script));
-		g_free (script);
+		webkit_web_view_execute_script(WEBKIT_WEB_VIEW
+					       (e->html_widget), script);
+		XI_message(("script: %s", script));
+		g_free(script);
 	}
 }
 
@@ -337,10 +355,12 @@ void editor_execute_script(gchar * script, EDITOR * e)
 
 void editor_insert_html(const gchar * html, EDITOR * e)
 {
-	gchar * str = NULL;
-	
-	str = g_strdup_printf("document.execCommand('insertHTML', null, \'%s\');", html);  
-	XI_message(("script: %s",str));
+	gchar *str = NULL;
+
+	str =
+	    g_strdup_printf
+	    ("document.execCommand('insertHTML', null, \'%s\');", html);
+	XI_message(("script: %s", str));
 	editor_execute_script(str, e);
 }
 
@@ -352,29 +372,38 @@ void editor_open_recent (const gchar * uri, EDITOR * e)
 }
 */
 
-gboolean editor_cut( EDITOR * e )
+gboolean editor_cut(EDITOR * e)
 {
-	if (webkit_web_view_can_cut_clipboard (WEBKIT_WEB_VIEW (e->html_widget))) {
-		webkit_web_view_cut_clipboard (WEBKIT_WEB_VIEW (e->html_widget));
+	if (webkit_web_view_can_cut_clipboard
+	    (WEBKIT_WEB_VIEW(e->html_widget))) {
+		webkit_web_view_cut_clipboard(WEBKIT_WEB_VIEW
+					      (e->html_widget));
 		return 1;
-	} else return 0;
+	} else
+		return 0;
 }
 
-gboolean editor_copy( EDITOR * e )
+gboolean editor_copy(EDITOR * e)
 {
-	if (webkit_web_view_can_copy_clipboard (WEBKIT_WEB_VIEW (e->html_widget))) {
-		webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (e->html_widget));
+	if (webkit_web_view_can_copy_clipboard
+	    (WEBKIT_WEB_VIEW(e->html_widget))) {
+		webkit_web_view_copy_clipboard(WEBKIT_WEB_VIEW
+					       (e->html_widget));
 		return 1;
-	} else return 0;
+	} else
+		return 0;
 }
 
-gboolean editor_paste( EDITOR * e )
+gboolean editor_paste(EDITOR * e)
 {
-	if (webkit_web_view_can_paste_clipboard (WEBKIT_WEB_VIEW (e->html_widget))) {
-		webkit_web_view_paste_clipboard (WEBKIT_WEB_VIEW (e->html_widget));
+	if (webkit_web_view_can_paste_clipboard
+	    (WEBKIT_WEB_VIEW(e->html_widget))) {
+		webkit_web_view_paste_clipboard(WEBKIT_WEB_VIEW
+						(e->html_widget));
 		return 1;
-	} else return 0;
-} 
+	} else
+		return 0;
+}
 
 /*
 GtkWidget * entry_module;
@@ -497,9 +526,9 @@ gboolean editor_insert_link(void)
  *   void
  */
 static
-void user_changed_contents_cb (WebKitWebView * web_view, EDITOR * e)
-{	
-	XI_message(("%s","user_changed_contents_cb"));
+void user_changed_contents_cb(WebKitWebView * web_view, EDITOR * e)
+{
+	XI_message(("%s", "user_changed_contents_cb"));
 	e->is_changed = TRUE;
 }
 
@@ -523,22 +552,22 @@ void user_changed_contents_cb (WebKitWebView * web_view, EDITOR * e)
  *   WebKitNavigationResponse
  */
 static
-WebKitNavigationResponse on_navigation_requested (WebKitWebView * web_view,
-                                                  WebKitWebFrame * frame,
-                                                  WebKitNetworkRequest * request,
-                                       			  EDITOR * e)
+WebKitNavigationResponse on_navigation_requested(WebKitWebView * web_view,
+						 WebKitWebFrame * frame,
+						 WebKitNetworkRequest *
+						 request, EDITOR * e)
 {
-	const gchar * uri = NULL;
-	
+	const gchar *uri = NULL;
+
 	if (e->is_changed) {
 		ask_about_saving(e);
 	}
-	
-	uri = webkit_network_request_get_uri  (request);
-	XI_message(("on_navigation_requested uri: %s",uri));
-	if (g_strstr_len (uri, 6, "file:"))
+
+	uri = webkit_network_request_get_uri(request);
+	XI_message(("on_navigation_requested uri: %s", uri));
+	if (g_strstr_len(uri, 6, "file:"))
 		return FALSE;
-	 else
+	else
 		return TRUE;
 }
 
@@ -562,11 +591,9 @@ WebKitNavigationResponse on_navigation_requested (WebKitWebView * web_view,
  *   void
  */
 
-static 
-void link_handler (GtkWidget *widget, 
-			      gchar     *title,
-			      gchar     *uri,
-			      EDITOR * e)
+static
+void link_handler(GtkWidget * widget,
+		  gchar * title, gchar * uri, EDITOR * e)
 {
 	XI_message(("link_handler"));
 }
@@ -591,96 +618,83 @@ void link_handler (GtkWidget *widget,
 static
 gint _has_element(gchar * name, gchar * class, EDITOR * e)
 {
-	if(!name) return 0;
-	if(!g_strcmp0 ("BODY",name)){
+	if (!name)
+		return 0;
+	if (!g_strcmp0("BODY", name)) {
 		return 0;
 	}
-	if(!g_strcmp0 ("B",name)){
-	   buttons_state.bold = 1;
+	if (!g_strcmp0("B", name)) {
+		buttons_state.bold = 1;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("I",name)){
-	   buttons_state.italic = 1;
+	} else if (!g_strcmp0("I", name)) {
+		buttons_state.italic = 1;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("U",name)){
-	   buttons_state.underline = 1;
+	} else if (!g_strcmp0("U", name)) {
+		buttons_state.underline = 1;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("STRIKE",name)){
-	   buttons_state.strike = 1;
+	} else if (!g_strcmp0("STRIKE", name)) {
+		buttons_state.strike = 1;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("DIV",name)){
-	   buttons_state.style = 0;
+	} else if (!g_strcmp0("DIV", name)) {
+		buttons_state.style = 0;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("H1",name)){
-	   buttons_state.style = 1;
+	} else if (!g_strcmp0("H1", name)) {
+		buttons_state.style = 1;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("H2",name)){
-	   buttons_state.style = 2;
+	} else if (!g_strcmp0("H2", name)) {
+		buttons_state.style = 2;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("H3",name)){
-	   buttons_state.style = 3;
+	} else if (!g_strcmp0("H3", name)) {
+		buttons_state.style = 3;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("H4",name)){
-	   buttons_state.style = 4;
+	} else if (!g_strcmp0("H4", name)) {
+		buttons_state.style = 4;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("H5",name)){
-	   buttons_state.style = 5;
+	} else if (!g_strcmp0("H5", name)) {
+		buttons_state.style = 5;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("H6",name)){
-	   buttons_state.style = 6;
+	} else if (!g_strcmp0("H6", name)) {
+		buttons_state.style = 6;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("ADDRESS",name)){
-	   buttons_state.style = 7;
+	} else if (!g_strcmp0("ADDRESS", name)) {
+		buttons_state.style = 7;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("PRE",name)){
-	   buttons_state.style = 8;
+	} else if (!g_strcmp0("PRE", name)) {
+		buttons_state.style = 8;
 		return 1;
-	} else 
-	if(!g_strcmp0 ("UL",name)){
-	   buttons_state.style = 9;
+	} else if (!g_strcmp0("UL", name)) {
+		buttons_state.style = 9;
 		return 1;
-	} else  
-	if(!g_strcmp0 ("FONT",name)){
-	   //buttons_state.style = 9;
+	} else if (!g_strcmp0("FONT", name)) {
+		//buttons_state.style = 9;
 		return 1;
-	} 
-	if(!g_strcmp0 ("LI",name)){
+	}
+	if (!g_strcmp0("LI", name)) {
 		return 1;
-	} else
-	if(!g_strcmp0 ("OL",name)){
-	   buttons_state.style = 10;
+	} else if (!g_strcmp0("OL", name)) {
+		buttons_state.style = 10;
 		if (class) {
-			XI_message(("\nclass: %s\n",class));
-			if (!g_strcmp0 ("L1",class)) {
+			XI_message(("\nclass: %s\n", class));
+			if (!g_strcmp0("L1", class)) {
 				e->toolitems.outline_level = 1;
-	   			buttons_state.style = 10;
+				buttons_state.style = 10;
 			}
-			if (!g_strcmp0 ("L2",class)){
+			if (!g_strcmp0("L2", class)) {
 				e->toolitems.outline_level = 2;
-	   			buttons_state.style = 12;
+				buttons_state.style = 12;
 			}
-			if (!g_strcmp0 ("L3",class)) {
+			if (!g_strcmp0("L3", class)) {
 				e->toolitems.outline_level = 3;
-	   			buttons_state.style = 11;
+				buttons_state.style = 11;
 			}
-			if (!g_strcmp0 ("L4",class)) {
+			if (!g_strcmp0("L4", class)) {
 				e->toolitems.outline_level = 4;
-	   			buttons_state.style = 12;
+				buttons_state.style = 12;
 			}
 		}
 		return 0;
-	} else return 0; 
+	} else
+		return 0;
 	return 1;
 }
 
@@ -704,22 +718,23 @@ gint _has_element(gchar * name, gchar * class, EDITOR * e)
  */
 
 static
-gboolean key_handler (GtkWidget *widget,
-                      GdkEventKey  *event,
-                      EDITOR * e)
-{			  
+gboolean key_handler(GtkWidget * widget, GdkEventKey * event, EDITOR * e)
+{
 	/* these are the mods we actually use for global keys, we always only check for these set */
-	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
+	guint state =
+	    event->
+	    state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK |
+		     GDK_MOD4_MASK);
 
 	switch (event->keyval) {
-	case XK_s: // Ctrl-L  verse entry
+	case XK_s:		// Ctrl-L  verse entry
 		if (state == GDK_CONTROL_MASK)
-			action_save_activate_cb (e->html_widget, e);
+			action_save_activate_cb(e->html_widget, e);
 		break;
 
 	}
-	
-	return 0;	
+
+	return 0;
 }
 
 
@@ -741,15 +756,17 @@ gboolean key_handler (GtkWidget *widget,
  */
 
 static
-void  menu_spell_item_activated (GtkWidget *menuitem, EDITOR * e)
+void menu_spell_item_activated(GtkWidget * menuitem, EDITOR * e)
 {
-	WebKitWebFrame * frame;
+	WebKitWebFrame *frame;
 	const gchar *label;
 
-	label = gtk_menu_item_get_label (GTK_MENU_ITEM(menuitem));
-	frame = webkit_web_view_get_main_frame ((WebKitWebView*) e->html_widget);
-	
-	webkit_web_frame_replace_selection (frame, label);
+	label = gtk_menu_item_get_label(GTK_MENU_ITEM(menuitem));
+	frame =
+	    webkit_web_view_get_main_frame((WebKitWebView *) e->
+					   html_widget);
+
+	webkit_web_frame_replace_selection(frame, label);
 }
 
 
@@ -770,14 +787,15 @@ void  menu_spell_item_activated (GtkWidget *menuitem, EDITOR * e)
  */
 
 static
-void  menu_spell_add_item_activated (GtkWidget *menuitem, gpointer user_data)
+void menu_spell_add_item_activated(GtkWidget * menuitem,
+				   gpointer user_data)
 {
 	WebKitSpellChecker *checker = NULL;
-	checker	= (WebKitSpellChecker *)webkit_get_text_checker ();
-	
-	webkit_spell_checker_learn_word (checker, (gchar*)user_data);
-	if ((gchar*)user_data)
-		g_free ((gchar*)user_data);
+	checker = (WebKitSpellChecker *) webkit_get_text_checker();
+
+	webkit_spell_checker_learn_word(checker, (gchar *) user_data);
+	if ((gchar *) user_data)
+		g_free((gchar *) user_data);
 }
 
 
@@ -798,14 +816,15 @@ void  menu_spell_add_item_activated (GtkWidget *menuitem, gpointer user_data)
  */
 
 static
-void  menu_spell_ignore_item_activated (GtkWidget *menuitem, gpointer user_data)
-{	
+void menu_spell_ignore_item_activated(GtkWidget * menuitem,
+				      gpointer user_data)
+{
 	WebKitSpellChecker *checker = NULL;
-	checker	= (WebKitSpellChecker *)webkit_get_text_checker ();
-	
-	webkit_spell_checker_ignore_word (checker, (gchar*)user_data);
-	if ((gchar*)user_data)
-		g_free ((gchar*)user_data);
+	checker = (WebKitSpellChecker *) webkit_get_text_checker();
+
+	webkit_spell_checker_ignore_word(checker, (gchar *) user_data);
+	if ((gchar *) user_data)
+		g_free((gchar *) user_data);
 }
 
 
@@ -828,69 +847,69 @@ void  menu_spell_ignore_item_activated (GtkWidget *menuitem, gpointer user_data)
 
 static
 gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
-{	
+{
 	WebKitSpellChecker *checker = NULL;
 	int misspelling_location;
 	int misspelling_length;
 	int i = 0;
-	GtkWidget * item;
-	char** word_list = NULL;
-	
-	XI_message(("\nword: %s\n",word));
-	checker	= (WebKitSpellChecker *)webkit_get_text_checker ();
+	GtkWidget *item;
+	char **word_list = NULL;
 
-	webkit_spell_checker_check_spelling_of_string (checker,
-                                               word,
-                                               &misspelling_location,
-                                               &misspelling_length);
-	if(!misspelling_length) 
+	XI_message(("\nword: %s\n", word));
+	checker = (WebKitSpellChecker *) webkit_get_text_checker();
+
+	webkit_spell_checker_check_spelling_of_string(checker,
+						      word,
+						      &misspelling_location,
+						      &misspelling_length);
+	if (!misspelling_length)
 		return 0;
-	 
-	word_list = webkit_spell_checker_get_guesses_for_word (checker,
-                                                                word,
-                                                                NULL);
+
+	word_list = webkit_spell_checker_get_guesses_for_word(checker,
+							      word, NULL);
 	/* add guesses to menu */
 	if (word_list) {
-		while(word_list[i]) {
-			item = gtk_menu_item_new_with_label (word_list[i]);
-			gtk_widget_show (item);
-			g_signal_connect (G_OBJECT (item), "activate",
-				  		 G_CALLBACK (menu_spell_item_activated),
-				  		 e);
-		            gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
+		while (word_list[i]) {
+			item = gtk_menu_item_new_with_label(word_list[i]);
+			gtk_widget_show(item);
+			g_signal_connect(G_OBJECT(item), "activate",
+					 G_CALLBACK
+					 (menu_spell_item_activated), e);
+			gtk_menu_shell_append((GtkMenuShell *) menu,
+					      (GtkWidget *) item);
 			i++;
-		} 
+		}
 	}
-	
+
 	/* separator */
-	item = gtk_separator_menu_item_new ();
-		gtk_widget_show (item);
-        gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
+	item = gtk_separator_menu_item_new();
+	gtk_widget_show(item);
+	gtk_menu_shell_append((GtkMenuShell *) menu, (GtkWidget *) item);
 
 	/* add word */
-	item = gtk_menu_item_new_with_label ("Add word");
-	gtk_widget_show (item);
-	g_signal_connect (G_OBJECT (item), "activate",
-		  		 G_CALLBACK (menu_spell_add_item_activated),
-		  		 g_strdup((gchar*)word));
-    gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);	
+	item = gtk_menu_item_new_with_label("Add word");
+	gtk_widget_show(item);
+	g_signal_connect(G_OBJECT(item), "activate",
+			 G_CALLBACK(menu_spell_add_item_activated),
+			 g_strdup((gchar *) word));
+	gtk_menu_shell_append((GtkMenuShell *) menu, (GtkWidget *) item);
 
 	/* ignore word */
-	item = gtk_menu_item_new_with_label ("Ignore word");
-	gtk_widget_show (item);
-	g_signal_connect (G_OBJECT (item), "activate",
-		  		 G_CALLBACK (menu_spell_ignore_item_activated),
-		  		 g_strdup((gchar*)word));
-    gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
-	
+	item = gtk_menu_item_new_with_label("Ignore word");
+	gtk_widget_show(item);
+	g_signal_connect(G_OBJECT(item), "activate",
+			 G_CALLBACK(menu_spell_ignore_item_activated),
+			 g_strdup((gchar *) word));
+	gtk_menu_shell_append((GtkMenuShell *) menu, (GtkWidget *) item);
+
 	/* separator */
-	item = gtk_separator_menu_item_new ();
-		gtk_widget_show (item);
-        gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
-	
-	if(word_list)
-		g_strfreev (word_list);
-	
+	item = gtk_separator_menu_item_new();
+	gtk_widget_show(item);
+	gtk_menu_shell_append((GtkMenuShell *) menu, (GtkWidget *) item);
+
+	if (word_list)
+		g_strfreev(word_list);
+
 	return misspelling_length;
 }
 
@@ -912,104 +931,106 @@ gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
  */
 
 static
-void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITOR * e)
+void _create_context_menu(WebKitDOMDocument * dom_document, guint32 time,
+			  EDITOR * e)
 {
-	WebKitDOMDOMWindow* window = NULL;
-	WebKitDOMDOMSelection* selection = NULL;
-	WebKitDOMRange* range = NULL;	
+	WebKitDOMDOMWindow *window = NULL;
+	WebKitDOMDOMSelection *selection = NULL;
+	WebKitDOMRange *range = NULL;
 	GError *error = NULL;
-	GtkWidget *menu = NULL;	
-	GtkWidget *item = NULL;	
+	GtkWidget *menu = NULL;
+	GtkWidget *item = NULL;
 	gchar *text;
 	gboolean have_selection = FALSE;
 
-	menu = gtk_menu_new ();
+	menu = gtk_menu_new();
 	window = webkit_dom_document_get_default_view(dom_document);
 	selection = webkit_dom_dom_window_get_selection(window);
-	if(selection) {
-		range = webkit_dom_dom_selection_get_range_at(selection, 0, &error);
+	if (selection) {
+		range =
+		    webkit_dom_dom_selection_get_range_at(selection, 0,
+							  &error);
 		if (error) {
-		      	fprintf(stderr, "Failed to get range: %s\n", error->message);
-		      	g_error_free(error);
-		      	error = NULL;
-		}	
+			fprintf(stderr, "Failed to get range: %s\n",
+				error->message);
+			g_error_free(error);
+			error = NULL;
+		}
 		text = webkit_dom_range_to_string(range, &error);
 		if (error) {
-		      	fprintf(stderr, "Failed range text: %s\n", error->message);
-		      	g_error_free(error);
-		      	error = NULL;
+			fprintf(stderr, "Failed range text: %s\n",
+				error->message);
+			g_error_free(error);
+			error = NULL;
 			return;
-		}	
-		if(text && (g_strcmp0 (text,"") != 0)) {
+		}
+		if (text && (g_strcmp0(text, "") != 0)) {
 			_fill_spell_menu(menu, text, e);
 			have_selection = TRUE;
-		} else 
+		} else
 			have_selection = FALSE;
-			
+
 	}
-	
+
 	/* cut */
-	item =  
-#ifdef HAVE_GTK_310 
-	gtk_menu_item_new_with_label ("Cut");	
-#else		
-	 gtk_image_menu_item_new_from_stock (GTK_STOCK_CUT,NULL);
-#endif	
-	gtk_widget_show (item);
-	g_signal_connect (G_OBJECT (item), "activate",
-			  		 G_CALLBACK (action_cut_activate_cb),
-			  		 e);
-	gtk_widget_set_sensitive (item,have_selection);
-    gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
-	
+	item =
+#ifdef HAVE_GTK_310
+	    gtk_menu_item_new_with_label("Cut");
+#else
+	    gtk_image_menu_item_new_from_stock(GTK_STOCK_CUT, NULL);
+#endif
+	gtk_widget_show(item);
+	g_signal_connect(G_OBJECT(item), "activate",
+			 G_CALLBACK(action_cut_activate_cb), e);
+	gtk_widget_set_sensitive(item, have_selection);
+	gtk_menu_shell_append((GtkMenuShell *) menu, (GtkWidget *) item);
+
 	/* copy */
-	item =  
-#ifdef HAVE_GTK_310 
-	 gtk_menu_item_new_with_label ("Copy"); 	
-#else		
-	 gtk_image_menu_item_new_from_stock (GTK_STOCK_COPY,NULL);
-#endif	
-	gtk_widget_show (item);
-	gtk_widget_set_sensitive (item,have_selection);
-	g_signal_connect (G_OBJECT (item), "activate",
-			  		 G_CALLBACK (action_copy_activate_cb),
-			  		 e);
-    gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
-	
+	item =
+#ifdef HAVE_GTK_310
+	    gtk_menu_item_new_with_label("Copy");
+#else
+	    gtk_image_menu_item_new_from_stock(GTK_STOCK_COPY, NULL);
+#endif
+	gtk_widget_show(item);
+	gtk_widget_set_sensitive(item, have_selection);
+	g_signal_connect(G_OBJECT(item), "activate",
+			 G_CALLBACK(action_copy_activate_cb), e);
+	gtk_menu_shell_append((GtkMenuShell *) menu, (GtkWidget *) item);
+
 	/* paste */
-	item = 
-#ifdef HAVE_GTK_310 
-	gtk_menu_item_new_with_label ("Paste");	
-#else		
-	gtk_image_menu_item_new_from_stock (GTK_STOCK_PASTE,NULL);  
-#endif	
-		gtk_widget_show (item);
-	g_signal_connect (G_OBJECT (item), "activate",
-			  		 G_CALLBACK (action_paste_activate_cb),
-			  		 e);
-    gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
-	
+	item =
+#ifdef HAVE_GTK_310
+	    gtk_menu_item_new_with_label("Paste");
+#else
+	    gtk_image_menu_item_new_from_stock(GTK_STOCK_PASTE, NULL);
+#endif
+	gtk_widget_show(item);
+	g_signal_connect(G_OBJECT(item), "activate",
+			 G_CALLBACK(action_paste_activate_cb), e);
+	gtk_menu_shell_append((GtkMenuShell *) menu, (GtkWidget *) item);
+
 	/* separator */
-	item = gtk_separator_menu_item_new ();
-	gtk_widget_show (item);
-    gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
+	item = gtk_separator_menu_item_new();
+	gtk_widget_show(item);
+	gtk_menu_shell_append((GtkMenuShell *) menu, (GtkWidget *) item);
 
 	/* select all */
 	item =
-#ifdef HAVE_GTK_310  
-		gtk_menu_item_new_with_label ("Select All");
-#else		
-		gtk_image_menu_item_new_from_stock (GTK_STOCK_SELECT_ALL,NULL);         
+#ifdef HAVE_GTK_310
+	    gtk_menu_item_new_with_label("Select All");
+#else
+	    gtk_image_menu_item_new_from_stock(GTK_STOCK_SELECT_ALL, NULL);
 
-#endif	
-	gtk_widget_show (item);
+#endif
+	gtk_widget_show(item);
 	/*g_signal_connect (G_OBJECT (item), "activate",
-			  		 G_CALLBACK (action_paste_activate_cb),
-			  		 NULL);*/	
-    gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
-	
-	
-	gtk_menu_popup ((GtkMenu*)menu,NULL,NULL,NULL,NULL,3, time);
+	   G_CALLBACK (action_paste_activate_cb),
+	   NULL); */
+	gtk_menu_shell_append((GtkMenuShell *) menu, (GtkWidget *) item);
+
+
+	gtk_menu_popup((GtkMenu *) menu, NULL, NULL, NULL, NULL, 3, time);
 }
 
 
@@ -1033,12 +1054,10 @@ void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITO
  */
 
 static
-gboolean button_handler (GtkWidget *widget,
-                               GdkEvent  *event,
-                               EDITOR * e)
+gboolean button_handler(GtkWidget * widget, GdkEvent * event, EDITOR * e)
 {
-	WebKitDOMDocument * dom_document;
-	WebKitDOMElement* element = NULL;
+	WebKitDOMDocument *dom_document;
+	WebKitDOMElement *element = NULL;
 	buttons_state.bold = 0;
 	buttons_state.italic = 0;
 	buttons_state.underline = 0;
@@ -1049,63 +1068,76 @@ gboolean button_handler (GtkWidget *widget,
 	gchar *class = NULL;
 	gchar *color = NULL;
 	gint i = 1;
-	
+
 	//current_element = NULL;
 	e->toolitems.outline_level = 0;
 	mouse_x = event->button.x;
 	mouse_y = event->button.y;
 
-	dom_document = webkit_web_view_get_dom_document ((WebKitWebView*) e->html_widget);
-	if(!dom_document)
+	dom_document =
+	    webkit_web_view_get_dom_document((WebKitWebView *) e->
+					     html_widget);
+	if (!dom_document)
 		return 0;
 
-	if(event->button.button == 3) {
-		_create_context_menu (dom_document, event->button.time, e);
-		return 1; // return true so we don't get the webkit context menu
+	if (event->button.button == 3) {
+		_create_context_menu(dom_document, event->button.time, e);
+		return 1;	// return true so we don't get the webkit context menu
 	}
-	
-	element = webkit_dom_document_element_from_point(dom_document, mouse_x, mouse_y);
-	if(!element) 
+
+	element =
+	    webkit_dom_document_element_from_point(dom_document, mouse_x,
+						   mouse_y);
+	if (!element)
 		return 0;
-	
+
 	name = webkit_dom_element_get_tag_name(element);
-	if(!name)
+	if (!name)
 		return 0;
 
 	/* set buttons.color to font color element */
-	if (buttons_state.color) 
-			g_free (buttons_state.color);
-	buttons_state.color = g_strdup("#000000"); /* start with black */
-	
+	if (buttons_state.color)
+		g_free(buttons_state.color);
+	buttons_state.color = g_strdup("#000000");	/* start with black */
+
 	/* we have to set it here in case the color element is the only element */
 	color = webkit_dom_element_get_attribute(element, "color");
 	if (color[0] == '#') {
-		if (buttons_state.color) 
-			g_free (buttons_state.color);
+		if (buttons_state.color)
+			g_free(buttons_state.color);
 		buttons_state.color = g_strdup(color);
 	}
-	
-	/*	
-	if(!g_strcmp0 ("LI",name)){
-		current_element = element;
-	}
-	*/
+
+	/*      
+	   if(!g_strcmp0 ("LI",name)){
+	   current_element = element;
+	   }
+	 */
 	i = _has_element(name, class, e);
 	while (i) {
-		if(name) {
-			XI_message(("\nelement name:  %s\nclass:     %s\ncolor: %s\n",name,class,color));
-			element = webkit_dom_node_get_parent_element((WebKitDOMNode*)element);
-			if(element) {
-				class = webkit_dom_element_get_attribute(element, "class");
-				color = webkit_dom_element_get_attribute(element, "color");
-				name = webkit_dom_element_get_tag_name(element);
+		if (name) {
+			XI_message(("\nelement name:  %s\nclass:     %s\ncolor: %s\n", name, class, color));
+			element =
+			    webkit_dom_node_get_parent_element((WebKitDOMNode *) element);
+			if (element) {
+				class =
+				    webkit_dom_element_get_attribute
+				    (element, "class");
+				color =
+				    webkit_dom_element_get_attribute
+				    (element, "color");
+				name =
+				    webkit_dom_element_get_tag_name
+				    (element);
 
 				if (color[0] == '#') {
-					if (buttons_state.color) 
-						g_free (buttons_state.color);
-					buttons_state.color = g_strdup(color);
+					if (buttons_state.color)
+						g_free(buttons_state.
+						       color);
+					buttons_state.color =
+					    g_strdup(color);
 				}
-	
+
 			}
 		}
 		i = _has_element(name, class, e);
@@ -1132,58 +1164,57 @@ gboolean button_handler (GtkWidget *widget,
  *   void
  */
 
-void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
+void create_editor_window(GtkWidget * scrollwindow, EDITOR * e)
 {
 	WebKitWebSettings *setting;
 	GtkWidget *webview;
 	gchar *text = NULL, *fname = NULL;
-	
+
 	webview = webkit_web_view_new();
 	e->html_widget = webview;
-	gtk_widget_show (webview); 
+	gtk_widget_show(webview);
 
 	/* Turn on editing */
-	webkit_web_view_set_editable ((WebKitWebView*) webview, TRUE); 
-	
+	webkit_web_view_set_editable((WebKitWebView *) webview, TRUE);
+
 	/* Create a new websettings and enable spell checking */
-	setting = webkit_web_settings_new ();
-	g_object_set (G_OBJECT(setting), "enable-spell_checking", TRUE, NULL);
+	setting = webkit_web_settings_new();
+	g_object_set(G_OBJECT(setting), "enable-spell_checking", TRUE,
+		     NULL);
 
 	/* Apply the result */
-	webkit_web_view_set_settings (WEBKIT_WEB_VIEW(webview), setting);
+	webkit_web_view_set_settings(WEBKIT_WEB_VIEW(webview), setting);
 
-	/* new empty document from template */	
+	/* new empty document from template */
 	fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
 	XI_message(("action delete item [%s]", fname));
 	text = inhale_text_from_file(fname);
 	g_free(fname);
 
 	if (text && strlen(text)) {
-	    webkit_web_view_load_string((WebKitWebView*)e->html_widget,
-					text, "text/html", "utf_8", "file://");
+		webkit_web_view_load_string((WebKitWebView *) e->
+					    html_widget, text, "text/html",
+					    "utf_8", "file://");
 	}
-	if (text) g_free(text);
-	
-	e->is_changed = FALSE;	
-	
-	gtk_container_add (GTK_CONTAINER(scrollwindow), webview);
+	if (text)
+		g_free(text);
 
-	g_signal_connect(G_OBJECT(webview),"navigation-requested",
-	                 G_CALLBACK(on_navigation_requested)
-	                 ,e);
-	g_signal_connect (G_OBJECT (webview), "hovering-over-link",
-			  		 G_CALLBACK (link_handler),
-			  		 e);
-	g_signal_connect (G_OBJECT (webview), "user-changed-contents",
-			  		 G_CALLBACK (user_changed_contents_cb),
-			  		 e);
-	g_signal_connect (G_OBJECT (webview), "button-press-event",
-			  		 G_CALLBACK (button_handler),
-			  		 e);
-	g_signal_connect (G_OBJECT (webview), "key-press-event",
-			  		 G_CALLBACK (key_handler),
-			  		 e);
-	
+	e->is_changed = FALSE;
+
+	gtk_container_add(GTK_CONTAINER(scrollwindow), webview);
+
+	g_signal_connect(G_OBJECT(webview), "navigation-requested",
+			 G_CALLBACK(on_navigation_requested)
+			 , e);
+	g_signal_connect(G_OBJECT(webview), "hovering-over-link",
+			 G_CALLBACK(link_handler), e);
+	g_signal_connect(G_OBJECT(webview), "user-changed-contents",
+			 G_CALLBACK(user_changed_contents_cb), e);
+	g_signal_connect(G_OBJECT(webview), "button-press-event",
+			 G_CALLBACK(button_handler), e);
+	g_signal_connect(G_OBJECT(webview), "key-press-event",
+			 G_CALLBACK(key_handler), e);
+
 }
 
-#endif /* USE_WEBKIT_EDITOR */
+#endif				/* USE_WEBKIT_EDITOR */

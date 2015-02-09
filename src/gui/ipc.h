@@ -27,7 +27,6 @@
 #include <dbus/dbus-glib.h>
 
 G_BEGIN_DECLS
-
 #define IPC_TYPE_OBJECT             (ipc_object_get_type())
 #define IPC_OBJECT(object) \
 	(G_TYPE_CHECK_INSTANCE_CAST ((object), \
@@ -44,8 +43,7 @@ G_BEGIN_DECLS
 #define IPC_OBJECT_GET_CLASS(obj) \
 	(G_TYPE_INSTANCE_GET_CLASS ((obj), \
 	 IPC_TYPE_OBJECT, IpcObjectClass))
-
-typedef enum {
+    typedef enum {
 	SEARCH_PERFORMED,
 	NAVIGATION,
 	LAST_SIGNAL
@@ -67,17 +65,15 @@ struct _IpcObjectClass {
 
 GType ipc_object_get_type(void);
 
-gboolean ipc_object_search_performed (IpcObject* obj,
-				      const gchar* search_term,
-				      const int* hits,
-				      GError** error);
-gboolean ipc_object_navigation_signal (IpcObject* obj,
-				       const gchar* reference,
-				       GError** error);
+gboolean ipc_object_search_performed(IpcObject * obj,
+				     const gchar * search_term,
+				     const int *hits, GError ** error);
+gboolean ipc_object_navigation_signal(IpcObject * obj,
+				      const gchar * reference,
+				      GError ** error);
 
-IpcObject* ipc_init_dbus_connection(IpcObject* obj);
-IpcObject* ipc_get_main_ipc(void);
+IpcObject *ipc_init_dbus_connection(IpcObject * obj);
+IpcObject *ipc_get_main_ipc(void);
 
 G_END_DECLS
-
-#endif /* __XIPHOS_IPC_H__ */
+#endif				/* __XIPHOS_IPC_H__ */

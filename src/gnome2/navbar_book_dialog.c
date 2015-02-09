@@ -52,13 +52,15 @@
  *   void
  */
 
-static void menu_deactivate_callback(GtkWidget * widget, gpointer user_data)
+static void menu_deactivate_callback(GtkWidget * widget,
+				     gpointer user_data)
 {
 	GtkWidget *menu_button;
 
 	menu_button = GTK_WIDGET(user_data);
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(menu_button), FALSE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(menu_button),
+				     FALSE);
 }
 
 
@@ -81,22 +83,22 @@ static void menu_deactivate_callback(GtkWidget * widget, gpointer user_data)
  */
 
 static
-void menu_position_under(GtkMenu * menu, int * x, int * y,
-				gboolean * push_in, gpointer user_data)
+void menu_position_under(GtkMenu * menu, int *x, int *y,
+			 gboolean * push_in, gpointer user_data)
 {
 	GtkWidget *widget;
 	GtkAllocation allocation;
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
 #if defined(HAVE_GTK_220) || defined(USE_GTK_3)
-        g_return_if_fail (gtk_widget_get_window(user_data));
+	g_return_if_fail(gtk_widget_get_window(user_data));
 #else
-	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
+	g_return_if_fail(GTK_WIDGET_NO_WINDOW(user_data));
 #endif
 	widget = GTK_WIDGET(user_data);
 
-	gdk_window_get_origin(gtk_widget_get_window (widget), x, y);
-	gtk_widget_get_allocation (widget, &allocation);
+	gdk_window_get_origin(gtk_widget_get_window(widget), x, y);
+	gtk_widget_get_allocation(widget, &allocation);
 	*x += allocation.x;
 	*y += allocation.y + allocation.height;
 
@@ -136,7 +138,8 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 			 G_CALLBACK(menu_deactivate_callback), widget);
 	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
 		gtk_widget_grab_focus(widget);
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
+					     TRUE);
 		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			       menu_position_under, widget, event->button,
 			       event->time);
@@ -279,17 +282,17 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d)
 
 	d->navbar_book.lookup_entry = gtk_entry_new();
 	gtk_widget_show(d->navbar_book.lookup_entry);
-	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.lookup_entry, TRUE,
-			   TRUE, 0);
-	gtk_editable_set_editable(GTK_EDITABLE(d->navbar_book.lookup_entry),
-				  FALSE);
-	gtk_entry_set_invisible_char(GTK_ENTRY(d->navbar_book.lookup_entry),
-				     9679);
+	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.lookup_entry,
+			   TRUE, TRUE, 0);
+	gtk_editable_set_editable(GTK_EDITABLE
+				  (d->navbar_book.lookup_entry), FALSE);
+	gtk_entry_set_invisible_char(GTK_ENTRY
+				     (d->navbar_book.lookup_entry), 9679);
 
 	d->navbar_book.button_list = gtk_toggle_button_new();
 	gtk_widget_show(d->navbar_book.button_list);
-	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.button_list, FALSE,
-			   FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.button_list,
+			   FALSE, FALSE, 0);
 	//gtk_button_set_relief (GTK_BUTTON (d->navbar_book.button_list), GTK_RELIEF_NONE);
 
 #ifdef HAVE_GTK_310
@@ -302,88 +305,97 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d)
 	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
 #endif
 	gtk_widget_show(arrow1);
-	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_list), arrow1);
+	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_list),
+			  arrow1);
 
 	d->navbar_book.button_left = gtk_button_new();
 	gtk_widget_show(d->navbar_book.button_left);
-	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.button_left, FALSE,
-			   FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.button_left,
+			   FALSE, FALSE, 0);
 	gtk_widget_set_tooltip_text(d->navbar_book.button_left,
-			     _("Go outward, to the section containing this one"));
+				    _
+				    ("Go outward, to the section containing this one"));
 
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_left),
 			      GTK_RELIEF_NONE);
-	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_left),
-				      FALSE);
+	gtk_button_set_focus_on_click(GTK_BUTTON
+				      (d->navbar_book.button_left), FALSE);
 
 #ifdef HAVE_GTK_310
-	image1 = gtk_image_new_from_icon_name ("go-previous",
-                      			  GTK_ICON_SIZE_BUTTON);	
-#else	
+	image1 = gtk_image_new_from_icon_name("go-previous",
+					      GTK_ICON_SIZE_BUTTON);
+#else
 	image1 = gtk_image_new_from_stock(GTK_STOCK_GO_BACK,
-	                                  GTK_ICON_SIZE_BUTTON);
-#endif	
+					  GTK_ICON_SIZE_BUTTON);
+#endif
 	gtk_widget_show(image1);
-	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_left), image1);
+	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_left),
+			  image1);
 
 	d->navbar_book.button_up = gtk_button_new();
 	gtk_widget_show(d->navbar_book.button_up);
 	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.button_up, FALSE,
 			   FALSE, 0);
-	gtk_widget_set_tooltip_text(d->navbar_book.button_up, _("Go to previous item"));
+	gtk_widget_set_tooltip_text(d->navbar_book.button_up,
+				    _("Go to previous item"));
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_up),
 			      GTK_RELIEF_NONE);
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_up),
 				      FALSE);
 #ifdef HAVE_GTK_310
-	image1 = gtk_image_new_from_icon_name ("go-up",
-                      			  GTK_ICON_SIZE_BUTTON);
+	image1 = gtk_image_new_from_icon_name("go-up",
+					      GTK_ICON_SIZE_BUTTON);
 #else
 	image1 = gtk_image_new_from_stock(GTK_STOCK_GO_UP,
-	                                  GTK_ICON_SIZE_BUTTON);
-#endif	
+					  GTK_ICON_SIZE_BUTTON);
+#endif
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_up), image1);
 
 	d->navbar_book.button_down = gtk_button_new();
 	gtk_widget_show(d->navbar_book.button_down);
-	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.button_down, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_tooltip_text(d->navbar_book.button_down, _("Go to next item"));
+	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.button_down,
+			   FALSE, FALSE, 0);
+	gtk_widget_set_tooltip_text(d->navbar_book.button_down,
+				    _("Go to next item"));
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_down),
 			      GTK_RELIEF_NONE);
-	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_down),
-				      FALSE);
-	image2 = 
+	gtk_button_set_focus_on_click(GTK_BUTTON
+				      (d->navbar_book.button_down), FALSE);
+	image2 =
 #ifdef HAVE_GTK_310
-		gtk_image_new_from_icon_name ("go-down",
-                      			  GTK_ICON_SIZE_BUTTON);	
-#else	
-		gtk_image_new_from_stock(GTK_STOCK_GO_DOWN,
-	                                  GTK_ICON_SIZE_BUTTON);
-#endif	
+	    gtk_image_new_from_icon_name("go-down", GTK_ICON_SIZE_BUTTON);
+#else
+	    gtk_image_new_from_stock(GTK_STOCK_GO_DOWN,
+				     GTK_ICON_SIZE_BUTTON);
+#endif
 	gtk_widget_show(image2);
-	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_down), image2);
+	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_down),
+			  image2);
 
 	d->navbar_book.button_right = gtk_button_new();
 	gtk_widget_show(d->navbar_book.button_right);
-	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.button_right, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_tooltip_text(d->navbar_book.button_right, _("Go inward, to the first subsection"));
+	gtk_box_pack_start(GTK_BOX(hbox1), d->navbar_book.button_right,
+			   FALSE, FALSE, 0);
+	gtk_widget_set_tooltip_text(d->navbar_book.button_right,
+				    _
+				    ("Go inward, to the first subsection"));
 
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_right),
 			      GTK_RELIEF_NONE);
-	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_right),
+	gtk_button_set_focus_on_click(GTK_BUTTON
+				      (d->navbar_book.button_right),
 				      FALSE);
 #ifdef HAVE_GTK_310
-	image1 = gtk_image_new_from_icon_name ("go-next",
-                      			  GTK_ICON_SIZE_BUTTON);
-#else	
+	image1 = gtk_image_new_from_icon_name("go-next",
+					      GTK_ICON_SIZE_BUTTON);
+#else
 	image1 = gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD,
 					  GTK_ICON_SIZE_BUTTON);
-#endif	
+#endif
 	gtk_widget_show(image1);
-	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_right), image1);
+	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_right),
+			  image1);
 
 	g_signal_connect((gpointer) d->navbar_book.button_up, "clicked",
 			 G_CALLBACK(on_button_prev_clicked), d);
