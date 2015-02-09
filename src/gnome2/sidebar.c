@@ -237,9 +237,8 @@ gboolean gui_expand_treeview_to_path(GtkTreeView * tree,
 		gtk_tree_model_get(model, &iter, 3, &mod, -1);
 		if (!g_utf8_collate(mod, book_name)) {
 			selection = gtk_tree_view_get_selection(tree);
-			path =
-			    gtk_tree_path_new_from_string((gchar *)
-							  tmp_path_string);
+			path = gtk_tree_path_new_from_string((gchar *)
+							     tmp_path_string);
 			gtk_tree_view_expand_to_path(tree, path);
 			gtk_tree_selection_select_path(selection, path);
 
@@ -725,9 +724,8 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 	gchar *key = NULL;
 	gchar *text = NULL;
 
-	selection =
-	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.
-					results_list);
+	selection = gtk_tree_view_get_selection((GtkTreeView *)
+						sidebar.results_list);
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
 
@@ -804,9 +802,8 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 	GtkTreeIter selected;
 	gchar *key = NULL;
 
-	selection =
-	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.
-					results_list);
+	selection = gtk_tree_view_get_selection((GtkTreeView *)
+						sidebar.results_list);
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
 
@@ -892,17 +889,16 @@ on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 		if (gui_yes_no_dialog(dialog_text, NULL)) {
 			if (mod_type == PERCOM_TYPE)
 				editor_create_new((gchar *) buf_module,
-						  (gchar *) settings.
-						  currentverse,
+						  (gchar *)
+						  settings.currentverse,
 						  NOTE_EDITOR);
 			else
 				editor_create_new((gchar *) buf_module,
 						  "0", BOOK_EDITOR);
 		} else {
 			if (mod_type == PERCOM_TYPE)
-				main_dialogs_open(buf_module,
-						  (gchar *) settings.
-						  currentverse);
+				main_dialogs_open(buf_module, (gchar *)
+						  settings.currentverse);
 			else
 				main_dialogs_open(buf_module, NULL);
 		}
@@ -1025,8 +1021,7 @@ on_send_list_via_biblesync_activate(GtkMenuItem * menuitem,
 			if (!first) {
 				vlist = g_string_append_c(vlist, ';');
 			}
-			vlist = g_string_append(vlist,
-						(char *)
+			vlist = g_string_append(vlist, (char *)
 						main_get_osisref_from_key
 						(settings.MainWindowModule,
 						 item->key));
@@ -1328,9 +1323,8 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 	GtkTreeIter selected;
 	gchar *key = NULL;
 
-	selection =
-	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.
-					results_list);
+	selection = gtk_tree_view_get_selection((GtkTreeView *)
+						sidebar.results_list);
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
 

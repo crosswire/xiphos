@@ -308,14 +308,11 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	 * fall back 10 yards and punt: arbitrarily take the 1st one.
 	 * if there aren't any, use main window bible.
 	 */
-	settings.cvparallel = (gchar *) main_get_valid_key((settings.
-							    parallel_list ?
-							    settings.
-							    parallel_list
-							    [0]
-							    : settings.
-							    MainWindowModule),
-							   (gchar *) buf);
+	settings.cvparallel = (gchar *)
+	    main_get_valid_key((settings.parallel_list ?
+				settings.parallel_list[0]
+				: settings.MainWindowModule),
+			       (gchar *) buf);
 
 	if (settings.special_anchor)
 		*settings.special_anchor = '#';	/* put it back. */

@@ -257,14 +257,12 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 
 		edata.passage_type =
 		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						 (d.
-						  rb_book)) ? BOOK :
+						 (d.rb_book)) ? BOOK :
 		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						 (d.
-						  rb_chapter)) ? CHAPTER :
+						 (d.rb_chapter)) ? CHAPTER
+		    :
 		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						 (d.
-						  rb_verse)) ? VERSE :
+						 (d.rb_verse)) ? VERSE :
 		    VERSE_RANGE;
 
 		edata.verse_num =

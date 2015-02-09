@@ -422,8 +422,8 @@ action_delete_item_activate_cb(GtkWidget * widget, EDITOR * e)
 		g_free(fname);
 
 		if (text && strlen(text)) {
-			webkit_web_view_load_string((WebKitWebView *) e->
-						    html_widget, text,
+			webkit_web_view_load_string((WebKitWebView *)
+						    e->html_widget, text,
 						    "text/html", "utf_8",
 						    "file://");
 		}
@@ -456,12 +456,13 @@ void set_button_state(BUTTONS_STATE state, EDITOR * e)
 		XI_message(("state.color: %s", state.color));
 #ifdef HAVE_GTK_34
 		if (gdk_rgba_parse(&rgba, state.color))
-			gtk_color_chooser_set_rgba((GtkColorChooser *) e->
-						   toolitems.color, &rgba);
+			gtk_color_chooser_set_rgba((GtkColorChooser *)
+						   e->toolitems.color,
+						   &rgba);
 #else
 		if (gdk_color_parse(state.color, &color))
-			gtk_color_button_set_color((GtkColorButton *) e->
-						   toolitems.color,
+			gtk_color_button_set_color((GtkColorButton *)
+						   e->toolitems.color,
 						   &color);
 #endif
 	}
@@ -1288,9 +1289,10 @@ void editor_load_book(EDITOR * e)
 	}
 
 	if (text && strlen(text)) {
-		webkit_web_view_load_string((WebKitWebView *) e->
-					    html_widget, text, "text/html",
-					    "utf_8", "file://");
+		webkit_web_view_load_string((WebKitWebView *)
+					    e->html_widget, text,
+					    "text/html", "utf_8",
+					    "file://");
 	}
 
 	if (text)
@@ -1377,9 +1379,10 @@ editor_load_note(EDITOR * e, const gchar * module_name, const gchar * key)
 	}
 
 	if (text && strlen(text)) {
-		webkit_web_view_load_string((WebKitWebView *) e->
-					    html_widget, text, "text/html",
-					    "utf_8", "file://");
+		webkit_web_view_load_string((WebKitWebView *)
+					    e->html_widget, text,
+					    "text/html", "utf_8",
+					    "file://");
 	}
 
 	e->is_changed = FALSE;

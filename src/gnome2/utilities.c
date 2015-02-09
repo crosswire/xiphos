@@ -739,8 +739,8 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 			add_module_to_prayerlist_folder(GTK_TREE_MODEL
 							(store),
 							prayerlist,
-							(gchar *) tmp->
-							data);
+							(gchar *)
+							tmp->data);
 			tmp = g_list_next(tmp);
 		}
 	}
@@ -844,8 +844,8 @@ MOD_FONT *get_font(const gchar * mod_name)
 	/* convert string -> int, here, once for all. includes base bias. */
 	mf->old_font_size_value = ((mf->old_font_size)
 				   ? atoi(mf->old_font_size) +
-				   settings.base_font_size : settings.
-				   base_font_size);
+				   settings.base_font_size :
+				   settings.base_font_size);
 
 	return mf;
 }

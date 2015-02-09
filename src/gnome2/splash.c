@@ -326,9 +326,9 @@ expose_event_callback(GtkWidget * widget, GdkEventExpose * event,
 		gdk_draw_pixbuf(gtk_widget_get_window(canvas),
 				NULL,
 				GDK_PIXBUF(icon->light ?
-					   icon->light_pixbuf : icon->
-					   dark_pixbuf), 0, 0, icon->x,
-				icon->y,
+					   icon->light_pixbuf :
+					   icon->dark_pixbuf), 0, 0,
+				icon->x, icon->y,
 				gdk_pixbuf_get_width(icon->light_pixbuf),
 				gdk_pixbuf_get_height(icon->light_pixbuf),
 				2, 0, 0);

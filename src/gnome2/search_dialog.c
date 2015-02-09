@@ -1134,9 +1134,8 @@ static void _finds_verselist_selection_changed(GtkWidget * widget,
 	GtkTreeIter selected;
 	gchar *key = NULL;
 
-	selection =
-	    gtk_tree_view_get_selection((GtkTreeView *) search1.
-					listview_verses);
+	selection = gtk_tree_view_get_selection((GtkTreeView *)
+						search1.listview_verses);
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
 				    (search1.listview_verses));
@@ -1256,8 +1255,7 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
 			} else {
 				vlist = g_string_append_c(vlist, ';');
 			}
-			vlist = g_string_append(vlist,
-						(char *)
+			vlist = g_string_append(vlist, (char *)
 						main_get_osisref_from_key
 						(module, key));
 

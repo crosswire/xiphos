@@ -736,8 +736,8 @@ void gui_export_bookmarks_dialog(gint export_type, GList * verses)
 						  name->str);
 		g_string_free(name, 1);
 	} else
-		setup_filechooserwidget((GtkFileChooser *) ex_data->
-					filechooserwidget);
+		setup_filechooserwidget((GtkFileChooser *)
+					ex_data->filechooserwidget);
 
 	gtk_widget_set_sensitive(ex_data->cb_scripture, FALSE);
 
@@ -745,15 +745,15 @@ void gui_export_bookmarks_dialog(gint export_type, GList * verses)
 
 	if (ex_data->verselist == ADV_SEARCH_RESULTS_EXPORT) {
 		gtk_widget_set_sensitive(ex_data->rb_bookmarks, FALSE);
-		gtk_toggle_button_set_active((GtkToggleButton *) ex_data->
-					     rb_html, TRUE);
+		gtk_toggle_button_set_active((GtkToggleButton *)
+					     ex_data->rb_html, TRUE);
 	}
 
 
 	if (ex_data->verselist == ADV_SEARCH_RESULTS_EXPORT) {
 		gtk_widget_set_sensitive(ex_data->rb_bookmarks, FALSE);
-		gtk_toggle_button_set_active((GtkToggleButton *) ex_data->
-					     rb_html, TRUE);
+		gtk_toggle_button_set_active((GtkToggleButton *)
+					     ex_data->rb_html, TRUE);
 	}
 
 	g_object_unref(G_OBJECT(builder));
