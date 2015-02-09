@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #define _GNU_SOURCE	1
@@ -62,7 +62,7 @@
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>
-#endif /* !WIN32 */
+#endif				/* !WIN32 */
 #include <errno.h>
 
 #include "xiphos_html/xiphos_html.h"
@@ -80,20 +80,18 @@
 /*
  * month names and lengths, for use in constructing journals and devotional references.
  */
-int month_day_counts[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+int month_day_counts[] =
+    { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 char *(month_names[]) = {
-    N_("January"),
-    N_("February"),
-    N_("March"),
-    N_("April"),
-    N_("May"),
-    N_("June"),
-    N_("July"),
-    N_("August"),
-    N_("September"),
-    N_("October"),
-    N_("November"),
-    N_("December")
+	N_("January"),
+	    N_("February"),
+	    N_("March"),
+	    N_("April"),
+	    N_("May"),
+	    N_("June"),
+	    N_("July"),
+	    N_("August"),
+	    N_("September"), N_("October"), N_("November"), N_("December")
 };
 
 /******************************************************************************
@@ -113,8 +111,7 @@ char *(month_names[]) = {
 
 gint stop_window_sync = 0;
 
-void
-sync_windows()
+void sync_windows()
 {
 	if (stop_window_sync == 0) {
 		while (gtk_events_pending())
@@ -138,7 +135,8 @@ sync_windows()
  *   void
  */
 
-void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent, GtkTreeModel *model)
+void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent,
+			      GtkTreeModel * model)
 {
 	static xmlNodePtr cur_node;
 	GtkTreeIter child;
@@ -149,29 +147,24 @@ void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent, GtkT
 	gchar *description = NULL;
 
 	gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child,
-                                             tree_parent);
+				     tree_parent);
 
 	do {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
-			   		2, &caption,
-					3, &key,
-					4, &module,
-					5, &mod_desc,
-					6, &description,
-					-1);
+				   2, &caption,
+				   3, &key,
+				   4, &module,
+				   5, &mod_desc, 6, &description, -1);
 		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
-							&child)) {
+						  &child)) {
 			cur_node = xml_add_folder_to_parent(parent,
-							caption);
+							    caption);
 			utilities_parse_treeview(cur_node, &child, model);
 
-		}
-		else
+		} else
 			xml_add_bookmark_to_parent(parent,
-						description,
-						key,
-						module,
-						mod_desc);
+						   description,
+						   key, module, mod_desc);
 
 		g_free(caption);
 		g_free(key);
@@ -192,7 +185,7 @@ gchar *gui_tf2of(gint true_false)
 	return (true_false ? "On" : "Off");
 }
 
-void gui_reassign_strdup(gchar **where, gchar *what)
+void gui_reassign_strdup(gchar ** where, gchar * what)
 {
 	if (*where)
 		g_free(*where);
@@ -206,19 +199,18 @@ void gui_set_progressbar_text(GtkWidget * pb, gchar * text)
 	sync_windows();
 }
 
-void gui_set_statusbar (const gchar * message)
+void gui_set_statusbar(const gchar * message)
 {
 	static guint context_id = 0;
-	gtk_statusbar_pop (GTK_STATUSBAR(widgets.appbar), context_id);
+	gtk_statusbar_pop(GTK_STATUSBAR(widgets.appbar), context_id);
 	context_id =
-		gtk_statusbar_get_context_id (GTK_STATUSBAR (widgets.appbar),
-                                       		message);
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(widgets.appbar),
+					 message);
 
 	context_id =
-		gtk_statusbar_push (GTK_STATUSBAR(widgets.appbar),
-                                    context_id,
-                                    message);
-	XI_message (("context_id: %d\nmessage: %s",context_id,message));
+	    gtk_statusbar_push(GTK_STATUSBAR(widgets.appbar),
+			       context_id, message);
+	XI_message(("context_id: %d\nmessage: %s", context_id, message));
 
 }
 
@@ -237,16 +229,19 @@ void gui_set_combo_index(GtkWidget * combo, gint index)
 
 void gui_clear_combo(GtkWidget * combo)
 {
-	GtkTreeModel* model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
+	GtkTreeModel *model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
 	gtk_list_store_clear(GTK_LIST_STORE(model));
 }
 
 void gui_add_item_to_combo(GtkWidget * combo, gchar * item)
 {
 	GtkTreeIter iter;
-	GtkTreeModel* model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
+	GtkTreeModel *model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
 	gtk_list_store_append(GTK_LIST_STORE(model), &iter);
-	gtk_list_store_set(GTK_LIST_STORE(model), &iter, 0, (gchar*)item, -1);
+	gtk_list_store_set(GTK_LIST_STORE(model), &iter, 0, (gchar *) item,
+			   -1);
 }
 
 
@@ -254,68 +249,54 @@ void gui_add_item_to_combo(GtkWidget * combo, gchar * item)
  * taken from galeon
  * glade_signal_connect_func: used by glade_xml_signal_autoconnect_full
  */
-void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
-			   const gchar *signal_name, const gchar *signal_data,
-			   GObject *conn_obj, gboolean conn_after,
-			   gpointer user_data)
+void gui_glade_signal_connect_func(const gchar * cb_name, GObject * obj,
+				   const gchar * signal_name,
+				   const gchar * signal_data,
+				   GObject * conn_obj, gboolean conn_after,
+				   gpointer user_data)
 {
 	/** Module with all the symbols of the program */
 	static GModule *mod_self = NULL;
 	gpointer handler_func;
 
- 	/* initialize gmodule */
-	if (mod_self == NULL)
-	{
-		mod_self = g_module_open (NULL, 0);
-		g_assert (mod_self != NULL);
+	/* initialize gmodule */
+	if (mod_self == NULL) {
+		mod_self = g_module_open(NULL, 0);
+		g_assert(mod_self != NULL);
 	}
 
 	/*g_print( "glade_signal_connect_func: cb_name = '%s', signal_name = '%s', signal_data = '%s'\n",
-	  cb_name, signal_name, signal_data ); */
+	   cb_name, signal_name, signal_data ); */
 
-	if (g_module_symbol (mod_self, cb_name, &handler_func))
-	{
+	if (g_module_symbol(mod_self, cb_name, &handler_func)) {
 		/* found callback */
-		if (conn_obj)
-		{
-			if (conn_after)
-			{
+		if (conn_obj) {
+			if (conn_after) {
 				g_signal_connect_object
-                                        (obj, signal_name,
-                                         handler_func, conn_obj,
-                                         G_CONNECT_AFTER);
-			}
-			else
-			{
+				    (obj, signal_name,
+				     handler_func, conn_obj,
+				     G_CONNECT_AFTER);
+			} else {
 				g_signal_connect_object
-                                        (obj, signal_name,
-                                         handler_func, conn_obj,
-                                         G_CONNECT_SWAPPED);
+				    (obj, signal_name,
+				     handler_func, conn_obj,
+				     G_CONNECT_SWAPPED);
 			}
-		}
-		else
-		{
+		} else {
 			/* no conn_obj; use standard connect */
 			gpointer data = NULL;
 
 			data = user_data;
 
-			if (conn_after)
-			{
+			if (conn_after) {
 				g_signal_connect_after
-					(obj, signal_name,
-					 handler_func, data);
-			}
-			else
-			{
+				    (obj, signal_name, handler_func, data);
+			} else {
 				g_signal_connect
-					(obj, signal_name,
-					 handler_func, data);
+				    (obj, signal_name, handler_func, data);
 			}
 		}
-	}
-	else
-	{
+	} else {
 		XI_warning(("callback function not found: %s", cb_name));
 	}
 }
@@ -329,7 +310,7 @@ void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
  * fname: just the filename with no path information
  * critical: critical file? (halt if not found)
  */
-gchar * gui_general_user_file (const char *fname, gboolean critical)
+gchar *gui_general_user_file(const char *fname, gboolean critical)
 {
 	static GHashTable *already_found = NULL;
 	gchar *alternative[10];
@@ -337,23 +318,19 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	gint i;
 
 	/* create cache hash table if it doesnt already exist */
-	if (already_found == NULL)
-	{
-		already_found = g_hash_table_new_full (g_str_hash, g_str_equal,
-						       g_free, g_free);
+	if (already_found == NULL) {
+		already_found =
+		    g_hash_table_new_full(g_str_hash, g_str_equal, g_free,
+					  g_free);
 	}
 
-        /* Have we already found this? */
-	file = g_hash_table_lookup (already_found, fname);
-	if (file != NULL)
-	{
-		if (g_file_test (file, G_FILE_TEST_EXISTS))
-		{
-			return g_strdup (file);
-		}
-		else
-		{
-			g_hash_table_remove (already_found, fname);
+	/* Have we already found this? */
+	file = g_hash_table_lookup(already_found, fname);
+	if (file != NULL) {
+		if (g_file_test(file, G_FILE_TEST_EXISTS)) {
+			return g_strdup(file);
+		} else {
+			g_hash_table_remove(already_found, fname);
 		}
 	}
 
@@ -361,18 +338,17 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	file = g_build_filename(settings.gSwordDir, fname, NULL);
 
 	/* success? */
-	if (g_file_test (file, G_FILE_TEST_EXISTS))
-	{
+	if (g_file_test(file, G_FILE_TEST_EXISTS)) {
 		/* add it to the set of found files */
-		g_hash_table_insert (already_found, g_strdup (fname),
-				     g_strdup (file));
+		g_hash_table_insert(already_found, g_strdup(fname),
+				    g_strdup(file));
 		return file;
 	}
 	g_free(file);
 
 	/* specify alternate locations in order of precedence */
 	i = 0;
-	alternative[i++] = g_strdup (fname);
+	alternative[i++] = g_strdup(fname);
 #ifdef DEBUG
 	XI_message(("MAINTAINER_MODE"));
 	/* generally only developers have any use for these */
@@ -382,54 +358,51 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	alternative[i++] = g_build_filename("..", "..", "ui", fname, NULL);
 #endif
 #ifdef WIN32
-	alternative[i++] = g_build_filename(xiphos_win32_get_subdir("share"),
-					    "xiphos", fname, NULL);
+	alternative[i++] =
+	    g_build_filename(xiphos_win32_get_subdir("share"), "xiphos",
+			     fname, NULL);
 #else
-	alternative[i++] = g_build_filename("..", "share", "xiphos", fname, NULL);
+	alternative[i++] =
+	    g_build_filename("..", "share", "xiphos", fname, NULL);
 #endif
 	alternative[i++] = g_build_filename(SHARE_DIR, fname, NULL);
-	alternative[i++] = NULL;  /* NULL terminator needed */
+	alternative[i++] = NULL;	/* NULL terminator needed */
 
 	/* select one of the alternatives */
 	file = NULL;
 
-	for (i = 0; alternative[i] != NULL; i++)
-	{
-		if (file == NULL &&  g_file_test (alternative[i], G_FILE_TEST_IS_REGULAR))
-		{
+	for (i = 0; alternative[i] != NULL; i++) {
+		if (file == NULL
+		    && g_file_test(alternative[i],
+				   G_FILE_TEST_IS_REGULAR)) {
 			file = alternative[i];
-		}
-		else
-		{
+		} else {
 			/* free unused string */
-			g_free (alternative[i]);
+			g_free(alternative[i]);
 		}
 	}
 
 	/* check for success */
-	if (file != NULL)
-	{
+	if (file != NULL) {
 		/* warn if we're using other than the install default */
-		if (!g_path_is_absolute (file))
-		{
-			gchar * cwd, *file1;
+		if (!g_path_is_absolute(file)) {
+			gchar *cwd, *file1;
 			XI_message(("Using %s (usually OK)", file));
 
 			/* Make it absolute */
 			cwd = g_get_current_dir();
 			file1 = g_build_filename(cwd, file, NULL);
-			g_free (file);
-			g_free (cwd);
+			g_free(file);
+			g_free(cwd);
 			file = file1;
 		}
 
 		/* add it to the set of found files */
-		g_hash_table_insert (already_found, g_strdup (fname),
-				     g_strdup (file));
+		g_hash_table_insert(already_found, g_strdup(fname),
+				    g_strdup(file));
 	}
 	/* if nothing then theres an error */
-	else if (critical)
-	{
+	else if (critical) {
 		XI_error(("%s not found", fname));
 	}
 
@@ -457,8 +430,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 
 static void
 language_add_folders(GtkTreeModel * model,
-		      GtkTreeIter iter,
-		      gchar ** languages)
+		     GtkTreeIter iter, gchar ** languages)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter child_iter;
@@ -466,14 +438,13 @@ language_add_folders(GtkTreeModel * model,
 
 	(void) gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	for (j = 0; languages[j]; ++j) {
-		gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
-		gtk_tree_store_set(GTK_TREE_STORE(model),
-				   &child_iter,
-				   0,
-				   ((g_utf8_validate(languages[j], -1, NULL))
+		gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter,
+				      &iter);
+		gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, 0,
+				   ((g_utf8_validate
+				     (languages[j], -1, NULL))
 				    ? languages[j]
-				    : _("Unknown")),
-				   -1);
+				    : _("Unknown")), -1);
 	}
 }
 
@@ -495,14 +466,13 @@ language_add_folders(GtkTreeModel * model,
  *   void
  */
 static void add_module_to_prayerlist_folder(GtkTreeModel * model,
-					  GtkTreeIter iter,
-					  gchar * module_name)
+					    GtkTreeIter iter,
+					    gchar * module_name)
 {
 
 	GtkTreeIter child_iter;
 
-	gtk_tree_store_append(GTK_TREE_STORE(model),
-			      &child_iter, &iter);
+	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
 	gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
 			   0, module_name, -1);
 }
@@ -537,7 +507,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 
 	/* Check language */
 	const gchar *buf = language;
-	if (!g_utf8_validate(buf,-1,NULL))
+	if (!g_utf8_validate(buf, -1, NULL))
 		language = _("Unknown");
 	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
 		language = _("Unknown");
@@ -550,7 +520,8 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 		gtk_tree_model_get(model, &iter_iter, 0, &str_data, -1);
 		if (!strcmp(language, str_data)) {
 			gchar *content;
-			const gchar *abbreviation = main_get_abbreviation(module_name);
+			const gchar *abbreviation =
+			    main_get_abbreviation(module_name);
 
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
@@ -559,10 +530,11 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 						   ? abbreviation
 						   : module_name),
 						  description);
-			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
-					   UTIL_COL_CAPTION, (gchar *) content,
-					   UTIL_COL_MODULE, (gchar *) module_name,
-					   -1);
+			gtk_tree_store_set(GTK_TREE_STORE(model),
+					   &child_iter, UTIL_COL_CAPTION,
+					   (gchar *) content,
+					   UTIL_COL_MODULE,
+					   (gchar *) module_name, -1);
 			g_free(content);
 			g_free(str_data);
 			return;
@@ -606,80 +578,74 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 	GList *tmp2 = NULL;
 	MOD_MGR *info;
 
-	store = gtk_tree_store_new(UTIL_N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
+	store =
+	    gtk_tree_store_new(UTIL_N_COLUMNS, G_TYPE_STRING,
+			       G_TYPE_STRING);
 	gtk_tree_store_clear(store);
 
 	/*  Biblical Texts folders */
 	gtk_tree_store_append(store, &text, NULL);
 	gtk_tree_store_set(store, &text,
 			   UTIL_COL_CAPTION, _("Biblical Texts"),
-			   UTIL_COL_MODULE, NULL,
-			   -1);
+			   UTIL_COL_MODULE, NULL, -1);
 
 	/*  Commentaries folders */
 	gtk_tree_store_append(store, &commentary, NULL);
 	gtk_tree_store_set(store, &commentary,
 			   UTIL_COL_CAPTION, _("Commentaries"),
-			   UTIL_COL_MODULE, NULL,
-			   -1);
+			   UTIL_COL_MODULE, NULL, -1);
 
 	if (!limited) {
 		/*  Dictionaries folders */
 		gtk_tree_store_append(store, &dictionary, NULL);
 		gtk_tree_store_set(store, &dictionary,
 				   UTIL_COL_CAPTION, _("Dictionaries"),
-				   UTIL_COL_MODULE, NULL,
-				   -1);
+				   UTIL_COL_MODULE, NULL, -1);
 
 		/*  Glossaries folders */
 		gtk_tree_store_append(store, &glossary, NULL);
 		gtk_tree_store_set(store, &glossary,
 				   UTIL_COL_CAPTION, _("Glossaries"),
-				   UTIL_COL_MODULE, NULL,
-				   -1);
+				   UTIL_COL_MODULE, NULL, -1);
 
 		/*  Devotionals folders */
 		gtk_tree_store_append(store, &devotional, NULL);
 		gtk_tree_store_set(store, &devotional,
-				   UTIL_COL_CAPTION, _("Daily Devotionals"),
-				   UTIL_COL_MODULE, NULL,
-				   -1);
+				   UTIL_COL_CAPTION,
+				   _("Daily Devotionals"), UTIL_COL_MODULE,
+				   NULL, -1);
 
 		/*  General Books folders */
 		gtk_tree_store_append(store, &book, NULL);
 		gtk_tree_store_set(store, &book,
 				   UTIL_COL_CAPTION, _("General Books"),
-				   UTIL_COL_MODULE, NULL,
-				   -1);
+				   UTIL_COL_MODULE, NULL, -1);
 
 		/*  Maps folders */
 		gtk_tree_store_append(store, &map, NULL);
 		gtk_tree_store_set(store, &map,
 				   UTIL_COL_CAPTION, _("Maps"),
-				   UTIL_COL_MODULE, NULL,
-				   -1);
+				   UTIL_COL_MODULE, NULL, -1);
 
 		/*  Images folders */
 		gtk_tree_store_append(store, &image, NULL);
 		gtk_tree_store_set(store, &image,
 				   UTIL_COL_CAPTION, _("Images"),
-				   UTIL_COL_MODULE, NULL,
-				   -1);
+				   UTIL_COL_MODULE, NULL, -1);
 
 		/*  Cult folders */
 		gtk_tree_store_append(store, &cult, NULL);
 		gtk_tree_store_set(store, &cult,
 				   UTIL_COL_CAPTION, _("Cult/Unorthodox"),
-				   UTIL_COL_MODULE, NULL,
-				   -1);
+				   UTIL_COL_MODULE, NULL, -1);
 
 		/*  Prayer lists folder */
 		if (settings.prayerlist) {
 			gtk_tree_store_append(store, &prayerlist, NULL);
 			gtk_tree_store_set(store, &prayerlist,
-					   UTIL_COL_CAPTION, _("Prayer List/Journal"),
-					   UTIL_COL_MODULE, NULL,
-					   -1);
+					   UTIL_COL_CAPTION,
+					   _("Prayer List/Journal"),
+					   UTIL_COL_MODULE, NULL, -1);
 		}
 	}
 
@@ -688,8 +654,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
 			   devotional, dictionary, glossary, book, cult,
-			   NULL, NULL,
-			   language_add_folders, limited);
+			   NULL, NULL, language_add_folders, limited);
 
 	tmp2 = tmp;
 	while (tmp2 != NULL) {
@@ -698,55 +663,60 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 		/* see comment on similar code in src/main/sidebar.cc. */
 
 		if ((info->type[0] == 'B') && !info->is_cult) {
-			add_module_to_language_folder(GTK_TREE_MODEL(store),
-						      text, info->language,
-						      info->name, info->description);
-		}
-		else if ((info->type[0] == 'C') && !info->is_cult) {
-			add_module_to_language_folder(GTK_TREE_MODEL(store),
-						      commentary, info->language,
-						      info->name, info->description);
-		}
-		else if (!limited) {
+			add_module_to_language_folder(GTK_TREE_MODEL
+						      (store), text,
+						      info->language,
+						      info->name,
+						      info->description);
+		} else if ((info->type[0] == 'C') && !info->is_cult) {
+			add_module_to_language_folder(GTK_TREE_MODEL
+						      (store), commentary,
+						      info->language,
+						      info->name,
+						      info->description);
+		} else if (!limited) {
 			if (info->is_cult) {
-				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      cult, info->language,
-							      info->name, info->description);
-			}
-			else if (info->is_maps) {
-				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      map, info->language,
-							      info->name, info->description);
-			}
-			else if (info->is_images) {
-				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      image, info->language,
-							      info->name, info->description);
-			}
-			else if (info->is_devotional) {
-				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      devotional, info->language,
-							      info->name, info->description);
-			}
-			else if (info->is_glossary) {
-				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      glossary, info->language,
-							      info->name, info->description);
-			}
-			else if (info->type[0] == 'L') {
-				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      dictionary, info->language,
-							      info->name, info->description);
-			}
-			else if (info->type[0] == 'G') {
-				gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
-				if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
-					add_module_to_language_folder(GTK_TREE_MODEL(store),
-								      book, info->language,
-								      info->name, info->description);
+				add_module_to_language_folder
+				    (GTK_TREE_MODEL(store), cult,
+				     info->language, info->name,
+				     info->description);
+			} else if (info->is_maps) {
+				add_module_to_language_folder
+				    (GTK_TREE_MODEL(store), map,
+				     info->language, info->name,
+				     info->description);
+			} else if (info->is_images) {
+				add_module_to_language_folder
+				    (GTK_TREE_MODEL(store), image,
+				     info->language, info->name,
+				     info->description);
+			} else if (info->is_devotional) {
+				add_module_to_language_folder
+				    (GTK_TREE_MODEL(store), devotional,
+				     info->language, info->name,
+				     info->description);
+			} else if (info->is_glossary) {
+				add_module_to_language_folder
+				    (GTK_TREE_MODEL(store), glossary,
+				     info->language, info->name,
+				     info->description);
+			} else if (info->type[0] == 'L') {
+				add_module_to_language_folder
+				    (GTK_TREE_MODEL(store), dictionary,
+				     info->language, info->name,
+				     info->description);
+			} else if (info->type[0] == 'G') {
+				gchar *gstype =
+				    main_get_mod_config_entry(info->name,
+							      "GSType");
+				if ((gstype == NULL)
+				    || strcmp(gstype, "PrayerList")) {
+					add_module_to_language_folder
+					    (GTK_TREE_MODEL(store), book,
+					     info->language, info->name,
+					     info->description);
 				}
-			}
-			else {
+			} else {
 				XI_warning(("mod `%s' unknown type `%s'",
 					    info->name, info->type));
 			}
@@ -766,9 +736,11 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 	if (!limited && settings.prayerlist) {
 		tmp = get_list(PRAYER_LIST);
 		while (tmp != NULL) {
-			add_module_to_prayerlist_folder(GTK_TREE_MODEL(store),
+			add_module_to_prayerlist_folder(GTK_TREE_MODEL
+							(store),
 							prayerlist,
-							(gchar *) tmp->data);
+							(gchar *) tmp->
+							data);
 			tmp = g_list_next(tmp);
 		}
 	}
@@ -800,7 +772,7 @@ MOD_FONT *get_font(const gchar * mod_name)
 	static gchar *file = NULL;
 
 	if (file == NULL)
-		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir); /* not freed */
+		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);	/* not freed */
 
 	mf = g_new0(MOD_FONT, 1);
 	mf->mod_name = mod_name;
@@ -809,19 +781,23 @@ MOD_FONT *get_font(const gchar * mod_name)
 	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
 
 	/* 1st try: module pref */
-	if ((mf->old_font == NULL) ||
-	    !strcmp(mf->old_font, "none")) {
+	if ((mf->old_font == NULL) || !strcmp(mf->old_font, "none")) {
 		/* in absence of module pref, user can specify language pref */
 		gchar *lang = main_get_mod_config_entry(mod_name, "Lang");
-		gchar *lang_lang = g_strdup_printf("Language:%s", (lang ? lang : ""));
+		gchar *lang_lang =
+		    g_strdup_printf("Language:%s", (lang ? lang : ""));
 		g_free(lang);
-		gchar *lang_font = get_conf_file_item(file, lang_lang, "Font");
-		gchar *lang_size = get_conf_file_item(file, lang_lang, "Fontsize");
+		gchar *lang_font =
+		    get_conf_file_item(file, lang_lang, "Font");
+		gchar *lang_size =
+		    get_conf_file_item(file, lang_lang, "Fontsize");
 		g_free(lang_lang);
 
 		/* in absence of any pref, module can name its pref */
-		gchar *preferred_font = main_get_mod_config_entry(mod_name, "Font");
-		gchar *preferred_size = main_get_mod_config_entry(mod_name, "Fontsize");
+		gchar *preferred_font =
+		    main_get_mod_config_entry(mod_name, "Font");
+		gchar *preferred_size =
+		    main_get_mod_config_entry(mod_name, "Fontsize");
 
 		g_free(mf->old_font);
 
@@ -853,7 +829,8 @@ MOD_FONT *get_font(const gchar * mod_name)
 			} else {
 				/* 3rd try */
 				g_free(lang_size);
-				if (preferred_size && (*preferred_size != '\0'))
+				if (preferred_size
+				    && (*preferred_size != '\0'))
 					mf->old_font_size = preferred_size;
 				else {
 					/* utter default */
@@ -866,8 +843,9 @@ MOD_FONT *get_font(const gchar * mod_name)
 
 	/* convert string -> int, here, once for all. includes base bias. */
 	mf->old_font_size_value = ((mf->old_font_size)
-				   ? atoi(mf->old_font_size) + settings.base_font_size
-				   : settings.base_font_size);
+				   ? atoi(mf->old_font_size) +
+				   settings.base_font_size : settings.
+				   base_font_size);
 
 	return mf;
 }
@@ -888,11 +866,13 @@ MOD_FONT *get_font(const gchar * mod_name)
  *   void
  */
 
-void free_font(MOD_FONT *mf)
+void free_font(MOD_FONT * mf)
 {
 
-	if (mf->old_font) g_free(mf->old_font);
-	if (mf->old_font_size) g_free(mf->old_font_size);
+	if (mf->old_font)
+		g_free(mf->old_font);
+	if (mf->old_font_size)
+		g_free(mf->old_font_size);
 	g_free(mf);
 }
 
@@ -912,9 +892,9 @@ void free_font(MOD_FONT *mf)
  *   gchar *
  */
 
-gchar * remove_linefeeds(gchar * buf)
+gchar *remove_linefeeds(gchar * buf)
 {
-	gchar * key = NULL;
+	gchar *key = NULL;
 
 	key = g_strdelimit(buf, "\n", ' ');
 
@@ -940,22 +920,21 @@ gchar * remove_linefeeds(gchar * buf)
  */
 
 void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
-				GCallback callback)
+			     GCallback callback)
 {
-	GList 	*tmp = NULL;
-	GtkWidget * item;
+	GList *tmp = NULL;
+	GtkWidget *item;
 
-    	if (mod_type == -1) return;
+	if (mod_type == -1)
+		return;
 
 	tmp = get_list(mod_type);
 	while (tmp != NULL) {
-		item =
-		    gtk_menu_item_new_with_label((gchar *) tmp->data);
+		item = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_show(item);
 		g_signal_connect(G_OBJECT(item), "activate",
-				   G_CALLBACK
-				   (callback),
-				   (gchar *) tmp->data);
+				 G_CALLBACK
+				 (callback), (gchar *) tmp->data);
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		tmp = g_list_next(tmp);
 	}
@@ -983,8 +962,7 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
  *   gchar
  */
 
-gchar *
-ncr_to_utf8(gchar * text)
+gchar *ncr_to_utf8(gchar * text)
 {
 	gchar *ncr;
 	gunichar unicode;
@@ -993,31 +971,31 @@ ncr_to_utf8(gchar * text)
 	GString *newtext = g_string_new(NULL);
 
 	for (ncr = strstr(text, "&#");
-	     ncr;
-	     text = ncr, ncr = strstr(text, "&#")) {
+	     ncr; text = ncr, ncr = strstr(text, "&#")) {
 		newtext = g_string_append_len(newtext, text, ncr - text);
 
 		// convert ncr value (string) to unicode (guint32)
 		unicode = 0;
-		for (ncr = ncr + 2;			// just past "&#"
-		     (*ncr != '\0') && (*ncr >= '0') && (*ncr <='9');
+		for (ncr = ncr + 2;	// just past "&#"
+		     (*ncr != '\0') && (*ncr >= '0') && (*ncr <= '9');
 		     ncr++)
 			unicode = (unicode * 10) + ((*ncr) - '0');
 
 		// converts unicode char to utf8
 		// need proper terminator + validation of content
 		if ((*ncr == ';') && g_unichar_validate(unicode)) {
-			ncr++;				// step past ';'
+			ncr++;	// step past ';'
 			len = g_unichar_to_utf8(unicode, utf8);
 			utf8[len] = '\0';
 			newtext = g_string_append(newtext, utf8);
 		} else {
 			g_string_append_printf(newtext, "&#%d;", unicode);
-			XI_message(("ncr2utf8: invalid unicode &#%d;\n", unicode));
+			XI_message(("ncr2utf8: invalid unicode &#%d;\n",
+				    unicode));
 		}
 	}
 
-	if (*text != '\0')		// residual text?  paste it on.
+	if (*text != '\0')	// residual text?  paste it on.
 		newtext = g_string_append(newtext, text);
 
 	return g_string_free(newtext, FALSE);
@@ -1028,27 +1006,32 @@ ncr_to_utf8(gchar * text)
 //
 void reading_selector(char *modname,
 		      char *key,
-		      DIALOG_DATA *dialog,
-		      GtkMenuItem *menuitem,
-		      gpointer user_data)
+		      DIALOG_DATA * dialog,
+		      GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar *url;
 	gboolean primary = 0, secondary = 0, all = 0;
-    	gboolean is_dialog = (dialog ? 1 : 0);
+	gboolean is_dialog = (dialog ? 1 : 0);
 
-	switch ((int) GPOINTER_TO_INT(user_data))
-	{
+	switch ((int) GPOINTER_TO_INT(user_data)) {
 	case 0:
-		primary = TRUE;  secondary = FALSE; all = FALSE;
+		primary = TRUE;
+		secondary = FALSE;
+		all = FALSE;
 		break;
 	case 1:
-		primary = FALSE; secondary = TRUE;  all = FALSE;
+		primary = FALSE;
+		secondary = TRUE;
+		all = FALSE;
 		break;
 	case 2:
-		primary = FALSE; secondary = FALSE; all = TRUE;
+		primary = FALSE;
+		secondary = FALSE;
+		all = TRUE;
 		break;
 	default:
-		g_message("invalid variant %d\n", (int) GPOINTER_TO_INT(user_data));
+		g_message("invalid variant %d\n",
+			  (int) GPOINTER_TO_INT(user_data));
 		gui_generic_warning("Xiphos: invalid internal variant");
 		break;
 	}
@@ -1076,19 +1059,18 @@ struct language_set {
 } language_set[N_LANGSET_MODTYPES];
 
 /* one-shot setup during initialization. */
-void
-language_init(void)
+void language_init(void)
 {
 	int i;
 	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
-		language_set[i].ptr = calloc(LANGSET_COUNT, sizeof(char*));
+		language_set[i].ptr =
+		    calloc(LANGSET_COUNT, sizeof(char *));
 		language_set[i].count = 0;
 	}
 }
 
 /* per-usage clear of old content before a new collection is made. */
-static void
-language_clear()
+static void language_clear()
 {
 	int i, j;
 	char **s;
@@ -1104,8 +1086,7 @@ language_clear()
 }
 
 /* used during module set analysis: add one language to a per-type set. */
-static void
-language_add(const char *language, int module_type)
+static void language_add(const char *language, int module_type)
 {
 	int j;
 	char **s;
@@ -1116,27 +1097,25 @@ language_add(const char *language, int module_type)
 	s = language_set[module_type].ptr;
 	for (j = 0; j < language_set[module_type].count; ++j) {
 		if (!strcmp(s[j], language))
-			return;			/* found -- duplicate. */
+			return;	/* found -- duplicate. */
 	}
-	assert(j < LANGSET_COUNT);		/* let's not overrun the set. */
+	assert(j < LANGSET_COUNT);	/* let's not overrun the set. */
 	s[j] = g_strdup(language);
 	++(language_set[module_type].count);
 }
 
 /* comparator function pulled verbatim from qsort(3). */
-static int
-cmpstringp(const void *p1, const void *p2)
+static int cmpstringp(const void *p1, const void *p2)
 {
 	/* The actual arguments to this function are "pointers to
 	   pointers to char", but strcmp(3) arguments are "pointers
 	   to char", hence the following cast plus dereference */
 
-	return strcmp(* (char * const *) p1, * (char * const *) p2);
+	return strcmp(*(char *const *) p1, *(char *const *) p2);
 }
 
 /* retrieve the language set specific to the module type requested */
-static gchar **
-language_get_type(int module_type)
+static gchar **language_get_type(int module_type)
 {
 	assert((module_type >= 0) && (module_type < N_LANGSET_MODTYPES));
 	return language_set[module_type].ptr;
@@ -1145,8 +1124,8 @@ language_get_type(int module_type)
 /* push a list of modules' sorted languages into the specified tree store. */
 /* other than init, this is the only public function. */
 void
-language_make_list(GList *modlist,
-		   GtkTreeStore *store,
+language_make_list(GList * modlist,
+		   GtkTreeStore * store,
 		   GtkTreeIter text,
 		   GtkTreeIter commentary,
 		   GtkTreeIter map,
@@ -1156,9 +1135,9 @@ language_make_list(GList *modlist,
 		   GtkTreeIter glossary,
 		   GtkTreeIter book,
 		   GtkTreeIter cult,
-		   GtkTreeIter *update,
-		   GtkTreeIter *uninstalled,
-		   void (*add)(GtkTreeModel *, GtkTreeIter, gchar **),
+		   GtkTreeIter * update,
+		   GtkTreeIter * uninstalled,
+		   void (*add) (GtkTreeModel *, GtkTreeIter, gchar **),
 		   gboolean limited)
 {
 	MOD_MGR *info;
@@ -1173,13 +1152,18 @@ language_make_list(GList *modlist,
 		/* mod.mgr: special extra lists */
 		if ((update != NULL) && (uninstalled != NULL)) {
 			if (!info->installed) {
-				language_add(info->language, LANGSET_UNINSTALLED);
-			} else if ((!info->old_version && info->new_version &&
-				    strcmp(info->new_version, " ")) ||
-				   (info->old_version && !info->new_version) ||
-				   (info->old_version && info->new_version &&
-				    strcmp(info->new_version, info->old_version) > 0)) {
-				language_add(info->language, LANGSET_UPDATE);
+				language_add(info->language,
+					     LANGSET_UNINSTALLED);
+			} else
+			    if ((!info->old_version && info->new_version
+				 && strcmp(info->new_version, " "))
+				|| (info->old_version
+				    && !info->new_version)
+				|| (info->old_version && info->new_version
+				    && strcmp(info->new_version,
+					      info->old_version) > 0)) {
+				language_add(info->language,
+					     LANGSET_UPDATE);
 			}
 		}
 
@@ -1201,7 +1185,8 @@ language_make_list(GList *modlist,
 		else if (info->type[0] == 'L')
 			language_add(info->language, LANGSET_DICTIONARY);
 		else if ((info->type[0] == 'G') &&
-			 (!main_get_mod_config_entry(info->name, "GSType")))
+			 (!main_get_mod_config_entry
+			  (info->name, "GSType")))
 			language_add(info->language, LANGSET_GENBOOK);
 
 		modlist = g_list_next(modlist);
@@ -1210,36 +1195,34 @@ language_make_list(GList *modlist,
 	/* sort */
 	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
 		qsort(language_set[i].ptr,
-		      language_set[i].count,
-		      sizeof(char *),
-		      cmpstringp);
+		      language_set[i].count, sizeof(char *), cmpstringp);
 	}
 
 	/* generate tree. */
-	(*add)(GTK_TREE_MODEL(store), text,
-	       language_get_type(LANGSET_BIBLE));
-	(*add)(GTK_TREE_MODEL(store), commentary,
-	       language_get_type(LANGSET_COMMENTARY));
+	(*add) (GTK_TREE_MODEL(store), text,
+		language_get_type(LANGSET_BIBLE));
+	(*add) (GTK_TREE_MODEL(store), commentary,
+		language_get_type(LANGSET_COMMENTARY));
 	if (!limited) {
-		(*add)(GTK_TREE_MODEL(store), map,
-		       language_get_type(LANGSET_MAP));
-		(*add)(GTK_TREE_MODEL(store), image,
-		       language_get_type(LANGSET_IMAGE));
-		(*add)(GTK_TREE_MODEL(store), cult,
-		       language_get_type(LANGSET_CULT));
-		(*add)(GTK_TREE_MODEL(store), devotional,
-		       language_get_type(LANGSET_DEVOTIONAL));
-		(*add)(GTK_TREE_MODEL(store), glossary,
-		       language_get_type(LANGSET_GLOSSARY));
-		(*add)(GTK_TREE_MODEL(store), dictionary,
-		       language_get_type(LANGSET_DICTIONARY));
-		(*add)(GTK_TREE_MODEL(store), book,
-		       language_get_type(LANGSET_GENBOOK));
+		(*add) (GTK_TREE_MODEL(store), map,
+			language_get_type(LANGSET_MAP));
+		(*add) (GTK_TREE_MODEL(store), image,
+			language_get_type(LANGSET_IMAGE));
+		(*add) (GTK_TREE_MODEL(store), cult,
+			language_get_type(LANGSET_CULT));
+		(*add) (GTK_TREE_MODEL(store), devotional,
+			language_get_type(LANGSET_DEVOTIONAL));
+		(*add) (GTK_TREE_MODEL(store), glossary,
+			language_get_type(LANGSET_GLOSSARY));
+		(*add) (GTK_TREE_MODEL(store), dictionary,
+			language_get_type(LANGSET_DICTIONARY));
+		(*add) (GTK_TREE_MODEL(store), book,
+			language_get_type(LANGSET_GENBOOK));
 		if ((update != NULL) && (uninstalled != NULL)) {
-			(*add)(GTK_TREE_MODEL(store), *update,
-			       language_get_type(LANGSET_UPDATE));
-			(*add)(GTK_TREE_MODEL(store), *uninstalled,
-			       language_get_type(LANGSET_UNINSTALLED));
+			(*add) (GTK_TREE_MODEL(store), *update,
+				language_get_type(LANGSET_UPDATE));
+			(*add) (GTK_TREE_MODEL(store), *uninstalled,
+				language_get_type(LANGSET_UNINSTALLED));
 		}
 	}
 }
@@ -1298,7 +1281,7 @@ gchar *get_modlist_string(GList * mods)
  *   GList *
  */
 
-GList *get_current_list(GtkTreeView *treeview)
+GList *get_current_list(GtkTreeView * treeview)
 {
 	GList *items = NULL;
 	gchar *buf;
@@ -1310,8 +1293,7 @@ GList *get_current_list(GtkTreeView *treeview)
 		do {
 			gtk_tree_model_get(model, &iter, 1, &buf, -1);
 			items =
-			    g_list_append(items,
-					  (gchar *) g_strdup(buf));
+			    g_list_append(items, (gchar *) g_strdup(buf));
 
 		} while (gtk_tree_model_iter_next(model, &iter));
 	}
@@ -1322,22 +1304,20 @@ GList *get_current_list(GtkTreeView *treeview)
 /*
  * caller must free the returned string.
  */
-char *
-image_locator(const char *image)
+char *image_locator(const char *image)
 {
 #ifndef WIN32
 	return g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
 #else
 	return g_build_filename(xiphos_win32_get_subdir("share"),
 				"xiphos", image, NULL);
-#endif /* WIN32 */
+#endif				/* WIN32 */
 }
 
 /*
  * get a pixmap widget from specified file.
  */
-GtkWidget *
-pixmap_finder(char *image)
+GtkWidget *pixmap_finder(char *image)
 {
 	GtkWidget *w;
 	char *image_file;
@@ -1351,8 +1331,7 @@ pixmap_finder(char *image)
 /*
  * get a pixbuf from specified file.
  */
-GdkPixbuf *
-pixbuf_finder(const char *image, int size, GError **error)
+GdkPixbuf *pixbuf_finder(const char *image, int size, GError ** error)
 {
 	GdkPixbuf *p;
 	char *image_file;
@@ -1361,10 +1340,9 @@ pixbuf_finder(const char *image, int size, GError **error)
 	if (size == 0)
 		p = gdk_pixbuf_new_from_file(image_file, error);
 	else
-		p = gdk_pixbuf_new_from_file_at_scale (image_file,
-					       size, size,
-					       TRUE,
-					       error);
+		p = gdk_pixbuf_new_from_file_at_scale(image_file,
+						      size, size,
+						      TRUE, error);
 	g_free(image_file);
 	return p;
 }
@@ -1378,15 +1356,12 @@ pixbuf_finder(const char *image, int size, GError **error)
 #define min(x,y)	((x) < (y) ? (x) : (y))
 
 void
-HtmlOutput(char *text,
-	   GtkWidget *gtkText,
-	   MOD_FONT *mf,
-	   char *anchor)
+HtmlOutput(char *text, GtkWidget * gtkText, MOD_FONT * mf, char *anchor)
 {
 	int len = strlen(text), offset = 0;
- 
+
 	XiphosHtml *html = XIPHOS_HTML(gtkText);
-	XIPHOS_HTML_OPEN_STREAM(html,"text/html");
+	XIPHOS_HTML_OPEN_STREAM(html, "text/html");
 
 	// EVIL EVIL EVIL EVIL.
 	// crazy nonsense with xulrunner 1.9.2.3, failure to jump to anchor.
@@ -1403,17 +1378,18 @@ HtmlOutput(char *text,
 		len -= offset;
 
 		// now write the javascript snippet.
-		buf = g_strdup_printf(
-		    "<script type=\"text/javascript\" language=\"javascript\">"
-		    " window.onload = function () { window.location.hash = \"%s\"; }"
-		    " </script>", (settings.special_anchor
-				   ? settings.special_anchor
-				   : anchor));
+		buf =
+		    g_strdup_printf
+		    ("<script type=\"text/javascript\" language=\"javascript\">"
+		     " window.onload = function () { window.location.hash = \"%s\"; }"
+		     " </script>",
+		     (settings.special_anchor ? settings.
+		      special_anchor : anchor));
 		XIPHOS_HTML_WRITE(html, buf, strlen(buf));
 		g_free(buf);
 	}
 
-	if(!anchor)
+	if (!anchor)
 		XIPHOS_HTML_WRITE(html, text, len);
 
 	/* use anchor if asked, but if so, special anchor takes priority. */
@@ -1427,15 +1403,15 @@ HtmlOutput(char *text,
 	settings.special_anchor = NULL;
 }
 
-void set_window_icon (GtkWindow *window)
+void set_window_icon(GtkWindow * window)
 {
 	gchar *imagename;
 	GdkPixbuf *pixbuf;
 
 	imagename = image_locator("xiphos-x-16.png");
-	pixbuf = gdk_pixbuf_new_from_file (imagename, NULL);
-	g_free (imagename);
-	gtk_window_set_icon (window, pixbuf);
+	pixbuf = gdk_pixbuf_new_from_file(imagename, NULL);
+	g_free(imagename);
+	gtk_window_set_icon(window, pixbuf);
 
 }
 
@@ -1461,25 +1437,25 @@ void set_window_icon (GtkWindow *window)
  * Return value
  *   void
  */
-gboolean xiphos_open_default (const gchar *file)
+gboolean xiphos_open_default(const gchar * file)
 {
 #ifdef WIN32
 	gunichar2 *w_file;
 	gint rt;
 	w_file = g_utf8_to_utf16(file, -1, NULL, NULL, NULL);
 	XI_message(("opening file %ls", w_file));
-	rt = (gint)ShellExecuteW(NULL, L"open", w_file, NULL, NULL, SW_SHOWDEFAULT);
+	rt = (gint) ShellExecuteW(NULL, L"open", w_file, NULL, NULL,
+				  SW_SHOWDEFAULT);
 	return rt > 32;
 
 #else
 	GError *error = NULL;
-	gtk_show_uri (NULL, file, gtk_get_current_event_time(), &error);
+	gtk_show_uri(NULL, file, gtk_get_current_event_time(), &error);
 	if (error != NULL) {
 		XI_warning(("%s", error->message));
-		g_error_free (error);
+		g_error_free(error);
 		return FALSE;
-	}
-	else
+	} else
 		return TRUE;
 #endif
 }
@@ -1494,9 +1470,10 @@ gboolean xiphos_open_default (const gchar *file)
  * Since 3.1.2
  */
 #ifdef WIN32
-gchar* xiphos_win32_get_subdir(const gchar *subdir)
+gchar *xiphos_win32_get_subdir(const gchar * subdir)
 {
-	gchar *ret_dir = g_win32_get_package_installation_directory_of_module(NULL);
+	gchar *ret_dir =
+	    g_win32_get_package_installation_directory_of_module(NULL);
 	ret_dir = g_strconcat(ret_dir, "\0", NULL);
 	ret_dir = g_build_filename(ret_dir, subdir, NULL);
 	return ret_dir;
@@ -1513,7 +1490,8 @@ gchar* xiphos_win32_get_subdir(const gchar *subdir)
  *
  * Since 3.1.2
  */
-void archive_addfile(GsfOutfile *output, const gchar *file, const gchar *name)
+void archive_addfile(GsfOutfile * output, const gchar * file,
+		     const gchar * name)
 {
 	GsfInput *inputchild = NULL;
 	GsfOutput *outputchild = NULL;
@@ -1537,7 +1515,7 @@ void archive_addfile(GsfOutfile *output, const gchar *file, const gchar *name)
  *
  * Since 3.1.2
  */
-void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
+void archive_adddir(GsfOutfile * output, gchar * path, const gchar * name)
 {
 	GDir *dir;
 	const gchar *file;
@@ -1549,9 +1527,11 @@ void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
 	while ((file = g_dir_read_name(dir))) {
 		complete_file = g_build_filename(path, file, NULL);
 		if (g_file_test(complete_file, G_FILE_TEST_IS_DIR))
-			archive_adddir(GSF_OUTFILE(child), complete_file, file);
+			archive_adddir(GSF_OUTFILE(child), complete_file,
+				       file);
 		else
-			archive_addfile(GSF_OUTFILE(child), complete_file, file);
+			archive_addfile(GSF_OUTFILE(child), complete_file,
+					file);
 	}
 	g_dir_close(dir);
 }
@@ -1568,14 +1548,14 @@ void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
  *
  * Since 3.1.2
  */
-void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
-			   const gchar *destination)
+void xiphos_create_archive(gchar * conf_file, gchar * datapath,
+			   gchar * zip, const gchar * destination)
 {
 	GsfOutfile *outputfile;
 	GsfOutput *output;
 	GsfOutfile *tmp;
-	gchar** path;
-	gchar* moddirname;
+	gchar **path;
+	gchar *moddirname;
 	GString *modpath;
 	int i;
 
@@ -1593,10 +1573,9 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	/* create a relative path without preceding "." */
 	/* or the trailing dir name */
 	modpath = g_string_new(NULL);
-	for (i = 1; i <= (g_strv_length(path) - 2); i++)
-	{
+	for (i = 1; i <= (g_strv_length(path) - 2); i++) {
 		modpath = g_string_append(modpath, path[i]);
-		if (i < g_strv_length(path) -2) /* avoid a trailing / */
+		if (i < g_strv_length(path) - 2)	/* avoid a trailing / */
 			modpath = g_string_append(modpath, "/");
 	}
 
@@ -1605,7 +1584,9 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	outputfile = gsf_outfile_zip_new(output, NULL);
 
 	/* add the module directory */
-	tmp = GSF_OUTFILE(gsf_outfile_new_child(outputfile, modpath->str, TRUE));
+	tmp =
+	    GSF_OUTFILE(gsf_outfile_new_child
+			(outputfile, modpath->str, TRUE));
 
 	/* add all data files */
 	archive_adddir(tmp,
@@ -1615,10 +1596,11 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	g_object_unref(tmp);
 
 	/* add conf file */
-	tmp = GSF_OUTFILE(gsf_outfile_new_child(outputfile, "mods.d", TRUE));
+	tmp =
+	    GSF_OUTFILE(gsf_outfile_new_child(outputfile, "mods.d", TRUE));
 	archive_addfile(tmp,
-			g_build_filename(destination, "mods.d", conf_file, NULL),
-			conf_file);
+			g_build_filename(destination, "mods.d", conf_file,
+					 NULL), conf_file);
 
 	/* cleanup */
 	gsf_output_close(GSF_OUTPUT(outputfile));
@@ -1639,71 +1621,77 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 //
 
 #ifndef INVALID_SOCKET
-# define INVALID_SOCKET (-1)
+#define INVALID_SOCKET (-1)
 #else
-# ifdef WIN32
-#  undef INVALID_SOCKET
-#  define INVALID_SOCKET (-1)
-# endif
+#ifdef WIN32
+#undef INVALID_SOCKET
+#define INVALID_SOCKET (-1)
+#endif
 #endif
 
-void
-ReadAloud(unsigned int verse, const char *suppliedtext)
+void ReadAloud(unsigned int verse, const char *suppliedtext)
 {
 	static int tts_socket = INVALID_SOCKET;	// no initial connection.
 	static int use_counter = -2;	// to shortcircuit early uses.
 
-	if (settings.readaloud ||       // read anything, or
-	    (verse == 0)) {		// read what's handed us.
+	if (settings.readaloud ||	// read anything, or
+	    (verse == 0)) {	// read what's handed us.
 		gchar *s, *t;
 
 		// setup for communication.
 		if (tts_socket < 0) {
 			struct sockaddr_in service;
 
-			if ((tts_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
+			if ((tts_socket =
+			     socket(AF_INET, SOCK_STREAM, 0)) < 0) {
 				char msg[256];
-				sprintf(msg, "ReadAloud disabled:\nsocket failed, %s",
+				sprintf(msg,
+					"ReadAloud disabled:\nsocket failed, %s",
 					strerror(errno));
 				settings.readaloud = 0;
-				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-							       (widgets.readaloud_item),
-							       settings.readaloud);
+				gtk_check_menu_item_set_active
+				    (GTK_CHECK_MENU_ITEM
+				     (widgets.readaloud_item),
+				     settings.readaloud);
 				gui_generic_warning(msg);
 				return;
 			}
-
 			// festival's port (1314) on localhost (127.0.0.1).
 			memset(&service, 0, sizeof service);
 			service.sin_family = AF_INET;
 			service.sin_port = htons(1314);
 			service.sin_addr.s_addr = htonl(0x7f000001);
-			if (connect(tts_socket, (const struct sockaddr *)&service,
-				    sizeof(service)) != 0) {
+			if (connect
+			    (tts_socket,
+			     (const struct sockaddr *) &service,
+			     sizeof(service)) != 0) {
 				StartFestival();
 #ifdef WIN32
-				Sleep(2); // give festival a moment to init.
+				Sleep(2);	// give festival a moment to init.
 #else
-				sleep(2); // give festival a moment to init.
+				sleep(2);	// give festival a moment to init.
 #endif
-				if (connect(tts_socket, (const struct sockaddr *)&service,
-					    sizeof(service)) != 0) {
+				if (connect
+				    (tts_socket,
+				     (const struct sockaddr *) &service,
+				     sizeof(service)) != 0) {
 					// it still didn't work -- missing.
 					char msg[256];
 					sprintf(msg, "%s\n%s, %s",
 						"TTS \"festival\" not started -- perhaps not installed",
-						"TTS connect failed", strerror(errno));
+						"TTS connect failed",
+						strerror(errno));
 					StopFestival(&tts_socket);
 					settings.readaloud = 0;
-					gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-								       (widgets.readaloud_item),
-								       settings.readaloud);
+					gtk_check_menu_item_set_active
+					    (GTK_CHECK_MENU_ITEM
+					     (widgets.readaloud_item),
+					     settings.readaloud);
 					gui_generic_warning(msg);
 					return;
 				}
 			}
 		}
-
 		// avoid speaking the first *2* times.
 		// (2 Display() calls are made during startup.)
 		// though speaking may be intended, startup speech is annoying.
@@ -1712,8 +1700,9 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 
 		GString *text = g_string_new(NULL);
 		if (verse != 0)
-			g_string_printf(text, "%d. ...  %s", verse, suppliedtext);
-			// use of ". ..." is to induce proper pauses.
+			g_string_printf(text, "%d. ...  %s", verse,
+					suppliedtext);
+		// use of ". ..." is to induce proper pauses.
 		else
 			g_string_printf(text, "%s", suppliedtext);
 		XI_message(("ReadAloud: dirty: %s\n", text->str));
@@ -1721,8 +1710,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		// clean: no <span> surrounding strongs/morph.
 		// i wish there was a regexp form of strstr().
 		for (s = strstr(text->str, "<span class=\"strongs\">");
-		     s;
-		     s = strstr(s, "<span class=\"strongs\">")) {
+		     s; s = strstr(s, "<span class=\"strongs\">")) {
 			if ((t = strstr(s, "</span>"))) {
 				t += 6;
 				while (s <= t)
@@ -1733,8 +1721,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			}
 		}
 		for (s = strstr(text->str, "<span class=\"morph\">");
-		     s;
-		     s = strstr(s, "<span class=\"morph\">")) {
+		     s; s = strstr(s, "<span class=\"morph\">")) {
 			if ((t = strstr(s, "</span>"))) {
 				t += 6;
 				while (s <= t)
@@ -1761,7 +1748,8 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		}
 
 		// clean: no &lt;...&gt; sequences.  (Strong's ref, "<1234>".)
-		for (s = strstr(text->str, "&lt;"); s; s = strstr(s, "&lt;")) {
+		for (s = strstr(text->str, "&lt;"); s;
+		     s = strstr(s, "&lt;")) {
 			if ((t = strstr(s, "&gt;"))) {
 				t += 3;
 				while (s <= t)
@@ -1773,17 +1761,20 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		}
 
 		// clean: no unicode apostrophes and quotation marks.
-		for (s = strstr(text->str, "\342\200\231"); s; s = strstr(s, "\342\200\231")) {
+		for (s = strstr(text->str, "\342\200\231"); s;
+		     s = strstr(s, "\342\200\231")) {
 			*(s++) = '\'';
 			*(s++) = '\'';
 			*(s++) = '\'';
 		}
-		for (s = strstr(text->str, "\342\200\234"); s; s = strstr(s, "\342\200\234")) {
+		for (s = strstr(text->str, "\342\200\234"); s;
+		     s = strstr(s, "\342\200\234")) {
 			*(s++) = ' ';
 			*(s++) = ' ';
 			*(s++) = ' ';
 		}
-		for (s = strstr(text->str, "\342\200\235"); s; s = strstr(s, "\342\200\235")) {
+		for (s = strstr(text->str, "\342\200\235"); s;
+		     s = strstr(s, "\342\200\235")) {
 			*(s++) = ' ';
 			*(s++) = ' ';
 			*(s++) = ' ';
@@ -1804,7 +1795,8 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		for (s = strstr(text->str, "*n"); s; s = strstr(s, "*n")) {
 			*(s++) = ' ';
 			*(s++) = ' ';
-			while (isdigit(*s)) *(s++) = ' ';
+			while (isdigit(*s))
+				*(s++) = ' ';
 		}
 		for (s = strstr(text->str, "*u"); s; s = strstr(s, "*u")) {
 			*(s++) = ' ';
@@ -1813,7 +1805,8 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		for (s = strstr(text->str, "*x"); s; s = strstr(s, "*x")) {
 			*(s++) = ' ';
 			*(s++) = ' ';
-			while (isdigit(*s)) *(s++) = ' ';
+			while (isdigit(*s))
+				*(s++) = ' ';
 		}
 
 		// festival *pronounces* brackets and asterisks -- idiots.
@@ -1828,42 +1821,44 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 
 		// walk the string, looking for dislocated "LORD" as "L<spaces>ORD".
 		// this occurs in "smallcaps" use in many bibles.
-		for (s = strchr(text->str, 'L'); s; s = strchr(s+1, 'L')) {
+		for (s = strchr(text->str, 'L'); s; s = strchr(s + 1, 'L')) {
 			gchar *begin = s++;
 			while (*s == ' ')
 				++s;
 			if (!strncmp(s, "ORD", 3)) {
 				*begin = ' ';
-				*(s-1) = 'L';
+				*(s - 1) = 'L';
 			}
 		}
 		// same song, second verse: G<spaces>OD.
-		for (s = strchr(text->str, 'G'); s; s = strchr(s+1, 'G')) {
+		for (s = strchr(text->str, 'G'); s; s = strchr(s + 1, 'G')) {
 			gchar *begin = s++;
 			while (*s == ' ')
 				++s;
 			if (!strncmp(s, "OD", 2)) {
 				*begin = ' ';
-				*(s-1) = 'G';
+				*(s - 1) = 'G';
 			}
 		}
 
 		XI_message(("ReadAloud: clean: %s\n", text->str));
 		// scribble clean text to the socket.
-		if (FestivalSpeak(text->str, strlen(text->str), tts_socket) == FALSE)
-		{
+		if (FestivalSpeak(text->str, strlen(text->str), tts_socket)
+		    == FALSE) {
 			char msg[256];
-			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
+			sprintf(msg,
+				"TTS disappeared?\nTTS write failed: %s",
 				strerror(errno));
 			StopFestival(&tts_socket);
 			settings.readaloud = 0;
 			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-						       (widgets.readaloud_item),
+						       (widgets.
+							readaloud_item),
 						       settings.readaloud);
 			gui_generic_warning(msg);
 		}
 
-	out:
+	      out:
 		g_string_free(text, TRUE);
 		return;
 
@@ -1882,16 +1877,18 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 //
 // starts festival in a async process
 //
-void
-StartFestival(void)
+void StartFestival(void)
 {
 #ifdef WIN32
 	//on windows, we will ship festival directly under Xiphos
 	gchar *festival_args[5];
-        gchar *festival_com = g_win32_get_package_installation_directory_of_module(NULL);
+	gchar *festival_com =
+	    g_win32_get_package_installation_directory_of_module(NULL);
 	festival_com = g_strconcat(festival_com, "\0", NULL);
-	gchar *festival_lib = g_build_filename(festival_com, "festival\\lib\0");
-	festival_com = g_build_filename(festival_com, "festival\\festival.exe\0");
+	gchar *festival_lib =
+	    g_build_filename(festival_com, "festival\\lib\0");
+	festival_com =
+	    g_build_filename(festival_com, "festival\\festival.exe\0");
 	festival_args[0] = festival_com;
 	festival_args[1] = g_strdup("--libdir");
 	festival_args[2] = festival_lib;
@@ -1903,21 +1900,15 @@ StartFestival(void)
 	festival_args[1] = g_strdup("--server");
 	festival_args[2] = NULL;
 #endif
-	g_spawn_async ( NULL,
-			festival_args,
-			NULL,
-			G_SPAWN_SEARCH_PATH,
-			NULL,
-			NULL,
-			NULL,
-			NULL);
+	g_spawn_async(NULL,
+		      festival_args,
+		      NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
 }
 
 //
 // shuts down Festival
 //
-void
-StopFestival(int *tts_socket)
+void StopFestival(int *tts_socket)
 {
 #ifdef WIN32
 	closesocket(*tts_socket);
@@ -1931,17 +1922,19 @@ StopFestival(int *tts_socket)
 //
 // tells Festival to say the given text
 //
-gboolean
-FestivalSpeak(gchar *text, int length, int tts_socket)
+gboolean FestivalSpeak(gchar * text, int length, int tts_socket)
 {
 #ifdef WIN32
-	if ((send(tts_socket, "(SayText \"", 10, MSG_DONTROUTE) == INVALID_SOCKET)  ||
-	    (send(tts_socket, text, length, MSG_DONTROUTE) == INVALID_SOCKET) ||
-	    (send(tts_socket, "\")\r\n", 4, MSG_DONTROUTE) == INVALID_SOCKET ))
+	if ((send(tts_socket, "(SayText \"", 10, MSG_DONTROUTE) ==
+	     INVALID_SOCKET)
+	    || (send(tts_socket, text, length, MSG_DONTROUTE) ==
+		INVALID_SOCKET)
+	    || (send(tts_socket, "\")\r\n", 4, MSG_DONTROUTE) ==
+		INVALID_SOCKET))
 		return FALSE;
 #else
-	if ((write(tts_socket, "(SayText \"", 10) < 0)  ||
-	    (write(tts_socket, text, length ) < 0) ||
+	if ((write(tts_socket, "(SayText \"", 10) < 0) ||
+	    (write(tts_socket, text, length) < 0) ||
 	    (write(tts_socket, "\")\r\n", 4) < 0))
 		return FALSE;
 #endif
@@ -1952,8 +1945,7 @@ FestivalSpeak(gchar *text, int length, int tts_socket)
 /*
  * strcasestr() turns out to be nonstandard extension, but we need it.
  */
-const char *
-strcasestr(const char *haystack, const char *needle)
+const char *strcasestr(const char *haystack, const char *needle)
 {
 	char *lower_haystack = g_strdup(haystack);
 	char *lower_needle = g_strdup(needle);
@@ -1968,33 +1960,30 @@ strcasestr(const char *haystack, const char *needle)
 
 	s = strstr(lower_haystack, lower_needle);
 	if (s)
-		s = (char *)haystack + (s - lower_haystack);
+		s = (char *) haystack + (s - lower_haystack);
 
 	g_free(lower_haystack);
 	g_free(lower_needle);
 	return s;
 }
-#endif /* !HAVE_STRCASESTR */
+#endif				/* !HAVE_STRCASESTR */
 
-int
-ImageDimensions(const char *path, int *x, int *y)
+int ImageDimensions(const char *path, int *x, int *y)
 {
 
-	if (gdk_pixbuf_get_file_info (path, x, y))
+	if (gdk_pixbuf_get_file_info(path, x, y))
 		return 0;
 	else
 		return -1;
 }
 
 #define	IMGSRC_STRING	"<img src=\""
-#define	IMGSRC_LENGTH	10		// strlen(IMGSRC_STRING)
+#define	IMGSRC_LENGTH	10	// strlen(IMGSRC_STRING)
 #ifndef HAVE_STRCASESTR
 const char *strcasestr(const char *haystack, const char *needle);
 #endif
 
-const char *
-AnalyzeForImageSize(const char *origtext,
-		    GdkWindow *window)
+const char *AnalyzeForImageSize(const char *origtext, GdkWindow * window)
 {
 	static GString *resized;
 	static gint resized_init = FALSE;
@@ -2011,50 +2000,52 @@ AnalyzeForImageSize(const char *origtext,
 		resized = g_string_new("");
 		resized_init = TRUE;
 	}
-
 	// performance tweak:
 	// image content is by no means common. therefore, spend an extra
 	// search call to determine whether any of the rest is needed,
 	// most especially to stop copying large blocks of text w/no images.
-	if ((path = (char *)strcasestr(origtext, IMGSRC_STRING)) == NULL)
+	if ((path = (char *) strcasestr(origtext, IMGSRC_STRING)) == NULL)
 		return origtext;
 
 	for (resized = g_string_assign(resized, ""), trail = origtext
-		 /* and path was initialized just above */ ;
-	     path;
-	     path = (char *)strcasestr(path, IMGSRC_STRING)) {
+	     /* and path was initialized just above */ ;
+	     path; path = (char *) strcasestr(path, IMGSRC_STRING)) {
 
 		if (window_y == -999) {
 			/* we have images, but we don't know bounds yet */
 
 #ifdef USE_GTK_3
-			window_x = gdk_window_get_width (window);
-			window_y = gdk_window_get_height(window);	
+			window_x = gdk_window_get_width(window);
+			window_y = gdk_window_get_height(window);
 #else
-			gdk_drawable_get_size(window, &window_x, &window_y);
+			gdk_drawable_get_size(window, &window_x,
+					      &window_y);
 #endif
 			if ((window_x > 200) || (window_y > 200)) {
 				window_x -= 23;
 				window_y -= 23;
 			} else {
-				window_x = (window_x * 93)/100;
-				window_y = (window_y * 93)/100;
+				window_x = (window_x * 93) / 100;
+				window_y = (window_y * 93) / 100;
 			}
 		}
 
 		/* add the working segment, with annotation added */
 		/* to keep us from matching IMGSRC_STRING again. */
 		path += IMGSRC_LENGTH;
-                resized = g_string_append_len(resized, trail, path-trail-5);
-                resized = g_string_append(resized, "resized=\"yes\" ");
-                resized = g_string_append_len(resized, path-5, 5);
+		resized =
+		    g_string_append_len(resized, trail, path - trail - 5);
+		resized = g_string_append(resized, "resized=\"yes\" ");
+		resized = g_string_append_len(resized, path - 5, 5);
 
 		// some modules play fast-n-loose with proper file spec.
 		if (strncmp(path, "file://", 7) == 0) {
 #ifdef WIN32
 			/* due to need for local soup server */
 			path += 5;
-			resized = g_string_append(resized, "http://127.0.0.1:7878/");
+			resized =
+			    g_string_append(resized,
+					    "http://127.0.0.1:7878/");
 #else
 			path += 7;
 			resized = g_string_append(resized, "file://");
@@ -2062,7 +2053,9 @@ AnalyzeForImageSize(const char *origtext,
 		} else if (strncmp(path, "file:", 5) == 0) {
 			path += 5;
 #ifdef WIN32
-			resized = g_string_append(resized, "http://127.0.0.1:7878/");
+			resized =
+			    g_string_append(resized,
+					    "http://127.0.0.1:7878/");
 #else
 			resized = g_string_append(resized, "file:");
 #endif
@@ -2079,7 +2072,9 @@ AnalyzeForImageSize(const char *origtext,
 
 		*end = '\0';
 #ifdef WIN32
-		resized = g_string_append(resized, g_strdelimit(path, "\\", '/'));
+		resized =
+		    g_string_append(resized,
+				    g_strdelimit(path, "\\", '/'));
 #else
 		resized = g_string_append(resized, path);
 #endif
@@ -2087,34 +2082,36 @@ AnalyzeForImageSize(const char *origtext,
 		*end = '"';
 
 		resized = g_string_append_c(resized, '"');
-		path = end+1;
+		path = end + 1;
 		trail = path;
 
 		if (image_retval != 0) {
 			if (!warned_once) {
-				gui_generic_warning(
-				    _("An image file's size could not be determined.\n"
-				      "Xiphos cannot resize images to fit window."));
+				gui_generic_warning(_
+						    ("An image file's size could not be determined.\n"
+						     "Xiphos cannot resize images to fit window."));
 				// settings.imageresize = 0;
 				warned_once = TRUE;
 			}
 			continue;
 		}
-
 		// knowing image size & window size, adjust to fit.
 		if (image_x > window_x) {
-			float proportion = (float)window_x / (float)image_x;
+			float proportion =
+			    (float) window_x / (float) image_x;
 			image_x = window_x;
-			image_y = (int)((float)image_y * proportion);
+			image_y = (int) ((float) image_y * proportion);
 		}
 		if (image_y > window_y) {
-			float proportion = (float)window_y / (float)image_y;
+			float proportion =
+			    (float) window_y / (float) image_y;
 			image_y = window_y;
-			image_x = (int)((float)image_x * proportion);
+			image_x = (int) ((float) image_x * proportion);
 		}
-		sprintf(buf, " width=\"%d\" height=\"%d\"", image_x, image_y);
+		sprintf(buf, " width=\"%d\" height=\"%d\"", image_x,
+			image_y);
 		resized = g_string_append(resized, buf);
-        }
+	}
 
 	resized = g_string_append(resized, trail);	// remainder of text appended.
 	return resized->str;
@@ -2137,33 +2134,30 @@ AnalyzeForImageSize(const char *origtext,
 
 char *inhale_text_from_file(const char *filename)
 {
-    FILE *handle;
-    size_t length;
-    gchar *blob = NULL;
+	FILE *handle;
+	size_t length;
+	gchar *blob = NULL;
 
-    if ((handle = g_fopen(filename, "r")) == NULL)
-	return NULL;
+	if ((handle = g_fopen(filename, "r")) == NULL)
+		return NULL;
 
-    (void) fseek(handle, 0L, SEEK_END);
-    length = ftell(handle);
-    rewind(handle);
+	(void) fseek(handle, 0L, SEEK_END);
+	length = ftell(handle);
+	rewind(handle);
 
-    if ((length != 0) &&
-	((blob = (gchar*)g_malloc(length+2)) != NULL) &&
-	(fread(blob, 1, length, handle) == length))
-    {
-	/* success. bound the text as a C string. */
-	*(blob + length) = '\0';
-    }
-    else
-    {
-	if (blob)
-	    g_free(blob);
-	blob = NULL;
-    }
+	if ((length != 0) &&
+	    ((blob = (gchar *) g_malloc(length + 2)) != NULL) &&
+	    (fread(blob, 1, length, handle) == length)) {
+		/* success. bound the text as a C string. */
+		*(blob + length) = '\0';
+	} else {
+		if (blob)
+			g_free(blob);
+		blob = NULL;
+	}
 
-    fclose(handle);
-    return blob;
+	fclose(handle);
+	return blob;
 }
 
 /******   end of file   ******/

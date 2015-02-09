@@ -71,14 +71,12 @@ on_dialog_response(GtkDialog * dialog, gint response_id,
  *   GtkWidget *
  */
 
-GtkWidget*
-gui_create_about_sword(void)
+GtkWidget *gui_create_about_sword(void)
 {
 	GdkPixbuf *about1_logo_pixbuf;
 	GtkWidget *about1;
 	gchar *about =
-	    _
-	    ("The SWORD Project is an effort to create an ever-expanding \
+	    _("The SWORD Project is an effort to create an ever-expanding \
 software package for research and study of God and His Word. \
 The SWORD Project framework allows easy use and study of Bible \
 texts, commentaries, lexicons, dictionaries, and other books. \
@@ -94,21 +92,20 @@ Books can be downloaded from the SWORD Project.");
 	g_signal_connect(about1, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
 	gtk_about_dialog_set_program_name
-	    (GTK_ABOUT_DIALOG (about1), "The SWORD Project");
+	    (GTK_ABOUT_DIALOG(about1), "The SWORD Project");
 	gtk_about_dialog_set_version
-	    (GTK_ABOUT_DIALOG (about1), (gchar *)main_get_sword_version());
-	gtk_about_dialog_set_comments
-	    (GTK_ABOUT_DIALOG (about1), about);
+	    (GTK_ABOUT_DIALOG(about1), (gchar *) main_get_sword_version());
+	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(about1), about);
 
 	gtk_about_dialog_set_website
-	    (GTK_ABOUT_DIALOG (about1), "http://www.crosswire.org/");
+	    (GTK_ABOUT_DIALOG(about1), "http://www.crosswire.org/");
 	gtk_about_dialog_set_website_label
-	    (GTK_ABOUT_DIALOG (about1), _("The SWORD Project"));
+	    (GTK_ABOUT_DIALOG(about1), _("The SWORD Project"));
 
 	gtk_about_dialog_set_logo
-	    (GTK_ABOUT_DIALOG (about1), about1_logo_pixbuf);
+	    (GTK_ABOUT_DIALOG(about1), about1_logo_pixbuf);
 
-	set_window_icon (GTK_WINDOW(about1));
+	set_window_icon(GTK_WINDOW(about1));
 
 	return about1;
 }

@@ -38,10 +38,5 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-
-/* the code implementing our versions of these is in src/gnome2/gui.c, */
-/* expressly because gui.c does not need these functions; ergo, gui.c  */
-/* does not #include this file: it gets access to real glib functions. */
-/* all other source files include this file to get the replacements.   */
-
-#endif /* DEBUG */
+/* the code implementing our versions of these is in src/gnome2/gui.c, *//* expressly because gui.c does not need these functions; ergo, gui.c  *//* does not #include this file: it gets access to real glib functions. *//* all other source files include this file to get the replacements.   */
+#endif				/* DEBUG */

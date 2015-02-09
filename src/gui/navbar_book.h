@@ -23,6 +23,6 @@
 #define ___NAVBAR_BOOK_H_
 
 GtkWidget *gui_navbar_book_new(void);
-void on_entry_activate (GtkEntry *entry, gpointer  user_data);
+void on_entry_activate(GtkEntry * entry, gpointer user_data);
 
 #endif

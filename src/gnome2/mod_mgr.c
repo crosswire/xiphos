@@ -22,7 +22,7 @@
 
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <sys/types.h>
@@ -35,7 +35,7 @@
 
 #include <gtk/gtk.h>
 #ifndef USE_GTKBUILDER
-  #include <glade/glade-xml.h>
+#include <glade/glade-xml.h>
 #endif
 
 #include "gui/mod_mgr.h"
@@ -81,8 +81,8 @@ _("<b>Welcome to Xiphos.</b>\n\nThere are no Bibles installed. In order to initi
 
 /* activity codes */
 enum {
-	ALL_MODULES = -1, /* for obsolescence search-&-destroy */
-	REMOVE  = 0,
+	ALL_MODULES = -1,	/* for obsolescence search-&-destroy */
+	REMOVE = 0,
 	INSTALL = 1,
 	ARCHIVE = 2,
 	FASTMOD = 3,
@@ -91,9 +91,9 @@ enum {
 
 /* dialog & progress bar phrases */
 enum {
-	PHRASE_INQUIRY  = 0,
-	PHRASE_PREPARE  = 1,
-	PHRASE_DOING    = 2,
+	PHRASE_INQUIRY = 0,
+	PHRASE_PREPARE = 1,
+	PHRASE_DOING = 2,
 	PHRASE_COMPLETE = 3,
 };
 
@@ -190,36 +190,37 @@ static int load_source_treeviews(void);
 
 /* indexed by REMOVE/INSTALL/ARCHIVE/FASTMOD/DELFAST and PHRASE_* */
 char *verbs[5][4] = {
-    {
-	N_("Remove these modules?"),
-	N_("Preparing to remove"),
-	N_("Removing"),
-	N_("Remove")
-    },
-    {
-	N_("Install these modules?"),
-	N_("Preparing to install"),
-	N_("Installing"),
-	N_("Install")
-    },
-    {
-	N_("Archive these modules?"),
-	N_("Preparing to archive"),
-	N_("Archiving"),
-	N_("Archive")
-    },
-    {
-	N_("Build fast-search index for these\nmodules (may take minutes/module)?"),
-	N_("Preparing to index"),
-	N_("Indexing"),
-	N_("Index")
-    },
-    {
-	N_("Delete fast-search index for these modules?"),
-	N_("Preparing to delete index"),
-	N_("Deleting index"),
-	N_("Deletion")
-    },
+	{
+	 N_("Remove these modules?"),
+	 N_("Preparing to remove"),
+	 N_("Removing"),
+	 N_("Remove")
+	 },
+	{
+	 N_("Install these modules?"),
+	 N_("Preparing to install"),
+	 N_("Installing"),
+	 N_("Install")
+	 },
+	{
+	 N_("Archive these modules?"),
+	 N_("Preparing to archive"),
+	 N_("Archiving"),
+	 N_("Archive")
+	 },
+	{
+	 N_
+	 ("Build fast-search index for these\nmodules (may take minutes/module)?"),
+	 N_("Preparing to index"),
+	 N_("Indexing"),
+	 N_("Index")
+	 },
+	{
+	 N_("Delete fast-search index for these modules?"),
+	 N_("Preparing to delete index"),
+	 N_("Deleting index"),
+	 N_("Deletion")
+	 },
 };
 
 /******************************************************************************
@@ -242,17 +243,18 @@ char *verbs[5][4] = {
  */
 
 static gboolean on_modmgr_configure_event(GtkWidget * widget,
-					    GdkEventConfigure * event,
-					    gpointer user_data)
+					  GdkEventConfigure * event,
+					  gpointer user_data)
 {
 	gchar layout[10];
 	gint x;
 	gint y;
 
- 	gdk_window_get_root_origin(
-	    GDK_WINDOW(gtk_widget_get_window (dialog_modmgr)), &x, &y);
+	gdk_window_get_root_origin(GDK_WINDOW
+				   (gtk_widget_get_window(dialog_modmgr)),
+				   &x, &y);
 
-	settings.modmgr_width  = event->width;
+	settings.modmgr_width = event->width;
 	settings.modmgr_height = event->height;
 	settings.modmgr_x = x;
 	settings.modmgr_y = y;
@@ -274,12 +276,11 @@ static gboolean on_modmgr_configure_event(GtkWidget * widget,
 }
 
 static
-gboolean query_tooltip (GtkWidget  *widget,
-			gint        x,
-			gint        y,
-			gboolean    keyboard_mode,
-			GtkTooltip *tooltip,
-			gpointer    user_data)
+gboolean query_tooltip(GtkWidget * widget,
+		       gint x,
+		       gint y,
+		       gboolean keyboard_mode,
+		       GtkTooltip * tooltip, gpointer user_data)
 {
 	GtkTreeModel *model;
 	GtkTreePath *path;
@@ -288,22 +289,20 @@ gboolean query_tooltip (GtkWidget  *widget,
 	gchar *about;
 	gchar *version;
 	gchar *desc;
-	GString *str  = g_string_new (NULL);
+	GString *str = g_string_new(NULL);
 	GString *text = g_string_new(NULL);
 	GString *description = g_string_new(NULL);
 
-	if (!gtk_tree_view_get_tooltip_context ((GtkTreeView *)widget,
-						 &x,
-						 &y,
-						 keyboard_mode,
-						 &model,
-						 &path,
-						 &iter)) {
+	if (!gtk_tree_view_get_tooltip_context((GtkTreeView *) widget,
+					       &x,
+					       &y,
+					       keyboard_mode,
+					       &model, &path, &iter)) {
 		return FALSE;
 	}
 
-	if (gtk_tree_model_iter_has_child (model ,&iter)) {
-		gtk_tree_path_free (path);
+	if (gtk_tree_model_iter_has_child(model, &iter)) {
+		gtk_tree_path_free(path);
 		return FALSE;
 	}
 
@@ -311,44 +310,44 @@ gboolean query_tooltip (GtkWidget  *widget,
 	if (!desc)
 		return FALSE;
 	gtk_tree_model_get(model, &iter, COLUMN_ABOUT, &about, -1);
-	gtk_tree_model_get(model, &iter, COLUMN_AVAILABLE_VERSION, &version, -1);
+	gtk_tree_model_get(model, &iter, COLUMN_AVAILABLE_VERSION,
+			   &version, -1);
 
 	if (about)
-		g_strdelimit (about, "&", '+');
+		g_strdelimit(about, "&", '+');
 	g_string_printf(description,
 			"%s\n%s %s\n\n",
 			desc,
 			(version) ? "Sword module version" : "",
 			(version) ? version : "");
 
-	about_module_display(str,
-			     ((about && *about)
-			      ? about
-			      : _("The module has no About information.")),
+	about_module_display(str, ((about && *about)
+				   ? about
+				   :
+				   _
+				   ("The module has no About information.")),
 			     TRUE);
 
-	text = g_string_append_len(text, description->str, description->len);
+	text =
+	    g_string_append_len(text, description->str, description->len);
 	text = g_string_append_len(text, str->str, str->len);
 	if (text->len > 1200) {
-		text = g_string_truncate (text, 1200);
-		text = g_string_append_len(text, " ...", strlen (" ..."));
+		text = g_string_truncate(text, 1200);
+		text = g_string_append_len(text, " ...", strlen(" ..."));
 	}
 	pixbuf = pixbuf_finder("sword3.png", 0, NULL);
-	gtk_tooltip_set_icon (tooltip, pixbuf);
-	gtk_tooltip_set_text (tooltip, text->str);
+	gtk_tooltip_set_icon(tooltip, pixbuf);
+	gtk_tooltip_set_text(tooltip, text->str);
 
-	gtk_tree_view_set_tooltip_cell((GtkTreeView *)widget,
-				       tooltip,
-				       path,
-				       NULL,
-				       NULL);
-	gtk_tree_path_free (path);
-	g_free (about);
-	g_free (desc);
-	g_free (version);
-	g_string_free (str, TRUE);
-	g_string_free (text, TRUE);
-	g_string_free (description, TRUE);
+	gtk_tree_view_set_tooltip_cell((GtkTreeView *) widget,
+				       tooltip, path, NULL, NULL);
+	gtk_tree_path_free(path);
+	g_free(about);
+	g_free(desc);
+	g_free(version);
+	g_string_free(str, TRUE);
+	g_string_free(text, TRUE);
+	g_string_free(description, TRUE);
 	return TRUE;
 }
 
@@ -368,81 +367,77 @@ gboolean query_tooltip (GtkWidget  *widget,
  *   void
  */
 
-static void
-create_pixbufs(void)
+static void create_pixbufs(void)
 {
 
-#ifdef USE_GTK_3    
+#ifdef USE_GTK_3
 #ifdef HAVE_GTK_310
-	GtkIconTheme *icon_theme =                       
-			gtk_icon_theme_get_default ();
-	
-	INSTALLED = gtk_icon_theme_load_icon (icon_theme,
-                          "_Apply",
-                          16,
-                          GTK_ICON_LOOKUP_FORCE_SIZE,
-                          NULL);
-	
-	FASTICON  = gtk_icon_theme_load_icon (icon_theme,
-                          "edit-find-symbolic",
-                          16,
-                          GTK_ICON_LOOKUP_FORCE_SIZE,
-                          NULL);
+	GtkIconTheme *icon_theme = gtk_icon_theme_get_default();
 
-	NO_INDEX  = gtk_icon_theme_load_icon (icon_theme,
-                          "_Cancel",
-                          16,
-                          GTK_ICON_LOOKUP_FORCE_SIZE,
-                          NULL);
+	INSTALLED = gtk_icon_theme_load_icon(icon_theme,
+					     "_Apply",
+					     16,
+					     GTK_ICON_LOOKUP_FORCE_SIZE,
+					     NULL);
 
-	LOCKED    = gtk_icon_theme_load_icon (icon_theme,
-                          "changes-prevent-symbolic",
-                          16,
-                          GTK_ICON_LOOKUP_FORCE_SIZE,
-                          NULL);
+	FASTICON = gtk_icon_theme_load_icon(icon_theme,
+					    "edit-find-symbolic",
+					    16,
+					    GTK_ICON_LOOKUP_FORCE_SIZE,
+					    NULL);
 
-	REFRESH   = gtk_icon_theme_load_icon (icon_theme,
-                          "view-refresh-symbolic",
-                          16,
-                          GTK_ICON_LOOKUP_FORCE_SIZE,
-                          NULL);
-	
-	BLANK     = gtk_icon_theme_load_icon (icon_theme,
-                          "gnome-stock-blank", // FIXME:
-                          16,
-                          GTK_ICON_LOOKUP_FORCE_SIZE,
-                          NULL);
+	NO_INDEX = gtk_icon_theme_load_icon(icon_theme,
+					    "_Cancel",
+					    16,
+					    GTK_ICON_LOOKUP_FORCE_SIZE,
+					    NULL);
+
+	LOCKED = gtk_icon_theme_load_icon(icon_theme,
+					  "changes-prevent-symbolic",
+					  16,
+					  GTK_ICON_LOOKUP_FORCE_SIZE,
+					  NULL);
+
+	REFRESH = gtk_icon_theme_load_icon(icon_theme,
+					   "view-refresh-symbolic",
+					   16,
+					   GTK_ICON_LOOKUP_FORCE_SIZE,
+					   NULL);
+
+	BLANK = gtk_icon_theme_load_icon(icon_theme, "gnome-stock-blank",	// FIXME:
+					 16,
+					 GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
 #else
 	INSTALLED = gtk_widget_render_icon_pixbuf(dialog_modmgr,
-					   GTK_STOCK_APPLY,
-					   GTK_ICON_SIZE_MENU);
-	FASTICON  = pixbuf_finder("indexed-16.png", 0, NULL);
-	NO_INDEX  = gtk_widget_render_icon_pixbuf(dialog_modmgr,
-					   GTK_STOCK_CANCEL,
-					   GTK_ICON_SIZE_MENU);
-	LOCKED    = pixbuf_finder("epiphany-secure.png", 0, NULL);
-	REFRESH   = gtk_widget_render_icon_pixbuf(dialog_modmgr,
-					   GTK_STOCK_REFRESH,
-					   GTK_ICON_SIZE_MENU);
-	BLANK     = gtk_widget_render_icon_pixbuf(dialog_modmgr,
-					   "gnome-stock-blank",
-					   GTK_ICON_SIZE_MENU);
-#endif	
+						  GTK_STOCK_APPLY,
+						  GTK_ICON_SIZE_MENU);
+	FASTICON = pixbuf_finder("indexed-16.png", 0, NULL);
+	NO_INDEX = gtk_widget_render_icon_pixbuf(dialog_modmgr,
+						 GTK_STOCK_CANCEL,
+						 GTK_ICON_SIZE_MENU);
+	LOCKED = pixbuf_finder("epiphany-secure.png", 0, NULL);
+	REFRESH = gtk_widget_render_icon_pixbuf(dialog_modmgr,
+						GTK_STOCK_REFRESH,
+						GTK_ICON_SIZE_MENU);
+	BLANK = gtk_widget_render_icon_pixbuf(dialog_modmgr,
+					      "gnome-stock-blank",
+					      GTK_ICON_SIZE_MENU);
+#endif
 #else
 	INSTALLED = gtk_widget_render_icon(dialog_modmgr,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
-	FASTICON  = pixbuf_finder("indexed-16.png", 0, NULL);
-	NO_INDEX  = gtk_widget_render_icon(dialog_modmgr,
-					   GTK_STOCK_CANCEL,
-					   GTK_ICON_SIZE_MENU, NULL);
-	LOCKED    = pixbuf_finder("epiphany-secure.png", 0, NULL);
-	REFRESH   = gtk_widget_render_icon(dialog_modmgr,
-					   GTK_STOCK_REFRESH,
-					   GTK_ICON_SIZE_MENU, NULL);
-	BLANK     = gtk_widget_render_icon(dialog_modmgr,
-					   "gnome-stock-blank",
-					   GTK_ICON_SIZE_MENU, NULL);
+	FASTICON = pixbuf_finder("indexed-16.png", 0, NULL);
+	NO_INDEX = gtk_widget_render_icon(dialog_modmgr,
+					  GTK_STOCK_CANCEL,
+					  GTK_ICON_SIZE_MENU, NULL);
+	LOCKED = pixbuf_finder("epiphany-secure.png", 0, NULL);
+	REFRESH = gtk_widget_render_icon(dialog_modmgr,
+					 GTK_STOCK_REFRESH,
+					 GTK_ICON_SIZE_MENU, NULL);
+	BLANK = gtk_widget_render_icon(dialog_modmgr,
+				       "gnome-stock-blank",
+				       GTK_ICON_SIZE_MENU, NULL);
 #endif
 }
 
@@ -462,14 +457,12 @@ create_pixbufs(void)
  *   GtkTreeModel *
  */
 
-static GtkTreeModel *
-create_model(void)
+static GtkTreeModel *create_model(void)
 {
 	GtkTreeStore *store;
 
 	/* create list store */
-	store = gtk_tree_store_new(NUM_COLUMNS,
-				   G_TYPE_STRING,	/* module name */
+	store = gtk_tree_store_new(NUM_COLUMNS, G_TYPE_STRING,	/* module name */
 				   GDK_TYPE_PIXBUF,	/* installed */
 				   G_TYPE_BOOLEAN,	/* checkbox */
 				   G_TYPE_STRING,	/* installed verssion */
@@ -502,9 +495,8 @@ create_model(void)
  */
 
 static void
-fixed_toggled(GtkCellRendererToggle *cell,
-	      gchar *path_str,
-	      gpointer data)
+fixed_toggled(GtkCellRendererToggle * cell,
+	      gchar * path_str, gpointer data)
 {
 	GtkTreeView *treeview = (GtkTreeView *) data;
 	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
@@ -542,9 +534,7 @@ fixed_toggled(GtkCellRendererToggle *cell,
  *   void
  */
 
-static void
-add_columns(GtkTreeView * treeview,
-	    gboolean remove)
+static void add_columns(GtkTreeView * treeview, gboolean remove)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -553,34 +543,36 @@ add_columns(GtkTreeView * treeview,
 	/* -- column for sword module name -- */
 	renderer = gtk_cell_renderer_text_new();
 	column =
-	    gtk_tree_view_column_new_with_attributes(_("Module Name"), renderer,
-						     "text", COLUMN_NAME,
-						     NULL);
-					/* fixed sizing (200 pixels) */
+	    gtk_tree_view_column_new_with_attributes(_("Module Name"),
+						     renderer, "text",
+						     COLUMN_NAME, NULL);
+	/* fixed sizing (200 pixels) */
 	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
 					GTK_TREE_VIEW_COLUMN_FIXED);
 	gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN
-					     (column), 275);
+					   (column), 275);
 	gtk_tree_view_append_column(treeview, column);
 
 	/* -- installed -- */
 	column = gtk_tree_view_column_new();
-	image = 
+	image =
 #ifdef HAVE_GTK_310
-		 gtk_image_new_from_icon_name("emblem-ok-symbolic",
-					    GTK_ICON_SIZE_MENU);
+	    gtk_image_new_from_icon_name("emblem-ok-symbolic",
+					 GTK_ICON_SIZE_MENU);
 #else
-            (remove
-		 ? gtk_image_new_from_stock("gnome-stock-blank",
-					    GTK_ICON_SIZE_MENU)
-		 : gtk_image_new_from_stock(GTK_STOCK_APPLY,
-					    GTK_ICON_SIZE_MENU));
-#endif	
+	    (remove
+	     ? gtk_image_new_from_stock("gnome-stock-blank",
+					GTK_ICON_SIZE_MENU)
+	     : gtk_image_new_from_stock(GTK_STOCK_APPLY,
+					GTK_ICON_SIZE_MENU));
+#endif
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
 				    (remove
 				     ? ""
-				     : _("A checkmark means this module is already installed")));
+				     :
+				     _
+				     ("A checkmark means this module is already installed")));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -594,22 +586,25 @@ add_columns(GtkTreeView * treeview,
 	g_signal_connect(renderer, "toggled",
 			 G_CALLBACK(fixed_toggled), treeview);
 
-	column = gtk_tree_view_column_new(); 
-	image = 
+	column = gtk_tree_view_column_new();
+	image =
 #ifdef HAVE_GTK_310
-		 gtk_image_new_from_icon_name ("list-add-symbolic",
+	    gtk_image_new_from_icon_name("list-add-symbolic",
 					 GTK_ICON_SIZE_MENU);
 #else
-		 gtk_image_new_from_stock((remove
-					  ? "gtk-yes" //GTK_STOCK_REMOVE
-					  : GTK_STOCK_ADD),
-					 GTK_ICON_SIZE_MENU);
-#endif	
+	    gtk_image_new_from_stock((remove ? "gtk-yes"	//GTK_STOCK_REMOVE
+				      : GTK_STOCK_ADD),
+				     GTK_ICON_SIZE_MENU);
+#endif
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
 				    (remove
-				     ? _("Click the box to work on this module")
-				     : _("Click the box to select this module for install/update")));
+				     ?
+				     _
+				     ("Click the box to work on this module")
+				     :
+				     _
+				     ("Click the box to select this module for install/update")));
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
@@ -618,11 +613,11 @@ add_columns(GtkTreeView * treeview,
 					    "visible",
 					    COLUMN_VISIBLE, NULL);
 
-					/* fixed sizing (25 pixels) */
+	/* fixed sizing (25 pixels) */
 	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
 					GTK_TREE_VIEW_COLUMN_FIXED);
 	gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN
-					     (column), 25);
+					   (column), 25);
 	gtk_tree_view_append_column(treeview, column);
 
 	/* -- installed version -- */
@@ -637,45 +632,52 @@ add_columns(GtkTreeView * treeview,
 	/* -- fast index ready -- */
 	column = gtk_tree_view_column_new();
 #ifdef HAVE_GTK_310
-	image = gtk_image_new_from_icon_name("edit-find-symbolic", GTK_ICON_SIZE_MENU);
+	image =
+	    gtk_image_new_from_icon_name("edit-find-symbolic",
+					 GTK_ICON_SIZE_MENU);
 #else
 	image = pixmap_finder("indexed-16.png");
 #endif
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, _("The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"));
+	gtk_widget_set_tooltip_text(image,
+				    _
+				    ("The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
 					    "pixbuf", COLUMN_FASTREADY,
 					    NULL);
-					/* fixed sizing (25 pixels) */
+	/* fixed sizing (25 pixels) */
 	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
 					GTK_TREE_VIEW_COLUMN_FIXED);
 	gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN
-					     (column), 27);
+					   (column), 27);
 	gtk_tree_view_append_column(treeview, column);
 
 	/* -- locked -- */
 	column = gtk_tree_view_column_new();
 #ifdef HAVE_GTK_310
-	image = gtk_image_new_from_icon_name("changes-prevent-symbolic", GTK_ICON_SIZE_MENU);
+	image =
+	    gtk_image_new_from_icon_name("changes-prevent-symbolic",
+					 GTK_ICON_SIZE_MENU);
 #else
 	image = pixmap_finder("epiphany-secure.png");
 #endif
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, _("The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"));
+	gtk_widget_set_tooltip_text(image,
+				    _
+				    ("The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
-					    "pixbuf", COLUMN_LOCKED,
-					    NULL);
-					/* fixed sizing (25 pixels) */
+					    "pixbuf", COLUMN_LOCKED, NULL);
+	/* fixed sizing (25 pixels) */
 	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
 					GTK_TREE_VIEW_COLUMN_FIXED);
 	gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN
-					     (column), 25);
+					   (column), 25);
 	gtk_tree_view_append_column(treeview, column);
 
 	/* -- About content (invisible) -- */
@@ -686,28 +688,30 @@ add_columns(GtkTreeView * treeview,
 						     NULL);
 	/* column not shown */
 	gtk_tree_view_column_set_visible(column, FALSE);
-					/* fixed sizing (2 pixels) */
+	/* fixed sizing (2 pixels) */
 	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
 					GTK_TREE_VIEW_COLUMN_FIXED);
 	gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN
-					     (column), 2);
+					   (column), 2);
 	gtk_tree_view_append_column(treeview, column);
 
 	if (remove)
-		return;	/* no more fields needed */
+		return;		/* no more fields needed */
 
 	/* -- refresh/update -- */
 	column = gtk_tree_view_column_new();
-	image =   
+	image =
 #ifdef HAVE_GTK_310
-		gtk_image_new_from_icon_name 
-				("view-refresh-symbolic", GTK_ICON_SIZE_MENU);
+	    gtk_image_new_from_icon_name
+	    ("view-refresh-symbolic", GTK_ICON_SIZE_MENU);
 #else
-		gtk_image_new_from_stock
-				(GTK_STOCK_REFRESH, GTK_ICON_SIZE_MENU);
-#endif	
+	    gtk_image_new_from_stock
+	    (GTK_STOCK_REFRESH, GTK_ICON_SIZE_MENU);
+#endif
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, _("The refresh icon means the Installed module is older than the newer Available module: You should update the module"));
+	gtk_widget_set_tooltip_text(image,
+				    _
+				    ("The refresh icon means the Installed module is older than the newer Available module: You should update the module"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -739,13 +743,11 @@ add_columns(GtkTreeView * treeview,
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Description"),
 						     renderer, "text",
-						     COLUMN_DESC,
-						     NULL);
+						     COLUMN_DESC, NULL);
 	gtk_tree_view_append_column(treeview, column);
 }
 
-static void
-setup_treeview_install(GtkTreeView * install)
+static void setup_treeview_install(GtkTreeView * install)
 {
 	GtkTreeModel *model;
 	model = create_model();
@@ -754,11 +756,10 @@ setup_treeview_install(GtkTreeView * install)
 	add_columns(install, FALSE);
 }
 
-static void
-setup_treeview_maintenance(GtkTreeView * maintenance)
+static void setup_treeview_maintenance(GtkTreeView * maintenance)
 {
 	GtkTreeModel *model;
-	model =  create_model();
+	model = create_model();
 	gtk_tree_view_set_model(maintenance, NULL);
 	gtk_tree_view_set_model(maintenance, model);
 	add_columns(maintenance, TRUE);
@@ -804,9 +805,7 @@ static gboolean mod_mgr_check_for_file(const gchar * filename)
 
 #define ZIP_DIR	DOTSWORD "/zip"
 
-static void
-remove_install_modules(GList * modules,
-		       int activity)
+static void remove_install_modules(GList * modules, int activity)
 {
 	GList *tmp;
 	gchar *buf;
@@ -831,8 +830,10 @@ remove_install_modules(GList * modules,
 		tmp = g_list_next(tmp);
 	}
 
-	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
-				      gettext (verbs[activity][PHRASE_INQUIRY]), mods->str);
+	dialog_text =
+	    g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
+			    gettext(verbs[activity][PHRASE_INQUIRY]),
+			    mods->str);
 
 	if (!gui_yes_no_dialog(dialog_text, NULL)) {
 		g_list_free_full(modules, g_free);
@@ -842,7 +843,8 @@ remove_install_modules(GList * modules,
 	g_free(dialog_text);
 
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
-				  gettext (verbs[activity][PHRASE_PREPARE]));
+				  gettext(verbs[activity]
+					  [PHRASE_PREPARE]));
 	gtk_widget_show(progressbar_refresh);
 	gtk_widget_queue_draw(dialog_modmgr);
 	gtk_widget_hide(button_close);
@@ -865,15 +867,15 @@ remove_install_modules(GList * modules,
 		/* for "Abbreviation (Real)", we must */
 		/* get the real name for internal use. */
 		if ((s = strchr(buf, '(')) != NULL) {
-			module_name = g_strdup(s+1);
+			module_name = g_strdup(s + 1);
 			*(strchr(module_name, ')')) = '\0';
-		}
-		else
+		} else
 			module_name = g_strdup(buf);	/* no abbreviation */
-		
+
 		current_mod = module_name;
 		g_string_printf(mods, "%s: %s",
-				gettext(verbs[activity][PHRASE_DOING]), buf);
+				gettext(verbs[activity][PHRASE_DOING]),
+				buf);
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
 					  (progressbar_refresh),
 					  mods->str);
@@ -890,9 +892,11 @@ remove_install_modules(GList * modules,
 				  (destination
 				   ? destination
 				   : settings.path_to_mods)));
-			dir = g_strdup_printf("%s/%s", settings.homedir, ZIP_DIR);
-			if ((g_access(dir, F_OK) == -1) &&
-			    (g_mkdir(dir, S_IRWXU) != 0)) {
+			dir =
+			    g_strdup_printf("%s/%s", settings.homedir,
+					    ZIP_DIR);
+			if ((g_access(dir, F_OK) == -1)
+			    && (g_mkdir(dir, S_IRWXU) != 0)) {
 				char msg[300];
 				sprintf(msg, _("`mkdir %s' failed:\n%s."),
 					dir, strerror(errno));
@@ -902,30 +906,34 @@ remove_install_modules(GList * modules,
 				return;
 			}
 
-			zipfile = g_strdup_printf("%s/%s.zip", dir, module_name);
-			datapath = main_get_mod_config_entry(module_name, "DataPath");
+			zipfile =
+			    g_strdup_printf("%s/%s.zip", dir, module_name);
+			datapath =
+			    main_get_mod_config_entry(module_name,
+						      "DataPath");
 
 			// for modules whose DataPath ends in .../xyz/abc
 			// where abc is the file prefix (abc.dat, abc.idx, &c)
 			// we have to detect this and eliminate the end.
 			if (g_access(datapath, F_OK) == -1)
-			    *(strrchr(datapath, '/')) = '\0';
+				*(strrchr(datapath, '/')) = '\0';
 
 			// lastly, if the end char is '/', remove it or
 			// it becomes a problem when analyzing path length.
 			dlen = strlen(datapath);
-			if (datapath[dlen-1] == '/')
-			    datapath[dlen-1] = '\0';
-			
+			if (datapath[dlen - 1] == '/')
+				datapath[dlen - 1] = '\0';
+
 			conf_file = main_get_mod_config_file
-					    (module_name, (destination
-							   ? destination
-							   : settings.path_to_mods));
+			    (module_name, (destination
+					   ? destination
+					   : settings.path_to_mods));
 			g_remove(zipfile);
 
 			xiphos_create_archive(conf_file, datapath, zipfile,
 					      destination ?
-					      destination : settings.path_to_mods);
+					      destination : settings.
+					      path_to_mods);
 			g_string_append(cmd, module_name);
 			g_string_append(cmd, _(" archived in: \n"));
 			g_string_append(cmd, zipfile);
@@ -940,8 +948,7 @@ remove_install_modules(GList * modules,
 
 		if ((activity == REMOVE) ||	// just delete it
 		    (!first_time_user &&	// don't trip on "no modules".
-		     (activity == INSTALL) &&
-		     main_is_module(module_name))) {	// delete before re-install
+		     (activity == INSTALL) && main_is_module(module_name))) {	// delete before re-install
 			XI_print(("remove %s from %s\n", module_name,
 				  (destination
 				   ? destination
@@ -949,14 +956,17 @@ remove_install_modules(GList * modules,
 
 			/* hang onto the old key, if available. */
 			preserved_cipherkey =
-			    main_get_mod_config_entry(module_name, "CipherKey");
-			if (preserved_cipherkey && (*preserved_cipherkey == '\0')) {
+			    main_get_mod_config_entry(module_name,
+						      "CipherKey");
+			if (preserved_cipherkey
+			    && (*preserved_cipherkey == '\0')) {
 				/* present but empty -> nothingness */
 				g_free(preserved_cipherkey);
 				preserved_cipherkey = NULL;
 			}
 
-			result = mod_mgr_uninstall(destination, module_name);
+			result =
+			    mod_mgr_uninstall(destination, module_name);
 			if (result == -1) {
 				if (destination) {
 					new_dest = NULL;
@@ -970,47 +980,59 @@ remove_install_modules(GList * modules,
 					   ? new_dest
 					   : settings.path_to_mods)));
 				result =
-				    mod_mgr_uninstall(new_dest, module_name);
+				    mod_mgr_uninstall(new_dest,
+						      module_name);
 			}
-
 			// annihilate cache of removed module.
-			ModuleCacheErase((const char *)module_name);
+			ModuleCacheErase((const char *) module_name);
 		}
 
 		if (activity == INSTALL) {
 			XI_print(("install %s, source=%s\n", buf, source));
 			result = ((local)
-				  ? mod_mgr_local_install_module(destination, source, module_name)
-				  : mod_mgr_remote_install(destination, source, module_name));
+				  ?
+				  mod_mgr_local_install_module(destination,
+							       source,
+							       module_name)
+				  : mod_mgr_remote_install(destination,
+							   source,
+							   module_name));
 
 			/* try to re-use a saved key. */
 			if ((result != -1) && preserved_cipherkey) {
-				main_save_module_key(module_name, preserved_cipherkey);
-				XI_print(("re-use key %s\n", preserved_cipherkey));
+				main_save_module_key(module_name,
+						     preserved_cipherkey);
+				XI_print(("re-use key %s\n",
+					  preserved_cipherkey));
 			}
 
 			/* ask to eliminate old/dead/obsolete modules. */
 			if (result != -1)
-			    delete_obsolete(module_name, NULL);
+				delete_obsolete(module_name, NULL);
 		}
 
 		if (activity == FASTMOD) {
 			XI_print(("index %s\n", buf));
 #if 0
 			// why did we ever preclude indexing these?
-			if (main_get_mod_config_entry(module_name, "GSType"))
-				gui_generic_warning
-				    (_("Journals and prayer lists cannot be indexed."));
+			if (main_get_mod_config_entry
+			    (module_name, "GSType"))
+				gui_generic_warning(_
+						    ("Journals and prayer lists cannot be indexed."));
 			else
 #endif
-				result = ((main_module_mgr_index_mod(module_name))
-					  ? 0 : 1);
+				result =
+				    ((main_module_mgr_index_mod
+				      (module_name))
+				     ? 0 : 1);
 		}
 
 		if (activity == DELFAST) {
 			XI_print(("deleting index %s\n", buf));
-			result = ((main_module_mgr_delete_index_mod(module_name))
-				  ? 0 : 1);
+			result =
+			    ((main_module_mgr_delete_index_mod
+			      (module_name))
+			     ? 0 : 1);
 		}
 
 		if (preserved_cipherkey) {
@@ -1035,33 +1057,34 @@ remove_install_modules(GList * modules,
 
 	if (!result &&
 	    ((activity == REMOVE) ||
-	     (activity == FASTMOD) ||
-	     (activity == DELFAST))) {
+	     (activity == FASTMOD) || (activity == DELFAST))) {
 		load_module_tree(GTK_TREE_VIEW(treeview2), 0);
 	}
 
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), mods->str);
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
+				  mods->str);
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR
+				      (progressbar_refresh), 0);
 	g_string_free(mods, TRUE);
 	gtk_widget_hide(button_cancel);
 	gtk_widget_show(button_close);
 	switch (current_page) {
-		case 3:
-			gtk_widget_show(button_refresh);
-			gtk_widget_show(button_install);
-			gtk_widget_hide(button_arch);
-			gtk_widget_hide(button_idx);
-			gtk_widget_hide(button_delidx);
-			gtk_widget_hide(button_obsolete);
-			gtk_widget_hide(button_load_sources);
+	case 3:
+		gtk_widget_show(button_refresh);
+		gtk_widget_show(button_install);
+		gtk_widget_hide(button_arch);
+		gtk_widget_hide(button_idx);
+		gtk_widget_hide(button_delidx);
+		gtk_widget_hide(button_obsolete);
+		gtk_widget_hide(button_load_sources);
 		break;
-		case 4:
-			gtk_widget_show(button_remove);
-			gtk_widget_show(button_arch);
-			gtk_widget_show(button_idx);
-			gtk_widget_show(button_delidx);
-			gtk_widget_show(button_obsolete);
-			gtk_widget_hide(button_load_sources);
+	case 4:
+		gtk_widget_show(button_remove);
+		gtk_widget_show(button_arch);
+		gtk_widget_show(button_idx);
+		gtk_widget_show(button_delidx);
+		gtk_widget_show(button_obsolete);
+		gtk_widget_hide(button_load_sources);
 		break;
 	}
 	sync_windows();
@@ -1084,11 +1107,9 @@ remove_install_modules(GList * modules,
  *   GList *
  */
 
-static GList *
-parse_treeview(GList *list,
-	       GtkTreeModel *model,
-	       GtkTreeIter *tree_parent,
-	       int activity)
+static GList *parse_treeview(GList * list,
+			     GtkTreeModel * model,
+			     GtkTreeIter * tree_parent, int activity)
 {
 	GtkTreeIter child;
 	gchar *name = NULL;
@@ -1102,16 +1123,20 @@ parse_treeview(GList *list,
 				   &name, -1);
 		if (gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &child)) {
-			list = parse_treeview(list, model, &child, activity);
+			list =
+			    parse_treeview(list, model, &child, activity);
 		} else {
 			/* handle the abbreviated case, "abbrev (real)". */
 			char *n, *s = strchr(name, '(');
 			if (s) {
-				n = g_strdup(s+1);
+				n = g_strdup(s + 1);
 				*(strchr(n, ')')) = '\0';
 			}
 			if (fixed || (activity == ALL_MODULES)) {
-				list = g_list_append(list, (s ? n : (gchar *) name));
+				list =
+				    g_list_append(list,
+						  (s ? n : (gchar *)
+						   name));
 			}
 		}
 	} while (gtk_tree_model_iter_next(model, &child));
@@ -1136,8 +1161,7 @@ parse_treeview(GList *list,
  *   void
  */
 
-static GList *
-get_list_mods_to_remove_install(int activity)
+static GList *get_list_mods_to_remove_install(int activity)
 {
 	GList *retval = NULL;
 	GtkTreeIter root;
@@ -1145,13 +1169,10 @@ get_list_mods_to_remove_install(int activity)
 	gchar *name;
 	gboolean fixed;
 	if (activity == INSTALL)
-		model =
-		    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview));
+		model = gtk_tree_view_get_model(GTK_TREE_VIEW(treeview));
 	else
-		model =
-		    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview2));
-	if (!gtk_tree_model_get_iter_first
-	    (GTK_TREE_MODEL(model), &root))
+		model = gtk_tree_view_get_model(GTK_TREE_VIEW(treeview2));
+	if (!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &root))
 		return retval;
 
 	do {
@@ -1159,10 +1180,12 @@ get_list_mods_to_remove_install(int activity)
 				   COLUMN_FIXED, &fixed, COLUMN_NAME,
 				   &name, -1);
 		if (gtk_tree_model_iter_has_child(model, &root)) {
-			retval = parse_treeview(retval, model, &root, activity);
+			retval =
+			    parse_treeview(retval, model, &root, activity);
 		} else {
 			if (fixed || (activity == ALL_MODULES)) {
-				retval = g_list_append(retval, (gchar *)name);
+				retval =
+				    g_list_append(retval, (gchar *) name);
 			}
 
 		}
@@ -1191,10 +1214,9 @@ get_list_mods_to_remove_install(int activity)
 
 static void
 add_module_to_language_folder(GtkTreeView * tree,
-			      GtkTreeModel *model,
+			      GtkTreeModel * model,
 			      GtkTreeIter iter,
-			      MOD_MGR *info,
-			      gboolean checkmark)
+			      MOD_MGR * info, gboolean checkmark)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter child_iter;
@@ -1205,13 +1227,14 @@ add_module_to_language_folder(GtkTreeView * tree,
 	GdkPixbuf *locked;
 	GdkPixbuf *refresh;
 	const gchar *description = NULL;
-//	GtkTooltip *tooltip;
+//      GtkTooltip *tooltip;
 
 	/* Check language */
 	const gchar *buf = info->language;
-	if (!g_utf8_validate(buf,-1,NULL))
+	if (!g_utf8_validate(buf, -1, NULL))
 		info->language = _("Unknown");
-	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (info->language == NULL))
+	if (!g_unichar_isalnum(g_utf8_get_char(buf))
+	    || (info->language == NULL))
 		info->language = _("Unknown");
 
 	description = info->description;
@@ -1222,20 +1245,22 @@ add_module_to_language_folder(GtkTreeView * tree,
 		gchar *str_data;
 
 		/*gtk_tooltip_set_markup ( tooltip,
-                                         "<b>a little</b><br/>tooltip");*/
+		   "<b>a little</b><br/>tooltip"); */
 		gtk_tree_model_get(model, &iter_iter, COLUMN_NAME,
 				   &str_data, -1);
 		if (!strcmp(info->language, str_data)) {
-			installed = ((info->installed) ? INSTALLED : BLANK);
+			installed =
+			    ((info->installed) ? INSTALLED : BLANK);
 
-			locked    = ((info->locked)    ? LOCKED    : BLANK);
+			locked = ((info->locked) ? LOCKED : BLANK);
 
 			if ((info->installed &&
 			     (!info->old_version && info->new_version &&
 			      strcmp(info->new_version, " "))) ||
 			    ((info->old_version && !info->new_version)) ||
 			    ((info->old_version && info->new_version &&
-			      strcmp(info->new_version, info->old_version) > 0)))
+			      strcmp(info->new_version,
+				     info->old_version) > 0)))
 				refresh = REFRESH;
 			else
 				refresh = BLANK;
@@ -1256,14 +1281,15 @@ add_module_to_language_folder(GtkTreeView * tree,
 			gchar *caption;
 			if (info->abbreviation)
 				caption = g_strdup_printf("%s (%s)",
-							  info->abbreviation,
+							  info->
+							  abbreviation,
 							  info->name);
 			else
 				caption = g_strdup(info->name);
 
-			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
-					   COLUMN_NAME, caption,
-					   COLUMN_INSTALLED,
+			gtk_tree_store_set(GTK_TREE_STORE(model),
+					   &child_iter, COLUMN_NAME,
+					   caption, COLUMN_INSTALLED,
 					   (checkmark ? installed : BLANK),
 					   COLUMN_FIXED, FALSE,
 					   COLUMN_INSTALLED_VERSION,
@@ -1275,9 +1301,9 @@ add_module_to_language_folder(GtkTreeView * tree,
 					   COLUMN_AVAILABLE_VERSION,
 					   info->new_version,
 					   COLUMN_INSTALLSIZE,
-					   info->installsize,
-					   COLUMN_DESC, description,
-					   COLUMN_VISIBLE, TRUE, -1);
+					   info->installsize, COLUMN_DESC,
+					   description, COLUMN_VISIBLE,
+					   TRUE, -1);
 			g_free(caption);
 			g_free(str_data);
 			return;
@@ -1307,8 +1333,7 @@ add_module_to_language_folder(GtkTreeView * tree,
 
 static void
 language_add_folders(GtkTreeModel * model,
-		     GtkTreeIter iter,
-		     gchar ** languages)
+		     GtkTreeIter iter, gchar ** languages)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter child_iter;
@@ -1316,16 +1341,14 @@ language_add_folders(GtkTreeModel * model,
 
 	(void) gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	for (j = 0; languages[j]; ++j) {
-		gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
-		gtk_tree_store_set(GTK_TREE_STORE(model),
-				   &child_iter,
-				   COLUMN_VISIBLE,
-				   FALSE,
-				   COLUMN_NAME,
-				   ((g_utf8_validate(languages[j], -1, NULL))
+		gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter,
+				      &iter);
+		gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
+				   COLUMN_VISIBLE, FALSE, COLUMN_NAME,
+				   ((g_utf8_validate
+				     (languages[j], -1, NULL))
 				    ? languages[j]
-				    : _("Unknown")),
-				   -1);
+				    : _("Unknown")), -1);
 	}
 }
 
@@ -1348,9 +1371,8 @@ language_add_folders(GtkTreeModel * model,
  */
 
 static void
-add_language_folder(GtkTreeModel *model,
-		    GtkTreeIter iter,
-		    const gchar *language)
+add_language_folder(GtkTreeModel * model,
+		    GtkTreeIter iter, const gchar * language)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter child_iter;
@@ -1358,7 +1380,7 @@ add_language_folder(GtkTreeModel *model,
 
 	/* Check language */
 	const gchar *buf = language;
-	if (!g_utf8_validate(buf,-1,NULL))
+	if (!g_utf8_validate(buf, -1, NULL))
 		language = _("Unknown");
 	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
 		language = _("Unknown");
@@ -1369,10 +1391,7 @@ add_language_folder(GtkTreeModel *model,
 		gchar *str_data;
 
 		gtk_tree_model_get(model,
-				   &iter_iter,
-				   COLUMN_NAME,
-				   &str_data,
-				   -1);
+				   &iter_iter, COLUMN_NAME, &str_data, -1);
 
 		if (!g_utf8_collate(g_utf8_casefold(language, -1),
 				    g_utf8_casefold(str_data, -1))) {
@@ -1384,18 +1403,14 @@ add_language_folder(GtkTreeModel *model,
 	}
 	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
 	gtk_tree_store_set(GTK_TREE_STORE(model),
-			&child_iter,
-			COLUMN_VISIBLE,
-			FALSE,
-			COLUMN_NAME,
-			language,
-			-1);
+			   &child_iter,
+			   COLUMN_VISIBLE,
+			   FALSE, COLUMN_NAME, language, -1);
 }
 
 static gboolean
 on_modules_list_button_release(GtkWidget * widget,
-			     GdkEventButton * event,
-			     gpointer data)
+			       GdkEventButton * event, gpointer data)
 {
 	GtkTreeSelection *selection;
 	GtkTreeModel *model;
@@ -1425,20 +1440,20 @@ on_modules_list_button_release(GtkWidget * widget,
 	}
 	/* end of anti-bobble control. */
 
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(data));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(data));
 
-	if (!gtk_tree_selection_get_selected (selection, &model, &selected))
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
 		return FALSE;
 
-	if (!gtk_tree_model_iter_has_child (model ,&selected))
+	if (!gtk_tree_model_iter_has_child(model, &selected))
 		return FALSE;
 
-	path = gtk_tree_model_get_path (model, &selected);
-	if (gtk_tree_view_row_expanded (GTK_TREE_VIEW(data), path))
-	       gtk_tree_view_collapse_row ( GTK_TREE_VIEW(data), path );
-        else
-	       gtk_tree_view_expand_row ( GTK_TREE_VIEW(data), path, FALSE );
-	gtk_tree_path_free ( path );
+	path = gtk_tree_model_get_path(model, &selected);
+	if (gtk_tree_view_row_expanded(GTK_TREE_VIEW(data), path))
+		gtk_tree_view_collapse_row(GTK_TREE_VIEW(data), path);
+	else
+		gtk_tree_view_expand_row(GTK_TREE_VIEW(data), path, FALSE);
+	gtk_tree_path_free(path);
 	return FALSE;
 }
 
@@ -1460,9 +1475,7 @@ on_modules_list_button_release(GtkWidget * widget,
  *   void
  */
 
-static void
-load_module_tree(GtkTreeView * treeview,
-		 gboolean install)
+static void load_module_tree(GtkTreeView * treeview, gboolean install)
 {
 	GtkTreeStore *store;
 	GtkTreeIter repository_name;
@@ -1487,10 +1500,13 @@ load_module_tree(GtkTreeView * treeview,
 	MOD_MGR *info;
 
 	if (install) {
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton_source))) {
+		if (gtk_toggle_button_get_active
+		    (GTK_TOGGLE_BUTTON(radiobutton_source))) {
 			local = TRUE;
 			source =
-			    gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child (GTK_BIN(combo_entry1))));
+			    gtk_entry_get_text(GTK_ENTRY
+					       (gtk_bin_get_child
+						(GTK_BIN(combo_entry1))));
 
 			// must find the directory attached to the name.
 			// they may (and normally will) be the same,
@@ -1498,18 +1514,18 @@ load_module_tree(GtkTreeView * treeview,
 			tmp = tmp2 = mod_mgr_list_local_sources();
 			while (tmp) {
 				MOD_MGR_SOURCE *mms =
-				    (MOD_MGR_SOURCE *)tmp->data;
+				    (MOD_MGR_SOURCE *) tmp->data;
 
 				if (!strcmp(source, mms->caption))
 					source = g_strdup(mms->directory);
 
-				g_free((gchar*)mms->type);
-				g_free((gchar*)mms->caption);
-				g_free((gchar*)mms->source);
-				g_free((gchar*)mms->directory);
-				g_free((gchar*)mms->user);
-				g_free((gchar*)mms->pass);
-				g_free((gchar*)mms->uid);
+				g_free((gchar *) mms->type);
+				g_free((gchar *) mms->caption);
+				g_free((gchar *) mms->source);
+				g_free((gchar *) mms->directory);
+				g_free((gchar *) mms->user);
+				g_free((gchar *) mms->pass);
+				g_free((gchar *) mms->uid);
 				g_free(mms);
 				tmp = g_list_next(tmp);
 			}
@@ -1520,12 +1536,16 @@ load_module_tree(GtkTreeView * treeview,
 		} else {
 			local = FALSE;
 			source =
-			    gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child (GTK_BIN(combo_entry2))));
+			    gtk_entry_get_text(GTK_ENTRY
+					       (gtk_bin_get_child
+						(GTK_BIN(combo_entry2))));
 			tmp = mod_mgr_remote_list_modules(source);
 		}
 	} else {
 		// we are doing maintenance on all modules.
-		tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
+		tmp =
+		    mod_mgr_list_local_modules(settings.path_to_mods,
+					       TRUE);
 		// true -> we must have all modules available, incl. ~/.sword content.
 	}
 
@@ -1540,11 +1560,13 @@ load_module_tree(GtkTreeView * treeview,
 		/* note the repository that is active */
 		if ((local == FALSE) && (remote_source == NULL)) {
 #ifdef USE_GTK_3
-			remote_source = g_strdup(gtk_combo_box_text_get_active_text(
-						     GTK_COMBO_BOX_TEXT(combo_entry2)));
-#else 
-			remote_source = g_strdup(gtk_combo_box_get_active_text(
-						     GTK_COMBO_BOX(combo_entry2)));   
+			remote_source =
+			    g_strdup(gtk_combo_box_text_get_active_text
+				     (GTK_COMBO_BOX_TEXT(combo_entry2)));
+#else
+			remote_source =
+			    g_strdup(gtk_combo_box_get_active_text
+				     (GTK_COMBO_BOX(combo_entry2)));
 #endif
 		}
 		repository_identifier =
@@ -1556,7 +1578,8 @@ load_module_tree(GtkTreeView * treeview,
 		g_free(repository_identifier);
 
 		gtk_tree_store_append(store, &separator, NULL);
-		gtk_tree_store_set(store, &separator, 0, "------------------------", -1);
+		gtk_tree_store_set(store, &separator, 0,
+				   "------------------------", -1);
 
 		gtk_tree_store_append(store, &category_type, NULL);
 		gtk_tree_store_set(store, &category_type, 0,
@@ -1581,7 +1604,8 @@ load_module_tree(GtkTreeView * treeview,
 
 	/*  add Devotionals folder */
 	gtk_tree_store_append(store, &devotional, NULL);
-	gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"), -1);
+	gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"),
+			   -1);
 
 	/*  add Books folder */
 	gtk_tree_store_append(store, &book, NULL);
@@ -1601,7 +1625,8 @@ load_module_tree(GtkTreeView * treeview,
 
 	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &separator, NULL);
-		gtk_tree_store_set(store, &separator, 0, "------------------------", -1);
+		gtk_tree_store_set(store, &separator, 0,
+				   "------------------------", -1);
 
 		gtk_tree_store_append(store, &category_avail, NULL);
 		gtk_tree_store_set(store, &category_avail, 0,
@@ -1614,19 +1639,23 @@ load_module_tree(GtkTreeView * treeview,
 
 		/*  add Uninstalled folder */
 		gtk_tree_store_append(store, &uninstalled, NULL);
-		gtk_tree_store_set(store, &uninstalled, 0, _("Uninstalled"), -1);
+		gtk_tree_store_set(store, &uninstalled, 0,
+				   _("Uninstalled"), -1);
 	} else {
 		if (settings.prayerlist) {
 			gtk_tree_store_append(store, &prayerlist, NULL);
-			gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"), -1);
+			gtk_tree_store_set(store, &prayerlist, 0,
+					   _("Prayer List/Journal"), -1);
 		}
 	}
 
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
 			   devotional, dictionary, glossary, book, cult,
-			   ((install && !first_time_user) ? &update : NULL),
-			   ((install && !first_time_user) ? &uninstalled : NULL),
+			   ((install
+			     && !first_time_user) ? &update : NULL),
+			   ((install
+			     && !first_time_user) ? &uninstalled : NULL),
 			   language_add_folders, FALSE);
 
 	tmp2 = tmp;
@@ -1638,20 +1667,25 @@ load_module_tree(GtkTreeView * treeview,
 			if (!info->installed) {
 				add_module_to_language_folder(treeview,
 							      GTK_TREE_MODEL
-							      (store), uninstalled,
-							      info, install);
-			} else if ((!info->old_version && info->new_version &&
-				    strcmp(info->new_version, " ")) ||
-				   (info->old_version && !info->new_version) ||
-				   (info->old_version && info->new_version &&
-				    strcmp(info->new_version, info->old_version) > 0)) {
+							      (store),
+							      uninstalled,
+							      info,
+							      install);
+			} else
+			    if ((!info->old_version && info->new_version
+				 && strcmp(info->new_version, " "))
+				|| (info->old_version
+				    && !info->new_version)
+				|| (info->old_version && info->new_version
+				    && strcmp(info->new_version,
+					      info->old_version) > 0)) {
 				add_module_to_language_folder(treeview,
 							      GTK_TREE_MODEL
-							      (store), update,
-							      info, install);
+							      (store),
+							      update, info,
+							      install);
 			}
 		}
-
 		// see comment on similar code in src/main/sidebar.cc.
 
 		if (info->is_cult) {
@@ -1659,65 +1693,63 @@ load_module_tree(GtkTreeView * treeview,
 						      GTK_TREE_MODEL
 						      (store), cult,
 						      info, install);
-		}
-		else if (info->type[0] == 'B') {
+		} else if (info->type[0] == 'B') {
 			add_module_to_language_folder(treeview,
 						      GTK_TREE_MODEL
 						      (store), text,
 						      info, install);
-		}
-		else if (info->type[0] == 'C') {
+		} else if (info->type[0] == 'C') {
 			add_module_to_language_folder(treeview,
 						      GTK_TREE_MODEL
 						      (store), commentary,
 						      info, install);
-		}
-		else if (info->is_maps) {
+		} else if (info->is_maps) {
 			add_module_to_language_folder(treeview,
 						      GTK_TREE_MODEL
 						      (store), map,
 						      info, install);
-		}
-		else if (info->is_images) {
+		} else if (info->is_images) {
 			add_module_to_language_folder(treeview,
 						      GTK_TREE_MODEL
 						      (store), image,
 						      info, install);
-		}
-		else if (info->is_devotional) {
+		} else if (info->is_devotional) {
 			add_module_to_language_folder(treeview,
 						      GTK_TREE_MODEL
 						      (store), devotional,
 						      info, install);
-		}
-		else if (info->is_glossary) {
+		} else if (info->is_glossary) {
 			add_module_to_language_folder(treeview,
 						      GTK_TREE_MODEL
 						      (store), glossary,
 						      info, install);
-		}
-		else if (info->type[0] == 'L') {
+		} else if (info->type[0] == 'L') {
 			add_module_to_language_folder(treeview,
 						      GTK_TREE_MODEL
 						      (store), dictionary,
 						      info, install);
-		}
-		else if (info->type[0] == 'G') {
+		} else if (info->type[0] == 'G') {
 			gchar *gstype;
 			if (first_time_user ||
-			    ((gstype = main_get_mod_config_entry(info->name, "GSType"))
-			     == NULL) ||
-			    strcmp(gstype, "PrayerList")) {
+			    ((gstype =
+			      main_get_mod_config_entry(info->name,
+							"GSType"))
+			     == NULL) || strcmp(gstype, "PrayerList")) {
 				add_module_to_language_folder
-				    (treeview,GTK_TREE_MODEL(store), book, info, install);
+				    (treeview, GTK_TREE_MODEL(store), book,
+				     info, install);
 			} else if (settings.prayerlist) {
 				add_language_folder
-				    (GTK_TREE_MODEL(store), prayerlist, info->language);
-				add_module_to_language_folder
-				    (treeview,GTK_TREE_MODEL(store), prayerlist, info, install);
+				    (GTK_TREE_MODEL(store), prayerlist,
+				     info->language);
+				add_module_to_language_folder(treeview,
+							      GTK_TREE_MODEL
+							      (store),
+							      prayerlist,
+							      info,
+							      install);
 			}
-		}
-		else {
+		} else {
 			XI_warning(("mod `%s' unknown type `%s'",
 				    info->name, info->type));
 		}
@@ -1737,9 +1769,9 @@ load_module_tree(GtkTreeView * treeview,
 	gtk_tree_view_set_model(treeview, GTK_TREE_MODEL(store));
 
 	g_signal_connect_after((gpointer) treeview,
-			 "button_release_event",
-			 G_CALLBACK
-			 (on_modules_list_button_release), treeview);
+			       "button_release_event",
+			       G_CALLBACK
+			       (on_modules_list_button_release), treeview);
 
 }
 
@@ -1760,12 +1792,12 @@ load_module_tree(GtkTreeView * treeview,
  *   void
  */
 
-static void
-remove_install_wrapper(int activity)
+static void remove_install_wrapper(int activity)
 {
 	GList *modules = NULL;
 
-	if (working) return;
+	if (working)
+		return;
 	working = TRUE;
 
 	modules = get_list_mods_to_remove_install(activity);
@@ -1798,40 +1830,50 @@ remove_install_wrapper(int activity)
  *   void
  */
 
-static void
-response_refresh(void)
+static void response_refresh(void)
 {
 	gint result;
 	gchar *buf;
 
-	if (working) return;
+	if (working)
+		return;
 	working = TRUE;
 
 	if (remote_source == NULL)
 #ifdef USE_GTK_3
-		remote_source = g_strdup(gtk_combo_box_text_get_active_text(
-					     GTK_COMBO_BOX_TEXT(combo_entry2)));
-#else 
-		remote_source = g_strdup(gtk_combo_box_get_active_text(
-					     GTK_COMBO_BOX(combo_entry2)));
+		remote_source =
+		    g_strdup(gtk_combo_box_text_get_active_text
+			     (GTK_COMBO_BOX_TEXT(combo_entry2)));
+#else
+		remote_source =
+		    g_strdup(gtk_combo_box_get_active_text
+			     (GTK_COMBO_BOX(combo_entry2)));
 #endif
-	buf = g_strdup_printf("%s: %s", _("Refreshing from remote source"), remote_source);
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
+	buf =
+	    g_strdup_printf("%s: %s", _("Refreshing from remote source"),
+			    remote_source);
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
+				  buf);
 	g_free(buf);
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR
+				      (progressbar_refresh), 0);
 	gtk_widget_show(progressbar_refresh);
 	sync_windows();
 	result = mod_mgr_refresh_remote_source(remote_source);
 
 	if (result) {
-		gtk_progress_bar_set_text(
-			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote source not found"));
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
-	}
-	else {
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
+					  (progressbar_refresh),
+					  _("Remote source not found"));
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR
+					      (progressbar_refresh), 0);
+	} else {
 		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), _("Finished"));
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
+					  (progressbar_refresh),
+					  _("Finished"));
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR
+					      (progressbar_refresh), 0);
 	}
 
 	working = FALSE;
@@ -1853,8 +1895,7 @@ response_refresh(void)
  *   void
  */
 
-static void
-check_sync_repos(void)
+static void check_sync_repos(void)
 {
 	GList *tmp = mod_mgr_list_remote_sources();
 	/*
@@ -1863,9 +1904,12 @@ check_sync_repos(void)
 	if (g_list_length(tmp) <= 1) {
 		char index[10];
 		mod_mgr_init_config_extras();
-		settings.mod_mgr_remote_source_index = load_source_treeviews();
-		g_snprintf(index, 10, "%d", settings.mod_mgr_remote_source_index);
-		xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", index);
+		settings.mod_mgr_remote_source_index =
+		    load_source_treeviews();
+		g_snprintf(index, 10, "%d",
+			   settings.mod_mgr_remote_source_index);
+		xml_set_value("Xiphos", "modmgr",
+			      "mod_mgr_remote_source_index", index);
 		set_controls_to_last_use();
 	}
 	g_list_free(tmp);
@@ -1887,8 +1931,7 @@ check_sync_repos(void)
  *   void
  */
 
-static void
-add_columns_to_first(GtkTreeView * treeview)
+static void add_columns_to_first(GtkTreeView * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1918,8 +1961,7 @@ add_columns_to_first(GtkTreeView * treeview)
  *   void
  */
 
-static void
-add_columns_to_remote_treeview(GtkTreeView * treeview)
+static void add_columns_to_remote_treeview(GtkTreeView * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1935,16 +1977,14 @@ add_columns_to_remote_treeview(GtkTreeView * treeview)
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Caption"),
 						     renderer, "text",
-						     COLUMN_CAPTION,
-						     NULL);
+						     COLUMN_CAPTION, NULL);
 	gtk_tree_view_append_column(treeview, column);
 
 	renderer = gtk_cell_renderer_text_new();
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Source"),
 						     renderer, "text",
-						     COLUMN_SOURCE,
-						     NULL);
+						     COLUMN_SOURCE, NULL);
 	gtk_tree_view_append_column(treeview, column);
 
 	renderer = gtk_cell_renderer_text_new();
@@ -1959,29 +1999,25 @@ add_columns_to_remote_treeview(GtkTreeView * treeview)
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("User"),
 						     renderer, "text",
-						     COLUMN_USER,
-						     NULL);
+						     COLUMN_USER, NULL);
 	gtk_tree_view_append_column(treeview, column);
 
 	renderer = gtk_cell_renderer_text_new();
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Password"),
 						     renderer, "text",
-						     COLUMN_PASS,
-						     NULL);
+						     COLUMN_PASS, NULL);
 	gtk_tree_view_append_column(treeview, column);
 
 	renderer = gtk_cell_renderer_text_new();
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("UID"),
 						     renderer, "text",
-						     COLUMN_UID,
-						     NULL);
+						     COLUMN_UID, NULL);
 	gtk_tree_view_append_column(treeview, column);
 }
 
-static GtkTreeModel *
-create_model_to_first(void)
+static GtkTreeModel *create_model_to_first(void)
 {
 	GtkTreeStore *model;
 	GtkTreeIter iter;
@@ -1993,7 +2029,8 @@ create_model_to_first(void)
 	gtk_tree_store_set(model, &iter, 0, _("Module Sources"), -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Add/Remove"), 1, 1, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Add/Remove"), 1, 1,
+			   -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Choose"), 1, 2, -1);
 
@@ -2001,9 +2038,11 @@ create_model_to_first(void)
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, _("Modules"), -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Install/Update"), 1, 3, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Install/Update"), 1,
+			   3, -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Maintenance"), 1, 4, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Maintenance"), 1, 4,
+			   -1);
 
 	return GTK_TREE_MODEL(model);
 }
@@ -2011,8 +2050,7 @@ create_model_to_first(void)
 
 
 
-static GtkTreeModel *
-create_remote_source_treeview_model(void)
+static GtkTreeModel *create_remote_source_treeview_model(void)
 {
 	GtkListStore *store;
 
@@ -2023,8 +2061,7 @@ create_remote_source_treeview_model(void)
 				   G_TYPE_STRING,
 				   G_TYPE_STRING,
 				   G_TYPE_STRING,
-				   G_TYPE_STRING,
-				   G_TYPE_STRING);
+				   G_TYPE_STRING, G_TYPE_STRING);
 
 	return GTK_TREE_MODEL(store);
 }
@@ -2045,23 +2082,23 @@ create_remote_source_treeview_model(void)
  *   int
  */
 
-static int
-load_source_treeviews(void)
+static int load_source_treeviews(void)
 {
-	int crosswire_index = 1 /* guess */, crosswire_tracker = 0 /* start */;
+	int crosswire_index = 1 /* guess */ , crosswire_tracker =
+	    0 /* start */ ;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
 	GtkTreeIter iter;
 	GtkTreeIter combo_iter;
 	MOD_MGR_SOURCE *mms;
 	GtkTreeModel *remote_model =
-		gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
 	GtkTreeModel *local_model =
-		gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
-	GtkTreeModel* module_box_local =
-		gtk_combo_box_get_model(GTK_COMBO_BOX(combo_entry1));
-	GtkTreeModel* module_box_remote =
-		gtk_combo_box_get_model(GTK_COMBO_BOX(combo_entry2));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
+	GtkTreeModel *module_box_local =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX(combo_entry1));
+	GtkTreeModel *module_box_remote =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX(combo_entry2));
 
 	/* remote */
 	gtk_list_store_clear(GTK_LIST_STORE(remote_model));
@@ -2071,30 +2108,27 @@ load_source_treeviews(void)
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		if (!strcmp(mms->caption, "CrossWire"))
 			crosswire_index = crosswire_tracker;
-		gtk_list_store_append(GTK_LIST_STORE(remote_model),
-				      &iter);
+		gtk_list_store_append(GTK_LIST_STORE(remote_model), &iter);
 		gtk_list_store_set(GTK_LIST_STORE(remote_model), &iter,
-				   COLUMN_TYPE,      mms->type,
-				   COLUMN_CAPTION,   mms->caption,
-				   COLUMN_SOURCE,    mms->source,
+				   COLUMN_TYPE, mms->type,
+				   COLUMN_CAPTION, mms->caption,
+				   COLUMN_SOURCE, mms->source,
 				   COLUMN_DIRECTORY, mms->directory,
-				   COLUMN_USER,      mms->user,
-				   COLUMN_PASS,      mms->pass,
-				   COLUMN_UID,       mms->uid,
-				   -1);
-		gtk_list_store_append(GTK_LIST_STORE(module_box_remote), &combo_iter);
+				   COLUMN_USER, mms->user,
+				   COLUMN_PASS, mms->pass,
+				   COLUMN_UID, mms->uid, -1);
+		gtk_list_store_append(GTK_LIST_STORE(module_box_remote),
+				      &combo_iter);
 		gtk_list_store_set(GTK_LIST_STORE(module_box_remote),
-					&combo_iter,
-					0,
-					(gchar*)mms->caption,
-					-1);
-		g_free((gchar*)mms->type);
-		g_free((gchar*)mms->caption);
-		g_free((gchar*)mms->source);
-		g_free((gchar*)mms->directory);
-		g_free((gchar*)mms->user);
-		g_free((gchar*)mms->pass);
-		g_free((gchar*)mms->uid);
+				   &combo_iter, 0, (gchar *) mms->caption,
+				   -1);
+		g_free((gchar *) mms->type);
+		g_free((gchar *) mms->caption);
+		g_free((gchar *) mms->source);
+		g_free((gchar *) mms->directory);
+		g_free((gchar *) mms->user);
+		g_free((gchar *) mms->pass);
+		g_free((gchar *) mms->uid);
 		g_free(mms);
 		tmp = g_list_next(tmp);
 		crosswire_tracker++;
@@ -2108,30 +2142,23 @@ load_source_treeviews(void)
 	tmp = tmp2 = mod_mgr_list_local_sources();
 	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
-		gtk_list_store_append(GTK_LIST_STORE(local_model),
-				      &iter);
-		gtk_list_store_set(GTK_LIST_STORE(local_model), &iter,
-				   COLUMN_TYPE,      mms->type,
-				   COLUMN_CAPTION,   mms->caption,
-				   COLUMN_SOURCE,    " ", // mms->source - eh.
+		gtk_list_store_append(GTK_LIST_STORE(local_model), &iter);
+		gtk_list_store_set(GTK_LIST_STORE(local_model), &iter, COLUMN_TYPE, mms->type, COLUMN_CAPTION, mms->caption, COLUMN_SOURCE, " ",	// mms->source - eh.
 				   COLUMN_DIRECTORY, mms->directory,
-				   COLUMN_USER,      "",
-				   COLUMN_PASS,      "",
-				   COLUMN_UID,       "",
-				   -1);
-		gtk_list_store_append(GTK_LIST_STORE(module_box_local), &combo_iter);
+				   COLUMN_USER, "",
+				   COLUMN_PASS, "", COLUMN_UID, "", -1);
+		gtk_list_store_append(GTK_LIST_STORE(module_box_local),
+				      &combo_iter);
 		gtk_list_store_set(GTK_LIST_STORE(module_box_local),
-					&combo_iter,
-					0,
-					(gchar*)mms->caption,
-					-1);
-		g_free((gchar*)mms->type);
-		g_free((gchar*)mms->caption);
-		g_free((gchar*)mms->source);
-		g_free((gchar*)mms->directory);
-		g_free((gchar*)mms->user);
-		g_free((gchar*)mms->pass);
-		g_free((gchar*)mms->uid);
+				   &combo_iter, 0, (gchar *) mms->caption,
+				   -1);
+		g_free((gchar *) mms->type);
+		g_free((gchar *) mms->caption);
+		g_free((gchar *) mms->source);
+		g_free((gchar *) mms->directory);
+		g_free((gchar *) mms->user);
+		g_free((gchar *) mms->pass);
+		g_free((gchar *) mms->uid);
 		g_free(mms);
 		tmp = g_list_next(tmp);
 	}
@@ -2158,11 +2185,12 @@ load_source_treeviews(void)
  *   void
  */
 
-void
-clear_and_hide_progress_bar(void)
+void clear_and_hide_progress_bar(void)
 {
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), "");
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh),0);
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
+				  "");
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR
+				      (progressbar_refresh), 0);
 	gtk_widget_hide(progressbar_refresh);
 }
 
@@ -2188,15 +2216,12 @@ clear_and_hide_progress_bar(void)
 #ifdef USE_GTK_3
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
-			 gpointer arg,
-			 guint page_num,
-			 gpointer user_data)
+			 gpointer arg, guint page_num, gpointer user_data)
 #else
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
-			 guint page_num,
-			 gpointer user_data)
+			 guint page_num, gpointer user_data)
 #endif
 {
 	gchar *str;
@@ -2238,13 +2263,16 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 		break;
 	case 3:
 		if (!have_configs) {
-			str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
-					      _("Please Refresh"),
-					      _("Your module list is not up to date!"));
+			str =
+			    g_strdup_printf
+			    ("<span weight=\"bold\">%s</span>\n\n%s",
+			     _("Please Refresh"),
+			     _("Your module list is not up to date!"));
 			gui_generic_warning(str);
 			g_free(str);
 		}
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton_dest))) {
+		if (gtk_toggle_button_get_active
+		    (GTK_TOGGLE_BUTTON(radiobutton_dest))) {
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
 		} else {
@@ -2256,7 +2284,8 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
 		break;
 	case 4:
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton_dest))) {
+		if (gtk_toggle_button_get_active
+		    (GTK_TOGGLE_BUTTON(radiobutton_dest))) {
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
 		} else {
@@ -2300,19 +2329,20 @@ on_notebook1_switch_page(GtkNotebook * notebook,
  */
 
 void
-on_radiobutton2_toggled(GtkToggleButton * togglebutton,
-			gpointer user_data)
+on_radiobutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	if (gtk_toggle_button_get_active (togglebutton)) {
+	if (gtk_toggle_button_get_active(togglebutton)) {
 		gtk_widget_show(button_refresh);
 		if (remote_source)
-		        g_free(remote_source);
+			g_free(remote_source);
 #ifdef USE_GTK_3
-		remote_source = g_strdup(gtk_combo_box_text_get_active_text(
-					     GTK_COMBO_BOX_TEXT(combo_entry2)));
-#else  
-		remote_source = g_strdup(gtk_combo_box_get_active_text(
-					     GTK_COMBO_BOX(combo_entry2)));
+		remote_source =
+		    g_strdup(gtk_combo_box_text_get_active_text
+			     (GTK_COMBO_BOX_TEXT(combo_entry2)));
+#else
+		remote_source =
+		    g_strdup(gtk_combo_box_get_active_text
+			     (GTK_COMBO_BOX(combo_entry2)));
 #endif
 		xml_set_value("Xiphos", "modmgr", "mod_mgr_source", "1");
 
@@ -2321,18 +2351,20 @@ on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 		gtk_widget_hide(progressbar_refresh);
 		xml_set_value("Xiphos", "modmgr", "mod_mgr_source", "0");
 	}
-	settings.mod_mgr_source = gtk_toggle_button_get_active (togglebutton);
+	settings.mod_mgr_source =
+	    gtk_toggle_button_get_active(togglebutton);
 	xml_save_settings_doc(settings.fnconfigure);
 }
 
 
 void
-on_radiobutton4_toggled(GtkToggleButton * togglebutton,
-			gpointer user_data)
+on_radiobutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	xml_set_value("Xiphos", "modmgr", "mod_mgr_source",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.mod_mgr_source = gtk_toggle_button_get_active (togglebutton);
+		      (gtk_toggle_button_get_active(togglebutton) ? "1" :
+		       "0"));
+	settings.mod_mgr_source =
+	    gtk_toggle_button_get_active(togglebutton);
 	xml_save_settings_doc(settings.fnconfigure);
 }
 
@@ -2352,8 +2384,7 @@ on_radiobutton4_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-void
-save_sources(void)
+void save_sources(void)
 {
 	gchar *type = NULL;
 	gchar *caption = NULL;
@@ -2380,25 +2411,24 @@ save_sources(void)
 				   COLUMN_DIRECTORY, &directory,
 				   COLUMN_USER, &user,
 				   COLUMN_PASS, &pass,
-				   COLUMN_UID, &uid,
-				   -1);
+				   COLUMN_UID, &uid, -1);
 
-		if(strcasecmp(type,"HTTP") == 0)
+		if (strcasecmp(type, "HTTP") == 0)
 			mod_mgr_add_source("HTTPSource",
-				   type, caption, source, directory,
-				   user, pass, uid);
-		else if(strcasecmp(type,"HTTPS") == 0)
+					   type, caption, source,
+					   directory, user, pass, uid);
+		else if (strcasecmp(type, "HTTPS") == 0)
 			mod_mgr_add_source("HTTPSSource",
-				   type, caption, source, directory,
-				   user, pass, uid);
-		else if(strcasecmp(type,"SFTP") == 0)
+					   type, caption, source,
+					   directory, user, pass, uid);
+		else if (strcasecmp(type, "SFTP") == 0)
 			mod_mgr_add_source("SFTPSource",
-				   type, caption, source, directory,
-				   user, pass, uid);
+					   type, caption, source,
+					   directory, user, pass, uid);
 		else
 			mod_mgr_add_source("FTPSource",
-				   type, caption, source, directory,
-				   user, pass, uid);
+					   type, caption, source,
+					   directory, user, pass, uid);
 		g_free(type);
 		g_free(caption);
 		g_free(source);
@@ -2418,8 +2448,7 @@ save_sources(void)
 				   COLUMN_DIRECTORY, &directory,
 				   COLUMN_USER, &user,
 				   COLUMN_PASS, &pass,
-				   COLUMN_UID, &uid,
-				   -1);
+				   COLUMN_UID, &uid, -1);
 
 		mod_mgr_add_source("DIRSource",
 				   type, caption, "[local]", directory,
@@ -2455,31 +2484,33 @@ save_sources(void)
  *   void
  */
 
-static void
-create_fileselection_local_source(void)
+static void create_fileselection_local_source(void)
 {
 	GtkWidget *dialog;
-    	gchar *filename;
+	gchar *filename;
 	GtkTreeIter iter;
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
 
 	dialog =
-		gtk_file_chooser_dialog_new ("Open File",
-				      NULL,
-				      GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+	    gtk_file_chooser_dialog_new("Open File",
+					NULL,
+					GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
 #ifdef HAVE_GTK_310
-		                       "_Cancel", GTK_RESPONSE_CANCEL,
-		                       "_OK", GTK_RESPONSE_ACCEPT,
-#else                        
-				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		                      GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, 
-#endif					      
-				      NULL);
-	
-	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-		XI_message(("%s",filename));
+					"_Cancel", GTK_RESPONSE_CANCEL,
+					"_OK", GTK_RESPONSE_ACCEPT,
+#else
+					GTK_STOCK_CANCEL,
+					GTK_RESPONSE_CANCEL, GTK_STOCK_OK,
+					GTK_RESPONSE_ACCEPT,
+#endif
+					NULL);
+
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
+		filename =
+		    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER
+						  (dialog));
+		XI_message(("%s", filename));
 		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
 		gtk_list_store_set(GTK_LIST_STORE(model), &iter,
 				   COLUMN_TYPE, "DIR",
@@ -2487,13 +2518,11 @@ create_fileselection_local_source(void)
 				   COLUMN_SOURCE, "[local]",
 				   COLUMN_DIRECTORY, filename,
 				   COLUMN_USER, "",
-				   COLUMN_PASS, "",
-				   COLUMN_UID,  "",
-				   -1);
+				   COLUMN_PASS, "", COLUMN_UID, "", -1);
 		save_sources();
-		g_free (filename);
+		g_free(filename);
 	}
-	gtk_widget_destroy (dialog);
+	gtk_widget_destroy(dialog);
 }
 
 
@@ -2516,18 +2545,18 @@ create_fileselection_local_source(void)
  *   void
  */
 
-static void
-on_dialog_destroy(GObject * object, gpointer user_data)
+static void on_dialog_destroy(GObject * object, gpointer user_data)
 {
 	GList *tmp;
 	gchar *str;
 
-	if (working) return;
+	if (working)
+		return;
 	working = TRUE;
 
 	XI_message(("on_destroy"));
 	if (remote_source) {
-	        g_free(remote_source);
+		g_free(remote_source);
 		remote_source = NULL;
 	}
 
@@ -2562,7 +2591,8 @@ on_dialog_destroy(GObject * object, gpointer user_data)
 	 */
 	if (!main_is_module(settings.MainWindowModule)) {
 		if ((tmp = get_list(TEXT_LIST)))
-			main_display_bible((char *)tmp->data, settings.currentverse);
+			main_display_bible((char *) tmp->data,
+					   settings.currentverse);
 		else {
 			/* Zero Bibles is just not workable in Xiphos. */
 			gui_generic_warning_modal
@@ -2573,23 +2603,26 @@ on_dialog_destroy(GObject * object, gpointer user_data)
 			main_init_lists();
 			if (settings.havebible == 0) {
 				gui_generic_warning_modal
-				    (_("There are still no Bibles installed.\n"
-				       "Xiphos cannot continue without one."));
+				    (_
+				     ("There are still no Bibles installed.\n"
+				      "Xiphos cannot continue without one."));
 				exit(1);
 			}
 		}
 	}
 	if (!main_is_module(settings.CommWindowModule)) {
 		if ((tmp = get_list(COMM_LIST)))
-			main_display_commentary((char *)tmp->data, settings.currentverse);
+			main_display_commentary((char *) tmp->data,
+						settings.currentverse);
 	}
 	if (!main_is_module(settings.DictWindowModule)) {
 		if ((tmp = get_list(DICT_LIST)))
-			main_display_dictionary((char *)tmp->data, settings.dictkey);
+			main_display_dictionary((char *) tmp->data,
+						settings.dictkey);
 	}
 	if (!main_is_module(settings.book_mod)) {
 		if ((tmp = get_list(GBS_LIST)))
-			main_display_book((char *)tmp->data, "/");	/* blank key */
+			main_display_book((char *) tmp->data, "/");	/* blank key */
 	}
 
 	settings.display_modmgr = 0;
@@ -2613,8 +2646,7 @@ on_dialog_destroy(GObject * object, gpointer user_data)
  *   void
  */
 
-static void
-response_close(void)
+static void response_close(void)
 {
 	gtk_widget_destroy(GTK_WIDGET(dialog_modmgr));
 	on_dialog_destroy(NULL, NULL);
@@ -2624,38 +2656,32 @@ response_close(void)
 /*
  * click callbacks, most using a wrapper.
  */
-void
-on_refresh_clicked(GtkButton * button, gpointer  user_data)
+void on_refresh_clicked(GtkButton * button, gpointer user_data)
 {
 	response_refresh();
 }
 
-void
-on_install_clicked(GtkButton * button, gpointer  user_data)
+void on_install_clicked(GtkButton * button, gpointer user_data)
 {
 	remove_install_wrapper(INSTALL);
 }
 
-void
-on_remove_clicked(GtkButton * button, gpointer  user_data)
+void on_remove_clicked(GtkButton * button, gpointer user_data)
 {
 	remove_install_wrapper(REMOVE);
 }
 
-void
-on_archive_clicked(GtkButton * button, gpointer  user_data)
+void on_archive_clicked(GtkButton * button, gpointer user_data)
 {
 	remove_install_wrapper(ARCHIVE);
 }
 
-void
-on_index_clicked(GtkButton * button, gpointer  user_data)
+void on_index_clicked(GtkButton * button, gpointer user_data)
 {
 	remove_install_wrapper(FASTMOD);
 }
 
-void
-on_delete_index_clicked(GtkButton * button, gpointer  user_data)
+void on_delete_index_clicked(GtkButton * button, gpointer user_data)
 {
 	remove_install_wrapper(DELFAST);
 }
@@ -2679,48 +2705,59 @@ on_delete_index_clicked(GtkButton * button, gpointer  user_data)
 
 void delete_obsolete(char *module, int *counter)
 {
-    char *obsolete = backend_mod_mgr_get_config_entry(module, "Obsoletes");
+	char *obsolete =
+	    backend_mod_mgr_get_config_entry(module, "Obsoletes");
 
-    if (obsolete && main_is_module(obsolete)) {
-	if (counter)
-	    (*counter)++;
+	if (obsolete && main_is_module(obsolete)) {
+		if (counter)
+			(*counter)++;
 
-	/* targeting coordinates acquired. */
-	char *mod_display_name, *obs_display_name, *question;
-	const char *mod_abbrev = main_get_abbreviation((const char *)module);
-	const char *obs_abbrev = main_get_abbreviation((const char *)obsolete);
+		/* targeting coordinates acquired. */
+		char *mod_display_name, *obs_display_name, *question;
+		const char *mod_abbrev =
+		    main_get_abbreviation((const char *) module);
+		const char *obs_abbrev =
+		    main_get_abbreviation((const char *) obsolete);
 
-	if (mod_abbrev)
-	    mod_display_name = g_strdup_printf("%s (%s)", mod_abbrev, module);
-	else
-	    mod_display_name = g_strdup(module);
+		if (mod_abbrev)
+			mod_display_name =
+			    g_strdup_printf("%s (%s)", mod_abbrev, module);
+		else
+			mod_display_name = g_strdup(module);
 
-	if (obs_abbrev)
-	    obs_display_name = g_strdup_printf("%s (%s)", obs_abbrev, obsolete);
-	else
-	    obs_display_name = g_strdup(obsolete);
+		if (obs_abbrev)
+			obs_display_name =
+			    g_strdup_printf("%s (%s)", obs_abbrev,
+					    obsolete);
+		else
+			obs_display_name = g_strdup(obsolete);
 
-	question = g_strdup_printf(_("%s obsoletes %s.\n"
-				     "Would you like to delete %s?\n"
-				     "Beware: This cannot be undone."),
-				   mod_display_name, obs_display_name,
-				   (obs_abbrev ? obs_abbrev : obsolete));
-	if (gui_yes_no_dialog(question, NULL)) {
-	    /* lay the axe at the root. */
-	    if (mod_mgr_uninstall(destination, obsolete) == -1) {
-		mod_mgr_uninstall((destination
-				   ? NULL
-				   : gtk_label_get_text(GTK_LABEL(label_home))),
-				  obsolete);
-	    }
+		question = g_strdup_printf(_("%s obsoletes %s.\n"
+					     "Would you like to delete %s?\n"
+					     "Beware: This cannot be undone."),
+					   mod_display_name,
+					   obs_display_name,
+					   (obs_abbrev ? obs_abbrev :
+					    obsolete));
+		if (gui_yes_no_dialog(question, NULL)) {
+			/* lay the axe at the root. */
+			if (mod_mgr_uninstall(destination, obsolete) == -1) {
+				mod_mgr_uninstall((destination
+						   ? NULL
+						   :
+						   gtk_label_get_text
+						   (GTK_LABEL
+						    (label_home))),
+						  obsolete);
+			}
+		}
+
+		g_free(question);
+		g_free(mod_display_name);
+		g_free(obs_display_name);
+
+		ModuleCacheErase((const char *) obsolete);
 	}
-	
-	g_free(question);
-	g_free(mod_display_name);
-	g_free(obs_display_name);
-
-	ModuleCacheErase((const char *)obsolete);
-    }
 }
 
 /******************************************************************************
@@ -2739,79 +2776,81 @@ void delete_obsolete(char *module, int *counter)
  *   void
  */
 
-void
-on_scan_obsolete(GtkButton * button, gpointer user_data)
+void on_scan_obsolete(GtkButton * button, gpointer user_data)
 {
-    GList *modules = NULL;
-    int counter = 0;
+	GList *modules = NULL;
+	int counter = 0;
 
-    if (working) return;
-    working = TRUE;
+	if (working)
+		return;
+	working = TRUE;
 
-    modules = get_list_mods_to_remove_install(ALL_MODULES);
+	modules = get_list_mods_to_remove_install(ALL_MODULES);
 
-    /*
-     * walk the module list to find
-     * those that obsolete something else.
-     * verify each first, because previous
-     * obsolescences may delete some farther down.
-     */
-    GList *tmp = modules;
-    while (tmp) {
-	if (main_is_module((gchar *) tmp->data))
-	    delete_obsolete((gchar *) tmp->data, &counter);
-	tmp = g_list_next(tmp);
-    }
-    g_list_free_full(modules, g_free);
+	/*
+	 * walk the module list to find
+	 * those that obsolete something else.
+	 * verify each first, because previous
+	 * obsolescences may delete some farther down.
+	 */
+	GList *tmp = modules;
+	while (tmp) {
+		if (main_is_module((gchar *) tmp->data))
+			delete_obsolete((gchar *) tmp->data, &counter);
+		tmp = g_list_next(tmp);
+	}
+	g_list_free_full(modules, g_free);
 
-    if (counter == 0)
-	gui_generic_warning(_("No obsolete modules were found."));
-    else {
-	mod_mgr_shut_down();
-	mod_mgr_init(destination, FALSE, TRUE);
-	load_module_tree(GTK_TREE_VIEW(treeview2), 0);
-    }
-    
-    working = FALSE;
-    return;
+	if (counter == 0)
+		gui_generic_warning(_("No obsolete modules were found."));
+	else {
+		mod_mgr_shut_down();
+		mod_mgr_init(destination, FALSE, TRUE);
+		load_module_tree(GTK_TREE_VIEW(treeview2), 0);
+	}
+
+	working = FALSE;
+	return;
 }
 
-void
-on_cancel_clicked(GtkButton * button, gpointer  user_data)
+void on_cancel_clicked(GtkButton * button, gpointer user_data)
 {
 	mod_mgr_terminate();
 	sync_windows();
 }
 
 
-void
-on_load_sources_clicked(GtkButton * button, gpointer  user_data)
+void on_load_sources_clicked(GtkButton * button, gpointer user_data)
 {
 	if (mod_mgr_init_config_extras() == 0) {
 		/* not quite identical to check_sync_repos(). */
 		char index[10];
-		gui_generic_warning(_("Standard remote sources have been loaded."));
-		settings.mod_mgr_remote_source_index = load_source_treeviews();
-		g_snprintf(index, 10, "%d", settings.mod_mgr_remote_source_index);
-		xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", index);
+		gui_generic_warning(_
+				    ("Standard remote sources have been loaded."));
+		settings.mod_mgr_remote_source_index =
+		    load_source_treeviews();
+		g_snprintf(index, 10, "%d",
+			   settings.mod_mgr_remote_source_index);
+		xml_set_value("Xiphos", "modmgr",
+			      "mod_mgr_remote_source_index", index);
 		set_controls_to_last_use();
 	} else
-		gui_generic_warning(_("Could not load standard sources from CrossWire."));
+		gui_generic_warning(_
+				    ("Could not load standard sources from CrossWire."));
 }
 
-void
-on_mod_mgr_intro_clicked(GtkButton * button, gpointer user_data)
+void on_mod_mgr_intro_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *dialog;
-	dialog = gtk_message_dialog_new_with_markup
-	    (NULL,	/* no need for a parent window */
-	     GTK_DIALOG_DESTROY_WITH_PARENT,
-	     GTK_MESSAGE_INFO,
-	     GTK_BUTTONS_OK,
-	     (user_data ? XI_FIRST_INSTALL : XI_GENERAL_INTRO));
-	g_signal_connect_swapped (dialog, "response",
-				  G_CALLBACK (gtk_widget_destroy),
-				  dialog);
+	dialog = gtk_message_dialog_new_with_markup(NULL,	/* no need for a parent window */
+						    GTK_DIALOG_DESTROY_WITH_PARENT,
+						    GTK_MESSAGE_INFO,
+						    GTK_BUTTONS_OK,
+						    (user_data ?
+						     XI_FIRST_INSTALL :
+						     XI_GENERAL_INTRO));
+	g_signal_connect_swapped(dialog, "response",
+				 G_CALLBACK(gtk_widget_destroy), dialog);
 	gtk_widget_show(dialog);
 }
 
@@ -2833,8 +2872,7 @@ on_mod_mgr_intro_clicked(GtkButton * button, gpointer user_data)
 
 void
 on_mod_mgr_response(GtkDialog * dialog,
-		    gint response_id,
-		    gpointer user_data)
+		    gint response_id, gpointer user_data)
 {
 	switch (response_id) {
 	case GTK_RESPONSE_CANCEL:
@@ -2891,12 +2929,9 @@ on_mod_mgr_response(GtkDialog * dialog,
  *   void
  */
 
-void
-on_button_add_local_clicked(GtkButton * button,
-		   gpointer user_data)
+void on_button_add_local_clicked(GtkButton * button, gpointer user_data)
 {
-	if (!working)
-	{
+	if (!working) {
 		working = TRUE;
 		create_fileselection_local_source();
 		working = FALSE;
@@ -2920,11 +2955,9 @@ on_button_add_local_clicked(GtkButton * button,
  *   void
  */
 
-void
-on_button_remove_local_clicked(GtkButton * button,
-		   gpointer user_data)
+void on_button_remove_local_clicked(GtkButton * button, gpointer user_data)
 {
-//	gchar *name_string;
+//      gchar *name_string;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
 	gchar *caption = NULL;
@@ -2937,15 +2970,15 @@ on_button_remove_local_clicked(GtkButton * button,
 	gchar *str;
 	GtkTreeModel *model;
 
-	if (working) return;
+	if (working)
+		return;
 	working = TRUE;
 
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_local));
-	if (!gtk_tree_selection_get_selected
-		(selection, &model, &selected)){
-			working = FALSE;
-			return;
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected)) {
+		working = FALSE;
+		return;
 	}
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
 			   COLUMN_TYPE, &type,
@@ -2953,23 +2986,23 @@ on_button_remove_local_clicked(GtkButton * button,
 			   COLUMN_SOURCE, &source,
 			   COLUMN_DIRECTORY, &directory,
 			   COLUMN_USER, &user,
-			   COLUMN_PASS, &pass,
-			   COLUMN_UID, &uid,
-			   -1);
+			   COLUMN_PASS, &pass, COLUMN_UID, &uid, -1);
 	//name_string = caption;
 
-	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
-			      _("Remove the selected source"),
-			      caption, type, source, directory);
+	str =
+	    g_strdup_printf
+	    ("<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
+	     _("Remove the selected source"), caption, type, source,
+	     directory);
 
-	if (gui_yes_no_dialog(str, 
-#ifdef HAVE_GTK_310 
-	            "dialog-warning"          
+	if (gui_yes_no_dialog(str,
+#ifdef HAVE_GTK_310
+			      "dialog-warning"
 #else
-	            GTK_STOCK_DIALOG_WARNING
-#endif	
-	            )) {
-		
+			      GTK_STOCK_DIALOG_WARNING
+#endif
+	    )) {
+
 		gtk_list_store_remove(GTK_LIST_STORE(model), &selected);
 		save_sources();
 	}
@@ -3002,9 +3035,7 @@ on_button_remove_local_clicked(GtkButton * button,
  *   void
  */
 
-void
-on_button_add_remote_clicked(GtkButton * button,
-		   gpointer user_data)
+void on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *dialog;
@@ -3014,12 +3045,14 @@ on_button_add_remote_clicked(GtkButton * button,
 	gboolean name_conflict = FALSE;
 	MOD_MGR_SOURCE *mms;
 
-	if (working) return;
+	if (working)
+		return;
 	working = TRUE;
 
 	str = g_string_new(NULL);
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),
+				     TRUE);
 	gtk_widget_hide(button_refresh);
 
 	GtkTreeModel *model =
@@ -3028,12 +3061,12 @@ on_button_add_remote_clicked(GtkButton * button,
 			"<span weight=\"bold\">%s</span>",
 			_("Enter a remote source"));
 	dialog = gui_new_dialog();
-	dialog->stock_icon = 
+	dialog->stock_icon =
 #ifdef HAVE_GTK_310
-		"dialog-information";
+	    "dialog-information";
 #else
-		GTK_STOCK_DIALOG_INFO;
-#endif	
+	    GTK_STOCK_DIALOG_INFO;
+#endif
 	dialog->label_top = str->str;
 	dialog->label1 = _("Caption:");
 	dialog->label2 = _("Type:");
@@ -3062,21 +3095,21 @@ on_button_add_remote_clicked(GtkButton * button,
 	}
 
 	for (tmp = tmp2 = mod_mgr_list_remote_sources();
-	     tmp;
-	     tmp = g_list_next(tmp)) {
+	     tmp; tmp = g_list_next(tmp)) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		if (!strcmp(mms->caption, dialog->text1)) {
 			/* this can happen at most once */
-			gui_generic_warning_modal(_("A source by that name already exists."));
+			gui_generic_warning_modal(_
+						  ("A source by that name already exists."));
 			name_conflict = TRUE;
 		}
-		g_free((gchar*)mms->type);
-		g_free((gchar*)mms->caption);
-		g_free((gchar*)mms->source);
-		g_free((gchar*)mms->directory);
-		g_free((gchar*)mms->user);
-		g_free((gchar*)mms->pass);
-		g_free((gchar*)mms->uid);
+		g_free((gchar *) mms->type);
+		g_free((gchar *) mms->caption);
+		g_free((gchar *) mms->source);
+		g_free((gchar *) mms->directory);
+		g_free((gchar *) mms->user);
+		g_free((gchar *) mms->pass);
+		g_free((gchar *) mms->uid);
 		g_free(mms);
 	}
 	g_list_free(tmp2);
@@ -3091,47 +3124,47 @@ on_button_add_remote_clicked(GtkButton * button,
 		 * flensing, trepanation, and hari-kari all apply.
 		 */
 		gchar *uid = g_strdup_printf("%d%02d%02d%02d%02d%02d",
-					     local->tm_year+1900,
-					     local->tm_mon+1, local->tm_mday,
+					     local->tm_year + 1900,
+					     local->tm_mon + 1,
+					     local->tm_mday,
 					     local->tm_hour, local->tm_min,
 					     local->tm_sec);
 
 		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
 		gtk_list_store_set(GTK_LIST_STORE(model), &iter,
-				   COLUMN_TYPE,      dialog->text2,
-				   COLUMN_CAPTION,   dialog->text1,
-				   COLUMN_SOURCE,    dialog->text3,
+				   COLUMN_TYPE, dialog->text2,
+				   COLUMN_CAPTION, dialog->text1,
+				   COLUMN_SOURCE, dialog->text3,
 				   COLUMN_DIRECTORY, dialog->text4,
-				   COLUMN_USER,      dialog->text5,
-				   COLUMN_PASS,      dialog->text6,
-				   COLUMN_UID,       uid,
-				   -1);
+				   COLUMN_USER, dialog->text5,
+				   COLUMN_PASS, dialog->text6,
+				   COLUMN_UID, uid, -1);
 		g_free(uid);
 		save_sources();
 
 		/* set the new item's index as active */
 		for (test = 0, tmp = tmp2 = mod_mgr_list_remote_sources();
-		     tmp;
-		     tmp = g_list_next(tmp), ++test) {
+		     tmp; tmp = g_list_next(tmp), ++test) {
 			mms = (MOD_MGR_SOURCE *) tmp->data;
 			if (!strcmp(mms->caption, dialog->text1)) {
-				gtk_combo_box_set_active(
-				    GTK_COMBO_BOX(combo_entry2), test);
+				gtk_combo_box_set_active(GTK_COMBO_BOX
+							 (combo_entry2),
+							 test);
 			}
-			g_free((gchar*)mms->type);
-			g_free((gchar*)mms->caption);
-			g_free((gchar*)mms->source);
-			g_free((gchar*)mms->directory);
-			g_free((gchar*)mms->user);
-			g_free((gchar*)mms->pass);
-			g_free((gchar*)mms->uid);
+			g_free((gchar *) mms->type);
+			g_free((gchar *) mms->caption);
+			g_free((gchar *) mms->source);
+			g_free((gchar *) mms->directory);
+			g_free((gchar *) mms->user);
+			g_free((gchar *) mms->pass);
+			g_free((gchar *) mms->uid);
 			g_free(mms);
 		}
 		g_list_free(tmp2);
 	}
 
 	if (remote_source)
-	        g_free(remote_source);
+		g_free(remote_source);
 	remote_source = g_strdup(dialog->text1);
 
 	g_free(dialog->text1);
@@ -3148,7 +3181,7 @@ on_button_add_remote_clicked(GtkButton * button,
 	mod_mgr_shut_down();
 	mod_mgr_init(destination, FALSE, TRUE);
 
-out:
+      out:
 	gtk_widget_show(button_refresh);
 	working = FALSE;
 }
@@ -3171,8 +3204,7 @@ out:
  */
 
 void
-on_button_remove_remote_clicked(GtkButton * button,
-		   gpointer user_data)
+on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
@@ -3189,16 +3221,16 @@ on_button_remove_remote_clicked(GtkButton * button,
 	GtkTreeModel *model;
 	GString *str;
 
-	if (working) return;
+	if (working)
+		return;
 	working = TRUE;
 
 	str = g_string_new(NULL);
 
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_remote));
-	if (!gtk_tree_selection_get_selected
-	    (selection, &model, &selected)){
-	    	working = FALSE;
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected)) {
+		working = FALSE;
 		return;
 	}
 	gtk_tree_model_get(model, &selected,
@@ -3207,18 +3239,16 @@ on_button_remove_remote_clicked(GtkButton * button,
 			   COLUMN_SOURCE, &source,
 			   COLUMN_DIRECTORY, &directory,
 			   COLUMN_USER, &user,
-			   COLUMN_PASS, &pass,
-			   COLUMN_UID, &uid,
-			   -1);
+			   COLUMN_PASS, &pass, COLUMN_UID, &uid, -1);
 	//name_string = caption;
 
 	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->stock_icon =   
+	yes_no_dialog->stock_icon =
 #ifdef HAVE_GTK_310
-		"dialog-warning";
+	    "dialog-warning";
 #else
-		GTK_STOCK_DIALOG_WARNING;
-#endif	
+	    GTK_STOCK_DIALOG_WARNING;
+#endif
 	yes_no_dialog->title = _("Delete a remote source");
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
@@ -3277,7 +3307,8 @@ on_treeview1_button_release_event(GtkWidget * widget,
 	gint sel;
 	GtkTreeModel *model;
 
-	if (working) return 0;
+	if (working)
+		return 0;
 	working = TRUE;
 
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(treeview1));
@@ -3300,12 +3331,15 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button_delidx);
 				gtk_widget_hide(button_obsolete);
 				if (first_time_user)
-					gtk_widget_hide(button_load_sources);
+					gtk_widget_hide
+					    (button_load_sources);
 				else
-					gtk_widget_show(button_load_sources);
+					gtk_widget_show
+					    (button_load_sources);
 				break;
 			case 2:
-				if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton2)))
+				if (gtk_toggle_button_get_active
+				    (GTK_TOGGLE_BUTTON(radiobutton2)))
 					gtk_widget_show(button_refresh);
 				else
 					gtk_widget_hide(button_refresh);
@@ -3318,7 +3352,8 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button_load_sources);
 				break;
 			case 3:
-				if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton2)))
+				if (gtk_toggle_button_get_active
+				    (GTK_TOGGLE_BUTTON(radiobutton2)))
 					gtk_widget_show(button_refresh);
 				else
 					gtk_widget_hide(button_refresh);
@@ -3350,8 +3385,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 }
 
 
-static void
-setup_treeview_main(GtkTreeView * tree_view)
+static void setup_treeview_main(GtkTreeView * tree_view)
 {
 	GtkTreeModel *model;
 
@@ -3361,7 +3395,8 @@ setup_treeview_main(GtkTreeView * tree_view)
 	gtk_tree_view_expand_all(tree_view);
 
 	g_signal_connect(tree_view, "button_release_event",
-			 G_CALLBACK(on_treeview1_button_release_event), NULL);
+			 G_CALLBACK(on_treeview1_button_release_event),
+			 NULL);
 }
 
 static void
@@ -3378,48 +3413,58 @@ setup_treeviews_local_remote(GtkTreeView * local, GtkTreeView * remote)
 }
 
 
-static void
-set_combobox(GtkComboBox * combo)
+static void set_combobox(GtkComboBox * combo)
 {
 	GtkListStore *store;
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
 #ifdef USE_GTK_3
-	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX(combo), 0);
+	gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(combo), 0);
 #else
 	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
 #endif
 }
 
 
-static void
-setup_dialog_action_area(GtkDialog * dialog)
+static void setup_dialog_action_area(GtkDialog * dialog)
 {
 	GtkWidget *dialog_action_area1 =
 #ifdef HAVE_GTK_312
-		gtk_dialog_get_content_area(GTK_DIALOG (dialog));
+	    gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 #else
-		gtk_dialog_get_action_area(GTK_DIALOG (dialog));
+	    gtk_dialog_get_action_area(GTK_DIALOG(dialog));
 #endif
 
-	gtk_widget_show (dialog_action_area1);
-	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
+	gtk_widget_show(dialog_action_area1);
+	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+				  GTK_BUTTONBOX_END);
 
 	/*
 	 * response buttons
 	 */
-	g_signal_connect(button_close, "clicked", G_CALLBACK(response_close), NULL);
-	g_signal_connect(button_refresh, "clicked", G_CALLBACK(on_refresh_clicked), NULL);
-	g_signal_connect(button_install, "clicked", G_CALLBACK(on_install_clicked), NULL);
-	g_signal_connect(button_remove, "clicked", G_CALLBACK(on_remove_clicked), NULL);
-	g_signal_connect(button_arch, "clicked", G_CALLBACK(on_archive_clicked), NULL);
-	g_signal_connect(button_idx, "clicked", G_CALLBACK(on_index_clicked), NULL);
-	g_signal_connect(button_delidx, "clicked", G_CALLBACK(on_delete_index_clicked), NULL);
-	g_signal_connect(button_obsolete, "clicked", G_CALLBACK(on_scan_obsolete), NULL);
-	g_signal_connect(button_load_sources, "clicked", G_CALLBACK(on_load_sources_clicked), NULL);
-	g_signal_connect(button_intro, "clicked", G_CALLBACK(on_mod_mgr_intro_clicked), NULL);
-	g_signal_connect(button_cancel, "clicked", G_CALLBACK(on_cancel_clicked), NULL);
+	g_signal_connect(button_close, "clicked",
+			 G_CALLBACK(response_close), NULL);
+	g_signal_connect(button_refresh, "clicked",
+			 G_CALLBACK(on_refresh_clicked), NULL);
+	g_signal_connect(button_install, "clicked",
+			 G_CALLBACK(on_install_clicked), NULL);
+	g_signal_connect(button_remove, "clicked",
+			 G_CALLBACK(on_remove_clicked), NULL);
+	g_signal_connect(button_arch, "clicked",
+			 G_CALLBACK(on_archive_clicked), NULL);
+	g_signal_connect(button_idx, "clicked",
+			 G_CALLBACK(on_index_clicked), NULL);
+	g_signal_connect(button_delidx, "clicked",
+			 G_CALLBACK(on_delete_index_clicked), NULL);
+	g_signal_connect(button_obsolete, "clicked",
+			 G_CALLBACK(on_scan_obsolete), NULL);
+	g_signal_connect(button_load_sources, "clicked",
+			 G_CALLBACK(on_load_sources_clicked), NULL);
+	g_signal_connect(button_intro, "clicked",
+			 G_CALLBACK(on_mod_mgr_intro_clicked), NULL);
+	g_signal_connect(button_cancel, "clicked",
+			 G_CALLBACK(on_cancel_clicked), NULL);
 
 	gtk_widget_show(button_close);
 	on_mod_mgr_intro_clicked(NULL, NULL);
@@ -3427,8 +3472,7 @@ setup_dialog_action_area(GtkDialog * dialog)
 	on_mod_mgr_intro_clicked(NULL, (gpointer) 1);
 }
 
-static void
-set_controls_to_last_use(void)
+static void set_controls_to_last_use(void)
 {
 	/* local or remote source */
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),
@@ -3444,8 +3488,7 @@ set_controls_to_last_use(void)
 				     settings.mod_mgr_destination);
 }
 
-static void
-setup_ui_labels()
+static void setup_ui_labels()
 {
 	gchar *str;
 
@@ -3468,8 +3511,7 @@ setup_ui_labels()
 	if (g_access(settings.path_to_mods, W_OK) == -1) {
 		XI_print(("%s is write protected\n",
 			  (settings.path_to_mods
-			   ? settings.path_to_mods
-			   : "<null>")));
+			   ? settings.path_to_mods : "<null>")));
 		gtk_widget_set_sensitive(label_system, FALSE);
 		gtk_widget_set_sensitive(radiobutton4, FALSE);
 	} else {
@@ -3482,53 +3524,56 @@ setup_ui_labels()
 
 
 static void
-on_comboboxentry_local_changed(GtkComboBox *combobox, gpointer user_data)
+on_comboboxentry_local_changed(GtkComboBox * combobox, gpointer user_data)
 {
-	gint index = gtk_combo_box_get_active (GTK_COMBO_BOX(combo_entry1));
+	gint index = gtk_combo_box_get_active(GTK_COMBO_BOX(combo_entry1));
 	settings.mod_mgr_local_source_index = index;
-	gchar *index_str = g_strdup_printf("%d",index);
-	xml_set_value("Xiphos", "modmgr", "mod_mgr_local_source_index", index_str);
+	gchar *index_str = g_strdup_printf("%d", index);
+	xml_set_value("Xiphos", "modmgr", "mod_mgr_local_source_index",
+		      index_str);
 	xml_save_settings_doc(settings.fnconfigure);
 	g_free(index_str);
 }
 
 static void
-on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
+on_comboboxentry_remote_changed(GtkComboBox * combobox, gpointer user_data)
 {
-	gint index = gtk_combo_box_get_active (GTK_COMBO_BOX(combo_entry2));
+	gint index = gtk_combo_box_get_active(GTK_COMBO_BOX(combo_entry2));
 	settings.mod_mgr_remote_source_index = index;
-	gchar *index_str = g_strdup_printf("%d",index);
-	XI_message(("index = %d index_str = %s",index,index_str));
-	xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", index_str);
+	gchar *index_str = g_strdup_printf("%d", index);
+	XI_message(("index = %d index_str = %s", index, index_str));
+	xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index",
+		      index_str);
 	xml_save_settings_doc(settings.fnconfigure);
 	g_free(index_str);
 
 	if (remote_source)
 		g_free(remote_source);
-	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child (GTK_BIN(combobox)))));
+	remote_source =
+	    g_strdup(gtk_entry_get_text
+		     (GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combobox)))));
 }
 
-static GtkWidget *
-create_module_manager_dialog(gboolean first_run)
+static GtkWidget *create_module_manager_dialog(gboolean first_run)
 {
-	gchar *glade_file = gui_general_user_file ("module-manager" UI_SUFFIX, FALSE);
+	gchar *glade_file =
+	    gui_general_user_file("module-manager" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
-	XI_message(("%s",glade_file));
+	XI_message(("%s", glade_file));
 
 #ifdef USE_GTKBUILDER
-	gchar *ids[] = {"dialog", NULL};
-	gxml = gtk_builder_new ();
-	gtk_builder_add_objects_from_file (gxml, glade_file, ids, NULL);
+	gchar *ids[] = { "dialog", NULL };
+	gxml = gtk_builder_new();
+	gtk_builder_add_objects_from_file(gxml, glade_file, ids, NULL);
 #else
-	gxml = glade_xml_new (glade_file, "dialog", NULL);
+	gxml = glade_xml_new(glade_file, "dialog", NULL);
 #endif
-	g_free (glade_file);
-	g_return_val_if_fail ((gxml != NULL), NULL);
+	g_free(glade_file);
+	g_return_val_if_fail((gxml != NULL), NULL);
 
 	dialog_modmgr = UI_GET_ITEM(gxml, "dialog");
 	gtk_window_resize(GTK_WINDOW(dialog_modmgr),
-			  settings.modmgr_width,
-			  settings.modmgr_height);
+			  settings.modmgr_width, settings.modmgr_height);
 
 	/* response buttons */
 	button_close = UI_GET_ITEM(gxml, "button_close");
@@ -3543,20 +3588,21 @@ create_module_manager_dialog(gboolean first_run)
 	button_load_sources = UI_GET_ITEM(gxml, "button_load_sources");
 	button_intro = UI_GET_ITEM(gxml, "button_view_intro");
 
-	gtk_widget_set_can_default (button_close, 1);
+	gtk_widget_set_can_default(button_close, 1);
 
 	g_signal_connect(dialog_modmgr, "destroy",
 			 G_CALLBACK(on_dialog_destroy), NULL);
 	if (first_run)
-		setup_dialog_action_area(GTK_DIALOG (dialog_modmgr));
+		setup_dialog_action_area(GTK_DIALOG(dialog_modmgr));
 	else
 		g_signal_connect(dialog_modmgr, "response",
 				 G_CALLBACK(on_mod_mgr_response), NULL);
 
 	/* progress bars */
-	progressbar_refresh = UI_GET_ITEM(gxml, "progressbar1"); 
+	progressbar_refresh = UI_GET_ITEM(gxml, "progressbar1");
 #ifdef USE_GTKBUILDER
-	gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR(progressbar_refresh),TRUE);
+	gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR
+				       (progressbar_refresh), TRUE);
 #endif
 
 	/* treeviews */
@@ -3565,22 +3611,21 @@ create_module_manager_dialog(gboolean first_run)
 
 	treeview_local = UI_GET_ITEM(gxml, "treeview2");
 	treeview_remote = UI_GET_ITEM(gxml, "treeview3");
-	setup_treeviews_local_remote(GTK_TREE_VIEW(treeview_local), GTK_TREE_VIEW(treeview_remote));
+	setup_treeviews_local_remote(GTK_TREE_VIEW(treeview_local),
+				     GTK_TREE_VIEW(treeview_remote));
 
 	treeview = UI_GET_ITEM(gxml, "treeview4");
 	treeview2 = UI_GET_ITEM(gxml, "treeview5");
 	setup_treeview_install(GTK_TREE_VIEW(treeview));
 	setup_treeview_maintenance(GTK_TREE_VIEW(treeview2));
 
-	gtk_widget_set_has_tooltip (treeview, TRUE);
+	gtk_widget_set_has_tooltip(treeview, TRUE);
 	g_signal_connect((gpointer) treeview,
-			 "query-tooltip",
-			 G_CALLBACK(query_tooltip), NULL);
+			 "query-tooltip", G_CALLBACK(query_tooltip), NULL);
 
-	gtk_widget_set_has_tooltip (treeview2, TRUE);
+	gtk_widget_set_has_tooltip(treeview2, TRUE);
 	g_signal_connect((gpointer) treeview2,
-			 "query-tooltip",
-			 G_CALLBACK(query_tooltip), NULL);
+			 "query-tooltip", G_CALLBACK(query_tooltip), NULL);
 
 	/* notebook */
 	notebook1 = UI_GET_ITEM(gxml, "notebook1");
@@ -3604,7 +3649,8 @@ create_module_manager_dialog(gboolean first_run)
 	g_signal_connect(button_add_remote, "clicked",
 			 G_CALLBACK(on_button_add_remote_clicked), NULL);
 	g_signal_connect(button_remove_remote, "clicked",
-			 G_CALLBACK(on_button_remove_remote_clicked), NULL);
+			 G_CALLBACK(on_button_remove_remote_clicked),
+			 NULL);
 
 	/* combo box entrys */
 	combo_entry1 = UI_GET_ITEM(gxml, "comboboxentry1");
@@ -3613,10 +3659,10 @@ create_module_manager_dialog(gboolean first_run)
 	set_combobox(GTK_COMBO_BOX(combo_entry2));
 
 	/* radio buttons */
-	radiobutton_source = UI_GET_ITEM(gxml, "radiobutton1"); /* local */
-	radiobutton2 = UI_GET_ITEM(gxml, "radiobutton2"); /* remote */
-	radiobutton_dest = UI_GET_ITEM(gxml, "radiobutton3"); /* homedir */
-	radiobutton4 = UI_GET_ITEM(gxml, "radiobutton4"); /* homedir */
+	radiobutton_source = UI_GET_ITEM(gxml, "radiobutton1");	/* local */
+	radiobutton2 = UI_GET_ITEM(gxml, "radiobutton2");	/* remote */
+	radiobutton_dest = UI_GET_ITEM(gxml, "radiobutton3");	/* homedir */
+	radiobutton4 = UI_GET_ITEM(gxml, "radiobutton4");	/* homedir */
 
 	setup_ui_labels();
 	set_controls_to_last_use();
@@ -3624,18 +3670,18 @@ create_module_manager_dialog(gboolean first_run)
 			 G_CALLBACK(on_radiobutton2_toggled), NULL);
 	g_signal_connect(radiobutton4, "toggled",
 			 G_CALLBACK(on_radiobutton4_toggled), NULL);
-	g_signal_connect ((gpointer) combo_entry1, "changed",
-                    G_CALLBACK (on_comboboxentry_local_changed),
-                    NULL);
-	g_signal_connect ((gpointer) combo_entry2, "changed",
-                    G_CALLBACK (on_comboboxentry_remote_changed),
-                    NULL);
+	g_signal_connect((gpointer) combo_entry1, "changed",
+			 G_CALLBACK(on_comboboxentry_local_changed), NULL);
+	g_signal_connect((gpointer) combo_entry2, "changed",
+			 G_CALLBACK(on_comboboxentry_remote_changed),
+			 NULL);
 	if (first_run)
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (radiobutton2), TRUE);
 
 	gtk_widget_hide(button_refresh);
 
-	g_signal_connect((gpointer) dialog_modmgr, 
+	g_signal_connect((gpointer) dialog_modmgr,
 			 "configure_event",
 			 G_CALLBACK(on_modmgr_configure_event), NULL);
 
@@ -3654,7 +3700,8 @@ create_module_manager_dialog(gboolean first_run)
 	if ((settings.modmgr_y < 0) || (settings.modmgr_y > 2000))
 		settings.modmgr_y = 40;
 
- 	gtk_window_move(GTK_WINDOW(dialog_modmgr),settings.modmgr_x,settings.modmgr_y);
+	gtk_window_move(GTK_WINDOW(dialog_modmgr), settings.modmgr_x,
+			settings.modmgr_y);
 	return dialog_modmgr;
 }
 
@@ -3683,7 +3730,8 @@ void gui_open_mod_mgr(void)
 		set_window_icon(GTK_WINDOW(dlg));
 		is_running = TRUE;
 	} else
-		gdk_window_raise(gtk_widget_get_window (GTK_WIDGET(dialog_modmgr)));
+		gdk_window_raise(gtk_widget_get_window
+				 (GTK_WIDGET(dialog_modmgr)));
 }
 
 
@@ -3737,9 +3785,9 @@ void gui_update_install_status(glong total, glong done,
 	gchar *buf;
 
 	buf = g_strdup_printf("%s: %s",
-			      (current_mod ? current_mod : _("[no module]")),
-			      message);
-	gui_set_progressbar_text(progressbar_refresh,buf);
+			      (current_mod ? current_mod :
+			       _("[no module]")), message);
+	gui_set_progressbar_text(progressbar_refresh, buf);
 	g_free(buf);
 }
 

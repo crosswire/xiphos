@@ -26,32 +26,31 @@
 extern "C" {
 #endif
 
-typedef struct _sidebar_search SIDESEARCH;
-struct _sidebar_search {
-	GtkWidget *rrbUseBounds;
- 	GtkWidget *entrySearch;
-	GtkWidget *advanced_search;
- 	GtkWidget *entryLower;
- 	GtkWidget *entryUpper;
-	GtkWidget *rbMultiword;
- 	GtkWidget *rbRegExp;
-	GtkWidget *rbNoScope;
- 	GtkWidget *rbLastSearch;
- 	GtkWidget *rbPhraseSearch;
- 	GtkWidget *ckbCaseSensitive;
- 	GtkWidget *progressbar_search;
- 	GtkWidget *frame5;
- 	GtkWidget *frame_module;
- 	GtkWidget *radiobutton_search_text;
- 	GtkWidget *radiobutton_search_comm;
-};
-extern SIDESEARCH ss;
+	typedef struct _sidebar_search SIDESEARCH;
+	struct _sidebar_search {
+		GtkWidget *rrbUseBounds;
+		GtkWidget *entrySearch;
+		GtkWidget *advanced_search;
+		GtkWidget *entryLower;
+		GtkWidget *entryUpper;
+		GtkWidget *rbMultiword;
+		GtkWidget *rbRegExp;
+		GtkWidget *rbNoScope;
+		GtkWidget *rbLastSearch;
+		GtkWidget *rbPhraseSearch;
+		GtkWidget *ckbCaseSensitive;
+		GtkWidget *progressbar_search;
+		GtkWidget *frame5;
+		GtkWidget *frame_module;
+		GtkWidget *radiobutton_search_text;
+		GtkWidget *radiobutton_search_comm;
+	};
+	extern SIDESEARCH ss;
 
-void gui_search_update_sidebar(char percent, void *userData);
-void gui_create_search_sidebar(void);
+	void gui_search_update_sidebar(char percent, void *userData);
+	void gui_create_search_sidebar(void);
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif

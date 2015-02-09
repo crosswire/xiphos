@@ -41,12 +41,11 @@ extern "C" {
 
 /*** function prototypes ***/
 
-void frontend_init(void);
-void frontend_display(const char *);
-void shutdown_frontend(void);
+	void frontend_init(void);
+	void frontend_display(const char *);
+	void shutdown_frontend(void);
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif

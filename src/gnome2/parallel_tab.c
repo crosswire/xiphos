@@ -20,12 +20,12 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gtk/gtk.h>
 #ifndef USE_GTKBUILDER
-  #include <glade/glade-xml.h>
+#include <glade/glade-xml.h>
 #endif
 #include "xiphos_html/xiphos_html.h"
 
@@ -65,9 +65,7 @@ static void sync_with_main(const gchar * key);
 
 
 static void
-_popupmenu_requested_cb(XiphosHtml *html,
-			gchar *uri,
-			gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
 {
 	gui_popup_menu_parallel();
 }
@@ -117,15 +115,16 @@ void gui_parallel_close_tab(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_parallel_tab_destroy(GObject * object,
-				      gpointer user_data)
+static void on_parallel_tab_destroy(GObject * object, gpointer user_data)
 {
 
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-                                             TRUE);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
+				   (widgets.notebook_bible_parallel),
+				   TRUE);
 
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-					1);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.notebook_bible_parallel),
+				      1);
 	settings.dockedInt = TRUE;
 	main_update_parallel_page();
 }
@@ -153,15 +152,16 @@ static void sync_with_main(const gchar * key)
 	gchar *url = NULL;
 
 	if (key)
-		buf = (gchar*)main_url_encode(key);
+		buf = (gchar *) main_url_encode(key);
 	else
-		buf = (gchar*)main_url_encode(xml_get_value("keys", "verse"));
-	XI_message(("%s",buf));
+		buf =
+		    (gchar *)
+		    main_url_encode(xml_get_value("keys", "verse"));
+	XI_message(("%s", buf));
 	if (buf && (strlen(buf) > 3)) {
 		url =
 		    g_strdup_printf("passagestudy.jsp?action=showParallel&"
-					"type=verse&value=%s",
-					buf);
+				    "type=verse&value=%s", buf);
 
 		main_url_handler(url, TRUE);
 		g_free(url);
@@ -186,7 +186,8 @@ static void sync_with_main(const gchar * key)
 
 void gui_keep_parallel_tab_in_sync(void)
 {
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
+	if (gtk_toggle_button_get_active
+	    (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
 		sync_with_main(NULL);
 }
 
@@ -197,7 +198,9 @@ void gui_parallel_tab_sync(const gchar * key)
 
 void gui_force_parallel_tab_sync(void)
 {
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync), settings.linkedtabs);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (navbar_parallel.button_sync),
+				     settings.linkedtabs);
 	sync_on = settings.linkedtabs;
 	/* tell somebody that this button has been hacked */
 }
@@ -245,31 +248,36 @@ static GtkWidget *create_nav_toolbar(void)
 GtkWidget *_create_parallel_tab(void)
 {
 	GtkWidget *toolbar29;
-  	GtkWidget *box_parallel_labels;
+	GtkWidget *box_parallel_labels;
 	GtkWidget *scrolled_window;
 
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-                                             FALSE);
-	gtk_notebook_set_current_page (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-					0);
-	gtk_notebook_set_show_border (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-                                        TRUE);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
+				   (widgets.notebook_bible_parallel),
+				   FALSE);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.notebook_bible_parallel),
+				      0);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK
+				     (widgets.notebook_bible_parallel),
+				     TRUE);
 
 	UI_VBOX(parallel_vbox, FALSE, 0);
 	g_signal_connect(G_OBJECT(parallel_vbox), "destroy",
-			   G_CALLBACK(on_parallel_tab_destroy),
-			   NULL);
+			 G_CALLBACK(on_parallel_tab_destroy), NULL);
 	gtk_widget_show(parallel_vbox);
-	gtk_box_pack_start(GTK_BOX(widgets.page), parallel_vbox, TRUE, TRUE,
-			   0);
+	gtk_box_pack_start(GTK_BOX(widgets.page), parallel_vbox, TRUE,
+			   TRUE, 0);
 	toolbar29 = create_nav_toolbar();
 	gtk_widget_show(toolbar29);
-	gtk_box_pack_start(GTK_BOX(parallel_vbox), toolbar29, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(parallel_vbox), toolbar29, FALSE, FALSE,
+			   0);
 
 	UI_HBOX(box_parallel_labels, TRUE, 2);
-	gtk_widget_show (box_parallel_labels);
-	gtk_box_pack_start (GTK_BOX (parallel_vbox), box_parallel_labels, FALSE, TRUE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (box_parallel_labels), 2);
+	gtk_widget_show(box_parallel_labels);
+	gtk_box_pack_start(GTK_BOX(parallel_vbox), box_parallel_labels,
+			   FALSE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(box_parallel_labels),
+				       2);
 
 #if 0
 	if (settings.parallel_list) {
@@ -280,37 +288,43 @@ GtkWidget *_create_parallel_tab(void)
 		for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
 			plabel = gtk_label_new(NULL);
 			gtk_widget_show(plabel);
-			gtk_box_pack_start(GTK_BOX (box_parallel_labels), plabel, FALSE, FALSE, 0);
+			gtk_box_pack_start(GTK_BOX(box_parallel_labels),
+					   plabel, FALSE, FALSE, 0);
 			gtk_label_set_use_markup(GTK_LABEL(plabel), TRUE);
 
-			label = g_strdup_printf("<span color='%s' weight='bold'>%s</span>",
-						settings.bible_verse_num_color,
-						settings.parallel_list[modidx]);
+			label =
+			    g_strdup_printf
+			    ("<span color='%s' weight='bold'>%s</span>",
+			     settings.bible_verse_num_color,
+			     settings.parallel_list[modidx]);
 			gtk_label_set_markup(GTK_LABEL(plabel), label);
 			g_free(label);
 		}
 	}
-#endif /* 0 */
+#endif				/* 0 */
 
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
-	gtk_box_pack_start(GTK_BOX(parallel_vbox), scrolled_window, TRUE, TRUE,0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
+	gtk_box_pack_start(GTK_BOX(parallel_vbox), scrolled_window, TRUE,
+			   TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolled_window),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_ALWAYS);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
-                                             settings.shadow_type);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolled_window,
+					    settings.shadow_type);
 
-	widgets.html_parallel_dialog = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
+	widgets.html_parallel_dialog =
+	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel_dialog);
-    
+
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
-	
-	g_signal_connect((gpointer)widgets.html_parallel_dialog,
+
+	g_signal_connect((gpointer) widgets.html_parallel_dialog,
 			 "popupmenu_requested",
-			 G_CALLBACK (_popupmenu_requested_cb),
-			 NULL);
+			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 	gtk_widget_hide(widgets.hpaned);
 	return parallel_vbox;
 

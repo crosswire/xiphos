@@ -27,10 +27,10 @@
 #include <unistd.h>
 
 #ifndef USE_GTKBUILDER
-  #include <glade/glade-xml.h>
+#include <glade/glade-xml.h>
 #endif
 
-#ifdef USE_WEBKIT_EDITOR	
+#ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
 #else
@@ -97,24 +97,31 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GError *error = NULL;
 #ifdef WIN32
 	const char *lang = g_getenv("LANG");
-	gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
+	gchar *help_file =
+	    g_win32_get_package_installation_directory_of_module(NULL);
 	help_file = g_strconcat(help_file, "\0", NULL);
 	if (!strncmp(lang, "fr", 2))
-		help_file = g_build_filename(help_file, "share", "help", "xiphos_fr.chm", NULL);
+		help_file =
+		    g_build_filename(help_file, "share", "help",
+				     "xiphos_fr.chm", NULL);
 	else if (!strncmp(lang, "fa", 2))
-		help_file = g_build_filename(help_file, "share", "help", "xiphos_fa.chm", NULL);
+		help_file =
+		    g_build_filename(help_file, "share", "help",
+				     "xiphos_fa.chm", NULL);
 	else
-		help_file = g_build_filename(help_file, "share", "help", "xiphos.chm", NULL);
+		help_file =
+		    g_build_filename(help_file, "share", "help",
+				     "xiphos.chm", NULL);
 	xiphos_open_default(help_file);
 	g_free(help_file);
 #else
-	gtk_show_uri (NULL, "ghelp:xiphos", gtk_get_current_event_time(), &error);
+	gtk_show_uri(NULL, "ghelp:xiphos", gtk_get_current_event_time(),
+		     &error);
 	if (error != NULL) {
 		XI_warning(("%s", error->message));
 		g_error_free(error);
 	}
-
-#endif /* WIN32 */
+#endif				/* WIN32 */
 }
 
 /******************************************************************************
@@ -136,7 +143,8 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_mailing_list_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	xiphos_open_default("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/");
+	xiphos_open_default
+	    ("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/");
 }
 
 
@@ -184,9 +192,10 @@ on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 	for (s = strchr(user, ' '); s; s = strchr(s, ' '))
 		*s = '_';
 
-	url = g_strdup_printf(
-	    "http://webchat.freenode.net/?nick=%s|%c%s&channels=xiphos&prompt=1",
-	    user, platform, version);
+	url =
+	    g_strdup_printf
+	    ("http://webchat.freenode.net/?nick=%s|%c%s&channels=xiphos&prompt=1",
+	     user, platform, version);
 	xiphos_open_default(url);
 	g_free(url);
 	g_free(user);
@@ -232,7 +241,8 @@ on_report_bug_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_about_the_sword_project_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_about_the_sword_project_activate(GtkMenuItem * menuitem,
+				    gpointer user_data)
 {
 	GtkWidget *dlg;
 
@@ -323,11 +333,13 @@ on_preferences_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Return value
  *   void
  */
-G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem,
+					gpointer user_data)
 {
 	if (!settings.showshortcutbar)
 		gui_sidebar_showhide();
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),2);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.notebook_sidebar), 2);
 }
 
 /******************************************************************************
@@ -348,7 +360,7 @@ G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem, gpointer user_da
 G_MODULE_EXPORT void
 on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.linkedtabs = gtk_check_menu_item_get_active (menuitem);
+	settings.linkedtabs = gtk_check_menu_item_get_active(menuitem);
 	xml_set_value("Xiphos", "misc", "pinnedtabs",
 		      (settings.linkedtabs ? "1" : "0"));
 	if (settings.showparatab)
@@ -373,7 +385,7 @@ on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.readaloud = gtk_check_menu_item_get_active (menuitem);
+	settings.readaloud = gtk_check_menu_item_get_active(menuitem);
 	xml_set_value("Xiphos", "misc", "readaloud",
 		      (settings.readaloud ? "1" : "0"));
 	if (settings.readaloud)
@@ -396,9 +408,10 @@ on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem,
+			       gpointer user_data)
 {
-	settings.showversenum = gtk_check_menu_item_get_active (menuitem);
+	settings.showversenum = gtk_check_menu_item_get_active(menuitem);
 	xml_set_value("Xiphos", "misc", "showversenum",
 		      (settings.showversenum ? "1" : "0"));
 	main_display_commentary(NULL, settings.currentverse);
@@ -423,7 +436,7 @@ on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.versehighlight = gtk_check_menu_item_get_active (menuitem);
+	settings.versehighlight = gtk_check_menu_item_get_active(menuitem);
 	xml_set_value("Xiphos", "misc", "versehighlight",
 		      (settings.versehighlight ? "1" : "0"));
 	main_display_bible(NULL, settings.currentverse);
@@ -447,22 +460,24 @@ on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (!settings.browsing) return;
-	if (!settings.showparatab && !gtk_check_menu_item_get_active (menuitem)) {
+	if (!settings.browsing)
+		return;
+	if (!settings.showparatab
+	    && !gtk_check_menu_item_get_active(menuitem)) {
 		xml_set_value("Xiphos", "misc", "showparatab", "0");
 		return;
 	}
 
-	settings.showparatab = gtk_check_menu_item_get_active (menuitem);
+	settings.showparatab = gtk_check_menu_item_get_active(menuitem);
 	xml_set_value("Xiphos", "misc", "showparatab",
 		      (settings.showparatab ? "1" : "0"));
 	if (settings.showparatab) {
 		gui_open_parallel_view_in_new_tab();
 		gui_force_parallel_tab_sync();
 	} else
-		gui_close_passage_tab  (gtk_notebook_page_num (
-					GTK_NOTEBOOK (widgets.notebook_main),
-					widgets.parallel_tab));
+		gui_close_passage_tab(gtk_notebook_page_num
+				      (GTK_NOTEBOOK(widgets.notebook_main),
+				       widgets.parallel_tab));
 }
 
 /******************************************************************************
@@ -483,7 +498,8 @@ gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.show_previewer_in_sidebar = gtk_check_menu_item_get_active (menuitem);
+	settings.show_previewer_in_sidebar =
+	    gtk_check_menu_item_get_active(menuitem);
 	xml_set_value("Xiphos", "misc", "show_side_preview",
 		      (settings.show_previewer_in_sidebar ? "1" : "0"));
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
@@ -582,7 +598,7 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GtkWidget *dialog;
 	gchar *tabs_dir;
 
-	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+	tabs_dir = g_strdup_printf("%s/tabs/", settings.gSwordDir);
 
 	if (g_access(tabs_dir, F_OK) == -1) {
 		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
@@ -591,30 +607,35 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 		}
 	}
 
-	dialog = gtk_file_chooser_dialog_new ("Save Session",
-				      NULL,
-				      GTK_FILE_CHOOSER_ACTION_SAVE,
+	dialog = gtk_file_chooser_dialog_new("Save Session",
+					     NULL,
+					     GTK_FILE_CHOOSER_ACTION_SAVE,
 #ifdef HAVE_GTK_310
-		                       "_Cancel", GTK_RESPONSE_CANCEL,
-		                       "_Save", GTK_RESPONSE_ACCEPT,
-#else                        
-				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		                      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT, 
-#endif		                                      
-				      NULL);
-	
-	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
-	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-  	{
-    		char *filename;
+					     "_Cancel",
+					     GTK_RESPONSE_CANCEL, "_Save",
+					     GTK_RESPONSE_ACCEPT,
+#else
+					     GTK_STOCK_CANCEL,
+					     GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_SAVE,
+					     GTK_RESPONSE_ACCEPT,
+#endif
+					     NULL);
 
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+	gtk_file_chooser_set_current_folder((GtkFileChooser *) dialog,
+					    tabs_dir);
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
+		char *filename;
+
+		filename =
+		    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER
+						  (dialog));
 		filename = g_path_get_basename(filename);
 		gui_save_tabs(filename);
-		g_free (filename);
+		g_free(filename);
 	}
 
-	gtk_widget_destroy (dialog);
+	gtk_widget_destroy(dialog);
 }
 
 
@@ -632,8 +653,7 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Return value
  *   void
  */
-void
-redisplay_to_realign()
+void redisplay_to_realign()
 {
 	static int realign_busy = FALSE;
 	int save_comm_show = settings.comm_showing;
@@ -651,8 +671,7 @@ redisplay_to_realign()
 				     settings.currentverse);
 	main_url_handler(url, TRUE);
 	g_free(url);
-	if (settings.DictWindowModule
-	    && *settings.DictWindowModule	/* not empty */
+	if (settings.DictWindowModule && *settings.DictWindowModule	/* not empty */
 	    && settings.dictkey) {
 		url = g_strdup_printf("sword://%s/%s",
 				      settings.DictWindowModule,
@@ -660,8 +679,7 @@ redisplay_to_realign()
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
-	if (settings.book_mod
-	    && *settings.book_mod		/* not empty */
+	if (settings.book_mod && *settings.book_mod	/* not empty */
 	    && settings.book_key) {
 		url = g_strdup_printf("sword://%s/%s",
 				      settings.book_mod,
@@ -671,7 +689,8 @@ redisplay_to_realign()
 	}
 
 	settings.comm_showing = save_comm_show;
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.notebook_comm_book),
 				      (settings.comm_showing ? 0 : 1));
 
 	realign_busy = FALSE;
@@ -698,7 +717,7 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GtkWidget *dialog;
 	gchar *tabs_dir;
 
-	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+	tabs_dir = g_strdup_printf("%s/tabs/", settings.gSwordDir);
 
 	if (g_access(tabs_dir, F_OK) == -1) {
 		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
@@ -707,32 +726,37 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 		}
 	}
 
-	dialog = gtk_file_chooser_dialog_new ("Open Session",
-				      NULL,
-				      GTK_FILE_CHOOSER_ACTION_OPEN,	                              
+	dialog = gtk_file_chooser_dialog_new("Open Session",
+					     NULL,
+					     GTK_FILE_CHOOSER_ACTION_OPEN,
 #ifdef HAVE_GTK_310
-		                       "_Cancel", GTK_RESPONSE_CANCEL,
-		                       "_Open", GTK_RESPONSE_ACCEPT,
-#else                        
-				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		                      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, 
-#endif					
-				      NULL);
-	
-	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
-	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-  	{
-    		char *filename;
+					     "_Cancel",
+					     GTK_RESPONSE_CANCEL, "_Open",
+					     GTK_RESPONSE_ACCEPT,
+#else
+					     GTK_STOCK_CANCEL,
+					     GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OPEN,
+					     GTK_RESPONSE_ACCEPT,
+#endif
+					     NULL);
 
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+	gtk_file_chooser_set_current_folder((GtkFileChooser *) dialog,
+					    tabs_dir);
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
+		char *filename;
+
+		filename =
+		    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER
+						  (dialog));
 		filename = g_path_get_basename(filename);
 		gui_close_all_tabs();
 		gui_load_tabs(filename);
 		redisplay_to_realign();
-		g_free (filename);
+		g_free(filename);
 	}
 
-	gtk_widget_destroy (dialog);
+	gtk_widget_destroy(dialog);
 }
 
 /******************************************************************************
@@ -751,9 +775,10 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_bible_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_show_bible_text_activate(GtkCheckMenuItem * menuitem,
+			    gpointer user_data)
 {
-	gui_show_hide_texts(gtk_check_menu_item_get_active (menuitem));
+	gui_show_hide_texts(gtk_check_menu_item_get_active(menuitem));
 	redisplay_to_realign();
 }
 
@@ -761,7 +786,7 @@ on_show_bible_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	gui_show_hide_preview(gtk_check_menu_item_get_active (menuitem));
+	gui_show_hide_preview(gtk_check_menu_item_get_active(menuitem));
 	redisplay_to_realign();
 }
 
@@ -783,9 +808,10 @@ on_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_commentary_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_show_commentary_activate(GtkCheckMenuItem * menuitem,
+			    gpointer user_data)
 {
-	gui_show_hide_comms(gtk_check_menu_item_get_active (menuitem));
+	gui_show_hide_comms(gtk_check_menu_item_get_active(menuitem));
 	redisplay_to_realign();
 }
 
@@ -806,9 +832,10 @@ on_show_commentary_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_dictionary_lexicon_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_show_dictionary_lexicon_activate(GtkCheckMenuItem * menuitem,
+				    gpointer user_data)
 {
-	gui_show_hide_dicts(gtk_check_menu_item_get_active (menuitem));
+	gui_show_hide_dicts(gtk_check_menu_item_get_active(menuitem));
 	redisplay_to_realign();
 }
 
@@ -861,21 +888,22 @@ on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_advanced_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	main_open_search_dialog ();
+	main_open_search_dialog();
 }
 
 
 G_MODULE_EXPORT void
-on_attach_detach_sidebar_activate(GtkMenuItem *menuitem, gpointer user_data)
+on_attach_detach_sidebar_activate(GtkMenuItem * menuitem,
+				  gpointer user_data)
 {
-	gui_attach_detach_sidebar ();
+	gui_attach_detach_sidebar();
 }
 
 
 G_MODULE_EXPORT void
-on_sidebar_showhide_activate(GtkMenuItem *menuitem, gpointer user_data)
+on_sidebar_showhide_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_sidebar_showhide ();
+	gui_sidebar_showhide();
 }
 
 
@@ -886,30 +914,36 @@ GtkWidget *gui_create_main_menu(void)
 #else
 	GladeXML *gxml;
 #endif
-	gchar *glade_file = gui_general_user_file ("xi-menus" UI_SUFFIX, FALSE);
-	g_return_val_if_fail (glade_file != NULL, NULL);
+	gchar *glade_file =
+	    gui_general_user_file("xi-menus" UI_SUFFIX, FALSE);
+	g_return_val_if_fail(glade_file != NULL, NULL);
 
 #ifdef USE_GTKBUILDER
-	gxml = gtk_builder_new ();
-	gtk_builder_add_from_file (gxml, glade_file, NULL);
+	gxml = gtk_builder_new();
+	gtk_builder_add_from_file(gxml, glade_file, NULL);
 #else
-	gxml = glade_xml_new (glade_file, "menu_main", NULL);
+	gxml = glade_xml_new(glade_file, "menu_main", NULL);
 #endif
-	g_free (glade_file);
-	g_return_val_if_fail (gxml != NULL, NULL);
-	
+	g_free(glade_file);
+	g_return_val_if_fail(gxml != NULL, NULL);
+
 	GtkWidget *menu = UI_GET_ITEM(gxml, "menu_main");
 
 	widgets.viewtexts_item = UI_GET_ITEM(gxml, "show_bible_text");
 	widgets.viewpreview_item = UI_GET_ITEM(gxml, "preview");
 	widgets.viewcomms_item = UI_GET_ITEM(gxml, "commentary");
-	widgets.viewdicts_item = UI_GET_ITEM(gxml, "show_dictionary_lexicon");
+	widgets.viewdicts_item =
+	    UI_GET_ITEM(gxml, "show_dictionary_lexicon");
 	widgets.linkedtabs_item = UI_GET_ITEM(gxml, "link_tabs");
 	widgets.readaloud_item = UI_GET_ITEM(gxml, "read_aloud");
-	widgets.showversenum_item = UI_GET_ITEM(gxml, "show_verse_numbers");
-	widgets.versehighlight_item = UI_GET_ITEM(gxml, "highlight_current_verse");
-	widgets.parallel_tab_item = UI_GET_ITEM(gxml, "show_parallel_view_in_a_tab");
-	widgets.side_preview_item = UI_GET_ITEM(gxml, "show_previewer_in_sidebar");
+	widgets.showversenum_item =
+	    UI_GET_ITEM(gxml, "show_verse_numbers");
+	widgets.versehighlight_item =
+	    UI_GET_ITEM(gxml, "highlight_current_verse");
+	widgets.parallel_tab_item =
+	    UI_GET_ITEM(gxml, "show_parallel_view_in_a_tab");
+	widgets.side_preview_item =
+	    UI_GET_ITEM(gxml, "show_previewer_in_sidebar");
 	widgets.new_journal_item = UI_GET_ITEM(gxml, "newjournal");
 
 	/* map tab's show state into view menu. */
@@ -945,17 +979,18 @@ GtkWidget *gui_create_main_menu(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versehighlight_item),
 				       settings.versehighlight);
-    	/* connect signals and data */
-#ifdef USE_GTKBUILDER 
-        gtk_builder_connect_signals (gxml, NULL);
+	/* connect signals and data */
+#ifdef USE_GTKBUILDER
+	gtk_builder_connect_signals(gxml, NULL);
 	/*gtk_builder_connect_signals_full
-		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
+	   (gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL); */
 #else
 	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+	    (gxml, (GladeXMLConnectFunc) gui_glade_signal_connect_func,
+	     NULL);
 #endif
 	//set up global function to handle all link buttons
-//	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
+//      gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
 
 	if (settings.prayerlist)
 		gtk_widget_show(widgets.new_journal_item);

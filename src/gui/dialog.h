@@ -33,51 +33,50 @@ extern "C" {
 #define GS_OK 2
 #define GS_CANCEL 3
 
-typedef struct _gs_dialog GS_DIALOG;
-struct _gs_dialog {
+	typedef struct _gs_dialog GS_DIALOG;
+	struct _gs_dialog {
 
-	GtkWidget *dialog;
+		GtkWidget *dialog;
 
-	gchar *stock_icon;
+		gchar *stock_icon;
 
-	gchar *title;
+		gchar *title;
 
-	gchar *text1;
-	gchar *text2;
-	gchar *text3;
-	gchar *text4;
-	gchar *text5;
-	gchar *text6;
+		gchar *text1;
+		gchar *text2;
+		gchar *text3;
+		gchar *text4;
+		gchar *text5;
+		gchar *text6;
 
-	gchar *label_top;
-	gchar *label_middle;
-	gchar *label1;
-	gchar *label2;
-	gchar *label3;
-	gchar *label4;
-	gchar *label5;
-	gchar *label6;
-	gchar *label_bottom;
+		gchar *label_top;
+		gchar *label_middle;
+		gchar *label1;
+		gchar *label2;
+		gchar *label3;
+		gchar *label4;
+		gchar *label5;
+		gchar *label6;
+		gchar *label_bottom;
 
-	gboolean no_save;
-	gboolean save;
-	gboolean ok;
-	gboolean cancel;
-	gboolean yes;
-	gboolean no;
-	gboolean apply;
-};
+		gboolean no_save;
+		gboolean save;
+		gboolean ok;
+		gboolean cancel;
+		gboolean yes;
+		gboolean no;
+		gboolean apply;
+	};
 
-GS_DIALOG *gui_new_dialog(void);
-void gui_generic_warning(const char *);
-void gui_generic_warning_modal(const char *);
-gint gui_gs_dialog(GS_DIALOG * info);
-gint gui_alert_dialog(GS_DIALOG * info);
-gint gui_yes_no_dialog(char *, char *);
-gint gui_close_confirmation_dialog(GS_DIALOG * info);
+	GS_DIALOG *gui_new_dialog(void);
+	void gui_generic_warning(const char *);
+	void gui_generic_warning_modal(const char *);
+	gint gui_gs_dialog(GS_DIALOG * info);
+	gint gui_alert_dialog(GS_DIALOG * info);
+	gint gui_yes_no_dialog(char *, char *);
+	gint gui_close_confirmation_dialog(GS_DIALOG * info);
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif

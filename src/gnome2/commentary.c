@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <errno.h>
@@ -43,7 +43,7 @@
 #include "gui/widgets.h"
 #include "gui/utilities.h"
 
-#ifdef USE_WEBKIT_EDITOR	
+#ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
 #else
 #include "editor/slib-editor.h"
@@ -84,7 +84,8 @@ void access_to_edit_percomm()
 	if (!main_is_module(personal))
 		return;
 
-	editor_create_new (personal,(gchar *) settings.currentverse,NOTE_EDITOR);
+	editor_create_new(personal, (gchar *) settings.currentverse,
+			  NOTE_EDITOR);
 }
 
 
@@ -96,17 +97,15 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 	//gtk_widget_grab_focus (widgets.html_comm);
 	//settings.whichwindow = COMMENTARY_WINDOW;
 	//gui_change_window_title(settings.CommWindowModule);
-  	return FALSE;
+	return FALSE;
 }
 
 
 static void
-_popupmenu_requested_cb (XiphosHtml *html,
-			 gchar *uri,
-			 gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
 {
 	//g_print ("in comm _popupmenu_requested_cb\n");
-    	gui_menu_popup (html, settings.CommWindowModule, NULL);
+	gui_menu_popup(html, settings.CommWindowModule, NULL);
 }
 
 /******************************************************************************
@@ -136,22 +135,19 @@ GtkWidget *gui_create_commentary_pane(void)
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box_comm),
-			   scrolledwindow, TRUE,
-			   TRUE, 0);
+			   scrolledwindow, TRUE, TRUE, 0);
 
-	widgets.html_comm = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, COMMENTARY_TYPE));
+	widgets.html_comm =
+	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, COMMENTARY_TYPE));
 	gtk_widget_show(widgets.html_comm);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			 widgets.html_comm);
+			  widgets.html_comm);
 
-	g_signal_connect((gpointer)widgets.html_comm,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
-	g_signal_connect ((gpointer) scrolledwindow, "enter_notify_event",
-		    G_CALLBACK (on_enter_notify_event),
-		    NULL);
+	g_signal_connect((gpointer) widgets.html_comm,
+			 "popupmenu_requested",
+			 G_CALLBACK(_popupmenu_requested_cb), NULL);
+	g_signal_connect((gpointer) scrolledwindow, "enter_notify_event",
+			 G_CALLBACK(on_enter_notify_event), NULL);
 
 	return box_comm;
 }
-

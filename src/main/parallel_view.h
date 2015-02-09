@@ -26,23 +26,22 @@
 extern "C" {
 #endif
 
-gchar *main_parallel_change_verse(void);
-void main_load_g_ops_parallel(GtkWidget *menu);
-void main_set_parallel_options_at_start(void);
-void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
-				   GCallback mycallback);
-void main_check_parallel_modules(void);
-void main_set_parallel_options_at_start(void);
-void main_update_parallel_page(void);
-void main_update_parallel_page_detached(void);
-void main_swap_parallel_with_main(char *intmod);
+	gchar *main_parallel_change_verse(void);
+	void main_load_g_ops_parallel(GtkWidget * menu);
+	void main_set_parallel_options_at_start(void);
+	void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
+					  GCallback mycallback);
+	void main_check_parallel_modules(void);
+	void main_set_parallel_options_at_start(void);
+	void main_update_parallel_page(void);
+	void main_update_parallel_page_detached(void);
+	void main_swap_parallel_with_main(char *intmod);
 
-void main_init_parallel_view (void);
-void main_delete_parallel_view(void);
+	void main_init_parallel_view(void);
+	void main_delete_parallel_view(void);
 
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif

@@ -39,28 +39,30 @@
 G_DEFINE_TYPE(IpcObject, ipc_object, G_TYPE_OBJECT)
 
 
-gboolean ipc_object_set_current_reference(IpcObject* obj,
-					  gchar* reference,
-					  GError** error);
-gboolean ipc_object_get_current_reference(IpcObject* obj,
-					  gchar** reference,
-					  GError** error);
-gboolean ipc_object_get_next_search_reference(IpcObject* obj,
-				       gchar** reference,
-				       GError** error);
+gboolean ipc_object_set_current_reference(IpcObject * obj,
+					  gchar * reference,
+					  GError ** error);
+gboolean ipc_object_get_current_reference(IpcObject * obj,
+					  gchar ** reference,
+					  GError ** error);
+gboolean ipc_object_get_next_search_reference(IpcObject * obj,
+					      gchar ** reference,
+					      GError ** error);
 
 #include "ipc-interface.h"
 #include "main/url.hh"
 
 static IpcObject *main_ipc_obj;
 
-static void ipc_object_init(IpcObject* obj) {
+static void ipc_object_init(IpcObject * obj)
+{
 	g_assert(obj != NULL);
 	obj->references = NULL;
 	obj->current_ref = NULL;
 }
 
-static void ipc_object_class_init(IpcObjectClass* klass) {
+static void ipc_object_class_init(IpcObjectClass * klass)
+{
 
 	/**
 	 * IpcObject::search_performed_signal:
@@ -73,16 +75,14 @@ static void ipc_object_class_init(IpcObjectClass* klass) {
 	 * Since: 3.2
 	 */
 	klass->signals[SEARCH_PERFORMED] =
-		g_signal_new ("search-performed-signal",
-			      G_OBJECT_CLASS_TYPE(klass),
-			      G_SIGNAL_RUN_LAST,
-			      0,
-			      NULL,
-			      NULL,
-			      ipc_marshal_VOID__STRING_INT,
-			      G_TYPE_NONE,
-			      1,
-			      G_TYPE_STRING);
+	    g_signal_new("search-performed-signal",
+			 G_OBJECT_CLASS_TYPE(klass),
+			 G_SIGNAL_RUN_LAST,
+			 0,
+			 NULL,
+			 NULL,
+			 ipc_marshal_VOID__STRING_INT,
+			 G_TYPE_NONE, 1, G_TYPE_STRING);
 	/**
 	 * IpcObject::navigation_signal:
 	 * @reference: the new reference
@@ -94,16 +94,14 @@ static void ipc_object_class_init(IpcObjectClass* klass) {
 	 * Since: 3.2
 	 */
 	klass->signals[NAVIGATION] =
-		g_signal_new ("navigation-signal",
-			      G_OBJECT_CLASS_TYPE(klass),
-			      G_SIGNAL_RUN_LAST,
-			      0,
-			      NULL,
-			      NULL,
-			      g_cclosure_marshal_VOID__STRING,
-			      G_TYPE_NONE,
-			      1,
-			      G_TYPE_STRING);
+	    g_signal_new("navigation-signal",
+			 G_OBJECT_CLASS_TYPE(klass),
+			 G_SIGNAL_RUN_LAST,
+			 0,
+			 NULL,
+			 NULL,
+			 g_cclosure_marshal_VOID__STRING,
+			 G_TYPE_NONE, 1, G_TYPE_STRING);
 
 	dbus_g_object_type_install_info(IPC_TYPE_OBJECT,
 					&dbus_glib_ipc_object_object_info);
@@ -121,22 +119,18 @@ static void ipc_object_class_init(IpcObjectClass* klass) {
  *
  * Since: 3.2
  */
-gboolean ipc_object_search_performed(IpcObject* obj,
-				     const gchar* search_term,
-				     const int* hits,
-				     GError **error)
- {
+gboolean ipc_object_search_performed(IpcObject * obj,
+				     const gchar * search_term,
+				     const int *hits, GError ** error)
+{
 
-	 IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
+	IpcObjectClass *klass = IPC_OBJECT_GET_CLASS(obj);
 
-	 GString *s = g_string_new ("");
-	 g_string_printf(s, "%d", *hits);
+	GString *s = g_string_new("");
+	g_string_printf(s, "%d", *hits);
 
-	 g_signal_emit(obj,
-		       klass->signals[SEARCH_PERFORMED],
-		       0,
-		       s->str,
-		       hits);
+	g_signal_emit(obj,
+		      klass->signals[SEARCH_PERFORMED], 0, s->str, hits);
 	return FALSE;
 }
 
@@ -152,18 +146,15 @@ gboolean ipc_object_search_performed(IpcObject* obj,
  * Since: 3.2
  */
 
-gboolean ipc_object_navigation_signal (IpcObject* obj,
-					const gchar* reference,
-					GError** error)
+gboolean ipc_object_navigation_signal(IpcObject * obj,
+				      const gchar * reference,
+				      GError ** error)
 {
 	obj->current_ref = g_strdup(reference);
 
-	IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
+	IpcObjectClass *klass = IPC_OBJECT_GET_CLASS(obj);
 
-	g_signal_emit(obj,
-		      klass->signals[NAVIGATION],
-		      0,
-		      reference);
+	g_signal_emit(obj, klass->signals[NAVIGATION], 0, reference);
 	return FALSE;
 }
 
@@ -179,12 +170,12 @@ gboolean ipc_object_navigation_signal (IpcObject* obj,
  * Since: 3.2
  */
 
-gboolean ipc_object_get_next_search_reference(IpcObject* obj,
-				       gchar** reference,
-				       GError** error)
+gboolean ipc_object_get_next_search_reference(IpcObject * obj,
+					      gchar ** reference,
+					      GError ** error)
 {
 	if (obj->references)
-		*reference = g_strdup((gchar*)obj->references->data);
+		*reference = g_strdup((gchar *) obj->references->data);
 	else
 		*reference = g_strdup("XIPHOS_SEARCH_END");
 
@@ -203,16 +194,16 @@ gboolean ipc_object_get_next_search_reference(IpcObject* obj,
  *
  * Since: 3.2
  */
-gboolean ipc_object_set_current_reference(IpcObject* obj,
-					  gchar* reference,
-					  GError** error)
+gboolean ipc_object_set_current_reference(IpcObject * obj,
+					  gchar * reference,
+					  GError ** error)
 {
 	//easy route
-	main_url_handler((const gchar*)reference, TRUE);
+	main_url_handler((const gchar *) reference, TRUE);
 	//it should be done like this, probably
 	/* g_signal_emit(obj,
-		      "navigate-requested",
-		      reference); */
+	   "navigate-requested",
+	   reference); */
 
 	return TRUE;
 }
@@ -227,9 +218,9 @@ gboolean ipc_object_set_current_reference(IpcObject* obj,
  *
  * Since: 3.2
  */
-gboolean ipc_object_get_current_reference(IpcObject* obj,
-					  gchar** reference,
-					  GError** error)
+gboolean ipc_object_get_current_reference(IpcObject * obj,
+					  gchar ** reference,
+					  GError ** error)
 {
 	*reference = g_strdup(obj->current_ref);
 	return TRUE;
@@ -244,13 +235,13 @@ gboolean ipc_object_get_current_reference(IpcObject* obj,
  *
  * Since: 3.2
  */
-IpcObject* ipc_init_dbus_connection(IpcObject* obj)
+IpcObject *ipc_init_dbus_connection(IpcObject * obj)
 {
-	DBusGConnection* bus = NULL;
-	DBusGProxy* busProxy = NULL;
+	DBusGConnection *bus = NULL;
+	DBusGProxy *busProxy = NULL;
 	obj = NULL;
 	guint result;
-	GError* error = NULL;
+	GError *error = NULL;
 
 	bus = dbus_g_bus_get(DBUS_BUS_SESSION, &error);
 	if (error != NULL)
@@ -271,9 +262,7 @@ IpcObject* ipc_init_dbus_connection(IpcObject* obj)
 			       G_TYPE_UINT,
 			       0,
 			       G_TYPE_INVALID,
-			       G_TYPE_UINT,
-			       &result,
-			       G_TYPE_INVALID)) {
+			       G_TYPE_UINT, &result, G_TYPE_INVALID)) {
 		return NULL;
 	}
 
@@ -298,9 +287,7 @@ IpcObject* ipc_init_dbus_connection(IpcObject* obj)
  *
  * Since: 3.2
  */
-IpcObject* ipc_get_main_ipc(void)
+IpcObject *ipc_get_main_ipc(void)
 {
 	return main_ipc_obj;
 }
-
-
