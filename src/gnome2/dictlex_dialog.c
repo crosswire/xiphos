@@ -64,15 +64,14 @@ static gint cell_height;
  *   void
  */
 
-static void list_selection_changed(GtkTreeSelection *selection,
-				   DIALOG_DATA *d)
+static void list_selection_changed(GtkTreeSelection * selection,
+				   DIALOG_DATA * d)
 {
 	GtkTreeIter selected;
 	gchar *buf = NULL;
 	GtkTreeModel *model;
 
-	if (!gtk_tree_selection_get_selected
-	    (selection, &model, &selected))
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
 		return;
 
 	gtk_tree_model_get(model, &selected, 0, &buf, -1);
@@ -127,12 +126,11 @@ static gint button_press_event(GtkWidget *html,
  *   void
  */
 
-static void dialog_set_focus(GtkWindow *window,
-			     GtkWidget *widget,
-			     DIALOG_DATA *dlg)
+static void dialog_set_focus(GtkWindow * window,
+			     GtkWidget * widget, DIALOG_DATA * dlg)
 {
-//	cur_dlg = dlg;
-//	XI_warning(("current module = %s",cur_dlg->mod_name));
+//      cur_dlg = dlg;
+//      XI_warning(("current module = %s",cur_dlg->mod_name));
 }
 
 /******************************************************************************
@@ -151,8 +149,7 @@ static void dialog_set_focus(GtkWindow *window,
  *   void
  */
 
-static void dialog_destroy(GObject *object,
-			   DIALOG_DATA *dlg)
+static void dialog_destroy(GObject * object, DIALOG_DATA * dlg)
 {
 	if (!dialog_freed)
 		main_free_on_destroy(dlg);
@@ -176,9 +173,8 @@ static void dialog_destroy(GObject *object,
  *   gint
  */
 
-static gint list_button_released(GtkWidget *html,
-				 GdkEventButton *event,
-				 DIALOG_DATA *d)
+static gint list_button_released(GtkWidget * html,
+				 GdkEventButton * event, DIALOG_DATA * d)
 {
 	switch (event->button) {
 	case 1:
@@ -195,38 +191,35 @@ static gint list_button_released(GtkWidget *html,
 }
 
 
-static void add_columns(GtkTreeView *treeview)
+static void add_columns(GtkTreeView * treeview)
 {
 	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column; 
+	GtkTreeViewColumn *column;
 #ifdef USE_GTK_3
-    	GtkRequisition size;  
+	GtkRequisition size;
 #endif
-    
-//	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+
+//      GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 
 	/* column for fixed toggles */
 	renderer = gtk_cell_renderer_text_new();
 
 	column = gtk_tree_view_column_new_with_attributes("Keys",
 							  renderer,
-							  "text", 0,
-							  NULL);
+							  "text", 0, NULL);
 	gtk_tree_view_column_set_sort_column_id(column, 0);
 
 	gtk_tree_view_append_column(treeview, column);
 	/* get cell (row) height */
 #ifdef USE_GTK_3
- 	gtk_cell_renderer_get_preferred_size (renderer,
-                                              GTK_WIDGET(treeview) ,
-                                              NULL,
-                                              &size);
-    	cell_height = size.height;
+	gtk_cell_renderer_get_preferred_size(renderer,
+					     GTK_WIDGET(treeview),
+					     NULL, &size);
+	cell_height = size.height;
 #else
 	gtk_cell_renderer_get_size(renderer,
 				   GTK_WIDGET(treeview),
-				   NULL,
-				   NULL, NULL, NULL, &cell_height);
+				   NULL, NULL, NULL, NULL, &cell_height);
 #endif
 	settings.cell_height = cell_height;
 }
@@ -252,7 +245,7 @@ void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
 {
 	gchar *key = NULL;
 
-	key=settings.dictkey;
+	key = settings.dictkey;
 	gtk_entry_set_text(GTK_ENTRY(d->entry), key);
 }
 
@@ -272,8 +265,7 @@ void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
  *   void
  */
 
-static void entry_changed(GtkEditable *editable,
-			  DIALOG_DATA *d)
+static void entry_changed(GtkEditable * editable, DIALOG_DATA * d)
 {
 	gchar *key = NULL;
 
@@ -287,11 +279,9 @@ static void entry_changed(GtkEditable *editable,
 }
 
 static void
-_popupmenu_requested_cb (XiphosHtml *html,
-			     gchar *uri,
-			     DIALOG_DATA * d)
+_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, DIALOG_DATA * d)
 {
-	gui_menu_popup (html, cur_dlg->mod_name, cur_dlg);
+	gui_menu_popup(html, cur_dlg->mod_name, cur_dlg);
 }
 
 /******************************************************************************
@@ -310,7 +300,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
  *   GtkWidget *
  */
 
-void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
+void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 {
 	GtkWidget *hpaned7;
 	GtkWidget *vbox;
@@ -318,11 +308,11 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	GtkWidget *hbox_toolbar;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSyncDL;
-//	GtkWidget *label205;
+//      GtkWidget *label205;
 	GtkWidget *frameDictHTML;
 	GtkWidget *scrolledwindowDictHTML;
 	GtkWidget *scrolledwindow;
-//	GtkWidget *label;
+//      GtkWidget *label;
 	GtkListStore *model;
 
 	dlg->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -330,8 +320,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	g_object_set_data(G_OBJECT(dlg->dialog), "dlg->dialog",
 			  dlg->dialog);
 	gtk_window_set_title(GTK_WINDOW(dlg->dialog),
-			     main_get_module_description(dlg->
-							 mod_name));
+			     main_get_module_description(dlg->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(dlg->dialog), 465, 275);
 	gtk_window_set_resizable(GTK_WINDOW(dlg->dialog), TRUE);
 
@@ -356,8 +345,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 
 	UI_HBOX(hbox_toolbar, FALSE, 0);
 	gtk_widget_show(hbox_toolbar);
-	gtk_box_pack_start(GTK_BOX(vbox56), hbox_toolbar, FALSE, TRUE,
-			   0);
+	gtk_box_pack_start(GTK_BOX(vbox56), hbox_toolbar, FALSE, TRUE, 0);
 
 	btnSyncDL = gtk_button_new();
 	gtk_widget_show(btnSyncDL);
@@ -367,13 +355,11 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 
 	tmp_toolbar_icon =
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name ("gtk-refresh",
-                    		    GTK_ICON_SIZE_BUTTON);
-#else                        
-		
-	    gtk_image_new_from_stock("gtk-refresh",
-				     GTK_ICON_SIZE_BUTTON);
-#endif	    
+	    gtk_image_new_from_icon_name("gtk-refresh",
+					 GTK_ICON_SIZE_BUTTON);
+#else
+	    gtk_image_new_from_stock("gtk-refresh", GTK_ICON_SIZE_BUTTON);
+#endif
 	gtk_widget_show(tmp_toolbar_icon);
 	gtk_container_add(GTK_CONTAINER(btnSyncDL), tmp_toolbar_icon);
 
@@ -389,8 +375,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 
-	gtk_box_pack_start(GTK_BOX(vbox56), scrolledwindow, TRUE,
-			   TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox56), scrolledwindow, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
@@ -430,14 +415,17 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 					    scrolledwindowDictHTML,
 					    settings.shadow_type);
 
-	dlg->html = GTK_WIDGET(XIPHOS_HTML_NEW((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
+	dlg->html =
+	    GTK_WIDGET(XIPHOS_HTML_NEW
+		       ((DIALOG_DATA *) dlg, TRUE,
+			DIALOG_DICTIONARY_TYPE));
 
-	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML), dlg->html);
+	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
+			  dlg->html);
 	gtk_widget_show(dlg->html);
-	g_signal_connect((gpointer)dlg->html,
-		      "popupmenu_requested",
-		      G_CALLBACK(_popupmenu_requested_cb),
-		      dlg);
+	g_signal_connect((gpointer) dlg->html,
+			 "popupmenu_requested",
+			 G_CALLBACK(_popupmenu_requested_cb), dlg);
 
 	g_signal_connect(G_OBJECT(dlg->dialog), "set_focus",
 			 G_CALLBACK(dialog_set_focus), dlg);
@@ -446,12 +434,11 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	g_signal_connect(G_OBJECT(btnSyncDL), "clicked",
 			 G_CALLBACK(on_btnSyncDL_clicked), dlg);
 	g_signal_connect(G_OBJECT(dlg->entry), "changed",
-			 G_CALLBACK(entry_changed),
-			 (DIALOG_DATA *) dlg);
+			 G_CALLBACK(entry_changed), (DIALOG_DATA *) dlg);
 	g_signal_connect(G_OBJECT(dlg->listview),
 			 "button_release_event",
 			 G_CALLBACK(list_button_released), dlg);
-	cur_dlg =   dlg;
+	cur_dlg = dlg;
 }
 
 //******  end of file  ******/

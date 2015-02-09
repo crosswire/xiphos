@@ -61,12 +61,11 @@ GPid dbus_pid;
 #include <libsoup/soup.h>
 
 static void
-server_callback_media (SoupServer *server,
-                       SoupMessage *msg,
-                       const char *path,
-                       GHashTable *query,
-                       SoupClientContext *client,
-                       gpointer user_data)
+server_callback_media(SoupServer * server,
+		      SoupMessage * msg,
+		      const char *path,
+		      GHashTable * query,
+		      SoupClientContext * client, gpointer user_data)
 {
 	char *contents;
 	gsize length;
@@ -82,7 +81,7 @@ server_callback_media (SoupServer *server,
 				 contents, length);
 	soup_message_set_status(msg, SOUP_STATUS_OK);
 }
-#endif /* WIN32 */
+#endif				/* WIN32 */
 
 /******************************************************************************
  * Name
@@ -105,7 +104,7 @@ int main(int argc, char *argv[])
 	int newbookmarks = FALSE;
 	int have_sword_url = FALSE;
 	int have_tab_list = FALSE;
-	gint base_step = 0; //needed for splash
+	gint base_step = 0;	//needed for splash
 #ifdef WIN32
 	/* see comments on function immediately preceding. */
 	SoupServer *server;
@@ -115,13 +114,13 @@ int main(int argc, char *argv[])
 	double d;
 #endif
 
-	//	g_thread_init(NULL);
+	//      g_thread_init(NULL);
 #if !GLIB_CHECK_VERSION(2, 35, 0)
-	g_type_init(); // g_type_init has been deprecated since version 2.36
-	               // Since GLib 2.36, the type system is initialised 
-	               // automatically and this function does nothing.
+	g_type_init();		// g_type_init has been deprecated since version 2.36
+	// Since GLib 2.36, the type system is initialised 
+	// automatically and this function does nothing.
 #endif
-	
+
 #ifdef CHATTY
 	total = g_timer_new();
 #endif
@@ -129,10 +128,10 @@ int main(int argc, char *argv[])
 	/* get this error check out of the way before risking leaking win32 resources */
 	if (argc > 2) {
 		gui_generic_warning_modal
-		    (_("Xiphos does not understand more than one argument."));
+		    (_
+		     ("Xiphos does not understand more than one argument."));
 		exit(1);
 	}
-
 #ifdef WIN32
 	/*
 	 * WIN32 perversity: We very much want to be *in* the
@@ -141,26 +140,24 @@ int main(int argc, char *argv[])
 	 * to determine where we are (we can't depend on argv).
 	 */
 	gchar *bin_dir = xiphos_win32_get_subdir("bin");
-	g_chdir (bin_dir);
+	g_chdir(bin_dir);
 
 	/* add this directory to $PATH for other stuff, e.g. zip */
 	g_setenv("PATH", g_strdup_printf("%s;%s", bin_dir,
-					        g_getenv("PATH")),
-		                                TRUE);
+					 g_getenv("PATH")), TRUE);
 
 	/* This will not overwrite SWORD_PATH in case it has
 	   been set by some other program or set manually. In the case that
 	   it hasn't been set, it is set to the localized equivalent of
 	   C:/Documents and Settings/All Users/Application Data/Sword */
-	const gchar * const * strings;
+	const gchar *const *strings;
 	strings = g_get_system_data_dirs();
 	g_setenv("SWORD_PATH", g_strdup_printf("%s\\Sword",
 					       //g_getenv("ALLUSERSPROFILE"),
-					       strings[0]),
-		                               FALSE);
+					       strings[0]), FALSE);
 
 	/*it is necessary to explicitly set LANG, because we depend on that
-	  variable to set the SWORD locale */
+	   variable to set the SWORD locale */
 	g_setenv("LANG", g_win32_getlocale(), FALSE);
 
 	/* we need an idea of $HOME that's convenient. */
@@ -178,10 +175,12 @@ int main(int argc, char *argv[])
 	/* on windows, we will ship dbus along with Xiphos */
 	gchar *dbus_args[4];
 
-	gchar *dbus_com = g_win32_get_package_installation_directory_of_module(NULL);
+	gchar *dbus_com =
+	    g_win32_get_package_installation_directory_of_module(NULL);
 	dbus_com = g_strconcat(dbus_com, "\0", NULL);
 
-	gchar *dbus_conf = g_build_filename(dbus_com, "etc\\dbus-session.conf\0", NULL);
+	gchar *dbus_conf =
+	    g_build_filename(dbus_com, "etc\\dbus-session.conf\0", NULL);
 	dbus_conf = g_build_filename("--config-file=\0", dbus_conf, NULL);
 
 	dbus_com = g_build_filename(dbus_com, "dbus.exe\0", NULL);
@@ -193,15 +192,11 @@ int main(int argc, char *argv[])
 	g_spawn_async(NULL,
 		      dbus_args,
 		      NULL,
-		      G_SPAWN_SEARCH_PATH,
-		      NULL,
-		      NULL,
-		      &dbus_pid,
-		      NULL);
-	Sleep(2);			// give dbus a moment to init.
-#endif /* HAVE_DBUS */
+		      G_SPAWN_SEARCH_PATH, NULL, NULL, &dbus_pid, NULL);
+	Sleep(2);		// give dbus a moment to init.
+#endif				/* HAVE_DBUS */
 
-#endif /* WIN32 */
+#endif				/* WIN32 */
 
 	if (argc > 1) {
 		/*
@@ -229,7 +224,7 @@ int main(int argc, char *argv[])
 		    (!strncmp(argv[1], "bible:/", 7)) ||
 		    (strstr(argv[1], "studypad"))) {
 			if (!strncmp(argv[1], "bible:/", 7))
-				memcpy(argv[1], "sword", 5); /* equivalent */
+				memcpy(argv[1], "sword", 5);	/* equivalent */
 			have_sword_url = TRUE;
 		}
 	}
@@ -237,7 +232,7 @@ int main(int argc, char *argv[])
 	/*
 	 * check for directories and files
 	 */
-    	settings_init(argc, argv, newconfigs, newbookmarks);
+	settings_init(argc, argv, newconfigs, newbookmarks);
 
 	gui_init(argc, argv);
 
@@ -266,8 +261,8 @@ int main(int argc, char *argv[])
 
 	if (have_sword_url) {
 		if (!strncmp(argv[1], "sword:/", 7)) {
-			char *key = strchr(argv[1]+8, '/');
-			if (key && *(key+1) != '\0')
+			char *key = strchr(argv[1] + 8, '/');
+			if (key && *(key + 1) != '\0')
 				key++;
 			else
 				key = "Gen 1:1";
@@ -275,13 +270,12 @@ int main(int argc, char *argv[])
 		}
 		main_url_handler(argv[1], TRUE);
 	}
-
 #ifdef CHATTY
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
 	printf("total time is %f\n", d);
 #endif
-	g_idle_add ((GSourceFunc)gui_splash_done, NULL);
+	g_idle_add((GSourceFunc) gui_splash_done, NULL);
 
 	gui_recompute_shows(FALSE);
 

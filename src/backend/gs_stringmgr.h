@@ -24,32 +24,31 @@
 #include <stringmgr.h>
 
 SWORD_NAMESPACE_START
-
 /* StringMgr is a way to provide UTf8 handling by the Sword frontend
  * Each platform, if it's up-to-date, should provide functions to handle
  * unicode and utf8. This class makes it possible to implement Unicode
  * support on the user-side and not in Sword itself.
  */
+class GS_StringMgr:public StringMgr {
 
-class GS_StringMgr : public StringMgr {
-
-public:
+      public:
 	/* Converts the param to an upper case Utf8 string
-	*  @param text The text encoded in utf8 which should
-	*  be turned into an upper case string
-	*  @param max Only change max chars
-	*/
+	 *  @param text The text encoded in utf8 which should
+	 *  be turned into an upper case string
+	 *  @param max Only change max chars
+	 */
 	virtual char *upperUTF8(char *text, unsigned int max = 0) const;
 
-protected:
+      protected:
 	/* Checks whether Utf8 support is available.
-	*  Override the function supportsUnicode() to tell whether
-	*  your implementation has utf8 support.
-	*  @return True if this implementation provides support for
-	*  Utf8 handling or false if just latin1 handling is available
-	*/
-	virtual bool supportsUnicode() const;
+	 *  Override the function supportsUnicode() to tell whether
+	 *  your implementation has utf8 support.
+	 *  @return True if this implementation provides support for
+	 *  Utf8 handling or false if just latin1 handling is available
+	 */
+	virtual bool supportsUnicode()const;
 
 };
+
 SWORD_NAMESPACE_END
 #endif

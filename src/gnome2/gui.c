@@ -39,32 +39,34 @@
 
 #ifdef HAVE_DBUS
 #include "gui/ipc.h"
-static IpcObject* ipc;
+static IpcObject *ipc;
 #endif
 
 void gui_init(int argc, char *argv[])
 {
 	static int gui_init_done = FALSE;
 
-	if (gui_init_done) return;
+	if (gui_init_done)
+		return;
 	gui_init_done = TRUE;
 
 #ifdef ENABLE_NLS
-	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
+	bindtextdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+	textdomain(GETTEXT_PACKAGE);
 #endif
 #ifdef WIN32
-	gchar *locale_dir = g_win32_get_package_installation_directory_of_module(NULL);
+	gchar *locale_dir =
+	    g_win32_get_package_installation_directory_of_module(NULL);
 	locale_dir = g_strconcat(locale_dir, "\0", NULL);
-	locale_dir = g_build_filename (locale_dir, "share", "locale", NULL);
+	locale_dir = g_build_filename(locale_dir, "share", "locale", NULL);
 	bindtextdomain(GETTEXT_PACKAGE, locale_dir);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-	g_free (locale_dir);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+	textdomain(GETTEXT_PACKAGE);
+	g_free(locale_dir);
 #endif
 	if (!gtk_init_with_args(&argc, &argv, NULL, NULL, NULL, NULL)) {
-	    exit(1);
+		exit(1);
 	};
 #ifndef WIN32
 	gconf_setup();
@@ -102,12 +104,12 @@ void gui_main(void)
 /* we don't ask any more, because there's no good reason not to take over.    */
 
 char *gconf_keys[GS_GCONF_MAX][2] = {
-    { "/desktop/gnome/url-handlers/bible/command",        "xiphos-nav \"%s\"" },
-    { "/desktop/gnome/url-handlers/bible/enabled",        (char *) 1 },
-    { "/desktop/gnome/url-handlers/bible/needs_terminal", (char *) 0 },
-    { "/desktop/gnome/url-handlers/sword/command",        "xiphos-nav \"%s\"" },
-    { "/desktop/gnome/url-handlers/sword/enabled",        (char *) 1 },
-    { "/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0 }
+	{"/desktop/gnome/url-handlers/bible/command", "xiphos-nav \"%s\""},
+	{"/desktop/gnome/url-handlers/bible/enabled", (char *) 1},
+	{"/desktop/gnome/url-handlers/bible/needs_terminal", (char *) 0},
+	{"/desktop/gnome/url-handlers/sword/command", "xiphos-nav \"%s\""},
+	{"/desktop/gnome/url-handlers/sword/enabled", (char *) 1},
+	{"/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0}
 };
 
 #ifndef WIN32
@@ -115,7 +117,7 @@ void gconf_setup()
 {
 	int i;
 	gchar *str;
-	GConfClient* client = gconf_client_get_default();
+	GConfClient *client = gconf_client_get_default();
 
 	if (client == NULL)
 		return;		/* we're not running under GConf */
@@ -128,7 +130,7 @@ void gconf_setup()
 	 * We must fix broken keys.
 	 */
 	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
-					    NULL)) == NULL) ||
+					     NULL)) == NULL) ||
 	     (strncmp(str, "xiphos ", 7) == 0))
 	    ) {
 		/*
@@ -136,20 +138,16 @@ void gconf_setup()
 		 */
 		for (i = 0; i < GS_GCONF_MAX; ++i) {
 			(((i % 3) == 0)	/* contrived hack */
-				  ? gconf_client_set_string
-					(client,
-					 gconf_keys[i][0],
-					 gconf_keys[i][1],
-					 NULL)
-				  : gconf_client_set_bool
-					(client,
-					 gconf_keys[i][0],
-					 (gconf_keys[i][1] ? TRUE : FALSE),
-					 NULL));
+			 ? gconf_client_set_string
+			 (client, gconf_keys[i][0], gconf_keys[i][1], NULL)
+			 : gconf_client_set_bool
+			 (client,
+			  gconf_keys[i][0],
+			  (gconf_keys[i][1] ? TRUE : FALSE), NULL));
 		}
 	}
 }
-#endif /* WIN32 */
+#endif				/* WIN32 */
 
 #ifdef DEBUG
 
@@ -166,25 +164,22 @@ void gconf_setup()
 
 /* GIVE US THE CRASHES, PLEASE!  MYSTERY BUGS ARE EVIL!  glibc.helpfulness-- */
 
-gchar*
-XI_g_strdup_printf(const char *filename,
-		   int linenumber,
-		   const gchar *format,
-		   ...)
+gchar *XI_g_strdup_printf(const char *filename,
+			  int linenumber, const gchar * format, ...)
 {
 	gchar *buffer, *next, *s;
 	va_list args;
 
 	va_start(args, format);
-	for (s = strchr(format, '%'); s; s = strchr(++s, '%'))
-	{
-		next = va_arg(args, gchar*);
-		if ((next == (gchar*) NULL) && (*(s+1) == 's'))
-		{
+	for (s = strchr(format, '%'); s; s = strchr(++s, '%')) {
+		next = va_arg(args, gchar *);
+		if ((next == (gchar *) NULL) && (*(s + 1) == 's')) {
 			gchar *msg = g_strdup_printf
 			    ("%s\n%s\n\n%s:%d \"%s\"",
-			     _("BUG! Xiphos is about to crash due to a \"STRDUP\" error."),
-			     _("Please report this error to the Xiphos team with:"),
+			     _
+			     ("BUG! Xiphos is about to crash due to a \"STRDUP\" error."),
+			     _
+			     ("Please report this error to the Xiphos team with:"),
 			     filename, linenumber, format);
 			gui_generic_warning_modal(msg);
 			g_free(msg);
@@ -194,32 +189,30 @@ XI_g_strdup_printf(const char *filename,
 	va_end(args);
 
 	/* real g_strdup_printf content */
-	va_start (args, format);
-	buffer = g_strdup_vprintf (format, args);
-	va_end (args);
+	va_start(args, format);
+	buffer = g_strdup_vprintf(format, args);
+	va_end(args);
 	return buffer;
 }
 
 void
 XI_g_string_printf(const char *filename,
 		   int linenumber,
-		   GString *string,
-		   const gchar *format,
-		   ...)
+		   GString * string, const gchar * format, ...)
 {
 	gchar *next, *s;
 	va_list args;
 
 	va_start(args, format);
-	for (s = strchr(format, '%'); s; s = strchr(++s, '%'))
-	{
-		next = va_arg(args, gchar*);
-		if ((next == (gchar*) NULL) && (*(s+1) == 's'))
-		{
+	for (s = strchr(format, '%'); s; s = strchr(++s, '%')) {
+		next = va_arg(args, gchar *);
+		if ((next == (gchar *) NULL) && (*(s + 1) == 's')) {
 			gchar *msg = g_strdup_printf
 			    ("%s\n%s\n\n%s:%d \"%s\"",
-			     _("BUG! Xiphos is about to crash due to a \"STRING\" error."),
-			     _("Please report this error to the Xiphos team with:"),
+			     _
+			     ("BUG! Xiphos is about to crash due to a \"STRING\" error."),
+			     _
+			     ("Please report this error to the Xiphos team with:"),
 			     filename, linenumber, format);
 			gui_generic_warning_modal(msg);
 			g_free(msg);
@@ -229,10 +222,10 @@ XI_g_string_printf(const char *filename,
 	va_end(args);
 
 	/* real g_string_printf content */
-	g_string_truncate (string, 0);
-	va_start (args, format);
-	g_string_append_vprintf (string, format, args);
-	va_end (args);
+	g_string_truncate(string, 0);
+	va_start(args, format);
+	g_string_append_vprintf(string, format, args);
+	va_end(args);
 }
 
-#endif /* DEBUG */
+#endif				/* DEBUG */

@@ -82,9 +82,9 @@ static void set_gbs_label(gchar * mod_name)
 	/*
 	 * set label to module name
 	 */
-	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
+	gtk_label_set_text(GTK_LABEL(widgets.label_comm), mod_name);
 }
-#endif /* 0 */
+#endif				/* 0 */
 
 /******************************************************************************
  * Name
@@ -127,17 +127,15 @@ void gui_set_book_mod_and_key(gchar * mod_name, gchar * key)
 void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 {
 	/*save_module_options(cur_t->mod_name, option,
-				    choice);*/
+	   choice); */
 	//gbs_display(cur_g, tree_level);
 }
 
 
 static void
-_popupmenu_requested_cb (XiphosHtml *html,
-			     gchar *uri,
-			     gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
 {
-	gui_menu_popup (html, settings.book_mod, NULL);
+	gui_menu_popup(html, settings.book_mod, NULL);
 }
 
 /******************************************************************************
@@ -175,15 +173,15 @@ GtkWidget *gui_create_book_pane(void)
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
-	widgets.html_book = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, BOOK_TYPE));
+	widgets.html_book =
+	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, BOOK_TYPE));
 	gtk_widget_show(widgets.html_book);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			 widgets.html_book);
+			  widgets.html_book);
 
-	g_signal_connect((gpointer)widgets.html_book,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
+	g_signal_connect((gpointer) widgets.html_book,
+			 "popupmenu_requested",
+			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 	return box;
 }
 

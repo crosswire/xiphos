@@ -28,11 +28,10 @@ extern "C" {
 
 #include "main/module_dialogs.h"
 
-void gui_create_gbs_dialog(DIALOG_DATA * dlg);
-void gui_close_gbs_dialog(DIALOG_DATA * dlg);
+	void gui_create_gbs_dialog(DIALOG_DATA * dlg);
+	void gui_close_gbs_dialog(DIALOG_DATA * dlg);
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif

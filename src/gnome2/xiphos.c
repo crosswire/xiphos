@@ -105,9 +105,9 @@ void frontend_init(void)
 	 */
 	if (settings.havebible) {
 		main_check_parallel_modules();
-		main_init_parallel_view();	
+		main_init_parallel_view();
 		gui_create_parallel_page();
-		gtk_widget_realize(widgets.html_parallel);	
+		gtk_widget_realize(widgets.html_parallel);
 		main_set_parallel_options_at_start();
 	}
 
@@ -126,9 +126,11 @@ void frontend_init(void)
 		gtk_widget_realize(widgets.html_book);
 	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_dict)))
 		gtk_widget_realize(widgets.html_dict);
-	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_previewer_text)))
+	if (!gtk_widget_get_realized
+	    (GTK_WIDGET(widgets.html_previewer_text)))
 		gtk_widget_realize(widgets.html_previewer_text);
-	if (!gtk_widget_get_realized(GTK_WIDGET(sidebar.html_viewer_widget)))
+	if (!gtk_widget_get_realized
+	    (GTK_WIDGET(sidebar.html_viewer_widget)))
 		gtk_widget_realize(sidebar.html_viewer_widget);
 	main_flush_widgets_content();
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
@@ -155,8 +157,8 @@ void frontend_init(void)
 
 void frontend_display(const char *tabs)
 {
-	GdkScreen *screen  = gdk_screen_get_default();
-	gint screen_width  = gdk_screen_get_width(screen);
+	GdkScreen *screen = gdk_screen_get_default();
+	gint screen_width = gdk_screen_get_width(screen);
 	gint screen_height = gdk_screen_get_height(screen);
 
 	XI_print(("%s\n", "Displaying Xiphos"));
@@ -194,14 +196,15 @@ void frontend_display(const char *tabs)
 	if (settings.app_y > (screen_height - 100))
 		settings.app_y = screen_height - 100;
 
- 	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
+	gtk_window_move(GTK_WINDOW(widgets.app), settings.app_x,
+			settings.app_y);
 
 	/* gecko  needs the widgets to be visible before writing */
 	sync_windows();
 
 	// setup passage notebook
-//	if (settings.browsing) {
-	gui_notebook_main_setup (settings.browsing, tabs);
+//      if (settings.browsing) {
+	gui_notebook_main_setup(settings.browsing, tabs);
 /*	} else {
 		url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 						      settings.dictkey);
@@ -226,9 +229,8 @@ void frontend_display(const char *tabs)
 				       (widgets.parallel_tab_item),
 				       settings.showparatab);
 	g_signal_connect(G_OBJECT(widgets.parallel_tab_item),
-			   "toggled",
-			   G_CALLBACK(gui_parallel_tab_activate),
-			   NULL	);
+			 "toggled",
+			 G_CALLBACK(gui_parallel_tab_activate), NULL);
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
 
 	/* open saved windows as needed */
@@ -245,7 +247,7 @@ void frontend_display(const char *tabs)
 		main_display_devotional();
 	else
 		main_init_previewer();
-	gtk_widget_grab_focus (sidebar.module_list);
+	gtk_widget_grab_focus(sidebar.module_list);
 
 	XI_print(("%s\n\n", "done"));
 }
@@ -270,18 +272,18 @@ void frontend_display(const char *tabs)
 void shutdown_frontend(void)
 {
 	RESULTS *list_item;
-	if(pixbufs->pixbuf_closed)
+	if (pixbufs->pixbuf_closed)
 		g_object_unref(pixbufs->pixbuf_closed);
-	if(pixbufs->pixbuf_opened)
+	if (pixbufs->pixbuf_opened)
 		g_object_unref(pixbufs->pixbuf_opened);
-	if(pixbufs->pixbuf_helpdoc)
+	if (pixbufs->pixbuf_helpdoc)
 		g_object_unref(pixbufs->pixbuf_helpdoc);
 
 	/* free verse list used for saving search results */
 	if (list_of_verses) {
 		GList *chaser = list_of_verses;
 		while (chaser) {
-			list_item = (RESULTS*)chaser->data;
+			list_item = (RESULTS *) chaser->data;
 			g_free(list_item->module);
 			g_free(list_item->key);
 			g_free(list_item);
@@ -303,7 +305,7 @@ void shutdown_frontend(void)
 
 	XIPHOS_HTML_SHUTDOWN();
 
-	gui_notebook_main_shutdown (settings.browsing);
+	gui_notebook_main_shutdown(settings.browsing);
 
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);
@@ -314,8 +316,8 @@ void shutdown_frontend(void)
 	main_delete_sidebar_search_backend();
 	main_delete_parallel_view();
 
-	g_string_free(navbar_versekey.module_name,TRUE);
-	g_string_free(navbar_versekey.key,TRUE);
+	g_string_free(navbar_versekey.module_name, TRUE);
+	g_string_free(navbar_versekey.key, TRUE);
 
 	XI_print(("\n%s\n", "Xiphos is shutdown"));
 }

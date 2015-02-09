@@ -25,7 +25,7 @@
  * A general compatibility layer that will buffer the application from the
  * direct effects of WebKit and Gecko being alternatively selected for
  * the rendering system.
- */   
+ */
 #include "webkit/wk-html.h"
 
 // Used in places like the ubiquitous _popmenu_requested_cb
@@ -42,11 +42,12 @@ typedef WkHtmlPriv XiphosHtmlPriv;
 #define XIPHOS_HTML_FIND(a, b)			wk_html_find(a, b)
 #define XIPHOS_HTML_FIND_AGAIN(a, b)		wk_html_find_again(a, b)
 #define XIPHOS_HTML_JUMP_TO_ANCHOR		wk_html_jump_to_anchor
-#define XIPHOS_HTML_PRINT_DOCUMENT(a)		wk_html_print(a)// TODO: Implement?
+#define XIPHOS_HTML_PRINT_DOCUMENT(a)		wk_html_print(a)	// TODO: Implement?
 #define XIPHOS_HTML_SHUTDOWN			wk_html_shutdown
 #define XIPHOS_HTML_INITIALIZE			wk_html_initialize
 
 #define XIPHOS_TYPE_HTML WK_TYPE_HTML
 #define XIPHOS_HTML_GET_PRIVATE(object)		(G_TYPE_INSTANCE_GET_PRIVATE ((object), WK_TYPE_HTML, WkHtmlPriv))
 
-XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane);
+XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog,
+			    gint pane);

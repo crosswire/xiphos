@@ -112,13 +112,13 @@ void gui_popup_menu_parallel(void)
 	g_object_set_data(G_OBJECT(menu), "pmInt", menu);
 
 	if (!settings.showparatab) {
-		undockInt = gtk_menu_item_new_with_label(_("Detach/Attach"));
+		undockInt =
+		    gtk_menu_item_new_with_label(_("Detach/Attach"));
 		gtk_widget_show(undockInt);
 		gtk_container_add(GTK_CONTAINER(menu), undockInt);
 	}
 
-	module_options =
-	    gtk_menu_item_new_with_label(_("Module Options"));
+	module_options = gtk_menu_item_new_with_label(_("Module Options"));
 	gtk_widget_show(module_options);
 	gtk_container_add(GTK_CONTAINER(menu), module_options);
 
@@ -143,25 +143,22 @@ void gui_popup_menu_parallel(void)
 		}
 	}
 
-	gtk_menu_popup((GtkMenu*)menu, NULL, NULL, NULL, NULL, 0,
+	gtk_menu_popup((GtkMenu *) menu, NULL, NULL, NULL, NULL, 0,
 		       gtk_get_current_event_time());
 }
 
 
 static gboolean
-on_enter_notify_event(GtkWidget       *widget,
-		      GdkEventCrossing *event,
-		      gpointer         user_data)
+on_enter_notify_event(GtkWidget * widget,
+		      GdkEventCrossing * event, gpointer user_data)
 {
-	gtk_widget_grab_focus (widgets.html_parallel);
-  	return FALSE;
+	gtk_widget_grab_focus(widgets.html_parallel);
+	return FALSE;
 }
 
 
 static void
-_popupmenu_requested_cb(XiphosHtml *html,
-			gchar *uri,
-			gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
 {
 	gui_popup_menu_parallel();
 }
@@ -194,34 +191,35 @@ void gui_create_parallel_page(void)
 
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolled_window),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_ALWAYS);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
 			  scrolled_window);
 
-	widgets.html_parallel = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
+	widgets.html_parallel =
+	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel);
-    
+
 	widgets.frame_parallel = scrolled_window;
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel);
 
-	g_signal_connect((gpointer)widgets.html_parallel,
+	g_signal_connect((gpointer) widgets.html_parallel,
 			 "popupmenu_requested",
-			 G_CALLBACK (_popupmenu_requested_cb),
-			 NULL);
+			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 
 	label = gtk_label_new(_("Parallel View"));
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK
-				    (widgets.notebook_bible_parallel),
-				    1),
-				   label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK
+				   (widgets.notebook_bible_parallel),
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							     (widgets.
+							      notebook_bible_parallel),
+							     1), label);
 
-	g_signal_connect ((gpointer) widgets.html_parallel, "enter_notify_event",
-		    G_CALLBACK (on_enter_notify_event),
-		    NULL);
+	g_signal_connect((gpointer) widgets.html_parallel,
+			 "enter_notify_event",
+			 G_CALLBACK(on_enter_notify_event), NULL);
 }

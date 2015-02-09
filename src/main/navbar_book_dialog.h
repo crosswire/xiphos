@@ -23,20 +23,18 @@
 #define _NAVBAR_BOOK_DIALOG_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data);
-void main_navbar_book_dialog_parent(gpointer data);
-void main_navbar_book_dialog_first_child(gpointer data);
-void main_navbar_book_dialog_prev(gpointer data);
-void main_navbar_book_dialog_next(gpointer data);
-void main_setup_navbar_book_dialog(gpointer data);
+	GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data);
+	void main_navbar_book_dialog_parent(gpointer data);
+	void main_navbar_book_dialog_first_child(gpointer data);
+	void main_navbar_book_dialog_prev(gpointer data);
+	void main_navbar_book_dialog_next(gpointer data);
+	void main_setup_navbar_book_dialog(gpointer data);
 
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* _NAVBAR_BOOK_DIALOG_H */
+#endif				/* _NAVBAR_BOOK_DIALOG_H */

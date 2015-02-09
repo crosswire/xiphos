@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gtk/gtk.h>
@@ -72,8 +72,7 @@ DIALOG_DATA *cur_d;
  *   void
  */
 
-static void on_dialog_destroy(GObject *object,
-			      DIALOG_DATA *d)
+static void on_dialog_destroy(GObject * object, DIALOG_DATA * d)
 {
 	if (!dialog_freed)
 		main_free_on_destroy(d);
@@ -123,9 +122,9 @@ void gui_close_comm_dialog(DIALOG_DATA * d)
  *   gboolean
  */
 
-static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
-					      GdkEventMotion *event,
-					      DIALOG_DATA *d)
+static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
+					      GdkEventMotion * event,
+					      DIALOG_DATA * d)
 {
 	cur_d = d;
 	return FALSE;
@@ -148,10 +147,9 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
  *   void
  */
 
-static void sync_with_main(DIALOG_DATA *d)
+static void sync_with_main(DIALOG_DATA * d)
 {
-	gchar *url =
-	    g_strdup_printf("sword:///%s", settings.currentverse);
+	gchar *url = g_strdup_printf("sword:///%s", settings.currentverse);
 	main_dialogs_url_handler(d, url, TRUE);
 	cur_d = d;
 	g_free(url);
@@ -174,18 +172,16 @@ static void sync_with_main(DIALOG_DATA *d)
  *   void
  */
 
-static GtkWidget *create_nav_toolbar(DIALOG_DATA *d)
+static GtkWidget *create_nav_toolbar(DIALOG_DATA * d)
 {
 	d->navbar.type = NB_DIALOG;
 	return gui_navbar_versekey_dialog_new(d);
 }
 
 static void
-_popupmenu_requested_cb (XiphosHtml *html,
-			 gchar *uri,
-			 DIALOG_DATA *d)
+_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, DIALOG_DATA * d)
 {
-    	gui_menu_popup (html, cur_d->mod_name, cur_d);
+	gui_menu_popup(html, cur_d->mod_name, cur_d);
 	//gui_commentary_dialog_create_menu(d);
 }
 
@@ -205,8 +201,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
  *   void
  */
 
-void gui_create_commentary_dialog(DIALOG_DATA *d,
-				  gboolean do_edit)
+void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 {
 	GtkWidget *vbox30;
 	GtkWidget *vbox_toolbars;
@@ -217,8 +212,7 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	cur_d = d;
 	d->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-	g_object_set_data(G_OBJECT(d->dialog), "d->dialog",
-			  d->dialog);
+	g_object_set_data(G_OBJECT(d->dialog), "d->dialog", d->dialog);
 	gtk_window_set_title(GTK_WINDOW(d->dialog),
 			     main_get_module_description(d->mod_name));
 	//gtk_window_set_default_size(GTK_WINDOW(d->dialog), 462, 280);
@@ -259,14 +253,17 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 					    scrolledwindow38,
 					    settings.shadow_type);
 
-	d->html = GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA*) d),TRUE,DIALOG_COMMENTARY_TYPE));
+	d->html =
+	    GTK_WIDGET(XIPHOS_HTML_NEW
+		       (((DIALOG_DATA *) d), TRUE,
+			DIALOG_COMMENTARY_TYPE));
 
 	gtk_container_add(GTK_CONTAINER(scrolledwindow38), d->html);
 	gtk_widget_show(d->html);
-	g_signal_connect((gpointer)d->html,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      (DIALOG_DATA*)d);
+	g_signal_connect((gpointer) d->html,
+			 "popupmenu_requested",
+			 G_CALLBACK(_popupmenu_requested_cb),
+			 (DIALOG_DATA *) d);
 
 	g_signal_connect(G_OBJECT(d->dialog), "destroy",
 			 G_CALLBACK(on_dialog_destroy), d);

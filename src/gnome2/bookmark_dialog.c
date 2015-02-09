@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 #ifndef USE_GTKBUILDER
-  #include <glade/glade-xml.h>
+#include <glade/glade-xml.h>
 #endif
 
 #include "gui/bookmark_dialog.h"
@@ -58,21 +58,18 @@ static gchar *note;
 GtkWidget *bookmark_dialog;
 GtkWidget *mark_verse_dialog;
 
-void on_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
+void on_buffer_changed(GtkTextBuffer * textbuffer, gpointer user_data)
 {
 	GtkTextIter start;
 	GtkTextIter end;
 
 
-	gtk_text_buffer_get_start_iter (textbuffer, &start);
-	gtk_text_buffer_get_end_iter (textbuffer, &end);
+	gtk_text_buffer_get_start_iter(textbuffer, &start);
+	gtk_text_buffer_get_end_iter(textbuffer, &end);
 	if (note)
 		g_free(note);
-	note = gtk_text_buffer_get_text (textbuffer,
-                                         &start,
-                                         &end,
-                                         FALSE);
-	XI_message (("note: %s", note));
+	note = gtk_text_buffer_get_text(textbuffer, &start, &end, FALSE);
+	XI_message(("note: %s", note));
 
 
 }
@@ -106,20 +103,20 @@ void add_bookmark_button(void)
 		return;
 
 	data = g_new(BOOKMARK_DATA, 1);
-	data->caption = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY
-						    (entry_label)));
-	data->key = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY
-						(entry_key)));
-	data->module = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY
-						   (entry_module)));
+	data->caption = g_strdup((gchar *) gtk_entry_get_text(GTK_ENTRY
+							      (entry_label)));
+	data->key = g_strdup((gchar *) gtk_entry_get_text(GTK_ENTRY
+							  (entry_key)));
+	data->module = g_strdup((gchar *) gtk_entry_get_text(GTK_ENTRY
+							     (entry_module)));
 
-	if (!strcmp(data->module,"studypad"))
+	if (!strcmp(data->module, "studypad"))
 		data->module_desc = "studypad";
 	else
 		data->module_desc =
-			g_strdup(main_get_module_description(data->module));
+		    g_strdup(main_get_module_description(data->module));
 
-	data->description = g_strdup((gchar *)gtk_entry_get_text
+	data->description = g_strdup((gchar *) gtk_entry_get_text
 				     (GTK_ENTRY(entry_label)));
 
 	data->is_leaf = TRUE;
@@ -163,8 +160,7 @@ static void add_folder_button(void)
 	GS_DIALOG *info;
 	GString *str;
 	GtkTreePath *path;
-	selection =
-	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
 
@@ -200,7 +196,8 @@ static void add_folder_button(void)
 		g_free(data->caption);
 		path =
 		    gtk_tree_model_get_path(GTK_TREE_MODEL(model), &iter);
-		gtk_tree_view_expand_to_path(GTK_TREE_VIEW (treeview), path);
+		gtk_tree_view_expand_to_path(GTK_TREE_VIEW(treeview),
+					     path);
 		gtk_tree_selection_select_path(selection, path);
 		gtk_tree_path_free(path);
 	}
@@ -227,19 +224,18 @@ static void add_folder_button(void)
  */
 
 void on_dialog_response(GtkDialog * dialog,
-			gint response_id,
-			gpointer user_data)
+			gint response_id, gpointer user_data)
 {
 	switch (response_id) {
-	case GTK_RESPONSE_CANCEL: /*  cancel button pressed  */
-	case GTK_RESPONSE_NONE:   /*  dialog destroyed  */
+	case GTK_RESPONSE_CANCEL:	/*  cancel button pressed  */
+	case GTK_RESPONSE_NONE:	/*  dialog destroyed  */
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
-	case GTK_RESPONSE_OK: /*  add button pressed  */
+	case GTK_RESPONSE_OK:	/*  add button pressed  */
 		add_bookmark_button();
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
-	case GTK_RESPONSE_ACCEPT: /*  add folder pressed  */
+	case GTK_RESPONSE_ACCEPT:	/*  add folder pressed  */
 		add_folder_button();
 		break;
 	}
@@ -263,8 +259,7 @@ void on_dialog_response(GtkDialog * dialog,
 void on_dialog_enter(void)
 {
 	on_dialog_response(GTK_DIALOG(bookmark_dialog),
-			   GTK_RESPONSE_OK,
-			   NULL);
+			   GTK_RESPONSE_OK, NULL);
 }
 
 /******************************************************************************
@@ -282,35 +277,38 @@ void on_dialog_enter(void)
  */
 
 void on_mark_verse_response(GtkDialog * dialog,
-			    gint response_id,
-			    gpointer user_data)
+			    gint response_id, gpointer user_data)
 {
 	gchar reference[100], *module, *key;
 
-	module = (gchar *)gtk_entry_get_text(GTK_ENTRY(entry_module));
-	key    = (gchar *)gtk_entry_get_text(GTK_ENTRY(entry_key));
+	module = (gchar *) gtk_entry_get_text(GTK_ENTRY(entry_module));
+	key = (gchar *) gtk_entry_get_text(GTK_ENTRY(entry_key));
 
 	g_snprintf(reference, 100, "%s %s", module,
-		   main_get_osisref_from_key((const char *)module,
-					     (const char *)key));
+		   main_get_osisref_from_key((const char *) module,
+					     (const char *) key));
 
 	switch (response_id) {
-	case GTK_RESPONSE_CANCEL: /*  cancel button pressed  */
-	case GTK_RESPONSE_NONE:   /*  dialog destroyed  */
+	case GTK_RESPONSE_CANCEL:	/*  cancel button pressed  */
+	case GTK_RESPONSE_NONE:	/*  dialog destroyed  */
 		break;
-	case GTK_RESPONSE_ACCEPT: /*  mark the verse  */
+	case GTK_RESPONSE_ACCEPT:	/*  mark the verse  */
 		xml_set_list_item("osisrefmarkedverses", "markedverse",
-				  reference, (note ? note : "user content"));
-		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
+				  reference,
+				  (note ? note : "user content"));
+		marked_cache_fill(settings.MainWindowModule,
+				  settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
 		break;
-	case GTK_RESPONSE_OK:     /*  unmark the verse  */
-		xml_remove_node("osisrefmarkedverses", "markedverse", reference);
-		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
+	case GTK_RESPONSE_OK:	/*  unmark the verse  */
+		xml_remove_node("osisrefmarkedverses", "markedverse",
+				reference);
+		marked_cache_fill(settings.MainWindowModule,
+				  settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
 		break;
 	}
-	g_free (note);
+	g_free(note);
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 	xml_save_settings_doc(settings.fnconfigure);
 }
@@ -332,8 +330,7 @@ void on_mark_verse_response(GtkDialog * dialog,
 void on_mark_verse_enter(void)
 {
 	on_mark_verse_response(GTK_DIALOG(mark_verse_dialog),
-			       GTK_RESPONSE_ACCEPT,
-			       NULL);
+			       GTK_RESPONSE_ACCEPT, NULL);
 }
 
 /******************************************************************************
@@ -352,9 +349,9 @@ void on_mark_verse_enter(void)
  *
  */
 
-gboolean on_treeview_button_release_event(GtkWidget       *widget,
-                                 	  GdkEventButton  *event,
-                                 	  gpointer        user_data)
+gboolean on_treeview_button_release_event(GtkWidget * widget,
+					  GdkEventButton * event,
+					  gpointer user_data)
 {
 	GtkTreeSelection *selection = NULL;
 	GtkTreeModel *gmodel;
@@ -365,12 +362,14 @@ gboolean on_treeview_button_release_event(GtkWidget       *widget,
 	if (gtk_tree_selection_get_selected(selection, &gmodel, &selected)) {
 		gtk_tree_model_get(gmodel, &selected, 3, &key, -1);
 		if (!gtk_tree_model_iter_has_child(gmodel, &selected)
-				&& key != NULL) {
+		    && key != NULL) {
 			gtk_widget_set_sensitive(button_new_folder, FALSE);
-			gtk_widget_set_sensitive(button_add_bookmark, FALSE);
+			gtk_widget_set_sensitive(button_add_bookmark,
+						 FALSE);
 		} else {
 			gtk_widget_set_sensitive(button_new_folder, TRUE);
-			gtk_widget_set_sensitive(button_add_bookmark, TRUE);
+			gtk_widget_set_sensitive(button_add_bookmark,
+						 TRUE);
 		}
 		if (key)
 			g_free(key);
@@ -401,7 +400,8 @@ static void setup_treeview(void)
 	GtkTreeIter iter;
 	GtkTreeSelection *selection = NULL;
 
-	gtk_tree_view_set_model(GTK_TREE_VIEW(treeview),GTK_TREE_MODEL(model));
+	gtk_tree_view_set_model(GTK_TREE_VIEW(treeview),
+				GTK_TREE_MODEL(model));
 	gui_add_columns(GTK_TREE_VIEW(treeview));
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
@@ -429,26 +429,26 @@ static void setup_treeview(void)
  */
 
 static GtkWidget *_create_bookmark_dialog(gchar * label,
-					  gchar * module,
-					  gchar * key)
+					  gchar * module, gchar * key)
 {
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
 #else
 	GladeXML *gxml;
 #endif
-	gchar *glade_file = gui_general_user_file ("bookmarks" UI_SUFFIX, TRUE);
+	gchar *glade_file =
+	    gui_general_user_file("bookmarks" UI_SUFFIX, TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
-	XI_message(("%s",glade_file));
+	XI_message(("%s", glade_file));
 
 	/* build the widget */
 #ifdef USE_GTKBUILDER
-	gxml = gtk_builder_new ();
-	gtk_builder_add_from_file (gxml, glade_file, NULL);
+	gxml = gtk_builder_new();
+	gtk_builder_add_from_file(gxml, glade_file, NULL);
 #else
-	gxml = glade_xml_new (glade_file, NULL, NULL);
+	gxml = glade_xml_new(glade_file, NULL, NULL);
 #endif
-	g_free (glade_file);
+	g_free(glade_file);
 	g_return_val_if_fail(gxml != NULL, NULL);
 
 	/* lookup the root widget */
@@ -460,7 +460,8 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 	treeview = UI_GET_ITEM(gxml, "treeview");
 	setup_treeview();
 	g_signal_connect(treeview, "button-release-event",
-			 G_CALLBACK(on_treeview_button_release_event), NULL);
+			 G_CALLBACK(on_treeview_button_release_event),
+			 NULL);
 	/* entrys */
 	entry_label = UI_GET_ITEM(gxml, "entry1");
 	entry_key = UI_GET_ITEM(gxml, "entry2");
@@ -498,8 +499,7 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
  *   void
  */
 
-static GtkWidget *_create_mark_verse_dialog(gchar * module,
-					    gchar * key)
+static GtkWidget *_create_mark_verse_dialog(gchar * module, gchar * key)
 {
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
@@ -510,19 +510,20 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	gchar osisreference[100];
 	gchar *old_note = NULL;
 
-	gchar *glade_file = gui_general_user_file("markverse" UI_SUFFIX, TRUE);
+	gchar *glade_file =
+	    gui_general_user_file("markverse" UI_SUFFIX, TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
-	XI_message(("%s",glade_file));
+	XI_message(("%s", glade_file));
 
-	g_snprintf(osisreference,  100, "%s %s", module,
-		   main_get_osisref_from_key((const char *)module,
-					     (const char *)key));
+	g_snprintf(osisreference, 100, "%s %s", module,
+		   main_get_osisref_from_key((const char *) module,
+					     (const char *) key));
 	note = NULL;
 
 	/* build the widget */
 #ifdef USE_GTKBUILDER
-	gxml = gtk_builder_new ();
-	gtk_builder_add_from_file (gxml, glade_file, NULL);
+	gxml = gtk_builder_new();
+	gtk_builder_add_from_file(gxml, glade_file, NULL);
 #else
 	gxml = glade_xml_new(glade_file, NULL, NULL);
 #endif
@@ -531,8 +532,8 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 
 	/* lookup the root widget */
 	mark_verse_dialog = UI_GET_ITEM(gxml, "dialog");
-	gtk_window_set_default_size (GTK_WINDOW (mark_verse_dialog),
-                                   300, 350);
+	gtk_window_set_default_size(GTK_WINDOW(mark_verse_dialog),
+				    300, 350);
 
 	g_signal_connect(mark_verse_dialog, "response",
 			 G_CALLBACK(on_mark_verse_response), NULL);
@@ -542,25 +543,29 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	entry_module = UI_GET_ITEM(gxml, "entry3");
 	textview = UI_GET_ITEM(gxml, "textview");
 
-	textbuffer = gtk_text_view_get_buffer ((GtkTextView*)textview);
+	textbuffer = gtk_text_view_get_buffer((GtkTextView *) textview);
 	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
 	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
 
 	sw = UI_GET_ITEM(gxml, "scrolledwindow1");
 
-	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview), GTK_WRAP_WORD);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
-				      GTK_POLICY_AUTOMATIC,
-				      GTK_POLICY_AUTOMATIC);
+	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview),
+				    GTK_WRAP_WORD);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
 	g_signal_connect(entry_key, "activate",
 			 G_CALLBACK(on_mark_verse_enter), NULL);
 	g_signal_connect(entry_module, "activate",
 			 G_CALLBACK(on_mark_verse_enter), NULL);
 
 
-	old_note = xml_get_list_from_label("osisrefmarkedverses", "markedverse", osisreference);
-	note = g_strdup ((old_note) ? old_note : "");
-	gtk_text_buffer_set_text (textbuffer, (old_note) ? old_note : "", -1);
+	old_note =
+	    xml_get_list_from_label("osisrefmarkedverses", "markedverse",
+				    osisreference);
+	note = g_strdup((old_note) ? old_note : "");
+	gtk_text_buffer_set_text(textbuffer, (old_note) ? old_note : "",
+				 -1);
 	g_signal_connect(textbuffer, "changed",
 			 G_CALLBACK(on_buffer_changed), NULL);
 
@@ -587,8 +592,10 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 
 void gui_bookmark_dialog(gchar * label, gchar * module_name, gchar * key)
 {
-	GtkWidget *dialog = _create_bookmark_dialog(label, module_name, key);
-	if (!dialog) return;
+	GtkWidget *dialog =
+	    _create_bookmark_dialog(label, module_name, key);
+	if (!dialog)
+		return;
 	gtk_dialog_run(GTK_DIALOG(dialog));
 }
 
@@ -611,6 +618,7 @@ void gui_bookmark_dialog(gchar * label, gchar * module_name, gchar * key)
 void gui_mark_verse_dialog(gchar * module_name, gchar * key)
 {
 	GtkWidget *dialog = _create_mark_verse_dialog(module_name, key);
-	if (!dialog) return;
+	if (!dialog)
+		return;
 	gtk_dialog_run(GTK_DIALOG(dialog));
 }

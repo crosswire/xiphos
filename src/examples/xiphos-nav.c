@@ -27,7 +27,7 @@
 
 #include "ipc-interface.h"
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	DBusGConnection *bus;
 	DBusGProxy *remote_object;
@@ -35,19 +35,20 @@ int main (int argc, char **argv)
 
 	/* not necessary if using from a gtk/gnome program */
 #if !GLIB_CHECK_VERSION(2, 35, 0)
-	g_type_init ();
+	g_type_init();
 #endif
 	/* get the "session" dbus */
-	bus = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
+	bus = dbus_g_bus_get(DBUS_BUS_SESSION, &error);
 
 	/* connect to Xiphos */
-	remote_object = dbus_g_proxy_new_for_name (bus,
-						   "org.xiphos.remote",
-						   "/org/xiphos/remote/ipc",
-						   "org.xiphos.remote");
+	remote_object = dbus_g_proxy_new_for_name(bus,
+						  "org.xiphos.remote",
+						  "/org/xiphos/remote/ipc",
+						  "org.xiphos.remote");
 
 	/* attempt to set reference in running instance of Xiphos */
-	org_xiphos_remote_set_current_reference(remote_object, argv[1], &error);
+	org_xiphos_remote_set_current_reference(remote_object, argv[1],
+						&error);
 
 	/* if error, then Xiphos is not running, so we just start it and pass
 	   it the arguments given to this program */
@@ -56,6 +57,3 @@ int main (int argc, char **argv)
 
 	return 1;
 }
-
-
-

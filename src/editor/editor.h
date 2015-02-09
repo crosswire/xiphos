@@ -21,41 +21,40 @@
 
 #ifndef _EDITOR_H
 #define _EDITOR_H
-   
+
 #include <config.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
-	
-#include <gtk/gtk.h> 
+
+#include <gtk/gtk.h>
 
 #ifdef USE_WEBKIT_EDITOR
-	
+
 #include "editor/webkit_editor.h"
 
 
-gchar * editor_get_selected_text (EDITOR * e);
-void editor_find_string (gchar * needle, EDITOR * e);
-void editor_replace_string (gchar * old_string, gchar * new_string, EDITOR * e); 
-gint editor_insert_new_outline_level (gint level, EDITOR * e);
-gboolean editor_cut( EDITOR * e );
-gboolean editor_copy( EDITOR * e );
-gboolean editor_paste( EDITOR * e );
-void editor_get_document_content (GString * data, EDITOR * e);
+	gchar *editor_get_selected_text(EDITOR * e);
+	void editor_find_string(gchar * needle, EDITOR * e);
+	void editor_replace_string(gchar * old_string, gchar * new_string,
+				   EDITOR * e);
+	gint editor_insert_new_outline_level(gint level, EDITOR * e);
+	gboolean editor_cut(EDITOR * e);
+	gboolean editor_copy(EDITOR * e);
+	gboolean editor_paste(EDITOR * e);
+	void editor_get_document_content(GString * data, EDITOR * e);
 //void editor_open_recent (const gchar * uri, EDITOR * e);
-gboolean editor_insert_link(void);   
-gboolean editor_insert_sword_link(void);  
-void editor_insert_link_ok (void);
-void editor_execute_script (gchar * script, EDITOR * e);
-void editor_insert_html(const gchar * html, EDITOR * e);
-void create_editor_window (GtkWidget * scrollwindow, EDITOR * e);
+	gboolean editor_insert_link(void);
+	gboolean editor_insert_sword_link(void);
+	void editor_insert_link_ok(void);
+	void editor_execute_script(gchar * script, EDITOR * e);
+	void editor_insert_html(const gchar * html, EDITOR * e);
+	void create_editor_window(GtkWidget * scrollwindow, EDITOR * e);
 
-#endif /* USE_WEBKIT_EDITOR */
+#endif				/* USE_WEBKIT_EDITOR */
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* _EDITOR_H */
+#endif				/* _EDITOR_H */

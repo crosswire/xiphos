@@ -23,33 +23,31 @@
 #define _NAVBAR_BOOK_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
-typedef struct _navbar_book NAVBAR_BOOK;
-struct _navbar_book {
-	GtkWidget *button_up;
-	GtkWidget *button_down;
-	GtkWidget *button_left;
-	GtkWidget *button_right;
-	GtkWidget *button_list;
-	GtkWidget *menu;
-	GtkWidget *lookup_entry;
-	gchar *key;
-	gchar *book_name;
-};
-extern NAVBAR_BOOK navbar_book;
+	typedef struct _navbar_book NAVBAR_BOOK;
+	struct _navbar_book {
+		GtkWidget *button_up;
+		GtkWidget *button_down;
+		GtkWidget *button_left;
+		GtkWidget *button_right;
+		GtkWidget *button_list;
+		GtkWidget *menu;
+		GtkWidget *lookup_entry;
+		gchar *key;
+		gchar *book_name;
+	};
+	extern NAVBAR_BOOK navbar_book;
 
-GtkWidget *main_book_drop_down_new(void);
-void main_navbar_book_parent(void);
-void main_navbar_book_first_child(void);
-void main_navbar_book_prev(void);
-void main_navbar_book_next(void);
-void main_setup_navbar_book(char * book_name, unsigned long offset);
-void main_navbar_book_entry_activate (const gchar* entry_text);
+	GtkWidget *main_book_drop_down_new(void);
+	void main_navbar_book_parent(void);
+	void main_navbar_book_first_child(void);
+	void main_navbar_book_prev(void);
+	void main_navbar_book_next(void);
+	void main_setup_navbar_book(char *book_name, unsigned long offset);
+	void main_navbar_book_entry_activate(const gchar * entry_text);
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* _NAVBAR_BOOK_H */
+#endif				/* _NAVBAR_BOOK_H */

@@ -21,7 +21,8 @@
 
 #include "xiphos_html.h"
 
-XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
+XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog,
+			    gint pane)
 {
 	XiphosHtml *html;
 	html = XIPHOS_HTML(g_object_new(XIPHOS_TYPE_HTML, NULL));
@@ -30,6 +31,6 @@ XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 	priv->pane = pane;
 	priv->is_dialog = is_dialog;
 	priv->dialog = dialog;
-	
+
 	return html;
 }

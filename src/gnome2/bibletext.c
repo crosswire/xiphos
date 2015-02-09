@@ -55,7 +55,7 @@
 
 gboolean shift_key_pressed = FALSE;
 guint scroll_adj_signal;
-GtkAdjustment* adjustment;
+GtkAdjustment *adjustment;
 
 /******************************************************************************
  * Name
@@ -75,17 +75,15 @@ GtkAdjustment* adjustment;
 
 void gui_popup_pm_text(void)
 {
-   /* gui_menu_popup (settings.MainWindowModule,
-			NULL);*/
+	/* gui_menu_popup (settings.MainWindowModule,
+	   NULL); */
 }
 
 
 static gboolean
-_popupmenu_requested_cb (XiphosHtml *html,
-			    gchar *uri ,
-			     gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
 {
-	gui_menu_popup(html, settings.MainWindowModule, NULL);  
+	gui_menu_popup(html, settings.MainWindowModule, NULL);
 	return TRUE;
 }
 
@@ -116,20 +114,17 @@ GtkWidget *gui_create_bible_pane(void)
 
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(vbox),
-			   scrolledwindow,
-	                   TRUE,
-			   TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE, 0);
 
-	widgets.html_text = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, TEXT_TYPE));
+	widgets.html_text =
+	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, TEXT_TYPE));
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-	                  widgets.html_text);
-	                  
-	g_signal_connect((gpointer)widgets.html_text,
-	              "popupmenu_requested",
-	              G_CALLBACK (_popupmenu_requested_cb),
-	              NULL);
+			  widgets.html_text);
 
-	return 	vbox;
+	g_signal_connect((gpointer) widgets.html_text,
+			 "popupmenu_requested",
+			 G_CALLBACK(_popupmenu_requested_cb), NULL);
+
+	return vbox;
 }

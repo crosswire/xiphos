@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gtk/gtk.h>
@@ -85,19 +85,19 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  *   void
  */
 
-void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard,
-					const gchar *text,
-					gpointer data)
+void gui_get_clipboard_text_for_lookup(GtkClipboard * clipboard,
+				       const gchar * text, gpointer data)
 {
 	char *key = NULL;
 	gchar *dict = NULL;
 	int len = 0;
 
-	if (text == NULL) return;
-	XI_message(("src/gnome2/dictlex.c: text =>%s<",text));
+	if (text == NULL)
+		return;
+	XI_message(("src/gnome2/dictlex.c: text =>%s<", text));
 
-	key = g_strdelimit((char*)text, "&.,\"<>;:?", ' ');
-	key = g_strstrip((char*)key);
+	key = g_strdelimit((char *) text, "&.,\"<>;:?", ' ');
+	key = g_strstrip((char *) key);
 	len = strlen(key);
 
 	if (key[len - 1] == 's' || key[len - 1] == 'd')
@@ -210,9 +210,9 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 {
 	gchar *buf = NULL;
 
-	buf = (gchar*)gtk_entry_get_text(entry);
-	XI_message(("dict_key_entry_changed: %s",buf));
-	if (strlen(buf) < 2 )
+	buf = (gchar *) gtk_entry_get_text(entry);
+	XI_message(("dict_key_entry_changed: %s", buf));
+	if (strlen(buf) < 2)
 		return;
 
 	main_display_dictionary(settings.DictWindowModule, buf);
@@ -221,12 +221,14 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 
 void button_back_clicked(GtkButton * button, gpointer user_data)
 {
-	if (settings.havedict) main_dictionary_button_clicked(0);
+	if (settings.havedict)
+		main_dictionary_button_clicked(0);
 }
 
 void button_forward_clicked(GtkButton * button, gpointer user_data)
 {
-	if (settings.havedict) main_dictionary_button_clicked(1);
+	if (settings.havedict)
+		main_dictionary_button_clicked(1);
 }
 
 
@@ -247,13 +249,15 @@ void button_forward_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
+static void menu_deactivate_callback(GtkWidget * widget,
+				     gpointer user_data)
 {
 	GtkWidget *menu_button;
 
-	menu_button = GTK_WIDGET (user_data);
+	menu_button = GTK_WIDGET(user_data);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (menu_button), FALSE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(menu_button),
+				     FALSE);
 }
 
 
@@ -273,25 +277,24 @@ static void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
  *
  */
 
-static void menu_position_under (GtkMenu *menu,
-		     int *x,
-		     int *y,
-		     gboolean *push_in,
-		     gpointer user_data)
+static void menu_position_under(GtkMenu * menu,
+				int *x,
+				int *y,
+				gboolean * push_in, gpointer user_data)
 {
 	GtkWidget *widget;
 	GtkAllocation allocation;
-    
-	g_return_if_fail (GTK_IS_BUTTON (user_data));
-#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
-        g_return_if_fail (gtk_widget_get_window(user_data));
-#else
-	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
-#endif
-	widget = GTK_WIDGET (user_data);
 
-	gdk_window_get_origin (gtk_widget_get_window(widget), x, y);
-	gtk_widget_get_allocation (widget,&allocation);
+	g_return_if_fail(GTK_IS_BUTTON(user_data));
+#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
+	g_return_if_fail(gtk_widget_get_window(user_data));
+#else
+	g_return_if_fail(GTK_WIDGET_NO_WINDOW(user_data));
+#endif
+	widget = GTK_WIDGET(user_data);
+
+	gdk_window_get_origin(gtk_widget_get_window(widget), x, y);
+	gtk_widget_get_allocation(widget, &allocation);
 	*x += allocation.x;
 	*y += allocation.y + allocation.height;
 
@@ -318,27 +321,28 @@ static void menu_position_under (GtkMenu *menu,
  *   gboolean
  */
 
-static gboolean select_button_press_callback (GtkWidget *widget,
-			      GdkEventButton *event,
-			      gpointer user_data)
+static gboolean select_button_press_callback(GtkWidget * widget,
+					     GdkEventButton * event,
+					     gpointer user_data)
 {
 	if (!settings.DictWindowModule ||
 	    (*settings.DictWindowModule == '\0'))
 		return 0;
 
-	GtkWidget *menu = main_dictionary_drop_down_new(settings.DictWindowModule,
-						settings.dictkey);
+	GtkWidget *menu =
+	    main_dictionary_drop_down_new(settings.DictWindowModule,
+					  settings.dictkey);
 
-	g_signal_connect (menu, "deactivate",
-			  G_CALLBACK (menu_deactivate_callback),
-			  widget);
+	g_signal_connect(menu, "deactivate",
+			 G_CALLBACK(menu_deactivate_callback), widget);
 	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
-		gtk_widget_grab_focus (widget);
+		gtk_widget_grab_focus(widget);
 
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-		gtk_menu_popup (GTK_MENU (menu),
-				NULL, NULL, menu_position_under, widget,
-				event->button, event->time);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
+					     TRUE);
+		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
+			       menu_position_under, widget, event->button,
+			       event->time);
 
 		return TRUE;
 	}
@@ -346,11 +350,9 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 }
 
 static void
-_popupmenu_requested_cb (XiphosHtml *html,
-			     gchar *uri,
-			     gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
 {
-	gui_menu_popup (html, settings.DictWindowModule, NULL);
+	gui_menu_popup(html, settings.DictWindowModule, NULL);
 	//gui_create_pm_dictionary();
 }
 
@@ -369,41 +371,44 @@ GtkWidget *gui_create_dictionary_pane(void)
 	UI_VBOX(box_dict, FALSE, 0);
 	gtk_widget_show(box_dict);
 
-	gtk_container_set_border_width (GTK_CONTAINER (box_dict), 1);
+	gtk_container_set_border_width(GTK_CONTAINER(box_dict), 1);
 
 	UI_HBOX(hbox2, FALSE, 0);
 	gtk_widget_show(hbox2);
 	gtk_box_pack_start(GTK_BOX(box_dict), hbox2, FALSE, FALSE, 0);
 
-  	widgets.entry_dict = gtk_entry_new ();
-  	gtk_widget_show (widgets.entry_dict);
-	gtk_box_pack_start(GTK_BOX(hbox2), widgets.entry_dict, TRUE, TRUE, 0);
+	widgets.entry_dict = gtk_entry_new();
+	gtk_widget_show(widgets.entry_dict);
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.entry_dict, TRUE, TRUE,
+			   0);
 
-  	dict_drop_down = gtk_toggle_button_new ();
-	gtk_widget_show (dict_drop_down);
+	dict_drop_down = gtk_toggle_button_new();
+	gtk_widget_show(dict_drop_down);
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
 
 #ifdef HAVE_GTK_314
-	arrow1 = gtk_image_new_from_icon_name("open-menu-symbolic", GTK_ICON_SIZE_BUTTON);
+	arrow1 =
+	    gtk_image_new_from_icon_name("open-menu-symbolic",
+					 GTK_ICON_SIZE_BUTTON);
 #else
 	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
 #endif
-  	gtk_widget_show(arrow1);
-  	gtk_container_add(GTK_CONTAINER(dict_drop_down), arrow1);
+	gtk_widget_show(arrow1);
+	gtk_container_add(GTK_CONTAINER(dict_drop_down), arrow1);
 
 	button10 = gtk_button_new();
 	gtk_widget_show(button10);
 	gtk_box_pack_start(GTK_BOX(hbox2), button10, FALSE, FALSE, 0);
 	gtk_button_set_relief(GTK_BUTTON(button10), GTK_RELIEF_NONE);
 
-	image1 = 
+	image1 =
 #ifdef HAVE_GTK_314
 	    gtk_image_new_from_icon_name("go-up-symbolic",
 					 GTK_ICON_SIZE_BUTTON);
-#else                        
+#else
 	    gtk_image_new_from_stock(GTK_STOCK_GO_UP,
 				     GTK_ICON_SIZE_BUTTON);
-#endif	 
+#endif
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(button10), image1);
 
@@ -412,46 +417,45 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_box_pack_start(GTK_BOX(hbox2), button11, FALSE, FALSE, 0);
 	gtk_button_set_relief(GTK_BUTTON(button11), GTK_RELIEF_NONE);
 
-	image2 = 
+	image2 =
 #ifdef HAVE_GTK_314
-	    gtk_image_new_from_icon_name ("go-down-symbolic",
-					  GTK_ICON_SIZE_BUTTON);
-#else                        
+	    gtk_image_new_from_icon_name("go-down-symbolic",
+					 GTK_ICON_SIZE_BUTTON);
+#else
 	    gtk_image_new_from_stock(GTK_STOCK_GO_DOWN,
 				     GTK_ICON_SIZE_BUTTON);
-#endif	 	
+#endif
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(button11), image2);
 
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(box_dict), scrolledwindow, TRUE, TRUE, 0);
-	
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
-                                             settings.shadow_type);
+	gtk_box_pack_start(GTK_BOX(box_dict), scrolledwindow, TRUE, TRUE,
+			   0);
 
-	widgets.html_dict = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DICTIONARY_TYPE));
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow,
+					    settings.shadow_type);
+
+	widgets.html_dict =
+	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DICTIONARY_TYPE));
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			 widgets.html_dict);
-	g_signal_connect((gpointer)widgets.html_dict,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
+			  widgets.html_dict);
+	g_signal_connect((gpointer) widgets.html_dict,
+			 "popupmenu_requested",
+			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 
-	g_signal_connect (dict_drop_down,
-			  "button_press_event",
-			  G_CALLBACK (select_button_press_callback),
-			  NULL);
+	g_signal_connect(dict_drop_down,
+			 "button_press_event",
+			 G_CALLBACK(select_button_press_callback), NULL);
 	g_signal_connect(G_OBJECT(widgets.entry_dict), "activate",
 			 G_CALLBACK(dict_key_entry_changed), NULL);
 
-	g_signal_connect ((gpointer) button10, "clicked",
-		    G_CALLBACK (button_back_clicked),
-		    NULL);
-	g_signal_connect ((gpointer) button11, "clicked",
-		    G_CALLBACK (button_forward_clicked),
-		    NULL);
+	g_signal_connect((gpointer) button10, "clicked",
+			 G_CALLBACK(button_back_clicked), NULL);
+	g_signal_connect((gpointer) button11, "clicked",
+			 G_CALLBACK(button_forward_clicked), NULL);
 	return box_dict;
 }
 

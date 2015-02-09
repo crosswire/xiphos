@@ -26,10 +26,9 @@
 extern "C" {
 #endif
 
-void gui_attach_detach_sidebar(void);
+	void gui_attach_detach_sidebar(void);
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif
