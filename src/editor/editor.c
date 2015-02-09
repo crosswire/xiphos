@@ -89,9 +89,8 @@ gint editor_insert_new_outline_level(gint level, EDITOR * e)
 
 	XI_message(("\n%s\n", "editor_insert_new_outline_level"));
 
-	doc =
-	    webkit_web_view_get_dom_document((WebKitWebView *) e->
-					     html_widget);
+	doc = webkit_web_view_get_dom_document((WebKitWebView *)
+					       e->html_widget);
 
 	if (!doc)
 		return 0;
@@ -103,8 +102,7 @@ gint editor_insert_new_outline_level(gint level, EDITOR * e)
 		return 0;
 	}
 
-	element_anchor =
-	    (WebKitDOMElement *)
+	element_anchor = (WebKitDOMElement *)
 	    webkit_dom_dom_selection_get_anchor_node(selection);
 	if (element_anchor == NULL) {
 		XI_message(("\n%s\n", "failed to get anchor"));
@@ -178,9 +176,8 @@ void editor_get_document_content(GString * data, EDITOR * e)
 	gchar *body = NULL;
 	gchar *head = NULL;
 
-	dom_document =
-	    webkit_web_view_get_dom_document((WebKitWebView *) e->
-					     html_widget);
+	dom_document = webkit_web_view_get_dom_document((WebKitWebView *)
+							e->html_widget);
 	if (!dom_document)
 		return;
 
@@ -224,9 +221,8 @@ gchar *editor_get_selected_text(EDITOR * e)
 	gchar *text = NULL;
 	GError *error = NULL;
 
-	dom_document =
-	    webkit_web_view_get_dom_document((WebKitWebView *) e->
-					     html_widget);
+	dom_document = webkit_web_view_get_dom_document((WebKitWebView *)
+							e->html_widget);
 	if (!dom_document)
 		return NULL;
 	window = webkit_dom_document_get_default_view(dom_document);
@@ -299,9 +295,8 @@ void editor_replace_string(gchar * old_string, gchar * new_string,
 {
 	WebKitWebFrame *frame = NULL;
 
-	frame =
-	    webkit_web_view_get_main_frame((WebKitWebView *) e->
-					   html_widget);
+	frame = webkit_web_view_get_main_frame((WebKitWebView *)
+					       e->html_widget);
 	webkit_web_view_search_text((WebKitWebView *) e->html_widget,
 				    old_string, FALSE, TRUE, FALSE);
 	webkit_web_frame_replace_selection(frame, new_string);
@@ -722,9 +717,8 @@ gboolean key_handler(GtkWidget * widget, GdkEventKey * event, EDITOR * e)
 {
 	/* these are the mods we actually use for global keys, we always only check for these set */
 	guint state =
-	    event->
-	    state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK |
-		     GDK_MOD4_MASK);
+	    event->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK |
+			    GDK_MOD1_MASK | GDK_MOD4_MASK);
 
 	switch (event->keyval) {
 	case XK_s:		// Ctrl-L  verse entry
@@ -762,9 +756,8 @@ void menu_spell_item_activated(GtkWidget * menuitem, EDITOR * e)
 	const gchar *label;
 
 	label = gtk_menu_item_get_label(GTK_MENU_ITEM(menuitem));
-	frame =
-	    webkit_web_view_get_main_frame((WebKitWebView *) e->
-					   html_widget);
+	frame = webkit_web_view_get_main_frame((WebKitWebView *)
+					       e->html_widget);
 
 	webkit_web_frame_replace_selection(frame, label);
 }
@@ -1074,9 +1067,8 @@ gboolean button_handler(GtkWidget * widget, GdkEvent * event, EDITOR * e)
 	mouse_x = event->button.x;
 	mouse_y = event->button.y;
 
-	dom_document =
-	    webkit_web_view_get_dom_document((WebKitWebView *) e->
-					     html_widget);
+	dom_document = webkit_web_view_get_dom_document((WebKitWebView *)
+							e->html_widget);
 	if (!dom_document)
 		return 0;
 
@@ -1132,8 +1124,8 @@ gboolean button_handler(GtkWidget * widget, GdkEvent * event, EDITOR * e)
 
 				if (color[0] == '#') {
 					if (buttons_state.color)
-						g_free(buttons_state.
-						       color);
+						g_free
+						    (buttons_state.color);
 					buttons_state.color =
 					    g_strdup(color);
 				}
@@ -1192,9 +1184,10 @@ void create_editor_window(GtkWidget * scrollwindow, EDITOR * e)
 	g_free(fname);
 
 	if (text && strlen(text)) {
-		webkit_web_view_load_string((WebKitWebView *) e->
-					    html_widget, text, "text/html",
-					    "utf_8", "file://");
+		webkit_web_view_load_string((WebKitWebView *)
+					    e->html_widget, text,
+					    "text/html", "utf_8",
+					    "file://");
 	}
 	if (text)
 		g_free(text);

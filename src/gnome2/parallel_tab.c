@@ -154,8 +154,7 @@ static void sync_with_main(const gchar * key)
 	if (key)
 		buf = (gchar *) main_url_encode(key);
 	else
-		buf =
-		    (gchar *)
+		buf = (gchar *)
 		    main_url_encode(xml_get_value("keys", "verse"));
 	XI_message(("%s", buf));
 	if (buf && (strlen(buf) > 3)) {

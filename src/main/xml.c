@@ -1022,8 +1022,7 @@ void xml_convert_to_osisref(void)
 
 				/* cons up a new version. */
 				*t = '\0';
-				g_snprintf(reference, 100, "%s %s",
-					   label
+				g_snprintf(reference, 100, "%s %s", label
 					   /* this is just the module name now */
 					   ,
 					   main_get_osisref_from_key((const

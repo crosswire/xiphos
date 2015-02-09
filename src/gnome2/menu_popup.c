@@ -562,9 +562,8 @@ G_MODULE_EXPORT void on_verse_per_line_activate(GtkCheckMenuItem *
 				      settings.gSwordDir);
 
 	gchar *url = g_strdup_printf("sword://%s/%s",
-				     (is_dialog ? dialog->
-				      mod_name : settings.
-				      MainWindowModule),
+				     (is_dialog ? dialog->mod_name :
+				      settings.MainWindowModule),
 				     (is_dialog ? dialog->key : settings.
 				      currentverse));
 
@@ -1313,8 +1312,9 @@ G_MODULE_EXPORT void on_lookup_google_activate(GtkMenuItem * menuitem,
 	gtk_editable_select_region((GtkEditable *) widgets.entry_dict, 0,
 				   -1);
 	gtk_editable_paste_clipboard((GtkEditable *) widgets.entry_dict);
-	dict_key = g_strdup(gtk_editable_get_chars((GtkEditable *) widgets.
-						   entry_dict, 0, -1));
+	dict_key =
+	    g_strdup(gtk_editable_get_chars
+		     ((GtkEditable *) widgets.entry_dict, 0, -1));
 
 	if ((dict_key == NULL) || (*dict_key == '\0')) {
 		gui_generic_warning("No selection made");
@@ -1535,8 +1535,8 @@ G_MODULE_EXPORT void on_read_selection_aloud_activate(GtkMenuItem *
 				   -1);
 	gtk_editable_paste_clipboard((GtkEditable *) widgets.entry_dict);
 	dict_key =
-	    g_strdup(gtk_editable_get_chars((GtkEditable *) widgets.
-					    entry_dict, 0, -1));
+	    g_strdup(gtk_editable_get_chars
+		     ((GtkEditable *) widgets.entry_dict, 0, -1));
 	len = (dict_key ? strlen(dict_key) : 0);
 
 	if (dict_key && len && *dict_key) {
@@ -1602,8 +1602,8 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML * gxml,
 	GtkWidget *item;
 	GLOBAL_OPS *ops = NULL;
 	gint modtype =
-	    main_get_mod_type((gchar *) (is_dialog ? d->
-					 mod_name : mod_name));
+	    main_get_mod_type((gchar *) (is_dialog ? d->mod_name :
+					 mod_name));
 
 	ops = main_new_globals((gchar *) mod_name);
 
@@ -1913,8 +1913,8 @@ static void _lookup_selection(GtkMenuItem * menuitem,
 	gtk_editable_paste_clipboard((GtkEditable *) widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
 	dict_key =
-	    g_strdup(gtk_editable_get_chars((GtkEditable *) widgets.
-					    entry_dict, 0, -1));
+	    g_strdup(gtk_editable_get_chars
+		     ((GtkEditable *) widgets.entry_dict, 0, -1));
 
 	if (dict_key && mod_name) {
 		main_display_dictionary(mod_name, dict_key);
@@ -2036,8 +2036,7 @@ GtkWidget *_create_popup_menu(XiphosHtml * html, const gchar * mod_name,
 		gtk_widget_show(note);
 		gtk_widget_show(mark_verse);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(note), note_sub);
-		gui_add_mods_2_gtk_menu(PERCOMM_LIST, note_sub,
-					(GCallback)
+		gui_add_mods_2_gtk_menu(PERCOMM_LIST, note_sub, (GCallback)
 					on_edit_percomm_activate);
 		break;
 
@@ -2053,8 +2052,8 @@ GtkWidget *_create_popup_menu(XiphosHtml * html, const gchar * mod_name,
 		g_signal_connect(G_OBJECT(open_edit),
 				 "activate",
 				 G_CALLBACK(on_edit_percomm_activate),
-				 (gchar *) (is_dialog ? d->
-					    mod_name : mod_name));
+				 (gchar *) (is_dialog ? d->mod_name :
+					    mod_name));
 
 		gtk_widget_show(rename_percomm);
 		gtk_widget_show(dump_percomm);
@@ -2071,8 +2070,8 @@ GtkWidget *_create_popup_menu(XiphosHtml * html, const gchar * mod_name,
 		g_signal_connect(G_OBJECT(open_edit),
 				 "activate",
 				 G_CALLBACK(on_edit_prayerlist_activate),
-				 (gchar *) (is_dialog ? d->
-					    mod_name : mod_name));
+				 (gchar *) (is_dialog ? d->mod_name :
+					    mod_name));
 		break;
 	}
 
@@ -2083,9 +2082,8 @@ GtkWidget *_create_popup_menu(XiphosHtml * html, const gchar * mod_name,
 
 	/* = glade_xml_get_widget (gxml, ""); */
 	_add_and_check_global_opts(gxml,
-				   (char *) (is_dialog ? d->
-					     mod_name : mod_name),
-				   mod_opt_sub, d);
+				   (char *) (is_dialog ? d->mod_name :
+					     mod_name), mod_opt_sub, d);
 	/* connect signals and data */
 #ifdef USE_GTKBUILDER
 	gtk_builder_connect_signals(gxml, html);

@@ -616,9 +616,8 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 {
 	/* these are the mods we actually use for global keys, we always only check for these set */
 	guint state =
-	    event->
-	    state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK |
-		     GDK_MOD4_MASK);
+	    event->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK |
+			    GDK_MOD1_MASK | GDK_MOD4_MASK);
 
 	switch (event->keyval) {
 	case XK_Shift_L:	/* shift keys - we need this for locking strongs (and */
@@ -648,8 +647,8 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_c:
 	case XK_C:
 		if (state == GDK_MOD1_MASK) {	// Alt-C  commentary pane
-			gtk_widget_grab_focus(navbar_versekey.
-					      lookup_entry);
+			gtk_widget_grab_focus
+			    (navbar_versekey.lookup_entry);
 			gtk_notebook_set_current_page(GTK_NOTEBOOK
 						      (widgets.
 						       notebook_comm_book),
@@ -712,8 +711,8 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_l:
 	case XK_L:
 		if (state == GDK_CONTROL_MASK)	// Ctrl-L  verse entry
-			gtk_widget_grab_focus(navbar_versekey.
-					      lookup_entry);
+			gtk_widget_grab_focus
+			    (navbar_versekey.lookup_entry);
 		break;
 
 	case XK_m:

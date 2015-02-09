@@ -422,10 +422,9 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	if (gkey == NULL)
 		return;
 
-	gchar *url =
-	    g_strdup_printf("sword:///%s%s", gkey,
-			    (settings.special_anchor ? settings.
-			     special_anchor : ""));
+	gchar *url = g_strdup_printf("sword:///%s%s", gkey,
+				     (settings.special_anchor ?
+				      settings.special_anchor : ""));
 
 	navbar_versekey.module_name =
 	    g_string_assign(navbar_versekey.module_name,

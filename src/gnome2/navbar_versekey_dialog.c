@@ -462,10 +462,9 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * dialog)
 		*settings.special_anchor = '#';	/* put it back. */
 	if (gkey == NULL)
 		return;
-	gchar *url =
-	    g_strdup_printf("sword:///%s%s", gkey,
-			    (settings.special_anchor ? settings.
-			     special_anchor : ""));
+	gchar *url = g_strdup_printf("sword:///%s%s", gkey,
+				     (settings.special_anchor ?
+				      settings.special_anchor : ""));
 
 	dialog->navbar.module_name =
 	    g_string_assign(dialog->navbar.module_name, dialog->mod_name);

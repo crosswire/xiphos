@@ -602,8 +602,7 @@ void gui_display_about_module_dialog(gchar * modname)
 		feature_count++;
 	}
 	if (main_check_for_global_option((gchar *) modname, "OSISGlosses")
-	    || main_check_for_global_option((gchar *) modname,
-					    "OSISRuby")) {
+	    || main_check_for_global_option((gchar *) modname, "OSISRuby")) {
 		info = g_string_append(info, _("*&nbsp;Glosses"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
