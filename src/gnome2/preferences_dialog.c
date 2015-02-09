@@ -2656,17 +2656,17 @@ void ps_setup_listview()
 	if (settings.parallel_list) {
 		for (i = 0; settings.parallel_list[i]; ++i) {
 			const char *abbreviation =
-			    main_get_abbreviation(settings.
-						  parallel_list[i]);
+			    main_get_abbreviation(settings.parallel_list
+						  [i]);
 			gtk_list_store_append(list_store, &iter);
 			gtk_list_store_set(list_store, &iter,
 					   0, main_get_module_description
 					   (settings.parallel_list[i]),
 					   1,
 					   (abbreviation
-					    ? abbreviation
-					    : (gchar *) settings.
-					    parallel_list[i]), -1);
+					    ? abbreviation : (gchar *)
+					    settings.parallel_list[i]),
+					   -1);
 		}
 	}
 }

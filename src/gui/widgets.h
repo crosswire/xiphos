@@ -27,7 +27,7 @@ extern "C" {
 #endif
 	typedef struct _app_widgets WIDGETS;
 	struct _app_widgets {
-		GtkWidget * app,	/* main form */
+		GtkWidget *app,	/* main form */
 		*appbar,	/* gtk status/progress bar */
 		*vboxMain,	/*  */
 		*page,		/*  */

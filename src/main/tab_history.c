@@ -400,8 +400,8 @@ void main_navigate_tab_history(gint direction)
 	if (direction) {
 		if (tab->current_history_item < tab->history_items - 1) {
 			++tab->current_history_item;
-			main_change_verse_tab_history(tab->
-						      current_history_item);
+			main_change_verse_tab_history
+			    (tab->current_history_item);
 		}
 	} else {
 		if (tab->current_history_item > 0) {
@@ -412,8 +412,8 @@ void main_navigate_tab_history(gint direction)
 				--tab->current_history_item;
 #endif
 
-			main_change_verse_tab_history(tab->
-						      current_history_item);
+			main_change_verse_tab_history
+			    (tab->current_history_item);
 			tab->first_back_click = FALSE;
 		}
 	}

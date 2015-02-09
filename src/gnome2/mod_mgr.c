@@ -932,8 +932,8 @@ static void remove_install_modules(GList * modules, int activity)
 
 			xiphos_create_archive(conf_file, datapath, zipfile,
 					      destination ?
-					      destination : settings.
-					      path_to_mods);
+					      destination :
+					      settings.path_to_mods);
 			g_string_append(cmd, module_name);
 			g_string_append(cmd, _(" archived in: \n"));
 			g_string_append(cmd, zipfile);
@@ -1134,9 +1134,8 @@ static GList *parse_treeview(GList * list,
 			}
 			if (fixed || (activity == ALL_MODULES)) {
 				list =
-				    g_list_append(list,
-						  (s ? n : (gchar *)
-						   name));
+				    g_list_append(list, (s ? n : (gchar *)
+							 name));
 			}
 		}
 	} while (gtk_tree_model_iter_next(model, &child));

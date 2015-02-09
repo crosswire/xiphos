@@ -261,24 +261,23 @@ GString *pick_tab_label(PASSAGE_TAB_INFO * pt)
 	if (pt->showtexts || (pt->showcomms && pt->comm_showing)) {
 		g_string_printf(str, "%s: %s",
 				(pt->showtexts
-				 ? (abbrev_text ? abbrev_text : pt->
-				    text_mod)
-				 : (pt->
-				    commentary_mod ? (abbrev_comm ?
-						      abbrev_comm : pt->
-						      commentary_mod)
+				 ? (abbrev_text ? abbrev_text :
+				    pt->text_mod)
+				 : (pt->commentary_mod
+				    ? (abbrev_comm ? abbrev_comm :
+				       pt->commentary_mod)
 				    : "[no commentary]")),
 				pt->text_commentary_key);
 	} else {
 		g_string_printf(str, "%s",
 				(pt->showcomms
 				 ? (pt->book_mod
-				    ? (abbrev_book ? abbrev_book : pt->
-				       book_mod)
+				    ? (abbrev_book ? abbrev_book :
+				       pt->book_mod)
 				    : "[no book]")
 				 : (pt->dictlex_mod
-				    ? (abbrev_dict ? abbrev_dict : pt->
-				       dictlex_mod)
+				    ? (abbrev_dict ? abbrev_dict :
+				       pt->dictlex_mod)
 				    : "[no dict]")));
 	}
 	return str;
@@ -419,23 +418,23 @@ void gui_save_tabs(const gchar * filename)
 		xmlNewProp(cur_node, (const xmlChar *) "book_offset",
 			   (const xmlChar *) pt->book_offset);
 		xmlNewProp(cur_node, (const xmlChar *) "comm_showing",
-			   (const xmlChar *) true_false2yes_no(pt->
-							       comm_showing));
+			   (const xmlChar *)
+			   true_false2yes_no(pt->comm_showing));
 		xmlNewProp(cur_node, (const xmlChar *) "showtexts",
-			   (const xmlChar *) true_false2yes_no(pt->
-							       showtexts));
+			   (const xmlChar *)
+			   true_false2yes_no(pt->showtexts));
 		xmlNewProp(cur_node, (const xmlChar *) "showpreview",
-			   (const xmlChar *) true_false2yes_no(pt->
-							       showpreview));
+			   (const xmlChar *)
+			   true_false2yes_no(pt->showpreview));
 		xmlNewProp(cur_node, (const xmlChar *) "showcomms",
-			   (const xmlChar *) true_false2yes_no(pt->
-							       showcomms));
+			   (const xmlChar *)
+			   true_false2yes_no(pt->showcomms));
 		xmlNewProp(cur_node, (const xmlChar *) "showdicts",
-			   (const xmlChar *) true_false2yes_no(pt->
-							       showdicts));
+			   (const xmlChar *)
+			   true_false2yes_no(pt->showdicts));
 		xmlNewProp(cur_node, (const xmlChar *) "showparallel",
-			   (const xmlChar *) true_false2yes_no(pt->
-							       showparallel));
+			   (const xmlChar *)
+			   true_false2yes_no(pt->showparallel));
 	}
 	xmlSaveFormatFile(file, xml_doc, 1);
 	g_free(file);
@@ -519,20 +518,20 @@ void _save_off_tab(const gchar * filename)
 	xmlNewProp(cur_node, (const xmlChar *) "book_offset",
 		   (const xmlChar *) settings.book_key);
 	xmlNewProp(cur_node, (const xmlChar *) "comm_showing",
-		   (const xmlChar *) true_false2yes_no(settings.
-						       comm_showing));
+		   (const xmlChar *)
+		   true_false2yes_no(settings.comm_showing));
 	xmlNewProp(cur_node, (const xmlChar *) "showtexts",
-		   (const xmlChar *) true_false2yes_no(settings.
-						       showtexts));
+		   (const xmlChar *)
+		   true_false2yes_no(settings.showtexts));
 	xmlNewProp(cur_node, (const xmlChar *) "showpreview",
-		   (const xmlChar *) true_false2yes_no(settings.
-						       showpreview));
+		   (const xmlChar *)
+		   true_false2yes_no(settings.showpreview));
 	xmlNewProp(cur_node, (const xmlChar *) "showcomms",
-		   (const xmlChar *) true_false2yes_no(settings.
-						       showcomms));
+		   (const xmlChar *)
+		   true_false2yes_no(settings.showcomms));
 	xmlNewProp(cur_node, (const xmlChar *) "showdicts",
-		   (const xmlChar *) true_false2yes_no(settings.
-						       showdicts));
+		   (const xmlChar *)
+		   true_false2yes_no(settings.showdicts));
 	xmlNewProp(cur_node, (const xmlChar *) "showparallel",
 		   (const xmlChar *) "no");
 
@@ -640,8 +639,7 @@ void gui_load_tabs(const gchar * filename)
 								    pt;
 
 							/* load per-tab module information. */
-							val =
-							    (gchar *)
+							val = (gchar *)
 							    xmlGetProp
 							    (tmp_node,
 							     (const xmlChar
@@ -650,8 +648,7 @@ void gui_load_tabs(const gchar * filename)
 							pt->text_mod =
 							    g_strdup(val);
 							xmlFree(val);
-							val =
-							    (gchar *)
+							val = (gchar *)
 							    xmlGetProp
 							    (tmp_node,
 							     (const xmlChar
@@ -661,8 +658,7 @@ void gui_load_tabs(const gchar * filename)
 							    =
 							    g_strdup(val);
 							xmlFree(val);
-							val =
-							    (gchar *)
+							val = (gchar *)
 							    xmlGetProp
 							    (tmp_node,
 							     (const xmlChar
@@ -671,8 +667,7 @@ void gui_load_tabs(const gchar * filename)
 							pt->dictlex_mod =
 							    g_strdup(val);
 							xmlFree(val);
-							val =
-							    (gchar *)
+							val = (gchar *)
 							    xmlGetProp
 							    (tmp_node,
 							     (const xmlChar
@@ -681,8 +676,7 @@ void gui_load_tabs(const gchar * filename)
 							pt->book_mod =
 							    g_strdup(val);
 							xmlFree(val);
-							val =
-							    (gchar *)
+							val = (gchar *)
 							    xmlGetProp
 							    (tmp_node,
 							     (const xmlChar
@@ -690,8 +684,7 @@ void gui_load_tabs(const gchar * filename)
 							     "text_commentary_key");
 							pt->text_commentary_key = g_strdup(val);
 							xmlFree(val);
-							val =
-							    (gchar *)
+							val = (gchar *)
 							    xmlGetProp
 							    (tmp_node,
 							     (const xmlChar
@@ -700,8 +693,7 @@ void gui_load_tabs(const gchar * filename)
 							pt->dictlex_key =
 							    g_strdup(val);
 							xmlFree(val);
-							val =
-							    (gchar *)
+							val = (gchar *)
 							    xmlGetProp
 							    (tmp_node,
 							     (const xmlChar
@@ -710,8 +702,7 @@ void gui_load_tabs(const gchar * filename)
 							pt->book_offset =
 							    g_strdup(val);
 							xmlFree(val);
-							val =
-							    (gchar *)
+							val = (gchar *)
 							    xmlGetProp
 							    (tmp_node,
 							     (const xmlChar
@@ -721,8 +712,7 @@ void gui_load_tabs(const gchar * filename)
 							    yes_no2true_false
 							    (val);
 							xmlFree(val);
-							val =
-							    (gchar *)
+							val = (gchar *)
 							    xmlGetProp
 							    (tmp_node,
 							     (const xmlChar
@@ -779,8 +769,7 @@ void gui_load_tabs(const gchar * filename)
 							     (tmp_node,
 							      (const
 							       xmlChar *)
-							      "showtexts")))
-							{
+							      "showtexts"))) {
 								pt->showtexts = yes_no2true_false(val);
 								xmlFree
 								    (val);
@@ -1229,11 +1218,11 @@ void gui_set_tab_label(const gchar * key, gboolean one_tab)
 		GList *tmp = NULL;
 		for (tmp = g_list_first(passage_list); tmp != NULL;
 		     tmp = g_list_next(tmp))
-			gui_set_named_tab_label(key,
-						(PASSAGE_TAB_INFO *) tmp->
-						data,
-						((PASSAGE_TAB_INFO *) tmp->
-						 data == cur_passage_tab));
+			gui_set_named_tab_label(key, (PASSAGE_TAB_INFO *)
+						tmp->data,
+						((PASSAGE_TAB_INFO *)
+						 tmp->data ==
+						 cur_passage_tab));
 	} else {
 		gui_set_named_tab_label(key, cur_passage_tab, TRUE);
 	}

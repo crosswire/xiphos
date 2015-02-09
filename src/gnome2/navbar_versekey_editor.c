@@ -447,10 +447,9 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
 		*settings.special_anchor = '#';	/* put it back. */
 	if (gkey == NULL)
 		return;
-	gchar *url =
-	    g_strdup_printf("sword:///%s%s", gkey,
-			    (settings.special_anchor ? settings.
-			     special_anchor : ""));
+	gchar *url = g_strdup_printf("sword:///%s%s", gkey,
+				     (settings.special_anchor ?
+				      settings.special_anchor : ""));
 
 	editor->navbar.module_name =
 	    g_string_assign(editor->navbar.module_name,
