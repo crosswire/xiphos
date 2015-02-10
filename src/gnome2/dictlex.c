@@ -402,7 +402,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_button_set_relief(GTK_BUTTON(button10), GTK_RELIEF_NONE);
 
 	image1 =
-#ifdef HAVE_GTK_314
+#ifdef HAVE_GTK_310
 	    gtk_image_new_from_icon_name("go-up-symbolic",
 					 GTK_ICON_SIZE_BUTTON);
 #else
@@ -418,7 +418,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_button_set_relief(GTK_BUTTON(button11), GTK_RELIEF_NONE);
 
 	image2 =
-#ifdef HAVE_GTK_314
+#ifdef HAVE_GTK_310
 	    gtk_image_new_from_icon_name("go-down-symbolic",
 					 GTK_ICON_SIZE_BUTTON);
 #else
