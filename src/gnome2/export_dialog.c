@@ -348,8 +348,7 @@ gint _check_for_distribution_license(gchar * mod_name)
 						  (distributionlicense),
 						  "Copyright"))) {
 		if (main_get_one_option(mod_name, OP_NAME) == 0) {
-			gui_generic_warning(_
-					    ("Please check copyright before exporting!"));
+			gui_generic_warning(_("Please check copyright before exporting!"));
 			main_save_module_options(mod_name, OP_NAME, 1);
 		}
 

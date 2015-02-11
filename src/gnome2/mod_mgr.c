@@ -209,8 +209,7 @@ char *verbs[5][4] = {
 	 N_("Archive")
 	 },
 	{
-	 N_
-	 ("Build fast-search index for these\nmodules (may take minutes/module)?"),
+	 N_("Build fast-search index for these\nmodules (may take minutes/module)?"),
 	 N_("Preparing to index"),
 	 N_("Indexing"),
 	 N_("Index")
@@ -323,9 +322,7 @@ gboolean query_tooltip(GtkWidget * widget,
 
 	about_module_display(str, ((about && *about)
 				   ? about
-				   :
-				   _
-				   ("The module has no About information.")),
+				   : _("The module has no About information.")),
 			     TRUE);
 
 	text =
@@ -570,9 +567,7 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	gtk_widget_set_tooltip_text(image,
 				    (remove
 				     ? ""
-				     :
-				     _
-				     ("A checkmark means this module is already installed")));
+				     : _("A checkmark means this module is already installed")));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -599,12 +594,8 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
 				    (remove
-				     ?
-				     _
-				     ("Click the box to work on this module")
-				     :
-				     _
-				     ("Click the box to select this module for install/update")));
+				     ? _("Click the box to work on this module")
+				     : _("Click the box to select this module for install/update")));
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
@@ -640,8 +631,7 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 #endif
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
-				    _
-				    ("The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"));
+				    _("The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -666,8 +656,7 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 #endif
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
-				    _
-				    ("The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"));
+				    _("The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -710,8 +699,7 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 #endif
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
-				    _
-				    ("The refresh icon means the Installed module is older than the newer Available module: You should update the module"));
+				    _("The refresh icon means the Installed module is older than the newer Available module: You should update the module"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1017,8 +1005,7 @@ static void remove_install_modules(GList * modules, int activity)
 			// why did we ever preclude indexing these?
 			if (main_get_mod_config_entry
 			    (module_name, "GSType"))
-				gui_generic_warning(_
-						    ("Journals and prayer lists cannot be indexed."));
+				gui_generic_warning(_("Journals and prayer lists cannot be indexed."));
 			else
 #endif
 				result =
@@ -2602,9 +2589,8 @@ static void on_dialog_destroy(GObject * object, gpointer user_data)
 			main_init_lists();
 			if (settings.havebible == 0) {
 				gui_generic_warning_modal
-				    (_
-				     ("There are still no Bibles installed.\n"
-				      "Xiphos cannot continue without one."));
+				    (_("There are still no Bibles installed.\n"
+				       "Xiphos cannot continue without one."));
 				exit(1);
 			}
 		}
@@ -2824,8 +2810,7 @@ void on_load_sources_clicked(GtkButton * button, gpointer user_data)
 	if (mod_mgr_init_config_extras() == 0) {
 		/* not quite identical to check_sync_repos(). */
 		char index[10];
-		gui_generic_warning(_
-				    ("Standard remote sources have been loaded."));
+		gui_generic_warning(_("Standard remote sources have been loaded."));
 		settings.mod_mgr_remote_source_index =
 		    load_source_treeviews();
 		g_snprintf(index, 10, "%d",
@@ -2834,8 +2819,7 @@ void on_load_sources_clicked(GtkButton * button, gpointer user_data)
 			      "mod_mgr_remote_source_index", index);
 		set_controls_to_last_use();
 	} else
-		gui_generic_warning(_
-				    ("Could not load standard sources from CrossWire."));
+		gui_generic_warning(_("Could not load standard sources from CrossWire."));
 }
 
 void on_mod_mgr_intro_clicked(GtkButton * button, gpointer user_data)
@@ -3098,8 +3082,7 @@ void on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		if (!strcmp(mms->caption, dialog->text1)) {
 			/* this can happen at most once */
-			gui_generic_warning_modal(_
-						  ("A source by that name already exists."));
+			gui_generic_warning_modal(_("A source by that name already exists."));
 			name_conflict = TRUE;
 		}
 		g_free((gchar *) mms->type);

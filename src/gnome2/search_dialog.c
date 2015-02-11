@@ -542,8 +542,7 @@ void clear_modules(GtkButton * button, gpointer user_data)
 
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
 			      _("Clear List?"),
-			      _
-			      ("Are you sure you want to clear the module list?"));
+			      _("Are you sure you want to clear the module list?"));
 
 #ifdef HAVE_GTK_310
 	if (gui_yes_no_dialog(str, "dialog-warning")) {
@@ -735,8 +734,7 @@ void delete_list(GtkButton * button, gpointer user_data)
 #if 0
 	// #if 0'd until list_rows is properly managed.
 	if (search1.list_rows < 2) {
-		gui_generic_warning_modal(_
-					  ("The last module list may not be deleted"));
+		gui_generic_warning_modal(_("The last module list may not be deleted"));
 		return;
 	}
 #endif
@@ -1248,8 +1246,7 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
 					g_free(text);
 					g_string_free(vlist, TRUE);
 					gui_generic_warning
-					    (_
-					     ("Module is neither Bible nor commentary"));
+					    (_("Module is neither Bible nor commentary"));
 					return;
 				}
 			} else {
@@ -1268,8 +1265,7 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
 		g_free(module);
 		g_string_free(vlist, TRUE);
 	} else {
-		gui_generic_warning(_
-				    ("BibleSync is not active for transmit."));
+		gui_generic_warning(_("BibleSync is not active for transmit."));
 	}
 }
 

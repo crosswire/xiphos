@@ -2087,8 +2087,7 @@ const char *AnalyzeForImageSize(const char *origtext, GdkWindow * window)
 
 		if (image_retval != 0) {
 			if (!warned_once) {
-				gui_generic_warning(_
-						    ("An image file's size could not be determined.\n"
+				gui_generic_warning(_("An image file's size could not be determined.\n"
 						     "Xiphos cannot resize images to fit window."));
 				// settings.imageresize = 0;
 				warned_once = TRUE;

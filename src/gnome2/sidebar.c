@@ -1031,8 +1031,7 @@ on_send_list_via_biblesync_activate(GtkMenuItem * menuitem,
 					      vlist->str);
 		g_string_free(vlist, TRUE);
 	} else {
-		gui_generic_warning(_
-				    ("BibleSync is not active for transmit."));
+		gui_generic_warning(_("BibleSync is not active for transmit."));
 	}
 }
 

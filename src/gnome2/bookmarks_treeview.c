@@ -766,8 +766,7 @@ static gboolean button_release_event(GtkWidget * widget,
 		button_one = TRUE;
 		break;
 	case 2:
-		gui_generic_warning(_
-				    ("Opening a multi-reference bookmark in\n"
+		gui_generic_warning(_("Opening a multi-reference bookmark in\n"
 				     "separate tabs is not supported."));
 		break;
 	case 3:
