@@ -53,15 +53,11 @@
  * externs
  */
 extern gboolean dict_display_change;
-extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
-
-
-
+extern gboolean isrunningSD; /* is the view dictionary dialog runing */
 
 /******************************************************************************
  * static
  */
-
 
 /******************************************************************************
  * Name
@@ -85,8 +81,8 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  *   void
  */
 
-void gui_get_clipboard_text_for_lookup(GtkClipboard * clipboard,
-				       const gchar * text, gpointer data)
+void gui_get_clipboard_text_for_lookup(GtkClipboard *clipboard,
+				       const gchar *text, gpointer data)
 {
 	char *key = NULL;
 	gchar *dict = NULL;
@@ -96,14 +92,13 @@ void gui_get_clipboard_text_for_lookup(GtkClipboard * clipboard,
 		return;
 	XI_message(("src/gnome2/dictlex.c: text =>%s<", text));
 
-	key = g_strdelimit((char *) text, "&.,\"<>;:?", ' ');
-	key = g_strstrip((char *) key);
+	key = g_strdelimit((char *)text, "&.,\"<>;:?", ' ');
+	key = g_strstrip((char *)key);
 	len = strlen(key);
 
 	if (key[len - 1] == 's' || key[len - 1] == 'd')
 		key[len - 1] = '\0';
-	if (key[len - 1] == 'h' && key[len - 2] == 't'
-	    && key[len - 3] == 'e')
+	if (key[len - 1] == 'h' && key[len - 2] == 't' && key[len - 3] == 'e')
 		key[len - 3] = '\0';
 
 	if (settings.useDefaultDict)
@@ -142,12 +137,10 @@ static void set_label(gchar * mod_name)
  *   void
  */
 
-void on_entryDictLookup_changed(GtkEditable * editable, gpointer data)
+void on_entryDictLookup_changed(GtkEditable *editable, gpointer data)
 {
 	main_dictionary_entry_changed(settings.DictWindowModule);
 }
-
-
 
 /******************************************************************************
  * Name
@@ -165,11 +158,10 @@ void on_entryDictLookup_changed(GtkEditable * editable, gpointer data)
  *   void
  */
 
-void gui_display_dictlex(gchar * key)
+void gui_display_dictlex(gchar *key)
 {
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 }
-
 
 /******************************************************************************
  * Name
@@ -187,7 +179,7 @@ void gui_display_dictlex(gchar * key)
  *   void
  */
 
-void gui_set_dictlex_mod_and_key(gchar * mod_name, gchar * key)
+void gui_set_dictlex_mod_and_key(gchar *mod_name, gchar *key)
 {
 	const gchar *old_key;
 
@@ -202,15 +194,13 @@ void gui_set_dictlex_mod_and_key(gchar * mod_name, gchar * key)
 		on_entryDictLookup_changed(NULL, NULL);
 	else
 		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
-
 }
 
-
-void dict_key_entry_changed(GtkEntry * entry, gpointer data)
+void dict_key_entry_changed(GtkEntry *entry, gpointer data)
 {
 	gchar *buf = NULL;
 
-	buf = (gchar *) gtk_entry_get_text(entry);
+	buf = (gchar *)gtk_entry_get_text(entry);
 	XI_message(("dict_key_entry_changed: %s", buf));
 	if (strlen(buf) < 2)
 		return;
@@ -219,19 +209,17 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 	//gtk_widget_grab_focus(widgets.entry_dict);
 }
 
-void button_back_clicked(GtkButton * button, gpointer user_data)
+void button_back_clicked(GtkButton *button, gpointer user_data)
 {
 	if (settings.havedict)
 		main_dictionary_button_clicked(0);
 }
 
-void button_forward_clicked(GtkButton * button, gpointer user_data)
+void button_forward_clicked(GtkButton *button, gpointer user_data)
 {
 	if (settings.havedict)
 		main_dictionary_button_clicked(1);
 }
-
-
 
 /******************************************************************************
  * Name
@@ -249,7 +237,7 @@ void button_forward_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void menu_deactivate_callback(GtkWidget * widget,
+static void menu_deactivate_callback(GtkWidget *widget,
 				     gpointer user_data)
 {
 	GtkWidget *menu_button;
@@ -259,7 +247,6 @@ static void menu_deactivate_callback(GtkWidget * widget,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(menu_button),
 				     FALSE);
 }
-
 
 /******************************************************************************
  * Name
@@ -277,10 +264,10 @@ static void menu_deactivate_callback(GtkWidget * widget,
  *
  */
 
-static void menu_position_under(GtkMenu * menu,
+static void menu_position_under(GtkMenu *menu,
 				int *x,
 				int *y,
-				gboolean * push_in, gpointer user_data)
+				gboolean *push_in, gpointer user_data)
 {
 	GtkWidget *widget;
 	GtkAllocation allocation;
@@ -301,7 +288,6 @@ static void menu_position_under(GtkMenu * menu,
 	*push_in = FALSE;
 }
 
-
 /******************************************************************************
  * Name
  *   select_button_press_callback
@@ -321,8 +307,8 @@ static void menu_position_under(GtkMenu * menu,
  *   gboolean
  */
 
-static gboolean select_button_press_callback(GtkWidget * widget,
-					     GdkEventButton * event,
+static gboolean select_button_press_callback(GtkWidget *widget,
+					     GdkEventButton *event,
 					     gpointer user_data)
 {
 	if (!settings.DictWindowModule ||
@@ -350,7 +336,7 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 }
 
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 {
 	gui_menu_popup(html, settings.DictWindowModule, NULL);
 	//gui_create_pm_dictionary();
@@ -442,7 +428,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_dict);
-	g_signal_connect((gpointer) widgets.html_dict,
+	g_signal_connect((gpointer)widgets.html_dict,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 
@@ -452,12 +438,11 @@ GtkWidget *gui_create_dictionary_pane(void)
 	g_signal_connect(G_OBJECT(widgets.entry_dict), "activate",
 			 G_CALLBACK(dict_key_entry_changed), NULL);
 
-	g_signal_connect((gpointer) button10, "clicked",
+	g_signal_connect((gpointer)button10, "clicked",
 			 G_CALLBACK(button_back_clicked), NULL);
-	g_signal_connect((gpointer) button11, "clicked",
+	g_signal_connect((gpointer)button11, "clicked",
 			 G_CALLBACK(button_forward_clicked), NULL);
 	return box_dict;
 }
-
 
 //******  end of file  ******/

@@ -35,7 +35,6 @@
 #include "gui/tabbed_browser.h"
 #include "gui/utilities.h"
 
-
 #include "main/module_dialogs.h"
 #include "main/navbar_versekey.h"
 #include "main/settings.h"
@@ -48,8 +47,6 @@
 NAVBAR_VERSEKEY navbar_versekey;
 
 extern PASSAGE_TAB_INFO *cur_passage_tab;
-
-
 
 /******************************************************************************
  * Name
@@ -67,7 +64,7 @@ extern PASSAGE_TAB_INFO *cur_passage_tab;
  *   void
  */
 
-static void menu_deactivate_callback(GtkWidget * widget,
+static void menu_deactivate_callback(GtkWidget *widget,
 				     gpointer user_data)
 {
 	GtkWidget *menu_button;
@@ -77,7 +74,6 @@ static void menu_deactivate_callback(GtkWidget * widget,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(menu_button),
 				     FALSE);
 }
-
 
 /******************************************************************************
  * Name
@@ -97,9 +93,8 @@ static void menu_deactivate_callback(GtkWidget * widget,
  *   void
  */
 
-static
-void menu_position_under(GtkMenu * menu, int *x, int *y,
-			 gboolean * push_in, gpointer user_data)
+static void menu_position_under(GtkMenu *menu, int *x, int *y,
+				gboolean *push_in, gpointer user_data)
 {
 	GtkWidget *widget;
 	GtkAllocation allocation;
@@ -112,16 +107,13 @@ void menu_position_under(GtkMenu * menu, int *x, int *y,
 #endif
 	widget = GTK_WIDGET(user_data);
 
-
 	gdk_window_get_origin(gtk_widget_get_window(widget), x, y);
 	gtk_widget_get_allocation(widget, &allocation);
 	*x += allocation.x;
 	*y += allocation.y + allocation.height;
 
-
 	*push_in = FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -142,8 +134,8 @@ void menu_position_under(GtkMenu * menu, int *x, int *y,
  *   gboolean
  */
 
-static gboolean select_button_press_callback(GtkWidget * widget,
-					     GdkEventButton * event,
+static gboolean select_button_press_callback(GtkWidget *widget,
+					     GdkEventButton *event,
 					     gpointer user_data)
 {
 	GtkWidget *menu;
@@ -165,7 +157,6 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 	return FALSE;
 }
 
-
 /******************************************************************************
  * Name
  *   select_button_press_callback
@@ -185,8 +176,8 @@ static gboolean select_button_press_callback(GtkWidget * widget,
  *   gboolean
  */
 
-static gboolean select_book_button_press_callback(GtkWidget * widget,
-						  GdkEventButton * event,
+static gboolean select_book_button_press_callback(GtkWidget *widget,
+						  GdkEventButton *event,
 						  gpointer user_data)
 {
 	GtkWidget *menu;
@@ -199,7 +190,7 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 #endif
 
 	g_get_current_time(&start_time);
-//      XI_message(("Start time is: %d sec %d mil", start_time.tv_sec, start_time.tv_usec));
+	//      XI_message(("Start time is: %d sec %d mil", start_time.tv_sec, start_time.tv_usec));
 
 	menu = main_versekey_drop_down_book_menu(navbar_versekey, NB_MAIN,
 						 NULL, NULL);
@@ -212,7 +203,7 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 	    (end_time.tv_usec - start_time.tv_usec);
 	time_add = 0;
 	//if (time_diff > 10000)
-	time_add = (guint32) (time_diff / 1000);
+	time_add = (guint32)(time_diff / 1000);
 #endif
 	if (!menu)
 		return 0;
@@ -234,8 +225,6 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 	return FALSE;
 }
 
-
-
 /******************************************************************************
  * Name
  *   select_button_press_callback
@@ -255,9 +244,9 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
  *   gboolean
  */
 
-static gboolean select_chapter_button_press_callback(GtkWidget * widget,
+static gboolean select_chapter_button_press_callback(GtkWidget *widget,
 						     GdkEventButton *
-						     event,
+							 event,
 						     gpointer user_data)
 {
 	GtkWidget *menu;
@@ -281,8 +270,6 @@ static gboolean select_chapter_button_press_callback(GtkWidget * widget,
 	return FALSE;
 }
 
-
-
 /******************************************************************************
  * Name
  *   select_button_press_callback
@@ -302,8 +289,8 @@ static gboolean select_chapter_button_press_callback(GtkWidget * widget,
  *   gboolean
  */
 
-static gboolean select_verse_button_press_callback(GtkWidget * widget,
-						   GdkEventButton * event,
+static gboolean select_verse_button_press_callback(GtkWidget *widget,
+						   GdkEventButton *event,
 						   gpointer user_data)
 {
 	GtkWidget *menu;
@@ -326,7 +313,6 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 	return FALSE;
 }
 
-
 /******************************************************************************
  * Name
  *  on_button_history_next_clicked
@@ -343,12 +329,10 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
  *   void
  */
 
-static
-void on_button_history_next_clicked(GtkButton * button, gpointer user_data)
+static void on_button_history_next_clicked(GtkButton *button, gpointer user_data)
 {
 	main_navigate_tab_history(1);
 }
-
 
 /******************************************************************************
  * Name
@@ -366,8 +350,7 @@ void on_button_history_next_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static
-void on_button_history_back_clicked(GtkButton * button, gpointer user_data)
+static void on_button_history_back_clicked(GtkButton *button, gpointer user_data)
 {
 	main_navigate_tab_history(0);
 }
@@ -388,7 +371,7 @@ void on_button_history_back_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_entry_activate(GtkEntry * entry, gpointer user_data)
+static void on_entry_activate(GtkEntry *entry, gpointer user_data)
 {
 	char *rawtext;
 	const gchar *gkey, *buf = gtk_entry_get_text(entry);
@@ -396,13 +379,13 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	if (buf == NULL)
 		return;
 	/* handle potential subsection anchor */
-	if ((settings.special_anchor = strchr(buf, '#')) ||	/* thml */
-	    (settings.special_anchor = strchr(buf, '!')))	/* osisref */
+	if ((settings.special_anchor = strchr(buf, '#')) || /* thml */
+	    (settings.special_anchor = strchr(buf, '!')))   /* osisref */
 		*settings.special_anchor = '\0';
 
 	rawtext =
 	    main_get_raw_text(navbar_versekey.module_name->str,
-			      (gchar *) buf);
+			      (gchar *)buf);
 	if (!rawtext || (rawtext && (strlen(rawtext) < 2))) {
 		gtk_entry_set_text(entry, navbar_versekey.key->str);
 		g_free(rawtext);
@@ -410,7 +393,7 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	}
 
 	gkey =
-	    main_get_valid_key(settings.MainWindowModule, (gchar *) buf);
+	    main_get_valid_key(settings.MainWindowModule, (gchar *)buf);
 
 	// we got a valid key. but was it really a valid key within v11n?
 	// for future use in determining whether to show normal navbar content.
@@ -418,13 +401,12 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	    main_is_Bible_key(settings.MainWindowModule, gkey);
 
 	if (settings.special_anchor)
-		*settings.special_anchor = '#';	/* put it back. */
+		*settings.special_anchor = '#'; /* put it back. */
 	if (gkey == NULL)
 		return;
 
 	gchar *url = g_strdup_printf("sword:///%s%s", gkey,
-				     (settings.special_anchor ?
-				      settings.special_anchor : ""));
+				     (settings.special_anchor ? settings.special_anchor : ""));
 
 	navbar_versekey.module_name =
 	    g_string_assign(navbar_versekey.module_name,
@@ -434,9 +416,8 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	if (url)
 		g_free(url);
 	if (gkey)
-		g_free((gchar *) gkey);
+		g_free((gchar *)gkey);
 }
-
 
 /******************************************************************************
  * Name
@@ -456,17 +437,14 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
  *   gboolean
  */
 
-static
-gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
-						 GdkEvent * event,
-						 gpointer user_data)
+static gboolean on_button_verse_menu_verse_scroll_event(GtkWidget *widget,
+							GdkEvent *event,
+							gpointer user_data)
 {
 	main_navbar_versekey_spin_verse(navbar_versekey,
 					event->scroll.direction);
 	return FALSE;
 }
-
-
 
 /******************************************************************************
  * Name
@@ -486,17 +464,14 @@ gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_button_verse_menu_chapter_scroll_event(GtkWidget * widget,
-						   GdkEvent * event,
-						   gpointer user_data)
+static gboolean on_button_verse_menu_chapter_scroll_event(GtkWidget *widget,
+							  GdkEvent *event,
+							  gpointer user_data)
 {
 	main_navbar_versekey_spin_chapter(navbar_versekey,
 					  event->scroll.direction);
 	return FALSE;
 }
-
-
 
 /******************************************************************************
  * Name
@@ -516,16 +491,14 @@ gboolean on_button_verse_menu_chapter_scroll_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_button_verse_menu_book_scroll_event(GtkWidget * widget,
-						GdkEvent * event,
-						gpointer user_data)
+static gboolean on_button_verse_menu_book_scroll_event(GtkWidget *widget,
+						       GdkEvent *event,
+						       gpointer user_data)
 {
 	main_navbar_versekey_spin_book(navbar_versekey,
 				       event->scroll.direction);
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -545,10 +518,9 @@ gboolean on_button_verse_menu_book_scroll_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_up_enter_notify_event(GtkWidget * widget,
-				  GdkEventCrossing * event,
-				  gpointer user_data)
+static gboolean on_up_enter_notify_event(GtkWidget *widget,
+					 GdkEventCrossing *event,
+					 gpointer user_data)
 {
 	switch (GPOINTER_TO_INT(user_data)) {
 	case BOOK_BUTTON:
@@ -566,7 +538,6 @@ gboolean on_up_enter_notify_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -586,10 +557,9 @@ gboolean on_up_enter_notify_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_down_enter_notify_event(GtkWidget * widget,
-				    GdkEventCrossing * event,
-				    gpointer user_data)
+static gboolean on_down_enter_notify_event(GtkWidget *widget,
+					   GdkEventCrossing *event,
+					   gpointer user_data)
 {
 	switch (GPOINTER_TO_INT(user_data)) {
 	case BOOK_BUTTON:
@@ -607,7 +577,6 @@ gboolean on_down_enter_notify_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -627,10 +596,9 @@ gboolean on_down_enter_notify_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_up_leave_notify_event(GtkWidget * widget,
-				  GdkEventCrossing * event,
-				  gpointer user_data)
+static gboolean on_up_leave_notify_event(GtkWidget *widget,
+					 GdkEventCrossing *event,
+					 gpointer user_data)
 {
 	switch (GPOINTER_TO_INT(user_data)) {
 	case BOOK_BUTTON:
@@ -648,7 +616,6 @@ gboolean on_up_leave_notify_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -668,10 +635,9 @@ gboolean on_up_leave_notify_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_down_leave_notify_event(GtkWidget * widget,
-				    GdkEventCrossing * event,
-				    gpointer user_data)
+static gboolean on_down_leave_notify_event(GtkWidget *widget,
+					   GdkEventCrossing *event,
+					   gpointer user_data)
 {
 	switch (GPOINTER_TO_INT(user_data)) {
 	case BOOK_BUTTON:
@@ -689,7 +655,6 @@ gboolean on_down_leave_notify_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -709,10 +674,9 @@ gboolean on_down_leave_notify_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_up_eventbox_button_release_event(GtkWidget * widget,
-					     GdkEventButton * event,
-					     gpointer user_data)
+static gboolean on_up_eventbox_button_release_event(GtkWidget *widget,
+						    GdkEventButton *event,
+						    gpointer user_data)
 {
 	switch (GPOINTER_TO_INT(user_data)) {
 	case BOOK_BUTTON:
@@ -727,7 +691,6 @@ gboolean on_up_eventbox_button_release_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -747,10 +710,9 @@ gboolean on_up_eventbox_button_release_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_down_eventbox_button_release_event(GtkWidget * widget,
-					       GdkEventButton * event,
-					       gpointer user_data)
+static gboolean on_down_eventbox_button_release_event(GtkWidget *widget,
+						      GdkEventButton *event,
+						      gpointer user_data)
 {
 	switch (GPOINTER_TO_INT(user_data)) {
 	case BOOK_BUTTON:
@@ -784,8 +746,7 @@ gboolean on_down_eventbox_button_release_event(GtkWidget * widget,
 
 gboolean access_on_up_eventbox_button_release_event(gint element)
 {
-	return on_up_eventbox_button_release_event
-	    (NULL, NULL, GINT_TO_POINTER(element));
+	return on_up_eventbox_button_release_event(NULL, NULL, GINT_TO_POINTER(element));
 }
 
 /******************************************************************************
@@ -806,8 +767,7 @@ gboolean access_on_up_eventbox_button_release_event(gint element)
 
 gboolean access_on_down_eventbox_button_release_event(gint element)
 {
-	return on_down_eventbox_button_release_event
-	    (NULL, NULL, GINT_TO_POINTER(element));
+	return on_down_eventbox_button_release_event(NULL, NULL, GINT_TO_POINTER(element));
 }
 
 /******************************************************************************
@@ -826,127 +786,123 @@ gboolean access_on_down_eventbox_button_release_event(gint element)
  *  void
  */
 
-static
-void _connect_signals(NAVBAR_VERSEKEY navbar)
+static void _connect_signals(NAVBAR_VERSEKEY navbar)
 {
 
-	g_signal_connect((gpointer) navbar.lookup_entry,
+	g_signal_connect((gpointer)navbar.lookup_entry,
 			 "activate", G_CALLBACK(on_entry_activate), NULL);
-	g_signal_connect((gpointer) navbar.button_book_up,
+	g_signal_connect((gpointer)navbar.button_book_up,
 			 "button_release_event",
 			 G_CALLBACK(on_up_eventbox_button_release_event),
 			 GINT_TO_POINTER(BOOK_BUTTON));
-	g_signal_connect((gpointer) navbar.button_book_down,
+	g_signal_connect((gpointer)navbar.button_book_down,
 			 "button_release_event",
 			 G_CALLBACK(on_down_eventbox_button_release_event),
 			 GINT_TO_POINTER(BOOK_BUTTON));
-	g_signal_connect((gpointer) navbar.button_chapter_up,
+	g_signal_connect((gpointer)navbar.button_chapter_up,
 			 "button_release_event",
 			 G_CALLBACK(on_up_eventbox_button_release_event),
 			 GINT_TO_POINTER(CHAPTER_BUTTON));
-	g_signal_connect((gpointer) navbar.button_chapter_down,
+	g_signal_connect((gpointer)navbar.button_chapter_down,
 			 "button_release_event",
 			 G_CALLBACK(on_down_eventbox_button_release_event),
 			 GINT_TO_POINTER(CHAPTER_BUTTON));
-	g_signal_connect((gpointer) navbar.button_verse_up,
+	g_signal_connect((gpointer)navbar.button_verse_up,
 			 "button_release_event",
 			 G_CALLBACK(on_up_eventbox_button_release_event),
 			 GINT_TO_POINTER(VERSE_BUTTON));
-	g_signal_connect((gpointer) navbar.button_verse_down,
+	g_signal_connect((gpointer)navbar.button_verse_down,
 			 "button_release_event",
 			 G_CALLBACK(on_down_eventbox_button_release_event),
 			 GINT_TO_POINTER(VERSE_BUTTON));
 	/*     */
-	g_signal_connect((gpointer) navbar.button_book_up,
+	g_signal_connect((gpointer)navbar.button_book_up,
 			 "enter_notify_event",
 			 G_CALLBACK(on_up_enter_notify_event),
 			 GINT_TO_POINTER(BOOK_BUTTON));
-	g_signal_connect((gpointer) navbar.button_book_up,
+	g_signal_connect((gpointer)navbar.button_book_up,
 			 "leave_notify_event",
 			 G_CALLBACK(on_up_leave_notify_event),
 			 GINT_TO_POINTER(BOOK_BUTTON));
 
-	g_signal_connect((gpointer) navbar.button_book_down,
+	g_signal_connect((gpointer)navbar.button_book_down,
 			 "enter_notify_event",
 			 G_CALLBACK(on_down_enter_notify_event),
 			 GINT_TO_POINTER(BOOK_BUTTON));
-	g_signal_connect((gpointer) navbar.button_book_down,
+	g_signal_connect((gpointer)navbar.button_book_down,
 			 "leave_notify_event",
 			 G_CALLBACK(on_down_leave_notify_event),
 			 GINT_TO_POINTER(BOOK_BUTTON));
 
 	/*    */
-	g_signal_connect((gpointer) navbar.button_chapter_up,
+	g_signal_connect((gpointer)navbar.button_chapter_up,
 			 "enter_notify_event",
 			 G_CALLBACK(on_up_enter_notify_event),
 			 GINT_TO_POINTER(CHAPTER_BUTTON));
-	g_signal_connect((gpointer) navbar.button_chapter_up,
+	g_signal_connect((gpointer)navbar.button_chapter_up,
 			 "leave_notify_event",
 			 G_CALLBACK(on_up_leave_notify_event),
 			 GINT_TO_POINTER(CHAPTER_BUTTON));
 
-	g_signal_connect((gpointer) navbar.button_chapter_down,
+	g_signal_connect((gpointer)navbar.button_chapter_down,
 			 "enter_notify_event",
 			 G_CALLBACK(on_down_enter_notify_event),
 			 GINT_TO_POINTER(CHAPTER_BUTTON));
-	g_signal_connect((gpointer) navbar.button_chapter_down,
+	g_signal_connect((gpointer)navbar.button_chapter_down,
 			 "leave_notify_event",
 			 G_CALLBACK(on_down_leave_notify_event),
 			 GINT_TO_POINTER(CHAPTER_BUTTON));
 
 	/*    */
-	g_signal_connect((gpointer) navbar.button_verse_up,
+	g_signal_connect((gpointer)navbar.button_verse_up,
 			 "enter_notify_event",
 			 G_CALLBACK(on_up_enter_notify_event),
 			 GINT_TO_POINTER(VERSE_BUTTON));
-	g_signal_connect((gpointer) navbar.button_verse_up,
+	g_signal_connect((gpointer)navbar.button_verse_up,
 			 "leave_notify_event",
 			 G_CALLBACK(on_up_leave_notify_event),
 			 GINT_TO_POINTER(VERSE_BUTTON));
 
-	g_signal_connect((gpointer) navbar.button_verse_down,
+	g_signal_connect((gpointer)navbar.button_verse_down,
 			 "enter_notify_event",
 			 G_CALLBACK(on_down_enter_notify_event),
 			 GINT_TO_POINTER(VERSE_BUTTON));
-	g_signal_connect((gpointer) navbar.button_verse_down,
+	g_signal_connect((gpointer)navbar.button_verse_down,
 			 "leave_notify_event",
 			 G_CALLBACK(on_down_leave_notify_event),
 			 GINT_TO_POINTER(VERSE_BUTTON));
 
-	g_signal_connect((gpointer) navbar.button_history_back,
+	g_signal_connect((gpointer)navbar.button_history_back,
 			 "clicked",
 			 G_CALLBACK(on_button_history_back_clicked), NULL);
-	g_signal_connect((gpointer) navbar.button_history_next, "clicked",
+	g_signal_connect((gpointer)navbar.button_history_next, "clicked",
 			 G_CALLBACK(on_button_history_next_clicked), NULL);
-	g_signal_connect((gpointer) navbar.button_history_menu,
+	g_signal_connect((gpointer)navbar.button_history_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_button_press_callback), NULL);
-	g_signal_connect((gpointer) navbar.button_book_menu,
+	g_signal_connect((gpointer)navbar.button_book_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_book_button_press_callback),
 			 NULL);
-	g_signal_connect((gpointer) navbar.button_chapter_menu,
+	g_signal_connect((gpointer)navbar.button_chapter_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_chapter_button_press_callback),
 			 NULL);
-	g_signal_connect((gpointer) navbar.button_verse_menu,
+	g_signal_connect((gpointer)navbar.button_verse_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_verse_button_press_callback),
 			 NULL);
 #ifndef HAVE_GTK_34
-	g_signal_connect((gpointer) navbar.button_verse_menu,
+	g_signal_connect((gpointer)navbar.button_verse_menu,
 			 "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_verse_scroll_event), NULL);
-	g_signal_connect((gpointer) navbar.button_chapter_menu,
+			 G_CALLBACK(on_button_verse_menu_verse_scroll_event), NULL);
+	g_signal_connect((gpointer)navbar.button_chapter_menu,
 			 "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_chapter_scroll_event),
+			 G_CALLBACK(on_button_verse_menu_chapter_scroll_event),
 			 NULL);
-	g_signal_connect((gpointer) navbar.button_book_menu,
+	g_signal_connect((gpointer)navbar.button_book_menu,
 			 "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_book_scroll_event), NULL);
+			 G_CALLBACK(on_button_verse_menu_book_scroll_event), NULL);
 #endif
 }
 
@@ -983,7 +939,7 @@ GtkWidget *gui_navbar_versekey_new(void)
 	g_return_val_if_fail((glade_file != NULL), NULL);
 	XI_message(("%s", glade_file));
 
-	/* build the widget */
+/* build the widget */
 #ifdef USE_GTKBUILDER
 	gxml = gtk_builder_new();
 	gtk_builder_add_from_file(gxml, glade_file, NULL);
@@ -1041,20 +997,17 @@ GtkWidget *gui_navbar_versekey_new(void)
 	    UI_GET_ITEM(gxml, "label_verse");
 #ifdef HAVE_GTK_34
 	eventbox = UI_GET_ITEM(gxml, "eventbox_book");
-	g_signal_connect((gpointer) eventbox, "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_book_scroll_event), NULL);
+	g_signal_connect((gpointer)eventbox, "scroll_event",
+			 G_CALLBACK(on_button_verse_menu_book_scroll_event), NULL);
 
 	eventbox = UI_GET_ITEM(gxml, "eventbox_chapter");
-	g_signal_connect((gpointer) eventbox, "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_chapter_scroll_event),
+	g_signal_connect((gpointer)eventbox, "scroll_event",
+			 G_CALLBACK(on_button_verse_menu_chapter_scroll_event),
 			 NULL);
 
 	eventbox = UI_GET_ITEM(gxml, "eventbox_verse");
-	g_signal_connect((gpointer) eventbox, "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_verse_scroll_event), NULL);
+	g_signal_connect((gpointer)eventbox, "scroll_event",
+			 G_CALLBACK(on_button_verse_menu_verse_scroll_event), NULL);
 #endif
 	_connect_signals(navbar_versekey);
 

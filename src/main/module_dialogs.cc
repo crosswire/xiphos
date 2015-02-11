@@ -44,7 +44,6 @@
 #include "gui/widgets.h"
 #include "gui/about_modules.h"
 
-
 #include "main/navbar_book_dialog.h"
 #include "main/module_dialogs.h"
 #include "main/navbar_versekey.h"
@@ -61,17 +60,18 @@
 
 #include "gui/debug_glib_null.h"
 
-#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
 
 typedef struct _treeitem TreeItem;
-struct _treeitem {
+struct _treeitem
+{
 	gchar *module_name;
 	gchar *item_name;
 	gchar *offset;
 	gboolean is_leaf;
 	gboolean expanded;
-        GdkPixbuf *pixbuf_opened;
-        GdkPixbuf *pixbuf_closed;
+	GdkPixbuf *pixbuf_opened;
+	GdkPixbuf *pixbuf_closed;
 };
 
 enum {
@@ -97,7 +97,7 @@ static GList *list_dialogs;
 /******************************************************************************
  * externs
  */
-extern gboolean gsI_isrunning;	/* information dialog */
+extern gboolean gsI_isrunning; /* information dialog */
 extern gboolean do_display;
 
 extern gboolean valid_scripture_key;
@@ -118,9 +118,9 @@ extern gboolean valid_scripture_key;
  *   void
  */
 
-void main_dialogs_book_heading(DIALOG_DATA * d)
+void main_dialogs_book_heading(DIALOG_DATA *d)
 {
-	BackEnd* be = (BackEnd*)d->backend;
+	BackEnd *be = (BackEnd *)d->backend;
 	SWMgr *mgr = be->get_mgr();
 
 	be->display_mod = mgr->Modules[d->mod_name];
@@ -132,7 +132,6 @@ void main_dialogs_book_heading(DIALOG_DATA * d)
 	vkey->setChapter(0);
 	be->display_mod->display();
 }
-
 
 /******************************************************************************
  * Name
@@ -150,9 +149,9 @@ void main_dialogs_book_heading(DIALOG_DATA * d)
  *   void
  */
 
-void main_dialogs_chapter_heading(DIALOG_DATA * d)
+void main_dialogs_chapter_heading(DIALOG_DATA *d)
 {
-	BackEnd* be = (BackEnd*)d->backend;
+	BackEnd *be = (BackEnd *)d->backend;
 	SWMgr *mgr = be->get_mgr();
 
 	be->display_mod = mgr->Modules[d->mod_name];
@@ -164,7 +163,6 @@ void main_dialogs_chapter_heading(DIALOG_DATA * d)
 	//vkey->Chapter(0);
 	be->display_mod->display();
 }
-
 
 /******************************************************************************
  * Name
@@ -202,7 +200,6 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 	g_string_free(str, TRUE);
 }
 
-
 /******************************************************************************
  * Name
  *   main_dialogs_information_viewer
@@ -220,81 +217,79 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
  *   void
  */
 
-void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
-				     gchar * text, gchar * key,
-		             	     gchar * action ,gchar * type ,
-			     	     gchar * morph_text, gchar * morph)
+void main_dialogs_information_viewer(DIALOG_DATA *d, gchar *mod_name,
+				     gchar *text, gchar *key,
+				     gchar *action, gchar *type,
+				     gchar *morph_text, gchar *morph)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	MOD_FONT *mf = get_font(mod_name);
 
 	g_string_printf(tmp_str,
-		HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color,
-		settings.link_color);
+			HTML_START
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			settings.bible_bg_color, settings.bible_text_color,
+			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
 	if (type) {
-		if (!strcmp(type,"n")) {
+		if (!strcmp(type, "n")) {
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s<hr/></font><br/>",
+					"<font color=\"grey\">%s<hr/></font><br/>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(type,"x")) {
+		if (!strcmp(type, "x")) {
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s<hr/></font><br/>",
+					"<font color=\"grey\">%s<hr/></font><br/>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
+		if (!strcmp(action, "showStrongs")) { //&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<hr/></font><br/>",
-					_("Strongs"),key);
+					"<font color=\"grey\">%s: %s<hr/></font><br/>",
+					_("Strongs"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(action ,"showMorph")) {  //&& !strcmp(type,"Greek")
+		if (!strcmp(action, "showMorph")) { //&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<hr/></font><br/>",
-					_("Morphology"),key);
+					"<font color=\"grey\">%s: %s<hr/></font><br/>",
+					_("Morphology"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
 	}
 
-	if (!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
+	if (!strcmp(action, "showStrongsMorph")) { //&& !strcmp(type,"Greek")
 		g_string_printf(tmp_str,
-			"<font color=\"grey\">%s: %s<hr/></font><br/>",
-				_("Strongs"),key);
+				"<font color=\"grey\">%s: %s<hr/></font><br/>",
+				_("Strongs"), key);
 		str = g_string_append(str, tmp_str->str);
 		g_string_printf(tmp_str,
 				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font)?mf->old_font:"none",
-				(mf->old_font_size)?mf->old_font_size:"+0");
+				(mf->old_font) ? mf->old_font : "none",
+				(mf->old_font_size) ? mf->old_font_size : "+0");
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
 		g_string_printf(tmp_str,
-			"<font color=\"grey\"><br/><br/>%s: %s<hr/></font><br/>",
-					_("Morphology"),morph);
+				"<font color=\"grey\"><br/><br/>%s: %s<hr/></font><br/>",
+				_("Morphology"), morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
 		g_string_printf(tmp_str, " %s<br/>", "</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
 
-
 	} else {
 		g_string_printf(tmp_str,
 				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font)?mf->old_font:"none",
-				(mf->old_font_size)?mf->old_font_size:"+0");
+				(mf->old_font) ? mf->old_font : "none",
+				(mf->old_font_size) ? mf->old_font_size : "+0");
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
 		g_string_printf(tmp_str, " %s", "</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
-
 	}
 
 	HtmlOutput(str->str, sidebar.html_viewer_widget, NULL, NULL);
@@ -302,11 +297,6 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
 }
-
-
-
-
-
 
 /******************************************************************************
  * Name
@@ -325,82 +315,80 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
  *   void
  */
 
-void main_dialog_information_viewer(const gchar * mod_name,
-				    const gchar * text,
-				    const gchar * key,
-				    const gchar * action,
-				    const gchar * type,
-				    const gchar * morph_text,
-				    const gchar * morph,
-				    DIALOG_DATA * d)
+void main_dialog_information_viewer(const gchar *mod_name,
+				    const gchar *text,
+				    const gchar *key,
+				    const gchar *action,
+				    const gchar *type,
+				    const gchar *morph_text,
+				    const gchar *morph,
+				    DIALOG_DATA *d)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
-	MOD_FONT *mf = get_font((gchar*)mod_name);
+	MOD_FONT *mf = get_font((gchar *)mod_name);
 
 	if (!d->previewer)
 		return;
 
 	g_string_printf(tmp_str,
-		HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color,
-		settings.link_color);
+			HTML_START
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			settings.bible_bg_color, settings.bible_text_color,
+			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
 	if (type) {
-		if (!strcmp(type,"n")) {
-			g_string_printf(tmp_str,"<font color=\"grey\">%s<hr/></font><br/>",
+		if (!strcmp(type, "n")) {
+			g_string_printf(tmp_str, "<font color=\"grey\">%s<hr/></font><br/>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(type,"x")) {
-			g_string_printf(tmp_str,"<font color=\"grey\">%s<hr/></font><br/>",
+		if (!strcmp(type, "x")) {
+			g_string_printf(tmp_str, "<font color=\"grey\">%s<hr/></font><br/>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
-			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<hr/></font><br/>",
-					_("Strongs"),key);
+		if (!strcmp(action, "showStrongs")) { //&& !strcmp(type,"Greek")
+			g_string_printf(tmp_str, "<font color=\"grey\">%s: %s<hr/></font><br/>",
+					_("Strongs"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(action ,"showMorph")) {  //&& !strcmp(type,"Greek")
-			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<hr/></font><br/>",
-					_("Morphology"),key);
+		if (!strcmp(action, "showMorph")) { //&& !strcmp(type,"Greek")
+			g_string_printf(tmp_str, "<font color=\"grey\">%s: %s<hr/></font><br/>",
+					_("Morphology"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
 	}
 
-	if (!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
-		g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<hr/></font><br/>",
-				_("Strongs"),key);
+	if (!strcmp(action, "showStrongsMorph")) { //&& !strcmp(type,"Greek")
+		g_string_printf(tmp_str, "<font color=\"grey\">%s: %s<hr/></font><br/>",
+				_("Strongs"), key);
 		str = g_string_append(str, tmp_str->str);
 		g_string_printf(tmp_str,
 				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font)?mf->old_font:"none",
-				(mf->old_font_size)?mf->old_font_size:"+0");
+				(mf->old_font) ? mf->old_font : "none",
+				(mf->old_font_size) ? mf->old_font_size : "+0");
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
-		g_string_printf(tmp_str,"<font color=\"grey\"><br/><br/>%s: %s<hr/></font><br/>",
-					_("Morphology"),morph);
+		g_string_printf(tmp_str, "<font color=\"grey\"><br/><br/>%s: %s<hr/></font><br/>",
+				_("Morphology"), morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
 		g_string_printf(tmp_str, " %s<br/>", "</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
 
-
 	} else {
 		g_string_printf(tmp_str,
 				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font)?mf->old_font:"none",
-				(mf->old_font_size)?mf->old_font_size:"+0");
+				(mf->old_font) ? mf->old_font : "none",
+				(mf->old_font_size) ? mf->old_font_size : "+0");
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
 		g_string_printf(tmp_str, " %s", "</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
-
 	}
 
 	HtmlOutput(str->str, d->previewer, NULL, NULL);
@@ -425,20 +413,19 @@ void main_dialog_information_viewer(const gchar * mod_name,
  *   GtkCTreeNode*
  */
 
-static void add_tree_item(GtkTreeModel * model, TreeItem *item, GtkTreeIter parent)
+static void add_tree_item(GtkTreeModel *model, TreeItem *item, GtkTreeIter parent)
 {
 
 	GtkTreeIter iter;
 
 	gtk_tree_store_append(GTK_TREE_STORE(model), &iter, &parent);
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
-				COL_OPEN_PIXBUF,item->pixbuf_opened,
-				COL_CLOSED_PIXBUF,item->pixbuf_closed,
-				COL_TITLE, item->item_name,
-				COL_BOOK, item->module_name,
-				COL_OFFSET, item->offset,
-				-1);
-
+			   COL_OPEN_PIXBUF, item->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, item->pixbuf_closed,
+			   COL_TITLE, item->item_name,
+			   COL_BOOK, item->module_name,
+			   COL_OFFSET, item->offset,
+			   -1);
 }
 
 /******************************************************************************
@@ -458,8 +445,8 @@ static void add_tree_item(GtkTreeModel * model, TreeItem *item, GtkTreeIter pare
  *   void
  */
 
-void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
-	  unsigned long offset, gboolean is_dialog, DIALOG_DATA * d)
+void main_dialogs_add_children_to_tree(GtkTreeModel *model, GtkTreeIter iter,
+				       unsigned long offset, gboolean is_dialog, DIALOG_DATA *d)
 {
 	gchar buf[256];
 	gchar *tmpbuf;
@@ -479,7 +466,7 @@ void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 		sprintf(buf, "%lu", offset);
 		p_treeitem->offset = buf;
 		tmpbuf = be->treekey_get_local_name(offset);
-		p_treeitem->item_name = (gchar*)tmpbuf;
+		p_treeitem->item_name = (gchar *)tmpbuf;
 		if (be->treekey_has_children(offset)) {
 			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
 			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
@@ -500,7 +487,7 @@ void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 		sprintf(buf, "%lu", offset);
 		p_treeitem->offset = buf;
 		tmpbuf = be->treekey_get_local_name(offset);
-		p_treeitem->item_name = (gchar*)tmpbuf;
+		p_treeitem->item_name = (gchar *)tmpbuf;
 		if (be->treekey_has_children(offset)) {
 			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
 			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
@@ -516,7 +503,6 @@ void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 		free(tmpbuf);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -534,29 +520,27 @@ void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
  *   void
  */
 
-void main_dialogs_add_book_to_tree(GtkWidget * tree, gchar * mod_name,
-			     gboolean is_dialog, DIALOG_DATA * d)
+void main_dialogs_add_book_to_tree(GtkWidget *tree, gchar *mod_name,
+				   gboolean is_dialog, DIALOG_DATA *d)
 {
 	GtkTreeIter iter;
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree));
-	BackEnd *be = (BackEnd *) d->backend;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	gtk_tree_store_append(GTK_TREE_STORE(model), &iter, NULL);
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
-				    COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-				    COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-				    COL_TITLE,d->mod_name,
-				    COL_BOOK,d->mod_name,
-				    COL_OFFSET,NULL,
-				    -1);
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_TITLE, d->mod_name,
+			   COL_BOOK, d->mod_name,
+			   COL_OFFSET, NULL,
+			   -1);
 	be->set_module(d->mod_name);
 	be->set_treekey(0);
 	main_dialogs_add_children_to_tree(model, iter, be->get_treekey_offset(),
-				is_dialog, d);
-
+					  is_dialog, d);
 }
-
 
 /******************************************************************************
  * Name
@@ -575,8 +559,8 @@ void main_dialogs_add_book_to_tree(GtkWidget * tree, gchar * mod_name,
  *   void
  */
 
-void main_dialogs_tree_selection_changed(GtkTreeModel * model,
-	    GtkTreeSelection * selection, gboolean is_dialog, DIALOG_DATA * g)
+void main_dialogs_tree_selection_changed(GtkTreeModel *model,
+					 GtkTreeSelection *selection, gboolean is_dialog, DIALOG_DATA *g)
 {
 	GtkTreeIter selected;
 	GtkTreePath *path;
@@ -584,16 +568,16 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 	gchar *book = NULL;
 	gchar *offset = NULL;
 	unsigned long l_offset;
-	BackEnd *be = (BackEnd *) g->backend;
+	BackEnd *be = (BackEnd *)g->backend;
 
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
 		path = gtk_tree_model_get_path(model, &selected);
 		//tree_level = gtk_tree_path_get_depth(path);
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-					2,&name,
-					3,&book,
-					4,&offset,
-					-1);
+				   2, &name,
+				   3, &book,
+				   4, &offset,
+				   -1);
 		gtk_tree_path_free(path);
 
 		if (offset) {
@@ -602,10 +586,10 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 			be->set_module(book);
 			be->set_treekey(l_offset);
 			settings.book_key = be->treekey_get_local_name(l_offset);
-			if ( !gtk_tree_model_iter_has_child(model, &selected) &&
-				be->treekey_has_children(l_offset)) {
+			if (!gtk_tree_model_iter_has_child(model, &selected) &&
+			    be->treekey_has_children(l_offset)) {
 				main_dialogs_add_children_to_tree(model, selected,
-						l_offset, is_dialog, g);
+								  l_offset, is_dialog, g);
 			}
 			//is_leaf = gtk_tree_model_iter_has_child(model, &selected);
 			be->display_mod->display();
@@ -615,7 +599,6 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 		}
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -633,7 +616,7 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
  *   void
  */
 
-void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
+void main_dialogs_dictionary_entry_changed(DIALOG_DATA *d)
 {
 	gint count = 10, i;
 	gchar *new_key;
@@ -643,8 +626,8 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 	GtkListStore *list_store;
 	GtkTreeIter iter;
 	gint height;
-	gchar * mod_name = d->mod_name;
-	BackEnd *be = (BackEnd*)d->backend;
+	gchar *mod_name = d->mod_name;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	if (!backend->is_module(mod_name))
 		return;
@@ -653,9 +636,8 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 	be->set_module_key(mod_name, d->key);
 	key = be->get_module_key();
 
-
-//	xml_set_value("Xiphos", "keys", "dictionary", key);
-//	settings.dictkey = xml_get_value("keys", "dictionary");
+	//	xml_set_value("Xiphos", "keys", "dictionary", key);
+	//	settings.dictkey = xml_get_value("keys", "dictionary");
 
 	be->set_module_key(mod_name, key);
 	be->display_mod->display();
@@ -663,13 +645,13 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(d->listview));
 	list_store = GTK_LIST_STORE(model);
 
-	if (!firsttime) {   
+	if (!firsttime) {
 #ifdef USE_GTK_3
 		height = gdk_window_get_height(GDK_WINDOW(d->listview));
-#else          
-		gdk_drawable_get_size ((GdkDrawable *)d->listview->window,
-				       NULL,
-				       &height);
+#else
+		gdk_drawable_get_size((GdkDrawable *)d->listview->window,
+				      NULL,
+				      &height);
 #endif
 		count = height / settings.cell_height;
 	}
@@ -695,7 +677,6 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 	firsttime = FALSE;
 }
 
-
 /******************************************************************************
  * Name
  *   main_free_on_destroy
@@ -713,26 +694,25 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
  *   void
  */
 
-void main_free_on_destroy(DIALOG_DATA * d)
+void main_free_on_destroy(DIALOG_DATA *d)
 {
-	list_dialogs = g_list_remove(list_dialogs, (DIALOG_DATA*) d);
-//	g_free(d->ops);
+	list_dialogs = g_list_remove(list_dialogs, (DIALOG_DATA *)d);
+	//	g_free(d->ops);
 	g_free(d->key);
 	g_free(d->mod_name);
 
-		if (d->navbar.module_name)
-			g_string_free(d->navbar.module_name,TRUE);
-		if (d->navbar.key)
-			g_string_free(d->navbar.key,TRUE);
+	if (d->navbar.module_name)
+		g_string_free(d->navbar.module_name, TRUE);
+	if (d->navbar.key)
+		g_string_free(d->navbar.key, TRUE);
 
-	if ((BackEnd*)d->backend) {
-		BackEnd* be = (BackEnd*)d->backend;
+	if ((BackEnd *)d->backend) {
+		BackEnd *be = (BackEnd *)d->backend;
 		delete be;
 		be = NULL;
 	}
 	g_free(d);
 }
-
 
 /******************************************************************************
  * Name
@@ -750,16 +730,16 @@ void main_free_on_destroy(DIALOG_DATA * d)
  *   void
  */
 
-void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
+void main_dialog_goto_bookmark(const gchar *module, const gchar *key)
 {
 	DIALOG_DATA *t = NULL;
 	GList *tmp = NULL;
 
 	tmp = g_list_first(list_dialogs);
 	while (tmp != NULL) {
-		t = (DIALOG_DATA *) tmp->data;
+		t = (DIALOG_DATA *)tmp->data;
 		if (!strcmp(t->mod_name, module)) {
-			BackEnd* be = (BackEnd*)t->backend;
+			BackEnd *be = (BackEnd *)t->backend;
 			if (t->mod_type == BOOK_TYPE) {
 				t->offset = atoi(key);
 				be->set_treekey(t->offset);
@@ -769,7 +749,7 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 				t->key = g_strdup(key);
 				be->set_key(t->key);
 			}
-			if (t->mod_type == TEXT_TYPE ||	t->mod_type == COMMENTARY_TYPE)
+			if (t->mod_type == TEXT_TYPE || t->mod_type == COMMENTARY_TYPE)
 				be->display_mod->display();
 			gdk_window_raise(GDK_WINDOW(t->dialog));
 			return;
@@ -777,8 +757,8 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 		tmp = g_list_next(tmp);
 	}
 
-	t = main_dialogs_open((gchar*)module,key);
-	BackEnd* be = (BackEnd*)t->backend;
+	t = main_dialogs_open((gchar *)module, key);
+	BackEnd *be = (BackEnd *)t->backend;
 	if (t->mod_type == BOOK_TYPE) {
 		t->offset = atoi(key);
 		be->set_treekey(t->offset);
@@ -790,7 +770,6 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 	}
 	be->display_mod->display();
 }
-
 
 /******************************************************************************
  * Name
@@ -817,7 +796,6 @@ void main_dialogs_setup(void)
 	dlg_percom = NULL;
 }
 
-
 /******************************************************************************
  * Name
  *   main_keep_bibletext_dialog_in_sync
@@ -834,16 +812,16 @@ void main_dialogs_setup(void)
  *   void
  */
 
-void main_keep_bibletext_dialog_in_sync(gchar * key)
+void main_keep_bibletext_dialog_in_sync(gchar *key)
 {
 	GList *tmp = NULL;
-	gchar * url;
+	gchar *url;
 	tmp = g_list_first(list_dialogs);
 	stop_window_sync++;
 	while (tmp != NULL) {
-		DIALOG_DATA * t = (DIALOG_DATA*) tmp->data;
+		DIALOG_DATA *t = (DIALOG_DATA *)tmp->data;
 		if (t->sync) {
-			url = g_strdup_printf("sword://%s/%s",t->mod_name, key);
+			url = g_strdup_printf("sword://%s/%s", t->mod_name, key);
 			main_dialogs_url_handler(t, url, TRUE);
 			g_free(url);
 		}
@@ -851,7 +829,6 @@ void main_keep_bibletext_dialog_in_sync(gchar * key)
 	}
 	stop_window_sync--;
 }
-
 
 /******************************************************************************
  * Name
@@ -872,9 +849,9 @@ void main_keep_bibletext_dialog_in_sync(gchar * key)
 void main_dialogs_shutdown(void)
 {
 	GList *tmp = list_dialogs;
-	XI_warning(("items = %d",g_list_length(tmp)));
+	XI_warning(("items = %d", g_list_length(tmp)));
 	while (tmp != NULL) {
-		DIALOG_DATA *t = (DIALOG_DATA*) tmp->data;
+		DIALOG_DATA *t = (DIALOG_DATA *)tmp->data;
 		bible_freed = TRUE;
 		dialog_freed = TRUE;
 		/*
@@ -885,12 +862,12 @@ void main_dialogs_shutdown(void)
 		/*
 		 * free each DIALOG_DATA item created
 		 */
-		if ((BackEnd*)t->backend) {
-			BackEnd* be = (BackEnd*)t->backend;
+		if ((BackEnd *)t->backend) {
+			BackEnd *be = (BackEnd *)t->backend;
 			delete be;
 		}
-		g_string_free(t->navbar.module_name,TRUE);
-		g_string_free(t->navbar.key,TRUE);
+		g_string_free(t->navbar.module_name, TRUE);
+		g_string_free(t->navbar.key, TRUE);
 		g_free(t->mod_name);
 		g_free(t->key);
 		g_free(t);
@@ -898,7 +875,6 @@ void main_dialogs_shutdown(void)
 	}
 	g_list_free(list_dialogs);
 }
-
 
 /******************************************************************************
  * Name
@@ -917,65 +893,64 @@ void main_dialogs_shutdown(void)
  *   gint
  */
 
-static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passage,
-		const gchar * type, const gchar * value, gboolean clicked)
+static gint show_note(DIALOG_DATA *d, const gchar *module, const gchar *passage,
+		      const gchar *type, const gchar *value, gboolean clicked)
 {
 	gchar *tmpbuf = NULL;
 	gchar *buf = NULL;
 	GString *str = g_string_new(NULL);
 	GList *tmp = NULL;
 	gint i = 0;
-	BackEnd* be = (BackEnd*)d->backend;
+	BackEnd *be = (BackEnd *)d->backend;
 	RESULTS *list_item;
 
-
-	if (!be->is_module((gchar*)module))
+	if (!be->is_module((gchar *)module))
 		module = settings.MainWindowModule;
 
 	if (passage && (strlen(passage) < 5))
 		passage = d->key;
 
-	if (strstr(type,"x") && clicked) {
-		be->set_module_key((gchar*)module, (gchar*)passage);
+	if (strstr(type, "x") && clicked) {
+		be->set_module_key((gchar *)module, (gchar *)passage);
 		tmpbuf = be->get_entry_attribute("Footnote",
-							 (gchar*)value,
-							"refList");
+						 (gchar *)value,
+						 "refList");
 		if (tmpbuf) {
 			main_display_verse_list_in_sidebar(d->key,
-					  (gchar*)module,
-					  tmpbuf);
+							   (gchar *)module,
+							   tmpbuf);
 			g_free(tmpbuf);
 		}
-	} else if (strstr(type,"n") && !clicked) {
-		be->set_module_key((gchar*)module, (gchar*)passage);
+	} else if (strstr(type, "n") && !clicked) {
+		be->set_module_key((gchar *)module, (gchar *)passage);
 		tmpbuf = be->get_entry_attribute("Footnote",
-						(gchar*)value,
-						"body");
-		buf = be->render_this_text((gchar*)module,(gchar*)tmpbuf);
-		if (tmpbuf) g_free(tmpbuf);
+						 (gchar *)value,
+						 "body");
+		buf = be->render_this_text((gchar *)module, (gchar *)tmpbuf);
+		if (tmpbuf)
+			g_free(tmpbuf);
 		if (buf) {
 			main_dialog_information_viewer(module,
-					buf,
-					value,
-					"showNote",
-					type,
-					NULL,
-					NULL,
-					d);
+						       buf,
+						       value,
+						       "showNote",
+						       type,
+						       NULL,
+						       NULL,
+						       d);
 			g_free(buf);
 		}
-	} else if (strstr(type,"x") && !clicked) {
-		be->set_module_key((gchar*)module, (gchar*)passage);
+	} else if (strstr(type, "x") && !clicked) {
+		be->set_module_key((gchar *)module, (gchar *)passage);
 		tmpbuf = be->get_entry_attribute("Footnote",
-						(gchar*)value,
-						"refList");
-
+						 (gchar *)value,
+						 "refList");
 
 		list_of_verses = g_list_first(list_of_verses);
 		if (list_of_verses) {
 			GList *chaser = list_of_verses;
 			while (chaser) {
-				list_item = (RESULTS*)chaser->data;
+				list_item = (RESULTS *)chaser->data;
 				g_free(list_item->module);
 				g_free(list_item->key);
 				g_free(list_item);
@@ -988,48 +963,50 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 		tmp = be->parse_verse_list(d->mod_name, tmpbuf, d->key);
 		while (tmp != NULL) {
 			buf = g_strdup_printf(
-				"<a href=\"sword://%s/%s\">"
-				"<font color=\"%s\">%s,</font></a><br/>",
-				(gchar*)module,
-				(const char *) tmp->data,
-				settings.bible_text_color,
-				(const char *) tmp->data);
-			str = g_string_append(str,buf);
-			if (buf) g_free(buf);
+			    "<a href=\"sword://%s/%s\">"
+			    "<font color=\"%s\">%s,</font></a><br/>",
+			    (gchar *)module,
+			    (const char *)tmp->data,
+			    settings.bible_text_color,
+			    (const char *)tmp->data);
+			str = g_string_append(str, buf);
+			if (buf)
+				g_free(buf);
 			buf = NULL;
 			++i;
-			g_free((char *) tmp->data);
+			g_free((char *)tmp->data);
 			tmp = g_list_next(tmp);
 		}
 		g_list_free(tmp);
 
 		buf = g_strdup_printf(
-				"<a href=\"sword://%s/%s\">"
-				"<font color=\"%s\">%s%s</font></a><br/>",
-				(gchar*)module,
-				d->key,
-				settings.bible_text_color,
-				_("Back to "),
-				d->key);
-		str = g_string_append(str,buf);
-		if (buf) g_free(buf);
+		    "<a href=\"sword://%s/%s\">"
+		    "<font color=\"%s\">%s%s</font></a><br/>",
+		    (gchar *)module,
+		    d->key,
+		    settings.bible_text_color,
+		    _("Back to "),
+		    d->key);
+		str = g_string_append(str, buf);
+		if (buf)
+			g_free(buf);
 
-		if (tmpbuf) g_free(tmpbuf);
+		if (tmpbuf)
+			g_free(tmpbuf);
 		if (str) {
 			main_dialog_information_viewer(module,
-					str->str,
-					value,
-					"showNote",
-					type,
-					NULL,
-					NULL,
-					d);
+						       str->str,
+						       value,
+						       "showNote",
+						       type,
+						       NULL,
+						       NULL,
+						       d);
 		}
 	}
 	g_string_free(str, 1);
 	return 1;
 }
-
 
 /******************************************************************************
  * Name
@@ -1048,19 +1025,18 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
  *   gint
  */
 
- static gint show_morph(DIALOG_DATA * d, const gchar * type,
-			const gchar * value, gboolean clicked)
+static gint show_morph(DIALOG_DATA *d, const gchar *type,
+		       const gchar *value, gboolean clicked)
 {
 	gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	static GtkWidget *dlg;
 
+	BackEnd *be = (BackEnd *)d->backend;
 
-	BackEnd* be = (BackEnd*)d->backend;
-
-	if (!strcmp(type,"Greek") || strstr(type,"x-Robinson")  || strstr(type,"robinson")) {
+	if (!strcmp(type, "Greek") || strstr(type, "x-Robinson") || strstr(type, "robinson")) {
 		if (be->is_module("Robinson"))
-			modbuf = (char*)"Robinson";
+			modbuf = (char *)"Robinson";
 	}
 	if (clicked) {
 		if (!gsI_isrunning)
@@ -1070,27 +1046,25 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 
 		gui_display_mod_and_key(modbuf, value);
 		gtk_window_set_title(GTK_WINDOW(dialog_display_info),
-		     modbuf);
+				     modbuf);
 	} else {
-		mybuf = main_get_rendered_text(modbuf, (gchar*)value);
+		mybuf = main_get_rendered_text(modbuf, (gchar *)value);
 		if (mybuf) {
 			main_dialog_information_viewer(modbuf,
-					mybuf,
-					value,
-					"showMorph",
-					type,
-					NULL,
-					NULL,
-					d);
+						       mybuf,
+						       value,
+						       "showMorph",
+						       type,
+						       NULL,
+						       NULL,
+						       d);
 			g_free(mybuf);
 		}
 	}
 	return 1;
-
 }
 
-
- /******************************************************************************
+/******************************************************************************
  * Name
  *   show_strongs
  *
@@ -1107,23 +1081,23 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
  *   gint
  */
 
-static gint show_strongs(DIALOG_DATA * t, const gchar * type,
-			const gchar * value, gboolean clicked)
+static gint show_strongs(DIALOG_DATA *t, const gchar *type,
+			 const gchar *value, gboolean clicked)
 {
 	const gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	static GtkWidget *dlg;
 
-	if (!strncmp(t->mod_name,"NASB",4)) {
-		if (!strcmp(type,"Greek"))
+	if (!strncmp(t->mod_name, "NASB", 4)) {
+		if (!strcmp(type, "Greek"))
 			modbuf = "NASGreek";
 		else
 			modbuf = "NASHebrew";
 
 	} else {
-		if (!strcmp(type,"Greek"))
+		if (!strcmp(type, "Greek"))
 			modbuf = settings.lex_greek;
-		else if (!strcmp(type,"Hebrew"))
+		else if (!strcmp(type, "Hebrew"))
 			modbuf = settings.lex_hebrew;
 	}
 
@@ -1136,23 +1110,22 @@ static gint show_strongs(DIALOG_DATA * t, const gchar * type,
 		gui_display_mod_and_key(modbuf, value);
 		gtk_window_set_title(GTK_WINDOW(dialog_display_info), modbuf);
 	} else {
-		mybuf = main_get_rendered_text((gchar*)modbuf, (gchar*)value);
+		mybuf = main_get_rendered_text((gchar *)modbuf, (gchar *)value);
 		if (mybuf) {
 			main_dialog_information_viewer(
-					modbuf,
-					mybuf,
-					value,
-					"showStrongs",
-					type,
-					NULL,
-					NULL,
-					t);
+			    modbuf,
+			    mybuf,
+			    value,
+			    "showStrongs",
+			    type,
+			    NULL,
+			    NULL,
+			    t);
 			g_free(mybuf);
 		}
 	}
 	return 1;
 }
-
 
 /******************************************************************************
  * Name
@@ -1173,19 +1146,18 @@ static gint show_strongs(DIALOG_DATA * t, const gchar * type,
  *   gint
  */
 
-static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
+static gint sword_uri(DIALOG_DATA *t, const gchar *url, gboolean clicked)
 {
 	gchar *module = NULL;
 	gchar *key = NULL;
 	gchar **work_buf = NULL;
 
-	BackEnd* be = (BackEnd*)t->backend;
+	BackEnd *be = (BackEnd *)t->backend;
 
 	if (!clicked)
 		return 0;
 
-
-	work_buf = g_strsplit (url,"/",4);
+	work_buf = g_strsplit(url, "/", 4);
 	if (!work_buf[MODULE] && !work_buf[KEY]) {
 		g_strfreev(work_buf);
 		return 0;
@@ -1199,7 +1171,7 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	if (strlen(work_buf[KEY]) < 5)
 		key = g_strdup(t->key);
 	else
-		key =g_strdup( work_buf[KEY]);
+		key = g_strdup(work_buf[KEY]);
 
 	if (t->key)
 		g_free(t->key);
@@ -1212,11 +1184,11 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	int mtype = be->module_type(t->mod_name);
 	if ((mtype == TEXT_TYPE) || (mtype == COMMENTARY_TYPE)) {
 		t->navbar.valid_key = valid_scripture_key =
-			main_is_Bible_key(t->mod_name, key);
+		    main_is_Bible_key(t->mod_name, key);
 	}
 	be->set_module_key(t->mod_name, t->key);
 	be->display_mod->display();
-	valid_scripture_key = TRUE;	// leave nice for future use.
+	valid_scripture_key = TRUE; // leave nice for future use.
 	if (t->navbar.module_name)
 		main_navbar_versekey_set(t->navbar, t->key);
 
@@ -1224,11 +1196,10 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	g_free(key);
 	g_strfreev(work_buf);
 	return 1;
-
 }
 
-static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar * value,
-			 const gchar * morph, gboolean clicked)
+static gint show_strongs_morph(DIALOG_DATA *d, const gchar *type, const gchar *value,
+			       const gchar *morph, gboolean clicked)
 {
 	const gchar *modbuf = NULL;
 	const gchar *morph_mod = NULL;
@@ -1236,13 +1207,13 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
 	gchar *morph_buf = NULL;
 	static GtkWidget *dlg;
 
-	if (!strncmp(d->mod_name,"NASB",4)) {
-		if (!strcmp(type,"Greek"))
+	if (!strncmp(d->mod_name, "NASB", 4)) {
+		if (!strcmp(type, "Greek"))
 			modbuf = "NASGreek";
 		else
 			modbuf = "NASHebrew";
 	} else {
-		if (!strcmp(type,"Greek")) {
+		if (!strcmp(type, "Greek")) {
 			modbuf = settings.lex_greek;
 			if (backend->is_module("Robinson"))
 				morph_mod = "Robinson";
@@ -1256,31 +1227,31 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
 		else
 			gtk_widget_show(dlg);
 
-		gui_display_mod_and_key(modbuf, (gchar*)value);
+		gui_display_mod_and_key(modbuf, (gchar *)value);
 		gtk_window_set_title(GTK_WINDOW(dialog_display_info),
-		     modbuf);
+				     modbuf);
 	} else {
 		strongs_buf =
-		    main_get_rendered_text((gchar*)modbuf, (gchar*)value);
+		    main_get_rendered_text((gchar *)modbuf, (gchar *)value);
 		morph_buf =
-		    main_get_rendered_text((gchar*)morph_mod, (gchar*)morph);
+		    main_get_rendered_text((gchar *)morph_mod, (gchar *)morph);
 		if (strongs_buf) {
 			main_dialog_information_viewer(
-					modbuf,
-					strongs_buf,
-					value,
-					"showStrongs",
-					type,
-					morph_buf,
-					morph,
-					d);
+			    modbuf,
+			    strongs_buf,
+			    value,
+			    "showStrongs",
+			    type,
+			    morph_buf,
+			    morph,
+			    d);
 			g_free(strongs_buf);
-			if (morph_buf) g_free(morph_buf);
+			if (morph_buf)
+				g_free(morph_buf);
 		}
 	}
 	return 1;
 }
-
 
 /******************************************************************************
  * Name
@@ -1299,22 +1270,21 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
  *   gint
  */
 
- static gint show_mod_info(const gchar * module, const gchar * description,
-						gboolean clicked)
+static gint show_mod_info(const gchar *module, const gchar *description,
+			  gboolean clicked)
 {
 	if (clicked) {
-		XI_print(("module = %s\n",module));
-		gui_display_about_module_dialog((gchar*)module);
+		XI_print(("module = %s\n", module));
+		gui_display_about_module_dialog((gchar *)module);
 	} else {
 		/* some mod descriptions contain fun(ny) characters */
 		GString *desc_clean = hex_decode(description);
 		XI_print(("description = %s\n", desc_clean->str));
-		gui_set_statusbar (desc_clean->str);
+		gui_set_statusbar(desc_clean->str);
 		g_string_free(desc_clean, TRUE);
 	}
 	return 1;
 }
-
 
 /******************************************************************************
  * Name
@@ -1332,7 +1302,7 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
  *   gint
  */
 
-static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
+static gint show_ref(const gchar *module, const gchar *list, gboolean clicked)
 {
 	if (!clicked)
 		return 1;
@@ -1340,73 +1310,79 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
 	if (!backend->is_module(module))
 		module = settings.MainWindowModule;
 	main_display_verse_list_in_sidebar(settings.currentverse,
-						  (gchar*)module,
-						  (gchar*)list);
+					   (gchar *)module,
+					   (gchar *)list);
 	return 1;
 }
 
-static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
+static gint new_url_handler(DIALOG_DATA *t, const gchar *url, gboolean clicked)
 {
 
-	gchar* action = NULL;
-	gchar* type = NULL;
-	gchar* value = NULL;
-	gchar* module = NULL;
-	gchar* passage = NULL;
-	gchar* strongs = NULL;
-	gchar* morph = NULL;
-	URL* m_url;
+	gchar *action = NULL;
+	gchar *type = NULL;
+	gchar *value = NULL;
+	gchar *module = NULL;
+	gchar *passage = NULL;
+	gchar *strongs = NULL;
+	gchar *morph = NULL;
+	URL *m_url;
 
-	XI_message(("new_url_handler url = %s",url));
-	m_url = new URL((const char*)url);
+	XI_message(("new_url_handler url = %s", url));
+	m_url = new URL((const char *)url);
 	action = g_strdup(m_url->getParameterValue("action"));
-	type = g_strdup((gchar*)m_url->getParameterValue("type"));
-	value = g_strdup((gchar*)m_url->getParameterValue("value"));
-	morph = g_strdup((gchar*)m_url->getParameterValue("morph"));
-	strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
+	type = g_strdup((gchar *)m_url->getParameterValue("type"));
+	value = g_strdup((gchar *)m_url->getParameterValue("value"));
+	morph = g_strdup((gchar *)m_url->getParameterValue("morph"));
+	strongs = g_strdup((gchar *)m_url->getParameterValue("lemma"));
 
-	XI_message(("action = %s",action));
-	XI_message(("type = %s",type));
-	XI_message(("value = %s",value));
+	XI_message(("action = %s", action));
+	XI_message(("type = %s", type));
+	XI_message(("value = %s", value));
 
-	if (strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
-		show_strongs_morph(t, type,strongs,morph,clicked);
+	if (strlen(strongs) >= 1 && strlen(morph) >= 1) {
+		show_strongs_morph(t, type, strongs, morph, clicked);
 	} else if (strlen(strongs) >= 1 && strlen(morph) < 1) {
-		show_strongs(t, type,strongs,clicked);
+		show_strongs(t, type, strongs, clicked);
 	}
 
-	if (!strcmp(action,"showStrongs")) {
+	if (!strcmp(action, "showStrongs")) {
 		show_strongs(t, type, value, clicked);
 	}
 
 	if (!strcmp(action, "showModInfo")) {
-			module = g_strdup(m_url->getParameterValue("module"));
-			show_mod_info(module, value, clicked);
-			if (module) g_free(module);
+		module = g_strdup(m_url->getParameterValue("module"));
+		show_mod_info(module, value, clicked);
+		if (module)
+			g_free(module);
 	}
 
-
-	if (!strcmp(action,"showMorph")) {
+	if (!strcmp(action, "showMorph")) {
 		show_morph(t, type, value, clicked);
 	}
 
-	if (!strcmp(action,"showNote")) {
+	if (!strcmp(action, "showNote")) {
 		module = g_strdup(m_url->getParameterValue("module"));
-		passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
+		passage = g_strdup((gchar *)m_url->getParameterValue("passage"));
 		show_note(t, module, passage, type, value, clicked);
-		if (module) g_free(module);
-		if (passage) g_free(passage);
+		if (module)
+			g_free(module);
+		if (passage)
+			g_free(passage);
 	}
 
-	if (!strcmp(action,"showRef")) {
+	if (!strcmp(action, "showRef")) {
 		module = g_strdup(m_url->getParameterValue("module"));
-		show_ref (module,value,clicked);
-		if (module) g_free(module);
+		show_ref(module, value, clicked);
+		if (module)
+			g_free(module);
 	}
 
-	if (action) g_free(action);
-	if (type) g_free(type);
-	if (value) g_free(value);
+	if (action)
+		g_free(action);
+	if (type)
+		g_free(type);
+	if (value)
+		g_free(value);
 	return 1;
 }
 
@@ -1426,20 +1402,21 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
  *   gint
  */
 
-gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
+gint main_dialogs_url_handler(DIALOG_DATA *t, const gchar *url, gboolean clicked)
 {
 	static int handling_url = FALSE;
 	gint retval = 0;
 
-	if (handling_url) return retval;
+	if (handling_url)
+		return retval;
 	handling_url = TRUE;
 
-	XI_message(("main_dialogs_url_handler url = %s",url));
+	XI_message(("main_dialogs_url_handler url = %s", url));
 
 	if (strstr(url, "sword://") ||
 	    strstr(url, "bible://")) {
-		if ((settings.special_anchor = strchr((gchar*)url, '#')) ||	/* thml */
-		    (settings.special_anchor = strchr((gchar*)url, '!')))	/* osisref */
+		if ((settings.special_anchor = strchr((gchar *)url, '#')) || /* thml */
+		    (settings.special_anchor = strchr((gchar *)url, '!')))   /* osisref */
 			*(settings.special_anchor++) = '\0';
 
 		GString *url_clean = hex_decode(url);
@@ -1448,9 +1425,9 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 		retval = sword_uri(t, url_clean->str, clicked);
 		g_string_free(url_clean, TRUE);
 	}
-	if (strstr(url,"passagestudy.jsp") || strstr(url,"xiphos.url")) {    
+	if (strstr(url, "passagestudy.jsp") || strstr(url, "xiphos.url")) {
 		handling_url = FALSE;
-		return new_url_handler(t,url,clicked);
+		return new_url_handler(t, url, clicked);
 	}
 	/*if (strstr(url,"sword://"))
 		return sword_uri(t, url, clicked);*/
@@ -1458,7 +1435,6 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 	handling_url = FALSE;
 	return retval;
 }
-
 
 /******************************************************************************
  * Name
@@ -1476,7 +1452,7 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
  *   void
  */
 
-DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
+DIALOG_DATA *main_dialogs_open(const gchar *mod_name, const gchar *key)
 {
 	BackEnd *be;
 	DIALOG_DATA *t = NULL;
@@ -1489,8 +1465,8 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	type = backend->module_type(mod_name);
 
 	t = g_new0(DIALOG_DATA, 1);
-	t->backend = (BackEnd*) new BackEnd();
-	be = (BackEnd*)t->backend;
+	t->backend = (BackEnd *)new BackEnd();
+	be = (BackEnd *)t->backend;
 
 	t->navbar.module_name = NULL;
 	t->editor = NULL;
@@ -1500,8 +1476,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	t->is_dialog = TRUE;
 	t->mod_name = g_strdup(mod_name);
 	t->is_rtol = FALSE;
-	if ((direction = be->get_config_entry(t->mod_name, (char*)"Direction"))
-					!= NULL) {
+	if ((direction = be->get_config_entry(t->mod_name, (char *)"Direction")) != NULL) {
 		if (!strcmp(direction, "RtoL"))
 			t->is_rtol = TRUE;
 	}
@@ -1519,27 +1494,27 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			t->key = g_strdup(settings.currentverse);
 		dlg_bible = t;
 		t->navbar.module_name = g_string_new(mod_name);
-		t->navbar.key =  g_string_new(settings.currentverse);
+		t->navbar.key = g_string_new(settings.currentverse);
 		break;
 
 	case COMMENTARY_TYPE:
 	case PERCOM_TYPE:
 		t->mod_type = COMMENTARY_TYPE;
 		gui_create_commentary_dialog(t, FALSE);
-		be->entryDisplay = new DialogEntryDisp(t->html,  t, be);
+		be->entryDisplay = new DialogEntryDisp(t->html, t, be);
 		be->init_SWORD(1);
 		if (key)
 			t->key = g_strdup(key);
 		else
 			t->key = g_strdup(settings.currentverse);
 		t->navbar.module_name = g_string_new(mod_name);
-		t->navbar.key =  g_string_new(settings.currentverse);
+		t->navbar.key = g_string_new(settings.currentverse);
 		break;
 
 	case DICTIONARY_TYPE:
 		t->mod_type = DICTIONARY_TYPE;
 		gui_create_dictlex_dialog(t);
-		be->entryDisplay = new DialogEntryDisp(t->html,  t, be);
+		be->entryDisplay = new DialogEntryDisp(t->html, t, be);
 		be->init_SWORD(1);
 
 		if (key)
@@ -1553,16 +1528,14 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		time_t curtime;
 		struct tm *loctime;
 		char *feature;
-		if ((feature = (char *)be->get_mgr()->
-					getModule(mod_name)->
-					getConfigEntry("Feature")) &&
+		if ((feature = (char *)be->get_mgr()->getModule(mod_name)->getConfigEntry("Feature")) &&
 		    !strcmp(feature, "DailyDevotion")) {
-			if ((strlen(t->key) != 5) ||		// blunt tests.
+			if ((strlen(t->key) != 5) || // blunt tests.
 			    (t->key[0] < '0') || (t->key[0] > '9') ||
 			    (t->key[1] < '0') || (t->key[1] > '9') ||
-			    (t->key[2] != '.')                     ||
+			    (t->key[2] != '.') ||
 			    (t->key[3] < '0') || (t->key[3] > '9') ||
-			    (t->key[4] < '0') || (t->key[4] > '9')) {	// not MM.DD
+			    (t->key[4] < '0') || (t->key[4] > '9')) { // not MM.DD
 				curtime = time(NULL);
 				loctime = localtime(&curtime);
 				strftime(buf, 10, "%m.%d", loctime);
@@ -1576,7 +1549,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	case PRAYERLIST_TYPE:
 		t->mod_type = BOOK_TYPE;
 		gui_create_gbs_dialog(t);
-		be->entryDisplay = new DialogEntryDisp(t->html,  t, be);
+		be->entryDisplay = new DialogEntryDisp(t->html, t, be);
 		be->init_SWORD(1);
 		t->key = NULL;
 		if (key)
@@ -1587,19 +1560,19 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	}
 
 	gtk_widget_show(t->dialog);
-	list_dialogs = g_list_append(list_dialogs, (DIALOG_DATA *) t);
+	list_dialogs = g_list_append(list_dialogs, (DIALOG_DATA *)t);
 	be->set_module(t->mod_name);
 	if (type == BOOK_TYPE) {
 		main_dialogs_add_book_to_tree(t->tree, t->mod_name,
-			     TRUE, t);
+					      TRUE, t);
 		be->set_treekey(t->offset);
 		main_setup_navbar_book_dialog(t);
-		XI_message(("offset = %ld",t->offset));
+		XI_message(("offset = %ld", t->offset));
 	} else
 		be->set_key(t->key);
 
-	if (be->get_config_entry(t->mod_name, (char*)"CipherKey")) {
-		t->cipher_old = be->get_config_entry(t->mod_name, (char*)"CipherKey");
+	if (be->get_config_entry(t->mod_name, (char *)"CipherKey")) {
+		t->cipher_old = be->get_config_entry(t->mod_name, (char *)"CipherKey");
 		t->is_locked = strlen(t->cipher_old);
 	} else {
 		t->is_locked = 0;
@@ -1611,7 +1584,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	    (type != DICTIONARY_TYPE)) {
 		valid_scripture_key = main_is_Bible_key(t->mod_name, t->key);
 		be->display_mod->display();
-		valid_scripture_key = TRUE;	// leave nice for future use.
+		valid_scripture_key = TRUE; // leave nice for future use.
 		bible_apply_change = TRUE;
 	}
 	if (type == TEXT_TYPE)
@@ -1620,10 +1593,10 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	if ((type == COMMENTARY_TYPE) ||
 	    (type == PERCOM_TYPE) ||
 	    (type == TEXT_TYPE))
-		main_navbar_versekey_set(t->navbar, (char*)t->key);
+		main_navbar_versekey_set(t->navbar, (char *)t->key);
 
 	if (type == DICTIONARY_TYPE)
-		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);
+		gtk_entry_set_text(GTK_ENTRY(t->entry), t->key);
 	return t;
 }
 

@@ -24,7 +24,7 @@
 
 #include <gtk/gtk.h>
 
-void gui_find_dlg(GtkWidget * htmlwidget, gchar * mod_name,
-		  gboolean regular, gchar * text);
+void gui_find_dlg(GtkWidget *htmlwidget, gchar *mod_name,
+		  gboolean regular, gchar *text);
 
 #endif

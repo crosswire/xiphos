@@ -21,7 +21,7 @@
 
 #include "xiphos_html.h"
 
-XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog,
+XiphosHtml *xiphos_html_new(DIALOG_DATA *dialog, gboolean is_dialog,
 			    gint pane)
 {
 	XiphosHtml *html;

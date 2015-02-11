@@ -33,7 +33,8 @@
 
 typedef struct _find_dialog FIND_DIALOG;
 
-struct _find_dialog {
+struct _find_dialog
+{
 	GtkWidget *dialog;
 	GtkWidget *htmlwidget;
 	GtkWidget *entry;
@@ -47,7 +48,6 @@ struct _find_dialog {
 };
 
 static FIND_DIALOG *dialog;
-
 
 /******************************************************************************
  * Name
@@ -65,13 +65,12 @@ static FIND_DIALOG *dialog;
  *   void
  */
 
-static void dialog_destroy(GObject * object, gpointer data)
+static void dialog_destroy(GObject *object, gpointer data)
 {
 	g_free(dialog);
 	dialog = NULL;
 	XI_print(("\nall done\n"));
 }
-
 
 /******************************************************************************
  * Name
@@ -89,14 +88,13 @@ static void dialog_destroy(GObject * object, gpointer data)
  *   void
  */
 
-static void find_clicked(GtkButton * button, FIND_DIALOG * d)
+static void find_clicked(GtkButton *button, FIND_DIALOG *d)
 {
-	gchar *text = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->entry));
+	gchar *text = (gchar *)gtk_entry_get_text(GTK_ENTRY(d->entry));
 	sprintf(settings.findText, "%s", text);
 
-	XIPHOS_HTML_FIND((void *) d->htmlwidget, text);
+	XIPHOS_HTML_FIND((void *)d->htmlwidget, text);
 }
-
 
 /******************************************************************************
  * Name
@@ -114,12 +112,11 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
  *   void
  */
 
-static void next_clicked(GtkButton * button, FIND_DIALOG * d)
+static void next_clicked(GtkButton *button, FIND_DIALOG *d)
 {
-	XIPHOS_HTML_FIND_AGAIN((void *) d->htmlwidget, 1);
+	XIPHOS_HTML_FIND_AGAIN((void *)d->htmlwidget, 1);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d->backward), 0);
 }
-
 
 /******************************************************************************
  * Name
@@ -137,11 +134,10 @@ static void next_clicked(GtkButton * button, FIND_DIALOG * d)
  *   void
  */
 
-static void close_clicked(GtkButton * button, FIND_DIALOG * d)
+static void close_clicked(GtkButton *button, FIND_DIALOG *d)
 {
 	gtk_widget_destroy(d->dialog);
 }
-
 
 /******************************************************************************
  * Name
@@ -159,7 +155,7 @@ static void close_clicked(GtkButton * button, FIND_DIALOG * d)
  *   void
  */
 
-static void create_find_dialog(GtkWidget * htmlwidget)
+static void create_find_dialog(GtkWidget *htmlwidget)
 {
 	GtkWidget *dialog_vbox29;
 	GtkWidget *vbox45;
@@ -177,10 +173,9 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 
 	//sprintf(title, "%s - %s", settings.program_title, _("Find"));
 
-	dialog = g_new(FIND_DIALOG, 1);	/* must be freed */
+	dialog = g_new(FIND_DIALOG, 1); /* must be freed */
 	dialog->regular = FALSE;
 	dialog->htmlwidget = htmlwidget;
-
 
 	dialog->dialog = gtk_dialog_new();
 	g_object_set_data(G_OBJECT(dialog->dialog),
@@ -223,8 +218,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_widget_show(dialog->backward);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->backward, FALSE,
 			   FALSE, 0);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (dialog->backward), FALSE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dialog->backward), FALSE);
 
 	dialog_action_area29 =
 #ifdef HAVE_GTK_312
@@ -235,8 +229,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	g_object_set_data(G_OBJECT(dialog->dialog),
 			  "dialog_action_area29", dialog_action_area29);
 	gtk_widget_show(dialog_action_area29);
-	gtk_container_set_border_width(GTK_CONTAINER
-				       (dialog_action_area29), 10);
+	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area29), 10);
 
 #ifdef USE_GTK_3
 	hbuttonbox8 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
@@ -252,7 +245,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	    gtk_button_new_from_icon_name("edit-find",
 					  GTK_ICON_SIZE_BUTTON);
 #else
-	    gtk_button_new_from_stock(GTK_STOCK_FIND);	//gtk_button_new_with_label(_("Find"));
+	    gtk_button_new_from_stock(GTK_STOCK_FIND); //gtk_button_new_with_label(_("Find"));
 #endif
 	gtk_widget_show(dialog->find);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->find);
@@ -260,7 +253,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	dialog->next = gtk_button_new();
 	gtk_widget_show(dialog->next);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->next);
-	//GTK_WIDGET_SET_FLAGS(dialog->next, GTK_CAN_DEFAULT);
+//GTK_WIDGET_SET_FLAGS(dialog->next, GTK_CAN_DEFAULT);
 
 #ifndef HAVE_GTK_310
 	alignment = gtk_alignment_new(0.5, 0.5, 0, 0);
@@ -301,9 +294,6 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	//GTK_WIDGET_SET_FLAGS(dialog->close, GTK_CAN_DEFAULT);
 	gtk_widget_set_can_default(dialog->find, 1);
 
-
-
-
 	g_signal_connect(G_OBJECT(dialog->dialog), "destroy",
 			 G_CALLBACK(dialog_destroy), dialog);
 	g_signal_connect(G_OBJECT(dialog->find), "clicked",
@@ -313,7 +303,6 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	g_signal_connect(G_OBJECT(dialog->close), "clicked",
 			 G_CALLBACK(close_clicked), dialog);
 }
-
 
 /******************************************************************************
  * Name
@@ -331,21 +320,19 @@ static void create_find_dialog(GtkWidget * htmlwidget)
  *   void
  */
 
-static void find_dialog(GtkWidget * htmlwidget, const gchar * title)
+static void find_dialog(GtkWidget *htmlwidget, const gchar *title)
 {
 	if (dialog) {
 		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
 		dialog->htmlwidget = htmlwidget;
 		gtk_widget_show(GTK_WIDGET(dialog->dialog));
-		gdk_window_raise(gtk_widget_get_window
-				 (GTK_WIDGET(dialog->dialog)));
+		gdk_window_raise(gtk_widget_get_window(GTK_WIDGET(dialog->dialog)));
 	} else {
 		create_find_dialog(htmlwidget);
 		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
 		gtk_widget_show(GTK_WIDGET(dialog->dialog));
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -364,8 +351,8 @@ static void find_dialog(GtkWidget * htmlwidget, const gchar * title)
  *   void
  */
 
-void gui_find_dlg(GtkWidget * htmlwidget, gchar * mod_name,
-		  gboolean regular, gchar * text)
+void gui_find_dlg(GtkWidget *htmlwidget, gchar *mod_name,
+		  gboolean regular, gchar *text)
 {
 	gchar buf[256];
 

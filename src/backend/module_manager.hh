@@ -34,12 +34,14 @@
 using namespace std;
 using namespace sword;
 
-class GSStatusReporter : public StatusReporter {
+class GSStatusReporter : public StatusReporter
+{
 	virtual void statusUpdate(double dltotal, double dlnow);
 	virtual void preStatus(long totalBytes, long completedBytes, const char *message);
 };
 
-class ModuleManager {
+class ModuleManager
+{
 	SWMgr *mgr;
 	SWMgr *list_mgr;
 	InstallMgr *installMgr;
@@ -47,11 +49,11 @@ class ModuleManager {
 	ModMap::iterator end;
 	GSStatusReporter *statusReporter;
 	SWBuf baseDir;
-public:
+
+      public:
 	ModuleManager();
 	~ModuleManager();
 	void init_ModuleManager(void);
-
 };
 
 extern "C" {
@@ -61,7 +63,7 @@ void backend_module_mgr_list_local_modules_init(bool for_install);
 #endif
 #include "main/mod_mgr.h"
 
-char *backend_mod_mgr_get_config_entry(char * module_name, const char * entry);
+char *backend_mod_mgr_get_config_entry(char *module_name, const char *entry);
 void backend_mod_mgr_init_language_map(void);
 MOD_MGR *backend_module_mgr_get_next_module(void);
 GList *backend_module_mgr_list_remote_sources(void);
@@ -84,14 +86,14 @@ void backend_init_module_mgr_config(void);
 int backend_init_module_mgr_config_extras(void);
 void backend_module_mgr_clear_config(void);
 void backend_module_mgr_reread_config(void);
-void backend_module_mgr_add_source(const char * vtype,
-				   const char * type,
-				   const char * caption,
-				   const char * source,
-				   const char * directory,
-				   const char * user,
-				   const char * pass,
-				   const char * uid);
+void backend_module_mgr_add_source(const char *vtype,
+				   const char *type,
+				   const char *caption,
+				   const char *source,
+				   const char *directory,
+				   const char *user,
+				   const char *pass,
+				   const char *uid);
 
 #ifdef __cplusplus
 }

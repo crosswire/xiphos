@@ -45,11 +45,10 @@
  *
  */
 
-char *get_conf_file_item(const char * file, const char * mod_name, const char * item)
+char *get_conf_file_item(const char *file, const char *mod_name, const char *item)
 {
 	return backend->get_conf_file_item(file, mod_name, item);
 }
-
 
 /******************************************************************************
  * Name
@@ -68,12 +67,11 @@ char *get_conf_file_item(const char * file, const char * mod_name, const char * 
  *   void
  */
 
-void save_conf_file_item(const char * file, const char * mod_name, const char * item,
-			const char * value)
+void save_conf_file_item(const char *file, const char *mod_name, const char *item,
+			 const char *value)
 {
 	backend->save_conf_file_item(file, mod_name, item, value);
 }
-
 
 /******************************************************************************
  * Name
@@ -91,7 +89,7 @@ void save_conf_file_item(const char * file, const char * mod_name, const char * 
  *   void
  */
 
-void save_module_key(char * mod_name, char * key)
+void save_module_key(char *mod_name, char *key)
 {
 	backend->save_module_key(mod_name, key);
 

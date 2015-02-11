@@ -28,9 +28,9 @@ extern "C" {
 
 #include <gtk/gtk.h>
 
-	GtkWidget *gui_create_about_xiphos(void);
+GtkWidget *gui_create_about_xiphos(void);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __ABOUT_XIPHOS_H_ */
+#endif /* __ABOUT_XIPHOS_H_ */

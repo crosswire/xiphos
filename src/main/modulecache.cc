@@ -42,30 +42,30 @@ int
 ConstructFlags(GLOBAL_OPS *ops)
 {
 	int flags = 0;
-	flags |= (ops->footnotes             ? Footnotes : 0);
-	flags |= (ops->greekaccents          ? GreekAccents : 0);
-	flags |= (ops->headings              ? Headings : 0);
-	flags |= (ops->hebrewcant            ? HebrewCantillation : 0);
-	flags |= (ops->hebrewpoints          ? HebrewVowels : 0);
-	flags |= (ops->lemmas                ? Lemmas : 0);
-	flags |= (ops->morphs                ? Morphology : 0);
-	flags |= (ops->words_in_red          ? RedWordsOfChrist : 0);
-	flags |= (ops->strongs               ? StrongsNumbers : 0);
-	flags |= (ops->scripturerefs         ? Xrefs : 0);
-	flags |= (ops->image_content         ? Images : 0);
-	flags |= (ops->respect_font_faces    ? RespectFontFaces : 0);
-	flags |= (ops->variants_all          ? VariantsAll : 0);
-	flags |= (ops->variants_primary      ? VariantsPrimary : 0);
-	flags |= (ops->variants_secondary    ? VariantsSecondary : 0);
-	flags |= (ops->transliteration       ? Transliteration : 0);
-	flags |= (ops->xlit                  ? Xlit : 0);
-	flags |= (ops->enumerated            ? Enumerated : 0);
-	flags |= (ops->glosses               ? Glosses : 0);
-	flags |= (ops->morphseg              ? MorphSegmentation : 0);
+	flags |= (ops->footnotes ? Footnotes : 0);
+	flags |= (ops->greekaccents ? GreekAccents : 0);
+	flags |= (ops->headings ? Headings : 0);
+	flags |= (ops->hebrewcant ? HebrewCantillation : 0);
+	flags |= (ops->hebrewpoints ? HebrewVowels : 0);
+	flags |= (ops->lemmas ? Lemmas : 0);
+	flags |= (ops->morphs ? Morphology : 0);
+	flags |= (ops->words_in_red ? RedWordsOfChrist : 0);
+	flags |= (ops->strongs ? StrongsNumbers : 0);
+	flags |= (ops->scripturerefs ? Xrefs : 0);
+	flags |= (ops->image_content ? Images : 0);
+	flags |= (ops->respect_font_faces ? RespectFontFaces : 0);
+	flags |= (ops->variants_all ? VariantsAll : 0);
+	flags |= (ops->variants_primary ? VariantsPrimary : 0);
+	flags |= (ops->variants_secondary ? VariantsSecondary : 0);
+	flags |= (ops->transliteration ? Transliteration : 0);
+	flags |= (ops->xlit ? Xlit : 0);
+	flags |= (ops->enumerated ? Enumerated : 0);
+	flags |= (ops->glosses ? Glosses : 0);
+	flags |= (ops->morphseg ? MorphSegmentation : 0);
 
 	flags |= (ops->commentary_by_chapter ? CommentaryChapter : 0);
-	flags |= (ops->doublespace           ? Doublespace : 0);
-	flags |= (ops->xrefnotenumbers       ? XrefNoteNumbers : 0);
+	flags |= (ops->doublespace ? Doublespace : 0);
+	flags |= (ops->xrefnotenumbers ? XrefNoteNumbers : 0);
 
 	return flags;
 }

@@ -27,7 +27,7 @@
 #include <gtk/gtk.h>
 
 #if !GTK_CHECK_VERSION(2, 20, 0)
-inline gboolean xi_gtk_widget_get_realized(GtkWidget * widget)
+inline gboolean xi_gtk_widget_get_realized(GtkWidget *widget)
 {
 	return GTK_WIDGET_REALIZED(widget);
 }

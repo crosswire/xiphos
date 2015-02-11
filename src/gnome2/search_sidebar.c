@@ -39,10 +39,9 @@
 
 #include "gui/debug_glib_null.h"
 
-
 SIDESEARCH ss;
 
-GtkWidget *remember_search;	/* needed to change button in search stop */
+GtkWidget *remember_search; /* needed to change button in search stop */
 
 /******************************************************************************
  * Name
@@ -60,33 +59,31 @@ GtkWidget *remember_search;	/* needed to change button in search stop */
  *   void
  */
 
-static void on_search_button_clicked(GtkButton * button,
+static void on_search_button_clicked(GtkButton *button,
 				     gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
 #ifdef HAVE_GTK_310
-		gtk_button_set_image((GtkButton *) remember_search,
-				     gtk_image_new_from_icon_name
-				     ("edit-find", GTK_ICON_SIZE_BUTTON));
+		gtk_button_set_image((GtkButton *)remember_search,
+				     gtk_image_new_from_icon_name("edit-find", GTK_ICON_SIZE_BUTTON));
 #else
-		gtk_button_set_label((GtkButton *) remember_search,
+		gtk_button_set_label((GtkButton *)remember_search,
 				     "gtk-find");
-		gtk_button_set_use_stock((GtkButton *) remember_search,
+		gtk_button_set_use_stock((GtkButton *)remember_search,
 					 TRUE);
 
 #endif
 		sync_windows();
 	} else {
 #ifdef HAVE_GTK_310
-		gtk_button_set_image((GtkButton *) remember_search,
-				     gtk_image_new_from_icon_name
-				     ("process-stop",
-				      GTK_ICON_SIZE_BUTTON));
+		gtk_button_set_image((GtkButton *)remember_search,
+				     gtk_image_new_from_icon_name("process-stop",
+								  GTK_ICON_SIZE_BUTTON));
 #else
-		gtk_button_set_label((GtkButton *) remember_search,
+		gtk_button_set_label((GtkButton *)remember_search,
 				     "gtk-stop");
-		gtk_button_set_use_stock((GtkButton *) remember_search,
+		gtk_button_set_use_stock((GtkButton *)remember_search,
 					 TRUE);
 #endif
 
@@ -94,18 +91,16 @@ static void on_search_button_clicked(GtkButton * button,
 		main_do_sidebar_search(user_data);
 
 #ifdef HAVE_GTK_310
-		gtk_button_set_image((GtkButton *) remember_search,
-				     gtk_image_new_from_icon_name
-				     ("edit-find", GTK_ICON_SIZE_BUTTON));
+		gtk_button_set_image((GtkButton *)remember_search,
+				     gtk_image_new_from_icon_name("edit-find", GTK_ICON_SIZE_BUTTON));
 #else
-		gtk_button_set_label((GtkButton *) remember_search,
+		gtk_button_set_label((GtkButton *)remember_search,
 				     "gtk-find");
-		gtk_button_set_use_stock((GtkButton *) remember_search,
+		gtk_button_set_use_stock((GtkButton *)remember_search,
 					 TRUE);
 #endif
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -125,7 +120,7 @@ static void on_search_button_clicked(GtkButton * button,
  *   void
  */
 
-static void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
+static void on_rrbUseBounds_toggled(GtkToggleButton *togglebutton,
 				    gpointer user_data)
 {
 	main_init_sidebar_search_backend();
@@ -135,7 +130,6 @@ static void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
 		gtk_widget_hide(ss.frame5);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -178,14 +172,11 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(scrolledwindow_search);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
 			  scrolledwindow_search);
-	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW
-					    (scrolledwindow_search),
+	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow_search),
 					    settings.shadow_type);
-	gtk_container_set_border_width(GTK_CONTAINER
-				       (scrolledwindow_search), 2);
+	gtk_container_set_border_width(GTK_CONTAINER(scrolledwindow_search), 2);
 
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow_search),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_search),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
@@ -206,9 +197,10 @@ void gui_create_search_sidebar(void)
 	ss.entrySearch = gtk_entry_new();
 	gtk_widget_show(ss.entrySearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), ss.entrySearch, TRUE, TRUE, 0);
-	gtk_widget_set_size_request(ss.entrySearch, 130, -1);;
+	gtk_widget_set_size_request(ss.entrySearch, 130, -1);
+	;
 
-	/* find button */
+/* find button */
 #ifdef HAVE_GTK_310
 	remember_search =
 	    gtk_button_new_from_icon_name("edit-find-symbolic",
@@ -273,9 +265,7 @@ void gui_create_search_sidebar(void)
 			   FALSE, FALSE, 0);
 
 	ss.radiobutton_search_comm =
-	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON
-							(ss.
-							 radiobutton_search_text),
+	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(ss.radiobutton_search_text),
 							_("Commentary"));
 	gtk_widget_show(ss.radiobutton_search_comm);
 	gtk_widget_set_size_request(ss.radiobutton_search_comm, -1, 20);
@@ -310,20 +300,17 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox2), ss.rbMultiword, FALSE,
 			   FALSE, 0);
 	gtk_widget_set_size_request(ss.rbMultiword, -1, 20);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (ss.rbMultiword), TRUE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ss.rbMultiword), TRUE);
 
 	ss.rbRegExp =
-	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON
-							(ss.rbMultiword),
+	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(ss.rbMultiword),
 							_("Regular expression"));
 	gtk_widget_show(ss.rbRegExp);
 	gtk_box_pack_start(GTK_BOX(vbox2), ss.rbRegExp, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(ss.rbRegExp, -1, 20);
 
 	ss.rbPhraseSearch =
-	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON
-							(ss.rbMultiword),
+	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(ss.rbMultiword),
 							_("Exact phrase"));
 	gtk_widget_show(ss.rbPhraseSearch);
 	gtk_box_pack_start(GTK_BOX(vbox2), ss.rbPhraseSearch,
@@ -359,7 +346,6 @@ void gui_create_search_sidebar(void)
 			   FALSE, 0);
 	gtk_widget_set_size_request(ss.ckbCaseSensitive, -1, 20);
 
-
 	frame4 = gtk_frame_new(NULL);
 	gtk_widget_show(frame4);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame4, FALSE, TRUE, 0);
@@ -391,8 +377,7 @@ void gui_create_search_sidebar(void)
 				     TRUE);
 
 	ss.rrbUseBounds =
-	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON
-							(ss.rbNoScope),
+	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(ss.rbNoScope),
 							_("Use bounds"));
 	gtk_widget_show(ss.rrbUseBounds);
 	gtk_box_pack_start(GTK_BOX(vbox4), ss.rrbUseBounds, FALSE,
@@ -400,8 +385,7 @@ void gui_create_search_sidebar(void)
 	gtk_widget_set_size_request(ss.rrbUseBounds, -1, 20);
 
 	ss.rbLastSearch =
-	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON
-							(ss.rbNoScope),
+	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(ss.rbNoScope),
 							_("Last search"));
 	gtk_widget_show(ss.rbLastSearch);
 	gtk_box_pack_start(GTK_BOX(vbox4), ss.rbLastSearch, FALSE,
@@ -453,7 +437,6 @@ void gui_create_search_sidebar(void)
 	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
 #endif
 
-
 	ss.entryUpper = gtk_combo_box_text_new_with_entry();
 	gtk_widget_show(ss.entryUpper);
 	gtk_grid_attach(GTK_GRID(table1), ss.entryUpper, 1, 1, 1, 1);
@@ -470,15 +453,15 @@ void gui_create_search_sidebar(void)
 	label1 = gtk_label_new(_("Lower"));
 	gtk_widget_show(label1);
 	gtk_table_attach(GTK_TABLE(table1), label1, 0, 1, 0, 1,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+			 (GtkAttachOptions)(GTK_FILL),
+			 (GtkAttachOptions)(0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label1), 1.0, 0.5);
 
 	label2 = gtk_label_new(_("Upper"));
 	gtk_widget_show(label2);
 	gtk_table_attach(GTK_TABLE(table1), label2, 0, 1, 1, 2,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+			 (GtkAttachOptions)(GTK_FILL),
+			 (GtkAttachOptions)(0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
 
 #ifdef HAVE_GTK_224
@@ -488,8 +471,8 @@ void gui_create_search_sidebar(void)
 #endif
 	gtk_widget_show(ss.entryLower);
 	gtk_table_attach(GTK_TABLE(table1), ss.entryLower, 1, 2, 0, 1,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+			 (GtkAttachOptions)(GTK_FILL),
+			 (GtkAttachOptions)(0), 0, 0);
 	gtk_widget_set_size_request(ss.entryLower, 114, 22);
 
 #ifdef HAVE_GTK_224
@@ -499,8 +482,8 @@ void gui_create_search_sidebar(void)
 #endif
 	gtk_widget_show(ss.entryUpper);
 	gtk_table_attach(GTK_TABLE(table1), ss.entryUpper, 1, 2, 1, 2,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+			 (GtkAttachOptions)(GTK_FILL),
+			 (GtkAttachOptions)(0), 0, 0);
 	gtk_widget_set_size_request(ss.entryUpper, 114, 22);
 #endif
 

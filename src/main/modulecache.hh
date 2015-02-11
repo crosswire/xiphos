@@ -45,96 +45,97 @@
 #include <map>
 #include <string>
 
-namespace ModuleCache {
+namespace ModuleCache
+{
 
-	// bitwise cache type indicators:
-	// if flags change (=> new display choice), text becomes invalid.
+// bitwise cache type indicators:
+// if flags change (=> new display choice), text becomes invalid.
 
-	// options known to Sword.
-	static const int Footnotes          = (1<<0);
-	static const int GreekAccents       = (1<<1);
-	static const int Headings           = (1<<2);
-	static const int HebrewCantillation = (1<<3);
-	static const int HebrewVowels       = (1<<4);
-	static const int Lemmas             = (1<<5);
-	static const int Morphology         = (1<<6);
-	static const int RedWordsOfChrist   = (1<<7);
-	static const int StrongsNumbers     = (1<<8);
-	static const int Xrefs              = (1<<9);
-	static const int Images             = (1<<10);
-	static const int RespectFontFaces   = (1<<11);
-	static const int VariantsAll        = (1<<12);
-	static const int VariantsPrimary    = (1<<13);
-	static const int VariantsSecondary  = (1<<14);
-	static const int Transliteration    = (1<<15);
-	static const int Xlit               = (1<<16);
-	static const int Enumerated         = (1<<17);
-	static const int Glosses            = (1<<18);
-	static const int MorphSegmentation  = (1<<19);
-	// 20-23 yet to be assigned.
+// options known to Sword.
+static const int Footnotes = (1 << 0);
+static const int GreekAccents = (1 << 1);
+static const int Headings = (1 << 2);
+static const int HebrewCantillation = (1 << 3);
+static const int HebrewVowels = (1 << 4);
+static const int Lemmas = (1 << 5);
+static const int Morphology = (1 << 6);
+static const int RedWordsOfChrist = (1 << 7);
+static const int StrongsNumbers = (1 << 8);
+static const int Xrefs = (1 << 9);
+static const int Images = (1 << 10);
+static const int RespectFontFaces = (1 << 11);
+static const int VariantsAll = (1 << 12);
+static const int VariantsPrimary = (1 << 13);
+static const int VariantsSecondary = (1 << 14);
+static const int Transliteration = (1 << 15);
+static const int Xlit = (1 << 16);
+static const int Enumerated = (1 << 17);
+static const int Glosses = (1 << 18);
+static const int MorphSegmentation = (1 << 19);
+// 20-23 yet to be assigned.
 
-	// options known only within Xiphos.
-	static const int CommentaryChapter  = (1<<24);
-	static const int Doublespace        = (1<<25);
-	static const int XrefNoteNumbers    = (1<<26);
+// options known only within Xiphos.
+static const int CommentaryChapter = (1 << 24);
+static const int Doublespace = (1 << 25);
+static const int XrefNoteNumbers = (1 << 26);
 
-	class CacheVerse {
-	public:
-		CacheVerse();
-		CacheVerse(int flags,
-			   const char *text,
-			   const char *header = NULL);
-		~CacheVerse();
+class CacheVerse
+{
+      public:
+	CacheVerse();
+	CacheVerse(int flags,
+		   const char *text,
+		   const char *header = NULL);
+	~CacheVerse();
 
-		bool		TextIsValid();
-		bool		HeaderIsValid();
-		bool		CacheIsValid(int flags);
+	bool TextIsValid();
+	bool HeaderIsValid();
+	bool CacheIsValid(int flags);
 
-		int		GetFlags();
-		void		SetFlags(int flags = 0);
-		void		AddFlag(int flag);
-		void		DelFlag(int flag);
+	int GetFlags();
+	void SetFlags(int flags = 0);
+	void AddFlag(int flag);
+	void DelFlag(int flag);
 
-		const char *	GetText();
-		void		SetText(const char *text, int flags);
-		void		AppendText(const char *text, int flags);
+	const char *GetText();
+	void SetText(const char *text, int flags);
+	void AppendText(const char *text, int flags);
 
-		const char *	GetHeader();
-		void		SetHeader(const char *text);
-		void		AppendHeader(const char *text);
+	const char *GetHeader();
+	void SetHeader(const char *text);
+	void AppendHeader(const char *text);
 
-		void		Invalidate();
-		void		InvalidateHeader();
+	void Invalidate();
+	void InvalidateHeader();
 
-	private:
-		char *		_text;
-		char *		_header;
-		int		_flags;		// bitmask
-	};
+      private:
+	char *_text;
+	char *_header;
+	int _flags; // bitmask
+};
 
-	// In precision order.
-	typedef std::map < int, CacheVerse     > CacheChapter;
-	typedef std::map < int, CacheChapter   > CacheBook;
-	typedef std::map < int, CacheBook      > CacheTestament;
-	typedef std::map < int, CacheTestament > CacheModule;
+// In precision order.
+typedef std::map<int, CacheVerse> CacheChapter;
+typedef std::map<int, CacheChapter> CacheBook;
+typedef std::map<int, CacheBook> CacheTestament;
+typedef std::map<int, CacheTestament> CacheModule;
 
-	// Index by module name => Cache for that module.
-	typedef std::map < const std::string, CacheModule > CacheMap;
+// Index by module name => Cache for that module.
+typedef std::map<const std::string, CacheModule> CacheMap;
 
-	// Textually:
-	// CacheMap contains modules of testaments of books of chapters of
-	// verses, subscriptable at any stage to get the subordinate content.
+// Textually:
+// CacheMap contains modules of testaments of books of chapters of
+// verses, subscriptable at any stage to get the subordinate content.
 
-	// Similar concept for genbooks and lexdicts.
-	typedef std::map < const char *, CacheVerse > BookCacheMap;
-	// a "verse" is just a section entry, textually keyed.
+// Similar concept for genbooks and lexdicts.
+typedef std::map<const char *, CacheVerse> BookCacheMap;
+// a "verse" is just a section entry, textually keyed.
 }
 
 // Lifecycle.
 
-inline
-ModuleCache::CacheVerse::
-CacheVerse()
+inline ModuleCache::CacheVerse::
+    CacheVerse()
     : _text(NULL),
       _header(NULL),
       _flags(0)
@@ -142,19 +143,17 @@ CacheVerse()
 	// just initializers preceding
 }
 
-inline
-ModuleCache::CacheVerse::
-CacheVerse(int flags, const char *text, const char *header)
-    : _text(text     ? g_strdup(text)   : NULL),
+inline ModuleCache::CacheVerse::
+    CacheVerse(int flags, const char *text, const char *header)
+    : _text(text ? g_strdup(text) : NULL),
       _header(header ? g_strdup(header) : NULL),
       _flags(flags)
 {
 	// just initializers preceding
 }
 
-inline
-ModuleCache::CacheVerse::
-~CacheVerse()
+inline ModuleCache::CacheVerse::
+    ~CacheVerse()
 {
 	if (_text)
 		g_free(_text);
@@ -164,70 +163,61 @@ ModuleCache::CacheVerse::
 
 // Access.
 
-inline
-bool ModuleCache::CacheVerse::
-TextIsValid()
+inline bool ModuleCache::CacheVerse::
+    TextIsValid()
 {
 	return _text != NULL;
 }
 
-inline
-bool ModuleCache::CacheVerse::
-HeaderIsValid()
+inline bool ModuleCache::CacheVerse::
+    HeaderIsValid()
 {
 	return _header != NULL;
 }
 
-inline
-bool ModuleCache::CacheVerse::
-CacheIsValid(int flags)
+inline bool ModuleCache::CacheVerse::
+    CacheIsValid(int flags)
 {
 	return TextIsValid() && (flags == GetFlags());
 }
 
-inline
-int ModuleCache::CacheVerse::
-GetFlags()
+inline int ModuleCache::CacheVerse::
+    GetFlags()
 {
 	return _flags;
 }
 
-inline
-void ModuleCache::CacheVerse::
-SetFlags(int flags)
+inline void ModuleCache::CacheVerse::
+    SetFlags(int flags)
 {
 	_flags = flags;
 }
 
-inline
-void ModuleCache::CacheVerse::
-AddFlag(int flag)
+inline void ModuleCache::CacheVerse::
+    AddFlag(int flag)
 {
 	_flags |= flag;
 }
 
-inline
-void ModuleCache::CacheVerse::
-DelFlag(int flag)
+inline void ModuleCache::CacheVerse::
+    DelFlag(int flag)
 {
 	_flags &= ~flag;
 }
 
-inline
-const char *ModuleCache::CacheVerse::
-GetText()
+inline const char *ModuleCache::CacheVerse::
+    GetText()
 {
 	assert(_text);
 	return _text;
 }
 
-inline
-void ModuleCache::CacheVerse::
-SetText(const char *text, int flags)
+inline void ModuleCache::CacheVerse::
+    SetText(const char *text, int flags)
 {
 	if (_text)
 		g_free(_text);
-	_text  = g_strdup(text);
+	_text = g_strdup(text);
 	_flags = flags;
 	// we are setting from scratch: neutralize header.
 	if (_header) {
@@ -236,16 +226,15 @@ SetText(const char *text, int flags)
 	}
 }
 
-inline
-void ModuleCache::CacheVerse::
-AppendText(const char *text, int flags)
+inline void ModuleCache::CacheVerse::
+    AppendText(const char *text, int flags)
 {
 	if (_text) {
 		char *new_text = g_strconcat(_text, text, NULL);
 		g_free(_text);
 		_text = new_text;
 	} else
-		_text  = g_strdup(text);
+		_text = g_strdup(text);
 	_flags = flags;
 }
 
@@ -255,37 +244,33 @@ AppendText(const char *text, int flags)
 // a few lines of straight line code we will also assign text+flags.
 // also, a null header is legit.
 
-inline
-const char *ModuleCache::CacheVerse::
-GetHeader()
+inline const char *ModuleCache::CacheVerse::
+    GetHeader()
 {
 	return (_header ? _header : "");
 }
 
-inline
-void ModuleCache::CacheVerse::
-SetHeader(const char *text)
+inline void ModuleCache::CacheVerse::
+    SetHeader(const char *text)
 {
 	if (_header)
 		g_free(_header);
-	_header  = g_strdup(text);
+	_header = g_strdup(text);
 }
 
-inline
-void ModuleCache::CacheVerse::
-AppendHeader(const char *text)
+inline void ModuleCache::CacheVerse::
+    AppendHeader(const char *text)
 {
 	if (_header) {
 		char *new_text = g_strconcat(_header, text, NULL);
 		g_free(_header);
 		_header = new_text;
 	} else
-		_header  = g_strdup(text);
+		_header = g_strdup(text);
 }
 
-inline
-void ModuleCache::CacheVerse::
-Invalidate()
+inline void ModuleCache::CacheVerse::
+    Invalidate()
 {
 	_flags = 0;
 	if (_text)
@@ -295,9 +280,8 @@ Invalidate()
 	_text = _header = NULL;
 }
 
-inline
-void ModuleCache::CacheVerse::
-InvalidateHeader()
+inline void ModuleCache::CacheVerse::
+    InvalidateHeader()
 {
 	if (_header)
 		g_free(_header);
@@ -305,12 +289,12 @@ InvalidateHeader()
 }
 
 extern "C" {
-#endif	/* __cplusplus */
+#endif /* __cplusplus */
 
 // namespace-free routines.
 
 // utility function to give our bitset.
-int ConstructFlags(GLOBAL_OPS * ops);
+int ConstructFlags(GLOBAL_OPS *ops);
 
 // access from plain C to eliminate a module's entire cache (mod_mgr.c).
 void ModuleCacheErase(const char *modname);

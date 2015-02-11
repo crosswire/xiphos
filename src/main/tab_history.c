@@ -25,7 +25,6 @@
 
 #include <gtk/gtk.h>
 
-
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
 #include "gui/tabbed_browser.h"
@@ -43,8 +42,8 @@
 #include "main/navbar_versekey.h"
 
 /* de-uglify all references to button sensitivitiy */
-#define BUTTON_BACK	navbar_versekey.button_history_back
-#define BUTTON_FORW	navbar_versekey.button_history_next
+#define BUTTON_BACK navbar_versekey.button_history_back
+#define BUTTON_FORW navbar_versekey.button_history_next
 
 /******************************************************************************
  * Name
@@ -64,7 +63,7 @@
  */
 
 void
-on_menu_historyitem_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_menu_historyitem_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	main_change_verse_tab_history(GPOINTER_TO_INT(user_data));
 }
@@ -102,7 +101,6 @@ void main_clear_tab_history(void)
 	tab->first_back_click = TRUE;
 }
 
-
 /******************************************************************************
  * Name
  *   main_update_tab_history_menu
@@ -121,7 +119,7 @@ void main_clear_tab_history(void)
 
 void main_update_tab_history_menu(gpointer data)
 {
-	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO *) data;
+	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO *)data;
 
 	/* set sensitivity of history buttons */
 	gtk_widget_set_sensitive(BUTTON_BACK,
@@ -131,7 +129,6 @@ void main_update_tab_history_menu(gpointer data)
 				 (tab->current_history_item <
 				  (tab->history_items - 1)));
 }
-
 
 /******************************************************************************
  * Name
@@ -151,14 +148,13 @@ void main_update_tab_history_menu(gpointer data)
 void main_add_tab_history_item(gpointer data)
 {
 	gint i;
-	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO *) data;
+	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO *)data;
 
 	/* check to see if item is already in list
 	   if so do nothing except set button sensitivity */
 	for (i = 0; i < tab->history_items; ++i) {
-		if (!strcmp
-		    (tab->history_list[i].verseref,
-		     tab->text_commentary_key)) {
+		if (!strcmp(tab->history_list[i].verseref,
+			    tab->text_commentary_key)) {
 			tab->current_history_item = i;
 			main_update_tab_history_menu(data);
 			return;
@@ -250,7 +246,7 @@ void main_fake_tab_history_item(char *reference)
  *   void
  */
 
-void on_clear_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_clear_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	main_clear_tab_history();
 }
@@ -272,7 +268,7 @@ void on_clear_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_history_to_verse_list_activate(GtkMenuItem * menuitem,
+void on_history_to_verse_list_activate(GtkMenuItem *menuitem,
 				       gpointer user_data)
 {
 	int i;
@@ -287,8 +283,7 @@ void on_history_to_verse_list_activate(GtkMenuItem * menuitem,
 		first = FALSE;
 	}
 
-	main_display_verse_list_in_sidebar
-	    (settings.currentverse, settings.MainWindowModule, list->str);
+	main_display_verse_list_in_sidebar(settings.currentverse, settings.MainWindowModule, list->str);
 
 	g_string_free(list, TRUE);
 	return;
@@ -301,7 +296,7 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 	GtkWidget *item;
 	PASSAGE_TAB_INFO *tab = NULL;
 
-	tab = (PASSAGE_TAB_INFO *) data;
+	tab = (PASSAGE_TAB_INFO *)data;
 	menu = gtk_menu_new();
 
 	item = gtk_menu_item_new_with_label(_("Clear History"));
@@ -319,22 +314,18 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 
 	for (i = 0; i < tab->history_items; ++i) {
 		item =
-		    gtk_menu_item_new_with_label(tab->history_list[i].
-						 verseref);
+		    gtk_menu_item_new_with_label(tab->history_list[i].verseref);
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		g_signal_connect(G_OBJECT(item), "activate",
-				 G_CALLBACK
-				 (on_menu_historyitem_activate),
+				 G_CALLBACK(on_menu_historyitem_activate),
 				 GINT_TO_POINTER(i));
-		if (!strcmp
-		    (tab->history_list[i].verseref,
-		     tab->text_commentary_key))
+		if (!strcmp(tab->history_list[i].verseref,
+			    tab->text_commentary_key))
 			gtk_widget_set_sensitive(item, FALSE);
 	}
 	return menu;
 }
-
 
 /******************************************************************************
  * Name
@@ -366,15 +357,13 @@ void main_change_verse_tab_history(gint historynum)
 
 	key =
 	    main_update_nav_controls(tab->history_list[historynum].textmod,
-				     tab->history_list[historynum].
-				     verseref);
+				     tab->history_list[historynum].verseref);
 	main_display_commentary(tab->history_list[historynum].commod, key);
 	main_display_bible(tab->history_list[historynum].textmod, key);
 	main_keep_bibletext_dialog_in_sync(key);
 	if (key)
 		g_free(key);
 }
-
 
 /******************************************************************************
  * Name
@@ -400,8 +389,7 @@ void main_navigate_tab_history(gint direction)
 	if (direction) {
 		if (tab->current_history_item < tab->history_items - 1) {
 			++tab->current_history_item;
-			main_change_verse_tab_history
-			    (tab->current_history_item);
+			main_change_verse_tab_history(tab->current_history_item);
 		}
 	} else {
 		if (tab->current_history_item > 0) {
@@ -412,12 +400,11 @@ void main_navigate_tab_history(gint direction)
 				--tab->current_history_item;
 #endif
 
-			main_change_verse_tab_history
-			    (tab->current_history_item);
+			main_change_verse_tab_history(tab->current_history_item);
 			tab->first_back_click = FALSE;
 		}
 	}
 
-	main_update_tab_history_menu((gpointer) tab);
+	main_update_tab_history_menu((gpointer)tab);
 	settings.addhistoryitem = TRUE;
 }

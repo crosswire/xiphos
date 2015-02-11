@@ -36,7 +36,6 @@
 #include "gui/sidebar.h"
 #include "gui/utilities.h"
 
-
 #include "main/settings.h"
 #include "main/sidebar.h"
 #include "main/search_dialog.h"
@@ -44,47 +43,41 @@
 #include "main/xml.h"
 #include "main/url.hh"
 
-
 enum {
 	BOOKMARKS,
 	HTML,
 	PLAIN
 };
 
-
 //extern GList *list_for_bookmarking;
 
-
-void dialog_export_bookmarks_response_cb(GtkDialog * dialog,
+void dialog_export_bookmarks_response_cb(GtkDialog *dialog,
 					 gint response_id,
-					 BK_EXPORT * data);
-void checkbutton_include_text_toggled_cb(GtkToggleButton * togglebutton,
-					 BK_EXPORT * data);
-void radiobutton_plain_text_toggled_cb(GtkToggleButton * togglebutton,
-				       BK_EXPORT * data);
+					 BK_EXPORT *data);
+void checkbutton_include_text_toggled_cb(GtkToggleButton *togglebutton,
+					 BK_EXPORT *data);
+void radiobutton_plain_text_toggled_cb(GtkToggleButton *togglebutton,
+				       BK_EXPORT *data);
 void radiobutton_xiphos_bookmarks_toggled_cb(GtkToggleButton *
-					     togglebutton,
-					     BK_EXPORT * data);
-void radiobutton_html_toggled_cb(GtkToggleButton * togglebutton,
-				 BK_EXPORT * data);
-gboolean dialog_vbox1_key_press_event_cb(GtkWidget * widget,
-					 GdkEventKey * event,
+						 togglebutton,
+					     BK_EXPORT *data);
+void radiobutton_html_toggled_cb(GtkToggleButton *togglebutton,
+				 BK_EXPORT *data);
+gboolean dialog_vbox1_key_press_event_cb(GtkWidget *widget,
+					 GdkEventKey *event,
 					 gpointer user_data);
 
-
-static gchar *get_module(const gchar * key)
+static gchar *get_module(const gchar *key)
 {
-	if (main_is_Bible_key(settings.MainWindowModule, (gchar *) key))
+	if (main_is_Bible_key(settings.MainWindowModule, (gchar *)key))
 		return g_strdup(settings.MainWindowModule);
 	return NULL;
-
 }
 
-
-void gui_set_html_item(GString * str,
-		       const gchar * description,
-		       const gchar * module,
-		       const gchar * key, gboolean with_scripture)
+void gui_set_html_item(GString *str,
+		       const gchar *description,
+		       const gchar *module,
+		       const gchar *key, gboolean with_scripture)
 {
 	gchar *mod_tmp = NULL;
 	gchar *scripture = NULL;
@@ -99,8 +92,7 @@ void gui_set_html_item(GString * str,
 		else
 			mod_tmp = g_strdup(module);
 
-		if (((modtype = main_get_mod_type(mod_tmp)) == TEXT_TYPE)
-		    || (modtype == COMMENTARY_TYPE)) {
+		if (((modtype = main_get_mod_type(mod_tmp)) == TEXT_TYPE) || (modtype == COMMENTARY_TYPE)) {
 			text = main_get_rendered_text(mod_tmp, key);
 			scripture = g_strdup_printf("<li>%s</li>", text);
 			g_free(text);
@@ -115,17 +107,15 @@ void gui_set_html_item(GString * str,
 			      description,
 			      module, key, (scripture ? scripture : ""));
 
-
 	g_string_append(str, buf);
 	g_free(buf);
 	g_free(scripture);
 }
 
-
-void gui_set_plain_text_item(GString * str,
-			     const gchar * description,
-			     const gchar * module,
-			     const gchar * key, gboolean with_scripture)
+void gui_set_plain_text_item(GString *str,
+			     const gchar *description,
+			     const gchar *module,
+			     const gchar *key, gboolean with_scripture)
 {
 	gchar *mod_tmp = NULL;
 	gchar *scripture = NULL;
@@ -139,10 +129,9 @@ void gui_set_plain_text_item(GString * str,
 		else
 			mod_tmp = g_strdup(module);
 
-		if (((modtype = main_get_mod_type(mod_tmp)) == TEXT_TYPE)
-		    || (modtype == COMMENTARY_TYPE))
+		if (((modtype = main_get_mod_type(mod_tmp)) == TEXT_TYPE) || (modtype == COMMENTARY_TYPE))
 			scripture =
-			    main_get_striptext(mod_tmp, (gchar *) key);
+			    main_get_striptext(mod_tmp, (gchar *)key);
 
 		if (mod_tmp)
 			g_free(mod_tmp);
@@ -153,14 +142,12 @@ void gui_set_plain_text_item(GString * str,
 			      description,
 			      module, key, (scripture ? scripture : ""));
 
-
 	g_string_append(str, buf);
 	g_free(buf);
 	g_free(scripture);
 }
 
-
-static gboolean _save_verselist_2_xml(BK_EXPORT * data)
+static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 {
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
@@ -171,17 +158,15 @@ static gboolean _save_verselist_2_xml(BK_EXPORT * data)
 	GString *str = g_string_new("");
 	RESULTS *list_item;
 
-
 	sprintf(filename, "%s.xml", data->filename);
 
-	root_doc = xmlNewDoc((const xmlChar *) "1.0");
+	root_doc = xmlNewDoc((const xmlChar *)"1.0");
 
 	if (root_doc != NULL) {
-		root_node = xmlNewNode(NULL, (const xmlChar *)
-				       "SwordBookmarks");
+		root_node = xmlNewNode(NULL, (const xmlChar *)"SwordBookmarks");
 		//root_attr =
-		xmlNewProp(root_node, (const xmlChar *) "syntaxVersion",
-			   (const xmlChar *) "1");
+		xmlNewProp(root_node, (const xmlChar *)"syntaxVersion",
+			   (const xmlChar *)"1");
 		xmlDocSetRootElement(root_doc, root_node);
 	}
 
@@ -191,17 +176,17 @@ static gboolean _save_verselist_2_xml(BK_EXPORT * data)
 	else
 		g_string_printf(name, _("Verse List"));
 
-	cur_node = xml_add_folder_to_parent(root_node, name->str);	/* Verse List or Search result: */
+	cur_node = xml_add_folder_to_parent(root_node, name->str); /* Verse List or Search result: */
 
 	while (data->verses) {
-		list_item = (RESULTS *) data->verses->data;
+		list_item = (RESULTS *)data->verses->data;
 		g_string_printf(str, "%s, %s", list_item->key,
 				list_item->module);
 
-		xml_add_bookmark_to_parent(cur_node, str->str,	// bookmark description
-					   list_item->key,	// module key
-					   list_item->module,	// module name
-					   main_get_module_description(list_item->module));	// module description
+		xml_add_bookmark_to_parent(cur_node, str->str,				    // bookmark description
+					   list_item->key,				    // module key
+					   list_item->module,				    // module name
+					   main_get_module_description(list_item->module)); // module description
 
 		data->verses = g_list_next(data->verses);
 	}
@@ -211,8 +196,7 @@ static gboolean _save_verselist_2_xml(BK_EXPORT * data)
 	return 1;
 }
 
-
-static gboolean _save_verselist_2_html(BK_EXPORT * data)
+static gboolean _save_verselist_2_html(BK_EXPORT *data)
 {
 
 	gchar filename[256];
@@ -221,11 +205,11 @@ static gboolean _save_verselist_2_html(BK_EXPORT * data)
 	GString *str = g_string_new("");
 	GString *des = g_string_new("");
 	RESULTS *list_item;
-	void (*catenate) (GString * str,
-			  const gchar * description,
-			  const gchar * module,
-			  const gchar * key,
-			  gboolean with_scripture) = NULL;
+	void (*catenate)(GString *str,
+			 const gchar *description,
+			 const gchar *module,
+			 const gchar *key,
+			 gboolean with_scripture) = NULL;
 
 	switch (data->type) {
 	case HTML:
@@ -251,35 +235,31 @@ static gboolean _save_verselist_2_html(BK_EXPORT * data)
 		else
 			g_string_printf(name, _("Verse List"));
 
-
 		switch (data->type) {
 		case HTML:
 			buf =
-			    g_strdup_printf
-			    ("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b><br/><br/>",
-			     name->str);
+			    g_strdup_printf("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b><br/><br/>",
+					    name->str);
 			break;
 		case PLAIN:
 			buf = g_strdup_printf("%s\n\n", name->str);
 			break;
 		default:
 			buf =
-			    g_strdup_printf
-			    ("bogus data type, cannot happen");
+			    g_strdup_printf("bogus data type, cannot happen");
 			break;
 		}
 		g_string_append(str, buf);
 		g_string_free(name, 1);
 		g_free(buf);
 
-
 		while (data->verses) {
-			list_item = (RESULTS *) data->verses->data;
+			list_item = (RESULTS *)data->verses->data;
 			g_string_printf(des, "%s, %s", list_item->key,
 					list_item->module);
 
-			(*catenate) (str, des->str, list_item->module,
-				     list_item->key, data->with_scripture);
+			(*catenate)(str, des->str, list_item->module,
+				    list_item->key, data->with_scripture);
 			data->verses = g_list_next(data->verses);
 		}
 		g_string_free(des, 1);
@@ -302,8 +282,7 @@ static gboolean _save_verselist_2_html(BK_EXPORT * data)
 	return 1;
 }
 
-
-static void _export_verselist(BK_EXPORT * data)
+static void _export_verselist(BK_EXPORT *data)
 {
 	switch (data->type) {
 	case BOOKMARKS:
@@ -315,7 +294,6 @@ static void _export_verselist(BK_EXPORT * data)
 		break;
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -332,9 +310,8 @@ static void _export_verselist(BK_EXPORT * data)
  * Return value
  *   void
  */
-static
-void _parse_treeview(GString * str, GtkTreeIter * tree_parent,
-		     GtkTreeStore * model, BK_EXPORT * data)
+static void _parse_treeview(GString *str, GtkTreeIter *tree_parent,
+			    GtkTreeStore *model, BK_EXPORT *data)
 {
 	GtkTreeIter child;
 	gchar *caption = NULL;
@@ -343,11 +320,11 @@ void _parse_treeview(GString * str, GtkTreeIter * tree_parent,
 	gchar *mod_desc = NULL;
 	gchar *description = NULL;
 	gchar *buf = NULL;
-	void (*catenate) (GString * str,
-			  const gchar * description,
-			  const gchar * module,
-			  const gchar * key,
-			  gboolean with_scripture) = NULL;
+	void (*catenate)(GString *str,
+			 const gchar *description,
+			 const gchar *module,
+			 const gchar *key,
+			 gboolean with_scripture) = NULL;
 
 	switch (data->type) {
 	case HTML:
@@ -367,8 +344,7 @@ void _parse_treeview(GString * str, GtkTreeIter * tree_parent,
 				   3, &key,
 				   4, &module,
 				   5, &mod_desc, 6, &description, -1);
-		if (gtk_tree_model_iter_has_child
-		    (GTK_TREE_MODEL(model), &child)) {
+		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &child)) {
 			switch (data->type) {
 			case HTML:
 				buf =
@@ -384,8 +360,8 @@ void _parse_treeview(GString * str, GtkTreeIter * tree_parent,
 			_parse_treeview(str, &child, model, data);
 		}
 		if (key) {
-			(*catenate) (str, description, module, key,
-				     data->with_scripture);
+			(*catenate)(str, description, module, key,
+				    data->with_scripture);
 		} else {
 			switch (data->type) {
 			case HTML:
@@ -407,7 +383,6 @@ void _parse_treeview(GString * str, GtkTreeIter * tree_parent,
 	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
 }
 
-
 /******************************************************************************
  * Name
  *   save_iter_to_xml
@@ -424,16 +399,15 @@ void _parse_treeview(GString * str, GtkTreeIter * tree_parent,
  *   void
  */
 
-static void save_iter_to_xml(GtkTreeIter * iter, BK_EXPORT * data)
+static void save_iter_to_xml(GtkTreeIter *iter, BK_EXPORT *data)
 {
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
-//      xmlAttrPtr root_attr;
+	//      xmlAttrPtr root_attr;
 	gchar *caption = NULL;
 	gchar filename[256];
 	GtkTreeModel *tm;
-
 
 	if (data->verselist == VERSE_LIST_EXPORT)
 		tm = GTK_TREE_MODEL(model_verselist);
@@ -443,14 +417,13 @@ static void save_iter_to_xml(GtkTreeIter * iter, BK_EXPORT * data)
 	gtk_tree_model_get(tm, iter, 2, &caption, -1);
 	sprintf(filename, "%s.xml", data->filename);
 
-	root_doc = xmlNewDoc((const xmlChar *) "1.0");
+	root_doc = xmlNewDoc((const xmlChar *)"1.0");
 
 	if (root_doc != NULL) {
-		root_node = xmlNewNode(NULL, (const xmlChar *)
-				       "SwordBookmarks");
+		root_node = xmlNewNode(NULL, (const xmlChar *)"SwordBookmarks");
 		//root_attr =
-		xmlNewProp(root_node, (const xmlChar *) "syntaxVersion",
-			   (const xmlChar *) "1");
+		xmlNewProp(root_node, (const xmlChar *)"syntaxVersion",
+			   (const xmlChar *)"1");
 		xmlDocSetRootElement(root_doc, root_node);
 	}
 	gtk_tree_model_get(tm, iter, 2, &caption, -1);
@@ -481,7 +454,7 @@ static void save_iter_to_xml(GtkTreeIter * iter, BK_EXPORT * data)
  *   void
  */
 
-static void _save_iter(GtkTreeIter * iter, BK_EXPORT * data)
+static void _save_iter(GtkTreeIter *iter, BK_EXPORT *data)
 {
 	gchar *caption = NULL;
 	gchar filename[256];
@@ -530,8 +503,7 @@ static void _save_iter(GtkTreeIter * iter, BK_EXPORT * data)
 	g_string_free(str, 1);
 }
 
-
-static void export_2_bookmarks(BK_EXPORT * data)
+static void export_2_bookmarks(BK_EXPORT *data)
 {
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
@@ -549,7 +521,7 @@ static void export_2_bookmarks(BK_EXPORT * data)
 	save_iter_to_xml(&selected, data);
 }
 
-static void export_2_html(BK_EXPORT * data)
+static void export_2_html(BK_EXPORT *data)
 {
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
@@ -560,10 +532,9 @@ static void export_2_html(BK_EXPORT * data)
 		return;
 	sprintf(buf, "%s.html", data->filename);
 	_save_iter(&selected, data);
-
 }
 
-static void export_2_text(BK_EXPORT * data)
+static void export_2_text(BK_EXPORT *data)
 {
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
@@ -572,11 +543,9 @@ static void export_2_text(BK_EXPORT * data)
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
 	_save_iter(&selected, data);
-
 }
 
-
-static void _export(BK_EXPORT * data)
+static void _export(BK_EXPORT *data)
 {
 	switch (data->type) {
 	case BOOKMARKS:
@@ -588,12 +557,10 @@ static void _export(BK_EXPORT * data)
 	case PLAIN:
 		export_2_text(data);
 		break;
-
 	}
 }
 
-
-static void setup_filechooserwidget(GtkFileChooser * chooser)
+static void setup_filechooserwidget(GtkFileChooser *chooser)
 {
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
@@ -609,17 +576,16 @@ static void setup_filechooserwidget(GtkFileChooser * chooser)
 	g_free(caption);
 }
 
-
 G_MODULE_EXPORT void
-checkbutton_include_text_toggled_cb(GtkToggleButton * togglebutton,
-				    BK_EXPORT * data)
+checkbutton_include_text_toggled_cb(GtkToggleButton *togglebutton,
+				    BK_EXPORT *data)
 {
 	data->with_scripture = gtk_toggle_button_get_active(togglebutton);
 }
 
 G_MODULE_EXPORT void
-radiobutton_xiphos_bookmarks_toggled_cb(GtkToggleButton * togglebutton,
-					BK_EXPORT * data)
+radiobutton_xiphos_bookmarks_toggled_cb(GtkToggleButton *togglebutton,
+					BK_EXPORT *data)
 {
 	if (gtk_toggle_button_get_active(togglebutton)) {
 		data->type = BOOKMARKS;
@@ -628,8 +594,8 @@ radiobutton_xiphos_bookmarks_toggled_cb(GtkToggleButton * togglebutton,
 }
 
 G_MODULE_EXPORT void
-radiobutton_html_toggled_cb(GtkToggleButton * togglebutton,
-			    BK_EXPORT * data)
+radiobutton_html_toggled_cb(GtkToggleButton *togglebutton,
+			    BK_EXPORT *data)
 {
 	if (gtk_toggle_button_get_active(togglebutton)) {
 		data->type = HTML;
@@ -637,10 +603,9 @@ radiobutton_html_toggled_cb(GtkToggleButton * togglebutton,
 	}
 }
 
-
 G_MODULE_EXPORT void
-radiobutton_plain_text_toggled_cb(GtkToggleButton * togglebutton,
-				  BK_EXPORT * data)
+radiobutton_plain_text_toggled_cb(GtkToggleButton *togglebutton,
+				  BK_EXPORT *data)
 {
 	if (gtk_toggle_button_get_active(togglebutton)) {
 		data->type = PLAIN;
@@ -648,20 +613,17 @@ radiobutton_plain_text_toggled_cb(GtkToggleButton * togglebutton,
 	}
 }
 
-
 G_MODULE_EXPORT
-    void dialog_export_bookmarks_response_cb(GtkDialog * dialog,
-					     gint response_id,
-					     BK_EXPORT * data)
+void dialog_export_bookmarks_response_cb(GtkDialog *dialog,
+					 gint response_id,
+					 BK_EXPORT *data)
 {
 	switch (response_id) {
 	case GTK_RESPONSE_CANCEL:
 		break;
 	case GTK_RESPONSE_OK:
 		data->filename =
-		    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER
-						  (data->
-						   filechooserwidget));
+		    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(data->filechooserwidget));
 		if (data->verselist)
 			_export_verselist(data);
 		else
@@ -675,15 +637,15 @@ G_MODULE_EXPORT
 }
 
 G_MODULE_EXPORT
-    gboolean dialog_vbox1_key_press_event_cb(GtkWidget * widget,
-					     GdkEventKey * event,
-					     gpointer user_data)
+gboolean dialog_vbox1_key_press_event_cb(GtkWidget *widget,
+					 GdkEventKey *event,
+					 gpointer user_data)
 {
 
 	return TRUE;
 }
 
-void gui_export_bookmarks_dialog(gint export_type, GList * verses)
+void gui_export_bookmarks_dialog(gint export_type, GList *verses)
 {
 	GtkBuilder *builder;
 	gchar *gbuilder_file;
@@ -711,28 +673,21 @@ void gui_export_bookmarks_dialog(gint export_type, GList * verses)
 	gtk_builder_add_from_file(builder, gbuilder_file, NULL);
 
 	dialog =
-	    GTK_WIDGET(gtk_builder_get_object
-		       (builder, "dialog_export_bookmarks"));
+	    GTK_WIDGET(gtk_builder_get_object(builder, "dialog_export_bookmarks"));
 	ex_data->rb_bookmarks =
-	    GTK_WIDGET(gtk_builder_get_object
-		       (builder, "radiobutton_xiphos_bookmarks"));
+	    GTK_WIDGET(gtk_builder_get_object(builder, "radiobutton_xiphos_bookmarks"));
 	ex_data->rb_html =
-	    GTK_WIDGET(gtk_builder_get_object
-		       (builder, "radiobutton_html"));
+	    GTK_WIDGET(gtk_builder_get_object(builder, "radiobutton_html"));
 	ex_data->rb_plain =
-	    GTK_WIDGET(gtk_builder_get_object
-		       (builder, "radiobutton_plain_text"));
+	    GTK_WIDGET(gtk_builder_get_object(builder, "radiobutton_plain_text"));
 	ex_data->cb_scripture =
-	    GTK_WIDGET(gtk_builder_get_object
-		       (builder, "checkbutton_include_text"));
+	    GTK_WIDGET(gtk_builder_get_object(builder, "checkbutton_include_text"));
 	ex_data->filechooserwidget =
-	    GTK_WIDGET(gtk_builder_get_object
-		       (builder, "filechooserwidget"));
+	    GTK_WIDGET(gtk_builder_get_object(builder, "filechooserwidget"));
 
 	if (ex_data->verselist) {
 		gtk_file_chooser_set_current_name((GtkFileChooser *)
-						  ex_data->
-						  filechooserwidget,
+						  ex_data->filechooserwidget,
 						  name->str);
 		g_string_free(name, 1);
 	} else
@@ -746,14 +701,15 @@ void gui_export_bookmarks_dialog(gint export_type, GList * verses)
 	if (ex_data->verselist == ADV_SEARCH_RESULTS_EXPORT) {
 		gtk_widget_set_sensitive(ex_data->rb_bookmarks, FALSE);
 		gtk_toggle_button_set_active((GtkToggleButton *)
-					     ex_data->rb_html, TRUE);
+					     ex_data->rb_html,
+					     TRUE);
 	}
-
 
 	if (ex_data->verselist == ADV_SEARCH_RESULTS_EXPORT) {
 		gtk_widget_set_sensitive(ex_data->rb_bookmarks, FALSE);
 		gtk_toggle_button_set_active((GtkToggleButton *)
-					     ex_data->rb_html, TRUE);
+					     ex_data->rb_html,
+					     TRUE);
 	}
 
 	g_object_unref(G_OBJECT(builder));

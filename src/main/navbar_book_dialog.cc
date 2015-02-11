@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 #include <gtk/gtk.h>
 #include <versekey.h>
@@ -37,7 +37,7 @@
 
 #include "backend/sword_main.hh"
 
-DIALOG_DATA * cur_d;
+DIALOG_DATA *cur_d;
 
 /******************************************************************************
  * Name
@@ -55,11 +55,10 @@ DIALOG_DATA * cur_d;
  *   int
  */
 
-static
-int check_for_parent(DIALOG_DATA * d)
+static int check_for_parent(DIALOG_DATA *d)
 {
 	unsigned long offset_save;
-	BackEnd *be = (BackEnd *) d->backend;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	offset_save = d->offset;
 	be->set_treekey(d->offset);
@@ -70,8 +69,6 @@ int check_for_parent(DIALOG_DATA * d)
 	}
 	return 0;
 }
-
-
 
 /******************************************************************************
  * Name
@@ -89,11 +86,10 @@ int check_for_parent(DIALOG_DATA * d)
  *   int
  */
 
-static
-int check_for_prev_sib(DIALOG_DATA * d)
+static int check_for_prev_sib(DIALOG_DATA *d)
 {
 	unsigned long offset_save;
-	BackEnd *be = (BackEnd *) d->backend;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	offset_save = d->offset;
 	be->set_treekey(d->offset);
@@ -104,8 +100,6 @@ int check_for_prev_sib(DIALOG_DATA * d)
 	}
 	return 0;
 }
-
-
 
 /******************************************************************************
  * Name
@@ -123,11 +117,10 @@ int check_for_prev_sib(DIALOG_DATA * d)
  *  int
  */
 
-static
-int check_for_next_sib(DIALOG_DATA * d)
+static int check_for_next_sib(DIALOG_DATA *d)
 {
 	unsigned long offset_save;
-	BackEnd *be = (BackEnd *) d->backend;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	offset_save = d->offset;
 	be->set_treekey(d->offset);
@@ -138,7 +131,6 @@ int check_for_next_sib(DIALOG_DATA * d)
 	}
 	return 0;
 }
-
 
 /******************************************************************************
  * Name
@@ -158,8 +150,8 @@ int check_for_next_sib(DIALOG_DATA * d)
 
 void main_navbar_book_dialog_parent(gpointer data)
 {
-	DIALOG_DATA * d = (DIALOG_DATA *) data;
-	BackEnd *be = (BackEnd *) d->backend;
+	DIALOG_DATA *d = (DIALOG_DATA *)data;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	be->set_treekey(d->offset);
 	if (be->treekey_parent(d->offset)) {
@@ -167,7 +159,6 @@ void main_navbar_book_dialog_parent(gpointer data)
 		main_setup_navbar_book_dialog(d);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -187,8 +178,8 @@ void main_navbar_book_dialog_parent(gpointer data)
 
 void main_navbar_book_dialog_first_child(gpointer data)
 {
-	DIALOG_DATA * d = (DIALOG_DATA *) data;
-	BackEnd *be = (BackEnd *) d->backend;
+	DIALOG_DATA *d = (DIALOG_DATA *)data;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	be->set_treekey(d->offset);
 	if (be->treekey_first_child(d->offset)) {
@@ -196,7 +187,6 @@ void main_navbar_book_dialog_first_child(gpointer data)
 		main_setup_navbar_book_dialog(d);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -216,8 +206,8 @@ void main_navbar_book_dialog_first_child(gpointer data)
 
 void main_navbar_book_dialog_prev(gpointer data)
 {
-	DIALOG_DATA * d = (DIALOG_DATA *) data;
-	BackEnd *be = (BackEnd *) d->backend;
+	DIALOG_DATA *d = (DIALOG_DATA *)data;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	be->set_treekey(d->offset);
 	if (be->treekey_prev_sibling(d->offset)) {
@@ -225,7 +215,6 @@ void main_navbar_book_dialog_prev(gpointer data)
 		main_setup_navbar_book_dialog(d);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -245,8 +234,8 @@ void main_navbar_book_dialog_prev(gpointer data)
 
 void main_navbar_book_dialog_next(gpointer data)
 {
-	DIALOG_DATA * d = (DIALOG_DATA *) data;
-	BackEnd *be = (BackEnd *) d->backend;
+	DIALOG_DATA *d = (DIALOG_DATA *)data;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	be->set_treekey(d->offset);
 	if (be->treekey_next_sibling(d->offset)) {
@@ -254,7 +243,6 @@ void main_navbar_book_dialog_next(gpointer data)
 		main_setup_navbar_book_dialog(d);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -273,13 +261,11 @@ void main_navbar_book_dialog_next(gpointer data)
  *   void
  */
 
-static
-void on_menu_select(GtkMenuItem * menuitem, gpointer data)
+static void on_menu_select(GtkMenuItem *menuitem, gpointer data)
 {
 	cur_d->offset = GPOINTER_TO_INT(data);
 	main_setup_navbar_book_dialog(cur_d);
 }
-
 
 /******************************************************************************
  * Name
@@ -304,8 +290,8 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 	GtkWidget *menu;
 	GtkWidget *item;
 	unsigned long offset;
-	DIALOG_DATA * d = (DIALOG_DATA *) data;
-	BackEnd *be = (BackEnd *) d->backend;
+	DIALOG_DATA *d = (DIALOG_DATA *)data;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	cur_d = d;
 	be->set_treekey(d->offset);
@@ -317,11 +303,11 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 	}
 	/* add menu item for first sibling*/
 	tmpbuf = be->treekey_get_local_name(offset);
-	item = gtk_menu_item_new_with_label((gchar *) tmpbuf);
+	item = gtk_menu_item_new_with_label((gchar *)tmpbuf);
 	gtk_widget_show(item);
 	g_signal_connect(G_OBJECT(item), "activate",
 			 G_CALLBACK(on_menu_select),
-			GINT_TO_POINTER(offset) );
+			 GINT_TO_POINTER(offset));
 	gtk_container_add(GTK_CONTAINER(menu), item);
 	g_free(tmpbuf);
 
@@ -329,7 +315,7 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 		offset = be->get_treekey_offset();
 		/* add menu item */
 		tmpbuf = be->treekey_get_local_name(offset);
-		item = gtk_menu_item_new_with_label((gchar *) tmpbuf);
+		item = gtk_menu_item_new_with_label((gchar *)tmpbuf);
 		gtk_widget_show(item);
 		g_signal_connect(G_OBJECT(item), "activate",
 				 G_CALLBACK(on_menu_select),
@@ -339,7 +325,6 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 	}
 	return menu;
 }
-
 
 /******************************************************************************
  * Name
@@ -361,8 +346,8 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 void main_setup_navbar_book_dialog(gpointer data)
 {
 	gchar *tmpbuf = NULL;
-	DIALOG_DATA * d = (DIALOG_DATA *) data;
-	BackEnd *be = (BackEnd *) d->backend;
+	DIALOG_DATA *d = (DIALOG_DATA *)data;
+	BackEnd *be = (BackEnd *)d->backend;
 
 	be->set_treekey(d->offset);
 	tmpbuf = be->get_key_from_offset(d->offset);

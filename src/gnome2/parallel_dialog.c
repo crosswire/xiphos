@@ -68,9 +68,8 @@ NAVBAR_VERSEKEY navbar_parallel;
 static GtkWidget *create_parallel_dialog(void);
 static void sync_with_main(void);
 
-
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 {
 	gui_popup_menu_parallel();
 }
@@ -99,13 +98,10 @@ void gui_undock_parallel_page(void)
 	ApplyChangeBook = FALSE;
 	parallel_UnDock_Dialog = create_parallel_dialog();
 
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-				   (widgets.notebook_bible_parallel),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				   FALSE);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_bible_parallel),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				      0);
-
 
 	gtk_widget_show(parallel_UnDock_Dialog);
 	//main_update_parallel_page_detached();
@@ -134,7 +130,7 @@ void gui_undock_parallel_page(void)
  *   void
  */
 
-void gui_btnDockInt_clicked(GtkButton * button, gpointer user_data)
+void gui_btnDockInt_clicked(GtkButton *button, gpointer user_data)
 {
 	gtk_widget_destroy(parallel_UnDock_Dialog);
 }
@@ -158,15 +154,13 @@ void gui_btnDockInt_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_dlgparallel_destroy(GObject * object, gpointer user_data)
+static void on_dlgparallel_destroy(GObject *object, gpointer user_data)
 {
 
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-				   (widgets.notebook_bible_parallel),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				   TRUE);
 
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_bible_parallel),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				      1);
 	settings.dockedInt = TRUE;
 	main_update_parallel_page();
@@ -174,7 +168,6 @@ static void on_dlgparallel_destroy(GObject * object, gpointer user_data)
 	settings.display_parallel = 0;
 	xml_set_value("Xiphos", "layout", "parallelopen", "0");
 }
-
 
 /******************************************************************************
  * Name
@@ -196,7 +189,7 @@ static void sync_with_main(void)
 {
 	gchar *buf = NULL;
 
-	buf = (gchar *) main_url_encode(settings.currentverse);
+	buf = (gchar *)main_url_encode(settings.currentverse);
 
 	if (buf && (strlen(buf) > 3)) {
 		gchar *url =
@@ -207,7 +200,6 @@ static void sync_with_main(void)
 		g_free(url);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -226,11 +218,9 @@ static void sync_with_main(void)
 
 void gui_keep_parallel_dialog_in_sync(void)
 {
-	if (gtk_toggle_button_get_active
-	    (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
 		sync_with_main();
 }
-
 
 /******************************************************************************
  * Name
@@ -251,8 +241,6 @@ void gui_set_parallel_navbar(const char *key)
 {
 	main_navbar_set(navbar, key);
 }
-
-
 
 /******************************************************************************
  * Name
@@ -275,7 +263,6 @@ static GtkWidget *create_nav_toolbar(void)
 	return gui_navbar_versekey_parallel_new();
 }
 
-
 /******************************************************************************
  * Name
  *   on_parallel_configure_event
@@ -295,17 +282,15 @@ static GtkWidget *create_nav_toolbar(void)
  *   gboolean
  */
 
-static gboolean on_parallel_configure_event(GtkWidget * widget,
-					    GdkEventConfigure * event,
+static gboolean on_parallel_configure_event(GtkWidget *widget,
+					    GdkEventConfigure *event,
 					    gpointer user_data)
 {
 	gchar layout[10];
 	gint x;
 	gint y;
 
-	gdk_window_get_root_origin(GDK_WINDOW
-				   (gtk_widget_get_window
-				    (dialog_parallel)), &x, &y);
+	gdk_window_get_root_origin(GDK_WINDOW(gtk_widget_get_window(dialog_parallel)), &x, &y);
 
 	settings.parallel_width = event->width;
 	settings.parallel_height = event->height;
@@ -344,8 +329,7 @@ static gboolean on_parallel_configure_event(GtkWidget * widget,
  * Return value
  *   GtkWidget *
  */
-static
-GtkWidget *create_parallel_dialog(void)
+static GtkWidget *create_parallel_dialog(void)
 {
 	GtkWidget *box_parallel_labels;
 	GtkWidget *dialog_vbox25;
@@ -410,14 +394,13 @@ GtkWidget *create_parallel_dialog(void)
 			g_free(label);
 		}
 	}
-#endif				/* 0 */
+#endif /* 0 */
 
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_box_pack_start(GTK_BOX(vboxInt), scrolled_window, TRUE, TRUE,
 			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolled_window),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
@@ -431,7 +414,7 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
 
-	g_signal_connect((gpointer) widgets.html_parallel_dialog,
+	g_signal_connect((gpointer)widgets.html_parallel_dialog,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 
@@ -444,8 +427,7 @@ GtkWidget *create_parallel_dialog(void)
 	g_object_set_data(G_OBJECT(dialog_parallel),
 			  "dialog_action_area25", dialog_action_area25);
 	gtk_widget_show(dialog_action_area25);
-	gtk_container_set_border_width(GTK_CONTAINER
-				       (dialog_action_area25), 10);
+	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area25), 10);
 
 #ifdef USE_GTK_3
 	hbuttonbox4 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
@@ -468,13 +450,12 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_container_add(GTK_CONTAINER(hbuttonbox4), btnDockInt);
 	gtk_widget_set_can_default(btnDockInt, 1);
 
-
 	g_signal_connect(G_OBJECT(dialog_parallel), "destroy",
 			 G_CALLBACK(on_dlgparallel_destroy), NULL);
 	g_signal_connect(G_OBJECT(btnDockInt), "clicked",
 			 G_CALLBACK(gui_btnDockInt_clicked), NULL);
 
-	g_signal_connect((gpointer) dialog_parallel,
+	g_signal_connect((gpointer)dialog_parallel,
 			 "configure_event",
 			 G_CALLBACK(on_parallel_configure_event), NULL);
 

@@ -26,15 +26,15 @@
 extern "C" {
 #endif
 
-	gchar *gui_get_export_filename(void);
-	void gui_export_dialog(void);
-	void _get_export_filename(void);
-	void on_dialog_export_passage_response(GtkDialog * dialog,
-					       gint response_id,
-					       gpointer user_data);
-	gint _check_for_distribution_license(gchar * mod_name);
+gchar *gui_get_export_filename(void);
+void gui_export_dialog(void);
+void _get_export_filename(void);
+void on_dialog_export_passage_response(GtkDialog *dialog,
+				       gint response_id,
+				       gpointer user_data);
+gint _check_for_distribution_license(gchar *mod_name);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* _EXPORT_DIALOG_H_ */
+#endif /* _EXPORT_DIALOG_H_ */

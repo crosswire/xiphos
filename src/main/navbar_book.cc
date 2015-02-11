@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 #include <gtk/gtk.h>
 #include <versekey.h>
@@ -36,7 +36,6 @@
 #include "backend/sword_main.hh"
 
 #include "gui/debug_glib_null.h"
-
 
 /******************************************************************************
  * Name
@@ -54,8 +53,7 @@
  *   int
  */
 
-static
-int check_for_parent(char *book, unsigned long offset)
+static int check_for_parent(char *book, unsigned long offset)
 {
 	unsigned long offset_save;
 
@@ -69,7 +67,6 @@ int check_for_parent(char *book, unsigned long offset)
 	}
 	return 0;
 }
-
 
 /******************************************************************************
  * Name
@@ -87,8 +84,7 @@ int check_for_parent(char *book, unsigned long offset)
  *   int
  */
 
-static
-int check_for_prev_sib(char *book, unsigned long offset)
+static int check_for_prev_sib(char *book, unsigned long offset)
 {
 	unsigned long offset_save;
 
@@ -101,8 +97,6 @@ int check_for_prev_sib(char *book, unsigned long offset)
 	}
 	return 0;
 }
-
-
 
 /******************************************************************************
  * Name
@@ -120,8 +114,7 @@ int check_for_prev_sib(char *book, unsigned long offset)
  *  int
  */
 
-static
-int check_for_next_sib(char *book, unsigned long offset)
+static int check_for_next_sib(char *book, unsigned long offset)
 {
 	unsigned long offset_save;
 
@@ -134,7 +127,6 @@ int check_for_next_sib(char *book, unsigned long offset)
 	}
 	return 0;
 }
-
 
 /******************************************************************************
  * Name
@@ -171,7 +163,6 @@ void main_navbar_book_parent(void)
 	}
 }
 
-
 /******************************************************************************
  * Name
  *  main_navbar_book_first_child
@@ -207,7 +198,6 @@ void main_navbar_book_first_child(void)
 	}
 }
 
-
 /******************************************************************************
  * Name
  *  main_navbar_book_prev
@@ -242,7 +232,6 @@ void main_navbar_book_prev(void)
 		g_free(tmpbuf);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -283,7 +272,6 @@ void main_navbar_book_next(void)
 	}
 }
 
-
 /******************************************************************************
  * Name
  *   main_navbar_book_entry_activate
@@ -300,11 +288,10 @@ void main_navbar_book_next(void)
  *   void
  */
 
-void  main_navbar_book_entry_activate (const gchar* entry_text)
+void main_navbar_book_entry_activate(const gchar *entry_text)
 {
 	main_display_book(settings.book_mod, entry_text);
 }
-
 
 /******************************************************************************
  * Name
@@ -323,15 +310,13 @@ void  main_navbar_book_entry_activate (const gchar* entry_text)
  *   void
  */
 
-static
-void on_menu_select(GtkMenuItem * menuitem, gpointer user_data)
+static void on_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 {
 	char *tmpbuf = NULL;
 
 	tmpbuf = g_strdup_printf("%d", GPOINTER_TO_INT(user_data));
 	main_display_book(settings.book_mod, tmpbuf);
 }
-
 
 /******************************************************************************
  * Name
@@ -367,7 +352,7 @@ GtkWidget *main_book_drop_down_new(void)
 	}
 	/* add menu item for first sibling*/
 	tmpbuf = backend->treekey_get_local_name(offset);
-	item = gtk_menu_item_new_with_label((gchar *) tmpbuf);
+	item = gtk_menu_item_new_with_label((gchar *)tmpbuf);
 	gtk_widget_show(item);
 	g_signal_connect(G_OBJECT(item), "activate",
 			 G_CALLBACK(on_menu_select),
@@ -379,7 +364,7 @@ GtkWidget *main_book_drop_down_new(void)
 		offset = backend->get_treekey_offset();
 		/* add menu item */
 		tmpbuf = backend->treekey_get_local_name(offset);
-		item = gtk_menu_item_new_with_label((gchar *) tmpbuf);
+		item = gtk_menu_item_new_with_label((gchar *)tmpbuf);
 		gtk_widget_show(item);
 		g_signal_connect(G_OBJECT(item), "activate",
 				 G_CALLBACK(on_menu_select),
@@ -389,7 +374,6 @@ GtkWidget *main_book_drop_down_new(void)
 	}
 	return menu;
 }
-
 
 /******************************************************************************
  * Name
@@ -408,10 +392,10 @@ GtkWidget *main_book_drop_down_new(void)
  *   void
  */
 
-void main_setup_navbar_book(gchar * book_name, unsigned long offset)
+void main_setup_navbar_book(gchar *book_name, unsigned long offset)
 {
 	gchar *tmpbuf = NULL;
-	XI_message(("offset: %ld",offset));
+	XI_message(("offset: %ld", offset));
 	backend->set_module(book_name);
 	backend->set_treekey(offset);
 
