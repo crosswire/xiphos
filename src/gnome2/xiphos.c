@@ -88,7 +88,6 @@
  *   void
  */
 
-
 void frontend_init(void)
 {
 	XI_print(("%s\n", "Initiating Xiphos"));
@@ -126,17 +125,14 @@ void frontend_init(void)
 		gtk_widget_realize(widgets.html_book);
 	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_dict)))
 		gtk_widget_realize(widgets.html_dict);
-	if (!gtk_widget_get_realized
-	    (GTK_WIDGET(widgets.html_previewer_text)))
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_previewer_text)))
 		gtk_widget_realize(widgets.html_previewer_text);
-	if (!gtk_widget_get_realized
-	    (GTK_WIDGET(sidebar.html_viewer_widget)))
+	if (!gtk_widget_get_realized(GTK_WIDGET(sidebar.html_viewer_widget)))
 		gtk_widget_realize(sidebar.html_viewer_widget);
 	main_flush_widgets_content();
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
 	main_init_previewer();
 }
-
 
 /******************************************************************************
  * Name
@@ -154,7 +150,6 @@ void frontend_init(void)
  *   void
  */
 
-
 void frontend_display(const char *tabs)
 {
 	GdkScreen *screen = gdk_screen_get_default();
@@ -164,17 +159,13 @@ void frontend_display(const char *tabs)
 	XI_print(("%s\n", "Displaying Xiphos"));
 	gui_show_main_window();
 
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewtexts_item),
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.viewtexts_item),
 				       settings.showtexts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewcomms_item),
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.viewcomms_item),
 				       settings.showcomms);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewdicts_item),
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.viewdicts_item),
 				       settings.showdicts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewpreview_item),
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.viewpreview_item),
 				       settings.showpreview);
 	gui_show_hide_preview(settings.showpreview);
 	gui_show_hide_texts(settings.showtexts);
@@ -203,9 +194,9 @@ void frontend_display(const char *tabs)
 	sync_windows();
 
 	// setup passage notebook
-//      if (settings.browsing) {
+	//      if (settings.browsing) {
 	gui_notebook_main_setup(settings.browsing, tabs);
-/*	} else {
+	/*	} else {
 		url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 						      settings.dictkey);
 		main_url_handler(url);
@@ -225,8 +216,7 @@ void frontend_display(const char *tabs)
 	} */
 	/* must be set after tab stuff is done */
 
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.parallel_tab_item),
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.parallel_tab_item),
 				       settings.showparatab);
 	g_signal_connect(G_OBJECT(widgets.parallel_tab_item),
 			 "toggled",
@@ -251,7 +241,6 @@ void frontend_display(const char *tabs)
 
 	XI_print(("%s\n\n", "done"));
 }
-
 
 /******************************************************************************
  * Name
@@ -283,7 +272,7 @@ void shutdown_frontend(void)
 	if (list_of_verses) {
 		GList *chaser = list_of_verses;
 		while (chaser) {
-			list_item = (RESULTS *) chaser->data;
+			list_item = (RESULTS *)chaser->data;
 			g_free(list_item->module);
 			g_free(list_item->key);
 			g_free(list_item);
@@ -296,7 +285,6 @@ void shutdown_frontend(void)
 	gui_save_bookmarks_treeview();
 
 	/* if study pad file has changed since last save */
-
 
 	xml_save_settings_doc(settings.fnconfigure);
 	xml_free_settings_doc();

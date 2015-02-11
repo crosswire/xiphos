@@ -43,7 +43,6 @@
 
 #include "gui/debug_glib_null.h"
 
-
 static void _set_global_option(const char *option,
 			       gboolean choice)
 {
@@ -54,15 +53,12 @@ static void _set_global_option(const char *option,
 	mgr->setGlobalOption(option, on_off);
 }
 
-
 void _set_global_textual(const char *option,
 			 const char *choice)
 {
 	SWMgr *mgr = backend->get_mgr();
 	mgr->setGlobalOption(option, choice);
-
 }
-
 
 /******************************************************************************
  * Name
@@ -97,7 +93,6 @@ int main_save_module_options(const char *mod_name,
 	return true;
 }
 
-
 /******************************************************************************
  * Name
  *  main_get_option
@@ -126,7 +121,6 @@ main_get_one_option(const char *mod_name, const char *op)
 	return gui_of2tf(module_options[mod_name][op].c_str());
 }
 
-
 /******************************************************************************
  * Name
  *  main_set_global_options
@@ -143,7 +137,7 @@ main_get_one_option(const char *mod_name, const char *op)
  *   void
  */
 
-void main_set_global_options(GLOBAL_OPS * ops)
+void main_set_global_options(GLOBAL_OPS *ops)
 {
 	_set_global_option("Strong's Numbers", ops->strongs);
 	_set_global_option("Morphological Tags", ops->morphs);
@@ -165,7 +159,8 @@ void main_set_global_options(GLOBAL_OPS * ops)
 	_set_global_option("Morpheme Segmentation", ops->morphseg);
 
 	_set_global_textual("Transliteration", (ops->transliteration
-						? "Latin" : "Off"));
+						    ? "Latin"
+						    : "Off"));
 
 	if (ops->variants_primary)
 		_set_global_textual("Textual Variants", "Primary Reading");
@@ -174,7 +169,6 @@ void main_set_global_options(GLOBAL_OPS * ops)
 	else if (ops->variants_all)
 		_set_global_textual("Textual Variants", "All Readings");
 }
-
 
 /******************************************************************************
  * Name
@@ -192,7 +186,7 @@ void main_set_global_options(GLOBAL_OPS * ops)
  *   GLOBAL_OPS *
  */
 
-GLOBAL_OPS *main_new_globals(const gchar * mod_name)
+GLOBAL_OPS *main_new_globals(const gchar *mod_name)
 {
 	GLOBAL_OPS *ops;
 	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
@@ -254,25 +248,25 @@ GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 	// we prefer and assume paragraph layout.
 	// we take user preference, and alter our default for
 	// those modules showing proper configuration for it.
-	ops->verse_per_line = 
+	ops->verse_per_line =
 	    ((*(module_options[mod_name]["style"].c_str()) == 'v')
-	     ? 1
-	     : ((*(module_options[mod_name]["style"].c_str()) == 'p')
-		? 0
-		: (main_check_for_option(mod_name, "Feature", "NoParagraphs")
-		   ? 1	
-		   : 0)));	// default to paragraph style.
+		 ? 1
+		 : ((*(module_options[mod_name]["style"].c_str()) == 'p')
+			? 0
+			: (main_check_for_option(mod_name, "Feature", "NoParagraphs")
+			       ? 1
+			       : 0))); // default to paragraph style.
 
 	// options not from configuration: xiphos-specific capability.
 	ops->image_content =
 	    (*(module_options[mod_name]["Image Content"].c_str()) == '\0')
-	    ? -1	// "unknown"; otherwise, it's like the others.
-	    : gui_of2tf(module_options[mod_name]["Image Content"].c_str());
+		? -1 // "unknown"; otherwise, it's like the others.
+		: gui_of2tf(module_options[mod_name]["Image Content"].c_str());
 
 	ops->respect_font_faces =
 	    (*(module_options[mod_name]["Respect Font Faces"].c_str()) == '\0')
-	    ? -1	// "unknown"; otherwise, it's like the others.
-	    : gui_of2tf(module_options[mod_name]["Respect Font Faces"].c_str());
+		? -1 // "unknown"; otherwise, it's like the others.
+		: gui_of2tf(module_options[mod_name]["Respect Font Faces"].c_str());
 
 	ops->commentary_by_chapter =
 	    gui_of2tf(module_options[mod_name]["Commentary by Chapter"].c_str());

@@ -61,15 +61,13 @@ extern gboolean sync_on;
 static GtkWidget *parallel_vbox;
 NAVBAR_VERSEKEY navbar_parallel;
 
-static void sync_with_main(const gchar * key);
-
+static void sync_with_main(const gchar *key);
 
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 {
 	gui_popup_menu_parallel();
 }
-
 
 /******************************************************************************
  * Name
@@ -90,11 +88,10 @@ _popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
  *   void
  */
 
-void gui_parallel_close_tab(GtkButton * button, gpointer user_data)
+void gui_parallel_close_tab(GtkButton *button, gpointer user_data)
 {
 	//gtk_widget_destroy(parallel_UnDock_Dialog);
 }
-
 
 /******************************************************************************
  * Name
@@ -115,20 +112,17 @@ void gui_parallel_close_tab(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_parallel_tab_destroy(GObject * object, gpointer user_data)
+static void on_parallel_tab_destroy(GObject *object, gpointer user_data)
 {
 
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-				   (widgets.notebook_bible_parallel),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				   TRUE);
 
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_bible_parallel),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				      1);
 	settings.dockedInt = TRUE;
 	main_update_parallel_page();
 }
-
 
 /******************************************************************************
  * Name
@@ -146,13 +140,13 @@ static void on_parallel_tab_destroy(GObject * object, gpointer user_data)
  *   void
  */
 
-static void sync_with_main(const gchar * key)
+static void sync_with_main(const gchar *key)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
 
 	if (key)
-		buf = (gchar *) main_url_encode(key);
+		buf = (gchar *)main_url_encode(key);
 	else
 		buf = (gchar *)
 		    main_url_encode(xml_get_value("keys", "verse"));
@@ -160,13 +154,13 @@ static void sync_with_main(const gchar * key)
 	if (buf && (strlen(buf) > 3)) {
 		url =
 		    g_strdup_printf("passagestudy.jsp?action=showParallel&"
-				    "type=verse&value=%s", buf);
+				    "type=verse&value=%s",
+				    buf);
 
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -185,25 +179,22 @@ static void sync_with_main(const gchar * key)
 
 void gui_keep_parallel_tab_in_sync(void)
 {
-	if (gtk_toggle_button_get_active
-	    (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
 		sync_with_main(NULL);
 }
 
-void gui_parallel_tab_sync(const gchar * key)
+void gui_parallel_tab_sync(const gchar *key)
 {
 	sync_with_main(key);
 }
 
 void gui_force_parallel_tab_sync(void)
 {
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (navbar_parallel.button_sync),
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(navbar_parallel.button_sync),
 				     settings.linkedtabs);
 	sync_on = settings.linkedtabs;
 	/* tell somebody that this button has been hacked */
 }
-
 
 /******************************************************************************
  * Name
@@ -225,7 +216,6 @@ static GtkWidget *create_nav_toolbar(void)
 {
 	return gui_navbar_versekey_parallel_new();
 }
-
 
 /******************************************************************************
  * Name
@@ -250,14 +240,11 @@ GtkWidget *_create_parallel_tab(void)
 	GtkWidget *box_parallel_labels;
 	GtkWidget *scrolled_window;
 
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-				   (widgets.notebook_bible_parallel),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				   FALSE);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_bible_parallel),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				      0);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK
-				     (widgets.notebook_bible_parallel),
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				     TRUE);
 
 	UI_VBOX(parallel_vbox, FALSE, 0);
@@ -300,14 +287,13 @@ GtkWidget *_create_parallel_tab(void)
 			g_free(label);
 		}
 	}
-#endif				/* 0 */
+#endif /* 0 */
 
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_box_pack_start(GTK_BOX(parallel_vbox), scrolled_window, TRUE,
 			   TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolled_window),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
@@ -321,21 +307,18 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
 
-	g_signal_connect((gpointer) widgets.html_parallel_dialog,
+	g_signal_connect((gpointer)widgets.html_parallel_dialog,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 	gtk_widget_hide(widgets.hpaned);
 	return parallel_vbox;
-
 }
-
 
 GtkWidget *gui_create_parallel_tab(void)
 {
 	settings.dockedInt = FALSE;
 	return _create_parallel_tab();
 }
-
 
 void gui_destroy_parallel_tab(void)
 {

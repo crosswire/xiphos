@@ -40,7 +40,7 @@
 #include "gui/dictlex.h"
 #include "main/sword.h"
 
-#define WK_HTML_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), WK_TYPE_HTML, WkHtmlPriv))
+#define WK_HTML_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE((object), WK_TYPE_HTML, WkHtmlPriv))
 
 extern gboolean shift_key_pressed;
 extern gboolean in_url;
@@ -56,12 +56,12 @@ enum {
 	LAST_SIGNAL
 };
 
-static guint signals[LAST_SIGNAL] = { 0 };
+static guint signals[LAST_SIGNAL] = {0};
 
 static GObjectClass *parent_class = NULL;
 
-static gboolean button_release_handler(GtkWidget * widget,
-				       GdkEventButton * event)
+static gboolean button_release_handler(GtkWidget *widget,
+				       GdkEventButton *event)
 {
 	GtkClipboard *clipboard;
 
@@ -69,30 +69,28 @@ static gboolean button_release_handler(GtkWidget * widget,
 		XI_message((" button 1 = %s", "double click!\n"));
 
 #ifdef USE_WEBKIT2
-		webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW
-							(widget),
+		webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW(widget),
 							WEBKIT_EDITING_COMMAND_COPY);
 #else
 		if (webkit_web_view_has_selection(WEBKIT_WEB_VIEW(widget))) {
-			webkit_web_view_copy_clipboard(WEBKIT_WEB_VIEW
-						       (widget));
+			webkit_web_view_copy_clipboard(WEBKIT_WEB_VIEW(widget));
 #endif
 
-			clipboard = gtk_widget_get_clipboard(widget,
-							     GDK_SELECTION_CLIPBOARD);
-			gtk_clipboard_request_text(clipboard,
-						   gui_get_clipboard_text_for_lookup,
-						   NULL);
+		clipboard = gtk_widget_get_clipboard(widget,
+						     GDK_SELECTION_CLIPBOARD);
+		gtk_clipboard_request_text(clipboard,
+					   gui_get_clipboard_text_for_lookup,
+					   NULL);
 #ifndef USE_WEBKIT2
-		}
-#endif
 	}
-
-	return FALSE;
+#endif
 }
 
-static gboolean button_press_handler(GtkWidget * widget,
-				     GdkEventButton * event)
+return FALSE;
+}
+
+static gboolean button_press_handler(GtkWidget *widget,
+				     GdkEventButton *event)
 {
 	WkHtmlPriv *priv;
 	priv = WK_HTML_GET_PRIVATE(WK_HTML(widget));
@@ -128,12 +126,12 @@ static gboolean button_press_handler(GtkWidget * widget,
 	return FALSE;
 }
 
-static void link_handler(GtkWidget * widget,
+static void link_handler(GtkWidget *widget,
 #ifdef USE_WEBKIT2
-			 WebKitHitTestResult * hit_test_result,
+			 WebKitHitTestResult *hit_test_result,
 			 guint modifiers,
 #else
-			 gchar * title, gchar * uri,
+				 gchar * title, gchar * uri,
 #endif
 			 gpointer user_data)
 {
@@ -171,7 +169,7 @@ static void link_handler(GtkWidget * widget,
 	}
 }
 
-static void html_realize(GtkWidget * widget)
+static void html_realize(GtkWidget *widget)
 {
 	GTK_WIDGET_CLASS(parent_class)->realize(widget);
 
@@ -184,12 +182,12 @@ static void html_realize(GtkWidget * widget)
 #ifdef USE_WEBKIT2
 			 "mouse-target-changed",
 #else
-			 "hovering-over-link",
+				 "hovering-over-link",
 #endif
 			 G_CALLBACK(link_handler), NULL);
 }
 
-static void html_init(WkHtml * html)
+static void html_init(WkHtml *html)
 {
 	WkHtmlPriv *priv;
 
@@ -206,13 +204,13 @@ static void html_init(WkHtml * html)
 	/*            G_CALLBACK(html_open_uri), NULL); */
 }
 
-static void html_dispose(GObject * object)
+static void html_dispose(GObject *object)
 {
-//  WkHtml *html = WK_HTML(object);
+	//  WkHtml *html = WK_HTML(object);
 	parent_class->dispose(object);
 }
 
-static void html_finalize(GObject * object)
+static void html_finalize(GObject *object)
 {
 	WkHtml *html = WK_HTML(object);
 	WkHtmlPriv *priv = html->priv;
@@ -225,13 +223,13 @@ static void html_finalize(GObject * object)
 	parent_class->finalize(object);
 }
 
-static void html_class_init(WkHtmlClass * klass)
+static void html_class_init(WkHtmlClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS(klass);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS(klass);
-//  WebKitWebViewClass *wc_class = WEBKIT_WEB_VIEW_CLASS(klass);
+	//  WebKitWebViewClass *wc_class = WEBKIT_WEB_VIEW_CLASS(klass);
 
-	parent_class = (GObjectClass *) g_type_class_peek_parent(klass);
+	parent_class = (GObjectClass *)g_type_class_peek_parent(klass);
 
 	object_class->finalize = html_finalize;
 	object_class->dispose = html_dispose;
@@ -278,26 +276,26 @@ GType wk_html_get_type(void)
 
 	if (G_UNLIKELY(type == 0)) {
 		static const GTypeInfo info = {
-			sizeof(WkHtmlClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) html_class_init,
-			NULL,
-			NULL,
-			sizeof(WkHtml),
-			0,
-			(GInstanceInitFunc) html_init,
+		    sizeof(WkHtmlClass),
+		    NULL,
+		    NULL,
+		    (GClassInitFunc)html_class_init,
+		    NULL,
+		    NULL,
+		    sizeof(WkHtml),
+		    0,
+		    (GInstanceInitFunc)html_init,
 		};
 
 		type = g_type_register_static(WEBKIT_TYPE_WEB_VIEW,
 					      "WkHtml",
-					      &info, (GTypeFlags) 0);
+					      &info, (GTypeFlags)0);
 	}
 
 	return type;
 }
 
-void wk_html_set_base_uri(WkHtml * html, const gchar * uri)
+void wk_html_set_base_uri(WkHtml *html, const gchar *uri)
 {
 	WkHtmlPriv *priv;
 
@@ -311,7 +309,7 @@ void wk_html_set_base_uri(WkHtml * html, const gchar * uri)
 	priv->base_uri = g_strdup("file://");
 }
 
-void wk_html_open_stream(WkHtml * html, const gchar * mime)
+void wk_html_open_stream(WkHtml *html, const gchar *mime)
 {
 	wk_html_set_base_uri(html, NULL);
 #ifndef USE_WEBKIT2
@@ -325,7 +323,7 @@ void wk_html_open_stream(WkHtml * html, const gchar * mime)
 	html->priv->mime = g_strdup(mime);
 }
 
-void wk_html_write(WkHtml * html, const gchar * data, gint len)
+void wk_html_write(WkHtml *html, const gchar *data, gint len)
 {
 	gchar *tmp = NULL;
 
@@ -341,12 +339,12 @@ void wk_html_write(WkHtml * html, const gchar * data, gint len)
 	}
 }
 
-void wk_html_frames(WkHtml * html, gboolean enable)
+void wk_html_frames(WkHtml *html, gboolean enable)
 {
 	html->priv->frames_enabled = enable;
 }
 
-void wk_html_printf(WkHtml * html, char *format, ...)
+void wk_html_printf(WkHtml *html, char *format, ...)
 {
 	va_list args;
 	gchar *string;
@@ -362,14 +360,12 @@ void wk_html_printf(WkHtml * html, char *format, ...)
 	g_free(string);
 }
 
-
-void wk_html_close(WkHtml * html)
+void wk_html_close(WkHtml *html)
 {
 	if (!html->priv->initialised) {
 		html->priv->initialised = TRUE;
 #ifndef USE_WEBKIT2
-		webkit_web_view_set_maintains_back_forward_list
-		    (WEBKIT_WEB_VIEW(html), FALSE);
+		webkit_web_view_set_maintains_back_forward_list(WEBKIT_WEB_VIEW(html), FALSE);
 #endif
 	}
 #ifdef USE_WEBKIT2
@@ -384,10 +380,10 @@ void wk_html_close(WkHtml * html)
 
 	g_bytes_unref(html_bytes);
 #else
-	webkit_web_view_load_string(WEBKIT_WEB_VIEW(html),
-				    html->priv->content,
-				    html->priv->mime,
-				    NULL, html->priv->base_uri);
+		webkit_web_view_load_string(WEBKIT_WEB_VIEW(html),
+					    html->priv->content,
+					    html->priv->mime,
+					    NULL, html->priv->base_uri);
 #endif
 	g_free(html->priv->content);
 	html->priv->content = NULL;
@@ -395,7 +391,7 @@ void wk_html_close(WkHtml * html)
 	html->priv->mime = NULL;
 }
 
-void wk_html_render_data(WkHtml * html, const char *data, guint32 len)
+void wk_html_render_data(WkHtml *html, const char *data, guint32 len)
 {
 	printf("in render_data, data is %s", data);
 	wk_html_open_stream(html, "text/html");
@@ -403,7 +399,7 @@ void wk_html_render_data(WkHtml * html, const char *data, guint32 len)
 	wk_html_close(html);
 }
 
-gboolean wk_html_find(WkHtml * html, const gchar * find_string)
+gboolean wk_html_find(WkHtml *html, const gchar *find_string)
 {
 	if (html->priv->find_string)
 		g_free(html->priv->find_string);
@@ -418,12 +414,12 @@ gboolean wk_html_find(WkHtml * html, const gchar * find_string)
 				      WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE,
 				      G_MAXUINT);
 #else
-	return webkit_web_view_search_text(WEBKIT_WEB_VIEW(html),
-					   find_string, FALSE, TRUE, TRUE);
+		return webkit_web_view_search_text(WEBKIT_WEB_VIEW(html),
+						   find_string, FALSE, TRUE, TRUE);
 #endif
 }
 
-gboolean wk_html_find_again(WkHtml * html, gboolean forward)
+gboolean wk_html_find_again(WkHtml *html, gboolean forward)
 {
 #ifdef USE_WEBKIT2
 	WebKitFindController *find_controller;
@@ -433,20 +429,20 @@ gboolean wk_html_find_again(WkHtml * html, gboolean forward)
 				      html->priv->find_string,
 				      WEBKIT_FIND_OPTIONS_NONE, G_MAXUINT);
 #else
-	return webkit_web_view_search_text(WEBKIT_WEB_VIEW(html),
-					   html->priv->find_string,
-					   FALSE, forward, TRUE);
+		return webkit_web_view_search_text(WEBKIT_WEB_VIEW(html),
+						   html->priv->find_string,
+						   FALSE, forward, TRUE);
 #endif
 }
 
 void
-wk_html_set_find_props(WkHtml * html,
+wk_html_set_find_props(WkHtml *html,
 		       const char *str, gboolean match_case, gboolean wrap)
 {
 	/* Empty */
 }
 
-void wk_html_jump_to_anchor(WkHtml * html, gchar * anchor)
+void wk_html_jump_to_anchor(WkHtml *html, gchar *anchor)
 {
 	WkHtmlPriv *priv;
 
@@ -467,28 +463,28 @@ void ClipboardTextReceivedFunc(GtkClipboard *clipboard,
 }
 */
 
-void wk_html_copy_selection(WkHtml * html)
+void wk_html_copy_selection(WkHtml *html)
 {
 #ifdef USE_WEBKIT2
 	webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW(html),
 						WEBKIT_EDITING_COMMAND_COPY);
 #else
-	if (webkit_web_view_has_selection(WEBKIT_WEB_VIEW(html)))
-		webkit_web_view_copy_clipboard(WEBKIT_WEB_VIEW(html));
+		if (webkit_web_view_has_selection(WEBKIT_WEB_VIEW(html)))
+			webkit_web_view_copy_clipboard(WEBKIT_WEB_VIEW(html));
 #endif
 }
 
-void wk_html_select_all(WkHtml * html)
+void wk_html_select_all(WkHtml *html)
 {
 #ifdef USE_WEBKIT2
 	webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW(html),
 						WEBKIT_EDITING_COMMAND_SELECT_ALL);
 #else
-	webkit_web_view_select_all(WEBKIT_WEB_VIEW(html));
+		webkit_web_view_select_all(WEBKIT_WEB_VIEW(html));
 #endif
 }
 
-void wk_html_print(WkHtml * html)
+void wk_html_print(WkHtml *html)
 {
 #ifdef USE_WEBKIT2
 	WebKitPrintOperation *print_operation;
@@ -496,9 +492,8 @@ void wk_html_print(WkHtml * html)
 	    webkit_print_operation_new(WEBKIT_WEB_VIEW(html));
 	webkit_print_operation_run_dialog(print_operation, NULL);
 #else
-	webkit_web_frame_print(webkit_web_view_get_main_frame
-			       (WEBKIT_WEB_VIEW(html)));
-	webkit_web_view_execute_script(WEBKIT_WEB_VIEW(html), "print();");
+		webkit_web_frame_print(webkit_web_view_get_main_frame(WEBKIT_WEB_VIEW(html)));
+		webkit_web_view_execute_script(WEBKIT_WEB_VIEW(html), "print();");
 #endif
 }
 

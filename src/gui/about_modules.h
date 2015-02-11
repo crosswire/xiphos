@@ -28,13 +28,13 @@ extern "C" {
 
 #include <gtk/gtk.h>
 
-	void gui_display_about_module_dialog(gchar * modname);
-	void gui_core_display_about_dialog(const gchar * desc,
-					   const gchar * abouttext,
-					   const gchar * modname);
-	void about_module_display(GString * str,
-				  const gchar * text,
-				  const gboolean tooltip);
+void gui_display_about_module_dialog(gchar *modname);
+void gui_core_display_about_dialog(const gchar *desc,
+				   const gchar *abouttext,
+				   const gchar *modname);
+void about_module_display(GString *str,
+			  const gchar *text,
+			  const gboolean tooltip);
 
 #ifdef __cplusplus
 }

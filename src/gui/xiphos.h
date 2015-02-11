@@ -26,7 +26,6 @@
 extern "C" {
 #endif
 
-
 #define MAIN_TEXT_WINDOW 0
 #define parallel_WINDOW 1
 #define COMMENTARY_WINDOW 2
@@ -41,9 +40,9 @@ extern "C" {
 
 /*** function prototypes ***/
 
-	void frontend_init(void);
-	void frontend_display(const char *);
-	void shutdown_frontend(void);
+void frontend_init(void);
+void frontend_display(const char *);
+void shutdown_frontend(void);
 
 #ifdef __cplusplus
 }

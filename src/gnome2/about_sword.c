@@ -49,7 +49,7 @@
  */
 
 static void
-on_dialog_response(GtkDialog * dialog, gint response_id,
+on_dialog_response(GtkDialog *dialog, gint response_id,
 		   gpointer user_data)
 {
 	gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -85,25 +85,19 @@ set of books may be shared among all frontends using the \
 framework.\n\n \
 Books can be downloaded from the SWORD Project.");
 
-
 	about1_logo_pixbuf = pixbuf_finder("sword-big.png", 0, NULL);
 
 	about1 = gtk_about_dialog_new();
 	g_signal_connect(about1, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
-	gtk_about_dialog_set_program_name
-	    (GTK_ABOUT_DIALOG(about1), "The SWORD Project");
-	gtk_about_dialog_set_version
-	    (GTK_ABOUT_DIALOG(about1), (gchar *) main_get_sword_version());
+	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(about1), "The SWORD Project");
+	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(about1), (gchar *)main_get_sword_version());
 	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(about1), about);
 
-	gtk_about_dialog_set_website
-	    (GTK_ABOUT_DIALOG(about1), "http://www.crosswire.org/");
-	gtk_about_dialog_set_website_label
-	    (GTK_ABOUT_DIALOG(about1), _("The SWORD Project"));
+	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(about1), "http://www.crosswire.org/");
+	gtk_about_dialog_set_website_label(GTK_ABOUT_DIALOG(about1), _("The SWORD Project"));
 
-	gtk_about_dialog_set_logo
-	    (GTK_ABOUT_DIALOG(about1), about1_logo_pixbuf);
+	gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(about1), about1_logo_pixbuf);
 
 	set_window_icon(GTK_WINDOW(about1));
 

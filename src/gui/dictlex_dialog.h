@@ -28,8 +28,8 @@ extern "C" {
 
 #include "main/module_dialogs.h"
 
-	void gui_create_dictlex_dialog(DIALOG_DATA * dlg);
-	void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d);
+void gui_create_dictlex_dialog(DIALOG_DATA *dlg);
+void on_btnSyncDL_clicked(GtkButton *button, DIALOG_DATA *d);
 
 #ifdef __cplusplus
 }

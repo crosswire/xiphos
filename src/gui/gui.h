@@ -9,10 +9,9 @@ void gui_main(void);
 void gconf_setup(void);
 #endif
 
-#define	GS_GCONF_MAX	6
+#define GS_GCONF_MAX 6
 
 #ifdef DEBUG
-
 
 gchar *XI_g_strdup_printf(const char *filename,
 			  int linenumber,
@@ -21,9 +20,9 @@ gchar *XI_g_strdup_printf(const char *filename,
 
 void XI_g_string_printf(const char *filename,
 			int linenumber,
-			GString * string,
+			GString *string,
 			const char *format, ...) G_GNUC_PRINTF(4, 5);
 
-#endif				/* DEBUG */
+#endif /* DEBUG */
 
 #endif

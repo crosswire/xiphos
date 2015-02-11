@@ -30,13 +30,13 @@
 extern "C" {
 #endif
 
-#define	g_strdup_printf(f, ...)		XI_g_strdup_printf(__FILE__, __LINE__, f, __VA_ARGS__)
-#define	g_string_printf(s, f, ...)	XI_g_string_printf(__FILE__, __LINE__, s, f, __VA_ARGS__)
+#define g_strdup_printf(f, ...) XI_g_strdup_printf(__FILE__, __LINE__, f, __VA_ARGS__)
+#define g_string_printf(s, f, ...) XI_g_string_printf(__FILE__, __LINE__, s, f, __VA_ARGS__)
 
 #include "gui.h"
 
 #ifdef __cplusplus
 }
 #endif
-																																																																																																													    /* the code implementing our versions of these is in src/gnome2/gui.c, *//* expressly because gui.c does not need these functions; ergo, gui.c  *//* does not #include this file: it gets access to real glib functions. *//* all other source files include this file to get the replacements.   */
-#endif				/* DEBUG */
+/* the code implementing our versions of these is in src/gnome2/gui.c, */ /* expressly because gui.c does not need these functions; ergo, gui.c  */ /* does not #include this file: it gets access to real glib functions. */ /* all other source files include this file to get the replacements.   */
+#endif																											      /* DEBUG */

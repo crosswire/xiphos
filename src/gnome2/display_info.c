@@ -37,9 +37,7 @@
 gboolean gsI_isrunning = FALSE;
 GtkWidget *dialog_display_info;
 
-
 static GtkWidget *html_widget;
-
 
 /******************************************************************************
  * Name
@@ -57,7 +55,7 @@ static GtkWidget *html_widget;
  *   void
  */
 
-void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
+void gui_display_mod_and_key(const gchar *mod_name, const gchar *key)
 {
 	gchar *text = NULL;
 	XI_message(("mod_name: %s  key: %s", mod_name, key));
@@ -65,12 +63,11 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 	XI_message(("%s", text));
 	if (text) {
 		main_entry_display(html_widget,
-				   (gchar *) mod_name,
-				   text, (gchar *) key, TRUE);
+				   (gchar *)mod_name,
+				   text, (gchar *)key, TRUE);
 		g_free(text);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -88,7 +85,7 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
  *   void
  */
 
-void gui_display_text_information(gchar * information)
+void gui_display_text_information(gchar *information)
 {
 	XIPHOS_HTML_OPEN_STREAM(html_widget, "text/html");
 	XIPHOS_HTML_WRITE(html_widget, information, strlen(information));
@@ -112,7 +109,7 @@ void gui_display_text_information(gchar * information)
  *   void
  */
 
-static void on_dlgInformation_destroy(GObject * object, gpointer user_data)
+static void on_dlgInformation_destroy(GObject *object, gpointer user_data)
 {
 	gsI_isrunning = FALSE;
 }
@@ -133,7 +130,7 @@ static void on_dlgInformation_destroy(GObject * object, gpointer user_data)
  *   void
  */
 
-static void button_close_clicked(GtkButton * button, gpointer user_data)
+static void button_close_clicked(GtkButton *button, gpointer user_data)
 {
 	gtk_widget_hide(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
@@ -171,8 +168,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 			  "dialog_display_info", dialog_display_info);
 	gtk_window_set_title(GTK_WINDOW(dialog_display_info), " ");
 	//GTK_WINDOW(dialog_display_info)->type = GTK_WINDOW_TOPLEVEL;
-	gtk_window_set_default_size(GTK_WINDOW
-				    (dialog_display_info), 350, 200);
+	gtk_window_set_default_size(GTK_WINDOW(dialog_display_info), 350, 200);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_display_info), TRUE);
 
 #ifndef USE_GTK_3
@@ -180,11 +176,10 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 				     FALSE);
 #endif
 
-	dialog_vbox23 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_display_info));	//GTK_DIALOG(dialog_display_info)->vbox;
+	dialog_vbox23 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_display_info)); //GTK_DIALOG(dialog_display_info)->vbox;
 	g_object_set_data(G_OBJECT(dialog_display_info),
 			  "dialog_vbox23", dialog_vbox23);
 	gtk_widget_show(dialog_vbox23);
-
 
 	UI_HBOX(hbox, FALSE, 12);
 	gtk_widget_show(hbox);
@@ -204,7 +199,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 #ifndef HAVE_GTK_310
 	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
 #endif
-	html_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 30));	//gtk_html_new();
+	html_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 30)); //gtk_html_new();
 	gtk_widget_show(html_widget);
 	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
 	//gtk_container_add(GTK_CONTAINER(scrolledwindow70), html_widget);
@@ -218,8 +213,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	g_object_set_data(G_OBJECT(dialog_display_info),
 			  "dialog_action_area23", dialog_action_area23);
 	gtk_widget_show(dialog_action_area23);
-	gtk_container_set_border_width(GTK_CONTAINER
-				       (dialog_action_area23), 10);
+	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area23), 10);
 
 #ifdef USE_GTK_3
 	hbuttonbox2 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);

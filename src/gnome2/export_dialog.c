@@ -19,7 +19,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -34,7 +33,6 @@
 #include "gui/dialog.h"
 #include "gui/utilities.h"
 
-
 #include "main/export_passage.h"
 #include "main/settings.h"
 #include "main/sword.h"
@@ -47,9 +45,9 @@ gchar *datafile;
 static GtkWidget *dialog;
 static gchar *filename;
 
-
 typedef struct _export_dialog EXPORT_DIALOG;
-struct _export_dialog {
+struct _export_dialog
+{
 	GtkWidget *rb_copy;
 	GtkWidget *rb_export;
 	GtkWidget *rb_book;
@@ -74,12 +72,11 @@ struct _export_dialog {
 
 EXPORT_DIALOG d;
 EXPORT_DATA edata = {
-	NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL,
-	-1, -1, -1, -1, -1, -1
-};
+    NULL,
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL,
+    -1, -1, -1, -1, -1, -1};
 
 /******************************************************************************
  * Name
@@ -99,10 +96,9 @@ EXPORT_DATA edata = {
  *   void
  */
 
-static
-void on_filechooserdialog_response(GtkDialog * fdialog,
-				   gint response_id,
-				   GtkFileChooser * filesel)
+static void on_filechooserdialog_response(GtkDialog *fdialog,
+					  gint response_id,
+					  GtkFileChooser *filesel)
 {
 
 	switch (response_id) {
@@ -115,11 +111,9 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 
 	case GTK_RESPONSE_CANCEL:
 		break;
-
 	}
 	gtk_widget_destroy(GTK_WIDGET(fdialog));
 }
-
 
 /******************************************************************************
  * Name
@@ -153,7 +147,7 @@ void _get_export_filename(void)
 	XI_message(("%s", glade_file));
 #endif
 
-	/* build the widget */
+/* build the widget */
 #ifdef USE_GTKBUILDER
 	fdialog = gtk_file_chooser_dialog_new("Save Export File",
 					      NULL,
@@ -177,7 +171,7 @@ void _get_export_filename(void)
 	g_signal_connect(fdialog,
 			 "response",
 			 G_CALLBACK(on_filechooserdialog_response),
-			 (GtkFileChooser *) fdialog);
+			 (GtkFileChooser *)fdialog);
 
 #ifdef USE_GTKBUILDER
 	gtk_dialog_run(GTK_DIALOG(fdialog));
@@ -186,37 +180,31 @@ void _get_export_filename(void)
 
 static void _save_state_buttons(void)
 {
-	gchar value[10];	/* set export-copy.xml */
+	gchar value[10]; /* set export-copy.xml */
 	gchar *file =
 	    g_strdup_printf("%s/export-copy.xml", settings.gSwordDir);
 
-	if (xml_load_copy_export_file((const xmlChar *) file)) {
+	if (xml_load_copy_export_file((const xmlChar *)file)) {
 		sprintf(value, "%d",
-			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						     (d.rb_plain)));
+			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_plain)));
 		xml_export_set_value("Copy_Export", "dialog", "plaintext",
 				     value);
 		sprintf(value, "%d",
-			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						     (d.cb_versenum)));
+			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.cb_versenum)));
 		xml_export_set_value("Copy_Export", "dialog",
 				     "verse_numbers", value);
 		sprintf(value, "%d",
-			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						     (d.
-						      cb_reference_last)));
+			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.cb_reference_last)));
 		xml_export_set_value("Copy_Export", "dialog",
 				     "reference_last", value);
 		//sprintf(value, "%d", gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.)));
 		//xml_export_set_value("Copy_Export", "dialog", "",value );
 		sprintf(value, "%d",
-			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						     (d.cb_version)));
+			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.cb_version)));
 		xml_export_set_value("Copy_Export", "dialog", "version",
 				     value);
 		xml_save_export_doc(file);
 		xml_free_export_doc();
-
 	}
 	if (file)
 		g_free(file);
@@ -240,7 +228,7 @@ static void _save_state_buttons(void)
  *   void
  */
 
-void on_dialog_export_passage_response(GtkDialog * dialog,
+void on_dialog_export_passage_response(GtkDialog *dialog,
 				       gint response_id,
 				       gpointer user_data)
 {
@@ -249,36 +237,25 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
 	case GTK_RESPONSE_OK:
-		if (gtk_toggle_button_get_active
-		    (GTK_TOGGLE_BUTTON(d.rb_html)))
+		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_html)))
 			d.format = 1;
 		else
 			d.format = 0;
 
 		edata.passage_type =
-		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						 (d.rb_book)) ? BOOK :
-		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						 (d.rb_chapter)) ? CHAPTER
-		    :
-		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						 (d.rb_verse)) ? VERSE :
-		    VERSE_RANGE;
+		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_book)) ? BOOK : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_chapter)) ? CHAPTER
+																		      : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_verse)) ? VERSE : VERSE_RANGE;
 
 		edata.verse_num =
-		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						 (d.cb_versenum));
+		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.cb_versenum));
 		edata.reference_last =
-		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
-						 (d.cb_reference_last));
+		    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.cb_reference_last));
 
 		if (edata.passage_type == VERSE_RANGE) {
 			edata.start_verse =
-			    gtk_spin_button_get_value_as_int
-			    (GTK_SPIN_BUTTON(d.sb_start_verse));
+			    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(d.sb_start_verse));
 			edata.end_verse =
-			    gtk_spin_button_get_value_as_int
-			    (GTK_SPIN_BUTTON(d.sb_end_verse));
+			    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(d.sb_end_verse));
 			if (edata.end_verse < edata.start_verse) {
 				int swap;
 				swap = edata.end_verse;
@@ -290,8 +267,7 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			edata.end_verse = 0;
 		}
 		_save_state_buttons();
-		if (gtk_toggle_button_get_active
-		    (GTK_TOGGLE_BUTTON(d.rb_export)))
+		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_export)))
 			_get_export_filename();
 		else {
 			edata.filename = NULL;
@@ -301,7 +277,6 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 		break;
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -321,9 +296,9 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
  *   gint
  */
 
-#define	OP_NAME	"Warned about License for Export"
+#define OP_NAME "Warned about License for Export"
 
-gint _check_for_distribution_license(gchar * mod_name)
+gint _check_for_distribution_license(gchar *mod_name)
 {
 	gchar *distributionlicense;
 	gchar *conf_file;
@@ -344,8 +319,7 @@ gint _check_for_distribution_license(gchar * mod_name)
 
 	if (!distributionlicense || (distributionlicense &&
 				     g_strstr_len(distributionlicense,
-						  strlen
-						  (distributionlicense),
+						  strlen(distributionlicense),
 						  "Copyright"))) {
 		if (main_get_one_option(mod_name, OP_NAME) == 0) {
 			gui_generic_warning(_("Please check copyright before exporting!"));
@@ -358,19 +332,16 @@ gint _check_for_distribution_license(gchar * mod_name)
 	return 0;
 }
 
-
-static
-void on_rb_multi_verse_toggled(GtkToggleButton * togglebutton,
-			       gpointer user_data)
+static void on_rb_multi_verse_toggled(GtkToggleButton *togglebutton,
+				      gpointer user_data)
 {
 	gint state = gtk_toggle_button_get_active(togglebutton);
 	gtk_widget_set_sensitive(d.sb_start_verse, state);
 	gtk_widget_set_sensitive(d.sb_end_verse, state);
 }
 
-static
-void on_cb_version_toggled(GtkToggleButton * togglebutton,
-			   gpointer user_data)
+static void on_cb_version_toggled(GtkToggleButton *togglebutton,
+				  gpointer user_data)
 {
 	if (gtk_toggle_button_get_active(togglebutton))
 		edata.version = TRUE;
@@ -378,9 +349,8 @@ void on_cb_version_toggled(GtkToggleButton * togglebutton,
 		edata.version = FALSE;
 }
 
-static
-void on_reference_last_toggled(GtkToggleButton * togglebutton,
-			       gpointer user_data)
+static void on_reference_last_toggled(GtkToggleButton *togglebutton,
+				      gpointer user_data)
 {
 	if (gtk_toggle_button_get_active(togglebutton))
 		edata.reference_last = TRUE;
@@ -404,14 +374,13 @@ void on_reference_last_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-static
-void _load_data(gchar * filename)
+static void _load_data(gchar *filename)
 {
 	gchar *buf;
 	gchar *file =
 	    g_strdup_printf("%s/export-copy.xml", settings.gSwordDir);
 
-	if (xml_load_copy_export_file((const xmlChar *) filename)) {
+	if (xml_load_copy_export_file((const xmlChar *)filename)) {
 
 		/* html */
 
@@ -435,8 +404,7 @@ void _load_data(gchar * filename)
 		    xml_get_copy_export_value("verserange", "verse");
 
 		if (edata.verse_range_verse == NULL) {
-			xml_add_new_item_to_export_doc_section
-			    ("verserange", "verse", " %s%s");
+			xml_add_new_item_to_export_doc_section("verserange", "verse", " %s%s");
 			edata.verse_range_verse =
 			    xml_get_copy_export_value("verserange",
 						      "verse");
@@ -466,53 +434,44 @@ void _load_data(gchar * filename)
 		    xml_get_copy_export_value("verserange", "plain_first");
 
 		if ((buf =
-		     xml_get_copy_export_value("dialog", "plaintext"))) {
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (d.rb_plain),
+			 xml_get_copy_export_value("dialog", "plaintext"))) {
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_plain),
 						     atoi(buf));
 			g_free(buf);
 		} else {
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (d.rb_plain), TRUE);
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_plain), TRUE);
 		}
 
 		if ((buf =
-		     xml_get_copy_export_value("dialog",
-					       "verse_numbers"))) {
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (d.cb_versenum),
+			 xml_get_copy_export_value("dialog",
+						   "verse_numbers"))) {
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.cb_versenum),
 						     atoi(buf));
 			g_free(buf);
 		} else {
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (d.cb_versenum),
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.cb_versenum),
 						     TRUE);
 		}
 
-
 		if ((buf =
-		     xml_get_copy_export_value("dialog",
-					       "reference_last"))) {
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (d.cb_reference_last),
+			 xml_get_copy_export_value("dialog",
+						   "reference_last"))) {
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.cb_reference_last),
 						     atoi(buf));
 			g_free(buf);
 		} else {
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (d.cb_reference_last),
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.cb_reference_last),
 						     TRUE);
 		}
 
 		if ((buf = xml_get_copy_export_value("dialog", "version"))) {
 			edata.version = atoi(buf);
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (d.cb_version),
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.cb_version),
 						     edata.version);
 			g_free(buf);
 		} else {
 			edata.version = 0;
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (d.cb_version), TRUE);
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.cb_version), TRUE);
 		}
 
 		xml_free_export_doc();
@@ -556,7 +515,7 @@ void gui_export_dialog(void)
 	dist_license =
 	    _check_for_distribution_license(settings.MainWindowModule);
 
-	/* build the widget */
+/* build the widget */
 #ifdef USE_GTKBUILDER
 	gxml = gtk_builder_new();
 	gtk_builder_add_from_file(gxml, glade_file, NULL);
@@ -586,7 +545,7 @@ void gui_export_dialog(void)
 	/* set export-copy.xml */
 	datafile =
 	    g_strdup_printf("%s/export-copy.xml", settings.gSwordDir);
-	/* check for datafile */
+/* check for datafile */
 #ifdef HAVE_GTK_224
 	if (g_access(datafile, F_OK) == -1) {
 #else
@@ -634,14 +593,14 @@ void gui_export_dialog(void)
 
 	gtk_label_set_text(GTK_LABEL(d.lb_version),
 			   settings.MainWindowModule);
-	ref = (char *) main_getText(settings.currentverse);
+	ref = (char *)main_getText(settings.currentverse);
 	gtk_label_set_text(GTK_LABEL(d.lb_key), ref);
 	g_free(ref);
 
-	g_signal_connect((gpointer) d.rb_multi_verse, "toggled",
+	g_signal_connect((gpointer)d.rb_multi_verse, "toggled",
 			 G_CALLBACK(on_rb_multi_verse_toggled), NULL);
-	g_signal_connect((gpointer) d.cb_version, "toggled",
+	g_signal_connect((gpointer)d.cb_version, "toggled",
 			 G_CALLBACK(on_cb_version_toggled), NULL);
-	g_signal_connect((gpointer) d.cb_reference_last, "toggled",
+	g_signal_connect((gpointer)d.cb_reference_last, "toggled",
 			 G_CALLBACK(on_reference_last_toggled), NULL);
 }

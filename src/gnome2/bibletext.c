@@ -27,7 +27,6 @@
 
 #include "xiphos_html/xiphos_html.h"
 
-
 #include "gui/xiphos.h"
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
@@ -79,14 +78,12 @@ void gui_popup_pm_text(void)
 	   NULL); */
 }
 
-
 static gboolean
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 {
 	gui_menu_popup(html, settings.MainWindowModule, NULL);
 	return TRUE;
 }
-
 
 /******************************************************************************
  * Name
@@ -122,7 +119,7 @@ GtkWidget *gui_create_bible_pane(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_text);
 
-	g_signal_connect((gpointer) widgets.html_text,
+	g_signal_connect((gpointer)widgets.html_text,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 

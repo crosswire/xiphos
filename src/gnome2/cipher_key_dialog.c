@@ -32,8 +32,6 @@
 #include "main/settings.h"
 #include "main/sword.h"
 
-
-
 /******************************************************************************
  * Name
  *   gui_add_cipher_key
@@ -50,7 +48,7 @@
  *   gboolean
  */
 
-gchar *gui_add_cipher_key(const char *mod_name, gchar * cipher_old)
+gchar *gui_add_cipher_key(const char *mod_name, gchar *cipher_old)
 {
 	gchar *retval = NULL;
 	GS_DIALOG *info;
@@ -64,7 +62,7 @@ gchar *gui_add_cipher_key(const char *mod_name, gchar * cipher_old)
 	info->label_top =
 	    g_strdup_printf(_("Cipher key for module %s"), mod_name);
 	info->label_middle = _("for:");
-	info->label_bottom = (char *) mod_name;
+	info->label_bottom = (char *)mod_name;
 	info->text1 = g_strdup(cipher_old);
 	info->label1 = _("Enter Key: ");
 	info->ok = TRUE;

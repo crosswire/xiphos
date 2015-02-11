@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-	void gui_set_module_font(gchar * mod_name);
+void gui_set_module_font(gchar *mod_name);
 
 #ifdef __cplusplus
 }

@@ -26,13 +26,13 @@
 extern "C" {
 #endif
 
-	gboolean main_prayerlist_basic_create(void);
-	gboolean main_prayerlist_subject_create(void);
-	gboolean main_prayerlist_monthly_create(void);
-	gboolean main_prayerlist_journal_create(void);
-	gboolean main_prayerlist_outlined_topic_create(void);
+gboolean main_prayerlist_basic_create(void);
+gboolean main_prayerlist_subject_create(void);
+gboolean main_prayerlist_monthly_create(void);
+gboolean main_prayerlist_journal_create(void);
+gboolean main_prayerlist_outlined_topic_create(void);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* _PRAYERLISTS_H */
+#endif /* _PRAYERLISTS_H */

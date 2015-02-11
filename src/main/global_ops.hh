@@ -19,7 +19,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
 #ifndef ___MOD_GLOBAL_OPS_H_
 #define ___MOD_GLOBAL_OPS_H_
 
@@ -27,10 +26,10 @@
 extern "C" {
 #endif
 
-
 typedef struct _global_ops GLOBAL_OPS;
 #include "main/module_dialogs.h"
-struct  _global_ops {
+struct _global_ops
+{
 	gboolean words_in_red;
 	gboolean strongs;
 	gboolean morphs;
@@ -60,11 +59,11 @@ struct  _global_ops {
 };
 
 void _set_global_textual(const char *option, const char *choice);
-GLOBAL_OPS *main_new_globals(const gchar * mod_name);
-int main_save_module_options(const char * mod_name, const char * option, int choice);
+GLOBAL_OPS *main_new_globals(const gchar *mod_name);
+int main_save_module_options(const char *mod_name, const char *option, int choice);
 int main_get_one_option(const char *mod_name, const char *op);
 
-void main_set_global_options(GLOBAL_OPS * ops);
+void main_set_global_options(GLOBAL_OPS *ops);
 
 #ifdef __cplusplus
 }

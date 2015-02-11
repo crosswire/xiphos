@@ -60,7 +60,6 @@
 
 #include "gui/debug_glib_null.h"
 
-
 /******************************************************************************
  * Name
  *
@@ -84,13 +83,12 @@ void access_to_edit_percomm()
 	if (!main_is_module(personal))
 		return;
 
-	editor_create_new(personal, (gchar *) settings.currentverse,
+	editor_create_new(personal, (gchar *)settings.currentverse,
 			  NOTE_EDITOR);
 }
 
-
-static gboolean on_enter_notify_event(GtkWidget * widget,
-				      GdkEventCrossing * event,
+static gboolean on_enter_notify_event(GtkWidget *widget,
+				      GdkEventCrossing *event,
 				      gpointer user_data)
 {
 	//shift_key_pressed = FALSE;
@@ -100,9 +98,8 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 	return FALSE;
 }
 
-
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 {
 	//g_print ("in comm _popupmenu_requested_cb\n");
 	gui_menu_popup(html, settings.CommWindowModule, NULL);
@@ -143,10 +140,10 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_comm);
 
-	g_signal_connect((gpointer) widgets.html_comm,
+	g_signal_connect((gpointer)widgets.html_comm,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), NULL);
-	g_signal_connect((gpointer) scrolledwindow, "enter_notify_event",
+	g_signal_connect((gpointer)scrolledwindow, "enter_notify_event",
 			 G_CALLBACK(on_enter_notify_event), NULL);
 
 	return box_comm;

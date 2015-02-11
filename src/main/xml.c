@@ -36,7 +36,8 @@
 #include "main/xml.h"
 #include "gui/dialog.h"
 
-struct _bookmark_data {
+struct _bookmark_data
+{
 	gchar *caption;
 	gchar *key;
 	gchar *module;
@@ -79,7 +80,7 @@ void xml_new_bookmark_file(void)
 	sprintf(buf, "%s/%s/bookmarks.xml", settings.gSwordDir,
 		"bookmarks");
 	xml_filename = buf;
-	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
+	xml_doc = xmlNewDoc((const xmlChar *)"1.0");
 
 	if (xml_doc == NULL) {
 		fprintf(stderr,
@@ -87,9 +88,9 @@ void xml_new_bookmark_file(void)
 		return;
 	}
 
-	xml_node = xmlNewNode(NULL, (const xmlChar *) "SwordBookmarks");
-	(void) xmlNewProp(xml_node, (const xmlChar *) "syntaxVersion",
-			  (const xmlChar *) "1.0");
+	xml_node = xmlNewNode(NULL, (const xmlChar *)"SwordBookmarks");
+	(void)xmlNewProp(xml_node, (const xmlChar *)"syntaxVersion",
+			 (const xmlChar *)"1.0");
 	xmlDocSetRootElement(xml_doc, xml_node);
 
 	xml_root = xml_add_folder_to_parent(xml_node, _("Personal"));
@@ -128,18 +129,17 @@ void xml_new_bookmark_file(void)
  *   xmlNodePtr
  */
 
-xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption)
+xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar *caption)
 {
 	xmlNodePtr cur_node;
 
 	cur_node = xmlNewChild(parent,
-			       NULL, (const xmlChar *) "Folder", NULL);
-	(void) xmlNewProp(cur_node,
-			  (const xmlChar *) "caption",
-			  (const xmlChar *) caption);
+			       NULL, (const xmlChar *)"Folder", NULL);
+	(void)xmlNewProp(cur_node,
+			 (const xmlChar *)"caption",
+			 (const xmlChar *)caption);
 	return cur_node;
 }
-
 
 /******************************************************************************
  * Name
@@ -159,9 +159,9 @@ xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption)
  */
 
 void xml_add_bookmark_to_parent(xmlNodePtr parent,
-				gchar * caption,
-				gchar * key,
-				gchar * module, const gchar * mod_desc)
+				gchar *caption,
+				gchar *key,
+				gchar *module, const gchar *mod_desc)
 {
 	xmlNodePtr xml_node;
 	//gchar *mod_desc = NULL;
@@ -175,16 +175,16 @@ void xml_add_bookmark_to_parent(xmlNodePtr parent,
 		mod_desc = " ";
 
 	xml_node = xmlNewChild(parent,
-			       NULL, (const xmlChar *) "Bookmark", NULL);
-	(void) xmlNewProp(xml_node,
-			  (const xmlChar *) "modulename",
-			  (const xmlChar *) module);
-	(void) xmlNewProp(xml_node, (const xmlChar *) "key",
-			  (const xmlChar *) key);
-	(void) xmlNewProp(xml_node, (const xmlChar *) "moduledescription",
-			  (const xmlChar *) mod_desc);
-	(void) xmlNewProp(xml_node, (const xmlChar *) "description",
-			  (const xmlChar *) caption);
+			       NULL, (const xmlChar *)"Bookmark", NULL);
+	(void)xmlNewProp(xml_node,
+			 (const xmlChar *)"modulename",
+			 (const xmlChar *)module);
+	(void)xmlNewProp(xml_node, (const xmlChar *)"key",
+			 (const xmlChar *)key);
+	(void)xmlNewProp(xml_node, (const xmlChar *)"moduledescription",
+			 (const xmlChar *)mod_desc);
+	(void)xmlNewProp(xml_node, (const xmlChar *)"description",
+			 (const xmlChar *)caption);
 	/*xml_attr =
 	   xmlNewProp(xml_node, "caption",
 	   (const xmlChar *) caption); */
@@ -206,10 +206,10 @@ void xml_add_bookmark_to_parent(xmlNodePtr parent,
  *   void
  */
 
-void xml_write_bookmark_doc(const xmlChar * xml_filename)
+void xml_write_bookmark_doc(const xmlChar *xml_filename)
 {
 	XI_print(("\nsaving = %s\n", xml_filename));
-	xmlSaveFormatFile((const char *) xml_filename, bookmark_doc, 1);
+	xmlSaveFormatFile((const char *)xml_filename, bookmark_doc, 1);
 }
 
 /******************************************************************************
@@ -233,7 +233,6 @@ void xml_free_bookmark_doc(void)
 	xmlFreeDoc(bookmark_doc);
 }
 
-
 /******************************************************************************
  * Name
  *   xml_load_bookmark_file
@@ -250,12 +249,12 @@ void xml_free_bookmark_doc(void)
  *   xmlNodePtr
  */
 
-xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file)
+xmlNodePtr xml_load_bookmark_file(const xmlChar *bookmark_file)
 {
 
 	xmlNodePtr cur = NULL;
 
-	bookmark_doc = xmlParseFile((const char *) bookmark_file);
+	bookmark_doc = xmlParseFile((const char *)bookmark_file);
 
 	if (bookmark_doc == NULL) {
 		fprintf(stderr, _("Document not parsed successfully. \n"));
@@ -268,7 +267,7 @@ xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file)
 		return NULL;
 	}
 
-	if (xmlStrcmp(cur->name, (const xmlChar *) "SwordBookmarks")) {
+	if (xmlStrcmp(cur->name, (const xmlChar *)"SwordBookmarks")) {
 		fprintf(stderr,
 			_("wrong type, root node != SwordBookmarks\n"));
 		xmlFreeDoc(bookmark_doc);
@@ -278,7 +277,6 @@ xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file)
 	cur = cur->xmlChildrenNode;
 	return cur;
 }
-
 
 /******************************************************************************
  * Name
@@ -302,7 +300,6 @@ void xml_save_export_doc(char *name)
 	xmlSaveFormatFile(name, xml_export_doc, 1);
 }
 
-
 /******************************************************************************
  * Name
  *   xml_get_copy_export_value
@@ -324,13 +321,13 @@ char *xml_get_copy_export_value(const char *section, const char *item)
 	xmlNodePtr cur = NULL;
 	xmlChar *results = NULL;
 	if ((cur =
-	     xml_find_prop(xml_export_doc, "Copy_Export", section,
-			   item)) != NULL) {
+		 xml_find_prop(xml_export_doc, "Copy_Export", section,
+			       item)) != NULL) {
 		results =
 		    xmlNodeListGetString(xml_export_doc,
 					 cur->xmlChildrenNode, 1);
 		if (results)
-			return (char *) results;
+			return (char *)results;
 	}
 	return NULL;
 }
@@ -357,9 +354,9 @@ void xml_export_set_value(const char *type_doc, const char *section,
 {
 	xmlNodePtr cur = NULL;
 	if ((cur =
-	     xml_find_prop(xml_export_doc, type_doc, section,
-			   item)) != NULL) {
-		xmlNodeSetContent(cur, (const xmlChar *) value);
+		 xml_find_prop(xml_export_doc, type_doc, section,
+			       item)) != NULL) {
+		xmlNodeSetContent(cur, (const xmlChar *)value);
 	}
 }
 
@@ -400,11 +397,11 @@ void xml_free_export_doc(void)
  *   xmlNodePtr
  */
 
-int xml_load_copy_export_file(const xmlChar * file)
+int xml_load_copy_export_file(const xmlChar *file)
 {
 	xmlNodePtr cur = NULL;
 
-	xml_export_doc = xmlParseFile((const char *) file);
+	xml_export_doc = xmlParseFile((const char *)file);
 
 	if (xml_export_doc == NULL) {
 		fprintf(stderr, _("Document not parsed successfully. \n"));
@@ -417,7 +414,7 @@ int xml_load_copy_export_file(const xmlChar * file)
 		return 0;
 	}
 
-	if (xmlStrcmp(cur->name, (const xmlChar *) "Copy_Export")) {
+	if (xmlStrcmp(cur->name, (const xmlChar *)"Copy_Export")) {
 		fprintf(stderr,
 			_("wrong type, root node != Copy_Export\n"));
 		xmlFreeDoc(xml_export_doc);
@@ -426,7 +423,6 @@ int xml_load_copy_export_file(const xmlChar * file)
 	//cur = cur->xmlChildrenNode;
 	return 1;
 }
-
 
 void xml_add_new_section_to_doc(xmlDocPtr doc, char *section)
 {
@@ -437,11 +433,9 @@ void xml_add_new_section_to_doc(xmlDocPtr doc, char *section)
 		fprintf(stderr, _("empty document \n"));
 		return;
 	}
-	(void) xmlNewChild(root_node, NULL,
-			   (const xmlChar *) section, NULL);
+	(void)xmlNewChild(root_node, NULL,
+			  (const xmlChar *)section, NULL);
 }
-
-
 
 /******************************************************************************
  * Name
@@ -465,7 +459,7 @@ int xml_create_copy_export_file(char *path)
 	xmlNodePtr section_node;
 	xmlDocPtr xml_doc;
 
-	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
+	xml_doc = xmlNewDoc((const xmlChar *)"1.0");
 
 	if (xml_doc == NULL) {
 		fprintf(stderr,
@@ -473,110 +467,105 @@ int xml_create_copy_export_file(char *path)
 		return 0;
 	}
 
-	root_node = xmlNewNode(NULL, (const xmlChar *) "Copy_Export");
-	(void) xmlNewProp(root_node, (const xmlChar *) "Version",
-			  (const xmlChar *) "0");
+	root_node = xmlNewNode(NULL, (const xmlChar *)"Copy_Export");
+	(void)xmlNewProp(root_node, (const xmlChar *)"Version",
+			 (const xmlChar *)"0");
 	xmlDocSetRootElement(xml_doc, root_node);
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "dialog", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plaintext",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "HTML",
-			(const xmlChar *) "0");
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"dialog", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"plaintext",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"HTML",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "verse_numbers",
-			(const xmlChar *) "0");
+			(const xmlChar *)"verse_numbers",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "reference_last",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "version",
-			(const xmlChar *) "1");
+			(const xmlChar *)"reference_last",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"version",
+			(const xmlChar *)"1");
 
 	/* book format */
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "book", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "header",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"book", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"header",
 			(const xmlChar *)
 			_("%s<center>%s<br>Chapter %d</center><br>"));
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "chapterheader",
+			(const xmlChar *)"chapterheader",
 			(const xmlChar *)
 			_("<br><center>Chapter %d</center><br>"));
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "plain_header",
-			(const xmlChar *) _("%s\n\nChapter %d\n\n"));
+			(const xmlChar *)"plain_header",
+			(const xmlChar *)_("%s\n\nChapter %d\n\n"));
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "plain_chapterheader",
-			(const xmlChar *) _("\n\nChapter %d\n\n"));
-
+			(const xmlChar *)"plain_chapterheader",
+			(const xmlChar *)_("\n\nChapter %d\n\n"));
 
 	/* chapter format */
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "chapter",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"chapter",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "header",
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"header",
 			(const xmlChar *)
 			_("%s%s: %s Chapter %d<br><br>"));
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "plain_header",
-			(const xmlChar *) _("%s: %s Chapter %d\n\n"));
+			(const xmlChar *)"plain_header",
+			(const xmlChar *)_("%s: %s Chapter %d\n\n"));
 
 	/* versenumber format */
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "versenumber",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"versenumber",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "format",
-			(const xmlChar *) _("&nbsp;&nbsp;[%d]"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"format",
+			(const xmlChar *)_("&nbsp;&nbsp;[%d]"));
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "plain_format",
-			(const xmlChar *) _(" [%d]"));
-
+			(const xmlChar *)"plain_format",
+			(const xmlChar *)_(" [%d]"));
 
 	/* single verse format */
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "singleverse",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"singleverse",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "last",
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"last",
 			(const xmlChar *)
 			_("%s%s (%s %d:%d%s)</body></html>"));
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "first",
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"first",
 			(const xmlChar *)
 			_("%s(%s %d:%d%s)%s </body></html>"));
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_last",
-			(const xmlChar *) _("%s (%s %d:%d%s)"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"plain_last",
+			(const xmlChar *)_("%s (%s %d:%d%s)"));
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "plain_first",
-			(const xmlChar *) _("(%s %d:%d%s) %s"));
-
+			(const xmlChar *)"plain_first",
+			(const xmlChar *)_("(%s %d:%d%s) %s"));
 
 	/* verse range format */
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "verserange",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"verserange",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "verse",
-			(const xmlChar *) _(" %s%s"));
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "last",
-			(const xmlChar *) _("%s(%s %d:%d-%d%s)"));
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "first",
-			(const xmlChar *) _("(%s %d:%d-%d%s)<br>"));
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_last",
-			(const xmlChar *) _("%s(%s %d:%d-%d%s)"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"verse",
+			(const xmlChar *)_(" %s%s"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"last",
+			(const xmlChar *)_("%s(%s %d:%d-%d%s)"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"first",
+			(const xmlChar *)_("(%s %d:%d-%d%s)<br>"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"plain_last",
+			(const xmlChar *)_("%s(%s %d:%d-%d%s)"));
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "plain_first",
-			(const xmlChar *) _("(%s %d:%d-%d%s)\n"));
-
+			(const xmlChar *)"plain_first",
+			(const xmlChar *)_("(%s %d:%d-%d%s)\n"));
 
 	xmlSaveFormatFile(path, xml_doc, 1);
 	xmlFreeDoc(xml_doc);
 	return 1;
 }
-
 
 /******************************************************************************
  * Name
@@ -601,7 +590,7 @@ int xml_create_settings_file(char *path)
 	xmlNodePtr section_node;
 	GList *tmp = NULL;
 
-	xml_settings_doc = xmlNewDoc((const xmlChar *) "1.0");
+	xml_settings_doc = xmlNewDoc((const xmlChar *)"1.0");
 
 	if (xml_settings_doc == NULL) {
 		fprintf(stderr,
@@ -609,370 +598,364 @@ int xml_create_settings_file(char *path)
 		return 0;
 	}
 
-	root_node = xmlNewNode(NULL, (const xmlChar *) "Xiphos");
-	(void) xmlNewProp(root_node, (const xmlChar *) "Version",
-			  (const xmlChar *) VERSION);
+	root_node = xmlNewNode(NULL, (const xmlChar *)"Xiphos");
+	(void)xmlNewProp(root_node, (const xmlChar *)"Version",
+			 (const xmlChar *)VERSION);
 	xmlDocSetRootElement(xml_settings_doc, root_node);
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "ranges", NULL);
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"ranges", NULL);
 	cur_node =
-	    xmlNewChild(section_node, NULL, (const xmlChar *) "range",
+	    xmlNewChild(section_node, NULL, (const xmlChar *)"range",
 			NULL);
-	(void) xmlNewProp(cur_node, (const xmlChar *) "label",
-			  (const xmlChar *) _("Old Testament"));
-	(void) xmlNewProp(cur_node, (const xmlChar *) "list",
-			  (const xmlChar *) _("Gen - Mal"));
+	(void)xmlNewProp(cur_node, (const xmlChar *)"label",
+			 (const xmlChar *)_("Old Testament"));
+	(void)xmlNewProp(cur_node, (const xmlChar *)"list",
+			 (const xmlChar *)_("Gen - Mal"));
 
 	cur_node =
-	    xmlNewChild(section_node, NULL, (const xmlChar *) "range",
+	    xmlNewChild(section_node, NULL, (const xmlChar *)"range",
 			NULL);
-	(void) xmlNewProp(cur_node, (const xmlChar *) "label",
-			  (const xmlChar *) _("New Testament"));
-	(void) xmlNewProp(cur_node, (const xmlChar *) "list",
-			  (const xmlChar *) _("Mat - Rev"));
+	(void)xmlNewProp(cur_node, (const xmlChar *)"label",
+			 (const xmlChar *)_("New Testament"));
+	(void)xmlNewProp(cur_node, (const xmlChar *)"list",
+			 (const xmlChar *)_("Mat - Rev"));
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "modlists",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"modlists",
 			NULL);
 	cur_node =
-	    xmlNewChild(section_node, NULL, (const xmlChar *) "modlist",
+	    xmlNewChild(section_node, NULL, (const xmlChar *)"modlist",
 			NULL);
-	(void) xmlNewProp(cur_node, (const xmlChar *) "label",
-			  (const xmlChar *) _("Sample Module List"));
+	(void)xmlNewProp(cur_node, (const xmlChar *)"label",
+			 (const xmlChar *)_("Sample Module List"));
 	tmp = get_list(TEXT_LIST);
-	(void) xmlNewProp(cur_node,
-			  (const xmlChar *) "list",
-			  (tmp ? (const xmlChar *) (gchar *) (tmp->data)
-			   : (const xmlChar *) (gchar *) "-ReplaceMe-"));
+	(void)xmlNewProp(cur_node,
+			 (const xmlChar *)"list",
+			 (tmp ? (const xmlChar *)(gchar *)(tmp->data)
+			      : (const xmlChar *)(gchar *) "-ReplaceMe-"));
 
 	section_node = xmlNewChild(root_node, NULL,
-				   (const xmlChar *) "editor", NULL);
+				   (const xmlChar *)"editor", NULL);
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "spell_language",
-			(const xmlChar *) "unknown");
+			(const xmlChar *)"spell_language",
+			(const xmlChar *)"unknown");
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "locale", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "special",
-			(const xmlChar *) "");
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"locale", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"special",
+			(const xmlChar *)"");
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "modmgr", NULL);
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"modmgr", NULL);
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "mod_mgr_source",
-			(const xmlChar *) "1");
+			(const xmlChar *)"mod_mgr_source",
+			(const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "mod_mgr_destination",
-			(const xmlChar *) "0");
+			(const xmlChar *)"mod_mgr_destination",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "mod_mgr_local_source_index",
-			(const xmlChar *) "0");
+			(const xmlChar *)"mod_mgr_local_source_index",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "mod_mgr_remote_source_index",
-			(const xmlChar *) "0");
+			(const xmlChar *)"mod_mgr_remote_source_index",
+			(const xmlChar *)"0");
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "fontsize",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"fontsize",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "versenum",
-			(const xmlChar *) "+0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versenum",
+			(const xmlChar *)"+0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "basefontsize",
-			(const xmlChar *) "+0");
-
+			(const xmlChar *)"basefontsize",
+			(const xmlChar *)"+0");
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "HTMLcolors",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"HTMLcolors",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "background", (const xmlChar *) "#FFFFFF");	/* white */
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "text_fg", (const xmlChar *) "#000000");	/* black */
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "versenum", (const xmlChar *) "#0000CF");	/* blue */
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "currentverse", (const xmlChar *) "#009000");	/* green */
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "link", (const xmlChar *) "#878787");	/* grey */
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "found", (const xmlChar *) "#D02898");	/* ? */
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "highlight_fg", (const xmlChar *) "#FFFF00");	/* yellow */
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "highlight_bg", (const xmlChar *) "#060680");	/* navy */
-
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"background", (const xmlChar *)"#FFFFFF");   /* white */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"text_fg", (const xmlChar *)"#000000");      /* black */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versenum", (const xmlChar *)"#0000CF");     /* blue */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"currentverse", (const xmlChar *)"#009000"); /* green */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"link", (const xmlChar *)"#878787");	 /* grey */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"found", (const xmlChar *)"#D02898");	/* ? */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"highlight_fg", (const xmlChar *)"#FFFF00"); /* yellow */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"highlight_bg", (const xmlChar *)"#060680"); /* navy */
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "parallel",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"parallel",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "parallel",
-			(const xmlChar *) "1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallel",
+			(const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "cantillation",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "points",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "footnotes",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "morphs",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "strongs",
-			(const xmlChar *) "0");
+			(const xmlChar *)"cantillation",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"points",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"footnotes",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"morphs",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"strongs",
+			(const xmlChar *)"0");
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "book", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "module",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"book", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"module",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "key", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "offset",
-			(const xmlChar *) "0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"key", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"offset",
+			(const xmlChar *)"0");
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "keys", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "book",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "dictionary",
-			(const xmlChar *) "Grace");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "verse",
-			(const xmlChar *) "Romans 8:28");
-
-
-	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "layout", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "height",
-			(const xmlChar *) "600");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "width",
-			(const xmlChar *) "800");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "app_x",
-			(const xmlChar *) "40");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "app_y",
-			(const xmlChar *) "40");
-
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "parallelopen",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "parallel_height",
-			(const xmlChar *) "361");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "parallel_width",
-			(const xmlChar *) "657");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "parallel_x",
-			(const xmlChar *) "40");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "parallel_y",
-			(const xmlChar *) "40");
-
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "modmgropen",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "modmgr_height",
-			(const xmlChar *) "450");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "modmgr_width",
-			(const xmlChar *) "710");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "modmgr_x",
-			(const xmlChar *) "40");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "modmgr_y",
-			(const xmlChar *) "40");
-
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "advsearchopen",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "advsearch_height",
-			(const xmlChar *) "465");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "advsearch_width",
-			(const xmlChar *) "665");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "advsearch_x",
-			(const xmlChar *) "40");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "advsearch_y",
-			(const xmlChar *) "40");
-
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "prefsopen",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "prefs_height",
-			(const xmlChar *) "300");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "prefs_width",
-			(const xmlChar *) "590");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "prefs_x",
-			(const xmlChar *) "40");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "prefs_y",
-			(const xmlChar *) "40");
-
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "textpane",
-			(const xmlChar *) "368");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "shortcutbar",
-			(const xmlChar *) "200");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "uperpane",
-			(const xmlChar *) "210");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "vltoppaneheight",
-			(const xmlChar *) "210");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "sidebar_notebook_height",
-			(const xmlChar *) "350");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "bibleheight",
-			(const xmlChar *) "250");
-	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "commentaryheight",
-			(const xmlChar *) "240");
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"keys", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"book",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"dictionary",
+			(const xmlChar *)"Grace");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"verse",
+			(const xmlChar *)"Romans 8:28");
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "lexicons",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"layout", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"height",
+			(const xmlChar *)"600");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"width",
+			(const xmlChar *)"800");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"app_x",
+			(const xmlChar *)"40");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"app_y",
+			(const xmlChar *)"40");
+
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"parallelopen",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"parallel_height",
+			(const xmlChar *)"361");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"parallel_width",
+			(const xmlChar *)"657");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallel_x",
+			(const xmlChar *)"40");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallel_y",
+			(const xmlChar *)"40");
+
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"modmgropen",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"modmgr_height",
+			(const xmlChar *)"450");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"modmgr_width",
+			(const xmlChar *)"710");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"modmgr_x",
+			(const xmlChar *)"40");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"modmgr_y",
+			(const xmlChar *)"40");
+
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"advsearchopen",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"advsearch_height",
+			(const xmlChar *)"465");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"advsearch_width",
+			(const xmlChar *)"665");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"advsearch_x",
+			(const xmlChar *)"40");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"advsearch_y",
+			(const xmlChar *)"40");
+
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"prefsopen",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"prefs_height",
+			(const xmlChar *)"300");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"prefs_width",
+			(const xmlChar *)"590");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"prefs_x",
+			(const xmlChar *)"40");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"prefs_y",
+			(const xmlChar *)"40");
+
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"textpane",
+			(const xmlChar *)"368");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"shortcutbar",
+			(const xmlChar *)"200");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"uperpane",
+			(const xmlChar *)"210");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"vltoppaneheight",
+			(const xmlChar *)"210");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"sidebar_notebook_height",
+			(const xmlChar *)"350");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"bibleheight",
+			(const xmlChar *)"250");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"commentaryheight",
+			(const xmlChar *)"240");
+
+	section_node =
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"lexicons",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "indictpane",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "inviewer",
-			(const xmlChar *) "0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"indictpane",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"inviewer",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "usedefaultdict",
-			(const xmlChar *) "0");
+			(const xmlChar *)"usedefaultdict",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "defaultdictionary", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "greek",
+			(const xmlChar *)"defaultdictionary", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"greek",
 			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "hebrew",
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"hebrew",
 			NULL);
 
 	section_node = xmlNewChild(root_node, NULL,
-				   (const xmlChar *) "osisrefmarkedverses",
+				   (const xmlChar *)"osisrefmarkedverses",
 				   NULL);
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "misc", NULL);
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"misc", NULL);
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "dailydevotional",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "splash",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "usedefault",
-			(const xmlChar *) "1");
+			(const xmlChar *)"dailydevotional",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"splash",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"usedefault",
+			(const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "formatpercom",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "showcomms",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "showdicts",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "showtexts",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "versestyle",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "pinnedtabs",
-			(const xmlChar *) "0");
+			(const xmlChar *)"formatpercom",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showcomms",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showdicts",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showtexts",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versestyle",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"pinnedtabs",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "showversenum",
-			(const xmlChar *) "1");
+			(const xmlChar *)"showversenum",
+			(const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "imageresize",
-			(const xmlChar *) "1");
+			(const xmlChar *)"imageresize",
+			(const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "verse_num_bold",
-			(const xmlChar *) "0");
+			(const xmlChar *)"verse_num_bold",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "verse_num_bracket",
-			(const xmlChar *) "0");
+			(const xmlChar *)"verse_num_bracket",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "verse_num_superscript",
-			(const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "readaloud",
-			(const xmlChar *) "0");
+			(const xmlChar *)"verse_num_superscript",
+			(const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"readaloud",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "versehighlight",
-			(const xmlChar *) "0");
+			(const xmlChar *)"versehighlight",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "annotatehighlight",
-			(const xmlChar *) "1");
+			(const xmlChar *)"annotatehighlight",
+			(const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "xrefsinverselist",
-			(const xmlChar *) "1");
+			(const xmlChar *)"xrefsinverselist",
+			(const xmlChar *)"1");
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "modules",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"modules",
 			NULL);
 	tmp = get_list(GBS_LIST);
 	if (tmp)
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "book",
-				(const xmlChar *) tmp->data);
+				(const xmlChar *)"book",
+				(const xmlChar *)tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "book", NULL);
+				(const xmlChar *)"book", NULL);
 	tmp = get_list(COMM_LIST);
 	if (tmp)
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "comm",
-				(const xmlChar *) (gchar *) tmp->data);
+				(const xmlChar *)"comm",
+				(const xmlChar *)(gchar *) tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "comm", NULL);
+				(const xmlChar *)"comm", NULL);
 	tmp = get_list(DEVOTION_LIST);
 	if (tmp)
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "devotional",
-				(const xmlChar *) (gchar *) tmp->data);
+				(const xmlChar *)"devotional",
+				(const xmlChar *)(gchar *) tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "devotional", NULL);
+				(const xmlChar *)"devotional", NULL);
 	tmp = get_list(DICT_LIST);
 	if (tmp)
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "dict",
-				(const xmlChar *) (gchar *) tmp->data);
+				(const xmlChar *)"dict",
+				(const xmlChar *)(gchar *) tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "dict", NULL);
+				(const xmlChar *)"dict", NULL);
 
 	tmp = get_list(TEXT_LIST);
-	if (tmp)		/* default parallels list set to 1 bible. */
+	if (tmp) /* default parallels list set to 1 bible. */
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "parallels",
-				(const xmlChar *) (gchar *) tmp->data);
+				(const xmlChar *)"parallels",
+				(const xmlChar *)(gchar *) tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "parallels", NULL);
+				(const xmlChar *)"parallels", NULL);
 
 	if (tmp)
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "bible",
-				(const xmlChar *) (gchar *) tmp->data);
+				(const xmlChar *)"bible",
+				(const xmlChar *)(gchar *) tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "bible", NULL);
+				(const xmlChar *)"bible", NULL);
 
 	tmp = get_list(PERCOMM_LIST);
 	if (tmp)
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "percomm",
-				(const xmlChar *) (gchar *) tmp->data);
+				(const xmlChar *)"percomm",
+				(const xmlChar *)(gchar *) tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) "percomm", NULL);
-
+				(const xmlChar *)"percomm", NULL);
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "shortcutbar",
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"shortcutbar",
 			NULL);
 	xmlNewTextChild(section_node, NULL,
-			(const xmlChar *) "shortcutbar",
-			(const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "docked",
-			(const xmlChar *) "1");
-
-
-	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "studypad",
-			NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "directory",
-			(const xmlChar *) settings.homedir);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "lastfile",
-			NULL);
-
+			(const xmlChar *)"shortcutbar",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"docked",
+			(const xmlChar *)"1");
 
 	section_node =
-	    xmlNewChild(root_node, NULL, (const xmlChar *) "tabs", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "browsing",
-			(const xmlChar *) "1");
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"studypad",
+			NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"directory",
+			(const xmlChar *)settings.homedir);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"lastfile",
+			NULL);
+
+	section_node =
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"tabs", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"browsing",
+			(const xmlChar *)"1");
 	return 1;
 }
 
@@ -1008,9 +991,9 @@ void xml_convert_to_osisref(void)
 			content = g_strdup(xml_get_list());
 
 			/* detect "NASB Revelation of John 1:1" */
-			if (((s = strrchr(label, ' ')) != NULL) &&	/* rightmost space */
-			    ((s = strchr((t = s + 1), ':')) != NULL) &&	/* chapter:verse */
-			    ((t = strchr(label, ' ')) < s)) {	/* leftmost space */
+			if (((s = strrchr(label, ' ')) != NULL) &&      /* rightmost space */
+			    ((s = strchr((t = s + 1), ':')) != NULL) && /* chapter:verse */
+			    ((t = strchr(label, ' ')) < s)) {		/* leftmost space */
 
 				/* having gotten this far, we successfully */
 				/* detected a wrongly-formatted label.  convert. */
@@ -1025,14 +1008,9 @@ void xml_convert_to_osisref(void)
 				g_snprintf(reference, 100, "%s %s", label
 					   /* this is just the module name now */
 					   ,
-					   main_get_osisref_from_key((const
-								      char
-								      *)
+					   main_get_osisref_from_key((const char *)
 								     label,
-								     (const
-								      char
-								      *) t
-								     + 1));
+								     (const char *)t + 1));
 				xml_set_list_item("osisrefmarkedverses",
 						  "markedverse", reference,
 						  content);
@@ -1051,7 +1029,6 @@ void xml_convert_to_osisref(void)
 	xml_remove_section("markedverses");
 	g_list_free(hold);
 }
-
 
 /******************************************************************************
  * Name
@@ -1080,7 +1057,7 @@ static xmlNodePtr xml_find_section(xmlDocPtr doc, const char *type_doc,
 		return NULL;
 	}
 
-	if (xmlStrcmp(cur->name, (const xmlChar *) type_doc)) {
+	if (xmlStrcmp(cur->name, (const xmlChar *)type_doc)) {
 		fprintf(stderr,
 			_("wrong type, root node != %s\n"), type_doc);
 		return NULL;
@@ -1089,7 +1066,7 @@ static xmlNodePtr xml_find_section(xmlDocPtr doc, const char *type_doc,
 	cur = cur->xmlChildrenNode;
 
 	while (cur != NULL) {
-		if (!xmlStrcmp(cur->name, (const xmlChar *) section)) {
+		if (!xmlStrcmp(cur->name, (const xmlChar *)section)) {
 			return cur;
 		}
 		if (cur->next)
@@ -1099,7 +1076,6 @@ static xmlNodePtr xml_find_section(xmlDocPtr doc, const char *type_doc,
 	}
 	return NULL;
 }
-
 
 /******************************************************************************
  * Name
@@ -1127,16 +1103,15 @@ static xmlNodePtr xml_find_item(xmlNodePtr parent, const char *item,
 	cur = parent->xmlChildrenNode;
 
 	while (cur != NULL) {
-		if (!xmlStrcmp(cur->name, (const xmlChar *) item)) {
+		if (!xmlStrcmp(cur->name, (const xmlChar *)item)) {
 			/* no label means any (i.e. first) element matches */
 			if (!label)
 				return cur;
 
 			/* otherwise we must find the label match. */
 			prop_label =
-			    xmlGetProp(cur, (const xmlChar *) "label");
-			if (!xmlStrcmp
-			    (prop_label, (const xmlChar *) label)) {
+			    xmlGetProp(cur, (const xmlChar *)"label");
+			if (!xmlStrcmp(prop_label, (const xmlChar *)label)) {
 				return cur;
 			}
 		}
@@ -1147,7 +1122,6 @@ static xmlNodePtr xml_find_item(xmlNodePtr parent, const char *item,
 	}
 	return NULL;
 }
-
 
 /******************************************************************************
  * Name
@@ -1171,30 +1145,25 @@ char *xml_get_list_from_label(const char *section, const char *item,
 	xmlNodePtr cur = NULL;
 	xmlChar *prop_label = NULL;
 
-
 	if ((cur =
-	     xml_find_section(xml_settings_doc, "Xiphos",
-			      section)) != NULL) {
+		 xml_find_section(xml_settings_doc, "Xiphos",
+				  section)) != NULL) {
 
 		cur = cur->xmlChildrenNode;
 
 		while (cur != NULL) {
 
 			//g_warning("cur->name = %s", cur->name);
-			if (!xmlStrcmp(cur->name, (const xmlChar *) item)) {
+			if (!xmlStrcmp(cur->name, (const xmlChar *)item)) {
 				prop_label =
 				    xmlGetProp(cur,
-					       (const xmlChar *) "label");
+					       (const xmlChar *)"label");
 				XI_message(("\nprop_label: %s\nlabel: %s",
 					    prop_label, label));
-				if (!xmlStrcmp
-				    (prop_label,
-				     (const xmlChar *) label)) {
-					return (char *) xmlGetProp(cur,
-								   (const
-								    xmlChar
-								    *)
-								   "list");
+				if (!xmlStrcmp(prop_label,
+					       (const xmlChar *)label)) {
+					return (char *)xmlGetProp(cur,
+								  (const xmlChar *)"list");
 				}
 			}
 			if (cur->next)
@@ -1205,7 +1174,6 @@ char *xml_get_list_from_label(const char *section, const char *item,
 	}
 	return NULL;
 }
-
 
 /******************************************************************************
  * Name
@@ -1232,27 +1200,27 @@ void xml_set_list_item(const char *section, const char *item,
 	xmlNodePtr new = NULL;
 
 	if ((cur =
-	     xml_find_section(xml_settings_doc, "Xiphos",
-			      section)) == NULL) {
+		 xml_find_section(xml_settings_doc, "Xiphos",
+				  section)) == NULL) {
 		xmlNodePtr root_node =
 		    xmlDocGetRootElement(xml_settings_doc);
 		cur =
-		    xmlNewChild(root_node, NULL, (const xmlChar *) section,
+		    xmlNewChild(root_node, NULL, (const xmlChar *)section,
 				NULL);
 	}
 
 	if (cur) {
 		if ((cur_item = xml_find_item(cur, item, label))) {
-			xmlSetProp(cur_item, (const xmlChar *) "list",
-				   (const xmlChar *) value);
+			xmlSetProp(cur_item, (const xmlChar *)"list",
+				   (const xmlChar *)value);
 		} else {
 			new =
-			    xmlNewChild(cur, NULL, (const xmlChar *) item,
+			    xmlNewChild(cur, NULL, (const xmlChar *)item,
 					NULL);
-			xmlNewProp(new, (const xmlChar *) "label",
-				   (const xmlChar *) label);
-			xmlNewProp(new, (const xmlChar *) "list",
-				   (const xmlChar *) value);
+			xmlNewProp(new, (const xmlChar *)"label",
+				   (const xmlChar *)label);
+			xmlNewProp(new, (const xmlChar *)"list",
+				   (const xmlChar *)value);
 		}
 	}
 }
@@ -1280,18 +1248,18 @@ void xml_set_new_element(const char *section, const char *item,
 	xmlNodePtr cur = NULL;
 
 	if ((cur =
-	     xml_find_section(xml_settings_doc, "Xiphos",
-			      section)) == NULL) {
+		 xml_find_section(xml_settings_doc, "Xiphos",
+				  section)) == NULL) {
 		xmlNodePtr root_node =
 		    xmlDocGetRootElement(xml_settings_doc);
 		cur =
-		    xmlNewChild(root_node, NULL, (const xmlChar *) section,
+		    xmlNewChild(root_node, NULL, (const xmlChar *)section,
 				NULL);
 	}
 
 	if (cur)
-		(void) xmlNewChild(cur, NULL, (const xmlChar *) item,
-				   (const xmlChar *) content);
+		(void)xmlNewChild(cur, NULL, (const xmlChar *)item,
+				  (const xmlChar *)content);
 }
 
 /******************************************************************************
@@ -1315,8 +1283,8 @@ int xml_set_section_ptr(const char *section)
 	xmlNodePtr cur = NULL;
 
 	if ((cur =
-	     xml_find_section(xml_settings_doc, "Xiphos",
-			      section)) != NULL) {
+		 xml_find_section(xml_settings_doc, "Xiphos",
+				  section)) != NULL) {
 		section_ptr = cur->xmlChildrenNode;
 		if (section_ptr)
 			return 1;
@@ -1367,9 +1335,8 @@ int xml_next_item(void)
 
 char *xml_get_label(void)
 {
-	return (char *) xmlGetProp(section_ptr, (const xmlChar *) "label");
+	return (char *)xmlGetProp(section_ptr, (const xmlChar *)"label");
 }
-
 
 /******************************************************************************
  * Name
@@ -1389,9 +1356,8 @@ char *xml_get_label(void)
 
 char *xml_get_list(void)
 {
-	return (char *) xmlGetProp(section_ptr, (const xmlChar *) "list");
+	return (char *)xmlGetProp(section_ptr, (const xmlChar *)"list");
 }
-
 
 /******************************************************************************
  * Name
@@ -1422,7 +1388,7 @@ static xmlNodePtr xml_find_prop(xmlDocPtr doc, const char *type_doc,
 		return NULL;
 	}
 
-	if (xmlStrcmp(cur->name, (const xmlChar *) type_doc)) {
+	if (xmlStrcmp(cur->name, (const xmlChar *)type_doc)) {
 		fprintf(stderr,
 			_("wrong type, root node != %s\n"), type_doc);
 		return NULL;
@@ -1431,12 +1397,11 @@ static xmlNodePtr xml_find_prop(xmlDocPtr doc, const char *type_doc,
 	cur = cur->xmlChildrenNode;
 
 	while (cur != NULL) {
-		if (!xmlStrcmp(cur->name, (const xmlChar *) section)) {
+		if (!xmlStrcmp(cur->name, (const xmlChar *)section)) {
 			item_cur = cur->xmlChildrenNode;
 			while (item_cur != NULL) {
-				if (!xmlStrcmp
-				    (item_cur->name,
-				     (const xmlChar *) prop)) {
+				if (!xmlStrcmp(item_cur->name,
+					       (const xmlChar *)prop)) {
 					return item_cur;
 				}
 				if (item_cur->next)
@@ -1452,7 +1417,6 @@ static xmlNodePtr xml_find_prop(xmlDocPtr doc, const char *type_doc,
 	}
 	return NULL;
 }
-
 
 /******************************************************************************
  * Name
@@ -1475,13 +1439,13 @@ char *xml_get_value(const char *section, const char *item)
 	xmlNodePtr cur = NULL;
 	xmlChar *results = NULL;
 	if ((cur =
-	     xml_find_prop(xml_settings_doc, "Xiphos", section,
-			   item)) != NULL) {
+		 xml_find_prop(xml_settings_doc, "Xiphos", section,
+			       item)) != NULL) {
 		results =
 		    xmlNodeListGetString(xml_settings_doc,
 					 cur->xmlChildrenNode, 1);
 		if (results)
-			return (char *) results;
+			return (char *)results;
 	}
 	return NULL;
 }
@@ -1508,13 +1472,11 @@ void xml_set_value(const char *type_doc, const char *section,
 {
 	xmlNodePtr cur = NULL;
 	if ((cur =
-	     xml_find_prop(xml_settings_doc, type_doc, section,
-			   item)) != NULL) {
-		xmlNodeSetContent(cur, (const xmlChar *) value);
+		 xml_find_prop(xml_settings_doc, type_doc, section,
+			       item)) != NULL) {
+		xmlNodeSetContent(cur, (const xmlChar *)value);
 	}
 }
-
-
 
 /******************************************************************************
  * Name
@@ -1542,7 +1504,6 @@ int xml_parse_settings_file(char *file_name)
 
 	return TRUE;
 }
-
 
 /******************************************************************************
  * Name
@@ -1583,8 +1544,8 @@ void xml_save_settings_doc(char *name)
 	    ((retval == 0) && (buf.st_size == 0))) {
 		char *msg =
 		    g_strdup_printf(_("Save of settings failed! stat %d, size %d\n%s"),
-retval, (int) buf.st_size,
-_("Attempting to revert to previous save."));
+				    retval, (int)buf.st_size,
+				    _("Attempting to revert to previous save."));
 		g_unlink(name);
 		g_rename(backup_name, name);
 		gui_generic_warning_modal(msg);
@@ -1592,7 +1553,6 @@ _("Attempting to revert to previous save."));
 	}
 #endif
 }
-
 
 /******************************************************************************
  * Name
@@ -1624,11 +1584,9 @@ void xml_add_new_section_to_settings_doc(char *section)
 		fprintf(stderr, _("empty document \n"));
 		return;
 	}
-	(void) xmlNewChild(root_node, NULL,
-			   (const xmlChar *) section, NULL);
+	(void)xmlNewChild(root_node, NULL,
+			  (const xmlChar *)section, NULL);
 }
-
-
 
 /******************************************************************************
  * Name
@@ -1656,8 +1614,8 @@ void xml_add_new_item_to_export_doc_section(char *section, char *item_name,
 
 	if (section_node)
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) item_name,
-				(const xmlChar *) value);
+				(const xmlChar *)item_name,
+				(const xmlChar *)value);
 }
 
 /******************************************************************************
@@ -1686,8 +1644,8 @@ void xml_add_new_item_to_section(char *section, char *item_name,
 
 	if (section_node)
 		xmlNewTextChild(section_node, NULL,
-				(const xmlChar *) item_name,
-				(const xmlChar *) value);
+				(const xmlChar *)item_name,
+				(const xmlChar *)value);
 }
 
 /******************************************************************************
@@ -1712,14 +1670,13 @@ void xml_remove_node(const char *section, const char *item,
 	xmlNodePtr cur = NULL;
 	xmlNodePtr cur_item = NULL;
 	if ((cur =
-	     xml_find_section(xml_settings_doc, "Xiphos",
-			      section)) != NULL) {
+		 xml_find_section(xml_settings_doc, "Xiphos",
+				  section)) != NULL) {
 		if ((cur_item = xml_find_item(cur, item, label)) != NULL) {
 			xmlUnlinkNode(cur_item);
 			xmlFreeNode(cur_item);
 		}
 	}
-
 }
 
 /******************************************************************************
@@ -1743,10 +1700,9 @@ void xml_remove_section(const char *section)
 	xmlNodePtr cur = NULL;
 
 	if ((cur =
-	     xml_find_section(xml_settings_doc, "Xiphos",
-			      section)) != NULL) {
+		 xml_find_section(xml_settings_doc, "Xiphos",
+				  section)) != NULL) {
 		xmlUnlinkNode(cur);
 		xmlFreeNode(cur);
 	}
-
 }

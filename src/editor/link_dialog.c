@@ -19,16 +19,12 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
 #include <config.h>
-
 
 #include <gtk/gtk.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
-
 
 #ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
@@ -53,8 +49,7 @@ static GtkWidget *entry_verse;
 static GtkWidget *entry_text;
 static GtkWidget *linkage_verse_list;
 
-
-G_MODULE_EXPORT void entry_verse_changed_cb(GObject * object, EDITOR * e)
+G_MODULE_EXPORT void entry_verse_changed_cb(GObject *object, EDITOR *e)
 {
 	const gchar *verse_str = NULL;
 
@@ -62,7 +57,7 @@ G_MODULE_EXPORT void entry_verse_changed_cb(GObject * object, EDITOR * e)
 	gtk_entry_set_text(GTK_ENTRY(entry_text), verse_str);
 }
 
-G_MODULE_EXPORT void button_ok_clicked_cb(GObject * object, EDITOR * e)
+G_MODULE_EXPORT void button_ok_clicked_cb(GObject *object, EDITOR *e)
 {
 	const gchar *mod_str = NULL;
 	const gchar *verse_str = NULL;
@@ -76,7 +71,7 @@ G_MODULE_EXPORT void button_ok_clicked_cb(GObject * object, EDITOR * e)
 	verse_str = gtk_entry_get_text(GTK_ENTRY(entry_verse));
 	text_str = gtk_entry_get_text(GTK_ENTRY(entry_text));
 
-	type = main_get_mod_type((gchar *) mod_str);
+	type = main_get_mod_type((gchar *)mod_str);
 
 	if (mod_str)
 		encoded_mod = main_url_encode(mod_str);
@@ -84,13 +79,9 @@ G_MODULE_EXPORT void button_ok_clicked_cb(GObject * object, EDITOR * e)
 		encoded_verse = main_url_encode(verse_str);
 
 	g_string_printf(str,
-			(((gtk_toggle_button_get_active
-			   (GTK_TOGGLE_BUTTON(linkage_verse_list)))
-			  && ((type == -1) || (type == TEXT_TYPE)
-			      || (type == COMMENTARY_TYPE)))
-			 ?
-			 "<a href=\"passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s\">%s</a>"
-			 : "<a href=\"sword://%s/%s\">%s</a>"),
+			(((gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(linkage_verse_list))) && ((type == -1) || (type == TEXT_TYPE) || (type == COMMENTARY_TYPE)))
+			     ? "<a href=\"passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s\">%s</a>"
+			     : "<a href=\"sword://%s/%s\">%s</a>"),
 			(encoded_mod ? encoded_mod : ""),
 			(encoded_verse ? encoded_verse : ""),
 			(text_str ? text_str : ""));
@@ -103,14 +94,14 @@ G_MODULE_EXPORT void button_ok_clicked_cb(GObject * object, EDITOR * e)
 	gtkhtml_editor_insert_html(GTKHTML_EDITOR(e->window), str->str);
 #endif
 	g_string_free(str, TRUE);
-	g_free((gchar *) encoded_mod);
-	g_free((gchar *) encoded_verse);
+	g_free((gchar *)encoded_mod);
+	g_free((gchar *)encoded_verse);
 
 	gtk_widget_destroy(GTK_WIDGET(window));
 }
 
 G_MODULE_EXPORT
-    void button_test_clicked_cb(GObject * object, gpointer user_data)
+void button_test_clicked_cb(GObject *object, gpointer user_data)
 {
 	const gchar *mod_str = NULL;
 	const gchar *verse_str = NULL;
@@ -133,25 +124,25 @@ G_MODULE_EXPORT
 	XI_message(("link: %s", str->str));
 	main_url_handler(str->str, TRUE);
 	g_string_free(str, TRUE);
-	g_free((gchar *) encoded_mod);
-	g_free((gchar *) encoded_verse);
+	g_free((gchar *)encoded_mod);
+	g_free((gchar *)encoded_verse);
 }
 
 G_MODULE_EXPORT
-    void button_cancel_clicked_cb(GObject * object, gpointer user_data)
+void button_cancel_clicked_cb(GObject *object, gpointer user_data)
 {
 	gtk_widget_destroy(GTK_WIDGET(window));
 }
 
-void editor_link_dialog(EDITOR * e)
+void editor_link_dialog(EDITOR *e)
 {
 	GtkBuilder *builder;
 	gchar *gbuilder_file;
 
 #ifndef USE_WEBKIT_EDITOR
 	GtkHTML *html = gtkhtml_editor_get_html(GTKHTML_EDITOR(e->window));
-	if (html->pointer_url)	/* are we in a link */
-		return;		/* if so don't do anything */
+	if (html->pointer_url) /* are we in a link */
+		return;	/* if so don't do anything */
 #endif
 
 	gbuilder_file =
@@ -166,7 +157,7 @@ void editor_link_dialog(EDITOR * e)
 
 	window = GTK_WIDGET(gtk_builder_get_object(builder, "dialog1"));
 	set_window_icon(GTK_WINDOW(window));
-	gtk_builder_connect_signals(builder, (EDITOR *) e);
+	gtk_builder_connect_signals(builder, (EDITOR *)e);
 
 	entry_module =
 	    GTK_WIDGET(gtk_builder_get_object(builder, "entry_module"));
@@ -175,8 +166,7 @@ void editor_link_dialog(EDITOR * e)
 	entry_text =
 	    GTK_WIDGET(gtk_builder_get_object(builder, "entry_text"));
 	linkage_verse_list =
-	    GTK_WIDGET(gtk_builder_get_object
-		       (builder, "radio_verse_list"));
+	    GTK_WIDGET(gtk_builder_get_object(builder, "radio_verse_list"));
 
 	g_object_unref(G_OBJECT(builder));
 	gtk_widget_show(window);

@@ -98,7 +98,7 @@ static void fill_search_results_list(int finds)
 	if (list_of_verses) {
 		GList *chaser = list_of_verses;
 		while (chaser) {
-			list_item = (RESULTS*)chaser->data;
+			list_item = (RESULTS *)chaser->data;
 			g_free(list_item->module);
 			g_free(list_item->key);
 			g_free(list_item);
@@ -108,56 +108,55 @@ static void fill_search_results_list(int finds)
 		list_of_verses = NULL;
 	}
 
-	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
-	selection = gtk_tree_view_get_selection
-		(GTK_TREE_VIEW(sidebar.results_list));
+	gtk_widget_set_sensitive(sidebar.menu_item_save_search, FALSE);
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(sidebar.results_list));
 	list_store = gtk_list_store_new(1, G_TYPE_STRING);
 
-	backendSearch->set_listkey_position((char) 1);	/* TOP */
+	backendSearch->set_listkey_position((char)1); /* TOP */
 	while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
-		tmpbuf = (gchar*) key_buf;
+		tmpbuf = (gchar *)key_buf;
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
 				   tmpbuf, -1);
-		list_item = g_new(RESULTS,1);
+		list_item = g_new(RESULTS, 1);
 		list_item->module = g_strdup(settings.sb_search_mod);
 		list_item->key = g_strdup(tmpbuf);
 		list_of_verses = g_list_append(list_of_verses,
-					       (RESULTS *) list_item);
+					       (RESULTS *)list_item);
 	}
 
 	model = GTK_TREE_MODEL(list_store);
-	gtk_tree_view_set_model (GTK_TREE_VIEW(sidebar.results_list), model);
+	gtk_tree_view_set_model(GTK_TREE_VIEW(sidebar.results_list), model);
 
 	num = main_format_number(finds);
 	sprintf(buf, "%s %s", num, buf1);
 	g_free(num);
-	gui_set_statusbar (buf);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),3);
+	gui_set_statusbar(buf);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar), 3);
 	/* cleanup progress bar */
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(ss.progressbar_search),
-				0.0);
+				      0.0);
 	/* display first item in list by selection row*/
-	if (!gtk_tree_model_get_iter_first(model,&iter))
+	if (!gtk_tree_model_get_iter_first(model, &iter))
 		return;
 
-	gtk_widget_set_sensitive(sidebar.menu_item_save_search,TRUE);
-	path = gtk_tree_model_get_path(model,&iter);
+	gtk_widget_set_sensitive(sidebar.menu_item_save_search, TRUE);
+	path = gtk_tree_model_get_path(model, &iter);
 	gtk_tree_selection_select_path(selection,
 				       path);
 	gtk_tree_path_free(path);
-	gui_verselist_button_release_event(NULL,NULL,NULL);
+	gui_verselist_button_release_event(NULL, NULL, NULL);
 	return;
 }
 
 #ifdef HAVE_DBUS
-GList* get_list_of_references()
+GList *get_list_of_references()
 {
-	RESULTS* list_item;
+	RESULTS *list_item;
 	GList *tmp = list_of_verses;
 	GList *references = NULL;
 	while (tmp) {
-		list_item = (RESULTS*)tmp->data;
+		list_item = (RESULTS *)tmp->data;
 		references = g_list_append(references, list_item->key);
 		tmp = g_list_next(tmp);
 	}
@@ -189,7 +188,7 @@ void main_do_sidebar_search(gpointer user_data)
 	if (!backendSearch)
 		main_init_sidebar_search_backend();
 
-	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
+	gtk_widget_set_sensitive(sidebar.menu_item_save_search, FALSE);
 	search_dialog = FALSE;
 	search_string = gtk_entry_get_text(GTK_ENTRY(ss.entrySearch));
 
@@ -197,51 +196,47 @@ void main_do_sidebar_search(gpointer user_data)
 		return;
 
 	/* text -vs- commentary search selection. */
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.radiobutton_search_text))) {
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ss.radiobutton_search_text))) {
 		strcpy(settings.sb_search_mod,
 		       settings.MainWindowModule);
-	}
-	else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.radiobutton_search_comm))) {
+	} else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ss.radiobutton_search_comm))) {
 		if (!settings.CommWindowModule ||
 		    (strlen(settings.CommWindowModule) == 0)) {
 			gui_generic_warning(_("There is no commentary module."));
 			return;
 		}
-		strcpy(settings.sb_search_mod,settings.CommWindowModule);
+		strcpy(settings.sb_search_mod, settings.CommWindowModule);
 	}
 
 	search_module = settings.sb_search_mod;
 
 	backendSearch->clear_scope();
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.rrbUseBounds))) {
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ss.rrbUseBounds))) {
 		gchar *str;
-		backendSearch->clear_search_list(); 
-		str = g_strdup_printf("%s - %s",  
+		backendSearch->clear_search_list();
+		str = g_strdup_printf("%s - %s",
 #ifdef USE_GTK_3
-				      gtk_combo_box_text_get_active_text((GtkComboBoxText*)
-								    ss.entryLower),
-				      gtk_combo_box_text_get_active_text((GtkComboBoxText*)
-								    ss.entryUpper));
-#else 
-				      gtk_combo_box_get_active_text(GTK_COMBO_BOX
-								    (ss.entryLower)),
-				      gtk_combo_box_get_active_text(GTK_COMBO_BOX
-								    (ss.entryUpper)));
+				      gtk_combo_box_text_get_active_text((GtkComboBoxText *)
+									 ss.entryLower),
+				      gtk_combo_box_text_get_active_text((GtkComboBoxText *)
+									 ss.entryUpper));
+#else
+				      gtk_combo_box_get_active_text(GTK_COMBO_BOX(ss.entryLower)),
+				      gtk_combo_box_get_active_text(GTK_COMBO_BOX(ss.entryUpper)));
 #endif
 		backendSearch->set_range(settings.MainWindowModule, str);
 		backendSearch->set_scope2range();
 		g_free(str);
 	}
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.rbLastSearch)))
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ss.rbLastSearch)))
 		backendSearch->set_scope2last_search();
 
 	snprintf(settings.searchText, 255, "%s", search_string);
 
 	settings.searchType =
-		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.rbRegExp)) ? 0 :
-	    	gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)) ? -1 : -2;
+	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ss.rbRegExp)) ? 0 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)) ? -1 : -2;
 
 	if (settings.searchType == -2)
 		settings.searchType = backendSearch->check_for_optimal_search(search_module);
@@ -264,7 +259,7 @@ void main_do_sidebar_search(gpointer user_data)
 	}
 
 	search_params =
-	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.ckbCaseSensitive)) ? 0 : REG_ICASE;
+	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ss.ckbCaseSensitive)) ? 0 : REG_ICASE;
 
 	terminate_search = FALSE;
 	search_active = TRUE;
@@ -276,8 +271,7 @@ void main_do_sidebar_search(gpointer user_data)
 	mgr->setGlobalOption("Arabic Vowel Points", "Off");
 
 	finds = backendSearch->do_module_search(search_module,
-						mgr->getModule(search_module)->
-						stripText(search_string),
+						mgr->getModule(search_module)->stripText(search_string),
 						settings.searchType,
 						search_params,
 						FALSE);
@@ -285,17 +279,16 @@ void main_do_sidebar_search(gpointer user_data)
 
 	search_active = FALSE;
 
-	fill_search_results_list (finds);
+	fill_search_results_list(finds);
 
 #ifdef HAVE_DBUS
 	IpcObject *obj = ipc_get_main_ipc();
-	if (obj){
+	if (obj) {
 		obj->references = get_list_of_references();
 		ipc_object_search_performed(obj, settings.searchText,
 					    &finds, NULL);
 	}
 #endif
-
 }
 
 void main_sidebar_perscomm_dump(void)
@@ -303,21 +296,20 @@ void main_sidebar_perscomm_dump(void)
 	if (!backendSearch)
 		main_init_sidebar_search_backend();
 
-	strcpy(settings.sb_search_mod,settings.MainWindowModule);
+	strcpy(settings.sb_search_mod, settings.MainWindowModule);
 	backendSearch->clear_scope();
 	backendSearch->clear_search_list();
 	fill_search_results_list(backendSearch->do_module_search
-		/* personal commentary */	(settings.CommWindowModule,
-		/* find two-plus characters */	"..+",
-		/* regexp */			0,
-		/* case is irrelevant */	0,
-		/* happening in sidebar */	FALSE));
+				 /* personal commentary */ (settings.CommWindowModule,
+							    /* find two-plus characters */ "..+",
+							    /* regexp */ 0,
+							    /* case is irrelevant */ 0,
+							    /* happening in sidebar */ FALSE));
 }
 
 void main_init_sidebar_search_backend(void)
 {
-	if (!backendSearch)
-	{
+	if (!backendSearch) {
 		backendSearch = new BackEnd();
 		main_search_sidebar_fill_bounds_combos();
 	}
@@ -338,26 +330,27 @@ void main_search_sidebar_fill_bounds_combos(void)
 
 	char *module_name = settings.MainWindowModule;
 	SWModule *mod = backendSearch->get_SWModule(module_name);
-	if (!mod) return;
+	if (!mod)
+		return;
 
 	VerseKey *key = (VerseKey *)mod->createKey();
 
-	GtkTreeModel* upper_model = gtk_combo_box_get_model(
-			GTK_COMBO_BOX(ss.entryUpper));
+	GtkTreeModel *upper_model = gtk_combo_box_get_model(
+	    GTK_COMBO_BOX(ss.entryUpper));
 	gtk_list_store_clear(GTK_LIST_STORE(upper_model));
-	GtkTreeModel* lower_model = gtk_combo_box_get_model(
-			GTK_COMBO_BOX(ss.entryLower));
+	GtkTreeModel *lower_model = gtk_combo_box_get_model(
+	    GTK_COMBO_BOX(ss.entryLower));
 	gtk_list_store_clear(GTK_LIST_STORE(lower_model));
 
 	if (backendSearch->module_has_testament(module_name, 1)) {
 		while (i < key->BMAX[0]) {
 			key->setTestament(1);
-			key->setBook(i+1);
-			book = strdup((const char *) key->getBookName());  
+			key->setBook(i + 1);
+			book = strdup((const char *)key->getBookName());
 #ifdef USE_GTK_3
-			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryUpper, book);
-			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryLower, book);
-#else          
+			gtk_combo_box_text_append_text((GtkComboBoxText *)ss.entryUpper, book);
+			gtk_combo_box_text_append_text((GtkComboBoxText *)ss.entryLower, book);
+#else
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 #endif
@@ -370,12 +363,12 @@ void main_search_sidebar_fill_bounds_combos(void)
 	if (backendSearch->module_has_testament(module_name, 2)) {
 		while (i < key->BMAX[1]) {
 			key->setTestament(2);
-			key->setBook(i+1);
-			book = strdup((const char *) key->getBookName());
+			key->setBook(i + 1);
+			book = strdup((const char *)key->getBookName());
 #ifdef USE_GTK_3
-			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryUpper, book);
-			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryLower, book);
-#else          
+			gtk_combo_box_text_append_text((GtkComboBoxText *)ss.entryUpper, book);
+			gtk_combo_box_text_append_text((GtkComboBoxText *)ss.entryLower, book);
+#else
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 #endif
@@ -388,7 +381,6 @@ void main_search_sidebar_fill_bounds_combos(void)
 				 key->BMAX[0] + key->BMAX[1] - 1);
 	delete key;
 }
-
 
 /******************************************************************************
  * Name
@@ -408,7 +400,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 
 void main_sidebar_search_percent_update(char percent, void *userData)
 {
-	char maxHashes = *((char *) userData);
+	char maxHashes = *((char *)userData);
 	float num;
 	char buf[80];
 	static char printed = 0;
@@ -418,12 +410,13 @@ void main_sidebar_search_percent_update(char percent, void *userData)
 	if (terminate_search) {
 		backendSearch->terminate_search();
 	} else {
-		while ((((float) percent) / 100) * maxHashes > printed) {
-		    sprintf(buf, "%f", (((float) percent) / 100));
-		    num = (float) percent / 100;
-		    gtk_progress_bar_set_fraction((GtkProgressBar *)
-					    ss.progressbar_search, num);
-		    printed++;
+		while ((((float)percent) / 100) * maxHashes > printed) {
+			sprintf(buf, "%f", (((float)percent) / 100));
+			num = (float)percent / 100;
+			gtk_progress_bar_set_fraction((GtkProgressBar *)
+						      ss.progressbar_search,
+						      num);
+			printed++;
 		}
 	}
 	sync_windows();

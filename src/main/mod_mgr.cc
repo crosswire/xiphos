@@ -36,13 +36,12 @@
 #include "backend/module_manager.hh"
 #include "backend/sword_main.hh"
 
-
-int main_module_mgr_index_mod(char * module_name)
+int main_module_mgr_index_mod(char *module_name)
 {
 	return backend->do_module_index(module_name);
 }
 
-int main_module_mgr_delete_index_mod(char * module_name)
+int main_module_mgr_delete_index_mod(char *module_name)
 {
 	return backend->do_module_delete_index(module_name);
 }
@@ -76,7 +75,6 @@ void main_update_module_lists(void)
 	main_init_parallel_view();
 }
 
-
 /******************************************************************************
  * Name
  *   update_install_status
@@ -100,7 +98,6 @@ void update_install_status(long total,
 	gui_update_install_status(total, done, message);
 }
 
-
 /******************************************************************************
  * Name
  *   update_install_progress
@@ -122,19 +119,18 @@ void update_install_progress(double fraction)
 	gui_update_install_progressbar(fraction);
 }
 
-
 void main_index_percent_update(char percent,
 			       void *userData)
 {
-	char maxHashes = *((char *) userData);
+	char maxHashes = *((char *)userData);
 	float num;
 	char buf[80];
 	static char printed = 0;
 
 	/* update search dialog progress */
-	while ((((float) percent) / 100) * maxHashes > printed) {
-		sprintf(buf, "%f", (((float) percent) / 100));
-		num = (float) percent / 100;
+	while ((((float)percent) / 100) * maxHashes > printed) {
+		sprintf(buf, "%f", (((float)percent) / 100));
+		num = (float)percent / 100;
 		gui_update_install_progressbar((gdouble)num);
 		printed++;
 	}
@@ -162,7 +158,6 @@ GList *mod_mgr_list_remote_sources(void)
 	return backend_module_mgr_list_remote_sources();
 }
 
-
 /******************************************************************************
  * Name
  *   mod_mgr_list_local_sources
@@ -184,7 +179,6 @@ GList *mod_mgr_list_local_sources(void)
 	return backend_module_mgr_list_local_sources();
 }
 
-
 /******************************************************************************
  * Name
  *   mod_mgr_uninstall
@@ -205,7 +199,6 @@ int mod_mgr_uninstall(const char *dir, const char *mod_name)
 {
 	return backend_uninstall_module(dir, mod_name);
 }
-
 
 /******************************************************************************
  * Name
@@ -230,7 +223,6 @@ int mod_mgr_remote_install(const char *dir,
 	return backend_remote_install_module(dir, source_name, mod_name);
 }
 
-
 /******************************************************************************
  * Name
  *   mod_mgr_local_install_module
@@ -253,7 +245,6 @@ int mod_mgr_local_install_module(const char *destdir,
 {
 	return backend_local_install_module(destdir, srcdir, mod_name);
 }
-
 
 /******************************************************************************
  * Name
@@ -281,11 +272,10 @@ GList *mod_mgr_list_local_modules(const char *dir,
 
 	backend_module_mgr_list_local_modules_init(!augment);
 	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
-		list = g_list_append(list, (MOD_MGR*) mod_info);
+		list = g_list_append(list, (MOD_MGR *)mod_info);
 	}
 	return list;
 }
-
 
 /******************************************************************************
  * Name
@@ -310,11 +300,10 @@ GList *mod_mgr_remote_list_modules(const char *source_name)
 
 	backend_module_mgr_remote_list_modules_init(source_name);
 	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
-		list = g_list_append(list, (MOD_MGR*) mod_info);
+		list = g_list_append(list, (MOD_MGR *)mod_info);
 	}
 	return list;
 }
-
 
 /******************************************************************************
  * Name
@@ -336,7 +325,6 @@ int mod_mgr_refresh_remote_source(const char *source_name)
 {
 	return backend_module_mgr_refresh_remote_source(source_name);
 }
-
 
 /******************************************************************************
  * Name
@@ -374,14 +362,14 @@ void mod_mgr_reread_config(void)
 	backend_module_mgr_reread_config();
 }
 
-void mod_mgr_add_source(const char * vtype,
-			const char * type,
-			const char * caption,
-			const char * source,
-			const char * directory,
-			const char * user,
-			const char * pass,
-			const char * uid)
+void mod_mgr_add_source(const char *vtype,
+			const char *type,
+			const char *caption,
+			const char *source,
+			const char *directory,
+			const char *user,
+			const char *pass,
+			const char *uid)
 {
 	backend_module_mgr_add_source(vtype,
 				      type,
@@ -392,7 +380,6 @@ void mod_mgr_add_source(const char * vtype,
 				      pass,
 				      uid);
 }
-
 
 /******************************************************************************
  * Name
@@ -437,7 +424,6 @@ void mod_mgr_terminate(void)
 {
 	backend_terminate_module_mgr();
 }
-
 
 /******************************************************************************
  * Name

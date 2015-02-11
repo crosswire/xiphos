@@ -19,7 +19,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -53,7 +52,6 @@
 
 #include "gui/debug_glib_null.h"
 #include <locale.h>
-
 
 /******************************************************************************
  * defines
@@ -103,7 +101,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	strcpy(settings.program_title, "Xiphos");
 
 	/* Get home dir */
-	if ((settings.homedir = (char *) g_getenv(HOMEVAR)) == NULL) {
+	if ((settings.homedir = (char *)g_getenv(HOMEVAR)) == NULL) {
 		gui_init(argc, argv);
 		gui_generic_warning_modal(_("$HOME is not set!"));
 		/* if not found in env exit */
@@ -119,8 +117,7 @@ int settings_init(int argc, char **argv, int new_configs,
 		if ((Mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			char msg[300];
 			gui_init(argc, argv);
-			sprintf(msg, _("Xiphos can not create directory "
-				       XI_DIR
+			sprintf(msg, _("Xiphos can not create directory " XI_DIR
 				       ":\n%s\n\nXiphos cannot continue."),
 				strerror(errno));
 			gui_generic_warning_modal(msg);
@@ -134,8 +131,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
-			gui_generic_warning_modal(_("can not create "
-						   DOTSWORD));
+			gui_generic_warning_modal(_("can not create " DOTSWORD));
 		}
 	}
 	g_free(sword_dir);
@@ -145,8 +141,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
-			gui_generic_warning_modal(_("can not create "
-						   DOTSWORD "/mods.d"));
+			gui_generic_warning_modal(_("can not create " DOTSWORD "/mods.d"));
 		}
 	}
 	g_free(sword_dir);
@@ -157,8 +152,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
-			gui_generic_warning_modal(_("can not create "
-						   DOTSWORD "/modules"));
+			gui_generic_warning_modal(_("can not create " DOTSWORD "/modules"));
 		}
 	}
 	g_free(sword_dir);
@@ -179,8 +173,8 @@ int settings_init(int argc, char **argv, int new_configs,
 	    g_strdup_printf("%s/settings.xml", settings.gSwordDir);
 
 	/* check for a bad settings file. */
-	if ((stat(settings.fnconfigure, &buf) == 0) &&	/* exists... */
-	    (buf.st_size == 0)) {	/* ...but empty? */
+	if ((stat(settings.fnconfigure, &buf) == 0) && /* exists... */
+	    (buf.st_size == 0)) {		       /* ...but empty? */
 		char *backup_name =
 		    g_strdup_printf("%s.SAVE", settings.fnconfigure);
 
@@ -190,12 +184,10 @@ int settings_init(int argc, char **argv, int new_configs,
 			buf_says_empty = (buf.st_size == 0);
 			rename(backup_name, settings.fnconfigure);
 			gui_init(argc, argv);
-			gui_generic_warning_modal
-			    (_("Empty settings file -- backup recovery attempted.\n"
-			      "Some information may have been lost."));
+			gui_generic_warning_modal(_("Empty settings file -- backup recovery attempted.\n"
+						    "Some information may have been lost."));
 		} else {
-			gui_generic_warning_modal
-			    (_("Empty settings file -- no backup?!? Information lost!"));
+			gui_generic_warning_modal(_("Empty settings file -- no backup?!? Information lost!"));
 		}
 		g_free(backup_name);
 	}
@@ -205,9 +197,8 @@ int settings_init(int argc, char **argv, int new_configs,
 	    (g_access(settings.fnconfigure, F_OK) == -1) || new_configs) {
 		/* must be first run */
 		XI_print((buf_says_empty
-			  ?
-			  "\nSETTINGS FILE EXISTS BUT IS EMPTY - RECREATING.\n"
-			  : "\nFirst Run: need to create settings!\n"));
+			      ? "\nSETTINGS FILE EXISTS BUT IS EMPTY - RECREATING.\n"
+			      : "\nFirst Run: need to create settings!\n"));
 		settings.first_run = TRUE;
 
 		xml_create_settings_file(settings.fnconfigure);
@@ -223,11 +214,10 @@ int settings_init(int argc, char **argv, int new_configs,
 		gui_open_mod_mgr_initial_run();
 		main_init_lists();
 		if (settings.havebible == 0) {
-			gui_generic_warning_modal
-			    (_("There are no Bibles installed.\n"
-			       "Evidently, you declined to install any.\n\n"
-			       "Without any Bible modules to display,\n"
-			       "Xiphos cannot proceed,\nand will now exit."));
+			gui_generic_warning_modal(_("There are no Bibles installed.\n"
+						    "Evidently, you declined to install any.\n\n"
+						    "Without any Bible modules to display,\n"
+						    "Xiphos cannot proceed,\nand will now exit."));
 			exit(1);
 		}
 		gui_generic_warning_modal(_("Bible module installation complete."));
@@ -258,17 +248,16 @@ int settings_init(int argc, char **argv, int new_configs,
 	settings.bs_mismatch = FALSE;
 	settings.bs_group_tab = TRUE;
 	settings.bs_receiving = FALSE;
-	settings.bs_listen_set = 0;	// selective
+	settings.bs_listen_set = 0; // selective
 	settings.bs_passphrase = g_strdup("BibleSync");
 
 	/* if the user had forced a locale, we must set it now. */
-	if (settings.special_locale
-	    && strcmp(settings.special_locale, NONE)) {
+	if (settings.special_locale && strcmp(settings.special_locale, NONE)) {
 		g_setenv("LANG", settings.special_locale, TRUE);
 		gchar *test = setlocale(LC_ALL, settings.special_locale);
 		if (test == NULL) {
 			gchar lfix[32];
-			sprintf(lfix, "%s.UTF-8", settings.special_locale);	//for Ubuntu
+			sprintf(lfix, "%s.UTF-8", settings.special_locale); //for Ubuntu
 			test = setlocale(LC_ALL, lfix);
 		}
 		if (test != NULL) {
@@ -280,7 +269,7 @@ int settings_init(int argc, char **argv, int new_configs,
 
 	/* find out what kind of peculiar language environment we have */
 	re_encode_digits = FALSE;
-	if (((env = (char *) g_getenv("LANG")) != NULL) &&
+	if (((env = (char *)g_getenv("LANG")) != NULL) &&
 	    // for now, farsi-sensitive only
 	    (strncmp(env, "fa", 2) == 0)) {
 		re_encode_digits = TRUE;
@@ -288,7 +277,6 @@ int settings_init(int argc, char **argv, int new_configs,
 
 	return retval;
 }
-
 
 /******************************************************************************
  * Name
@@ -344,7 +332,6 @@ int init_bookmarks(int new_bookmarks)
 	return 1;
 }
 
-
 /******************************************************************************
  * Name
  *
@@ -367,7 +354,7 @@ void load_settings_structure(void)
 
 	settings.gs_version = VERSION;
 	if ((settings.MainWindowModule =
-	     xml_get_value("modules", "bible")) == NULL) {
+		 xml_get_value("modules", "bible")) == NULL) {
 		/* by the time we are here, we *must* have at least 1 bible */
 		settings.MainWindowModule =
 		    g_strdup(get_list(TEXT_LIST)->data);
@@ -380,9 +367,9 @@ void load_settings_structure(void)
 	if (!parallels || (*parallels == '\0')) {
 		char intN[] = "intN", *oldparallel, i, *newhold;
 
-		g_free(parallels);	/* in case it was real but empty */
+		g_free(parallels); /* in case it was real but empty */
 		parallels = g_strdup("");
-		for (i = '1'; i <= '5'; ++i) {	/* the old set */
+		for (i = '1'; i <= '5'; ++i) { /* the old set */
 			intN[3] = i;
 			oldparallel = xml_get_value("modules", intN);
 			if (oldparallel && *oldparallel) {
@@ -392,7 +379,7 @@ void load_settings_structure(void)
 				g_free(parallels);
 				parallels = newhold;
 				g_free(oldparallel);
-				xml_remove_node("modules", intN, NULL);	/* ? */
+				xml_remove_node("modules", intN, NULL); /* ? */
 			}
 		}
 
@@ -436,7 +423,8 @@ void load_settings_structure(void)
 	}
 	settings.useDefaultDict =
 	    atoi((buf = xml_get_value("lexicons", "usedefaultdict"))
-		 ? buf : "0");
+		     ? buf
+		     : "0");
 
 	/* unusual locale setting */
 	if ((buf = xml_get_value("locale", "special")))
@@ -508,7 +496,8 @@ void load_settings_structure(void)
 	/* layout */
 	settings.sidebar_width =
 	    atoi((buf = xml_get_value("layout", "shortcutbar"))
-		 ? buf : "100");
+		     ? buf
+		     : "100");
 	if ((buf = xml_get_value("layout", "vltoppaneheight")))
 		settings.verselist_toppane_height = atoi(buf);
 	else {
@@ -519,7 +508,7 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "sidebar_notebook_height")))
 		settings.sidebar_notebook_height = atoi(buf);
 	else {
-		if ((buf = xml_get_value("layout", "sidebar_notebook_hight"))) {	/* backward compatible */
+		if ((buf = xml_get_value("layout", "sidebar_notebook_hight"))) { /* backward compatible */
 			settings.sidebar_notebook_height = atoi(buf);
 			xml_remove_node("layout", "sidebar_notebook_hight",
 					0);
@@ -568,7 +557,7 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "height")))
 		settings.gs_height = atoi(buf);
 	else {
-		if ((buf = xml_get_value("layout", "hight"))) {	/* backward compatible */
+		if ((buf = xml_get_value("layout", "hight"))) { /* backward compatible */
 			settings.gs_height = atoi(buf);
 			xml_remove_node("layout", "hight", 0);
 		} else
@@ -717,12 +706,13 @@ void load_settings_structure(void)
 	/* random geometry stuff */
 	settings.biblepane_width =
 	    atoi((buf = xml_get_value("layout", "textpane"))
-		 ? buf : "0");
+		     ? buf
+		     : "0");
 
 	if ((buf = xml_get_value("layout", "bibleheight")))
 		settings.biblepane_height = atoi(buf);
 	else {
-		if ((buf = xml_get_value("layout", "biblehight"))) {	/* backward compatible */
+		if ((buf = xml_get_value("layout", "biblehight"))) { /* backward compatible */
 			settings.biblepane_height = atoi(buf);
 			xml_remove_node("layout", "biblehight", 0);
 		} else
@@ -735,7 +725,7 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "commentaryheight")))
 		settings.commpane_height = atoi(buf);
 	else {
-		if ((buf = xml_get_value("layout", "commentaryhight"))) {	/* backward compatible */
+		if ((buf = xml_get_value("layout", "commentaryhight"))) { /* backward compatible */
 			settings.commpane_height = atoi(buf);
 			xml_remove_node("layout", "commentaryhight", 0);
 		} else
@@ -770,7 +760,7 @@ void load_settings_structure(void)
 					    "+1");
 		settings.base_font_size_str = g_strdup("+1");
 		settings.base_font_size = 1;
-#endif				/* WIN32 */
+#endif /* WIN32 */
 	}
 
 	/* colors */
@@ -986,7 +976,9 @@ void load_settings_structure(void)
 
 	settings.showdevotional =
 	    atoi((buf =
-		  xml_get_value("misc", "dailydevotional")) ? buf : "1");
+		      xml_get_value("misc", "dailydevotional"))
+		     ? buf
+		     : "1");
 	settings.versestyle =
 	    atoi((buf = xml_get_value("misc", "versestyle")) ? buf : "1");
 
@@ -1107,7 +1099,7 @@ void load_settings_structure(void)
 	}
 
 #if 1
-	settings.browsing = 1;	/* unconditional - no longer toggle-able. */
+	settings.browsing = 1; /* unconditional - no longer toggle-able. */
 #else
 	if ((buf = xml_get_value("tabs", "browsing"))) {
 		settings.browsing = atoi(buf);

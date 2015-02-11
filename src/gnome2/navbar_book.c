@@ -35,7 +35,6 @@
 
 NAVBAR_BOOK navbar_book;
 
-
 /******************************************************************************
  * Name
  *   menu_deactivate_callback
@@ -52,7 +51,7 @@ NAVBAR_BOOK navbar_book;
  *   void
  */
 
-static void menu_deactivate_callback(GtkWidget * widget,
+static void menu_deactivate_callback(GtkWidget *widget,
 				     gpointer user_data)
 {
 	GtkWidget *menu_button;
@@ -62,7 +61,6 @@ static void menu_deactivate_callback(GtkWidget * widget,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(menu_button),
 				     FALSE);
 }
-
 
 /******************************************************************************
  * Name
@@ -82,9 +80,8 @@ static void menu_deactivate_callback(GtkWidget * widget,
  *   void
  */
 
-static
-void menu_position_under(GtkMenu * menu, int *x, int *y,
-			 gboolean * push_in, gpointer user_data)
+static void menu_position_under(GtkMenu *menu, int *x, int *y,
+				gboolean *push_in, gpointer user_data)
 {
 	GtkWidget *widget;
 	GtkAllocation allocation;
@@ -105,8 +102,8 @@ void menu_position_under(GtkMenu * menu, int *x, int *y,
 	*push_in = FALSE;
 }
 
-static gboolean lookup_entry_press_callback(GtkWidget * widget,
-					    GdkEventKey * event,
+static gboolean lookup_entry_press_callback(GtkWidget *widget,
+					    GdkEventKey *event,
 					    gpointer user_data)
 {
 	if (!settings.havebook)
@@ -135,8 +132,6 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 	XI_message(("lookup_entry_press_callback\nkeycode: %d",
 		    event->hardware_keycode));
 	return FALSE;
-
-
 }
 
 /******************************************************************************
@@ -158,8 +153,8 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
  *   gboolean
  */
 
-static gboolean select_button_press_callback(GtkWidget * widget,
-					     GdkEventButton * event,
+static gboolean select_button_press_callback(GtkWidget *widget,
+					     GdkEventButton *event,
 					     gpointer user_data)
 {
 	GtkWidget *menu;
@@ -181,7 +176,6 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 	return FALSE;
 }
 
-
 /******************************************************************************
  * Name
  *  on_button_parent_clicked
@@ -198,14 +192,12 @@ static gboolean select_button_press_callback(GtkWidget * widget,
  *   void
  */
 
-static
-void on_button_parent_clicked(GtkButton * button, gpointer user_data)
+static void on_button_parent_clicked(GtkButton *button, gpointer user_data)
 {
 	if (!settings.havebook)
 		return;
 	main_navbar_book_parent();
 }
-
 
 /******************************************************************************
  * Name
@@ -223,14 +215,12 @@ void on_button_parent_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static
-void on_button_child_clicked(GtkButton * button, gpointer user_data)
+static void on_button_child_clicked(GtkButton *button, gpointer user_data)
 {
 	if (!settings.havebook)
 		return;
 	main_navbar_book_first_child();
 }
-
 
 /******************************************************************************
  * Name
@@ -248,14 +238,12 @@ void on_button_child_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static
-void on_button_prev_clicked(GtkButton * button, gpointer user_data)
+static void on_button_prev_clicked(GtkButton *button, gpointer user_data)
 {
 	if (!settings.havebook)
 		return;
 	main_navbar_book_prev();
 }
-
 
 /******************************************************************************
  * Name
@@ -273,15 +261,12 @@ void on_button_prev_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static
-void on_button_next_clicked(GtkButton * button, gpointer user_data)
+static void on_button_next_clicked(GtkButton *button, gpointer user_data)
 {
 	if (!settings.havebook)
 		return;
 	main_navbar_book_next();
 }
-
-
 
 /******************************************************************************
  * Name
@@ -300,14 +285,13 @@ void on_button_next_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void on_entry_activate(GtkEntry * entry, gpointer user_data)
+void on_entry_activate(GtkEntry *entry, gpointer user_data)
 {
 	const gchar *entry_buf = NULL;
 
 	entry_buf = gtk_entry_get_text(entry);
 	main_navbar_book_entry_activate(entry_buf);
 }
-
 
 /******************************************************************************
  * Name
@@ -378,11 +362,9 @@ GtkWidget *gui_navbar_book_new(void)
 
 	image1 =
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name
-	    ("go-previous-symbolic", GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_icon_name("go-previous-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
-	    gtk_image_new_from_stock
-	    (GTK_STOCK_GO_BACK, GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_BUTTON);
 #endif
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(navbar_book.button_left), image1);
@@ -400,11 +382,9 @@ GtkWidget *gui_navbar_book_new(void)
 
 	image1 =
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name
-	    ("go-up-symbolic", GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_icon_name("go-up-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
-	    gtk_image_new_from_stock
-	    (GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
 #endif
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(navbar_book.button_up), image1);
@@ -422,11 +402,9 @@ GtkWidget *gui_navbar_book_new(void)
 
 	image2 =
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name
-	    ("go-down-symbolic", GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_icon_name("go-down-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
-	    gtk_image_new_from_stock
-	    (GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
 #endif
 
 	gtk_widget_show(image2);
@@ -446,29 +424,27 @@ GtkWidget *gui_navbar_book_new(void)
 
 	image1 =
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name
-	    ("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_icon_name("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
-	    gtk_image_new_from_stock
-	    (GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_BUTTON);
 #endif
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(navbar_book.button_right), image1);
 
-	g_signal_connect((gpointer) navbar_book.lookup_entry,
+	g_signal_connect((gpointer)navbar_book.lookup_entry,
 			 "activate", G_CALLBACK(on_entry_activate), NULL);
-	g_signal_connect((gpointer) navbar_book.button_up, "clicked",
+	g_signal_connect((gpointer)navbar_book.button_up, "clicked",
 			 G_CALLBACK(on_button_prev_clicked), NULL);
-	g_signal_connect((gpointer) navbar_book.button_down, "clicked",
+	g_signal_connect((gpointer)navbar_book.button_down, "clicked",
 			 G_CALLBACK(on_button_next_clicked), NULL);
-	g_signal_connect((gpointer) navbar_book.button_left, "clicked",
+	g_signal_connect((gpointer)navbar_book.button_left, "clicked",
 			 G_CALLBACK(on_button_parent_clicked), NULL);
-	g_signal_connect((gpointer) navbar_book.button_right, "clicked",
+	g_signal_connect((gpointer)navbar_book.button_right, "clicked",
 			 G_CALLBACK(on_button_child_clicked), NULL);
-	g_signal_connect((gpointer) navbar_book.button_list,
+	g_signal_connect((gpointer)navbar_book.button_list,
 			 "button_press_event",
 			 G_CALLBACK(select_button_press_callback), NULL);
-	g_signal_connect((gpointer) navbar_book.lookup_entry,
+	g_signal_connect((gpointer)navbar_book.lookup_entry,
 			 "key_press_event",
 			 G_CALLBACK(lookup_entry_press_callback), NULL);
 	return vbox1;

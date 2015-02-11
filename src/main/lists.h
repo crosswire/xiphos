@@ -26,26 +26,25 @@
 extern "C" {
 #endif
 
-
 #include <gtk/gtk.h>
 
-	typedef struct _module_lists MOD_LISTS;
-	struct _module_lists {
-		GList
-		    * biblemods,
-		    *commentarymods,
-		    *dictionarymods,
-		    *bookmods,
-		    *percommods,
-		    *devotionmods,
-		    *prayermods,
-		    *imagemods,
-		    *mapmods,
-		    *text_descriptions,
-		    *dict_descriptions,
-		    *comm_descriptions,
-		    *book_descriptions, *prayer_descriptions, *options;
-	};
+typedef struct _module_lists MOD_LISTS;
+struct _module_lists
+{
+	GList *biblemods,
+	    *commentarymods,
+	    *dictionarymods,
+	    *bookmods,
+	    *percommods,
+	    *devotionmods,
+	    *prayermods,
+	    *imagemods,
+	    *mapmods,
+	    *text_descriptions,
+	    *dict_descriptions,
+	    *comm_descriptions,
+	    *book_descriptions, *prayer_descriptions, *options;
+};
 
 /* list types */
 #define TEXT_LIST 0
@@ -63,10 +62,9 @@ extern "C" {
 #define MAP_LIST 12
 #define IMAGE_LIST 13
 
-
-	GList *get_list(gint type);
-	void main_init_lists(void);
-	void main_shutdown_list(void);
+GList *get_list(gint type);
+void main_init_lists(void);
+void main_shutdown_list(void);
 
 #ifdef __cplusplus
 }

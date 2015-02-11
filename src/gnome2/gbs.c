@@ -60,7 +60,6 @@
 
 //static void create_menu(GdkEventButton * event);
 
-
 /******************************************************************************
  * Name
  *  gui_set_gbs_frame_label
@@ -84,7 +83,7 @@ static void set_gbs_label(gchar * mod_name)
 	 */
 	gtk_label_set_text(GTK_LABEL(widgets.label_comm), mod_name);
 }
-#endif				/* 0 */
+#endif /* 0 */
 
 /******************************************************************************
  * Name
@@ -102,11 +101,10 @@ static void set_gbs_label(gchar * mod_name)
  *   void
  */
 
-void gui_set_book_mod_and_key(gchar * mod_name, gchar * key)
+void gui_set_book_mod_and_key(gchar *mod_name, gchar *key)
 {
 	main_display_book(mod_name, key);
 }
-
 
 /******************************************************************************
  * Name
@@ -124,16 +122,15 @@ void gui_set_book_mod_and_key(gchar * mod_name, gchar * key)
  *   void
  */
 
-void gui_update_gbs_global_ops(gchar * option, gboolean choice)
+void gui_update_gbs_global_ops(gchar *option, gboolean choice)
 {
 	/*save_module_options(cur_t->mod_name, option,
 	   choice); */
 	//gbs_display(cur_g, tree_level);
 }
 
-
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 {
 	gui_menu_popup(html, settings.book_mod, NULL);
 }
@@ -168,8 +165,7 @@ GtkWidget *gui_create_book_pane(void)
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box), scrolledwindow, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
@@ -179,7 +175,7 @@ GtkWidget *gui_create_book_pane(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_book);
 
-	g_signal_connect((gpointer) widgets.html_book,
+	g_signal_connect((gpointer)widgets.html_book,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 	return box;

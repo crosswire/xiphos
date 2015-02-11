@@ -82,10 +82,8 @@ void gui_attach_detach_sidebar(void)
 		/* ugly fix until someone can make mozembed work with 'gtk_widget_reparent()' */
 		gtk_widget_destroy(sidebar.html_viewer_widget);
 		sidebar.html_viewer_widget =
-		    GTK_WIDGET(XIPHOS_HTML_NEW
-			       (NULL, FALSE, SB_VIEWER_TYPE));
-		gtk_container_add(GTK_CONTAINER
-				  (sidebar.html_viewer_eventbox),
+		    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
+		gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox),
 				  sidebar.html_viewer_widget);
 
 		gtk_widget_show_all(widgets.dock_sb);
@@ -109,10 +107,8 @@ void gui_attach_detach_sidebar(void)
 		/* ugly fix until someone can make mozembed work with 'gtk_widget_reparent()' */
 		gtk_widget_destroy(sidebar.html_viewer_widget);
 		sidebar.html_viewer_widget =
-		    GTK_WIDGET(XIPHOS_HTML_NEW
-			       (NULL, FALSE, SB_VIEWER_TYPE));
-		gtk_container_add(GTK_CONTAINER
-				  (sidebar.html_viewer_eventbox),
+		    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
+		gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox),
 				  sidebar.html_viewer_widget);
 
 		gtk_widget_show(sidebar.html_viewer_widget);
@@ -140,7 +136,7 @@ void gui_attach_detach_sidebar(void)
  *   void
  */
 
-static void on_dialog_destroy(GObject * object, gpointer user_data)
+static void on_dialog_destroy(GObject *object, gpointer user_data)
 {
 	/* we need the if to prevent a loop */
 	if (!settings.docked)

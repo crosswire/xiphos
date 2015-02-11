@@ -81,7 +81,6 @@ void gui_main(void)
 	gtk_main();
 }
 
-
 /******************************************************************************
  * Name
  *    gconf_setup
@@ -104,13 +103,12 @@ void gui_main(void)
 /* we don't ask any more, because there's no good reason not to take over.    */
 
 char *gconf_keys[GS_GCONF_MAX][2] = {
-	{"/desktop/gnome/url-handlers/bible/command", "xiphos-nav \"%s\""},
-	{"/desktop/gnome/url-handlers/bible/enabled", (char *) 1},
-	{"/desktop/gnome/url-handlers/bible/needs_terminal", (char *) 0},
-	{"/desktop/gnome/url-handlers/sword/command", "xiphos-nav \"%s\""},
-	{"/desktop/gnome/url-handlers/sword/enabled", (char *) 1},
-	{"/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0}
-};
+    {"/desktop/gnome/url-handlers/bible/command", "xiphos-nav \"%s\""},
+    {"/desktop/gnome/url-handlers/bible/enabled", (char *)1},
+    {"/desktop/gnome/url-handlers/bible/needs_terminal", (char *)0},
+    {"/desktop/gnome/url-handlers/sword/command", "xiphos-nav \"%s\""},
+    {"/desktop/gnome/url-handlers/sword/enabled", (char *)1},
+    {"/desktop/gnome/url-handlers/sword/needs_terminal", (char *)0}};
 
 #ifndef WIN32
 void gconf_setup()
@@ -120,7 +118,7 @@ void gconf_setup()
 	GConfClient *client = gconf_client_get_default();
 
 	if (client == NULL)
-		return;		/* we're not running under GConf */
+		return; /* we're not running under GConf */
 
 	/*
 	 * This is deliberately somewhat simple-minded, at least for now.
@@ -131,23 +129,20 @@ void gconf_setup()
 	 */
 	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
 					     NULL)) == NULL) ||
-	     (strncmp(str, "xiphos ", 7) == 0))
-	    ) {
+	     (strncmp(str, "xiphos ", 7) == 0))) {
 		/*
 		 * Mechanical as can be, one after another.
 		 */
 		for (i = 0; i < GS_GCONF_MAX; ++i) {
-			(((i % 3) == 0)	/* contrived hack */
-			 ? gconf_client_set_string
-			 (client, gconf_keys[i][0], gconf_keys[i][1], NULL)
-			 : gconf_client_set_bool
-			 (client,
-			  gconf_keys[i][0],
-			  (gconf_keys[i][1] ? TRUE : FALSE), NULL));
+			(((i % 3) == 0) /* contrived hack */
+			     ? gconf_client_set_string(client, gconf_keys[i][0], gconf_keys[i][1], NULL)
+			     : gconf_client_set_bool(client,
+						     gconf_keys[i][0],
+						     (gconf_keys[i][1] ? TRUE : FALSE), NULL));
 		}
 	}
 }
-#endif				/* WIN32 */
+#endif /* WIN32 */
 
 #ifdef DEBUG
 
@@ -165,7 +160,7 @@ void gconf_setup()
 /* GIVE US THE CRASHES, PLEASE!  MYSTERY BUGS ARE EVIL!  glibc.helpfulness-- */
 
 gchar *XI_g_strdup_printf(const char *filename,
-			  int linenumber, const gchar * format, ...)
+			  int linenumber, const gchar *format, ...)
 {
 	gchar *buffer, *next, *s;
 	va_list args;
@@ -173,12 +168,11 @@ gchar *XI_g_strdup_printf(const char *filename,
 	va_start(args, format);
 	for (s = strchr(format, '%'); s; s = strchr(++s, '%')) {
 		next = va_arg(args, gchar *);
-		if ((next == (gchar *) NULL) && (*(s + 1) == 's')) {
-			gchar *msg = g_strdup_printf
-			    ("%s\n%s\n\n%s:%d \"%s\"",
-			     _("BUG! Xiphos is about to crash due to a \"STRDUP\" error."),
-			     _("Please report this error to the Xiphos team with:"),
-			     filename, linenumber, format);
+		if ((next == (gchar *)NULL) && (*(s + 1) == 's')) {
+			gchar *msg = g_strdup_printf("%s\n%s\n\n%s:%d \"%s\"",
+						     _("BUG! Xiphos is about to crash due to a \"STRDUP\" error."),
+						     _("Please report this error to the Xiphos team with:"),
+						     filename, linenumber, format);
 			gui_generic_warning_modal(msg);
 			g_free(msg);
 			abort();
@@ -196,7 +190,7 @@ gchar *XI_g_strdup_printf(const char *filename,
 void
 XI_g_string_printf(const char *filename,
 		   int linenumber,
-		   GString * string, const gchar * format, ...)
+		   GString *string, const gchar *format, ...)
 {
 	gchar *next, *s;
 	va_list args;
@@ -204,12 +198,11 @@ XI_g_string_printf(const char *filename,
 	va_start(args, format);
 	for (s = strchr(format, '%'); s; s = strchr(++s, '%')) {
 		next = va_arg(args, gchar *);
-		if ((next == (gchar *) NULL) && (*(s + 1) == 's')) {
-			gchar *msg = g_strdup_printf
-			    ("%s\n%s\n\n%s:%d \"%s\"",
-			     _("BUG! Xiphos is about to crash due to a \"STRING\" error."),
-			     _("Please report this error to the Xiphos team with:"),
-			     filename, linenumber, format);
+		if ((next == (gchar *)NULL) && (*(s + 1) == 's')) {
+			gchar *msg = g_strdup_printf("%s\n%s\n\n%s:%d \"%s\"",
+						     _("BUG! Xiphos is about to crash due to a \"STRING\" error."),
+						     _("Please report this error to the Xiphos team with:"),
+						     filename, linenumber, format);
 			gui_generic_warning_modal(msg);
 			g_free(msg);
 			abort();
@@ -224,4 +217,4 @@ XI_g_string_printf(const char *filename,
 	va_end(args);
 }
 
-#endif				/* DEBUG */
+#endif /* DEBUG */

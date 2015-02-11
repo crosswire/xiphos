@@ -22,12 +22,11 @@
 #ifndef ___BIBLETEXT_H_
 #define ___BIBLETEXT_H_
 
-
 #include <gtk/gtk.h>
 
 void gui_setup_bibletext(void);
-gboolean gui_text_button_release_event(GtkWidget * widget,
-				       GdkEventButton * event,
+gboolean gui_text_button_release_event(GtkWidget *widget,
+				       GdkEventButton *event,
 				       gpointer data);
 void gui_popup_pm_text(void);
 GtkWidget *gui_create_bible_pane(void);
