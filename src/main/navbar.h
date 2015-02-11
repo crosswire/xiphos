@@ -22,35 +22,35 @@
 #ifndef _NAVBAR_H
 #define _NAVBAR_H
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include <config.h>
 
-	typedef struct _navbar NAVBAR;
-	struct _navbar {
-		GtkWidget *button_back;
-		GtkWidget *button_forward;
-		GtkWidget *comboboxentry_book;
-//      SPINBUTTONS book;
-		GtkWidget *comboboxentry_chapter;
-//      SPINBUTTONS chapter;
-		GtkWidget *comboboxentry_verse;
-//      SPINBUTTONS verse;
-		GtkWidget *lookup_entry;
-		gchar *key;
-		gchar *module_name;
-		gboolean is_dialog;
-		int testaments;
-	};
-	extern NAVBAR navbar_main;
+typedef struct _navbar NAVBAR;
+struct _navbar
+{
+	GtkWidget *button_back;
+	GtkWidget *button_forward;
+	GtkWidget *comboboxentry_book;
+	//      SPINBUTTONS book;
+	GtkWidget *comboboxentry_chapter;
+	//      SPINBUTTONS chapter;
+	GtkWidget *comboboxentry_verse;
+	//      SPINBUTTONS verse;
+	GtkWidget *lookup_entry;
+	gchar *key;
+	gchar *module_name;
+	gboolean is_dialog;
+	int testaments;
+};
+extern NAVBAR navbar_main;
 
-	void main_navbar_set(NAVBAR navbar, const char *key);
-	void main_navbar_fill_book_combo(NAVBAR navbar);
+void main_navbar_set(NAVBAR navbar, const char *key);
+void main_navbar_fill_book_combo(NAVBAR navbar);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* _NAVBAR_H */
+#endif /* _NAVBAR_H */

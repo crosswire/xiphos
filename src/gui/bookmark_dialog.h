@@ -19,30 +19,28 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
-
 #ifndef _BOOKMARK_DIALOG_H
 #define _BOOKMARK_DIALOG_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-	void on_dialog_response(GtkDialog * dialog,
-				gint response_id, gpointer user_data);
-	void gui_bookmark_dialog(gchar * label, gchar * module_name,
-				 gchar * key);
-	void gui_mark_verse_dialog(gchar * module_name, gchar * key);
-	void on_buffer_changed(GtkTextBuffer * textbuffer,
-			       gpointer user_data);
-	void on_mark_verse_response(GtkDialog * dialog, gint response_id,
-				    gpointer user_data);
-	void on_dialog_enter(void);
-	void on_mark_verse_enter(void);
-	gboolean on_treeview_button_release_event(GtkWidget * widget,
-						  GdkEventButton * event,
-						  gpointer user_data);
+void on_dialog_response(GtkDialog *dialog,
+			gint response_id, gpointer user_data);
+void gui_bookmark_dialog(gchar *label, gchar *module_name,
+			 gchar *key);
+void gui_mark_verse_dialog(gchar *module_name, gchar *key);
+void on_buffer_changed(GtkTextBuffer *textbuffer,
+		       gpointer user_data);
+void on_mark_verse_response(GtkDialog *dialog, gint response_id,
+			    gpointer user_data);
+void on_dialog_enter(void);
+void on_mark_verse_enter(void);
+gboolean on_treeview_button_release_event(GtkWidget *widget,
+					  GdkEventButton *event,
+					  gpointer user_data);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* _BOOKMARK_DIALOG_H */
+#endif /* _BOOKMARK_DIALOG_H */

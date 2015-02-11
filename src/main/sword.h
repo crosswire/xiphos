@@ -48,7 +48,7 @@ extern "C" {
 #define DIALOG_DICTIONARY_TYPE 9
 #define DIALOG_BOOK_TYPE 10
 #define DIALOG_SEARCH_PREVIEW_TYPE 11
-#define	PRAYERLIST_TYPE 12
+#define PRAYERLIST_TYPE 12
 
 /* these strings are not seen by users */
 /* they are returned by Sword in module->Type() */
@@ -58,88 +58,88 @@ extern "C" {
 #define BOOK_MODS "Generic Books"
 
 #define UTF_8 "UTF-8"
-	extern char *OLD_CODESET;
-	extern char *sword_locale;
-	extern int re_encode_digits;
-	extern gboolean companion_activity;
+extern char *OLD_CODESET;
+extern char *sword_locale;
+extern int re_encode_digits;
+extern gboolean companion_activity;
 /*** end defs ***/
 
 /*** function prototypes ***/
 
-	void main_add_abbreviation(const char *name,
-				   const char *abbreviation);
-	const char *main_get_abbreviation(const char *name);
-	const char *main_get_name(const char *abbreviation);
+void main_add_abbreviation(const char *name,
+			   const char *abbreviation);
+const char *main_get_abbreviation(const char *name);
+const char *main_get_name(const char *abbreviation);
 
-	void main_book_heading(char *mod_name);
-	void main_chapter_heading(char *mod_name);
-	void main_delete_note(const gchar * module_name,
-			      const gchar * key_str);
-	void main_save_note(const gchar * module_name,
-			    const gchar * key_str, const gchar * note_str);
-	GtkWidget *main_dictionary_drop_down_new(char *mod_name,
-						 char *old_key);
-	char *main_get_path_to_mods(void);
-	const char *main_get_sword_version(void);
-	void main_shutdown_backend(void);
-	void main_set_module_unlocked(const char *mod_name, char *key);
-	void main_save_module_key(const char *mod_name, char *key);
-	char *main_getText(char *key);
-	char *main_getShortText(char *key);
-	gchar *main_update_nav_controls(const char *module_name,
-					const gchar * key);
-	char *main_get_active_pane_key(void);
-	char *main_get_active_pane_module(void);
-	char *set_sword_locale(const char *sys_locale);
-	void main_init_backend(void);
-	int main_is_mod_rtol(const char *module_name);
-	char *main_module_name_from_description(char *description);
-	char *main_get_search_results_text(char *mod_name, char *key);
-	void main_display_book(const char *mod_name, const char *key);	//, unsigned long offset);
-	void main_display_commentary(const char *mod_name,
-				     const char *key);
-	void main_display_dictionary(const char *mod_name,
-				     const char *key);
-	void main_display_bible(const char *mod_name, const char *key);
-	void main_display_devotional(void);
-	void main_setup_displays(void);
-	void main_dictionary_entry_changed(char *mod_name);
-	void main_dictionary_button_clicked(gint direction);
-	const char *main_get_module_language(const char *module_name);
-	int main_check_for_option(const char *mod_name, const char *key,
-				  const char *option);
-	int main_check_for_global_option(const char *mod_name,
-					 const char *option);
-	int main_has_cipher_tag(char *mod_name);
-	void main_check_unlock(const char *mod_name, gboolean conditional);
-	int main_is_module(char *mod_name);
-	int main_has_search_framework(char *mod_name);
-	int main_optimal_search(char *mod_name);
-	char *main_get_mod_config_entry(const char *module_name,
-					const char *entry);
-	char *main_get_mod_config_file(const char *module_name,
-				       const char *moddir);
-	char *main_get_mod_about_info(char *mod_name);
-	char *main_get_striptext(char *module_name, char *key);
-	char *main_get_striptext_from_string(char *module_name,
-					     char *string);
-	char *main_get_rendered_text(const char *module_name,
-				     const char *key);
-	char *main_get_raw_text(char *module_name, char *key);
-	int main_get_mod_type(char *mod_name);
-	const char *main_get_module_description(const char *module_name);
-	char *main_get_treekey_local_name(unsigned long offset);
-	char *main_get_book_key_from_offset(unsigned long offset);
-	void main_refresh_all(void);
-	char *main_format_number(int x);
-	int main_deformat_number(char *digitstring);
-	void main_flush_widgets_content(void);
-	gboolean main_is_Bible_key(const gchar * name, const gchar * key);
-	const char *main_get_osisref_from_key(const char *module,
-					      const char *key);
-	const char *main_get_language_map(const char *language);
-	char **main_get_module_language_list(void);
-	void main_init_language_map(void);
+void main_book_heading(char *mod_name);
+void main_chapter_heading(char *mod_name);
+void main_delete_note(const gchar *module_name,
+		      const gchar *key_str);
+void main_save_note(const gchar *module_name,
+		    const gchar *key_str, const gchar *note_str);
+GtkWidget *main_dictionary_drop_down_new(char *mod_name,
+					 char *old_key);
+char *main_get_path_to_mods(void);
+const char *main_get_sword_version(void);
+void main_shutdown_backend(void);
+void main_set_module_unlocked(const char *mod_name, char *key);
+void main_save_module_key(const char *mod_name, char *key);
+char *main_getText(char *key);
+char *main_getShortText(char *key);
+gchar *main_update_nav_controls(const char *module_name,
+				const gchar *key);
+char *main_get_active_pane_key(void);
+char *main_get_active_pane_module(void);
+char *set_sword_locale(const char *sys_locale);
+void main_init_backend(void);
+int main_is_mod_rtol(const char *module_name);
+char *main_module_name_from_description(char *description);
+char *main_get_search_results_text(char *mod_name, char *key);
+void main_display_book(const char *mod_name, const char *key); //, unsigned long offset);
+void main_display_commentary(const char *mod_name,
+			     const char *key);
+void main_display_dictionary(const char *mod_name,
+			     const char *key);
+void main_display_bible(const char *mod_name, const char *key);
+void main_display_devotional(void);
+void main_setup_displays(void);
+void main_dictionary_entry_changed(char *mod_name);
+void main_dictionary_button_clicked(gint direction);
+const char *main_get_module_language(const char *module_name);
+int main_check_for_option(const char *mod_name, const char *key,
+			  const char *option);
+int main_check_for_global_option(const char *mod_name,
+				 const char *option);
+int main_has_cipher_tag(char *mod_name);
+void main_check_unlock(const char *mod_name, gboolean conditional);
+int main_is_module(char *mod_name);
+int main_has_search_framework(char *mod_name);
+int main_optimal_search(char *mod_name);
+char *main_get_mod_config_entry(const char *module_name,
+				const char *entry);
+char *main_get_mod_config_file(const char *module_name,
+			       const char *moddir);
+char *main_get_mod_about_info(char *mod_name);
+char *main_get_striptext(char *module_name, char *key);
+char *main_get_striptext_from_string(char *module_name,
+				     char *string);
+char *main_get_rendered_text(const char *module_name,
+			     const char *key);
+char *main_get_raw_text(char *module_name, char *key);
+int main_get_mod_type(char *mod_name);
+const char *main_get_module_description(const char *module_name);
+char *main_get_treekey_local_name(unsigned long offset);
+char *main_get_book_key_from_offset(unsigned long offset);
+void main_refresh_all(void);
+char *main_format_number(int x);
+int main_deformat_number(char *digitstring);
+void main_flush_widgets_content(void);
+gboolean main_is_Bible_key(const gchar *name, const gchar *key);
+const char *main_get_osisref_from_key(const char *module,
+				      const char *key);
+const char *main_get_language_map(const char *language);
+char **main_get_module_language_list(void);
+void main_init_language_map(void);
 
 #ifdef __cplusplus
 }
@@ -148,10 +148,10 @@ extern "C" {
  * waf configure -chatty to generate tracing.
  */
 #ifdef CHATTY
-#define XI_message(x)	g_message x
-#define XI_warning(x)	g_warning x
-#define XI_print(x)	g_print x
-#define XI_error(x)	g_error x
+#define XI_message(x) g_message x
+#define XI_warning(x) g_warning x
+#define XI_print(x) g_print x
+#define XI_error(x) g_error x
 #else
 #define XI_message(x)
 #define XI_warning(x)
@@ -159,14 +159,14 @@ extern "C" {
 #define XI_error(x)
 #endif
 #ifdef WIN32
-#define	Mkdir(d,m)	g_mkdir(d,m)
-#define	DOTSWORD	"Sword"
-#define access(d,m)     g_access(d,m)
+#define Mkdir(d, m) g_mkdir(d, m)
+#define DOTSWORD "Sword"
+#define access(d, m) g_access(d, m)
 #else
-#define	Mkdir(d,m)	mkdir(d,m)
-#define	DOTSWORD	".sword"
-#endif				/* WIN32 */
+#define Mkdir(d, m) mkdir(d, m)
+#define DOTSWORD ".sword"
+#endif /* WIN32 */
 /* we can now use "HOME" everywhere again,
    since we aggressively set it for WIN32. */
-#define	HOMEVAR		"HOME"
+#define HOMEVAR "HOME"
 #endif

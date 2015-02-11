@@ -19,7 +19,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -37,8 +36,9 @@
 
 using namespace sword;
 
-class GTKEntryDisp : public SWDisplay {
-public:
+class GTKEntryDisp : public SWDisplay
+{
+      public:
 	GTKEntryDisp(GtkWidget *_gtkText,
 		     BackEnd *_be)
 	    : gtkText(_gtkText),
@@ -55,22 +55,23 @@ public:
 	virtual char display(SWModule &imodule);
 	virtual char displayByChapter(SWModule &imodule);
 
-protected:
-	GtkWidget  *gtkText;
-	BackEnd    *be;
-	SWBuf      swbuf;
-	MOD_FONT   *mf;
+      protected:
+	GtkWidget *gtkText;
+	BackEnd *be;
+	SWBuf swbuf;
+	MOD_FONT *mf;
 	GLOBAL_OPS *ops;
-	gboolean   is_rtol;
-	gboolean   strongs_or_morph;
-	gboolean   strongs_and_morph;
-	int	   cache_flags;
+	gboolean is_rtol;
+	gboolean strongs_or_morph;
+	gboolean strongs_and_morph;
+	int cache_flags;
 };
 
-class GTKChapDisp : public GTKEntryDisp {
-public:
+class GTKChapDisp : public GTKEntryDisp
+{
+      public:
 	GTKChapDisp(GtkWidget *_gtkText,
-		    BackEnd   *_be)
+		    BackEnd *_be)
 	    : GTKEntryDisp(_gtkText, _be)
 	{
 	}
@@ -78,14 +79,15 @@ public:
 	virtual void getVerseBefore(SWModule &imodule);
 	virtual void getVerseAfter(SWModule &imodule);
 
-private:
+      private:
 };
 
-class DialogEntryDisp : public SWDisplay {
-public:
-	DialogEntryDisp(GtkWidget   *_gtkText,
+class DialogEntryDisp : public SWDisplay
+{
+      public:
+	DialogEntryDisp(GtkWidget *_gtkText,
 			DIALOG_DATA *_d,
-			BackEnd     *_be)
+			BackEnd *_be)
 	    : gtkText(_gtkText),
 	      d(_d),
 	      be(_be),
@@ -100,50 +102,52 @@ public:
 	virtual char display(SWModule &imodule);
 	virtual char displayByChapter(SWModule &imodule);
 
-protected:
-	GtkWidget   *gtkText;
+      protected:
+	GtkWidget *gtkText;
 	DIALOG_DATA *d;
-	BackEnd     *be;
-	GLOBAL_OPS  *ops;
-	MOD_FONT    *mf;
-	SWBuf       swbuf;
-	gboolean    is_rtol;
-	gboolean   strongs_or_morph;
-	gboolean   strongs_and_morph;
-	int	   cache_flags;
+	BackEnd *be;
+	GLOBAL_OPS *ops;
+	MOD_FONT *mf;
+	SWBuf swbuf;
+	gboolean is_rtol;
+	gboolean strongs_or_morph;
+	gboolean strongs_and_morph;
+	int cache_flags;
 };
 
-class DialogChapDisp : public  DialogEntryDisp {
-public:
-	DialogChapDisp(GtkWidget   *_gtkText,
+class DialogChapDisp : public DialogEntryDisp
+{
+      public:
+	DialogChapDisp(GtkWidget *_gtkText,
 		       DIALOG_DATA *_d,
-		       BackEnd     *_be)
+		       BackEnd *_be)
 	    : DialogEntryDisp(_gtkText, _d, _be)
 	{
 	}
 	virtual char display(SWModule &imodule);
 };
 
-
-class GTKPrintEntryDisp : public SWDisplay {
-public:
+class GTKPrintEntryDisp : public SWDisplay
+{
+      public:
 	GTKPrintEntryDisp(GtkWidget *_gtkText,
-			  BackEnd   *_be)
+			  BackEnd *_be)
 	    : gtkText(_gtkText),
 	      be(_be)
 	{
 	}
 	virtual char display(SWModule &imodule);
 
-protected:
+      protected:
 	GtkWidget *gtkText;
-	BackEnd   *be;
+	BackEnd *be;
 };
 
-class GTKPrintChapDisp : public GTKPrintEntryDisp {
-public:
+class GTKPrintChapDisp : public GTKPrintEntryDisp
+{
+      public:
 	GTKPrintChapDisp(GtkWidget *_gtkText,
-			 BackEnd   *_be)
+			 BackEnd *_be)
 	    : GTKPrintEntryDisp(_gtkText, _be)
 	{
 	}

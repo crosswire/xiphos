@@ -48,7 +48,7 @@ extern "C" {
 
 #include "gui/debug_glib_null.h"
 
-#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\
 <style type=\"text/css\"><!-- \
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right;} \
@@ -62,17 +62,17 @@ static GtkWidget *previewer_html_widget;
 
 void main_set_previewer_widget(int in_sidebar)
 {
-    if (in_sidebar)
-    	previewer_html_widget = sidebar.html_viewer_widget;
-    else
-	previewer_html_widget = widgets.html_previewer_text;
+	if (in_sidebar)
+		previewer_html_widget = sidebar.html_viewer_widget;
+	else
+		previewer_html_widget = widgets.html_previewer_text;
 }
 
 GtkWidget *main_get_previewer_widget(void)
 {
-	return 	settings.show_previewer_in_sidebar
-		? sidebar.html_viewer_widget
-		: widgets.html_previewer_text;
+	return settings.show_previewer_in_sidebar
+		   ? sidebar.html_viewer_widget
+		   : widgets.html_previewer_text;
 }
 
 /******************************************************************************
@@ -110,7 +110,6 @@ void main_init_previewer(void)
 	g_string_free(str, TRUE);
 }
 
-
 /******************************************************************************
  * Name
  *   main_clear_viewer
@@ -137,7 +136,6 @@ void main_clear_viewer(void)
 #endif /* USE_PREVIEWER_AUTOCLEAR */
 }
 
-
 /******************************************************************************
  * Name
  *   main_information_viewer
@@ -155,17 +153,17 @@ void main_clear_viewer(void)
  *   void
  */
 
-void main_information_viewer(const gchar * mod_name,
-			     const gchar * text,
-			     const gchar * key,
-			     const gchar * action,
-			     const gchar * type,
-			     const gchar * morph_text,
-			     const gchar * morph)
+void main_information_viewer(const gchar *mod_name,
+			     const gchar *text,
+			     const gchar *key,
+			     const gchar *action,
+			     const gchar *type,
+			     const gchar *morph_text,
+			     const gchar *morph)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
-	MOD_FONT *mf = get_font((gchar*)mod_name);
+	MOD_FONT *mf = get_font((gchar *)mod_name);
 
 	g_string_printf(tmp_str,
 			HTML_START
@@ -183,26 +181,22 @@ void main_information_viewer(const gchar * mod_name,
 					"<font color=\"grey\">%s</font><hr/>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
-		}
-		else if (*type == 'u') {
+		} else if (*type == 'u') {
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s:<br/>%s</font><hr/>",
 					_("User Annotation"), key);
 			str = g_string_append(str, tmp_str->str);
-		}
-		else if (*type == 'x') {
+		} else if (*type == 'x') {
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s</font><hr/>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
-		}
-		else if (!strcmp(action, "showStrongs")) {
+		} else if (!strcmp(action, "showStrongs")) {
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s: %s</font><hr/>",
 					_("Strongs"), key);
 			str = g_string_append(str, tmp_str->str);
-		}
-		else if (!strcmp(action, "showMorph")) {
+		} else if (!strcmp(action, "showMorph")) {
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s: %s</font><hr/>",
 					_("Morphology"), key);
@@ -233,15 +227,13 @@ void main_information_viewer(const gchar * mod_name,
 
 	str = g_string_append(str, "</font></body></html>");
 
-	HtmlOutput((char *)AnalyzeForImageSize
-			   (str->str,
-			    GDK_WINDOW(gtk_widget_get_window(previewer_html_widget))),
-			   previewer_html_widget, mf, NULL);
+	HtmlOutput((char *)AnalyzeForImageSize(str->str,
+					       GDK_WINDOW(gtk_widget_get_window(previewer_html_widget))),
+		   previewer_html_widget, mf, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
 }
-
 
 /******************************************************************************
  * Name
@@ -259,7 +251,7 @@ void main_information_viewer(const gchar * mod_name,
  *   void
  */
 
-void mark_search_words(GString * str)
+void mark_search_words(GString *str)
 {
 	gchar *tmpbuf, *buf, *searchbuf;
 	gint len_overall, len_word, len_tail, len_prefix;
@@ -278,13 +270,13 @@ void mark_search_words(GString * str)
 		settings.highlight_fg, settings.highlight_bg);
 	sprintf(closestr, "</span>");
 
-	searchbuf = g_utf8_casefold(g_strdup(settings.searchText),-1);
+	searchbuf = g_utf8_casefold(g_strdup(settings.searchText), -1);
 	if (g_str_has_prefix(searchbuf, "\"")) {
 		searchbuf = g_strdelimit(searchbuf, "\"", ' ');
 		g_strstrip(searchbuf);
 	}
 
-	buf = g_utf8_casefold(str->str,-1);
+	buf = g_utf8_casefold(str->str, -1);
 
 	/* if we have a muti word search go here */
 	if (settings.searchType == -2 || settings.searchType == -4) {
@@ -295,17 +287,17 @@ void mark_search_words(GString * str)
 		list = NULL;
 		/* separate the search words and add them to a glist */
 		if ((token = strtok(searchbuf, " ")) != NULL) {
-			if (!isalnum(*token) && isalnum(*(token+1)))
-				token++;	// skip leading punctuation.
+			if (!isalnum(*token) && isalnum(*(token + 1)))
+				token++; // skip leading punctuation.
 			if (!strncmp(token, "lemma:", 6))
-				token += 7;	// skip the H/G qualifier.
+				token += 7; // skip the H/G qualifier.
 			list = g_list_append(list, token);
 			++count;
 			while ((token = strtok(NULL, " ")) != NULL) {
-				if (!isalnum(*token) && isalnum(*(token+1)))
+				if (!isalnum(*token) && isalnum(*(token + 1)))
 					token++;
 				if (!strncmp(token, "lemma:", 6))
-					token += 7;	// skip the H/G qualifier.
+					token += 7; // skip the H/G qualifier.
 				list = g_list_append(list, token);
 				++count;
 			}
@@ -328,10 +320,10 @@ void mark_search_words(GString * str)
 				if ((tmpbuf != list->data) && *tmpbuf)
 					*tmpbuf = '\0';
 				else if (!sword::stricmp((gchar *)list->data, "and") ||
-					 !sword::stricmp((gchar *)list->data, "or")  ||
+					 !sword::stricmp((gchar *)list->data, "or") ||
 					 !sword::stricmp((gchar *)list->data, "not")) {
-						// don't color boolean ops.
-						goto next_word;
+					// don't color boolean ops.
+					goto next_word;
 				}
 			}
 			len_word = strlen((gchar *)list->data);
@@ -372,7 +364,7 @@ void mark_search_words(GString * str)
 		next_word:
 			g_free(buf);
 			if ((list = g_list_next(list)))
-				buf = g_utf8_casefold(str->str,-1);
+				buf = g_utf8_casefold(str->str, -1);
 		}
 		g_list_free(listbase);
 
@@ -394,7 +386,6 @@ void mark_search_words(GString * str)
 	g_free(searchbuf);
 }
 
-
 /******************************************************************************
  * Name
  *   main_entry_display
@@ -412,10 +403,10 @@ void mark_search_words(GString * str)
  *   void
  */
 
-void main_entry_display(gpointer data, gchar * mod_name,
-		   gchar * text, gchar * key, gboolean show_key)
+void main_entry_display(gpointer data, gchar *mod_name,
+			gchar *text, gchar *key, gboolean show_key)
 {
-	GtkWidget *html_widget = (GtkWidget *) data;
+	GtkWidget *html_widget = (GtkWidget *)data;
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
@@ -468,10 +459,9 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
-	HtmlOutput((char *)AnalyzeForImageSize
-			   (str->str,
-			    GDK_WINDOW(gtk_widget_get_window(html_widget))),
-			    html_widget, mf, NULL);
+	HtmlOutput((char *)AnalyzeForImageSize(str->str,
+					       GDK_WINDOW(gtk_widget_get_window(html_widget))),
+		   html_widget, mf, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);

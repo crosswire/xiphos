@@ -26,6 +26,6 @@
 
 #include "editor/slib-editor.h"
 
-GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor);
+GtkWidget *gui_navbar_versekey_editor_new(EDITOR *editor);
 
 #endif

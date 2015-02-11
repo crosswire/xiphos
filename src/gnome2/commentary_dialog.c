@@ -54,7 +54,6 @@ extern gboolean do_display;
  */
 DIALOG_DATA *cur_d;
 
-
 /******************************************************************************
  * Name
  *   on_dialog_destroy
@@ -72,13 +71,12 @@ DIALOG_DATA *cur_d;
  *   void
  */
 
-static void on_dialog_destroy(GObject * object, DIALOG_DATA * d)
+static void on_dialog_destroy(GObject *object, DIALOG_DATA *d)
 {
 	if (!dialog_freed)
 		main_free_on_destroy(d);
 	dialog_freed = FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -96,14 +94,13 @@ static void on_dialog_destroy(GObject * object, DIALOG_DATA * d)
  *   void
  */
 
-void gui_close_comm_dialog(DIALOG_DATA * d)
+void gui_close_comm_dialog(DIALOG_DATA *d)
 {
 	if (d->dialog) {
 		dialog_freed = FALSE;
 		gtk_widget_destroy(d->dialog);
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -122,14 +119,13 @@ void gui_close_comm_dialog(DIALOG_DATA * d)
  *   gboolean
  */
 
-static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
-					      GdkEventMotion * event,
-					      DIALOG_DATA * d)
+static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
+					      GdkEventMotion *event,
+					      DIALOG_DATA *d)
 {
 	cur_d = d;
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -147,14 +143,13 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  *   void
  */
 
-static void sync_with_main(DIALOG_DATA * d)
+static void sync_with_main(DIALOG_DATA *d)
 {
 	gchar *url = g_strdup_printf("sword:///%s", settings.currentverse);
 	main_dialogs_url_handler(d, url, TRUE);
 	cur_d = d;
 	g_free(url);
 }
-
 
 /******************************************************************************
  * Name
@@ -172,14 +167,14 @@ static void sync_with_main(DIALOG_DATA * d)
  *   void
  */
 
-static GtkWidget *create_nav_toolbar(DIALOG_DATA * d)
+static GtkWidget *create_nav_toolbar(DIALOG_DATA *d)
 {
 	d->navbar.type = NB_DIALOG;
 	return gui_navbar_versekey_dialog_new(d);
 }
 
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, DIALOG_DATA * d)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, DIALOG_DATA *d)
 {
 	gui_menu_popup(html, cur_d->mod_name, cur_d);
 	//gui_commentary_dialog_create_menu(d);
@@ -201,7 +196,7 @@ _popupmenu_requested_cb(XiphosHtml * html, gchar * uri, DIALOG_DATA * d)
  *   void
  */
 
-void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
+void gui_create_commentary_dialog(DIALOG_DATA *d, gboolean do_edit)
 {
 	GtkWidget *vbox30;
 	GtkWidget *vbox_toolbars;
@@ -245,8 +240,7 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 	scrolledwindow38 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow38);
 	gtk_container_add(GTK_CONTAINER(frame19), scrolledwindow38);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow38),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow38),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
@@ -254,16 +248,15 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 					    settings.shadow_type);
 
 	d->html =
-	    GTK_WIDGET(XIPHOS_HTML_NEW
-		       (((DIALOG_DATA *) d), TRUE,
-			DIALOG_COMMENTARY_TYPE));
+	    GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA *)d), TRUE,
+				       DIALOG_COMMENTARY_TYPE));
 
 	gtk_container_add(GTK_CONTAINER(scrolledwindow38), d->html);
 	gtk_widget_show(d->html);
-	g_signal_connect((gpointer) d->html,
+	g_signal_connect((gpointer)d->html,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb),
-			 (DIALOG_DATA *) d);
+			 (DIALOG_DATA *)d);
 
 	g_signal_connect(G_OBJECT(d->dialog), "destroy",
 			 G_CALLBACK(on_dialog_destroy), d);
@@ -272,9 +265,8 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 			 G_CALLBACK(on_dialog_motion_notify_event), d);
 }
 
-
-void gui_commentary_dialog_sync_toggled(GtkToggleButton * button,
-					DIALOG_DATA * d)
+void gui_commentary_dialog_sync_toggled(GtkToggleButton *button,
+					DIALOG_DATA *d)
 {
 	if (d == NULL)
 		d = cur_d;
@@ -284,6 +276,5 @@ void gui_commentary_dialog_sync_toggled(GtkToggleButton * button,
 	} else
 		d->sync = FALSE;
 }
-
 
 /******   end of file   ******/

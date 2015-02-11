@@ -29,7 +29,8 @@ SWORD_NAMESPACE_START
  * unicode and utf8. This class makes it possible to implement Unicode
  * support on the user-side and not in Sword itself.
  */
-class GS_StringMgr:public StringMgr {
+class GS_StringMgr : public StringMgr
+{
 
       public:
 	/* Converts the param to an upper case Utf8 string
@@ -46,8 +47,7 @@ class GS_StringMgr:public StringMgr {
 	 *  @return True if this implementation provides support for
 	 *  Utf8 handling or false if just latin1 handling is available
 	 */
-	virtual bool supportsUnicode()const;
-
+	virtual bool supportsUnicode() const;
 };
 
 SWORD_NAMESPACE_END

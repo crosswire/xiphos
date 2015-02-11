@@ -28,13 +28,11 @@
 #include <glade/glade-xml.h>
 #endif
 
-
 #ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
 #else
 #include "editor/slib-editor.h"
 #endif
-
 
 #include "gui/navbar_versekey_editor.h"
 #include "gui/bibletext_dialog.h"
@@ -47,7 +45,6 @@
 #include "main/tab_history.h"
 
 #include "gui/debug_glib_null.h"
-
 
 /******************************************************************************
  * Name
@@ -65,10 +62,9 @@
  *   void
  */
 
-static
-gboolean on_verse_up_button_release_event(GtkWidget * widget,
-					  GdkEventButton * event,
-					  EDITOR * editor)
+static gboolean on_verse_up_button_release_event(GtkWidget *widget,
+						 GdkEventButton *event,
+						 EDITOR *editor)
 {
 	main_navbar_versekey_spin_verse(editor->navbar, 0);
 	return FALSE;
@@ -90,10 +86,9 @@ gboolean on_verse_up_button_release_event(GtkWidget * widget,
  *   void
  */
 
-static
-gboolean on_verse_down_button_release_event(GtkWidget * widget,
-					    GdkEventButton * event,
-					    EDITOR * editor)
+static gboolean on_verse_down_button_release_event(GtkWidget *widget,
+						   GdkEventButton *event,
+						   EDITOR *editor)
 {
 	main_navbar_versekey_spin_verse(editor->navbar, 1);
 	return FALSE;
@@ -115,15 +110,13 @@ gboolean on_verse_down_button_release_event(GtkWidget * widget,
  *   void
  */
 
-static
-gboolean on_chapter_up_button_release_event(GtkWidget * widget,
-					    GdkEventButton * event,
-					    EDITOR * editor)
+static gboolean on_chapter_up_button_release_event(GtkWidget *widget,
+						   GdkEventButton *event,
+						   EDITOR *editor)
 {
 	main_navbar_versekey_spin_chapter(editor->navbar, 0);
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -141,10 +134,9 @@ gboolean on_chapter_up_button_release_event(GtkWidget * widget,
  *   void
  */
 
-static
-gboolean on_chapter_down_button_release_event(GtkWidget * widget,
-					      GdkEventButton * event,
-					      EDITOR * editor)
+static gboolean on_chapter_down_button_release_event(GtkWidget *widget,
+						     GdkEventButton *event,
+						     EDITOR *editor)
 {
 	main_navbar_versekey_spin_chapter(editor->navbar, 1);
 	return FALSE;
@@ -166,15 +158,13 @@ gboolean on_chapter_down_button_release_event(GtkWidget * widget,
  *   void
  */
 
-static
-gboolean on_book_up_button_release_event(GtkWidget * widget,
-					 GdkEventButton * event,
-					 EDITOR * editor)
+static gboolean on_book_up_button_release_event(GtkWidget *widget,
+						GdkEventButton *event,
+						EDITOR *editor)
 {
 	main_navbar_versekey_spin_book(editor->navbar, 0);
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -192,10 +182,9 @@ gboolean on_book_up_button_release_event(GtkWidget * widget,
  *   void
  */
 
-static
-gboolean on_book_down_button_release_event(GtkWidget * widget,
-					   GdkEventButton * event,
-					   EDITOR * editor)
+static gboolean on_book_down_button_release_event(GtkWidget *widget,
+						  GdkEventButton *event,
+						  EDITOR *editor)
 {
 	main_navbar_versekey_spin_book(editor->navbar, 1);
 	return FALSE;
@@ -217,7 +206,7 @@ gboolean on_book_down_button_release_event(GtkWidget * widget,
  *   void
  */
 
-static void menu_deactivate_callback(GtkWidget * widget,
+static void menu_deactivate_callback(GtkWidget *widget,
 				     gpointer user_data)
 {
 	GtkWidget *menu_button;
@@ -227,7 +216,6 @@ static void menu_deactivate_callback(GtkWidget * widget,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(menu_button),
 				     FALSE);
 }
-
 
 /******************************************************************************
  * Name
@@ -247,9 +235,8 @@ static void menu_deactivate_callback(GtkWidget * widget,
  *   void
  */
 
-static
-void menu_position_under(GtkMenu * menu, int *x, int *y,
-			 gboolean * push_in, gpointer user_data)
+static void menu_position_under(GtkMenu *menu, int *x, int *y,
+				gboolean *push_in, gpointer user_data)
 {
 	GtkWidget *widget;
 	GtkAllocation allocation;
@@ -271,7 +258,6 @@ void menu_position_under(GtkMenu * menu, int *x, int *y,
 	*push_in = FALSE;
 }
 
-
 /******************************************************************************
  * Name
  *   select_button_press_callback
@@ -291,10 +277,9 @@ void menu_position_under(GtkMenu * menu, int *x, int *y,
  *   gboolean
  */
 
-static
-gboolean select_book_button_press_callback(GtkWidget * widget,
-					   GdkEventButton * event,
-					   EDITOR * editor)
+static gboolean select_book_button_press_callback(GtkWidget *widget,
+						  GdkEventButton *event,
+						  EDITOR *editor)
 {
 	GtkWidget *menu;
 
@@ -317,8 +302,6 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 	return FALSE;
 }
 
-
-
 /******************************************************************************
  * Name
  *   select_button_press_callback
@@ -338,10 +321,9 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean select_chapter_button_press_callback(GtkWidget * widget,
-					      GdkEventButton * event,
-					      EDITOR * editor)
+static gboolean select_chapter_button_press_callback(GtkWidget *widget,
+						     GdkEventButton *event,
+						     EDITOR *editor)
 {
 	GtkWidget *menu;
 
@@ -364,8 +346,6 @@ gboolean select_chapter_button_press_callback(GtkWidget * widget,
 	return FALSE;
 }
 
-
-
 /******************************************************************************
  * Name
  *   select_button_press_callback
@@ -385,9 +365,9 @@ gboolean select_chapter_button_press_callback(GtkWidget * widget,
  *   gboolean
  */
 
-static gboolean select_verse_button_press_callback(GtkWidget * widget,
-						   GdkEventButton * event,
-						   EDITOR * editor)
+static gboolean select_verse_button_press_callback(GtkWidget *widget,
+						   GdkEventButton *event,
+						   EDITOR *editor)
 {
 	GtkWidget *menu;
 
@@ -426,17 +406,17 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
  *   void
  */
 
-static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
+static void on_entry_activate(GtkEntry *entry, EDITOR *editor)
 {
 	const gchar *buf = gtk_entry_get_text(entry);
 	if (buf == NULL)
 		return;
 	/* handle potential subsection anchor */
-	if ((settings.special_anchor = strchr(buf, '#')) ||	/* thml */
-	    (settings.special_anchor = strchr(buf, '!')))	/* osisref */
+	if ((settings.special_anchor = strchr(buf, '#')) || /* thml */
+	    (settings.special_anchor = strchr(buf, '!')))   /* osisref */
 		*settings.special_anchor = '\0';
 	const gchar *gkey =
-	    main_get_valid_key(settings.MainWindowModule, (gchar *) buf);
+	    main_get_valid_key(settings.MainWindowModule, (gchar *)buf);
 
 	// we got a valid key. but was it really a valid key within v11n?
 	// for future use in determining whether to show normal navbar content.
@@ -444,12 +424,11 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
 	    main_is_Bible_key(settings.MainWindowModule, gkey);
 
 	if (settings.special_anchor)
-		*settings.special_anchor = '#';	/* put it back. */
+		*settings.special_anchor = '#'; /* put it back. */
 	if (gkey == NULL)
 		return;
 	gchar *url = g_strdup_printf("sword:///%s%s", gkey,
-				     (settings.special_anchor ?
-				      settings.special_anchor : ""));
+				     (settings.special_anchor ? settings.special_anchor : ""));
 
 	editor->navbar.module_name =
 	    g_string_assign(editor->navbar.module_name,
@@ -461,9 +440,8 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
 	if (url)
 		g_free(url);
 	if (gkey)
-		g_free((gchar *) gkey);
+		g_free((gchar *)gkey);
 }
-
 
 /******************************************************************************
  * Name
@@ -483,18 +461,15 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
  *   gboolean
  */
 
-static
-gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
-						 GdkEvent * event,
-						 EDITOR * editor)
+static gboolean on_button_verse_menu_verse_scroll_event(GtkWidget *widget,
+							GdkEvent *event,
+							EDITOR *editor)
 {
 	XI_message(("%s", "on_button_verse_menu_verse_scroll_event"));
 	main_navbar_versekey_spin_verse(editor->navbar,
 					event->scroll.direction);
 	return FALSE;
 }
-
-
 
 /******************************************************************************
  * Name
@@ -514,17 +489,14 @@ gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_button_verse_menu_chapter_scroll_event(GtkWidget * widget,
-						   GdkEvent * event,
-						   EDITOR * editor)
+static gboolean on_button_verse_menu_chapter_scroll_event(GtkWidget *widget,
+							  GdkEvent *event,
+							  EDITOR *editor)
 {
 	main_navbar_versekey_spin_chapter(editor->navbar,
 					  event->scroll.direction);
 	return FALSE;
 }
-
-
 
 /******************************************************************************
  * Name
@@ -544,16 +516,14 @@ gboolean on_button_verse_menu_chapter_scroll_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_button_verse_menu_book_scroll_event(GtkWidget * widget,
-						GdkEvent * event,
-						EDITOR * editor)
+static gboolean on_button_verse_menu_book_scroll_event(GtkWidget *widget,
+						       GdkEvent *event,
+						       EDITOR *editor)
 {
 	main_navbar_versekey_spin_book(editor->navbar,
 				       event->scroll.direction);
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -573,30 +543,27 @@ gboolean on_button_verse_menu_book_scroll_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_book_up_leave_notify_event(GtkWidget * widget,
-				       GdkEventCrossing * event,
-				       EDITOR * editor)
+static gboolean on_book_up_leave_notify_event(GtkWidget *widget,
+					      GdkEventCrossing *event,
+					      EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_book_up_box);
 	gtk_widget_show(editor->navbar.arrow_book_up);
 	return FALSE;
 }
 
-static
-gboolean on_chapter_up_leave_notify_event(GtkWidget * widget,
-					  GdkEventCrossing * event,
-					  EDITOR * editor)
+static gboolean on_chapter_up_leave_notify_event(GtkWidget *widget,
+						 GdkEventCrossing *event,
+						 EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_chapter_up_box);
 	gtk_widget_show(editor->navbar.arrow_chapter_up);
 	return FALSE;
 }
 
-static
-gboolean on_verse_up_leave_notify_event(GtkWidget * widget,
-					GdkEventCrossing * event,
-					EDITOR * editor)
+static gboolean on_verse_up_leave_notify_event(GtkWidget *widget,
+					       GdkEventCrossing *event,
+					       EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_verse_up_box);
 	gtk_widget_show(editor->navbar.arrow_verse_up);
@@ -621,10 +588,9 @@ gboolean on_verse_up_leave_notify_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_book_down_leave_notify_event(GtkWidget * widget,
-					 GdkEventCrossing * event,
-					 EDITOR * editor)
+static gboolean on_book_down_leave_notify_event(GtkWidget *widget,
+						GdkEventCrossing *event,
+						EDITOR *editor)
 {
 
 	gtk_widget_hide(editor->navbar.arrow_book_down_box);
@@ -632,26 +598,23 @@ gboolean on_book_down_leave_notify_event(GtkWidget * widget,
 	return FALSE;
 }
 
-static
-gboolean on_chapter_down_leave_notify_event(GtkWidget * widget,
-					    GdkEventCrossing * event,
-					    EDITOR * editor)
+static gboolean on_chapter_down_leave_notify_event(GtkWidget *widget,
+						   GdkEventCrossing *event,
+						   EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_chapter_down_box);
 	gtk_widget_show(editor->navbar.arrow_chapter_down);
 	return FALSE;
 }
 
-static
-gboolean on_verse_down_leave_notify_event(GtkWidget * widget,
-					  GdkEventCrossing * event,
-					  EDITOR * editor)
+static gboolean on_verse_down_leave_notify_event(GtkWidget *widget,
+						 GdkEventCrossing *event,
+						 EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_verse_down_box);
 	gtk_widget_show(editor->navbar.arrow_verse_down);
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -671,37 +634,32 @@ gboolean on_verse_down_leave_notify_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_book_up_enter_notify_event(GtkWidget * widget,
-				       GdkEventCrossing * event,
-				       EDITOR * editor)
+static gboolean on_book_up_enter_notify_event(GtkWidget *widget,
+					      GdkEventCrossing *event,
+					      EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_book_up);
 	gtk_widget_show(editor->navbar.arrow_book_up_box);
 	return FALSE;
 }
 
-
-static
-gboolean on_chapter_up_enter_notify_event(GtkWidget * widget,
-					  GdkEventCrossing * event,
-					  EDITOR * editor)
+static gboolean on_chapter_up_enter_notify_event(GtkWidget *widget,
+						 GdkEventCrossing *event,
+						 EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_chapter_up);
 	gtk_widget_show(editor->navbar.arrow_chapter_up_box);
 	return FALSE;
 }
 
-static
-gboolean on_verse_up_enter_notify_event(GtkWidget * widget,
-					GdkEventCrossing * event,
-					EDITOR * editor)
+static gboolean on_verse_up_enter_notify_event(GtkWidget *widget,
+					       GdkEventCrossing *event,
+					       EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_verse_up);
 	gtk_widget_show(editor->navbar.arrow_verse_up_box);
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -721,30 +679,27 @@ gboolean on_verse_up_enter_notify_event(GtkWidget * widget,
  *   gboolean
  */
 
-static
-gboolean on_book_down_enter_notify_event(GtkWidget * widget,
-					 GdkEventCrossing * event,
-					 EDITOR * editor)
+static gboolean on_book_down_enter_notify_event(GtkWidget *widget,
+						GdkEventCrossing *event,
+						EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_book_down);
 	gtk_widget_show(editor->navbar.arrow_book_down_box);
 	return FALSE;
 }
 
-static
-gboolean on_chapter_down_enter_notify_event(GtkWidget * widget,
-					    GdkEventCrossing * event,
-					    EDITOR * editor)
+static gboolean on_chapter_down_enter_notify_event(GtkWidget *widget,
+						   GdkEventCrossing *event,
+						   EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_chapter_down);
 	gtk_widget_show(editor->navbar.arrow_chapter_down_box);
 	return FALSE;
 }
 
-static
-gboolean on_verse_down_enter_notify_event(GtkWidget * widget,
-					  GdkEventCrossing * event,
-					  EDITOR * editor)
+static gboolean on_verse_down_enter_notify_event(GtkWidget *widget,
+						 GdkEventCrossing *event,
+						 EDITOR *editor)
 {
 	gtk_widget_hide(editor->navbar.arrow_verse_down);
 	gtk_widget_show(editor->navbar.arrow_verse_down_box);
@@ -767,109 +722,105 @@ gboolean on_verse_down_enter_notify_event(GtkWidget * widget,
  *   void
  */
 
-static
-void _sync_toggled(GtkToggleButton * button, EDITOR * e)
+static void _sync_toggled(GtkToggleButton *button, EDITOR *e)
 {
 	if (gtk_toggle_button_get_active(button)) {
 		e->sync = TRUE;
-		editor_sync_with_main();	//sync_with_main(c);
+		editor_sync_with_main(); //sync_with_main(c);
 	} else
 		e->sync = FALSE;
 }
 
-
-static
-void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
+static void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR *editor)
 {
-	g_signal_connect((gpointer) navbar.lookup_entry,
+	g_signal_connect((gpointer)navbar.lookup_entry,
 			 "activate", G_CALLBACK(on_entry_activate),
 			 editor);
-	g_signal_connect((gpointer) editor->navbar.button_sync,
+	g_signal_connect((gpointer)editor->navbar.button_sync,
 			 "clicked", G_CALLBACK(_sync_toggled), editor);
-	g_signal_connect((gpointer) navbar.button_book_up,
+	g_signal_connect((gpointer)navbar.button_book_up,
 			 "button_release_event",
 			 G_CALLBACK(on_book_up_button_release_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_book_down,
+	g_signal_connect((gpointer)navbar.button_book_down,
 			 "button_release_event",
 			 G_CALLBACK(on_book_down_button_release_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_chapter_up,
+	g_signal_connect((gpointer)navbar.button_chapter_up,
 			 "button_release_event",
 			 G_CALLBACK(on_chapter_up_button_release_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_chapter_down,
+	g_signal_connect((gpointer)navbar.button_chapter_down,
 			 "button_release_event",
 			 G_CALLBACK(on_chapter_down_button_release_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_verse_up,
+	g_signal_connect((gpointer)navbar.button_verse_up,
 			 "button_release_event",
 			 G_CALLBACK(on_verse_up_button_release_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_verse_down,
+	g_signal_connect((gpointer)navbar.button_verse_down,
 			 "button_release_event",
 			 G_CALLBACK(on_verse_down_button_release_event),
 			 editor);
 
 	/*     */
-	g_signal_connect((gpointer) navbar.button_book_up,
+	g_signal_connect((gpointer)navbar.button_book_up,
 			 "enter_notify_event",
 			 G_CALLBACK(on_book_up_enter_notify_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_book_up,
+	g_signal_connect((gpointer)navbar.button_book_up,
 			 "leave_notify_event",
 			 G_CALLBACK(on_book_up_leave_notify_event),
 			 editor);
 
-	g_signal_connect((gpointer) navbar.button_book_down,
+	g_signal_connect((gpointer)navbar.button_book_down,
 			 "enter_notify_event",
 			 G_CALLBACK(on_book_down_enter_notify_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_book_down,
+	g_signal_connect((gpointer)navbar.button_book_down,
 			 "leave_notify_event",
 			 G_CALLBACK(on_book_down_leave_notify_event),
 			 editor);
 
 	/*    */
-	g_signal_connect((gpointer) navbar.button_chapter_up,
+	g_signal_connect((gpointer)navbar.button_chapter_up,
 			 "enter_notify_event",
 			 G_CALLBACK(on_chapter_up_enter_notify_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_chapter_up,
+	g_signal_connect((gpointer)navbar.button_chapter_up,
 			 "leave_notify_event",
 			 G_CALLBACK(on_chapter_up_leave_notify_event),
 			 editor);
 
-	g_signal_connect((gpointer) navbar.button_chapter_down,
+	g_signal_connect((gpointer)navbar.button_chapter_down,
 			 "enter_notify_event",
 			 G_CALLBACK(on_chapter_down_enter_notify_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_chapter_down,
+	g_signal_connect((gpointer)navbar.button_chapter_down,
 			 "leave_notify_event",
 			 G_CALLBACK(on_chapter_down_leave_notify_event),
 			 editor);
 
 	/*    */
-	g_signal_connect((gpointer) navbar.button_verse_up,
+	g_signal_connect((gpointer)navbar.button_verse_up,
 			 "enter_notify_event",
 			 G_CALLBACK(on_verse_up_enter_notify_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_verse_up,
+	g_signal_connect((gpointer)navbar.button_verse_up,
 			 "leave_notify_event",
 			 G_CALLBACK(on_verse_up_leave_notify_event),
 			 editor);
 
-	g_signal_connect((gpointer) navbar.button_verse_down,
+	g_signal_connect((gpointer)navbar.button_verse_down,
 			 "enter_notify_event",
 			 G_CALLBACK(on_verse_down_enter_notify_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_verse_down,
+	g_signal_connect((gpointer)navbar.button_verse_down,
 			 "leave_notify_event",
 			 G_CALLBACK(on_verse_down_leave_notify_event),
 			 editor);
 
-
-/*
+	/*
 	g_signal_connect((gpointer) navbar.button_book_up,
 			 "clicked", G_CALLBACK(on_book_button_up_clicked),
 			 editor);
@@ -889,37 +840,32 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
 			 "clicked", G_CALLBACK(on_verse_button_down_clicked),
 			 editor);
 			 */
-	g_signal_connect((gpointer) navbar.button_book_menu,
+	g_signal_connect((gpointer)navbar.button_book_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_book_button_press_callback),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_chapter_menu,
+	g_signal_connect((gpointer)navbar.button_chapter_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_chapter_button_press_callback),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_verse_menu,
+	g_signal_connect((gpointer)navbar.button_verse_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_verse_button_press_callback),
 			 editor);
 #ifndef HAVE_GTK_34
-	g_signal_connect((gpointer) navbar.button_verse_menu,
+	g_signal_connect((gpointer)navbar.button_verse_menu,
 			 "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_verse_scroll_event),
+			 G_CALLBACK(on_button_verse_menu_verse_scroll_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_chapter_menu,
+	g_signal_connect((gpointer)navbar.button_chapter_menu,
 			 "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_chapter_scroll_event),
+			 G_CALLBACK(on_button_verse_menu_chapter_scroll_event),
 			 editor);
-	g_signal_connect((gpointer) navbar.button_book_menu,
+	g_signal_connect((gpointer)navbar.button_book_menu,
 			 "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_book_scroll_event), editor);
+			 G_CALLBACK(on_button_verse_menu_book_scroll_event), editor);
 #endif
-
 }
-
 
 /******************************************************************************
  * Name
@@ -937,7 +883,7 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
  *   GtkWidget *
  */
 
-GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
+GtkWidget *gui_navbar_versekey_editor_new(EDITOR *editor)
 {
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
@@ -953,7 +899,7 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	g_return_val_if_fail((glade_file != NULL), NULL);
 	XI_message(("%s", glade_file));
 
-	/* build the widget */
+/* build the widget */
 #ifdef USE_GTKBUILDER
 	gxml = gtk_builder_new();
 	gtk_builder_add_from_file(gxml, glade_file, NULL);
@@ -1014,20 +960,17 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 
 #ifdef HAVE_GTK_34
 	eventbox = UI_GET_ITEM(gxml, "eventbox_book");
-	g_signal_connect((gpointer) eventbox, "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_book_scroll_event), editor);
+	g_signal_connect((gpointer)eventbox, "scroll_event",
+			 G_CALLBACK(on_button_verse_menu_book_scroll_event), editor);
 
 	eventbox = UI_GET_ITEM(gxml, "eventbox_chapter");
-	g_signal_connect((gpointer) eventbox, "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_chapter_scroll_event),
+	g_signal_connect((gpointer)eventbox, "scroll_event",
+			 G_CALLBACK(on_button_verse_menu_chapter_scroll_event),
 			 editor);
 
 	eventbox = UI_GET_ITEM(gxml, "eventbox_verse");
-	g_signal_connect((gpointer) eventbox, "scroll_event",
-			 G_CALLBACK
-			 (on_button_verse_menu_verse_scroll_event),
+	g_signal_connect((gpointer)eventbox, "scroll_event",
+			 G_CALLBACK(on_button_verse_menu_verse_scroll_event),
 			 editor);
 #endif
 	_connect_signals(editor->navbar, editor);

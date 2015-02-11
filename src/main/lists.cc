@@ -32,7 +32,6 @@
 #include "main/xml.h"
 #include "backend/sword_main.hh"
 
-
 /******************************************************************************
  *  lists to keep for the life of the program
  */
@@ -88,7 +87,6 @@ GList *get_list(gint type)
 	return NULL;
 }
 
-
 void main_init_lists(void)
 {
 	gboolean start_backend = FALSE;
@@ -142,8 +140,8 @@ void main_init_lists(void)
 
 	settings.haveprayerlist = g_list_length(mods.prayermods);
 
-	if (g_list_length(mods.devotionmods)== 1) {
-		xml_set_value("Xiphos", "modules", "devotional",(char*)mods.devotionmods->data );
+	if (g_list_length(mods.devotionmods) == 1) {
+		xml_set_value("Xiphos", "modules", "devotional", (char *)mods.devotionmods->data);
 		settings.devotionalmod = xml_get_value("modules", "devotional");
 	}
 
@@ -161,83 +159,84 @@ void main_init_lists(void)
 void main_shutdown_list(void)
 {
 	/* free lists */
-	if (!mod_lists) return;
+	if (!mod_lists)
+		return;
 
 	while (mod_lists->options != NULL) {
-		g_free((char *) mod_lists->options->data);
+		g_free((char *)mod_lists->options->data);
 		mod_lists->options = g_list_next(mod_lists->options);
 	}
 	g_list_free(mod_lists->options);
 
 	while (mod_lists->biblemods != NULL) {
-		g_free((char *) mod_lists->biblemods->data);
+		g_free((char *)mod_lists->biblemods->data);
 		mod_lists->biblemods =
 		    g_list_next(mod_lists->biblemods);
 	}
 	g_list_free(mod_lists->biblemods);
 
 	while (mod_lists->commentarymods != NULL) {
-		g_free((char *) mod_lists->commentarymods->data);
+		g_free((char *)mod_lists->commentarymods->data);
 		mod_lists->commentarymods =
 		    g_list_next(mod_lists->commentarymods);
 	}
 	g_list_free(mod_lists->commentarymods);
 
 	while (mod_lists->dictionarymods != NULL) {
-		g_free((char *) mod_lists->dictionarymods->data);
+		g_free((char *)mod_lists->dictionarymods->data);
 		mod_lists->dictionarymods =
 		    g_list_next(mod_lists->dictionarymods);
 	}
 	g_list_free(mod_lists->dictionarymods);
 
 	while (mod_lists->bookmods != NULL) {
-		g_free((char *) mod_lists->bookmods->data);
+		g_free((char *)mod_lists->bookmods->data);
 		mod_lists->bookmods = g_list_next(mod_lists->bookmods);
 	}
 	g_list_free(mod_lists->bookmods);
 
 	while (mod_lists->percommods != NULL) {
-		g_free((char *) mod_lists->percommods->data);
+		g_free((char *)mod_lists->percommods->data);
 		mod_lists->percommods =
 		    g_list_next(mod_lists->percommods);
 	}
 	g_list_free(mod_lists->percommods);
 	while (mod_lists->prayermods != NULL) {
-		g_free((char *) mod_lists->prayermods->data);
+		g_free((char *)mod_lists->prayermods->data);
 		mod_lists->prayermods =
 		    g_list_next(mod_lists->prayermods);
 	}
 	g_list_free(mod_lists->prayermods);
 	while (mod_lists->text_descriptions != NULL) {
-		g_free((char *) mod_lists->text_descriptions->data);
+		g_free((char *)mod_lists->text_descriptions->data);
 		mod_lists->text_descriptions =
 		    g_list_next(mod_lists->text_descriptions);
 	}
 	g_list_free(mod_lists->text_descriptions);
 
 	while (mod_lists->dict_descriptions != NULL) {
-		g_free((char *) mod_lists->dict_descriptions->data);
+		g_free((char *)mod_lists->dict_descriptions->data);
 		mod_lists->dict_descriptions =
 		    g_list_next(mod_lists->dict_descriptions);
 	}
 	g_list_free(mod_lists->dict_descriptions);
 
 	while (mod_lists->comm_descriptions != NULL) {
-		g_free((char *) mod_lists->comm_descriptions->data);
+		g_free((char *)mod_lists->comm_descriptions->data);
 		mod_lists->comm_descriptions =
 		    g_list_next(mod_lists->comm_descriptions);
 	}
 	g_list_free(mod_lists->comm_descriptions);
 
 	while (mod_lists->book_descriptions != NULL) {
-		g_free((char *) mod_lists->book_descriptions->data);
+		g_free((char *)mod_lists->book_descriptions->data);
 		mod_lists->book_descriptions =
 		    g_list_next(mod_lists->book_descriptions);
 	}
 	g_list_free(mod_lists->book_descriptions);
 
 	while (mod_lists->devotionmods != NULL) {
-		g_free((char *) mod_lists->devotionmods->data);
+		g_free((char *)mod_lists->devotionmods->data);
 		mod_lists->devotionmods =
 		    g_list_next(mod_lists->devotionmods);
 	}

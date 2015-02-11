@@ -59,10 +59,10 @@
 
 #include "gui/debug_glib_null.h"
 
-static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO * tbinf,
-				 const gchar * label_text);
-void notebook_main_add_page(PASSAGE_TAB_INFO * tbinf);
-void set_current_tab(PASSAGE_TAB_INFO * pt);
+static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
+				 const gchar *label_text);
+void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf);
+void set_current_tab(PASSAGE_TAB_INFO *pt);
 
 gboolean stop_refresh = FALSE;
 gboolean change_tabs_no_redisplay = FALSE;
@@ -86,7 +86,7 @@ static gint removed_page;
 static const gchar *default_tab_filename = ".last_session_tabs";
 static const gchar *no_tab_filename = ".last_session_no_tabs";
 
-static int yes_no2true_false(const gchar * yes_no)
+static int yes_no2true_false(const gchar *yes_no)
 {
 	return (yes_no && !strcmp(yes_no, "yes"));
 }
@@ -95,7 +95,6 @@ static gchar *true_false2yes_no(int true_false)
 {
 	return (true_false ? "yes" : "no");
 }
-
 
 /******************************************************************************
  * Name
@@ -158,23 +157,19 @@ void gui_recompute_view_menu_choices(void)
 {
 	change_tabs_no_redisplay = TRUE;
 
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewtexts_item),
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.viewtexts_item),
 				       settings.showtexts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewcomms_item),
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.viewcomms_item),
 				       settings.showcomms);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewdicts_item),
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.viewdicts_item),
 				       settings.showdicts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewpreview_item),
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.viewpreview_item),
 				       settings.showpreview);
 
 	change_tabs_no_redisplay = FALSE;
 }
 
-void setup_book_editor_tab(PASSAGE_TAB_INFO * pt)
+void setup_book_editor_tab(PASSAGE_TAB_INFO *pt)
 {
 	/*pt->editor = editor_create_new_book_editor(pt->book_mod, PRAYERLIST_TYPE);
 	   gtk_widget_show(GTK_WIDGET(pt->editor));
@@ -200,7 +195,7 @@ void setup_book_editor_tab(PASSAGE_TAB_INFO * pt)
  *   void
  */
 
-void set_current_tab(PASSAGE_TAB_INFO * pt)
+void set_current_tab(PASSAGE_TAB_INFO *pt)
 {
 	PASSAGE_TAB_INFO *ot = cur_passage_tab;
 
@@ -225,7 +220,6 @@ void set_current_tab(PASSAGE_TAB_INFO * pt)
 	}
 }
 
-
 /******************************************************************************
  * Name
  *  pick_tab_label
@@ -243,7 +237,7 @@ void set_current_tab(PASSAGE_TAB_INFO * pt)
  *   ** caller must free it **
  */
 
-GString *pick_tab_label(PASSAGE_TAB_INFO * pt)
+GString *pick_tab_label(PASSAGE_TAB_INFO *pt)
 {
 	GString *str = g_string_new(NULL);
 
@@ -261,28 +255,23 @@ GString *pick_tab_label(PASSAGE_TAB_INFO * pt)
 	if (pt->showtexts || (pt->showcomms && pt->comm_showing)) {
 		g_string_printf(str, "%s: %s",
 				(pt->showtexts
-				 ? (abbrev_text ? abbrev_text :
-				    pt->text_mod)
-				 : (pt->commentary_mod
-				    ? (abbrev_comm ? abbrev_comm :
-				       pt->commentary_mod)
-				    : "[no commentary]")),
+				     ? (abbrev_text ? abbrev_text : pt->text_mod)
+				     : (pt->commentary_mod
+					    ? (abbrev_comm ? abbrev_comm : pt->commentary_mod)
+					    : "[no commentary]")),
 				pt->text_commentary_key);
 	} else {
 		g_string_printf(str, "%s",
 				(pt->showcomms
-				 ? (pt->book_mod
-				    ? (abbrev_book ? abbrev_book :
-				       pt->book_mod)
-				    : "[no book]")
-				 : (pt->dictlex_mod
-				    ? (abbrev_dict ? abbrev_dict :
-				       pt->dictlex_mod)
-				    : "[no dict]")));
+				     ? (pt->book_mod
+					    ? (abbrev_book ? abbrev_book : pt->book_mod)
+					    : "[no book]")
+				     : (pt->dictlex_mod
+					    ? (abbrev_dict ? abbrev_dict : pt->dictlex_mod)
+					    : "[no dict]")));
 	}
 	return str;
 }
-
 
 /******************************************************************************
  * Name
@@ -299,7 +288,7 @@ GString *pick_tab_label(PASSAGE_TAB_INFO * pt)
  * Return value
  *   void
  */
-void notebook_main_add_page(PASSAGE_TAB_INFO * tbinf)
+void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 {
 	GtkWidget *tab_widget;
 	GtkWidget *menu_label;
@@ -319,8 +308,7 @@ void notebook_main_add_page(PASSAGE_TAB_INFO * tbinf)
 	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
 				 tbinf->page_widget, tab_widget);
 
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (widgets.notebook_main),
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					 tbinf->page_widget, str->str);
 
 	menu_label = gtk_label_new(str->str);
@@ -328,7 +316,6 @@ void notebook_main_add_page(PASSAGE_TAB_INFO * tbinf)
 				    tbinf->page_widget, menu_label);
 	g_string_free(str, TRUE);
 }
-
 
 /******************************************************************************
  * Name
@@ -344,13 +331,13 @@ void notebook_main_add_page(PASSAGE_TAB_INFO * tbinf)
  *
  */
 
-void gui_save_tabs(const gchar * filename)
+void gui_save_tabs(const gchar *filename)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
 	xmlNodePtr cur_node;
 	xmlNodePtr section_node;
-//      xmlAttrPtr xml_attr;
+	//      xmlAttrPtr xml_attr;
 	//const xmlChar *xml_filename;
 	gchar *tabs_dir;
 	gchar *file;
@@ -376,62 +363,61 @@ void gui_save_tabs(const gchar * filename)
 	}
 	//xml_filename = (const xmlChar *) file;
 
-	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
+	xml_doc = xmlNewDoc((const xmlChar *)"1.0");
 
 	if (xml_doc == NULL) {
-		gui_generic_warning_modal
-		    ("Tabs document not created successfully.");
+		gui_generic_warning_modal("Tabs document not created successfully.");
 		return;
 	}
 
-	root_node = xmlNewNode(NULL, (const xmlChar *) "Xiphos_Tabs");
-	//xml_attr = 
-	xmlNewProp(root_node, (const xmlChar *) "Version",
-		   (const xmlChar *) VERSION);
+	root_node = xmlNewNode(NULL, (const xmlChar *)"Xiphos_Tabs");
+	//xml_attr =
+	xmlNewProp(root_node, (const xmlChar *)"Version",
+		   (const xmlChar *)VERSION);
 	xmlDocSetRootElement(xml_doc, root_node);
 
 	section_node = xmlNewChild(root_node, NULL,
-				   (const xmlChar *) "tabs", NULL);
+				   (const xmlChar *)"tabs", NULL);
 
 	for (tmp = g_list_first(passage_list); tmp != NULL;
 	     tmp = g_list_next(tmp)) {
 
-		pt = (PASSAGE_TAB_INFO *) tmp->data;
+		pt = (PASSAGE_TAB_INFO *)tmp->data;
 
 		cur_node = xmlNewChild(section_node,
-				       NULL, (const xmlChar *) "tab",
+				       NULL, (const xmlChar *)"tab",
 				       NULL);
-		xmlNewProp(cur_node, (const xmlChar *) "text_mod",
-			   (const xmlChar *) pt->text_mod);
-		xmlNewProp(cur_node, (const xmlChar *) "commentary_mod",
-			   (const xmlChar *) pt->commentary_mod);
-		xmlNewProp(cur_node, (const xmlChar *) "dictlex_mod",
-			   (const xmlChar *) pt->dictlex_mod);
-		xmlNewProp(cur_node, (const xmlChar *) "book_mod",
-			   (const xmlChar *) pt->book_mod);
+		xmlNewProp(cur_node, (const xmlChar *)"text_mod",
+			   (const xmlChar *)pt->text_mod);
+		xmlNewProp(cur_node, (const xmlChar *)"commentary_mod",
+			   (const xmlChar *)pt->commentary_mod);
+		xmlNewProp(cur_node, (const xmlChar *)"dictlex_mod",
+			   (const xmlChar *)pt->dictlex_mod);
+		xmlNewProp(cur_node, (const xmlChar *)"book_mod",
+			   (const xmlChar *)pt->book_mod);
 		xmlNewProp(cur_node,
-			   (const xmlChar *) "text_commentary_key",
-			   (const xmlChar *) pt->text_commentary_key);
-		xmlNewProp(cur_node, (const xmlChar *) "dictlex_key",
-			   (const xmlChar *) pt->dictlex_key);
-		xmlNewProp(cur_node, (const xmlChar *) "book_offset",
-			   (const xmlChar *) pt->book_offset);
-		xmlNewProp(cur_node, (const xmlChar *) "comm_showing",
+			   (const xmlChar *)"text_commentary_key",
+			   (const xmlChar *)pt->text_commentary_key);
+		xmlNewProp(cur_node, (const xmlChar *)"dictlex_key",
+			   (const xmlChar *)pt->dictlex_key);
+		xmlNewProp(cur_node, (const xmlChar *)"book_offset",
+			   (const xmlChar *)pt->book_offset);
+		xmlNewProp(cur_node, (const xmlChar *)"comm_showing",
 			   (const xmlChar *)
 			   true_false2yes_no(pt->comm_showing));
-		xmlNewProp(cur_node, (const xmlChar *) "showtexts",
+		xmlNewProp(cur_node, (const xmlChar *)"showtexts",
 			   (const xmlChar *)
 			   true_false2yes_no(pt->showtexts));
-		xmlNewProp(cur_node, (const xmlChar *) "showpreview",
+		xmlNewProp(cur_node, (const xmlChar *)"showpreview",
 			   (const xmlChar *)
 			   true_false2yes_no(pt->showpreview));
-		xmlNewProp(cur_node, (const xmlChar *) "showcomms",
+		xmlNewProp(cur_node, (const xmlChar *)"showcomms",
 			   (const xmlChar *)
 			   true_false2yes_no(pt->showcomms));
-		xmlNewProp(cur_node, (const xmlChar *) "showdicts",
+		xmlNewProp(cur_node, (const xmlChar *)"showdicts",
 			   (const xmlChar *)
 			   true_false2yes_no(pt->showdicts));
-		xmlNewProp(cur_node, (const xmlChar *) "showparallel",
+		xmlNewProp(cur_node, (const xmlChar *)"showparallel",
 			   (const xmlChar *)
 			   true_false2yes_no(pt->showparallel));
 	}
@@ -439,7 +425,6 @@ void gui_save_tabs(const gchar * filename)
 	g_free(file);
 	xmlFreeDoc(xml_doc);
 }
-
 
 /******************************************************************************
  * Name
@@ -457,8 +442,7 @@ void gui_save_tabs(const gchar * filename)
  *
  */
 
-static
-void _save_off_tab(const gchar * filename)
+static void _save_off_tab(const gchar *filename)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
@@ -475,70 +459,67 @@ void _save_off_tab(const gchar * filename)
 
 	if (g_access(tabs_dir, F_OK) == -1) {
 		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
-			gui_generic_warning_modal
-			    ("Can't create tabs dir.");
+			gui_generic_warning_modal("Can't create tabs dir.");
 			return;
 		}
 	}
 	file = g_strdup_printf("%s%s", tabs_dir, filename);
 	g_free(tabs_dir);
 
-	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
+	xml_doc = xmlNewDoc((const xmlChar *)"1.0");
 
 	if (xml_doc == NULL) {
-		gui_generic_warning_modal
-		    ("Tabs document not created successfully.");
+		gui_generic_warning_modal("Tabs document not created successfully.");
 		return;
 	}
 
-	root_node = xmlNewNode(NULL, (const xmlChar *) "Xiphos_Tabs");
-	//xml_attr = 
-	xmlNewProp(root_node, (const xmlChar *) "Version",
-		   (const xmlChar *) VERSION);
+	root_node = xmlNewNode(NULL, (const xmlChar *)"Xiphos_Tabs");
+	//xml_attr =
+	xmlNewProp(root_node, (const xmlChar *)"Version",
+		   (const xmlChar *)VERSION);
 	xmlDocSetRootElement(xml_doc, root_node);
 
 	section_node = xmlNewChild(root_node, NULL,
-				   (const xmlChar *) "tabs", NULL);
+				   (const xmlChar *)"tabs", NULL);
 
 	cur_node = xmlNewChild(section_node,
-			       NULL, (const xmlChar *) "tab", NULL);
-	xmlNewProp(cur_node, (const xmlChar *) "text_mod",
-		   (const xmlChar *) settings.MainWindowModule);
-	xmlNewProp(cur_node, (const xmlChar *) "commentary_mod",
-		   (const xmlChar *) settings.CommWindowModule);
-	xmlNewProp(cur_node, (const xmlChar *) "dictlex_mod",
-		   (const xmlChar *) settings.DictWindowModule);
-	xmlNewProp(cur_node, (const xmlChar *) "book_mod",
-		   (const xmlChar *) settings.book_mod);
-	xmlNewProp(cur_node, (const xmlChar *) "text_commentary_key",
-		   (const xmlChar *) settings.currentverse);
-	xmlNewProp(cur_node, (const xmlChar *) "dictlex_key",
-		   (const xmlChar *) settings.dictkey);
-	xmlNewProp(cur_node, (const xmlChar *) "book_offset",
-		   (const xmlChar *) settings.book_key);
-	xmlNewProp(cur_node, (const xmlChar *) "comm_showing",
+			       NULL, (const xmlChar *)"tab", NULL);
+	xmlNewProp(cur_node, (const xmlChar *)"text_mod",
+		   (const xmlChar *)settings.MainWindowModule);
+	xmlNewProp(cur_node, (const xmlChar *)"commentary_mod",
+		   (const xmlChar *)settings.CommWindowModule);
+	xmlNewProp(cur_node, (const xmlChar *)"dictlex_mod",
+		   (const xmlChar *)settings.DictWindowModule);
+	xmlNewProp(cur_node, (const xmlChar *)"book_mod",
+		   (const xmlChar *)settings.book_mod);
+	xmlNewProp(cur_node, (const xmlChar *)"text_commentary_key",
+		   (const xmlChar *)settings.currentverse);
+	xmlNewProp(cur_node, (const xmlChar *)"dictlex_key",
+		   (const xmlChar *)settings.dictkey);
+	xmlNewProp(cur_node, (const xmlChar *)"book_offset",
+		   (const xmlChar *)settings.book_key);
+	xmlNewProp(cur_node, (const xmlChar *)"comm_showing",
 		   (const xmlChar *)
 		   true_false2yes_no(settings.comm_showing));
-	xmlNewProp(cur_node, (const xmlChar *) "showtexts",
+	xmlNewProp(cur_node, (const xmlChar *)"showtexts",
 		   (const xmlChar *)
 		   true_false2yes_no(settings.showtexts));
-	xmlNewProp(cur_node, (const xmlChar *) "showpreview",
+	xmlNewProp(cur_node, (const xmlChar *)"showpreview",
 		   (const xmlChar *)
 		   true_false2yes_no(settings.showpreview));
-	xmlNewProp(cur_node, (const xmlChar *) "showcomms",
+	xmlNewProp(cur_node, (const xmlChar *)"showcomms",
 		   (const xmlChar *)
 		   true_false2yes_no(settings.showcomms));
-	xmlNewProp(cur_node, (const xmlChar *) "showdicts",
+	xmlNewProp(cur_node, (const xmlChar *)"showdicts",
 		   (const xmlChar *)
 		   true_false2yes_no(settings.showdicts));
-	xmlNewProp(cur_node, (const xmlChar *) "showparallel",
-		   (const xmlChar *) "no");
+	xmlNewProp(cur_node, (const xmlChar *)"showparallel",
+		   (const xmlChar *)"no");
 
 	xmlSaveFormatFile(file, xml_doc, 1);
 	g_free(file);
 	xmlFreeDoc(xml_doc);
 }
-
 
 /******************************************************************************
  * Name
@@ -554,7 +535,7 @@ void _save_off_tab(const gchar * filename)
  *
  */
 
-void gui_load_tabs(const gchar * filename)
+void gui_load_tabs(const gchar *filename)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr tmp_node, childnode;
@@ -593,22 +574,17 @@ void gui_load_tabs(const gchar * filename)
 		xml_doc = xmlParseFile(file);
 		g_free(file);
 		if (xml_doc == NULL) {
-			gui_generic_warning_modal
-			    ("Tabs document not parsed successfully.");
+			gui_generic_warning_modal("Tabs document not parsed successfully.");
 			error = TRUE;
 		} else {
 			tmp_node = xmlDocGetRootElement(xml_doc);
 			if (tmp_node == NULL) {
-				gui_generic_warning_modal
-				    ("Tabs document is empty.");
+				gui_generic_warning_modal("Tabs document is empty.");
 				xmlFreeDoc(xml_doc);
 				error = TRUE;
-			} else
-			    if (xmlStrcmp
-				(tmp_node->name,
-				 (const xmlChar *) "Xiphos_Tabs")) {
-				gui_generic_warning_modal
-				    ("Tabs document has wrong type, root node != Xiphos_Tabs");
+			} else if (xmlStrcmp(tmp_node->name,
+					     (const xmlChar *)"Xiphos_Tabs")) {
+				gui_generic_warning_modal("Tabs document has wrong type, root node != Xiphos_Tabs");
 				xmlFreeDoc(xml_doc);
 				error = TRUE;
 			}
@@ -618,20 +594,16 @@ void gui_load_tabs(const gchar * filename)
 			for (childnode = tmp_node->children;
 			     childnode != NULL;
 			     childnode = childnode->next) {
-				if (!xmlStrcmp
-				    (childnode->name,
-				     (const xmlChar *) "tabs")) {
+				if (!xmlStrcmp(childnode->name,
+					       (const xmlChar *)"tabs")) {
 					tmp_node = childnode;
 					for (tmp_node = tmp_node->children;
 					     tmp_node != NULL;
 					     tmp_node = tmp_node->next) {
-						if (!xmlStrcmp
-						    (tmp_node->name,
-						     (const xmlChar *)
-						     "tab")) {
-							pt = g_new0
-							    (PASSAGE_TAB_INFO,
-							     1);
+						if (!xmlStrcmp(tmp_node->name,
+							       (const xmlChar *)"tab")) {
+							pt = g_new0(PASSAGE_TAB_INFO,
+								    1);
 							if (pt_first ==
 							    NULL)
 								pt_first =
@@ -639,122 +611,75 @@ void gui_load_tabs(const gchar * filename)
 
 							/* load per-tab module information. */
 							val = (gchar *)
-							    xmlGetProp
-							    (tmp_node,
-							     (const xmlChar
-							      *)
-							     "text_mod");
+							    xmlGetProp(tmp_node,
+								       (const xmlChar *)"text_mod");
 							pt->text_mod =
 							    g_strdup(val);
 							xmlFree(val);
 							val = (gchar *)
-							    xmlGetProp
-							    (tmp_node,
-							     (const xmlChar
-							      *)
-							     "commentary_mod");
-							pt->commentary_mod
-							    =
+							    xmlGetProp(tmp_node,
+								       (const xmlChar *)"commentary_mod");
+							pt->commentary_mod =
 							    g_strdup(val);
 							xmlFree(val);
 							val = (gchar *)
-							    xmlGetProp
-							    (tmp_node,
-							     (const xmlChar
-							      *)
-							     "dictlex_mod");
+							    xmlGetProp(tmp_node,
+								       (const xmlChar *)"dictlex_mod");
 							pt->dictlex_mod =
 							    g_strdup(val);
 							xmlFree(val);
 							val = (gchar *)
-							    xmlGetProp
-							    (tmp_node,
-							     (const xmlChar
-							      *)
-							     "book_mod");
+							    xmlGetProp(tmp_node,
+								       (const xmlChar *)"book_mod");
 							pt->book_mod =
 							    g_strdup(val);
 							xmlFree(val);
 							val = (gchar *)
-							    xmlGetProp
-							    (tmp_node,
-							     (const xmlChar
-							      *)
-							     "text_commentary_key");
+							    xmlGetProp(tmp_node,
+								       (const xmlChar *)"text_commentary_key");
 							pt->text_commentary_key = g_strdup(val);
 							xmlFree(val);
 							val = (gchar *)
-							    xmlGetProp
-							    (tmp_node,
-							     (const xmlChar
-							      *)
-							     "dictlex_key");
+							    xmlGetProp(tmp_node,
+								       (const xmlChar *)"dictlex_key");
 							pt->dictlex_key =
 							    g_strdup(val);
 							xmlFree(val);
 							val = (gchar *)
-							    xmlGetProp
-							    (tmp_node,
-							     (const xmlChar
-							      *)
-							     "book_offset");
+							    xmlGetProp(tmp_node,
+								       (const xmlChar *)"book_offset");
 							pt->book_offset =
 							    g_strdup(val);
 							xmlFree(val);
 							val = (gchar *)
-							    xmlGetProp
-							    (tmp_node,
-							     (const xmlChar
-							      *)
-							     "comm_showing");
+							    xmlGetProp(tmp_node,
+								       (const xmlChar *)"comm_showing");
 							pt->comm_showing =
-							    yes_no2true_false
-							    (val);
+							    yes_no2true_false(val);
 							xmlFree(val);
 							val = (gchar *)
-							    xmlGetProp
-							    (tmp_node,
-							     (const xmlChar
-							      *)
-							     "showparallel");
+							    xmlGetProp(tmp_node,
+								       (const xmlChar *)"showparallel");
 							pt->showparallel =
-							    yes_no2true_false
-							    (val);
+							    yes_no2true_false(val);
 							xmlFree(val);
-							if (pt->
-							    showparallel) {
-								settings.
-								    showparatab
-								    = TRUE;
-								pt->paratab
-								    =
-								    gui_create_parallel_tab
-								    ();
-								gtk_box_pack_start
-								    (GTK_BOX
-								     (widgets.
-								      page),
-								     pt->
-								     paratab,
-								     TRUE,
-								     TRUE,
-								     0);
-								gtk_widget_hide
-								    (pt->
-								     paratab);
-								gui_parallel_tab_sync
-								    ((gchar
-								      *)
-								     settings.
-								     currentverse);
-								settings.
-								    showparatab
-								    = TRUE;
+							if (pt->showparallel) {
+								settings.showparatab = TRUE;
+								pt->paratab =
+								    gui_create_parallel_tab();
+								gtk_box_pack_start(GTK_BOX(widgets.page),
+										   pt->paratab,
+										   TRUE,
+										   TRUE,
+										   0);
+								gtk_widget_hide(pt->paratab);
+								gui_parallel_tab_sync((gchar *)
+										      settings.currentverse);
+								settings.showparatab = TRUE;
 								sync_on =
 								    TRUE;
 							} else
-								pt->paratab
-								    = NULL;
+								pt->paratab = NULL;
 
 							/*
 							 * load per-tab "show" state.
@@ -763,81 +688,51 @@ void gui_load_tabs(const gchar * filename)
 							 * take tab state from global state.
 							 */
 							if ((val =
-							     (gchar *)
-							     xmlGetProp
-							     (tmp_node,
-							      (const
-							       xmlChar *)
-							      "showtexts"))) {
+								 (gchar *)
+							     xmlGetProp(tmp_node,
+									(const xmlChar *)"showtexts"))) {
 								pt->showtexts = yes_no2true_false(val);
-								xmlFree
-								    (val);
+								xmlFree(val);
 								val =
-								    (gchar
-								     *)
-								    xmlGetProp
-								    (tmp_node,
-								     (const
-								      xmlChar
-								      *)
-								     "showpreview");
+								    (gchar *)
+								    xmlGetProp(tmp_node,
+									       (const xmlChar *)"showpreview");
 								pt->showpreview = yes_no2true_false(val);
-								xmlFree
-								    (val);
+								xmlFree(val);
 								val =
-								    (gchar
-								     *)
-								    xmlGetProp
-								    (tmp_node,
-								     (const
-								      xmlChar
-								      *)
-								     "showcomms");
+								    (gchar *)
+								    xmlGetProp(tmp_node,
+									       (const xmlChar *)"showcomms");
 								pt->showcomms = yes_no2true_false(val);
-								xmlFree
-								    (val);
+								xmlFree(val);
 								val =
-								    (gchar
-								     *)
-								    xmlGetProp
-								    (tmp_node,
-								     (const
-								      xmlChar
-								      *)
-								     "showdicts");
+								    (gchar *)
+								    xmlGetProp(tmp_node,
+									       (const xmlChar *)"showdicts");
 								pt->showdicts = yes_no2true_false(val);
-								xmlFree
-								    (val);
+								xmlFree(val);
 
 							} else {
 								pt->showtexts = settings.showtexts;
 								pt->showpreview = settings.showpreview;
 								pt->showcomms = settings.showcomms;
 								pt->showdicts = settings.showdicts;
-								back_compat_need_save
-								    = TRUE;
+								back_compat_need_save = TRUE;
 							}
 
 							pt->history_items =
 							    0;
 							pt->current_history_item = 0;
 							pt->first_back_click = TRUE;
-							main_add_tab_history_item
-							    ((PASSAGE_TAB_INFO *) pt);
+							main_add_tab_history_item((PASSAGE_TAB_INFO *)pt);
 
-							gui_reassign_strdup
-							    (&settings.
-							     currentverse,
-							     pt->
-							     text_commentary_key);
+							gui_reassign_strdup(&settings.currentverse,
+									    pt->text_commentary_key);
 
 							passage_list =
-							    g_list_append
-							    (passage_list,
-							     (PASSAGE_TAB_INFO
-							      *) pt);
-							notebook_main_add_page
-							    (pt);
+							    g_list_append(passage_list,
+									  (PASSAGE_TAB_INFO *)pt);
+							notebook_main_add_page(pt);
 						}
 					}
 				}
@@ -856,11 +751,11 @@ void gui_load_tabs(const gchar * filename)
 			    g_strdup(settings.CommWindowModule);
 			pt->dictlex_mod =
 			    g_strdup(settings.DictWindowModule);
-			pt->book_mod = g_strdup(settings.book_mod);	//NULL;
+			pt->book_mod = g_strdup(settings.book_mod); //NULL;
 			pt->text_commentary_key =
 			    g_strdup(settings.currentverse);
 			pt->dictlex_key = g_strdup(settings.dictkey);
-			pt->book_offset = NULL;	//settings.book_offset = atol(xml_get_value( "keys", "offset"));
+			pt->book_offset = NULL; //settings.book_offset = atol(xml_get_value( "keys", "offset"));
 
 			pt->paratab = NULL;
 
@@ -872,10 +767,10 @@ void gui_load_tabs(const gchar * filename)
 			pt->history_items = 0;
 			pt->current_history_item = 0;
 			pt->first_back_click = TRUE;
-//                      main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
+			//                      main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
 			passage_list =
 			    g_list_append(passage_list,
-					  (PASSAGE_TAB_INFO *) pt);
+					  (PASSAGE_TAB_INFO *)pt);
 			notebook_main_add_page(pt);
 		} else {
 			// first passage is current/displayed.
@@ -905,7 +800,6 @@ void gui_load_tabs(const gchar * filename)
 	gui_recompute_view_menu_choices();
 }
 
-
 /******************************************************************************
  * Name
  *  on_notebook_main_close_page
@@ -922,17 +816,15 @@ void gui_load_tabs(const gchar * filename)
  *   void
  */
 
-static void on_notebook_main_close_page(GtkButton * button,
+static void on_notebook_main_close_page(GtkButton *button,
 					gpointer user_data)
 {
-	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO *) user_data;
+	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO *)user_data;
 	closing_tab = TRUE;
-	gui_close_passage_tab(gtk_notebook_page_num
-			      (GTK_NOTEBOOK(widgets.notebook_main),
-			       pt->page_widget));
+	gui_close_passage_tab(gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main),
+						    pt->page_widget));
 	closing_tab = FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -950,8 +842,8 @@ static void on_notebook_main_close_page(GtkButton * button,
  *   GtkWidget*
  */
 
-static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO * tbinf,
-				 const gchar * label_text)
+static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
+				 const gchar *label_text)
 {
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *box;
@@ -1056,13 +948,13 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO * tbinf,
  *   void
  */
 #ifdef USE_GTK_3
-void gui_notebook_main_switch_page(GtkNotebook * notebook,
+void gui_notebook_main_switch_page(GtkNotebook *notebook,
 				   gpointer arg,
-				   gint page_num, GList ** tl)
+				   gint page_num, GList **tl)
 #else
-void gui_notebook_main_switch_page(GtkNotebook * notebook,
-				   GtkNotebookPage * page,
-				   gint page_num, GList ** tl)
+void gui_notebook_main_switch_page(GtkNotebook *notebook,
+				   GtkNotebookPage *page,
+				   gint page_num, GList **tl)
 #endif
 {
 	gboolean comm_showing;
@@ -1081,18 +973,17 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	 * thought there is only 1.
 	 */
 	if (number_of_pages == 2 && removed_page == 0)
-		pt = (PASSAGE_TAB_INFO *) g_list_nth_data(*tl, 0);
+		pt = (PASSAGE_TAB_INFO *)g_list_nth_data(*tl, 0);
 	else
-		pt = (PASSAGE_TAB_INFO *) g_list_nth_data(*tl, page_num);
+		pt = (PASSAGE_TAB_INFO *)g_list_nth_data(*tl, page_num);
 	removed_page = 1;
-	//cur_passage_tab = pt;
+//cur_passage_tab = pt;
 
 #ifdef USE_TREEVIEW_PATH
 	if (cur_passage_tab && cur_passage_tab->book_mod)
-		gui_collapse_treeview_to_book(GTK_TREE_VIEW
-					      (sidebar.module_list),
+		gui_collapse_treeview_to_book(GTK_TREE_VIEW(sidebar.module_list),
 					      cur_passage_tab->book_mod);
-#endif				/* USE_TREEVIEW_PATH */
+#endif /* USE_TREEVIEW_PATH */
 
 	if (!pt->showparallel) {
 		if (cur_passage_tab && cur_passage_tab->paratab)
@@ -1114,16 +1005,14 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	} else
 		settings.paratab_showing = FALSE;
 
-
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);
 
 #ifdef USE_TREEVIEW_PATH
 	if (pt->showcomms && pt->book_mod)
-		gui_expand_treeview_to_path(GTK_TREE_VIEW
-					    (sidebar.module_list),
+		gui_expand_treeview_to_path(GTK_TREE_VIEW(sidebar.module_list),
 					    pt->book_mod);
-#endif				/* USE_TREEVIEW_PATH */
+#endif /* USE_TREEVIEW_PATH */
 
 	comm_showing = settings.comm_showing;
 	settings.comm_showing = 1;
@@ -1144,8 +1033,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	//sets the dictionary mod and key
 	main_display_dictionary(pt->dictlex_mod, pt->dictlex_key);
 
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_comm_book),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
 				      (pt->comm_showing ? 0 : 1));
 
 	gui_recompute_view_menu_choices();
@@ -1154,7 +1042,6 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 
 	page_change = FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -1189,7 +1076,6 @@ void gui_select_nth_tab(gint page_num)
 				      NULL, page_num, &passage_list);
 }
 
-
 /******************************************************************************
  * Name
  *  gui_set_tab_label
@@ -1208,7 +1094,7 @@ if *
  *   void
  */
 
-void gui_set_tab_label(const gchar * key, gboolean one_tab)
+void gui_set_tab_label(const gchar *key, gboolean one_tab)
 {
 	if (stop_refresh)
 		return;
@@ -1218,7 +1104,7 @@ void gui_set_tab_label(const gchar * key, gboolean one_tab)
 		for (tmp = g_list_first(passage_list); tmp != NULL;
 		     tmp = g_list_next(tmp))
 			gui_set_named_tab_label(key, (PASSAGE_TAB_INFO *)
-						tmp->data,
+						     tmp->data,
 						((PASSAGE_TAB_INFO *)
 						 tmp->data ==
 						 cur_passage_tab));
@@ -1243,7 +1129,7 @@ void gui_set_tab_label(const gchar * key, gboolean one_tab)
  *   void
  */
 
-void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO * pt,
+void gui_set_named_tab_label(const gchar *key, PASSAGE_TAB_INFO *pt,
 			     gboolean update)
 {
 	GString *str;
@@ -1251,15 +1137,14 @@ void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO * pt,
 	if (stop_refresh)
 		return;
 
-	gui_reassign_strdup(&pt->text_commentary_key, (char *) key);
+	gui_reassign_strdup(&pt->text_commentary_key, (char *)key);
 	str = pick_tab_label(pt);
 
 	gtk_label_set_text(pt->tab_label, str->str);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (widgets.notebook_main),
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					 pt->page_widget, str->str);
 	if (update)
-		main_add_tab_history_item((PASSAGE_TAB_INFO *) pt);
+		main_add_tab_history_item((PASSAGE_TAB_INFO *)pt);
 	g_string_free(str, TRUE);
 }
 
@@ -1279,12 +1164,12 @@ void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO * pt,
  *   void
  */
 
-void gui_update_tab_struct(const gchar * text_mod,
-			   const gchar * commentary_mod,
-			   const gchar * dictlex_mod,
-			   const gchar * book_mod,
-			   const gchar * dictlex_key,
-			   const gchar * book_offset,
+void gui_update_tab_struct(const gchar *text_mod,
+			   const gchar *commentary_mod,
+			   const gchar *dictlex_mod,
+			   const gchar *book_mod,
+			   const gchar *dictlex_key,
+			   const gchar *book_offset,
 			   gboolean comm_showing,
 			   gboolean showtexts,
 			   gboolean showpreview,
@@ -1293,7 +1178,7 @@ void gui_update_tab_struct(const gchar * text_mod,
 	if (stop_refresh)
 		return;
 
-/*	if (!settings.browsing)
+	/*	if (!settings.browsing)
 	        return;
 */
 
@@ -1308,29 +1193,29 @@ void gui_update_tab_struct(const gchar * text_mod,
 
 	if (text_mod) {
 		gui_reassign_strdup(&cur_passage_tab->text_mod,
-				    (char *) text_mod);
+				    (char *)text_mod);
 	}
 	if (commentary_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
 		gui_reassign_strdup(&cur_passage_tab->commentary_mod,
-				    (char *) commentary_mod);
+				    (char *)commentary_mod);
 	}
 	if (dictlex_mod) {
 		gui_reassign_strdup(&cur_passage_tab->dictlex_mod,
-				    (char *) dictlex_mod);
+				    (char *)dictlex_mod);
 	}
 	if (book_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
 		gui_reassign_strdup(&cur_passage_tab->book_mod,
-				    (char *) book_mod);
+				    (char *)book_mod);
 	}
 	if (book_offset) {
 		gui_reassign_strdup(&cur_passage_tab->book_offset,
-				    (char *) book_offset);
+				    (char *)book_offset);
 	}
 	if (dictlex_key) {
 		gui_reassign_strdup(&cur_passage_tab->dictlex_key,
-				    (char *) dictlex_key);
+				    (char *)dictlex_key);
 	}
 }
 
@@ -1349,7 +1234,7 @@ void gui_update_tab_struct(const gchar * text_mod,
  * Return value
  *   void
  */
-void gui_open_passage_in_new_tab(gchar * verse_key)
+void gui_open_passage_in_new_tab(gchar *verse_key)
 {
 	PASSAGE_TAB_INFO *pt;
 
@@ -1390,19 +1275,17 @@ void gui_open_passage_in_new_tab(gchar * verse_key)
 	pt->history_items = 0;
 	pt->current_history_item = 0;
 	pt->first_back_click = TRUE;
-	main_add_tab_history_item((PASSAGE_TAB_INFO *) pt);
+	main_add_tab_history_item((PASSAGE_TAB_INFO *)pt);
 
 	passage_list =
-	    g_list_append(passage_list, (PASSAGE_TAB_INFO *) pt);
+	    g_list_append(passage_list, (PASSAGE_TAB_INFO *)pt);
 	//set_current_tab(pt);
 	notebook_main_add_page(pt);
 
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
-				      gtk_notebook_page_num
-				      (GTK_NOTEBOOK(widgets.notebook_main),
-				       pt->page_widget));
+				      gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main),
+							    pt->page_widget));
 }
-
 
 /******************************************************************************
  * Name
@@ -1452,20 +1335,18 @@ void gui_open_parallel_view_in_new_tab(void)
 	pt->book_offset = g_strdup_printf("%ld", settings.book_offset);
 
 	passage_list =
-	    g_list_append(passage_list, (PASSAGE_TAB_INFO *) pt);
+	    g_list_append(passage_list, (PASSAGE_TAB_INFO *)pt);
 	set_current_tab(pt);
 	gui_recompute_view_menu_choices();
 	notebook_main_add_page(pt);
 	pt->paratab = gui_create_parallel_tab();
-	gui_parallel_tab_sync((gchar *) settings.currentverse);
+	gui_parallel_tab_sync((gchar *)settings.currentverse);
 	/*gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
 	   0); */
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
-				      gtk_notebook_page_num
-				      (GTK_NOTEBOOK(widgets.notebook_main),
-				       pt->page_widget));
+				      gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main),
+							    pt->page_widget));
 }
-
 
 /******************************************************************************
  * Name
@@ -1483,7 +1364,7 @@ void gui_open_parallel_view_in_new_tab(void)
  *   void
  */
 
-void gui_open_module_in_new_tab(gchar * module)
+void gui_open_module_in_new_tab(gchar *module)
 {
 	PASSAGE_TAB_INFO *pt;
 	gint module_type;
@@ -1556,16 +1437,14 @@ void gui_open_module_in_new_tab(gchar * module)
 	pt->book_offset = g_strdup_printf("%ld", settings.book_offset);
 
 	passage_list =
-	    g_list_append(passage_list, (PASSAGE_TAB_INFO *) pt);
+	    g_list_append(passage_list, (PASSAGE_TAB_INFO *)pt);
 	//set_current_tab(pt);
 	notebook_main_add_page(pt);
 
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
-				      gtk_notebook_page_num
-				      (GTK_NOTEBOOK(widgets.notebook_main),
-				       pt->page_widget));
+				      gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main),
+							    pt->page_widget));
 }
-
 
 /******************************************************************************
  * Name
@@ -1594,8 +1473,8 @@ void gui_close_all_tabs(void)
 
 	for (i = number_of_pages - 1; i > -1; i--) {
 		PASSAGE_TAB_INFO *pt =
-		    (PASSAGE_TAB_INFO *) g_list_nth_data(passage_list,
-							 (guint) i);
+		    (PASSAGE_TAB_INFO *)g_list_nth_data(passage_list,
+							(guint)i);
 		passage_list = g_list_remove(passage_list, pt);
 		g_free(pt->text_mod);
 		g_free(pt->commentary_mod);
@@ -1605,16 +1484,14 @@ void gui_close_all_tabs(void)
 		g_free(pt->dictlex_key);
 		g_free(pt->book_offset);
 		g_free(pt);
-		gtk_notebook_remove_page(GTK_NOTEBOOK
-					 (widgets.notebook_main), i);
+		gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), i);
 	}
 
 	g_list_free(passage_list);
 	passage_list = NULL;
 	cur_passage_tab = NULL;
-//      gui_set_text_frame_label(cur_t);
+	//      gui_set_text_frame_label(cur_t);
 }
-
 
 /******************************************************************************
  * Name
@@ -1645,7 +1522,6 @@ void gui_open_tabs(void)
 	gtk_widget_show(widgets.button_new_tab);
 }
 
-
 /******************************************************************************
  * Name
  *  gui_close_passage_tab
@@ -1668,26 +1544,21 @@ void gui_close_passage_tab(gint pagenum)
 
 	if (-1 == pagenum)
 		pagenum =
-		    gtk_notebook_get_current_page(GTK_NOTEBOOK
-						  (widgets.notebook_main));
+		    gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
 	if (1 ==
 	    gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main)))
 		return;
 	PASSAGE_TAB_INFO *pt =
-	    (PASSAGE_TAB_INFO *) g_list_nth_data(passage_list,
-						 (guint) pagenum);
-	if (pt->showparallel
-	    || (2 <=
-		gtk_notebook_get_n_pages(GTK_NOTEBOOK
-					 (widgets.notebook_main)))) {
+	    (PASSAGE_TAB_INFO *)g_list_nth_data(passage_list,
+						(guint)pagenum);
+	if (pt->showparallel || (2 <=
+				 gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main)))) {
 		// (surely this is always true!?)
 
 		if (pagenum > 0) {
-			gtk_notebook_set_current_page(GTK_NOTEBOOK
-						      (widgets.
-						       notebook_main), 0);
+			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main), 0);
 			cur_passage_tab = (PASSAGE_TAB_INFO *)
-			    g_list_nth_data(passage_list, (guint) 0);
+			    g_list_nth_data(passage_list, (guint)0);
 		}
 	}
 
@@ -1714,8 +1585,7 @@ void gui_close_passage_tab(gint pagenum)
 		gtk_widget_hide(pt->paratab);
 		gui_destroy_parallel_tab();
 		settings.showparatab = FALSE;
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (widgets.parallel_tab_item),
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.parallel_tab_item),
 					       settings.showparatab);
 	}
 	g_free(pt);
@@ -1725,7 +1595,7 @@ void gui_close_passage_tab(gint pagenum)
 				 pagenum);
 }
 
-void on_notebook_main_new_tab_clicked(GtkButton * button,
+void on_notebook_main_new_tab_clicked(GtkButton *button,
 				      gpointer user_data)
 {
 	gui_open_passage_in_new_tab(settings.currentverse);
@@ -1756,7 +1626,7 @@ void gui_notebook_main_setup(int tabs, const char *tabsfile)
 	passage_list = NULL;
 
 	gui_load_tabs(tabsfile ? tabsfile
-		      : (tabs ? default_tab_filename : no_tab_filename));
+			       : (tabs ? default_tab_filename : no_tab_filename));
 
 	g_signal_connect(G_OBJECT(widgets.notebook_main),
 			 "switch-page",
@@ -1799,7 +1669,7 @@ void gui_notebook_main_shutdown(int tabs)
 	passage_list = g_list_first(passage_list);
 	while (passage_list != NULL) {
 		PASSAGE_TAB_INFO *pt =
-		    (PASSAGE_TAB_INFO *) passage_list->data;
+		    (PASSAGE_TAB_INFO *)passage_list->data;
 		g_free(pt->text_mod);
 		g_free(pt->commentary_mod);
 		g_free(pt->dictlex_mod);
@@ -1807,7 +1677,7 @@ void gui_notebook_main_shutdown(int tabs)
 		g_free(pt->text_commentary_key);
 		g_free(pt->dictlex_key);
 		g_free(pt->book_offset);
-		g_free((PASSAGE_TAB_INFO *) passage_list->data);
+		g_free((PASSAGE_TAB_INFO *)passage_list->data);
 		passage_list = g_list_next(passage_list);
 	}
 	g_list_free(passage_list);
@@ -1838,16 +1708,14 @@ void gui_tab_set_showdicts(int show)
 		cur_passage_tab->showdicts = show;
 }
 
-static
-int _is_paratab_showing(void)
+static int _is_paratab_showing(void)
 {
 	if (settings.paratab_showing)
 		return 1;
 	return 0;
 }
 
-static
-void _tabs_on(void)
+static void _tabs_on(void)
 {
 	xml_set_value("Xiphos", "tabs", "browsing", "1");
 	settings.browsing = TRUE;
@@ -1857,24 +1725,21 @@ void _tabs_on(void)
 	gtk_widget_show(widgets.hpaned);
 }
 
-static
-void _tabs_off(void)
+static void _tabs_off(void)
 {
 	int page = _is_paratab_showing();
 	xml_set_value("Xiphos", "tabs", "browsing", "0");
 	gui_save_tabs(default_tab_filename);
 	if (settings.showparatab) {
-		gui_close_passage_tab(gtk_notebook_page_num
-				      (GTK_NOTEBOOK(widgets.notebook_main),
-				       widgets.parallel_tab));
+		gui_close_passage_tab(gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main),
+							    widgets.parallel_tab));
 		settings.showparatab = FALSE;
 	}
 	gui_close_all_tabs();
 	settings.browsing = FALSE;
 	gui_load_tabs(no_tab_filename);
 	gtk_widget_hide(widgets.hboxtb);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_bible_parallel),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				      page);
 }
 

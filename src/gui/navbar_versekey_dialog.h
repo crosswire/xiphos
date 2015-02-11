@@ -24,6 +24,6 @@
 
 #include "main/module_dialogs.h"
 
-GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog);
+GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA *dialog);
 
 #endif

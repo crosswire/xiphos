@@ -41,7 +41,7 @@
  *   void
  */
 
-static void about_trans_ok(GtkButton * button, gpointer user_data)
+static void about_trans_ok(GtkButton *button, gpointer user_data)
 {
 	GtkWidget *dlg;
 
@@ -114,8 +114,7 @@ GtkWidget *gui_create_about_trans(void)
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE, 4);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_widget_set_size_request(scrolledwindow, 400, 150);
@@ -130,8 +129,7 @@ GtkWidget *gui_create_about_trans(void)
 	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview),
 				    GTK_WRAP_WORD);
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview), FALSE);
-	gtk_text_buffer_set_text(gtk_text_view_get_buffer
-				 (GTK_TEXT_VIEW(textview)), about, -1);
+	gtk_text_buffer_set_text(gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview)), about, -1);
 	gtk_widget_set_sensitive(textview, FALSE);
 
 	label = gtk_label_new(_("See TRANSLATION-HOWTO in Xiphos source"));
@@ -140,8 +138,7 @@ GtkWidget *gui_create_about_trans(void)
 	gtk_widget_set_size_request(label, -2, 24);
 
 	href =
-	    gtk_link_button_new_with_label
-	    ("http://xiphos.org/development/", _("Xiphos development"));
+	    gtk_link_button_new_with_label("http://xiphos.org/development/", _("Xiphos development"));
 	gtk_widget_show(href);
 	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
 
@@ -154,8 +151,7 @@ GtkWidget *gui_create_about_trans(void)
 	g_object_set_data(G_OBJECT(dialog_about_trans),
 			  "dialog_action_area", dialog_action_area);
 	gtk_widget_show(dialog_action_area);
-	gtk_container_set_border_width(GTK_CONTAINER
-				       (dialog_action_area), 10);
+	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area), 10);
 
 #ifdef USE_GTK_3
 	hbuttonbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);

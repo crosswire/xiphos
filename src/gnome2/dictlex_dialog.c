@@ -64,8 +64,8 @@ static gint cell_height;
  *   void
  */
 
-static void list_selection_changed(GtkTreeSelection * selection,
-				   DIALOG_DATA * d)
+static void list_selection_changed(GtkTreeSelection *selection,
+				   DIALOG_DATA *d)
 {
 	GtkTreeIter selected;
 	gchar *buf = NULL;
@@ -79,7 +79,6 @@ static void list_selection_changed(GtkTreeSelection * selection,
 		gtk_entry_set_text(GTK_ENTRY(d->entry), buf);
 		g_free(buf);
 	}
-
 }
 
 /******************************************************************************
@@ -126,11 +125,11 @@ static gint button_press_event(GtkWidget *html,
  *   void
  */
 
-static void dialog_set_focus(GtkWindow * window,
-			     GtkWidget * widget, DIALOG_DATA * dlg)
+static void dialog_set_focus(GtkWindow *window,
+			     GtkWidget *widget, DIALOG_DATA *dlg)
 {
-//      cur_dlg = dlg;
-//      XI_warning(("current module = %s",cur_dlg->mod_name));
+	//      cur_dlg = dlg;
+	//      XI_warning(("current module = %s",cur_dlg->mod_name));
 }
 
 /******************************************************************************
@@ -149,7 +148,7 @@ static void dialog_set_focus(GtkWindow * window,
  *   void
  */
 
-static void dialog_destroy(GObject * object, DIALOG_DATA * dlg)
+static void dialog_destroy(GObject *object, DIALOG_DATA *dlg)
 {
 	if (!dialog_freed)
 		main_free_on_destroy(dlg);
@@ -173,13 +172,14 @@ static void dialog_destroy(GObject * object, DIALOG_DATA * dlg)
  *   gint
  */
 
-static gint list_button_released(GtkWidget * html,
-				 GdkEventButton * event, DIALOG_DATA * d)
+static gint list_button_released(GtkWidget *html,
+				 GdkEventButton *event, DIALOG_DATA *d)
 {
 	switch (event->button) {
 	case 1:
 		list_selection_changed((GtkTreeSelection *)
-				       d->mod_selection, d);
+				       d->mod_selection,
+				       d);
 		break;
 	case 2:
 	case 3:
@@ -190,8 +190,7 @@ static gint list_button_released(GtkWidget * html,
 	return FALSE;
 }
 
-
-static void add_columns(GtkTreeView * treeview)
+static void add_columns(GtkTreeView *treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -199,7 +198,7 @@ static void add_columns(GtkTreeView * treeview)
 	GtkRequisition size;
 #endif
 
-//      GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+	//      GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 
 	/* column for fixed toggles */
 	renderer = gtk_cell_renderer_text_new();
@@ -210,7 +209,7 @@ static void add_columns(GtkTreeView * treeview)
 	gtk_tree_view_column_set_sort_column_id(column, 0);
 
 	gtk_tree_view_append_column(treeview, column);
-	/* get cell (row) height */
+/* get cell (row) height */
 #ifdef USE_GTK_3
 	gtk_cell_renderer_get_preferred_size(renderer,
 					     GTK_WIDGET(treeview),
@@ -223,7 +222,6 @@ static void add_columns(GtkTreeView * treeview)
 #endif
 	settings.cell_height = cell_height;
 }
-
 
 /******************************************************************************
  * Name
@@ -241,7 +239,7 @@ static void add_columns(GtkTreeView * treeview)
  *   void
  */
 
-void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
+void on_btnSyncDL_clicked(GtkButton *button, DIALOG_DATA *d)
 {
 	gchar *key = NULL;
 
@@ -265,21 +263,21 @@ void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
  *   void
  */
 
-static void entry_changed(GtkEditable * editable, DIALOG_DATA * d)
+static void entry_changed(GtkEditable *editable, DIALOG_DATA *d)
 {
 	gchar *key = NULL;
 
 	if (d->key)
 		g_free(d->key);
 
-	key = g_strdup((gchar *) gtk_entry_get_text(GTK_ENTRY(d->entry)));
+	key = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY(d->entry)));
 	d->key = g_utf8_strup(key, -1);
 	g_free(key);
 	main_dialogs_dictionary_entry_changed(d);
 }
 
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, DIALOG_DATA * d)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, DIALOG_DATA *d)
 {
 	gui_menu_popup(html, cur_dlg->mod_name, cur_dlg);
 }
@@ -300,7 +298,7 @@ _popupmenu_requested_cb(XiphosHtml * html, gchar * uri, DIALOG_DATA * d)
  *   GtkWidget *
  */
 
-void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
+void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 {
 	GtkWidget *hpaned7;
 	GtkWidget *vbox;
@@ -308,11 +306,11 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	GtkWidget *hbox_toolbar;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSyncDL;
-//      GtkWidget *label205;
+	//      GtkWidget *label205;
 	GtkWidget *frameDictHTML;
 	GtkWidget *scrolledwindowDictHTML;
 	GtkWidget *scrolledwindow;
-//      GtkWidget *label;
+	//      GtkWidget *label;
 	GtkListStore *model;
 
 	dlg->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -328,7 +326,6 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(dlg->dialog), vbox);
 
-
 	dlg->frame = gtk_frame_new(NULL);
 	gtk_widget_show(dlg->frame);
 	gtk_box_pack_start(GTK_BOX(vbox), dlg->frame, TRUE, TRUE, 0);
@@ -341,7 +338,6 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	UI_VBOX(vbox56, FALSE, 0);
 	gtk_widget_show(vbox56);
 	gtk_paned_pack1(GTK_PANED(hpaned7), vbox56, FALSE, TRUE);
-
 
 	UI_HBOX(hbox_toolbar, FALSE, 0);
 	gtk_widget_show(hbox_toolbar);
@@ -368,7 +364,6 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_box_pack_start(GTK_BOX(hbox_toolbar), dlg->entry, TRUE,
 			   TRUE, 0);
 
-
 	/* create tree model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
 
@@ -376,8 +371,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_widget_show(scrolledwindow);
 
 	gtk_box_pack_start(GTK_BOX(vbox56), scrolledwindow, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
@@ -395,9 +389,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(dlg->listview),
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(dlg->listview));
-	dlg->mod_selection = G_OBJECT(gtk_tree_view_get_selection
-				      (GTK_TREE_VIEW(dlg->listview)));
-
+	dlg->mod_selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(dlg->listview)));
 
 	frameDictHTML = gtk_frame_new(NULL);
 	gtk_widget_show(frameDictHTML);
@@ -407,8 +399,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_widget_show(scrolledwindowDictHTML);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML),
 			  scrolledwindowDictHTML);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindowDictHTML),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindowDictHTML),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
@@ -416,14 +407,13 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 					    settings.shadow_type);
 
 	dlg->html =
-	    GTK_WIDGET(XIPHOS_HTML_NEW
-		       ((DIALOG_DATA *) dlg, TRUE,
-			DIALOG_DICTIONARY_TYPE));
+	    GTK_WIDGET(XIPHOS_HTML_NEW((DIALOG_DATA *)dlg, TRUE,
+				       DIALOG_DICTIONARY_TYPE));
 
 	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
 			  dlg->html);
 	gtk_widget_show(dlg->html);
-	g_signal_connect((gpointer) dlg->html,
+	g_signal_connect((gpointer)dlg->html,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), dlg);
 
@@ -434,7 +424,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	g_signal_connect(G_OBJECT(btnSyncDL), "clicked",
 			 G_CALLBACK(on_btnSyncDL_clicked), dlg);
 	g_signal_connect(G_OBJECT(dlg->entry), "changed",
-			 G_CALLBACK(entry_changed), (DIALOG_DATA *) dlg);
+			 G_CALLBACK(entry_changed), (DIALOG_DATA *)dlg);
 	g_signal_connect(G_OBJECT(dlg->listview),
 			 "button_release_event",
 			 G_CALLBACK(list_button_released), dlg);

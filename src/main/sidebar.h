@@ -29,27 +29,28 @@ extern "C" {
 
 #include <gtk/gtk.h>
 
-	typedef struct {
-		GdkPixbuf *pixbuf_opened;
-		GdkPixbuf *pixbuf_closed;
-		GdkPixbuf *pixbuf_helpdoc;
-	} TreePixbufs;
-	extern TreePixbufs *pixbufs;
+typedef struct
+{
+	GdkPixbuf *pixbuf_opened;
+	GdkPixbuf *pixbuf_closed;
+	GdkPixbuf *pixbuf_helpdoc;
+} TreePixbufs;
+extern TreePixbufs *pixbufs;
 
 #ifdef USE_TREEVIEW_PATH
-	gboolean main_expand_treeview_to_path(GtkTreeModel * model,
-					      GtkTreeIter iter);
+gboolean main_expand_treeview_to_path(GtkTreeModel *model,
+				      GtkTreeIter iter);
 #endif
 
-	void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key);
-	void main_display_verse_list_in_sidebar(gchar * key,
-						gchar * module_name,
-						gchar * verse_list);
-	void main_create_pixbufs(void);
-	void main_load_module_tree(GtkWidget * tree);
-	void main_add_mod_tree_columns(GtkTreeView * tree);
-	void main_mod_treeview_button_one(GtkTreeModel * model,
-					  GtkTreeIter selected);
+void main_open_bookmark_in_new_tab(gchar *mod_name, gchar *key);
+void main_display_verse_list_in_sidebar(gchar *key,
+					gchar *module_name,
+					gchar *verse_list);
+void main_create_pixbufs(void);
+void main_load_module_tree(GtkWidget *tree);
+void main_add_mod_tree_columns(GtkTreeView *tree);
+void main_mod_treeview_button_one(GtkTreeModel *model,
+				  GtkTreeIter selected);
 
 #ifdef __cplusplus
 }

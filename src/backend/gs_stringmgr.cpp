@@ -30,7 +30,8 @@
 
 SWORD_NAMESPACE_START
 
-char* GS_StringMgr::upperUTF8(char* text, unsigned int maxlen) const {
+char *GS_StringMgr::upperUTF8(char *text, unsigned int maxlen) const
+{
 	if ((text == NULL) || (*text == '\0')) {
 		return g_strdup("");
 	}
@@ -38,14 +39,16 @@ char* GS_StringMgr::upperUTF8(char* text, unsigned int maxlen) const {
 		maxlen = strlen(text);
 	char *upper_str = g_utf8_strup(text, -1);
 	unsigned int newlen = strlen(upper_str);
-	if (newlen >= maxlen) newlen = maxlen;
+	if (newlen >= maxlen)
+		newlen = maxlen;
 	memcpy(text, upper_str, newlen);
 	//text[newlen] = 0;	// be sure we're null terminated.
 	g_free(upper_str);
 	return text;
 }
 
-bool GS_StringMgr::supportsUnicode() const {
+bool GS_StringMgr::supportsUnicode() const
+{
 	return true;
 }
 

@@ -26,21 +26,22 @@
 extern "C" {
 #endif
 
-	typedef struct _mod_font MOD_FONT;
-	struct _mod_font {
-		const char *mod_name;
-		char *old_font;
-		const char *new_font;
-		char *old_font_size;
-		int old_font_size_value;
-		const char *new_font_size;
-		int no_font;
-	};
+typedef struct _mod_font MOD_FONT;
+struct _mod_font
+{
+	const char *mod_name;
+	char *old_font;
+	const char *new_font;
+	char *old_font_size;
+	int old_font_size_value;
+	const char *new_font_size;
+	int no_font;
+};
 
-	char *get_conf_file_item(const char *file, const char *mod_name,
-				 const char *item);
-	void save_conf_file_item(const char *file, const char *mod_name,
-				 const char *item, const char *value);
+char *get_conf_file_item(const char *file, const char *mod_name,
+			 const char *item);
+void save_conf_file_item(const char *file, const char *mod_name,
+			 const char *item, const char *value);
 #ifdef __cplusplus
 }
 #endif

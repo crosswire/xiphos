@@ -55,14 +55,14 @@
 #include "gui/debug_glib_null.h"
 
 /******************************************************************************/
-#define _BYTE   8
-#define _WORD   16
-#define _DWORD  32
+#define _BYTE 8
+#define _WORD 16
+#define _DWORD 32
 
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
 #define FINDS N_("found in ")
-#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
 
 SEARCH_DIALOG1 search1;
 
@@ -70,7 +70,7 @@ static gboolean _preview_on;
 static gchar *module_selected;
 gchar *verse_selected;
 
-GtkWidget *remember_search;	/* needed to change button in search stop */
+GtkWidget *remember_search; /* needed to change button in search stop */
 
 /******************************************************************************
  * Name
@@ -91,16 +91,15 @@ GtkWidget *remember_search;	/* needed to change button in search stop */
  *   gboolean
  */
 
-static gboolean on_advsearch_configure_event(GtkWidget * widget,
-					     GdkEventConfigure * event,
+static gboolean on_advsearch_configure_event(GtkWidget *widget,
+					     GdkEventConfigure *event,
 					     gpointer user_data)
 {
 	gchar layout[10];
 	gint x;
 	gint y;
 
-	gdk_window_get_root_origin(GDK_WINDOW
-				   (gtk_widget_get_window(search1.dialog)),
+	gdk_window_get_root_origin(GDK_WINDOW(gtk_widget_get_window(search1.dialog)),
 				   &x, &y);
 
 	settings.advsearch_width = event->width;
@@ -125,8 +124,8 @@ static gboolean on_advsearch_configure_event(GtkWidget * widget,
 }
 
 /* click on treeview folder to expand or collapse it */
-static gboolean button_release_event(GtkWidget * widget,
-				     GdkEventButton * event, gpointer data)
+static gboolean button_release_event(GtkWidget *widget,
+				     GdkEventButton *event, gpointer data)
 {
 	GtkTreeSelection *selection = NULL;
 	GtkTreeIter selected;
@@ -151,11 +150,10 @@ static gboolean button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
-void on_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
+void on_comboboxentry2_changed(GtkComboBox *combobox, gpointer user_data)
 {
 	main_comboboxentry2_changed(combobox, user_data);
 }
-
 
 /******************************************************************************
  * Name
@@ -173,7 +171,7 @@ void on_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
  *   void
  */
 
-void button_clean(GtkButton * button, gpointer user_data)
+void button_clean(GtkButton *button, gpointer user_data)
 {
 	GtkTreeModel *model;
 	GtkListStore *list_store;
@@ -181,14 +179,12 @@ void button_clean(GtkButton * button, gpointer user_data)
 
 	XI_message(("button_clean"));
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.listview_results));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_results));
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
 
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.listview_verses));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
 
@@ -221,11 +217,10 @@ void button_clean(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void button_save(GtkButton * button, gpointer user_data)
+void button_save(GtkButton *button, gpointer user_data)
 {
 	main_save_current_adv_search_as_bookmarks();
 }
-
 
 /******************************************************************************
  * Name
@@ -244,7 +239,7 @@ void button_save(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void button_export(GtkButton * button, gpointer user_data)
+void button_export(GtkButton *button, gpointer user_data)
 {
 	gui_export_bookmarks_dialog(ADV_SEARCH_RESULTS_EXPORT, NULL);
 }
@@ -265,7 +260,7 @@ void button_export(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void _on_destroy(GtkWidget * dialog, gpointer user_data)
+void _on_destroy(GtkWidget *dialog, gpointer user_data)
 {
 	/* main_do_dialog_search() initializes these as search starts */
 	if (search_active) {
@@ -288,9 +283,6 @@ void _on_destroy(GtkWidget * dialog, gpointer user_data)
 	}
 }
 
-
-
-
 /******************************************************************************
  * Name
  *   on_button_begin_search
@@ -307,32 +299,30 @@ void _on_destroy(GtkWidget * dialog, gpointer user_data)
  *   void
  */
 
-void on_button_begin_search(GtkButton * button, gpointer user_data)
+void on_button_begin_search(GtkButton *button, gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
 #ifdef HAVE_GTK_310
-		gtk_button_set_image((GtkButton *) remember_search,
-				     gtk_image_new_from_icon_name
-				     ("edit-find", GTK_ICON_SIZE_BUTTON));
+		gtk_button_set_image((GtkButton *)remember_search,
+				     gtk_image_new_from_icon_name("edit-find", GTK_ICON_SIZE_BUTTON));
 #else
-		gtk_button_set_label((GtkButton *) remember_search,
+		gtk_button_set_label((GtkButton *)remember_search,
 				     "gtk-find");
-		gtk_button_set_use_stock((GtkButton *) remember_search,
+		gtk_button_set_use_stock((GtkButton *)remember_search,
 					 TRUE);
 
 #endif
 		sync_windows();
 	} else {
 #ifdef HAVE_GTK_310
-		gtk_button_set_image((GtkButton *) remember_search,
-				     gtk_image_new_from_icon_name
-				     ("process-stop",
-				      GTK_ICON_SIZE_BUTTON));
+		gtk_button_set_image((GtkButton *)remember_search,
+				     gtk_image_new_from_icon_name("process-stop",
+								  GTK_ICON_SIZE_BUTTON));
 #else
-		gtk_button_set_label((GtkButton *) remember_search,
+		gtk_button_set_label((GtkButton *)remember_search,
 				     "gtk-stop");
-		gtk_button_set_use_stock((GtkButton *) remember_search,
+		gtk_button_set_use_stock((GtkButton *)remember_search,
 					 TRUE);
 #endif
 
@@ -340,18 +330,16 @@ void on_button_begin_search(GtkButton * button, gpointer user_data)
 		main_do_dialog_search();
 
 #ifdef HAVE_GTK_310
-		gtk_button_set_image((GtkButton *) remember_search,
-				     gtk_image_new_from_icon_name
-				     ("edit-find", GTK_ICON_SIZE_BUTTON));
+		gtk_button_set_image((GtkButton *)remember_search,
+				     gtk_image_new_from_icon_name("edit-find", GTK_ICON_SIZE_BUTTON));
 #else
-		gtk_button_set_label((GtkButton *) remember_search,
+		gtk_button_set_label((GtkButton *)remember_search,
 				     "gtk-find");
-		gtk_button_set_use_stock((GtkButton *) remember_search,
+		gtk_button_set_use_stock((GtkButton *)remember_search,
 					 TRUE);
 #endif
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -371,7 +359,7 @@ void on_button_begin_search(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void list_name_changed(GtkEditable * editable, gpointer user_data)
+void list_name_changed(GtkEditable *editable, gpointer user_data)
 {
 	const gchar *text;
 	GtkTreeModel *model;
@@ -382,8 +370,7 @@ void list_name_changed(GtkEditable * editable, gpointer user_data)
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 	list_store = GTK_LIST_STORE(model);
-	selection = gtk_tree_view_get_selection
-	    (GTK_TREE_VIEW(search1.module_lists));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
 
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
@@ -391,7 +378,6 @@ void list_name_changed(GtkEditable * editable, gpointer user_data)
 	text = gtk_entry_get_text(GTK_ENTRY(editable));
 	gtk_list_store_set(list_store, &selected, 0, text, -1);
 }
-
 
 /******************************************************************************
  * Name
@@ -411,7 +397,7 @@ void list_name_changed(GtkEditable * editable, gpointer user_data)
  *   void
  */
 
-void range_name_changed(GtkEditable * editable, gpointer user_data)
+void range_name_changed(GtkEditable *editable, gpointer user_data)
 {
 	const gchar *text;
 	GtkTreeModel *model;
@@ -420,11 +406,9 @@ void range_name_changed(GtkEditable * editable, gpointer user_data)
 	GtkTreeIter selected;
 
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.list_range_name));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.list_range_name));
 	list_store = GTK_LIST_STORE(model);
-	selection = gtk_tree_view_get_selection
-	    (GTK_TREE_VIEW(search1.list_range_name));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.list_range_name));
 
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
@@ -432,7 +416,6 @@ void range_name_changed(GtkEditable * editable, gpointer user_data)
 	text = gtk_entry_get_text(GTK_ENTRY(editable));
 	gtk_list_store_set(list_store, &selected, 0, text, -1);
 }
-
 
 /******************************************************************************
  * Name
@@ -451,11 +434,10 @@ void range_name_changed(GtkEditable * editable, gpointer user_data)
  *   void
  */
 
-void range_text_changed(GtkEditable * editable, gpointer user_data)
+void range_text_changed(GtkEditable *editable, gpointer user_data)
 {
 	main_range_text_changed(editable);
 }
-
 
 /******************************************************************************
  * Name
@@ -473,7 +455,7 @@ void range_text_changed(GtkEditable * editable, gpointer user_data)
  *   void
  */
 
-void new_modlist(GtkButton * button, gpointer user_data)
+void new_modlist(GtkButton *button, gpointer user_data)
 {
 	gchar buf[80];
 	GtkTreeModel *model;
@@ -485,12 +467,10 @@ void new_modlist(GtkButton * button, gpointer user_data)
 	GtkTreePath *path;
 
 	selection =
-	    gtk_tree_view_get_selection(GTK_TREE_VIEW
-					(search1.module_lists));
+	    gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
 
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.listview_modules));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
 	list_store = GTK_LIST_STORE(model);
 
 	model2 =
@@ -515,7 +495,6 @@ void new_modlist(GtkButton * button, gpointer user_data)
 	gtk_tree_path_free(path);
 }
 
-
 /******************************************************************************
  * Name
  *
@@ -532,7 +511,7 @@ void new_modlist(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void clear_modules(GtkButton * button, gpointer user_data)
+void clear_modules(GtkButton *button, gpointer user_data)
 {
 	GtkTreeModel *model;
 	GtkListStore *list_store;
@@ -550,26 +529,21 @@ void clear_modules(GtkButton * button, gpointer user_data)
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
 #endif
 		model =
-		    gtk_tree_view_get_model(GTK_TREE_VIEW
-					    (search1.listview_modules));
+		    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
 		list_store = GTK_LIST_STORE(model);
 		gtk_list_store_clear(list_store);
 
 		model =
-		    gtk_tree_view_get_model(GTK_TREE_VIEW
-					    (search1.module_lists));
+		    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 		list_store = GTK_LIST_STORE(model);
 		selection =
-		    gtk_tree_view_get_selection(GTK_TREE_VIEW
-						(search1.module_lists));
-		if (gtk_tree_selection_get_selected
-		    (selection, NULL, &selected))
+		    gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
+		if (gtk_tree_selection_get_selected(selection, NULL, &selected))
 			gtk_list_store_set(list_store, &selected, 1, "",
 					   -1);
 	}
 	g_free(str);
 }
-
 
 /******************************************************************************
  * Name
@@ -587,11 +561,10 @@ void clear_modules(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void delete_module(GtkButton * button, gpointer user_data)
+void delete_module(GtkButton *button, gpointer user_data)
 {
 	main_delete_module(GTK_TREE_VIEW(search1.listview_modules));
 }
-
 
 /******************************************************************************
  * Name
@@ -609,11 +582,10 @@ void delete_module(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void save_modlist(GtkButton * button, gpointer user_data)
+void save_modlist(GtkButton *button, gpointer user_data)
 {
 	main_save_modlist();
 }
-
 
 /******************************************************************************
  * Name
@@ -631,7 +603,7 @@ void save_modlist(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void new_range(GtkButton * button, gpointer user_data)
+void new_range(GtkButton *button, gpointer user_data)
 {
 	gchar *text[2];
 	GtkTreeModel *model;
@@ -641,11 +613,9 @@ void new_range(GtkButton * button, gpointer user_data)
 	GtkTreePath *path;
 
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.list_range_name));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.list_range_name));
 	list_store = GTK_LIST_STORE(model);
-	selection = gtk_tree_view_get_selection
-	    (GTK_TREE_VIEW(search1.list_range_name));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.list_range_name));
 
 	text[0] = "[New Range]";
 	text[1] = "";
@@ -660,7 +630,6 @@ void new_range(GtkButton * button, gpointer user_data)
 	gtk_entry_set_text(GTK_ENTRY(search1.entry_range_name), text[0]);
 	gtk_entry_set_text(GTK_ENTRY(search1.entry_range_text), "");
 }
-
 
 /******************************************************************************
  * Name
@@ -678,11 +647,10 @@ void new_range(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void save_range(GtkButton * button, gpointer user_data)
+void save_range(GtkButton *button, gpointer user_data)
 {
 	main_save_range();
 }
-
 
 /******************************************************************************
  * Name
@@ -700,11 +668,10 @@ void save_range(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void delete_range(GtkButton * button, gpointer user_data)
+void delete_range(GtkButton *button, gpointer user_data)
 {
 	main_delete_range();
 }
-
 
 /******************************************************************************
  * Name
@@ -722,7 +689,7 @@ void delete_range(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void delete_list(GtkButton * button, gpointer user_data)
+void delete_list(GtkButton *button, gpointer user_data)
 {
 	gchar *name_string = NULL;
 	GtkTreeModel *model;
@@ -742,8 +709,7 @@ void delete_list(GtkButton * button, gpointer user_data)
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 	list_store = GTK_LIST_STORE(model);
-	selection = gtk_tree_view_get_selection
-	    (GTK_TREE_VIEW(search1.module_lists));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
 
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
@@ -777,7 +743,6 @@ void delete_list(GtkButton * button, gpointer user_data)
 	g_free(str);
 }
 
-
 /******************************************************************************
  * Name
  *   scope_toggled
@@ -796,16 +761,14 @@ void delete_list(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void scope_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 {
 	search1.which_scope = togglebutton;
-	if (gtk_toggle_button_get_active
-	    (GTK_TOGGLE_BUTTON(search1.rb_custom_range)))
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_custom_range)))
 		gtk_widget_set_sensitive(search1.combo_range, TRUE);
 	else
 		gtk_widget_set_sensitive(search1.combo_range, FALSE);
 }
-
 
 /******************************************************************************
  * Name
@@ -824,19 +787,18 @@ void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void
  */
 
-void mod_list_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void mod_list_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 {
 	if (gtk_toggle_button_get_active(togglebutton)) {
 		main_comboboxentry2_changed((GtkComboBox *)
-					    search1.combo_list, user_data);
+					    search1.combo_list,
+					    user_data);
 	}
-	if (gtk_toggle_button_get_active
-	    (GTK_TOGGLE_BUTTON(search1.rb_custom_list)))
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_custom_list)))
 		gtk_widget_set_sensitive(search1.combo_list, TRUE);
 	else
 		gtk_widget_set_sensitive(search1.combo_list, FALSE);
 }
-
 
 /******************************************************************************
  * Name
@@ -855,14 +817,13 @@ void mod_list_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void
  */
 
-void optimized_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void optimized_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 {
 	if (gtk_toggle_button_get_active(togglebutton))
 		gtk_widget_show(search1.button_intro_lucene);
 	else
 		gtk_widget_hide(search1.button_intro_lucene);
 }
-
 
 /******************************************************************************
  * Name
@@ -881,13 +842,13 @@ void optimized_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void
  */
 
-#define	LUCENE_INTRO	\
-_("<b>Syntax overview for optimized \"lucene\" searches</b>\nSearch for verses that contain...\n\nloved one\n\t \"loved\" or \"one\"\n\tThis is the same as searching for loved OR one\n\"loved one\"\n\tThe phrase \"loved one\"\nlove*\n\tA word starting with \"love\"\n\t(love OR loves OR loved OR etc...)\nloved AND one\n\tThe word \"loved\" and the word \"one\"\n\t&amp;&amp; can be used in place of AND\n+loved one\n\tVerses that <b>must</b> contain \"loved\" and <b>may</b> contain \"one\"\nloved NOT one\n\t\"loved\" but not \"one\"\n(loved one) AND God\n\t\"loved\" or \"one\" and \"God\"\nlemma:G2316\n\tSearch for the Strong's Greek (\"G\") word number 2316.\n\tAlso, select Strong's display on the <i>Attribute Search</i> tab.\n\nFor complete details, search the web for \"lucene search syntax\".")
+#define LUCENE_INTRO \
+	_("<b>Syntax overview for optimized \"lucene\" searches</b>\nSearch for verses that contain...\n\nloved one\n\t \"loved\" or \"one\"\n\tThis is the same as searching for loved OR one\n\"loved one\"\n\tThe phrase \"loved one\"\nlove*\n\tA word starting with \"love\"\n\t(love OR loves OR loved OR etc...)\nloved AND one\n\tThe word \"loved\" and the word \"one\"\n\t&amp;&amp; can be used in place of AND\n+loved one\n\tVerses that <b>must</b> contain \"loved\" and <b>may</b> contain \"one\"\nloved NOT one\n\t\"loved\" but not \"one\"\n(loved one) AND God\n\t\"loved\" or \"one\" and \"God\"\nlemma:G2316\n\tSearch for the Strong's Greek (\"G\") word number 2316.\n\tAlso, select Strong's display on the <i>Attribute Search</i> tab.\n\nFor complete details, search the web for \"lucene search syntax\".")
 
-void on_lucene_intro_clicked(GtkButton * button, gpointer user_data)
+void on_lucene_intro_clicked(GtkButton *button, gpointer user_data)
 {
 	GtkWidget *dialog;
-	dialog = gtk_message_dialog_new_with_markup(NULL,	/* no need for a parent window */
+	dialog = gtk_message_dialog_new_with_markup(NULL, /* no need for a parent window */
 						    GTK_DIALOG_DESTROY_WITH_PARENT,
 						    GTK_MESSAGE_INFO,
 						    GTK_BUTTONS_OK,
@@ -914,14 +875,13 @@ void on_lucene_intro_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void attributes_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void attributes_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 {
 	if (gtk_toggle_button_get_active(togglebutton))
 		gtk_widget_show(search1.button_intro_attributes);
 	else
 		gtk_widget_hide(search1.button_intro_attributes);
 }
-
 
 /******************************************************************************
  * Name
@@ -940,13 +900,13 @@ void attributes_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void
  */
 
-#define	ATTRIBUTES_INTRO	\
-_("<b>Attribute-based searches</b>\nSearches for content contained in markup outside the main text. Attributes are footnotes, Strong's numbers, and morphological symbols.\n\nBe aware that most such searches can now be done faster via optimized \"lucene\" searches using keyword qualifiers.\n\nTo use attribute searches, you must select the appropriate button on the <i>Attribute Search</i> tab.\n* Footnote text is searched just like regular text.\n* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n* Morphological tags are identified literally, e.g. N-ASF for \"noun, accusative singular feminine\" -- see the Robinson module for details.")
+#define ATTRIBUTES_INTRO \
+	_("<b>Attribute-based searches</b>\nSearches for content contained in markup outside the main text. Attributes are footnotes, Strong's numbers, and morphological symbols.\n\nBe aware that most such searches can now be done faster via optimized \"lucene\" searches using keyword qualifiers.\n\nTo use attribute searches, you must select the appropriate button on the <i>Attribute Search</i> tab.\n* Footnote text is searched just like regular text.\n* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n* Morphological tags are identified literally, e.g. N-ASF for \"noun, accusative singular feminine\" -- see the Robinson module for details.")
 
-void on_attributes_intro_clicked(GtkButton * button, gpointer user_data)
+void on_attributes_intro_clicked(GtkButton *button, gpointer user_data)
 {
 	GtkWidget *dialog;
-	dialog = gtk_message_dialog_new_with_markup(NULL,	/* no need for a parent window */
+	dialog = gtk_message_dialog_new_with_markup(NULL, /* no need for a parent window */
 						    GTK_DIALOG_DESTROY_WITH_PARENT,
 						    GTK_MESSAGE_INFO,
 						    GTK_BUTTONS_OK,
@@ -975,7 +935,7 @@ void on_attributes_intro_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void current_module_toggled(GtkToggleButton * togglebutton,
+void current_module_toggled(GtkToggleButton *togglebutton,
 			    gpointer user_data)
 {
 	if (gtk_toggle_button_get_active(togglebutton)) {
@@ -987,8 +947,6 @@ void current_module_toggled(GtkToggleButton * togglebutton,
 		gtk_toggle_button_set_active(search1.which_scope, TRUE);
 	}
 }
-
-
 
 /******************************************************************************
  * Name
@@ -1007,12 +965,11 @@ void current_module_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-static void mod_selection_changed(GtkTreeSelection * selection,
-				  GtkWidget * tree_widget)
+static void mod_selection_changed(GtkTreeSelection *selection,
+				  GtkWidget *tree_widget)
 {
 	main_mod_selection_changed(selection, tree_widget);
 }
-
 
 /******************************************************************************
  * Name
@@ -1032,11 +989,11 @@ static void mod_selection_changed(GtkTreeSelection * selection,
  */
 
 static void _selection_finds_list_changed(GtkTreeSelection *
-					  selection, gpointer data)
+					      selection,
+					  gpointer data)
 {
 	main_selection_finds_list_changed(selection, data);
 }
-
 
 /******************************************************************************
  * Name
@@ -1056,13 +1013,11 @@ static void _selection_finds_list_changed(GtkTreeSelection *
  */
 
 static void _selection_modules_lists_changed(GtkTreeSelection *
-					     selection, gpointer data)
+						 selection,
+					     gpointer data)
 {
 	main_selection_modules_lists_changed(selection, data);
 }
-
-
-
 
 /******************************************************************************
  * Name
@@ -1082,7 +1037,8 @@ static void _selection_modules_lists_changed(GtkTreeSelection *
  */
 
 static void _modules_lists_changed(GtkTreeSelection *
-				   selection, GtkTreeView * tree_widget)
+				       selection,
+				   GtkTreeView *tree_widget)
 {
 	gchar *mod = NULL;
 	GtkTreeIter selected;
@@ -1102,9 +1058,7 @@ static void _modules_lists_changed(GtkTreeSelection *
 		g_free(module_selected);
 		module_selected = mod;
 	}
-
 }
-
 
 /******************************************************************************
  * Name
@@ -1123,8 +1077,8 @@ static void _modules_lists_changed(GtkTreeSelection *
  *   void
  */
 
-static void _finds_verselist_selection_changed(GtkWidget * widget,
-					       GdkEventButton * event,
+static void _finds_verselist_selection_changed(GtkWidget *widget,
+					       GdkEventButton *event,
 					       gpointer data)
 {
 	GtkTreeSelection *selection;
@@ -1135,8 +1089,7 @@ static void _finds_verselist_selection_changed(GtkWidget * widget,
 	selection = gtk_tree_view_get_selection((GtkTreeView *)
 						search1.listview_verses);
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.listview_verses));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
 
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
@@ -1145,7 +1098,7 @@ static void _finds_verselist_selection_changed(GtkWidget * widget,
 
 	main_finds_verselist_selection_changed(selection, model,
 					       event->type ==
-					       GDK_2BUTTON_PRESS);
+						   GDK_2BUTTON_PRESS);
 }
 
 /******************************************************************************
@@ -1166,14 +1119,14 @@ static void _finds_verselist_selection_changed(GtkWidget * widget,
  */
 
 static gboolean on_treeview_button_press_event_advsearch(GtkWidget *
-							 widget,
+							     widget,
 							 GdkEventButton *
-							 event,
+							     event,
 							 gpointer
-							 user_data)
+							     user_data)
 {
 	if (event->button == 3) {
-		gtk_menu_popup((GtkMenu *) search1.menu_item_send_search,
+		gtk_menu_popup((GtkMenu *)search1.menu_item_send_search,
 			       NULL, NULL, NULL, NULL, 2,
 			       gtk_get_current_event_time());
 		return TRUE;
@@ -1181,7 +1134,6 @@ static gboolean on_treeview_button_press_event_advsearch(GtkWidget *
 		return FALSE;
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -1199,14 +1151,13 @@ static gboolean on_treeview_button_press_event_advsearch(GtkWidget *
  */
 
 G_MODULE_EXPORT void
-on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
+on_send_list_via_biblesync_advsearch_activate(GtkMenuItem *menuitem,
 					      gpointer user_data)
 {
 	if (biblesync_active_xmit_allowed()) {
 		GtkTreeIter iter;
 		GtkTreeModel *model =
-		    gtk_tree_view_get_model(GTK_TREE_VIEW
-					    (search1.listview_verses));
+		    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
 
 		GString *vlist = g_string_new("");
 		gchar *module = NULL, *text, *buf, *key;
@@ -1239,22 +1190,20 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
 				module = g_strdup(text);
 				if (!main_is_module(module) ||
 				    ((main_get_mod_type(module) !=
-				      TEXT_TYPE)
-				     && (main_get_mod_type(module) !=
-					 COMMENTARY_TYPE))) {
+				      TEXT_TYPE) &&
+				     (main_get_mod_type(module) !=
+				      COMMENTARY_TYPE))) {
 					g_free(module);
 					g_free(text);
 					g_string_free(vlist, TRUE);
-					gui_generic_warning
-					    (_("Module is neither Bible nor commentary"));
+					gui_generic_warning(_("Module is neither Bible nor commentary"));
 					return;
 				}
 			} else {
 				vlist = g_string_append_c(vlist, ';');
 			}
 			vlist = g_string_append(vlist, (char *)
-						main_get_osisref_from_key
-						(module, key));
+						main_get_osisref_from_key(module, key));
 
 			g_free(text);
 			first = FALSE;
@@ -1268,7 +1217,6 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
 		gui_generic_warning(_("BibleSync is not active for transmit."));
 	}
 }
-
 
 /******************************************************************************
  * Name
@@ -1318,18 +1266,16 @@ GtkWidget *create_results_menu_advsearch(void)
 #ifdef USE_GTKBUILDER
 	/* connect signals and data */
 	gtk_builder_connect_signals(gxml, NULL);
-	/*gtk_builder_connect_signals_full
+/*gtk_builder_connect_signals_full
 	   (gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL); */
 #else
 	/* connect signals and data */
-	glade_xml_signal_autoconnect_full
-	    (gxml, (GladeXMLConnectFunc) gui_glade_signal_connect_func,
-	     NULL);
+	glade_xml_signal_autoconnect_full(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func,
+					  NULL);
 #endif
 
 	return menu;
 }
-
 
 /******************************************************************************
  * Name
@@ -1348,7 +1294,7 @@ GtkWidget *create_results_menu_advsearch(void)
  *   void
  */
 
-static void selection_range_lists_changed(GtkTreeSelection * selection,
+static void selection_range_lists_changed(GtkTreeSelection *selection,
 					  gpointer data)
 {
 	gchar *name = NULL;
@@ -1360,8 +1306,7 @@ static void selection_range_lists_changed(GtkTreeSelection * selection,
 		return;
 
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.list_range_name));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.list_range_name));
 	gtk_tree_model_get(model, &selected, 0, &name, 1, &range, -1);
 
 	gtk_entry_set_text(GTK_ENTRY(search1.entry_range_name), name);
@@ -1369,7 +1314,6 @@ static void selection_range_lists_changed(GtkTreeSelection * selection,
 	g_free(name);
 	g_free(range);
 }
-
 
 /******************************************************************************
  * Name
@@ -1388,7 +1332,7 @@ static void selection_range_lists_changed(GtkTreeSelection * selection,
  *   void
  */
 
-static void selection_verselist_changed(GtkTreeSelection * selection,
+static void selection_verselist_changed(GtkTreeSelection *selection,
 					gpointer data)
 {
 	GtkTreeModel *model;
@@ -1398,11 +1342,9 @@ static void selection_verselist_changed(GtkTreeSelection * selection,
 		return;
 
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.list_range_name));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.list_range_name));
 	main_finds_verselist_selection_changed(selection, model, FALSE);
 }
-
 
 /******************************************************************************
  * Name
@@ -1420,7 +1362,7 @@ static void selection_verselist_changed(GtkTreeSelection * selection,
  *   void
  */
 
-static void _add_two_text_columns(GtkTreeView * treeview)
+static void _add_two_text_columns(GtkTreeView *treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1438,10 +1380,7 @@ static void _add_two_text_columns(GtkTreeView * treeview)
 							  "text", 1, NULL);
 	gtk_tree_view_append_column(treeview, column);
 	gtk_tree_view_column_set_sort_column_id(column, 0);
-
 }
-
-
 
 /******************************************************************************
  * Name
@@ -1459,8 +1398,7 @@ static void _add_two_text_columns(GtkTreeView * treeview)
  *
  */
 
-static
-void _setup_combobox(GtkComboBox * combo)
+static void _setup_combobox(GtkComboBox *combo)
 {
 	GtkListStore *store;
 
@@ -1473,7 +1411,6 @@ void _setup_combobox(GtkComboBox * combo)
 #endif
 }
 
-
 /******************************************************************************
  * Name
  *
@@ -1490,8 +1427,7 @@ void _setup_combobox(GtkComboBox * combo)
  *
  */
 
-static
-void _setup_listviews(GtkWidget * listview, GCallback callback)
+static void _setup_listviews(GtkWidget *listview, GCallback callback)
 {
 	GtkListStore *model;
 	GObject *selection;
@@ -1505,11 +1441,9 @@ void _setup_listviews(GtkWidget * listview, GCallback callback)
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(listview)));
 	g_signal_connect(selection, "changed", G_CALLBACK(callback), NULL);
-
 }
 
-static
-void _setup_listviews2(GtkWidget * listview, GCallback callback)
+static void _setup_listviews2(GtkWidget *listview, GCallback callback)
 {
 	GtkListStore *model;
 	GObject *selection;
@@ -1520,18 +1454,16 @@ void _setup_listviews2(GtkWidget * listview, GCallback callback)
 	_add_two_text_columns(GTK_TREE_VIEW(listview));
 	if (!callback)
 		return;
-	g_signal_connect((gpointer) listview,
+	g_signal_connect((gpointer)listview,
 			 "button_press_event", G_CALLBACK(callback), NULL);
-	g_signal_connect((gpointer) listview,
+	g_signal_connect((gpointer)listview,
 			 "button_release_event",
 			 G_CALLBACK(callback), NULL);
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(listview)));
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(selection_verselist_changed), NULL);
-
 }
-
 
 /******************************************************************************
  * Name
@@ -1549,8 +1481,7 @@ void _setup_listviews2(GtkWidget * listview, GCallback callback)
  *
  */
 
-static
-void _setup_treeview(GtkWidget * treeview)
+static void _setup_treeview(GtkWidget *treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1575,9 +1506,7 @@ void _setup_treeview(GtkWidget * treeview)
 			       GINT_TO_POINTER(0));
 }
 
-
-static
-void _setup_treeview2(GtkWidget * treeview)
+static void _setup_treeview2(GtkWidget *treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1597,8 +1526,7 @@ void _setup_treeview2(GtkWidget * treeview)
 			 G_CALLBACK(_modules_lists_changed), treeview);
 }
 
-
-void on_closebutton2_clicked(GtkButton * button, gpointer user_data)
+void on_closebutton2_clicked(GtkButton *button, gpointer user_data)
 {
 	gtk_widget_hide(search1.mod_sel_dialog);
 }
@@ -1619,7 +1547,7 @@ void on_closebutton2_clicked(GtkButton * button, gpointer user_data)
  *
  */
 
-void _on_dialog2_response(GtkDialog * dialog, gint response_id,
+void _on_dialog2_response(GtkDialog *dialog, gint response_id,
 			  gpointer user_data)
 {
 	switch (response_id) {
@@ -1650,8 +1578,7 @@ void _on_dialog2_response(GtkDialog * dialog, gint response_id,
  */
 
 #ifndef USE_GTKBUILDER
-static
-void _create_mod_sel_dialog(void)
+static void _create_mod_sel_dialog(void)
 {
 	gchar *glade_file;
 	GladeXML *gxml2;
@@ -1660,11 +1587,10 @@ void _create_mod_sel_dialog(void)
 	g_return_if_fail(glade_file != NULL);
 	XI_message(("%s", glade_file));
 
-
 	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
 	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
 
-	g_signal_connect((gpointer) search1.mod_sel_dialog, "response",
+	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
 			 G_CALLBACK(_on_dialog2_response), NULL);
 
 	search1.mod_sel_dlg_treeview =
@@ -1694,7 +1620,7 @@ void _create_mod_sel_dialog(void)
  */
 
 void
-on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data)
+on_toolbutton12_clicked(GtkToolButton *toolbutton, gpointer user_data)
 {
 #ifndef USE_GTKBUILDER
 	_create_mod_sel_dialog();
@@ -1719,30 +1645,25 @@ on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data)
  */
 
 /* add html widgets */
-static
-void _add_html_widget(GtkWidget * vbox)
+static void _add_html_widget(GtkWidget *vbox)
 {
 	GtkWidget *scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
 	search1.preview_html =
-	    GTK_WIDGET(XIPHOS_HTML_NEW
-		       (NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
+	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  search1.preview_html);
 	gtk_box_pack_start(GTK_BOX(scrolledwindow), search1.preview_html,
 			   TRUE, TRUE, 0);
 	gtk_widget_show(search1.preview_html);
 }
-
-
 
 /******************************************************************************
  * Name
@@ -1760,14 +1681,13 @@ void _add_html_widget(GtkWidget * vbox)
  *
  */
 
-void _on_dialog_response(GtkDialog * dialog, gint response_id,
+void _on_dialog_response(GtkDialog *dialog, gint response_id,
 			 gpointer user_data)
 {
 	switch (response_id) {
 	case GTK_RESPONSE_CLOSE:
 		if (search1.mod_sel_dialog) {
-			gtk_widget_destroy(GTK_WIDGET
-					   (search1.mod_sel_dialog));
+			gtk_widget_destroy(GTK_WIDGET(search1.mod_sel_dialog));
 			search1.mod_sel_dialog = NULL;
 		}
 		gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -1791,8 +1711,7 @@ void _on_dialog_response(GtkDialog * dialog, gint response_id,
  *   void
  */
 
-static
-void _create_search_dialog(void)
+static void _create_search_dialog(void)
 {
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
@@ -1821,7 +1740,7 @@ void _create_search_dialog(void)
 	g_return_if_fail(glade_file != NULL);
 	XI_message(("%s", glade_file));
 
-	/* build the widget */
+/* build the widget */
 #ifdef USE_GTKBUILDER
 	gxml = gtk_builder_new();
 	gtk_builder_add_from_file(gxml, glade_file, NULL);
@@ -1856,14 +1775,14 @@ void _create_search_dialog(void)
 
 	search1.list_range_name = UI_GET_ITEM(gxml, "treeview4");
 	_setup_listviews(search1.list_range_name,
-			 (GCallback) selection_range_lists_changed);
+			 (GCallback)selection_range_lists_changed);
 
 	search1.list_ranges = UI_GET_ITEM(gxml, "treeview5");
 	_setup_listviews(search1.list_ranges, NULL);
 
 	search1.module_lists = UI_GET_ITEM(gxml, "treeview6");
 	_setup_listviews(search1.module_lists,
-			 (GCallback) _selection_modules_lists_changed);
+			 (GCallback)_selection_modules_lists_changed);
 
 	search1.listview_modules = UI_GET_ITEM(gxml, "treeview7");
 	_setup_listviews(search1.listview_modules, NULL);
@@ -1996,8 +1915,7 @@ void _create_search_dialog(void)
 
 	search1.progressbar = UI_GET_ITEM(gxml, "progressbar1");
 #ifdef USE_GTKBUILDER
-	gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR
-				       (search1.progressbar), TRUE);
+	gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(search1.progressbar), TRUE);
 #endif
 	search1.label_mod_select = UI_GET_ITEM(gxml, "label5");
 	search1.listview_results = UI_GET_ITEM(gxml, "treeview9");
@@ -2005,7 +1923,7 @@ void _create_search_dialog(void)
 #ifdef USE_GTKBUILDER
 	/* setup module select dialog */
 	search1.mod_sel_dialog = UI_GET_ITEM(gxml, "dialog2");
-	g_signal_connect((gpointer) search1.mod_sel_dialog, "response",
+	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
 			 G_CALLBACK(_on_dialog2_response), NULL);
 	search1.mod_sel_dlg_treeview = UI_GET_ITEM(gxml, "treeview8");
 	_setup_treeview2(search1.mod_sel_dlg_treeview);
@@ -2013,24 +1931,22 @@ void _create_search_dialog(void)
 #endif
 
 	_setup_listviews(search1.listview_results,
-			 (GCallback) _selection_finds_list_changed);
+			 (GCallback)_selection_finds_list_changed);
 	search1.listview_verses = UI_GET_ITEM(gxml, "treeview10");
 	search1.menu_item_send_search = create_results_menu_advsearch();
 	_setup_listviews2(search1.listview_verses,
-			  (GCallback) _finds_verselist_selection_changed);
-	g_signal_connect((gpointer) search1.listview_verses,
+			  (GCallback)_finds_verselist_selection_changed);
+	g_signal_connect((gpointer)search1.listview_verses,
 			 "button_press_event",
-			 G_CALLBACK
-			 (on_treeview_button_press_event_advsearch), NULL);
+			 G_CALLBACK(on_treeview_button_press_event_advsearch), NULL);
 
 #ifdef USE_GTKBUILDER
-	_add_html_widget(GTK_WIDGET
-			 (gtk_builder_get_object(gxml, "vbox12")));
+	_add_html_widget(GTK_WIDGET(gtk_builder_get_object(gxml, "vbox12")));
 #else
 	_add_html_widget(glade_xml_get_widget(gxml, "vbox12"));
 #endif
 
-	g_signal_connect((gpointer) search1.dialog,
+	g_signal_connect((gpointer)search1.dialog,
 			 "configure_event",
 			 G_CALLBACK(on_advsearch_configure_event), NULL);
 
@@ -2052,7 +1968,6 @@ void _create_search_dialog(void)
 	gtk_window_move(GTK_WINDOW(search1.dialog), settings.advsearch_x,
 			settings.advsearch_y);
 }
-
 
 /******************************************************************************
  * Name

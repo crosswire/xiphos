@@ -19,7 +19,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -35,7 +34,6 @@
 #include <string>
 #include <stdio.h>
 #include <unistd.h>
-
 
 #include "main/mod_mgr.h"
 #include "main/prayerlists.h"
@@ -59,8 +57,7 @@ using sword::SWConfig;
 using sword::SWModule;
 #endif
 
-enum
-{
+enum {
 	COL_OPEN_PIXBUF,
 	COL_CLOSED_PIXBUF,
 	COL_CAPTION,
@@ -76,28 +73,26 @@ extern char *(month_names[]);
 /*********************************    *************************************/
 
 static void
-setEntryText (RawGenBook * book, const gchar * text)
+setEntryText(RawGenBook *book, const gchar *text)
 {
-	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
 	if (treeKey->getOffset()) {
 		(*book) << text;
 	}
 }
 
-
 static void
-appendChild (TreeKeyIdx * treeKey, const gchar * name)
+appendChild(TreeKeyIdx *treeKey, const gchar *name)
 {
 	treeKey->appendChild();
 	treeKey->setLocalName(name);
 	treeKey->save();
 	XI_message(("name: %s\nlocalName: %s", name,
-		    treeKey->getLocalName ()));
+		    treeKey->getLocalName()));
 }
 
-
 static void
-appendSibling (TreeKeyIdx * treeKey, const gchar * name)
+appendSibling(TreeKeyIdx *treeKey, const gchar *name)
 {
 	if (treeKey->getOffset()) {
 		treeKey->append();
@@ -107,7 +102,7 @@ appendSibling (TreeKeyIdx * treeKey, const gchar * name)
 }
 
 static void
-add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
+add_prayer_list_sections(RawGenBook *book, TreeKeyIdx *treeKey)
 {
 	appendChild(treeKey, _("Growth"));
 	setEntryText(book, _("<b>For Growth</b><br/>"));
@@ -122,7 +117,7 @@ add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
 }
 
 static void
-add_outline_subsections (RawGenBook * book, TreeKeyIdx * treeKey)
+add_outline_subsections(RawGenBook *book, TreeKeyIdx *treeKey)
 {
 	appendChild(treeKey, _("Point x"));
 	setEntryText(book, _("<b>(x)</b><br/>"));
@@ -135,7 +130,7 @@ add_outline_subsections (RawGenBook * book, TreeKeyIdx * treeKey)
 }
 
 static void
-add_outline_sections (RawGenBook * book, TreeKeyIdx * treeKey)
+add_outline_sections(RawGenBook *book, TreeKeyIdx *treeKey)
 {
 	appendChild(treeKey, _("Minor Topic 1"));
 	setEntryText(book, _("<b>Subtopic 1</b><br/>"));
@@ -172,7 +167,7 @@ prayerlist_construct(gchar *listname, gchar *summary)
 	// configuration file generation.
 	gchar *path = g_strdup_printf("%s/" DOTSWORD "/mods.d/%s.conf",
 				      settings.homedir, listname);
-	SWConfig config (path);
+	SWConfig config(path);
 	g_free(path);
 
 	// configuration file content.
@@ -187,9 +182,9 @@ prayerlist_construct(gchar *listname, gchar *summary)
 	config[listname]["Lang"] = sword_locale; // set at startup.
 	config[listname]["Version"] = "0.1";
 	config[listname]["MinimumVersion"] = "1.5.11";
-	config[listname]["DisplayLevel"] = "2";	// ?
+	config[listname]["DisplayLevel"] = "2"; // ?
 	config[listname]["Description"] = listname;
-	config[listname]["About"] = summary;	// as provided.
+	config[listname]["About"] = summary; // as provided.
 	config.Save();
 
 	// fundamentals are complete.  update.
@@ -197,7 +192,6 @@ prayerlist_construct(gchar *listname, gchar *summary)
 	main_load_module_tree(sidebar.module_list);
 	settings.havebook = 1;
 }
-
 
 /******************************************************************************
  * Name
@@ -218,19 +212,19 @@ gchar *
 prayerlist_fundamentals(gchar *summary,
 			gchar *defaultname)
 {
-	char *listname = NULL;	// assume failure.
+	char *listname = NULL; // assume failure.
 	GS_DIALOG *info;
 	gint test;
 	GString *path = g_string_new(NULL);
 
 	// name selection dialog.
 	info = gui_new_dialog();
-	info->stock_icon = (gchar *) 
+	info->stock_icon = (gchar *)
 #ifdef HAVE_GTK_310
-		"dialog-question";
+	    "dialog-question";
 #else
-		GTK_STOCK_DIALOG_QUESTION;
-#endif	
+	    GTK_STOCK_DIALOG_QUESTION;
+#endif
 	info->title = _("Prayer List/Journal");
 	info->label_top = _("Name for new prayer list or journal");
 	info->label1 = _("Name: ");
@@ -241,20 +235,18 @@ prayerlist_fundamentals(gchar *summary,
 
 	// result of name selection.
 	if (test != GS_OK) {
-		goto out;	// cancelled.
+		goto out; // cancelled.
 	}
 
 	for (char *s = info->text1; *s; ++s) {
 		if (!isalnum(*s) && (*s != '_')) {
-			gui_generic_warning
-			    (_("Module names must contain [A-Za-z0-9_] only."));
+			gui_generic_warning(_("Module names must contain [A-Za-z0-9_] only."));
 			goto out;
 		}
 	}
 
 	if (main_is_module(info->text1)) {
-		gui_generic_warning
-		    (_("Xiphos already knows a module by that name."));
+		gui_generic_warning(_("Xiphos already knows a module by that name."));
 		goto out;
 	}
 
@@ -262,22 +254,20 @@ prayerlist_fundamentals(gchar *summary,
 	g_string_printf(path, "%s/" DOTSWORD "/modules/genbook/rawgenbook/%s",
 			settings.homedir, info->text1);
 	if (g_access(path->str, F_OK) == 0) {
-		gui_generic_warning
-		    (_("Xiphos finds that prayer list already."));
+		gui_generic_warning(_("Xiphos finds that prayer list already."));
 		goto out;
 	} else {
 		g_string_printf(path, "%s/" DOTSWORD "/modules/genbook",
 				settings.homedir);
-		Mkdir(path->str, S_IRWXU);	// ignore return value -- harmless
+		Mkdir(path->str, S_IRWXU); // ignore return value -- harmless
 		g_string_append(path, "/rawgenbook");
-		Mkdir(path->str, S_IRWXU);	// ignore return value -- harmless
+		Mkdir(path->str, S_IRWXU); // ignore return value -- harmless
 
 		g_string_append(path, "/");
 		g_string_append(path, info->text1);
-		if ((Mkdir(path->str, S_IRWXU)) != 0) {	// this one matters.
-			char *msg = g_strdup_printf
-			    (_("Xiphos cannot create module's path:\n%s"),
-			     path->str);
+		if ((Mkdir(path->str, S_IRWXU)) != 0) { // this one matters.
+			char *msg = g_strdup_printf(_("Xiphos cannot create module's path:\n%s"),
+						    path->str);
 			gui_generic_warning(msg);
 			g_free(msg);
 			goto out;
@@ -315,21 +305,19 @@ out:
 gboolean
 main_prayerlist_basic_create(void)
 {
-	char *listname = prayerlist_fundamentals
-	    (_("A basic prayer list. \\par\\par Module created by Xiphos."),
-	     _("BasicPrayerList"));
+	char *listname = prayerlist_fundamentals(_("A basic prayer list. \\par\\par Module created by Xiphos."),
+						 _("BasicPrayerList"));
 	if (listname == NULL)
 		return FALSE;
 
-	gchar *path = g_strdup_printf
-	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
-	     settings.homedir, listname, listname);
+	gchar *path = g_strdup_printf("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
+				      settings.homedir, listname, listname);
 	g_free(listname);
-	RawGenBook::createModule (path);
-	RawGenBook *book = new RawGenBook (path);
+	RawGenBook::createModule(path);
+	RawGenBook *book = new RawGenBook(path);
 
-	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
-	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
+	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
 
 	appendChild(treeKey, _("MyPrayerList"));
 	setEntryText(book, _("<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/>fellowship<br/>Bibles for missionaries<br/><br/><br/>"));
@@ -337,7 +325,6 @@ main_prayerlist_basic_create(void)
 	delete treeKey;
 	return TRUE;
 }
-
 
 /******************************************************************************
  * Name
@@ -357,21 +344,19 @@ main_prayerlist_basic_create(void)
 gboolean
 main_prayerlist_subject_create(void)
 {
-	char *listname = prayerlist_fundamentals
-	    (_("A subject-based prayer list. \\par\\par Module created by Xiphos."),
-	     _("SubjectPrayerList"));
+	char *listname = prayerlist_fundamentals(_("A subject-based prayer list. \\par\\par Module created by Xiphos."),
+						 _("SubjectPrayerList"));
 	if (listname == NULL)
 		return FALSE;
 
-	gchar *path = g_strdup_printf
-	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
-	     settings.homedir, listname, listname);
+	gchar *path = g_strdup_printf("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
+				      settings.homedir, listname, listname);
 	g_free(listname);
-	RawGenBook::createModule (path);
-	RawGenBook *book = new RawGenBook (path);
+	RawGenBook::createModule(path);
+	RawGenBook *book = new RawGenBook(path);
 
-	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
-	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
+	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
 
 	appendChild(treeKey, _("Salvation"));
 	setEntryText(book, _("Bob<br/>Sam<br/>Sue<br/>John<br/>"));
@@ -383,7 +368,6 @@ main_prayerlist_subject_create(void)
 	delete treeKey;
 	return TRUE;
 }
-
 
 /******************************************************************************
  * Name
@@ -403,26 +387,23 @@ main_prayerlist_subject_create(void)
 gboolean
 main_prayerlist_monthly_create(void)
 {
-	char *listname = prayerlist_fundamentals
-	    (_("A monthly prayer list. \\par\\par Module created by Xiphos."),
-	     _("MonthlyPrayerList"));
+	char *listname = prayerlist_fundamentals(_("A monthly prayer list. \\par\\par Module created by Xiphos."),
+						 _("MonthlyPrayerList"));
 	if (listname == NULL)
 		return FALSE;
 
-	gchar *path = g_strdup_printf
-	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
-	     settings.homedir, listname, listname);
+	gchar *path = g_strdup_printf("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
+				      settings.homedir, listname, listname);
 	g_free(listname);
 	RawGenBook::createModule(path);
-	RawGenBook *book = new RawGenBook (path);
+	RawGenBook *book = new RawGenBook(path);
 
-	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
-	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
+	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
 
-	for (int month = 0; month < 12; ++month)
-	{
+	for (int month = 0; month < 12; ++month) {
 		char monthnum[4], monthstring[32];
-		snprintf(monthnum, 3, "%02d", month+1);
+		snprintf(monthnum, 3, "%02d", month + 1);
 		snprintf(monthstring, 31, "<b>%s</b><br/>", _(month_names[month]));
 
 		if (month == 0)
@@ -455,26 +436,23 @@ main_prayerlist_monthly_create(void)
 gboolean
 main_prayerlist_journal_create(void)
 {
-	char *listname = prayerlist_fundamentals
-	    (_("A daily journal. \\par\\par Module created by Xiphos."),
-	     _("DailyJournal"));
+	char *listname = prayerlist_fundamentals(_("A daily journal. \\par\\par Module created by Xiphos."),
+						 _("DailyJournal"));
 	if (listname == NULL)
 		return FALSE;
 
-	gchar *path = g_strdup_printf
-	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
-	     settings.homedir, listname, listname);
+	gchar *path = g_strdup_printf("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
+				      settings.homedir, listname, listname);
 	g_free(listname);
 	RawGenBook::createModule(path);
-	RawGenBook *book = new RawGenBook (path);
+	RawGenBook *book = new RawGenBook(path);
 
-	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
-	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
+	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
 
-	for (int month = 0; month < 12; ++month)
-	{
+	for (int month = 0; month < 12; ++month) {
 		char monthnum[4], monthstring[32];
-		snprintf(monthnum, 3, "%02d", month+1);
+		snprintf(monthnum, 3, "%02d", month + 1);
 		snprintf(monthstring, 31, "<b>%s</b><br/>", _(month_names[month]));
 
 		if (month == 0)
@@ -485,8 +463,8 @@ main_prayerlist_journal_create(void)
 
 		for (int day = 0; day < month_day_counts[month]; ++day) {
 			char daynum[4], monthday[32];
-			snprintf(daynum, 3, "%02d", day+1);
-			snprintf(monthday, 31, "<b>%s %d</b><br/>", _(month_names[month]), day+1);
+			snprintf(daynum, 3, "%02d", day + 1);
+			snprintf(monthday, 31, "<b>%s %d</b><br/>", _(month_names[month]), day + 1);
 
 			if (day == 0)
 				appendChild(treeKey, daynum);
@@ -520,21 +498,19 @@ main_prayerlist_journal_create(void)
 gboolean
 main_prayerlist_outlined_topic_create(void)
 {
-	char *listname = prayerlist_fundamentals
-	    (_("An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."),
-	     _("OutlinedTopic"));
+	char *listname = prayerlist_fundamentals(_("An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."),
+						 _("OutlinedTopic"));
 	if (listname == NULL)
 		return FALSE;
 
-	gchar *path = g_strdup_printf
-	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
-	     settings.homedir, listname, listname);
+	gchar *path = g_strdup_printf("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
+				      settings.homedir, listname, listname);
 	g_free(listname);
 	RawGenBook::createModule(path);
-	RawGenBook *book = new RawGenBook (path);
+	RawGenBook *book = new RawGenBook(path);
 
-	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
-	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
+	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
 
 	appendChild(treeKey, _("Major Topic A"));
 	setEntryText(book, _("<b>Major Topic A</b><br/>"));

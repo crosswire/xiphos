@@ -59,8 +59,6 @@ static DIALOG_DATA *cur_dlg;
 static GtkTreeModel *model;
 //static gint tree_level;
 
-
-
 /******************************************************************************
  * Name
  *   dialog_destroy
@@ -77,13 +75,12 @@ static GtkTreeModel *model;
  *   void
  */
 
-static void dialog_destroy(GObject * object, DIALOG_DATA * dlg)
+static void dialog_destroy(GObject *object, DIALOG_DATA *dlg)
 {
 	if (!dialog_freed)
 		main_free_on_destroy(dlg);
 	dialog_freed = FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -167,8 +164,8 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  *   void
  */
 
-static void tree_selection_changed(GtkTreeSelection * selection,
-				   DIALOG_DATA * g)
+static void tree_selection_changed(GtkTreeSelection *selection,
+				   DIALOG_DATA *g)
 {
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(g->tree));
@@ -189,30 +186,26 @@ static GtkTreeModel *create_model(void)
 	return GTK_TREE_MODEL(model);
 }
 
-static void add_columns(GtkTreeView * tree)
+static void add_columns(GtkTreeView *tree)
 {
 	GtkTreeViewColumn *column;
-//      GtkTreeViewColumn *column2;
+	//      GtkTreeViewColumn *column2;
 	GtkCellRenderer *renderer;
 
 	column = gtk_tree_view_column_new();
 
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_pack_start(column, renderer, FALSE);
-	gtk_tree_view_column_set_attributes
-	    (column, renderer,
-	     "pixbuf", COL_OPEN_PIXBUF,
-	     "pixbuf-expander-open", COL_OPEN_PIXBUF,
-	     "pixbuf-expander-closed", COL_CLOSED_PIXBUF, NULL);
-
-
+	gtk_tree_view_column_set_attributes(column, renderer,
+					    "pixbuf", COL_OPEN_PIXBUF,
+					    "pixbuf-expander-open", COL_OPEN_PIXBUF,
+					    "pixbuf-expander-closed", COL_CLOSED_PIXBUF, NULL);
 
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
 					    "text", COL_TITLE, NULL);
 	gtk_tree_view_append_column(tree, column);
-
 
 	column = gtk_tree_view_column_new();
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
@@ -232,7 +225,7 @@ static void add_columns(GtkTreeView * tree)
 }
 
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, DIALOG_DATA * d)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, DIALOG_DATA *d)
 {
 	gui_menu_popup(html, cur_dlg->mod_name, cur_dlg);
 }
@@ -253,7 +246,7 @@ _popupmenu_requested_cb(XiphosHtml * html, gchar * uri, DIALOG_DATA * d)
  *   void
  */
 
-void gui_create_gbs_dialog(DIALOG_DATA * dlg)
+void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 {
 	GtkWidget *vbox_dialog;
 	GtkWidget *navbar;
@@ -287,8 +280,7 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	//gtk_widget_show(scrolledwindow_ctree);
 	gtk_paned_pack1(GTK_PANED(hpaned), scrolledwindow_ctree, FALSE,
 			TRUE);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow_ctree),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_ctree),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
@@ -303,15 +295,13 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	add_columns(GTK_TREE_VIEW(dlg->tree));
 
 	selection =
-	    G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(dlg->tree)));
+	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(dlg->tree)));
 
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_html);
 	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, FALSE,
 			TRUE);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow_html),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_html),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
@@ -319,28 +309,26 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 					    settings.shadow_type);
 
 	dlg->html =
-	    GTK_WIDGET(XIPHOS_HTML_NEW
-		       (((DIALOG_DATA *) dlg), TRUE, DIALOG_BOOK_TYPE));
+	    GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA *)dlg), TRUE, DIALOG_BOOK_TYPE));
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_html), dlg->html);
 	gtk_widget_show(dlg->html);
-	g_signal_connect((gpointer) dlg->html,
+	g_signal_connect((gpointer)dlg->html,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb),
-			 (DIALOG_DATA *) dlg);
+			 (DIALOG_DATA *)dlg);
 
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(tree_selection_changed),
-			 (DIALOG_DATA *) dlg);
+			 (DIALOG_DATA *)dlg);
 	dlg->statusbar = gtk_statusbar_new();
 	gtk_widget_show(dlg->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), dlg->statusbar, FALSE,
 			   FALSE, 0);
 
 	g_signal_connect(G_OBJECT(dlg->dialog), "destroy",
-			 G_CALLBACK(dialog_destroy), (DIALOG_DATA *) dlg);
+			 G_CALLBACK(dialog_destroy), (DIALOG_DATA *)dlg);
 	cur_dlg = dlg;
 }
-
 
 /******************************************************************************
  * Name
@@ -358,7 +346,7 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
  *   void
  */
 
-void gui_close_gbs_dialog(DIALOG_DATA * dlg)
+void gui_close_gbs_dialog(DIALOG_DATA *dlg)
 {
 	if (dlg->dialog) {
 		dialog_freed = FALSE;

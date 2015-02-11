@@ -55,7 +55,7 @@ static GtkWidget *text_html;
  *   void
  */
 
-static void about_modules_ok(GtkButton * button, gpointer user_data)
+static void about_modules_ok(GtkButton *button, gpointer user_data)
 {
 	GtkWidget *dlg;
 
@@ -63,8 +63,7 @@ static void about_modules_ok(GtkButton * button, gpointer user_data)
 	gtk_widget_destroy(dlg);
 }
 
-
-static void on_copy_activate(GtkMenuItem * menuitem, gpointer data)
+static void on_copy_activate(GtkMenuItem *menuitem, gpointer data)
 {
 	XI_message(("on_copy_activate"));
 	XIPHOS_HTML_COPY_SELECTION(text_html);
@@ -91,16 +90,15 @@ static void create_menu1(void)
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
 	gtk_menu_set_accel_group(GTK_MENU(menu), accel_group);
-	gtk_menu_popup((GtkMenu *) menu, NULL, NULL, NULL, NULL, 2,
+	gtk_menu_popup((GtkMenu *)menu, NULL, NULL, NULL, NULL, 2,
 		       gtk_get_current_event_time());
 }
 
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 {
 	create_menu1();
 }
-
 
 /******************************************************************************
  * Name
@@ -169,8 +167,7 @@ static GtkWidget *gui_create_about_modules(void)
 	gtk_widget_show(scrolledwindow30);
 	gtk_container_add(GTK_CONTAINER(frame73), scrolledwindow30);
 	gtk_widget_set_size_request(scrolledwindow30, 304, 183);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow30),
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow30),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
@@ -180,7 +177,7 @@ static GtkWidget *gui_create_about_modules(void)
 
 	text_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 12));
 	gtk_widget_show(text_html);
-	g_signal_connect((gpointer) text_html,
+	g_signal_connect((gpointer)text_html,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 
@@ -237,7 +234,6 @@ static GtkWidget *gui_create_about_modules(void)
 	g_signal_connect(G_OBJECT(button), "clicked",
 			 G_CALLBACK(about_modules_ok), NULL);
 	return dialog_about_mods;
-
 }
 
 /******************************************************************************
@@ -261,13 +257,13 @@ static GtkWidget *gui_create_about_modules(void)
  */
 
 void
-about_module_display(GString * str,
-		     const gchar * text, const gboolean tooltip)
+about_module_display(GString *str,
+		     const gchar *text, const gboolean tooltip)
 {
 	gboolean center = FALSE;
 
-	for ( /* */ ; *text; ++text) {
-		if (*text == '\\') {	// a RTF command
+	for (/* */; *text; ++text) {
+		if (*text == '\\') { // a RTF command
 			if ((text[1] == 'p') &&
 			    (text[2] == 'a') &&
 			    (text[3] == 'r') && (text[4] == 'd')) {
@@ -284,8 +280,7 @@ about_module_display(GString * str,
 			    (text[2] == 'a') && (text[3] == 'r')) {
 				str =
 				    g_string_append(str,
-						    (tooltip ? "\n" :
-						     "<br/>\n"));
+						    (tooltip ? "\n" : "<br/>\n"));
 				text += 3;
 				continue;
 			}
@@ -304,7 +299,7 @@ about_module_display(GString * str,
 				continue;
 			}
 		}
-		if (tooltip && (*text == '<')) {	/* no htmlisms in tooltips */
+		if (tooltip && (*text == '<')) { /* no htmlisms in tooltips */
 			while (*text && (*text != '>'))
 				++text;
 			continue;
@@ -330,11 +325,11 @@ about_module_display(GString * str,
  */
 
 void
-gui_core_display_about_dialog(const gchar * desc,
-			      const gchar * abouttext,
-			      const gchar * modname)
+gui_core_display_about_dialog(const gchar *desc,
+			      const gchar *abouttext,
+			      const gchar *modname)
 {
-	GtkWidget *aboutbox;	//-- pointer to about dialog
+	GtkWidget *aboutbox; //-- pointer to about dialog
 	GString *str = g_string_new(NULL);
 	GString *description = g_string_new(NULL);
 	GString *text = g_string_new(NULL);
@@ -386,7 +381,7 @@ gui_core_display_about_dialog(const gchar * desc,
  *   void
  */
 
-void gui_display_about_module_dialog(gchar * modname)
+void gui_display_about_module_dialog(gchar *modname)
 {
 	const gchar *desc;
 	gchar *about;
@@ -419,8 +414,8 @@ void gui_display_about_module_dialog(gchar * modname)
 
 	info = g_string_append(info, _("<b>Version:</b> "));
 	info = g_string_append(info, ((version && *version)
-				      ? version
-				      : _("No version stamp found")));
+					  ? version
+					  : _("No version stamp found")));
 	info = g_string_append(info, "<br/>");
 
 	info = g_string_append(info, _("<b>Type:</b> "));
@@ -475,10 +470,12 @@ void gui_display_about_module_dialog(gchar * modname)
 
 	info = g_string_append(info, _("<b>Language:</b> "));
 	info = g_string_append(info, ((language && *language)
-				      ? language : _("Not specified")));
+					  ? language
+					  : _("Not specified")));
 	info = g_string_append(info, "&nbsp;(");
 	info = g_string_append(info, ((langtoken && *langtoken)
-				      ? langtoken : "?"));
+					  ? langtoken
+					  : "?"));
 	info = g_string_append(info, ")");
 	info = g_string_append(info, "<br/>");
 
@@ -503,112 +500,96 @@ void gui_display_about_module_dialog(gchar * modname)
 
 	info = g_string_append(info, _("<b>Features:</b>"));
 	info = g_string_append(info, "<br/>");
-	if (main_check_for_global_option((gchar *) modname, "ThMLHeadings")
-	    || main_check_for_global_option((gchar *) modname,
-					    "OSISHeadings")) {
+	if (main_check_for_global_option((gchar *)modname, "ThMLHeadings") || main_check_for_global_option((gchar *)modname,
+													   "OSISHeadings")) {
 		info = g_string_append(info, _("*&nbsp;Headings"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option((gchar *) modname, "GBFFootnotes")
-	    || main_check_for_global_option((gchar *) modname,
-					    "ThMLFootnotes")
-	    || main_check_for_global_option((gchar *) modname,
-					    "OSISFootnotes")) {
+	if (main_check_for_global_option((gchar *)modname, "GBFFootnotes") || main_check_for_global_option((gchar *)modname,
+													   "ThMLFootnotes") ||
+	    main_check_for_global_option((gchar *)modname,
+					 "OSISFootnotes")) {
 		info = g_string_append(info, _("*&nbsp;Footnotes"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option((gchar *) modname, "ThMLScripref")
-	    || main_check_for_global_option((gchar *) modname,
-					    "OSISScripref")) {
+	if (main_check_for_global_option((gchar *)modname, "ThMLScripref") || main_check_for_global_option((gchar *)modname,
+													   "OSISScripref")) {
 		info = g_string_append(info, _("*&nbsp;Cross references"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if ((main_check_for_global_option((gchar *) modname, "GBFStrongs"))
-	    ||
-	    (main_check_for_global_option
-	     ((gchar *) modname, "ThMLStrongs"))
-	    ||
-	    (main_check_for_global_option
-	     ((gchar *) modname, "OSISStrongs"))) {
+	if ((main_check_for_global_option((gchar *)modname, "GBFStrongs")) ||
+	    (main_check_for_global_option((gchar *)modname, "ThMLStrongs")) ||
+	    (main_check_for_global_option((gchar *)modname, "OSISStrongs"))) {
 		info = g_string_append(info, _("*&nbsp;Strong's numbers"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option((gchar *) modname, "GBFMorph") ||
-	    main_check_for_global_option((gchar *) modname, "ThMLMorph") ||
-	    main_check_for_global_option((gchar *) modname, "OSISMorph")) {
+	if (main_check_for_global_option((gchar *)modname, "GBFMorph") ||
+	    main_check_for_global_option((gchar *)modname, "ThMLMorph") ||
+	    main_check_for_global_option((gchar *)modname, "OSISMorph")) {
 		info =
 		    g_string_append(info, _("*&nbsp;Morphological tags"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option((gchar *) modname, "ThMLLemma") ||
-	    main_check_for_global_option((gchar *) modname, "OSISLemma")) {
+	if (main_check_for_global_option((gchar *)modname, "ThMLLemma") ||
+	    main_check_for_global_option((gchar *)modname, "OSISLemma")) {
 		info = g_string_append(info, _("*&nbsp;Lemmas"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if ((main_check_for_global_option
-	     ((gchar *) modname, "GBFRedLetterWords"))
-	    ||
-	    (main_check_for_global_option
-	     ((gchar *) modname, "OSISRedLetterWords"))) {
+	if ((main_check_for_global_option((gchar *)modname, "GBFRedLetterWords")) ||
+	    (main_check_for_global_option((gchar *)modname, "OSISRedLetterWords"))) {
 		info =
 		    g_string_append(info,
 				    _("*&nbsp;Words of Christ in red"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option
-	    ((gchar *) modname, "UTF8GreekAccents")) {
+	if (main_check_for_global_option((gchar *)modname, "UTF8GreekAccents")) {
 		info = g_string_append(info, _("*&nbsp;Greek accents"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option
-	    ((gchar *) modname, "UTF8HebrewPoints")) {
+	if (main_check_for_global_option((gchar *)modname, "UTF8HebrewPoints")) {
 		info =
 		    g_string_append(info, _("*&nbsp;Hebrew Vowel Points"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option
-	    ((gchar *) modname, "UTF8Cantillation")) {
+	if (main_check_for_global_option((gchar *)modname, "UTF8Cantillation")) {
 		info =
 		    g_string_append(info, _("*&nbsp;Hebrew Cantillation"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option((gchar *) modname, "ThMLVariants")
-	    || main_check_for_global_option((gchar *) modname,
-					    "OSISVariants")) {
+	if (main_check_for_global_option((gchar *)modname, "ThMLVariants") || main_check_for_global_option((gchar *)modname,
+													   "OSISVariants")) {
 		info = g_string_append(info, _("*&nbsp;Variant readings"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option((gchar *) modname, "OSISXlit")) {
+	if (main_check_for_global_option((gchar *)modname, "OSISXlit")) {
 		info =
 		    g_string_append(info,
 				    _("*&nbsp;Transliteration forms"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option((gchar *) modname, "OSISEnum")) {
+	if (main_check_for_global_option((gchar *)modname, "OSISEnum")) {
 		info = g_string_append(info, _("*&nbsp;Enumerations"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option((gchar *) modname, "OSISGlosses")
-	    || main_check_for_global_option((gchar *) modname, "OSISRuby")) {
+	if (main_check_for_global_option((gchar *)modname, "OSISGlosses") || main_check_for_global_option((gchar *)modname, "OSISRuby")) {
 		info = g_string_append(info, _("*&nbsp;Glosses"));
 		info = g_string_append(info, "<br/>");
 		feature_count++;
 	}
-	if (main_check_for_global_option
-	    ((gchar *) modname, "OSISMorphSegmentation")) {
+	if (main_check_for_global_option((gchar *)modname, "OSISMorphSegmentation")) {
 		info =
 		    g_string_append(info,
 				    _("*&nbsp;Morpheme Segmentation"));

@@ -19,7 +19,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -28,13 +27,11 @@
 #include <glade/glade-xml.h>
 #endif
 
-
 #ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
 #else
 #include "editor/slib-editor.h"
 #endif
-
 
 #include "gui/treekey-editor.h"
 #include "gui/dialog.h"
@@ -46,22 +43,23 @@
 
 #include "gui/debug_glib_null.h"
 
-void on_add_sibling_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_add_child_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_remove_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_edit_activate2(GtkMenuItem * menuitem, gpointer user_data);
+void on_add_sibling_activate(GtkMenuItem *menuitem, gpointer user_data);
+void on_add_child_activate(GtkMenuItem *menuitem, gpointer user_data);
+void on_remove_activate(GtkMenuItem *menuitem, gpointer user_data);
+void on_edit_activate2(GtkMenuItem *menuitem, gpointer user_data);
 
 typedef struct _item_info INFO;
-struct _item_info {
+struct _item_info
+{
 	gchar *book;
-	gchar *local_name;	/* tree node name */
+	gchar *local_name; /* tree node name */
 	gchar *offset;
 
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 };
 
-INFO *_get_info(GtkWidget * tree);
+INFO *_get_info(GtkWidget *tree);
 
 enum {
 	COL_OPEN_PIXBUF,
@@ -74,7 +72,7 @@ enum {
 
 static GtkWidget *menu;
 
-INFO *_get_info(GtkWidget * tree)
+INFO *_get_info(GtkWidget *tree)
 {
 	GtkTreeSelection *selection = NULL;
 	GtkTreeView *t = GTK_TREE_VIEW(tree);
@@ -82,16 +80,14 @@ INFO *_get_info(GtkWidget * tree)
 	INFO *info = g_new0(INFO, 1);
 
 	selection = gtk_tree_view_get_selection(t);
-	if (gtk_tree_selection_get_selected
-	    (selection, &info->model, &info->iter))
+	if (gtk_tree_selection_get_selected(selection, &info->model, &info->iter))
 		gtk_tree_model_get(GTK_TREE_MODEL(info->model),
 				   &info->iter, 2, &info->local_name, 3,
 				   &info->book, 4, &info->offset, -1);
 	return info;
-
 }
 
-static void _button_one(EDITOR * e)
+static void _button_one(EDITOR *e)
 {
 	INFO *info;
 
@@ -120,12 +116,12 @@ static void _button_one(EDITOR * e)
 }
 
 G_MODULE_EXPORT void
-on_add_sibling_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_add_sibling_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	INFO *info;
 	char *buf = NULL;
 	unsigned long l_offset = 0;
-	EDITOR *e = (EDITOR *) user_data;
+	EDITOR *e = (EDITOR *)user_data;
 	GtkWidget *tree = GTK_WIDGET(e->treeview);
 	gint test;
 	GS_DIALOG *d;
@@ -153,8 +149,7 @@ on_add_sibling_activate(GtkMenuItem * menuitem, gpointer user_data)
 						       info->offset);
 		if (l_offset) {
 			buf = g_strdup_printf("%ld", l_offset);
-			gtk_tree_store_insert_after(GTK_TREE_STORE
-						    (info->model),
+			gtk_tree_store_insert_after(GTK_TREE_STORE(info->model),
 						    &sibling, NULL,
 						    &info->iter);
 			gtk_tree_store_set(GTK_TREE_STORE(info->model),
@@ -179,15 +174,13 @@ on_add_sibling_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_free(d);
 }
 
-
-
 G_MODULE_EXPORT void
-on_add_child_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_add_child_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	INFO *info;
 	char *buf = NULL;
 	unsigned long l_offset = 0;
-	EDITOR *e = (EDITOR *) user_data;
+	EDITOR *e = (EDITOR *)user_data;
 	GtkWidget *tree = GTK_WIDGET(e->treeview);
 	gint test;
 	GS_DIALOG *d;
@@ -214,7 +207,7 @@ on_add_child_activate(GtkMenuItem * menuitem, gpointer user_data)
 						     d->text1,
 						     info->offset);
 		if (l_offset) {
-			gtk_tree_store_set(GTK_TREE_STORE(info->model),	/* change treenode pixbuf from leaf to branch */
+			gtk_tree_store_set(GTK_TREE_STORE(info->model), /* change treenode pixbuf from leaf to branch */
 					   &info->iter,
 					   COL_OPEN_PIXBUF,
 					   pixbufs->pixbuf_closed,
@@ -247,12 +240,11 @@ on_add_child_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_free(d);
 }
 
-
 G_MODULE_EXPORT void
-on_remove_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_remove_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	INFO *info;
-	EDITOR *editor = (EDITOR *) user_data;
+	EDITOR *editor = (EDITOR *)user_data;
 	GtkWidget *tree = GTK_WIDGET(editor->treeview);
 	gchar *str;
 	gchar *icon_name;
@@ -281,12 +273,11 @@ on_remove_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_free(icon_name);
 }
 
-
 G_MODULE_EXPORT void
-on_edit_activate2(GtkMenuItem * menuitem, gpointer user_data)
+on_edit_activate2(GtkMenuItem *menuitem, gpointer user_data)
 {
 	INFO *info;
-	EDITOR *editor = (EDITOR *) user_data;
+	EDITOR *editor = (EDITOR *)user_data;
 	GtkWidget *tree = GTK_WIDGET(editor->treeview);
 	gint test;
 	GS_DIALOG *d;
@@ -312,7 +303,7 @@ on_edit_activate2(GtkMenuItem * menuitem, gpointer user_data)
 					    d->text1, info->offset);
 		gtk_tree_store_set(GTK_TREE_STORE(info->model),
 				   &info->iter,
-				   COL_CAPTION, (gchar *) d->text1, -1);
+				   COL_CAPTION, (gchar *)d->text1, -1);
 	}
 
 	g_free(info->book);
@@ -323,7 +314,7 @@ on_edit_activate2(GtkMenuItem * menuitem, gpointer user_data)
 	g_free(d);
 }
 
-GtkWidget *create_edit_tree_menu(EDITOR * editor)
+GtkWidget *create_edit_tree_menu(EDITOR *editor)
 {
 	GtkWidget *menu;
 	gchar *glade_file;
@@ -355,19 +346,18 @@ GtkWidget *create_edit_tree_menu(EDITOR * editor)
 	menu = UI_GET_ITEM(gxml, "menu_edit_tree");
 #ifdef USE_GTKBUILDER
 	gtk_builder_connect_signals(gxml, editor);
-	/* gtk_builder_connect_signals_full
+/* gtk_builder_connect_signals_full
 	   (gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, editor); */
 #else
 	/* connect signals and data */
-	glade_xml_signal_autoconnect_full
-	    (gxml, (GladeXMLConnectFunc) gui_glade_signal_connect_func,
-	     editor);
+	glade_xml_signal_autoconnect_full(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func,
+					  editor);
 #endif
 	return menu;
 }
 
-static gboolean on_button_release(GtkWidget * widget,
-				  GdkEventButton * event, EDITOR * editor)
+static gboolean on_button_release(GtkWidget *widget,
+				  GdkEventButton *event, EDITOR *editor)
 {
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
@@ -403,7 +393,7 @@ static gboolean on_button_release(GtkWidget * widget,
 	return FALSE;
 }
 
-GtkWidget *gui_create_editor_tree(EDITOR * editor)
+GtkWidget *gui_create_editor_tree(EDITOR *editor)
 {
 	GtkWidget *treeview;
 	treeview = gtk_tree_view_new();
@@ -416,7 +406,7 @@ GtkWidget *gui_create_editor_tree(EDITOR * editor)
 				      editor->module);
 	menu = create_edit_tree_menu(editor);
 
-	g_signal_connect_after((gpointer) treeview,
+	g_signal_connect_after((gpointer)treeview,
 			       "button_release_event",
 			       G_CALLBACK(on_button_release), editor);
 	return treeview;

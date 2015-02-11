@@ -48,7 +48,6 @@
 
 #include "gui/debug_glib_null.h"
 
-
 /******************************************************************************
  * static - global to this file only
  */
@@ -75,22 +74,20 @@ extern gboolean bible_freed;
  *   void
  */
 
-static void dialog_destroy(GObject * object, DIALOG_DATA * vt)
+static void dialog_destroy(GObject *object, DIALOG_DATA *vt)
 {
 	if (!bible_freed)
 		main_free_on_destroy(vt);
 	bible_freed = FALSE;
 }
 
-
-static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
-					      GdkEventMotion * event,
-					      DIALOG_DATA * vt)
+static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
+					      GdkEventMotion *event,
+					      DIALOG_DATA *vt)
 {
 	cur_vt = vt;
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -108,13 +105,12 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  *   void
  */
 
-static void sync_with_main(DIALOG_DATA * c)
+static void sync_with_main(DIALOG_DATA *c)
 {
 	gchar *url = g_strdup_printf("sword:///%s", settings.currentverse);
 	main_dialogs_url_handler(c, url, TRUE);
 	g_free(url);
 }
-
 
 /******************************************************************************
  * Name
@@ -132,8 +128,8 @@ static void sync_with_main(DIALOG_DATA * c)
  *   void
  */
 
-void gui_bible_dialog_sync_toggled(GtkToggleButton * button,
-				   DIALOG_DATA * c)
+void gui_bible_dialog_sync_toggled(GtkToggleButton *button,
+				   DIALOG_DATA *c)
 {
 	if (c == NULL)
 		c = cur_vt;
@@ -143,7 +139,6 @@ void gui_bible_dialog_sync_toggled(GtkToggleButton * button,
 	} else
 		c->sync = FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -161,18 +156,17 @@ void gui_bible_dialog_sync_toggled(GtkToggleButton * button,
  *   void
  */
 
-static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
+static GtkWidget *create_nav_toolbar(DIALOG_DATA *c)
 {
 	c->navbar.type = NB_DIALOG;
 	return gui_navbar_versekey_dialog_new(c);
 }
 
-
 static void
-_popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
+_popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 {
-	DIALOG_DATA *d = (DIALOG_DATA *) cur_vt;
-	gui_menu_popup(html, d->mod_name, d);	//gui_text_dialog_create_menu(d);
+	DIALOG_DATA *d = (DIALOG_DATA *)cur_vt;
+	gui_menu_popup(html, d->mod_name, d); //gui_text_dialog_create_menu(d);
 }
 
 /******************************************************************************
@@ -191,7 +185,7 @@ _popupmenu_requested_cb(XiphosHtml * html, gchar * uri, gpointer user_data)
  *   void
  */
 
-void gui_create_bibletext_dialog(DIALOG_DATA * vt)
+void gui_create_bibletext_dialog(DIALOG_DATA *vt)
 {
 	GtkWidget *vbox33;
 	GtkWidget *paned;
@@ -224,14 +218,14 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *) swVText,
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
 					    settings.shadow_type);
-	gtk_paned_add1((GtkPaned *) paned, swVText);
+	gtk_paned_add1((GtkPaned *)paned, swVText);
 
 	vt->html = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
-	g_signal_connect((gpointer) vt->html,
+	g_signal_connect((gpointer)vt->html,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), vt);
 
@@ -241,10 +235,10 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *) swVText,
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
 					    settings.shadow_type);
 
-	gtk_paned_add2((GtkPaned *) paned, swVText);
+	gtk_paned_add2((GtkPaned *)paned, swVText);
 
 	vt->previewer = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, VIEWER_TYPE));
 	gtk_widget_show(vt->previewer);
@@ -258,7 +252,6 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 	g_signal_connect(G_OBJECT(vt->dialog),
 			 "destroy", G_CALLBACK(dialog_destroy), vt);
-
 
 	g_signal_connect(G_OBJECT(vt->dialog),
 			 "motion_notify_event",

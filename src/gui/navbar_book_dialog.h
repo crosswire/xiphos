@@ -23,6 +23,6 @@
 #define ___NAVBAR_BOOK_DIALOG_H_
 
 #include "main/module_dialogs.h"
-GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d);
+GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d);
 
 #endif

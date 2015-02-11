@@ -31,7 +31,7 @@
 
 //this function will be called every time the user does a sidebar search
 static gboolean
-search_performed_signal_handler(DBusGProxy * proxy,
+search_performed_signal_handler(DBusGProxy *proxy,
 				char *results, gpointer user_data)
 {
 	char *ref;
@@ -53,7 +53,7 @@ search_performed_signal_handler(DBusGProxy * proxy,
 
 //this function will be called every time Xiphos navigates
 static gboolean
-navigation_performed_signal_handler(DBusGProxy * proxy,
+navigation_performed_signal_handler(DBusGProxy *proxy,
 				    char *reference, gpointer user_data)
 {
 	printf("new reference is: %s\n", reference);
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 	GError *error = NULL;
 	GMainLoop *mainloop;
 
-	//not necessary if using from a gtk/gnome program
+//not necessary if using from a gtk/gnome program
 #if !GLIB_CHECK_VERSION(2, 35, 0)
 	g_type_init();
 #endif
@@ -98,20 +98,17 @@ int main(int argc, char **argv)
 	dbus_g_proxy_add_signal(remote_object, "searchPerformedSignal",
 				G_TYPE_STRING, G_TYPE_INVALID);
 	dbus_g_proxy_connect_signal(remote_object, "searchPerformedSignal",
-				    G_CALLBACK
-				    (search_performed_signal_handler),
+				    G_CALLBACK(search_performed_signal_handler),
 				    NULL, NULL);
 
 	//add and connect to the navigationSignal
 	dbus_g_proxy_add_signal(remote_object, "navigationSignal",
 				G_TYPE_STRING, G_TYPE_INVALID);
 	dbus_g_proxy_connect_signal(remote_object, "navigationSignal",
-				    G_CALLBACK
-				    (navigation_performed_signal_handler),
+				    G_CALLBACK(navigation_performed_signal_handler),
 				    NULL, NULL);
 
 	g_main_loop_run(mainloop);
 
 	exit(0);
-
 }

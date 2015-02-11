@@ -26,11 +26,11 @@
 extern "C" {
 #endif
 
-	void gui_create_parallel_page(void);
-	void gui_create_parallel_popup(void);
-	void gui_popup_menu_parallel(void);
-	void on_undockInt_activate(GtkMenuItem * menuitem);
-	void on_paratab_activate(GtkMenuItem * menuitem);
+void gui_create_parallel_page(void);
+void gui_create_parallel_popup(void);
+void gui_popup_menu_parallel(void);
+void on_undockInt_activate(GtkMenuItem *menuitem);
+void on_paratab_activate(GtkMenuItem *menuitem);
 
 #ifdef __cplusplus
 }

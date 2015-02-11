@@ -64,15 +64,16 @@
 extern ModuleCache::CacheMap ModuleMap;
 
 // for tracking personal annotations.
-typedef struct {
-    gchar   *module;
-    gchar   *book;
-    int     chapter;
-    int     verse;
-    GString *annotation;
+typedef struct
+{
+	gchar *module;
+	gchar *book;
+	int chapter;
+	int verse;
+	GString *annotation;
 } marked_element;
 
-typedef std::map <int, marked_element *> MC;
+typedef std::map<int, marked_element *> MC;
 MC marked_cache;
 
 gchar *marked_cache_modname = NULL, *marked_cache_book = NULL;
@@ -87,8 +88,8 @@ gboolean valid_scripture_key = TRUE;
 const gchar *no_content =
     N_("<br/><br/><center><i>This module has no content at this point.</i></center>");
 
-#define	HTML_START	\
-"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"> \
+#define HTML_START \
+	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"> \
 <style type=\"text/css\"><!-- \
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right; } \
@@ -101,16 +102,16 @@ a:link{color:%s} %s%s -->\
 // BOTH is when the user wants to see both types of markup.
 // ONE is when he wants one or the other, so we can use a single
 // specification which overlays both on top of one another.
-#define CSS_BLOCK_BOTH \
-" *        { line-height: 3.8em; }" \
-" .word    { position: relative; top:  0.0em; left: 0; }" \
-" .strongs { position: absolute; top:  0.3em; left: 0; white-space: nowrap; z-index: 2 }" \
-" .morph   { position: absolute; top:  1.2em; left: 0; white-space: nowrap; z-index: 1 }"
-#define CSS_BLOCK_ONE \
-" *        { line-height: 2.7em; }" \
-" .word    { position: relative; top:  0.0em; left: 0; }" \
-" .strongs { position: absolute; top:  0.8em; left: 0; white-space: nowrap; }" \
-" .morph   { position: absolute; top:  0.8em; left: 0; white-space: nowrap; }"
+#define CSS_BLOCK_BOTH                                                                            \
+	" *        { line-height: 3.8em; }"                                                       \
+	" .word    { position: relative; top:  0.0em; left: 0; }"                                 \
+	" .strongs { position: absolute; top:  0.3em; left: 0; white-space: nowrap; z-index: 2 }" \
+	" .morph   { position: absolute; top:  1.2em; left: 0; white-space: nowrap; z-index: 1 }"
+#define CSS_BLOCK_ONE                                                                  \
+	" *        { line-height: 2.7em; }"                                            \
+	" .word    { position: relative; top:  0.0em; left: 0; }"                      \
+	" .strongs { position: absolute; top:  0.8em; left: 0; white-space: nowrap; }" \
+	" .morph   { position: absolute; top:  0.8em; left: 0; white-space: nowrap; }"
 
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
@@ -121,34 +122,35 @@ using namespace std;
 // user annotation cache filling.
 //
 
-#define	NUM_REPLACE	4
+#define NUM_REPLACE 4
 
-struct replace {
-    gchar c;
-    gchar *s;
+struct replace
+{
+	gchar c;
+	gchar *s;
 } replacement[NUM_REPLACE] = {
-    // < and > must be first.
-    { '<',  (gchar *)"&lt;"   },
-    { '>',  (gchar *)"&gt;"   },
-    { '\n', (gchar *)"<br />" },
-    { '"',  (gchar *)"&quot;" },
+      // < and > must be first.
+      {'<', (gchar *)"&lt;"},
+      {'>', (gchar *)"&gt;"},
+      {'\n', (gchar *)"<br />"},
+      {'"', (gchar *)"&quot;"},
 };
 
 // a macro to substitute the visually ugly presentation below.
 // this puts all the decoration possible around a verse number.
-#define PRETTYPRINT(v)	\
-	(settings.verse_num_superscript ? superscript_start : ""),	\
-	(settings.verse_num_bracket ? "[" : ""),			\
-	(settings.verse_num_bold ? bold_start : ""),			\
-	(v),								\
-	(settings.verse_num_bold ? bold_end : ""),			\
-	(settings.verse_num_bracket ? "]" : ""),			\
-	(settings.verse_num_superscript ? superscript_end : "")
+#define PRETTYPRINT(v)                                             \
+	(settings.verse_num_superscript ? superscript_start : ""), \
+	    (settings.verse_num_bracket ? "[" : ""),               \
+	    (settings.verse_num_bold ? bold_start : ""),           \
+	    (v),                                                   \
+	    (settings.verse_num_bold ? bold_end : ""),             \
+	    (settings.verse_num_bracket ? "]" : ""),               \
+	    (settings.verse_num_superscript ? superscript_end : "")
 
 const char *bold_start = "<b>",
-	   *bold_end   = "</b>",
+	   *bold_end = "</b>",
 	   *superscript_start = "<sup>",
-	   *superscript_end   = "</sup>";
+	   *superscript_end = "</sup>";
 
 void
 marked_cache_fill(const gchar *modname, gchar *key)
@@ -173,19 +175,19 @@ marked_cache_fill(const gchar *modname, gchar *key)
 	// tear apart the key (e.g. "Gen.1.1").
 	*(s = strrchr(key_book, '.')) = '\0';
 	*(t = strrchr(key_book, '.')) = '\0';
-	key_chapter = atoi(t+1);
+	key_chapter = atoi(t + 1);
 	// key_verse   = atoi(s+1);
 
 	// remember exactly what chapter this cache is for
 	g_free(marked_cache_modname);
 	g_free(marked_cache_book);
 	marked_cache_modname = g_strdup(modname);
-	marked_cache_book    = g_strdup(key_book);
+	marked_cache_book = g_strdup(key_book);
 	marked_cache_chapter = key_chapter;
 
 	// load up the annotation content
 	marked_element *e = new marked_element;
-    	if (xml_set_section_ptr("osisrefmarkedverses") && xml_get_label()) {
+	if (xml_set_section_ptr("osisrefmarkedverses") && xml_get_label()) {
 		do {
 			e->module = xml_get_label();
 			s = xml_get_list();
@@ -196,15 +198,15 @@ marked_cache_fill(const gchar *modname, gchar *key)
 			mhold = g_strdup(m);
 
 			// tear apart "NASB Gen.1.1"
-			if ((s = strrchr(m, '.')) == NULL)	// rightmost dot
+			if ((s = strrchr(m, '.')) == NULL) // rightmost dot
 				goto fail;
 			*s = '\0';
-			if ((t = strrchr(m, '.')) == NULL)	// chapter:verse
+			if ((t = strrchr(m, '.')) == NULL) // chapter:verse
 				goto fail;
 			*t = '\0';
-			e->chapter = atoi(t+1);
-			e->verse   = atoi(s+1);
-			if ((s = strchr(m, ' ')) == NULL)	// leftmost space
+			e->chapter = atoi(t + 1);
+			e->verse = atoi(s + 1);
+			if ((s = strchr(m, ' ')) == NULL) // leftmost space
 				goto fail;
 			*(s++) = '\0';
 			e->book = s;
@@ -225,11 +227,11 @@ marked_cache_fill(const gchar *modname, gchar *key)
 					for (s = strchr(e->annotation->str, replacement[i].c);
 					     s;
 					     s = strchr(e->annotation->str, replacement[i].c)) {
-						(void) g_string_erase(e->annotation,
-								      s - (e->annotation->str), 1);
-						(void) g_string_insert(e->annotation,
-								       s - (e->annotation->str),
-								       replacement[i].s);
+						(void)g_string_erase(e->annotation,
+								     s - (e->annotation->str), 1);
+						(void)g_string_insert(e->annotation,
+								      s - (e->annotation->str),
+								      replacement[i].s);
 					}
 				}
 				// valid: insert + get fresh one to work with.
@@ -273,7 +275,7 @@ ClearImages(gchar *text)
 	gchar *s, *t;
 
 	for (s = strstr(text, "<img "); s; s = strstr(s, "<img ")) {
-		if ((t = strchr(s+4, '>'))) {
+		if ((t = strchr(s + 4, '>'))) {
 			while (s <= t)
 				*(s++) = ' ';
 		} else {
@@ -294,7 +296,7 @@ ClearFontFaces(gchar *text)
 	// huge assumption: no nested <font> specs: <font face="">
 	// is never followed by another <font anything> before </font>.
 	for (s = strstr(text, "<font face=\"Galax"); s; s = strstr(s, "<font face=\"Galax")) {
-		if ((t = strchr(s+15, '>'))) {
+		if ((t = strchr(s + 15, '>'))) {
 			while (s <= t)
 				*(s++) = ' ';
 			s = strstr(s, "</font>");
@@ -312,55 +314,51 @@ ClearFontFaces(gchar *text)
 // retrieve the content of the module's personal css
 //
 static const char *stylefile =
-    "style.css";			// default name, per module.
+    "style.css"; // default name, per module.
 static const char *default_stylefile =
-    "default-style.css";		// default name, overall.
+    "default-style.css"; // default name, overall.
 
-const gchar *get_css_references(SWModule& module)
+const gchar *get_css_references(SWModule &module)
 {
-    static string css;		// static -> safe to return it
+	static string css; // static -> safe to return it
 
-    // assume nothing will be available.
-    css = "";
-    
-    // non-specific CSS for all module displays.
-    char *css_file = g_build_filename(settings.gSwordDir,
-				      default_stylefile, NULL);
+	// assume nothing will be available.
+	css = "";
 
-    if (g_file_test(css_file, G_FILE_TEST_EXISTS))
-    {
-	css += (string)"<link rel=\"stylesheet\" type=\"text/css\" href=\""
+	// non-specific CSS for all module displays.
+	char *css_file = g_build_filename(settings.gSwordDir,
+					  default_stylefile, NULL);
+
+	if (g_file_test(css_file, G_FILE_TEST_EXISTS)) {
+		css += (string) "<link rel=\"stylesheet\" type=\"text/css\" href=\""
 #ifdef WIN32
-	    + "http://127.0.0.1:7878/"	// see main.c (sob)
+		       + "http://127.0.0.1:7878/" // see main.c (sob)
 #else
-	    + "file:"
+		       + "file:"
 #endif
-	    + css_file
-	    + "\" />";
-    }
-    g_free(css_file);
+		       + css_file + "\" />";
+	}
+	g_free(css_file);
 
-    // construct path to module's CSS.
-    char *datapath = main_get_mod_config_entry(module.getName(), "AbsoluteDataPath");
-    char *prefcss  = main_get_mod_config_entry(module.getName(), "PreferredCSSXHTML");
+	// construct path to module's CSS.
+	char *datapath = main_get_mod_config_entry(module.getName(), "AbsoluteDataPath");
+	char *prefcss = main_get_mod_config_entry(module.getName(), "PreferredCSSXHTML");
 
-    // module-specific CSS.
-    css_file = g_build_filename(datapath, (prefcss ? prefcss : stylefile), NULL);
+	// module-specific CSS.
+	css_file = g_build_filename(datapath, (prefcss ? prefcss : stylefile), NULL);
 
-    if (g_file_test(css_file, G_FILE_TEST_EXISTS))
-    {
-	css += (string)"<link rel=\"stylesheet\" type=\"text/css\" href=\""
+	if (g_file_test(css_file, G_FILE_TEST_EXISTS)) {
+		css += (string) "<link rel=\"stylesheet\" type=\"text/css\" href=\""
 #ifdef WIN32
-	    + "http://127.0.0.1:7878/"	// see main.c (sob)
+		       + "http://127.0.0.1:7878/" // see main.c (sob)
 #else
-	    + "file:"
+		       + "file:"
 #endif
-	    + css_file
-	    + "\" />";
-    }
-    g_free(css_file);	// get rid of old one first.
-    
-    return css.c_str();
+		       + css_file + "\" />";
+	}
+	g_free(css_file); // get rid of old one first.
+
+	return css.c_str();
 }
 
 //
@@ -370,10 +368,10 @@ const gchar *get_css_references(SWModule& module)
 // we garbage-collect here so block_render doesn't have to.
 //
 
-#define	ALIGN_WORD	"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+#define ALIGN_WORD "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 
 void
-block_dump(SWBuf& rendered,
+block_dump(SWBuf &rendered,
 	   const char **word,
 	   const char **strongs,
 	   const char **morph)
@@ -383,9 +381,9 @@ block_dump(SWBuf& rendered,
 
 	// unannotated words need no help.
 	if (*word && (*strongs == NULL) && (*morph == NULL)) {
-                rendered += "<span class=\"word\">";
+		rendered += "<span class=\"word\">";
 		rendered += *word;
-                rendered += "</span>";
+		rendered += "</span>";
 		g_free((char *)*word);
 		*word = NULL;
 		rendered += " ";
@@ -402,34 +400,33 @@ block_dump(SWBuf& rendered,
 	if (*strongs) {
 		s = g_strrstr(*strongs, "</a>");
 		*s = '\0';
-		t = (char*)strrchr(*strongs, '>') + 1;
+		t = (char *)strrchr(*strongs, '>') + 1;
 		// correct weird NASB lexicon references.
-		if ((s0 = (char*)strchr(*strongs, '!'))) {
+		if ((s0 = (char *)strchr(*strongs, '!'))) {
 			do {
-				*s0 = *(s0+1);
+				*s0 = *(s0 + 1);
 				++s0;
 			} while (*s0 != '"');
 			*s0 = ' ';
 		}
 		*s = '<';
 		slen = s - t;
-		s = (char*)strstr(*strongs, "&lt;");
-		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
+		s = (char *)strstr(*strongs, "&lt;");
+		*s = *(s + 1) = *(s + 2) = *(s + 3) = ' ';
 		s = strstr(s, "&gt;");
-		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
+		*s = *(s + 1) = *(s + 2) = *(s + 3) = ' ';
 
 		// gross hack needed to handle new class="..." in sword -r2512.
-		if ((s = (char*)strstr(*strongs, " class=\"strongs\">"))) {
+		if ((s = (char *)strstr(*strongs, " class=\"strongs\">"))) {
 			memcpy(s, ">                ", 17);
-			if ((s = (char*)strstr(s, " class=\"strongs\">")))
+			if ((s = (char *)strstr(s, " class=\"strongs\">")))
 				memcpy(s, ">                ", 17);
 		}
-	}
-	else
+	} else
 		slen = 0;
 
 	if (*morph) {
-		s = s0 = (char*)g_strrstr(*morph, "\">") + 2;
+		s = s0 = (char *)g_strrstr(*morph, "\">") + 2;
 		t = strchr(s, '<');
 		for (/* */; s < t; ++s)
 			if (isupper(*s))
@@ -438,22 +435,21 @@ block_dump(SWBuf& rendered,
 			*s = '-';
 		s = g_strrstr(*morph, "</a>");
 		*s = '\0';
-		t = (char*)strrchr(*morph, '>') + 1;
+		t = (char *)strrchr(*morph, '>') + 1;
 		*s = '<';
 		mlen = s - t;
-		s = (char*)strchr(*morph, '(');
+		s = (char *)strchr(*morph, '(');
 		*s = ' ';
 		s = strrchr(s, ')');
 		*s = ' ';
 
 		// gross hack needed to handle new class="..." in sword -r2512.
-		if ((s = (char*)strstr(*morph, " class=\"morph\">"))) {
+		if ((s = (char *)strstr(*morph, " class=\"morph\">"))) {
 			memcpy(s, ">              ", 15);
-			if ((s = (char*)strstr(s, " class=\"morph\">")))
+			if ((s = (char *)strstr(s, " class=\"morph\">")))
 				memcpy(s, ">              ", 15);
 		}
-	}
-	else
+	} else
 		mlen = 0;
 
 	min_length = 2 + max(slen, mlen);
@@ -469,13 +465,15 @@ block_dump(SWBuf& rendered,
 	rendered += "<span class=\"strongs\"><sup>";
 	rendered += (*strongs ? *strongs : "&nbsp;");
 	rendered += "</sup></span>";
-	if (*strongs) g_free((char *)*strongs);
+	if (*strongs)
+		g_free((char *)*strongs);
 	*strongs = NULL;
 
 	rendered += "<span class=\"morph\"><sup>";
 	rendered += (*morph ? *morph : "&nbsp;");
 	rendered += "</sup></span>";
-	if (*morph) g_free((char *)*morph);
+	if (*morph)
+		g_free((char *)*morph);
 	*morph = NULL;
 
 	rendered += "</span> <span class=\"word\">&nbsp;</span>";
@@ -491,15 +489,15 @@ block_dump(SWBuf& rendered,
 // text destination is provided, ready to go.
 // this means we are able to recurse when needed.
 
-#define EMPTY_WORD	""
+#define EMPTY_WORD ""
 
 void
 block_render_secondary(const char *text,
-		       SWBuf& rendered)
+		       SWBuf &rendered)
 {
-	const char *word    = NULL,
+	const char *word = NULL,
 		   *strongs = NULL,
-		   *morph   = NULL;
+		   *morph = NULL;
 	int bracket;
 	const char *s;
 	char *t, *u;
@@ -515,20 +513,21 @@ block_render_secondary(const char *text,
 			// keep it bound with its </token> terminator,
 			// esp. because anchors contain <small></small>. *sigh*
 			// i believe we see only anchors + font switches here.
-			if ((((*(s+1) == 'a') || (*(s+1) == 'A')) && (*(s+2) == ' ')) ||
-			    (((*(s+1) == 'b') || (*(s+1) == 'B') ||
-			      (*(s+1) == 'i') || (*(s+1) == 'I') ||
-			      (*(s+1) == 'u') || (*(s+1) == 'U')) && (*(s+2) == '>'))) {
+			if ((((*(s + 1) == 'a') || (*(s + 1) == 'A')) && (*(s + 2) == ' ')) ||
+			    (((*(s + 1) == 'b') || (*(s + 1) == 'B') ||
+			      (*(s + 1) == 'i') || (*(s + 1) == 'I') ||
+			      (*(s + 1) == 'u') || (*(s + 1) == 'U')) &&
+			     (*(s + 2) == '>'))) {
 				if (word)
 					block_dump(rendered, &word, &strongs, &morph);
 
 				static char end[5] = "</X>";
-				end[2] = *(s+1);
+				end[2] = *(s + 1);
 			again:
 				if ((t = strstr((char *)s, end)) == NULL) {
 					XI_warning(("No %s in %s\n", end, s));
 					break;
-                                }
+				}
 
 				// yet another nightmare:
 				// if the markup results in e.g. doubled <i>
@@ -537,36 +536,36 @@ block_render_secondary(const char *text,
 				// so we search for the same markup embedded within.
 				// if we find an internal set, we just wipe it out.
 				static char embedded[4] = "<X>";
-				embedded[1] = *(s+1);
-				if ((u = g_strstr_len(s+3, t-(s+3), embedded))) {
-					*u = *(u+1) = *(u+2) =
-					    *t = *(t+1) = *(t+2) = *(t+3) = ' ';
-					goto again;	// yuck, yes, i know...
+				embedded[1] = *(s + 1);
+				if ((u = g_strstr_len(s + 3, t - (s + 3), embedded))) {
+					*u = *(u + 1) = *(u + 2) =
+					    *t = *(t + 1) = *(t + 2) = *(t + 3) = ' ';
+					goto again; // yuck, yes, i know...
 				}
 
 				// nasb eph 5:31: whole verse is an italicized
 				// quotation of gen 2:24...containing strongs.
 				// in event of font switch, output bare switch
 				// controls but recurse on content within.
-				if ((*(s+1) == 'a') || (*(s+1) == 'A')) {
+				if ((*(s + 1) == 'a') || (*(s + 1) == 'A')) {
 					// <a href> anchor -- uninteresting.
 					t += 4;
-					word = g_strndup(s, t-s);
-					s = t-1;
+					word = g_strndup(s, t - s);
+					s = t - 1;
 				} else {
 					// font switch nightmare.
 					word = g_strndup(s, 3);
 					rendered += word;
 					g_free((char *)word);
-					word = g_strndup(s+3, t-(s+3));
+					word = g_strndup(s + 3, t - (s + 3));
 					block_render_secondary(word, rendered);
 					g_free((char *)word);
 					word = NULL;
 					rendered += end;
-					s = t+3;
+					s = t + 3;
 				}
 				break;
-			} else if (!strncmp(s+1, "small>", 6)) {
+			} else if (!strncmp(s + 1, "small>", 6)) {
 				// strongs and morph are bounded by "<small>".
 				if ((t = strstr((char *)s, "</small>")) == NULL) {
 					XI_warning(("No </small> in %s\n", s));
@@ -578,27 +577,27 @@ block_render_secondary(const char *text,
 				// strongs: "<em>&lt;...&gt;</em>"
 				// morph:   "<em>(...)</em>"
 				// if Sword ever changes this, we're dead.
-				const char *u = s+11;
+				const char *u = s + 11;
 				while ((*u != '(') && (*u != '&'))
-					++u;	// it has to be one or the other.
+					++u; // it has to be one or the other.
 				if (*u == '(') {
 					if (morph) {
 						block_dump(rendered, &word, &strongs, &morph);
 						word = g_strdup(EMPTY_WORD);
 					}
-					morph   = g_strndup(s, t-s);
+					morph = g_strndup(s, t - s);
 				} else {
 					if (strongs) {
 						block_dump(rendered, &word, &strongs, &morph);
 						word = g_strdup(EMPTY_WORD);
 					}
-					strongs = g_strndup(s, t-s);
+					strongs = g_strndup(s, t - s);
 				}
-				s = t-1;
+				s = t - 1;
 				break;
 			}
-			// ...fall through to ordinary text...
-			// (includes other "<>"-bounded markup.)
+		// ...fall through to ordinary text...
+		// (includes other "<>"-bounded markup.)
 
 		default:
 			if (word)
@@ -615,25 +614,24 @@ block_render_secondary(const char *text,
 			do {
 				while ((*s == ' ') || (*s == '\t'))
 					s++;
-				for ( /* */ ;
+				for (/* */;
 				     *s && (*s != ' ') && (*s != '\t');
 				     ++s) {
 					if (*s == '<') {
-						if (!strncmp(s+1, "small>", 6) ||
-						    ((*(s+1) == 'a') &&
-						     (*(s+2) == ' '))) {
+						if (!strncmp(s + 1, "small>", 6) ||
+						    ((*(s + 1) == 'a') &&
+						     (*(s + 2) == ' '))) {
 							// "break 2;"
 							goto outword;
 						}
 						bracket++;
-					}
-					else if (*s == '>')
+					} else if (*s == '>')
 						bracket--;
 					assert(bracket >= 0);
 				}
 			} while (bracket != 0);
-		    outword:
-			word = g_strndup(word, s-word);
+		outword:
+			word = g_strndup(word, s - word);
 			s--;
 		}
 	}
@@ -664,16 +662,16 @@ CleanupContent(GString *text,
 {
 	if (ops->image_content == 0)
 		ClearImages((gchar *)text->str);
-	else if ((ops->image_content == -1) &&	// "unknown"
+	else if ((ops->image_content == -1) && // "unknown"
 		 (strcasestr(text->str, "<img ") != NULL)) {
-		ops->image_content = 1;		// now known.
+		ops->image_content = 1; // now known.
 		main_save_module_options(name, "Image Content", 1);
 	}
 	if (ops->respect_font_faces == 0)
 		ClearFontFaces((gchar *)text->str);
-	else if ((ops->respect_font_faces == -1) &&	// "unknown"
+	else if ((ops->respect_font_faces == -1) && // "unknown"
 		 (strcasestr(text->str, "<font face=\"Galax") != NULL)) {
-		ops->respect_font_faces = 1;	// now known.
+		ops->respect_font_faces = 1; // now known.
 		main_save_module_options(name, "Respect Font Faces", 1);
 	}
 
@@ -682,13 +680,13 @@ CleanupContent(GString *text,
 
 	// test for any 'n="X"' content.  if so, use it directly.
 	if ((reported = backend->get_entry_attribute("Footnote", "1", "n", false))) {
-		g_free(reported);		// dispose of test junk.
+		g_free(reported); // dispose of test junk.
 	}
 	// otherwise we simply count notes & xrefs through the verse.
 	else if (ops->xrefnotenumbers) {
 		while ((s = strstr(s, "*n"))) {
 			g_snprintf(value, 5, "%d", ++footnote);
-			pos = s-(text->str)+2;
+			pos = s - (text->str) + 2;
 			text = g_string_insert(text, pos, value);
 			s = text->str + pos + 1;
 		}
@@ -696,7 +694,7 @@ CleanupContent(GString *text,
 		s = text->str;
 		while ((s = strstr(s, "*x"))) {
 			g_snprintf(value, 5, "%d", ++xref);
-			pos = s-(text->str)+2;
+			pos = s - (text->str) + 2;
 			text = g_string_insert(text, pos, value);
 			s = text->str + pos + 1;
 		}
@@ -709,8 +707,8 @@ CleanupContent(GString *text,
 // utility function to fill headers from verses.
 //
 void
-CacheHeader(ModuleCache::CacheVerse& cVerse,
-	    SWModule& mod,
+CacheHeader(ModuleCache::CacheVerse &cVerse,
+	    SWModule &mod,
 	    GLOBAL_OPS *ops, BackEnd *be)
 {
 	int x = 0;
@@ -729,8 +727,8 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 				"%s",
 				(((ops->strongs || ops->lemmas) ||
 				  ops->morphs)
-				 ? block_render(preverse2.c_str())
-				 : preverse2.c_str()));
+				     ? block_render(preverse2.c_str())
+				     : preverse2.c_str()));
 		text = CleanupContent(text, ops, mod.getName(), false);
 
 		cVerse.AppendHeader(text->str);
@@ -742,19 +740,20 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 }
 
 void
-set_morph_order(SWModule& imodule)
+set_morph_order(SWModule &imodule)
 {
 	for (FilterList::const_iterator it =
 		 imodule.getRenderFilters().begin();
 	     it != imodule.getRenderFilters().end();
 	     it++) {
 		OSISXHTML *f = dynamic_cast<OSISXHTML *>(*it);
-		if (f) f->setMorphFirst();
+		if (f)
+			f->setMorphFirst();
 	}
 }
 
 void
-set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
+set_render_numbers(SWModule &imodule, GLOBAL_OPS *ops)
 {
 	// if we have not yet determined options, don't bother.
 	if (!ops)
@@ -765,13 +764,17 @@ set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 	     it != imodule.getRenderFilters().end();
 	     it++) {
 		OSISXHTML *f1 = dynamic_cast<OSISXHTML *>(*it);
-		if (f1) f1->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		if (f1)
+			f1->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 		ThMLXHTML *f2 = dynamic_cast<ThMLXHTML *>(*it);
-		if (f2) f2->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		if (f2)
+			f2->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 		GBFXHTML *f3 = dynamic_cast<GBFXHTML *>(*it);
-		if (f3) f3->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		if (f3)
+			f3->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 		TEIXHTML *f4 = dynamic_cast<TEIXHTML *>(*it);
-		if (f4) f4->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		if (f4)
+			f4->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 	}
 }
 
@@ -783,14 +786,14 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 {
 	imodule.setSkipConsecutiveLinks(true);
 
-	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	VerseKey *key = (VerseKey *)(SWKey *) imodule;
 	bool before_curVerse(true);
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
 	gchar *buf, *vbuf, *num;
 	const char *ModuleName = imodule.getName();
-	GString *rework;			// for image size analysis rework.
+	GString *rework; // for image size analysis rework.
 	footnote = xref = 0;
 
 	// we come into this routine with swbuf init'd with
@@ -801,8 +804,8 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
-	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
-			     ops->morphs);
+	strongs_or_morph = ((ops->strongs || ops->lemmas) ||
+			    ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 	set_render_numbers(imodule, ops);
@@ -820,27 +823,27 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 
-	    ModuleCache::CacheVerse& cVerse = ModuleMap
-		[ModuleName]
-		[key->getTestament()]
-		[key->getBook()]
-		[key->getChapter()]
-		[key->getVerse()];
+		ModuleCache::CacheVerse &cVerse = ModuleMap
+		    [ModuleName]
+		    [key->getTestament()]
+		    [key->getBook()]
+		    [key->getChapter()]
+		    [key->getVerse()];
 
 		// use the module cache rather than re-accessing Sword.
 		// but editable personal commentaries don't use the cache.
-		if (!cVerse.CacheIsValid(cache_flags) && 
+		if (!cVerse.CacheIsValid(cache_flags) &&
 		    (backend->module_type(imodule.getName()) != PERCOM_TYPE)) {
 			rework = g_string_new(strongs_or_morph
-					      ? block_render(imodule.renderText().c_str())
-					      : imodule.renderText().c_str());
+						  ? block_render(imodule.renderText().c_str())
+						  : imodule.renderText().c_str());
 			rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else {
 			if (backend->module_type(imodule.getName()) == PERCOM_TYPE)
 				rework = g_string_new(strongs_or_morph
-					      ? block_render(imodule.getRawEntry())
-					      : imodule.getRawEntry());
+							  ? block_render(imodule.getRawEntry())
+							  : imodule.getRawEntry());
 			else
 				rework = g_string_new(cVerse.GetText());
 		}
@@ -848,7 +851,7 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 		// add an anchor for where in the chapter we are.
 		// (commentaries can have big sections on 1 verse [<hr>],
 		// and many missing verses [<a name>].)
-		if ((curVerse != 1) &&			// not at top of pane
+		if ((curVerse != 1) && // not at top of pane
 		    ((curVerse == key->getVerse()) ||
 		     (before_curVerse && (key->getVerse() > curVerse)))) {
 			buf = NULL;
@@ -856,9 +859,9 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 					       // repeated conditional check here
 					       ((before_curVerse &&
 						 (key->getVerse() > curVerse))
-						? (buf = g_strdup_printf(
-						       "<a name=\"%d\"> </a>", curVerse))
-						: ""));
+						    ? (buf = g_strdup_printf(
+							   "<a name=\"%d\"> </a>", curVerse))
+						    : ""));
 			g_free(buf);
 			swbuf.append(vbuf);
 			g_free(vbuf);
@@ -869,12 +872,12 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 		// insert verse numbers
 		num = main_format_number(key->getVerse());
 		vbuf = g_strdup_printf((settings.showversenum
-					? "<td valign=\"top\" align=\"right\">"
-					"<a name=\"%d\" href=\"sword:///%s\">"
-					"<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></td>"
-					: "<p/><a name=\"%d\"> </a>"),
+					    ? "<td valign=\"top\" align=\"right\">"
+					      "<a name=\"%d\" href=\"sword:///%s\">"
+					      "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></td>"
+					    : "<p/><a name=\"%d\"> </a>"),
 				       key->getVerse(),
-				       (char*)key->getText(),
+				       (char *)key->getText(),
 				       settings.verse_num_font_size + settings.base_font_size,
 				       settings.bible_verse_num_color,
 				       PRETTYPRINT(num));
@@ -889,9 +892,9 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 			g_free(buf);
 		}
 		swbuf.append(settings.imageresize
-			     ? AnalyzeForImageSize(rework->str,
-						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-			     : rework->str /* left as-is */);
+				 ? AnalyzeForImageSize(rework->str,
+						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+				 : rework->str /* left as-is */);
 		if (settings.showversenum)
 			swbuf.append("</font></td>");
 
@@ -941,15 +944,15 @@ GTKEntryDisp::display(SWModule &imodule)
 
 	ops = main_new_globals(imodule.getName());
 
-	GString *rework;			// for image size analysis rework.
+	GString *rework; // for image size analysis rework.
 
-	imodule.getRawEntry();      // snap to entry
+	imodule.getRawEntry(); // snap to entry
 	main_set_global_options(ops);
 
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
-	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
-			     ops->morphs);
+	strongs_or_morph = ((ops->strongs || ops->lemmas) ||
+			    ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 	set_render_numbers(imodule, ops);
@@ -960,14 +963,14 @@ GTKEntryDisp::display(SWModule &imodule)
 			      "<font color=\"%s\">*%s*</font></a>]<br/>",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
-			      settings.link_color,	                      
-			      (strongs_and_morph		// both
-			       ? CSS_BLOCK_BOTH
-			       : (strongs_or_morph		// either
-				  ? CSS_BLOCK_ONE
-				  : (ops->doublespace		// neither
-				     ? DOUBLE_SPACE
-				     : ""))),
+			      settings.link_color,
+			      (strongs_and_morph // both
+				   ? CSS_BLOCK_BOTH
+				   : (strongs_or_morph // either
+					  ? CSS_BLOCK_ONE
+					  : (ops->doublespace // neither
+						 ? DOUBLE_SPACE
+						 : ""))),
 			      imodule.getRenderHeader(),
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
@@ -981,8 +984,8 @@ GTKEntryDisp::display(SWModule &imodule)
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
+				   ? "rtl"
+				   : "ltr"));
 
 	if (!valid_scripture_key) {
 		swbuf.append(no_content);
@@ -1014,11 +1017,11 @@ GTKEntryDisp::display(SWModule &imodule)
 
 	int modtype = backend->module_type(imodule.getName());
 	if (modtype == COMMENTARY_TYPE) {
-		VerseKey *key = (VerseKey *)(SWKey *)imodule;
+		VerseKey *key = (VerseKey *)(SWKey *) imodule;
 		cache_flags = ConstructFlags(ops);
 		const char *ModuleName = imodule.getName();
 
-		ModuleCache::CacheVerse& cVerse = ModuleMap
+		ModuleCache::CacheVerse &cVerse = ModuleMap
 		    [ModuleName]
 		    [key->getTestament()]
 		    [key->getBook()]
@@ -1028,8 +1031,8 @@ GTKEntryDisp::display(SWModule &imodule)
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = g_string_new(strongs_or_morph
-					      ? block_render(imodule.renderText().c_str())
-					      : imodule.renderText().c_str());
+						  ? block_render(imodule.renderText().c_str())
+						  : imodule.renderText().c_str());
 			rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else
@@ -1038,12 +1041,12 @@ GTKEntryDisp::display(SWModule &imodule)
 		if ((modtype == PERCOM_TYPE) ||
 		    (modtype == PRAYERLIST_TYPE))
 			rework = g_string_new(strongs_or_morph
-					      ? block_render(imodule.getRawEntry())
-					      : imodule.getRawEntry());
+						  ? block_render(imodule.getRawEntry())
+						  : imodule.getRawEntry());
 		else {
 			rework = g_string_new(strongs_or_morph
-					      ? block_render(imodule.renderText().c_str())
-					      : imodule.renderText().c_str());
+						  ? block_render(imodule.renderText().c_str())
+						  : imodule.renderText().c_str());
 			if (modtype == DICTIONARY_TYPE) {
 				char *f = (char *)imodule.getConfigEntry("Feature");
 				if (f && !strcmp(f, "DailyDevotion")) {
@@ -1053,7 +1056,7 @@ GTKEntryDisp::display(SWModule &imodule)
 					if (day)
 						*(day++) = '\0';
 					else
-						day = (char*)"XX";
+						day = (char *)"XX";
 					int idx_month = atoi(month) - 1;
 					pretty = g_strdup_printf("<b>%s %s</b><br/>",
 								 month_names[idx_month],
@@ -1067,9 +1070,9 @@ GTKEntryDisp::display(SWModule &imodule)
 	}
 
 	swbuf.append(settings.imageresize
-		     ? AnalyzeForImageSize(rework->str,
-					   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-		     : rework->str /* left as-is */);
+			 ? AnalyzeForImageSize(rework->str,
+					       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+			 : rework->str /* left as-is */);
 
 	swbuf.append("</div></font></body></html>");
 
@@ -1088,7 +1091,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	gchar *buf;
 	char *num;
 
-	sword::VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	sword::VerseKey *key = (VerseKey *)(SWKey *) imodule;
 	int curVerse = key->getVerse();
 	int chapter = key->getChapter();
 	int curBook = key->getBook();
@@ -1120,41 +1123,40 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		swbuf.appendFormatted("<div dir=%s>",
 				      ((is_rtol && !ops->transliteration)
-				       ? "rtl"
-				       : "ltr"));
+					   ? "rtl"
+					   : "ltr"));
 
 		num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(
-				(settings.showversenum
-				 ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-				 "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
-				 : "&nbsp; <a name=\"%d\"> </a>"),
-				0,
-				(char*)key->getText(),
-				(settings.versestyle
-				 ? settings.verse_num_font_size + settings.base_font_size
-				 : settings.base_font_size - 2),
-				settings.bible_verse_num_color,
-				PRETTYPRINT(num));
+		    (settings.showversenum
+			 ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+			   "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
+			 : "&nbsp; <a name=\"%d\"> </a>"),
+		    0,
+		    (char *)key->getText(),
+		    (settings.versestyle
+			 ? settings.verse_num_font_size + settings.base_font_size
+			 : settings.base_font_size - 2),
+		    settings.bible_verse_num_color,
+		    PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
 
 		num = main_format_number(chapter);
 		buf = g_strdup_printf(
-				"%s%s<br/><a name=\"TOP\"></a><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
-				(strongs_or_morph
-				 ? block_render(imodule.renderText().c_str())
-				 : imodule.renderText().c_str()),
-				// extra break when excess strongs/morph space.
-				(strongs_or_morph ? "<br/>" : ""),
-				_("Chapter"), num);
+		    "%s%s<br/><a name=\"TOP\"></a><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+		    (strongs_or_morph
+			 ? block_render(imodule.renderText().c_str())
+			 : imodule.renderText().c_str()),
+		    // extra break when excess strongs/morph space.
+		    (strongs_or_morph ? "<br/>" : ""),
+		    _("Chapter"), num);
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
 
 		swbuf.append("</div>");
-
 	}
 
 	imodule++;
@@ -1173,10 +1175,10 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		if ((i == 0) && (chapter != 1))
 			continue;
 
-		key->setChapter(i*chapter);
+		key->setChapter(i * chapter);
 		key->setVerse(0);
 
-#if 0		// with footnote counting, we no longer cache before/after verses.
+#if 0 // with footnote counting, we no longer cache before/after verses.
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
 		    [key->Testament()]
@@ -1193,8 +1195,8 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 #else
 		buf = g_strdup_printf("%s<br />",
 				      (strongs_or_morph
-				       ? block_render(imodule.renderText().c_str())
-				       : imodule.renderText().c_str()));
+					   ? block_render(imodule.renderText().c_str())
+					   : imodule.renderText().c_str()));
 #endif /* !0 */
 		swbuf.append(buf);
 		g_free(buf);
@@ -1215,15 +1217,15 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 #if 0
 	const char *ModuleName = imodule.Name();
 #endif
-	sword::VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	sword::VerseKey *key = (VerseKey *)(SWKey *) imodule;
 
 	imodule++;
 	if (imodule.popError()) {
 		buf = g_strdup_printf(
-			"%s<hr/><div style=\"text-align: center\"><p><b>%s</b></p></div>",
-			// extra break when excess strongs/morph space.
-			(strongs_or_morph ? "<br/><br/>" : ""),
-			imodule.getDescription());
+		    "%s<hr/><div style=\"text-align: center\"><p><b>%s</b></p></div>",
+		    // extra break when excess strongs/morph space.
+		    (strongs_or_morph ? "<br/><br/>" : ""),
+		    imodule.getDescription());
 		swbuf.append(buf);
 		g_free(buf);
 	} else {
@@ -1231,31 +1233,31 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		char *num = main_format_number(key->getChapter());
 
 		buf = g_strdup_printf(
-			"%s<hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
-			(strongs_or_morph ? "<br/><br/>" : ""),
-			_("Chapter"), num);
+		    "%s<hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+		    (strongs_or_morph ? "<br/><br/>" : ""),
+		    _("Chapter"), num);
 		swbuf.append(buf);
 		g_free(buf);
 		g_free(num);
 
 		swbuf.appendFormatted("<div dir=%s>",
 				      ((is_rtol && !ops->transliteration)
-				       ? "rtl"
-				       : "ltr"));
+					   ? "rtl"
+					   : "ltr"));
 
 		num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(
-				(settings.showversenum
-				 ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-				   "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
-				 : "&nbsp; <a name=\"%d\"> </a>"),
-				0,
-				(char*)key->getText(),
-				(settings.versestyle
-				 ? settings.verse_num_font_size + settings.base_font_size
-				 : settings.base_font_size - 2),
-				settings.bible_verse_num_color,
-				PRETTYPRINT(num));
+		    (settings.showversenum
+			 ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+			   "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
+			 : "&nbsp; <a name=\"%d\"> </a>"),
+		    0,
+		    (char *)key->getText(),
+		    (settings.versestyle
+			 ? settings.verse_num_font_size + settings.base_font_size
+			 : settings.base_font_size - 2),
+		    settings.bible_verse_num_color,
+		    PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1265,8 +1267,8 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		set_render_numbers(imodule, ops);
 
 		swbuf.append((strongs_or_morph
-			      ? block_render(imodule.renderText().c_str())
-			      : imodule.renderText().c_str()));
+				  ? block_render(imodule.renderText().c_str())
+				  : imodule.renderText().c_str()));
 		swbuf.append("</div>");
 	}
 }
@@ -1274,16 +1276,16 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 char
 GTKChapDisp::display(SWModule &imodule)
 {
-        // following line ensures linked verses work correctly
-        // it does not solve the problem of marking groups of verses (1-4), etc
-        imodule.setSkipConsecutiveLinks(true);
-	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	// following line ensures linked verses work correctly
+	// it does not solve the problem of marking groups of verses (1-4), etc
+	imodule.setSkipConsecutiveLinks(true);
+	VerseKey *key = (VerseKey *)(SWKey *) imodule;
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
 	gchar *buf;
 	char *num;
-	GString *rework;			// for image size analysis rework.
+	GString *rework; // for image size analysis rework.
 	const char *ModuleName = imodule.getName();
 	ops = main_new_globals(ModuleName);
 	cache_flags = ConstructFlags(ops);
@@ -1292,12 +1294,13 @@ GTKChapDisp::display(SWModule &imodule)
 	is_rtol = main_is_mod_rtol(ModuleName);
 	mf = get_font(ModuleName);
 
-	if (!gtk_widget_get_realized (GTK_WIDGET(gtkText))) return 0;
+	if (!gtk_widget_get_realized(GTK_WIDGET(gtkText)))
+		return 0;
 
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
-	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
-			     ops->morphs);
+	strongs_or_morph = ((ops->strongs || ops->lemmas) ||
+			    ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 	set_render_numbers(imodule, ops);
@@ -1309,8 +1312,8 @@ GTKChapDisp::display(SWModule &imodule)
 	// of it the user wants really big fonts.
 	gint display_boundary = (((settings.gs_height < 500) ||
 				  (mf->old_font_size_value > 2))
-				 ? 0
-				 : (strongs_or_morph ? 1 : 2));
+				     ? 0
+				     : (strongs_or_morph ? 1 : 2));
 
 	// if we are no longer where annotations were current, re-load.
 	if (strcasecmp(ModuleName,
@@ -1323,29 +1326,29 @@ GTKChapDisp::display(SWModule &imodule)
 	footnote = xref = 0;
 
 	buf = g_strdup_printf(HTML_START // "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			    "<font face=\"%s\" size=\"%+d\">",
-			    settings.bible_bg_color,
-			    settings.bible_text_color,
-			    settings.link_color,
-			    // strongs & morph specs win over dblspc.
-			    (strongs_and_morph		// both
-			     ? CSS_BLOCK_BOTH
-			     : (strongs_or_morph	// either
-				? CSS_BLOCK_ONE
-				: (ops->doublespace	// neither
-				   ? DOUBLE_SPACE
-				   : ""))),
-			    imodule.getRenderHeader(),
-			    get_css_references(imodule),
-			    ((mf->old_font) ? mf->old_font : ""),
-			    mf->old_font_size_value);
+			      "<font face=\"%s\" size=\"%+d\">",
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color,
+			      // strongs & morph specs win over dblspc.
+			      (strongs_and_morph // both
+				   ? CSS_BLOCK_BOTH
+				   : (strongs_or_morph // either
+					  ? CSS_BLOCK_ONE
+					  : (ops->doublespace // neither
+						 ? DOUBLE_SPACE
+						 : ""))),
+			      imodule.getRenderHeader(),
+			      get_css_references(imodule),
+			      ((mf->old_font) ? mf->old_font : ""),
+			      mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
+				   ? "rtl"
+				   : "ltr"));
 
 	main_set_global_options(ops);
 
@@ -1366,7 +1369,7 @@ GTKChapDisp::display(SWModule &imodule)
 	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 
-		ModuleCache::CacheVerse& cVerse = ModuleMap
+		ModuleCache::CacheVerse &cVerse = ModuleMap
 		    [ModuleName]
 		    [key->getTestament()]
 		    [key->getBook()]
@@ -1379,16 +1382,16 @@ GTKChapDisp::display(SWModule &imodule)
 
 		if (cache_flags & ModuleCache::Headings) {
 			swbuf.append(settings.imageresize
-				     ? AnalyzeForImageSize(cVerse.GetHeader(),
-							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-				     : cVerse.GetHeader() /* left as-is */);
+					 ? AnalyzeForImageSize(cVerse.GetHeader(),
+							       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+					 : cVerse.GetHeader() /* left as-is */);
 		} else
 			cVerse.InvalidateHeader();
 
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = g_string_new(strongs_or_morph
-				 ? block_render(imodule.renderText().c_str())
-				 : imodule.renderText().c_str());
+						  ? block_render(imodule.renderText().c_str())
+						  : imodule.renderText().c_str());
 			rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else
@@ -1403,8 +1406,8 @@ GTKChapDisp::display(SWModule &imodule)
 			    "<span style=\"background-color: %s\">"
 			    "<font face=\"%s\" size=\"%+d\">",
 			    ((settings.annotate_highlight && e)
-			     ? settings.highlight_fg
-			     : settings.highlight_bg),
+				 ? settings.highlight_fg
+				 : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    mf->old_font_size_value);
 			swbuf.append(buf);
@@ -1413,19 +1416,19 @@ GTKChapDisp::display(SWModule &imodule)
 
 		num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(settings.showversenum
-			? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></span>&nbsp;"
-			: "&nbsp; <a name=\"%d\"> </a>",
-			key->getVerse(),
-			(char*)key->getText(),
-			settings.verse_num_font_size + settings.base_font_size,
-			(((settings.versehighlight && (key->getVerse() == curVerse)) ||
-			  (e && settings.annotate_highlight))
-			 ? ((e && settings.annotate_highlight)
-			    ? settings.highlight_bg
-			    : settings.highlight_fg)
-			 : settings.bible_verse_num_color),
-			PRETTYPRINT(num));
+					  ? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
+					    "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></span>&nbsp;"
+					  : "&nbsp; <a name=\"%d\"> </a>",
+				      key->getVerse(),
+				      (char *)key->getText(),
+				      settings.verse_num_font_size + settings.base_font_size,
+				      (((settings.versehighlight && (key->getVerse() == curVerse)) ||
+					(e && settings.annotate_highlight))
+					   ? ((e && settings.annotate_highlight)
+						  ? settings.highlight_bg
+						  : settings.highlight_fg)
+					   : settings.bible_verse_num_color),
+				      PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1437,7 +1440,7 @@ GTKChapDisp::display(SWModule &imodule)
 					      "module=%s&passage=%s&value=%s\"><small>"
 					      "<sup>*u</sup></small></a></span>&nbsp;",
 					      settings.MainWindowModule,
-			                      (char*)key->getShortText(),
+					      (char *)key->getShortText(),
 					      e->annotation->str);
 			swbuf.append(buf);
 			g_free(buf);
@@ -1447,18 +1450,18 @@ GTKChapDisp::display(SWModule &imodule)
 			buf = g_strdup_printf("<font color=\"%s\">",
 					      ((settings.versehighlight ||
 						(e && settings.annotate_highlight))
-					       ? ((e && settings.annotate_highlight)
-						  ? settings.highlight_bg
-						  : settings.highlight_fg)
-					       : settings.currentverse_color));
+						   ? ((e && settings.annotate_highlight)
+							  ? settings.highlight_bg
+							  : settings.highlight_fg)
+						   : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
 		}
 
 		swbuf.append(settings.imageresize
-			     ? AnalyzeForImageSize(rework->str,
-						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-			     : rework->str /* left as-is */);
+				 ? AnalyzeForImageSize(rework->str,
+						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+				 : rework->str /* left as-is */);
 
 		if (key->getVerse() == curVerse) {
 			swbuf.append("</font>");
@@ -1509,7 +1512,6 @@ GTKChapDisp::display(SWModule &imodule)
 	return 0;
 }
 
-
 //
 // display of commentary by chapter.
 //
@@ -1517,13 +1519,13 @@ char
 DialogEntryDisp::displayByChapter(SWModule &imodule)
 {
 	imodule.setSkipConsecutiveLinks(true);
-	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	VerseKey *key = (VerseKey *)(SWKey *) imodule;
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
 	gchar *buf;
 	const char *ModuleName = imodule.getName();
-	GString *rework;			// for image size analysis rework.
+	GString *rework; // for image size analysis rework.
 	footnote = xref = 0;
 
 	// we come into this routine with swbuf init'd with
@@ -1534,22 +1536,22 @@ DialogEntryDisp::displayByChapter(SWModule &imodule)
 
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
-	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
-			     ops->morphs);
+	strongs_or_morph = ((ops->strongs || ops->lemmas) ||
+			    ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 	set_render_numbers(imodule, ops);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
+				   ? "rtl"
+				   : "ltr"));
 
 	for (key->setVerse(1);
 	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 
-		ModuleCache::CacheVerse& cVerse = ModuleMap
+		ModuleCache::CacheVerse &cVerse = ModuleMap
 		    [ModuleName]
 		    [key->getTestament()]
 		    [key->getBook()]
@@ -1559,8 +1561,8 @@ DialogEntryDisp::displayByChapter(SWModule &imodule)
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = g_string_new(strongs_or_morph
-				 ? block_render(imodule.renderText().c_str())
-				 : imodule.renderText().c_str());
+						  ? block_render(imodule.renderText().c_str())
+						  : imodule.renderText().c_str());
 			rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else
@@ -1570,9 +1572,9 @@ DialogEntryDisp::displayByChapter(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 		swbuf.append(settings.imageresize
-			     ? AnalyzeForImageSize(rework->str,
-						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-			     : rework->str /* left as-is */);
+				 ? AnalyzeForImageSize(rework->str,
+						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+				 : rework->str /* left as-is */);
 	}
 
 	swbuf.append("</div></font></body></html>");
@@ -1596,10 +1598,10 @@ DialogEntryDisp::display(SWModule &imodule)
 	mf = get_font(imodule.getName());
 	ops = main_new_globals(imodule.getName());
 	main_set_global_options(ops);
-	GString *rework;			// for image size analysis rework.
+	GString *rework; // for image size analysis rework.
 	footnote = xref = 0;
 
-	imodule.getRawEntry();	// snap to entry
+	imodule.getRawEntry(); // snap to entry
 
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">"
@@ -1640,11 +1642,11 @@ DialogEntryDisp::display(SWModule &imodule)
 		return displayByChapter(imodule);
 
 	if (be->module_type(imodule.getName()) == COMMENTARY_TYPE) {
-		VerseKey *key = (VerseKey *)(SWKey *)imodule;
+		VerseKey *key = (VerseKey *)(SWKey *) imodule;
 		cache_flags = ConstructFlags(ops);
 		const char *ModuleName = imodule.getName();
 
-		ModuleCache::CacheVerse& cVerse = ModuleMap
+		ModuleCache::CacheVerse &cVerse = ModuleMap
 		    [ModuleName]
 		    [key->getTestament()]
 		    [key->getBook()]
@@ -1660,7 +1662,7 @@ DialogEntryDisp::display(SWModule &imodule)
 			rework = g_string_new(cVerse.GetText());
 
 	} else {
-	        if ((be->module_type(imodule.getName()) == PERCOM_TYPE) ||
+		if ((be->module_type(imodule.getName()) == PERCOM_TYPE) ||
 		    (be->module_type(imodule.getName()) == PRAYERLIST_TYPE))
 			rework = g_string_new(imodule.getRawEntry());
 		else
@@ -1669,9 +1671,9 @@ DialogEntryDisp::display(SWModule &imodule)
 	}
 
 	swbuf.append(settings.imageresize
-		     ? AnalyzeForImageSize(rework->str,
-					   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-		     : rework->str /* left as-is */);
+			 ? AnalyzeForImageSize(rework->str,
+					       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+			 : rework->str /* left as-is */);
 
 	swbuf.append("</font></body></html>");
 
@@ -1684,18 +1686,17 @@ DialogEntryDisp::display(SWModule &imodule)
 	return 0;
 }
 
-
 char
 DialogChapDisp::display(SWModule &imodule)
 {
 	imodule.setSkipConsecutiveLinks(true);
-	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	VerseKey *key = (VerseKey *)(SWKey *) imodule;
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
 	gchar *buf;
 	char *num;
-	GString *rework;			// for image size analysis rework.
+	GString *rework; // for image size analysis rework.
 	marked_element *e = NULL;
 
 	const char *ModuleName = imodule.getName();
@@ -1707,8 +1708,8 @@ DialogChapDisp::display(SWModule &imodule)
 
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
-	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
-			     ops->morphs);
+	strongs_or_morph = ((ops->strongs || ops->lemmas) ||
+			    ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 	set_render_numbers(imodule, ops);
@@ -1718,8 +1719,8 @@ DialogChapDisp::display(SWModule &imodule)
 	// of it the user wants really big fonts.
 	gint display_boundary = (((settings.gs_height < 500) ||
 				  (mf->old_font_size_value > 2))
-				 ? 0
-				 : (strongs_or_morph ? 1 : 2));
+				     ? 0
+				     : (strongs_or_morph ? 1 : 2));
 
 	// if we are no longer where annotations were current, re-load.
 	if (strcasecmp(ModuleName,
@@ -1740,12 +1741,12 @@ DialogChapDisp::display(SWModule &imodule)
 			      settings.bible_text_color,
 			      settings.link_color,
 			      (strongs_and_morph
-			       ? CSS_BLOCK_BOTH
-			       : (strongs_or_morph
-				  ? CSS_BLOCK_ONE
-				  : (ops->doublespace
-				     ? DOUBLE_SPACE
-				     : ""))),
+				   ? CSS_BLOCK_BOTH
+				   : (strongs_or_morph
+					  ? CSS_BLOCK_ONE
+					  : (ops->doublespace
+						 ? DOUBLE_SPACE
+						 : ""))),
 			      imodule.getRenderHeader(),
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
@@ -1755,8 +1756,8 @@ DialogChapDisp::display(SWModule &imodule)
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
+				   ? "rtl"
+				   : "ltr"));
 
 	if (!valid_scripture_key) {
 		swbuf.append(no_content);
@@ -1773,7 +1774,7 @@ DialogChapDisp::display(SWModule &imodule)
 	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 
-		ModuleCache::CacheVerse& cVerse = ModuleMap
+		ModuleCache::CacheVerse &cVerse = ModuleMap
 		    [ModuleName]
 		    [key->getTestament()]
 		    [key->getBook()]
@@ -1783,8 +1784,8 @@ DialogChapDisp::display(SWModule &imodule)
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = g_string_new(strongs_or_morph
-				 ? block_render(imodule.renderText().c_str())
-				 : imodule.renderText().c_str());
+						  ? block_render(imodule.renderText().c_str())
+						  : imodule.renderText().c_str());
 			rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else
@@ -1795,9 +1796,9 @@ DialogChapDisp::display(SWModule &imodule)
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(settings.imageresize
-				     ? AnalyzeForImageSize(cVerse.GetHeader(),
-							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-				     : cVerse.GetHeader() /* left as-is */);
+					 ? AnalyzeForImageSize(cVerse.GetHeader(),
+							       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+					 : cVerse.GetHeader() /* left as-is */);
 		else
 			cVerse.InvalidateHeader();
 
@@ -1809,8 +1810,8 @@ DialogChapDisp::display(SWModule &imodule)
 			    "<span style=\"background-color: %s\">"
 			    "<font face=\"%s\" size=\"%+d\">",
 			    ((settings.annotate_highlight && e)
-			     ? settings.highlight_fg
-			     : settings.highlight_bg),
+				 ? settings.highlight_fg
+				 : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    mf->old_font_size_value);
 			swbuf.append(buf);
@@ -1819,19 +1820,19 @@ DialogChapDisp::display(SWModule &imodule)
 
 		num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(settings.showversenum
-			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
-			: "&nbsp; <a name=\"%d\"> </a>",
-			key->getVerse(),
-			(char*)key->getText(),
-			settings.verse_num_font_size + settings.base_font_size,
-			(((settings.versehighlight && (key->getVerse() == curVerse)) ||
-			  (e && settings.annotate_highlight))
-			 ? ((e && settings.annotate_highlight)
-			    ? settings.highlight_bg
-			    : settings.highlight_fg)
-			 : settings.bible_verse_num_color),
-			PRETTYPRINT(num));
+					  ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+					    "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
+					  : "&nbsp; <a name=\"%d\"> </a>",
+				      key->getVerse(),
+				      (char *)key->getText(),
+				      settings.verse_num_font_size + settings.base_font_size,
+				      (((settings.versehighlight && (key->getVerse() == curVerse)) ||
+					(e && settings.annotate_highlight))
+					   ? ((e && settings.annotate_highlight)
+						  ? settings.highlight_bg
+						  : settings.highlight_fg)
+					   : settings.bible_verse_num_color),
+				      PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1842,8 +1843,8 @@ DialogChapDisp::display(SWModule &imodule)
 					      "<a href=\"passagestudy.jsp?action=showUserNote&"
 					      "module=%s&passage=%s&value=%s\">"
 					      "<small><sup>*u</sup></small></a></span> ",
-/*xxx*/					      settings.MainWindowModule,
-			                      (char*)key->getShortText(),
+					      /*xxx*/ settings.MainWindowModule,
+					      (char *)key->getShortText(),
 					      e->annotation->str);
 			swbuf.append(buf);
 			g_free(buf);
@@ -1853,18 +1854,18 @@ DialogChapDisp::display(SWModule &imodule)
 			buf = g_strdup_printf("<font color=\"%s\">",
 					      ((settings.versehighlight ||
 						(e && settings.annotate_highlight))
-					       ? ((e && settings.annotate_highlight)
-						  ? settings.highlight_bg
-						  : settings.highlight_fg)
-					       : settings.currentverse_color));
+						   ? ((e && settings.annotate_highlight)
+							  ? settings.highlight_bg
+							  : settings.highlight_fg)
+						   : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
 		}
 
 		swbuf.append(settings.imageresize
-			     ? AnalyzeForImageSize(rework->str,
-						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-			     : rework->str /* left as-is */);
+				 ? AnalyzeForImageSize(rework->str,
+						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+				 : rework->str /* left as-is */);
 
 		if (key->getVerse() == curVerse) {
 			swbuf.append("</font>");
@@ -1872,11 +1873,11 @@ DialogChapDisp::display(SWModule &imodule)
 		}
 
 		if (versestyle) {
-		    if ((key->getVerse() != curVerse) ||
+			if ((key->getVerse() != curVerse) ||
 			    (!settings.versehighlight &&
 			     (!e || !settings.annotate_highlight)))
 				swbuf.append("<br/>");
-		    else if (key->getVerse() == curVerse)
+			else if (key->getVerse() == curVerse)
 				swbuf.append("<br/>");
 		}
 
@@ -1909,10 +1910,9 @@ DialogChapDisp::display(SWModule &imodule)
 	free_font(mf);
 	mf = NULL;
 	g_free(ops);
-    	ops = NULL;
+	ops = NULL;
 	return 0;
 }
-
 
 char
 GTKPrintEntryDisp::display(SWModule &imodule)
@@ -1923,20 +1923,20 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.getName());
 
-	GLOBAL_OPS * ops = main_new_globals(imodule.getName());
+	GLOBAL_OPS *ops = main_new_globals(imodule.getName());
 
-	imodule.getRawEntry();	// snap to entry
-	XI_message(("%s",(const char *)imodule.getRawEntry()));
+	imodule.getRawEntry(); // snap to entry
+	XI_message(("%s", (const char *)imodule.getRawEntry()));
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.getName());
 
 	if (mod_type == BOOK_TYPE)
 		keytext = strdup(backend->treekey_get_local_name(
-				settings.book_offset));
+		    settings.book_offset));
 	else if (mod_type == DICTIONARY_TYPE)
-		keytext = g_strdup((char*)imodule.getKeyText());
+		keytext = g_strdup((char *)imodule.getKeyText());
 	else
-		keytext = strdup((char*)imodule.getKeyText());
+		keytext = strdup((char *)imodule.getKeyText());
 
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">"
@@ -1955,7 +1955,7 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 			      imodule.getDescription(),
 			      imodule.getName(),
 			      imodule.getName(),
-			      (gchar*)keytext );
+			      (gchar *)keytext);
 	swbuf.append(buf);
 	g_free(buf);
 
@@ -1975,7 +1975,7 @@ char
 GTKPrintChapDisp::display(SWModule &imodule)
 {
 	imodule.setSkipConsecutiveLinks(true);
-	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	VerseKey *key = (VerseKey *)(SWKey *) imodule;
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
@@ -1985,7 +1985,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 	SWBuf swbuf;
 	char *num;
 
-	GLOBAL_OPS * ops = main_new_globals(imodule.getName());
+	GLOBAL_OPS *ops = main_new_globals(imodule.getName());
 	gboolean is_rtol = main_is_mod_rtol(imodule.getName());
 	mf = get_font(imodule.getName());
 
@@ -2006,8 +2006,8 @@ GTKPrintChapDisp::display(SWModule &imodule)
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
+				   ? "rtl"
+				   : "ltr"));
 
 	main_set_global_options(ops);
 
@@ -2029,14 +2029,14 @@ GTKPrintChapDisp::display(SWModule &imodule)
 
 		num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(settings.showversenum
-			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
-			: "&nbsp; <a name=\"%d\"> </a>",
-			key->getVerse(),
-			(char*)key->getText(),
-			settings.verse_num_font_size + settings.base_font_size,
-			settings.bible_verse_num_color,
-			PRETTYPRINT(num));
+					  ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+					    "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
+					  : "&nbsp; <a name=\"%d\"> </a>",
+				      key->getVerse(),
+				      (char *)key->getText(),
+				      settings.verse_num_font_size + settings.base_font_size,
+				      settings.bible_verse_num_color,
+				      PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);

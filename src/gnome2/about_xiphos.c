@@ -31,33 +31,31 @@
 #include "main/settings.h"
 
 static const gchar *authors[] = {
-	"Terry Biggs",
-	"Moses McKnight",
-	"Jan Paul Schmidt",
-	"Victor Porton",
-	"Stephen Binks",
-	"Carl Constantine",
-	"Jp Robinson",
-	"Andy Piper",
-	"Karl Kleinpaste",
-	"Matthew Talbert",
-	"Peter von Kaehne",
-	"Simon Meers",
-	"Martin Zibricky",
-	"Dmitrijs Ledkovs",
-	"Christopher Bayliss",
-	NULL
-};
+    "Terry Biggs",
+    "Moses McKnight",
+    "Jan Paul Schmidt",
+    "Victor Porton",
+    "Stephen Binks",
+    "Carl Constantine",
+    "Jp Robinson",
+    "Andy Piper",
+    "Karl Kleinpaste",
+    "Matthew Talbert",
+    "Peter von Kaehne",
+    "Simon Meers",
+    "Martin Zibricky",
+    "Dmitrijs Ledkovs",
+    "Christopher Bayliss",
+    NULL};
 
 static const gchar *documenters[] = {
-	"Pierre Benz",
-	"Andy Piper",
-	"Peter von Kaehne",
-	"Karl Kleinpaste",
-	"Matthew Talbert",
-	"Simon Meers",
-	NULL
-};
+    "Pierre Benz",
+    "Andy Piper",
+    "Peter von Kaehne",
+    "Karl Kleinpaste",
+    "Matthew Talbert",
+    "Simon Meers",
+    NULL};
 
 static gchar *translators =
     "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat\nMartin Zibricky\nAri Constancio\nGertjan Francke\nEicke Godehardt\nAndy Piper\nThomas Abthorpe\nEeli Kaikkonen";
@@ -80,7 +78,7 @@ static gchar *translators =
  */
 
 static void
-on_dialog_response(GtkDialog * dialog, gint response_id,
+on_dialog_response(GtkDialog *dialog, gint response_id,
 		   gpointer user_data)
 {
 	gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -116,23 +114,17 @@ GtkWidget *gui_create_about_xiphos(void)
 	g_signal_connect(about1, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
 
-	gtk_about_dialog_set_version
-	    (GTK_ABOUT_DIALOG(about1), versionbuild);
-	gtk_about_dialog_set_copyright
-	    (GTK_ABOUT_DIALOG(about1),
-	     _("Copyright © 2000-2015 Xiphos Development Team"));
-	gtk_about_dialog_set_comments
-	    (GTK_ABOUT_DIALOG(about1),
-	     _("\nPowered by The SWORD Project.\nWe would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
+	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(about1), versionbuild);
+	gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(about1),
+				       _("Copyright © 2000-2015 Xiphos Development Team"));
+	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(about1),
+				      _("\nPowered by The SWORD Project.\nWe would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(about1),
 				     "http://xiphos.org/");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(about1), authors);
-	gtk_about_dialog_set_documenters
-	    (GTK_ABOUT_DIALOG(about1), documenters);
-	gtk_about_dialog_set_translator_credits
-	    (GTK_ABOUT_DIALOG(about1), translators);
-	gtk_about_dialog_set_logo
-	    (GTK_ABOUT_DIALOG(about1), about1_logo_pixbuf);
+	gtk_about_dialog_set_documenters(GTK_ABOUT_DIALOG(about1), documenters);
+	gtk_about_dialog_set_translator_credits(GTK_ABOUT_DIALOG(about1), translators);
+	gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(about1), about1_logo_pixbuf);
 
 	set_window_icon(GTK_WINDOW(about1));
 

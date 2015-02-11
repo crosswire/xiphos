@@ -38,30 +38,29 @@
 
 G_DEFINE_TYPE(IpcObject, ipc_object, G_TYPE_OBJECT)
 
-
-gboolean ipc_object_set_current_reference(IpcObject * obj,
-					  gchar * reference,
-					  GError ** error);
-gboolean ipc_object_get_current_reference(IpcObject * obj,
-					  gchar ** reference,
-					  GError ** error);
-gboolean ipc_object_get_next_search_reference(IpcObject * obj,
-					      gchar ** reference,
-					      GError ** error);
+gboolean ipc_object_set_current_reference(IpcObject *obj,
+					  gchar *reference,
+					  GError **error);
+gboolean ipc_object_get_current_reference(IpcObject *obj,
+					  gchar **reference,
+					  GError **error);
+gboolean ipc_object_get_next_search_reference(IpcObject *obj,
+					      gchar **reference,
+					      GError **error);
 
 #include "ipc-interface.h"
 #include "main/url.hh"
 
 static IpcObject *main_ipc_obj;
 
-static void ipc_object_init(IpcObject * obj)
+static void ipc_object_init(IpcObject *obj)
 {
 	g_assert(obj != NULL);
 	obj->references = NULL;
 	obj->current_ref = NULL;
 }
 
-static void ipc_object_class_init(IpcObjectClass * klass)
+static void ipc_object_class_init(IpcObjectClass *klass)
 {
 
 	/**
@@ -119,9 +118,9 @@ static void ipc_object_class_init(IpcObjectClass * klass)
  *
  * Since: 3.2
  */
-gboolean ipc_object_search_performed(IpcObject * obj,
-				     const gchar * search_term,
-				     const int *hits, GError ** error)
+gboolean ipc_object_search_performed(IpcObject *obj,
+				     const gchar *search_term,
+				     const int *hits, GError **error)
 {
 
 	IpcObjectClass *klass = IPC_OBJECT_GET_CLASS(obj);
@@ -146,9 +145,9 @@ gboolean ipc_object_search_performed(IpcObject * obj,
  * Since: 3.2
  */
 
-gboolean ipc_object_navigation_signal(IpcObject * obj,
-				      const gchar * reference,
-				      GError ** error)
+gboolean ipc_object_navigation_signal(IpcObject *obj,
+				      const gchar *reference,
+				      GError **error)
 {
 	obj->current_ref = g_strdup(reference);
 
@@ -170,12 +169,12 @@ gboolean ipc_object_navigation_signal(IpcObject * obj,
  * Since: 3.2
  */
 
-gboolean ipc_object_get_next_search_reference(IpcObject * obj,
-					      gchar ** reference,
-					      GError ** error)
+gboolean ipc_object_get_next_search_reference(IpcObject *obj,
+					      gchar **reference,
+					      GError **error)
 {
 	if (obj->references)
-		*reference = g_strdup((gchar *) obj->references->data);
+		*reference = g_strdup((gchar *)obj->references->data);
 	else
 		*reference = g_strdup("XIPHOS_SEARCH_END");
 
@@ -194,12 +193,12 @@ gboolean ipc_object_get_next_search_reference(IpcObject * obj,
  *
  * Since: 3.2
  */
-gboolean ipc_object_set_current_reference(IpcObject * obj,
-					  gchar * reference,
-					  GError ** error)
+gboolean ipc_object_set_current_reference(IpcObject *obj,
+					  gchar *reference,
+					  GError **error)
 {
 	//easy route
-	main_url_handler((const gchar *) reference, TRUE);
+	main_url_handler((const gchar *)reference, TRUE);
 	//it should be done like this, probably
 	/* g_signal_emit(obj,
 	   "navigate-requested",
@@ -218,9 +217,9 @@ gboolean ipc_object_set_current_reference(IpcObject * obj,
  *
  * Since: 3.2
  */
-gboolean ipc_object_get_current_reference(IpcObject * obj,
-					  gchar ** reference,
-					  GError ** error)
+gboolean ipc_object_get_current_reference(IpcObject *obj,
+					  gchar **reference,
+					  GError **error)
 {
 	*reference = g_strdup(obj->current_ref);
 	return TRUE;
@@ -235,7 +234,7 @@ gboolean ipc_object_get_current_reference(IpcObject * obj,
  *
  * Since: 3.2
  */
-IpcObject *ipc_init_dbus_connection(IpcObject * obj)
+IpcObject *ipc_init_dbus_connection(IpcObject *obj)
 {
 	DBusGConnection *bus = NULL;
 	DBusGProxy *busProxy = NULL;
