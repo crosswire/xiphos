@@ -220,8 +220,7 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox5), remember_search, TRUE, FALSE,
 			   0);
 	gtk_widget_set_tooltip_text(remember_search,
-				    _
-				    ("This is an inclusive (\"AND\") search:\nFind matches showing all words."));
+				    _("This is an inclusive (\"AND\") search:\nFind matches showing all words."));
 	gtk_button_set_relief(GTK_BUTTON(remember_search),
 			      GTK_RELIEF_HALF);
 
@@ -238,8 +237,7 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox5), ss.advanced_search, TRUE, FALSE,
 			   0);
 	gtk_widget_set_tooltip_text(ss.advanced_search,
-				    _
-				    ("Open the separate Advanced Search dialog."));
+				    _("Open the separate Advanced Search dialog."));
 	gtk_button_set_relief(GTK_BUTTON(ss.advanced_search),
 			      GTK_RELIEF_HALF);
 
@@ -318,8 +316,7 @@ void gui_create_search_sidebar(void)
 	ss.rbRegExp =
 	    gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON
 							(ss.rbMultiword),
-							_
-							("Regular expression"));
+							_("Regular expression"));
 	gtk_widget_show(ss.rbRegExp);
 	gtk_box_pack_start(GTK_BOX(vbox2), ss.rbRegExp, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(ss.rbRegExp, -1, 20);

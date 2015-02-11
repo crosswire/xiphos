@@ -134,8 +134,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
-			gui_generic_warning_modal(_
-						  ("can not create "
+			gui_generic_warning_modal(_("can not create "
 						   DOTSWORD));
 		}
 	}
@@ -146,8 +145,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
-			gui_generic_warning_modal(_
-						  ("can not create "
+			gui_generic_warning_modal(_("can not create "
 						   DOTSWORD "/mods.d"));
 		}
 	}
@@ -159,8 +157,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
-			gui_generic_warning_modal(_
-						  ("can not create "
+			gui_generic_warning_modal(_("can not create "
 						   DOTSWORD "/modules"));
 		}
 	}
@@ -194,13 +191,11 @@ int settings_init(int argc, char **argv, int new_configs,
 			rename(backup_name, settings.fnconfigure);
 			gui_init(argc, argv);
 			gui_generic_warning_modal
-			    (_
-			     ("Empty settings file -- backup recovery attempted.\n"
+			    (_("Empty settings file -- backup recovery attempted.\n"
 			      "Some information may have been lost."));
 		} else {
 			gui_generic_warning_modal
-			    (_
-			     ("Empty settings file -- no backup?!? Information lost!"));
+			    (_("Empty settings file -- no backup?!? Information lost!"));
 		}
 		g_free(backup_name);
 	}
@@ -235,8 +230,7 @@ int settings_init(int argc, char **argv, int new_configs,
 			       "Xiphos cannot proceed,\nand will now exit."));
 			exit(1);
 		}
-		gui_generic_warning_modal(_
-					  ("Bible module installation complete."));
+		gui_generic_warning_modal(_("Bible module installation complete."));
 	}
 
 	/* check for template.pad file for studypad */

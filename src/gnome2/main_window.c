@@ -680,8 +680,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 				gui_find_dlg(widgets.html_dict,
 					     sD, FALSE, NULL);
 			} else
-				gui_generic_warning(_
-						    ("Xiphos: No windows."));
+				gui_generic_warning(_("Xiphos: No windows."));
 		}
 		break;
 
@@ -743,11 +742,9 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		else if (state == (GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_SHIFT_MASK)) {	// BSP transient navigate
 			if (biblesync_active_xmit_allowed()) {
 				biblesync_prep_and_xmit(sM, sV);
-				gui_set_statusbar(_
-						  ("BibleSync: Current navigation sent."));
+				gui_set_statusbar(_("BibleSync: Current navigation sent."));
 			} else {
-				gui_generic_warning(_
-						    ("BibleSync: Not speaking."));
+				gui_generic_warning(_("BibleSync: Not speaking."));
 			}
 		}
 		break;

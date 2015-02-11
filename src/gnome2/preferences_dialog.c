@@ -1894,8 +1894,7 @@ void on_combobox16_changed(GtkComboBox * combobox, gpointer user_data)
 	       (settings.special_locale
 		&& (strcmp(settings.special_locale, buf))));
 	if (clear || set)
-		gui_generic_warning(_
-				    ("Locale will take effect after restart."));
+		gui_generic_warning(_("Locale will take effect after restart."));
 
 	if (clear)
 		*buf = '\0';
@@ -2894,8 +2893,7 @@ void ps_button_cut(GtkButton * button, gpointer user_data)
 
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
 			      _("Remove Module?"),
-			      _
-			      ("Are you sure you want to remove the selected module?"));
+			      _("Are you sure you want to remove the selected module?"));
 
 #ifdef HAVE_GTK_310
 	if (gui_yes_no_dialog(str, "dialog-warning")) {

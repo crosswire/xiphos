@@ -369,8 +369,7 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.button_left, FALSE,
 			   FALSE, 0);
 	gtk_widget_set_tooltip_text(navbar_book.button_left,
-				    _
-				    ("Go outward, to the section containing this one"));
+				    _("Go outward, to the section containing this one"));
 
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_left),
 			      GTK_RELIEF_NONE);
@@ -438,8 +437,7 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.button_right, FALSE,
 			   FALSE, 0);
 	gtk_widget_set_tooltip_text(navbar_book.button_right,
-				    _
-				    ("Go inward, to the first subsection"));
+				    _("Go inward, to the first subsection"));
 
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_right),
 			      GTK_RELIEF_NONE);
