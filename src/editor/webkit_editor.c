@@ -36,13 +36,10 @@
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-//#include <editor/gtkhtml-editor.h>
-//#include <gtkhtml/gtkhtml-stream.h>
 
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
 #include "editor/link_dialog.h"
-//#include "editor/html.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -70,28 +67,11 @@ static void change_window_title(GtkWidget *window, const gchar *window_title);
 static gboolean editor_is_dirty(EDITOR *e);
 
 static void _load_file(EDITOR *e, const gchar *filename);
-
 static void _save_file(EDITOR *e);
-
 static void _save_note(EDITOR *e);
-
 static void _save_book(EDITOR *e);
 
 static GList *editors_all = NULL;
-
-/*
-static
-gchar * editor_get_filename(EDITOR * e)
-{
-	return NULL;
-}
-
-static
-void  editor_set_filename(EDITOR * e, const gchar * new_filename)
-{
-	
-}
-*/
 
 /******************************************************************************
  * Name
@@ -178,6 +158,9 @@ action_insert_table_activate_cb(GtkWidget *widget, EDITOR *e)
 G_MODULE_EXPORT void
 action_insert_emoticon_activate_cb(GtkWidget *widget, EDITOR *e)
 {
+	// This is stupid, if we don't have emoticons working, then we sould
+	// remove the button users see.
+
 	//script = g_strdup ("document.execCommand('', null, \"\");");
 }
 
@@ -187,27 +170,22 @@ action_insert_image_activate_cb(GtkWidget *widget, EDITOR *e)
 	gchar *script = NULL;
 	gchar *filename = NULL;
 
-	GtkWidget *dialog =
-	    gtk_file_chooser_dialog_new("Select an image file",
-					NULL,
-					GTK_FILE_CHOOSER_ACTION_OPEN,
+	GtkWidget *dialog = gtk_file_chooser_dialog_new("Select an image file",
+							NULL,
+							GTK_FILE_CHOOSER_ACTION_OPEN,
 #ifdef HAVE_GTK_310
-					"_Cancel", GTK_RESPONSE_CANCEL,
-					"_OK", GTK_RESPONSE_ACCEPT,
+							"_Cancel", GTK_RESPONSE_CANCEL,
+							"_OK", GTK_RESPONSE_ACCEPT,
 #else
-					GTK_STOCK_CANCEL,
-					GTK_RESPONSE_CANCEL,
-					GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+							GTK_STOCK_CANCEL,
+							GTK_RESPONSE_CANCEL,
+							GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
 #endif
-					NULL);
+							NULL);
 
-	// gtk_file_chooser_set_filter  ((GtkFileChooser *)dialog, GtkFileFilter *filter);
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
-		filename =
-		    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
-		script =
-		    g_strdup_printf("document.execCommand('insertImage', null, '%s');",
-				    filename);
+		filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+		script = g_strdup_printf("document.execCommand('insertImage', null, '%s');", filename);
 		editor_execute_script(script, e);
 	}
 
@@ -221,8 +199,7 @@ action_insert_outline_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	gchar *script = NULL;
 
-	script =
-	    g_strdup("document.execCommand('insertHTML', null, \"<OL CLASS=L1><LI> </LI></OL> \");");
+	script = g_strdup("document.execCommand('insertHTML', null, \"<OL CLASS=L1><LI> </LI></OL> \");");
 	editor_execute_script(script, e);
 }
 
@@ -231,8 +208,7 @@ action_justify_right_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	gchar *script = NULL;
 
-	script =
-	    g_strdup("document.execCommand('justifyright', false, false);");
+	script = g_strdup("document.execCommand('justifyright', false, false);");
 	editor_execute_script(script, e);
 }
 
@@ -241,8 +217,7 @@ action_justify_left_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	gchar *script = NULL;
 
-	script =
-	    g_strdup("document.execCommand('justifyleft', false, false);");
+	script = g_strdup("document.execCommand('justifyleft', false, false);");
 	editor_execute_script(script, e);
 }
 
@@ -251,8 +226,7 @@ action_justify_center_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	gchar *script = NULL;
 
-	script =
-	    g_strdup("document.execCommand('justifycenter', false, false);");
+	script = g_strdup("document.execCommand('justifycenter', false, false);");
 	editor_execute_script(script, e);
 }
 
@@ -261,8 +235,7 @@ action_justify_full_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	gchar *script = NULL;
 
-	script =
-	    g_strdup("document.execCommand('justifyfull', false, false);");
+	script = g_strdup("document.execCommand('justifyfull', false, false);");
 	editor_execute_script(script, e);
 }
 
@@ -316,8 +289,7 @@ action_underline_activate_cb(GtkWidget *widget, EDITOR *e)
 	if (buttons_state.nochange)
 		return;
 
-	script =
-	    g_strdup("document.execCommand('underline', false, false);");
+	script = g_strdup("document.execCommand('underline', false, false);");
 	editor_execute_script(script, e);
 }
 
@@ -329,8 +301,7 @@ action_strikethrough_activate_cb(GtkWidget *widget, EDITOR *e)
 	if (buttons_state.nochange)
 		return;
 
-	script =
-	    g_strdup("document.execCommand('strikethrough', false, false);");
+	script = g_strdup("document.execCommand('strikethrough', false, false);");
 	editor_execute_script(script, e);
 }
 
@@ -381,9 +352,8 @@ action_delete_item_activate_cb(GtkWidget *widget, EDITOR *e)
 		main_delete_note(e->module, e->key);
 
 		/* new empty document from template */
-		fname =
-		    g_build_filename(settings.gSwordDir, "studypad.spt",
-				     NULL);
+		fname = g_build_filename(settings.gSwordDir, "studypad.spt",
+					 NULL);
 		XI_message(("action delete item [%s]", fname));
 		text = inhale_text_from_file(fname);
 		g_free(fname);
@@ -411,14 +381,11 @@ void set_button_state(BUTTONS_STATE state, EDITOR *e)
 	GdkColor color;
 #endif
 	gtk_toggle_tool_button_set_active(e->toolitems.bold, state.bold);
-	gtk_toggle_tool_button_set_active(e->toolitems.italic,
-					  state.italic);
-	gtk_toggle_tool_button_set_active(e->toolitems.underline,
-					  state.underline);
-	gtk_toggle_tool_button_set_active(e->toolitems.strike,
-					  state.strike);
-	gtk_combo_box_set_active((GtkComboBox *)e->toolitems.cb,
-				 state.style);
+	gtk_toggle_tool_button_set_active(e->toolitems.italic, state.italic);
+	gtk_toggle_tool_button_set_active(e->toolitems.underline, state.underline);
+	gtk_toggle_tool_button_set_active(e->toolitems.strike, state.strike);
+	gtk_combo_box_set_active((GtkComboBox *)e->toolitems.cb, state.style);
+
 	if (state.color) {
 		XI_message(("state.color: %s", state.color));
 #ifdef HAVE_GTK_34
@@ -452,12 +419,9 @@ colorbutton1_color_set_cb(GtkColorButton *widget, EDITOR *e)
 #else
 	gtk_color_button_get_color((GtkColorButton *)widget, &color);
 	/* FIXME: ugly need something better */
-	color_str =
-	    g_strdup_printf("rgb(%u,%u,%u)", color.red >> 8,
-			    color.green >> 8, color.blue >> 8);
+	color_str = g_strdup_printf("rgb(%u,%u,%u)", color.red >> 8, color.green >> 8, color.blue >> 8);
 #endif
-	forecolor =
-	    g_strdup_printf("document.execCommand('forecolor', null, '%s');", color_str);
+	forecolor = g_strdup_printf("document.execCommand('forecolor', null, '%s');", color_str);
 	editor_execute_script(forecolor, e);
 }
 
@@ -479,12 +443,9 @@ colorbutton_highlight_color_set_cb(GtkColorButton *widget, EDITOR *e)
 #else
 	gtk_color_button_get_color((GtkColorButton *)widget, &color);
 	/* FIXME: ugly need something better */
-	color_str =
-	    g_strdup_printf("rgb(%u,%u,%u)", color.red >> 8,
-			    color.green >> 8, color.blue >> 8);
+	color_str = g_strdup_printf("rgb(%u,%u,%u)", color.red >> 8, color.green >> 8, color.blue >> 8);
 #endif
-	highligntcolor =
-	    g_strdup_printf("document.execCommand('backColor', null, '%s');", color_str);
+	highligntcolor = g_strdup_printf("document.execCommand('backColor', null, '%s');", color_str);
 	editor_execute_script(highligntcolor, e);
 }
 
@@ -529,11 +490,9 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
 #ifdef HAVE_GTK_32
-		fontname =
-		    gtk_font_chooser_get_font((GtkFontChooser *)dialog);
+		fontname = gtk_font_chooser_get_font((GtkFontChooser *)dialog);
 #else
-		fontname =
-		    gtk_font_selection_dialog_get_font_name((GtkFontSelectionDialog *)dialog);
+		fontname = gtk_font_selection_dialog_get_font_name((GtkFontSelectionDialog *)dialog);
 #endif
 		name = g_string_new(fontname);
 		size = get_font_size_from_name(name);
@@ -541,21 +500,16 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 
 		selected_text = editor_get_selected_text(e);
 #ifdef HAVE_GTK_32
-		font_description =
-		    gtk_font_chooser_get_font_desc((GtkFontChooser *)
-						   dialog);
-		fontname =
-		    pango_font_description_get_family(font_description);
+		font_description = gtk_font_chooser_get_font_desc((GtkFontChooser *)
+								  dialog);
+		fontname = pango_font_description_get_family(font_description);
 #else
-		font_description =
-		    pango_font_description_from_string(fontname);
-		fontname =
-		    pango_font_description_get_family(font_description);
+		font_description = pango_font_description_from_string(fontname);
+		fontname = pango_font_description_get_family(font_description);
 #endif
 
-		script =
-		    g_strdup_printf("<SPAN STYLE=\"font-family:%s;font-size:%spx;\">%s</SPAN>",
-				    fontname, size, selected_text);
+		script = g_strdup_printf("<SPAN STYLE=\"font-family:%s;font-size:%spx;\">%s</SPAN>",
+					 fontname, size, selected_text);
 
 		editor_insert_html(script, e);
 	}
@@ -666,8 +620,7 @@ print(WebKitWebView *html, GtkPrintOperationAction action)
 	frame = webkit_web_view_get_main_frame(html);
 	operation = gtk_print_operation_new();
 
-	result =
-	    webkit_web_frame_print_full(frame, operation, action, &error);
+	result = webkit_web_frame_print_full(frame, operation, action, &error);
 
 	g_object_unref(operation);
 	handle_error(&error);
@@ -679,35 +632,28 @@ static gint open_dialog(EDITOR *e)
 {
 	GtkWidget *dialog;
 	gint response;
-	//      GtkFileFilter *filter = gtk_file_filter_new();
 
-	//      gtk_file_filter_add_mime_type(filter,"text/html");
-
-	dialog =
-	    gtk_file_chooser_dialog_new(_("Open"), GTK_WINDOW(e->window),
-					GTK_FILE_CHOOSER_ACTION_OPEN,
+	dialog = gtk_file_chooser_dialog_new(_("Open"), GTK_WINDOW(e->window),
+					     GTK_FILE_CHOOSER_ACTION_OPEN,
 #ifdef HAVE_GTK_310
-					"_Cancel", GTK_RESPONSE_CANCEL,
-					"_Open", GTK_RESPONSE_ACCEPT,
+					     "_Cancel", GTK_RESPONSE_CANCEL,
+					     "_Open", GTK_RESPONSE_ACCEPT,
 #else
-					GTK_STOCK_CANCEL,
-					GTK_RESPONSE_CANCEL,
-					GTK_STOCK_OPEN,
-					GTK_RESPONSE_ACCEPT,
+					     GTK_STOCK_CANCEL,
+					     GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OPEN,
+					     GTK_RESPONSE_ACCEPT,
 #endif
-					NULL);
+					     NULL);
 
-	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
-					    settings.studypaddir);
-	//      gtk_file_chooser_set_filter ((GtkFileChooser*)dialog, filter);
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), settings.studypaddir);
 
 	response = gtk_dialog_run(GTK_DIALOG(dialog));
 
 	if (response == GTK_RESPONSE_ACCEPT) {
 		gchar *new_filename;
 
-		new_filename =
-		    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+		new_filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
 		_load_file(e, new_filename);
 		g_free(new_filename);
 	}
@@ -717,92 +663,29 @@ static gint open_dialog(EDITOR *e)
 	return response;
 }
 
-/*
-static gint
-save_dialog (EDITOR * e)
-{
-	GtkWidget *dialog;
-	const gchar *filename;
-	gint response;
-
-	dialog = gtk_file_chooser_dialog_new (
-		_("Save As"), GTK_WINDOW (e->window),
-		GTK_FILE_CHOOSER_ACTION_SAVE,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
-		NULL);
-
-	gtk_file_chooser_set_do_overwrite_confirmation (
-		GTK_FILE_CHOOSER (dialog), TRUE);
-
-	filename = editor_get_filename (e);
-
-	if (filename != NULL)
-		gtk_file_chooser_set_filename (
-			GTK_FILE_CHOOSER (dialog), filename);
-	else {
-		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), settings.studypaddir); 
-		gtk_file_chooser_set_current_name (
-			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
-	}
-
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-
-	if (response == GTK_RESPONSE_ACCEPT) {
-		gchar *new_filename;
-
-		new_filename = gtk_file_chooser_get_filename (
-			GTK_FILE_CHOOSER (dialog));
-		editor_set_filename (e, new_filename);
-
-		if (e->filename)
-			g_free(e->filename);
-		e->filename = g_strdup(new_filename);
-
-		xml_set_value("Xiphos", "studypad", "lastfile",
-			      e->filename);
-		settings.studypadfilename =
-		    xml_get_value("studypad", "lastfile");
-
-		change_window_title(e->window, e->filename);
-
-		g_free (new_filename);
-	}
-
-	gtk_widget_destroy (dialog);
-
-	return response;
-}
-*/
-
 G_MODULE_EXPORT void action_print_cb(GtkAction *action, EDITOR *e)
 {
 	print(WEBKIT_WEB_VIEW(e->html_widget),
 	      GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG);
 }
 
-G_MODULE_EXPORT void
-action_print_preview_cb(GtkAction *action, EDITOR *e)
+G_MODULE_EXPORT void action_print_preview_cb(GtkAction *action, EDITOR *e)
 {
 	print(WEBKIT_WEB_VIEW(e->html_widget),
 	      GTK_PRINT_OPERATION_ACTION_PREVIEW);
 }
 
-G_MODULE_EXPORT void
-action_quit_activate_cb(GtkWidget *widget, EDITOR *e)
+G_MODULE_EXPORT void action_quit_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	delete_event(NULL, NULL, e);
 }
 
-G_MODULE_EXPORT void
-action_open_activate_cb(GtkWidget *widget, EDITOR *e)
+G_MODULE_EXPORT void action_open_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	open_dialog(e);
 }
 
-G_MODULE_EXPORT void
-action_save_activate_cb(GtkWidget *widget, EDITOR *e)
+G_MODULE_EXPORT void action_save_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	switch (e->type) {
 	case STUDYPAD_EDITOR:
@@ -827,8 +710,7 @@ G_MODULE_EXPORT void action_new_activate_cb(GtkWidget *widget, EDITOR *e)
 	if (e->is_changed)
 		ask_about_saving(e);
 
-	filename =
-	    g_strdup_printf("%s/%s", settings.gSwordDir, "studypad.spt");
+	filename = g_strdup_printf("%s/%s", settings.gSwordDir, "studypad.spt");
 
 	_load_file(e, filename);
 
@@ -875,68 +757,55 @@ G_MODULE_EXPORT void combo_box_changed_cb(GtkComboBox *widget, EDITOR *e)
 
 	switch (choice) {
 	case 0: /* Normal  */
-		script =
-		    "document.execCommand('formatBlock', false, \"div\");";
+		script = "document.execCommand('formatBlock', false, \"div\");";
 		break;
 
 	case 1: /* H1  */
-		script =
-		    "document.execCommand('formatBlock', null, \"H1\");";
+		script = "document.execCommand('formatBlock', null, \"H1\");";
 		break;
 
 	case 2: /* H2 */
-		script =
-		    "document.execCommand('formatBlock', null, \"H2\");";
+		script = "document.execCommand('formatBlock', null, \"H2\");";
 		break;
 
 	case 3: /* H3  */
-		script =
-		    "document.execCommand('formatBlock', null, \"H3\");";
+		script = "document.execCommand('formatBlock', null, \"H3\");";
 		break;
 
 	case 4: /* H4  */
-		script =
-		    "document.execCommand('formatBlock', null, \"H4\");";
+		script = "document.execCommand('formatBlock', null, \"H4\");";
 		break;
 
 	case 5: /* H5 */
-		script =
-		    "document.execCommand('formatBlock', null, \"H5\");";
+		script = "document.execCommand('formatBlock', null, \"H5\");";
 		break;
 
 	case 6: /* H6  */
-		script =
-		    "document.execCommand('formatBlock', null, \"H6\");";
+		script = "document.execCommand('formatBlock', null, \"H6\");";
 		break;
 
 	case 7: /* Address  */
-		script =
-		    "document.execCommand('formatBlock', null, \"ADDRESS\");";
+		script = "document.execCommand('formatBlock', null, \"ADDRESS\");";
 		break;
 
 	case 8: /* Preformatted  */
-		script =
-		    "document.execCommand('formatBlock', null, \"PRE\");";
+		script = "document.execCommand('formatBlock', null, \"PRE\");";
 		break;
 
 	case 9: /* Bulleted List  insertUnorderedList */
-		script =
-		    "document.execCommand('insertUnorderedList', null, \"\");";
+		script = "document.execCommand('insertUnorderedList', null, \"\");";
 		break;
 
 	case 10: /* Roman Numeral List  */
-		script =
-		    "document.execCommand('insertHTML', null, \"<OL type=I><LI> </LI></OL> \");";
+		script = "document.execCommand('insertHTML', null, \"<OL type=I><LI> </LI></OL> \");";
 		break;
 
 	case 11: /* Numbered List  insertOrderedList */
-		script =
-		    "document.execCommand('insertOrderedList', null, \"\");";
+		script = "document.execCommand('insertOrderedList', null, \"\");";
 		break;
 
 	case 12: /* Alphabetical List  */
-		script =
-		    "document.execCommand('insertHTML', null, \"<OL type=A><LI> </LI></OL> \");";
+		script = "document.execCommand('insertHTML', null, \"<OL type=A><LI> </LI></OL> \");";
 		break;
 
 	default:
@@ -960,8 +829,6 @@ static GtkWidget *editor_new(const gchar *title, EDITOR *e)
 	GError *error = NULL;
 	GtkMenuItem *item;
 	GtkWidget *recent_item;
-	//extern BUTTONS_STATE buttons_state;
-	//GtkRecentFilter *filter;
 
 	buttons_state.nochange = 1;
 
@@ -985,45 +852,29 @@ static GtkWidget *editor_new(const gchar *title, EDITOR *e)
 	e->window = window;
 	gtk_window_set_title(GTK_WINDOW(window), title);
 
-	statusbar =
-	    GTK_WIDGET(gtk_builder_get_object(builder, "statusbar1"));
+	statusbar = GTK_WIDGET(gtk_builder_get_object(builder, "statusbar1"));
 	gtk_widget_hide(statusbar);
 
 	e->toolitems.outline_level = 0;
-	e->toolitems.bold =
-	    GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_bold"));
-	e->toolitems.italic =
-	    GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_italic"));
-	e->toolitems.underline =
-	    GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbuttonunderline"));
-	e->toolitems.strike =
-	    GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_strikethrough"));
-	e->toolitems.open =
-	    GTK_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_open"));
-	e->toolitems.newdoc =
-	    GTK_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_new"));
-	e->toolitems.deletedoc =
-	    GTK_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_delete"));
-	e->toolitems.color =
-	    GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "colorbutton1"));
+	e->toolitems.bold = GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_bold"));
+	e->toolitems.italic = GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_italic"));
+	e->toolitems.underline = GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbuttonunderline"));
+	e->toolitems.strike = GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_strikethrough"));
+	e->toolitems.open = GTK_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_open"));
+	e->toolitems.newdoc = GTK_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_new"));
+	e->toolitems.deletedoc = GTK_TOOL_BUTTON(gtk_builder_get_object(builder, "toolbutton_delete"));
+	e->toolitems.color = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "colorbutton1"));
+	e->toolitems.cb = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(builder, "comboboxtext1"));
 
-	e->toolitems.cb =
-	    GTK_COMBO_BOX_TEXT(gtk_builder_get_object(builder, "comboboxtext1"));
 	gtk_combo_box_set_active((GtkComboBox *)e->toolitems.cb, 0);
 
-	item =
-	    GTK_MENU_ITEM(gtk_builder_get_object(builder, "menuitem_recent"));
+	item = GTK_MENU_ITEM(gtk_builder_get_object(builder, "menuitem_recent"));
 
 	switch (e->type) {
 	case STUDYPAD_EDITOR:
 		gtk_widget_hide(GTK_WIDGET(e->toolitems.deletedoc));
 
-		//filter = gtk_recent_filter_new ();
-		//gtk_recent_filter_add_mime_type ( filter, "text/html");
-
 		recent_item = gtk_recent_chooser_menu_new();
-		//gtk_recent_chooser_set_filter ((GtkRecentChooser*)recent_item,
-		//                                             filter);
 		g_signal_connect(G_OBJECT(recent_item), "item-activated",
 				 G_CALLBACK(recent_item_cb), e);
 		gtk_menu_item_set_submenu(item, recent_item);
@@ -1040,28 +891,21 @@ static GtkWidget *editor_new(const gchar *title, EDITOR *e)
 		break;
 	}
 
-	e->navbar_box =
-	    GTK_WIDGET(gtk_builder_get_object(builder, "box_navbar"));
+	e->navbar_box = GTK_WIDGET(gtk_builder_get_object(builder, "box_navbar"));
 	e->box = GTK_WIDGET(gtk_builder_get_object(builder, "vbox1"));
 
-	scrollwindow =
-	    GTK_WIDGET(gtk_builder_get_object(builder, "scrolledwindow1"));
+	scrollwindow = GTK_WIDGET(gtk_builder_get_object(builder, "scrolledwindow1"));
 	create_editor_window(scrollwindow, e);
 	e->is_changed = FALSE;
 
 	/* This is important */
 	gtk_builder_connect_signals(builder, (EDITOR *)e);
 
-	find_dialog.window =
-	    GTK_WIDGET(gtk_builder_get_object(builder, "dialog_find_replace"));
-	find_dialog.find_entry =
-	    GTK_WIDGET(gtk_builder_get_object(builder, "entry1"));
-	find_dialog.replace_entry =
-	    GTK_WIDGET(gtk_builder_get_object(builder, "entry2"));
-	find_dialog.box_replace =
-	    GTK_WIDGET(gtk_builder_get_object(builder, "box4"));
-	find_dialog.button_replace =
-	    GTK_WIDGET(gtk_builder_get_object(builder, "button_replace"));
+	find_dialog.window = GTK_WIDGET(gtk_builder_get_object(builder, "dialog_find_replace"));
+	find_dialog.find_entry = GTK_WIDGET(gtk_builder_get_object(builder, "entry1"));
+	find_dialog.replace_entry = GTK_WIDGET(gtk_builder_get_object(builder, "entry2"));
+	find_dialog.box_replace = GTK_WIDGET(gtk_builder_get_object(builder, "box4"));
+	find_dialog.button_replace = GTK_WIDGET(gtk_builder_get_object(builder, "button_replace"));
 
 	g_object_unref(builder);
 
@@ -1118,8 +962,7 @@ static void _save_file(EDITOR *e)
 		gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
 						    settings.studypaddir);
 		if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
-			filename =
-			    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+			filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
 			e->filename = g_strdup(filename);
 			GFile *gfile = g_file_parse_name(filename);
 			g_file_replace_contents(gfile, data->str, data->len, NULL, TRUE, G_FILE_CREATE_NONE, NULL, NULL, NULL); //GError **error
@@ -1162,7 +1005,7 @@ static void _load_file(EDITOR *e, const gchar *filename)
 					 ? filename + 5
 					 : filename);
 
-	XI_message(("load file web view load uri [%s]", text));
+	XI_message(("web view load string [%s]", text));
 	webkit_web_view_load_string(WEBKIT_WEB_VIEW(e->html_widget),
 				    text, "text/html", "utf_8", "file://");
 
@@ -1201,9 +1044,7 @@ void editor_load_book(EDITOR *e)
 			g_free(text);
 
 		/* new empty document from template */
-		fname =
-		    g_build_filename(settings.gSwordDir, "studypad.spt",
-				     NULL);
+		fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
 		XI_message(("editor load BOOK [%s]", fname));
 		text = inhale_text_from_file(fname);
 		g_free(fname);
@@ -1292,9 +1133,8 @@ editor_load_note(EDITOR *e, const gchar *module_name, const gchar *key)
 			g_free(text);
 
 		/* new empty document from template */
-		fname =
-		    g_build_filename(settings.gSwordDir, "studypad.spt",
-				     NULL);
+		fname = g_build_filename(settings.gSwordDir, "studypad.spt",
+					 NULL);
 		XI_message(("editor load NOTE [%s]", fname));
 		text = inhale_text_from_file(fname);
 		g_free(fname);
@@ -1356,19 +1196,17 @@ gint ask_about_saving(EDITOR *e)
 	case BOOK_EDITOR:
 	case NOTE_EDITOR:
 		info = gui_new_dialog();
-		info->stock_icon =
-#ifdef HAVE_GTK_310
+		info->stock_icon = #ifdef HAVE_GTK_310
 		    "dialog-warning";
 #else
-		    GTK_STOCK_DIALOG_WARNING;
+GTK_STOCK_DIALOG_WARNING;
 #endif
 
 		buf = g_strdup_printf("%s: %s", e->module, e->key);
 		buf1 = _("Save the changes to document");
 		buf2 = _("before closing?");
-		buf3 =
-		    g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
-				    buf1, buf, buf2);
+		buf3 = g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
+				       buf1, buf, buf2);
 		info->label_top = buf3;
 		info->label2 = _("If you don't save, changes will be permanently lost.");
 		info->save = TRUE;
@@ -1395,11 +1233,10 @@ gint ask_about_saving(EDITOR *e)
 
 	case STUDYPAD_EDITOR:
 		info = gui_new_dialog();
-		info->stock_icon =
-#ifdef HAVE_GTK_310
+		info->stock_icon = #ifdef HAVE_GTK_310
 		    "dialog-warning";
 #else
-		    GTK_STOCK_DIALOG_WARNING;
+		GTK_STOCK_DIALOG_WARNING;
 #endif
 		if (settings.studypadfilename)
 			buf = settings.studypadfilename;
@@ -1407,9 +1244,8 @@ gint ask_about_saving(EDITOR *e)
 			buf = N_("File");
 		buf1 = _("Save the changes to document");
 		buf2 = _("before closing?");
-		buf3 =
-		    g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
-				    buf1, buf, buf2);
+		buf3 = g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
+				       buf1, buf, buf2);
 		info->label_top = buf3;
 		info->label2 = _("If you don't save, changes will be permanently lost.");
 		info->save = TRUE;
@@ -1433,7 +1269,6 @@ static gint _create_new(const gchar *filename, const gchar *key,
 			gint editor_type)
 {
 	EDITOR *editor;
-	//      GtkWidget *vbox = NULL;
 	GtkWidget *toolbar_nav = NULL;
 
 	editor = g_new(EDITOR, 1);
@@ -1449,8 +1284,7 @@ static gint _create_new(const gchar *filename, const gchar *key,
 		editor->module = NULL;
 		editor->key = NULL;
 		editor->filename = NULL;
-		widgets.studypad_dialog =
-		    editor_new(_("StudyPad"), editor);
+		widgets.studypad_dialog = editor_new(_("StudyPad"), editor);
 
 		if (filename) {
 			editor->filename = g_strdup(filename);
@@ -1508,7 +1342,6 @@ static gint _create_new(const gchar *filename, const gchar *key,
 				  editor->treeview);
 		gtk_paned_set_position(GTK_PANED(hpaned1), 125);
 		gtk_tree_view_expand_all((GtkTreeView *)editor->treeview);
-//gtk_tree_view_collapse_all((GtkTreeView *)editor->treeview);
 // then we should expand on the item to which we've opened for edit.
 
 #ifdef HAVE_GTK_310
