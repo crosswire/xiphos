@@ -1196,7 +1196,8 @@ gint ask_about_saving(EDITOR *e)
 	case BOOK_EDITOR:
 	case NOTE_EDITOR:
 		info = gui_new_dialog();
-		info->stock_icon = #ifdef HAVE_GTK_310
+		info->stock_icon =
+#ifdef HAVE_GTK_310
 		    "dialog-warning";
 #else
 GTK_STOCK_DIALOG_WARNING;
@@ -1233,7 +1234,8 @@ GTK_STOCK_DIALOG_WARNING;
 
 	case STUDYPAD_EDITOR:
 		info = gui_new_dialog();
-		info->stock_icon = #ifdef HAVE_GTK_310
+		info->stock_icon =
+#ifdef HAVE_GTK_310
 		    "dialog-warning";
 #else
 		GTK_STOCK_DIALOG_WARNING;
