@@ -977,8 +977,7 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	    UI_GET_ITEM(gxml, "togglebutton_sync");
 	gtk_widget_show(editor->navbar.button_sync);
 	gtk_widget_set_tooltip_text(editor->navbar.button_sync,
-				    _
-				    ("Synchronize this window's scrolling with the main window"));
+				    _("Synchronize this window's scrolling with the main window"));
 	editor->navbar.button_book_up = UI_GET_ITEM(gxml, "eventbox9");
 	editor->navbar.button_book_down = UI_GET_ITEM(gxml, "eventbox6");
 	editor->navbar.button_chapter_up = UI_GET_ITEM(gxml, "eventbox8");

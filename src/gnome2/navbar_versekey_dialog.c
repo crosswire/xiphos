@@ -945,8 +945,7 @@ GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog)
 	    UI_GET_ITEM(gxml, "togglebutton_sync");
 	gtk_widget_show(dialog->navbar.button_sync);
 	gtk_widget_set_tooltip_text(dialog->navbar.button_sync,
-				    _
-				    ("Synchronize this window's scrolling with the main window"));
+				    _("Synchronize this window's scrolling with the main window"));
 	gtk_widget_hide(dialog->navbar.button_history_back);
 	gtk_widget_hide(dialog->navbar.button_history_next);
 	gtk_widget_hide(dialog->navbar.button_history_menu);

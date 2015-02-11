@@ -878,8 +878,7 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 
 	gtk_widget_show(navbar_parallel.button_sync);
 	gtk_widget_set_tooltip_text(navbar_parallel.button_sync,
-				    _
-				    ("Synchronize this window's scrolling with the main window"));
+				    _("Synchronize this window's scrolling with the main window"));
 	gtk_widget_hide(navbar_parallel.button_history_back);
 	gtk_widget_hide(navbar_parallel.button_history_next);
 	gtk_widget_hide(navbar_parallel.button_history_menu);

@@ -405,8 +405,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_entry_set_text(GTK_ENTRY(GTK_BIN(combo_size)->child), _("+0"));
 #endif
 	checkbutton_no_font =
-	    gtk_check_button_new_with_label(_
-					    ("Use the default font for this module"));
+	    gtk_check_button_new_with_label(_("Use the default font for this module"));
 	gtk_widget_show(checkbutton_no_font);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (checkbutton_no_font), mf->no_font);

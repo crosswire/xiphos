@@ -1267,9 +1267,7 @@ gint ask_about_saving(EDITOR * e)
 		    ("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
 		     buf1, buf, buf2);
 		info->label_top = buf3;
-		info->label2 =
-		    _
-		    ("If you don't save, changes will be permanently lost.");
+		info->label2 = _("If you don't save, changes will be permanently lost.");
 		info->save = TRUE;
 		info->cancel = TRUE;
 		info->no_save = TRUE;
@@ -1311,9 +1309,7 @@ gint ask_about_saving(EDITOR * e)
 		    ("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
 		     buf1, buf, buf2);
 		info->label_top = buf3;
-		info->label2 =
-		    _
-		    ("If you don't save, changes will be permanently lost.");
+		info->label2 = _("If you don't save, changes will be permanently lost.");
 		info->save = TRUE;
 		info->cancel = TRUE;
 		info->no_save = TRUE;

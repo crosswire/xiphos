@@ -1387,8 +1387,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate(GtkMenuItem * menuitem,
 	for (s = info->text1; *s; ++s) {
 		if (!isalnum(*s) && (*s != '_')) {
 			gui_generic_warning_modal
-			    (_
-			     ("Module names must contain [A-Za-z0-9_] only."));
+			    (_("Module names must contain [A-Za-z0-9_] only."));
 			goto out1;
 		}
 	}
@@ -1438,8 +1437,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate(GtkMenuItem * menuitem,
 			conf_new);
 	if ((result = popen(workstr->str, "r")) == NULL) {
 		g_string_printf(workstr,
-				_
-				("Failed to create new configuration:\n%s"),
+				_("Failed to create new configuration:\n%s"),
 				strerror(errno));
 		gui_generic_warning_modal(workstr->str);
 		goto out2;
@@ -1448,8 +1446,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate(GtkMenuItem * menuitem,
 		if (fgets(output, 256, result) != NULL) {
 			g_string_truncate(workstr, 0);
 			g_string_append(workstr,
-					_
-					("Configuration build error:\n\n"));
+					_("Configuration build error:\n\n"));
 			g_string_append(workstr, output);
 			gui_generic_warning_modal(workstr->str);
 			goto out2;	// necessary?  advisable?
