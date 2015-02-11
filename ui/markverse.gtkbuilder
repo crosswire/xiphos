@@ -80,7 +80,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button3">
-                <property name="label">Unmark</property>
+                <property name="label" translatable="yes">Unmark</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
