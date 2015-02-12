@@ -922,14 +922,21 @@ void create_mainwindow(void)
 	/**widgets.epaned********/
 	widgets.epaned = UI_HPANE();
 	gtk_widget_show(widgets.epaned);
+#ifdef HAVE_GTK_314
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.epaned), 0);
+#else
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.epaned), 4);
+#endif
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE, 0);
 
 	UI_VBOX(widgets.vboxMain, FALSE, 0);
 	gtk_widget_show(widgets.vboxMain);
-	gtk_paned_pack2(GTK_PANED(widgets.epaned), widgets.vboxMain,
-			TRUE, TRUE);
+	gtk_paned_pack2(GTK_PANED(widgets.epaned), widgets.vboxMain, TRUE, TRUE);
+#ifdef HAVE_GTK_314
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.vboxMain), 0);
+#else
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.vboxMain), 2);
+#endif
 
 	/*
 	 * notebook to have separate passages opened at once
