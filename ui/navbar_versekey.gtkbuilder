@@ -578,6 +578,7 @@
       <packing>
         <property name="expand">True</property>
         <property name="fill">True</property>
+        <property name="padding">2</property>
         <property name="position">7</property>
       </packing>
     </child>
