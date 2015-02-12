@@ -23,6 +23,7 @@
 #define __WK_HTML_H__
 
 #undef DATADIR
+
 #ifdef USE_WEBKIT2
 #include <webkit2/webkit2.h>
 #else
@@ -66,10 +67,8 @@ struct _WkHtmlClass
 	WebKitWebViewClass parent;
 
 	/* Signals */
-	void (*uri_selected)(WkHtml *view,
-			     gchar *uri, gboolean handled);
-	gboolean (*frame_selected)(WkHtml *view,
-				   gchar *uri, gboolean handled);
+	void (*uri_selected)(WkHtml *view, gchar *uri, gboolean handled);
+	gboolean (*frame_selected)(WkHtml *view, gchar *uri, gboolean handled);
 	void (*title_changed)(WkHtml *view, const gchar *new_title);
 	void (*popupmenu_requested)(WkHtml *view, const gchar *link);
 };
@@ -79,8 +78,7 @@ WkHtml *wk_html_new(DIALOG_DATA *dialog, gboolean is_dialog, gint pane);
 void wk_html_set_base_uri(WkHtml *html, const gchar *uri);
 void wk_html_open_stream(WkHtml *html, const gchar *mime);
 void wk_html_write(WkHtml *html, const gchar *data, gint len);
-void wk_html_printf(WkHtml *html,
-		    gchar *format, ...) G_GNUC_PRINTF(2, 3);
+void wk_html_printf(WkHtml *html, gchar *format, ...) G_GNUC_PRINTF(2, 3);
 void wk_html_close(WkHtml *html);
 
 void wk_html_render_data(WkHtml *html, const char *data, guint32 len);
@@ -88,9 +86,6 @@ void wk_html_render_data(WkHtml *html, const char *data, guint32 len);
 void wk_html_frames(WkHtml *html, gboolean enable);
 gboolean wk_html_find(WkHtml *html, const gchar *find_string);
 gboolean wk_html_find_again(WkHtml *html, gboolean forward);
-void wk_html_set_find_props(WkHtml *html,
-			    const char *str,
-			    gboolean match_case, gboolean wrap);
 void wk_html_jump_to_anchor(WkHtml *html, gchar *anchor);
 void wk_html_copy_selection(WkHtml *html);
 
