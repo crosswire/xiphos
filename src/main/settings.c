@@ -1098,6 +1098,13 @@ void load_settings_structure(void)
 		settings.prayerlist = 1;
 	}
 
+	if ((buf = xml_get_value("misc", "statusbar"))) {
+		settings.statusbar = atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc", "statusbar", "1");
+		settings.statusbar = 1;
+	}
+
 #if 1
 	settings.browsing = 1; /* unconditional - no longer toggle-able. */
 #else
