@@ -149,6 +149,9 @@ void on_checkbutton_xrefs_in_verse_list_toggled(GtkToggleButton *
 void on_checkbutton_prayerlist_toggled(GtkToggleButton *
 					   togglebutton,
 				       gpointer user_data);
+void on_checkbutton_statusbar_toggled(GtkToggleButton *
+					  togglebutton,
+				      gpointer user_data);
 void on_basecombobox1_changed(GtkComboBox *combobox,
 			      gpointer user_data);
 

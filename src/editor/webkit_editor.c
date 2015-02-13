@@ -1200,7 +1200,7 @@ gint ask_about_saving(EDITOR *e)
 #ifdef HAVE_GTK_310
 		    "dialog-warning";
 #else
-GTK_STOCK_DIALOG_WARNING;
+		    GTK_STOCK_DIALOG_WARNING;
 #endif
 
 		buf = g_strdup_printf("%s: %s", e->module, e->key);
@@ -1238,7 +1238,7 @@ GTK_STOCK_DIALOG_WARNING;
 #ifdef HAVE_GTK_310
 		    "dialog-warning";
 #else
-		GTK_STOCK_DIALOG_WARNING;
+		    GTK_STOCK_DIALOG_WARNING;
 #endif
 		if (settings.studypadfilename)
 			buf = settings.studypadfilename;

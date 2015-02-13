@@ -204,6 +204,9 @@ struct _settings
 	/* if true use prayerlist */
 	int prayerlist;
 
+	/* statusbar setting */
+	int statusbar;
+
 	/* if true parallel tab is showing */
 	int paratab_showing;
 
