@@ -1139,7 +1139,7 @@ void create_mainwindow(void)
 
 	widgets.appbar = gtk_statusbar_new();
 
-#ifdef HAVE_GTK314
+#ifdef HAVE_GTK_314
 	if (settings.statusbar) {
 		gtk_widget_show(widgets.appbar);
 	}
