@@ -1139,13 +1139,10 @@ void create_mainwindow(void)
 
 	widgets.appbar = gtk_statusbar_new();
 
-#ifdef HAVE_GTK_314
 	if (settings.statusbar) {
 		gtk_widget_show(widgets.appbar);
 	}
-#else
-	gtk_widget_show(widgets.appbar);
-#endif
+
 #ifndef USE_GTK_3
 	gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(widgets.appbar),
 					  TRUE);

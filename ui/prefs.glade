@@ -1491,6 +1491,26 @@
                           </packing>
                         </child>
                         <child>
+                          <widget class="GtkCheckButton" id="checkbutton_statusbar">
+                            <property name="label" translatable="yes">Enable Statusbar</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="tooltip" translatable="yes">Enable/Disable Statusbar.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">Enable Prayer Lists Checkbox</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">10</property>
+                          </packing>
+                        </child>
+                        <child>
                           <widget class="GtkHBox" id="hbox3">
                             <property name="visible">True</property>
                             <property name="homogeneous">True</property>
@@ -1581,7 +1601,7 @@
                             </child>
                           </widget>
                           <packing>
-                            <property name="position">10</property>
+                            <property name="position">11</property>
                           </packing>
                         </child>
                         <child>
