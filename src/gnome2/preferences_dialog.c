@@ -111,6 +111,7 @@ struct _preferences_check_buttons
 	GtkWidget *xrefs_in_verse_list;
 	GtkWidget *show_splash_screen;
 	GtkWidget *prayerlist;
+	GtkWidget *statusbar;
 
 	GtkWidget *show_in_viewer;
 	GtkWidget *show_in_dictionary;
@@ -1424,6 +1425,33 @@ on_checkbutton_prayerlist_toggled(GtkToggleButton *togglebutton,
 
 /******************************************************************************
  * Name
+ *   on_checkbutton_statusbar_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_checkbutton_statusbar_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_checkbutton_statusbar_toggled(GtkToggleButton *togglebutton, gpointer user_data)
+{
+	xml_set_value("Xiphos", "misc", "statusbar",
+		      (gtk_toggle_button_get_active(togglebutton) ? "1" : "0"));
+	settings.statusbar = gtk_toggle_button_get_active(togglebutton);
+
+	if (settings.statusbar)
+		gtk_widget_show(widgets.appbar);
+	else
+		gtk_widget_hide(widgets.appbar);
+}
+
+/******************************************************************************
+ * Name
  *   on_folder_changed
  *
  * Synopsis
@@ -2144,6 +2172,8 @@ static void setup_check_buttons(void)
 				     settings.xrefs_in_verse_list);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check_button.prayerlist),
 				     settings.prayerlist);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check_button.statusbar),
+				     settings.statusbar);
 
 	/* v-- BibleSync --v */
 	/* toggles */
@@ -2215,6 +2245,9 @@ static void setup_check_buttons(void)
 			 NULL);
 	g_signal_connect(check_button.prayerlist, "toggled",
 			 G_CALLBACK(on_checkbutton_prayerlist_toggled),
+			 NULL);
+	g_signal_connect(check_button.statusbar, "toggled",
+			 G_CALLBACK(on_checkbutton_statusbar_toggled),
 			 NULL);
 
 	/* v-- BibleSync --v */
@@ -2917,6 +2950,7 @@ static void create_preferences_dialog(void)
 	    UI_GET_ITEM(gxml, "checkbutton_xrefs_in_verse_list");
 	check_button.prayerlist =
 	    UI_GET_ITEM(gxml, "checkbutton_prayerlist");
+	check_button.statusbar = UI_GET_ITEM(gxml, "checkbutton_statusbar");
 
 	/* v-- BibleSync --v */
 	check_button.bs_debug =
