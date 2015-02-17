@@ -3,8 +3,8 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Intermediate Test Bundle 4.0.0g
-03 Feb 2015
+Intermediate Test Bundle 4.0.0h
+17 Feb 2015
 
 - Completed webkit editor, due to replace gtkhtml editor.
 
@@ -15,6 +15,8 @@ Intermediate Test Bundle 4.0.0g
 - Added obsolete module audit, during install and on maintenance page.
 
 - Added more informative "About" for modules.
+
+- Added status bar en/disable.
 
 - Removed BibleSync from Xiphos' source tree. It must be referenced as a
   proper library.
@@ -30,6 +32,8 @@ Intermediate Test Bundle 4.0.0g
 - Huge GTK3 compatibility cleanliness hackery.
 
 - WebKit2 compatibility hackery.
+
+- Fix compiler flag choices.
 ________________________________________________________________
 
 Release 4.0.0

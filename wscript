@@ -14,7 +14,7 @@ preproc.strict_quotes=0
 import waffles.misc
 import waffles.gnome as gnome
 
-VERSION='4.0.0g'
+VERSION='4.0.0h'
 
 APPNAME='xiphos'
 PACKAGE='xiphos'
