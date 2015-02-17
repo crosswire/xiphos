@@ -200,8 +200,8 @@ def configure(conf):
         env['CXXFLAGS']            = []
         env['CXXFLAGS_OPTIMIZED']  = ['-O2']
         env['CXXFLAGS_RELEASE']    = ['-O2']
-        env['CXXFLAGS_DEBUG']      = ['-g', '-DDEBUG', '-ftemplate-depth-25']
-        env['CXXFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG', '-ftemplate-depth-25']
+        env['CXXFLAGS_DEBUG']      = ['-g', '-DDEBUG']
+        env['CXXFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG']
     
     if env['IS_WIN32']:
         ## setup for Winsock on Windows (required for read-aloud)
