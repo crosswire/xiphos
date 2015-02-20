@@ -2452,7 +2452,6 @@ void setup_font_prefs_combobox(void)
 			g_strdup_printf("%s (%s)",
 					main_get_language_map(*language), *language);
 		list = g_list_append(list, real_language);
-		g_free(real_language);
 	}
 	fill_combobox(list, GTK_COMBO_BOX(combo.font_prefs),
 		      NULL, NULL, NULL);
