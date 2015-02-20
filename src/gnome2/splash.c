@@ -534,11 +534,11 @@ static GtkWidget *splash = NULL;
 
 void gui_splash_init()
 {
-	GdkPixbuf *icon_pixbuf;
 	GError *error = NULL;
-	GList *icons = NULL;
 
 	if (settings.showsplash) {
+		GList *icons;
+
 		splash = e_splash_new();
 		if (!splash)
 			return;
@@ -553,7 +553,7 @@ void gui_splash_init()
 		icons = g_list_append(icons, "gs2-48x48.png");
 
 		while (icons != NULL) {
-			icon_pixbuf =
+			GdkPixbuf *icon_pixbuf =
 			    pixbuf_finder(icons->data, 0, &error);
 			if (!icon_pixbuf) {
 				XI_warning(("pixmap file error: %s\n",
@@ -577,9 +577,8 @@ void gui_splash_init()
 
 void gui_splash_step(gchar *text, gdouble progress, gint step)
 {
-	ESplashPrivate *priv;
 	if (settings.showsplash) {
-		priv = E_SPLASH(splash)->priv;
+		ESplashPrivate *priv = E_SPLASH(splash)->priv;
 		gtk_progress_bar_set_text(priv->progressbar, text);
 		gtk_progress_bar_set_fraction(priv->progressbar, progress);
 		e_splash_set_icon_highlight(E_SPLASH(splash), step, TRUE);

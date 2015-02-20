@@ -260,7 +260,6 @@ void frontend_display(const char *tabs)
 
 void shutdown_frontend(void)
 {
-	RESULTS *list_item;
 	if (pixbufs->pixbuf_closed)
 		g_object_unref(pixbufs->pixbuf_closed);
 	if (pixbufs->pixbuf_opened)
@@ -272,7 +271,7 @@ void shutdown_frontend(void)
 	if (list_of_verses) {
 		GList *chaser = list_of_verses;
 		while (chaser) {
-			list_item = (RESULTS *)chaser->data;
+			RESULTS *list_item = (RESULTS *)chaser->data;
 			g_free(list_item->module);
 			g_free(list_item->key);
 			g_free(list_item);

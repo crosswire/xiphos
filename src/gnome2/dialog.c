@@ -165,13 +165,9 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 	GtkWidget *dialog_alert;
 	GtkWidget *dialog_vbox2;
 	GtkWidget *hbox3;
-	GtkWidget *image5;
 	GtkWidget *vbox2;
 	GtkWidget *label7;
-	GtkWidget *label10;
 	GtkWidget *dialog_action_area2;
-	GtkWidget *scrolledwindow;
-	GtkWidget *viewport;
 
 	dialog_alert = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_alert), 5);
@@ -191,7 +187,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 6);
 
 	if (info->stock_icon) {
-		image5 =
+		GtkWidget *image5 =
 #ifdef HAVE_GTK_310
 		    gtk_image_new_from_icon_name
 #else
@@ -223,7 +219,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 	if (info->label2) {
 		gtk_window_set_default_size(GTK_WINDOW(dialog_alert), 380,
 					    200);
-		scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+		GtkWidget *scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 		gtk_widget_show(scrolledwindow);
 		gtk_box_pack_start(GTK_BOX(vbox2), scrolledwindow, TRUE,
 				   TRUE, 0);
@@ -231,11 +227,11 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 					       GTK_POLICY_AUTOMATIC,
 					       GTK_POLICY_AUTOMATIC);
 
-		viewport = gtk_viewport_new(NULL, NULL);
+		GtkWidget *viewport = gtk_viewport_new(NULL, NULL);
 		gtk_widget_show(viewport);
 		gtk_container_add(GTK_CONTAINER(scrolledwindow), viewport);
 
-		label10 = gtk_label_new(info->label2);
+		GtkWidget *label10 = gtk_label_new(info->label2);
 		gtk_widget_show(label10);
 		gtk_container_add(GTK_CONTAINER(viewport), label10);
 		gtk_label_set_justify(GTK_LABEL(label10),
@@ -319,7 +315,6 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 {
 	GtkWidget *dialog_vbox3 = NULL;
 	GtkWidget *hbox4 = NULL;
-	GtkWidget *image6 = NULL;
 	GtkWidget *vbox3 = NULL;
 	GtkWidget *label8 = NULL;
 	GtkWidget *table2 = NULL;
@@ -355,12 +350,12 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 
 	if (info->stock_icon) {
 #ifdef HAVE_GTK_310
-		image6 =
+		GtkWidget *image6 =
 		    gtk_image_new_from_icon_name(info->stock_icon,
 						 GTK_ICON_SIZE_DIALOG);
 
 #else
-		image6 =
+		GtkWidget *image6 =
 		    gtk_image_new_from_stock(info->stock_icon,
 					     GTK_ICON_SIZE_DIALOG);
 #endif
@@ -787,11 +782,10 @@ void gui_generic_warning(const char *message)
 
 gint gui_gs_dialog(GS_DIALOG *info)
 {
-	GtkWidget *dialog;
 	static gboolean is_running = FALSE;
 
 	if (!is_running) {
-		dialog = create_dialog_request(info);
+		GtkWidget *dialog = create_dialog_request(info);
 		retval = 4;
 		is_running = TRUE;
 		gtk_dialog_run((GtkDialog *)dialog);
@@ -820,11 +814,10 @@ gint gui_gs_dialog(GS_DIALOG *info)
 
 gint gui_alert_dialog(GS_DIALOG *info)
 {
-	GtkWidget *dialog;
 	static gboolean is_running = FALSE;
 
 	if (!is_running) {
-		dialog = create_dialog_alert(info); //gs_dialog_build(info);
+		GtkWidget *dialog = create_dialog_alert(info); //gs_dialog_build(info);
 		retval = 4;
 		is_running = TRUE;
 		gtk_dialog_run((GtkDialog *)dialog);
@@ -853,11 +846,10 @@ gint gui_alert_dialog(GS_DIALOG *info)
 
 gint gui_close_confirmation_dialog(GS_DIALOG *info)
 {
-	GtkWidget *dialog;
 	static gboolean is_running = FALSE;
 
 	if (!is_running) {
-		dialog = create_dialog_alert(info);
+		GtkWidget *dialog = create_dialog_alert(info);
 		gtk_dialog_add_button(GTK_DIALOG(dialog),
 				      _("Close _without Saving"),
 				      GTK_RESPONSE_NO);

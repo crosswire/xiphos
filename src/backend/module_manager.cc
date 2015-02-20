@@ -111,6 +111,9 @@ void GSStatusReporter::statusUpdate(double dltotal,
 }
 
 ModuleManager::ModuleManager()
+	: mgr(NULL),
+	  list_mgr(NULL),
+	  installMgr(NULL)
 {
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	baseDir = (envhomedir) ? envhomedir : ".";
@@ -125,12 +128,11 @@ ModuleManager::~ModuleManager()
 char *backend_mod_mgr_get_config_entry(char *module_name,
 				       const char *entry)
 {
-	SWModule *mod;
 	ModMap::iterator it; //-- iteratior
 
 	it = mgr->Modules.find(module_name);
 	if (it != mgr->Modules.end()) {
-		mod = (*it).second;
+		SWModule *mod = (*it).second;
 		return g_strdup((char *)mod->getConfigEntry(entry));
 	} else
 		return NULL;
@@ -164,10 +166,9 @@ int backend_mod_mgr_is_module(const char *mod_name)
 MOD_MGR *backend_module_mgr_get_next_module(void)
 {
 	MOD_MGR *mod_info = NULL;
-	SWModule *module;
 
 	if (list_it != list_end) {
-		module = list_it->second;
+		SWModule *module = list_it->second;
 		mod_info = g_new(MOD_MGR, 1);
 		gchar *name = g_strdup(module->getName());
 
@@ -224,7 +225,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->description = g_strdup(module->getDescription());
 			mod_info->locked =
 			    ((module->getConfigEntry("CipherKey")) ? 1 : 0);
-			list_it++;
+			++list_it;
 			g_free(name);
 			return (MOD_MGR *)mod_info;
 		}
@@ -414,7 +415,6 @@ int backend_local_install_module(const char *destdir,
 
 GList *backend_module_mgr_list_remote_sources(void)
 {
-	MOD_MGR_SOURCE *mms;
 	GList *retval = NULL;
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
@@ -427,8 +427,8 @@ GList *backend_module_mgr_list_remote_sources(void)
 
 	for (InstallSourceMap::iterator it =
 		 inst_mgr->sources.begin();
-	     it != inst_mgr->sources.end(); it++) {
-		mms = g_new(MOD_MGR_SOURCE, 1);
+	     it != inst_mgr->sources.end(); ++it) {
+		MOD_MGR_SOURCE *mms = g_new(MOD_MGR_SOURCE, 1);
 		mms->caption = g_strdup(it->second->caption);
 		mms->type = g_strdup(it->second->type);
 		mms->source = g_strdup(it->second->source);
@@ -460,7 +460,6 @@ GList *backend_module_mgr_list_remote_sources(void)
 
 GList *backend_module_mgr_list_local_sources(void)
 {
-	MOD_MGR_SOURCE *mms;
 	GList *retval = NULL;
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
@@ -477,7 +476,7 @@ GList *backend_module_mgr_list_local_sources(void)
 		sourceEnd = sourcesSection->second.upper_bound("DIRSource");
 
 		while (sourceBegin != sourceEnd) {
-			mms = g_new(MOD_MGR_SOURCE, 1);
+			MOD_MGR_SOURCE *mms = g_new(MOD_MGR_SOURCE, 1);
 			InstallSource *is = new InstallSource("DIR",
 							      sourceBegin->second.c_str());
 			mms->caption = is->caption;
@@ -488,7 +487,7 @@ GList *backend_module_mgr_list_local_sources(void)
 			mms->pass = is->p;
 			mms->uid = is->uid;
 			retval = g_list_append(retval, (MOD_MGR_SOURCE *)mms);
-			sourceBegin++;
+			++sourceBegin;
 		}
 	}
 	delete installConf;

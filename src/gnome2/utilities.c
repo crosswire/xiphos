@@ -559,7 +559,6 @@ void gui_load_module_tree(GtkWidget *tree, gboolean limited)
 	GtkTreeIter prayerlist;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
-	MOD_MGR *info;
 
 	store =
 	    gtk_tree_store_new(UTIL_N_COLUMNS, G_TYPE_STRING,
@@ -641,7 +640,7 @@ void gui_load_module_tree(GtkWidget *tree, gboolean limited)
 
 	tmp2 = tmp;
 	while (tmp2 != NULL) {
-		info = (MOD_MGR *)tmp2->data;
+		MOD_MGR *info = (MOD_MGR *)tmp2->data;
 
 		/* see comment on similar code in src/main/sidebar.cc. */
 
@@ -892,14 +891,13 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget *menu,
 			     GCallback callback)
 {
 	GList *tmp = NULL;
-	GtkWidget *item;
 
 	if (mod_type == -1)
 		return;
 
 	tmp = get_list(mod_type);
 	while (tmp != NULL) {
-		item = gtk_menu_item_new_with_label((gchar *)tmp->data);
+		GtkWidget *item = gtk_menu_item_new_with_label((gchar *)tmp->data);
 		gtk_widget_show(item);
 		g_signal_connect(G_OBJECT(item), "activate",
 				 G_CALLBACK(callback), (gchar *)tmp->data);
@@ -1041,10 +1039,9 @@ void language_init(void)
 static void language_clear()
 {
 	int i, j;
-	char **s;
 
 	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
-		s = language_set[i].ptr;
+		char **s = language_set[i].ptr;
 		for (j = 0; j < language_set[i].count; ++j) {
 			g_free(s[j]);
 			s[j] = NULL;
@@ -1108,14 +1105,13 @@ language_make_list(GList *modlist,
 		   void (*add)(GtkTreeModel *, GtkTreeIter, gchar **),
 		   gboolean limited)
 {
-	MOD_MGR *info;
 	int i;
 
 	language_clear();
 
 	/* append */
 	while (modlist != NULL) {
-		info = (MOD_MGR *)modlist->data;
+		MOD_MGR *info = (MOD_MGR *)modlist->data;
 
 		/* mod.mgr: special extra lists */
 		if ((update != NULL) && (uninstalled != NULL)) {
@@ -1315,7 +1311,7 @@ GdkPixbuf *pixbuf_finder(const char *image, int size, GError **error)
 void
 HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor)
 {
-	int len = strlen(text), offset = 0;
+	int len = strlen(text);
 
 	XiphosHtml *html = XIPHOS_HTML(gtkText);
 	XIPHOS_HTML_OPEN_STREAM(html, "text/html");
@@ -1330,7 +1326,7 @@ HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor)
 		// first, scribble out everything up to the closing </head>.
 		buf = strstr(text, "</head>"); // yes, lowercase.
 		assert(buf != NULL);	   // don't be so stupid as not to include <head></head>.
-		offset = buf - text;
+		int offset = buf - text;
 		XIPHOS_HTML_WRITE(html, text, offset);
 		len -= offset;
 
@@ -1473,19 +1469,19 @@ void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
 {
 	GDir *dir;
 	const gchar *file;
-	gchar *complete_file;
 	GsfOutfile *child;
 
 	child = GSF_OUTFILE(gsf_outfile_new_child(output, name, TRUE));
 	dir = g_dir_open(path, 0, NULL);
 	while ((file = g_dir_read_name(dir))) {
-		complete_file = g_build_filename(path, file, NULL);
+		gchar *complete_file = g_build_filename(path, file, NULL);
 		if (g_file_test(complete_file, G_FILE_TEST_IS_DIR))
 			archive_adddir(GSF_OUTFILE(child), complete_file,
 				       file);
 		else
 			archive_addfile(GSF_OUTFILE(child), complete_file,
 					file);
+		g_free(complete_file);
 	}
 	g_dir_close(dir);
 }

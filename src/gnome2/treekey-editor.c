@@ -119,8 +119,6 @@ G_MODULE_EXPORT void
 on_add_sibling_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	INFO *info;
-	char *buf = NULL;
-	unsigned long l_offset = 0;
 	EDITOR *e = (EDITOR *)user_data;
 	GtkWidget *tree = GTK_WIDGET(e->treeview);
 	gint test;
@@ -144,11 +142,11 @@ on_add_sibling_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 	test = gui_gs_dialog(d);
 	if (test == GS_OK) {
-		l_offset = main_treekey_append_sibling(info->book,
-						       d->text1,
-						       info->offset);
+		unsigned long l_offset = main_treekey_append_sibling(info->book,
+								     d->text1,
+								     info->offset);
 		if (l_offset) {
-			buf = g_strdup_printf("%ld", l_offset);
+			char *buf = g_strdup_printf("%ld", l_offset);
 			gtk_tree_store_insert_after(GTK_TREE_STORE(info->model),
 						    &sibling, NULL,
 						    &info->iter);
@@ -178,8 +176,6 @@ G_MODULE_EXPORT void
 on_add_child_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	INFO *info;
-	char *buf = NULL;
-	unsigned long l_offset = 0;
 	EDITOR *e = (EDITOR *)user_data;
 	GtkWidget *tree = GTK_WIDGET(e->treeview);
 	gint test;
@@ -203,10 +199,12 @@ on_add_child_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 	test = gui_gs_dialog(d);
 	if (test == GS_OK) {
-		l_offset = main_treekey_append_child(info->book,
-						     d->text1,
-						     info->offset);
+		unsigned long l_offset = main_treekey_append_child(info->book,
+								   d->text1,
+								   info->offset);
 		if (l_offset) {
+			char *buf = NULL;
+
 			gtk_tree_store_set(GTK_TREE_STORE(info->model), /* change treenode pixbuf from leaf to branch */
 					   &info->iter,
 					   COL_OPEN_PIXBUF,

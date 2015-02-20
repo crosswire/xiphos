@@ -85,9 +85,7 @@ BookMarksPixbufs *bm_pixbufs;
 void gui_verselist_to_bookmarks(GList *verses, gint save_as_single)
 {
 	gint test;
-	gchar *tmpbuf;
 	gchar *module_name = NULL;
-	GString *str;
 	GtkTreeIter parent;
 	GtkTreeIter iter;
 	GS_DIALOG *info;
@@ -158,11 +156,11 @@ void gui_verselist_to_bookmarks(GList *verses, gint save_as_single)
 				   COL_CAPTION, info->text1,
 				   COL_KEY, NULL, COL_MODULE, NULL, -1);
 		//              set_results_position((char) 1); // TOP
-		str = g_string_new(" ");
+		GString *str = g_string_new(" ");
 		while (verses) {
 			list_item = (RESULTS *)verses->data;
 			module_name = list_item->module;
-			tmpbuf = list_item->key;
+			gchar *tmpbuf = list_item->key;
 			g_string_printf(str, "%s, %s", tmpbuf,
 					module_name);
 			XI_message(("bookmark: %s", str->str));
@@ -687,14 +685,12 @@ static gboolean button_release_event(GtkWidget *widget,
 {
 	GtkTreeSelection *selection = NULL;
 	GtkTreeIter selected;
-	GtkTreePath *path;
 	gboolean is_selected = FALSE;
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
 	gchar *mod_desc = NULL;
 	gchar *description = NULL;
-	gchar *url = NULL;
 	button_one = FALSE;
 
 	selection = gtk_tree_view_get_selection(bookmark_tree);
@@ -714,7 +710,7 @@ static gboolean button_release_event(GtkWidget *widget,
 			gtk_widget_set_sensitive(menu.remove, FALSE);
 		} else {
 			/* click on treeview folder to expand or collapse it */
-			path =
+			GtkTreePath *path =
 			    gtk_tree_model_get_path(GTK_TREE_MODEL(model),
 						    &selected);
 			if (gtk_tree_view_row_expanded(bookmark_tree, path))
@@ -781,6 +777,7 @@ static gboolean button_release_event(GtkWidget *widget,
 	}
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected) && key != NULL) {
+			gchar *url = NULL;
 			if (!strcmp(module, "studypad"))
 				url =
 				    g_strdup_printf("passagestudy.jsp?action=showStudypad&"

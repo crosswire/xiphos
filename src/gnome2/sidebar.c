@@ -203,7 +203,6 @@ gboolean gui_expand_treeview_to_path(GtkTreeView *tree,
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 	GtkTreePath *path;
-	GtkTreeSelection *selection;
 	gchar **work_buf = NULL;
 	gint i = 3;
 
@@ -225,7 +224,8 @@ gboolean gui_expand_treeview_to_path(GtkTreeView *tree,
 						(gchar *)tmp_path_string)) {
 		gtk_tree_model_get(model, &iter, 3, &mod, -1);
 		if (!g_utf8_collate(mod, book_name)) {
-			selection = gtk_tree_view_get_selection(tree);
+			GtkTreeSelection *selection = gtk_tree_view_get_selection(tree);
+
 			path = gtk_tree_path_new_from_string((gchar *)
 							     tmp_path_string);
 			gtk_tree_view_expand_to_path(tree, path);
@@ -951,11 +951,10 @@ on_send_list_via_biblesync_activate(GtkMenuItem *menuitem,
 		GList *verse;
 		GString *vlist = g_string_new("");
 		gboolean first = TRUE;
-		RESULTS *item;
 
 		for (verse = list_of_verses; verse;
 		     verse = g_list_next(verse)) {
-			item = (RESULTS *)verse->data;
+			RESULTS *item = (RESULTS *)verse->data;
 			if (!first) {
 				vlist = g_string_append_c(vlist, ';');
 			}
@@ -977,10 +976,9 @@ on_preload_history_from_verse_list_activate(GtkMenuItem *menuitem,
 					    gpointer user_data)
 {
 	GList *verse;
-	RESULTS *item;
 
 	for (verse = list_of_verses; verse; verse = g_list_next(verse)) {
-		item = (RESULTS *)verse->data;
+		RESULTS *item = (RESULTS *)verse->data;
 		main_fake_tab_history_item((char *)
 					   main_getShortText(item->key));
 	}
@@ -1262,7 +1260,6 @@ static gboolean tree_key_press_cb(GtkWidget *widget,
 	if (!key)
 		return FALSE;
 
-	XI_warning(("%d", event->keyval));
 	if (event) {
 
 		switch (event->keyval) {

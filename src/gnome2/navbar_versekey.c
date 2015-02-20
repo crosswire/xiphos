@@ -201,7 +201,6 @@ static gboolean select_book_button_press_callback(GtkWidget *widget,
 	time_diff =
 	    ((end_time.tv_sec - start_time.tv_sec) * 1000000) +
 	    (end_time.tv_usec - start_time.tv_usec);
-	time_add = 0;
 	//if (time_diff > 10000)
 	time_add = (guint32)(time_diff / 1000);
 #endif

@@ -213,7 +213,6 @@ gchar *editor_get_selected_text(EDITOR *e)
 	WebKitDOMDocument *dom_document;
 	WebKitDOMDOMWindow *window = NULL;
 	WebKitDOMDOMSelection *selection = NULL;
-	WebKitDOMRange *range = NULL;
 	gchar *text = NULL;
 	GError *error = NULL;
 
@@ -224,7 +223,7 @@ gchar *editor_get_selected_text(EDITOR *e)
 	window = webkit_dom_document_get_default_view(dom_document);
 	selection = webkit_dom_dom_window_get_selection(window);
 	if (selection) {
-		range =
+		WebKitDOMRange *range =
 		    webkit_dom_dom_selection_get_range_at(selection, 0,
 							  &error);
 		if (error) {
@@ -810,7 +809,6 @@ static gint _fill_spell_menu(GtkWidget *menu, gchar *word, EDITOR *e)
 	WebKitSpellChecker *checker = NULL;
 	int misspelling_location;
 	int misspelling_length;
-	int i = 0;
 	GtkWidget *item;
 	char **word_list = NULL;
 
@@ -828,6 +826,7 @@ static gint _fill_spell_menu(GtkWidget *menu, gchar *word, EDITOR *e)
 							      word, NULL);
 	/* add guesses to menu */
 	if (word_list) {
+		int i = 0;
 		while (word_list[i]) {
 			item = gtk_menu_item_new_with_label(word_list[i]);
 			gtk_widget_show(item);
@@ -892,18 +891,16 @@ static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 {
 	WebKitDOMDOMWindow *window = NULL;
 	WebKitDOMDOMSelection *selection = NULL;
-	WebKitDOMRange *range = NULL;
 	GError *error = NULL;
 	GtkWidget *menu = NULL;
 	GtkWidget *item = NULL;
-	gchar *text;
 	gboolean have_selection = FALSE;
 
 	menu = gtk_menu_new();
 	window = webkit_dom_document_get_default_view(dom_document);
 	selection = webkit_dom_dom_window_get_selection(window);
 	if (selection) {
-		range =
+		WebKitDOMRange *range =
 		    webkit_dom_dom_selection_get_range_at(selection, 0,
 							  &error);
 		if (error) {
@@ -912,7 +909,7 @@ static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 			g_error_free(error);
 			error = NULL;
 		}
-		text = webkit_dom_range_to_string(range, &error);
+		gchar *text = webkit_dom_range_to_string(range, &error);
 		if (error) {
 			fprintf(stderr, "Failed range text: %s\n",
 				error->message);

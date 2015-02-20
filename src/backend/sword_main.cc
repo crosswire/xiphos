@@ -139,7 +139,7 @@ void BackEnd::init_SWORD(int gsType)
 		main_setup_displays();
 		for (it = main_mgr->Modules.begin();
 		     it != main_mgr->Modules.end();
-		     it++) {
+		     ++it) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->getType(), TEXT_MODS)) {
 				display_mod->setDisplay(textDisplay);
@@ -157,7 +157,7 @@ void BackEnd::init_SWORD(int gsType)
 	} else if (gsType == 1) { // dialogs
 		for (it = main_mgr->Modules.begin();
 		     it != main_mgr->Modules.end();
-		     it++) {
+		     ++it) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->getType(), TEXT_MODS)) {
 				display_mod->setDisplay(chapDisplay);
@@ -168,7 +168,7 @@ void BackEnd::init_SWORD(int gsType)
 	} else if (gsType == 2) { // search
 		for (it = main_mgr->Modules.begin();
 		     it != main_mgr->Modules.end();
-		     it++) {
+		     ++it) {
 			display_mod = (*it).second;
 			display_mod->setDisplay(entryDisplay);
 		}
@@ -181,7 +181,7 @@ void BackEnd::init_lists(MOD_LISTS *mods)
 
 	for (it = main_mgr->Modules.begin();
 	     it != main_mgr->Modules.end();
-	     it++) {
+	     ++it) {
 		SWModule *m = it->second;
 		const char *modtype = m->getType();
 		const char *modname = m->getName();
@@ -281,7 +281,7 @@ GList *BackEnd::get_module_options(void)
 	GList *options = NULL;
 	StringList optionslist = main_mgr->getGlobalOptions();
 	for (StringList::iterator it = optionslist.begin();
-	     it != optionslist.end(); it++) {
+	     it != optionslist.end(); ++it) {
 		options = g_list_append(options, strdup((char *)(*it).c_str()));
 	}
 	return options;
@@ -529,7 +529,7 @@ char **BackEnd::get_module_language_list(void)
 
 	// create a set of unique language names in use by modules.
 	ModMap::iterator it;
-	for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++)
+	for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); ++it)
 		module_languages.insert((*it).second->getLanguage());
 
 	// construct a list of char* from the uniquified set.
@@ -606,7 +606,7 @@ char *BackEnd::module_name_from_description(char *description)
 		return NULL;
 
 	for (it = main_mgr->Modules.begin();
-	     it != main_mgr->Modules.end(); it++) {
+	     it != main_mgr->Modules.end(); ++it) {
 		if (!strcmp((*it).second->getDescription(), description))
 			retval = strdup((*it).second->getName());
 	}

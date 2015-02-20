@@ -1250,7 +1250,7 @@ G_MODULE_EXPORT void on_use_current_dictionary_activate(GtkMenuItem *
 G_MODULE_EXPORT void on_lookup_google_activate(GtkMenuItem *menuitem,
 					       gpointer user_data)
 {
-	gchar *dict_key, *showstr;
+	gchar *dict_key;
 
 	XIPHOS_HTML_COPY_SELECTION(_get_html());
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict, 0,
@@ -1262,9 +1262,8 @@ G_MODULE_EXPORT void on_lookup_google_activate(GtkMenuItem *menuitem,
 	if ((dict_key == NULL) || (*dict_key == '\0')) {
 		gui_generic_warning("No selection made");
 	} else {
-		showstr =
-		    g_strconcat("http://www.biblemap.org/#", dict_key,
-				NULL);
+		gchar *showstr =
+		    g_strconcat("http://www.biblemap.org/#", dict_key, NULL);
 		xiphos_open_default(showstr);
 		g_free(showstr);
 	}
@@ -1768,18 +1767,16 @@ static void on_view_mod_activate(GtkMenuItem *menuitem,
 	if (is_dialog)
 		return;
 
-	gchar *module_name =
-	    main_module_name_from_description((gchar *)user_data);
-	gchar *url = NULL;
-	gchar *key = NULL;
+	gchar *module_name = main_module_name_from_description((gchar *)user_data);
+	gchar *key;
 
 	if (module_name && (key = _get_key(menu_mod_name))) {
-		url = g_strdup_printf("sword://%s/%s", module_name, key);
+		gchar *url = g_strdup_printf("sword://%s/%s", module_name, key);
 		main_url_handler(url, TRUE);
 		g_free(url);
-		g_free(module_name);
-		g_free(key);
 	}
+	g_free(module_name);
+	g_free(key);
 }
 
 /******************************************************************************
