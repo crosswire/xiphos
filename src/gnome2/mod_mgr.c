@@ -543,8 +543,11 @@ static void add_columns(GtkTreeView *treeview, gboolean remove)
 	column = gtk_tree_view_column_new();
 	image =
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name("emblem-ok-symbolic",
-					 GTK_ICON_SIZE_MENU);
+	    (remove
+		 ? gtk_image_new_from_icon_name("",
+						GTK_ICON_SIZE_MENU)
+		 : gtk_image_new_from_icon_name("emblem-ok-symbolic",
+						GTK_ICON_SIZE_MENU));
 #else
 	    (remove
 		 ? gtk_image_new_from_stock("gnome-stock-blank",
