@@ -916,8 +916,6 @@ static void
 on_radiobutton_biblesync_mode(GtkToggleButton *togglebutton,
 			      gpointer user_data)
 {
-	int new_mode;
-
 	if (gtk_toggle_button_get_active(togglebutton)) {
 		settings.bs_mode = *((int *)user_data);
 
@@ -926,8 +924,8 @@ on_radiobutton_biblesync_mode(GtkToggleButton *togglebutton,
 			settings.bs_passphrase =
 			    on_biblesync_obtain_passphrase();
 		}
-		new_mode = biblesync_mode_select(settings.bs_mode,
-						 settings.bs_passphrase);
+		int new_mode = biblesync_mode_select(settings.bs_mode,
+						     settings.bs_passphrase);
 		/* selecting active mode enables polled receiver. */
 
 		if (new_mode != settings.bs_mode) {
@@ -2446,13 +2444,15 @@ void setup_locale_combobox(void)
 void setup_font_prefs_combobox(void)
 {
 	char **language_list = main_get_module_language_list();
-	char *real_language, **language;
+	char **language;
 	GList *chase, *list = NULL;
 
 	for (language = &language_list[0]; *language; ++language) {
-		real_language = g_strdup_printf("%s (%s)",
-						main_get_language_map(*language), *language);
+		char *real_language =
+			g_strdup_printf("%s (%s)",
+					main_get_language_map(*language), *language);
 		list = g_list_append(list, real_language);
+		g_free(real_language);
 	}
 	fill_combobox(list, GTK_COMBO_BOX(combo.font_prefs),
 		      NULL, NULL, NULL);
@@ -2522,7 +2522,6 @@ static gboolean button_release_event(GtkWidget *widget,
 static void ps_setup_listview()
 {
 	GtkListStore *model;
-	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeIter iter;
 	GtkTreeModel *model_t;
@@ -2534,7 +2533,7 @@ static void ps_setup_listview()
 				GTK_TREE_MODEL(model));
 
 	for (i = 0; i < 2; ++i) {
-		renderer = gtk_cell_renderer_text_new();
+		GtkCellRenderer *renderer = gtk_cell_renderer_text_new();
 		column = gtk_tree_view_column_new_with_attributes("Module",
 								  renderer,
 								  "text",
@@ -2718,34 +2717,27 @@ static void on_mod_sel_close_clicked(void)
  */
 void ps_button_clear(GtkButton *button, gpointer user_data)
 {
-	{
-		GtkTreeModel *model;
-		GtkListStore *list_store;
-		gchar *str;
-
-		str =
-		    g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
-				    _("Clear List?"),
-				    _("Are you sure you want to clear the module list?"));
+	gchar *str =
+		g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
+				_("Clear List?"),
+				_("Are you sure you want to clear the module list?"));
 
 #ifdef HAVE_GTK_310
-		if (gui_yes_no_dialog(str, "dialog-warning")) {
+	if (gui_yes_no_dialog(str, "dialog-warning")) {
 #else
-		if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
+	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
 #endif
 
-			model =
-			    gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview));
-			list_store = GTK_LIST_STORE(model);
-			gtk_list_store_clear(list_store);
-			if (settings.parallel_list)
-				g_strfreev(settings.parallel_list);
-			settings.parallel_list = NULL;
-			xml_set_value("Xiphos", "modules", "parallels",
-				      "");
-		}
-		g_free(str);
+		GtkTreeModel *model =
+			gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview));
+		GtkListStore *list_store = GTK_LIST_STORE(model);
+		gtk_list_store_clear(list_store);
+		if (settings.parallel_list)
+			g_strfreev(settings.parallel_list);
+		settings.parallel_list = NULL;
+		xml_set_value("Xiphos", "modules", "parallels", "");
 	}
+	g_free(str);
 }
 
 /******************************************************************************
@@ -2763,8 +2755,6 @@ void ps_button_clear(GtkButton *button, gpointer user_data)
  */
 void ps_button_cut(GtkButton *button, gpointer user_data)
 {
-	GList *mods = NULL;
-	gchar *mod_list;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
@@ -2790,9 +2780,9 @@ void ps_button_cut(GtkButton *button, gpointer user_data)
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
 #endif
 		gtk_list_store_remove(list_store, &selected);
-		mods =
+		GList *mods =
 		    get_current_list(GTK_TREE_VIEW(parallel_select.listview));
-		mod_list = get_modlist_string(mods);
+		gchar *mod_list = get_modlist_string(mods);
 		if (settings.parallel_list)
 			g_strfreev(settings.parallel_list);
 		settings.parallel_list = g_strsplit(mod_list, ",", -1);

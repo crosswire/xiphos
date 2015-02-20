@@ -339,10 +339,8 @@ void gui_save_tabs(const gchar *filename)
 	xmlNodePtr section_node;
 	//      xmlAttrPtr xml_attr;
 	//const xmlChar *xml_filename;
-	gchar *tabs_dir;
 	gchar *file;
 	GList *tmp = NULL;
-	PASSAGE_TAB_INFO *pt;
 
 	if (NULL == filename)
 		filename = default_tab_filename;
@@ -351,7 +349,7 @@ void gui_save_tabs(const gchar *filename)
 		/* we're done, just copy for local use that can be free'd */
 		file = g_strdup(filename);
 	} else {
-		tabs_dir = g_strdup_printf("%s/tabs/", settings.gSwordDir);
+		gchar *tabs_dir = g_strdup_printf("%s/tabs/", settings.gSwordDir);
 		if (g_access(tabs_dir, F_OK) == -1) {
 			if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
 				gui_generic_warning_modal(_("Can't create tabs dir."));
@@ -382,7 +380,7 @@ void gui_save_tabs(const gchar *filename)
 	for (tmp = g_list_first(passage_list); tmp != NULL;
 	     tmp = g_list_next(tmp)) {
 
-		pt = (PASSAGE_TAB_INFO *)tmp->data;
+		PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO *)tmp->data;
 
 		cur_node = xmlNewChild(section_node,
 				       NULL, (const xmlChar *)"tab",
@@ -540,7 +538,6 @@ void gui_load_tabs(const gchar *filename)
 	xmlDocPtr xml_doc;
 	xmlNodePtr tmp_node, childnode;
 	//const xmlChar *xml_filename;
-	gchar *tabs_dir, *file, *val;
 	gboolean error = FALSE;
 	gboolean back_compat_need_save = FALSE;
 	settings.showparatab = FALSE;
@@ -551,11 +548,13 @@ void gui_load_tabs(const gchar *filename)
 	if (filename == NULL) {
 		error = TRUE;
 	} else {
+		gchar *file;
+
 		if (g_access(filename, F_OK) == 0) {
 			/* we're done, just copy for local use that can be free'd */
 			file = g_strdup(filename);
 		} else {
-			tabs_dir =
+			gchar *tabs_dir =
 			    g_strdup_printf("%s/tabs/",
 					    settings.gSwordDir);
 			if (g_access(tabs_dir, F_OK) == -1) {
@@ -602,6 +601,8 @@ void gui_load_tabs(const gchar *filename)
 					     tmp_node = tmp_node->next) {
 						if (!xmlStrcmp(tmp_node->name,
 							       (const xmlChar *)"tab")) {
+							gchar *val;
+
 							pt = g_new0(PASSAGE_TAB_INFO,
 								    1);
 							if (pt_first ==
@@ -845,11 +846,8 @@ static void on_notebook_main_close_page(GtkButton *button,
 static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 				 const gchar *label_text)
 {
-	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *box;
-	GtkRequisition r;
 #ifdef USE_GTK_3
-	GtkRequisition r0;
 	GdkRGBA color;
 #else
 	GdkColor color;
@@ -861,8 +859,9 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	    gtk_button_new_from_icon_name("window-close-symbolic",
 					  GTK_ICON_SIZE_MENU);
 #else
-	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLOSE,
-						    GTK_ICON_SIZE_MENU);
+	GtkWidget *tmp_toolbar_icon =
+		gtk_image_new_from_stock(GTK_STOCK_CLOSE,
+					 GTK_ICON_SIZE_MENU);
 	tbinf->button_close = gtk_button_new();
 	gtk_button_set_image(GTK_BUTTON(tbinf->button_close),
 			     tmp_toolbar_icon);
@@ -888,8 +887,8 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
 #endif
 
-#ifdef USE_GTK_3
-#else
+#ifndef USE_GTK_3
+	GtkRequisition r;
 	gtk_widget_size_request(tbinf->button_close, &r);
 #endif
 

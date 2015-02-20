@@ -113,7 +113,6 @@ char *gconf_keys[GS_GCONF_MAX][2] = {
 #ifndef WIN32
 void gconf_setup()
 {
-	int i;
 	gchar *str;
 	GConfClient *client = gconf_client_get_default();
 
@@ -133,6 +132,7 @@ void gconf_setup()
 		/*
 		 * Mechanical as can be, one after another.
 		 */
+		int i;
 		for (i = 0; i < GS_GCONF_MAX; ++i) {
 			(((i % 3) == 0) /* contrived hack */
 			     ? gconf_client_set_string(client, gconf_keys[i][0], gconf_keys[i][1], NULL)
@@ -162,12 +162,12 @@ void gconf_setup()
 gchar *XI_g_strdup_printf(const char *filename,
 			  int linenumber, const gchar *format, ...)
 {
-	gchar *buffer, *next, *s;
+	gchar *buffer, *s;
 	va_list args;
 
 	va_start(args, format);
 	for (s = strchr(format, '%'); s; s = strchr(++s, '%')) {
-		next = va_arg(args, gchar *);
+		gchar *next = va_arg(args, gchar *);
 		if ((next == (gchar *)NULL) && (*(s + 1) == 's')) {
 			gchar *msg = g_strdup_printf("%s\n%s\n\n%s:%d \"%s\"",
 						     _("BUG! Xiphos is about to crash due to a \"STRDUP\" error."),
@@ -192,12 +192,12 @@ XI_g_string_printf(const char *filename,
 		   int linenumber,
 		   GString *string, const gchar *format, ...)
 {
-	gchar *next, *s;
+	gchar *s;
 	va_list args;
 
 	va_start(args, format);
 	for (s = strchr(format, '%'); s; s = strchr(++s, '%')) {
-		next = va_arg(args, gchar *);
+		gchar *next = va_arg(args, gchar *);
 		if ((next == (gchar *)NULL) && (*(s + 1) == 's')) {
 			gchar *msg = g_strdup_printf("%s\n%s\n\n%s:%d \"%s\"",
 						     _("BUG! Xiphos is about to crash due to a \"STRING\" error."),

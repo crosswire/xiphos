@@ -745,7 +745,7 @@ set_morph_order(SWModule &imodule)
 	for (FilterList::const_iterator it =
 		 imodule.getRenderFilters().begin();
 	     it != imodule.getRenderFilters().end();
-	     it++) {
+	     ++it) {
 		OSISXHTML *f = dynamic_cast<OSISXHTML *>(*it);
 		if (f)
 			f->setMorphFirst();
@@ -762,7 +762,7 @@ set_render_numbers(SWModule &imodule, GLOBAL_OPS *ops)
 	for (FilterList::const_iterator it =
 		 imodule.getRenderFilters().begin();
 	     it != imodule.getRenderFilters().end();
-	     it++) {
+	     ++it) {
 		OSISXHTML *f1 = dynamic_cast<OSISXHTML *>(*it);
 		if (f1)
 			f1->setRenderNoteNumbers((ops->xrefnotenumbers != 0));

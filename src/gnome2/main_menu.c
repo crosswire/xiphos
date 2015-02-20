@@ -93,7 +93,6 @@ link_uri_hook(GtkLinkButton *button,
 G_MODULE_EXPORT void
 on_help_contents_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	GError *error = NULL;
 #ifdef WIN32
 	const char *lang = g_getenv("LANG");
 	gchar *help_file =
@@ -114,6 +113,7 @@ on_help_contents_activate(GtkMenuItem *menuitem, gpointer user_data)
 	xiphos_open_default(help_file);
 	g_free(help_file);
 #else
+	GError *error = NULL;
 	gtk_show_uri(NULL, "ghelp:xiphos", gtk_get_current_event_time(),
 		     &error);
 	if (error != NULL) {
