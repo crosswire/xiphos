@@ -197,112 +197,82 @@ action_insert_image_activate_cb(GtkWidget *widget, EDITOR *e)
 G_MODULE_EXPORT void
 action_insert_outline_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *script = NULL;
-
-	script = g_strdup("document.execCommand('insertHTML', null, \"<OL CLASS=L1><LI> </LI></OL> \");");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('insertHTML', null, \"<OL CLASS=L1><LI> </LI></OL> \");", e);
 }
 
 G_MODULE_EXPORT void
 action_justify_right_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *script = NULL;
-
-	script = g_strdup("document.execCommand('justifyright', false, false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('justifyright', false, false);", e);
 }
 
 G_MODULE_EXPORT void
 action_justify_left_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *script = NULL;
-
-	script = g_strdup("document.execCommand('justifyleft', false, false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('justifyleft', false, false);", e);
 }
 
 G_MODULE_EXPORT void
 action_justify_center_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *script = NULL;
-
-	script = g_strdup("document.execCommand('justifycenter', false, false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('justifycenter', false, false);", e);
 }
 
 G_MODULE_EXPORT void
 action_justify_full_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *script = NULL;
-
-	script = g_strdup("document.execCommand('justifyfull', false, false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('justifyfull', false, false);", e);
 }
 
 G_MODULE_EXPORT void
 action_bold_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *script = NULL;
 	if (buttons_state.nochange)
 		return;
 
-	script = g_strdup("document.execCommand('bold',false,false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('bold',false,false);", e);
 }
 
 G_MODULE_EXPORT void
 action_italic_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	//extern BUTTONS_STATE buttons_state;
-	gchar *script = NULL;
 	if (buttons_state.nochange)
 		return;
-	;
 
-	script = g_strdup("document.execCommand('italic',false,false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('italic',false,false);", e);
 }
 
 G_MODULE_EXPORT void
 action_undo_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *script = NULL;
-
-	script = g_strdup("document.execCommand('undo',false,false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('undo',false,false);", e);
 }
 
 G_MODULE_EXPORT void
 action_redo_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *script = NULL;
-
-	script = g_strdup("document.execCommand('redo',false,false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('redo',false,false);", e);
 }
 
 G_MODULE_EXPORT void
 action_underline_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	//extern BUTTONS_STATE buttons_state;
-	gchar *script = NULL;
 	if (buttons_state.nochange)
 		return;
 
-	script = g_strdup("document.execCommand('underline', false, false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('underline', false, false);", e);
 }
 
 G_MODULE_EXPORT void
 action_strikethrough_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	//extern BUTTONS_STATE buttons_state;
-	gchar *script = NULL;
 	if (buttons_state.nochange)
 		return;
 
-	script = g_strdup("document.execCommand('strikethrough', false, false);");
-	editor_execute_script(script, e);
+	editor_execute_script("document.execCommand('strikethrough', false, false);", e);
 }
 
 G_MODULE_EXPORT void action_cut_activate_cb(GtkWidget *widget, EDITOR *e)
@@ -421,6 +391,7 @@ colorbutton1_color_set_cb(GtkColorButton *widget, EDITOR *e)
 #endif
 	forecolor = g_strdup_printf("document.execCommand('forecolor', null, '%s');", color_str);
 	editor_execute_script(forecolor, e);
+	g_free(forecolor);
 }
 
 G_MODULE_EXPORT void
@@ -445,6 +416,7 @@ colorbutton_highlight_color_set_cb(GtkColorButton *widget, EDITOR *e)
 #endif
 	highligntcolor = g_strdup_printf("document.execCommand('backColor', null, '%s');", color_str);
 	editor_execute_script(highligntcolor, e);
+	g_free(highligntcolor);
 }
 
 static gchar *get_font_size_from_name(GString *fontname)
@@ -471,7 +443,6 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	GtkWidget *dialog;
 	gchar *selected_text = NULL;
-	gchar *script = NULL;
 	gchar *size = NULL;
 #ifdef HAVE_GTK_32
 	dialog = gtk_font_chooser_dialog_new("Select font", NULL);
@@ -505,17 +476,16 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 		fontname = pango_font_description_get_family(font_description);
 #endif
 
-		script = g_strdup_printf("<SPAN STYLE=\"font-family:%s;font-size:%spx;\">%s</SPAN>",
-					 fontname, size, selected_text);
+		gchar *script = g_strdup_printf("<SPAN STYLE=\"font-family:%s;font-size:%spx;\">%s</SPAN>",
+						fontname, size, selected_text);
 
 		editor_insert_html(script, e);
+		g_free(script);
 	}
 	if (size)
 		g_free(size);
 	if (selected_text)
 		g_free(selected_text);
-	if (script)
-		g_free(script);
 	gtk_widget_destroy(dialog);
 }
 
