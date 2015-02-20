@@ -79,12 +79,11 @@ void gui_set_html_item(GString *str,
 		       const gchar *module,
 		       const gchar *key, gboolean with_scripture)
 {
-	gchar *mod_tmp = NULL;
 	gchar *scripture = NULL;
-	gchar *text = NULL;
 	gchar *buf = NULL;
 
 	if (with_scripture) {
+		gchar *mod_tmp = NULL;
 		gint modtype;
 
 		if (strlen(module) < 2)
@@ -93,7 +92,7 @@ void gui_set_html_item(GString *str,
 			mod_tmp = g_strdup(module);
 
 		if (((modtype = main_get_mod_type(mod_tmp)) == TEXT_TYPE) || (modtype == COMMENTARY_TYPE)) {
-			text = main_get_rendered_text(mod_tmp, key);
+			gchar *text = main_get_rendered_text(mod_tmp, key);
 			scripture = g_strdup_printf("<li>%s</li>", text);
 			g_free(text);
 		}
@@ -117,11 +116,11 @@ void gui_set_plain_text_item(GString *str,
 			     const gchar *module,
 			     const gchar *key, gboolean with_scripture)
 {
-	gchar *mod_tmp = NULL;
 	gchar *scripture = NULL;
 	gchar *buf = NULL;
 
 	if (with_scripture) {
+		gchar *mod_tmp = NULL;
 		gint modtype;
 
 		if (strlen(module) < 2)
@@ -156,7 +155,6 @@ static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 	gchar filename[256];
 	GString *name = g_string_new(NULL);
 	GString *str = g_string_new("");
-	RESULTS *list_item;
 
 	sprintf(filename, "%s.xml", data->filename);
 
@@ -179,7 +177,7 @@ static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 	cur_node = xml_add_folder_to_parent(root_node, name->str); /* Verse List or Search result: */
 
 	while (data->verses) {
-		list_item = (RESULTS *)data->verses->data;
+		RESULTS *list_item = (RESULTS *)data->verses->data;
 		g_string_printf(str, "%s, %s", list_item->key,
 				list_item->module);
 
@@ -198,13 +196,10 @@ static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 
 static gboolean _save_verselist_2_html(BK_EXPORT *data)
 {
-
 	gchar filename[256];
-	gchar *buf;
 	GString *name = g_string_new(NULL);
 	GString *str = g_string_new("");
 	GString *des = g_string_new("");
-	RESULTS *list_item;
 	void (*catenate)(GString *str,
 			 const gchar *description,
 			 const gchar *module,
@@ -228,6 +223,7 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 					       data->with_scripture);
 
 	} else {
+		gchar *buf;
 
 		if (is_search_result)
 			g_string_printf(name, _("Search result: %s"),
@@ -254,7 +250,7 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 		g_free(buf);
 
 		while (data->verses) {
-			list_item = (RESULTS *)data->verses->data;
+			RESULTS *list_item = (RESULTS *)data->verses->data;
 			g_string_printf(des, "%s, %s", list_item->key,
 					list_item->module);
 

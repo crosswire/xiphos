@@ -407,16 +407,15 @@ static gboolean on_button_verse_menu_book_scroll_event(GtkWidget *widget,
 
 static void sync_with_main(GtkToggleButton *button, gpointer data)
 {
-	gchar *buf = NULL;
-	gchar *url = NULL;
 	sync_on = FALSE;
 	if (gtk_toggle_button_get_active(button)) {
 		sync_on = TRUE;
-		buf = (gchar *)main_url_encode(settings.currentverse);
+		gchar *buf = (gchar *)main_url_encode(settings.currentverse);
 		if (buf && (strlen(buf) > 3)) {
-			url = g_strdup_printf("passagestudy.jsp?action=showParallel&"
-					      "type=verse&value=%s",
-					      buf); // xml_get_value("keys", "verse")));
+			gchar *url =
+				g_strdup_printf("passagestudy.jsp?action=showParallel&"
+						"type=verse&value=%s",
+						buf); // xml_get_value("keys", "verse")));
 			main_url_handler(url, TRUE);
 			g_free(url);
 		}

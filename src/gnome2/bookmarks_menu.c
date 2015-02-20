@@ -284,7 +284,6 @@ G_MODULE_EXPORT void on_dialog_activate(GtkMenuItem *menuitem,
 	GtkTreeIter selected;
 	gchar *key = NULL;
 	gchar *module = NULL;
-	gchar *url = NULL;
 
 	GtkTreeSelection *selection =
 	    gtk_tree_view_get_selection(bookmark_tree);
@@ -302,7 +301,7 @@ G_MODULE_EXPORT void on_dialog_activate(GtkMenuItem *menuitem,
 			return;
 		}
 
-		url =
+		gchar *url =
 		    g_strdup_printf("passagestudy.jsp?action=showBookmark&"
 				    "type=%s&value=%s&module=%s",
 				    "newDialog", main_url_encode(key),
@@ -335,7 +334,6 @@ G_MODULE_EXPORT void on_edit_item_activate(GtkMenuItem *menuitem,
 					   gpointer user_data)
 {
 	GS_DIALOG *info;
-	BOOKMARK_DATA *data;
 	gint test;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
@@ -380,7 +378,7 @@ G_MODULE_EXPORT void on_edit_item_activate(GtkMenuItem *menuitem,
 
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
-		data = g_new(BOOKMARK_DATA, 1);
+		BOOKMARK_DATA *data = g_new(BOOKMARK_DATA, 1);
 		data->caption = info->text1;
 		data->key = NULL;
 		data->module = NULL;
@@ -739,7 +737,7 @@ G_MODULE_EXPORT void on_new_folder_activate(GtkMenuItem *menuitem,
 	//      gchar *caption = NULL;
 	//      gchar *key = NULL;
 	//      gchar *module = NULL;
-	char *t, *buf;
+	char *t;
 	gint test;
 	GS_DIALOG *info;
 	BOOKMARK_DATA *data;
@@ -765,7 +763,7 @@ G_MODULE_EXPORT void on_new_folder_activate(GtkMenuItem *menuitem,
 	/*** open dialog to get name for new folder ***/
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
-		buf = g_strdelimit(info->text1, t, ' ');
+		char *buf = g_strdelimit(info->text1, t, ' ');
 		data->caption = g_strdup(buf);
 		data->key = NULL;
 		data->module = NULL;

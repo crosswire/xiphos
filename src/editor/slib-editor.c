@@ -1101,11 +1101,10 @@ void editor_load_book(EDITOR *e)
 void editor_sync_with_main(void)
 {
 	GList *tmp = NULL;
-	EDITOR *e;
 
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
-		e = (EDITOR *)tmp->data;
+		EDITOR *e = (EDITOR *)tmp->data;
 
 		switch (e->type) {
 		case STUDYPAD_EDITOR:
@@ -1394,11 +1393,10 @@ gint editor_create_new(const gchar *filename, const gchar *key,
 		       gint editor_type)
 {
 	GList *tmp = NULL;
-	EDITOR *e;
 
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
-		e = (EDITOR *)tmp->data;
+		EDITOR *e = (EDITOR *)tmp->data;
 		switch (editor_type) {
 		case STUDYPAD_EDITOR:
 			if (e->studypad) {

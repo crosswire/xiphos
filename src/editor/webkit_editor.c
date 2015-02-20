@@ -167,7 +167,6 @@ action_insert_emoticon_activate_cb(GtkWidget *widget, EDITOR *e)
 G_MODULE_EXPORT void
 action_insert_image_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *script = NULL;
 	gchar *filename = NULL;
 
 	GtkWidget *dialog = gtk_file_chooser_dialog_new("Select an image file",
@@ -185,8 +184,9 @@ action_insert_image_activate_cb(GtkWidget *widget, EDITOR *e)
 
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
 		filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
-		script = g_strdup_printf("document.execCommand('insertImage', null, '%s');", filename);
+		gchar *script = g_strdup_printf("document.execCommand('insertImage', null, '%s');", filename);
 		editor_execute_script(script, e);
+		g_free(script);
 	}
 
 	if (filename)
@@ -333,13 +333,12 @@ action_delete_activate_cb(GtkWidget *widget, EDITOR *e)
 G_MODULE_EXPORT void
 action_delete_item_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	gchar *buf = NULL, *text = NULL, *fname = NULL;
-
 	if (e->studypad)
 		return;
 
-	buf = g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
-			      _("Are you sure you want to delete the note for"), e->key);
+	gchar *buf = 
+		g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
+				_("Are you sure you want to delete the note for"), e->key);
 
 	if (gui_yes_no_dialog(buf,
 #ifdef HAVE_GTK_310
@@ -352,10 +351,9 @@ action_delete_item_activate_cb(GtkWidget *widget, EDITOR *e)
 		main_delete_note(e->module, e->key);
 
 		/* new empty document from template */
-		fname = g_build_filename(settings.gSwordDir, "studypad.spt",
-					 NULL);
+		gchar *fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
 		XI_message(("action delete item [%s]", fname));
-		text = inhale_text_from_file(fname);
+		gchar *text = inhale_text_from_file(fname);
 		g_free(fname);
 
 		if (text && strlen(text)) {
@@ -472,12 +470,9 @@ G_MODULE_EXPORT void
 action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	GtkWidget *dialog;
-	GString *name;
-	const gchar *fontname = NULL;
 	gchar *selected_text = NULL;
 	gchar *script = NULL;
 	gchar *size = NULL;
-	PangoFontDescription *font_description;
 #ifdef HAVE_GTK_32
 	dialog = gtk_font_chooser_dialog_new("Select font", NULL);
 	gtk_font_chooser_set_font((GtkFontChooser *)dialog,
@@ -490,21 +485,23 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
 #ifdef HAVE_GTK_32
-		fontname = gtk_font_chooser_get_font((GtkFontChooser *)dialog);
+		const gchar *fontname = gtk_font_chooser_get_font((GtkFontChooser *)dialog);
 #else
-		fontname = gtk_font_selection_dialog_get_font_name((GtkFontSelectionDialog *)dialog);
+		const gchar *fontname = gtk_font_selection_dialog_get_font_name((GtkFontSelectionDialog *)dialog);
 #endif
-		name = g_string_new(fontname);
+		GString *name = g_string_new(fontname);
 		size = get_font_size_from_name(name);
 		g_string_free(name, TRUE);
 
 		selected_text = editor_get_selected_text(e);
 #ifdef HAVE_GTK_32
-		font_description = gtk_font_chooser_get_font_desc((GtkFontChooser *)
-								  dialog);
+		PangoFontDescription *font_description =
+			gtk_font_chooser_get_font_desc((GtkFontChooser *)
+						       dialog);
 		fontname = pango_font_description_get_family(font_description);
 #else
-		font_description = pango_font_description_from_string(fontname);
+		PangoFontDescription *font_description =
+			pango_font_description_from_string(fontname);
 		fontname = pango_font_description_get_family(font_description);
 #endif
 
@@ -934,7 +931,6 @@ static void _save_book(EDITOR *e)
 
 static void _save_file(EDITOR *e)
 {
-	gchar *filename = NULL;
 	GtkRecentManager *rm = NULL;
 	GString *data = g_string_new("");
 
@@ -962,7 +958,7 @@ static void _save_file(EDITOR *e)
 		gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
 						    settings.studypaddir);
 		if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
-			filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+			gchar *filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
 			e->filename = g_strdup(filename);
 			GFile *gfile = g_file_parse_name(filename);
 			g_file_replace_contents(gfile, data->str, data->len, NULL, TRUE, G_FILE_CREATE_NONE, NULL, NULL, NULL); //GError **error
@@ -1027,7 +1023,7 @@ void editor_save_book(EDITOR *e)
 /* save if needed is done in treeky-editor.c before calling editor_load_book() */
 void editor_load_book(EDITOR *e)
 {
-	gchar *title = NULL, *text = NULL, *fname = NULL;
+	gchar *title = NULL, *text = NULL;
 
 	if (!g_ascii_isdigit(e->key[0]))
 		return; /* make sure is a number (offset) */
@@ -1044,7 +1040,7 @@ void editor_load_book(EDITOR *e)
 			g_free(text);
 
 		/* new empty document from template */
-		fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
+		gchar *fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
 		XI_message(("editor load BOOK [%s]", fname));
 		text = inhale_text_from_file(fname);
 		g_free(fname);
@@ -1087,11 +1083,10 @@ void editor_load_book(EDITOR *e)
 void editor_sync_with_main(void)
 {
 	GList *tmp = NULL;
-	EDITOR *e;
 
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
-		e = (EDITOR *)tmp->data;
+		EDITOR *e = (EDITOR *)tmp->data;
 
 		switch (e->type) {
 		case STUDYPAD_EDITOR:
@@ -1110,7 +1105,7 @@ void editor_sync_with_main(void)
 void
 editor_load_note(EDITOR *e, const gchar *module_name, const gchar *key)
 {
-	gchar *title = NULL, *text = NULL, *fname = NULL;
+	gchar *title = NULL, *text = NULL;
 
 	if (e->is_changed)
 		_save_note(e);
@@ -1133,8 +1128,7 @@ editor_load_note(EDITOR *e, const gchar *module_name, const gchar *key)
 			g_free(text);
 
 		/* new empty document from template */
-		fname = g_build_filename(settings.gSwordDir, "studypad.spt",
-					 NULL);
+		gchar *fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
 		XI_message(("editor load NOTE [%s]", fname));
 		text = inhale_text_from_file(fname);
 		g_free(fname);
@@ -1383,11 +1377,10 @@ gint editor_create_new(const gchar *filename, const gchar *key,
 		       gint editor_type)
 {
 	GList *tmp = NULL;
-	EDITOR *e;
 
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
-		e = (EDITOR *)tmp->data;
+		EDITOR *e = (EDITOR *)tmp->data;
 		switch (editor_type) {
 		case STUDYPAD_EDITOR:
 			if (e->studypad) {

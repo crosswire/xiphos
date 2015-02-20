@@ -477,8 +477,6 @@ static GtkWidget *create_dialog_mod_font()
 
 void gui_set_module_font(gchar *mod_name)
 {
-	gchar *str;
-
 	mf = get_font(mod_name);
 
 	if (!strncmp(mf->old_font, "none", 4))
@@ -490,7 +488,7 @@ void gui_set_module_font(gchar *mod_name)
 	gtk_label_set_text(GTK_LABEL(label_mod), mf->mod_name);
 	gtk_label_set_text(GTK_LABEL(label_current_font), mf->old_font);
 	if (mf->old_font) {
-		str = g_strdup_printf("%s, 12", mf->old_font);
+		gchar *str = g_strdup_printf("%s, 12", mf->old_font);
 		gtk_font_button_set_font_name((GtkFontButton *)
 					      font_button,
 					      str);

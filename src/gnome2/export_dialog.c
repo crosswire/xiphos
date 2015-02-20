@@ -376,11 +376,11 @@ static void on_reference_last_toggled(GtkToggleButton *togglebutton,
 
 static void _load_data(gchar *filename)
 {
-	gchar *buf;
 	gchar *file =
 	    g_strdup_printf("%s/export-copy.xml", settings.gSwordDir);
 
 	if (xml_load_copy_export_file((const xmlChar *)filename)) {
+		gchar *buf;
 
 		/* html */
 

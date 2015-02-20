@@ -513,10 +513,6 @@ void new_modlist(GtkButton *button, gpointer user_data)
 
 void clear_modules(GtkButton *button, gpointer user_data)
 {
-	GtkTreeModel *model;
-	GtkListStore *list_store;
-	GtkTreeSelection *selection;
-	GtkTreeIter selected;
 	gchar *str;
 
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
@@ -528,15 +524,15 @@ void clear_modules(GtkButton *button, gpointer user_data)
 #else
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
 #endif
-		model =
+		GtkTreeIter selected;
+		GtkTreeModel *model =
 		    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
-		list_store = GTK_LIST_STORE(model);
+		GtkListStore *list_store = GTK_LIST_STORE(model);
 		gtk_list_store_clear(list_store);
 
-		model =
-		    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+		model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 		list_store = GTK_LIST_STORE(model);
-		selection =
+		GtkTreeSelection *selection =
 		    gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
 		if (gtk_tree_selection_get_selected(selection, NULL, &selected))
 			gtk_list_store_set(list_store, &selected, 1, "",
@@ -1160,7 +1156,7 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem *menuitem,
 		    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
 
 		GString *vlist = g_string_new("");
-		gchar *module = NULL, *text, *buf, *key;
+		gchar *module = NULL, *text, *buf;
 
 		gboolean first = TRUE;
 		gboolean valid =
@@ -1175,7 +1171,7 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem *menuitem,
 			buf = strchr(text, ':');
 			*buf = '\0';
 			// key starts 2 characters after the (former) ':'.
-			key = buf + 2;
+			gchar *key = buf + 2;
 			// next : is the middle of chapter:verse.
 			buf = strchr(key, ':');
 			// if that works, then space after that ends key.

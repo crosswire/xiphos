@@ -143,7 +143,6 @@ static void on_parallel_tab_destroy(GObject *object, gpointer user_data)
 static void sync_with_main(const gchar *key)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 
 	if (key)
 		buf = (gchar *)main_url_encode(key);
@@ -152,10 +151,9 @@ static void sync_with_main(const gchar *key)
 		    main_url_encode(xml_get_value("keys", "verse"));
 	XI_message(("%s", buf));
 	if (buf && (strlen(buf) > 3)) {
-		url =
+		gchar *url =
 		    g_strdup_printf("passagestudy.jsp?action=showParallel&"
-				    "type=verse&value=%s",
-				    buf);
+				    "type=verse&value=%s", buf);
 
 		main_url_handler(url, TRUE);
 		g_free(url);

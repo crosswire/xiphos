@@ -147,11 +147,11 @@ static void add_folder_button(void)
 	GtkTreeIter iter;
 	BOOKMARK_DATA *data;
 	GtkTreeSelection *selection;
-	char *t, *buf;
+	char *t;
 	gint test;
 	GS_DIALOG *info;
 	GString *str;
-	GtkTreePath *path;
+
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
@@ -173,7 +173,7 @@ static void add_folder_button(void)
 	/*** open dialog to get name for new folder ***/
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
-		buf = g_strdelimit(info->text1, t, ' ');
+		char *buf = g_strdelimit(info->text1, t, ' ');
 		data->caption = g_strdup(buf);
 		data->key = NULL;
 		data->module = NULL;
@@ -186,7 +186,7 @@ static void add_folder_button(void)
 		bookmarks_changed = TRUE;
 		gui_save_bookmarks(NULL, NULL);
 		g_free(data->caption);
-		path =
+		GtkTreePath *path =
 		    gtk_tree_model_get_path(GTK_TREE_MODEL(model), &iter);
 		gtk_tree_view_expand_to_path(GTK_TREE_VIEW(treeview),
 					     path);

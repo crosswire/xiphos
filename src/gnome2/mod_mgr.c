@@ -1430,7 +1430,6 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 {
 	GtkTreeStore *store;
 	GtkTreeIter repository_name;
-	gchar *repository_identifier;
 	GtkTreeIter category_type;
 	GtkTreeIter category_avail;
 	GtkTreeIter text;
@@ -1448,7 +1447,6 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 	GtkTreeIter prayerlist;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
-	MOD_MGR *info;
 
 	if (install) {
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_source))) {
@@ -1513,7 +1511,7 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 			    g_strdup(gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo_entry2)));
 #endif
 		}
-		repository_identifier =
+		gchar *repository_identifier =
 		    g_strdup_printf(_("Repository:\n%s"),
 				    (local ? source : remote_source));
 		gtk_tree_store_append(store, &repository_name, NULL);
@@ -1601,7 +1599,7 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 
 	tmp2 = tmp;
 	while (tmp2) {
-		info = (MOD_MGR *)tmp2->data;
+		MOD_MGR *info = (MOD_MGR *)tmp2->data;
 
 		if (install && !first_time_user) {
 			// special lists: updated and uninstalled modules.
@@ -2126,7 +2124,6 @@ on_notebook1_switch_page(GtkNotebook *notebook,
 			 guint page_num, gpointer user_data)
 #endif
 {
-	gchar *str;
 #ifndef USE_GTK_3
 	GdkCursor *cursor;
 	GdkDisplay *display;
@@ -2165,7 +2162,7 @@ on_notebook1_switch_page(GtkNotebook *notebook,
 		break;
 	case 3:
 		if (!have_configs) {
-			str =
+			gchar *str =
 			    g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
 					    _("Please Refresh"),
 					    _("Your module list is not up to date!"));
@@ -2380,7 +2377,6 @@ void save_sources(void)
 static void create_fileselection_local_source(void)
 {
 	GtkWidget *dialog;
-	gchar *filename;
 	GtkTreeIter iter;
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
@@ -2400,7 +2396,7 @@ static void create_fileselection_local_source(void)
 					NULL);
 
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
-		filename =
+		gchar *filename =
 		    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
 		XI_message(("%s", filename));
 		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
