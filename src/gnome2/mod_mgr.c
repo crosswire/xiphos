@@ -359,7 +359,7 @@ static void create_pixbufs(void)
 
 	INSTALLED = gtk_icon_theme_load_icon(icon_theme,
 #ifdef HAVE_GTK_312
-                         "emblem-ok-symbolic",
+					     "emblem-ok-symbolic",
 #else
 					     "_Apply",
 #endif
