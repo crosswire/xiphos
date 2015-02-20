@@ -358,7 +358,11 @@ static void create_pixbufs(void)
 	GtkIconTheme *icon_theme = gtk_icon_theme_get_default();
 
 	INSTALLED = gtk_icon_theme_load_icon(icon_theme,
+#ifdef HAVE_GTK_312
+                         "emblem-ok-symbolic",
+#else
 					     "_Apply",
+#endif
 					     16,
 					     GTK_ICON_LOOKUP_FORCE_SIZE,
 					     NULL);
