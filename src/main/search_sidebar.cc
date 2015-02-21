@@ -79,7 +79,6 @@ int search_dialog;
 static void fill_search_results_list(int finds)
 {
 	gchar buf[256];
-	gchar *tmpbuf;
 	const gchar *key_buf = NULL;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
@@ -114,7 +113,7 @@ static void fill_search_results_list(int finds)
 
 	backendSearch->set_listkey_position((char)1); /* TOP */
 	while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
-		tmpbuf = (gchar *)key_buf;
+		gchar *tmpbuf = (gchar *)key_buf;
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
 				   tmpbuf, -1);
@@ -152,11 +151,10 @@ static void fill_search_results_list(int finds)
 #ifdef HAVE_DBUS
 GList *get_list_of_references()
 {
-	RESULTS *list_item;
 	GList *tmp = list_of_verses;
 	GList *references = NULL;
 	while (tmp) {
-		list_item = (RESULTS *)tmp->data;
+		RESULTS *list_item = (RESULTS *)tmp->data;
 		references = g_list_append(references, list_item->key);
 		tmp = g_list_next(tmp);
 	}
@@ -401,8 +399,6 @@ void main_search_sidebar_fill_bounds_combos(void)
 void main_sidebar_search_percent_update(char percent, void *userData)
 {
 	char maxHashes = *((char *)userData);
-	float num;
-	char buf[80];
 	static char printed = 0;
 	if (!backendSearch)
 		main_init_sidebar_search_backend();
@@ -411,8 +407,10 @@ void main_sidebar_search_percent_update(char percent, void *userData)
 		backendSearch->terminate_search();
 	} else {
 		while ((((float)percent) / 100) * maxHashes > printed) {
+			float num = (float)percent / 100;
+			gchar buf[80];
+
 			sprintf(buf, "%f", (((float)percent) / 100));
-			num = (float)percent / 100;
 			gtk_progress_bar_set_fraction((GtkProgressBar *)
 						      ss.progressbar_search,
 						      num);

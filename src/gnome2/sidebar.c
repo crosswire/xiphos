@@ -81,6 +81,8 @@ static GtkWidget *create_menu_modules(void);
 void on_export_verselist_activate(GtkMenuItem *menuitem,
 				  gpointer user_data);
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *
@@ -100,6 +102,7 @@ void on_export_verselist_activate(GtkMenuItem *menuitem,
 void gui_sync_module_treeview(gint direction)
 {
 }
+#endif
 
 #ifdef USE_TREEVIEW_PATH
 /******************************************************************************

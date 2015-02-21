@@ -87,7 +87,6 @@ static GList *list_for_bookmarking = NULL;
 
 gboolean main_export_current_adv_search(GString *str, gboolean html, gboolean with_scripture)
 {
-	GList *verses = NULL;
 	GList *tmp = NULL;
 	RESULTS *list_item;
 	gboolean ret = FALSE;
@@ -97,7 +96,7 @@ gboolean main_export_current_adv_search(GString *str, gboolean html, gboolean wi
 	if (html)
 		str = g_string_append(str, "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body>");
 	while (tmp) {
-		verses = (GList *)tmp->data;
+		GList *verses = (GList *)tmp->data;
 
 		GString *verse_string = g_string_new("");
 		gboolean first_entry = TRUE;
@@ -160,13 +159,12 @@ gboolean main_export_current_adv_search(GString *str, gboolean html, gboolean wi
 
 void main_save_current_adv_search_as_bookmarks(void)
 {
-	GList *verses = NULL;
 	RESULTS *list_item;
 	gchar *module_name = NULL;
 
 	list_for_bookmarking = g_list_first(list_for_bookmarking);
 	while (list_for_bookmarking) {
-		verses = (GList *)list_for_bookmarking->data;
+		GList *verses = (GList *)list_for_bookmarking->data;
 
 		GString *name = g_string_new(NULL);
 		GString *verse_string = g_string_new("");
@@ -218,7 +216,6 @@ void main_save_current_adv_search_as_bookmarks(void)
 void main_range_text_changed(GtkEditable *editable)
 {
 	const gchar *entry;
-	gchar *buf = NULL;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeModel *model_list_ranges;
@@ -244,7 +241,7 @@ void main_range_text_changed(GtkEditable *editable)
 	entry = gtk_entry_get_text(GTK_ENTRY(editable));
 	tmp = backend->parse_range_list(settings.MainWindowModule, entry);
 	while (tmp) {
-		buf = (gchar *)tmp->data;
+		gchar *buf = (gchar *)tmp->data;
 		if (!buf)
 			break;
 		gtk_list_store_append(store_list_ranges, &iter);
@@ -443,7 +440,6 @@ void main_delete_range(void)
 
 static void add_module_finds(GList *versekeys)
 {
-	gchar *buf;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
@@ -456,7 +452,7 @@ static void add_module_finds(GList *versekeys)
 	gtk_list_store_clear(list_store);
 
 	while (tmp) {
-		buf = (char *)tmp->data;
+		gchar *buf = (char *)tmp->data;
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store,
 				   &iter,
@@ -484,7 +480,6 @@ static void add_module_finds(GList *versekeys)
 
 static void add_ranges(void)
 {
-	gchar *buf[2];
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
@@ -496,6 +491,8 @@ static void add_ranges(void)
 	gtk_list_store_clear(list_store);
 
 	if (xml_set_section_ptr("ranges")) {
+		gchar *buf[2];
+
 		if (xml_get_label()) {
 			buf[0] = xml_get_label();
 			buf[1] = xml_get_list();
@@ -550,7 +547,6 @@ static void add_ranges(void)
 
 static void add_modlist(void)
 {
-	gchar *buf[2];
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
@@ -561,6 +557,8 @@ static void add_modlist(void)
 	gtk_list_store_clear(list_store);
 
 	if (xml_set_section_ptr("modlists")) {
+		gchar *buf[2];
+
 		if (xml_get_label()) {
 			buf[0] = xml_get_label();
 			buf[1] = xml_get_list();
@@ -616,10 +614,8 @@ static void add_modlist(void)
 
 void main_change_mods_select_label(char *mod_name)
 {
-	gchar *str;
-
 	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_current_module))) {
-		str = g_strdup_printf("<b>%s</b>%s", Q_("Search: "), mod_name);
+		gchar *str = g_strdup_printf("<b>%s</b>%s", Q_("Search: "), mod_name);
 		gtk_label_set_markup(GTK_LABEL(search1.label_mod_select), str);
 		g_free(str);
 	} else
@@ -644,8 +640,6 @@ void main_change_mods_select_label(char *mod_name)
 
 void main_delete_module(GtkTreeView *treeview)
 {
-	GList *mods = NULL;
-	gchar *mod_list;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
@@ -673,8 +667,8 @@ void main_delete_module(GtkTreeView *treeview)
 			      )) {
 		gtk_list_store_remove(list_store, &selected);
 
-		mods = get_current_list(treeview);
-		mod_list = get_modlist_string(mods);
+		GList *mods = get_current_list(treeview);
+		gchar *mod_list = get_modlist_string(mods);
 
 		selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
 
@@ -754,9 +748,6 @@ void main_mod_selection_changed(GtkTreeSelection *selection,
 				GtkWidget *tree_widget)
 {
 	gchar *mod = NULL;
-	const gchar *mod_description = NULL;
-	gchar *mod_list = NULL;
-	GList *mods = NULL;
 	GtkListStore *store_modules_lists;
 	GtkListStore *list_store;
 	GtkTreeSelection *selection_modules_lists;
@@ -786,7 +777,7 @@ void main_mod_selection_changed(GtkTreeSelection *selection,
 
 	gtk_tree_model_get(model, &selected, UTIL_COL_MODULE, &mod, -1);
 	if (mod) {
-		mod_description =
+		const gchar *mod_description =
 		    backendSearch->module_description(mod);
 
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_current_module))) {
@@ -797,8 +788,9 @@ void main_mod_selection_changed(GtkTreeSelection *selection,
 			gtk_list_store_set(list_store, &iter,
 					   0, mod_description,
 					   1, mod, -1);
-			mods = get_current_list(GTK_TREE_VIEW(search1.listview_modules));
-			mod_list = get_modlist_string(mods);
+
+			GList *mods = get_current_list(GTK_TREE_VIEW(search1.listview_modules));
+			gchar *mod_list = get_modlist_string(mods);
 
 			if (mod_list) {
 				gtk_tree_selection_get_selected(selection_modules_lists, NULL,
@@ -933,8 +925,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection *selection,
 
 	XI_message(("main_finds_verselist_selection_changed: %s %s", module, key));
 
-	if (text)
-		g_free(text);
+	g_free(text);
 	g_string_free(text_str, TRUE);
 }
 
@@ -1170,9 +1161,6 @@ static GList *get_custom_list_from_name(const gchar *label)
 
 static void set_up_dialog_search(GList *modlist)
 {
-	const gchar *label;
-	gchar *range = NULL;
-
 	//gui_begin_html(search1.results_html, TRUE);
 	backendSearch->clear_scope();
 	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_custom_range))) {
@@ -1195,11 +1183,10 @@ static void set_up_dialog_search(GList *modlist)
 
 		if (range_ok) {
 			backendSearch->clear_search_list();
-			label =
+			const gchar *label =
 			    gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(search1.combo_range))));
-			range =
-			    (gchar *)xml_get_list_from_label("ranges", "range",
-							     label);
+			gchar *range =
+			    (gchar *)xml_get_list_from_label("ranges", "range", label);
 			if (range) {
 				backendSearch->set_range(name_for_range, range);
 				backendSearch->set_scope2range();
@@ -1218,14 +1205,13 @@ static void set_up_dialog_search(GList *modlist)
 
 static void _clear_find_lists(void)
 {
-	GList *tmp, *base;
-	gchar *tmp_buf;
+	GList *base;
 
 	base = list_of_finds = g_list_first(list_of_finds);
 	while (list_of_finds) {
-		tmp = (GList *)list_of_finds->data;
+		GList *tmp = (GList *)list_of_finds->data;
 		while (tmp) {
-			tmp_buf = (char *)tmp->data;
+			gchar *tmp_buf = (gchar *)tmp->data;
 			XI_message(("%s", tmp_buf));
 			if (tmp_buf)
 				g_free(tmp_buf);
@@ -1242,12 +1228,12 @@ static void _clear_find_lists(void)
 
 static void _clear_bookmarking_lists(void)
 {
-	GList *tmp = NULL;
 	RESULTS *results;
 
 	list_for_bookmarking = g_list_first(list_for_bookmarking);
 	while (list_for_bookmarking) {
-		tmp = (GList *)list_for_bookmarking->data;
+		GList *tmp = (GList *)list_for_bookmarking->data;
+
 		while (tmp) {
 			results = (RESULTS *)tmp->data;
 			XI_message(("%s://%s", results->module, results->key));
@@ -1553,8 +1539,6 @@ void main_close_search_dialog(void)
 void main_dialog_search_percent_update(char percent, void *userData)
 {
 	char maxHashes = *((char *)userData);
-	float num;
-	static char printed = 0;
 
 	if (terminate_search) {
 		backendSearch->terminate_search();
@@ -1562,9 +1546,11 @@ void main_dialog_search_percent_update(char percent, void *userData)
 		// _clear_find_lists();  why would i have ever done this here?  oy.
 		is_running = FALSE;
 	} else {
+		static char printed = 0;
+
 		/* update search dialog progress */
 		while ((((float)percent) / 100) * maxHashes > printed) {
-			num = (float)percent / 100;
+			float num = (float)percent / 100;
 			gui_set_progressbar_fraction(search1.progressbar, (gdouble)num);
 			printed++;
 		}

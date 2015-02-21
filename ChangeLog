@@ -1,3 +1,10 @@
+2015-02-20  karl <charcoal@users.sf.net>
+
+	* consequent to use of cppcheck, made many updates for efficiency,
+	  scope reduction, and waste elimination.
+	  cppcheck complains about many functions "never used," but this
+	  is generally false, they are simply callbacks in gtkbuilder files.
+
 2015-02-02  karl <charcoal@users.sf.net>
 
 	* feat.req#204: merged webkit2 (webkit2gtk-4.0) changes.

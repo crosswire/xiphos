@@ -602,12 +602,11 @@ void biblesync_update_speaker()
 			 G_CALLBACK(query_tooltip), NULL);
 
 	GtkTreeIter iter;
-	BSP_Speaker *object;
 	string identifying_info;
 
 	// fill it with the user list.
 	for (i = 0; i < size; ++i) {
-		object = array[i];
+		BSP_Speaker *object = array[i];
 		identifying_info = (string)_("IP address: ") + object->ipaddr + (string)_("\nApplication: ") + object->app + (string)_("\nDevice: ") + object->device + (string)_("\nUUID: ") + object->uuid;
 
 		gtk_list_store_append(model_speakers, &iter);
@@ -711,6 +710,8 @@ int biblesync_personal()
 	return biblesync->getMode() == BSP_MODE_PERSONAL;
 }
 
+#if 0
+// unneeded at this time. disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *  biblesync_active
@@ -729,6 +730,7 @@ int biblesync_active()
 {
 	return biblesync->getMode() != BSP_MODE_DISABLE;
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -837,7 +839,6 @@ void biblesync_prep_and_xmit(const char *mod_name, const char *key)
 	// audience does not xmit nav.
 	{
 		string group = "1"; // default if determination fails.
-		char pchar[2];
 		gint pagenum = (cur_passage_tab
 				    ? gtk_notebook_page_num(
 					  GTK_NOTEBOOK(widgets.notebook_main),
@@ -845,6 +846,7 @@ void biblesync_prep_and_xmit(const char *mod_name, const char *key)
 				    : 1);
 
 		if ((pagenum != -1) && (pagenum < 9)) {
+			char pchar[2];
 			pchar[0] = pagenum + '1'; // 0-based list.
 			pchar[1] = '\0';
 			group = (string)pchar;

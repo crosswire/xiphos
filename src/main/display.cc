@@ -272,9 +272,10 @@ marked_cache_check(int thisVerse)
 void
 ClearImages(gchar *text)
 {
-	gchar *s, *t;
+	gchar *s;
 
 	for (s = strstr(text, "<img "); s; s = strstr(s, "<img ")) {
+		gchar *t;
 		if ((t = strchr(s + 4, '>'))) {
 			while (s <= t)
 				*(s++) = ' ';
@@ -291,11 +292,12 @@ ClearImages(gchar *text)
 void
 ClearFontFaces(gchar *text)
 {
-	gchar *s, *t;
+	gchar *s;
 
 	// huge assumption: no nested <font> specs: <font face="">
 	// is never followed by another <font anything> before </font>.
 	for (s = strstr(text, "<font face=\"Galax"); s; s = strstr(s, "<font face=\"Galax")) {
+		gchar *t;
 		if ((t = strchr(s + 15, '>'))) {
 			while (s <= t)
 				*(s++) = ' ';
@@ -791,7 +793,7 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
-	gchar *buf, *vbuf, *num;
+	gchar *buf, *vbuf;
 	const char *ModuleName = imodule.getName();
 	GString *rework; // for image size analysis rework.
 	footnote = xref = 0;
@@ -870,7 +872,7 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 		swbuf.append("<tr>");
 
 		// insert verse numbers
-		num = main_format_number(key->getVerse());
+		char *num = main_format_number(key->getVerse());
 		vbuf = g_strdup_printf((settings.showversenum
 					    ? "<td valign=\"top\" align=\"right\">"
 					      "<a name=\"%d\" href=\"sword:///%s\">"
@@ -1284,12 +1286,10 @@ GTKChapDisp::display(SWModule &imodule)
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
 	gchar *buf;
-	char *num;
 	GString *rework; // for image size analysis rework.
 	const char *ModuleName = imodule.getName();
 	ops = main_new_globals(ModuleName);
 	cache_flags = ConstructFlags(ops);
-	marked_element *e = NULL;
 
 	is_rtol = main_is_mod_rtol(ModuleName);
 	mf = get_font(ModuleName);
@@ -1398,6 +1398,7 @@ GTKChapDisp::display(SWModule &imodule)
 			rework = g_string_new(cVerse.GetText());
 
 		// special contrasty highlighting
+		marked_element *e;
 		if (((e = marked_cache_check(key->getVerse())) &&
 		     settings.annotate_highlight) ||
 		    ((key->getVerse() == curVerse) &&
@@ -1414,7 +1415,7 @@ GTKChapDisp::display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		num = main_format_number(key->getVerse());
+		gchar *num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(settings.showversenum
 					  ? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
 					    "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></span>&nbsp;"
@@ -1695,9 +1696,7 @@ DialogChapDisp::display(SWModule &imodule)
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
 	gchar *buf;
-	char *num;
 	GString *rework; // for image size analysis rework.
-	marked_element *e = NULL;
 
 	const char *ModuleName = imodule.getName();
 	ops = main_new_globals(ModuleName);
@@ -1803,6 +1802,7 @@ DialogChapDisp::display(SWModule &imodule)
 			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
+		marked_element *e;
 		if (((e = marked_cache_check(key->getVerse())) &&
 		     settings.annotate_highlight) ||
 		    ((key->getVerse() == curVerse) && settings.versehighlight)) {
@@ -1818,7 +1818,7 @@ DialogChapDisp::display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		num = main_format_number(key->getVerse());
+		gchar *num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(settings.showversenum
 					  ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
 					    "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
@@ -1980,10 +1980,8 @@ GTKPrintChapDisp::display(SWModule &imodule)
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
 	gchar *buf;
-	gchar *preverse = NULL;
 	gchar heading[32];
 	SWBuf swbuf;
-	char *num;
 
 	GLOBAL_OPS *ops = main_new_globals(imodule.getName());
 	gboolean is_rtol = main_is_mod_rtol(imodule.getName());
@@ -2015,7 +2013,9 @@ GTKPrintChapDisp::display(SWModule &imodule)
 	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 		int x = 0;
+		gchar *preverse;
 		sprintf(heading, "%d", x);
+
 		while ((preverse = backend->get_entry_attribute("Heading", "Preverse",
 								heading)) != NULL) {
 			SWBuf preverse2 = imodule.renderText(preverse);
@@ -2027,7 +2027,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 			sprintf(heading, "%d", x);
 		}
 
-		num = main_format_number(key->getVerse());
+		gchar *num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(settings.showversenum
 					  ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
 					    "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"

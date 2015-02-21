@@ -330,6 +330,8 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	cur_dlg = dlg;
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   gui_close_gbs_dialog
@@ -353,5 +355,6 @@ void gui_close_gbs_dialog(DIALOG_DATA *dlg)
 		gtk_widget_destroy(dlg->dialog);
 	}
 }
+#endif
 
 //******  end of file  ******/

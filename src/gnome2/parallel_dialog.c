@@ -222,6 +222,8 @@ void gui_keep_parallel_dialog_in_sync(void)
 		sync_with_main();
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   gui_set_parallel_navbar
@@ -241,6 +243,7 @@ void gui_set_parallel_navbar(const char *key)
 {
 	main_navbar_set(navbar, key);
 }
+#endif
 
 /******************************************************************************
  * Name

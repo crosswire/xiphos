@@ -68,12 +68,15 @@ void main_set_previewer_widget(int in_sidebar)
 		previewer_html_widget = widgets.html_previewer_text;
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 GtkWidget *main_get_previewer_widget(void)
 {
 	return settings.show_previewer_in_sidebar
 		   ? sidebar.html_viewer_widget
 		   : widgets.html_previewer_text;
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -110,6 +113,8 @@ void main_init_previewer(void)
 	g_string_free(str, TRUE);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   main_clear_viewer
@@ -135,6 +140,7 @@ void main_clear_viewer(void)
 	main_init_previewer();
 #endif /* USE_PREVIEWER_AUTOCLEAR */
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -380,7 +386,8 @@ void mark_search_words(GString *str)
 			str = g_string_insert(str, (len_prefix + len_word),
 					      closestr);
 			/* then place start tag */
-			str = g_string_insert(str, len_prefix, openstr);
+			/* don't re-assign str here, to keep cppcheck happy */
+			(void) g_string_insert(str, len_prefix, openstr);
 		}
 	}
 	g_free(searchbuf);
@@ -409,7 +416,6 @@ void main_entry_display(gpointer data, gchar *mod_name,
 	GtkWidget *html_widget = (GtkWidget *)data;
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
-	GString *search_str;
 	MOD_FONT *mf = get_font(mod_name);
 
 	g_string_printf(tmp_str,
@@ -448,7 +454,7 @@ void main_entry_display(gpointer data, gchar *mod_name,
 	}
 
 	if (settings.displaySearchResults) {
-		search_str = g_string_new(text);
+		GString *search_str = g_string_new(text);
 		mark_search_words(search_str);
 		str = g_string_append(str, search_str->str);
 		g_string_free(search_str, TRUE);

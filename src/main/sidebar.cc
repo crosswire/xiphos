@@ -944,7 +944,6 @@ void main_load_module_tree(GtkWidget *tree)
 	GtkTreeIter child_iter;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
-	MOD_MGR *info;
 
 	store = gtk_tree_store_new(N_COLUMNS,
 				   GDK_TYPE_PIXBUF,
@@ -1080,7 +1079,7 @@ void main_load_module_tree(GtkWidget *tree)
 
 	tmp2 = tmp;
 	while (tmp2 != NULL) {
-		info = (MOD_MGR *)tmp2->data;
+		MOD_MGR *info = (MOD_MGR *)tmp2->data;
 
 		if (info->is_cult) {
 			add_module_to_language_folder(GTK_TREE_MODEL(store),

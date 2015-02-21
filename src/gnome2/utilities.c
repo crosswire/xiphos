@@ -546,17 +546,20 @@ static void add_module_to_language_folder(GtkTreeModel *model,
 
 void gui_load_module_tree(GtkWidget *tree, gboolean limited)
 {
+	// GtkTreeIter should be an opaque type.
+	// but because cppcheck(1) complains of uninit'd use,
+	// we cheat & peek & assign the structs (perhaps pointlessly).
+	GtkTreeIter text = { -1, NULL, NULL, NULL };
+	GtkTreeIter commentary = { -1, NULL, NULL, NULL };
+	GtkTreeIter dictionary = { -1, NULL, NULL, NULL };
+	GtkTreeIter glossary = { -1, NULL, NULL, NULL };
+	GtkTreeIter devotional = { -1, NULL, NULL, NULL };
+	GtkTreeIter book = { -1, NULL, NULL, NULL };
+	GtkTreeIter map = { -1, NULL, NULL, NULL };
+	GtkTreeIter image = { -1, NULL, NULL, NULL };
+	GtkTreeIter cult = { -1, NULL, NULL, NULL };
+	GtkTreeIter prayerlist = { -1, NULL, NULL, NULL };
 	GtkTreeStore *store;
-	GtkTreeIter text;
-	GtkTreeIter commentary;
-	GtkTreeIter dictionary;
-	GtkTreeIter glossary;
-	GtkTreeIter devotional;
-	GtkTreeIter book;
-	GtkTreeIter map;
-	GtkTreeIter image;
-	GtkTreeIter cult;
-	GtkTreeIter prayerlist;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
 
@@ -845,6 +848,8 @@ void free_font(MOD_FONT *mf)
 	g_free(mf);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   remove_linefeeds
@@ -869,6 +874,7 @@ gchar *remove_linefeeds(gchar *buf)
 
 	return (key ? g_strdup(key) : NULL);
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -906,6 +912,8 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget *menu,
 	}
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *  ncr_to_utf8
@@ -966,6 +974,7 @@ gchar *ncr_to_utf8(gchar *text)
 
 	return g_string_free(newtext, FALSE);
 }
+#endif
 
 //
 // for choosing variants, primary/secondary/all.

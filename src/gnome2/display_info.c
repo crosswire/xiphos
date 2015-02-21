@@ -69,6 +69,8 @@ void gui_display_mod_and_key(const gchar *mod_name, const gchar *key)
 	}
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *
@@ -91,6 +93,7 @@ void gui_display_text_information(gchar *information)
 	XIPHOS_HTML_WRITE(html_widget, information, strlen(information));
 	XIPHOS_HTML_CLOSE(html_widget);
 }
+#endif
 
 /******************************************************************************
  * Name

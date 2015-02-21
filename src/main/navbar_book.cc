@@ -146,16 +146,13 @@ static int check_for_next_sib(char *book, unsigned long offset)
 
 void main_navbar_book_parent(void)
 {
-	char *tmpbuf = NULL;
-	unsigned long offset;
-
 	backend->set_module(settings.book_mod);
 	backend->set_treekey(settings.book_offset);
 	if (backend->treekey_parent(settings.book_offset)) {
-		offset = backend->get_treekey_offset();
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),
-				   tmpbuf);
+		unsigned long offset = backend->get_treekey_offset();
+		char *tmpbuf = backend->treekey_get_local_name(offset);
+
+		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry), tmpbuf);
 		g_free(tmpbuf);
 		tmpbuf = g_strdup_printf("%ld", offset);
 		main_display_book(settings.book_mod, tmpbuf);
@@ -181,16 +178,13 @@ void main_navbar_book_parent(void)
 
 void main_navbar_book_first_child(void)
 {
-	char *tmpbuf = NULL;
-	unsigned long offset;
-
 	backend->set_module(settings.book_mod);
 	backend->set_treekey(settings.book_offset);
 	if (backend->treekey_first_child(settings.book_offset)) {
-		offset = backend->get_treekey_offset();
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),
-				   tmpbuf);
+		unsigned long offset = backend->get_treekey_offset();
+		char *tmpbuf = backend->treekey_get_local_name(offset);
+
+		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry), tmpbuf);
 		g_free(tmpbuf);
 		tmpbuf = g_strdup_printf("%ld", offset);
 		main_display_book(settings.book_mod, tmpbuf);
@@ -216,16 +210,13 @@ void main_navbar_book_first_child(void)
 
 void main_navbar_book_prev(void)
 {
-	char *tmpbuf = NULL;
-	unsigned long offset;
-
 	backend->set_module(settings.book_mod);
 	backend->set_treekey(settings.book_offset);
 	if (backend->treekey_prev_sibling(settings.book_offset)) {
-		offset = backend->get_treekey_offset();
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),
-				   tmpbuf);
+		unsigned long offset = backend->get_treekey_offset();
+		char *tmpbuf = backend->treekey_get_local_name(offset);
+
+		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry), tmpbuf);
 		g_free(tmpbuf);
 		tmpbuf = g_strdup_printf("%ld", offset);
 		main_display_book(settings.book_mod, tmpbuf);
@@ -251,20 +242,13 @@ void main_navbar_book_prev(void)
 
 void main_navbar_book_next(void)
 {
-	char *tmpbuf = NULL;
-	unsigned long offset;
-	//const gchar *path;
-
-	/*gchar *buf = g_strrstr_len (path,
-                                    sizeof (path),
-                                    ":");*/
 	backend->set_module(settings.book_mod);
 	backend->set_treekey(settings.book_offset);
 	if (backend->treekey_next_sibling(settings.book_offset)) {
-		offset = backend->get_treekey_offset();
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),
-				   tmpbuf);
+		unsigned long offset = backend->get_treekey_offset();
+		char *tmpbuf = backend->treekey_get_local_name(offset);
+
+		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry), tmpbuf);
 		g_free(tmpbuf);
 		tmpbuf = g_strdup_printf("%ld", offset);
 		main_display_book(settings.book_mod, tmpbuf);

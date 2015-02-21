@@ -226,7 +226,6 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 
 static void on_nt_book_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 {
-	SWModule *mod;
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
 	gchar *name, *key;
@@ -262,7 +261,7 @@ static void on_nt_book_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 	}
 
 	if (entry) {
-		mod = backend->get_SWModule(name);
+		SWModule *mod = backend->get_SWModule(name);
 		if (mod) {
 			VerseKey *vkey = (VerseKey *)mod->createKey();
 			vkey->setAutoNormalize(1);
@@ -297,7 +296,6 @@ static void on_nt_book_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 
 static void on_ot_book_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 {
-	SWModule *mod;
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
 	gchar *name, *key;
@@ -333,7 +331,7 @@ static void on_ot_book_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 	}
 
 	if (entry) {
-		mod = backend->get_SWModule(name);
+		SWModule *mod = backend->get_SWModule(name);
 		if (mod) {
 			VerseKey *vkey = (VerseKey *)mod->createKey();
 			vkey->setAutoNormalize(1);
@@ -368,7 +366,6 @@ static void on_ot_book_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 
 static void on_chapter_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 {
-	SWModule *mod;
 	GtkWidget *entry = NULL;
 	int chapter = GPOINTER_TO_INT(user_data);
 	gchar *name, *key;
@@ -403,7 +400,7 @@ static void on_chapter_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 		break;
 	}
 	if (entry) {
-		mod = backend->get_SWModule(name);
+		SWModule *mod = backend->get_SWModule(name);
 		if (mod) {
 			VerseKey *vkey = (VerseKey *)mod->createKey();
 			vkey->setAutoNormalize(1);
@@ -437,7 +434,6 @@ static void on_chapter_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 
 static void on_verse_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 {
-	SWModule *mod;
 	GtkWidget *entry = NULL;
 	int verse = GPOINTER_TO_INT(user_data);
 	gchar *name, *key;
@@ -472,7 +468,7 @@ static void on_verse_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 		break;
 	}
 	if (entry) {
-		mod = backend->get_SWModule(name);
+		SWModule *mod = backend->get_SWModule(name);
 		if (mod) {
 			VerseKey *vkey = (VerseKey *)mod->createKey();
 			vkey->setAutoNormalize(1);
@@ -507,7 +503,6 @@ static void on_verse_menu_select(GtkMenuItem *menuitem, gpointer user_data)
 void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char *key)
 {
 	char *tmpbuf = NULL;
-	char *num;
 
 	if (!navbar.module_name->len)
 		return;
@@ -527,7 +522,7 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char *key)
 		gtk_label_set_label(GTK_LABEL(navbar.label_book_menu), tmpbuf);
 		g_free(tmpbuf);
 
-		num = main_format_number(vkey->getChapter());
+		gchar *num = main_format_number(vkey->getChapter());
 		tmpbuf = g_strdup_printf("<b>%s</b>", num);
 		g_free(num);
 		gtk_label_set_label(GTK_LABEL(navbar.label_chapter_menu), tmpbuf);
@@ -574,7 +569,6 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 					      gpointer dialog,
 					      gpointer editor)
 {
-	char *num;
 	gint i, x;
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;
@@ -600,7 +594,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	delete vkey;
 
 	for (i = 1; i <= x; i++) {
-		num = main_format_number(i);
+		gchar *num = main_format_number(i);
 		item = gtk_menu_item_new_with_label(num);
 		gtk_widget_show(item);
 		gtk_menu_shell_append(menu_shell, item);
@@ -640,7 +634,6 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 						gpointer dialog,
 						gpointer editor)
 {
-	char *num;
 	gint i, x;
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;
@@ -666,7 +659,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	delete vkey;
 
 	for (i = 1; i <= x; i++) {
-		num = main_format_number(i);
+		gchar *num = main_format_number(i);
 		item = gtk_menu_item_new_with_label(num);
 		gtk_widget_show(item);
 		gtk_menu_shell_append(menu_shell, item);
