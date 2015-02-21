@@ -496,11 +496,9 @@ e_splash_set_icon_highlight(ESplash *splash, int num, gboolean highlight)
 
 	g_return_if_fail(splash != NULL);
 	g_return_if_fail(E_IS_SPLASH(splash));
-	if (num >= splash->priv->num_icons)
-		return; // no noisy logging
 
-	if (!splash)
-		return;
+	if (!splash || (num >= splash->priv->num_icons))
+		return; // no noisy logging
 
 	priv = splash->priv;
 

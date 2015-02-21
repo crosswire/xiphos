@@ -123,14 +123,13 @@ void main_index_percent_update(char percent,
 			       void *userData)
 {
 	char maxHashes = *((char *)userData);
-	float num;
 	char buf[80];
 	static char printed = 0;
 
 	/* update search dialog progress */
 	while ((((float)percent) / 100) * maxHashes > printed) {
 		sprintf(buf, "%f", (((float)percent) / 100));
-		num = (float)percent / 100;
+		float num = (float)percent / 100;
 		gui_update_install_progressbar((gdouble)num);
 		printed++;
 	}

@@ -78,6 +78,8 @@ static void on_dialog_destroy(GObject *object, DIALOG_DATA *d)
 	dialog_freed = FALSE;
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   gui_close_comm_dialog
@@ -101,6 +103,7 @@ void gui_close_comm_dialog(DIALOG_DATA *d)
 		gtk_widget_destroy(d->dialog);
 	}
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -265,6 +268,8 @@ void gui_create_commentary_dialog(DIALOG_DATA *d, gboolean do_edit)
 			 G_CALLBACK(on_dialog_motion_notify_event), d);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 void gui_commentary_dialog_sync_toggled(GtkToggleButton *button,
 					DIALOG_DATA *d)
 {
@@ -276,5 +281,6 @@ void gui_commentary_dialog_sync_toggled(GtkToggleButton *button,
 	} else
 		d->sync = FALSE;
 }
+#endif
 
 /******   end of file   ******/

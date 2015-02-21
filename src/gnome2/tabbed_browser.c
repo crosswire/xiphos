@@ -169,6 +169,8 @@ void gui_recompute_view_menu_choices(void)
 	change_tabs_no_redisplay = FALSE;
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 void setup_book_editor_tab(PASSAGE_TAB_INFO *pt)
 {
 	/*pt->editor = editor_create_new_book_editor(pt->book_mod, PRAYERLIST_TYPE);
@@ -177,6 +179,7 @@ void setup_book_editor_tab(PASSAGE_TAB_INFO *pt)
 	   gtk_box_pack_start (GTK_BOX (widgets.vboxMain), GTK_WIDGET(pt->editor),
 	   TRUE, TRUE, 0); */
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -1492,6 +1495,8 @@ void gui_close_all_tabs(void)
 	//      gui_set_text_frame_label(cur_t);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *  gui_open_tabs
@@ -1520,6 +1525,7 @@ void gui_open_tabs(void)
 
 	gtk_widget_show(widgets.button_new_tab);
 }
+#endif
 
 /******************************************************************************
  * Name

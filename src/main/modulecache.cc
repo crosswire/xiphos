@@ -81,6 +81,8 @@ ModuleCacheErase(const char *modname)
 	// or just ModuleMap.erase(modname), i guess.
 }
 
+#if 0
+// unused at this time -- we don't cache book content.
 void
 BookModuleCacheErase(const char *modname)
 {
@@ -89,3 +91,4 @@ BookModuleCacheErase(const char *modname)
 	if (itr != BookModuleMap.end())
 		BookModuleMap.erase(itr);
 }
+#endif

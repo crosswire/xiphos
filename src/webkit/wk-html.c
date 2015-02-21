@@ -62,8 +62,6 @@ static GObjectClass *parent_class = NULL;
 
 static gboolean button_release_handler(GtkWidget *widget, GdkEventButton *event)
 {
-	GtkClipboard *clipboard;
-
 	if (event->type == GDK_BUTTON_RELEASE && db_click) {
 		XI_message((" button 1 = %s", "double click!\n"));
 
@@ -75,7 +73,7 @@ static gboolean button_release_handler(GtkWidget *widget, GdkEventButton *event)
 			webkit_web_view_copy_clipboard(WEBKIT_WEB_VIEW(widget));
 		}
 #endif
-		clipboard = gtk_widget_get_clipboard(widget, GDK_SELECTION_CLIPBOARD);
+		GtkClipboard *clipboard = gtk_widget_get_clipboard(widget, GDK_SELECTION_CLIPBOARD);
 		gtk_clipboard_request_text(clipboard, gui_get_clipboard_text_for_lookup, NULL);
 	}
 

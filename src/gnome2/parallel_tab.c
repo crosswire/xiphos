@@ -69,6 +69,8 @@ _popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 	gui_popup_menu_parallel();
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   on_btnDockInt_clicked
@@ -92,6 +94,7 @@ void gui_parallel_close_tab(GtkButton *button, gpointer user_data)
 {
 	//gtk_widget_destroy(parallel_UnDock_Dialog);
 }
+#endif
 
 /******************************************************************************
  * Name
