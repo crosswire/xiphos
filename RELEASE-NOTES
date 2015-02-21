@@ -3,7 +3,7 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Intermediate Test Bundle 4.0.0h
+Intermediate Test Bundle 4.0.0i
 17 Feb 2015
 
 - Completed webkit editor, due to replace gtkhtml editor.
@@ -34,6 +34,8 @@ Intermediate Test Bundle 4.0.0h
 - WebKit2 compatibility hackery.
 
 - Fix compiler flag choices.
+
+- Numerous code internals updates due to cppcheck(1) diagnostics.
 ________________________________________________________________
 
 Release 4.0.0
