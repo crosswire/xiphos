@@ -190,6 +190,8 @@ void xml_add_bookmark_to_parent(xmlNodePtr parent,
 	   (const xmlChar *) caption); */
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   xml_write_bookmark_doc
@@ -211,6 +213,7 @@ void xml_write_bookmark_doc(const xmlChar *xml_filename)
 	XI_print(("\nsaving = %s\n", xml_filename));
 	xmlSaveFormatFile((const char *)xml_filename, bookmark_doc, 1);
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -319,11 +322,10 @@ void xml_save_export_doc(char *name)
 char *xml_get_copy_export_value(const char *section, const char *item)
 {
 	xmlNodePtr cur = NULL;
-	xmlChar *results = NULL;
 	if ((cur =
 		 xml_find_prop(xml_export_doc, "Copy_Export", section,
 			       item)) != NULL) {
-		results =
+		xmlChar *results =
 		    xmlNodeListGetString(xml_export_doc,
 					 cur->xmlChildrenNode, 1);
 		if (results)
@@ -820,9 +822,11 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"hebrew",
 			NULL);
 
-	section_node = xmlNewChild(root_node, NULL,
-				   (const xmlChar *)"osisrefmarkedverses",
-				   NULL);
+	/* cppcheck dislikes assigning this to section_node  */
+	/* because it is then immediately re-assigned after. */
+	(void) xmlNewChild(root_node, NULL,
+			   (const xmlChar *)"osisrefmarkedverses",
+			   NULL);
 
 	section_node =
 	    xmlNewChild(root_node, NULL, (const xmlChar *)"misc", NULL);
@@ -979,7 +983,6 @@ int xml_create_settings_file(char *path)
 
 void xml_convert_to_osisref(void)
 {
-	gchar *label, *content, *s, *t;
 	gchar reference[100];
 	GList *deletable = NULL, *hold;
 
@@ -987,6 +990,8 @@ void xml_convert_to_osisref(void)
 	/* re-insert into new "osisrefmarkedverses" */
 	if (xml_set_section_ptr("markedverses") && xml_get_label()) {
 		do {
+			gchar *label, *content, *s, *t;
+
 			label = xml_get_label();
 			content = g_strdup(xml_get_list());
 
@@ -1143,7 +1148,6 @@ char *xml_get_list_from_label(const char *section, const char *item,
 			      const char *label)
 {
 	xmlNodePtr cur = NULL;
-	xmlChar *prop_label = NULL;
 
 	if ((cur =
 		 xml_find_section(xml_settings_doc, "Xiphos",
@@ -1155,7 +1159,7 @@ char *xml_get_list_from_label(const char *section, const char *item,
 
 			//g_warning("cur->name = %s", cur->name);
 			if (!xmlStrcmp(cur->name, (const xmlChar *)item)) {
-				prop_label =
+				xmlChar *prop_label =
 				    xmlGetProp(cur,
 					       (const xmlChar *)"label");
 				XI_message(("\nprop_label: %s\nlabel: %s",
@@ -1437,11 +1441,10 @@ static xmlNodePtr xml_find_prop(xmlDocPtr doc, const char *type_doc,
 char *xml_get_value(const char *section, const char *item)
 {
 	xmlNodePtr cur = NULL;
-	xmlChar *results = NULL;
 	if ((cur =
 		 xml_find_prop(xml_settings_doc, "Xiphos", section,
 			       item)) != NULL) {
-		results =
+		xmlChar *results =
 		    xmlNodeListGetString(xml_settings_doc,
 					 cur->xmlChildrenNode, 1);
 		if (results)

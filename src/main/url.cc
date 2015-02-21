@@ -309,7 +309,6 @@ static gint show_morph(const char *module_name,
 		       gboolean clicked)
 {
 	const gchar *modbuf = NULL;
-	gchar *mybuf = NULL;
 
 	if (!strcmp(stype, "Greek") ||
 	    strstr(stype, "x-Robinson") ||
@@ -328,7 +327,7 @@ static gint show_morph(const char *module_name,
 	if (clicked) {
 		main_display_dictionary(modbuf, (gchar *)svalue);
 	} else {
-		mybuf = main_get_rendered_text(modbuf, (gchar *)svalue);
+		gchar *mybuf = main_get_rendered_text(modbuf, (gchar *)svalue);
 		//XI_message(("mybuf = %s", mybuf));
 		if (mybuf) {
 			main_information_viewer(modbuf,
@@ -364,14 +363,6 @@ static gint show_strongs(const gchar *stype, const gchar *svalue,
 			 gboolean clicked)
 {
 	const gchar *modbuf = NULL;
-	gchar *mybuf = NULL;
-	gchar *val = NULL;
-
-	val = g_strdup(svalue);
-	/*if ((val1 = strchar(val,'|')) != NULL)	{
-		val1 = (val1) ? (val1 + 1) : val;
-
-	}*/
 
 	if (!strncmp(settings.MainWindowModule, "NASB", 4)) {
 		if (!strcmp(stype, "Greek"))
@@ -391,7 +382,7 @@ static gint show_strongs(const gchar *stype, const gchar *svalue,
 	if (clicked) {
 		main_display_dictionary(modbuf, (gchar *)svalue);
 	} else {
-		mybuf = main_get_rendered_text(modbuf, (gchar *)svalue);
+		gchar *mybuf = main_get_rendered_text(modbuf, (gchar *)svalue);
 		if (mybuf) {
 			main_information_viewer(
 			    modbuf,
@@ -404,7 +395,7 @@ static gint show_strongs(const gchar *stype, const gchar *svalue,
 			g_free(mybuf);
 		}
 	}
-	g_free(val);
+
 	return 1;
 }
 
@@ -439,7 +430,7 @@ static gint show_note(const gchar *module, const gchar *passage,
 	if (!backend->is_module((gchar *)module))
 		module = settings.MainWindowModule;
 
-	if (passage && (strlen(passage) < 5))
+	if (strlen(passage) < 5)
 		passage = settings.currentverse;
 
 	//
@@ -774,8 +765,7 @@ gint sword_uri(const gchar *url, gboolean clicked)
 		   ? work_buf[MODULE]
 		   : settings.MainWindowModule);
 
-	if (tmpkey &&
-	    strpbrk(tmpkey, "-;,") && // >1 verse marked
+	if (strpbrk(tmpkey, "-;,") && // >1 verse marked
 	    (main_get_mod_type(mod) == TEXT_TYPE)) {
 		main_display_verse_list_in_sidebar(settings.currentverse, mod, tmpkey);
 		handling_uri = FALSE;

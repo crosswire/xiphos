@@ -85,6 +85,8 @@ static void set_gbs_label(gchar * mod_name)
 }
 #endif /* 0 */
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *  gui_set_book_page_and_key
@@ -105,7 +107,10 @@ void gui_set_book_mod_and_key(gchar *mod_name, gchar *key)
 {
 	main_display_book(mod_name, key);
 }
+#endif
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *
@@ -128,6 +133,7 @@ void gui_update_gbs_global_ops(gchar *option, gboolean choice)
 	   choice); */
 	//gbs_display(cur_g, tree_level);
 }
+#endif
 
 static void
 _popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)

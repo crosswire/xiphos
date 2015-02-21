@@ -204,10 +204,10 @@ void main_add_tab_history_item(gpointer data)
 void main_fake_tab_history_item(char *reference)
 {
 	PASSAGE_TAB_INFO *tab = cur_passage_tab;
-	int i;
 
 	/* if we have hit max length, dispose of oldest */
 	if (tab->history_items == TABHISTORYLENGTH) {
+		int i;
 		for (i = 0; i < (TABHISTORYLENGTH - 1); ++i) {
 			tab->history_list[i] = tab->history_list[i + 1];
 		}

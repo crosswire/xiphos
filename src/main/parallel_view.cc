@@ -144,6 +144,8 @@ static void set_global_textual_reading(const char *option, int choice)
 	g_free(buf);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   main_parallel_change_verse
@@ -200,6 +202,7 @@ gchar *main_parallel_change_verse(void)
 	g_free(newbook);
 	return retval;
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -533,7 +536,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 			 (char *)"Secondary Reading");
 
 	item = gtk_radio_menu_item_new_with_mnemonic(group, _("All Readings"));
-	group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(item));
+	//group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(item));
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(variants_menu), item);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), settings.parallel_variants_all);
@@ -604,13 +607,15 @@ void main_check_parallel_modules(void)
 
 void get_heading(SWBuf &text, BackEnd *p, gint modidx)
 {
-	const gchar *preverse, *preverse2, *buf;
+	const gchar *preverse;
 	gchar heading[8];
 
 	int x = 0;
 	sprintf(heading, "%d", x);
 	while ((preverse = p->get_entry_attribute("Heading", "Preverse",
 						  heading)) != NULL) {
+		const gchar *preverse2, *buf;
+
 		preverse2 = p->render_this_text(
 		    settings.parallel_list[modidx], preverse);
 		buf = g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2);
@@ -643,13 +648,10 @@ void get_heading(SWBuf &text, BackEnd *p, gint modidx)
 
 void main_update_parallel_page(void)
 {
-	gchar *tmpBuf, *fontstring;
-	const gchar *rowcolor;
-	gchar *utf8str, *mod_name;
+	gchar *tmpBuf;
 	gint modidx;
 	gboolean is_rtol = FALSE;
 	GString *data;
-	MOD_FONT *mf;
 
 	settings.cvparallel = settings.currentverse;
 
@@ -661,9 +663,11 @@ void main_update_parallel_page(void)
 	g_free(tmpBuf);
 
 	if (settings.parallel_list) {
+		gchar *mod_name;
 		for (modidx = 0;
 		     (mod_name = settings.parallel_list[modidx]);
 		     modidx++) {
+			const gchar *rowcolor;
 
 			// if a module was deleted, but still in parallels list,
 			// we will segfault when looking for content for the
@@ -691,12 +695,12 @@ void main_update_parallel_page(void)
 				g_free(tmpBuf);
 			}
 
-			mf = get_font(mod_name);
-			fontstring = g_strdup_printf((((strlen(mf->old_font) < 2) ||
-						       !strncmp(mf->old_font, "none", 4))
-							  ? "<font size=\"%+d\">"
-							  : "<font size=\"%+d\" face=\"%s\">"),
-						     mf->old_font_size_value, mf->old_font);
+			MOD_FONT *mf = get_font(mod_name);
+			gchar *fontstring = g_strdup_printf((((strlen(mf->old_font) < 2) ||
+							      !strncmp(mf->old_font, "none", 4))
+							     ? "<font size=\"%+d\">"
+							     : "<font size=\"%+d\" face=\"%s\">"),
+							    mf->old_font_size_value, mf->old_font);
 			free_font(mf);
 
 			tmpBuf = g_strdup_printf(
@@ -725,7 +729,7 @@ void main_update_parallel_page(void)
 				get_heading(text, backend_p, modidx);
 				g_string_append(data, text.c_str());
 
-				utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
+				gchar *utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
 				if (utf8str) {
 					g_string_append(data, utf8str);
 					g_free(utf8str);
@@ -1005,6 +1009,8 @@ void main_swap_parallel_with_main(char *intmod)
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 0);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   load_menu_formmod_list
@@ -1026,7 +1032,6 @@ void main_load_menu_form_mod_list(GtkWidget *pmInt, gchar *label,
 				  GCallback mycallback)
 {
 	GList *tmp = get_list(TEXT_DESC_LIST);
-	GtkWidget *item;
 	GtkWidget *view_module;
 	GtkWidget *view_module_menu;
 
@@ -1041,7 +1046,7 @@ void main_load_menu_form_mod_list(GtkWidget *pmInt, gchar *label,
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU
 					      (view_module_menu));*/
 	while (tmp != NULL) {
-		item =
+		GtkWidget *item =
 		    gtk_menu_item_new_with_label((gchar *)tmp->data);
 		gtk_widget_show(item);
 		g_signal_connect(G_OBJECT(item), "activate",
@@ -1054,6 +1059,7 @@ void main_load_menu_form_mod_list(GtkWidget *pmInt, gchar *label,
 	}
 	g_list_free(tmp);
 }
+#endif
 
 /******************************************************************************
  * Name

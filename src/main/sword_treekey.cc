@@ -129,6 +129,8 @@ void setEntryText(RawGenBook *book, const gchar *text)
 	}
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 void appendSibbling(TreeKeyIdx *treeKey, const gchar *name)
 {
 	if (treeKey->getOffset()) {
@@ -137,6 +139,7 @@ void appendSibbling(TreeKeyIdx *treeKey, const gchar *name)
 		treeKey->save();
 	}
 }
+#endif
 
 void appendChild(TreeKeyIdx *treeKey, const gchar *name)
 {
@@ -282,7 +285,11 @@ void main_treekey_save_book_text(char *book, char *offset, char *text)
 	mod->setKey(treenode);
 	mod->getKeyText(); //snap to entry
 	(*mod) << text;
-	if (settings.book_mod && book && !strcmp(settings.book_mod, book)) {
+
+	// on recommendation of cppcheck, test of "book" for non-NULL
+	// was removed here.  this should be ok because above we use
+	// book as Modules subscript.  so both or neither blows up.
+	if (settings.book_mod && !strcmp(settings.book_mod, book)) {
 		XI_message(("main_treekey_save_book_text"));
 		main_display_book(book, offset);
 	}

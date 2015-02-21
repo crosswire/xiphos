@@ -142,6 +142,8 @@ void on_entryDictLookup_changed(GtkEditable *editable, gpointer data)
 	main_dictionary_entry_changed(settings.DictWindowModule);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   gui_display_dictlex
@@ -162,7 +164,10 @@ void gui_display_dictlex(gchar *key)
 {
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 }
+#endif
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *  gui_set_dictlex_mod_and_key
@@ -195,6 +200,7 @@ void gui_set_dictlex_mod_and_key(gchar *mod_name, gchar *key)
 	else
 		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 }
+#endif
 
 void dict_key_entry_changed(GtkEntry *entry, gpointer data)
 {

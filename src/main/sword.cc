@@ -555,6 +555,8 @@ const char *main_get_sword_version(void)
 	return backend->get_sword_version();
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *
@@ -575,6 +577,7 @@ char *main_get_treekey_local_name(unsigned long offset)
 {
 	return backend->treekey_get_local_name(offset);
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -675,8 +678,9 @@ void main_init_language_map()
 		gui_generic_warning(_("Xiphos cannot read the\nlanguage abbreviation file."));
 		return;
 	}
-	fclose(language); // safe to do even while mmap is active.
-	*(end = length + mapspace) = '\0';
+	fclose(language);
+	end = length + mapspace;
+	*end = '\0';
 
 	for (s = mapspace; s < end; ++s) {
 		if ((newline = strchr(s, '\n')) == NULL) {
@@ -732,12 +736,11 @@ char **main_get_module_language_list(void)
  */
 char *set_sword_locale(const char *sys_locale)
 {
-	int ncmp[3] = {100, 5, 2}; // fixed data
-
 	if (sys_locale) {
 		SWBuf locale;
 		StringList localelist = LocaleMgr::getSystemLocaleMgr()->getAvailableLocales();
 		StringList::iterator it;
+		int ncmp[3] = {100, 5, 2}; // fixed data
 
 		// length-limited match
 		for (int i = 0; i < 3; ++i) {
@@ -917,7 +920,6 @@ GtkWidget *main_dictionary_drop_down_new(char *mod_name, char *old_key)
 	gchar *new_key;
 	gchar *key = NULL;
 	GtkWidget *menu;
-	GtkWidget *item;
 
 	menu = gtk_menu_new();
 
@@ -955,7 +957,7 @@ GtkWidget *main_dictionary_drop_down_new(char *mod_name, char *old_key)
 		(*backend->display_mod)++;
 		new_key = g_strdup((char *)backend->display_mod->getKeyText());
 		/* add menu item */
-		item =
+		GtkWidget *item =
 		    gtk_menu_item_new_with_label((gchar *)new_key);
 		gtk_widget_show(item);
 		g_signal_connect(G_OBJECT(item), "activate",
@@ -1179,7 +1181,6 @@ void main_display_dictionary(const char *mod_name,
 	if (strcmp(settings.DictWindowModule, mod_name)) {
 		// new dict -- is it actually a devotional?
 		time_t curtime;
-		struct tm *loctime;
 		char *feature;
 		if ((feature = (char *)backend->get_mgr()->getModule(mod_name)->getConfigEntry("Feature")) &&
 		    !strcmp(feature, "DailyDevotion")) {
@@ -1189,6 +1190,8 @@ void main_display_dictionary(const char *mod_name,
 			    (key[2] != '.') ||
 			    (key[3] < '0') || (key[3] > '9') ||
 			    (key[4] < '0') || (key[4] > '9')) { // not MM.DD
+				struct tm *loctime;
+
 				curtime = time(NULL);
 				loctime = localtime(&curtime);
 				strftime(buf, 10, "%m.%d", loctime);
@@ -1226,8 +1229,6 @@ void main_display_dictionary(const char *mod_name,
 void main_display_bible(const char *mod_name,
 			const char *key)
 {
-	gchar *val_key = NULL;
-
 	/* keeps us out of a crash causing loop */
 	extern guint scroll_adj_signal;
 	extern GtkAdjustment *adjustment;
@@ -1321,6 +1322,8 @@ void main_display_bible(const char *mod_name,
 		backend->set_module_key(mod_name, key);
 		backend->display_mod->display();
 	} else {
+		gchar *val_key = NULL;
+
 		if (backend->get_key_testament(mod_name, key) == 1)
 			val_key = main_update_nav_controls(mod_name, "Matthew 1:1");
 		else
@@ -1430,6 +1433,8 @@ void main_display_devotional(void)
 	g_free(prettybuf);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 void main_refresh_all(void)
 {
 	main_display_bible(settings.MainWindowModule, settings.currentverse);
@@ -1437,6 +1442,7 @@ void main_refresh_all(void)
 	main_display_book(settings.book_mod, settings.book_key);
 	main_display_dictionary(settings.DictWindowModule, settings.dictkey);
 }
+#endif
 
 void main_setup_displays(void)
 {
@@ -1560,6 +1566,8 @@ int main_optimal_search(char *mod_name)
 	return mod->isSearchOptimallySupported("God", -4, 0, 0);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *  get_mod_about_info
@@ -1580,6 +1588,7 @@ char *main_get_mod_about_info(char *mod_name)
 {
 	return backend->get_config_entry(mod_name, (char *)"About");
 }
+#endif
 
 char *main_get_mod_config_entry(const char *module_name,
 				const char *entry)
@@ -1594,12 +1603,13 @@ char *main_get_mod_config_file(const char *module_name,
 	return backend->get_config_file((char *)module_name, (char *)moddir);
 #else
 	GDir *dir;
-	const gchar *ent;
 	SWBuf name;
 
 	name = moddir;
 	name += "/mods.d";
 	if ((dir = g_dir_open(name, 0, NULL))) {
+		const gchar *ent;
+
 		g_dir_rewind(dir);
 		while ((ent = g_dir_read_name(dir))) {
 			name = moddir;
@@ -1672,9 +1682,7 @@ int main_has_cipher_tag(char *mod_name)
 
 void main_check_unlock(const char *mod_name, gboolean conditional)
 {
-	gchar *cipher_old, *cipher_key;
-
-	cipher_old = main_get_mod_config_entry(mod_name, "CipherKey");
+	gchar *cipher_old = main_get_mod_config_entry(mod_name, "CipherKey");
 
 	/* if forced by the unlock menu item, or it's present but empty... */
 	if (!conditional ||
@@ -1693,7 +1701,7 @@ void main_check_unlock(const char *mod_name, gboolean conditional)
 			gtk_widget_show(dialog);
 		}
 
-		cipher_key = gui_add_cipher_key(mod_name, cipher_old);
+		gchar *cipher_key = gui_add_cipher_key(mod_name, cipher_old);
 		if (cipher_key) {
 			ModuleCacheErase(mod_name);
 			redisplay_to_realign();
@@ -1724,6 +1732,8 @@ char *main_get_striptext(char *module_name, char *key)
 	return backend->get_strip_text(module_name, key);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   main_get_striptext
@@ -1744,6 +1754,7 @@ char *main_get_striptext_from_string(char *module_name, char *string)
 {
 	return backend->get_strip_text_from_string(module_name, string);
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -1787,6 +1798,8 @@ char *main_get_raw_text(char *module_name, char *key)
 	return backend->get_raw_text(module_name, key);
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *   main_get_raw_text
@@ -1807,6 +1820,7 @@ char *main_get_book_key_from_offset(unsigned long offset)
 {
 	return backend->get_key_from_offset(offset);
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -1894,6 +1908,8 @@ main_format_number(int x)
 	return digits;
 }
 
+#if 0
+// unneeded at this time.  disabled to silence cppcheck.
 /******************************************************************************
  * Name
  *  main_deformat_number
@@ -1930,6 +1946,7 @@ main_deformat_number(char *digitstring)
 	}
 	return atoi(digitstring);
 }
+#endif
 
 /******************************************************************************
  * Name

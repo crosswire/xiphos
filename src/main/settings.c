@@ -365,13 +365,13 @@ void load_settings_structure(void)
 	parallels = xml_get_value("modules", "parallels");
 	/* if no parallels are known, convert old fixed parallel set */
 	if (!parallels || (*parallels == '\0')) {
-		char intN[] = "intN", *oldparallel, i, *newhold;
+		char intN[] = "intN", i, *newhold;
 
 		g_free(parallels); /* in case it was real but empty */
 		parallels = g_strdup("");
 		for (i = '1'; i <= '5'; ++i) { /* the old set */
 			intN[3] = i;
-			oldparallel = xml_get_value("modules", intN);
+			char *oldparallel = xml_get_value("modules", intN);
 			if (oldparallel && *oldparallel) {
 				newhold =
 				    g_strconcat(parallels, oldparallel,

@@ -563,15 +563,13 @@ void main_dialogs_tree_selection_changed(GtkTreeModel *model,
 					 GtkTreeSelection *selection, gboolean is_dialog, DIALOG_DATA *g)
 {
 	GtkTreeIter selected;
-	GtkTreePath *path;
 	gchar *name = NULL;
 	gchar *book = NULL;
 	gchar *offset = NULL;
-	unsigned long l_offset;
 	BackEnd *be = (BackEnd *)g->backend;
 
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
-		path = gtk_tree_model_get_path(model, &selected);
+		GtkTreePath *path = gtk_tree_model_get_path(model, &selected);
 		//tree_level = gtk_tree_path_get_depth(path);
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
 				   2, &name,
@@ -581,7 +579,7 @@ void main_dialogs_tree_selection_changed(GtkTreeModel *model,
 		gtk_tree_path_free(path);
 
 		if (offset) {
-			l_offset = strtoul(offset, NULL, 0);
+			unsigned long l_offset = strtoul(offset, NULL, 0);
 			g->offset = l_offset;
 			be->set_module(book);
 			be->set_treekey(l_offset);
@@ -619,7 +617,6 @@ void main_dialogs_tree_selection_changed(GtkTreeModel *model,
 void main_dialogs_dictionary_entry_changed(DIALOG_DATA *d)
 {
 	gint count = 10, i;
-	gchar *new_key;
 	gchar *key = NULL;
 	static gboolean firsttime = TRUE;
 	GtkTreeModel *model;
@@ -657,8 +654,9 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA *d)
 	}
 
 	if (count) {
+		gchar *new_key = be->navigate_module(-1);
+
 		gtk_list_store_clear(list_store);
-		new_key = be->navigate_module(-1);
 
 		for (i = 0; i < (count / 2); i++) {
 			free(new_key);
@@ -1029,8 +1027,6 @@ static gint show_morph(DIALOG_DATA *d, const gchar *type,
 		       const gchar *value, gboolean clicked)
 {
 	gchar *modbuf = NULL;
-	gchar *mybuf = NULL;
-	static GtkWidget *dlg;
 
 	BackEnd *be = (BackEnd *)d->backend;
 
@@ -1039,6 +1035,8 @@ static gint show_morph(DIALOG_DATA *d, const gchar *type,
 			modbuf = (char *)"Robinson";
 	}
 	if (clicked) {
+		static GtkWidget *dlg;
+
 		if (!gsI_isrunning)
 			dlg = gui_create_display_informtion_dialog();
 		else
@@ -1048,7 +1046,7 @@ static gint show_morph(DIALOG_DATA *d, const gchar *type,
 		gtk_window_set_title(GTK_WINDOW(dialog_display_info),
 				     modbuf);
 	} else {
-		mybuf = main_get_rendered_text(modbuf, (gchar *)value);
+		gchar *mybuf = main_get_rendered_text(modbuf, (gchar *)value);
 		if (mybuf) {
 			main_dialog_information_viewer(modbuf,
 						       mybuf,
@@ -1085,8 +1083,6 @@ static gint show_strongs(DIALOG_DATA *t, const gchar *type,
 			 const gchar *value, gboolean clicked)
 {
 	const gchar *modbuf = NULL;
-	gchar *mybuf = NULL;
-	static GtkWidget *dlg;
 
 	if (!strncmp(t->mod_name, "NASB", 4)) {
 		if (!strcmp(type, "Greek"))
@@ -1102,6 +1098,8 @@ static gint show_strongs(DIALOG_DATA *t, const gchar *type,
 	}
 
 	if (clicked) {
+		static GtkWidget *dlg;
+
 		if (!gsI_isrunning)
 			dlg = gui_create_display_informtion_dialog();
 		else
@@ -1110,7 +1108,7 @@ static gint show_strongs(DIALOG_DATA *t, const gchar *type,
 		gui_display_mod_and_key(modbuf, value);
 		gtk_window_set_title(GTK_WINDOW(dialog_display_info), modbuf);
 	} else {
-		mybuf = main_get_rendered_text((gchar *)modbuf, (gchar *)value);
+		gchar *mybuf = main_get_rendered_text((gchar *)modbuf, (gchar *)value);
 		if (mybuf) {
 			main_dialog_information_viewer(
 			    modbuf,
@@ -1203,9 +1201,6 @@ static gint show_strongs_morph(DIALOG_DATA *d, const gchar *type, const gchar *v
 {
 	const gchar *modbuf = NULL;
 	const gchar *morph_mod = NULL;
-	gchar *strongs_buf = NULL;
-	gchar *morph_buf = NULL;
-	static GtkWidget *dlg;
 
 	if (!strncmp(d->mod_name, "NASB", 4)) {
 		if (!strcmp(type, "Greek"))
@@ -1222,6 +1217,8 @@ static gint show_strongs_morph(DIALOG_DATA *d, const gchar *type, const gchar *v
 	}
 
 	if (clicked) {
+		static GtkWidget *dlg;
+
 		if (!gsI_isrunning)
 			dlg = gui_create_display_informtion_dialog();
 		else
@@ -1231,6 +1228,8 @@ static gint show_strongs_morph(DIALOG_DATA *d, const gchar *type, const gchar *v
 		gtk_window_set_title(GTK_WINDOW(dialog_display_info),
 				     modbuf);
 	} else {
+		gchar *strongs_buf, *morph_buf;
+
 		strongs_buf =
 		    main_get_rendered_text((gchar *)modbuf, (gchar *)value);
 		morph_buf =
@@ -1322,7 +1321,6 @@ static gint new_url_handler(DIALOG_DATA *t, const gchar *url, gboolean clicked)
 	gchar *type = NULL;
 	gchar *value = NULL;
 	gchar *module = NULL;
-	gchar *passage = NULL;
 	gchar *strongs = NULL;
 	gchar *morph = NULL;
 	URL *m_url;
@@ -1361,8 +1359,8 @@ static gint new_url_handler(DIALOG_DATA *t, const gchar *url, gboolean clicked)
 	}
 
 	if (!strcmp(action, "showNote")) {
+		gchar *passage = g_strdup((gchar *)m_url->getParameterValue("passage"));
 		module = g_strdup(m_url->getParameterValue("module"));
-		passage = g_strdup((gchar *)m_url->getParameterValue("passage"));
 		show_note(t, module, passage, type, value, clicked);
 		if (module)
 			g_free(module);
@@ -1377,12 +1375,9 @@ static gint new_url_handler(DIALOG_DATA *t, const gchar *url, gboolean clicked)
 			g_free(module);
 	}
 
-	if (action)
-		g_free(action);
-	if (type)
-		g_free(type);
-	if (value)
-		g_free(value);
+	g_free(action);
+	g_free(type);
+	g_free(value);
 	return 1;
 }
 
@@ -1526,7 +1521,6 @@ DIALOG_DATA *main_dialogs_open(const gchar *mod_name, const gchar *key)
 		gchar buf[10];
 
 		time_t curtime;
-		struct tm *loctime;
 		char *feature;
 		if ((feature = (char *)be->get_mgr()->getModule(mod_name)->getConfigEntry("Feature")) &&
 		    !strcmp(feature, "DailyDevotion")) {
@@ -1536,6 +1530,8 @@ DIALOG_DATA *main_dialogs_open(const gchar *mod_name, const gchar *key)
 			    (t->key[2] != '.') ||
 			    (t->key[3] < '0') || (t->key[3] > '9') ||
 			    (t->key[4] < '0') || (t->key[4] > '9')) { // not MM.DD
+				struct tm *loctime;
+
 				curtime = time(NULL);
 				loctime = localtime(&curtime);
 				strftime(buf, 10, "%m.%d", loctime);
