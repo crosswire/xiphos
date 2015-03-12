@@ -62,7 +62,7 @@ static GtkWidget *dialog_parallel;
 static GtkWidget *parallel_UnDock_Dialog;
 static GtkWidget *vboxInt;
 static gboolean ApplyChangeBook;
-static NAVBAR navbar;
+//static NAVBAR navbar;
 NAVBAR_VERSEKEY navbar_parallel;
 
 static GtkWidget *create_parallel_dialog(void);
