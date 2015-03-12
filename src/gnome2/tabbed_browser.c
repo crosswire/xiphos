@@ -851,7 +851,7 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 {
 	GtkWidget *box;
 #ifdef USE_GTK_3
-	GdkRGBA color;
+//	GdkRGBA color;
 #else
 	GdkColor color;
 #endif
@@ -900,12 +900,12 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	tbinf->tab_label = GTK_LABEL(gtk_label_new(label_text));
 	gtk_widget_show(GTK_WIDGET(tbinf->tab_label));
 
+#ifdef USE_GTK_3
+#else
 	color.red = 0;
 	color.green = 0;
 	color.blue = 0;
 
-#ifdef USE_GTK_3
-#else
 	gtk_widget_modify_fg(tbinf->button_close, GTK_STATE_NORMAL,
 			     &color);
 	gtk_widget_modify_fg(tbinf->button_close, GTK_STATE_INSENSITIVE,

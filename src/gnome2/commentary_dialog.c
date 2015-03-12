@@ -130,6 +130,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
 	return FALSE;
 }
 
+#if 0
 /******************************************************************************
  * Name
  *   sync_with_main
@@ -153,6 +154,7 @@ static void sync_with_main(DIALOG_DATA *d)
 	cur_d = d;
 	g_free(url);
 }
+#endif
 
 /******************************************************************************
  * Name
