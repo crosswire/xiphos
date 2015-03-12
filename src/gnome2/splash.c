@@ -535,7 +535,7 @@ void gui_splash_init()
 	GError *error = NULL;
 
 	if (settings.showsplash) {
-		GList *icons;
+		GList *icons = NULL;
 
 		splash = e_splash_new();
 		if (!splash)
