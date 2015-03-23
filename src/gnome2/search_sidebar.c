@@ -66,7 +66,7 @@ static void on_search_button_clicked(GtkButton *button,
 		terminate_search = TRUE;
 #ifdef HAVE_GTK_310
 		gtk_button_set_image((GtkButton *)remember_search,
-				     gtk_image_new_from_icon_name("edit-find", GTK_ICON_SIZE_BUTTON));
+				     gtk_image_new_from_icon_name("edit-find-symbolic", GTK_ICON_SIZE_BUTTON));
 #else
 		gtk_button_set_label((GtkButton *)remember_search,
 				     "gtk-find");
@@ -78,7 +78,7 @@ static void on_search_button_clicked(GtkButton *button,
 	} else {
 #ifdef HAVE_GTK_310
 		gtk_button_set_image((GtkButton *)remember_search,
-				     gtk_image_new_from_icon_name("process-stop",
+				     gtk_image_new_from_icon_name("process-stop-symbolic",
 								  GTK_ICON_SIZE_BUTTON));
 #else
 		gtk_button_set_label((GtkButton *)remember_search,
@@ -92,7 +92,7 @@ static void on_search_button_clicked(GtkButton *button,
 
 #ifdef HAVE_GTK_310
 		gtk_button_set_image((GtkButton *)remember_search,
-				     gtk_image_new_from_icon_name("edit-find", GTK_ICON_SIZE_BUTTON));
+				     gtk_image_new_from_icon_name("edit-find-symbolic", GTK_ICON_SIZE_BUTTON));
 #else
 		gtk_button_set_label((GtkButton *)remember_search,
 				     "gtk-find");
