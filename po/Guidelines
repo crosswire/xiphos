@@ -41,14 +41,22 @@ It is updated by cd'ing into the "po" directory and using
 
 intltool-update --pot
 
-It will write a file called untitled.pot.  Use "diff -u xiphos.pot
-untitled.pot" to see if the new version is sane, and if so, then "mv
-untitled.pot xiphos.pot".
+It will write a file called untitled.pot.  Use this command to see if the
+new version is sane:
 
-3.) To create a new translation simply copy the file xiphos.pot and rename
-your working copy to xx.po where xx stands for the
-relevant iso code for your target language - e.g. fa.po for Farsi, de.po for
-German etc.
+diff -u xiphos.pot untitled.pot
+
+If it's OK, then...
+
+mv untitled.pot xiphos.pot
+
+3.) To create a new translation simply copy the file xiphos.pot to your
+working copy:
+
+cp xiphos.pot xx.po
+
+where xx stands for the relevant ISO code for your target language,
+e.g. fa.po for Farsi, de.po for German etc.
 
 4.) If you need to update your file to the newest strings you can use the
 command msgmerge:
