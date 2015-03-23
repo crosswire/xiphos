@@ -331,7 +331,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="print">
-                <property name="label" translatable="yes">gtk-print</property>
+                <property name="label">gtk-print</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -342,7 +342,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="close">
-                <property name="label" translatable="yes">gtk-close</property>
+                <property name="label">gtk-close</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -368,7 +368,7 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkImageMenuItem" id="copy">
-                <property name="label" translatable="yes">gtk-copy</property>
+                <property name="label">gtk-copy</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -379,7 +379,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="find">
-                <property name="label" translatable="yes">gtk-find</property>
+                <property name="label">gtk-find</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -425,7 +425,7 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkImageMenuItem" id="font">
-                <property name="label" translatable="yes">gtk-select-font</property>
+                <property name="label">gtk-select-font</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
