@@ -419,10 +419,11 @@ GList *backend_module_mgr_list_remote_sources(void)
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/" DOTSWORD "/InstallMgr";
+
 	InstallMgr *inst_mgr = new InstallMgr(baseDir,
 					      (StatusReporter *)0,
 					      (SWBuf) "ftp",
-					      (SWBuf) "xiphos@xiphos.org");
+					      (SWBuf) ftp_password());
 	inst_mgr->setUserDisclaimerConfirmed(true);
 
 	for (InstallSourceMap::iterator it =
@@ -750,7 +751,7 @@ void backend_init_module_mgr(const char *dir,
 	installMgr = new InstallMgr(baseDir,
 				    statusReporter,
 				    (SWBuf) "ftp",
-				    (SWBuf) "xiphos@xiphos.org");
+				    (SWBuf) ftp_password());
 	installMgr->setUserDisclaimerConfirmed(true);
 }
 
