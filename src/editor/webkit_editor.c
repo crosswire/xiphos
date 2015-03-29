@@ -124,7 +124,7 @@ action_about_activate_cb(GtkWidget *widget, EDITOR *e)
 	g_signal_connect(about, "response",
 			 G_CALLBACK(on_about_dialog_response), NULL);
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(about), "WebKit editor, Xiphos");
-	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(about), (gchar *)PACKAGE_VERSION);
+	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(about), (gchar *)VERSION);
 	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(about), "Replacement for gtkhtml editor");
 	gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(about), about_logo);
 	set_window_icon(GTK_WINDOW(about));
