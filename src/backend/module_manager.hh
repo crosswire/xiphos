@@ -54,7 +54,20 @@ class ModuleManager
 	ModuleManager();
 	~ModuleManager();
 	void init_ModuleManager(void);
+	SWBuf ftp_password();
 };
+
+inline SWBuf ftp_password()
+{
+	return
+#ifdef WIN32
+		(SWBuf) "W"
+#else
+		(SWBuf) "L"
+#endif
+		+ (SWBuf) VERSION
+		+ (SWBuf) "@xiphos.org";
+}
 
 extern "C" {
 
