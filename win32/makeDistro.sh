@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #Copyright (c) 2009-2011 Matthew Talbert
+#Copyright (c) 2014-2015 Karl Kleinpaste
 
 #Permission is hereby granted, free of charge, to any person
 #obtaining a copy of this software and associated documentation
@@ -23,6 +24,28 @@
 #FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #OTHER DEALINGS IN THE SOFTWARE.
 
+# default build (no arg) is 32-bit.
+bits=32
+winprefix=i686-w64-mingw32
+case "$1" in
+    64) bits=64
+	winprefix=x86_64-w64-mingw32
+	;;
+    32|'') # redundant
+	;;
+    *)  echo '"'"$1"'"' is not 32 or 64. && exit 1
+	;;
+esac
+shift
+# build options, debug or final
+buildopts="-d debug"
+case "$1" in
+    f|final)	buildopts="-d optimized --disable-console" ;;
+    d|debug|'')	;; # redundant
+    *)		echo '"'"$1"'"' is not debug or final. && exit 1
+esac
+
+# exit on any error
 set -e
 
 # get in the right directory
@@ -30,19 +53,19 @@ dir=~0
 [ "${dir##*/}" != win32 ] && echo -e '\n\n*** NOT IN WIN32 DIR -- CD WIN32 ***\n\n' && cd win32
 
 # copy sword utils and libs
-outdir=win32/binaries/Xiphos/32/
-sworddir=/usr/i686-w64-mingw32/sys-root/mingw/bin/
+outdir=win32/binaries/Xiphos/"$bits"/
+sworddir=/usr/"$winprefix"/sys-root/mingw/bin/
 
-CROSS=i686-w64-mingw32-
-PKG_CONFIG_PATH=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
-PKG_CONFIG_LIBDIR=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
-PKG_CONFIG_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw/
+CROSS="$winprefix"-
+PKG_CONFIG_PATH=/usr/"$winprefix"/sys-root/mingw/lib/pkgconfig/:/usr/"$winprefix"/sys-root/mingw/share/pkgconfig/
+PKG_CONFIG_LIBDIR=/usr/"$winprefix"/sys-root/mingw/lib/pkgconfig/:/usr/"$winprefix"/sys-root/mingw/share/pkgconfig/
+PKG_CONFIG_PREFIX=/usr/"$winprefix"/sys-root/mingw/
 export PKG_CONFIG_PATH PKG_CONFIG_LIBDIR PKG_CONFIG_PREFIX
 
-CFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
-CXXFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
-LDFLAGS="-L/usr/i686-w64-mingw32/sys-root/mingw/lib `pkg-config --libs gthread-2.0`"
-MSVC_LIBPATH=/usr/i686-w64-mingw32/sys-root/mingw/
+CFLAGS="-I/usr/$winprefix/sys-root/mingw/include -g"
+CXXFLAGS="-I/usr/$winprefix/sys-root/mingw/include -g"
+LDFLAGS="-L/usr/$winprefix/sys-root/mingw/lib `pkg-config --libs gthread-2.0`"
+MSVC_LIBPATH=/usr/"$winprefix"/sys-root/mingw/
 
 CC=/usr/bin/${CROSS}gcc
 CXX=/usr/bin/${CROSS}g++
@@ -66,9 +89,9 @@ export CROSS CC CXX AR RANLIB CFLAGS CXXFLAGS LDFLAGS WINRC \
 	--disable-dbus \
 	--disable-help \
 	--prefix=${outdir} \
-	-d debug \
-	-b build-win32
-	#--disable-console
+	--enable-webkit-editor \
+	-b build-win"$bits" \
+	$buildopts
 
 #
 # GROSS HACK - TEMPORARY
@@ -77,12 +100,12 @@ export CROSS CC CXX AR RANLIB CFLAGS CXXFLAGS LDFLAGS WINRC \
 # this release out the door, we force these items to be set.  we'll figure out
 # what's wrong with waf later.
 for symbol in LOCALE_H INTTYPES_H MEMORY_H STDINT_H STDLIB_H STRINGS_H STRING_H SYS_STAT_H UNISTD_H WINSOCK_H ; do
-    sed -i -e "/undef.*$symbol/d" build-win32/default/config.h
+    sed -i -e "/undef.*$symbol/d" build-win"$bits"/default/config.h
 done
 for symbol in LOCALEDIR GNOMELOCALEDIR PACKAGE_LOCALE_DIR ; do
-    sed -i -e "/$symbol/d" build-win32/default/config.h
+    sed -i -e "/$symbol/d" build-win"$bits"/default/config.h
 done
-ed -s build-win32/default/config.h << \EOF
+ed -s build-win"$bits"/default/config.h << \EOF
 $i
 #define HAVE_LOCALE_H 1
 #define HAVE_INTTYPES_H 1
@@ -114,7 +137,7 @@ for f in libsword.dll \
 	libjavascriptcoregtk-1.0-0.dll libwebkitgtk-1.0-0.dll \
 	libgconf-2-4.dll \
 	libdbus-1-3.dll libdbus-glib-1-2.dll \
-	emptyvss.exe imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe \
+	addld.exe emptyvss.exe imp2gbs.exe imp2ld.exe imp2vs.exe mkfastmod.exe mod2imp.exe mod2osis.exe mod2vpl.exe mod2zmod.exe osis2mod.exe tei2mod.exe vpl2mod.exe xml2gbs.exe \
 	installmgr.exe  diatheke.exe vs2osisreftxt.exe \
 	uconv.exe icui18n50.dll icuuc50.dll icudata50.dll icule50.dll \
 	libcairo-gobject-2.dll iconv.dll \
@@ -125,16 +148,17 @@ for f in libsword.dll \
 	libbz2-1.dll libgthread-2.0-0.dll libgnurx-0.dll \
 	libenchant.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libclucene-core.dll libclucene-shared.dll \
 	libwinpthread-1.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
-	libgcc_s_sjlj-1.dll libstdc++-6.dll \
+	'libgcc_s_*-1.dll' \
+	libstdc++-6.dll \
 	gdb.exe libwebp-5.dll \
 	libcrypto-10.dll libssl-10.dll libgstapp-1.0-0.dll libgstbase-1.0-0.dll libgstreamer-1.0-0.dll libgstpbutils-1.0-0.dll \
 	libgstvideo-1.0-0.dll libgstaudio-1.0-0.dll libgstbase-1.0-0.dll libgstcontroller-1.0-0.dll \
 	libgstfft-1.0-0.dll libgstnet-1.0-0.dll libgstriff-1.0-0.dll libgstrtp-1.0-0.dll libgstrtsp-1.0-0.dll libgstsdp-1.0-0.dll \
 	libgsttag-1.0-0.dll libharfbuzz-0.dll libharfbuzz-icu-0.dll \
-	gspawn-win32-helper.exe gspawn-win32-helper-console.exe
+	'gspawn-win*-helper.exe' 'gspawn-win*-helper-console.exe'
 do
     echo "Copying and stripping ${f}"
-    cp ${sworddir}${f} ${outdir}bin/`basename ${f}`
+    cp ${sworddir}${f} ${outdir}bin/
     #strip -o ${outdir}bin/${f} ${sworddir}${f}
 done
 
@@ -191,4 +215,4 @@ find ../../${outdir} -name .svn -delete #| xargs rm -r {}
 # make installer
 cd ../nsis
 #${sworddir}makensis installer.nsi
-wine ~/.wine/drive_c/Program\ Files*/NSIS/Unicode/makensis.exe installer.nsi
+wine ~/.wine/drive_c/Program\ Files*/NSIS/Unicode/makensis.exe installer"$bits".nsi
