@@ -392,6 +392,7 @@ colorbutton1_color_set_cb(GtkColorButton *widget, EDITOR *e)
 	forecolor = g_strdup_printf("document.execCommand('forecolor', null, '%s');", color_str);
 	editor_execute_script(forecolor, e);
 	g_free(forecolor);
+	g_free(color_str);
 }
 
 G_MODULE_EXPORT void
@@ -404,7 +405,7 @@ colorbutton_highlight_color_set_cb(GtkColorButton *widget, EDITOR *e)
 	GdkColor color;
 #endif
 	gchar *color_str;
-	gchar *highligntcolor = NULL;
+	gchar *highlightcolor = NULL;
 
 #ifdef HAVE_GTK_34
 	gtk_color_chooser_get_rgba((GtkColorChooser *)widget, &color);
@@ -414,9 +415,10 @@ colorbutton_highlight_color_set_cb(GtkColorButton *widget, EDITOR *e)
 	/* FIXME: ugly need something better */
 	color_str = g_strdup_printf("rgb(%u,%u,%u)", color.red >> 8, color.green >> 8, color.blue >> 8);
 #endif
-	highligntcolor = g_strdup_printf("document.execCommand('backColor', null, '%s');", color_str);
-	editor_execute_script(highligntcolor, e);
-	g_free(highligntcolor);
+	highlightcolor = g_strdup_printf("document.execCommand('backColor', null, '%s');", color_str);
+	editor_execute_script(highlightcolor, e);
+	g_free(highlightcolor);
+	g_free(color_str);
 }
 
 static gchar *get_font_size_from_name(GString *fontname)

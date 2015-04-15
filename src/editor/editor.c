@@ -318,7 +318,6 @@ void editor_execute_script(gchar *script, EDITOR *e)
 	if (script) {
 		webkit_web_view_execute_script(WEBKIT_WEB_VIEW(e->html_widget), script);
 		XI_message(("script: %s", script));
-		g_free(script);
 	}
 }
 
@@ -340,12 +339,10 @@ void editor_execute_script(gchar *script, EDITOR *e)
 
 void editor_insert_html(const gchar *html, EDITOR *e)
 {
-	gchar *str = NULL;
-
-	str =
-	    g_strdup_printf("document.execCommand('insertHTML', null, \'%s\');", html);
+	gchar *str = g_strdup_printf("document.execCommand('insertHTML', null, \'%s\');", html);
 	XI_message(("script: %s", str));
 	editor_execute_script(str, e);
+	g_free(str);
 }
 
 /*
