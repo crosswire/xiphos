@@ -3,6 +3,14 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.0.2
+15 Apr 2015
+
+This is an urgent bugfix-only release.  A serious memory management error
+has been uncovered in the editor, making it virtually useless in many
+cases.  This release corrects this error.
+________________________________________________________________
+
 Release 4.0.1
 30 Mar 2015
 
