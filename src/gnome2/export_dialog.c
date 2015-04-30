@@ -585,7 +585,7 @@ void gui_export_dialog(void)
 
 	if (dist_license) {
 		gtk_widget_show(d.warning_label);
-		gtk_widget_hide(d.rb_book);
+		gtk_widget_show(d.rb_book);	/* formerly hide */
 	} else {
 		gtk_widget_hide(d.warning_label);
 		gtk_widget_show(d.rb_book);
