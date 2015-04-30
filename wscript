@@ -74,6 +74,10 @@ def set_options(opt):
             dest='webkit_editor',
             help='Use webkit editor [default: disabled]')
 
+    miscgroup.add_option('--enable-webkit2', action='store_true', default=False,
+            dest='webkit2',
+            help='Use webkit2 instead of original webkit [default: disabled]')
+
     miscgroup.add_option('--disable-dbus',
                    action = 'store_true',
                    default = False,
@@ -375,7 +379,7 @@ def configure(conf):
                               errmsg='fail',
                               mandatory=True):
                 common_libs += ' "gtkhtml-editor-4.0" '
-            if conf.check_cfg(modversion='webkit2gtk-4.0',
+            if opt.gtkver == '3' and opt.webkit2 and conf.check_cfg(modversion='webkit2gtk-4.0',
                               msg='Checking for WebKit2',
                               okmsg='ok',
                               errmsg='fail'):
