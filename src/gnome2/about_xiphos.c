@@ -100,13 +100,23 @@ on_dialog_response(GtkDialog *dialog, gint response_id,
  *   GtkWidget *
  */
 
+#ifdef USE_GTK_3
+# ifdef USE_WEBKIT2
+#  define	BUILD_TYPE	"gtk3 webkit2"
+# else
+#  define	BUILD_TYPE	"gtk3 webkit1"
+# endif
+#else
+#  define	BUILD_TYPE	"gtk2 webkit1"
+#endif
+
 GtkWidget *gui_create_about_xiphos(void)
 {
 	GdkPixbuf *about1_logo_pixbuf;
 	GtkWidget *about1;
 	gchar versionbuild[128];
 
-	snprintf(versionbuild, 120, "%s", VERSION);
+	snprintf(versionbuild, 120, "%s (%s)", VERSION, BUILD_TYPE);
 
 	about1_logo_pixbuf = pixbuf_finder("about.png", 0, NULL);
 
