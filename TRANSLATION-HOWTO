@@ -88,7 +88,7 @@ directory.
 $ xml2po -e -u YOUR-LANG.po ../C/*xml
 
 
-Don't forget to send YOUR-LANG.po files to xiphos-developers@lists.sourceforge.net.
+Don't forget to send YOUR-LANG.po files to gnomesword-developers@lists.sourceforge.net.
 
 
 "..and ye shall be witnesses unto me both in Jerusalem, and in all 
