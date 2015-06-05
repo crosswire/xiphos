@@ -1,16 +1,16 @@
 # prevod xiphos.po (en_GB) v sl_SI
 # Copyright (C) 2010
-# Ta datoteka je ditrubiurana pod isto licenco kot Xiphos paket.
+# Ta datoteka je distribuirana pod isto licenco kot Xiphos paket.
 #
-# Marjan Šavli <marjan.savli@gmail.com>, 2010.
+# Marjan Šavli <marjan.savli@gmail.com>, 2010, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-22 21:00-0400\n"
-"PO-Revision-Date: 2010-03-26 08:39+0000\n"
+"PO-Revision-Date: 2015-06-04 12:39+0000\n"
 "Last-Translator: Marjan Šavli <marjan.savli@gmail.com>\n"
-"Language-Team: Slovenščina (Slovene) <gnomesword-developers@lists."
+"Language-Team: Slovenščina (Slovene) <gnomesword-devel@lists.sourceforge.net>\n"
 "sourceforge.net>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -28,10 +28,13 @@ msgid ""
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
+"Xiphos napaka: \"can't happen\", display_mod: null\n"
+"Prosim prijavite. sword_main.cc:set_treekey\n"
+"Kaj ste počeli, ko se je to zgodilo?""
 
 #: ../src/backend/sword_main.cc:1149
 msgid "Configuration not found"
-msgstr "Ne najdem nastavitev"
+msgstr "Nastavitev ni najdena"
 
 #: ../src/editor/webkit_editor.c:311
 msgid "Are you sure you want to delete the note for"
@@ -48,7 +51,7 @@ msgstr "Neimenovan dokument"
 
 #: ../src/editor/webkit_editor.c:1171 ../src/editor/webkit_editor.c:1211
 msgid "Save the changes to document"
-msgstr "Shrani spremembe dokumenta"
+msgstr "Spremembe shrani v dokument"
 
 #: ../src/editor/webkit_editor.c:1172 ../src/editor/webkit_editor.c:1212
 msgid "before closing?"
@@ -56,7 +59,7 @@ msgstr "pred zaprtjem?"
 
 #: ../src/editor/webkit_editor.c:1176 ../src/editor/webkit_editor.c:1216
 msgid "If you don't save, changes will be permanently lost."
-msgstr "Če ne shranite bodo narejene spremembe za vedno izgubljene."
+msgstr "Če ne shranite, bodo narejene spremembe za vedno izgubljene."
 
 #: ../src/editor/webkit_editor.c:1210 ../ui/xi-menus.glade.h:59
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
@@ -69,7 +72,7 @@ msgstr "Študijski zaznamki"
 
 #: ../src/editor/webkit_editor.c:1268
 msgid "Note Editor"
-msgstr "Opomba uredniku"
+msgstr "Urejevalnik opomb"
 
 #: ../src/editor/webkit_editor.c:1285
 msgid "Prayer List/Journal Editor"
@@ -83,7 +86,7 @@ msgstr "Vizitka Sword modula"
 #: ../src/gnome2/about_modules.c:219 ../src/gnome2/about_trans.c:168
 #: ../src/gnome2/find_dialog.c:288
 msgid "Close"
-msgstr ""
+msgstr "Zapri"
 
 #: ../src/gnome2/about_modules.c:411
 #, fuzzy
@@ -93,21 +96,21 @@ msgstr "<b>Upravljalec modulov</b>"
 #: ../src/gnome2/about_modules.c:415
 #, fuzzy
 msgid "<b>Version:</b> "
-msgstr "<b>Opcije</b>"
+msgstr "<b>Verzija:</b>"
 
 #: ../src/gnome2/about_modules.c:418
 msgid "No version stamp found"
-msgstr ""
+msgstr "Ni najti podatka o verziji"
 
 #: ../src/gnome2/about_modules.c:421
 #, fuzzy
 msgid "<b>Type:</b> "
-msgstr "<b>Območje</b>"
+msgstr "<b>Tip:</b>"
 
 #: ../src/gnome2/about_modules.c:423
 #, fuzzy
 msgid "Daily Devotion"
-msgstr "_Dnevne posvetitve"
+msgstr "Dnevne posvetitve"
 
 #: ../src/gnome2/about_modules.c:425 ../src/gnome2/mod_mgr.c:1558
 #: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1030
@@ -123,11 +126,11 @@ msgstr "Slike"
 
 #: ../src/gnome2/about_modules.c:429
 msgid "Glossary"
-msgstr ""
+msgstr "Besednjak"
 
 #: ../src/gnome2/about_modules.c:433
 msgid "Cult"
-msgstr ""
+msgstr "Kult"
 
 #: ../src/gnome2/about_modules.c:437 ../src/gnome2/search_sidebar.c:261
 msgid "Bible"
@@ -146,12 +149,12 @@ msgstr "Slovar"
 #: ../src/gnome2/about_modules.c:446
 #, fuzzy
 msgid "General Book"
-msgstr "Splošne knjige"
+msgstr "Splošna knjiga"
 
 #: ../src/gnome2/about_modules.c:451
 #, fuzzy
 msgid "Personal Commentary"
-msgstr "Preimenuj komentar"
+msgstr "Oseben komentar"
 
 #: ../src/gnome2/about_modules.c:454
 #, fuzzy
@@ -161,7 +164,7 @@ msgstr "DnevniDnevnik"
 #: ../src/gnome2/about_modules.c:457
 #, fuzzy
 msgid "Unknown type"
-msgstr "Neznan"
+msgstr "Neznana vrsta"
 
 #: ../src/gnome2/about_modules.c:466
 #, fuzzy
@@ -171,112 +174,112 @@ msgstr "<b>Seznam modulov</b>"
 #: ../src/gnome2/about_modules.c:471
 #, fuzzy
 msgid "<b>Language:</b> "
-msgstr "<b>Območja</b>"
+msgstr "<b>Jezik:</b>"
 
 #: ../src/gnome2/about_modules.c:474
 msgid "Not specified"
-msgstr ""
+msgstr "Ni navedeno"
 
 #: ../src/gnome2/about_modules.c:483
 #, fuzzy
 msgid "<b>Installed size:</b> "
-msgstr "<b>Namesti izvorno kodo</b>"
+msgstr "<b>Nameščena velikost:</b>"
 
 #: ../src/gnome2/about_modules.c:491
 #, fuzzy
 msgid "<b>Companion module(s):</b></br>"
-msgstr "<b>Glavno okno modulov</b>"
+msgstr "<b>Spremljevalni modul/-i</b>"
 
 #: ../src/gnome2/about_modules.c:501
 #, fuzzy
 msgid "<b>Features:</b>"
-msgstr "<b>Format</b>"
+msgstr "<b>Lastnosti:</b>"
 
 #: ../src/gnome2/about_modules.c:505
 #, fuzzy
 msgid "*&nbsp;Headings"
-msgstr "Naslovi"
+msgstr "*&nbsp;Poglavja"
 
 #: ../src/gnome2/about_modules.c:513
 #, fuzzy
 msgid "*&nbsp;Footnotes"
-msgstr "Zaznamki"
+msgstr "*&nbsp;Zaznamki"
 
 #: ../src/gnome2/about_modules.c:519
 #, fuzzy
 msgid "*&nbsp;Cross references"
-msgstr "Napotitve drugam"
+msgstr "*&nbsp;Sklici"
 
 #: ../src/gnome2/about_modules.c:526
 #, fuzzy
 msgid "*&nbsp;Strong's numbers"
-msgstr "Močne številke"
+msgstr "*&nbsp;Strong-ove številke"
 
 #: ../src/gnome2/about_modules.c:534
 #, fuzzy
 msgid "*&nbsp;Morphological tags"
-msgstr "Oblikoslovni dodatki"
+msgstr "*&nbsp;Oblikoslovne oznake"
 
 #: ../src/gnome2/about_modules.c:540
 #, fuzzy
 msgid "*&nbsp;Lemmas"
-msgstr "Lema (sklop vseh oblik neke besede, ki imajo enak pomen)"
+msgstr "*&nbsp;Leme (besede s podobnim pomenom)"
 
 #: ../src/gnome2/about_modules.c:548
 #, fuzzy
 msgid "*&nbsp;Words of Christ in red"
-msgstr "Kristusove besede obarvane z rdečo"
+msgstr "*&nbsp;Kristusove besede obarvane z rdečo"
 
 #: ../src/gnome2/about_modules.c:553
 #, fuzzy
 msgid "*&nbsp;Greek accents"
-msgstr "Grški naglasi"
+msgstr "*&nbsp;Grški naglasi"
 
 #: ../src/gnome2/about_modules.c:559
 #, fuzzy
 msgid "*&nbsp;Hebrew Vowel Points"
-msgstr "Hebrejski poudarjeni samoglasniki"
+msgstr "*&nbsp;Hebrejski poudarjeni samoglasniki"
 
 #: ../src/gnome2/about_modules.c:565
 #, fuzzy
 msgid "*&nbsp;Hebrew Cantillation"
-msgstr "Hebrejske oznake za petje besedila"
+msgstr "*&nbsp;Hebrejske oznake za petje besedila"
 
 #: ../src/gnome2/about_modules.c:571
 msgid "*&nbsp;Variant readings"
-msgstr ""
+msgstr "*&nbsp;Bralne različice"
 
 #: ../src/gnome2/about_modules.c:578
 #, fuzzy
 msgid "*&nbsp;Transliteration forms"
-msgstr "Prepis v drugo abecedo"
+msgstr "*&nbsp;Prepis v druge oblike"
 
 #: ../src/gnome2/about_modules.c:583
 msgid "*&nbsp;Enumerations"
-msgstr ""
+msgstr "*&nbsp;Naštevanja"
 
 #: ../src/gnome2/about_modules.c:588
 msgid "*&nbsp;Glosses"
-msgstr ""
+msgstr "*&nbsp;Besednjak"
 
 #: ../src/gnome2/about_modules.c:595
 #, fuzzy
 msgid "*&nbsp;Morpheme Segmentation"
-msgstr "Delitev morfemov"
+msgstr "*&nbsp;Delitev morfemov"
 
 #: ../src/gnome2/about_modules.c:602
 msgid "*&nbsp;<i>No features found</i>"
-msgstr ""
+msgstr "*&nbsp;<i>Ni najti lastnosti</i>"
 
 #: ../src/gnome2/about_modules.c:612
 #, fuzzy
 msgid "<b>Distribution license:</b>"
-msgstr "<b>Lastnosti</b>"
+msgstr "<b>Licenca za razširjanje:</b>"
 
 #: ../src/gnome2/about_modules.c:625
 #, fuzzy
 msgid "<b>Promotional:</b> "
-msgstr "<b>Opcije</b>"
+msgstr "<b>Podpira:</b>"
 
 #: ../src/gnome2/about_sword.c:79
 msgid ""
@@ -294,7 +297,7 @@ msgstr ""
 "projekta SWORD omogoča preprosto uporabo in proučevanje Bibličnih besedil, "
 "komentarjev, leksikonov, slovarjev in drugih knjig. S pomočjo tega ogrodja "
 "je bilo zgrajenih veliko vmesnikov. Nameščen seznam knjig se lahko deli med "
-"vsemi vmesniki ki uporabljajo to ogrodje.\n"
+"vsemi vmesniki, ki uporabljajo to ogrodje.\n"
 "\n"
 "Knjige je mogoče naložiti iz projekta SWORD."
 
@@ -313,10 +316,10 @@ msgid ""
 "below, contact us, and get involved with our efforts. Your help will be much "
 "appreciated!"
 msgstr ""
-"Ali za proučevanje Biblije radi uporabljate Xiphos? Bi radi videli da njegov "
+"Ali za proučevanje Biblije radi uporabljate Xiphos? Bi radi videli, da njegov "
 "vmesnik uporablja vaš materin jezik? Vi lahko prevedete  Xiphos! \n"
 "\n"
-"Vedno veseli pričakujemo prispevke prevodov Xiphosa v druge jezike. Če nam "
+"Vedno veselo pričakujemo prispevke prevodov Xiphosa v druge jezike. Če nam "
 "ga lahko prevedete, prosimo obiščite spodnjo povezavo, navežite stik z nami "
 "in se priključite našemu trudu."
 
@@ -326,7 +329,7 @@ msgstr "Vizitka prevoda Xiphos"
 
 #: ../src/gnome2/about_trans.c:135
 msgid "See TRANSLATION-HOWTO in Xiphos source"
-msgstr "V Xiphos izvorni kodi si poglejte kako narediti prevod"
+msgstr "V izvorni kodi Xiphos-a poglejte navodila za prevod"
 
 #: ../src/gnome2/about_trans.c:141
 msgid "Xiphos development"
@@ -335,7 +338,7 @@ msgstr "Xiphos razvoj"
 #: ../src/gnome2/about_xiphos.c:119
 #, fuzzy
 msgid "Copyright © 2000-2015 Xiphos Development Team"
-msgstr "Avtorske pravice 2000-2015 Xiphos razvojna skupina"
+msgstr "Avtorske pravice © 2000-2015 Xiphos razvojna skupina"
 
 #: ../src/gnome2/about_xiphos.c:121
 msgid ""
@@ -346,7 +349,7 @@ msgid ""
 msgstr ""
 "\n"
 "Podprt s projektom SWORD.\n"
-"Radi bi se zahvalili Troyu Griffittsu in vsem ostalim ki so nam dali projekt "
+"Radi bi se zahvalili Troyu Griffittsu in vsem ostalim, ki so nam dali projekt "
 "SWORD."
 
 #. info->stock_icon = GTK_STOCK_OPEN;
@@ -374,7 +377,7 @@ msgstr "Mapa: "
 #: ../src/gnome2/bookmarks_menu.c:200
 #, fuzzy
 msgid "Specify bookmarks file"
-msgstr "Uredi zaznamek"
+msgstr "Določi datoteko zaznamkov"
 
 #: ../src/gnome2/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:61
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
@@ -428,6 +431,8 @@ msgid ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
 msgstr ""
+"Odpiranje zaznamka z mnogimi sklici v\n"
+"ločeni tabulatorji niso podprti."
 
 #: ../src/gnome2/bookmarks_treeview.c:839 ../src/gnome2/sidebar.c:1500
 #: ../src/gnome2/sidebar.c:1536
@@ -437,7 +442,7 @@ msgstr "Zaznamki"
 #: ../src/gnome2/cipher_key_dialog.c:63
 #, c-format
 msgid "Cipher key for module %s"
-msgstr ""
+msgstr "Kodni ključ za modul %s"
 
 #: ../src/gnome2/cipher_key_dialog.c:64
 msgid "for:"
@@ -477,7 +482,7 @@ msgstr "RezultatiIskanja"
 #: ../src/gnome2/export_dialog.c:325 ../ui/export-dialog.glade.h:4
 #: ../ui/export-dialog.gtkbuilder.h:4
 msgid "Please check copyright before exporting!"
-msgstr "Prosim da pred izvažanjem preverite avtorske pravice!"
+msgstr "Prosim, da pred izvažanjem preverite avtorske pravice!"
 
 #: ../src/gnome2/find_dialog.c:183 ../src/gnome2/find_dialog.c:359
 #: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
@@ -523,11 +528,11 @@ msgstr "Za ta modul uporabi privzeto pisavo"
 
 #: ../src/gnome2/gui.c:173
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr "HROŠČ! Xiphos je tik pred tem da se zruši zaradi \"STRDUP\" napake."
+msgstr "HROŠČ! Xiphos je tik pred tem, da se zruši zaradi \"STRDUP\" napake."
 
 #: ../src/gnome2/gui.c:174 ../src/gnome2/gui.c:204
 msgid "Please report this error to the Xiphos team with:"
-msgstr "Prosimo sporočite to napako Xiphos osebju z:"
+msgstr "Prosimo, sporočite to napako Xiphos osebju z:"
 
 #: ../src/gnome2/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
@@ -536,20 +541,20 @@ msgstr "HROŠČ! Xiphos je tik pred tem da se zruši zaradi \"STRING\" napake."
 #: ../src/gnome2/main_window.c:583
 #, fuzzy, c-format
 msgid "Module has no support for %s."
-msgstr "V modulih ki imajo krepke številke"
+msgstr "Modul nima podpore za %s."
 
 #: ../src/gnome2/main_window.c:656
 #, fuzzy
 msgid "Xiphos: No windows."
-msgstr "Xiphos:"
+msgstr "Xiphos: Nobenih oken."
 
 #: ../src/gnome2/main_window.c:708
 msgid "BibleSync: Current navigation sent."
-msgstr ""
+msgstr "BibleSync: Trenutna navigacija poslana."
 
 #: ../src/gnome2/main_window.c:710
 msgid "BibleSync: Not speaking."
-msgstr ""
+msgstr "BibleSync: Ne govori."
 
 #: ../src/gnome2/main_window.c:897
 msgid "Xiphos - Bible Study Software"
@@ -618,7 +623,7 @@ msgstr "Ime: "
 
 #: ../src/gnome2/menu_popup.c:1330 ../src/main/prayerlists.cc:243
 msgid "Module names must contain [A-Za-z0-9_] only."
-msgstr "Imena Modulov smejo vsebovati samo znake iz nabora [A-Za-z0-9_]."
+msgstr "Imena Modulov smejo vsebovati samo znake [A-Za-z0-9_]."
 
 #: ../src/gnome2/menu_popup.c:1336 ../src/main/prayerlists.cc:249
 msgid "Xiphos already knows a module by that name."
@@ -643,7 +648,7 @@ msgstr ""
 
 #: ../src/gnome2/menu_popup.c:2032
 msgid "No module in this pane."
-msgstr ""
+msgstr "V tem oknu ni nobenega modula."
 
 #. *****************************************************************************
 #. * defines
@@ -673,15 +678,15 @@ msgid ""
 "Live Chat, or (if no one is responsive in chat) send mail to our users' "
 "mailing list.\n"
 msgstr ""
-"<b>Dobrodošli v upravljalcu modulov.</b>\n"
+"<b>Pregled Upravljalca modulov.</b>\n"
 "\n"
 "To je Xiphosov mehanizem za pridobivanje novih in \n"
-"osveženih vsebin. Videti je da na tem mestu niste bili še nikoli doslej. "
-"Prosimo vas da si vzamete trenutek in si ga ogledate.\n"
+"osveženih vsebin. Videti je, da na tem mestu doslej še niste bili. "
+"Prosimo vas, da si vzamete trenutek in si ga ogledate.\n"
 "(To obvestilno okno boste videli samo enkrat.)\n"
 "\n"
 "Moduli prihajajo iz različnih <u>skladišč</u>.  <b>Viri modulov: Dodaj/"
-"Odstrani</b> vam pokažejo katera skladišča so trenutno znana.\n"
+"Odstrani</b> vam bodo pokazali katera skladišča so trenutno znana.\n"
 "\n"
 "<b>Viri modulov: Izberi</b> je za odločitev od kje naj bi moduli prišli, "
 "torej iz katerega skladišča naj jih Xiphos pridobi, kot tudi kje v vašem "
@@ -693,7 +698,7 @@ msgstr ""
 "\n"
 "<b>Moduli: Vzdrževanje</b> je za arhiviranje in ustvarjanje kazala.\n"
 "\n"
-"Za podrobnosti pri upravljanju z moduli si poglejte si peto poglavje našega "
+"Za podrobnosti pri upravljanju z moduli si poglejte peto poglavje našega "
 "priročnika, ali prosite za pomoč preko pogovora v živo, ali (če se nihče ne "
 "odzove) pošljite e-sporočilo na naš uporabniški poštni seznam.\n"
 
@@ -731,6 +736,35 @@ msgid ""
 "Both this step-by-step instruction dialog and the general introduction "
 "dialog may be closed at any time."
 msgstr ""
+"<b>Dobrodošli v Xiphosu.</b>\n"
+"\n"
+"Ni nameščenih Bibilij. Da se program požene, Xiphos potrebuje najmanj "
+"en Biblijski modul.\n"
+"\n"
+"Z vašim dovoljenjem, bo Xiphos odprl Upravljalca modulov, tako da boste lahko "
+"namestili eno ali več Biblij iz lokalnega vira (CDROM, USB disk) "
+"ali preko omrežja družbe CrossWire Bible Society.\n"
+"\n"
+"<u>Za lokalno namestitev:</u>\n"
+"- V <i>Viri modulov: Dodaj/Odstrani</i>, dodaj novo loklano mapo kjer "
+"se lahko najdejo moduli.\n"
+"  (To je kjer obstajata mapi <i>mods.d</i> in <i>modules</i>.)\n"
+"- V <i>Viri modulov: Izberi</i>, kliknite \"Lokalen\" gumb, in iz padajočega "
+"seznama izberite vašo mapo.\n"
+"\n"
+"<u>Za mrežno namestitec iz CrossWire:</u>\n"
+"- V <i>Viri modulov: Izberi</i>, kliknite \"Oddaljen\" gumb in iz padajočega "
+"seznama izberite CrossWire.\n"
+"- Kliknite na gumb \"Osveži\", ki se pojavi na dnu okna.\n"
+"\n"
+"<u>V vsakem primeru:</u>\n"
+"- V <i>Moduli: Namesti/Osveži</i>, izberite Biblije, ki jih želite.\n"
+"- Kliknite \"Namesti\".\n"
+"- Ko ste zaključili, zaprite Upravljalec modulov.\n"
+"\n"
+"<u>Opozorilo</u>: Če živite v državi, kjer kristjane preganjajo, to uporabite s previdnostjo.\n"
+"\n"
+"Naj Xiphos odpre Upravljalec modulov, tako da boste lahko namestili Biblijo?"
 
 #: ../src/gnome2/mod_mgr.c:191
 msgid "Remove these modules?"
@@ -828,15 +862,15 @@ msgstr "Ime modula"
 
 #: ../src/gnome2/mod_mgr.c:562
 msgid "A checkmark means this module is already installed"
-msgstr "Kljukica pomeni da je ta modul že nameščen"
+msgstr "Kljukica pomeni, da je ta modul že nameščen"
 
 #: ../src/gnome2/mod_mgr.c:589
 msgid "Click the box to work on this module"
-msgstr "Za delo s tem modulom kliknite na okvir"
+msgstr "Za delo s tem modulom kliknite v kvadratek"
 
 #: ../src/gnome2/mod_mgr.c:590
 msgid "Click the box to select this module for install/update"
-msgstr "Kliknite okvir da izberete ta modul za namestitev/posodobitev"
+msgstr "Za izbiro tega modula za namestitev/posodobitev, kliknite v kvadratek"
 
 #: ../src/gnome2/mod_mgr.c:608
 msgid "Installed"
@@ -847,7 +881,7 @@ msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
-"Ikona kazala pomeni da ste zgradili optimizirano ('sijajno') kazalo za hitro "
+"Ikona kazala pomeni, da ste zgradili optimizirano ('sijajno') kazalo za hitro "
 "iskanje po modulu (za to funkcijo poglejte Vzdrževanje)"
 
 #: ../src/gnome2/mod_mgr.c:649
@@ -855,7 +889,7 @@ msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
-"Ikona zaklenjene ključavnice pomeni da je ta modul kriptiran in zahteva "
+"Ikona zaklenjene ključavnice pomeni, da je ta modul kriptiran in zahteva "
 "nakup šifrirnega ključa od lastnika vsebine"
 
 #: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:580
@@ -869,8 +903,8 @@ msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
 msgstr ""
-"Osvežitvena ikona pomeni da je nameščen modul starejši od novega modula ki "
-"je na voljo: Predlagamo osvežitev tega modula"
+"Osvežitvena ikona pomeni, da je nameščen modul starejši od novega modula, ki "
+"je na voljo: Predlagana je osvežitev tega modula"
 
 #: ../src/gnome2/mod_mgr.c:700
 msgid "Available"
@@ -955,7 +989,7 @@ msgstr "Slovarji"
 #: ../src/gnome2/mod_mgr.c:1545 ../src/gnome2/utilities.c:593
 #: ../src/main/sidebar.cc:1003 ../src/main/sidebar.cc:1005
 msgid "Glossaries"
-msgstr ""
+msgstr "Besednjaki"
 
 #: ../src/gnome2/mod_mgr.c:1549 ../src/gnome2/utilities.c:600
 #: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1014
@@ -971,7 +1005,7 @@ msgstr "Splošne knjige"
 #: ../src/gnome2/mod_mgr.c:1566 ../src/gnome2/utilities.c:624
 #: ../src/main/sidebar.cc:1048 ../src/main/sidebar.cc:1050
 msgid "Cult/Unorthodox"
-msgstr ""
+msgstr "Kultne/Neobičajne"
 
 #: ../src/gnome2/mod_mgr.c:1575
 msgid ""
@@ -1092,10 +1126,14 @@ msgid ""
 "Would you like to delete %s?\n"
 "Beware: This cannot be undone."
 msgstr ""
+"%s zastarele %s.\n"
+"Ali želite, da sa pobriše %s?\n"
+"Pazite: Tega se ne da razveljaviti."
+
 
 #: ../src/gnome2/mod_mgr.c:2682
 msgid "No obsolete modules were found."
-msgstr ""
+msgstr "Zastarelih modulov ni najti."
 
 #: ../src/gnome2/mod_mgr.c:2704
 msgid "Standard remote sources have been loaded."
@@ -1103,7 +1141,7 @@ msgstr "Običajni oddaljeni viri so bili naloženi."
 
 #: ../src/gnome2/mod_mgr.c:2713
 msgid "Could not load standard sources from CrossWire."
-msgstr "Ni bilo mogoče naložiti običajnih virov iz CrossWire."
+msgstr "Iz CrossWire ni bilo mogoče naložiti običajnih virov."
 
 #: ../src/gnome2/mod_mgr.c:2864 ../src/gnome2/mod_mgr.c:3120
 msgid "Remove the selected source"
@@ -1149,11 +1187,11 @@ msgstr "Izbriši oddaljeni vir"
 #: ../src/gnome2/mod_mgr.c:3636
 #, fuzzy
 msgid "[no module]"
-msgstr "Celoten modul"
+msgstr "[noben modul]"
 
 #: ../src/gnome2/navbar_book.c:356 ../src/gnome2/navbar_book_dialog.c:300
 msgid "Go outward, to the section containing this one"
-msgstr "Pojdi nazaj na poglavje ki to vsebuje"
+msgstr "Pojdi nazaj na poglavje, ki to vsebuje"
 
 #: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:322
 msgid "Go to previous item"
@@ -1165,13 +1203,13 @@ msgstr "Pojdi k naslednji"
 
 #: ../src/gnome2/navbar_book.c:418 ../src/gnome2/navbar_book_dialog.c:362
 msgid "Go inward, to the first subsection"
-msgstr "Pojdi noter k prvemu podpoglavju"
+msgstr "Pojdi noter, k prvemu podpoglavju"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:898
 #: ../src/gnome2/navbar_versekey_editor.c:926
 #: ../src/gnome2/navbar_versekey_parallel.c:847
 msgid "Synchronize this window's scrolling with the main window"
-msgstr "Uskladi pomikanje tega okna z glavnim oknom"
+msgstr "Pomik tega okna uskladi z glavnim oknom"
 
 #: ../src/gnome2/parallel_dialog.c:346 ../src/gnome2/preferences_dialog.c:2030
 msgid "Parallel"
@@ -1195,11 +1233,11 @@ msgstr "Vzporedni pogled"
 
 #: ../src/gnome2/preferences_dialog.c:860
 msgid "BibleSync session passphrase"
-msgstr ""
+msgstr "BibleSync geslo za sejo"
 
 #: ../src/gnome2/preferences_dialog.c:862
 msgid "Phrase:"
-msgstr ""
+msgstr "Geslo:"
 
 #. mode selection failed? probably dead interface
 #: ../src/gnome2/preferences_dialog.c:933
@@ -1207,20 +1245,23 @@ msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
+"Način izbire je spodletel.\n"
+"Nastavi \"Odprava napak\" in poskusi ponovno, da vidiš zakaj."
+
 
 #: ../src/gnome2/preferences_dialog.c:988
 #, fuzzy
 msgid "Mode selection failed.\n"
-msgstr "Izbrano preberi na glas"
+msgstr "Način izbire spodletel.\n"
 
 #: ../src/gnome2/preferences_dialog.c:991
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
-msgstr ""
+msgstr "BibleSync: %s (geslo \"%s\")."
 
 #: ../src/gnome2/preferences_dialog.c:993
 msgid "Disabled"
-msgstr ""
+msgstr "Onemogočeno"
 
 #: ../src/gnome2/preferences_dialog.c:995 ../src/main/xml.c:96
 msgid "Personal"
@@ -1228,11 +1269,11 @@ msgstr "Osebno"
 
 #: ../src/gnome2/preferences_dialog.c:997
 msgid "Speaker"
-msgstr ""
+msgstr "Govornik"
 
 #: ../src/gnome2/preferences_dialog.c:998
 msgid "Audience"
-msgstr ""
+msgstr "Občinstvo"
 
 #: ../src/gnome2/preferences_dialog.c:1584
 #: ../src/gnome2/preferences_dialog.c:1618
@@ -1269,7 +1310,7 @@ msgstr "Opcije"
 #: ../ui/prefs.gtkbuilder.h:85
 #, fuzzy
 msgid "BibleSync"
-msgstr "Biblija"
+msgstr "BibleSync"
 
 #: ../src/gnome2/preferences_dialog.c:2013
 msgid "Fonts"
@@ -1282,7 +1323,7 @@ msgstr "Barva"
 #: ../src/gnome2/preferences_dialog.c:2019
 #, fuzzy
 msgid "Sizes and Faces"
-msgstr "Zavihki in okvirčki"
+msgstr "Velikosti in oblike"
 
 #: ../src/gnome2/preferences_dialog.c:2033
 msgid "Special"
@@ -1294,7 +1335,7 @@ msgstr "Počistim seznam?"
 
 #: ../src/gnome2/preferences_dialog.c:2722 ../src/gnome2/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
-msgstr "Ali ste prepričani da želite počistiti seznam modulov?"
+msgstr "Ali ste prepričani, da želite počistiti seznam modulov?"
 
 #: ../src/gnome2/preferences_dialog.c:2773 ../src/main/search_dialog.cc:658
 msgid "Remove Module?"
@@ -1302,7 +1343,7 @@ msgstr "Odstranim modul?"
 
 #: ../src/gnome2/preferences_dialog.c:2774 ../src/main/search_dialog.cc:659
 msgid "Are you sure you want to remove the selected module?"
-msgstr "Ali ste prepričani da želite pobrisati označeni modul?"
+msgstr "Ali ste prepričani, da želite odstraniti označen modul?"
 
 #: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:52
 #: ../src/main/search_sidebar.cc:51
@@ -1322,7 +1363,7 @@ msgstr "najden v "
 #: ../src/gnome2/search_dialog.c:483
 #, c-format
 msgid "New List %s"
-msgstr ""
+msgstr "Nov seznam %s"
 
 #: ../src/gnome2/search_dialog.c:700
 msgid "The last module list may not be deleted"
@@ -1334,7 +1375,7 @@ msgstr "Izbrišem seznam?"
 
 #: ../src/gnome2/search_dialog.c:716
 msgid "Are you sure you want to delete:"
-msgstr "Ali ste prepričani da želite izbrisati:"
+msgstr "Ali ste prepričani, da želite izbrisati:"
 
 #. *****************************************************************************
 #. * Name
@@ -1380,6 +1421,31 @@ msgid ""
 "\n"
 "For complete details, search the web for \"lucene search syntax\"."
 msgstr ""
+"<b>Pregled sintaks za optimalna \"lucene\" iskanja</b>\n"
+"Išči vrstice, ki vsebujejo...\n"
+"\n"
+"ljubiti Bog\n"
+"\t \"ljubiti\" or \"Bog\"\n"
+"\tTo je isto kot iskanje: ljubiti ALI Bog\n"
+"\"ljubiti Bog\"\n"
+"\tFraza \"ljubiti Bog\"\n"
+"ljub*\n"
+"\tBeseda, ki se prične z \"ljub\"\n"
+"\t(ljubiti OR ljubljen OR ljubezen OR itd...)\n"
+"ljubiti AND Bog\n"
+"\tBeseda \"ljubiti\" in beseda \"Bog\"\n"
+"\t&amp;&amp; se lahko uporabi namesto AND\n"
+"+ljubiti Bog\n"
+"\tVrstice, ki <b>morajo</b> vsebovati \"ljubiti\" in <b>lahko</b> vsebujejo \"Bog\"\n"
+"ljubiti NOT Bog\n"
+"\t\"ljubiti\" toda ne \"Bog\"\n"
+"(ljubiti Bog) AND Jezus\n"
+"\t\"ljubiti\" ali \"Bog\" in \"Jezus\"\n"
+"lemma:G2316\n"
+"\tIskanje za Strong-ovo grško (\"G\") besedo za število 2316.\n"
+"\tPrav tako izberite Strongov prikaz na zavihku <i>Iskanje po lastnostih</i>.\n"
+"\n"
+"Za podrobnejšo razlago na internetu iščite za \"lucene search syntax\"."
 
 #. *****************************************************************************
 #. * Name
@@ -1414,14 +1480,28 @@ msgid ""
 "* Morphological tags are identified literally, e.g. N-ASF for \"noun, "
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
+"<b>Iskanja osnovana na lastnostih</b>\n"
+"Iskanja vsebine, ki je napisna izven glavnega besedila. Lastnosti "
+"so zaznamki, Strong-ova števila in morfološki znaki.\n"
+"\n"
+"Zavedajte se, da je večina takšnih iskanj lahko opravljena hitreje s "
+"pomočjo optimiziranih \"lucene\" iskanj z uporabo ključnih besed.\n"
+"\n"
+"Za uporabo Iskanj po lastnostih, morate izbrati primeren gumb na "
+"zavihku <i>Iskanje po lastnostih</i>.\n"
+"* Po besedilu opomb se išče podobno kot po običajnem besedilu.\n"
+"* Strong-ove besede so navedene s predčrko H ali G (Hebrejščina ali Grščina) "
+"in številčno besedo, npr. G2316, če iščete \"θεός\" (\"Bog\").\n"
+"* Morfološke oznake so identificirane dobesedno, npr. N-ASF for \"noun, "
+"accusative singular feminine\" -- za podrobnosti glej Robinson-ov modul."
 
 #: ../src/gnome2/search_dialog.c:1195
 msgid "Module is neither Bible nor commentary"
-msgstr ""
+msgstr "Modul ni niti Biblija, niti komentar"
 
 #: ../src/gnome2/search_dialog.c:1213 ../src/gnome2/sidebar.c:973
 msgid "BibleSync is not active for transmit."
-msgstr ""
+msgstr "BibleSync ni aktiven za oddajo."
 
 #: ../src/gnome2/search_sidebar.c:215
 msgid ""
@@ -1429,16 +1509,16 @@ msgid ""
 "Find matches showing all words."
 msgstr ""
 "To je vključujoče (\"AND\") iskanje:\n"
-"Najde zadetke ki prikazujejo vse besede."
+"Najde zadetke, ki prikazujejo vse besede:\n"
 
 #: ../src/gnome2/search_sidebar.c:227
 #, fuzzy
 msgid "_Open Advanced Search"
-msgstr "N_apredno iskanje"
+msgstr "_Odpri napredno iskanje"
 
 #: ../src/gnome2/search_sidebar.c:232
 msgid "Open the separate Advanced Search dialog."
-msgstr ""
+msgstr "Odpri okno z ločenim naprednim iskanjem."
 
 #: ../src/gnome2/search_sidebar.c:248
 msgid "Search Module"
@@ -1451,7 +1531,7 @@ msgstr "Iskalni tip"
 #: ../src/gnome2/search_sidebar.c:298 ../ui/search-dialog.glade.h:39
 #: ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi word"
-msgstr "Mnogobeseden"
+msgstr "Mnogo beseden"
 
 #: ../src/gnome2/search_sidebar.c:307 ../ui/search-dialog.glade.h:41
 #: ../ui/search-dialog.gtkbuilder.h:41
@@ -1503,20 +1583,20 @@ msgstr "Višji"
 #: ../src/gnome2/sidebar.c:834
 #, fuzzy
 msgid "Open module in editor?"
-msgstr "Odpri v urejevalniku"
+msgstr "Modul odprem v urejevalniku?"
 
 #: ../src/gnome2/sidebar.c:835
 msgid "If no, it will open for display only."
-msgstr ""
+msgstr "Če ne, bo prikazan samo za branje."
 
 #: ../src/gnome2/sidebar.c:934
 #, fuzzy
 msgid "Paste verse references"
-msgstr "Možnosti"
+msgstr "Prilepi sklice vrstic"
 
 #: ../src/gnome2/sidebar.c:936
 msgid "List:"
-msgstr ""
+msgstr "Seznam:"
 
 #: ../src/gnome2/sidebar.c:1507 ../src/gnome2/sidebar.c:1545
 msgid "Search"
@@ -1532,7 +1612,7 @@ msgstr "Podkrepljeno s SWORD projektom"
 
 #: ../src/gnome2/tabbed_browser.c:358
 msgid "Can't create tabs dir."
-msgstr ""
+msgstr "Ne morem kreirati zavihkov."
 
 #: ../src/gnome2/treekey-editor.c:136 ../src/gnome2/treekey-editor.c:193
 #: ../src/gnome2/treekey-editor.c:291
@@ -1603,8 +1683,6 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 "Ni mogoče določiti velikost slikovne datoteke.\n"
-"Ali je nameščen ImageMagickov 'identify'?\n"
-"(Ali je mogoče slika tipa ki je drug kot bmp/gif/jpg/png.)\n"
 "Xiphos slikam ne more spremeniti velikosti da bi se prilegale oknu."
 
 #: ../src/main/biblesync_glue.cc:104
@@ -1612,91 +1690,106 @@ msgid ""
 "Mismatched packet\n"
 "\n"
 msgstr ""
+"Neprimeren paket\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:118
 msgid ""
 "Presence announcement:\n"
 "\n"
 msgstr ""
+"Navzočnost obvestila:\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:128
 msgid ""
 "Navigation packet:\n"
 "\n"
 msgstr ""
+"Navigacijski paket:\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:179
 #, fuzzy
 msgid "Unknown module "
-msgstr "Celoten modul"
+msgstr "Neznan modul"
 
 #: ../src/main/biblesync_glue.cc:179
 msgid ""
 ".\n"
 "Navigated indirectly using verse list."
 msgstr ""
+".\n"
+"Posredna navigacija z uporabo seznama vrstic."
 
 #: ../src/main/biblesync_glue.cc:255
 msgid "ERROR: unknown BibleSync indicator: "
-msgstr ""
+msgstr "NAPAKA: neznan BibleSync kazalnik: "
 
 #: ../src/main/biblesync_glue.cc:255
 msgid "Other indications are:"
-msgstr ""
+msgstr "Drugi kazalniki so:"
 
 #: ../src/main/biblesync_glue.cc:530
 #, fuzzy
 msgid "Check the box to listen to this Speaker"
-msgstr "Za delo s tem modulom kliknite na okvir"
+msgstr "Za poslušanje tega govornika obklukajte izbiro"
 
 #: ../src/main/biblesync_glue.cc:543
 #, fuzzy
 msgid "Available Speakers"
-msgstr "Na voljo"
+msgstr "Govorniki na voljo"
 
 #: ../src/main/biblesync_glue.cc:552
 msgid "D/I"
-msgstr ""
+msgstr "D/I"
 
 #: ../src/main/biblesync_glue.cc:562
 msgid "Last navigation was Direct or Indirect"
-msgstr ""
+msgstr "Zadnja navigacija je bila direktna sli posredna"
 
 #: ../src/main/biblesync_glue.cc:571
 #, fuzzy
 msgid "Last Navigation"
-msgstr "Odrešitev"
+msgstr "Zadnja navigacija"
 
 #: ../src/main/biblesync_glue.cc:590
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: ../src/main/biblesync_glue.cc:610
 msgid "IP address: "
-msgstr ""
+msgstr "IP številka: "
 
 #: ../src/main/biblesync_glue.cc:610
 msgid ""
 "\n"
 "Application: "
 msgstr ""
+"\n"
+"Program: "
 
 #: ../src/main/biblesync_glue.cc:610
 msgid ""
 "\n"
 "Device: "
 msgstr ""
+"\n"
+"Naprava: "
 
 #: ../src/main/biblesync_glue.cc:610
 msgid ""
 "\n"
 "UUID: "
 msgstr ""
+"\n"
+"UUID: "
 
 #: ../src/main/display.cc:89
 msgid ""
 "<br/><br/><center><i>This module has no content at this point.</i></center>"
 msgstr ""
+"<br/><br/><center><i>Ta modul na tej točki nima nobene vsebine.</i></center>"
 
 #: ../src/main/display.cc:249
 #, c-format
@@ -1715,12 +1808,12 @@ msgstr "Poglavje"
 
 #: ../src/main/main.c:129
 msgid "Xiphos does not understand more than one argument."
-msgstr "Xiphos ne razume več kot enega argumenta."
+msgstr "Xiphos ne razume več kakor samo en argument."
 
 #: ../src/main/main.c:240
 #, fuzzy
 msgid "Initiating HTML"
-msgstr "Zaganjam Gecko"
+msgstr "Zaganjam HTML"
 
 #: ../src/main/main.c:245
 msgid "Building Interface"
@@ -1750,13 +1843,13 @@ msgstr "Zaznamek"
 #: ../src/main/module_dialogs.cc:246 ../src/main/module_dialogs.cc:349
 #: ../src/main/previewer.cc:198
 msgid "Cross Reference"
-msgstr "Kazalka"
+msgstr "Sklic"
 
 #: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
 #: ../src/main/module_dialogs.cc:354 ../src/main/module_dialogs.cc:366
 #: ../src/main/previewer.cc:203 ../src/main/previewer.cc:221
 msgid "Strongs"
-msgstr "Močni"
+msgstr "Strong"
 
 #: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
 #: ../src/main/module_dialogs.cc:359 ../src/main/module_dialogs.cc:376
@@ -1766,16 +1859,16 @@ msgstr "Oblikoslovje"
 
 #: ../src/main/module_dialogs.cc:986 ../src/main/url.cc:515
 msgid "Back to "
-msgstr "Nazaj "
+msgstr "Nazaj na "
 
 #: ../src/main/parallel_view.cc:61
 msgid "Unknown parallel module: "
-msgstr ""
+msgstr "Neznan vzporeden modul: "
 
 #: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:68
 #: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Strong's Numbers"
-msgstr "Močne številke"
+msgstr "Strong-ove številke"
 
 #: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:102
 #: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:71
@@ -1846,7 +1939,7 @@ msgstr "Osnovno branje"
 #: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:81
 #: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "Secondary Reading"
-msgstr "Drugo branje"
+msgstr "Dodatno branje"
 
 #: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:82
 #: ../ui/xi-menus-popup.gtkbuilder.h:60
@@ -1857,17 +1950,17 @@ msgstr "Vsa branja"
 #: ../ui/xi-menus-popup.gtkbuilder.h:61
 #, fuzzy
 msgid "Transliterated Forms"
-msgstr "Prepis v drugo abecedo"
+msgstr "Prepis obrazcev v drugo abecedo"
 
 #: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:84
 #: ../ui/xi-menus-popup.gtkbuilder.h:62
 msgid "Enumerations"
-msgstr ""
+msgstr "Naštevanja"
 
 #: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:85
 #: ../ui/xi-menus-popup.gtkbuilder.h:63
 msgid "Glosses"
-msgstr ""
+msgstr "Razlage"
 
 #: ../src/main/parallel_view.cc:745
 msgid "view context"
@@ -1880,16 +1973,16 @@ msgstr "Rast"
 #: ../src/main/prayerlists.cc:108
 #, fuzzy
 msgid "<b>For Growth</b><br/>"
-msgstr "<b>Za rast</b><br>"
+msgstr "<b>Za rast</b><br/>"
 
 #: ../src/main/prayerlists.cc:109 ../src/main/prayerlists.cc:361
 msgid "Salvation"
-msgstr "Odrešitev"
+msgstr "Rešitev duš"
 
 #: ../src/main/prayerlists.cc:110
 #, fuzzy
 msgid "<b>For Salvation</b><br/>"
-msgstr "<b>Za odrešitev</b><br>"
+msgstr "<b>Za rešitev duš</b><br/>"
 
 #: ../src/main/prayerlists.cc:111 ../src/main/prayerlists.cc:365
 msgid "Health"
@@ -1898,7 +1991,7 @@ msgstr "Zdravje"
 #: ../src/main/prayerlists.cc:112
 #, fuzzy
 msgid "<b>For Health</b><br/>"
-msgstr "<b>Za Zdravje</b><br>"
+msgstr "<b>Za Zdravje</b><br/>"
 
 #: ../src/main/prayerlists.cc:113
 msgid "Misc"
@@ -1907,7 +2000,7 @@ msgstr "Mešano"
 #: ../src/main/prayerlists.cc:114
 #, fuzzy
 msgid "<b>Miscellaneous</b><br/>"
-msgstr "<b>Mešano</b><br>"
+msgstr "<b>Mešano</b><br/>"
 
 #: ../src/main/prayerlists.cc:122
 msgid "Point x"
@@ -1916,7 +2009,7 @@ msgstr "Določi x"
 #: ../src/main/prayerlists.cc:123
 #, fuzzy
 msgid "<b>(x)</b><br/>"
-msgstr "<b>(x)</b><br>"
+msgstr "<b>(x)</b><br/>"
 
 #: ../src/main/prayerlists.cc:124
 msgid "Point y"
@@ -1925,7 +2018,7 @@ msgstr "Določi y"
 #: ../src/main/prayerlists.cc:125
 #, fuzzy
 msgid "<b>(y)</b><br/>"
-msgstr "<b>(y)</b><br>"
+msgstr "<b>(y)</b><br/>"
 
 #: ../src/main/prayerlists.cc:126
 msgid "Point z"
@@ -1934,7 +2027,7 @@ msgstr "Določi z"
 #: ../src/main/prayerlists.cc:127
 #, fuzzy
 msgid "<b>(z)</b><br/>"
-msgstr "<b>(z)</b><br>"
+msgstr "<b>(z)</b><br/>"
 
 #: ../src/main/prayerlists.cc:135
 msgid "Minor Topic 1"
@@ -1943,7 +2036,7 @@ msgstr "Podpoglavje 1"
 #: ../src/main/prayerlists.cc:136
 #, fuzzy
 msgid "<b>Subtopic 1</b><br/>"
-msgstr "<b>Podpoglavje 1</b><br>"
+msgstr "<b>Podpoglavje 1</b><br/>"
 
 #: ../src/main/prayerlists.cc:138
 msgid "Minor Topic 2"
@@ -1952,7 +2045,7 @@ msgstr "Podpoglavje 2"
 #: ../src/main/prayerlists.cc:139
 #, fuzzy
 msgid "<b>Subtopic 2</b><br/>"
-msgstr "<b>Podpoglavje 2</b><br>"
+msgstr "<b>Podpoglavje 2</b><br/>"
 
 #: ../src/main/prayerlists.cc:141
 msgid "Minor Topic 3"
@@ -1961,7 +2054,7 @@ msgstr "Podpoglavje 3"
 #: ../src/main/prayerlists.cc:142
 #, fuzzy
 msgid "<b>Subtopic 3</b><br/>"
-msgstr "<b>Podpoglavje 3</b><br>"
+msgstr "<b>Podpoglavje 3</b><br/>"
 
 #: ../src/main/prayerlists.cc:144
 msgid "Minor Topic 4"
@@ -1970,7 +2063,7 @@ msgstr "Podpoglavje 4"
 #: ../src/main/prayerlists.cc:145
 #, fuzzy
 msgid "<b>Subtopic 4</b><br/>"
-msgstr "<b>Podpoglavje 4</b><br>"
+msgstr "<b>Podpoglavje 4</b><br/>"
 
 #: ../src/main/prayerlists.cc:229
 msgid "Name for new prayer list or journal"
@@ -2008,13 +2101,13 @@ msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
 ">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
 msgstr ""
-"<b>Ljudje:</b><br>Bob<br>Sam<br>Sue<br><br><b>Cerkev:</"
-"b><br>sedež<br>družba<br>Biblija za misijonarje<br><br><br>"
+"<b>Ljudje:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Cerkev:</b><br/>sedež<br/"
+">družba<br/>Biblija za misijonarje<br/><br/><br/>"
 
 #: ../src/main/prayerlists.cc:347
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
-"Molitveni seznam temelječ po področjih. \\par\\par Modul je ustvaril  Xiphos."
+"Molitveni seznam temelječ na področjih. \\par\\par Modul je ustvaril Xiphos."
 
 #: ../src/main/prayerlists.cc:348
 msgid "SubjectPrayerList"
@@ -2023,7 +2116,7 @@ msgstr "MolitveniSeznamPoPodročjih"
 #: ../src/main/prayerlists.cc:362
 #, fuzzy
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
-msgstr "Bob<br>Sam<br>Sue<br>John<br>"
+msgstr "Bob<br/>Sam<br/>Sue<br/>John<br/>"
 
 #: ../src/main/prayerlists.cc:363
 msgid "Spiritual Growth"
@@ -2032,12 +2125,12 @@ msgstr "Duhovna rast"
 #: ../src/main/prayerlists.cc:364
 #, fuzzy
 msgid "Mike<br/>Steve<br/>"
-msgstr "Mike<br>Steve<br>"
+msgstr "Mike<br/>Steve<br/>"
 
 #: ../src/main/prayerlists.cc:366
 #, fuzzy
 msgid "Sue<br/>John<br/>"
-msgstr "Sue<br>John<br>"
+msgstr "Sue<br/>John<br/>"
 
 #: ../src/main/prayerlists.cc:390
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
@@ -2070,7 +2163,7 @@ msgstr "Glavna tema A"
 #: ../src/main/prayerlists.cc:516
 #, fuzzy
 msgid "<b>Major Topic A</b><br/>"
-msgstr "<b>Glavna tema A</b><br>"
+msgstr "<b>Glavna tema A</b><br/>"
 
 #: ../src/main/prayerlists.cc:518
 msgid "Major Topic B"
@@ -2079,7 +2172,7 @@ msgstr "Glavna tema B"
 #: ../src/main/prayerlists.cc:519
 #, fuzzy
 msgid "<b>Major Topic B</b><br/>"
-msgstr "<b>Glavna tema B</b><br>"
+msgstr "<b>Glavna tema B</b><br/>"
 
 #: ../src/main/prayerlists.cc:521
 msgid "Major Topic C"
@@ -2088,7 +2181,7 @@ msgstr "Glavna tema C"
 #: ../src/main/prayerlists.cc:522
 #, fuzzy
 msgid "<b>Major Topic C</b><br/>"
-msgstr "<b>Glavna tema C</b><br>"
+msgstr "<b>Glavna tema C</b><br/>"
 
 #: ../src/main/previewer.cc:193
 msgid "User Annotation"
@@ -2131,7 +2224,7 @@ msgstr "Prosim prilagodite seznam modulov."
 #: ../src/main/search_dialog.cc:1394
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr "Ne obstaja kazalo hitrega iskanja za %s.%s%s"
+msgstr "Kazalo hitrega iskanja za %s.%s%s ne obstaja"
 
 #: ../src/main/search_dialog.cc:1396
 msgid ""
@@ -2147,7 +2240,7 @@ msgid ""
 "See the Module Manager, Maintenance pane."
 msgstr ""
 "\n"
-"Poglejte Upravljalca z modulom, zavihek Vzdrževanje."
+"Poglejte Upravljalca z modulom, Moduli, Vzdrževanje."
 
 #: ../src/main/search_dialog.cc:1458
 msgid "Search finished"
@@ -2159,7 +2252,7 @@ msgstr "zadetki"
 
 #: ../src/main/search_sidebar.cc:203
 msgid "There is no commentary module."
-msgstr ""
+msgstr "Modula s komentarjen ni."
 
 #: ../src/main/settings.c:106
 msgid "$HOME is not set!"
@@ -2168,9 +2261,7 @@ msgstr "$HOME ni nastavljen!"
 #: ../src/main/settings.c:120
 #, fuzzy, c-format
 msgid "Xiphos can not create directory "
-msgstr ""
-"Xiphos ne more ustvariti modulove poti:\n"
-"%s"
+msgstr "Xiphos ne more ustvariti mape "
 
 #: ../src/main/settings.c:134 ../src/main/settings.c:144
 #: ../src/main/settings.c:155
@@ -2201,9 +2292,9 @@ msgid ""
 "and will now exit."
 msgstr ""
 "Ni nameščenih Bibilij.\n"
-"Očitno ste zavrnili da bi kako namestili.\n"
+"Očitno ste zavrnili, da bi kako namestili.\n"
 "\n"
-"Brez nobenega Biblijskega modula za prikaz,\n"
+"Brez niti enega Biblijskega modula za prikaz,\n"
 "Xiphos ne more pričeti,\n"
 "in se bo sedaj končal."
 
@@ -2216,6 +2307,8 @@ msgid ""
 "Module error: Unusable xref encoding.\n"
 "Please report this, with module & verse"
 msgstr ""
+"Napaka modula: Neuporabno xref kodiranje.\n"
+"Prosim, to napako sporočite z modulom in vrstico"
 
 #: ../src/main/sidebar.cc:411
 msgid "verse"
@@ -2263,7 +2356,8 @@ msgstr ""
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
-msgstr "Ni najti ujemajočega se prizorišča za"
+msgstr "Ni najti ujemajočega se jezika za `%s'.\n"
+"%s"
 
 #: ../src/main/sword.cc:760
 #, fuzzy
@@ -2277,6 +2371,9 @@ msgid ""
 "%s.\n"
 "Would you like to open these as well?%s"
 msgstr ""
+"Module %s ima spremljevalne module:\n"
+"%s.\n"
+"Želite, da tudi te odprem?%s"
 
 #: ../src/main/sword.cc:1118 ../src/main/sword.cc:1287
 msgid ""
@@ -2285,10 +2382,14 @@ msgid ""
 "The first will open in the main window\n"
 "and others in separate windows."
 msgstr ""
+"\n"
+"\n"
+"Najprej se bo odprlo glavno okno,\n"
+"ostala pa v ločenih oknih."
 
 #: ../src/main/sword.cc:1411
 msgid "Daily devotional was requested, but there are none installed."
-msgstr "Dnevne posvetitve so bile zahtevane, toda nobenih ni nameščenih."
+msgstr "Dnevne posvetitve so bile zahtevane, toda nobene ni nameščene."
 
 #: ../src/main/sword.cc:1665
 msgid ""
@@ -2303,15 +2404,25 @@ msgid ""
 "\n"
 "Please enter the key in the dialog."
 msgstr ""
+"<b>Zaklenjen modul.</b>\n"
+"\n"
+"<u>Odpirate modul, ki zahteva <i>ključ</i>.</u>\n"
+"\n"
+"Modul je zaklenjen, kar pomeni, da je vsebino kriptiral njen izdajatelj "
+"in da morate vnesti pravi ključ, da vsebina lahko postala uporabna. "
+"Ta ključ naj bi pridobili na spletni strani , ki je potrdila vaš nakup "
+"ali pa vam je bil po nakupu poslan na vaš elektronski naslov.\n"
+"\n"
+"Prosim, da v okno vnesete ključ."
 
 #: ../src/main/tab_history.c:302
 msgid "Clear History"
-msgstr "Pobriše zgodovino"
+msgstr "Pobriši zgodovino"
 
 #: ../src/main/tab_history.c:308
 #, fuzzy
 msgid "History ➛ Verse List"
-msgstr "Seznam vrstic"
+msgstr "Zgodovina ➛ Seznam vrstic"
 
 #: ../src/main/url.cc:106
 msgid "URL not found:"
@@ -2379,17 +2490,17 @@ msgstr "napačen tip, root vozel != SwordZaznamki\n"
 #: ../src/main/xml.c:421
 #, fuzzy, c-format
 msgid "wrong type, root node != Copy_Export\n"
-msgstr "napačen tip, root vozel != %s\n"
+msgstr "napačen tip, root vozel != Copy_Export\n"
 
 #: ../src/main/xml.c:498
 #, c-format
 msgid "%s<center>%s<br>Chapter %d</center><br>"
-msgstr ""
+msgstr "%s<center>%s<br>Poglavje %d</center><br>"
 
 #: ../src/main/xml.c:502
 #, c-format
 msgid "<br><center>Chapter %d</center><br>"
-msgstr ""
+msgstr "<br><center>Poglavje %d</center><br>"
 
 #: ../src/main/xml.c:505
 #, fuzzy, c-format
@@ -2398,7 +2509,11 @@ msgid ""
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Poglavje"
+msgstr ""
+"%s\n"
+"\n"
+"Poglavje %d\n"
+"\n"
 
 #: ../src/main/xml.c:508
 #, fuzzy, c-format
@@ -2407,12 +2522,16 @@ msgid ""
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Poglavje"
+msgstr ""
+"\n"
+"\n"
+"Poglavje %d\n"
+"\n"
 
 #: ../src/main/xml.c:517
 #, c-format
 msgid "%s%s: %s Chapter %d<br><br>"
-msgstr ""
+msgstr "%s%s: %s Poglavje %d<br><br>"
 
 #: ../src/main/xml.c:520
 #, c-format
@@ -2420,56 +2539,58 @@ msgid ""
 "%s: %s Chapter %d\n"
 "\n"
 msgstr ""
+"%s: %s Poglavje %d\n"
+"\n"
 
 #: ../src/main/xml.c:528
 #, c-format
 msgid "&nbsp;&nbsp;[%d]"
-msgstr ""
+msgstr "&nbsp;&nbsp;[%d]"
 
 #: ../src/main/xml.c:531
 #, c-format
 msgid " [%d]"
-msgstr ""
+msgstr " [%d]"
 
 #: ../src/main/xml.c:540
 #, c-format
 msgid "%s%s (%s %d:%d%s)</body></html>"
-msgstr ""
+msgstr "%s%s (%s %d:%d%s)</body></html>"
 
 #: ../src/main/xml.c:543
 #, c-format
 msgid "%s(%s %d:%d%s)%s </body></html>"
-msgstr ""
+msgstr "%s(%s %d:%d%s)%s </body></html>"
 
 #: ../src/main/xml.c:545
 #, c-format
 msgid "%s (%s %d:%d%s)"
-msgstr ""
+msgstr "%s (%s %d:%d%s)"
 
 #: ../src/main/xml.c:548
 #, c-format
 msgid "(%s %d:%d%s) %s"
-msgstr ""
+msgstr "(%s %d:%d%s) %s"
 
 #: ../src/main/xml.c:556
 #, c-format
 msgid " %s%s"
-msgstr ""
+msgstr " %s%s"
 
 #: ../src/main/xml.c:558 ../src/main/xml.c:562
 #, c-format
 msgid "%s(%s %d:%d-%d%s)"
-msgstr ""
+msgstr "%s(%s %d:%d-%d%s)"
 
 #: ../src/main/xml.c:560
 #, c-format
 msgid "(%s %d:%d-%d%s)<br>"
-msgstr ""
+msgstr "(%s %d:%d-%d%s)<br>"
 
 #: ../src/main/xml.c:565
 #, c-format
 msgid "(%s %d:%d-%d%s)\n"
-msgstr ""
+msgstr "(%s %d:%d-%d%s)\n"
 
 #: ../src/main/xml.c:614
 msgid "Old Testament"
@@ -2582,20 +2703,20 @@ msgstr "Vrstica"
 #: ../ui/editor_link_dialog.xml.h:4
 #, fuzzy
 msgid "Link Text"
-msgstr "Preprosto besedilo"
+msgstr "Poveži besedilo"
 
 #: ../ui/editor_link_dialog.xml.h:5
 msgid "Link directly"
-msgstr ""
+msgstr "Poveži direktno"
 
 #: ../ui/editor_link_dialog.xml.h:6
 msgid "Link via verse list"
-msgstr ""
+msgstr "Poveži preko seznama vrstic"
 
 #: ../ui/editor_link_dialog.xml.h:7
 #, fuzzy
 msgid "Test Link"
-msgstr "Vstavi povezavo"
+msgstr "Preveri povezavo"
 
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
@@ -2611,7 +2732,7 @@ msgstr "Natisni to beležko"
 
 #: ../ui/editor_note.xml.h:4
 msgid "Preview the note to be printed"
-msgstr "Predogled beležke ki naj bi se natisnila"
+msgstr "Predogled beležke, ki naj bi se natisnila"
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
 msgid "HTML Format switch"
@@ -2627,7 +2748,7 @@ msgstr "Pobriši trenutno beležko"
 
 #: ../ui/editor_note.xml.h:8
 msgid "_Delete Personal Comment"
-msgstr "Iz_briši osebni komentar"
+msgstr "_Izbriši osebni komentar"
 
 #: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:7
 #: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:86
@@ -2670,11 +2791,11 @@ msgstr "Natisni ta dokument"
 
 #: ../ui/editor_studypad.xml.h:4
 msgid "Preview the document to be printed"
-msgstr "Predogled dokumenta ki naj bi se natisnil"
+msgstr "Predogled dokumenta, ki naj bi se natisnil"
 
 #: ../ui/editor_studypad.xml.h:8
 msgid "Open a file in Studypad"
-msgstr "Odpri datoteko v študijski beležnici"
+msgstr "Datoteko odpri v študijski beležnici"
 
 #: ../ui/editor_studypad.xml.h:10
 msgid "Save the current file"
@@ -2682,15 +2803,15 @@ msgstr "Shrani trenutno datoteko"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Save the current file as"
-msgstr "Shrani trenutno datoteko kot"
+msgstr "Trenutno datoteko shrani kot"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Save AS"
-msgstr "Shrani kot"
+msgstr "Shrani KOT"
 
 #: ../ui/editor_studypad.xml.h:14
 msgid "Add this file to your bookmarks"
-msgstr "To datoteko dodaj k svojim zaznamkom"
+msgstr "To datoteko dodaj k tvojim zaznamkom"
 
 #: ../ui/editor_studypad.xml.h:16
 msgid "Create a new document"
@@ -2744,7 +2865,7 @@ msgstr "Knjiga"
 
 #: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Book Radio Button"
-msgstr "Bližnjica do knjige"
+msgstr "Izbira knjige"
 
 #: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:14
 msgid "Export complete chapter"
@@ -2752,7 +2873,7 @@ msgstr "Izvozi celotno poglavje"
 
 #: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Chapter Radio Button"
-msgstr "Bližnjica do poglavja"
+msgstr "Izbira poglavja"
 
 #: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:17
 msgid "Export single verse"
@@ -2760,7 +2881,7 @@ msgstr "Izvozi eno vrstico"
 
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
-msgstr "Bližnjica za vrstico"
+msgstr "Izbira vrstice"
 
 #: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse range"
@@ -2776,7 +2897,7 @@ msgstr "Preprosto besedilo"
 
 #: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text Radio Button"
-msgstr "Bližnjica do preprostega besedila"
+msgstr "Izbira preprostega besedila"
 
 #: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:23
 msgid "HTML"
@@ -2784,84 +2905,86 @@ msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML Radio Button"
-msgstr "HTML bližnjica"
+msgstr "HTML izbira"
 
 #: ../ui/export-dialog.glade.h:25
 msgid ""
 "Indicates whether verse numbers should appear inline in the text for more "
 "than 1 verse."
 msgstr ""
+"Nakazuja katera vrstica naj se prikaže znotraj besedila za več kakor "
+"eno vrstico."
 
 #: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:25
 #, fuzzy
 msgid "_Verse numbers in text"
-msgstr "Velikost številke vrstice"
+msgstr "Številke _vrstic v besedilu"
 
 #: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:27
 #, fuzzy
 msgid "Verse Number button"
-msgstr "Številka vrstice"
+msgstr "Izbira vrstice"
 
 #: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Indicates whether reference is placed first or last."
-msgstr ""
+msgstr "Nakazuje kateri sklic je postavljen kot prvi ali kot zadnji."
 
 #: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
 #, fuzzy
 msgid "Reference last"
-msgstr "Vnos virov"
+msgstr "Zadnji sklic"
 
 #: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
 #, fuzzy
 msgid "Reference last button"
-msgstr "Vnos virov"
+msgstr "Izbira sklica"
 
 #: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
 msgid "Indicates whether or not version name is included in reference."
-msgstr ""
+msgstr "Nakazuja ali naj bo ime verzije vsebovano v sklicu."
 
 #: ../ui/export-dialog.glade.h:32
 #, fuzzy
 msgid "Include Version"
-msgstr "Sword verzija"
+msgstr "Vsebuje verzijo"
 
 #: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
 #, fuzzy
 msgid "Version button"
-msgstr "Bližnjica za vrstico"
+msgstr "Izbira vrstice"
 
 #: ../ui/export-dialog.glade.h:34
 msgid "Save Export As"
-msgstr "Shrani izvoženo kot"
+msgstr "Izvoženo shrani kot"
 
 #: ../ui/export-dialog.gtkbuilder.h:26
 msgid "Indicates whether verse numbers should appear inline in the text."
-msgstr ""
+msgstr "Nakazuje ali naj se v besedilu prikažejo številke vrstic."
 
 #: ../ui/export-dialog.gtkbuilder.h:31
 #, fuzzy
 msgid "Include version"
-msgstr "Sword verzija"
+msgstr "Vsebuje verzijo"
 
 #: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
 #, fuzzy
 msgid "About Studypad"
-msgstr "Odpri študijsko _beležko"
+msgstr "Vizitka študijske beležke"
 
 #: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
 #, fuzzy
 msgid "Open about dialog"
-msgstr "Odpri v pogovornem oknu"
+msgstr "Odpri okno vizitke"
 
 #: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:118
 #: ../ui/prefs.gtkbuilder.h:118
 msgid "Bold"
-msgstr ""
+msgstr "Krepko"
 
 #: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
 #, fuzzy
 msgid "Make selection bold"
-msgstr "Izbrano preberi na glas"
+msgstr "Izbrano poudari"
 
 #: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
 msgid "Copy"
@@ -2869,33 +2992,33 @@ msgstr "Kopiraj"
 
 #: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
 msgid "Copy selection to clipboard"
-msgstr ""
+msgstr "Izbiro kopiraj na odložišče"
 
 #: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
 msgid "Cut"
-msgstr ""
+msgstr "Izreži"
 
 #: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
 #, fuzzy
 msgid "Cut selection"
-msgstr "Izbira modula"
+msgstr "Izreži izbiro"
 
 #: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
 msgid "Decrease indent"
-msgstr ""
+msgstr "Zmanjšaj zamik"
 
 #: ../ui/gtk2_webedit.ui.h:11 ../ui/gtk_webedit.ui.h:11
 msgid "Decrease"
-msgstr ""
+msgstr "Zmanjšaj"
 
 #: ../ui/gtk2_webedit.ui.h:12 ../ui/gtk_webedit.ui.h:12
 msgid "Decrease paragraph indent"
-msgstr ""
+msgstr "Zmanjšaj zamik odstavka"
 
 #: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
 #, fuzzy
 msgid "Delete selection"
-msgstr "Izbris označenega območja"
+msgstr "Izbris označenega"
 
 #: ../ui/gtk2_webedit.ui.h:14 ../ui/gtk_webedit.ui.h:14
 msgid "Delete"
@@ -2908,68 +3031,68 @@ msgstr "Odstrani označeno"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
 #: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:11
-msgid "Delete Item"
-msgstr "Izbriši Stvar"
+msgid "Delete item"
+msgstr "Izbriši predmet"
 
 #: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
 #, fuzzy
 msgid "Delete current item"
-msgstr "Izbriši trenutni zaznamek"
+msgstr "Izbriši trenuten predmet"
 
 #: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
 #, fuzzy
 msgid "Search current document"
-msgstr "Preišči celoten modul"
+msgstr "Išči po trenutnem dokumentu"
 
 #: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
 #, fuzzy
 msgid "Font"
-msgstr "Pisave"
+msgstr "Pisava"
 
 #: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
 #, fuzzy
 msgid "Change font"
-msgstr "Spremeni pisavo za"
+msgstr "Spremeni pisavo"
 
 #: ../ui/gtk2_webedit.ui.h:22 ../ui/gtk_webedit.ui.h:22
 msgid "Increase indent"
-msgstr ""
+msgstr "Povečaj zamik"
 
 #: ../ui/gtk2_webedit.ui.h:23 ../ui/gtk_webedit.ui.h:23
 msgid "Increase"
-msgstr ""
+msgstr "Povečaj"
 
 #: ../ui/gtk2_webedit.ui.h:24 ../ui/gtk_webedit.ui.h:24
 msgid "Increase paragraph indent"
-msgstr ""
+msgstr "Povečaj zamik odstavka"
 
 #: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
 #, fuzzy
 msgid "Insert emoticon"
-msgstr "Vstavi povezavo"
+msgstr "Vstavi smejkota"
 
 #: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
 msgid "Emoticon"
-msgstr ""
+msgstr "Smrjko"
 
 #: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
 #, fuzzy
 msgid "Insert an emoticon"
-msgstr "Vstavi povezavo"
+msgstr "Vstavi smejkota"
 
 #: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
 #, fuzzy
 msgid "Insert image"
-msgstr "Vstavi povezavo"
+msgstr "Vstavi sliko"
 
 #: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
 #, fuzzy
 msgid "Image"
-msgstr "Slike"
+msgstr "Slika"
 
 #: ../ui/gtk2_webedit.ui.h:30 ../ui/gtk_webedit.ui.h:30
 msgid "Insert image at cursor"
-msgstr ""
+msgstr "Sliko vstavi pri kurzorju"
 
 #: ../ui/gtk2_webedit.ui.h:31 ../ui/gtk_webedit.ui.h:31
 #, fuzzy
@@ -2979,7 +3102,7 @@ msgstr "Vstavi povezavo"
 #: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
 #, fuzzy
 msgid "Link"
-msgstr "Povezave"
+msgstr "Povezava"
 
 #: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
 #, fuzzy
@@ -2989,7 +3112,7 @@ msgstr "Vstavi povezavo"
 #: ../ui/gtk2_webedit.ui.h:34 ../ui/gtk_webedit.ui.h:34
 #, fuzzy
 msgid "Insert Outline"
-msgstr "Vstavi povezavo"
+msgstr "Vstavi skico"
 
 #: ../ui/gtk2_webedit.ui.h:35 ../ui/gtk_webedit.ui.h:35
 #, fuzzy
@@ -2999,88 +3122,88 @@ msgstr "Skica"
 #: ../ui/gtk2_webedit.ui.h:36 ../ui/gtk_webedit.ui.h:36
 #, fuzzy
 msgid "Insert outline"
-msgstr "Vstavi povezavo"
+msgstr "Vstavi skico"
 
 #: ../ui/gtk2_webedit.ui.h:37 ../ui/gtk_webedit.ui.h:37
 #, fuzzy
 msgid "Insert rule"
-msgstr "Vstavi povezavo"
+msgstr "Vstavi pravilo"
 
 #: ../ui/gtk2_webedit.ui.h:38 ../ui/gtk_webedit.ui.h:38
 msgid "Rule"
-msgstr ""
+msgstr "Pravilo"
 
 #: ../ui/gtk2_webedit.ui.h:39 ../ui/gtk_webedit.ui.h:39
 msgid "Insert horizontal rule"
-msgstr ""
+msgstr "Vstavi vodoravno pravilo"
 
 #: ../ui/gtk2_webedit.ui.h:40 ../ui/gtk_webedit.ui.h:40
 #, fuzzy
 msgid "Xiphos Link"
-msgstr "Xiphos:"
+msgstr "Xiphos povezava"
 
 #: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
 #, fuzzy
-msgid "Xiphos"
+msgid "Xiphos:"
 msgstr "Xiphos:"
 
 #: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
 #, fuzzy
 msgid "Insert a link to a sword module"
-msgstr "Namestim te module?"
+msgstr "Vstavi povezavo do sword modula"
 
 #: ../ui/gtk2_webedit.ui.h:43 ../ui/gtk_webedit.ui.h:43
 #, fuzzy
 msgid "Insert table"
-msgstr "Vstavi povezavo"
+msgstr "Vstavi tabelo"
 
 #: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
 msgid "Table"
-msgstr ""
+msgstr "Tabela"
 
 #: ../ui/gtk2_webedit.ui.h:45 ../ui/gtk_webedit.ui.h:45
 msgid "Insert a table"
-msgstr ""
+msgstr "Vstavi tabelo"
 
 #: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
 msgid "Italic"
-msgstr ""
+msgstr "Ležeče"
 
 #: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
 msgid "Change selection to italic font"
-msgstr ""
+msgstr "Izbrano spremeni v poševno pisavo"
 
 #: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
 msgid "Center"
-msgstr ""
+msgstr "Na sredino"
 
 #: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
 msgid "Center justify paragraph"
-msgstr ""
+msgstr "Odstavek porazdeli sredinsko"
 
 #: ../ui/gtk2_webedit.ui.h:50 ../ui/gtk_webedit.ui.h:50
 msgid "Full"
-msgstr ""
+msgstr "Poln"
 
 #: ../ui/gtk2_webedit.ui.h:51 ../ui/gtk_webedit.ui.h:51
 msgid "full justify"
-msgstr ""
+msgstr "polno obojestransko"
 
 #: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
 msgid "Left"
-msgstr ""
+msgstr "Levo"
 
 #: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
 msgid "Left justify paragraph"
-msgstr ""
+msgstr "Odstavek porazdeli levo"
 
 #: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
 msgid "Right"
-msgstr ""
+msgstr "Desno"
 
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
-msgstr ""
+msgstr "Odstavek porazdeli desno"
 
 #: ../ui/gtk2_webedit.ui.h:56 ../ui/gtk_webedit.ui.h:56
 msgid "New"
@@ -3089,30 +3212,30 @@ msgstr "Nov"
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
 #, fuzzy
 msgid "Create new file"
-msgstr "Ustvari novo mapo"
+msgstr "Ustvari novo datoteko"
 
 #: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
 #, fuzzy
 msgid "Open file"
-msgstr "Odpri modul"
+msgstr "Odpri datoteko"
 
 #: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
 msgid "Paste"
-msgstr ""
+msgstr "Prilepi"
 
 #: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
 msgid "Paste clipboard at cursor."
-msgstr ""
+msgstr "Odložišče prilepi pri kurzorju."
 
 #: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
 #, fuzzy
 msgid "Print Document"
-msgstr "Natisni ta dokument"
+msgstr "Natisni dokument"
 
 #: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
 #, fuzzy
 msgid "Print"
-msgstr "Tiskanje"
+msgstr "Natisni"
 
 #: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
 #, fuzzy
@@ -3122,53 +3245,53 @@ msgstr "Natisni ta dokument"
 #: ../ui/gtk2_webedit.ui.h:65 ../ui/gtk_webedit.ui.h:65
 #, fuzzy
 msgid "Print Preview"
-msgstr "Predo_gled tiskanja"
+msgstr "Predogled tiskanja"
 
 #: ../ui/gtk2_webedit.ui.h:66 ../ui/gtk_webedit.ui.h:66
 #, fuzzy
 msgid "Preview"
-msgstr "_Predogled"
+msgstr "Predogled"
 
 #: ../ui/gtk2_webedit.ui.h:67 ../ui/gtk_webedit.ui.h:67
 #, fuzzy
 msgid "Print preview of current document"
-msgstr "Natisni ta dokument"
+msgstr "Predogled tega dokumenta"
 
 #: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
 #, fuzzy
 msgid "Quit"
-msgstr "_Izhod"
+msgstr "Izhod"
 
 #: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
 #, fuzzy
 msgid "Shut down editor"
-msgstr "Odpri v urejevalniku"
+msgstr "Zapri urejevalnik"
 
 #: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
 msgid "Redo"
-msgstr ""
+msgstr "Ponovi"
 
 #: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
 msgid "Redo last undo"
-msgstr ""
+msgstr "Ponovi zadnjo razveljavitev"
 
 #: ../ui/gtk2_webedit.ui.h:72 ../ui/gtk_webedit.ui.h:72
 msgid "Find and replace"
-msgstr ""
+msgstr "Najdi in zamenjaj"
 
 #: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
 msgid "Replace"
-msgstr ""
+msgstr "Zamenjaj"
 
 #: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
 #, fuzzy
 msgid "Search and replace"
-msgstr "Iskalni kriterij"
+msgstr "Išči in zamenjaj"
 
 #: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
 #, fuzzy
 msgid "Save changes to file"
-msgstr "Shrani spremembe dokumenta"
+msgstr "Spremembe shrani v datoteko"
 
 #: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
 #, fuzzy
@@ -3178,42 +3301,42 @@ msgstr "Shrani kot"
 #: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
 #, fuzzy
 msgid "Save file as ..."
-msgstr "Shr_ani kot..."
+msgstr "Datoteko shrani kot..."
 
 #: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
 msgid "Strikethrough"
-msgstr ""
+msgstr "Prečrtaj"
 
 #: ../ui/gtk2_webedit.ui.h:80 ../ui/gtk_webedit.ui.h:80
 msgid "Strikethrough selection"
-msgstr ""
+msgstr "Izbrano prečrtaj"
 
 #: ../ui/gtk2_webedit.ui.h:81 ../ui/gtk_webedit.ui.h:81
 msgid "Underline"
-msgstr ""
+msgstr "Podčrtaj"
 
 #: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
 #, fuzzy
 msgid "Underline selection"
-msgstr "Izbira modula"
+msgstr "Izbiro podčrtaj"
 
 #: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
 msgid "Undo"
-msgstr ""
+msgstr "Razveljavi"
 
 #: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
 msgid "Undo last change"
-msgstr ""
+msgstr "Razveljavi zadnjo spremembo"
 
 #: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:85
 #, fuzzy
 msgid "Editor"
-msgstr "Uredi"
+msgstr "Urejevalnik"
 
 #: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:87
 #, fuzzy
 msgid "Recent files"
-msgstr "Shrani trenutno datoteko kot"
+msgstr "Zadnje datoteke"
 
 #: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:88
 #: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
@@ -3227,69 +3350,69 @@ msgstr "_Pomoč"
 
 #: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:90
 msgid "Normal"
-msgstr ""
+msgstr "Običajno"
 
 #: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
 msgid "Header 1"
-msgstr ""
+msgstr "Naslov 1"
 
 #: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
 msgid "Header 2"
-msgstr ""
+msgstr "Naslov 2"
 
 #: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
 msgid "Header 3"
-msgstr ""
+msgstr "Naslov 3"
 
 #: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
 msgid "Header 4"
-msgstr ""
+msgstr "Naslov 4"
 
 #: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
 msgid "Header 5"
-msgstr ""
+msgstr "Naslov 5"
 
 #: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
 msgid "Header 6"
-msgstr ""
+msgstr "Naslov 6"
 
 #: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
 msgid "Address"
-msgstr ""
+msgstr "Naslov"
 
 #: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
 msgid "Preformatted"
-msgstr ""
+msgstr "Predurejeno"
 
 #: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
 #, fuzzy
 msgid "Bulleted List"
-msgstr "Izbrišem seznam?"
+msgstr "Izbirni seznam"
 
 #: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
 msgid "Roman Numeral List"
-msgstr ""
+msgstr "Roman številčni seznam"
 
 #: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
 #, fuzzy
 msgid "Numbered List"
-msgstr "Seznam vrstic"
+msgstr "Oštevilčen seznam"
 
 #: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
 msgid "Alphabetical List"
-msgstr ""
+msgstr "Abecedni seznam"
 
 #: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
 msgid "Strike"
-msgstr ""
+msgstr "Prečrtaj"
 
 #: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
 msgid "Set font color of selected text."
-msgstr ""
+msgstr "Nastavi pisavo in barvo označenega besedila."
 
 #: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
 msgid "Highlight selected text by setting background color."
-msgstr ""
+msgstr "Izbrano besedilo poudari z nastavitvijo barve izadja."
 
 #: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
@@ -3310,81 +3433,86 @@ msgstr "Upravljalec modulov"
 #: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
 #, fuzzy
 msgid "_View Intro"
-msgstr "P_ogled"
+msgstr "Pogled u_voda"
 
 #: ../ui/module-manager.glade.h:3 ../ui/module-manager.gtkbuilder.h:3
 msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
+msgstr "Odpri kratko uvodno pojasnilo o tem kako deluje Upravljalec modulov."
 
 #: ../ui/module-manager.glade.h:4 ../ui/module-manager.gtkbuilder.h:4
 #, fuzzy
 msgid "_Load Standard"
-msgstr "Naloži standard"
+msgstr "Na_loži standard"
 
 #: ../ui/module-manager.glade.h:5 ../ui/module-manager.gtkbuilder.h:5
 msgid ""
 "Load and synchronize the standard set of known repositories, as maintained "
 "at crosswire.org, with your current remote sources."
 msgstr ""
+"Naloži in sinhroniziraj običajno nastavitev znanih skladišč, kakor so "
+"vzdrževana pri crosswire.org, z vašimi trenutnimi oddaljenimi viri."
 
 #: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
 msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
 msgstr ""
+"Osveži Xiphos-ovo poznavanje modulov, ki so na voljo na izbranem "
+"oddaljenem skladišču"
 
 #: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
 #, fuzzy
 msgid "_Install"
-msgstr "Namesti"
+msgstr "Namest_i"
 
 #: ../ui/module-manager.glade.h:8 ../ui/module-manager.gtkbuilder.h:7
 #, fuzzy
 msgid "Install or update the selected modules"
-msgstr "Namestim te module?"
+msgstr "Izbrane module namestim ali osvežim?"
 
 #: ../ui/module-manager.glade.h:9 ../ui/module-manager.gtkbuilder.h:9
 #, fuzzy
 msgid "Remove the selected modules from your system"
-msgstr "Označeni modul odstrani iz seznama"
+msgstr "Izbrane module odstrani iz vaše naprave"
 
 #: ../ui/module-manager.glade.h:10 ../ui/module-manager.gtkbuilder.h:10
 #, fuzzy
 msgid "_Archive"
-msgstr "Arhiv"
+msgstr "_Arhiv"
 
 #: ../ui/module-manager.glade.h:11 ../ui/module-manager.gtkbuilder.h:11
 #, fuzzy
 msgid "Create a zip archive of the selected modules."
-msgstr "Ali ste prepričani da želite pobrisati označeni modul?"
+msgstr "Ali ste prepričani, da želite pobrisati označene module?"
 
 #: ../ui/module-manager.glade.h:12 ../ui/module-manager.gtkbuilder.h:12
 #, fuzzy
 msgid "_Index"
-msgstr "Kazalo"
+msgstr "_Kazalo"
 
 #: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
 msgid ""
 "Build an index of the selected modules, for optimized (\"lucene\") searching."
 msgstr ""
+"Zgradi kazalo izbranih modulov za optimizirano (\"lucene\") iskanje."
 
 #: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
 #, fuzzy
 msgid "_Delete Index"
-msgstr "Pobriši kazalo"
+msgstr "_Pobriši kazalo"
 
 #: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
 #, fuzzy
 msgid "Delete the fast-search index of the selected modules."
-msgstr "Ali za te module izbrišem kazalo s hitrim iskanjem?"
+msgstr "Ali za izbrane module izbrišem kazalo s hitrim iskanjem?"
 
 #: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
 msgid "Scan _Obsolete"
-msgstr ""
+msgstr "Preišči _zastarele"
 
 #: ../ui/module-manager.glade.h:17 ../ui/module-manager.gtkbuilder.h:17
 msgid "Scan for obsolete modules and offer to delete them."
-msgstr ""
+msgstr "Preišči za zastarelimi moduli in ponudi njihov izbris."
 
 #: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:19
 msgid "Continue"
@@ -3418,10 +3546,12 @@ msgid ""
 "Add a local folder as an install source, typically on a cdrom or flash "
 "drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
 msgstr ""
+"Lokalno mapo dodaj kot namestitveni vir, tipično je to CDROM ali USB disk. "
+"Takšna mapa vsebuje podmapi \"mods.d\" in \"modules\"."
 
 #: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:27
 msgid "Remove one of your local folders as an install source."
-msgstr ""
+msgstr "Eno izmed lokalnih map odstrani kot namestitveni vir."
 
 #: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:28
 msgid "Current Remote Sources"
@@ -3432,11 +3562,14 @@ msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
 msgstr ""
+"Dodaj posebne oddaljene namestitvene vire. Poznati morate njihovo "
+"ime (hostname) in mapo v kateri je skladišče."
+
 
 #: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:30
 #, fuzzy
 msgid "Remove a remote install source."
-msgstr "Izbriši oddaljeni vir"
+msgstr "Izbriši oddaljeni namestitveni vir"
 
 #: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:31
 msgid "<b>Install Source</b>"
@@ -3452,7 +3585,7 @@ msgstr "Oddaljen"
 
 #: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:34
 msgid "<b>Install Destination</b>"
-msgstr "<b>Namesti cilj</b>"
+msgstr "<b>Namestitveni cilj</b>"
 
 #: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:35
 msgid "<i>Personal area, for your use only:</i>"
@@ -3460,7 +3593,7 @@ msgstr "<i>Osebno področje, samo za vašo uporabo:</i>"
 
 #: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:36
 msgid "Home dir"
-msgstr "Domači direktorij"
+msgstr "Domača mapa"
 
 #: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:37
 msgid "<i>System area, for all users:</i>"
@@ -3468,14 +3601,14 @@ msgstr "<i>Sistemsko področje, za vse uporabnike:</i>"
 
 #: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:38
 msgid "Sword sys dir"
-msgstr "Swordov sistemski direktorij"
+msgstr "Swordova sistemska mapa"
 
 #: ../ui/module-manager.glade.h:38 ../ui/module-manager.gtkbuilder.h:39
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
-"<b>Opozorilo:</b> Če živite v državi kjer je preganjanje in ne želite "
+"<b>Opozorilo:</b> Če živite v državi, kjer je preganjanje in ne želite "
 "tvegati da vas opazijo, naj v bodoče NE bi uporabljali možnosti oddaljene "
 "namestitve! "
 
@@ -3485,11 +3618,11 @@ msgstr "Lokalna namestitvena mapa"
 
 #: ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
-msgstr ""
+msgstr "_Prekliči"
 
 #: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
 msgid "Drop down history list"
-msgstr "Padajoči seznam zgodovine"
+msgstr "Spustni menu seznama zgodovine"
 
 #: ../ui/navbar_versekey.glade.h:2
 msgid "Choose book to display"
@@ -3519,19 +3652,19 @@ msgstr "1"
 #: ../ui/navbar_versekey.glade.h:8
 #, fuzzy
 msgid "Choose Verse to display"
-msgstr "Izberite knjigo za prikaz"
+msgstr "Izberite vrstico za prikaz"
 
 #: ../ui/navbar_versekey.glade.h:9 ../ui/navbar_versekey.gtkbuilder.h:6
 msgid "Toggle Verse Button"
-msgstr "Gumb za vrstice"
+msgstr "Gumb za vrstico"
 
 #: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
-msgstr ""
+msgstr "Vnesite sklic na vrstico v obliki Knjiga 1:1 in pritisnite Enter"
 
 #: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
 msgid "Reference Entry"
-msgstr "Vnos virov"
+msgstr "Vnos sklica"
 
 #: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:10
 msgid "Cover"
@@ -3547,7 +3680,7 @@ msgstr "Ozadje"
 
 #: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
 #, fuzzy
-msgid " "
+msgid ": "
 msgstr ": "
 
 #: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
@@ -3556,7 +3689,7 @@ msgstr "Ospredje"
 
 #: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
 msgid "Current Verse"
-msgstr "Trenutni verz"
+msgstr "Trenutna vrstica"
 
 #: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
 msgid "Verse Number"
@@ -3577,16 +3710,16 @@ msgstr "Poudari ozadje"
 #: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
 #, fuzzy
 msgid "Invert color pairs"
-msgstr "Vstavi zaznamek"
+msgstr "Preobrni barvne pare"
 
 #: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
 msgid "Normal Text"
-msgstr ""
+msgstr "Običajno besedilo"
 
 #: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
 #, fuzzy
 msgid "Highlight"
-msgstr "Poudari ozadje"
+msgstr "Poudari"
 
 #: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
 msgid "Font Colors"
@@ -3598,11 +3731,11 @@ msgstr "<b>Velikost pisav</b>"
 
 #: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
 msgid "All displayed font sizes are relative to this choice"
-msgstr ""
+msgstr "Vse prikazane velikosti pisav so relativne k tej izbiri"
 
 #: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:26
 msgid "Base font size"
-msgstr "Temeljna velikost pisave"
+msgstr "Osnovna velikost pisave"
 
 #: ../ui/prefs.glade.h:19
 msgid ""
@@ -3626,7 +3759,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
 msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr ""
+msgstr "Pogosto -1, da naredi številke vrstic manj vsiljive"
 
 #: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
 msgid "Verse number size"
@@ -3637,15 +3770,17 @@ msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
 msgstr ""
+"Ime in velikost izbire za katereikoli modul v danem jeziku; še vedno "
+"neupoštevno z določeno izbiro na posameznem modulu"
 
 #: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
 msgid "Font preferences, per language"
-msgstr ""
+msgstr "Nastavitve pisave za jezik"
 
 #: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
 #, fuzzy
 msgid "Language Font Combo"
-msgstr "Spremeni okno s knjigo"
+msgstr "Izbira pisave za jezik"
 
 #: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
 msgid "Font Misc"
@@ -3654,7 +3789,7 @@ msgstr "Podrobnosti pisav"
 #: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
 #, fuzzy
 msgid "<b>BibleSync</b>"
-msgstr "<b>Območje</b>"
+msgstr "<b>BibleSync</b>"
 
 #: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:34
 msgid ""
@@ -3667,173 +3802,183 @@ msgid ""
 "audience's Bible programs to follow along; Audience, to receive the "
 "speaker's navigation."
 msgstr ""
+"Xiphos je prvi program za preučevanje Biblije, ki omogoča uporabo "
+"BibleSync, sinhronizacijskega protokola za Biblijske programe. Če delate z "
+"več Biblijskimi programi ali če delate v skupini ali če imate šolske "
+"dejavnosti s uporabo deljenega učenja, je lahko BibleSync za vas zelo uporabno "
+"orodje. BibleSync deluje v enem od treh načinov: "
+" - Osebni, da sinhronizira več vaših lastnih Biblij, ali v delovni skupini; "
+" - Govornik, da poganja lekcijo z Bibličnimi programi občinstva, da sledijo; "
+" - Občinstvo, da sprejema govornikovo usmerjanje. "
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:36
 #, fuzzy
 msgid "<i>Mode:</i>"
-msgstr "<b>Moduli</b>"
+msgstr "<b>Način:</b>"
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:35
 msgid "Select the mode in which BibleSync should operate."
-msgstr ""
+msgstr "Izberi način v katerem naj BibleSync deluje."
 
 #: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
 msgid "_Off"
-msgstr ""
+msgstr "_Izklopljen"
 
 #: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
 msgid "Disable BibleSync."
-msgstr ""
+msgstr "Onemogoči BibleSync."
 
 #: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
 #, fuzzy
 msgid "BSP off radio button"
-msgstr "Bližnjica do knjige"
+msgstr "Izbira za izklop BSP"
 
 #: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
 msgid "_Speaker"
-msgstr ""
+msgstr "_Govornik"
 
 #: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
 msgid "Enable BibleSync as the speaker."
-msgstr ""
+msgstr "Omogoči BibleSync kot govornik"
 
 #: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
 #, fuzzy
 msgid "BSP speaker radio button"
-msgstr "Točna fraza okvirček"
+msgstr "Izbira za BSP govornika"
 
 #: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
 msgid "_Audience"
-msgstr ""
+msgstr "_Občinstvo"
 
 #: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
 msgid "Enable BibleSync as a member of the audience."
-msgstr ""
+msgstr "Omogoči BibleSync kot član občinstca."
 
 #: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
 #, fuzzy
 msgid "BSP audience radio button"
-msgstr "Bližnjica do preprostega besedila"
+msgstr "Izbira za BSP občinstvo"
 
 #: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
 #, fuzzy
 msgid "_Personal"
-msgstr "Osebno"
+msgstr "_Oseben"
 
 #: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
 msgid "Enable BibleSync for personal or team use."
-msgstr ""
+msgstr "Omogoči BibleSync za osebno ali skupinsko uporabo."
 
 #: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
 #, fuzzy
 msgid "BSP personal radio button"
-msgstr "Nadomestni vzorci okvirček"
+msgstr "Izbira za oseben BSP"
 
 #: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
 msgid "Private"
-msgstr ""
+msgstr "Osebno"
 
 #: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
 msgid ""
 "When in Personal mode, only programs running on this machine will hear your "
 "navigation."
 msgstr ""
+"Kadar je v Osebnem načinu, bodo vaše usmerjanje slišali samo programi, ki so
+"na tej napravi."
 
 #: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
 #, fuzzy
 msgid "BSP privacy button"
-msgstr "Bližnjica za vrstico"
+msgstr "Izbira za BSP zasebnost"
 
 #: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:53
 #, fuzzy
 msgid "<i>Navigate:</i>"
-msgstr "Odrešitev"
+msgstr "<i>Usmeriti:</i>"
 
 #: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:52
 msgid "Choose how to accept incoming navigation synchronization."
-msgstr ""
+msgstr "Izberite kako sprejeti vstopajočo usmerjevalno sinhronizacijo."
 
 #: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
 #, fuzzy
 msgid "_Direct"
-msgstr "Imenik"
+msgstr "_Neposredno"
 
 #: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
-msgstr ""
+msgstr "BibleSync usmerjanje bo Xiphos usmerilo neposredno na označeno vrstico."
 
 #: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
 #, fuzzy
 msgid "BSP nav direct radio button"
-msgstr "Posamezen modul okvirček"
+msgstr "Izbira za neposredno BSP navigacijo"
 
 #: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
 #, fuzzy
 msgid "_Verse list"
-msgstr "Seznam vrstic"
+msgstr "_Seznam vrstic"
 
 #: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
 msgid "BibleSync navigation will use Xiphos' sidebar verse list."
-msgstr ""
+msgstr "BibleSync navigacija bo uporabljala Xiphos-ev stranski seznam vrstic."
 
 #: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
 #, fuzzy
 msgid "BSP nav verse list radio button"
-msgstr "Seznam modula okvirček"
+msgstr "Izbira za navigacijski BSP seznam vrstic"
 
 #: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:61
 #, fuzzy
 msgid "<i>Listen:</i>"
-msgstr "<b>Seznam imen</b>"
+msgstr "<b>Prisluhni:</b>"
 
 #: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:60
 msgid "Xiphos will listen to Speakers according to choice here."
-msgstr ""
+msgstr "Xiphos bo poslušal govornike glede na izbiro tukaj."
 
 #: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
 msgid "Selective"
-msgstr ""
+msgstr "Izbiren"
 
 #: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
 msgid "Choose the Speakers to be followed."
-msgstr ""
+msgstr "Izberite govornike, ki naj sledijo."
 
 #: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
 #, fuzzy
 msgid "BSP listen some radio button"
-msgstr "Bližnjica do preprostega besedila"
+msgstr "Izbira poslušaj nekatere BSP"
 
 #: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
 msgid "All"
-msgstr ""
+msgstr "Vsi"
 
 #: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
 msgid "All Speakers will be followed."
-msgstr ""
+msgstr "Sledili bodo vsi govorniki."
 
 #: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
 #, fuzzy
 msgid "BSP listen all radio button"
-msgstr "Nadomestni vzorci okvirček"
+msgstr "Izbira poslušaj vse BSP"
 
 #: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
 msgid "None"
-msgstr ""
+msgstr "Noben"
 
 #: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
 msgid "No Speakers will be followed."
-msgstr ""
+msgstr "Noben govornik ne bo sledil."
 
 #: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
 #, fuzzy
 msgid "BSP listen none radio button"
-msgstr "Bližnjica do preprostega besedila"
+msgstr "Izbira poslušaj noben BSP"
 
 #: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:72
 #, fuzzy
 msgid "<i>Special:</i>"
-msgstr "Posebni"
+msgstr "<i>Poseben:</i>"
 
 #: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:71
 msgid ""
@@ -3841,49 +3986,53 @@ msgid ""
 "presence, mismatch, and debug. Beware enabling these, they can be very "
 "chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
 msgstr ""
+"Dodatne sledi so lahko predstavljene med BibleSync delovanjem z omogočitvijo "
+"prisotnosti, neujemanja, and odpravo napak. Pazite z omogočanjem le-teh, ker "
+"so lahko zelo zgovorne. Prav tako se odločite ali boste dovolili skupinske "
+"nastavitve kot Xiphos-ovo število zavihkov."
 
 #: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
 #, fuzzy
 msgid "Presence"
-msgstr "Možnosti"
+msgstr "Prisotnost"
 
 #: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
 msgid "Presence announcements will be shown in dialogs."
-msgstr ""
+msgstr "Obvestilo o prisotnost bo prikazano v dialogih "
 
 #: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
 #, fuzzy
 msgid "BSP presence button"
-msgstr "Bližnjica za vrstico"
+msgstr "Izbira za pristnost BSP"
 
 #: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
 #, fuzzy
 msgid "Mismatch"
-msgstr "zadetki"
+msgstr "Neujemanja"
 
 #: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Mismatches from your session will be shown in dialogs."
-msgstr ""
+msgstr "Neujemanja pred vašo sejo bodo prikazana v dialogih."
 
 #: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
 msgid "BSP mismatch button"
-msgstr ""
+msgstr "Izbira za neujemanja BSP"
 
 #: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
 msgid "Debug"
-msgstr ""
+msgstr "Odprava napak"
 
 #: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
 msgid "Packet tracing."
-msgstr ""
+msgstr "Sledenje paketa."
 
 #: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
 msgid "BSP event debug button"
-msgstr ""
+msgstr "Izbira za odprave napak BSP"
 
 #: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
 msgid "_Group as tab"
-msgstr ""
+msgstr "_Skupina kot zavihek"
 
 #: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
 msgid ""
@@ -3891,11 +4040,15 @@ msgid ""
 "Disabling this may be necessary if some Speakers' use of group number is not "
 "appropriate as a tab number."
 msgstr ""
+"Pojasnjuje številko skupinskega protokola kot Xiphos-ovo številko zavihka. "
+"Onemogočitev tega je lahko potrebna, če nekateri govorniki menijo, da "
+"uporaba skupinske številke ni primerna kot številka tabulatorja."
+
 
 #: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 #, fuzzy
 msgid "BSP event group-as-tab button"
-msgstr "Posamezen modul okvirček"
+msgstr "Izbira za primer BSP, ko je skupina kot zavihek"
 
 #: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
 msgid "<b>General</b>"
@@ -3906,6 +4059,8 @@ msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr ""
+"Izbira določenega jezika za prikaz vmesnika, ki je različna od običajne "
+"nastavitve"
 
 #: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
 msgid "Special Locale (requires restart)"
@@ -3913,7 +4068,7 @@ msgstr "Posebna lokalizacija (zahtevan ponoven zagon)"
 
 #: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "Special Locale Combo"
-msgstr "Posebna lokalizacija okvirček"
+msgstr "Izbira posebna lokalizacije"
 
 #: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
 msgid "Show splash screen at start up"
@@ -3928,6 +4083,9 @@ msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
 msgstr ""
+"Če ste določili izbrano dnevno posvetitev, bo njegova današnja vsebina "
+"prikazana ob zagonu."
+
 
 #: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Use default Dictionary"
@@ -3938,10 +4096,13 @@ msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
 msgstr ""
+"Z dvojnim klikom na besedo vedno uporabi privzet slovar namesto "
+"slovarja, ki je trenutno prikazan"
+
 
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
 msgid "Use default Dictionary Checkbox"
-msgstr "Uporabi privzeti slovar okvirček"
+msgstr "Izbira uporabe privzetega slovanja"
 
 #: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
 msgid "Scroll to Previous/Next Chapter"
@@ -3955,22 +4116,20 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr "Pomakni se k prejšnjemu/naslednjemu poglavju okvirček"
+msgstr "Pomakni se k prejšnjemu/naslednjemu poglavju"
 
 #: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
 msgid "Resize images"
-msgstr "Spremeni velikost slikam"
+msgstr "Slikam spremeni velikost"
 
 #: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 #, fuzzy
 msgid "Automatically resize image content to fit the pane"
-msgstr ""
-"Avtomatično prilagodi velikost komentarja, knjige in vsebino slovarjeve "
-"slike da ustreza podoknu"
+msgstr "Velikost slike avtomatično prilagodi, da ustreza podoknu"
 
 #: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 msgid "Resize images checkbox"
-msgstr "Spremeni velikost slikam okvirček"
+msgstr "Izbira slikam spremeni velikost"
 
 #: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 msgid "Highlight current verse"
@@ -3979,40 +4138,42 @@ msgstr "Poudari trenutno vrstico"
 #: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
 #, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr "Uporabi zelo kontrastno označevanje trenutne vrstice"
+msgstr ""
+"Uporabi zelo kontrastno označevanje trenutne vrstice "
+"- glej barvne možnosti"
 
 #: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "Highlight current verse check box"
-msgstr "Poudari trenutno vrstico okvirček"
+msgstr "Izbira poudari trenutno vrstico"
 
 #: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
 #, fuzzy
 msgid "Highlight user annotations"
-msgstr "Uporabniške beležke"
+msgstr "Poudari uporabniške beležke"
 
 #: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
 #, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
-msgstr "Uporabi zelo kontrastno označevanje trenutne vrstice"
+msgstr "Na uporabniško-komentiranih vrsticah uporabi preobrnjen poudarek"
 
 #: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
 #, fuzzy
 msgid "Highlight user annotations check box"
-msgstr "Poudari trenutno vrstico okvirček"
+msgstr "Izbira poudari uporabniško beležko"
 
 #: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
 #, fuzzy
 msgid "Cross-references in verse list"
-msgstr "Napotitve drugam"
+msgstr "Napotitve drugam na seznamu vrstic"
 
 #: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr ""
+msgstr "Za Biblijske napotitve drugam namesto predogleda uporabi seznam vrstic"
 
 #: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 #, fuzzy
 msgid "Xrefs in verse list check box"
-msgstr "Spremeni velikost slikam okvirček"
+msgstr "Izbira Xrefs v seznamu vrstic"
 
 #: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
 msgid "Enable Prayer Lists"
@@ -4020,19 +4181,19 @@ msgstr "Omogoči molitvene sezname"
 
 #: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Make journals/prayer lists available"
-msgstr ""
+msgstr "Omogoči Dnevnike/molitvene sezname"
 
 #: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
 msgid "Enable Prayer Lists Checkbox"
-msgstr "Omogoči okvirčke molitvenih seznamov"
+msgstr "Omogoči izbiro molitvenih seznamov"
 
 #: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
 msgid "Enable Statusbar"
-msgstr ""
+msgstr "Omogoči statusno vrstico"
 
 #: ../ui/prefs.glade.h:115
 msgid "Enable/Disable Statusbar."
-msgstr ""
+msgstr "Omogoči/onemogoči statusno vrstico"
 
 #: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:117
 #, fuzzy
@@ -4041,58 +4202,58 @@ msgstr "Številka vrstice"
 
 #: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:116
 msgid "Offset the verse number in several ways"
-msgstr ""
+msgstr "Odmik številke vrstice na več načinov"
 
 #: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
 #, fuzzy
 msgid "Show verse number in bold text"
-msgstr "Prikaži oštevilče_nje vrstic"
+msgstr "Številke vrstic prikaži s krepkim besedilom"
 
 #: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 #, fuzzy
 msgid "Verse number bold checkbox"
-msgstr "Velikost številke vrstice"
+msgstr "Izbira krepke (poudarjene) številke vrstice"
 
 #: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
 msgid "Brackets"
-msgstr ""
+msgstr "Oklepaji"
 
 #: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
 msgid "Show verse number with [surrounding brackets]"
-msgstr ""
+msgstr "Številko vrstice prikaži z [obdajajočimi oklepaji]"
 
 #: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
 #, fuzzy
 msgid "Verse number bracket checkbox"
-msgstr "Uporabi eno vrsto za eno vrstico okvirček"
+msgstr "Izbira oklepaja za številko vrstice"
 
 #: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
 #, fuzzy
 msgid "Superscript"
-msgstr "Opis"
+msgstr "Nadpisano"
 
 #: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
 #, fuzzy
 msgid "Show verse number as a superscript"
-msgstr "Prikaži oštevilče_nje vrstic"
+msgstr "Številko vrstice prikaži kot nadpisano"
 
 #: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 #, fuzzy
 msgid "Verse number superscript checkbox"
-msgstr "Velikost številke vrstice"
+msgstr "Izbira nadpisa številke vrstice"
 
 #: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 #, fuzzy
 msgid "StudyPad default directory"
-msgstr "Privzeti imenik študijske beležnice"
+msgstr "Privzeta mapa študijske beležnice"
 
 #: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "Select A Directory"
-msgstr "Izberi imenik"
+msgstr "Izberi mapo"
 
 #: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 msgid "StudyPad default directory combo"
-msgstr "Privzeti imenik študijske beležnice"
+msgstr "Privzeta mapa študijske beležnice"
 
 #: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 msgid "General Misc"
@@ -4108,19 +4269,19 @@ msgstr "Biblično besedilo"
 
 #: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 msgid "Change Biblical Text Combo"
-msgstr "Spremeni okno Bibličnega besedila"
+msgstr "Izbira spremembe Bibličnega besedila"
 
 #: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "Change Commentary Combo"
-msgstr "Spremeni okno s komentarjem"
+msgstr "Izbira spremembe okna s komentarjem"
 
 #: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "Change Dictionary Combo"
-msgstr "Spremeni okno slovarja"
+msgstr "Izbira spremembe slovarja"
 
 #: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 msgid "Change Book Combo"
-msgstr "Spremeni okno s knjigo"
+msgstr "Izbira spremembe knjige"
 
 #: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
@@ -4130,12 +4291,12 @@ msgstr "<b>Moduli</b>"
 #: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
-msgstr "Pobriši vse module iz seznama"
+msgstr "Iz seznama pobriši vse module"
 
 #: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
-msgstr "Gumb za brisanje modulov iz seznama"
+msgstr "Izbira brisanja modulov iz seznama"
 
 #: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
@@ -4145,12 +4306,12 @@ msgstr "Označeni modul odstrani iz seznama"
 #: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
-msgstr "Gumb za izbris označenega modula iz seznama"
+msgstr "Izbira za izbris označenega modula iz seznama"
 
 #: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 #, fuzzy
 msgid "Open a dialog to select modules"
-msgstr "Odpre okno za izbiro modulov katere doda na seznam"
+msgstr "Odpre okno za izbiro modulov"
 
 #: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
@@ -4184,7 +4345,7 @@ msgstr "Hebrejski leksikon"
 
 #: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
 msgid "Hebrew Lexicon Combo"
-msgstr "Okno Hebrejskega leksikona"
+msgstr "Izbira Hebrejskega leksikona"
 
 #: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
 msgid "Greek Lexicon"
@@ -4192,15 +4353,15 @@ msgstr "Grški leksikon"
 
 #: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
 msgid "Greek Lexicon Combo"
-msgstr "Okno Grškega leksikona"
+msgstr "Izbira Grškega leksikona"
 
 #: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
 msgid "Default Dictionary"
-msgstr "Prizveti slovar"
+msgstr "Prizvet slovar"
 
 #: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Change Default Dictionary Combo"
-msgstr "Spremeni okno privzetega slovarja"
+msgstr "Izbira spremembe privzetega slovarja"
 
 #: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Personal Notes"
@@ -4212,41 +4373,41 @@ msgstr "Spremeni okno osebnih beležk"
 
 #: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
 msgid "Modules Misc"
-msgstr "Moduli Podrobnosti"
+msgstr "Podrobnosti Modulov"
 
 #: ../ui/prefs.gtkbuilder.h:1
 msgid "-2"
-msgstr ""
+msgstr "-2"
 
 #: ../ui/prefs.gtkbuilder.h:2
 #, fuzzy
 msgid "-1"
-msgstr "1"
+msgstr "-1"
 
 #: ../ui/prefs.gtkbuilder.h:4
 #, fuzzy
 msgid "+1"
-msgstr "1"
+msgstr "+1"
 
 #: ../ui/prefs.gtkbuilder.h:5
 msgid "+2"
-msgstr ""
+msgstr "+2"
 
 #: ../ui/prefs.gtkbuilder.h:6
 msgid "+3"
-msgstr ""
+msgstr "+3"
 
 #: ../ui/prefs.gtkbuilder.h:7
 msgid "+4"
-msgstr ""
+msgstr "+4"
 
 #: ../ui/prefs.gtkbuilder.h:8
 msgid "+5"
-msgstr ""
+msgstr "+5"
 
 #: ../ui/prefs.gtkbuilder.h:115
 msgid "Enable/disable the Statusbar"
-msgstr ""
+msgstr "Omogoči/onemogoči statustno vrstico"
 
 #: ../ui/search-dialog.glade.h:1 ../ui/search-dialog.gtkbuilder.h:1
 msgid "Advanced Search"
@@ -4254,22 +4415,23 @@ msgstr "Napredno iskanje"
 
 #: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
 msgid "_Lucene Search Syntax"
-msgstr ""
+msgstr "Pravila _Lucene iskanja"
 
 #: ../ui/search-dialog.glade.h:3 ../ui/search-dialog.gtkbuilder.h:3
 msgid ""
 "Open a brief explanation of the syntax used for optimized \"lucene\" "
 "searches."
 msgstr ""
+"Odpre kratko razlago sintakse za optimalna \"lucene\" iskanja."
 
 #: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
 #, fuzzy
 msgid "_Attribute Search"
-msgstr "Iskanje po lastnostih"
+msgstr "_Iskanje po lastnostih"
 
 #: ../ui/search-dialog.glade.h:5 ../ui/search-dialog.gtkbuilder.h:5
 msgid "Open a brief explanation of attribute-based searches."
-msgstr ""
+msgstr "Odpre kratko razlago iskanja osnovanega na lastnostih"
 
 #: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
 msgid "for "
@@ -4305,11 +4467,11 @@ msgstr "Celoten modul"
 
 #: ../ui/search-dialog.glade.h:14 ../ui/search-dialog.gtkbuilder.h:15
 msgid "Entire module radiobutton"
-msgstr "Celoten modul okvirček"
+msgstr "Izbira celotnega modula"
 
 #: ../ui/search-dialog.glade.h:15 ../ui/search-dialog.gtkbuilder.h:17
 msgid "Use the results of the last search as the scope of the search"
-msgstr "Za območje iskanja uporabi rezultat zadnjega iskanja"
+msgstr "Za območje iskanja uporabi rezultate zadnjega iskanja"
 
 #: ../ui/search-dialog.glade.h:16 ../ui/search-dialog.gtkbuilder.h:16
 msgid "Current results"
@@ -4317,35 +4479,35 @@ msgstr "Trenutni rezultati"
 
 #: ../ui/search-dialog.glade.h:17 ../ui/search-dialog.gtkbuilder.h:18
 msgid "Current results radiobutton"
-msgstr "Trenutni rezultati gumbek"
+msgstr "Izbira trenutni rezultatov"
 
 #: ../ui/search-dialog.glade.h:18 ../ui/search-dialog.gtkbuilder.h:20
 msgid "Use a custom range for the scope of the search"
-msgstr "Za področje iskanja uporabi običajno območje"
+msgstr "Za področje iskanja uporabi posebno območje"
 
 #: ../ui/search-dialog.glade.h:19 ../ui/search-dialog.gtkbuilder.h:19
 msgid "Custom verse range"
-msgstr "Običajno območje vrstic"
+msgstr "Posebno območje vrstic"
 
 #: ../ui/search-dialog.glade.h:20 ../ui/search-dialog.gtkbuilder.h:21
 msgid "Custom verse range radiobutton"
-msgstr "Običajno območje vrstic okvirček"
+msgstr "Izbira posebnega območja vrstic"
 
 #: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
 msgid "Custom Range Selector Combo"
-msgstr "Okno za izbiro običajnega območja"
+msgstr "Izbira posebnga območja"
 
 #: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
 msgid "Use a single module for the search"
-msgstr "Za iskanje uporabi običajen modul"
+msgstr "Za iskanje uporabi samo en modul"
 
 #: ../ui/search-dialog.glade.h:24 ../ui/search-dialog.gtkbuilder.h:24
 msgid "Single module"
-msgstr "Posamezen modul"
+msgstr "Samo en modul"
 
 #: ../ui/search-dialog.glade.h:25 ../ui/search-dialog.gtkbuilder.h:26
 msgid "Single module radiobutton"
-msgstr "Posamezen modul okvirček"
+msgstr "Izbira samo enega modula"
 
 #: ../ui/search-dialog.glade.h:26 ../ui/search-dialog.gtkbuilder.h:28
 msgid "Use the current module list for the search"
@@ -4353,31 +4515,31 @@ msgstr "Za iskanje uporabi seznam trenutnega modula"
 
 #: ../ui/search-dialog.glade.h:27 ../ui/search-dialog.gtkbuilder.h:27
 msgid "Module list"
-msgstr "Seznam modula"
+msgstr "Seznam modulov"
 
 #: ../ui/search-dialog.glade.h:28 ../ui/search-dialog.gtkbuilder.h:29
 msgid "Module list radiobutton"
-msgstr "Seznam modula okvirček"
+msgstr "Izbira seznama modulov"
 
 #: ../ui/search-dialog.glade.h:29 ../ui/search-dialog.gtkbuilder.h:31
 msgid "Use a custom module list for the search"
-msgstr "Za iskanje uporabi običajen seznam modula"
+msgstr "Za iskanje uporabi poseben seznam modulov"
 
 #: ../ui/search-dialog.glade.h:30 ../ui/search-dialog.gtkbuilder.h:30
 msgid "Custom module list"
-msgstr "Običajen seznam modula"
+msgstr "Poseben seznam modulov"
 
 #: ../ui/search-dialog.glade.h:31 ../ui/search-dialog.gtkbuilder.h:32
 msgid "Custom module list radiobutton"
-msgstr "Običajen seznam modula okvirček"
+msgstr "Seznam posebnega seznama modulov"
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Module List Combo"
-msgstr "Običajen seznam modula okno"
+msgstr "Izbira posebnega seznama modulov"
 
 #: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
 msgid "<b>Search Type</b>"
-msgstr "<b>Iskalni tip</b>"
+msgstr "<b>Tip iskanja</b>"
 
 #: ../ui/search-dialog.glade.h:34 ../ui/search-dialog.gtkbuilder.h:35
 msgid ""
@@ -4395,23 +4557,23 @@ msgstr "Optimiziran (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr "Optimiziran (\"Lucene\") okvirček"
+msgstr "Izbira optimizirano (\"Lucene\") iskanje"
 
 #: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
 msgid "Multi word radiobutton"
-msgstr "Mnogobeseden okvirček"
+msgstr "Izbira mnogobesednosti"
 
 #: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
 msgid "Regular expression radiobutton"
-msgstr "Nadomestni vzorci okvirček"
+msgstr "Izbira nadomestnih vzorcev"
 
 #: ../ui/search-dialog.glade.h:44 ../ui/search-dialog.gtkbuilder.h:44
 msgid "Exact phrase radiobutton"
-msgstr "Točna fraza okvirček"
+msgstr "Izbira točne fraze"
 
 #: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
 msgid "Make selections on the Attribute Search tab"
-msgstr "Naredi izbire na zavihku podrobnega iskanja"
+msgstr "Izbire naredi na zavihku iskanja po lastnostih"
 
 #: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
 msgid "Attributes"
@@ -4419,7 +4581,7 @@ msgstr "Lastnosti"
 
 #: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
 msgid "Attributes radiobutton"
-msgstr "Lastnosti gumbek"
+msgstr "Izbira lastnosti"
 
 #: ../ui/search-dialog.glade.h:48 ../ui/search-dialog.gtkbuilder.h:48
 msgid "<b>Options</b>"
@@ -4427,7 +4589,7 @@ msgstr "<b>Opcije</b>"
 
 #: ../ui/search-dialog.glade.h:50 ../ui/search-dialog.gtkbuilder.h:50
 msgid "Match case checkbox"
-msgstr "Razlikovanje velikih in malih črk okvirček"
+msgstr "Izbira razlikovanja velikih in malih črk"
 
 #: ../ui/search-dialog.glade.h:51 ../ui/search-dialog.gtkbuilder.h:51
 msgid "Search  Criteria"
@@ -4455,7 +4617,7 @@ msgstr "Pobriši sezname za novo iskanje"
 
 #: ../ui/search-dialog.glade.h:57 ../ui/search-dialog.gtkbuilder.h:57
 msgid "<b>Found</b>"
-msgstr "<b>Našel</b>"
+msgstr "<b>Najedno</b>"
 
 #: ../ui/search-dialog.glade.h:58 ../ui/search-dialog.gtkbuilder.h:59
 msgid "Result Summary Window"
@@ -4527,11 +4689,11 @@ msgstr "npr. Mt-Jn;Raz4"
 
 #: ../ui/search-dialog.glade.h:75 ../ui/search-dialog.gtkbuilder.h:75
 msgid "Custom Range Preview"
-msgstr "Predogled običajnega območja"
+msgstr "Predogled posebnega območja"
 
 #: ../ui/search-dialog.glade.h:76 ../ui/search-dialog.gtkbuilder.h:76
 msgid "Custom Verse Ranges"
-msgstr "Običajno območje vrstic"
+msgstr "Posebna območja vrstic"
 
 #: ../ui/search-dialog.glade.h:77 ../ui/search-dialog.gtkbuilder.h:77
 msgid "Create a new module list"
@@ -4539,15 +4701,15 @@ msgstr "Ustvari nov seznam modulov"
 
 #: ../ui/search-dialog.glade.h:78 ../ui/search-dialog.gtkbuilder.h:78
 msgid "New Custom Module List Button"
-msgstr "Gumb za nov običajni seznam modula"
+msgstr "Gumb za nov poseben seznam modulov"
 
 #: ../ui/search-dialog.glade.h:79 ../ui/search-dialog.gtkbuilder.h:79
 msgid "Save the module list"
-msgstr "Shrani seznam modula"
+msgstr "Shrani seznam modulov"
 
 #: ../ui/search-dialog.glade.h:80 ../ui/search-dialog.gtkbuilder.h:80
 msgid "Save Custom Module List Button"
-msgstr "Gumb za shranitev običajnega seznama modula"
+msgstr "Gumb za shranitev običajnega seznama modulov"
 
 #: ../ui/search-dialog.glade.h:81 ../ui/search-dialog.gtkbuilder.h:81
 msgid "Delete the selected list"
@@ -4559,7 +4721,7 @@ msgstr "Gumb za brisanje posebnega seznama modulov"
 
 #: ../ui/search-dialog.glade.h:83 ../ui/search-dialog.gtkbuilder.h:83
 msgid "<b>Module Lists</b>"
-msgstr "<b>Seznam modulov</b>"
+msgstr "<b>Seznami modulov</b>"
 
 #: ../ui/search-dialog.glade.h:84 ../ui/search-dialog.gtkbuilder.h:84
 msgid "<b>List Name</b>"
@@ -4567,7 +4729,7 @@ msgstr "<b>Seznam imen</b>"
 
 #: ../ui/search-dialog.glade.h:85 ../ui/search-dialog.gtkbuilder.h:85
 msgid "Custom Module List Name Entry"
-msgstr "Običajen seznam modula vpis imen"
+msgstr "Poseben seznam modulov vpisa imen"
 
 #: ../ui/search-dialog.glade.h:90 ../ui/search-dialog.gtkbuilder.h:90
 msgid "Open a dialog to select modules to add to the list"
@@ -4575,7 +4737,7 @@ msgstr "Odpre okno za izbiro modulov katere doda na seznam"
 
 #: ../ui/search-dialog.glade.h:93 ../ui/search-dialog.gtkbuilder.h:93
 msgid "Custom Module Lists"
-msgstr "Običajni seznami modulov"
+msgstr "Posebni seznami modulov"
 
 #: ../ui/search-dialog.glade.h:94 ../ui/search-dialog.gtkbuilder.h:94
 msgid "<b>Attribute</b>"
@@ -4583,15 +4745,15 @@ msgstr "<b>Lastnosti</b>"
 
 #: ../ui/search-dialog.glade.h:95 ../ui/search-dialog.gtkbuilder.h:96
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr "Išči za močnimi številkami kot so G4442 ali H1121"
+msgstr "Išči za Strong-ovimi številkami kot so G4442 ali H1121"
 
 #: ../ui/search-dialog.glade.h:96 ../ui/search-dialog.gtkbuilder.h:95
 msgid "Strongs Numbers"
-msgstr "Močne številke"
+msgstr "Strong-ove številke"
 
 #: ../ui/search-dialog.glade.h:97 ../ui/search-dialog.gtkbuilder.h:97
 msgid "Strongs Numbers radiobutton"
-msgstr "Močne številke okvirček"
+msgstr "Izbira Strong-ovih številk"
 
 #: ../ui/search-dialog.glade.h:98 ../ui/search-dialog.gtkbuilder.h:99
 msgid "Search for Morphological tags"
@@ -4599,7 +4761,7 @@ msgstr "Išči za oblikoslovnimi dodatki"
 
 #: ../ui/search-dialog.glade.h:100 ../ui/search-dialog.gtkbuilder.h:100
 msgid "Morphological Tags radiobutton"
-msgstr "Oblikoslovni dodatki okvirček"
+msgstr "Izbira oblikoslovnih dodatkov"
 
 #: ../ui/search-dialog.glade.h:101 ../ui/search-dialog.gtkbuilder.h:102
 msgid "Search in footnotes"
@@ -4607,7 +4769,7 @@ msgstr "Išči v opombah"
 
 #: ../ui/search-dialog.glade.h:103 ../ui/search-dialog.gtkbuilder.h:103
 msgid "Footnotes radiobutton"
-msgstr "Zaznamki okenček"
+msgstr "Izbira opomb"
 
 #: ../ui/search-dialog.glade.h:104 ../ui/search-dialog.gtkbuilder.h:104
 msgid "<b>Results Display Options</b>"
@@ -4615,19 +4777,19 @@ msgstr "<b>Rezultat prikaza opcij</b>"
 
 #: ../ui/search-dialog.glade.h:105 ../ui/search-dialog.gtkbuilder.h:106
 msgid "In modules that have Strong's Numbers"
-msgstr "V modulih ki imajo krepke številke"
+msgstr "V modulih, ki imajo Strong-ove številke"
 
 #: ../ui/search-dialog.glade.h:106 ../ui/search-dialog.gtkbuilder.h:105
 msgid "Show Strong's Numbers"
-msgstr "Pokaži močne številke"
+msgstr "Pokaži Strong-ove številke"
 
 #: ../ui/search-dialog.glade.h:107 ../ui/search-dialog.gtkbuilder.h:107
 msgid "Show Strong's Numbers checkbox"
-msgstr "Pokaži močne številke okvirček"
+msgstr "Izbira prikaza Strong-ovih številk"
 
 #: ../ui/search-dialog.glade.h:108 ../ui/search-dialog.gtkbuilder.h:109
 msgid "In modules that have Morphological Tags"
-msgstr "V modulih ki imajo oblikoslovne dodatke"
+msgstr "V modulih, ki imajo oblikoslovne dodatke"
 
 #: ../ui/search-dialog.glade.h:109 ../ui/search-dialog.gtkbuilder.h:108
 msgid "Show Morphological Tags"
@@ -4635,11 +4797,11 @@ msgstr "Pokaži oblikoslovne dodatke"
 
 #: ../ui/search-dialog.glade.h:110 ../ui/search-dialog.gtkbuilder.h:110
 msgid "Show Morphological Tags checkbox"
-msgstr "Pokaži oblikoslovne dodatke okvirček"
+msgstr "Izbira prikaza oblikoslovnih dodatkov"
 
 #: ../ui/search-dialog.glade.h:111 ../ui/search-dialog.gtkbuilder.h:112
 msgid "In modules that have Footnotes"
-msgstr "V modulih ki imajo opombe"
+msgstr "V modulih, ki imajo opombe"
 
 #: ../ui/search-dialog.glade.h:112 ../ui/search-dialog.gtkbuilder.h:111
 msgid "Show Footnotes"
@@ -4647,7 +4809,7 @@ msgstr "Pokaži opombe"
 
 #: ../ui/search-dialog.glade.h:113 ../ui/search-dialog.gtkbuilder.h:113
 msgid "Show Footnotes checkbox"
-msgstr "Pokaži opombe okvirček"
+msgstr "Izbira prikaza opomb"
 
 #: ../ui/search-dialog.glade.h:114 ../ui/search-dialog.gtkbuilder.h:114
 msgid "Attribute Search"
@@ -4661,7 +4823,7 @@ msgstr "Izbira modula"
 #: ../ui/search-dialog.gtkbuilder.h:6
 #, fuzzy
 msgid "<b>search module</b>"
-msgstr "<b>Iskalni tip</b>"
+msgstr "<b>iskalni modul</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "Export Bookmark Folder"
@@ -4685,7 +4847,7 @@ msgstr "Neoblikovano besedilo"
 
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Include Bible text"
-msgstr "Vsebuje besedilo Biblije"
+msgstr "Vsebuje Biblično besedilo"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
@@ -4705,7 +4867,7 @@ msgstr "_Odpri sejo"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Open a saved tab settings collection"
-msgstr ""
+msgstr "Odpri nastavtive zbirke shranjenih zavihkov"
 
 #: ../ui/xi-menus.glade.h:5 ../ui/xi-menus.gtkbuilder.h:4
 msgid "_Save Session"
@@ -4713,25 +4875,25 @@ msgstr "_Shrani sejo"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Save this collection of tab settings"
-msgstr ""
+msgstr "Shrani zbirko nastavitev zavihkov"
 
 #: ../ui/xi-menus.glade.h:7 ../ui/xi-menus.gtkbuilder.h:5
 #, fuzzy
 msgid "_New Prayerlist/Journal"
-msgstr "Molitveni seznam/Dnevnik"
+msgstr "_Nov Molitveni seznam/Dnevnik"
 
 #: ../ui/xi-menus.glade.h:8
 #, fuzzy
 msgid "Create a new journal or prayerlist from a template"
-msgstr "Ustvari nov preprost molitveni seznam"
+msgstr "Ustvari nov preprost molitveni seznam iz predloge"
 
 #: ../ui/xi-menus.glade.h:10 ../ui/xi-menus.gtkbuilder.h:7
 msgid "_Search"
-msgstr "I_skanje"
+msgstr "_Iskanje"
 
 #: ../ui/xi-menus.glade.h:11
 msgid "Bring the simple sidebar search forward"
-msgstr ""
+msgstr "Preprosto stransko vrstico za iskanje privedi naprej"
 
 #: ../ui/xi-menus.glade.h:12 ../ui/xi-menus.gtkbuilder.h:8
 msgid "_Advanced Search"
@@ -4739,7 +4901,7 @@ msgstr "N_apredno iskanje"
 
 #: ../ui/xi-menus.glade.h:13
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
+msgstr "Odpri dialog za napredno iskanje za poganjanje zapletenih poizvedb"
 
 #: ../ui/xi-menus.glade.h:14 ../ui/xi-menus.gtkbuilder.h:9
 msgid "_Preferences"
@@ -4764,7 +4926,7 @@ msgstr "Predogled _Dnevnih posvetitev"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr ""
+msgstr "Prikaži današnje vnose vaših izbranih dnevnih posvetitev v pregledovalniku"
 
 #: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
 msgid "_Bible"
@@ -4788,7 +4950,7 @@ msgstr "Poveži zav_ihke"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Make all tabs' Bibles navigate together"
-msgstr ""
+msgstr "Naj se vsi Biblični zavihki hkrati premikajo"
 
 #: ../ui/xi-menus.glade.h:26 ../ui/xi-menus.gtkbuilder.h:18
 msgid "_Read Aloud"
@@ -4796,7 +4958,7 @@ msgstr "P_reberi na glas"
 
 #: ../ui/xi-menus.glade.h:27
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
+msgstr "Vklopi možnost glasnega branja Bibličnih besedil, kot so izbrani"
 
 #: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
 msgid "Show Verse _Numbers"
@@ -4804,7 +4966,7 @@ msgstr "Prikaži oštevilče_nje vrstic"
 
 #: ../ui/xi-menus.glade.h:29
 msgid "Display verse numbers in the text"
-msgstr ""
+msgstr "V besedilu prikaži številke vrstic"
 
 #: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
 msgid "_Highlight Current Verse"
@@ -4822,7 +4984,7 @@ msgstr "Dodaj/Odstrani str_ansko vrstico"
 #: ../ui/xi-menus.glade.h:33
 #, fuzzy
 msgid "Operate the sidebar as a separate window"
-msgstr "Odpri v ločenem oknu"
+msgstr "Stransko vrstico odpri v ločenem oknu"
 
 #: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "_Show/Hide Attached Sidebar"
@@ -4831,7 +4993,7 @@ msgstr "Prikaži/Skrij pripeto _stransko vrstico"
 #: ../ui/xi-menus.glade.h:35
 #, fuzzy
 msgid "Remove the sidebar entirely from view"
-msgstr "Odstrani označeno mapo"
+msgstr "Popolnoma odstrani stransko vrstico iz pogleda"
 
 #: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Parallel View in a _Tab"
@@ -4839,7 +5001,7 @@ msgstr "Prikaži vzporedni pogled v _zavihkih"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
+msgstr "Zagotovo celotno poglavje okna paralelne Biblije kot še en zavihek"
 
 #: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "Show Previe_wer in the Sidebar"
@@ -4847,7 +5009,7 @@ msgstr "Prikaži predogled v stranski vrstici"
 
 #: ../ui/xi-menus.glade.h:39
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr ""
+msgstr "Izberi položaj predledovalnika med stransko vrstico ali pod Biblijo"
 
 #: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Contents"
@@ -4855,7 +5017,7 @@ msgstr "_Vsebina"
 
 #: ../ui/xi-menus.glade.h:42
 msgid "Open the help viewer on the Xiphos manual"
-msgstr ""
+msgstr "Odpri prikazovalnik pomoči Xiphos-ovega priročnika"
 
 #: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Mailing List"
@@ -4863,7 +5025,7 @@ msgstr "_Diskusijska skupina"
 
 #: ../ui/xi-menus.glade.h:44
 msgid "Open a browser on the users' mailing list webpage"
-msgstr ""
+msgstr "Brskalnik odpri na spletni strani uporabniških diskusijskih skupin"
 
 #: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Live Chat"
@@ -4871,15 +5033,15 @@ msgstr "_Pogovor v živo"
 
 #: ../ui/xi-menus.glade.h:46
 msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
+msgstr "Brskalnik odpri na strani vmesnika za IRC pogovor v živo"
 
 #: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "_Report Bug"
-msgstr "Spo_roči hrošča"
+msgstr "Spo_roči napako v programu"
 
 #: ../ui/xi-menus.glade.h:48
 msgid "Open a browser on our bug tracker"
-msgstr ""
+msgstr "Brskalnik odpri na naš strani za sporočanje napak v programu"
 
 #: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "About _Translation"
@@ -4887,7 +5049,7 @@ msgstr "Vizi_tka prevoda"
 
 #: ../ui/xi-menus.glade.h:50
 msgid "Learn about translating the Xiphos interface to other languages"
-msgstr ""
+msgstr "Pouči se o prevajanju Xiphos-ovega vmesnika v druge jezike"
 
 #: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
 msgid "_About The SWORD Project"
@@ -4896,6 +5058,8 @@ msgstr "Vizitk_a projekta SWORD"
 #: ../ui/xi-menus.glade.h:52
 msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr ""
+"Pouči se o Projektu Sword, katerega ena izmed aplikacij je tudi "
+"Xiphos"
 
 #: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "About _Xiphos"
@@ -4929,11 +5093,11 @@ msgstr "En _Verz v eni vrstici"
 
 #: ../ui/xi-menus.glade.h:73 ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Footnote/Cross-ref Markers"
-msgstr ""
+msgstr "Oznake za Opombe/Napotitve drugam"
 
 #: ../ui/xi-menus.glade.h:74
 msgid "Show non-anonymous markers e.g. \"*n23\""
-msgstr ""
+msgstr "Prikaži neanonimne oznake npr. \"*n23\""
 
 #: ../ui/xi-menus.glade.h:79 ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Variants"
@@ -4945,7 +5109,7 @@ msgstr "Vsebina slike"
 
 #: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Respect Font Faces"
-msgstr "Spoštuj videz pisave"
+msgstr "Spoštuj obliko pisave"
 
 #: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Commentary by Chapter"
@@ -4954,7 +5118,7 @@ msgstr "Komentarji po poglavju"
 #: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:68
 #, fuzzy
 msgid "Doublespace"
-msgstr "Besedilo z Dv_ojnim presledkom med črkami"
+msgstr "Besedilo z dvojnim presledkom med črkami"
 
 #: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Lookup Selection"
@@ -4998,7 +5162,7 @@ msgstr "Rezultate shrani kot en zaznamek"
 
 #: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Save list as a single bookmark"
-msgstr "Shrani seznam kot en zaznamek"
+msgstr "Shrani seznam kot en sam zaznamek"
 
 #: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid "Save these results as a series of bookmarks in their own folder"
@@ -5013,30 +5177,34 @@ msgid ""
 "Provide a dialog in which to paste a line of verse references, to fill the "
 "verse list."
 msgstr ""
+"Zagotovi dialog v katerega se prilepi vrstico z napotitvami drugam, da se "
+"napolni seznam vrstic."
 
 #: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:94
 #, fuzzy
 msgid "Populate verse list"
-msgstr "Seznam vrstic"
+msgstr "Poseliti seznam vrstic"
 
 #: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:97
 msgid "Push the entire verse list contents directly into the history list."
-msgstr ""
+msgstr "Celoten seznam vrstic porine direktno v seznam zgodovine."
 
 #: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:96
 #, fuzzy
 msgid "Preload history from verse list"
-msgstr "Padajoči seznam zgodovine"
+msgstr "Iz seznama vrstic ponovno naloži zgodovino"
 
 #: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:99
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
 msgstr ""
+"Ta seznam vrstic pošlji ostalim preko BibleSync, če si v osebnem ali "
+"govorniškem načinu."
 
 #: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:98
 msgid "Send list via BibleSync"
-msgstr ""
+msgstr "Seznam pošlji preko BibleSync"
 
 #: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:100
 msgid "Export List"
@@ -5100,7 +5268,7 @@ msgstr "Zapri vse"
 
 #: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
-msgstr "Dovoli stvarem da se premaknejo iz ene mape v drugo"
+msgstr "Dovoli stvarem, da se premaknejo iz ene mape v drugo"
 
 #: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
@@ -5109,12 +5277,12 @@ msgstr "Dovoli spreminjanje vrstnega reda"
 #: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:20
 #, fuzzy
 msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr "Naloži zaznamke iz bibličnih časov"
+msgstr "Naloži drugo datoteko z zaznamki (privzeto: iz BibleTime)"
 
 #: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:19
 #, fuzzy
 msgid "Import Bookmarks"
-msgstr "Vstavi zaznamek"
+msgstr "Uvozi zaznamke"
 
 #: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
@@ -5146,7 +5314,7 @@ msgstr "Ustvari nov preprost molitveni seznam"
 
 #: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Simple"
-msgstr "Preprosto"
+msgstr "Preprost"
 
 #: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new subject prayer list"
@@ -5182,7 +5350,7 @@ msgstr "Skica"
 
 #: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:89
 msgid "Open module in editor or plain display window"
-msgstr ""
+msgstr "Modul odpri v urejevalniku ali preprostem pogovornem oknu"
 
 #: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:88
 #, fuzzy
@@ -5195,7 +5363,7 @@ msgstr "Dodaj podstvar"
 
 #: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add Sub-Item"
-msgstr "Dodaj Podstvar"
+msgstr "Dodaj Podstvari"
 
 #: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Add an item"
@@ -5203,7 +5371,7 @@ msgstr "Dodaj stvar"
 
 #: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add Item"
-msgstr "Dodaj stvar"
+msgstr "Dodaj stvari"
 
 #: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Remove this item"
@@ -5223,11 +5391,11 @@ msgstr "Proučevanje Biblije"
 
 #, fuzzy
 #~ msgid "[no dump ready]"
-#~ msgstr "Celoten modul"
+#~ msgstr "[nobeno odlagališče ni pripravljeno]"
 
 #, fuzzy
 #~ msgid "Transmit failed.\n"
-#~ msgstr "%s spodletelo"
+#~ msgstr "Prenos ni uspel.\n"
 
 #~ msgid "Page %d of %d"
 #~ msgstr "Stran %d od %d"
@@ -5313,7 +5481,7 @@ msgstr "Proučevanje Biblije"
 #~ msgstr "Uporabi krmarjenje z zavihki"
 
 #~ msgid "Use tabbed browsing Checkbox"
-#~ msgstr "Uporabi krmarjenje z zavihki okvirček"
+#~ msgstr "Izbira uporabe krmarjenja z zavihki"
 
 #~ msgid "<b>Show</b>"
 #~ msgstr "<b>Pokaži</b>"
@@ -5322,22 +5490,22 @@ msgstr "Proučevanje Biblije"
 #~ msgstr "Biblična besedila"
 
 #~ msgid "Bible Texts Checkbox"
-#~ msgstr "Vklop bibličnega besedila"
+#~ msgstr "Izbira bibličnega besedila"
 
 #~ msgid "Previewer Checkbox"
-#~ msgstr "Okvirček za predogled"
+#~ msgstr "Izbira predogleda"
 
 #~ msgid "Commentaries Checkbox"
-#~ msgstr "Okvirček za komentarje"
+#~ msgstr "Izbira komentarjev"
 
 #~ msgid "Dictionary/Lexicon"
 #~ msgstr "Slovar/Leksikon"
 
 #~ msgid "Dictionary/Lexicon Checkbox"
-#~ msgstr "Slovar/Leksikon okvirček"
+#~ msgstr "Izbira slovarja/leksikona"
 
 #~ msgid "Parallel View in a tab"
-#~ msgstr "Vzporeden pogled v zavihkih"
+#~ msgstr "Vzporeden pogled v zavihku"
 
 #~ msgid "Tabs and Panes"
 #~ msgstr "Zavihki in okvirčki"
@@ -5358,9 +5526,9 @@ msgstr "Proučevanje Biblije"
 #~ "program to handle these references?"
 #~ msgstr ""
 #~ "URL reference \"sword://\" (podobno kot spletne\n"
-#~ "strani) lahko uporabljajo programi da pogledajo\n"
+#~ "strani) lahko uporabljajo programi, da pogledajo\n"
 #~ "biblijske reference. Vaš sistem trenutno nima\n"
-#~ "nobenega programa ki bi bil nastavljen za\n"
+#~ "nobenega programa, ki bi bil nastavljen za\n"
 #~ "upravljanje s temi referencami.\n"
 #~ "\n"
 #~ "Ali želite da se Xiphos nastavi kot program\n"
@@ -5453,7 +5621,7 @@ msgstr "Proučevanje Biblije"
 #~ "Trenutno ni nameščenih modulov z Biblijami. Da bi pričeli, morate Xiphosu "
 #~ "namestiti najmanj eno Biblijo.\n"
 #~ "\n"
-#~ "Z vašim dovoljenjem, se bo Xiphos obrnil na Upravljalca z moduli tako da "
+#~ "Z vašim dovoljenjem, se bo Xiphos obrnil na Upravljalca z moduli, tako da "
 #~ "jih boste lahko namestili iz spletne strani Crosswire:\n"
 #~ " 1. Konfigurirajte oddaljeno namestitev.\n"
 #~ " 2. Povežite se.\n"
@@ -5464,7 +5632,7 @@ msgstr "Proučevanje Biblije"
 #~ "Opozorilo: Če živite v državi kjer je preganjanje, Upravljalca modulov "
 #~ "uporabljajte pazljivo.\n"
 #~ "\n"
-#~ "Sme torej Xiphos poklicati Upravljalca modulov tako da boste lahko "
+#~ "Sme torej Xiphos poklicati Upravljalca modulov, tako da boste lahko "
 #~ "namestili Biblijo?"
 
 #~ msgid "<b>Parallel View</b>"
@@ -5474,37 +5642,37 @@ msgstr "Proučevanje Biblije"
 #~ msgstr "Vzporedno 1"
 
 #~ msgid "Parallel 1 Combo"
-#~ msgstr "Vzporedno 1 okno"
+#~ msgstr "Izbira vzporedno 1"
 
 #~ msgid "Parallel 2"
 #~ msgstr "Vzporedno 2"
 
 #~ msgid "Parallel 2 Combo"
-#~ msgstr "Vzporedno 2 okno"
+#~ msgstr "Izbira vzporedno 2"
 
 #~ msgid "Parallel 3"
 #~ msgstr "Vzporedno 3"
 
 #~ msgid "Parallel 3 Combo"
-#~ msgstr "Vzporedno 3 Okno"
+#~ msgstr "Izbira vzporedno 3"
 
 #~ msgid "Parallel 4"
 #~ msgstr "Vzporedno 4"
 
 #~ msgid "Parallel 4 Combo"
-#~ msgstr "Vzporedno 4 Okno"
+#~ msgstr "Izbira vzporedno 4"
 
 #~ msgid "Parallel 5"
 #~ msgstr "Vzporedno 5"
 
 #~ msgid "Parallel 5 Combo"
-#~ msgstr "Vzporedno 5 okno"
+#~ msgstr "Izbira vzporedno 5"
 
 #~ msgid "Use Verse Per Line"
 #~ msgstr "Uporabi eno vrsto za eno vrstico"
 
 #~ msgid "Import Bibletime Bookmarks"
-#~ msgstr "Uvozi zaznamke iz bibličnih časov"
+#~ msgstr "Uvozi zaznamke iz Bibletime"
 
 #~ msgid "Restore Folder"
 #~ msgstr "Obnovi mapo"
@@ -5525,7 +5693,7 @@ msgstr "Proučevanje Biblije"
 #~ "SWORD dovoljuje lahkotno uporabo in proučevanje Bibličnih besedil, "
 #~ "komentarjev, leksikonov, slovarjev in drugih knjig. Mnogo vmesnikov je "
 #~ "bilo zgrajenih z uporabo tega ogrodja. Nameščen nabor knjig se lahko deli "
-#~ "med vsemi vmesniki ki uporabljajo to ogrodje."
+#~ "med vsemi vmesniki, ki uporabljajo to ogrodje."
 
 #~ msgid "About the SWORD Project"
 #~ msgstr "Vizitka projekta SWORD"
@@ -5540,4 +5708,4 @@ msgstr "Proučevanje Biblije"
 #~ msgstr "Sinhronizira to okno iz glavnega okna"
 
 #~ msgid "Open the file in Studypad"
-#~ msgstr "Odpri datoteko v študijski beležnici"
+#~ msgstr "Datoteko odpri v študijski beležnici"
