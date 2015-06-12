@@ -30,7 +30,7 @@ msgid ""
 msgstr ""
 "Xiphos napaka: \"can't happen\", display_mod: null\n"
 "Prosim prijavite. sword_main.cc:set_treekey\n"
-"Kaj ste počeli, ko se je to zgodilo?""
+"Kaj ste počeli, ko se je to zgodilo?"
 
 #: ../src/backend/sword_main.cc:1149
 msgid "Configuration not found"
@@ -1509,7 +1509,7 @@ msgid ""
 "Find matches showing all words."
 msgstr ""
 "To je vključujoče (\"AND\") iskanje:\n"
-"Najde zadetke, ki prikazujejo vse besede:\n"
+"Najde zadetke, ki prikazujejo vse besede:"
 
 #: ../src/gnome2/search_sidebar.c:227
 #, fuzzy
@@ -3142,11 +3142,6 @@ msgstr "Vstavi vodoravno pravilo"
 msgid "Xiphos Link"
 msgstr "Xiphos povezava"
 
-#: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
-#, fuzzy
-msgid "Xiphos:"
-msgstr "Xiphos:"
-
 #: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
 #, fuzzy
 msgid "Insert a link to a sword module"
@@ -3678,11 +3673,6 @@ msgstr "<b>Barve pisav</b>"
 msgid "Background"
 msgstr "Ozadje"
 
-#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
-#, fuzzy
-msgid ": "
-msgstr ": "
-
 #: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
 msgid "Foreground"
 msgstr "Ospredje"
@@ -3882,7 +3872,7 @@ msgid ""
 "When in Personal mode, only programs running on this machine will hear your "
 "navigation."
 msgstr ""
-"Kadar je v Osebnem načinu, bodo vaše usmerjanje slišali samo programi, ki so
+"Kadar je v Osebnem načinu, bodo vaše usmerjanje slišali samo programi, ki so"
 "na tej napravi."
 
 #: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
@@ -5245,10 +5235,6 @@ msgstr "Uredi zaznamek"
 #: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "Ur_edi stvar"
-
-#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:12
-msgid "Delete item"
-msgstr "Izbriši stvar"
 
 #: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
