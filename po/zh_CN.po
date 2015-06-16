@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-22 21:00-0400\n"
+"POT-Creation-Date: 2015-06-16 13:36-0400\n"
 "PO-Revision-Date: 2010-09-29 22:04+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -33,41 +33,41 @@ msgstr "配置未找到"
 msgid "Are you sure you want to delete the note for"
 msgstr "你是否要删除相关笔记"
 
-#: ../src/editor/webkit_editor.c:603 ../ui/editor_studypad.xml.h:9
+#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
 #: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "打开"
 
-#: ../src/editor/webkit_editor.c:686
+#: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "无标题文档"
 
-#: ../src/editor/webkit_editor.c:1171 ../src/editor/webkit_editor.c:1211
+#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "保存修改内容"
 
-#: ../src/editor/webkit_editor.c:1172 ../src/editor/webkit_editor.c:1212
+#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "在关闭之前"
 
-#: ../src/editor/webkit_editor.c:1176 ../src/editor/webkit_editor.c:1216
+#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "如果您不保存，变更将永久丢失。"
 
-#: ../src/editor/webkit_editor.c:1210 ../ui/xi-menus.glade.h:59
+#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:59
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "文件"
 
-#: ../src/editor/webkit_editor.c:1253
+#: ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "研修笔记"
 
-#: ../src/editor/webkit_editor.c:1268
+#: ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "笔记编辑器"
 
-#: ../src/editor/webkit_editor.c:1285
+#: ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "祈祷名单/笔记编辑器"
 
@@ -318,12 +318,12 @@ msgstr "请参考 Xiphos 资源中的 翻译指南"
 msgid "Xiphos development"
 msgstr "Xiphos 开发项目"
 
-#: ../src/gnome2/about_xiphos.c:119
+#: ../src/gnome2/about_xiphos.c:129
 #, fuzzy
 msgid "Copyright © 2000-2015 Xiphos Development Team"
 msgstr "版权所有 2000-2015 Xiphos 开发项目组"
 
-#: ../src/gnome2/about_xiphos.c:121
+#: ../src/gnome2/about_xiphos.c:131
 msgid ""
 "\n"
 "Powered by The SWORD Project.\n"
