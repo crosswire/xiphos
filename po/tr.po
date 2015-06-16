@@ -2088,6 +2088,7 @@ msgid ""
 msgstr ""
 "%s:\n"
 "Böyle bir modül kurulu var.\n"
+"%s"
 
 #: ../src/main/search_dialog.cc:1378
 msgid "Please adjust the module list."
