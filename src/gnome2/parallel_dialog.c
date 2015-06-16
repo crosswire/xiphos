@@ -438,8 +438,15 @@ static GtkWidget *create_parallel_dialog(void)
 	hbuttonbox4 = gtk_hbutton_box_new();
 #endif
 	gtk_widget_show(hbuttonbox4);
+
+#ifdef HAVE_GTK_312
+	gtk_box_pack_start(GTK_BOX(dialog_action_area25), hbuttonbox4,
+			   FALSE, TRUE, 3);
+#else
 	gtk_box_pack_start(GTK_BOX(dialog_action_area25), hbuttonbox4,
 			   TRUE, TRUE, 0);
+#endif
+
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox4),
 				  GTK_BUTTONBOX_END);
 	btnDockInt =
