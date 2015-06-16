@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-22 21:00-0400\n"
+"POT-Creation-Date: 2015-06-16 13:36-0400\n"
 "PO-Revision-Date: 2015-06-04 12:39+0000\n"
 "Last-Translator: Marjan Šavli <marjan.savli@gmail.com>\n"
-"Language-Team: Slovenščina (Slovene) <gnomesword-devel@lists.sourceforge.net>\n"
-"sourceforge.net>\n"
+"Language-Team: Slovenščina (Slovene) <gnomesword-devel@lists.sourceforge."
+"net>\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"sourceforge.net>\n"
 "X-Launchpad-Export-Date: 2010-03-27 05:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SLOVENIA\n"
@@ -40,41 +41,41 @@ msgstr "Nastavitev ni najdena"
 msgid "Are you sure you want to delete the note for"
 msgstr "Ali ste prepričani da želite izbrisati zaznamek za"
 
-#: ../src/editor/webkit_editor.c:603 ../ui/editor_studypad.xml.h:9
+#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
 #: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Odpri"
 
-#: ../src/editor/webkit_editor.c:686
+#: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "Neimenovan dokument"
 
-#: ../src/editor/webkit_editor.c:1171 ../src/editor/webkit_editor.c:1211
+#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "Spremembe shrani v dokument"
 
-#: ../src/editor/webkit_editor.c:1172 ../src/editor/webkit_editor.c:1212
+#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "pred zaprtjem?"
 
-#: ../src/editor/webkit_editor.c:1176 ../src/editor/webkit_editor.c:1216
+#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Če ne shranite, bodo narejene spremembe za vedno izgubljene."
 
-#: ../src/editor/webkit_editor.c:1210 ../ui/xi-menus.glade.h:59
+#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:59
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Datoteka"
 
-#: ../src/editor/webkit_editor.c:1253
+#: ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "Študijski zaznamki"
 
-#: ../src/editor/webkit_editor.c:1268
+#: ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "Urejevalnik opomb"
 
-#: ../src/editor/webkit_editor.c:1285
+#: ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "Molitveni seznam/Urejevalnik dnevnika"
 
@@ -316,8 +317,8 @@ msgid ""
 "below, contact us, and get involved with our efforts. Your help will be much "
 "appreciated!"
 msgstr ""
-"Ali za proučevanje Biblije radi uporabljate Xiphos? Bi radi videli, da njegov "
-"vmesnik uporablja vaš materin jezik? Vi lahko prevedete  Xiphos! \n"
+"Ali za proučevanje Biblije radi uporabljate Xiphos? Bi radi videli, da "
+"njegov vmesnik uporablja vaš materin jezik? Vi lahko prevedete  Xiphos! \n"
 "\n"
 "Vedno veselo pričakujemo prispevke prevodov Xiphosa v druge jezike. Če nam "
 "ga lahko prevedete, prosimo obiščite spodnjo povezavo, navežite stik z nami "
@@ -335,12 +336,12 @@ msgstr "V izvorni kodi Xiphos-a poglejte navodila za prevod"
 msgid "Xiphos development"
 msgstr "Xiphos razvoj"
 
-#: ../src/gnome2/about_xiphos.c:119
+#: ../src/gnome2/about_xiphos.c:129
 #, fuzzy
 msgid "Copyright © 2000-2015 Xiphos Development Team"
 msgstr "Avtorske pravice © 2000-2015 Xiphos razvojna skupina"
 
-#: ../src/gnome2/about_xiphos.c:121
+#: ../src/gnome2/about_xiphos.c:131
 msgid ""
 "\n"
 "Powered by The SWORD Project.\n"
@@ -349,8 +350,8 @@ msgid ""
 msgstr ""
 "\n"
 "Podprt s projektom SWORD.\n"
-"Radi bi se zahvalili Troyu Griffittsu in vsem ostalim, ki so nam dali projekt "
-"SWORD."
+"Radi bi se zahvalili Troyu Griffittsu in vsem ostalim, ki so nam dali "
+"projekt SWORD."
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:163 ../src/gnome2/bookmarks_menu.c:361
@@ -681,8 +682,8 @@ msgstr ""
 "<b>Pregled Upravljalca modulov.</b>\n"
 "\n"
 "To je Xiphosov mehanizem za pridobivanje novih in \n"
-"osveženih vsebin. Videti je, da na tem mestu doslej še niste bili. "
-"Prosimo vas, da si vzamete trenutek in si ga ogledate.\n"
+"osveženih vsebin. Videti je, da na tem mestu doslej še niste bili. Prosimo "
+"vas, da si vzamete trenutek in si ga ogledate.\n"
 "(To obvestilno okno boste videli samo enkrat.)\n"
 "\n"
 "Moduli prihajajo iz različnih <u>skladišč</u>.  <b>Viri modulov: Dodaj/"
@@ -738,16 +739,16 @@ msgid ""
 msgstr ""
 "<b>Dobrodošli v Xiphosu.</b>\n"
 "\n"
-"Ni nameščenih Bibilij. Da se program požene, Xiphos potrebuje najmanj "
-"en Biblijski modul.\n"
+"Ni nameščenih Bibilij. Da se program požene, Xiphos potrebuje najmanj en "
+"Biblijski modul.\n"
 "\n"
-"Z vašim dovoljenjem, bo Xiphos odprl Upravljalca modulov, tako da boste lahko "
-"namestili eno ali več Biblij iz lokalnega vira (CDROM, USB disk) "
-"ali preko omrežja družbe CrossWire Bible Society.\n"
+"Z vašim dovoljenjem, bo Xiphos odprl Upravljalca modulov, tako da boste "
+"lahko namestili eno ali več Biblij iz lokalnega vira (CDROM, USB disk) ali "
+"preko omrežja družbe CrossWire Bible Society.\n"
 "\n"
 "<u>Za lokalno namestitev:</u>\n"
-"- V <i>Viri modulov: Dodaj/Odstrani</i>, dodaj novo loklano mapo kjer "
-"se lahko najdejo moduli.\n"
+"- V <i>Viri modulov: Dodaj/Odstrani</i>, dodaj novo loklano mapo kjer se "
+"lahko najdejo moduli.\n"
 "  (To je kjer obstajata mapi <i>mods.d</i> in <i>modules</i>.)\n"
 "- V <i>Viri modulov: Izberi</i>, kliknite \"Lokalen\" gumb, in iz padajočega "
 "seznama izberite vašo mapo.\n"
@@ -762,7 +763,8 @@ msgstr ""
 "- Kliknite \"Namesti\".\n"
 "- Ko ste zaključili, zaprite Upravljalec modulov.\n"
 "\n"
-"<u>Opozorilo</u>: Če živite v državi, kjer kristjane preganjajo, to uporabite s previdnostjo.\n"
+"<u>Opozorilo</u>: Če živite v državi, kjer kristjane preganjajo, to "
+"uporabite s previdnostjo.\n"
 "\n"
 "Naj Xiphos odpre Upravljalec modulov, tako da boste lahko namestili Biblijo?"
 
@@ -881,8 +883,8 @@ msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
-"Ikona kazala pomeni, da ste zgradili optimizirano ('sijajno') kazalo za hitro "
-"iskanje po modulu (za to funkcijo poglejte Vzdrževanje)"
+"Ikona kazala pomeni, da ste zgradili optimizirano ('sijajno') kazalo za "
+"hitro iskanje po modulu (za to funkcijo poglejte Vzdrževanje)"
 
 #: ../src/gnome2/mod_mgr.c:649
 msgid ""
@@ -1130,7 +1132,6 @@ msgstr ""
 "Ali želite, da sa pobriše %s?\n"
 "Pazite: Tega se ne da razveljaviti."
 
-
 #: ../src/gnome2/mod_mgr.c:2682
 msgid "No obsolete modules were found."
 msgstr "Zastarelih modulov ni najti."
@@ -1247,7 +1248,6 @@ msgid ""
 msgstr ""
 "Način izbire je spodletel.\n"
 "Nastavi \"Odprava napak\" in poskusi ponovno, da vidiš zakaj."
-
 
 #: ../src/gnome2/preferences_dialog.c:988
 #, fuzzy
@@ -1436,14 +1436,16 @@ msgstr ""
 "\tBeseda \"ljubiti\" in beseda \"Bog\"\n"
 "\t&amp;&amp; se lahko uporabi namesto AND\n"
 "+ljubiti Bog\n"
-"\tVrstice, ki <b>morajo</b> vsebovati \"ljubiti\" in <b>lahko</b> vsebujejo \"Bog\"\n"
+"\tVrstice, ki <b>morajo</b> vsebovati \"ljubiti\" in <b>lahko</b> vsebujejo "
+"\"Bog\"\n"
 "ljubiti NOT Bog\n"
 "\t\"ljubiti\" toda ne \"Bog\"\n"
 "(ljubiti Bog) AND Jezus\n"
 "\t\"ljubiti\" ali \"Bog\" in \"Jezus\"\n"
 "lemma:G2316\n"
 "\tIskanje za Strong-ovo grško (\"G\") besedo za število 2316.\n"
-"\tPrav tako izberite Strongov prikaz na zavihku <i>Iskanje po lastnostih</i>.\n"
+"\tPrav tako izberite Strongov prikaz na zavihku <i>Iskanje po lastnostih</"
+"i>.\n"
 "\n"
 "Za podrobnejšo razlago na internetu iščite za \"lucene search syntax\"."
 
@@ -1481,14 +1483,14 @@ msgid ""
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 "<b>Iskanja osnovana na lastnostih</b>\n"
-"Iskanja vsebine, ki je napisna izven glavnega besedila. Lastnosti "
-"so zaznamki, Strong-ova števila in morfološki znaki.\n"
+"Iskanja vsebine, ki je napisna izven glavnega besedila. Lastnosti so "
+"zaznamki, Strong-ova števila in morfološki znaki.\n"
 "\n"
-"Zavedajte se, da je večina takšnih iskanj lahko opravljena hitreje s "
-"pomočjo optimiziranih \"lucene\" iskanj z uporabo ključnih besed.\n"
+"Zavedajte se, da je večina takšnih iskanj lahko opravljena hitreje s pomočjo "
+"optimiziranih \"lucene\" iskanj z uporabo ključnih besed.\n"
 "\n"
-"Za uporabo Iskanj po lastnostih, morate izbrati primeren gumb na "
-"zavihku <i>Iskanje po lastnostih</i>.\n"
+"Za uporabo Iskanj po lastnostih, morate izbrati primeren gumb na zavihku "
+"<i>Iskanje po lastnostih</i>.\n"
 "* Po besedilu opomb se išče podobno kot po običajnem besedilu.\n"
 "* Strong-ove besede so navedene s predčrko H ali G (Hebrejščina ali Grščina) "
 "in številčno besedo, npr. G2316, če iščete \"θεός\" (\"Bog\").\n"
@@ -2356,7 +2358,8 @@ msgstr ""
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
-msgstr "Ni najti ujemajočega se jezika za `%s'.\n"
+msgstr ""
+"Ni najti ujemajočega se jezika za `%s'.\n"
 "%s"
 
 #: ../src/main/sword.cc:760
@@ -2408,10 +2411,10 @@ msgstr ""
 "\n"
 "<u>Odpirate modul, ki zahteva <i>ključ</i>.</u>\n"
 "\n"
-"Modul je zaklenjen, kar pomeni, da je vsebino kriptiral njen izdajatelj "
-"in da morate vnesti pravi ključ, da vsebina lahko postala uporabna. "
-"Ta ključ naj bi pridobili na spletni strani , ki je potrdila vaš nakup "
-"ali pa vam je bil po nakupu poslan na vaš elektronski naslov.\n"
+"Modul je zaklenjen, kar pomeni, da je vsebino kriptiral njen izdajatelj in "
+"da morate vnesti pravi ključ, da vsebina lahko postala uporabna. Ta ključ "
+"naj bi pridobili na spletni strani , ki je potrdila vaš nakup ali pa vam je "
+"bil po nakupu poslan na vaš elektronski naslov.\n"
 "\n"
 "Prosim, da v okno vnesete ključ."
 
@@ -2912,8 +2915,8 @@ msgid ""
 "Indicates whether verse numbers should appear inline in the text for more "
 "than 1 verse."
 msgstr ""
-"Nakazuja katera vrstica naj se prikaže znotraj besedila za več kakor "
-"eno vrstico."
+"Nakazuja katera vrstica naj se prikaže znotraj besedila za več kakor eno "
+"vrstico."
 
 #: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:25
 #, fuzzy
@@ -3455,8 +3458,8 @@ msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
 msgstr ""
-"Osveži Xiphos-ovo poznavanje modulov, ki so na voljo na izbranem "
-"oddaljenem skladišču"
+"Osveži Xiphos-ovo poznavanje modulov, ki so na voljo na izbranem oddaljenem "
+"skladišču"
 
 #: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
 #, fuzzy
@@ -3491,8 +3494,7 @@ msgstr "_Kazalo"
 #: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
 msgid ""
 "Build an index of the selected modules, for optimized (\"lucene\") searching."
-msgstr ""
-"Zgradi kazalo izbranih modulov za optimizirano (\"lucene\") iskanje."
+msgstr "Zgradi kazalo izbranih modulov za optimizirano (\"lucene\") iskanje."
 
 #: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
 #, fuzzy
@@ -3560,9 +3562,8 @@ msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
 msgstr ""
-"Dodaj posebne oddaljene namestitvene vire. Poznati morate njihovo "
-"ime (hostname) in mapo v kateri je skladišče."
-
+"Dodaj posebne oddaljene namestitvene vire. Poznati morate njihovo ime "
+"(hostname) in mapo v kateri je skladišče."
 
 #: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:30
 #, fuzzy
@@ -3799,14 +3800,14 @@ msgid ""
 "audience's Bible programs to follow along; Audience, to receive the "
 "speaker's navigation."
 msgstr ""
-"Xiphos je prvi program za preučevanje Biblije, ki omogoča uporabo "
-"BibleSync, sinhronizacijskega protokola za Biblijske programe. Če delate z "
-"več Biblijskimi programi ali če delate v skupini ali če imate šolske "
-"dejavnosti s uporabo deljenega učenja, je lahko BibleSync za vas zelo uporabno "
-"orodje. BibleSync deluje v enem od treh načinov: "
-" - Osebni, da sinhronizira več vaših lastnih Biblij, ali v delovni skupini; "
-" - Govornik, da poganja lekcijo z Bibličnimi programi občinstva, da sledijo; "
-" - Občinstvo, da sprejema govornikovo usmerjanje. "
+"Xiphos je prvi program za preučevanje Biblije, ki omogoča uporabo BibleSync, "
+"sinhronizacijskega protokola za Biblijske programe. Če delate z več "
+"Biblijskimi programi ali če delate v skupini ali če imate šolske dejavnosti "
+"s uporabo deljenega učenja, je lahko BibleSync za vas zelo uporabno orodje. "
+"BibleSync deluje v enem od treh načinov:  - Osebni, da sinhronizira več "
+"vaših lastnih Biblij, ali v delovni skupini;  - Govornik, da poganja lekcijo "
+"z Bibličnimi programi občinstva, da sledijo;  - Občinstvo, da sprejema "
+"govornikovo usmerjanje. "
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:36
 #, fuzzy
@@ -3903,7 +3904,8 @@ msgstr "_Neposredno"
 
 #: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
-msgstr "BibleSync usmerjanje bo Xiphos usmerilo neposredno na označeno vrstico."
+msgstr ""
+"BibleSync usmerjanje bo Xiphos usmerilo neposredno na označeno vrstico."
 
 #: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
 #, fuzzy
@@ -4041,7 +4043,6 @@ msgstr ""
 "Onemogočitev tega je lahko potrebna, če nekateri govorniki menijo, da "
 "uporaba skupinske številke ni primerna kot številka tabulatorja."
 
-
 #: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 #, fuzzy
 msgid "BSP event group-as-tab button"
@@ -4083,7 +4084,6 @@ msgstr ""
 "Če ste določili izbrano dnevno posvetitev, bo njegova današnja vsebina "
 "prikazana ob zagonu."
 
-
 #: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Use default Dictionary"
 msgstr "Uporabi privzeti slovar"
@@ -4093,9 +4093,8 @@ msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
 msgstr ""
-"Z dvojnim klikom na besedo vedno uporabi privzet slovar namesto "
-"slovarja, ki je trenutno prikazan"
-
+"Z dvojnim klikom na besedo vedno uporabi privzet slovar namesto slovarja, ki "
+"je trenutno prikazan"
 
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
 msgid "Use default Dictionary Checkbox"
@@ -4136,8 +4135,7 @@ msgstr "Poudari trenutno vrstico"
 #, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr ""
-"Uporabi zelo kontrastno označevanje trenutne vrstice "
-"- glej barvne možnosti"
+"Uporabi zelo kontrastno označevanje trenutne vrstice - glej barvne možnosti"
 
 #: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "Highlight current verse check box"
@@ -4418,8 +4416,7 @@ msgstr "Pravila _Lucene iskanja"
 msgid ""
 "Open a brief explanation of the syntax used for optimized \"lucene\" "
 "searches."
-msgstr ""
-"Odpre kratko razlago sintakse za optimalna \"lucene\" iskanja."
+msgstr "Odpre kratko razlago sintakse za optimalna \"lucene\" iskanja."
 
 #: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
 #, fuzzy
@@ -4923,7 +4920,8 @@ msgstr "Predogled _Dnevnih posvetitev"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr "Prikaži današnje vnose vaših izbranih dnevnih posvetitev v pregledovalniku"
+msgstr ""
+"Prikaži današnje vnose vaših izbranih dnevnih posvetitev v pregledovalniku"
 
 #: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
 msgid "_Bible"
@@ -5054,9 +5052,7 @@ msgstr "Vizitk_a projekta SWORD"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
-"Pouči se o Projektu Sword, katerega ena izmed aplikacij je tudi "
-"Xiphos"
+msgstr "Pouči se o Projektu Sword, katerega ena izmed aplikacij je tudi Xiphos"
 
 #: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "About _Xiphos"
