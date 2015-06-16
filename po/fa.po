@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-22 21:00-0400\n"
+"POT-Creation-Date: 2015-06-16 13:36-0400\n"
 "PO-Revision-Date: 2014-12-20 22:37-0000\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
@@ -39,41 +39,41 @@ msgstr "ترکیب پیدا نشد"
 msgid "Are you sure you want to delete the note for"
 msgstr "آیا به یقین می‌خواهید این یادداشت حذف شود؟"
 
-#: ../src/editor/webkit_editor.c:603 ../ui/editor_studypad.xml.h:9
+#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
 #: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "باز کن"
 
-#: ../src/editor/webkit_editor.c:686
+#: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "متن بی‌نام"
 
-#: ../src/editor/webkit_editor.c:1171 ../src/editor/webkit_editor.c:1211
+#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "تغییرات را ضبط کن"
 
-#: ../src/editor/webkit_editor.c:1172 ../src/editor/webkit_editor.c:1212
+#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "قبل از بستن؟"
 
-#: ../src/editor/webkit_editor.c:1176 ../src/editor/webkit_editor.c:1216
+#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "اگر ضبط نکنید، تغییرات به کلی حذف خواهد شد."
 
-#: ../src/editor/webkit_editor.c:1210 ../ui/xi-menus.glade.h:59
+#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:59
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "پرونده"
 
-#: ../src/editor/webkit_editor.c:1253
+#: ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "یادداشتهای مطالعات شخصی"
 
-#: ../src/editor/webkit_editor.c:1268
+#: ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "ویرایشگر یادداشتهای شخصی"
 
-#: ../src/editor/webkit_editor.c:1285
+#: ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "لیست دعا/یادداشتهای هر روزه"
 
@@ -334,11 +334,11 @@ msgstr "لطفا به بخش ترجمه در قسمت منابع زیفوس مر
 msgid "Xiphos development"
 msgstr "بسط و گسترش زیفوس"
 
-#: ../src/gnome2/about_xiphos.c:119
+#: ../src/gnome2/about_xiphos.c:129
 msgid "Copyright © 2000-2015 Xiphos Development Team"
 msgstr "حق چاپ برای تیم گسترش زیفوس محفوظ می‏باشد 2000-2015"
 
-#: ../src/gnome2/about_xiphos.c:121
+#: ../src/gnome2/about_xiphos.c:131
 msgid ""
 "\n"
 "Powered by The SWORD Project.\n"

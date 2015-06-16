@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-22 21:00-0400\n"
+"POT-Creation-Date: 2015-06-16 13:36-0400\n"
 "PO-Revision-Date: 2010-03-20 18:19+0000\n"
 "Last-Translator: Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
@@ -33,41 +33,41 @@ msgstr "無適當組態"
 msgid "Are you sure you want to delete the note for"
 msgstr "您確定要刪除所屬的附註嗎?"
 
-#: ../src/editor/webkit_editor.c:603 ../ui/editor_studypad.xml.h:9
+#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
 #: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr ""
 
-#: ../src/editor/webkit_editor.c:686
+#: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "未命名的文件"
 
-#: ../src/editor/webkit_editor.c:1171 ../src/editor/webkit_editor.c:1211
+#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "儲存變更"
 
-#: ../src/editor/webkit_editor.c:1172 ../src/editor/webkit_editor.c:1212
+#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "結束前"
 
-#: ../src/editor/webkit_editor.c:1176 ../src/editor/webkit_editor.c:1216
+#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "如果您不儲存，變更將會永久消失。"
 
-#: ../src/editor/webkit_editor.c:1210 ../ui/xi-menus.glade.h:59
+#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:59
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "檔案"
 
-#: ../src/editor/webkit_editor.c:1253
+#: ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "小筆記"
 
-#: ../src/editor/webkit_editor.c:1268
+#: ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "附註編輯器"
 
-#: ../src/editor/webkit_editor.c:1285
+#: ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "禱告表/日記編輯器"
 
@@ -292,12 +292,12 @@ msgstr "參閱  Xiphos source 的翻譯說明"
 msgid "Xiphos development"
 msgstr "開發 Xiphos"
 
-#: ../src/gnome2/about_xiphos.c:119
+#: ../src/gnome2/about_xiphos.c:129
 #, fuzzy
 msgid "Copyright © 2000-2015 Xiphos Development Team"
 msgstr "Xiphos 開發團隊版權所有 2000 - 2015"
 
-#: ../src/gnome2/about_xiphos.c:121
+#: ../src/gnome2/about_xiphos.c:131
 msgid ""
 "\n"
 "Powered by The SWORD Project.\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-22 21:00-0400\n"
+"POT-Creation-Date: 2015-06-16 13:36-0400\n"
 "PO-Revision-Date: 2010-05-17 03:32+0000\n"
 "Last-Translator: Kunio Nakamaru <n_e_o_m@hotmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -33,41 +33,41 @@ msgstr "設定が見つかりませんでした。"
 msgid "Are you sure you want to delete the note for"
 msgstr "以下のメモを削除しますがよろしいですか？"
 
-#: ../src/editor/webkit_editor.c:603 ../ui/editor_studypad.xml.h:9
+#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
 #: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr ""
 
-#: ../src/editor/webkit_editor.c:686
+#: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "タイトルなしのドキュメント"
 
-#: ../src/editor/webkit_editor.c:1171 ../src/editor/webkit_editor.c:1211
+#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "文書の変更を保存"
 
-#: ../src/editor/webkit_editor.c:1172 ../src/editor/webkit_editor.c:1212
+#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "閉じる前に？"
 
-#: ../src/editor/webkit_editor.c:1176 ../src/editor/webkit_editor.c:1216
+#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "保存しない場合、変更は失われます。"
 
-#: ../src/editor/webkit_editor.c:1210 ../ui/xi-menus.glade.h:59
+#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:59
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "ファイル(&F)"
 
-#: ../src/editor/webkit_editor.c:1253
+#: ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "StudyPad"
 
-#: ../src/editor/webkit_editor.c:1268
+#: ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "メモ編集ツール"
 
-#: ../src/editor/webkit_editor.c:1285
+#: ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "祈り帳/日記編集ツール"
 
@@ -305,11 +305,11 @@ msgstr "Xiphosソースコードの翻訳HowToを参照ください"
 msgid "Xiphos development"
 msgstr "Xiphos開発"
 
-#: ../src/gnome2/about_xiphos.c:119
+#: ../src/gnome2/about_xiphos.c:129
 msgid "Copyright © 2000-2015 Xiphos Development Team"
 msgstr ""
 
-#: ../src/gnome2/about_xiphos.c:121
+#: ../src/gnome2/about_xiphos.c:131
 msgid ""
 "\n"
 "Powered by The SWORD Project.\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-22 21:00-0400\n"
+"POT-Creation-Date: 2015-06-16 13:36-0400\n"
 "PO-Revision-Date: 2010-09-30 00:22+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: <i18n-nb@lister.ping.uio.no>\n"
@@ -39,41 +39,41 @@ msgstr "Konfigurasjonen ikke funnet"
 msgid "Are you sure you want to delete the note for"
 msgstr "Er du sikker på at du vil slette notatet for"
 
-#: ../src/editor/webkit_editor.c:603 ../ui/editor_studypad.xml.h:9
+#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
 #: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Åpne"
 
-#: ../src/editor/webkit_editor.c:686
+#: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "Navnløst dokument"
 
-#: ../src/editor/webkit_editor.c:1171 ../src/editor/webkit_editor.c:1211
+#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "Lagre endringer i dokumentet"
 
-#: ../src/editor/webkit_editor.c:1172 ../src/editor/webkit_editor.c:1212
+#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "før du avslutter?"
 
-#: ../src/editor/webkit_editor.c:1176 ../src/editor/webkit_editor.c:1216
+#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Hvis du ikke lagrer vil du miste alle endringer du har gjort."
 
-#: ../src/editor/webkit_editor.c:1210 ../ui/xi-menus.glade.h:59
+#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:59
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Fil"
 
-#: ../src/editor/webkit_editor.c:1253
+#: ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "Studieblokk"
 
-#: ../src/editor/webkit_editor.c:1268
+#: ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "Notatblokk"
 
-#: ../src/editor/webkit_editor.c:1285
+#: ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "Bønne Liste/Journal Editor"
 
@@ -337,12 +337,12 @@ msgstr "Se HVORDAN OVERSETTE i Xiphos kilde"
 msgid "Xiphos development"
 msgstr "Xiphos utvikling"
 
-#: ../src/gnome2/about_xiphos.c:119
+#: ../src/gnome2/about_xiphos.c:129
 #, fuzzy
 msgid "Copyright © 2000-2015 Xiphos Development Team"
 msgstr "Copyright·2000-2015·The·Xiphos·Development·Team"
 
-#: ../src/gnome2/about_xiphos.c:121
+#: ../src/gnome2/about_xiphos.c:131
 msgid ""
 "\n"
 "Powered by The SWORD Project.\n"
