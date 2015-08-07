@@ -3,6 +3,16 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.0.3
+06 Aug 2015
+
+Another bugfix release, induced by the discovery that a hard limit on the
+number of language groups that can be supported is too small with respect
+to newer repositories supporting far larger groups of modules.  The code
+involved will be re-factored for a better near-term future release but
+this is an immediate survivability fix.
+________________________________________________________________
+
 Release 4.0.2
 15 Apr 2015
 
