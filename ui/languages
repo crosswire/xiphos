@@ -698,7 +698,8 @@ alq	Algonquin
 alr	Alutor
 als	Tosk Albanian
 alt	Southern Altai
-alu	'Are'are
+# remove leading ' (consequent to eBible repo discoveries)
+alu	Are'are
 alw	Alaba-K’abeena
 alx	Amol
 aly	Alyawarr
@@ -881,7 +882,8 @@ aua	Asumboa
 aub	Alugu
 auc	Waorani
 aud	Anuta
-aue	=/Kx'au//'ein
+# remove leading =/ (consequent to eBible repo discoveries)
+aue	Kx'au//'ein
 aug	Aguna
 auh	Aushi
 aui	Anuki
@@ -1220,6 +1222,8 @@ bjl	Bulu (Papua New Guinea)
 bjm	Bajelani
 bjn	Banjar
 bjo	Mid-Southern Banda
+# addition from eBible repo
+bjp	Tangga
 bjq	Southern Betsimisaraka Malagasy
 bjr	Binumarien
 bjs	Bajan
@@ -2219,6 +2223,8 @@ duz	Duli
 dva	Duau
 dwa	Diri
 dwl	Walo Kumbe Dogon
+# addition from eBible repo
+dwr	Dawro
 dws	Dutton World Speedwords
 dww	Dawawa
 dya	Dyan
@@ -2238,6 +2244,8 @@ dzl	Dzalakha
 dzn	Dzando
 dzo	Dzongkha
 ebg	Ebughu
+# addition from eBible repo
+ebk	Eastern Bontok
 ebo	Teke-Ebo
 ebr	Ebrié
 ebu	Embu
@@ -2614,6 +2622,8 @@ gmm	Gbaya-Mbodomo
 gmn	Gimnime
 gmo	Gamo-Gofa-Dawro
 gmu	Gumalu
+# addition from eBible repo
+gmv	Gamo
 gmx	Magoma
 gmy	Mycenaean Greek
 gna	Kaansa
@@ -2624,7 +2634,8 @@ gne	Ganang
 gng	Ngangam
 gnh	Lere
 gni	Gooniyandi
-gnk	//Gana
+# remove leading // (consequent to eBible repo discoveries)
+gnk	Gana
 gnl	Gangulu
 gnm	Ginuman
 gnn	Gumatj
@@ -2640,6 +2651,8 @@ gob	Playero
 goc	Gorakor
 god	Godié
 goe	Gongduk
+# addition from eBible repo
+gof	Gofa
 gog	Gogo
 goh	Old High German (ca. 750-1050)
 goi	Gobasi
@@ -2743,7 +2756,8 @@ gwe	Gweno
 gwf	Gowro
 gwg	Moo
 gwi	Gwichʼin
-gwj	/Gwi
+# remove leading / (consequent to eBible repo discoveries)
+gwj	Gwi
 gwn	Gwandara
 gwr	Gwere
 gwt	Gawar-Bati
@@ -2874,7 +2888,8 @@ hmz	Hmong Shua
 hna	Mina (Cameroon)
 hnd	Southern Hindko
 hne	Chhattisgarhi
-hnh	//Ani
+# remove leading // (consequent to eBible repo discoveries)
+hnh	Ani
 hni	Hani
 hnj	Hmong Njua
 hnn	Hanunoo
@@ -2925,7 +2940,8 @@ hts	Hadza
 htu	Hitu
 htx	Middle Hittite
 hub	Huambisa
-huc	=/Hua
+# remove leading =/ (consequent to eBible repo discoveries)
+huc	Hua
 hud	Huaulu
 hue	San Francisco Del Mar Huave
 huf	Humene
@@ -3763,6 +3779,7 @@ ktz	Ju/'hoan
 kua	Kuanyama
 kub	Kutep
 kuc	Kwinsu
+# remove leading ' (consequent to eBible repo discoveries)
 kud	'Auhelawa
 kue	Kuman
 kuf	Western Katu
@@ -3950,6 +3967,8 @@ lbf	Tinani
 lbg	Laopang
 lbi	La'bi
 lbj	Ladakhi
+# addition from eBible repo
+lbk	Central Bontok
 lbm	Lodhi
 lbn	Lamet
 lbo	Laven
@@ -5169,7 +5188,8 @@ nmj	Ngombe (Central African Republic)
 nmk	Namakura
 nml	Ndemli
 nmm	Manangba
-nmn	!Xóõ
+# remove leading ! (consequent to eBible repo discoveries)
+nmn	Xóõ
 nmo	Moyon Naga
 nmp	Nimanbur
 nmq	Nambya
@@ -5528,7 +5548,8 @@ oub	Glio-Oubi
 oue	Oune
 oui	Old Uighur
 oum	Ouma
-oun	!O!ung
+# remove leading ! (consequent to eBible repo discoveries)
+oun	O!ung
 owi	Owiniga
 owl	Old Welsh
 oyb	Oy
@@ -5796,6 +5817,8 @@ prb	Lua'
 prc	Parachi
 prd	Parsi-Dari
 pre	Principense
+# addition from eBible repo
+prf	Paranan
 prg	Prussian
 prh	Porohanon
 pri	Paicî
@@ -6903,6 +6926,8 @@ tnw	Tonsawang
 tnx	Tanema
 tny	Tongwe
 tnz	Tonga (Thailand)
+# addition from eBible repo
+to	Tongan
 tob	Toba
 toc	Coyutla Totonac
 tod	Toma
@@ -7568,7 +7593,8 @@ xae	Aequian
 xag	Aghwan
 xai	Kaimbé
 xal	Kalmyk
-xam	/Xam
+# remove leading / (consequent to eBible repo discoveries)
+xam	Xam
 xan	Xamtanga
 xao	Khao
 xap	Apalachee
@@ -7608,7 +7634,8 @@ xdm	Edomite
 xdy	Malayic Dayak
 xeb	Eblan
 xed	Hdi
-xeg	//Xegwi
+# remove leading // (consequent to eBible repo discoveries)
+xeg	Xegwi
 xel	Kelo
 xem	Kembayan
 xep	Epi-Olmec
