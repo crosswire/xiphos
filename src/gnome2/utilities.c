@@ -1031,6 +1031,7 @@ struct language_set
 {
 	gchar **ptr;
 	int count;
+	int max;
 } language_set[N_LANGSET_MODTYPES];
 
 /* one-shot setup during initialization. */
@@ -1039,8 +1040,9 @@ void language_init(void)
 	int i;
 	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
 		language_set[i].ptr =
-		    calloc(LANGSET_COUNT, sizeof(char *));
+		    calloc(LANGSET_STRIDE, sizeof(char *));
 		language_set[i].count = 0;
+		language_set[i].max = LANGSET_STRIDE;	/* initial limit */
 	}
 }
 
@@ -1068,12 +1070,28 @@ static void language_add(const char *language, int module_type)
 	if ((language == NULL) || (*language == '\0'))
 		language = _("Unknown");
 	assert((module_type >= 0) && (module_type < N_LANGSET_MODTYPES));
+
 	s = language_set[module_type].ptr;
 	for (j = 0; j < language_set[module_type].count; ++j) {
 		if (!strcmp(s[j], language))
 			return; /* found -- duplicate. */
 	}
-	assert(j < LANGSET_COUNT); /* let's not overrun the set. */
+
+	// grow the set dynamically as we run out of space.
+	if (j >= language_set[module_type].max) {
+		// in bytes.
+		int old_size = language_set[module_type].max * sizeof(char*);
+
+		language_set[module_type].max += LANGSET_STRIDE;
+		s = language_set[module_type].ptr =
+			realloc(language_set[module_type].ptr,
+				language_set[module_type].max *
+				sizeof(char*));
+		// realloc() does not set newly-alloc'd mem to zeroes.
+		// must use (void*), otherwise arithmetic will use pointer size.
+		memset((void*)s + old_size, '\0', LANGSET_STRIDE * sizeof(char*));
+	}
+
 	s[j] = g_strdup(language);
 	++(language_set[module_type].count);
 }
