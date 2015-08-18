@@ -1,3 +1,28 @@
+2015-08-17  karl <charcoal@users.sf.net>
+
+	* change language_set to grow dynamically, no limit.
+
+2015-08-06  karl <charcoal@users.sf.net>
+
+	* survivability fix: increase LANGSET_COUNT to 2000 (eBible repo).
+	* 4.0.3 release.
+
+2015-06-15  karl <charcoal@users.sf.net>
+
+	* fixed detached parallel "close" button visual overreach.
+	* updated Slovenian translation (marjan savli).
+	* add toolkit identifications to "about xiphos."
+	* generic, all-purpose makeDistro.sh; deleted makeDistro3.sh.
+
+2015-04-15  karl <charcoal@users.sf.net>
+
+	* emergency fix mem alloc error in editor.
+	* 4.0.2 release.
+
+2015-03-29  karl <charcoal@users.sf.net>
+
+	* 4.0.1 release.
+
 2015-02-20  karl <charcoal@users.sf.net>
 
 	* consequent to use of cppcheck, made many updates for efficiency,
