@@ -8008,6 +8008,8 @@ yrb	Yareba
 yre	Yaouré
 yri	Yarí
 yrk	Nenets
+# add dup for cyrillic version
+yrk-Cyrl	Nenets
 yrl	Nhengatu
 yrn	Yerong
 yrs	Yarsun
