@@ -146,7 +146,7 @@ enum {
 	UTIL_N_COLUMNS
 };
 
-#define LANGSET_COUNT 2000
+#define	LANGSET_STRIDE	100
 
 void language_init(void);
 
