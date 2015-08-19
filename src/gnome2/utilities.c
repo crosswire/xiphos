@@ -1040,7 +1040,7 @@ void language_init(void)
 	int i;
 	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
 		language_set[i].ptr =
-		    calloc(LANGSET_STRIDE, sizeof(char *));
+		    calloc(LANGSET_STRIDE + 1, sizeof(char *));
 		language_set[i].count = 0;
 		language_set[i].max = LANGSET_STRIDE;	/* initial limit */
 	}
@@ -1079,17 +1079,15 @@ static void language_add(const char *language, int module_type)
 
 	// grow the set dynamically as we run out of space.
 	if (j >= language_set[module_type].max) {
-		// in bytes.
-		int old_size = language_set[module_type].max * sizeof(char*);
+		int old_max = language_set[module_type].max;
 
 		language_set[module_type].max += LANGSET_STRIDE;
 		s = language_set[module_type].ptr =
 			realloc(language_set[module_type].ptr,
-				language_set[module_type].max *
+				(language_set[module_type].max + 1) *
 				sizeof(char*));
 		// realloc() does not set newly-alloc'd mem to zeroes.
-		// must use (void*), otherwise arithmetic will use pointer size.
-		memset((void*)s + old_size, '\0', LANGSET_STRIDE * sizeof(char*));
+		memset(s + old_max, '\0', (LANGSET_STRIDE + 1) * sizeof(char*));
 	}
 
 	s[j] = g_strdup(language);
