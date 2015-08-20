@@ -963,6 +963,9 @@ static void remove_install_modules(GList *modules, int activity)
 							       source,
 							       module_name));
 
+			/* do gtk refresh, to make sure last messages display */
+			sync_windows();
+
 			/* try to re-use a saved key. */
 			if ((result != -1) && preserved_cipherkey) {
 				main_save_module_key(module_name,
