@@ -5,6 +5,8 @@
 2015-08-06  karl <charcoal@users.sf.net>
 
 	* survivability fix: increase LANGSET_COUNT to 2000 (eBible repo).
+	* updated French translation.
+	* added Korean translation.
 	* 4.0.3 release.
 
 2015-06-15  karl <charcoal@users.sf.net>
