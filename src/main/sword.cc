@@ -129,7 +129,7 @@ void main_add_abbreviation(const char *name, const char *abbreviation)
  *   const char * main_get_abbreviation(const char *name)
  *
  * Description
- *   gets abbreviation, if available.
+ *   gets abbreviation from real module, if available.
  *
  * Return value
  *   const char *
@@ -156,7 +156,7 @@ const char *main_get_abbreviation(const char *name)
  *   const char * main_get_name(const char *abbreviation)
  *
  * Description
- *   gets abbreviation, if available.
+ *   gets real module name from abbreviation, if available.
  *
  * Return value
  *   const char *

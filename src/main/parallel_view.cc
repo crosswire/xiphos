@@ -703,6 +703,7 @@ void main_update_parallel_page(void)
 							    mf->old_font_size_value, mf->old_font);
 			free_font(mf);
 
+			const char *abbreviation = main_get_abbreviation(mod_name);
 			tmpBuf = g_strdup_printf(
 			    "<tr bgcolor=\"%s\"><td>%s<b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\">[%s]</font></a></b><br/>",
 			    rowcolor,
@@ -711,7 +712,7 @@ void main_update_parallel_page(void)
 			    mod_name,
 			    settings.bible_verse_num_color,
 			    settings.verse_num_font_size + settings.base_font_size,
-			    mod_name);
+			    (abbreviation ? abbreviation : mod_name));
 			g_free(fontstring);
 			g_string_append(data, tmpBuf);
 			g_free(tmpBuf);
@@ -964,12 +965,13 @@ void main_update_parallel_page_detached(void)
 	text += buf;
 
 	for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
+		const char *abbreviation = main_get_abbreviation(settings.parallel_list[modidx]);
 		snprintf(buf, 499,
 			 "<td valign=\"top\" width=\"%d%%\" bgcolor=\"#c0c0c0\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></td>",
 			 fraction,
 			 settings.bible_verse_num_color,
 			 settings.verse_num_font_size + settings.base_font_size,
-			 settings.parallel_list[modidx]);
+			 (abbreviation ? abbreviation : settings.parallel_list[modidx]));
 		text += buf;
 	}
 
