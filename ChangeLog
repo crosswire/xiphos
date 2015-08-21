@@ -1,6 +1,8 @@
 2015-08-17  karl <charcoal@users.sf.net>
 
 	* change language_set to grow dynamically, no limit.
+	* improve abbreviation support: use abbrev in parallel page,
+	  parallel dialog/tab, and in main window non-Bible (comm/book/dict).
 
 2015-08-06  karl <charcoal@users.sf.net>
 

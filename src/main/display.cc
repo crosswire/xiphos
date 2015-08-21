@@ -939,6 +939,7 @@ GTKEntryDisp::display(SWModule &imodule)
 	if (!gtk_widget_get_realized(GTK_WIDGET(gtkText)))
 		gtk_widget_realize(gtkText);
 
+	const char *abbreviation = main_get_abbreviation(imodule.getName());
 	gchar *buf;
 	mf = get_font(imodule.getName());
 	swbuf = "";
@@ -980,7 +981,7 @@ GTKEntryDisp::display(SWModule &imodule)
 			      imodule.getDescription(),
 			      imodule.getName(),
 			      settings.bible_verse_num_color,
-			      imodule.getName());
+			      (abbreviation ? abbreviation : imodule.getName()));
 	swbuf.append(buf);
 	g_free(buf);
 
