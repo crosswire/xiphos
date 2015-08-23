@@ -777,13 +777,18 @@ static gboolean button_release_event(GtkWidget *widget,
 	}
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected) && key != NULL) {
+			// might have an abbrev.  get the real.
+			const gchar *real_mod = main_get_name(module);
 			gchar *url = NULL;
+
 			if (!strcmp(module, "studypad"))
 				url =
 				    g_strdup_printf("passagestudy.jsp?action=showStudypad&"
 						    "type=9&value=%s&module=%s",
 						    main_url_encode(key),
-						    main_url_encode(module));
+						    main_url_encode((real_mod
+								     ? real_mod
+								     : module)));
 
 			else if (button_one)
 				url =
@@ -791,7 +796,9 @@ static gboolean button_release_event(GtkWidget *widget,
 						    "type=%s&value=%s&module=%s",
 						    "currentTab",
 						    main_url_encode(key),
-						    main_url_encode(module));
+						    main_url_encode((real_mod
+								     ? real_mod
+								     : module)));
 			if (url) {
 				main_url_handler(url, TRUE);
 				g_free(url);
