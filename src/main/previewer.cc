@@ -209,9 +209,11 @@ void main_information_viewer(const gchar *mod_name,
 			str = g_string_append(str, tmp_str->str);
 		}
 	} else {
+		const char *abbreviation = main_get_abbreviation(mod_name);
 		g_string_printf(tmp_str,
 				"<font color=\"grey\">%s: %s</font><hr/>",
-				mod_name, key);
+				(abbreviation ? abbreviation : mod_name),
+				key);
 		str = g_string_append(str, tmp_str->str);
 	}
 
@@ -433,6 +435,7 @@ void main_entry_display(gpointer data, gchar *mod_name,
 
 	/* show key in html widget  */
 	if (show_key) {
+		const char *abbreviation = main_get_abbreviation(mod_name);
 		if ((settings.displaySearchResults)) {
 			g_string_printf(tmp_str,
 					"<a href=\"sword://%s/%s\">"
@@ -440,7 +443,8 @@ void main_entry_display(gpointer data, gchar *mod_name,
 					mod_name,
 					key,
 					settings.link_color,
-					mod_name, key);
+					(abbreviation ? abbreviation : mod_name),
+					key);
 		} else {
 			g_string_printf(tmp_str,
 					"<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
@@ -448,7 +452,8 @@ void main_entry_display(gpointer data, gchar *mod_name,
 					backend->module_description(mod_name),
 					mod_name,
 					settings.link_color,
-					mod_name, key);
+					(abbreviation ? abbreviation : mod_name),
+					key);
 		}
 		str = g_string_append(str, tmp_str->str);
 	}
