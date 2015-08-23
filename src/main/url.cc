@@ -774,6 +774,10 @@ gint sword_uri(const gchar *url, gboolean clicked)
 		   ? work_buf[MODULE]
 		   : settings.MainWindowModule);
 
+	const char *real_mod = main_get_name(mod);
+	if (real_mod)
+		mod = (gchar *)real_mod;
+	
 	if (strpbrk(tmpkey, "-;,") && // >1 verse marked
 	    (main_get_mod_type(mod) == TEXT_TYPE)) {
 		main_display_verse_list_in_sidebar(settings.currentverse, mod, tmpkey);
@@ -922,7 +926,7 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 		passage = g_strdup((gchar *)m_url.getParameterValue("passage"));
 
 		// no module specified => use main module.
-		if (!strcmp(module, "")) {
+		if (!module || !strcmp(module, "")) {
 			g_free(module);
 			module = g_strdup(settings.MainWindowModule);
 		}
