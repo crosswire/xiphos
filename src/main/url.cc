@@ -401,15 +401,15 @@ static gint show_strongs(const gchar *stype, const gchar *svalue,
 
 /******************************************************************************
  * Name
- *   note_uri
+ *   show_note
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint note_uri(const gchar * url)
+ *   gint show_note(module, passage, stype, svalue, gblooean clicked)
  *
  * Description
- *
+ *   show a footnote in the previewer.
  *
  * Return value
  *   gint
@@ -668,11 +668,15 @@ static gint show_in_previewer(const gchar *url)
 
 	work_buf = g_strsplit(url, "/", 4);
 
-	mybuf = main_get_rendered_text(work_buf[MODULE], work_buf[KEY]);
+	// might be an abbrev.  get the real.
+	const char *real_mod = main_get_name(work_buf[MODULE]);
+
+	mybuf = main_get_rendered_text((real_mod ? real_mod : work_buf[MODULE]),
+				       work_buf[KEY]);
 
 	if (mybuf) {
 		main_information_viewer(
-		    (gchar *)work_buf[MODULE],
+		    (gchar *)(real_mod ? real_mod : work_buf[MODULE]),
 		    mybuf,
 		    (gchar *)work_buf[KEY],
 		    NULL,
@@ -729,14 +733,19 @@ gint sword_uri(const gchar *url, gboolean clicked)
 			gchar *slash = g_strstr_len(name, 20, "/");
 			if (slash)
 				*slash = '\0'; // limit to name end.
-			int mod_type = backend->module_type(name);
+
+			// might be an abbrev.  get the real.
+			const char *real_mod = main_get_name(name);
+
+			int mod_type = backend->module_type(real_mod ? real_mod : name);
+
 			if (slash)
 				*slash = '/';
 
 			if (mod_type == DICTIONARY_TYPE)
 				show_in_previewer(url);
 			else
-				gui_set_statusbar(url);
+				gui_set_statusbar(name + ((*name == '/') ? 1 : 0));
 		}
 		handling_uri = FALSE;
 		return 1;
@@ -773,12 +782,12 @@ gint sword_uri(const gchar *url, gboolean clicked)
 	}
 
 	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
-	if (backend->is_module(work_buf[MODULE])) {
-		mod_type = backend->module_type(work_buf[MODULE]);
+	if (backend->is_module(mod)) {
+		mod_type = backend->module_type(mod);
 		switch (mod_type) {
 		case TEXT_TYPE:
-			key = main_update_nav_controls(work_buf[MODULE], tmpkey);
-			main_display_bible(work_buf[MODULE], key);
+			key = main_update_nav_controls(mod, tmpkey);
+			main_display_bible(mod, key);
 			if (settings.comm_showing)
 				main_display_commentary(NULL, key);
 			main_keep_bibletext_dialog_in_sync((gchar *)key);
@@ -795,16 +804,15 @@ gint sword_uri(const gchar *url, gboolean clicked)
 				settings.special_anchor = save;
 			}
 			settings.comm_showing = TRUE;
-			key = main_update_nav_controls(work_buf[MODULE], tmpkey);
-			main_display_commentary(work_buf[MODULE], key);
+			key = main_update_nav_controls(mod, tmpkey);
+			main_display_commentary(mod, key);
 			main_display_bible(NULL, key);
 			main_keep_bibletext_dialog_in_sync((gchar *)key);
 			if (key)
 				g_free((gchar *)key);
 			break;
 		case DICTIONARY_TYPE:
-			main_display_dictionary(work_buf[MODULE],
-						tmpkey);
+			main_display_dictionary(mod, tmpkey);
 			break;
 		case BOOK_TYPE:
 			if (gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book)) != 1) {
@@ -814,7 +822,7 @@ gint sword_uri(const gchar *url, gboolean clicked)
 				settings.special_anchor = save;
 			}
 			settings.comm_showing = FALSE;
-			main_display_book(work_buf[MODULE], tmpkey);
+			main_display_book(mod, tmpkey);
 			break;
 		}
 	} else { /* module name not found or not given */
@@ -905,11 +913,19 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 
 		/* passagestudy.jsp?action=showStrongs&type= */
 		URL m_url((const char *)tmpstr->str);
-		action = g_strdup(m_url.getParameterValue("action"));
-		morph = g_strdup((gchar *)m_url.getParameterValue("morph"));
+		action  = g_strdup((gchar *)m_url.getParameterValue("action"));
+		morph   = g_strdup((gchar *)m_url.getParameterValue("morph"));
 		strongs = g_strdup((gchar *)m_url.getParameterValue("lemma"));
-		stype = g_strdup((gchar *)m_url.getParameterValue("type"));
-		svalue = g_strdup((gchar *)m_url.getParameterValue("value"));
+		stype   = g_strdup((gchar *)m_url.getParameterValue("type"));
+		svalue  = g_strdup((gchar *)m_url.getParameterValue("value"));
+		module  = g_strdup((gchar *)m_url.getParameterValue("module"));
+		passage = g_strdup((gchar *)m_url.getParameterValue("passage"));
+
+		// no module specified => use main module.
+		if (!strcmp(module, "")) {
+			g_free(module);
+			module = g_strdup(settings.MainWindowModule);
+		}
 
 		// XXX gross hack-fix
 		// AraSVD is named "Smith & Van Dyke", using a literal '&'.
@@ -919,38 +935,28 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 		//	*(svalue+1) = '-';
 
 		XI_message(("action = %s", action));
+		XI_message(("morph = %s", morph));
+		XI_message(("strongs = %s", strongs));
 		XI_message(("type = %s", stype));
 		XI_message(("value = %s", svalue));
-		XI_message(("strongs = %s", strongs));
-		XI_message(("morph = %s", morph));
+		XI_message(("module = %s", module));
+		XI_message(("passage = %s", passage));
 
 		if (!strcmp(action, "showStrongs")) {
 			show_strongs(stype, svalue, clicked);
 		}
 
 		else if (!strcmp(action, "showMorph")) {
-			show_morph(settings.MainWindowModule,
-				   stype, svalue, clicked);
+			show_morph(module, stype, svalue, clicked);
 		}
 
 		else if (!strcmp(action, "showNote")) {
-			module = g_strdup(m_url.getParameterValue("module"));
-			passage = g_strdup((gchar *)m_url.getParameterValue("passage"));
 			show_note(module, passage, stype, svalue, clicked);
-			if (module)
-				g_free(module);
-			if (passage)
-				g_free(passage);
 		}
 
 		else if (!strcmp(action, "showUserNote")) {
-			module = g_strdup(m_url.getParameterValue("module"));
-			passage = g_strdup((gchar *)m_url.getParameterValue("passage"));
-
 			// need localized key, not the osisref that we've got.
-			ModMap::iterator it = backend->get_mgr()->Modules.find((module && *module)
-										   ? module
-										   : settings.MainWindowModule);
+			ModMap::iterator it = backend->get_mgr()->Modules.find(module);
 			SWModule *m = (*it).second;
 			VerseKey *vk = (VerseKey *)m->getKey();
 			*vk = passage;
@@ -962,32 +968,19 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 						(gchar *)"u",
 						NULL,
 						NULL);
-			if (module)
-				g_free(module);
-			if (passage)
-				g_free(passage);
 		}
 
 		else if (!strcmp(action, "showRef")) {
-			module = g_strdup(m_url.getParameterValue("module"));
 			if (!strcmp(stype, "scripRef"))
 				show_ref(module, svalue, clicked);
-			if (module)
-				g_free(module);
 		}
 
 		else if (!strcmp(action, "showBookmark")) {
-			module = g_strdup(m_url.getParameterValue("module"));
 			show_module_and_key(module, svalue, stype, clicked);
-			if (module)
-				g_free(module);
 		}
 
 		else if (!strcmp(action, "showModInfo")) {
-			module = g_strdup(m_url.getParameterValue("module"));
 			show_mod_info(module, svalue, clicked);
-			if (module)
-				g_free(module);
 		}
 
 		else if (!strcmp(action, "showParallel")) {
@@ -1015,6 +1008,11 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 			g_free(strongs);
 		if (morph)
 			g_free(morph);
+		if (module)
+			g_free(module);
+		if (passage)
+			g_free(passage);
+
 		g_string_free(tmpstr, TRUE);
 		retval = 1;
 	} else if (clicked)
