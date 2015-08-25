@@ -637,6 +637,12 @@ void load_settings_structure(void)
 	}
 
 	/* main window placement */
+	if ((buf = xml_get_value("layout", "maximized")))
+		settings.app_x = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "maximized", "0");
+		settings.maximized = 0;
+	}
 	if ((buf = xml_get_value("layout", "app_x")))
 		settings.app_x = atoi(buf);
 	else {
