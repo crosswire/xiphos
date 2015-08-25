@@ -174,6 +174,7 @@ struct _settings
 
 	/* window location at close */
 	int app_x, app_y;
+	int maximized;	/* gboolean */
 	int parallel_x, parallel_y;
 	int modmgr_x, modmgr_y;
 	int advsearch_x, advsearch_y;

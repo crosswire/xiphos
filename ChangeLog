@@ -3,6 +3,9 @@
 	* change language_set to grow dynamically, no limit.
 	* improve abbrev support: use abbrev in parallel page, parallel
 	  dialog/tab, main window non-Bible (comm/book/dict), bookmarks.
+	* fixed module installation messages' display, so they're not lost.
+	* update language abbreviations to eliminate more unknowns.
+	* added gtk3 maximization detection.
 
 2015-08-06  karl <charcoal@users.sf.net>
 
