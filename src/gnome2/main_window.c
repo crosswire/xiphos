@@ -449,13 +449,17 @@ static gboolean on_configure_event(GtkWidget *widget,
 	gint x;
 	gint y;
 
-	gdk_window_get_root_origin(gtk_widget_get_window(widgets.app), &x,
-				   &y);
+	gdk_window_get_root_origin(gtk_widget_get_window(widgets.app), &x, &y);
 
 	settings.gs_width = event->width;
 	settings.gs_height = event->height;
 	settings.app_x = x;
 	settings.app_y = y;
+
+#ifdef USE_GTK_3
+	sprintf(layout, "%d", gtk_window_is_maximized(GTK_WINDOW(widgets.app)));
+	xml_set_value("Xiphos", "layout", "maximized", layout);
+#endif
 
 	sprintf(layout, "%d", settings.gs_width);
 	xml_set_value("Xiphos", "layout", "width", layout);

@@ -720,6 +720,8 @@ int xml_create_settings_file(char *path)
 
 	section_node =
 	    xmlNewChild(root_node, NULL, (const xmlChar *)"layout", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"maximized",
+			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"height",
 			(const xmlChar *)"600");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"width",
