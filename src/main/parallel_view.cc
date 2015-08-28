@@ -665,9 +665,12 @@ void main_update_parallel_page(void)
 	if (settings.parallel_list) {
 		gchar *mod_name;
 		for (modidx = 0;
-		     (mod_name = settings.parallel_list[modidx]);
+		     mod_name = settings.parallel_list[modidx];
 		     modidx++) {
 			const gchar *rowcolor;
+			const char *real_mod = main_get_name(mod_name);
+			if (real_mod)
+				mod_name = (gchar *)real_mod;
 
 			// if a module was deleted, but still in parallels list,
 			// we will segfault when looking for content for the
@@ -721,12 +724,12 @@ void main_update_parallel_page(void)
 				g_string_append(data, "<br/><div align=right>");
 
 			// does this verse exist for this module?
-			if (!backend_p->is_Bible_key(settings.parallel_list[modidx],
+			if (!backend_p->is_Bible_key(mod_name,
 						     settings.cvparallel, settings.cvparallel)) {
 				g_string_append(data, no_content);
 			} else {
 				SWBuf text("");
-				backend_p->set_module_key(settings.parallel_list[modidx], settings.cvparallel);
+				backend_p->set_module_key(mod_name, settings.cvparallel);
 				get_heading(text, backend_p, modidx);
 				g_string_append(data, text.c_str());
 
@@ -780,13 +783,14 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 	// should be 1st parallel module.
 	// it would be really weird if that's missing, but be ready anyhow.
 	char *module_name = (settings.parallel_list
-				 ? settings.parallel_list[0]
-				 : settings.MainWindowModule);
+			     ? settings.parallel_list[0]
+			     : settings.MainWindowModule);
+	// might have an abbrev. get the real.
+	const char *real_mod = main_get_name(module_name);
+	if (real_mod)
+		module_name = (gchar *)real_mod;
 
-	gchar *utf8str,
-	    *textColor,
-	    *tmpkey,
-	    tmpbuf[256];
+	gchar *utf8str, *textColor, *tmpkey, tmpbuf[256];
 	const gchar *bgColor;
 	gchar str[500];
 	gint cur_verse, cur_chapter, verse, modidx;
@@ -817,17 +821,22 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 
 	// quick cache of fonts/rtol/type info.
 	for (modidx = 0; modidx < parallel_count; ++modidx) {
+		gchar *mod = settings.parallel_list[modidx];
+		// might have an abbrev. get the real.
+		const char *real_mod = main_get_name(mod);
+		if (real_mod)
+			mod = (gchar *)real_mod;
+
 		// determine module presence once each.
-		is_module[modidx] = backend->is_module(settings.parallel_list[modidx]);
+		is_module[modidx] = backend->is_module(mod);
 
 		if (is_module[modidx]) {
-			is_rtol[modidx] = main_is_mod_rtol(settings.parallel_list[modidx]);
-			mf[modidx] = get_font(settings.parallel_list[modidx]);
+			is_rtol[modidx] = main_is_mod_rtol(mod);
+			mf[modidx] = get_font(mod);
 			is_bible_text[modidx] =
-			    (main_get_mod_type(settings.parallel_list[modidx]) == TEXT_TYPE);
+			    (main_get_mod_type(mod) == TEXT_TYPE);
 		} else {
-			gui_generic_warning((unknown_parallel +
-					     (SWBuf)settings.parallel_list[modidx]).c_str());
+			gui_generic_warning((unknown_parallel + (SWBuf)mod).c_str());
 		}
 	}
 
@@ -858,6 +867,12 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 			bgColor = settings.bible_bg_color;
 
 		for (modidx = 0; modidx < parallel_count; modidx++) {
+			gchar *mod = settings.parallel_list[modidx];
+			// might have an abbrev. get the real.
+			const char *real_mod = main_get_name(mod);
+			if (real_mod)
+				mod = (gchar *)real_mod;
+
 			if (is_module[modidx]) {
 
 				// mark current verse properly.
@@ -891,10 +906,10 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 				if (is_rtol[modidx])
 					text += "<br/><div align=right>";
 
-				backend_p->set_module_key(settings.parallel_list[modidx], tmpkey);
+				backend_p->set_module_key(mod, tmpkey);
 				get_heading(text, backend_p, modidx);
 
-				utf8str = backend_p->get_render_text(settings.parallel_list[modidx], tmpkey);
+				utf8str = backend_p->get_render_text(mod, tmpkey);
 				if (utf8str) {
 					text += utf8str;
 					g_free(utf8str);
