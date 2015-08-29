@@ -412,6 +412,14 @@ void gui_display_about_module_dialog(gchar *modname)
 	info = g_string_append(info, modname);
 	info = g_string_append(info, "<br/>");
 
+	if (abbreviation && *abbreviation) {
+		info =
+		    g_string_append(info,
+				    _("<b>Module abbreviation:</b> "));
+		info = g_string_append(info, abbreviation);
+		info = g_string_append(info, "<br/>");
+	}
+
 	info = g_string_append(info, _("<b>Version:</b> "));
 	info = g_string_append(info, ((version && *version)
 					  ? version
@@ -459,14 +467,6 @@ void gui_display_about_module_dialog(gchar *modname)
 		}
 	}
 	info = g_string_append(info, "<br/>");
-
-	if (abbreviation && *abbreviation) {
-		info =
-		    g_string_append(info,
-				    _("<b>Module abbreviation:</b> "));
-		info = g_string_append(info, abbreviation);
-		info = g_string_append(info, "<br/>");
-	}
 
 	info = g_string_append(info, _("<b>Language:</b> "));
 	info = g_string_append(info, ((language && *language)
