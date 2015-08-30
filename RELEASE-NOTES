@@ -3,6 +3,16 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.0.4
+30 Aug 2015
+
+- Implemented dynamic allocation enhancement to replace survivability fix.
+- Updated language abbreviations to eliminate unknowns.
+- Fixed module installation messages so they are not lost.
+- Fixed abbrev support, to show abbrevs in all non-essential contexts.
+- Fixed maximization restoral (mostly gtk3; partial for gtk2).
+________________________________________________________________
+
 Release 4.0.3
 06 Aug 2015
 
@@ -25,34 +35,19 @@ Release 4.0.1
 30 Mar 2015
 
 - Completed webkit editor, due to replace gtkhtml editor.
-
 - Added Abbreviation module configuration support.
-
 - Added Glosses (Ruby) and Morpheme Segmentation display support.
-
 - Added obsolete module audit, during install and on maintenance page.
-
 - Added more informative "About" for modules.
-
 - Added status bar en/disable.
-
-- Removed BibleSync from Xiphos' source tree. It must be referenced as a
-  proper library.
-
+- Removed BibleSync from Xiphos' source, now referenced as a proper library.
 - Fixed studypad directory choice.
-
 - Fixed mis-handling of unreal "multiple verse" reference in URL handling.
-
 - Fixed editor's mis-handling of the link editor subdialog.
-
 - Updated Win32 URL clickability; updated "About Sword" URL properly.
-
 - Huge GTK3 compatibility cleanliness hackery.
-
 - WebKit2 compatibility hackery.
-
 - Fix compiler flag choices.
-
 - Numerous code internals updates due to cppcheck(1) diagnostics.
 ________________________________________________________________
 
