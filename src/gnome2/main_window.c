@@ -456,7 +456,7 @@ static gboolean on_configure_event(GtkWidget *widget,
 	settings.app_x = x;
 	settings.app_y = y;
 
-#ifdef USE_GTK_3
+#ifdef HAVE_GTK_312
 	sprintf(layout, "%d", gtk_window_is_maximized(GTK_WINDOW(widgets.app)));
 	xml_set_value("Xiphos", "layout", "maximized", layout);
 #endif
