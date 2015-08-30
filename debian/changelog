@@ -1,3 +1,9 @@
+xiphos-svn (4.0.4-0~svn) unstable; urgency=low
+
+  * New upstream release
+
+ -- Karl Kleinpaste <charcoal@users.sf.net>  Sun, 30 Aug 2015 12:13:00 +0000
+
 xiphos-svn (4.0.3-0~svn) unstable; urgency=low
 
   * New upstream release, urgent bugfix only
