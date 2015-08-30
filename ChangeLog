@@ -1,3 +1,7 @@
+2015-08-30  karl <charcoal@users.sf.net>
+
+	* 4.0.3 release.
+
 2015-08-17  karl <charcoal@users.sf.net>
 
 	* change language_set to grow dynamically, no limit.
