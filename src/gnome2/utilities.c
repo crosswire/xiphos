@@ -1101,7 +1101,7 @@ static int cmpstringp(const void *p1, const void *p2)
 	   pointers to char", but strcmp(3) arguments are "pointers
 	   to char", hence the following cast plus dereference */
 
-	return strcmp(*(char *const *)p1, *(char *const *)p2);
+	return strcoll(*(char *const *)p1, *(char *const *)p2);
 }
 
 /* retrieve the language set specific to the module type requested */
