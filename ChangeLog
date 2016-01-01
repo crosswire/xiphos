@@ -1,3 +1,7 @@
+2016-01-01  karl <charcoal@users.sf.net>
+
+	* change module list sort from strcmp() to strcoll().
+
 2015-08-30  karl <charcoal@users.sf.net>
 
 	* 4.0.3 release.
