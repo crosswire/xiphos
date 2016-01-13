@@ -1094,14 +1094,19 @@ static void language_add(const char *language, int module_type)
 	++(language_set[module_type].count);
 }
 
-/* comparator function pulled verbatim from qsort(3). */
+/* comparator function pulled verbatim from qsort(3) */
+/* but with function changed to ucol_strcollUTF8(3). */
+/* http://icu-project.org/apiref/icu4c/ucol_8h.html  */
 static int cmpstringp(const void *p1, const void *p2)
 {
 	/* The actual arguments to this function are "pointers to
 	   pointers to char", but strcmp(3) arguments are "pointers
 	   to char", hence the following cast plus dereference */
 
-	return strcoll(*(char *const *)p1, *(char *const *)p2);
+	return ucol_strcollUTF8(collator,
+				*(char *const *)p1, -1,
+				*(char *const *)p2, -1,
+				&collator_status);
 }
 
 /* retrieve the language set specific to the module type requested */
