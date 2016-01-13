@@ -411,6 +411,13 @@ def configure(conf):
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
 
+    conf.check_cfg(package='icu-i18n',
+                   args='--cflags --libs',
+                   uselib_store='ICUI18N',
+                   errmsg='fail',
+                   mandatory=True)
+    env.append_value('ALL_LIBS', 'ICUI18N')
+
     conf.check_cfg(package='biblesync',
                    args='"biblesync >= 1.1.2" --cflags --libs',
                    uselib_store='BIBLESYNC',
