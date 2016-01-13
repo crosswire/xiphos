@@ -1,10 +1,10 @@
-2016-01-01  karl <charcoal@users.sf.net>
+2016-01-13  karl <charcoal@users.sf.net>
 
-	* change module list sort from strcmp() to strcoll().
+	* change module lang sort from strcmp/strcoll to ICU ucol_strcollUTF8.
 
 2015-08-30  karl <charcoal@users.sf.net>
 
-	* 4.0.3 release.
+	* 4.0.4 release.
 
 2015-08-17  karl <charcoal@users.sf.net>
 

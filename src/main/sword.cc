@@ -88,6 +88,10 @@ using namespace sword;
 char *sword_locale = NULL;
 gboolean companion_activity = FALSE;
 
+/* Unicode collation necessities. */
+UCollator* collator;
+UErrorCode collator_status;
+
 extern gboolean valid_scripture_key;
 
 // these track together.  when one changes, so does the other.
@@ -787,6 +791,7 @@ void main_init_backend(void)
 	if (!lang)
 		lang = "C";
 	sword_locale = set_sword_locale(lang);
+	collator = ucol_open(sword_locale, &collator_status);
 	lang = LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName();
 
 	backend = new BackEnd();

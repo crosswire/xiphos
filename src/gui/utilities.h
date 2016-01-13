@@ -27,6 +27,18 @@
 #include "main/module_dialogs.h"
 #include <gsf/gsf-outfile.h>
 
+/* Unicode collation necessities */
+#include "unicode/utypes.h"
+#include "unicode/unorm.h"
+#include "unicode/localpointer.h"
+#include "unicode/parseerr.h"
+#include "unicode/uloc.h"
+#include "unicode/uset.h"
+#include "unicode/uscript.h"
+#include "unicode/ucol.h"
+extern UCollator* collator;
+extern UErrorCode collator_status;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
