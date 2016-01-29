@@ -3,15 +3,14 @@ Installation instructions
 
 On Linux install Xiphos through you package manager, for example on Fedora:
 
-    $ sudo yum install xiphos
+    $ sudo dnf install xiphos-gtk3
 
 Or on Debian, Ubuntu, or Linux Mint:
 
     $ sudo apt-get update
     $ sudo apt-get install xiphos
 
-If you use Windows download the .exe file from
-http://sourceforge.net/projects/gnomesword/files/Xiphos/3.2.2/xiphos-3.2.2-win32.exe/download
+If you use Windows download the .exe file from: http://xiphos.org/download/
 
 Compile Xiphos from source
 ==========================
@@ -24,7 +23,7 @@ Sourceforge. To do so, do:
 Now to compile the GTK3 version of Xiphos you need to make sure you have these
 packages installed:
 
-    $ sudo yum install gcc-c++ intltool gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk4-devel libxml2-devel libgsf-devel gconfmm26-devel sword-devel libuuid-devel gnome-doc-utils rarian rarian-compat biblesync-devel
+    $ sudo dnf install gcc-c++ intltool gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk4-devel libxml2-devel libgsf-devel gconfmm26-devel sword-devel libuuid-devel gnome-doc-utils rarian rarian-compat biblesync-devel
 
 Or for ubuntu, both GTK3 and GTK2 versions, install:
 

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * debug_glib_null.h - support to find NULL parms in glib printf() calls.
  *
- * Copyright (C) 2010-2015 Xiphos Developer Team
+ * Copyright (C) 2010-2016 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

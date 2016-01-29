@@ -294,7 +294,7 @@ msgstr "開發 Xiphos"
 
 #: ../src/gnome2/about_xiphos.c:129
 #, fuzzy
-msgid "Copyright © 2000-2015 Xiphos Development Team"
+msgid "Copyright © 2000-2016 Xiphos Development Team"
 msgstr "Xiphos 開發團隊版權所有 2000 - 2015"
 
 #: ../src/gnome2/about_xiphos.c:131

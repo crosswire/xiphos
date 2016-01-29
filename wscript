@@ -506,12 +506,12 @@ def build(bld):
 
 
     bld.install_files('${PACKAGE_DOC_DIR}', """
-        README
+        README.md
 	RELEASE-NOTES
 	COPYING
 	AUTHORS
 	ChangeLog
-	INSTALL
+	INSTALL.md
 	TODO
 	Xiphos.ogg
     """)

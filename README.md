@@ -1,25 +1,21 @@
-Xiphos
-======
+# Xiphos
 
 Xiphos is a Bible study application for Linux, UNIX, and Windows operating
 systems. It uses Sword to display Bibles, commentaries, dictionary, and other
 texts and images. Xiphos includes features such as, searching, biblesync,
 bookmarks, parallel study, and original language study.
 
-To install Xiphos, search in you package manager for xiphos and install the
+To install Xiphos, search in your package manager for xiphos and install the
 package. If you are using Windows, please download the exe from here:
 
-http://sourceforge.net/projects/gnomesword/files/Xiphos/4.0.0/xiphos-4.0.0-win32.exe/download
+http://xiphos.org/download/
 
-
-Building Xiphos
-===============
+## Building Xiphos
 
 Please see the INSTALL file.
 
 
-History and Acknowledgements
-============================
+## History and Acknowledgements
 
 Xiphos started life as the Sword Project's Cheatah program.
 
@@ -30,8 +26,8 @@ We wish to thank the folks who have put so much time and work into the Sword
 Project and then giving it to the world! God Bless you!
 
 
-Developing Xiphos
-=================
+## Developing Xiphos
+
 
 If you want to help develop Xiphos your help will be very appreciated!
 
@@ -50,8 +46,8 @@ Where /path/to/edited.c, the C or C++ file you edited. The option '-style=file'
 uses a predefined style file called .clang-format in the source tree.
 
 
-Thank you!
-==========
+## Thank you!
+
 
 We hope that your Bible study will be enhanced by Xiphos!
 
