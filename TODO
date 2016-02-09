@@ -1,8 +1,6 @@
-TODO:
-	* Completion of Sword 1.6's av11n integration.
+* Abbreviation support
+  * remove inconsistent use cases
+  * add manual abbrev choice
 
-For more information on feature requests:
-http://sourceforge.net/tracker/?group_id=5528&atid=355528
-
-For more bug information:
-http://sourceforge.net/tracker/?atid=105528&group_id=5528&func=browse
+For more information on bugs and feature requests:
+https://github.com/crosswire/xiphos/issues

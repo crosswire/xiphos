@@ -16,9 +16,9 @@ Compile Xiphos from source
 ==========================
 
 To compile Xiphos from source you will need to get a checkout of Xiphos from
-Sourceforge. To do so, do:
+GitHub. To do so, do:
 
-    $ svn checkout svn://svn.code.sf.net/p/gnomesword/code/trunk xiphos
+    $ git clone https://github.com/crosswire/xiphos.git
 
 Now to compile the GTK3 version of Xiphos you need to make sure you have these
 packages installed:

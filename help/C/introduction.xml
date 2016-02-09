@@ -77,8 +77,8 @@
        <warning>
          <para>&app; is currently in development, so this manual may not
          reflect the program as you see it. If it does not, please file a
-         bug at the <ulink type="http" url="http://sourceforge.net/projects/xiphos">
-	 project website</ulink>, or email <email>xiphos-developers@lists.sourceforge.net</email>.
+         bug at the <ulink type="http" url="https://github.com/crosswire/xiphos">
+	 project website</ulink>, or email <email>xiphos-developers@crosswire.org</email>.
          All help is appreciated, as it will improve the software.</para>
        </warning>
 

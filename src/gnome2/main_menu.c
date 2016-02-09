@@ -142,7 +142,7 @@ on_help_contents_activate(GtkMenuItem *menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_mailing_list_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	xiphos_open_default("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/");
+	xiphos_open_default("http://www.crosswire.org/mailman/listinfo/xiphos-users/");
 }
 
 /******************************************************************************
@@ -208,7 +208,7 @@ on_live_chat_activate(GtkMenuItem *menuitem, gpointer user_data)
  *						gpointer user_data)
  *
  * Description
- *   open web browser to sourceforge bug tracker
+ *   open web browser to github bug tracker
  *
  * Return value
  *   void

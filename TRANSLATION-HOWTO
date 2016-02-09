@@ -14,7 +14,7 @@ Preparation
 Make sure you have the GNU gettext package installed.
 Grab the latest versions of the source files of Xiphos in 
 Subversion :
-$ svn co https://gnomesword.svn.sourceforge.net/svnroot/gnomesword/trunk xiphos
+$ git clone https://github.com/crosswire/xiphos.git
 
 Translating Xiphos Application
 ---------------------------------- 
@@ -88,7 +88,7 @@ directory.
 $ xml2po -e -u YOUR-LANG.po ../C/*xml
 
 
-Don't forget to send YOUR-LANG.po files to gnomesword-developers@lists.sourceforge.net.
+Don't forget to send YOUR-LANG.po files to xiphos-developers@crosswire.org.
 
 
 "..and ye shall be witnesses unto me both in Jerusalem, and in all 

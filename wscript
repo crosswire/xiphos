@@ -288,7 +288,7 @@ def configure(conf):
 
     define('INSTALL_PREFIX', conf.escpath(sub('${PREFIX}/', env)))
     #dfn('LT_OBJDIR', '.libs') - what's the purpose?
-    define('PACKAGE_BUGREPORT','http://sourceforge.net/tracker/?group_id=5528&atid=105528' )
+    define('PACKAGE_BUGREPORT','https://github.com/crosswire/xiphos/issues' )
     define('PACKAGE_DATA_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
     define('PACKAGE_DOC_DIR', conf.escpath(env['DOCDIR']))
     define('PACKAGE_HELP_DIR', conf.escpath(sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env)))

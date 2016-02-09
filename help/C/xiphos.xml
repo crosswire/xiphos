@@ -86,9 +86,9 @@ Template last modified Apr 11, 2002
 
 	 <para>To report a bug or make a suggestion regarding the &appname;
 	   application or this manual, Use
-	   the <ulink url="http://sourceforge.net/tracker/?group_id=5528">
-	   Tracker on SourceForge</ulink> or the mailing
-	   lists <email>gnomesword-developers@lists.sourceforge.net</email>
+	   the <ulink url="https://github.com/crosswire/xiphos/issues">
+	   Tracker on GitHub</ulink> or the mailing
+	   lists <email>xiphos-developers@crosswire.org</email>
 	 </para>
     </legalnotice>
     
