@@ -665,7 +665,7 @@ void main_update_parallel_page(void)
 	if (settings.parallel_list) {
 		gchar *mod_name;
 		for (modidx = 0;
-		     mod_name = settings.parallel_list[modidx];
+		     (mod_name = settings.parallel_list[modidx]);
 		     modidx++) {
 			const gchar *rowcolor;
 			const char *real_mod = main_get_name(mod_name);
