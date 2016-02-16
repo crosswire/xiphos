@@ -131,8 +131,9 @@ gd	Gàidhlig
 gl	Galego
 # Gujarati
 gn	ગુજરાતી
-# Gothic (missing font: untranslated) 𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰
-got	Gothic
+# Gothic
+#got	Gothic
+got	𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰
 # Manx
 gv	Gaelg
 # Greek, Ancient (to 1453)
@@ -206,6 +207,8 @@ kw	Kernewek
 # Kirghiz
 ky	Кыргызча
 ky-Arab	Кыргызча
+# addition from IBT modules
+ky-Cyrl	кыргызча
 # Latin
 la	Latina
 # Letzeburgesch
@@ -993,6 +996,8 @@ bag	Tuki
 bah	Bahamas Creole English
 baj	Barakai
 bak	Bashkir
+# addition from IBT modules
+bak-Cyrl	Башкиры
 bal	Baluchi
 bam	Bambara
 ban	Balinese
@@ -1764,6 +1769,8 @@ cjo	Ashéninka Pajonal
 cjp	Cabécar
 cjr	Chorotega
 cjs	Shor
+# addition from IBT modules
+cjs-Cyrl	Шор тили
 cjv	Chuave
 cjy	Jinyu Chinese
 cka	Khumi Awa Chin
@@ -1782,6 +1789,8 @@ ckq	Kajakse
 ckr	Kairak
 cks	Tayo
 ckt	Chukot
+# addition from IBT modules
+ckt-Cyrl	Чуко́тский
 cku	Koasati
 ckv	Kavalan
 ckw	Western Cakchiquel
@@ -1874,7 +1883,8 @@ cre	Cree
 crf	Caramanta
 crg	Michif
 crh	Crimean Tatar
-crh-Cyrl	Crimean Tatar
+# addition from IBT modules
+crh-Cyrl	Къырымтатарджа
 cri	Sãotomense
 crj	Southern East Cree
 crk	Plains Cree
@@ -1982,6 +1992,8 @@ dao	Daai Chin
 dap	Nisi (India)
 daq	Dandami Maria
 dar	Dargwa
+# addition from IBT modules
+dar-Cyrl	дарганти
 das	Daho-Doo
 dau	Dar Sila Daju
 dav	Taita
@@ -2666,7 +2678,7 @@ gop	Yeretuar
 goq	Gorap
 gor	Gorontalo
 gos	Gronings
-got	Gothic
+#got	Gothic				// dup
 gou	Gavar
 gow	Gorowa
 gox	Gobu
@@ -3269,6 +3281,8 @@ jya	Jiarong
 jye	Judeo-Yemeni Arabic
 jyy	Jaya
 kaa	Kara-Kalpak
+# addition from IBT modules
+kaa-Cyrl	Қарақалпақ
 kab	Kabyle
 kac	Kachin
 kad	Kadara
@@ -3285,6 +3299,8 @@ kam	Kamba (Kenya)
 kan	ಕನ್ನಡ
 kao	Xaasongaxango
 kap	Bezhta
+# addition from IBT modules
+kap-Cyrl	бежкьалас
 kaq	Capanahua
 kas	Kashmiri
 kat	Georgian
