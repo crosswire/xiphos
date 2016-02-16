@@ -266,8 +266,12 @@ static gint string_is_color(gchar *color)
 		return 0;
 	}
 	for (i = 1; i < 7; i++) {
-		if ((color[i] > 102) || (color[i] < 48) || ((color[i] > 57) && (color[i] < 65)) || ((color[i] > 70) && (color[i] < 97))) {
-			XI_warning(("string_is_color, %d in %s is not from a color, it is %d\n", i, color, color[i]));
+		if ((color[i] > 102) || 
+		    (color[i] < 48) || 
+		    ((color[i] > 57) && (color[i] < 65)) || 
+		    ((color[i] > 70) && (color[i] < 97))) {
+			XI_warning(("string_is_color, %d in %s is not from a color, it is %d\n",
+				    i, color, color[i]));
 			return 0;
 		}
 	}
@@ -935,27 +939,21 @@ on_radiobutton_biblesync_mode(GtkToggleButton *togglebutton,
 					      "again to see why."));
 			settings.bs_mode = new_mode;
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radio_button.bs_mode_off),
-						     (settings.bs_mode ==
-						      0));
+						     (settings.bs_mode == 0));
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radio_button.bs_mode_personal),
-						     (settings.bs_mode ==
-						      1));
+						     (settings.bs_mode == 1));
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radio_button.bs_mode_speaker),
-						     (settings.bs_mode ==
-						      2));
+						     (settings.bs_mode == 2));
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radio_button.bs_mode_audience),
-						     (settings.bs_mode ==
-						      3));
+						     (settings.bs_mode == 3));
 		}
 
 		if (biblesync_personal()) {
-			gtk_widget_set_sensitive(check_button.bs_privacy,
-						 TRUE);
+			gtk_widget_set_sensitive(check_button.bs_privacy, TRUE);
 			on_checkbutton_biblesync_toggled(GTK_TOGGLE_BUTTON(check_button.bs_privacy),
 							 &settings.bs_privacy);
 		} else {
-			gtk_widget_set_sensitive(check_button.bs_privacy,
-						 FALSE);
+			gtk_widget_set_sensitive(check_button.bs_privacy, FALSE);
 		}
 	}
 }

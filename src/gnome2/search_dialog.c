@@ -815,10 +815,13 @@ void mod_list_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 
 void optimized_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 {
-	if (gtk_toggle_button_get_active(togglebutton))
+	if (gtk_toggle_button_get_active(togglebutton)) {
 		gtk_widget_show(search1.button_intro_lucene);
-	else
+		gtk_widget_set_sensitive(search1.cb_case_sensitive, FALSE);
+	} else {
 		gtk_widget_hide(search1.button_intro_lucene);
+		gtk_widget_set_sensitive(search1.cb_case_sensitive, TRUE);
+	}
 }
 
 /******************************************************************************
@@ -1948,6 +1951,9 @@ static void _create_search_dialog(void)
 
 	settings.display_advsearch = 1;
 	xml_set_value("Xiphos", "layout", "advsearchopen", "1");
+
+	/* disable match case initially */
+	gtk_widget_set_sensitive(search1.cb_case_sensitive, FALSE);
 
 	/*
 	 * (from xiphos.c)

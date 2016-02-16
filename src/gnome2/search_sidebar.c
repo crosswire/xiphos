@@ -133,6 +133,32 @@ static void on_rrbUseBounds_toggled(GtkToggleButton *togglebutton,
 
 /******************************************************************************
  * Name
+ *   sidebar_optimized_toggled
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void sidebar_optimized_toggled(GtkToggleButton *togglebutton,
+ *			    gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void sidebar_optimized_toggled(GtkToggleButton *togglebutton, gpointer user_data)
+{
+	if (gtk_toggle_button_get_active(togglebutton)) {
+		gtk_widget_set_sensitive(ss.ckbCaseSensitive, FALSE);
+	} else {
+		gtk_widget_set_sensitive(ss.ckbCaseSensitive, TRUE);
+	}
+}
+
+/******************************************************************************
+ * Name
  *   gui_create_shortcutbar_search
  *
  * Synopsis
@@ -295,7 +321,7 @@ void gui_create_search_sidebar(void)
 	gtk_container_set_border_width(GTK_CONTAINER(vbox2), 4);
 
 	ss.rbMultiword =
-	    gtk_radio_button_new_with_label(NULL, _("Multi word"));
+	    gtk_radio_button_new_with_label(NULL, _("Optimized (\"Lucene\")"));
 	gtk_widget_show(ss.rbMultiword);
 	gtk_box_pack_start(GTK_BOX(vbox2), ss.rbMultiword, FALSE,
 			   FALSE, 0);
@@ -498,4 +524,10 @@ void gui_create_search_sidebar(void)
 
 	g_signal_connect(G_OBJECT(ss.advanced_search), "clicked",
 			 G_CALLBACK(main_open_search_dialog), NULL);
+
+	/* prep for toggle case sensitive availability per optimized */
+	g_signal_connect(ss.rbMultiword, "toggled",
+			 G_CALLBACK(sidebar_optimized_toggled), NULL);
+	/* initialize it off */
+	gtk_widget_set_sensitive(ss.ckbCaseSensitive, FALSE);
 }
