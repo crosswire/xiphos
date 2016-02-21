@@ -6,7 +6,7 @@ This document will contain some guidelines for writing/submitting a good patch
 to the Xiphos documentation project.
 
 Any new features or large scale work should first be discussed on the
-xiphos-developers mailing-list first.  This will ensure the idea fits in the
+xiphos-devel mailing-list first.  This will ensure the idea fits in the
 direction we wish to take Xiphos, and also that the effort is not
 duplicated.
 

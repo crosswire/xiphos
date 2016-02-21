@@ -19,7 +19,7 @@ Build-Depends: autotools-dev,
                libclucene-dev 
 Section: gnome
 Priority: optional
-Maintainer: Xiphos Developer Team <xiphos-developers@crosswire.org>
+Maintainer: Xiphos Developer Team <xiphos-devel@crosswire.org>
 Standards-Version: 3.8.2
 
 Package: xiphos-svn

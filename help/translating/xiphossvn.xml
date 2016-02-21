@@ -5,7 +5,7 @@
   <para>Make sure that you have the GNU gettext package installed. Grab the
     latest versions of the source files of &app; in Subversion: </para>
   <para><command>
-      svn co https://gnomesword.svn.sourceforge.net/svnroot/gnomesword/trunk xiphos</command>
+      git clone https://github.com/crosswire/xiphos.git</command>
   </para>
 </sect2>
 

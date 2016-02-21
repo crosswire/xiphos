@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright © 2014-2016 Xiphos Development Team <xiphos-developers@crosswire.org> -->
+<!-- Copyright © 2014-2016 Xiphos Development Team <xiphos-devel@crosswire.org> -->
 <component type="desktop">
  <id>xiphos.desktop</id>
  <metadata_license>CC0-1.0</metadata_license>
@@ -49,6 +49,6 @@
   </screenshot>
  </screenshots>
  <url type="homepage">https://github.com/crosswire/xiphos/</url>
- <updatecontact>xiphos-developers@crosswire.org</updatecontact>
+ <updatecontact>xiphos-devel@crosswire.org</updatecontact>
  <project_group>GNOME</project_group>
 </component>
