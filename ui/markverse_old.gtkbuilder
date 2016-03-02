@@ -137,7 +137,7 @@
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="tooltip-text" translatable="yes">Create new folder</property>
+                <property name="tooltip-text" translatable="yes">Add annotation. The verse will display with highlight colors and a *u marker to show content.</property>
                 <accessibility>
                   
                 </accessibility>
@@ -180,7 +180,7 @@
                 </child>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="a11y-button11">
-                    <property name="AtkObject::accessible-name" translatable="yes">New Folder</property>
+                    <property name="AtkObject::accessible-name" translatable="yes">New Annotation</property>
                   </object>
                 </child>
               </object>
@@ -198,6 +198,7 @@
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
+                <property name="tooltip-text" translatable="yes">Remove annotation.</property>
                 <accessibility>
                   
                 </accessibility>
@@ -226,7 +227,7 @@
                 </accessibility>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="a11y-button21">
-                    <property name="AtkObject::accessible-name" translatable="yes">Cancel Bookmark</property>
+                    <property name="AtkObject::accessible-name" translatable="yes">Cancel Annotation</property>
                   </object>
                 </child>
               </object>
@@ -245,7 +246,7 @@
         </child>
         <child internal-child="accessible">
           <object class="AtkObject" id="a11y-dialog-vbox11">
-            <property name="AtkObject::accessible-name" translatable="yes">Bookmark Dialog</property>
+            <property name="AtkObject::accessible-name" translatable="yes">Annotation Dialog</property>
           </object>
         </child>
       </object>

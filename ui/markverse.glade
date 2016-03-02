@@ -13,7 +13,7 @@
       <widget class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <accessibility>
-          <atkproperty name="AtkObject::accessible-name" translatable="yes">Bookmark Dialog</atkproperty>
+          <atkproperty name="AtkObject::accessible-name" translatable="yes">Annotation Dialog</atkproperty>
         </accessibility>
         <child>
           <widget class="GtkVBox" id="vbox1">
@@ -124,9 +124,9 @@
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="tooltip" translatable="yes">Create new folder</property>
+                <property name="tooltip" translatable="yes">Add annotation. The verse will display with highlight colors and a *u marker to show content.</property>
                 <accessibility>
-                  <atkproperty name="AtkObject::accessible-name" translatable="yes">New Folder</atkproperty>
+                  <atkproperty name="AtkObject::accessible-name" translatable="yes">New Annotation</atkproperty>
                 </accessibility>
                 <child>
                   <widget class="GtkAlignment" id="alignment1">
@@ -181,6 +181,7 @@
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
+                <property name="tooltip" translatable="yes">Remove annotation.</property>
                 <accessibility>
                   <atkproperty name="AtkObject::accessible-name" translatable="yes">Unmark</atkproperty>
                 </accessibility>
@@ -201,7 +202,7 @@
                 <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
                 <accessibility>
-                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Cancel Bookmark</atkproperty>
+                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Cancel Annotation</atkproperty>
                 </accessibility>
               </widget>
               <packing>

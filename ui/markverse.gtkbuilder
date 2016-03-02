@@ -25,7 +25,7 @@
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="tooltip_text" translatable="yes">Create new folder</property>
+                <property name="tooltip_text" translatable="yes">Add annotation. The verse will display with highlight colors and a *u marker to show content.</property>
                 <child>
                   <object class="GtkAlignment" id="alignment1">
                     <property name="visible">True</property>
@@ -68,7 +68,7 @@
                 </child>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="button1-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">New Folder</property>
+                    <property name="AtkObject::accessible-name" translatable="yes">New Annotation</property>
                   </object>
                 </child>
               </object>
@@ -86,6 +86,7 @@
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
+                <property name="tooltip_text" translatable="yes">Remove annotation.</property>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="button3-atkobject">
                     <property name="AtkObject::accessible-name" translatable="yes">Unmark</property>
@@ -108,7 +109,7 @@
                 <property name="use_stock">True</property>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="button2-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Cancel Bookmark</property>
+                    <property name="AtkObject::accessible-name" translatable="yes">Cancel Annotation</property>
                   </object>
                 </child>
               </object>
@@ -244,7 +245,7 @@
         </child>
         <child internal-child="accessible">
           <object class="AtkObject" id="dialog-vbox1-atkobject">
-            <property name="AtkObject::accessible-name" translatable="yes">Bookmark Dialog</property>
+            <property name="AtkObject::accessible-name" translatable="yes">Annotation Dialog</property>
           </object>
         </child>
       </object>

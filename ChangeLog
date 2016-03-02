@@ -1,3 +1,16 @@
+2016-03-02  karl <charcoal@users.sf.net>
+
+	* add pixmaps/screenshots directory, using images from sourceforge.
+	* fix #749: annotation dialog tooltips.
+	
+2016-02-15  karl <charcoal@users.sf.net>
+
+	* move to github: import source, add .gitignore & others, change
+	  some text files to *.md names, update refs sourceforge->github.
+	* delint a warning in parallel_view.cc.
+	* add language abbrevs from IBT modules.
+	* disable "match case" in searches when in clucene mode.
+	
 2016-01-13  karl <charcoal@users.sf.net>
 
 	* change module lang sort from strcmp/strcoll to ICU ucol_strcollUTF8.
