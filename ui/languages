@@ -1853,6 +1853,8 @@ con	Cofán
 coo	Comox
 # enabled plain latin name because font-specific name causes grief.
 cop	Coptic
+# addition from Sahidic module, name determined from wikipedia.
+copt	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
 coq	Coquille
 cor	Cornish
 cos	Corsican
