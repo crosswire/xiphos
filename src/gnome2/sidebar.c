@@ -1502,26 +1502,42 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 	gtk_grid_attach(GTK_GRID(table2), button_bookmarks, 1, 0, 1, 1);
 	gtk_button_set_relief(GTK_BUTTON(button_bookmarks),
 			      GTK_RELIEF_HALF);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(button_bookmarks), FALSE);
+#else
 	gtk_button_set_focus_on_click(GTK_BUTTON(button_bookmarks), FALSE);
+#endif
 
 	button_search = gtk_toggle_button_new_with_mnemonic(_("Search"));
 	gtk_widget_show(button_search);
 	gtk_grid_attach(GTK_GRID(table2), button_search, 0, 1, 1, 1);
 	gtk_button_set_relief(GTK_BUTTON(button_search), GTK_RELIEF_HALF);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(button_search), FALSE);
+#else
 	gtk_button_set_focus_on_click(GTK_BUTTON(button_search), FALSE);
+#endif
 
 	button_v_lists =
 	    gtk_toggle_button_new_with_mnemonic(_("Verse List"));
 	gtk_widget_show(button_v_lists);
 	gtk_grid_attach(GTK_GRID(table2), button_v_lists, 1, 1, 1, 1);
 	gtk_button_set_relief(GTK_BUTTON(button_v_lists), GTK_RELIEF_HALF);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(button_v_lists), FALSE);
+#else
 	gtk_button_set_focus_on_click(GTK_BUTTON(button_v_lists), FALSE);
+#endif
 
 	button_modules = gtk_toggle_button_new_with_mnemonic(_("Modules"));
 	gtk_widget_show(button_modules);
 	gtk_grid_attach(GTK_GRID(table2), button_modules, 0, 0, 1, 1);
 	gtk_button_set_relief(GTK_BUTTON(button_modules), GTK_RELIEF_HALF);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(button_modules), FALSE);
+#else
 	gtk_button_set_focus_on_click(GTK_BUTTON(button_modules), FALSE);
+#endif
 
 #else
 

@@ -357,8 +357,11 @@ GtkWidget *gui_navbar_book_new(void)
 
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_left),
 			      GTK_RELIEF_NONE);
-	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_left),
-				      FALSE);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(navbar_book.button_left), FALSE);
+#else
+	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_left), FALSE);
+#endif
 
 	image1 =
 #ifdef HAVE_GTK_310
@@ -377,8 +380,11 @@ GtkWidget *gui_navbar_book_new(void)
 				    _("Go to previous item"));
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_up),
 			      GTK_RELIEF_NONE);
-	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_up),
-				      FALSE);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(navbar_book.button_up), FALSE);
+#else
+	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_up), FALSE);
+#endif
 
 	image1 =
 #ifdef HAVE_GTK_310
@@ -397,8 +403,11 @@ GtkWidget *gui_navbar_book_new(void)
 				    _("Go to next item"));
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_down),
 			      GTK_RELIEF_NONE);
-	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_down),
-				      FALSE);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(navbar_book.button_down), FALSE);
+#else
+	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_down), FALSE);
+#endif
 
 	image2 =
 #ifdef HAVE_GTK_310
@@ -419,8 +428,11 @@ GtkWidget *gui_navbar_book_new(void)
 
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_right),
 			      GTK_RELIEF_NONE);
-	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_right),
-				      FALSE);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(navbar_book.button_right), FALSE);
+#else
+	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_right), FALSE);
+#endif
 
 	image1 =
 #ifdef HAVE_GTK_310

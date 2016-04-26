@@ -361,6 +361,9 @@ def configure(conf):
         conf.check_cfg(package="gtk+-3.0",
                        atleast_version = "3.14",
                        uselib_store="GTK_314")
+        conf.check_cfg(package="gtk+-3.0",
+                       atleast_version = "3.20",
+                       uselib_store="GTK_320")
         conf.define('USE_GTK_3', 1)
         conf.define('USE_GTKBUILDER', 1)
         if opt.webkit_editor:

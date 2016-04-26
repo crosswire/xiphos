@@ -301,7 +301,11 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d)
 
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_left),
 			      GTK_RELIEF_NONE);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(d->navbar_book.button_left), FALSE);
+#else
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_left), FALSE);
+#endif
 
 #ifdef HAVE_GTK_310
 	image1 = gtk_image_new_from_icon_name("go-previous",
@@ -322,8 +326,12 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d)
 				    _("Go to previous item"));
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_up),
 			      GTK_RELIEF_NONE);
-	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_up),
-				      FALSE);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(d->navbar_book.button_up), FALSE);
+#else
+	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_up), FALSE);
+#endif
+
 #ifdef HAVE_GTK_310
 	image1 = gtk_image_new_from_icon_name("go-up",
 					      GTK_ICON_SIZE_BUTTON);
@@ -342,7 +350,11 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d)
 				    _("Go to next item"));
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_down),
 			      GTK_RELIEF_NONE);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(d->navbar_book.button_down), FALSE);
+#else
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_down), FALSE);
+#endif
 	image2 =
 #ifdef HAVE_GTK_310
 	    gtk_image_new_from_icon_name("go-down", GTK_ICON_SIZE_BUTTON);
@@ -363,8 +375,11 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d)
 
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_right),
 			      GTK_RELIEF_NONE);
-	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_right),
-				      FALSE);
+#ifdef HAVE_GTK_320
+	gtk_widget_set_focus_on_click(GTK_WIDGET(d->navbar_book.button_right), FALSE);
+#else
+	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_right), FALSE);
+#endif
 #ifdef HAVE_GTK_310
 	image1 = gtk_image_new_from_icon_name("go-next",
 					      GTK_ICON_SIZE_BUTTON);
