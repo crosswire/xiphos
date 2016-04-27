@@ -1646,6 +1646,7 @@ on_toolbutton12_clicked(GtkToolButton *toolbutton, gpointer user_data)
 /* add html widgets */
 static void _add_html_widget(GtkWidget *vbox)
 {
+#ifndef USE_WEBKIT2
 	GtkWidget *scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE, 0);
@@ -1655,13 +1656,19 @@ static void _add_html_widget(GtkWidget *vbox)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
+#endif
+
 	search1.preview_html =
 	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
+	gtk_widget_show(search1.preview_html);
+#ifdef USE_WEBKIT2
+	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE, TRUE, 0);
+#else
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  search1.preview_html);
 	gtk_box_pack_start(GTK_BOX(scrolledwindow), search1.preview_html,
 			   TRUE, TRUE, 0);
-	gtk_widget_show(search1.preview_html);
+#endif
 }
 
 /******************************************************************************

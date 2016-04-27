@@ -124,27 +124,37 @@ _popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 GtkWidget *gui_create_commentary_pane(void)
 {
 	GtkWidget *box_comm;
+#ifndef USE_WEBKIT2
 	GtkWidget *scrolledwindow;
+#endif
 
 	UI_VBOX(box_comm, FALSE, 0);
 	gtk_widget_show(box_comm);
 
+#ifndef USE_WEBKIT2
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box_comm),
 			   scrolledwindow, TRUE, TRUE, 0);
+#endif
 
 	widgets.html_comm =
 	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, COMMENTARY_TYPE));
 	gtk_widget_show(widgets.html_comm);
+#ifdef USE_WEBKIT2
+	gtk_box_pack_start(GTK_BOX(box_comm), widgets.html_comm, TRUE, TRUE, 0);
+#else
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_comm);
+#endif
 
 	g_signal_connect((gpointer)widgets.html_comm,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb), NULL);
+#ifndef USE_WEBKIT2
 	g_signal_connect((gpointer)scrolledwindow, "enter_notify_event",
 			 G_CALLBACK(on_enter_notify_event), NULL);
+#endif
 
 	return box_comm;
 }

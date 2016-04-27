@@ -207,7 +207,9 @@ void gui_create_commentary_dialog(DIALOG_DATA *d, gboolean do_edit)
 	GtkWidget *vbox_toolbars;
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame19;
+#ifndef USE_WEBKIT2
 	GtkWidget *scrolledwindow38;
+#endif
 
 	cur_d = d;
 	d->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -242,6 +244,7 @@ void gui_create_commentary_dialog(DIALOG_DATA *d, gboolean do_edit)
 	gtk_box_pack_start(GTK_BOX(vbox30), frame19, TRUE, TRUE, 0);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame19), GTK_SHADOW_IN);
 
+#ifndef USE_WEBKIT2
 	scrolledwindow38 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow38);
 	gtk_container_add(GTK_CONTAINER(frame19), scrolledwindow38);
@@ -251,13 +254,17 @@ void gui_create_commentary_dialog(DIALOG_DATA *d, gboolean do_edit)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow38,
 					    settings.shadow_type);
+#endif
 
 	d->html =
 	    GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA *)d), TRUE,
 				       DIALOG_COMMENTARY_TYPE));
-
-	gtk_container_add(GTK_CONTAINER(scrolledwindow38), d->html);
 	gtk_widget_show(d->html);
+#ifdef USE_WEBKIT2
+	gtk_container_add(GTK_CONTAINER(frame19), d->html);
+#else
+	gtk_container_add(GTK_CONTAINER(scrolledwindow38), d->html);
+#endif
 	g_signal_connect((gpointer)d->html,
 			 "popupmenu_requested",
 			 G_CALLBACK(_popupmenu_requested_cb),

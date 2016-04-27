@@ -340,7 +340,9 @@ static GtkWidget *create_parallel_dialog(void)
 	GtkWidget *dialog_action_area25;
 	GtkWidget *hbuttonbox4;
 	GtkWidget *btnDockInt;
+#ifndef USE_WEBKIT2
 	GtkWidget *scrolled_window;
+#endif
 	gchar title[256];
 
 	sprintf(title, "%s - %s", settings.program_title, _("Parallel"));
@@ -399,6 +401,7 @@ static GtkWidget *create_parallel_dialog(void)
 	}
 #endif /* 0 */
 
+#ifndef USE_WEBKIT2
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_box_pack_start(GTK_BOX(vboxInt), scrolled_window, TRUE, TRUE,
@@ -409,13 +412,17 @@ static GtkWidget *create_parallel_dialog(void)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolled_window,
 					    settings.shadow_type);
+#endif
 
 	widgets.html_parallel_dialog =
 	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel_dialog);
-
+#ifdef USE_WEBKIT2
+	gtk_box_pack_start(GTK_BOX(vboxInt), widgets.html_parallel_dialog, TRUE, TRUE, 0);
+#else
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
+#endif
 
 	g_signal_connect((gpointer)widgets.html_parallel_dialog,
 			 "popupmenu_requested",

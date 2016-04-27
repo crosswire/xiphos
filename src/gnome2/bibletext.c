@@ -107,20 +107,28 @@ _popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *vbox;
+#ifndef USE_WEBKIT2
 	GtkWidget *scrolledwindow;
+#endif
 
 	UI_VBOX(vbox, FALSE, 0);
 	gtk_widget_show(vbox);
 
+#ifndef USE_WEBKIT2
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE, 0);
+#endif
 
 	widgets.html_text =
 	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, TEXT_TYPE));
 	gtk_widget_show(widgets.html_text);
+#ifdef USE_WEBKIT2
+	gtk_box_pack_start(GTK_BOX(vbox), widgets.html_text, TRUE, TRUE, 0);
+#else
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_text);
+#endif
 
 	g_signal_connect((gpointer)widgets.html_text,
 			 "popupmenu_requested",

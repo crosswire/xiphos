@@ -1442,7 +1442,9 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 	GtkWidget *scrolledwindow4;
 	GtkWidget *scrolledwindow_bm;
 	GtkWidget *title_label = NULL;
+#ifndef USE_WEBKIT2
 	GtkWidget *scrolledwindow;
+#endif
 
 	GtkWidget *table2;
 
@@ -1465,6 +1467,7 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 			 (gchar *)"paned_sidebar");
 	widgets.shortcutbar = widgets.paned_sidebar;
 
+#ifndef USE_WEBKIT2
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview),
@@ -1475,12 +1478,17 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
+#endif
 
 	sidebar.html_viewer_widget =
 	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
+	gtk_widget_show(sidebar.html_viewer_widget);
+#ifdef USE_WEBKIT2
+	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), sidebar.html_viewer_widget, TRUE, TRUE, 0);
+#else
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  sidebar.html_viewer_widget);
-	gtk_widget_show(sidebar.html_viewer_widget);
+#endif
 
 /* ---------------------------------------------------------------- */
 /* 2x2 button box set: modules/bookmarks/search/vlist */

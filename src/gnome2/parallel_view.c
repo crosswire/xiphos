@@ -176,13 +176,16 @@ _popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 void gui_create_parallel_page(void)
 {
 	GtkWidget *label;
+#ifndef USE_WEBKIT2
 	GtkWidget *scrolled_window;
+#endif
 
 	/*
 	 * parallel page
 	 */
 	settings.dockedInt = TRUE;
 
+#ifndef USE_WEBKIT2
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
@@ -190,14 +193,18 @@ void gui_create_parallel_page(void)
 				       GTK_POLICY_ALWAYS);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
 			  scrolled_window);
+#endif
 
 	widgets.html_parallel =
 	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel);
-
+#ifdef USE_WEBKIT2
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), widgets.html_parallel);
+#else
 	widgets.frame_parallel = scrolled_window;
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel);
+#endif
 
 	g_signal_connect((gpointer)widgets.html_parallel,
 			 "popupmenu_requested",

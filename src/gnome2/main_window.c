@@ -879,7 +879,9 @@ void create_mainwindow(void)
 	GtkWidget *hbox25;
 	GtkWidget *tab_button_icon;
 	GtkWidget *label;
+#ifndef USE_WEBKIT2
 	GtkWidget *scrolledwindow;
+#endif
 	GtkWidget *box_book;
 	GdkPixbuf *pixbuf;
 	/*
@@ -1071,6 +1073,7 @@ void create_mainwindow(void)
 
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.vbox_previewer), 2);
 
+#ifndef USE_WEBKIT2
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), scrolledwindow,
@@ -1081,11 +1084,15 @@ void create_mainwindow(void)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
+#endif
 	widgets.html_previewer_text = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, VIEWER_TYPE));
+	gtk_widget_show(widgets.html_previewer_text);
+#ifdef USE_WEBKIT2
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), widgets.html_previewer_text, TRUE, TRUE, 0);
+#else
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_previewer_text);
-
-	gtk_widget_show(widgets.html_previewer_text);
+#endif
 
 	/*
 	 * commentary/book notebook

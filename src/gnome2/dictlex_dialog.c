@@ -308,7 +308,9 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	GtkWidget *btnSyncDL;
 	//      GtkWidget *label205;
 	GtkWidget *frameDictHTML;
+#ifndef USE_WEBKIT2
 	GtkWidget *scrolledwindowDictHTML;
+#endif
 	GtkWidget *scrolledwindow;
 	//      GtkWidget *label;
 	GtkListStore *model;
@@ -395,6 +397,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_widget_show(frameDictHTML);
 	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
+#ifndef USE_WEBKIT2
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowDictHTML);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML),
@@ -405,13 +408,17 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindowDictHTML,
 					    settings.shadow_type);
+#endif
 
 	dlg->html =
 	    GTK_WIDGET(XIPHOS_HTML_NEW((DIALOG_DATA *)dlg, TRUE,
 				       DIALOG_DICTIONARY_TYPE));
-
+#ifdef USE_WEBKIT2
+	gtk_container_add(GTK_CONTAINER(frameDictHTML), dlg->html);
+#else
 	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
 			  dlg->html);
+#endif
 	gtk_widget_show(dlg->html);
 	g_signal_connect((gpointer)dlg->html,
 			 "popupmenu_requested",
