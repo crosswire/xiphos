@@ -858,18 +858,16 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 
 	g_return_val_if_fail(label_text != NULL, NULL);
 #ifdef HAVE_GTK_310
-	tbinf->button_close =
-	    gtk_button_new_from_icon_name("window-close-symbolic",
-					  GTK_ICON_SIZE_MENU);
+	tbinf->button_close = gtk_button_new_from_icon_name("window-close-symbolic", GTK_ICON_SIZE_MENU);
+#ifdef HAVE_GTK_320
+	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
 #else
-	GtkWidget *tmp_toolbar_icon =
-		gtk_image_new_from_stock(GTK_STOCK_CLOSE,
-					 GTK_ICON_SIZE_MENU);
+#endif
+#else
+	GtkWidget *tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
 	tbinf->button_close = gtk_button_new();
-	gtk_button_set_image(GTK_BUTTON(tbinf->button_close),
-			     tmp_toolbar_icon);
-	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close),
-			      GTK_RELIEF_NONE);
+	gtk_button_set_image(GTK_BUTTON(tbinf->button_close), tmp_toolbar_icon);
+	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
 #endif
 
 #ifndef USE_GTK_3
