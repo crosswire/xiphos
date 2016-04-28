@@ -2,7 +2,7 @@
 *.swp
 *~
 .lock-wscript
-.waf-1.5.15-49b2085e76313a25671ed8aa1c64079f/
+.waf*/
 build-win*/
 build/
 src/examples/ipc-interface.xml
