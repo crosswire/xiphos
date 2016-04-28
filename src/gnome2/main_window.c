@@ -899,11 +899,9 @@ void create_mainwindow(void)
 	widgets.studypad_dialog = NULL;
 
 	widgets.app = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_title(GTK_WINDOW(widgets.app),
-			     _("Xiphos - Bible Study Software"));
+	gtk_window_set_title(GTK_WINDOW(widgets.app), _("Xiphos - Bible Study Software"));
 
-	g_object_set_data(G_OBJECT(widgets.app),
-			  "widgets.app", widgets.app);
+	g_object_set_data(G_OBJECT(widgets.app), "widgets.app", widgets.app);
 	gtk_widget_set_size_request(widgets.app, 680, 425);
 	gtk_widget_set_can_focus(widgets.app, 1);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
@@ -952,53 +950,40 @@ void create_mainwindow(void)
 	UI_HBOX(widgets.hboxtb, FALSE, 0);
 	if (settings.browsing)
 		gtk_widget_show(widgets.hboxtb);
-	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.hboxtb,
-			   FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.hboxtb, FALSE, FALSE, 0);
 
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
 
-	tab_button_icon =
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name("tab-new-symbolic",
-					 GTK_ICON_SIZE_SMALL_TOOLBAR);
+	tab_button_icon = gtk_image_new_from_icon_name("tab-new-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
 #else
-	    gtk_image_new_from_stock(GTK_STOCK_ADD,
-				     GTK_ICON_SIZE_SMALL_TOOLBAR);
+	tab_button_icon = gtk_image_new_from_stock(GTK_STOCK_ADD, GTK_ICON_SIZE_SMALL_TOOLBAR);
 #endif
 
 	gtk_widget_show(tab_button_icon);
-	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab),
-			  tab_button_icon);
-	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab),
-			      GTK_RELIEF_NONE);
-	gtk_box_pack_start(GTK_BOX(widgets.hboxtb), widgets.button_new_tab,
-			   FALSE, FALSE, 0);
-	gtk_widget_set_tooltip_text(widgets.button_new_tab,
-				    _("Open a new tab"));
+	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);
+	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab), GTK_RELIEF_NONE);
+	gtk_box_pack_start(GTK_BOX(widgets.hboxtb), widgets.button_new_tab, FALSE, FALSE, 0);
+	gtk_widget_set_tooltip_text(widgets.button_new_tab, _("Open a new tab"));
 
 	widgets.notebook_main = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_main);
-	gtk_box_pack_start(GTK_BOX(widgets.hboxtb),
-			   widgets.notebook_main, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.hboxtb), widgets.notebook_main, TRUE, TRUE, 0);
 	gtk_widget_set_size_request(widgets.notebook_main, -1, 25);
-	gtk_notebook_set_scrollable(GTK_NOTEBOOK(widgets.notebook_main),
-				    TRUE);
+	gtk_notebook_set_scrollable(GTK_NOTEBOOK(widgets.notebook_main), TRUE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_main));
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main),
-				     FALSE);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main), FALSE);
 	/* main passage tabbed notebook end */
 
 	UI_VBOX(widgets.page, FALSE, 0);
 	gtk_widget_show(widgets.page);
-	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.page, TRUE,
-			   TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.page, TRUE, TRUE, 0);
 	/*
 	 * nav toolbar
 	 */
 	nav_toolbar = gui_navbar_versekey_new();
-	gtk_box_pack_start(GTK_BOX(widgets.page), nav_toolbar, FALSE,
-			   FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.page), nav_toolbar, FALSE, FALSE, 0);
 	/*
 	 * end nav toolbar
 	 */
@@ -1006,61 +991,46 @@ void create_mainwindow(void)
 	/**widgets.hpaned********/
 	widgets.hpaned = UI_HPANE();
 	gtk_widget_show(widgets.hpaned);
-	gtk_box_pack_start(GTK_BOX(widgets.page), widgets.hpaned, TRUE,
-			   TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.page), widgets.hpaned, TRUE, TRUE, 0);
 
 	/**widgets.vpaned********/
 	widgets.vpaned = UI_VPANE();
 	gtk_widget_show(widgets.vpaned);
 	gtk_widget_set_size_request(widgets.vpaned, 50, -1);
-	gtk_paned_pack1(GTK_PANED(widgets.hpaned), widgets.vpaned, TRUE,
-			FALSE);
+	gtk_paned_pack1(GTK_PANED(widgets.hpaned), widgets.vpaned, TRUE, FALSE);
 
 	widgets.vpaned2 = UI_VPANE();
 	gtk_widget_show(widgets.vpaned2);
 	gtk_widget_set_size_request(widgets.vpaned2, 50, -1);
-	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE,
-			FALSE);
+	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, FALSE);
 
 	/**widgets.hpaned********/
 	UI_VBOX(widgets.vbox_text, FALSE, 0);
 	gtk_widget_show(widgets.vbox_text);
-	gtk_paned_pack1(GTK_PANED(widgets.vpaned),
-			widgets.vbox_text, TRUE, TRUE);
+	gtk_paned_pack1(GTK_PANED(widgets.vpaned), widgets.vbox_text, TRUE, TRUE);
 
 	/*
 	 * bible/parallel notebook
 	 */
 	widgets.notebook_bible_parallel = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_bible_parallel);
-	gtk_box_pack_start(GTK_BOX(widgets.vbox_text),
-			   widgets.notebook_bible_parallel, TRUE, TRUE, 0);
-	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-				 GTK_POS_BOTTOM);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-				   TRUE);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-				     FALSE);
-	gtk_container_set_border_width(GTK_CONTAINER(widgets.notebook_bible_parallel),
-				       1);
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_text), widgets.notebook_bible_parallel, TRUE, TRUE, 0);
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(widgets.notebook_bible_parallel), GTK_POS_BOTTOM);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel), TRUE);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_bible_parallel), FALSE);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.notebook_bible_parallel), 1);
 
-	g_signal_connect(G_OBJECT(widgets.notebook_bible_parallel),
-			 "change-current-page",
-			 G_CALLBACK(on_notebook_bible_parallel_switch_page), NULL);
+	g_signal_connect(G_OBJECT(widgets.notebook_bible_parallel), "change-current-page", G_CALLBACK(on_notebook_bible_parallel_switch_page), NULL);
 	/*
 	 * text notebook
 	 */
 	widgets.notebook_text = gui_create_bible_pane();
 
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
-			  widgets.notebook_text);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), widgets.notebook_text);
 
 	label = gtk_label_new(_("Standard View"));
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-							     0),
-				   label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_bible_parallel), gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 0), label);
 
 	/*
 	 * previewer
@@ -1068,30 +1038,23 @@ void create_mainwindow(void)
 	UI_VBOX(widgets.vbox_previewer, FALSE, 0);
 	gtk_widget_show(widgets.vbox_previewer);
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.vbox_previewer), 1);
-	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer,
-			TRUE, TRUE);
+	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, TRUE, TRUE);
 
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.vbox_previewer), 2);
 
 #ifndef USE_WEBKIT2
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), scrolledwindow,
-			   TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
-					    scrolledwindow,
-					    settings.shadow_type);
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), scrolledwindow, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *) scrolledwindow, settings.shadow_type);
 #endif
 	widgets.html_previewer_text = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, VIEWER_TYPE));
 	gtk_widget_show(widgets.html_previewer_text);
 #ifdef USE_WEBKIT2
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), widgets.html_previewer_text, TRUE, TRUE, 0);
 #else
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.html_previewer_text);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow), widgets.html_previewer_text);
 #endif
 
 	/*
@@ -1100,12 +1063,10 @@ void create_mainwindow(void)
 	widgets.notebook_comm_book = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_comm_book);
 
-	gtk_paned_pack1(GTK_PANED(widgets.vpaned2),
-			widgets.notebook_comm_book, TRUE, TRUE);
+	gtk_paned_pack1(GTK_PANED(widgets.vpaned2), widgets.notebook_comm_book, TRUE, TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.notebook_comm_book), 1);
 
-	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(widgets.notebook_comm_book),
-				 GTK_POS_BOTTOM);
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(widgets.notebook_comm_book), GTK_POS_BOTTOM);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm_book), TRUE);
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_comm_book), FALSE);
 
@@ -1114,36 +1075,27 @@ void create_mainwindow(void)
 	 */
 	widgets.box_comm = gui_create_commentary_pane();
 
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm_book),
-			  widgets.box_comm);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm_book), widgets.box_comm);
 
 	label = gtk_label_new(_("Commentary View"));
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm_book),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
-							     0),
-				   label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm_book), gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_comm_book), 0), label);
 
 	/*
 	 * book pane
 	 */
 	box_book = gui_create_book_pane();
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm_book),
-			  box_book);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm_book), box_book);
 
 	label = gtk_label_new(_("Book View"));
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm_book),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
-							     1),
-				   label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm_book), gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_comm_book), 1), label);
 
 	/*
 	 * dict/lex
 	 */
 	widgets.box_dict = gui_create_dictionary_pane();
-	gtk_paned_pack2(GTK_PANED(widgets.vpaned2),
-			widgets.box_dict, TRUE, TRUE);
+	gtk_paned_pack2(GTK_PANED(widgets.vpaned2), widgets.box_dict, TRUE, TRUE);
 	/*
 	 * end  dict/lex
 	 */
@@ -1155,49 +1107,27 @@ void create_mainwindow(void)
 	}
 
 #ifndef USE_GTK_3
-	gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(widgets.appbar),
-					  TRUE);
+	gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(widgets.appbar), TRUE);
 #endif
-	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE,
-			   0);
+	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE, 0);
 	gui_set_statusbar(_("Welcome to Xiphos"));
 
-	g_signal_connect((gpointer)vbox_gs, "key_press_event",
-			 G_CALLBACK(on_vbox1_key_press_event), NULL);
-	g_signal_connect((gpointer)vbox_gs, "key_release_event",
-			 G_CALLBACK(on_vbox1_key_release_event), NULL);
+	g_signal_connect((gpointer)vbox_gs, "key_press_event", G_CALLBACK(on_vbox1_key_press_event), NULL);
+	g_signal_connect((gpointer)vbox_gs, "key_release_event", G_CALLBACK(on_vbox1_key_release_event), NULL);
 
-	g_signal_connect(G_OBJECT(widgets.notebook_comm_book),
-			 "switch_page",
-			 G_CALLBACK(on_notebook_comm_book_switch_page), NULL);
+	g_signal_connect(G_OBJECT(widgets.notebook_comm_book), "switch_page", G_CALLBACK(on_notebook_comm_book_switch_page), NULL);
 
-	g_signal_connect(G_OBJECT(widgets.app), "delete_event",
-			 G_CALLBACK(delete_event), NULL);
+	g_signal_connect(G_OBJECT(widgets.app), "delete_event", G_CALLBACK(delete_event), NULL);
 
-	g_signal_connect((gpointer)widgets.app,
-			 "configure_event",
-			 G_CALLBACK(on_configure_event), NULL);
-	g_signal_connect(G_OBJECT(widgets.epaned),
-			 "button_release_event",
-			 G_CALLBACK(epaned_button_release_event),
-			 (gchar *)"epaned");
-	g_signal_connect(G_OBJECT(widgets.vpaned),
-			 "button_release_event",
-			 G_CALLBACK(epaned_button_release_event),
-			 (gchar *)"vpaned");
-	g_signal_connect(G_OBJECT(widgets.vpaned2),
-			 "button_release_event",
-			 G_CALLBACK(epaned_button_release_event),
-			 (gchar *)"vpaned2");
-	g_signal_connect(G_OBJECT(widgets.hpaned),
-			 "button_release_event",
-			 G_CALLBACK(epaned_button_release_event),
-			 (gchar *)"hpaned1");
+	g_signal_connect((gpointer)widgets.app, "configure_event", G_CALLBACK(on_configure_event), NULL);
+	g_signal_connect(G_OBJECT(widgets.epaned), "button_release_event", G_CALLBACK(epaned_button_release_event), (gchar *)"epaned");
+	g_signal_connect(G_OBJECT(widgets.vpaned), "button_release_event", G_CALLBACK(epaned_button_release_event), (gchar *)"vpaned");
+	g_signal_connect(G_OBJECT(widgets.vpaned2), "button_release_event", G_CALLBACK(epaned_button_release_event), (gchar *)"vpaned2");
+	g_signal_connect(G_OBJECT(widgets.hpaned), "button_release_event", G_CALLBACK(epaned_button_release_event), (gchar *)"hpaned1");
 
 	gtk_widget_grab_focus(navbar_versekey.lookup_entry);
 
-	gtk_window_set_default_size((GtkWindow *)widgets.app,
-				    settings.gs_width, settings.gs_height);
+	gtk_window_set_default_size((GtkWindow *)widgets.app, settings.gs_width, settings.gs_height);
 	main_window_created = TRUE;
 }
 
