@@ -914,14 +914,14 @@ void create_mainwindow(void)
 	 *           widgets.hboxtb   widgets.page
 	 *                            |         |
 	 *                     widgets.hpaned  nav_toolbar
-	 *                     |                 |
-	 *              widgets.vpaned-----+     +-----------------------------------------widgets.vpaned2-------------------------+
-	 *               |                 |                                                      |                                |
-	 * widgets.vbox_previewer   widgets.vbox_text                                widgets.notebook_comm_book            widgets.box_dict
-	 *                                 |                                         |                       |
-	 *                         widgets.notebook_bible_parallel          widgets.box_comm              box_book
-	 *                                 |
-	 *                         widgets.notebook_text
+	 *                     |            |
+	 *              widgets.vpaned---+  +----------------------------widgets.vpaned2---------------+
+	 *               |               |                                      |                      |
+	 * widgets.vbox_previewer   widgets.vbox_text              widgets.notebook_comm_book   widgets.box_dict
+	 *                               |                         |                       |
+	 *                widgets.notebook_bible_parallel   widgets.box_comm            box_book
+	 *                               |
+	 *                     widgets.notebook_text
 	 *
 	 */
 
