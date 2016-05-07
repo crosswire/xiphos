@@ -217,4 +217,4 @@ def detect(conf):
     if conf.env['IS_WIN32']:
         xsltproc = conf.find_program('xsltproc', var='XSLTPROC')
         htmlhelpc = conf.find_program('hhc', var='HTMLHELPC')
-        
+
