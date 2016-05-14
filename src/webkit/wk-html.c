@@ -21,7 +21,7 @@
 
 #include <string.h>
 
-#ifndef USE_WEBKIT2
+#ifdef USE_WEBKIT2
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #else

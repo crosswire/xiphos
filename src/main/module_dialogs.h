@@ -22,7 +22,10 @@
 #ifndef __MODULE_DIALOGS_H__
 #define __MODULE_DIALOGS_H__
 
+#ifndef USE_CMAKE
 #include <config.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
