@@ -26,7 +26,9 @@
 extern "C" {
 #endif
 
+#ifndef USE_CMAKE
 #include <config.h>
+#endif
 
 #ifndef USE_WEBKIT_EDITOR
 

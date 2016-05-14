@@ -26,7 +26,9 @@
 extern "C" {
 #endif
 
+#ifndef USE_CMAKE
 #include <config.h>
+#endif
 
 typedef struct _navbar NAVBAR;
 struct _navbar

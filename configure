@@ -1,2 +1,16 @@
 #!/bin/sh
 cmake .
+
+# FIXME:: This is BAD. I'm just doing it this as a tmp measure to try and get
+# the rest of the cmake process done.
+echo '-- Generating marshal.c'
+glib-genmarshal --prefix wk_marshal src/webkit/marshal.list --body > src/webkit/marshal.c
+glib-genmarshal --prefix ipc_marshal src/gnome2/marshal.list --body > src/gnome2/marshal.c
+echo '-- Generating marshal.h'
+glib-genmarshal --prefix wk_marshal src/webkit/marshal.list --header > src/webkit/marshal.h
+glib-genmarshal --prefix ipc_marshal src/gnome2/marshal.list --header > src/gnome2/marshal.h
+echo '-- Generating ipc-interface.h'
+dbus-binding-tool --prefix=ipc_object --mode=glib-server --output=src/gnome2/ipc-interface.h src/gnome2/ipc-interface.xml
+dbus-binding-tool --prefix=ipc_object --mode=glib-client --output=src/examples/ipc-interface.h src/examples/ipc-interface.xml
+dbus-binding-tool --prefix=ipc_object --mode=glib-client --output=src/examples/ipc-client-stub.h src/examples/ipc-interface.xml
+echo 'done'

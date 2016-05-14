@@ -22,7 +22,9 @@
 #ifndef ___NAVBAR_VERSEKEY_EDITOR_H_
 #define ___NAVBAR_VERSEKEY_EDITOR_H_
 
+#ifndef USE_CMAKE
 #include <config.h>
+#endif
 
 #include "editor/slib-editor.h"
 

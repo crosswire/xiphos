@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.5.2)
 project(xiphos)
 set(PACKAGE_VERSION "4.0.4")
-SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+set(PACKAGE "xiphos")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 #add_subdirectory(src)
 file(GLOB xiphos_SRC
@@ -16,13 +17,15 @@ include_directories(src)
 
 # Use the package PkgConfig to detect GTK+ headers/library files
 find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 pkg_check_modules(WK2 REQUIRED webkit2gtk-4.0)
 pkg_check_modules(GCONF REQUIRED gconf-2.0)
 pkg_check_modules(LIBGSF REQUIRED libgsf-1)
 pkg_check_modules(LIBXML REQUIRED libxml-2.0)
 pkg_check_modules(GMODULE REQUIRED gmodule-2.0)
-
-message (${GTK3_VERSION})
+pkg_check_modules(GLADE REQUIRED libglade-2.0)
+pkg_check_modules(GTKHTML_EDITOR REQUIRED gtkhtml-editor-4.0)
+pkg_check_modules(SWORD REQUIRED sword)
 
 if (${GTK3_VERSION} VERSION_GREATER "3.2")
 	add_definitions(-DHAVE_GTK_32)
@@ -54,6 +57,9 @@ include_directories(${GTK3_INCLUDE_DIRS}
 		${LIBGSF_INCLUDE_DIRS}
 		${LIBXML_INCLUDE_DIRS}
 		${GMODULE_INCLUDE_DIRS}
+		${GLADE_INCLUDE_DIRS}
+		${GTKHTML_EDITOR_INCLUDE_DIRS}
+		${SWORD_INCLUDE_DIRS}
 )
 link_directories(${GTK3_LIBRARY_DIRS}
 		${WK2_LIBRARY_DIRS}
@@ -61,6 +67,9 @@ link_directories(${GTK3_LIBRARY_DIRS}
 		${LIBGSF_INCLUDE_DIRS}
 		${LIBXML_INCLUDE_DIRS}
 		${GMODULE_INCLUDE_DIRS}
+		${GLADE_INCLUDE_DIRS}
+		${GTKHTML_EDITOR_INCLUDE_DIRS}
+		${SWORD_INCLUDE_DIRS}
 )
 
 # Add other flags to the compiler
@@ -70,11 +79,19 @@ add_definitions(${GTK3_CFLAGS_OTHER}
 		${LIBGSF_CFLAGS_OTHER}
 		${LIBXML_CFLAGS_OTHER}
 		${GMODULE_CFLAGS_OTHER}
+		${GLADE_CFLAGS_OTHER}
+		${GTKHTML_EDITOR_CFLAGS_OTHER}
+		${SWORD_CFLAGS_OTHER}
 )
 add_definitions(-DVERSION="${PACKAGE_VERSION}")
 add_definitions(-DUSE_GTK_3)
 add_definitions(-DUSE_CMAKE)
 add_definitions(-DUSE_WEBKIT2)
+add_definitions(-DHAVE_STRCASESTR)
+add_definitions(-DSHARE_DIR="${DATAROOTDIR}/${PACKAGE}")
+add_definitions(-DPACKAGE_PIXMAPS_DIR="${DATAROOTDIR}/${PACKAGE}")
+add_definitions(-DPACKAGE_BUGREPORT="https://github.com/crosswire/xiphos/issues")
+add_definitions(-DGETTEXT_PACKAGE="${PACKAGE}")
 
 add_executable(xiphos ${xiphos_SRC})
 
@@ -85,4 +102,7 @@ target_link_libraries(xiphos
 		${LIBGSF_LIBRARIES}
 		${LIBXML_LIBRARIES}
 		${GMODULE_LIBRARIES}
+		${GLADE_LIBRARIES}
+		${GTKHTML_EDITOR_LIBRARIES}
+		${SWORD_LIBRARIES}
 )

@@ -22,7 +22,9 @@
 #ifndef _WEBKIT_EDITOR_H
 #define _WEBKIT_EDITOR_H
 
+#ifndef USE_CMAKE
 #include <config.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
