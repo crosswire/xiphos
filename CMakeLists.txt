@@ -6,11 +6,24 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 #add_subdirectory(src)
 file(GLOB xiphos_SRC
-	"src/*/*.h"
-	"src/*/*.hh"
-	"src/*/*.c"
-	"src/*/*.cc"
-	"src/*/*.cpp"
+	"src/backend/*.h"
+	"src/backend/*.hh"
+	"src/backend/*.cc"
+	"src/backend/*.cpp"
+	"src/editor/*.h"
+	"src/editor/*.c"
+	"src/gnome2/*.h"
+	"src/gnome2/*.c"
+	"src/gnome2/*.cpp"
+	"src/gui/*.h"
+	"src/main/*.h"
+	"src/main/*.hh"
+	"src/main/*.c"
+	"src/main/*.cc"
+	"src/webkit/*.h"
+	"src/webkit/*.c"
+	"src/xiphos_html/*.h"
+	"src/xiphos_html/*.c"
 )
 
 include_directories(src)
@@ -92,6 +105,7 @@ add_definitions(-DSHARE_DIR="${DATAROOTDIR}/${PACKAGE}")
 add_definitions(-DPACKAGE_PIXMAPS_DIR="${DATAROOTDIR}/${PACKAGE}")
 add_definitions(-DPACKAGE_BUGREPORT="https://github.com/crosswire/xiphos/issues")
 add_definitions(-DGETTEXT_PACKAGE="${PACKAGE}")
+add_definitions(-DHAVE_DBUS)
 
 add_executable(xiphos ${xiphos_SRC})
 
