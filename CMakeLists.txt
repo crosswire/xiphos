@@ -4,7 +4,6 @@ set(PACKAGE_VERSION "4.0.4")
 set(PACKAGE "xiphos")
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-#add_subdirectory(src)
 file(GLOB xiphos_SRC
 	"src/backend/*.h"
 	"src/backend/*.hh"
@@ -39,6 +38,10 @@ pkg_check_modules(GMODULE REQUIRED gmodule-2.0)
 pkg_check_modules(GLADE REQUIRED libglade-2.0)
 pkg_check_modules(GTKHTML_EDITOR REQUIRED gtkhtml-editor-4.0)
 pkg_check_modules(SWORD REQUIRED sword)
+pkg_check_modules(I18N REQUIRED icu-i18n)
+pkg_check_modules(DBUS_GLIB REQUIRED dbus-glib-1)
+pkg_check_modules(BIBLESYNC REQUIRED biblesync)
+pkg_check_modules(UUID REQUIRED uuid)
 
 if (${GTK3_VERSION} VERSION_GREATER "3.2")
 	add_definitions(-DHAVE_GTK_32)
@@ -119,4 +122,8 @@ target_link_libraries(xiphos
 		${GLADE_LIBRARIES}
 		${GTKHTML_EDITOR_LIBRARIES}
 		${SWORD_LIBRARIES}
+		${I18N_LIBRARIES}
+		${DBUS_GLIB_LIBRARIES}
+		${BIBLESYNC_LIBRARIES}
+		${UUID_LIBRARIES}
 )
