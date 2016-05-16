@@ -51,7 +51,9 @@ uses a predefined style file called .clang-format in the source tree.
 
 We hope that your Bible study will be enhanced by Xiphos!
 
-## The Xiphos Development Team
+The Xiphos Development Team
+
+## Contributors
 
 This is a list of all the people that have contributed to Xiphos' development.
 Mostly just the output of:
