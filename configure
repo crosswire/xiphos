@@ -13,4 +13,6 @@ echo '-- Generating ipc-interface.h'
 dbus-binding-tool --prefix=ipc_object --mode=glib-server --output=src/gnome2/ipc-interface.h src/gnome2/ipc-interface.xml
 dbus-binding-tool --prefix=ipc_object --mode=glib-client --output=src/examples/ipc-interface.h src/examples/ipc-interface.xml
 dbus-binding-tool --prefix=ipc_object --mode=glib-client --output=src/examples/ipc-client-stub.h src/examples/ipc-interface.xml
+echo '-- Generating locale.c'
+libs/make-locale-set.sh po/LINGUAS > libs/locale.c
 echo 'done'
