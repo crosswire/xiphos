@@ -9,3 +9,14 @@ src/examples/ipc-interface.xml
 win*/binaries/
 win32/nsis/xiphos*.exe
 win32/po/messages.mo
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+src/examples/ipc-client-stub.h
+src/examples/ipc-interface.h
+src/gnome2/ipc-interface.h
+src/gnome2/marshal.c
+src/gnome2/marshal.h
+src/webkit/marshal.c
+src/webkit/marshal.h
