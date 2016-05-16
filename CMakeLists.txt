@@ -25,7 +25,9 @@ file(GLOB xiphos_SRC
 	"src/xiphos_html/*.c"
 )
 
+add_subdirectory(libs)
 include_directories(src)
+
 
 # Use the package PkgConfig to detect GTK+ headers/library files
 find_package(PkgConfig REQUIRED)
@@ -112,7 +114,7 @@ add_definitions(-DHAVE_DBUS)
 
 add_executable(xiphos ${xiphos_SRC})
 
-target_link_libraries(xiphos
+target_link_libraries(xiphos LINK_PUBLIC locale
 		${GTK3_LIBRARIES}
 		${WK2_LIBRARIES}
 		${GCONF_LIBRARIES}
