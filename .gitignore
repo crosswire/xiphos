@@ -20,3 +20,5 @@ src/gnome2/marshal.c
 src/gnome2/marshal.h
 src/webkit/marshal.c
 src/webkit/marshal.h
+libs/liblocale.a
+libs/locale.c
