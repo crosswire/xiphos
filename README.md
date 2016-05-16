@@ -59,37 +59,69 @@ Mostly just the output of:
 	$ git log --format='%aN <%cE>' | sort -u
 
 Ambrose Li <ambrose.li@gmail.com>
+
 Andy Piper <andypiperuk@gmail.com>
+
 Ari Constancio <ari.constancio@gmail.com>
+
 Barry Drake <bdrake@crosswire.org>
+
 Brian J Dumont <brian.j.dumont@gmail.com>
+
 Christopher Bayliss <christopher.j.bayliss@gmail.com>
+
 Daniel Glassey <dglassey@gmail.com>
+
 Dmitrij Ledkovskij <xnox@debian.org>
+
 Dominique Corbex <dominique.corbex@gmail.com>
+
 Eicke Godehardt <eicke@godehardt.org>
+
 Gertjan Francke <gwfrancke@gmail.com>
+
 Greg Hellings <greg.hellings@gmail.com>
+
 Thomas Abthorpe <thomas@goodking.ca>
+
 Jan Paul Schmidt <japas@users.sf.net>
+
 Karl Kleinpaste <karl@kleinpaste.org>
+
 Karl-Rikard Ländell <kallelandell@gmail.com>
+
 Konstantin Maslyuk <kostyamaslyuk@gmail.com>
+
 Laurentiu Nica <nick.laurentiu.nica@gmail.com>
+
 Mansour <manhid1@yahoo.com>
+
 Martin Zibricky <mzibr.public@gmail.com>
+
 Michael Meeks <michael.meeks@collabora.com>
+
 Moses McKnight <moses@texband.net>
+
 mwtalbert <ransom1982@gmail.com>
+
 Peter von Kaehne <refdoc@crosswire.org>
+
 Pierre Benz <mail@pierrebenz.com>
+
 Scott Bell <skaught@users.sourceforge.net>
+
 Simon Meers <simon@simonmeers.com>
+
 Terry Biggs <tbiggs@users.sf.net>
+
 Teus Benschop <teusjannette@gmail.com>
+
 Victor Porton <porton@narod.ru>
+
 Yotam Benshalom <benshalom@gmail.com>
+
 Zdenko Podobny <zdposter@gmail.com>
 
 We even have an unknown author! ;)
+
 Unknown Author <nobody@crosswire.orgnobody@crosswire.org>
