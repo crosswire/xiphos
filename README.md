@@ -52,23 +52,44 @@ uses a predefined style file called .clang-format in the source tree.
 We hope that your Bible study will be enhanced by Xiphos!
 
 ## The Xiphos Development Team
-Terry Biggs  tbiggs_at_users.sf.net
-Moses McKnight  m_mcknight_at_users.sf.net
-Jan Paul Schmidt japas_at_users.sf.net
-Victor Porton  porton_at_users.sf.net
-Stephen Binks  steveb_at_icenet.com.au
-Carl Constantine  duckwing_at_users.sf.net
-Jorge Chacon  jgchacon_at_itelgua.com
-Jp Robinson  robinson_at_knightmail.com
-Dominique Corbex  domcox_at_users.sf.net
-Zdenko Podobný  zdpo_at_mailbox.sk
-Andy Piper  andyp_at_users.sf.net
-Pierre Benz  pierrebenz_at_users.sf.net
-Pavlo Bohmat  bohm_at_ukr.net
-Karl Kleinpaste  karl_at_kleinpaste.org
-Matthew Talbert  ransom1982_at_gmail.com
-Peter von Kaehne  refdoc_at_crosswire.org
-Simon Meers  drmeers_at_gmail.com
-Martin Zibricky  matysek03_at_users.sf.net
-Dmitrijs Ledkovs dmitrijledkov_at_users.sf.net
-Greg Hellings hellings_at_users.sf.net
+
+This is a list of all the people that have contributed to Xiphos' development.
+Mostly just the output of:
+
+	$ git log --format='%aN <%cE>' | sort -u
+
+Ambrose Li <ambrose.li@gmail.com>
+Andy Piper <andypiperuk@gmail.com>
+Ari Constancio <ari.constancio@gmail.com>
+Barry Drake <bdrake@crosswire.org>
+Brian J Dumont <brian.j.dumont@gmail.com>
+Christopher Bayliss <christopher.j.bayliss@gmail.com>
+Daniel Glassey <dglassey@gmail.com>
+Dmitrij Ledkovskij <xnox@debian.org>
+Dominique Corbex <dominique.corbex@gmail.com>
+Eicke Godehardt <eicke@godehardt.org>
+Gertjan Francke <gwfrancke@gmail.com>
+Greg Hellings <greg.hellings@gmail.com>
+Thomas Abthorpe <thomas@goodking.ca>
+Jan Paul Schmidt <japas@users.sf.net>
+Karl Kleinpaste <karl@kleinpaste.org>
+Karl-Rikard LÃ¤ndell <kallelandell@gmail.com>
+Konstantin Maslyuk <kostyamaslyuk@gmail.com>
+Laurentiu Nica <nick.laurentiu.nica@gmail.com>
+Mansour <manhid1@yahoo.com>
+Martin Zibricky <mzibr.public@gmail.com>
+Michael Meeks <michael.meeks@collabora.com>
+Moses McKnight <moses@texband.net>
+mwtalbert <ransom1982@gmail.com>
+Peter von Kaehne <refdoc@crosswire.org>
+Pierre Benz <mail@pierrebenz.com>
+Scott Bell <skaught@users.sourceforge.net>
+Simon Meers <simon@simonmeers.com>
+Terry Biggs <tbiggs@users.sf.net>
+Teus Benschop <teusjannette@gmail.com>
+Victor Porton <porton@narod.ru>
+Yotam Benshalom <benshalom@gmail.com>
+Zdenko Podobny <zdposter@gmail.com>
+
+We even have an unknown author! ;)
+Unknown Author <nobody@crosswire.orgnobody@crosswire.org>
