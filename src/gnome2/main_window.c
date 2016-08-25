@@ -690,10 +690,9 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 	case XK_M:
 		if (state == GDK_MOD1_MASK) // Alt-M morph
 		{
-			kbd_toggle_option((main_check_for_global_option(sM, "GBFMorph") || main_check_for_global_option(sM,
-															"ThMLMorph") ||
-					   main_check_for_global_option(sM,
-									"OSISMorph")),
+			kbd_toggle_option((main_check_for_global_option(sM, "GBFMorph") ||
+					   main_check_for_global_option(sM, "ThMLMorph") ||
+					   main_check_for_global_option(sM, "OSISMorph")),
 					  "Morphological Tags");
 		}
 		break;
@@ -771,8 +770,10 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 
 	case XK_t:
 	case XK_T:
-		if (state == GDK_CONTROL_MASK) // open a new tab
+		if (state == GDK_CONTROL_MASK) // Ctrl-T open a new tab
 			on_notebook_main_new_tab_clicked(NULL, NULL);
+		else if (state == GDK_MOD1_MASK) // Alt-T transliteration
+			kbd_toggle_option(true, "Transliteration");
 		break;
 
 	case XK_z:
