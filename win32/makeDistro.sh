@@ -193,7 +193,7 @@ for f in $gtkfiles \
 	'libgcc_s_*-1.dll' \
 	libstdc++-6.dll \
 	gdb.exe \
-	libwebp-5.dll \
+	libwebp-6.dll \
 	libcrypto-10.dll libssl-10.dll libgstapp-1.0-0.dll \
 	libgstbase-1.0-0.dll libgstreamer-1.0-0.dll libgstpbutils-1.0-0.dll \
 	libgstvideo-1.0-0.dll libgstaudio-1.0-0.dll libgstbase-1.0-0.dll \
