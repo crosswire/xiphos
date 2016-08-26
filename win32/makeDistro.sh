@@ -200,6 +200,7 @@ for f in $gtkfiles \
 	libgstcontroller-1.0-0.dll libgstfft-1.0-0.dll libgstnet-1.0-0.dll \
 	libgstriff-1.0-0.dll libgstrtp-1.0-0.dll libgstrtsp-1.0-0.dll libgstsdp-1.0-0.dll \
 	libgsttag-1.0-0.dll libharfbuzz-0.dll libharfbuzz-icu-0.dll \
+	libpcre-1.dll \
 	'gspawn-win*-helper.exe' 'gspawn-win*-helper-console.exe'
 do
     echo "Copying and stripping ${f}"
