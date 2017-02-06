@@ -1671,7 +1671,7 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 			return;
 
 		GString *text = g_string_new(NULL);
-		if (verse != 0)
+		if ((settings.showversenum) && (verse != 0))
 			g_string_printf(text, "%d. ...  %s", verse,
 					suppliedtext);
 		// use of ". ..." is to induce proper pauses.
