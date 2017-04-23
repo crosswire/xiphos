@@ -1,3 +1,17 @@
+2017-04-23  karl <charcoal@users.sf.net>
+
+	* 4.0.5 release.
+
+2017-04-23  karl <charcoal@users.sf.net>
+
+	* update win32 packaging.
+	* fix lack of collator in mod.mgr on first run.
+	* restore proper formatting of code in biblesync glue.
+
+2017-02-06  karl <charcoal@users.sf.net>
+
+	* readaloud: speak verse# per showversenum (audible matches visible).
+
 2016-08-25  karl <charcoal@users.sf.net>
 
 	* add Alt-T toggle transliteration.

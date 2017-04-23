@@ -3,6 +3,13 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.0.5
+23 Apr 2017
+
+- ReadAloud: Speak verse# only if we are showing verse#s in text as well.
+- Fix crash caused by lack of collator during mod.mgr in first run.
+________________________________________________________________
+
 Release 4.0.4
 30 Aug 2015
 
