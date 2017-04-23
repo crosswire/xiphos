@@ -1178,6 +1178,18 @@ language_make_list(GList *modlist,
 		modlist = g_list_next(modlist);
 	}
 
+	/* self-defense, prior to qsort(3). */
+	/* if this is 1st run, then we have not yet init'd the sword engine,
+	 * in turn we do not have sword_locale or collator. we need collator
+	 * in order to use qsort(3). it's a gross, unreliable hack, but we
+	 * will simply use $LANG in this one instance, un-massaged by the
+	 * more correct set_sword_locale().
+	 */
+	if (!collator) {
+		char *locale = getenv("LANG");
+		collator = ucol_open((locale ? locale : ""), &collator_status);
+	}
+
 	/* sort */
 	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
 		qsort(language_set[i].ptr,
