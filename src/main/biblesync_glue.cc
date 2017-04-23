@@ -101,12 +101,18 @@ biblesync_navigate(char cmd, string speaker_uuid,
 	// mismatch
 	case 'M':
 		if (settings.bs_mismatch) {
-			message = BSP + (string)_("Mismatched packet\n\n") + info + ((info.substr(0, 8) == "announce")
-											 ? ("\nMessage: " + presence)
-											 : ("\nBible: " + bible + "; Ref: " + ref + "; Alt: " + alt + "\nGroup: " + group + "; Domain: " + domain)) +
-				  (settings.bs_debug
-				       ? ("\n\n" + (string)dump)
-				       : "");
+			message = BSP + (string)_("Mismatched packet\n\n")
+				+ info
+				+ ((info.substr(0, 8) == "announce")
+				   ? ("\nMessage: " + presence)
+				   : ("\nBible: " + bible
+				      + "; Ref: " + ref
+				      + "; Alt: " + alt
+				      + "\nGroup: " + group
+				      + "; Domain: " + domain))
+				+ (settings.bs_debug
+				   ? ("\n\n" + (string)dump)
+				   : "");
 			gui_generic_warning((char *)message.c_str());
 		}
 		break;
@@ -252,7 +258,17 @@ biblesync_navigate(char cmd, string speaker_uuid,
 		break;
 
 	default:
-		message = _("ERROR: unknown BibleSync indicator: ") + cmd + (string) ".\n" + (string)_("Other indications are:") + "\nbible: " + bible + "\nref: " + ref + "\nalt: " + alt + "\ngroup: " + group + "\ndomain: " + domain + "\ninfo: " + info + "\ndump:\n" + dump;
+		message = _("ERROR: unknown BibleSync indicator: ")
+			+ cmd
+			+ (string) ".\n"
+			+ (string)_("Other indications are:")
+			+ "\nbible: " + bible
+			+ "\nref: " + ref
+			+ "\nalt: " + alt
+			+ "\ngroup: " + group
+			+ "\ndomain: " + domain
+			+ "\ninfo: " + info
+			+ "\ndump:\n" + dump;
 		gui_generic_warning((char *)message.c_str());
 		break;
 	}
