@@ -66,6 +66,7 @@ gtkfiles='libglade-2.0-0.dll
 	  libgtk-win32-2.0-0.dll
 	  libjavascriptcoregtk-1.0-0.dll
 	  libwebkitgtk-1.0-0.dll'
+wkver=1
 #
 # we don't use gtkhtml editor in win32 at all any more.
 # libgtkhtml-3.14-19.dll libgtkhtml-editor-3.14-0.dll
@@ -76,6 +77,7 @@ case "$1" in
 		    libgtk-3-0.dll
 		    libjavascriptcoregtk-3.0-0.dll
 		    libwebkitgtk-3.0-0.dll'
+	  wkver=3
 	  ;;
     2|'') # redundant
           ;;
@@ -208,30 +210,38 @@ do
     #strip -o ${outdir}bin/${f} ${sworddir}${f}
 done
 
-# Fetch extra libraries
-for d in enchant gtk-2.0/2.10.0/engines gtk-2.0/modules
-do
+# there are no gtk3 equivalents of these.
+if [ "$gtkver" = 2 ] ; then
+    # Fetch extra libraries
+    for d in gtk-2.0/2.10.0/engines gtk-2.0/modules
+    do
 	mkdir -p ${outdir}/lib/${d}
-done
-for f in gtk-2.0/2.10.0/engines/libpixmap.dll \
-	 gtk-2.0/2.10.0/engines/libwimp.dll \
-	 gtk-2.0/modules/libgail.dll
-do
+    done
+    for f in gtk-2.0/2.10.0/engines/libpixmap.dll \
+	     gtk-2.0/2.10.0/engines/libwimp.dll \
+	     gtk-2.0/modules/libgail.dll
+    do
 	echo "Copying and stripping ${f}"
 	cp ${sworddir}../lib/${f} ${outdir}lib/${f}
 	#strip -o ${outdir}lib/${f} ${sworddir}../lib/${f}
-done
-mkdir -p ${outdir}lib/pango/1.8.0/modules/
-# additional broken path expected by pango - duplicated path elements.
-mkdir -p ${outdir}lib/pango/lib/pango/1.8.0/modules/
-for f in $(find ${sworddir}../lib/pango/1.8.0/modules/ -name '*.dll')
-do
-	echo "Copying and stripping ${f}"
-	cp ${f} ${outdir}lib/pango/1.8.0/modules/
-	# duplicate modules at the (broken) path that pango (bogusly) expects.
-	cp ${f} ${outdir}lib/pango/lib/pango/1.8.0/modules/
-	#strip -o ${outdir}lib/pango/1.8.0/modules/`basename ${f}` $f
-done
+    done
+fi
+
+mkdir -p ${outdir}/lib/enchant
+cp ${sworddir}../lib/enchant/libenchant_myspell.dll ${outdir}lib/enchant
+
+### pango modules are ... gone in F24?
+### mkdir -p ${outdir}lib/pango/1.8.0/modules/
+### # additional broken path expected by pango - duplicated path elements.
+### mkdir -p ${outdir}lib/pango/lib/pango/1.8.0/modules/
+### for f in $(find ${sworddir}../lib/pango/1.8.0/modules/ -name '*.dll')
+### do
+### 	echo "Copying and stripping ${f}"
+### 	cp ${f} ${outdir}lib/pango/1.8.0/modules/
+### 	# duplicate modules at the (broken) path that pango (bogusly) expects.
+### 	cp ${f} ${outdir}lib/pango/lib/pango/1.8.0/modules/
+### 	#strip -o ${outdir}lib/pango/1.8.0/modules/`basename ${f}` $f
+### done
 
 # Strip the main Xiphos binary
 #strip ${outdir}bin/xiphos.exe
@@ -239,7 +249,7 @@ done
 # Copy shared files
 mkdir -p ${outdir}share/sword/
 cp -r ${sworddir}../share/sword/locales.d ${outdir}share/sword/locales.d
-for d in enchant gtkhtml-3.14 webkitgtk-1.0
+for d in enchant gtkhtml-3.14 webkitgtk-"$wkver".0
 do
 	cp -r ${sworddir}../share/${d} ${outdir}share/${d}
 done
