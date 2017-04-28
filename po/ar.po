@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-16 13:36-0400\n"
+"POT-Creation-Date: 2017-04-28 13:39+0200\n"
 "PO-Revision-Date: 2010-09-30 00:09+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Arabic <support@crosswire.org>\n"
@@ -86,84 +86,84 @@ msgstr ""
 msgid "<b>Module name:</b> "
 msgstr "<b>مدير وحدة</b>"
 
-#: ../src/gnome2/about_modules.c:415
+#: ../src/gnome2/about_modules.c:418
+#, fuzzy
+msgid "<b>Module abbreviation:</b> "
+msgstr "<b>قوائم وحدة</b>"
+
+#: ../src/gnome2/about_modules.c:423
 #, fuzzy
 msgid "<b>Version:</b> "
 msgstr "<b>خيارات</b>"
 
-#: ../src/gnome2/about_modules.c:418
+#: ../src/gnome2/about_modules.c:426
 msgid "No version stamp found"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:421
+#: ../src/gnome2/about_modules.c:429
 #, fuzzy
 msgid "<b>Type:</b> "
 msgstr "<b>نطاق</b>"
 
-#: ../src/gnome2/about_modules.c:423
+#: ../src/gnome2/about_modules.c:431
 #, fuzzy
 msgid "Daily Devotion"
 msgstr "صحيفة عبادي"
 
-#: ../src/gnome2/about_modules.c:425 ../src/gnome2/mod_mgr.c:1558
+#: ../src/gnome2/about_modules.c:433 ../src/gnome2/mod_mgr.c:1561
 #: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1030
 #: ../src/main/sidebar.cc:1032
 msgid "Maps"
 msgstr "خرائط"
 
-#: ../src/gnome2/about_modules.c:427 ../src/gnome2/mod_mgr.c:1562
+#: ../src/gnome2/about_modules.c:435 ../src/gnome2/mod_mgr.c:1565
 #: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1039
 #: ../src/main/sidebar.cc:1041
 msgid "Images"
 msgstr "الصور"
 
-#: ../src/gnome2/about_modules.c:429
+#: ../src/gnome2/about_modules.c:437
 #, fuzzy
 msgid "Glossary"
 msgstr "المسارد"
 
-#: ../src/gnome2/about_modules.c:433
+#: ../src/gnome2/about_modules.c:441
 msgid "Cult"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:437 ../src/gnome2/search_sidebar.c:261
+#: ../src/gnome2/about_modules.c:445 ../src/gnome2/search_sidebar.c:287
 msgid "Bible"
 msgstr "الكتاب المقدس"
 
-#: ../src/gnome2/about_modules.c:440 ../src/gnome2/search_sidebar.c:269
+#: ../src/gnome2/about_modules.c:448 ../src/gnome2/search_sidebar.c:295
 #: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 msgid "Commentary"
 msgstr "تعليق"
 
-#: ../src/gnome2/about_modules.c:443 ../ui/prefs.glade.h:136
+#: ../src/gnome2/about_modules.c:451 ../ui/prefs.glade.h:136
 #: ../ui/prefs.gtkbuilder.h:136
 msgid "Dictionary"
 msgstr "القاموس"
 
-#: ../src/gnome2/about_modules.c:446
+#: ../src/gnome2/about_modules.c:454
 #, fuzzy
 msgid "General Book"
 msgstr "كتب عامة"
 
-#: ../src/gnome2/about_modules.c:451
+#: ../src/gnome2/about_modules.c:459
 #, fuzzy
 msgid "Personal Commentary"
 msgstr "إعادة تسمية التعليق"
 
-#: ../src/gnome2/about_modules.c:454
+#: ../src/gnome2/about_modules.c:462
 #, fuzzy
 msgid "Journal"
 msgstr "DailyJournal"
 
-#: ../src/gnome2/about_modules.c:457
+#: ../src/gnome2/about_modules.c:465
 #, fuzzy
 msgid "Unknown type"
 msgstr "غير معروف"
-
-#: ../src/gnome2/about_modules.c:466
-#, fuzzy
-msgid "<b>Module abbreviation:</b> "
-msgstr "<b>قوائم وحدة</b>"
 
 #: ../src/gnome2/about_modules.c:471
 #, fuzzy
@@ -419,8 +419,8 @@ msgid ""
 "separate tabs is not supported."
 msgstr ""
 
-#: ../src/gnome2/bookmarks_treeview.c:839 ../src/gnome2/sidebar.c:1500
-#: ../src/gnome2/sidebar.c:1536
+#: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1508
+#: ../src/gnome2/sidebar.c:1560
 msgid "Bookmarks"
 msgstr "العلامات"
 
@@ -450,7 +450,7 @@ msgid "Close _without Saving"
 msgstr "إغلاق _without إنقاذ"
 
 #: ../src/gnome2/export_bookmarks.c:175 ../src/gnome2/export_bookmarks.c:232
-#: ../src/gnome2/sidebar.c:1514 ../src/gnome2/sidebar.c:1554
+#: ../src/gnome2/sidebar.c:1530 ../src/gnome2/sidebar.c:1578
 #, c-format
 msgid "Verse List"
 msgstr "الآية قائمة"
@@ -522,29 +522,29 @@ msgstr "الرجاء الإبلاغ عن هذا الخطأ لفريق Xiphos م�
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "علة! Xiphos على وشك أن تحطم نتيجة لخطأ في \"السلسلة\"."
 
-#: ../src/gnome2/main_window.c:583
+#: ../src/gnome2/main_window.c:587
 #, fuzzy, c-format
 msgid "Module has no support for %s."
 msgstr "في الوحدات النمطية التي لديها أرقام سترونغ"
 
-#: ../src/gnome2/main_window.c:656
+#: ../src/gnome2/main_window.c:660
 #, fuzzy
 msgid "Xiphos: No windows."
 msgstr "Xiphos :"
 
-#: ../src/gnome2/main_window.c:708
+#: ../src/gnome2/main_window.c:711
 msgid "BibleSync: Current navigation sent."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:710
+#: ../src/gnome2/main_window.c:713
 msgid "BibleSync: Not speaking."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:897
+#: ../src/gnome2/main_window.c:931
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos -- دراسة الكتاب المقدس البرمجيات"
 
-#: ../src/gnome2/main_window.c:972
+#: ../src/gnome2/main_window.c:995
 msgid "Open a new tab"
 msgstr "فتح علامة تبويب جديدة"
 
@@ -555,15 +555,15 @@ msgstr "فتح علامة تبويب جديدة"
 msgid "Standard View"
 msgstr "عرض قياسي"
 
-#: ../src/gnome2/main_window.c:1109
+#: ../src/gnome2/main_window.c:1092
 msgid "Commentary View"
 msgstr "تعليق الصورة"
 
-#: ../src/gnome2/main_window.c:1123
+#: ../src/gnome2/main_window.c:1100
 msgid "Book View"
 msgstr "عرض كتاب"
 
-#: ../src/gnome2/main_window.c:1152
+#: ../src/gnome2/main_window.c:1118
 msgid "Welcome to Xiphos"
 msgstr "مرحبا بكم في Xiphos"
 
@@ -816,7 +816,7 @@ msgstr ""
 "رمز القفل وسائل هذه الوحدة مشفرة ، ويتطلب أن تقوم بشراء فتح المفتاح من مالك "
 "المحتوى"
 
-#: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:580
+#: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:596
 #: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2
 #: ../ui/xi-menus.glade.h:55 ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
@@ -853,29 +853,29 @@ msgstr ""
 msgid " archived in: \n"
 msgstr "المؤرشفة في :\n"
 
-#: ../src/gnome2/mod_mgr.c:985
+#: ../src/gnome2/mod_mgr.c:988
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "لا يمكن المجلات وقوائم الصلاة وفهرستها."
 
-#: ../src/gnome2/mod_mgr.c:1016
+#: ../src/gnome2/mod_mgr.c:1019
 #, c-format
 msgid "%s failed"
 msgstr "%s فشلت"
 
-#: ../src/gnome2/mod_mgr.c:1019 ../src/gnome2/mod_mgr.c:1784
+#: ../src/gnome2/mod_mgr.c:1022 ../src/gnome2/mod_mgr.c:1787
 msgid "Finished"
 msgstr "انتهى"
 
-#: ../src/gnome2/mod_mgr.c:1192 ../src/gnome2/mod_mgr.c:1194
-#: ../src/gnome2/mod_mgr.c:1304 ../src/gnome2/mod_mgr.c:1337
-#: ../src/gnome2/mod_mgr.c:1339 ../src/gnome2/utilities.c:432
+#: ../src/gnome2/mod_mgr.c:1195 ../src/gnome2/mod_mgr.c:1197
+#: ../src/gnome2/mod_mgr.c:1307 ../src/gnome2/mod_mgr.c:1340
+#: ../src/gnome2/mod_mgr.c:1342 ../src/gnome2/utilities.c:432
 #: ../src/gnome2/utilities.c:495 ../src/gnome2/utilities.c:497
-#: ../src/gnome2/utilities.c:1069 ../src/main/sidebar.cc:808
+#: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:808
 #: ../src/main/sidebar.cc:879 ../src/main/sidebar.cc:881
 msgid "Unknown"
 msgstr "غير معروف"
 
-#: ../src/gnome2/mod_mgr.c:1515
+#: ../src/gnome2/mod_mgr.c:1518
 #, c-format
 msgid ""
 "Repository:\n"
@@ -884,156 +884,156 @@ msgstr ""
 "مستودع : \n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1528
+#: ../src/gnome2/mod_mgr.c:1531
 msgid ""
 "Categorized by\n"
 "Module Type"
 msgstr "مصنفة حسب نوع الوحدة"
 
-#: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/utilities.c:574
+#: ../src/gnome2/mod_mgr.c:1536 ../src/gnome2/utilities.c:574
 #: ../src/main/sidebar.cc:960 ../src/main/sidebar.cc:962
 msgid "Biblical Texts"
 msgstr "نصوص الكتاب المقدس"
 
-#: ../src/gnome2/mod_mgr.c:1537 ../src/gnome2/utilities.c:580
+#: ../src/gnome2/mod_mgr.c:1540 ../src/gnome2/utilities.c:580
 #: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:985
 #: ../src/main/sidebar.cc:987
 msgid "Commentaries"
 msgstr "التعليقات"
 
-#: ../src/gnome2/mod_mgr.c:1541 ../src/gnome2/utilities.c:587
+#: ../src/gnome2/mod_mgr.c:1544 ../src/gnome2/utilities.c:587
 #: ../src/main/sidebar.cc:994 ../src/main/sidebar.cc:996
 msgid "Dictionaries"
 msgstr "القواميس"
 
-#: ../src/gnome2/mod_mgr.c:1545 ../src/gnome2/utilities.c:593
+#: ../src/gnome2/mod_mgr.c:1548 ../src/gnome2/utilities.c:593
 #: ../src/main/sidebar.cc:1003 ../src/main/sidebar.cc:1005
 msgid "Glossaries"
 msgstr "المسارد"
 
-#: ../src/gnome2/mod_mgr.c:1549 ../src/gnome2/utilities.c:600
+#: ../src/gnome2/mod_mgr.c:1552 ../src/gnome2/utilities.c:600
 #: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1014
 msgid "Daily Devotionals"
 msgstr "يوميا دفوأيشنلس"
 
-#: ../src/gnome2/mod_mgr.c:1554 ../src/gnome2/utilities.c:606
+#: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/utilities.c:606
 #: ../src/main/sidebar.cc:675 ../src/main/sidebar.cc:1021
 #: ../src/main/sidebar.cc:1023
 msgid "General Books"
 msgstr "كتب عامة"
 
-#: ../src/gnome2/mod_mgr.c:1566 ../src/gnome2/utilities.c:624
+#: ../src/gnome2/mod_mgr.c:1569 ../src/gnome2/utilities.c:624
 #: ../src/main/sidebar.cc:1048 ../src/main/sidebar.cc:1050
 msgid "Cult/Unorthodox"
 msgstr "عبادة / غير تقليدي"
 
-#: ../src/gnome2/mod_mgr.c:1575
+#: ../src/gnome2/mod_mgr.c:1578
 msgid ""
 "Categorized by\n"
 "Availability"
 msgstr "مصنفة حسب توفر"
 
-#: ../src/gnome2/mod_mgr.c:1579
+#: ../src/gnome2/mod_mgr.c:1582
 msgid "Updates"
 msgstr "تحديثات"
 
-#: ../src/gnome2/mod_mgr.c:1584
+#: ../src/gnome2/mod_mgr.c:1587
 msgid "Uninstalled"
 msgstr "إلغاء"
 
-#: ../src/gnome2/mod_mgr.c:1589 ../src/gnome2/sidebar.c:630
+#: ../src/gnome2/mod_mgr.c:1592 ../src/gnome2/sidebar.c:630
 #: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:228
 #: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
 msgid "Prayer List/Journal"
 msgstr "قائمة الصلاة / مجلة"
 
-#: ../src/gnome2/mod_mgr.c:1767
+#: ../src/gnome2/mod_mgr.c:1770
 msgid "Refreshing from remote source"
 msgstr "منعش من مصدر بعيد"
 
-#: ../src/gnome2/mod_mgr.c:1779
+#: ../src/gnome2/mod_mgr.c:1782
 msgid "Remote source not found"
 msgstr "لم يتم العثور على مصدر البعيد"
 
-#: ../src/gnome2/mod_mgr.c:1850
+#: ../src/gnome2/mod_mgr.c:1853
 msgid "Configure"
 msgstr "تكوين"
 
-#: ../src/gnome2/mod_mgr.c:1879
+#: ../src/gnome2/mod_mgr.c:1882
 msgid "Type"
 msgstr "نوع"
 
-#: ../src/gnome2/mod_mgr.c:1886
+#: ../src/gnome2/mod_mgr.c:1889
 msgid "Caption"
 msgstr "شرح"
 
-#: ../src/gnome2/mod_mgr.c:1893
+#: ../src/gnome2/mod_mgr.c:1896
 msgid "Source"
 msgstr "مصدر"
 
-#: ../src/gnome2/mod_mgr.c:1900
+#: ../src/gnome2/mod_mgr.c:1903
 msgid "Directory"
 msgstr "الدليل"
 
-#: ../src/gnome2/mod_mgr.c:1908
+#: ../src/gnome2/mod_mgr.c:1911
 msgid "User"
 msgstr "المستخدم"
 
-#: ../src/gnome2/mod_mgr.c:1915
+#: ../src/gnome2/mod_mgr.c:1918
 msgid "Password"
 msgstr "كلمة السر"
 
-#: ../src/gnome2/mod_mgr.c:1922
+#: ../src/gnome2/mod_mgr.c:1925
 msgid "UID"
 msgstr "الأوصاف الفريدة"
 
-#: ../src/gnome2/mod_mgr.c:1937
+#: ../src/gnome2/mod_mgr.c:1940
 msgid "Module Sources"
 msgstr "مصادر الوحدة"
 
-#: ../src/gnome2/mod_mgr.c:1940
+#: ../src/gnome2/mod_mgr.c:1943
 msgid "Add/Remove"
 msgstr "إضافة / إزالة"
 
-#: ../src/gnome2/mod_mgr.c:1943
+#: ../src/gnome2/mod_mgr.c:1946
 msgid "Choose"
 msgstr "اختر"
 
-#: ../src/gnome2/mod_mgr.c:1946 ../src/gnome2/preferences_dialog.c:2023
-#: ../src/gnome2/sidebar.c:1520 ../src/gnome2/sidebar.c:1562
+#: ../src/gnome2/mod_mgr.c:1949 ../src/gnome2/preferences_dialog.c:2021
+#: ../src/gnome2/sidebar.c:1540 ../src/gnome2/sidebar.c:1586
 msgid "Modules"
 msgstr "وحدات"
 
-#: ../src/gnome2/mod_mgr.c:1948
+#: ../src/gnome2/mod_mgr.c:1951
 msgid "Install/Update"
 msgstr "تثبيت / تحديث"
 
-#: ../src/gnome2/mod_mgr.c:1951
+#: ../src/gnome2/mod_mgr.c:1954
 msgid "Maintenance"
 msgstr "الصيانة"
 
-#: ../src/gnome2/mod_mgr.c:2167
+#: ../src/gnome2/mod_mgr.c:2170
 msgid "Please Refresh"
 msgstr "يرجى تحديث"
 
-#: ../src/gnome2/mod_mgr.c:2168
+#: ../src/gnome2/mod_mgr.c:2171
 msgid "Your module list is not up to date!"
 msgstr "قائمة الوحدة النمطية الخاص بك لا يصل حتى الآن!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2485
+#: ../src/gnome2/mod_mgr.c:2488
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr "إلغاء لديك الخاص بالموقع الكتاب المقدس. Xiphos يتطلب واحد على الأقل."
 
-#: ../src/gnome2/mod_mgr.c:2491
+#: ../src/gnome2/mod_mgr.c:2494
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr "لا توجد حتى الآن تثبيت الاناجيل. Xiphos لا يمكن ان يستمر من دون واحدة."
 
-#: ../src/gnome2/mod_mgr.c:2616
+#: ../src/gnome2/mod_mgr.c:2619
 #, c-format
 msgid ""
 "%s obsoletes %s.\n"
@@ -1041,60 +1041,60 @@ msgid ""
 "Beware: This cannot be undone."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2682
+#: ../src/gnome2/mod_mgr.c:2685
 msgid "No obsolete modules were found."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2704
+#: ../src/gnome2/mod_mgr.c:2707
 msgid "Standard remote sources have been loaded."
 msgstr "تم تحميلها المصادر الاعتيادية البعيدة."
 
-#: ../src/gnome2/mod_mgr.c:2713
+#: ../src/gnome2/mod_mgr.c:2716
 msgid "Could not load standard sources from CrossWire."
 msgstr "لا يمكن تحميل المصادر القياسية من CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2864 ../src/gnome2/mod_mgr.c:3120
+#: ../src/gnome2/mod_mgr.c:2867 ../src/gnome2/mod_mgr.c:3123
 msgid "Remove the selected source"
 msgstr "إزالة مصدر مختارة"
 
-#: ../src/gnome2/mod_mgr.c:2930
+#: ../src/gnome2/mod_mgr.c:2933
 msgid "Enter a remote source"
 msgstr "أدخل مصدر بعيد"
 
-#: ../src/gnome2/mod_mgr.c:2939
+#: ../src/gnome2/mod_mgr.c:2942
 msgid "Caption:"
 msgstr "التعليق :"
 
-#: ../src/gnome2/mod_mgr.c:2940
+#: ../src/gnome2/mod_mgr.c:2943
 msgid "Type:"
 msgstr "النوع :"
 
-#: ../src/gnome2/mod_mgr.c:2941
+#: ../src/gnome2/mod_mgr.c:2944
 msgid "Host:"
 msgstr "المضيف :"
 
-#: ../src/gnome2/mod_mgr.c:2942
+#: ../src/gnome2/mod_mgr.c:2945
 msgid "Directory:"
 msgstr "الدليل :"
 
-#: ../src/gnome2/mod_mgr.c:2943
+#: ../src/gnome2/mod_mgr.c:2946
 msgid "User (optional):"
 msgstr "المستخدم (اختياري) :"
 
-#: ../src/gnome2/mod_mgr.c:2944
+#: ../src/gnome2/mod_mgr.c:2947
 msgid "Password (optional):"
 msgstr "كلمة السر (اختياري) :"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2970
+#: ../src/gnome2/mod_mgr.c:2973
 msgid "A source by that name already exists."
 msgstr "مصدر هذا الاسم موجود مسبقا."
 
-#: ../src/gnome2/mod_mgr.c:3117
+#: ../src/gnome2/mod_mgr.c:3120
 msgid "Delete a remote source"
 msgstr "حذف مصدر بعيد"
 
-#: ../src/gnome2/mod_mgr.c:3636
+#: ../src/gnome2/mod_mgr.c:3639
 #, fuzzy
 msgid "[no module]"
 msgstr "كله وحدة"
@@ -1103,15 +1103,15 @@ msgstr "كله وحدة"
 msgid "Go outward, to the section containing this one"
 msgstr "الذهاب إلى الخارج ، إلى المقطع تحتوي على هذا واحد"
 
-#: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:322
+#: ../src/gnome2/navbar_book.c:380 ../src/gnome2/navbar_book_dialog.c:326
 msgid "Go to previous item"
 msgstr "الذهاب إلى العنصر السابق"
 
-#: ../src/gnome2/navbar_book.c:397 ../src/gnome2/navbar_book_dialog.c:342
+#: ../src/gnome2/navbar_book.c:403 ../src/gnome2/navbar_book_dialog.c:350
 msgid "Go to next item"
 msgstr "الذهاب إلى البند التالي"
 
-#: ../src/gnome2/navbar_book.c:418 ../src/gnome2/navbar_book_dialog.c:362
+#: ../src/gnome2/navbar_book.c:427 ../src/gnome2/navbar_book_dialog.c:374
 msgid "Go inward, to the first subsection"
 msgstr "الذهاب إلى الداخل ، إلى الفرع الأول"
 
@@ -1121,7 +1121,7 @@ msgstr "الذهاب إلى الداخل ، إلى الفرع الأول"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "تزامن هذا الإطار في التمرير مع النافذة الرئيسية"
 
-#: ../src/gnome2/parallel_dialog.c:346 ../src/gnome2/preferences_dialog.c:2030
+#: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2028
 msgid "Parallel"
 msgstr "مواز"
 
@@ -1134,120 +1134,120 @@ msgstr "فصل / إرفاق"
 msgid "Module Options"
 msgstr "خيارات الوحدة"
 
-#: ../src/gnome2/parallel_view.c:206 ../src/gnome2/sidebar.c:614
+#: ../src/gnome2/parallel_view.c:213 ../src/gnome2/sidebar.c:614
 #: ../src/gnome2/sidebar.c:619 ../src/gnome2/tabbed_browser.c:254
 #: ../src/main/sidebar.cc:639 ../src/main/sidebar.cc:968
 #: ../src/main/sidebar.cc:969 ../src/main/sidebar.cc:970
 msgid "Parallel View"
 msgstr "عرض مواز"
 
-#: ../src/gnome2/preferences_dialog.c:860
+#: ../src/gnome2/preferences_dialog.c:864
 msgid "BibleSync session passphrase"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:862
+#: ../src/gnome2/preferences_dialog.c:866
 msgid "Phrase:"
 msgstr ""
 
 #. mode selection failed? probably dead interface
-#: ../src/gnome2/preferences_dialog.c:933
+#: ../src/gnome2/preferences_dialog.c:937
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:988
+#: ../src/gnome2/preferences_dialog.c:986
 #, fuzzy
 msgid "Mode selection failed.\n"
 msgstr "قراءة بصوت عال التحديد"
 
-#: ../src/gnome2/preferences_dialog.c:991
+#: ../src/gnome2/preferences_dialog.c:989
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:993
+#: ../src/gnome2/preferences_dialog.c:991
 msgid "Disabled"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:995 ../src/main/xml.c:96
+#: ../src/gnome2/preferences_dialog.c:993 ../src/main/xml.c:96
 msgid "Personal"
 msgstr "الشخصية"
 
-#: ../src/gnome2/preferences_dialog.c:997
+#: ../src/gnome2/preferences_dialog.c:995
 msgid "Speaker"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:998
+#: ../src/gnome2/preferences_dialog.c:996
 msgid "Audience"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1584
-#: ../src/gnome2/preferences_dialog.c:1618
-#: ../src/gnome2/preferences_dialog.c:1651
-#: ../src/gnome2/preferences_dialog.c:1683
-#: ../src/gnome2/preferences_dialog.c:1714
-#: ../src/gnome2/preferences_dialog.c:1745
-#: ../src/gnome2/preferences_dialog.c:1776
-#: ../src/gnome2/preferences_dialog.c:1808
-#: ../src/gnome2/preferences_dialog.c:1841
-#: ../src/gnome2/preferences_dialog.c:1892
-#: ../src/gnome2/preferences_dialog.c:2340
+#: ../src/gnome2/preferences_dialog.c:1582
+#: ../src/gnome2/preferences_dialog.c:1616
+#: ../src/gnome2/preferences_dialog.c:1649
+#: ../src/gnome2/preferences_dialog.c:1681
+#: ../src/gnome2/preferences_dialog.c:1712
+#: ../src/gnome2/preferences_dialog.c:1743
+#: ../src/gnome2/preferences_dialog.c:1774
+#: ../src/gnome2/preferences_dialog.c:1806
+#: ../src/gnome2/preferences_dialog.c:1839
+#: ../src/gnome2/preferences_dialog.c:1890
+#: ../src/gnome2/preferences_dialog.c:2338
 msgid "-- Select --"
 msgstr "-- اختر --"
 
-#: ../src/gnome2/preferences_dialog.c:1855
+#: ../src/gnome2/preferences_dialog.c:1853
 msgid "Locale will take effect after restart."
 msgstr "واللغة نافذة المفعول بعد إعادة التشغيل."
 
-#: ../src/gnome2/preferences_dialog.c:1925 ../ui/prefs.glade.h:1
+#: ../src/gnome2/preferences_dialog.c:1923 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "تفضيلات"
 
-#: ../src/gnome2/preferences_dialog.c:2003
+#: ../src/gnome2/preferences_dialog.c:2001
 msgid "General"
 msgstr "العام"
 
-#: ../src/gnome2/preferences_dialog.c:2006
+#: ../src/gnome2/preferences_dialog.c:2004
 msgid "Options"
 msgstr "خيارات"
 
-#: ../src/gnome2/preferences_dialog.c:2009 ../ui/prefs.glade.h:85
+#: ../src/gnome2/preferences_dialog.c:2007 ../ui/prefs.glade.h:85
 #: ../ui/prefs.gtkbuilder.h:85
 #, fuzzy
 msgid "BibleSync"
 msgstr "الكتاب المقدس"
 
-#: ../src/gnome2/preferences_dialog.c:2013
+#: ../src/gnome2/preferences_dialog.c:2011
 msgid "Fonts"
 msgstr "حرة"
 
-#: ../src/gnome2/preferences_dialog.c:2016
+#: ../src/gnome2/preferences_dialog.c:2014
 msgid "Color"
 msgstr "اللون"
 
-#: ../src/gnome2/preferences_dialog.c:2019
+#: ../src/gnome2/preferences_dialog.c:2017
 msgid "Sizes and Faces"
 msgstr "الأحجام وجوه"
 
-#: ../src/gnome2/preferences_dialog.c:2033
+#: ../src/gnome2/preferences_dialog.c:2031
 msgid "Special"
 msgstr "خاص"
 
-#: ../src/gnome2/preferences_dialog.c:2721 ../src/gnome2/search_dialog.c:519
+#: ../src/gnome2/preferences_dialog.c:2719 ../src/gnome2/search_dialog.c:519
 msgid "Clear List?"
 msgstr "قائمة واضحة؟"
 
-#: ../src/gnome2/preferences_dialog.c:2722 ../src/gnome2/search_dialog.c:520
+#: ../src/gnome2/preferences_dialog.c:2720 ../src/gnome2/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr "هل أنت متأكد أنك تريد مسح قائمة وحدة؟"
 
-#: ../src/gnome2/preferences_dialog.c:2773 ../src/main/search_dialog.cc:658
+#: ../src/gnome2/preferences_dialog.c:2771 ../src/main/search_dialog.cc:658
 msgid "Remove Module?"
 msgstr "إزالة وحدة؟"
 
-#: ../src/gnome2/preferences_dialog.c:2774 ../src/main/search_dialog.cc:659
+#: ../src/gnome2/preferences_dialog.c:2772 ../src/main/search_dialog.cc:659
 msgid "Are you sure you want to remove the selected module?"
 msgstr "هل أنت متأكد أنك تريد إزالة الوحدة المختارة؟"
 
@@ -1299,7 +1299,7 @@ msgstr "هل أنت متأكد أنك تريد حذف :"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:842
+#: ../src/gnome2/search_dialog.c:845
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1354,7 +1354,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:900
+#: ../src/gnome2/search_dialog.c:903
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1382,87 +1382,87 @@ msgstr ""
 "على سبيل المثال ن محامون بلا حدود عن \"الاسم ، النصب المفرد المؤنث\" -- انظر "
 "وحدة روبنسون للحصول على تفاصيل."
 
-#: ../src/gnome2/search_dialog.c:1195
+#: ../src/gnome2/search_dialog.c:1198
 msgid "Module is neither Bible nor commentary"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:1213 ../src/gnome2/sidebar.c:973
+#: ../src/gnome2/search_dialog.c:1216 ../src/gnome2/sidebar.c:973
 msgid "BibleSync is not active for transmit."
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:215
+#: ../src/gnome2/search_sidebar.c:241
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr "هذا هو شاملة (\"و\") البحث : البحث عن مباريات عرض جميع الكلمات."
 
-#: ../src/gnome2/search_sidebar.c:227
+#: ../src/gnome2/search_sidebar.c:253
 #, fuzzy
 msgid "_Open Advanced Search"
 msgstr "_Advanced البحث"
 
-#: ../src/gnome2/search_sidebar.c:232
+#: ../src/gnome2/search_sidebar.c:258
 #, fuzzy
 msgid "Open the separate Advanced Search dialog."
 msgstr "فتح مربع الحوار بحث متقدم ، لتشغيل استعلامات معقدة"
 
-#: ../src/gnome2/search_sidebar.c:248
+#: ../src/gnome2/search_sidebar.c:274
 msgid "Search Module"
 msgstr "نموذج البحث"
 
-#: ../src/gnome2/search_sidebar.c:285
+#: ../src/gnome2/search_sidebar.c:311
 msgid "Search Type"
 msgstr "نوع البحث"
 
-#: ../src/gnome2/search_sidebar.c:298 ../ui/search-dialog.glade.h:39
-#: ../ui/search-dialog.gtkbuilder.h:39
-msgid "Multi word"
-msgstr "كلمة متعددة"
+#: ../src/gnome2/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
+#: ../ui/search-dialog.gtkbuilder.h:34
+msgid "Optimized (\"Lucene\")"
+msgstr "الأمثل (\"وسين\")"
 
-#: ../src/gnome2/search_sidebar.c:307 ../ui/search-dialog.glade.h:41
+#: ../src/gnome2/search_sidebar.c:333 ../ui/search-dialog.glade.h:41
 #: ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "التعبير العادية"
 
-#: ../src/gnome2/search_sidebar.c:314 ../ui/search-dialog.glade.h:43
+#: ../src/gnome2/search_sidebar.c:340 ../ui/search-dialog.glade.h:43
 #: ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "بالضبط مثل العبارة"
 
-#: ../src/gnome2/search_sidebar.c:330
+#: ../src/gnome2/search_sidebar.c:356
 msgid "Search Options"
 msgstr "خيارات البحث"
 
-#: ../src/gnome2/search_sidebar.c:343 ../ui/search-dialog.glade.h:49
+#: ../src/gnome2/search_sidebar.c:369 ../ui/search-dialog.glade.h:49
 #: ../ui/search-dialog.gtkbuilder.h:49
 msgid "Match case"
 msgstr "حالة المباراة"
 
-#: ../src/gnome2/search_sidebar.c:359
+#: ../src/gnome2/search_sidebar.c:385
 msgid "Search Scope"
 msgstr "نطاق البحث"
 
-#: ../src/gnome2/search_sidebar.c:372
+#: ../src/gnome2/search_sidebar.c:398
 msgid "No scope"
 msgstr "لا مجال"
 
-#: ../src/gnome2/search_sidebar.c:381
+#: ../src/gnome2/search_sidebar.c:407
 msgid "Use bounds"
 msgstr "استخدام حدود"
 
-#: ../src/gnome2/search_sidebar.c:389
+#: ../src/gnome2/search_sidebar.c:415
 msgid "Last search"
 msgstr "البحث بالموقع"
 
-#: ../src/gnome2/search_sidebar.c:406
+#: ../src/gnome2/search_sidebar.c:432
 msgid "Bounds"
 msgstr "حدود"
 
-#: ../src/gnome2/search_sidebar.c:421 ../src/gnome2/search_sidebar.c:453
+#: ../src/gnome2/search_sidebar.c:447 ../src/gnome2/search_sidebar.c:479
 msgid "Lower"
 msgstr "انخفاض"
 
-#: ../src/gnome2/search_sidebar.c:433 ../src/gnome2/search_sidebar.c:460
+#: ../src/gnome2/search_sidebar.c:459 ../src/gnome2/search_sidebar.c:486
 msgid "Upper"
 msgstr "أعلى"
 
@@ -1484,7 +1484,7 @@ msgstr "تفضيلات"
 msgid "List:"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1507 ../src/gnome2/sidebar.c:1545
+#: ../src/gnome2/sidebar.c:1519 ../src/gnome2/sidebar.c:1569
 msgid "Search"
 msgstr "البحث"
 
@@ -1562,7 +1562,7 @@ msgstr "تشرين الثاني / نوفمبر"
 msgid "December"
 msgstr "كانون الأول / ديسمبر"
 
-#: ../src/gnome2/utilities.c:2038
+#: ../src/gnome2/utilities.c:2071
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -1576,81 +1576,81 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:118
+#: ../src/main/biblesync_glue.cc:124
 msgid ""
 "Presence announcement:\n"
 "\n"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:128
+#: ../src/main/biblesync_glue.cc:134
 msgid ""
 "Navigation packet:\n"
 "\n"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:179
+#: ../src/main/biblesync_glue.cc:185
 #, fuzzy
 msgid "Unknown module "
 msgstr "كله وحدة"
 
-#: ../src/main/biblesync_glue.cc:179
+#: ../src/main/biblesync_glue.cc:185
 msgid ""
 ".\n"
 "Navigated indirectly using verse list."
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:255
+#: ../src/main/biblesync_glue.cc:261
 msgid "ERROR: unknown BibleSync indicator: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:255
+#: ../src/main/biblesync_glue.cc:264
 msgid "Other indications are:"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:530
+#: ../src/main/biblesync_glue.cc:546
 #, fuzzy
 msgid "Check the box to listen to this Speaker"
 msgstr "انقر فوق مربع للعمل في هذه الوحدة"
 
-#: ../src/main/biblesync_glue.cc:543
+#: ../src/main/biblesync_glue.cc:559
 #, fuzzy
 msgid "Available Speakers"
 msgstr "متاح"
 
-#: ../src/main/biblesync_glue.cc:552
+#: ../src/main/biblesync_glue.cc:568
 msgid "D/I"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:562
+#: ../src/main/biblesync_glue.cc:578
 msgid "Last navigation was Direct or Indirect"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:571
+#: ../src/main/biblesync_glue.cc:587
 #, fuzzy
 msgid "Last Navigation"
 msgstr "خلاص"
 
-#: ../src/main/biblesync_glue.cc:590
+#: ../src/main/biblesync_glue.cc:606
 msgid "UUID"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:610
+#: ../src/main/biblesync_glue.cc:626
 msgid "IP address: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:610
+#: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "Application: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:610
+#: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "Device: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:610
+#: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "UUID: "
@@ -1670,8 +1670,8 @@ msgstr ""
 "ترميز غير صحيح تسمية الشخصية الشرح : \n"
 "%s"
 
-#: ../src/main/display.cc:1115 ../src/main/display.cc:1156
-#: ../src/main/display.cc:1240 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1116 ../src/main/display.cc:1157
+#: ../src/main/display.cc:1241 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr "الفصل"
@@ -1717,13 +1717,13 @@ msgstr "الصليب المرجعي"
 
 #: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
 #: ../src/main/module_dialogs.cc:354 ../src/main/module_dialogs.cc:366
-#: ../src/main/previewer.cc:203 ../src/main/previewer.cc:221
+#: ../src/main/previewer.cc:203 ../src/main/previewer.cc:223
 msgid "Strongs"
 msgstr "Strongs"
 
 #: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
 #: ../src/main/module_dialogs.cc:359 ../src/main/module_dialogs.cc:376
-#: ../src/main/previewer.cc:208 ../src/main/previewer.cc:227
+#: ../src/main/previewer.cc:208 ../src/main/previewer.cc:229
 msgid "Morphology"
 msgstr "مورفولوجيا"
 
@@ -1833,7 +1833,7 @@ msgstr ""
 msgid "Glosses"
 msgstr "المسارد"
 
-#: ../src/main/parallel_view.cc:745
+#: ../src/main/parallel_view.cc:749
 msgid "view context"
 msgstr "عرض السياق"
 
@@ -2058,7 +2058,7 @@ msgstr "هل أنت متأكد أنك تريد حذف هذا النطاق؟"
 msgid "Search: "
 msgstr "البحث :"
 
-#: ../src/main/search_dialog.cc:1376
+#: ../src/main/search_dialog.cc:1381
 #, c-format
 msgid ""
 "%s:\n"
@@ -2069,16 +2069,16 @@ msgstr ""
 " : تثبيت وحدة ، هي ليست\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1378
+#: ../src/main/search_dialog.cc:1383
 msgid "Please adjust the module list."
 msgstr "الرجاء ضبط قائمة الوحدات."
 
-#: ../src/main/search_dialog.cc:1394
+#: ../src/main/search_dialog.cc:1399
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "لا مؤشر سريع البحث وجود ل %s%s%s"
 
-#: ../src/main/search_dialog.cc:1396
+#: ../src/main/search_dialog.cc:1401
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -2086,7 +2086,7 @@ msgstr ""
 "\n"
 "بحث في هذا النموذج هو الآن `كلمة متعددة."
 
-#: ../src/main/search_dialog.cc:1397
+#: ../src/main/search_dialog.cc:1402
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -2094,7 +2094,7 @@ msgstr ""
 "\n"
 "راجع مدير وحدة ، صيانة جزء."
 
-#: ../src/main/search_dialog.cc:1458
+#: ../src/main/search_dialog.cc:1463
 msgid "Search finished"
 msgstr "الانتهاء من البحث"
 
@@ -2161,32 +2161,32 @@ msgstr "آية"
 msgid "chapter"
 msgstr "الفصل"
 
-#: ../src/main/sword.cc:654
+#: ../src/main/sword.cc:658
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr "في ملف Xiphos للغة الاختصارات مفقود."
 
-#: ../src/main/sword.cc:660
+#: ../src/main/sword.cc:664
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr "اختصار الملف لا يمكن للغة Xiphos يمكن فتح."
 
-#: ../src/main/sword.cc:672
+#: ../src/main/sword.cc:676
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr "لا يمكن Xiphos تخصيص مساحة للغة الاختصارات."
 
-#: ../src/main/sword.cc:678
+#: ../src/main/sword.cc:682
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr "لا يمكن Xiphos قراءة الملف اختصار اللغة."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:758
+#: ../src/main/sword.cc:762
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
@@ -2195,11 +2195,11 @@ msgstr ""
 "وجدت مطابقة للغة لا سيصدره '%s'.\n"
 "%s"
 
-#: ../src/main/sword.cc:760
+#: ../src/main/sword.cc:764
 msgid "Book names and menus may not be translated."
 msgstr "قد لا أسماء الكتاب والقوائم يمكن ترجمتها."
 
-#: ../src/main/sword.cc:1114 ../src/main/sword.cc:1283
+#: ../src/main/sword.cc:1119 ../src/main/sword.cc:1288
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2207,7 +2207,7 @@ msgid ""
 "Would you like to open these as well?%s"
 msgstr ""
 
-#: ../src/main/sword.cc:1118 ../src/main/sword.cc:1287
+#: ../src/main/sword.cc:1123 ../src/main/sword.cc:1292
 msgid ""
 "\n"
 "\n"
@@ -2215,11 +2215,11 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1411
+#: ../src/main/sword.cc:1416
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "وطلب اليومية تعبدي ، ولكن هناك شيء مثبت."
 
-#: ../src/main/sword.cc:1665
+#: ../src/main/sword.cc:1670
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2294,13 +2294,13 @@ msgstr "ما هو الإنجيل؟"
 msgid "1 Cor 15:1-4"
 msgstr "1 كو 15:1-4"
 
-#: ../src/main/xml.c:263 ../src/main/xml.c:409 ../src/main/xml.c:1504
+#: ../src/main/xml.c:263 ../src/main/xml.c:409 ../src/main/xml.c:1506
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "تحليل الوثيقة لا بنجاح.\n"
 
 #: ../src/main/xml.c:269 ../src/main/xml.c:415 ../src/main/xml.c:435
-#: ../src/main/xml.c:1061 ../src/main/xml.c:1391 ../src/main/xml.c:1587
+#: ../src/main/xml.c:1063 ../src/main/xml.c:1393 ../src/main/xml.c:1589
 #, c-format
 msgid "empty document \n"
 msgstr "وثيقة فارغة\n"
@@ -2425,19 +2425,19 @@ msgstr "حصيرة -- القس"
 msgid "Sample Module List"
 msgstr "عينة قائمة الوحدات"
 
-#: ../src/main/xml.c:1067 ../src/main/xml.c:1397
+#: ../src/main/xml.c:1069 ../src/main/xml.c:1399
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "نوع الخطأ ، والعقدة الجذر! = %s\n"
 
-#: ../src/main/xml.c:1549
+#: ../src/main/xml.c:1551
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
 
-#: ../src/main/xml.c:1551
+#: ../src/main/xml.c:1553
 msgid "Attempting to revert to previous save."
 msgstr "تحاول العودة الى انقاذ السابقة."
 
@@ -2446,17 +2446,14 @@ msgid "Add Bookmark"
 msgstr "إضافة إشارة مرجعية"
 
 #: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:13
-#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:11
 msgid "Bookmark Dialog"
 msgstr "المرجعية حوار"
 
 #: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
-#: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:2
 msgid "Create new folder"
 msgstr "إنشاء مجلد جديد"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
-#: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
 #: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "مجلد جديد"
@@ -2466,7 +2463,6 @@ msgid "New ..."
 msgstr "جديد..."
 
 #: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
 msgid "Cancel Bookmark"
 msgstr "إلغاء المرجعية"
 
@@ -2479,22 +2475,22 @@ msgid "Label Entry"
 msgstr "تسمية الدخول"
 
 #: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:8
-#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:7
+#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:8
 msgid "Verse:"
 msgstr "الآية :"
 
 #: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:9
-#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:8
+#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:9
 msgid "Verse Entry"
 msgstr "الآية الدخول"
 
 #: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:10
-#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:9
+#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:10
 msgid "Module:"
 msgstr "الوحدة :"
 
 #: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:11
-#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:10
+#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:11
 msgid "Module Entry"
 msgstr "وحدة الدخول"
 
@@ -3228,6 +3224,22 @@ msgstr ""
 msgid "Mark/Unmark Verse"
 msgstr "العلامة آية عدم تحديد /"
 
+#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:12
+#, fuzzy
+msgid "Annotation Dialog"
+msgstr "مستخدم التعليق"
+
+#: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:2
+msgid ""
+"Add annotation. The verse will display with highlight colors and a *u marker "
+"to show content."
+msgstr ""
+
+#: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
+#, fuzzy
+msgid "New Annotation"
+msgstr "مستخدم التعليق"
+
 #: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:3
 msgid "Mark"
 msgstr "مارك"
@@ -3235,6 +3247,16 @@ msgstr "مارك"
 #: ../ui/markverse.glade.h:10 ../ui/markverse.gtkbuilder.h:5
 msgid "Unmark"
 msgstr "عدم تحديد"
+
+#: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
+#, fuzzy
+msgid "Remove annotation."
+msgstr "مستخدم التعليق"
+
+#: ../ui/markverse.glade.h:12 ../ui/markverse.gtkbuilder.h:7
+#, fuzzy
+msgid "Cancel Annotation"
+msgstr "مستخدم التعليق"
 
 #: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
 msgid "Module Manager"
@@ -4296,13 +4318,13 @@ msgstr ""
 "سريع featureful المستندة يجب أن يكون قد فهارس البحث ، مؤشر بنيت قبل : مدير "
 "الصيانة في وظائف وحدة انظر"
 
-#: ../ui/search-dialog.glade.h:37 ../ui/search-dialog.gtkbuilder.h:34
-msgid "Optimized (\"Lucene\")"
-msgstr "الأمثل (\"وسين\")"
-
 #: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "الأمثل (\"وسين\") زر راديو"
+
+#: ../ui/search-dialog.glade.h:39 ../ui/search-dialog.gtkbuilder.h:39
+msgid "Multi word"
+msgstr "كلمة متعددة"
 
 #: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
 msgid "Multi word radiobutton"
@@ -5114,6 +5136,10 @@ msgstr "Xiphos دليل الكتاب المقدس"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr "دراسة الكتاب المقدس"
+
+#: ../xiphos.desktop.in.in.h:3
+msgid "Text;Bible;Study;"
+msgstr ""
 
 #, fuzzy
 #~ msgid "[no dump ready]"
