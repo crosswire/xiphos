@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-16 13:36-0400\n"
+"POT-Creation-Date: 2017-04-28 13:39+0200\n"
 "PO-Revision-Date: 2010-09-29 21:07+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Gnomesword-developers <gnomesword-developers@lists>\n"
@@ -87,83 +87,83 @@ msgstr ""
 msgid "<b>Module name:</b> "
 msgstr "<b>Rheolydd Modiwlau</b>"
 
-#: ../src/gnome2/about_modules.c:415
+#: ../src/gnome2/about_modules.c:418
+#, fuzzy
+msgid "<b>Module abbreviation:</b> "
+msgstr "<b>Rhestrau’r Modiwlau</b>"
+
+#: ../src/gnome2/about_modules.c:423
 #, fuzzy
 msgid "<b>Version:</b> "
 msgstr "<b>Dewisiadau</b>"
 
-#: ../src/gnome2/about_modules.c:418
+#: ../src/gnome2/about_modules.c:426
 msgid "No version stamp found"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:421
+#: ../src/gnome2/about_modules.c:429
 #, fuzzy
 msgid "<b>Type:</b> "
 msgstr "<b>Cwmpas</b>"
 
-#: ../src/gnome2/about_modules.c:423
+#: ../src/gnome2/about_modules.c:431
 #, fuzzy
 msgid "Daily Devotion"
 msgstr "Defosiwn Dyddiol"
 
-#: ../src/gnome2/about_modules.c:425 ../src/gnome2/mod_mgr.c:1558
+#: ../src/gnome2/about_modules.c:433 ../src/gnome2/mod_mgr.c:1561
 #: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1030
 #: ../src/main/sidebar.cc:1032
 msgid "Maps"
 msgstr "Mapiau"
 
-#: ../src/gnome2/about_modules.c:427 ../src/gnome2/mod_mgr.c:1562
+#: ../src/gnome2/about_modules.c:435 ../src/gnome2/mod_mgr.c:1565
 #: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1039
 #: ../src/main/sidebar.cc:1041
 msgid "Images"
 msgstr "Lluniau"
 
-#: ../src/gnome2/about_modules.c:429
+#: ../src/gnome2/about_modules.c:437
 msgid "Glossary"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:433
+#: ../src/gnome2/about_modules.c:441
 msgid "Cult"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:437 ../src/gnome2/search_sidebar.c:261
+#: ../src/gnome2/about_modules.c:445 ../src/gnome2/search_sidebar.c:287
 msgid "Bible"
 msgstr "Beibl"
 
-#: ../src/gnome2/about_modules.c:440 ../src/gnome2/search_sidebar.c:269
+#: ../src/gnome2/about_modules.c:448 ../src/gnome2/search_sidebar.c:295
 #: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 msgid "Commentary"
 msgstr "Esboniad"
 
-#: ../src/gnome2/about_modules.c:443 ../ui/prefs.glade.h:136
+#: ../src/gnome2/about_modules.c:451 ../ui/prefs.glade.h:136
 #: ../ui/prefs.gtkbuilder.h:136
 msgid "Dictionary"
 msgstr "Geiriadur"
 
-#: ../src/gnome2/about_modules.c:446
+#: ../src/gnome2/about_modules.c:454
 #, fuzzy
 msgid "General Book"
 msgstr "Llyfrau"
 
-#: ../src/gnome2/about_modules.c:451
+#: ../src/gnome2/about_modules.c:459
 #, fuzzy
 msgid "Personal Commentary"
 msgstr "Ailenwi’r Esboniad"
 
-#: ../src/gnome2/about_modules.c:454
+#: ../src/gnome2/about_modules.c:462
 #, fuzzy
 msgid "Journal"
 msgstr "Dyddlyfr"
 
-#: ../src/gnome2/about_modules.c:457
+#: ../src/gnome2/about_modules.c:465
 #, fuzzy
 msgid "Unknown type"
 msgstr "Anhysbys"
-
-#: ../src/gnome2/about_modules.c:466
-#, fuzzy
-msgid "<b>Module abbreviation:</b> "
-msgstr "<b>Rhestrau’r Modiwlau</b>"
 
 #: ../src/gnome2/about_modules.c:471
 #, fuzzy
@@ -414,8 +414,8 @@ msgid ""
 "separate tabs is not supported."
 msgstr ""
 
-#: ../src/gnome2/bookmarks_treeview.c:839 ../src/gnome2/sidebar.c:1500
-#: ../src/gnome2/sidebar.c:1536
+#: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1508
+#: ../src/gnome2/sidebar.c:1560
 msgid "Bookmarks"
 msgstr "Nodau Tudalen"
 
@@ -446,7 +446,7 @@ msgid "Close _without Saving"
 msgstr "Cau _heb gadw"
 
 #: ../src/gnome2/export_bookmarks.c:175 ../src/gnome2/export_bookmarks.c:232
-#: ../src/gnome2/sidebar.c:1514 ../src/gnome2/sidebar.c:1554
+#: ../src/gnome2/sidebar.c:1530 ../src/gnome2/sidebar.c:1578
 #, c-format
 msgid "Verse List"
 msgstr "Rhestr Adnodau"
@@ -518,29 +518,29 @@ msgstr ""
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:583
+#: ../src/gnome2/main_window.c:587
 #, fuzzy, c-format
 msgid "Module has no support for %s."
 msgstr "Mewn modiwlau sydd a rhifau Strong"
 
-#: ../src/gnome2/main_window.c:656
+#: ../src/gnome2/main_window.c:660
 #, fuzzy
 msgid "Xiphos: No windows."
 msgstr "Xiphos:"
 
-#: ../src/gnome2/main_window.c:708
+#: ../src/gnome2/main_window.c:711
 msgid "BibleSync: Current navigation sent."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:710
+#: ../src/gnome2/main_window.c:713
 msgid "BibleSync: Not speaking."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:897
+#: ../src/gnome2/main_window.c:931
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos – Meddalwedd Astudio’r Beibl"
 
-#: ../src/gnome2/main_window.c:972
+#: ../src/gnome2/main_window.c:995
 msgid "Open a new tab"
 msgstr "Agor tab newydd"
 
@@ -551,15 +551,15 @@ msgstr "Agor tab newydd"
 msgid "Standard View"
 msgstr "Golwg Safonol"
 
-#: ../src/gnome2/main_window.c:1109
+#: ../src/gnome2/main_window.c:1092
 msgid "Commentary View"
 msgstr "Golwg Esboniad"
 
-#: ../src/gnome2/main_window.c:1123
+#: ../src/gnome2/main_window.c:1100
 msgid "Book View"
 msgstr "Golwg Llyfr"
 
-#: ../src/gnome2/main_window.c:1152
+#: ../src/gnome2/main_window.c:1118
 msgid "Welcome to Xiphos"
 msgstr "Croeso i Xiphos"
 
@@ -818,7 +818,7 @@ msgstr ""
 "Mae'r eicon clo yn golygu fod y modiwl hwn wedi ei amgryptio, a bod angen i "
 "chi brynu allwedd gan berchennog y cynnwys"
 
-#: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:580
+#: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:596
 #: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2
 #: ../ui/xi-menus.glade.h:55 ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
@@ -857,36 +857,36 @@ msgstr ""
 msgid " archived in: \n"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:985
+#: ../src/gnome2/mod_mgr.c:988
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Ni ellir creu mynegai i Ddyddlyfrau a rhestrau gweddi"
 
-#: ../src/gnome2/mod_mgr.c:1016
+#: ../src/gnome2/mod_mgr.c:1019
 #, c-format
 msgid "%s failed"
 msgstr "%s wedi methu"
 
-#: ../src/gnome2/mod_mgr.c:1019 ../src/gnome2/mod_mgr.c:1784
+#: ../src/gnome2/mod_mgr.c:1022 ../src/gnome2/mod_mgr.c:1787
 msgid "Finished"
 msgstr "Wedi gorffen"
 
-#: ../src/gnome2/mod_mgr.c:1192 ../src/gnome2/mod_mgr.c:1194
-#: ../src/gnome2/mod_mgr.c:1304 ../src/gnome2/mod_mgr.c:1337
-#: ../src/gnome2/mod_mgr.c:1339 ../src/gnome2/utilities.c:432
+#: ../src/gnome2/mod_mgr.c:1195 ../src/gnome2/mod_mgr.c:1197
+#: ../src/gnome2/mod_mgr.c:1307 ../src/gnome2/mod_mgr.c:1340
+#: ../src/gnome2/mod_mgr.c:1342 ../src/gnome2/utilities.c:432
 #: ../src/gnome2/utilities.c:495 ../src/gnome2/utilities.c:497
-#: ../src/gnome2/utilities.c:1069 ../src/main/sidebar.cc:808
+#: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:808
 #: ../src/main/sidebar.cc:879 ../src/main/sidebar.cc:881
 msgid "Unknown"
 msgstr "Anhysbys"
 
-#: ../src/gnome2/mod_mgr.c:1515
+#: ../src/gnome2/mod_mgr.c:1518
 #, c-format
 msgid ""
 "Repository:\n"
 "%s"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1528
+#: ../src/gnome2/mod_mgr.c:1531
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -894,44 +894,44 @@ msgstr ""
 "Dosbarthwyd yn ôl\n"
 "Math o Fodiwl"
 
-#: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/utilities.c:574
+#: ../src/gnome2/mod_mgr.c:1536 ../src/gnome2/utilities.c:574
 #: ../src/main/sidebar.cc:960 ../src/main/sidebar.cc:962
 msgid "Biblical Texts"
 msgstr "Testunau Beiblaidd"
 
-#: ../src/gnome2/mod_mgr.c:1537 ../src/gnome2/utilities.c:580
+#: ../src/gnome2/mod_mgr.c:1540 ../src/gnome2/utilities.c:580
 #: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:985
 #: ../src/main/sidebar.cc:987
 msgid "Commentaries"
 msgstr "Esboniadau"
 
-#: ../src/gnome2/mod_mgr.c:1541 ../src/gnome2/utilities.c:587
+#: ../src/gnome2/mod_mgr.c:1544 ../src/gnome2/utilities.c:587
 #: ../src/main/sidebar.cc:994 ../src/main/sidebar.cc:996
 msgid "Dictionaries"
 msgstr "Geiriaduron"
 
-#: ../src/gnome2/mod_mgr.c:1545 ../src/gnome2/utilities.c:593
+#: ../src/gnome2/mod_mgr.c:1548 ../src/gnome2/utilities.c:593
 #: ../src/main/sidebar.cc:1003 ../src/main/sidebar.cc:1005
 msgid "Glossaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1549 ../src/gnome2/utilities.c:600
+#: ../src/gnome2/mod_mgr.c:1552 ../src/gnome2/utilities.c:600
 #: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1014
 msgid "Daily Devotionals"
 msgstr "Defosiwn Dyddiol"
 
-#: ../src/gnome2/mod_mgr.c:1554 ../src/gnome2/utilities.c:606
+#: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/utilities.c:606
 #: ../src/main/sidebar.cc:675 ../src/main/sidebar.cc:1021
 #: ../src/main/sidebar.cc:1023
 msgid "General Books"
 msgstr "Llyfrau"
 
-#: ../src/gnome2/mod_mgr.c:1566 ../src/gnome2/utilities.c:624
+#: ../src/gnome2/mod_mgr.c:1569 ../src/gnome2/utilities.c:624
 #: ../src/main/sidebar.cc:1048 ../src/main/sidebar.cc:1050
 msgid "Cult/Unorthodox"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1575
+#: ../src/gnome2/mod_mgr.c:1578
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -939,107 +939,107 @@ msgstr ""
 "Dosbarthwyd yn ôl\n"
 "Argaeledd"
 
-#: ../src/gnome2/mod_mgr.c:1579
+#: ../src/gnome2/mod_mgr.c:1582
 msgid "Updates"
 msgstr "Diweddariadau"
 
-#: ../src/gnome2/mod_mgr.c:1584
+#: ../src/gnome2/mod_mgr.c:1587
 msgid "Uninstalled"
 msgstr "Dadosodwyd"
 
-#: ../src/gnome2/mod_mgr.c:1589 ../src/gnome2/sidebar.c:630
+#: ../src/gnome2/mod_mgr.c:1592 ../src/gnome2/sidebar.c:630
 #: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:228
 #: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
 msgid "Prayer List/Journal"
 msgstr "Rhestr Weddi/Dyddlyfr"
 
-#: ../src/gnome2/mod_mgr.c:1767
+#: ../src/gnome2/mod_mgr.c:1770
 msgid "Refreshing from remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1779
+#: ../src/gnome2/mod_mgr.c:1782
 msgid "Remote source not found"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1850
+#: ../src/gnome2/mod_mgr.c:1853
 msgid "Configure"
 msgstr "Ffurfweddu"
 
-#: ../src/gnome2/mod_mgr.c:1879
+#: ../src/gnome2/mod_mgr.c:1882
 msgid "Type"
 msgstr "Teip"
 
-#: ../src/gnome2/mod_mgr.c:1886
+#: ../src/gnome2/mod_mgr.c:1889
 msgid "Caption"
 msgstr "Pennawd"
 
-#: ../src/gnome2/mod_mgr.c:1893
+#: ../src/gnome2/mod_mgr.c:1896
 msgid "Source"
 msgstr "Ffynhonnell"
 
-#: ../src/gnome2/mod_mgr.c:1900
+#: ../src/gnome2/mod_mgr.c:1903
 msgid "Directory"
 msgstr "Cyfeiriadur"
 
-#: ../src/gnome2/mod_mgr.c:1908
+#: ../src/gnome2/mod_mgr.c:1911
 msgid "User"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1915
+#: ../src/gnome2/mod_mgr.c:1918
 msgid "Password"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1922
+#: ../src/gnome2/mod_mgr.c:1925
 msgid "UID"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1937
+#: ../src/gnome2/mod_mgr.c:1940
 msgid "Module Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1940
+#: ../src/gnome2/mod_mgr.c:1943
 msgid "Add/Remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1943
+#: ../src/gnome2/mod_mgr.c:1946
 msgid "Choose"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1946 ../src/gnome2/preferences_dialog.c:2023
-#: ../src/gnome2/sidebar.c:1520 ../src/gnome2/sidebar.c:1562
+#: ../src/gnome2/mod_mgr.c:1949 ../src/gnome2/preferences_dialog.c:2021
+#: ../src/gnome2/sidebar.c:1540 ../src/gnome2/sidebar.c:1586
 msgid "Modules"
 msgstr "Modiwlau"
 
-#: ../src/gnome2/mod_mgr.c:1948
+#: ../src/gnome2/mod_mgr.c:1951
 msgid "Install/Update"
 msgstr "Gosod/Diweddariad"
 
-#: ../src/gnome2/mod_mgr.c:1951
+#: ../src/gnome2/mod_mgr.c:1954
 msgid "Maintenance"
 msgstr "Cynhaliaeth"
 
-#: ../src/gnome2/mod_mgr.c:2167
+#: ../src/gnome2/mod_mgr.c:2170
 msgid "Please Refresh"
 msgstr "Adnewyddwch"
 
-#: ../src/gnome2/mod_mgr.c:2168
+#: ../src/gnome2/mod_mgr.c:2171
 msgid "Your module list is not up to date!"
 msgstr "Nid yw eich rhestr modiwlau wedi’i diweddaru!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2485
+#: ../src/gnome2/mod_mgr.c:2488
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2491
+#: ../src/gnome2/mod_mgr.c:2494
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2616
+#: ../src/gnome2/mod_mgr.c:2619
 #, c-format
 msgid ""
 "%s obsoletes %s.\n"
@@ -1047,60 +1047,60 @@ msgid ""
 "Beware: This cannot be undone."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2682
+#: ../src/gnome2/mod_mgr.c:2685
 msgid "No obsolete modules were found."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2704
+#: ../src/gnome2/mod_mgr.c:2707
 msgid "Standard remote sources have been loaded."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2713
+#: ../src/gnome2/mod_mgr.c:2716
 msgid "Could not load standard sources from CrossWire."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2864 ../src/gnome2/mod_mgr.c:3120
+#: ../src/gnome2/mod_mgr.c:2867 ../src/gnome2/mod_mgr.c:3123
 msgid "Remove the selected source"
 msgstr "Diddymu’r Ffynhonnell ddewiswyd"
 
-#: ../src/gnome2/mod_mgr.c:2930
+#: ../src/gnome2/mod_mgr.c:2933
 msgid "Enter a remote source"
 msgstr "Agor ffynhonell cyrchiad pell"
 
-#: ../src/gnome2/mod_mgr.c:2939
+#: ../src/gnome2/mod_mgr.c:2942
 msgid "Caption:"
 msgstr "Pennawd:"
 
-#: ../src/gnome2/mod_mgr.c:2940
+#: ../src/gnome2/mod_mgr.c:2943
 msgid "Type:"
 msgstr "Teip:"
 
-#: ../src/gnome2/mod_mgr.c:2941
+#: ../src/gnome2/mod_mgr.c:2944
 msgid "Host:"
 msgstr "Gwesteiwr:"
 
-#: ../src/gnome2/mod_mgr.c:2942
+#: ../src/gnome2/mod_mgr.c:2945
 msgid "Directory:"
 msgstr "Cyfeiriadur:"
 
-#: ../src/gnome2/mod_mgr.c:2943
+#: ../src/gnome2/mod_mgr.c:2946
 msgid "User (optional):"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2944
+#: ../src/gnome2/mod_mgr.c:2947
 msgid "Password (optional):"
 msgstr ""
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2970
+#: ../src/gnome2/mod_mgr.c:2973
 msgid "A source by that name already exists."
 msgstr "Mae ffynhonell o’r enw hwnnw yn bod eisoes."
 
-#: ../src/gnome2/mod_mgr.c:3117
+#: ../src/gnome2/mod_mgr.c:3120
 msgid "Delete a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:3636
+#: ../src/gnome2/mod_mgr.c:3639
 #, fuzzy
 msgid "[no module]"
 msgstr "Modiwl cyfan"
@@ -1109,15 +1109,15 @@ msgstr "Modiwl cyfan"
 msgid "Go outward, to the section containing this one"
 msgstr "Mynd allan, i’r adran sy’n cynnwys hwn."
 
-#: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:322
+#: ../src/gnome2/navbar_book.c:380 ../src/gnome2/navbar_book_dialog.c:326
 msgid "Go to previous item"
 msgstr "I’r eitem flaenorol"
 
-#: ../src/gnome2/navbar_book.c:397 ../src/gnome2/navbar_book_dialog.c:342
+#: ../src/gnome2/navbar_book.c:403 ../src/gnome2/navbar_book_dialog.c:350
 msgid "Go to next item"
 msgstr "I’r eitem nesaf"
 
-#: ../src/gnome2/navbar_book.c:418 ../src/gnome2/navbar_book_dialog.c:362
+#: ../src/gnome2/navbar_book.c:427 ../src/gnome2/navbar_book_dialog.c:374
 msgid "Go inward, to the first subsection"
 msgstr "Mynd i mewn, i’r isadran gyntaf"
 
@@ -1127,7 +1127,7 @@ msgstr "Mynd i mewn, i’r isadran gyntaf"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:346 ../src/gnome2/preferences_dialog.c:2030
+#: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2028
 msgid "Parallel"
 msgstr "Paralel"
 
@@ -1140,121 +1140,121 @@ msgstr "Gwahanu/Atodi"
 msgid "Module Options"
 msgstr "Dewis Modiwl"
 
-#: ../src/gnome2/parallel_view.c:206 ../src/gnome2/sidebar.c:614
+#: ../src/gnome2/parallel_view.c:213 ../src/gnome2/sidebar.c:614
 #: ../src/gnome2/sidebar.c:619 ../src/gnome2/tabbed_browser.c:254
 #: ../src/main/sidebar.cc:639 ../src/main/sidebar.cc:968
 #: ../src/main/sidebar.cc:969 ../src/main/sidebar.cc:970
 msgid "Parallel View"
 msgstr "Golwg Paralel"
 
-#: ../src/gnome2/preferences_dialog.c:860
+#: ../src/gnome2/preferences_dialog.c:864
 msgid "BibleSync session passphrase"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:862
+#: ../src/gnome2/preferences_dialog.c:866
 msgid "Phrase:"
 msgstr ""
 
 #. mode selection failed? probably dead interface
-#: ../src/gnome2/preferences_dialog.c:933
+#: ../src/gnome2/preferences_dialog.c:937
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:988
+#: ../src/gnome2/preferences_dialog.c:986
 #, fuzzy
 msgid "Mode selection failed.\n"
 msgstr "Troi’r testun yn drwm"
 
-#: ../src/gnome2/preferences_dialog.c:991
+#: ../src/gnome2/preferences_dialog.c:989
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:993
+#: ../src/gnome2/preferences_dialog.c:991
 msgid "Disabled"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:995 ../src/main/xml.c:96
+#: ../src/gnome2/preferences_dialog.c:993 ../src/main/xml.c:96
 msgid "Personal"
 msgstr "Personol"
 
-#: ../src/gnome2/preferences_dialog.c:997
+#: ../src/gnome2/preferences_dialog.c:995
 msgid "Speaker"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:998
+#: ../src/gnome2/preferences_dialog.c:996
 msgid "Audience"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1584
-#: ../src/gnome2/preferences_dialog.c:1618
-#: ../src/gnome2/preferences_dialog.c:1651
-#: ../src/gnome2/preferences_dialog.c:1683
-#: ../src/gnome2/preferences_dialog.c:1714
-#: ../src/gnome2/preferences_dialog.c:1745
-#: ../src/gnome2/preferences_dialog.c:1776
-#: ../src/gnome2/preferences_dialog.c:1808
-#: ../src/gnome2/preferences_dialog.c:1841
-#: ../src/gnome2/preferences_dialog.c:1892
-#: ../src/gnome2/preferences_dialog.c:2340
+#: ../src/gnome2/preferences_dialog.c:1582
+#: ../src/gnome2/preferences_dialog.c:1616
+#: ../src/gnome2/preferences_dialog.c:1649
+#: ../src/gnome2/preferences_dialog.c:1681
+#: ../src/gnome2/preferences_dialog.c:1712
+#: ../src/gnome2/preferences_dialog.c:1743
+#: ../src/gnome2/preferences_dialog.c:1774
+#: ../src/gnome2/preferences_dialog.c:1806
+#: ../src/gnome2/preferences_dialog.c:1839
+#: ../src/gnome2/preferences_dialog.c:1890
+#: ../src/gnome2/preferences_dialog.c:2338
 msgid "-- Select --"
 msgstr "-- Dewis --"
 
-#: ../src/gnome2/preferences_dialog.c:1855
+#: ../src/gnome2/preferences_dialog.c:1853
 msgid "Locale will take effect after restart."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1925 ../ui/prefs.glade.h:1
+#: ../src/gnome2/preferences_dialog.c:1923 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "Dewisiadau"
 
-#: ../src/gnome2/preferences_dialog.c:2003
+#: ../src/gnome2/preferences_dialog.c:2001
 msgid "General"
 msgstr "Cyffredinol"
 
-#: ../src/gnome2/preferences_dialog.c:2006
+#: ../src/gnome2/preferences_dialog.c:2004
 msgid "Options"
 msgstr "Dewisiadau"
 
-#: ../src/gnome2/preferences_dialog.c:2009 ../ui/prefs.glade.h:85
+#: ../src/gnome2/preferences_dialog.c:2007 ../ui/prefs.glade.h:85
 #: ../ui/prefs.gtkbuilder.h:85
 #, fuzzy
 msgid "BibleSync"
 msgstr "Beibl"
 
-#: ../src/gnome2/preferences_dialog.c:2013
+#: ../src/gnome2/preferences_dialog.c:2011
 msgid "Fonts"
 msgstr "Ffontiau"
 
-#: ../src/gnome2/preferences_dialog.c:2016
+#: ../src/gnome2/preferences_dialog.c:2014
 msgid "Color"
 msgstr "Lliw"
 
-#: ../src/gnome2/preferences_dialog.c:2019
+#: ../src/gnome2/preferences_dialog.c:2017
 #, fuzzy
 msgid "Sizes and Faces"
 msgstr "Tabiau a cwareli"
 
-#: ../src/gnome2/preferences_dialog.c:2033
+#: ../src/gnome2/preferences_dialog.c:2031
 msgid "Special"
 msgstr "Arbennig"
 
-#: ../src/gnome2/preferences_dialog.c:2721 ../src/gnome2/search_dialog.c:519
+#: ../src/gnome2/preferences_dialog.c:2719 ../src/gnome2/search_dialog.c:519
 msgid "Clear List?"
 msgstr "Clirio Rhestr?"
 
-#: ../src/gnome2/preferences_dialog.c:2722 ../src/gnome2/search_dialog.c:520
+#: ../src/gnome2/preferences_dialog.c:2720 ../src/gnome2/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr "Ydych chi’n siŵr eich bod am glirio’r rhestr?"
 
-#: ../src/gnome2/preferences_dialog.c:2773 ../src/main/search_dialog.cc:658
+#: ../src/gnome2/preferences_dialog.c:2771 ../src/main/search_dialog.cc:658
 msgid "Remove Module?"
 msgstr "Dileu’r Modiwl?"
 
-#: ../src/gnome2/preferences_dialog.c:2774 ../src/main/search_dialog.cc:659
+#: ../src/gnome2/preferences_dialog.c:2772 ../src/main/search_dialog.cc:659
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Ydych chi’n siwr eich bod am ddileu y modiwl a ddewiswyd?"
 
@@ -1306,7 +1306,7 @@ msgstr "Ydych chi’n siŵr eich bod am ddileu:"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:842
+#: ../src/gnome2/search_dialog.c:845
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1351,7 +1351,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:900
+#: ../src/gnome2/search_dialog.c:903
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1369,15 +1369,15 @@ msgid ""
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:1195
+#: ../src/gnome2/search_dialog.c:1198
 msgid "Module is neither Bible nor commentary"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:1213 ../src/gnome2/sidebar.c:973
+#: ../src/gnome2/search_dialog.c:1216 ../src/gnome2/sidebar.c:973
 msgid "BibleSync is not active for transmit."
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:215
+#: ../src/gnome2/search_sidebar.c:241
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
@@ -1385,72 +1385,72 @@ msgstr ""
 "Mae hon yn chwiliad cynhwysol (\"A\"):\n"
 "Darganfod y rhai sy'n dangos pob gair."
 
-#: ../src/gnome2/search_sidebar.c:227
+#: ../src/gnome2/search_sidebar.c:253
 #, fuzzy
 msgid "_Open Advanced Search"
 msgstr "_Chwilio Manwl"
 
-#: ../src/gnome2/search_sidebar.c:232
+#: ../src/gnome2/search_sidebar.c:258
 msgid "Open the separate Advanced Search dialog."
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:248
+#: ../src/gnome2/search_sidebar.c:274
 msgid "Search Module"
 msgstr "Chwilio Modiwl"
 
-#: ../src/gnome2/search_sidebar.c:285
+#: ../src/gnome2/search_sidebar.c:311
 msgid "Search Type"
 msgstr "Chwilio Teip"
 
-#: ../src/gnome2/search_sidebar.c:298 ../ui/search-dialog.glade.h:39
-#: ../ui/search-dialog.gtkbuilder.h:39
-msgid "Multi word"
-msgstr "Aml-eiriau"
+#: ../src/gnome2/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
+#: ../ui/search-dialog.gtkbuilder.h:34
+msgid "Optimized (\"Lucene\")"
+msgstr "Wedi ei optimeiddio (\"Lucene\")"
 
-#: ../src/gnome2/search_sidebar.c:307 ../ui/search-dialog.glade.h:41
+#: ../src/gnome2/search_sidebar.c:333 ../ui/search-dialog.glade.h:41
 #: ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "Ymadrodd cyson"
 
-#: ../src/gnome2/search_sidebar.c:314 ../ui/search-dialog.glade.h:43
+#: ../src/gnome2/search_sidebar.c:340 ../ui/search-dialog.glade.h:43
 #: ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "Union gymal"
 
-#: ../src/gnome2/search_sidebar.c:330
+#: ../src/gnome2/search_sidebar.c:356
 msgid "Search Options"
 msgstr "Dewisiadau Chwilio"
 
-#: ../src/gnome2/search_sidebar.c:343 ../ui/search-dialog.glade.h:49
+#: ../src/gnome2/search_sidebar.c:369 ../ui/search-dialog.glade.h:49
 #: ../ui/search-dialog.gtkbuilder.h:49
 msgid "Match case"
 msgstr "Cydweddu"
 
-#: ../src/gnome2/search_sidebar.c:359
+#: ../src/gnome2/search_sidebar.c:385
 msgid "Search Scope"
 msgstr "Cwmpas y Chwilio"
 
-#: ../src/gnome2/search_sidebar.c:372
+#: ../src/gnome2/search_sidebar.c:398
 msgid "No scope"
 msgstr "Dim Cwmpas"
 
-#: ../src/gnome2/search_sidebar.c:381
+#: ../src/gnome2/search_sidebar.c:407
 msgid "Use bounds"
 msgstr "Defnyddio ffiniau"
 
-#: ../src/gnome2/search_sidebar.c:389
+#: ../src/gnome2/search_sidebar.c:415
 msgid "Last search"
 msgstr "Chwiliad diwethaf"
 
-#: ../src/gnome2/search_sidebar.c:406
+#: ../src/gnome2/search_sidebar.c:432
 msgid "Bounds"
 msgstr "Ffiniau"
 
-#: ../src/gnome2/search_sidebar.c:421 ../src/gnome2/search_sidebar.c:453
+#: ../src/gnome2/search_sidebar.c:447 ../src/gnome2/search_sidebar.c:479
 msgid "Lower"
 msgstr "Isaf"
 
-#: ../src/gnome2/search_sidebar.c:433 ../src/gnome2/search_sidebar.c:460
+#: ../src/gnome2/search_sidebar.c:459 ../src/gnome2/search_sidebar.c:486
 msgid "Upper"
 msgstr "Uchaf"
 
@@ -1472,7 +1472,7 @@ msgstr "Dewisiadau"
 msgid "List:"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1507 ../src/gnome2/sidebar.c:1545
+#: ../src/gnome2/sidebar.c:1519 ../src/gnome2/sidebar.c:1569
 msgid "Search"
 msgstr "Chwilio"
 
@@ -1550,7 +1550,7 @@ msgstr "Tachwedd"
 msgid "December"
 msgstr "Rhagfyr"
 
-#: ../src/gnome2/utilities.c:2038
+#: ../src/gnome2/utilities.c:2071
 #, fuzzy
 msgid ""
 "An image file's size could not be determined.\n"
@@ -1567,83 +1567,83 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:118
+#: ../src/main/biblesync_glue.cc:124
 msgid ""
 "Presence announcement:\n"
 "\n"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:128
+#: ../src/main/biblesync_glue.cc:134
 msgid ""
 "Navigation packet:\n"
 "\n"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:179
+#: ../src/main/biblesync_glue.cc:185
 #, fuzzy
 msgid "Unknown module "
 msgstr "Modiwl cyfan"
 
-#: ../src/main/biblesync_glue.cc:179
+#: ../src/main/biblesync_glue.cc:185
 msgid ""
 ".\n"
 "Navigated indirectly using verse list."
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:255
+#: ../src/main/biblesync_glue.cc:261
 msgid "ERROR: unknown BibleSync indicator: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:255
+#: ../src/main/biblesync_glue.cc:264
 msgid "Other indications are:"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:530
+#: ../src/main/biblesync_glue.cc:546
 #, fuzzy
 msgid "Check the box to listen to this Speaker"
 msgstr "Clicio'r bocs i weithio ar y modiwl"
 
-#: ../src/main/biblesync_glue.cc:543
+#: ../src/main/biblesync_glue.cc:559
 #, fuzzy
 msgid "Available Speakers"
 msgstr "Ar gael"
 
-#: ../src/main/biblesync_glue.cc:552
+#: ../src/main/biblesync_glue.cc:568
 msgid "D/I"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:562
+#: ../src/main/biblesync_glue.cc:578
 msgid "Last navigation was Direct or Indirect"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:571
+#: ../src/main/biblesync_glue.cc:587
 #, fuzzy
 msgid "Last Navigation"
 msgstr "Achubiaeth"
 
-#: ../src/main/biblesync_glue.cc:590
+#: ../src/main/biblesync_glue.cc:606
 msgid "UUID"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:610
+#: ../src/main/biblesync_glue.cc:626
 #, fuzzy
 msgid "IP address: "
 msgstr "Cyfeiriad"
 
-#: ../src/main/biblesync_glue.cc:610
+#: ../src/main/biblesync_glue.cc:626
 #, fuzzy
 msgid ""
 "\n"
 "Application: "
 msgstr "Am y cymhwysiad  hwn"
 
-#: ../src/main/biblesync_glue.cc:610
+#: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "Device: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:610
+#: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "UUID: "
@@ -1661,8 +1661,8 @@ msgid ""
 "'%s'"
 msgstr ""
 
-#: ../src/main/display.cc:1115 ../src/main/display.cc:1156
-#: ../src/main/display.cc:1240 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1116 ../src/main/display.cc:1157
+#: ../src/main/display.cc:1241 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr "Pennod"
@@ -1708,13 +1708,13 @@ msgstr "Croesgyfeiriad"
 
 #: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
 #: ../src/main/module_dialogs.cc:354 ../src/main/module_dialogs.cc:366
-#: ../src/main/previewer.cc:203 ../src/main/previewer.cc:221
+#: ../src/main/previewer.cc:203 ../src/main/previewer.cc:223
 msgid "Strongs"
 msgstr "Strongs"
 
 #: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
 #: ../src/main/module_dialogs.cc:359 ../src/main/module_dialogs.cc:376
-#: ../src/main/previewer.cc:208 ../src/main/previewer.cc:227
+#: ../src/main/previewer.cc:208 ../src/main/previewer.cc:229
 msgid "Morphology"
 msgstr "Morffoleg"
 
@@ -1823,7 +1823,7 @@ msgstr ""
 msgid "Glosses"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:745
+#: ../src/main/parallel_view.cc:749
 msgid "view context"
 msgstr "gweld cyd-destun"
 
@@ -2051,7 +2051,7 @@ msgstr "Ydych chi’n siwr eich bod am ddileu’r amrediad hwn?"
 msgid "Search: "
 msgstr "Chwilio: "
 
-#: ../src/main/search_dialog.cc:1376
+#: ../src/main/search_dialog.cc:1381
 #, c-format
 msgid ""
 "%s:\n"
@@ -2062,16 +2062,16 @@ msgstr ""
 "Y modiwl heb ei osod.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1378
+#: ../src/main/search_dialog.cc:1383
 msgid "Please adjust the module list."
 msgstr "Newidiwch y rhestr modiwlau."
 
-#: ../src/main/search_dialog.cc:1394
+#: ../src/main/search_dialog.cc:1399
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Nid oes mynegai chwilio cyflym i %s.%s%s"
 
-#: ../src/main/search_dialog.cc:1396
+#: ../src/main/search_dialog.cc:1401
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -2079,7 +2079,7 @@ msgstr ""
 "\n"
 "Mae'r chwiliad ar y modiwl hwn yn `aml-air'."
 
-#: ../src/main/search_dialog.cc:1397
+#: ../src/main/search_dialog.cc:1402
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -2087,7 +2087,7 @@ msgstr ""
 "\n"
 "Gweler y Rheolydd Modiwlau, Cwarel Cynnal a Chadw."
 
-#: ../src/main/search_dialog.cc:1458
+#: ../src/main/search_dialog.cc:1463
 msgid "Search finished"
 msgstr "Chwilio ar ben"
 
@@ -2157,7 +2157,7 @@ msgstr "adnod"
 msgid "chapter"
 msgstr "pennod"
 
-#: ../src/main/sword.cc:654
+#: ../src/main/sword.cc:658
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -2165,13 +2165,13 @@ msgstr ""
 "Ffeil Xiphos i’r talfyriadau\n"
 "iaith yn eisiau."
 
-#: ../src/main/sword.cc:660
+#: ../src/main/sword.cc:664
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
 
-#: ../src/main/sword.cc:672
+#: ../src/main/sword.cc:676
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -2179,7 +2179,7 @@ msgstr ""
 "Ni all Xiphos fapio’r\n"
 "ffeil talfyriadau iaith."
 
-#: ../src/main/sword.cc:678
+#: ../src/main/sword.cc:682
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -2188,18 +2188,18 @@ msgstr ""
 "ffeil talfyriadau iaith."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:758
+#: ../src/main/sword.cc:762
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr ""
 
-#: ../src/main/sword.cc:760
+#: ../src/main/sword.cc:764
 msgid "Book names and menus may not be translated."
 msgstr ""
 
-#: ../src/main/sword.cc:1114 ../src/main/sword.cc:1283
+#: ../src/main/sword.cc:1119 ../src/main/sword.cc:1288
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2207,7 +2207,7 @@ msgid ""
 "Would you like to open these as well?%s"
 msgstr ""
 
-#: ../src/main/sword.cc:1118 ../src/main/sword.cc:1287
+#: ../src/main/sword.cc:1123 ../src/main/sword.cc:1292
 msgid ""
 "\n"
 "\n"
@@ -2215,11 +2215,11 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1411
+#: ../src/main/sword.cc:1416
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Gofynnwyd am y defosiwn dyddiol, ond does dim wedi eu gosod."
 
-#: ../src/main/sword.cc:1665
+#: ../src/main/sword.cc:1670
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2289,13 +2289,13 @@ msgstr "Beth ydy’r Efengyl?"
 msgid "1 Cor 15:1-4"
 msgstr "1 Cor 15:1-4"
 
-#: ../src/main/xml.c:263 ../src/main/xml.c:409 ../src/main/xml.c:1504
+#: ../src/main/xml.c:263 ../src/main/xml.c:409 ../src/main/xml.c:1506
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Methu dosrannu’r ddogfen. \n"
 
 #: ../src/main/xml.c:269 ../src/main/xml.c:415 ../src/main/xml.c:435
-#: ../src/main/xml.c:1061 ../src/main/xml.c:1391 ../src/main/xml.c:1587
+#: ../src/main/xml.c:1063 ../src/main/xml.c:1393 ../src/main/xml.c:1589
 #, c-format
 msgid "empty document \n"
 msgstr "dogfen wag \n"
@@ -2420,19 +2420,19 @@ msgstr "Math - Dat"
 msgid "Sample Module List"
 msgstr "Sampl o Restr Modiwlau"
 
-#: ../src/main/xml.c:1067 ../src/main/xml.c:1397
+#: ../src/main/xml.c:1069 ../src/main/xml.c:1399
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "math anghywir, cwgn gwreiddyn != %s\n"
 
-#: ../src/main/xml.c:1549
+#: ../src/main/xml.c:1551
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
 
-#: ../src/main/xml.c:1551
+#: ../src/main/xml.c:1553
 msgid "Attempting to revert to previous save."
 msgstr ""
 
@@ -2441,17 +2441,14 @@ msgid "Add Bookmark"
 msgstr "Ychwanegu Nod Llyfr"
 
 #: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:13
-#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:11
 msgid "Bookmark Dialog"
 msgstr "Deialog Nod Tudalen"
 
 #: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
-#: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:2
 msgid "Create new folder"
 msgstr "Creu Ffolder Newydd"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
-#: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
 #: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Ffolder Newydd"
@@ -2461,7 +2458,6 @@ msgid "New ..."
 msgstr "Newydd ..."
 
 #: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
 msgid "Cancel Bookmark"
 msgstr "Canslo Nod Tudalen"
 
@@ -2474,22 +2470,22 @@ msgid "Label Entry"
 msgstr "Cofnod Label:"
 
 #: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:8
-#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:7
+#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:8
 msgid "Verse:"
 msgstr "Adnod:"
 
 #: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:9
-#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:8
+#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:9
 msgid "Verse Entry"
 msgstr "_Cofnod Adnod"
 
 #: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:10
-#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:9
+#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:10
 msgid "Module:"
 msgstr "Modiwl:"
 
 #: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:11
-#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:10
+#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:11
 msgid "Module Entry"
 msgstr "Cofnod Modiwl:"
 
@@ -3229,12 +3225,36 @@ msgstr ""
 msgid "Mark/Unmark Verse"
 msgstr ""
 
+#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:12
+msgid "Annotation Dialog"
+msgstr ""
+
+#: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:2
+msgid ""
+"Add annotation. The verse will display with highlight colors and a *u marker "
+"to show content."
+msgstr ""
+
+#: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
+#, fuzzy
+msgid "New Annotation"
+msgstr "Llafarganu Hebraeg"
+
 #: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:3
 msgid "Mark"
 msgstr ""
 
 #: ../ui/markverse.glade.h:10 ../ui/markverse.gtkbuilder.h:5
 msgid "Unmark"
+msgstr ""
+
+#: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
+#, fuzzy
+msgid "Remove annotation."
+msgstr "Methu symud"
+
+#: ../ui/markverse.glade.h:12 ../ui/markverse.gtkbuilder.h:7
+msgid "Cancel Annotation"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
@@ -4316,13 +4336,13 @@ msgstr ""
 "Rhaid llunio’r mynegeion ymlaen llaw:\n"
 "Gweler swyddogaethau cynnal a chadw Rheolydd y Modiwl"
 
-#: ../ui/search-dialog.glade.h:37 ../ui/search-dialog.gtkbuilder.h:34
-msgid "Optimized (\"Lucene\")"
-msgstr "Wedi ei optimeiddio (\"Lucene\")"
-
 #: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "Botwm dewis optimeiddio (\"Lucene\")"
+
+#: ../ui/search-dialog.glade.h:39 ../ui/search-dialog.gtkbuilder.h:39
+msgid "Multi word"
+msgstr "Aml-eiriau"
 
 #: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
 msgid "Multi word radiobutton"
@@ -5146,6 +5166,10 @@ msgstr "Canllaw Beibl Xiphos"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr "Astudio’r Beibl"
+
+#: ../xiphos.desktop.in.in.h:3
+msgid "Text;Bible;Study;"
+msgstr ""
 
 #, fuzzy
 #~ msgid "[no dump ready]"

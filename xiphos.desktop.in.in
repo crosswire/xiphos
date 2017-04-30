@@ -1,6 +1,7 @@
 [Desktop Entry]
 _Name=Xiphos Bible Guide
 _Comment=Study the Bible
+_Keywords=Text;Bible;Study;
 Exec=@xiphos_exec@
 TryExec=xiphos
 Icon=xiphos
