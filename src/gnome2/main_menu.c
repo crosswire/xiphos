@@ -147,6 +147,28 @@ on_mailing_list_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 /******************************************************************************
  * Name
+ *  on_view_releases_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_view_releases_activate(GtkMenuItem * menuitem,
+ *				    gpointer user_data)
+ *
+ * Description
+ *   open web browser to GitHub releases page.
+ *
+ * Return value
+ *   void
+ */
+G_MODULE_EXPORT void
+on_view_releases_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	xiphos_open_default("https://github.com/crosswire/xiphos/releases/");
+}
+
+/******************************************************************************
+ * Name
  *  on_live_chat_activate
  *
  * Synopsis

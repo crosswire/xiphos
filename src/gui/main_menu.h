@@ -37,6 +37,8 @@ void on_help_contents_activate(GtkMenuItem *menuitem,
 			       gpointer user_data);
 void on_mailing_list_activate(GtkMenuItem *menuitem,
 			      gpointer user_data);
+void on_view_releases_activate(GtkMenuItem *menuitem,
+			       gpointer user_data);
 void on_live_chat_activate(GtkMenuItem *menuitem,
 			   gpointer user_data);
 void on_report_bug_activate(GtkMenuItem *menuitem,
