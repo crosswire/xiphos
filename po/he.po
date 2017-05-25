@@ -1574,8 +1574,6 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 "לא ניתן לקבוע את גודל קובץ התמונה.\n"
-"האם התקנת את ,identify, של ImageMagick?\n"
-"(ייתכן גם שהתמונה אינה מסוג bmp/gif/jpg/png.)\n"
 "לא ניתן להתאים את גודל התמונות לחלון."
 
 #: ../src/main/biblesync_glue.cc:104

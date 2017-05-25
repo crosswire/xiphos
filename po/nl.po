@@ -1648,8 +1648,6 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 "De grootte van een illustratie kon niet worden vastgesteld.\n"
-"Is ImageMagick geïnstalleerd?\n"
-"(Mogelijks is het bestandstype iets anders dan bm/gif/jpg/png.)\n"
 "Xiphos kan illustraties niet aanpassen aan de schermgrootte."
 
 #: ../src/main/biblesync_glue.cc:104

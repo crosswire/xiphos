@@ -1557,8 +1557,6 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 "Ni ellid pennu maint y ffeil ddelwedd.\n"
-"Ydy ‘identify’ ImageMagick heb ei osod?\n"
-"(Neu efallai fod y ddelwedd yn fath gwahanol i bmp/gif/jpg/png.)\n"
 "All Xiphos ddim newid maint delweddau i ffitio’r ffenestr."
 
 #: ../src/main/biblesync_glue.cc:104

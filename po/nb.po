@@ -1672,8 +1672,6 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 "En bildefilstørrelse kunne ikke bestemmes.\n"
-"ImageMagick's·'identifikasjon'·ikke installert?\n"
-"(Bildet har annen filtype enn·bmp/gif/jpg/png.)\n"
 "Xiphos·kan ikke gjøre om bilde til å passe."
 
 #: ../src/main/biblesync_glue.cc:104
