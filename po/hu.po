@@ -1634,8 +1634,6 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 "Egy képfájl méretének meghatározása nem sikerült.\n"
-"ImageMagick telepítve van?\n"
-"(Vagy lehetséges, hogy a képnek más formátuma van, mint bmp/gif/png.)\n"
 "Xiphos nem tudta átméretezni a képet, hogy az betöltse az ablakot."
 
 #: ../src/main/biblesync_glue.cc:104
