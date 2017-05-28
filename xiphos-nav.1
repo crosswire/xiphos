@@ -1,0 +1,25 @@
+.TH XIPHOS-NAV "1" "May 2017" "xiphos 4.0.5" "Xiphos Utilities"
+.SH "NAME"
+xiphos\-nav \- Navigating Xiphos to a verse reference
+.SH "SYNOPSIS"
+.IX Header "SYNOPSIS"
+\&\fBxiphos-nav\fR \s-1URL\s0
+
+.SH "DESCRIPTION"
+.B xiphos-nav
+is a command line utility which induce Xiphos to react to a \s-1URL\s0 request
+using dbus.  Invoke it as e.g. 'xiphos-nav sword://ESV/Gen.1.1'. Normal
+use is that it's used as your desktop environment's handler for
+sword:// URLs.  If dbus access attempt fails, it concludes that Xiphos
+is not running and starts a new Xiphos with that \s-1URL. \s0 With this, you
+can click URLs of that sort in web pages and so forth, and Xiphos will
+be navigated for you.  The dbus interface also supports a search
+interface, used by bibledit.
+
+.SH "BUGS"
+Please report bugs online at: https://github.com/crosswire/xiphos/issues
+
+.SH "AUTHOR"
+.B xiphos-nav
+was written by the Xiphos Developer Team. <xiphos-devel@crosswire.org>
+.PP
