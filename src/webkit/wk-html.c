@@ -403,6 +403,7 @@ gboolean wk_html_find(WkHtml *html, const gchar *find_string)
 	webkit_find_controller_search(find_controller, find_string,
 				      WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE,
 				      G_MAXUINT);
+	return TRUE;
 #else
 	return webkit_web_view_search_text(WEBKIT_WEB_VIEW(html),
 					   find_string, FALSE, TRUE, TRUE);
@@ -417,6 +418,7 @@ gboolean wk_html_find_again(WkHtml *html, gboolean forward)
 	webkit_find_controller_search(find_controller,
 				      html->priv->find_string,
 				      WEBKIT_FIND_OPTIONS_NONE, G_MAXUINT);
+	return TRUE;
 #else
 	return webkit_web_view_search_text(WEBKIT_WEB_VIEW(html),
 					   html->priv->find_string,
