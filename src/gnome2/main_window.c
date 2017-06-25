@@ -684,6 +684,10 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 	case XK_L:
 		if (state == GDK_CONTROL_MASK) // Ctrl-L  verse entry
 			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
+		else if (state == GDK_MOD1_MASK) // Alt-L  lemma
+			kbd_toggle_option((main_check_for_global_option(sM, "ThMLLemma") ||
+					   main_check_for_global_option(sM, "OSISLemma")),
+					  "Lemmas");
 		break;
 
 	case XK_m:

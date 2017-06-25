@@ -776,6 +776,9 @@
 				<para><guibutton>Alt-M</guibutton>: Toggle morphology display.</para>
 			</listitem>
 			<listitem>
+				<para><guibutton>Alt-L</guibutton>: Toggle lemma display.</para>
+			</listitem>
+			<listitem>
 				<para><guibutton>Alt-R</guibutton>: Toggle "red words of Christ" display.</para>
 			</listitem>
 			<listitem>
