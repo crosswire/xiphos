@@ -406,7 +406,7 @@ void main_delete_range(void)
 			      name_string);
 
 	if (gui_yes_no_dialog(str, (char *)
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 			      "dialog-warning"
 #else
 			      GTK_STOCK_DIALOG_WARNING
@@ -659,7 +659,7 @@ void main_delete_module(GtkTreeView *treeview)
 			      _("Are you sure you want to remove the selected module?"));
 
 	if (gui_yes_no_dialog(str, (char *)
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 			      "dialog-warning"
 #else
 			      GTK_STOCK_DIALOG_WARNING

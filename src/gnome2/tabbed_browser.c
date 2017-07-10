@@ -857,9 +857,9 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 #endif
 
 	g_return_val_if_fail(label_text != NULL, NULL);
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	tbinf->button_close = gtk_button_new_from_icon_name("window-close-symbolic", GTK_ICON_SIZE_MENU);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
 #else
 #endif

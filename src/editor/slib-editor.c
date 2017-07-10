@@ -367,7 +367,7 @@ static gint open_dialog(EDITOR *e)
 	dialog =
 	    gtk_file_chooser_dialog_new(_("Open"), GTK_WINDOW(e->window),
 					GTK_FILE_CHOOSER_ACTION_OPEN,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 					"_Cancel", GTK_RESPONSE_CANCEL,
 					"_Open", GTK_RESPONSE_ACCEPT,
 #else
@@ -414,7 +414,7 @@ static gint save_dialog(GtkhtmlEditor *editor, EDITOR *e)
 	dialog =
 	    gtk_file_chooser_dialog_new(_("Save As"), GTK_WINDOW(editor),
 					GTK_FILE_CHOOSER_ACTION_SAVE,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 					"_Cancel", GTK_RESPONSE_CANCEL,
 					"_Open", GTK_RESPONSE_ACCEPT,
 #else
@@ -490,7 +490,7 @@ view_source_dialog(GtkhtmlEditor *editor,
 
 	dialog = gtk_dialog_new_with_buttons(title, GTK_WINDOW(editor),
 					     GTK_DIALOG_DESTROY_WITH_PARENT,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 					     "_Close", GTK_RESPONSE_CLOSE,
 #else
 					     GTK_STOCK_CLOSE,
@@ -617,7 +617,7 @@ static void action_delete_cb(GtkAction *action, EDITOR *e)
 			      _("Are you sure you want to delete the note for"), e->key);
 
 	if (gui_yes_no_dialog(buf,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 			      "dialog-warning"
 #else
 			      GTK_STOCK_DIALOG_WARNING
@@ -674,7 +674,7 @@ action_view_plain_source(GtkAction *action, GtkhtmlEditor *editor)
 static GtkActionEntry file_entries[] = {
 
     {"print",
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
      "_Print...",
 #else
      GTK_STOCK_PRINT,
@@ -685,7 +685,7 @@ static GtkActionEntry file_entries[] = {
      G_CALLBACK(action_print_cb)},
 
     {"print-preview",
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
      "Print Pre_view...",
 #else
      GTK_STOCK_PRINT_PREVIEW,
@@ -696,7 +696,7 @@ static GtkActionEntry file_entries[] = {
      G_CALLBACK(action_print_preview_cb)},
 
     {"quit",
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
      "_Quit...",
 #else
      GTK_STOCK_QUIT,
@@ -707,7 +707,7 @@ static GtkActionEntry file_entries[] = {
      G_CALLBACK(action_quit_cb)},
 
     {"open",
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
      "_Open",
 #else
      GTK_STOCK_OPEN,
@@ -718,7 +718,7 @@ static GtkActionEntry file_entries[] = {
      G_CALLBACK(action_open_cb)},
 
     {"save",
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
      "_Save",
 #else
      GTK_STOCK_SAVE,
@@ -729,7 +729,7 @@ static GtkActionEntry file_entries[] = {
      G_CALLBACK(action_save_cb)},
 
     {"save-as",
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
      "Save _As...",
 #else
      GTK_STOCK_SAVE_AS,
@@ -1237,7 +1237,7 @@ static gint ask_about_saving(EDITOR *e)
 	case STUDYPAD_EDITOR:
 		info = gui_new_dialog();
 		info->stock_icon =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		    "dialog-warning";
 #else
 		    GTK_STOCK_DIALOG_WARNING;

@@ -344,9 +344,8 @@ void main_create_pixbufs(void)
 		    pixbuf_finder("book_open_rtol.png", 16, NULL);
 	}
 
-#ifdef USE_GTK_3
-
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 10, 0)
 	GtkIconTheme *icon_theme = gtk_icon_theme_get_default();
 	pixbufs->pixbuf_helpdoc =
 	    gtk_icon_theme_load_icon(icon_theme,

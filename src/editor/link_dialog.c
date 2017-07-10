@@ -148,7 +148,7 @@ void editor_link_dialog(EDITOR *e)
 	gbuilder_file =
 	    gui_general_user_file("editor_link_dialog.xml", FALSE);
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	builder = gtk_builder_new_from_file(gbuilder_file);
 #else
 	builder = gtk_builder_new();

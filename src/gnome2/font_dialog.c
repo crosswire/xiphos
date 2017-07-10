@@ -313,7 +313,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox67, TRUE, TRUE, 0);
 
 	pixmap6 =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("gtk-select-font",
 					 GTK_ICON_SIZE_DND);
 #else
@@ -402,7 +402,7 @@ static GtkWidget *create_dialog_mod_font()
 			   FALSE, 0);
 
 	dialog_action_area21 =
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_mod_font));
 #else
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_mod_font));
@@ -424,7 +424,7 @@ static GtkWidget *create_dialog_mod_font()
 				  GTK_BUTTONBOX_EDGE);
 
 	button_cancel =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_button_new_with_label("Cancel");
 #else
 	    gtk_button_new_from_stock(GTK_STOCK_CANCEL);
@@ -433,7 +433,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_container_add(GTK_CONTAINER(hbuttonbox1), button_cancel);
 	gtk_widget_set_can_default(button_cancel, 1);
 	button_ok =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_button_new_with_label("OK");
 #else
 	    gtk_button_new_from_stock(GTK_STOCK_OK);

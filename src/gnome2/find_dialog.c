@@ -163,7 +163,7 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 	GtkWidget *hbox66;
 	GtkWidget *dialog_action_area29;
 	GtkWidget *hbuttonbox8;
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	GtkWidget *alignment;
 #endif
 	GtkWidget *hbox5;
@@ -221,7 +221,7 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dialog->backward), FALSE);
 
 	dialog_action_area29 =
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog->dialog));
 #else
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog->dialog));
@@ -241,7 +241,7 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 			   TRUE, TRUE, 0);
 
 	dialog->find =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_button_new_from_icon_name("edit-find",
 					  GTK_ICON_SIZE_BUTTON);
 #else
@@ -255,7 +255,7 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->next);
 //GTK_WIDGET_SET_FLAGS(dialog->next, GTK_CAN_DEFAULT);
 
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	alignment = gtk_alignment_new(0.5, 0.5, 0, 0);
 	gtk_widget_show(alignment);
 	gtk_container_add(GTK_CONTAINER(dialog->next), alignment);
@@ -263,12 +263,12 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 #endif
 	UI_HBOX(hbox5, FALSE, 2);
 	gtk_widget_show(hbox5);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_container_add(GTK_CONTAINER(alignment), hbox5);
 #endif
 
 	image =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("edit-find",
 					 GTK_ICON_SIZE_BUTTON);
 #else
@@ -283,7 +283,7 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 	gtk_label_set_justify(GTK_LABEL(label12), GTK_JUSTIFY_LEFT);
 
 	dialog->close =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    // Don't use an icon with GTK3
 	    gtk_button_new_with_label(_("Close"));
 #else

@@ -143,7 +143,7 @@ GtkWidget *gui_create_about_trans(void)
 	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
 
 	dialog_action_area =
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_about_trans));
 #else
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_trans));
@@ -164,14 +164,14 @@ GtkWidget *gui_create_about_trans(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox),
 				  GTK_BUTTONBOX_END);
 	button =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_button_new_with_mnemonic(_("Close"));
 #else
 	    gtk_button_new_from_stock(GTK_STOCK_CLOSE);
 #endif
 	gtk_widget_show(button);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox), button);
-#ifdef HAVE_GTK_218
+#if GTK_CHECK_VERSION(2, 18, 0)
 	gtk_widget_set_can_default(button, TRUE);
 #elif defined(USE_GTK_3)
 	gtk_widget_set_can_default(button, 1);

@@ -54,7 +54,7 @@ gchar *gui_add_cipher_key(const char *mod_name, gchar *cipher_old)
 	GS_DIALOG *info;
 
 	info = gui_new_dialog();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	info->stock_icon = "dialog-warning";
 #else
 	info->stock_icon = GTK_STOCK_DIALOG_WARNING;

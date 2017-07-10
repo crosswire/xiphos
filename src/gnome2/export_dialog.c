@@ -152,7 +152,7 @@ void _get_export_filename(void)
 	fdialog = gtk_file_chooser_dialog_new("Save Export File",
 					      NULL,
 					      GTK_FILE_CHOOSER_ACTION_SAVE,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 					      "_Cancel",
 					      GTK_RESPONSE_CANCEL, "_Save",
 					      GTK_RESPONSE_ACCEPT,
@@ -546,7 +546,7 @@ void gui_export_dialog(void)
 	datafile =
 	    g_strdup_printf("%s/export-copy.xml", settings.gSwordDir);
 /* check for datafile */
-#ifdef HAVE_GTK_224
+#if GTK_CHECK_VERSION(2, 24, 0)
 	if (g_access(datafile, F_OK) == -1) {
 #else
 	if (g_access(datafile, 0) == -1) {

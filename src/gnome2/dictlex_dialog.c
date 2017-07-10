@@ -352,7 +352,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_button_set_relief(GTK_BUTTON(btnSyncDL), GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("gtk-refresh",
 					 GTK_ICON_SIZE_BUTTON);
 #else
@@ -384,7 +384,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	dlg->listview =
 	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
 	gtk_widget_show(dlg->listview);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(dlg->listview), TRUE);
 #endif
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), dlg->listview);

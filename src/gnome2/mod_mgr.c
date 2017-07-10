@@ -354,11 +354,11 @@ static void create_pixbufs(void)
 {
 
 #ifdef USE_GTK_3
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	GtkIconTheme *icon_theme = gtk_icon_theme_get_default();
 
 	INSTALLED = gtk_icon_theme_load_icon(icon_theme,
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 					     "emblem-ok-symbolic",
 #else
 					     "_Apply",
@@ -542,7 +542,7 @@ static void add_columns(GtkTreeView *treeview, gboolean remove)
 	/* -- installed -- */
 	column = gtk_tree_view_column_new();
 	image =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    (remove
 		 ? gtk_image_new_from_icon_name("",
 						GTK_ICON_SIZE_MENU)
@@ -575,7 +575,7 @@ static void add_columns(GtkTreeView *treeview, gboolean remove)
 
 	column = gtk_tree_view_column_new();
 	image =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("list-add-symbolic",
 					 GTK_ICON_SIZE_MENU);
 #else
@@ -613,7 +613,7 @@ static void add_columns(GtkTreeView *treeview, gboolean remove)
 
 	/* -- fast index ready -- */
 	column = gtk_tree_view_column_new();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	image =
 	    gtk_image_new_from_icon_name("edit-find-symbolic",
 					 GTK_ICON_SIZE_MENU);
@@ -637,7 +637,7 @@ static void add_columns(GtkTreeView *treeview, gboolean remove)
 
 	/* -- locked -- */
 	column = gtk_tree_view_column_new();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	image =
 	    gtk_image_new_from_icon_name("changes-prevent-symbolic",
 					 GTK_ICON_SIZE_MENU);
@@ -678,7 +678,7 @@ static void add_columns(GtkTreeView *treeview, gboolean remove)
 	/* -- refresh/update -- */
 	column = gtk_tree_view_column_new();
 	image =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("view-refresh-symbolic", GTK_ICON_SIZE_MENU);
 #else
 	    gtk_image_new_from_stock(GTK_STOCK_REFRESH, GTK_ICON_SIZE_MENU);
@@ -2388,7 +2388,7 @@ static void create_fileselection_local_source(void)
 	    gtk_file_chooser_dialog_new("Open File",
 					NULL,
 					GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 					"_Cancel", GTK_RESPONSE_CANCEL,
 					"_OK", GTK_RESPONSE_ACCEPT,
 #else
@@ -2868,7 +2868,7 @@ void on_button_remove_local_clicked(GtkButton *button, gpointer user_data)
 			    directory);
 
 	if (gui_yes_no_dialog(str,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 			      "dialog-warning"
 #else
 			      GTK_STOCK_DIALOG_WARNING
@@ -2933,7 +2933,7 @@ void on_button_add_remote_clicked(GtkButton *button, gpointer user_data)
 			_("Enter a remote source"));
 	dialog = gui_new_dialog();
 	dialog->stock_icon =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    "dialog-information";
 #else
 	    GTK_STOCK_DIALOG_INFO;
@@ -3112,7 +3112,7 @@ on_button_remove_remote_clicked(GtkButton *button, gpointer user_data)
 
 	yes_no_dialog = gui_new_dialog();
 	yes_no_dialog->stock_icon =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    "dialog-warning";
 #else
 	    GTK_STOCK_DIALOG_WARNING;
@@ -3287,7 +3287,7 @@ static void set_combobox(GtkComboBox *combo)
 static void setup_dialog_action_area(GtkDialog *dialog)
 {
 	GtkWidget *dialog_action_area1 =
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 #else
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog));

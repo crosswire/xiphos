@@ -96,7 +96,7 @@ static void alert_url_not_found(const gchar *url)
 
 	dialog = gui_new_dialog();
 	dialog->stock_icon =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    (gchar *)"dialog-information";
 #else
 	    (gchar *)GTK_STOCK_DIALOG_INFO;

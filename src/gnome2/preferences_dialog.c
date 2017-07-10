@@ -248,7 +248,7 @@ static gboolean on_prefs_configure_event(GtkWidget *widget,
  * Return value
  *   gint
  */
-#ifndef HAVE_GTK_34
+#if !GTK_CHECK_VERSION(3, 4, 0)
 static gint string_is_color(gchar *color)
 {
 	gint i;
@@ -280,7 +280,7 @@ static gint string_is_color(gchar *color)
 }
 #endif
 
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 static gchar *gdkrgba_to_hex(GdkRGBA *color)
 {
 	gchar *tmpstr;
@@ -421,7 +421,7 @@ void
 on_colorbutton1_color_set(GtkColorButton *colorbutton, gpointer user_data)
 {
 	gchar *buf = NULL;
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA color;
 	gtk_color_chooser_get_rgba((GtkColorChooser *)colorbutton,
 				   &color);
@@ -458,7 +458,7 @@ void
 on_colorbutton2_color_set(GtkColorButton *colorbutton, gpointer user_data)
 {
 	gchar *buf2 = NULL;
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA color;
 
 	gtk_color_chooser_get_rgba((GtkColorChooser *)colorbutton,
@@ -496,7 +496,7 @@ void
 on_colorbutton3_color_set(GtkColorButton *colorbutton, gpointer user_data)
 {
 	gchar *buf2 = NULL;
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA color;
 
 	gtk_color_chooser_get_rgba((GtkColorChooser *)colorbutton,
@@ -535,7 +535,7 @@ void
 on_colorbutton4_color_set(GtkColorButton *colorbutton, gpointer user_data)
 {
 	gchar *buf2 = NULL;
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA color;
 
 	gtk_color_chooser_get_rgba((GtkColorChooser *)colorbutton,
@@ -574,7 +574,7 @@ void
 on_colorbutton5_color_set(GtkColorButton *colorbutton, gpointer user_data)
 {
 	gchar *buf2 = NULL;
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA color;
 
 	gtk_color_chooser_get_rgba((GtkColorChooser *)colorbutton,
@@ -612,7 +612,7 @@ void
 on_colorbutton6_color_set(GtkColorButton *colorbutton, gpointer user_data)
 {
 	gchar *buf2 = NULL;
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA color;
 
 	gtk_color_chooser_get_rgba((GtkColorChooser *)colorbutton,
@@ -651,7 +651,7 @@ void
 on_colorbutton7_color_set(GtkColorButton *colorbutton, gpointer user_data)
 {
 	gchar *buf2 = NULL;
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA color;
 
 	gtk_color_chooser_get_rgba((GtkColorChooser *)colorbutton,
@@ -856,7 +856,7 @@ gchar *on_biblesync_obtain_passphrase()
 {
 	gchar *retval;
 	GS_DIALOG *info = gui_new_dialog();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	info->stock_icon = g_strdup("dialog-warning");
 #else
 	info->stock_icon = g_strdup(GTK_STOCK_DIALOG_WARNING);
@@ -2049,7 +2049,7 @@ static GtkTreeModel *create_model(void)
 
 void setup_color_pickers(void)
 {
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA rgba;
 	if (gdk_rgba_parse(&rgba, settings.bible_bg_color))
 		gtk_color_chooser_set_rgba((GtkColorChooser *)
@@ -2719,7 +2719,7 @@ void ps_button_clear(GtkButton *button, gpointer user_data)
 				_("Clear List?"),
 				_("Are you sure you want to clear the module list?"));
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	if (gui_yes_no_dialog(str, "dialog-warning")) {
 #else
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
@@ -2771,7 +2771,7 @@ void ps_button_cut(GtkButton *button, gpointer user_data)
 			      _("Remove Module?"),
 			      _("Are you sure you want to remove the selected module?"));
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	if (gui_yes_no_dialog(str, "dialog-warning")) {
 #else
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {

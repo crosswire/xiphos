@@ -303,7 +303,7 @@ void on_button_begin_search(GtkButton *button, gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_button_set_image((GtkButton *)remember_search,
 				     gtk_image_new_from_icon_name("edit-find", GTK_ICON_SIZE_BUTTON));
 #else
@@ -315,7 +315,7 @@ void on_button_begin_search(GtkButton *button, gpointer user_data)
 #endif
 		sync_windows();
 	} else {
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_button_set_image((GtkButton *)remember_search,
 				     gtk_image_new_from_icon_name("process-stop",
 								  GTK_ICON_SIZE_BUTTON));
@@ -329,7 +329,7 @@ void on_button_begin_search(GtkButton *button, gpointer user_data)
 		// do the search
 		main_do_dialog_search();
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_button_set_image((GtkButton *)remember_search,
 				     gtk_image_new_from_icon_name("edit-find", GTK_ICON_SIZE_BUTTON));
 #else
@@ -519,7 +519,7 @@ void clear_modules(GtkButton *button, gpointer user_data)
 			      _("Clear List?"),
 			      _("Are you sure you want to clear the module list?"));
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	if (gui_yes_no_dialog(str, "dialog-warning")) {
 #else
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
@@ -716,7 +716,7 @@ void delete_list(GtkButton *button, gpointer user_data)
 			      _("Are you sure you want to delete:"),
 			      name_string);
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	if (!gui_yes_no_dialog(str, "dialog-warning")) {
 		g_free(name_string);
 		g_free(str);
@@ -1238,7 +1238,7 @@ GtkWidget *create_results_menu_advsearch(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 	glade_file =
 	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else

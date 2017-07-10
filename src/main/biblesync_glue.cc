@@ -516,7 +516,7 @@ void biblesync_update_speaker()
 	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model_speakers));
 	gtk_widget_show(speaker_list);
 	gtk_container_add(GTK_CONTAINER(speaker_window), speaker_list);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(speaker_list), TRUE);
 #endif
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(speaker_list), TRUE);
@@ -535,7 +535,7 @@ void biblesync_update_speaker()
 
 	column = gtk_tree_view_column_new();
 	image =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("emblem-ok-symbolic", GTK_ICON_SIZE_MENU);
 #else
 	    gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_MENU);
@@ -568,7 +568,7 @@ void biblesync_update_speaker()
 	column = gtk_tree_view_column_new_with_attributes(_("D/I"), renderer,
 							  "text", COLUMN_DIRECT, NULL);
 	image =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("emblem-default", GTK_ICON_SIZE_MENU);
 #else
 	    gtk_image_new_from_stock("gtk-yes", GTK_ICON_SIZE_MENU); // XXX

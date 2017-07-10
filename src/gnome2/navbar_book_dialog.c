@@ -86,7 +86,7 @@ static void menu_position_under(GtkMenu *menu, int *x, int *y,
 	GtkAllocation allocation;
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
-#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
+#if GTK_CHECK_VERSION(2, 20, 0)
 	g_return_if_fail(gtk_widget_get_window(user_data));
 #else
 	g_return_if_fail(GTK_WIDGET_NO_WINDOW(user_data));
@@ -279,7 +279,7 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d)
 			   FALSE, FALSE, 0);
 //gtk_button_set_relief (GTK_BUTTON (d->navbar_book.button_list), GTK_RELIEF_NONE);
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	{
 		gchar *arrow_path = image_locator("arrow_down_box.png");
 		arrow1 = gtk_image_new_from_file(arrow_path);
@@ -301,13 +301,13 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d)
 
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_left),
 			      GTK_RELIEF_NONE);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(d->navbar_book.button_left), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_left), FALSE);
 #endif
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	image1 = gtk_image_new_from_icon_name("go-previous",
 					      GTK_ICON_SIZE_BUTTON);
 #else
@@ -326,13 +326,13 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d)
 				    _("Go to previous item"));
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_up),
 			      GTK_RELIEF_NONE);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(d->navbar_book.button_up), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_up), FALSE);
 #endif
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	image1 = gtk_image_new_from_icon_name("go-up",
 					      GTK_ICON_SIZE_BUTTON);
 #else
@@ -350,13 +350,13 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d)
 				    _("Go to next item"));
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_down),
 			      GTK_RELIEF_NONE);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(d->navbar_book.button_down), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_down), FALSE);
 #endif
 	image2 =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("go-down", GTK_ICON_SIZE_BUTTON);
 #else
 	    gtk_image_new_from_stock(GTK_STOCK_GO_DOWN,
@@ -375,12 +375,12 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA *d)
 
 	gtk_button_set_relief(GTK_BUTTON(d->navbar_book.button_right),
 			      GTK_RELIEF_NONE);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(d->navbar_book.button_right), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_right), FALSE);
 #endif
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	image1 = gtk_image_new_from_icon_name("go-next",
 					      GTK_ICON_SIZE_BUTTON);
 #else

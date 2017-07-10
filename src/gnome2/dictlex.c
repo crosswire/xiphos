@@ -279,7 +279,7 @@ static void menu_position_under(GtkMenu *menu,
 	GtkAllocation allocation;
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
-#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
+#if GTK_CHECK_VERSION(2, 20, 0)
 	g_return_if_fail(gtk_widget_get_window(user_data));
 #else
 	g_return_if_fail(GTK_WIDGET_NO_WINDOW(user_data));
@@ -380,7 +380,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(dict_drop_down);
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
 
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 	arrow1 =
 	    gtk_image_new_from_icon_name("open-menu-symbolic",
 					 GTK_ICON_SIZE_BUTTON);
@@ -396,7 +396,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_button_set_relief(GTK_BUTTON(button10), GTK_RELIEF_NONE);
 
 	image1 =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("go-up-symbolic",
 					 GTK_ICON_SIZE_BUTTON);
 #else
@@ -412,7 +412,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_button_set_relief(GTK_BUTTON(button11), GTK_RELIEF_NONE);
 
 	image2 =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("go-down-symbolic",
 					 GTK_ICON_SIZE_BUTTON);
 #else

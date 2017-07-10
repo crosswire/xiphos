@@ -188,7 +188,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 
 	if (info->stock_icon) {
 		GtkWidget *image5 =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		    gtk_image_new_from_icon_name
 #else
 		    gtk_image_new_from_stock
@@ -196,7 +196,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 		    (info->stock_icon, GTK_ICON_SIZE_DIALOG);
 		gtk_widget_show(image5);
 		gtk_box_pack_start(GTK_BOX(hbox3), image5, FALSE, TRUE, 0);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 		gtk_misc_set_alignment(GTK_MISC(image5), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image5), 12, 0);
 #endif
@@ -212,7 +212,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 	gtk_label_set_use_markup(GTK_LABEL(label7), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label7), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label7), TRUE);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_misc_set_alignment(GTK_MISC(label7), 0, 0.5);
 #endif
 
@@ -236,13 +236,13 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 		gtk_container_add(GTK_CONTAINER(viewport), label10);
 		gtk_label_set_justify(GTK_LABEL(label10),
 				      GTK_JUSTIFY_LEFT);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
 #endif
 	}
 
 	dialog_action_area2 =
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_alert));
 #else
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_alert));
@@ -250,7 +250,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 	gtk_widget_show(dialog_action_area2);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area2),
 				  GTK_BUTTONBOX_END);
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      "_Ok", GTK_RESPONSE_OK);
@@ -325,7 +325,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 	GtkWidget *label13 = NULL;
 	GtkWidget *label14 = NULL;
 	GtkWidget *dialog_action_area3 = NULL;
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	gint nextrow = 0;
 #endif
 
@@ -349,7 +349,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 	gtk_container_set_border_width(GTK_CONTAINER(hbox4), 6);
 
 	if (info->stock_icon) {
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		GtkWidget *image6 =
 		    gtk_image_new_from_icon_name(info->stock_icon,
 						 GTK_ICON_SIZE_DIALOG);
@@ -361,7 +361,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 #endif
 		gtk_widget_show(image6);
 		gtk_box_pack_start(GTK_BOX(hbox4), image6, FALSE, TRUE, 0);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 		gtk_misc_set_alignment(GTK_MISC(image6), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image6), 12, 0);
 #endif
@@ -376,7 +376,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 	gtk_label_set_use_markup(GTK_LABEL(label8), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label8), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label8), TRUE);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_misc_set_alignment(GTK_MISC(label8), 0.5, 0);
 #endif
 
@@ -384,7 +384,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 		label9 = gtk_label_new(info->label1);
 		gtk_widget_show(label9);
 		gtk_label_set_justify(GTK_LABEL(label9), GTK_JUSTIFY_LEFT);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 		gtk_misc_set_alignment(GTK_MISC(label9), 0, 0.5);
 #endif
 
@@ -401,7 +401,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 		gtk_widget_show(label10);
 		gtk_label_set_justify(GTK_LABEL(label10),
 				      GTK_JUSTIFY_LEFT);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
 #endif
 
@@ -418,7 +418,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 		gtk_widget_show(label11);
 		gtk_label_set_justify(GTK_LABEL(label11),
 				      GTK_JUSTIFY_LEFT);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 		gtk_misc_set_alignment(GTK_MISC(label11), 0, 0.5);
 #endif
 
@@ -435,7 +435,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 		gtk_widget_show(label12);
 		gtk_label_set_justify(GTK_LABEL(label12),
 				      GTK_JUSTIFY_LEFT);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 		gtk_misc_set_alignment(GTK_MISC(label12), 0, 0.5);
 #endif
 
@@ -453,7 +453,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 		gtk_widget_show(label13);
 		gtk_label_set_justify(GTK_LABEL(label13),
 				      GTK_JUSTIFY_LEFT);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 		gtk_misc_set_alignment(GTK_MISC(label13), 0, 0.5);
 #endif
 
@@ -471,7 +471,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 		gtk_widget_show(label14);
 		gtk_label_set_justify(GTK_LABEL(label14),
 				      GTK_JUSTIFY_LEFT);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 		gtk_misc_set_alignment(GTK_MISC(label14), 0, 0.5);
 #endif
 
@@ -483,7 +483,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 		g_signal_connect((gpointer)entry6, "activate",
 				 G_CALLBACK(on_dialog_enter), info);
 	}
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	table2 = gtk_grid_new();
 	gtk_widget_show(table2);
 	gtk_box_pack_start(GTK_BOX(vbox3), table2, TRUE, TRUE, 0);
@@ -616,7 +616,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 	}
 #endif
 	dialog_action_area3 =
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_request));
 #else
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_request));
@@ -624,7 +624,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 	gtk_widget_show(dialog_action_area3);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area3),
 				  GTK_BUTTONBOX_END);
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
 				      "_No", GTK_RESPONSE_NO);
@@ -714,7 +714,7 @@ void gui_generic_warning_modal(const char *message)
 
 	dialog = gui_new_dialog();
 	dialog->stock_icon =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    "dialog-information";
 #else
 	    GTK_STOCK_DIALOG_INFO;
@@ -853,7 +853,7 @@ gint gui_close_confirmation_dialog(GS_DIALOG *info)
 		gtk_dialog_add_button(GTK_DIALOG(dialog),
 				      _("Close _without Saving"),
 				      GTK_RESPONSE_NO);
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_dialog_add_buttons(GTK_DIALOG(dialog),
 				       "_Cancel", GTK_RESPONSE_CANCEL,
 				       "document-save", GTK_RESPONSE_YES,
@@ -896,7 +896,7 @@ gint gui_yes_no_dialog(char *question, char *icon)
 	gint result;
 
 	yes_no = gui_new_dialog();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	yes_no->stock_icon = (icon ? icon : "dialog-question");
 #else
 	yes_no->stock_icon = (icon ? icon : GTK_STOCK_DIALOG_QUESTION);
