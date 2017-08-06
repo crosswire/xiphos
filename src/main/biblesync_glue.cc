@@ -784,7 +784,10 @@ int biblesync_active_xmit_allowed()
  */
 const char *biblesync_get_passphrase()
 {
-	return biblesync->getPassphrase().c_str();
+	static string phrase;
+
+	phrase = biblesync->getPassphrase();
+	return phrase.c_str();
 }
 
 /******************************************************************************
