@@ -1134,9 +1134,9 @@ void create_mainwindow(void)
 
 	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, FALSE);
 	gtk_widget_grab_focus(navbar_versekey.lookup_entry);
-	gtk_widget_show_all(widgets.app);
 
 	gtk_window_set_default_size((GtkWindow *)widgets.app, settings.gs_width, settings.gs_height);
+	gtk_widget_show_all(widgets.app);
 	main_window_created = TRUE;
 }
 
