@@ -667,7 +667,7 @@ void main_update_parallel_page(void)
 		for (modidx = 0;
 		     (mod_name = settings.parallel_list[modidx]);
 		     modidx++) {
-			const gchar *rowcolor;
+			const gchar *rowcolor, *textcolor;
 			const char *real_mod = main_get_name(mod_name);
 			if (real_mod)
 				mod_name = (gchar *)real_mod;
@@ -683,10 +683,13 @@ void main_update_parallel_page(void)
 
 			is_rtol = main_is_mod_rtol(mod_name);
 
-			if (modidx % 2 == 1) /* alternating background color */
-				rowcolor = "#c0c0c0";
-			else
+			if (modidx % 2 == 1) { /* alternating background color */
+				rowcolor = settings.bible_text_color;
+				textcolor = settings.bible_bg_color;
+			} else {
 				rowcolor = settings.bible_bg_color;
+				textcolor = settings.bible_text_color;
+			}
 
 			if (modidx == 0) {
 				tmpBuf = g_strdup_printf(
@@ -735,7 +738,12 @@ void main_update_parallel_page(void)
 
 				gchar *utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
 				if (utf8str) {
+					char fontcolor[32];
+
+					sprintf(fontcolor, "<font color=%s>", textcolor);
+					g_string_append(data, fontcolor);
 					g_string_append(data, utf8str);
+					g_string_append(data, "</font>");
 					g_free(utf8str);
 				}
 			}
@@ -861,10 +869,9 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 		text += "<tr valign=\"top\">";
 
 		// alternate background colors.
-		if (verse % 2 == 0)
-			bgColor = "#c0c0c0";
-		else
-			bgColor = settings.bible_bg_color;
+		bgColor = (verse % 2 == 0)
+			? settings.bible_text_color
+			: settings.bible_bg_color;
 
 		for (modidx = 0; modidx < parallel_count; modidx++) {
 			gchar *mod = settings.parallel_list[modidx];
@@ -879,7 +886,9 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 				if ((verse == cur_verse) && is_bible_text[modidx])
 					textColor = settings.currentverse_color;
 				else
-					textColor = settings.bible_text_color;
+					textColor = (verse % 2 == 0)
+						  ? settings.bible_bg_color
+						  : settings.bible_text_color;
 
 				const gchar *newurl = main_url_encode(tmpkey);
 				gchar *num = main_format_number(verse);
