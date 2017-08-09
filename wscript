@@ -314,18 +314,6 @@ def configure(conf):
     if env['ENABLE_GTK2']:
         env.append_value('ALL_LIBS', 'LIBGLADE')
         # We need to know specific versions of GTK+-2.0
-        conf.check_cfg(package="gtk+-2.0",
-                       atleast_version = "2.16",
-                       uselib_store="GTK_216")
-        conf.check_cfg(package="gtk+-2.0",
-                       atleast_version = "2.18",
-                       uselib_store="GTK_218")
-        conf.check_cfg(package="gtk+-2.0",
-                       atleast_version = "2.20",
-                       uselib_store="GTK_220")
-        conf.check_cfg(package="gtk+-2.0",
-                       atleast_version = "2.24",
-                       uselib_store="GTK_224")
         common_libs += ' libglade-2.0'
         common_libs += ' webkit-1.0'
         if opt.webkit_editor:
@@ -343,27 +331,6 @@ def configure(conf):
             common_libs += ' "libgtkhtml-3.14 >= 3.23" '
     else:
         common_libs += ' "gtk+-3.0" '
-        conf.check_cfg(package="gtk+-3.0",
-                       atleast_version = "3.2",
-                       uselib_store="GTK_32") 
-        conf.check_cfg(package="gtk+-3.0",
-                       atleast_version = "3.4",
-                       uselib_store="GTK_34")  
-        conf.check_cfg(package="gtk+-3.0",
-                       atleast_version = "3.8",
-                       uselib_store="GTK_38")  
-        conf.check_cfg(package="gtk+-3.0",
-                       atleast_version = "3.10",
-                       uselib_store="GTK_310")  
-        conf.check_cfg(package="gtk+-3.0",
-                       atleast_version = "3.12",
-                       uselib_store="GTK_312")
-        conf.check_cfg(package="gtk+-3.0",
-                       atleast_version = "3.14",
-                       uselib_store="GTK_314")
-        conf.check_cfg(package="gtk+-3.0",
-                       atleast_version = "3.20",
-                       uselib_store="GTK_320")
         conf.define('USE_GTK_3', 1)
         conf.define('USE_GTKBUILDER', 1)
         if opt.webkit_editor:
