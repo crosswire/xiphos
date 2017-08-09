@@ -1029,9 +1029,7 @@ void create_mainwindow(void)
 
 	// widgets.vpaned2
 	widgets.vpaned2 = UI_VPANE();
-	gtk_widget_show(widgets.vpaned2);
 	gtk_widget_set_size_request(widgets.vpaned2, 50, -1);
-	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, FALSE);
 
 	// widgets.vbox_text
 	UI_VBOX(widgets.vbox_text, FALSE, 0);
@@ -1134,9 +1132,11 @@ void create_mainwindow(void)
 	g_signal_connect(G_OBJECT(widgets.vpaned2), "button_release_event", G_CALLBACK(epaned_button_release_event), (gchar *)"vpaned2");
 	g_signal_connect(G_OBJECT(widgets.hpaned), "button_release_event", G_CALLBACK(epaned_button_release_event), (gchar *)"hpaned1");
 
+	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, FALSE);
 	gtk_widget_grab_focus(navbar_versekey.lookup_entry);
 
 	gtk_window_set_default_size((GtkWindow *)widgets.app, settings.gs_width, settings.gs_height);
+	gtk_widget_show_all(widgets.app);
 	main_window_created = TRUE;
 }
 
