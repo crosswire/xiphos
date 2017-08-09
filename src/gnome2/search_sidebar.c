@@ -64,7 +64,7 @@ static void on_search_button_clicked(GtkButton *button,
 {
 	if (search_active) {
 		terminate_search = TRUE;
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_button_set_image((GtkButton *)remember_search,
 				     gtk_image_new_from_icon_name("edit-find-symbolic", GTK_ICON_SIZE_BUTTON));
 #else
@@ -76,7 +76,7 @@ static void on_search_button_clicked(GtkButton *button,
 #endif
 		sync_windows();
 	} else {
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_button_set_image((GtkButton *)remember_search,
 				     gtk_image_new_from_icon_name("process-stop-symbolic",
 								  GTK_ICON_SIZE_BUTTON));
@@ -90,7 +90,7 @@ static void on_search_button_clicked(GtkButton *button,
 		// do the search
 		main_do_sidebar_search(user_data);
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_button_set_image((GtkButton *)remember_search,
 				     gtk_image_new_from_icon_name("edit-find-symbolic", GTK_ICON_SIZE_BUTTON));
 #else
@@ -227,7 +227,7 @@ void gui_create_search_sidebar(void)
 	;
 
 /* find button */
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	remember_search =
 	    gtk_button_new_from_icon_name("edit-find-symbolic",
 					  GTK_ICON_SIZE_BUTTON);
@@ -436,7 +436,7 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget(GTK_FRAME(ss.frame5), label1);
 
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	table1 = gtk_grid_new();
 	gtk_widget_show(table1);
 	gtk_container_add(GTK_CONTAINER(ss.frame5), table1);
@@ -447,7 +447,7 @@ void gui_create_search_sidebar(void)
 	label1 = gtk_label_new(_("Lower"));
 	gtk_widget_show(label1);
 	gtk_grid_attach(GTK_GRID(table1), label1, 0, 0, 1, 1);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_misc_set_alignment(GTK_MISC(label1), 1.0, 0.5);
 #endif
 
@@ -459,7 +459,7 @@ void gui_create_search_sidebar(void)
 	label2 = gtk_label_new(_("Upper"));
 	gtk_widget_show(label2);
 	gtk_grid_attach(GTK_GRID(table1), label2, 0, 1, 1, 1);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
 #endif
 
@@ -490,7 +490,7 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions)(0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
 
-#ifdef HAVE_GTK_224
+#if GTK_CHECK_VERSION(2, 24, 0)
 	ss.entryLower = gtk_combo_box_text_new_with_entry();
 #else
 	ss.entryLower = gtk_combo_box_entry_new_text();
@@ -501,7 +501,7 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions)(0), 0, 0);
 	gtk_widget_set_size_request(ss.entryLower, 114, 22);
 
-#ifdef HAVE_GTK_224
+#if GTK_CHECK_VERSION(2, 24, 0)
 	ss.entryUpper = gtk_combo_box_text_new_with_entry();
 #else
 	ss.entryUpper = gtk_combo_box_entry_new_text();

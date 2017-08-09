@@ -86,7 +86,7 @@ static void menu_position_under(GtkMenu *menu, int *x, int *y,
 	GtkWidget *widget;
 	GtkAllocation allocation;
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
-#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
+#if GTK_CHECK_VERSION(2, 20, 0)
 	g_return_if_fail(gtk_widget_get_window(user_data));
 #else
 	g_return_if_fail(GTK_WIDGET_NO_WINDOW(user_data));
@@ -338,7 +338,7 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.button_list, FALSE,
 			   FALSE, 0);
 
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 	arrow1 =
 	    gtk_image_new_from_icon_name("open-menu-symbolic",
 					 GTK_ICON_SIZE_BUTTON);
@@ -357,14 +357,14 @@ GtkWidget *gui_navbar_book_new(void)
 
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_left),
 			      GTK_RELIEF_NONE);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(navbar_book.button_left), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_left), FALSE);
 #endif
 
 	image1 =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("go-previous-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 	    gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_BUTTON);
@@ -380,14 +380,14 @@ GtkWidget *gui_navbar_book_new(void)
 				    _("Go to previous item"));
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_up),
 			      GTK_RELIEF_NONE);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(navbar_book.button_up), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_up), FALSE);
 #endif
 
 	image1 =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("go-up-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 	    gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
@@ -403,14 +403,14 @@ GtkWidget *gui_navbar_book_new(void)
 				    _("Go to next item"));
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_down),
 			      GTK_RELIEF_NONE);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(navbar_book.button_down), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_down), FALSE);
 #endif
 
 	image2 =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("go-down-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 	    gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
@@ -428,14 +428,14 @@ GtkWidget *gui_navbar_book_new(void)
 
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_right),
 			      GTK_RELIEF_NONE);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(navbar_book.button_right), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_right), FALSE);
 #endif
 
 	image1 =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
 #else
 	    gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_BUTTON);

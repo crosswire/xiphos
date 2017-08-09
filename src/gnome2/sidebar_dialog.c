@@ -68,7 +68,7 @@ void gui_attach_detach_sidebar(void)
 		settings.docked = FALSE;
 		biblepanesize = settings.gs_width / 2;
 		widgets.dock_sb = create_sidebar_dialog();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_container_add(GTK_CONTAINER(vbox_dock),
 				  widgets.shortcutbar);
 #else
@@ -97,7 +97,7 @@ void gui_attach_detach_sidebar(void)
 				       settings.sidebar_width);
 		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				       biblepanesize);
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_container_add(GTK_CONTAINER(widgets.epaned),
 				  widgets.shortcutbar);
 #else

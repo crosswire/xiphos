@@ -172,7 +172,7 @@ action_insert_image_activate_cb(GtkWidget *widget, EDITOR *e)
 	GtkWidget *dialog = gtk_file_chooser_dialog_new("Select an image file",
 							NULL,
 							GTK_FILE_CHOOSER_ACTION_OPEN,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 							"_Cancel", GTK_RESPONSE_CANCEL,
 							"_OK", GTK_RESPONSE_ACCEPT,
 #else
@@ -311,7 +311,7 @@ action_delete_item_activate_cb(GtkWidget *widget, EDITOR *e)
 				_("Are you sure you want to delete the note for"), e->key);
 
 	if (gui_yes_no_dialog(buf,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 			      "dialog-warning"
 #else
 			      GTK_STOCK_DIALOG_WARNING
@@ -343,7 +343,7 @@ action_delete_item_activate_cb(GtkWidget *widget, EDITOR *e)
 
 void set_button_state(BUTTONS_STATE state, EDITOR *e)
 {
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA rgba;
 #else
 	GdkColor color;
@@ -356,7 +356,7 @@ void set_button_state(BUTTONS_STATE state, EDITOR *e)
 
 	if (state.color) {
 		XI_message(("state.color: %s", state.color));
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 		if (gdk_rgba_parse(&rgba, state.color))
 			gtk_color_chooser_set_rgba((GtkColorChooser *)
 						   e->toolitems.color,
@@ -373,7 +373,7 @@ void set_button_state(BUTTONS_STATE state, EDITOR *e)
 G_MODULE_EXPORT void
 colorbutton1_color_set_cb(GtkColorButton *widget, EDITOR *e)
 {
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA color;
 #else
 	GdkColor color;
@@ -381,7 +381,7 @@ colorbutton1_color_set_cb(GtkColorButton *widget, EDITOR *e)
 	gchar *color_str;
 	gchar *forecolor = NULL;
 
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	gtk_color_chooser_get_rgba((GtkColorChooser *)widget, &color);
 	color_str = gdk_rgba_to_string(&color);
 #else
@@ -399,7 +399,7 @@ G_MODULE_EXPORT void
 colorbutton_highlight_color_set_cb(GtkColorButton *widget, EDITOR *e)
 {
 
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GdkRGBA color;
 #else
 	GdkColor color;
@@ -407,7 +407,7 @@ colorbutton_highlight_color_set_cb(GtkColorButton *widget, EDITOR *e)
 	gchar *color_str;
 	gchar *highlightcolor = NULL;
 
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	gtk_color_chooser_get_rgba((GtkColorChooser *)widget, &color);
 	color_str = gdk_rgba_to_string(&color);
 #else
@@ -446,7 +446,7 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 	GtkWidget *dialog;
 	gchar *selected_text = NULL;
 	gchar *size = NULL;
-#ifdef HAVE_GTK_32
+#if GTK_CHECK_VERSION(3, 2, 0)
 	dialog = gtk_font_chooser_dialog_new("Select font", NULL);
 	gtk_font_chooser_set_font((GtkFontChooser *)dialog,
 #else
@@ -457,7 +457,7 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 				  "Droid Sans 14");
 
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
-#ifdef HAVE_GTK_32
+#if GTK_CHECK_VERSION(3, 2, 0)
 		const gchar *fontname = gtk_font_chooser_get_font((GtkFontChooser *)dialog);
 #else
 		const gchar *fontname = gtk_font_selection_dialog_get_font_name((GtkFontSelectionDialog *)dialog);
@@ -467,7 +467,7 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 		g_string_free(name, TRUE);
 
 		selected_text = editor_get_selected_text(e);
-#ifdef HAVE_GTK_32
+#if GTK_CHECK_VERSION(3, 2, 0)
 		PangoFontDescription *font_description =
 			gtk_font_chooser_get_font_desc((GtkFontChooser *)
 						       dialog);
@@ -604,7 +604,7 @@ static gint open_dialog(EDITOR *e)
 
 	dialog = gtk_file_chooser_dialog_new(_("Open"), GTK_WINDOW(e->window),
 					     GTK_FILE_CHOOSER_ACTION_OPEN,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 					     "_Cancel", GTK_RESPONSE_CANCEL,
 					     "_Open", GTK_RESPONSE_ACCEPT,
 #else
@@ -913,7 +913,7 @@ static void _save_file(EDITOR *e)
 		GtkWidget *dialog = gtk_file_chooser_dialog_new("Save as",		      //const gchar *title,
 								NULL,			      //GtkWindow *parent,
 								GTK_FILE_CHOOSER_ACTION_SAVE, //GtkFileChooserAction action,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 								"_OK",
 								GTK_RESPONSE_OK,
 								"_Cancel",
@@ -1163,7 +1163,7 @@ gint ask_about_saving(EDITOR *e)
 	case NOTE_EDITOR:
 		info = gui_new_dialog();
 		info->stock_icon =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		    "dialog-warning";
 #else
 		    GTK_STOCK_DIALOG_WARNING;
@@ -1201,7 +1201,7 @@ gint ask_about_saving(EDITOR *e)
 	case STUDYPAD_EDITOR:
 		info = gui_new_dialog();
 		info->stock_icon =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		    "dialog-warning";
 #else
 		    GTK_STOCK_DIALOG_WARNING;
@@ -1312,7 +1312,7 @@ static gint _create_new(const gchar *filename, const gchar *key,
 		gtk_tree_view_expand_all((GtkTreeView *)editor->treeview);
 // then we should expand on the item to which we've opened for edit.
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		gtk_container_add(GTK_CONTAINER(box), editor->box);
 #else
 		gtk_widget_reparent(editor->box, box);

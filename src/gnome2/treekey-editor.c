@@ -128,7 +128,7 @@ on_add_sibling_activate(GtkMenuItem *menuitem, gpointer user_data)
 	info = _get_info(tree);
 
 	d = gui_new_dialog();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	d->stock_icon = "dialog-question";
 #else
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
@@ -185,7 +185,7 @@ on_add_child_activate(GtkMenuItem *menuitem, gpointer user_data)
 	info = _get_info(tree);
 
 	d = gui_new_dialog();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	d->stock_icon = "dialog-question";
 #else
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
@@ -251,7 +251,7 @@ on_remove_activate(GtkMenuItem *menuitem, gpointer user_data)
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s/%s",
 			      _("Remove the selected item"),
 			      info->book, info->local_name);
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	icon_name = g_strdup("dialog-warning");
 #else
 	icon_name = g_strdup(GTK_STOCK_DIALOG_WARNING);
@@ -283,7 +283,7 @@ on_edit_activate2(GtkMenuItem *menuitem, gpointer user_data)
 	info = _get_info(tree);
 
 	d = gui_new_dialog();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	d->stock_icon = "dialog-question";
 #else
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
@@ -318,7 +318,7 @@ GtkWidget *create_edit_tree_menu(EDITOR *editor)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 	glade_file =
 	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else

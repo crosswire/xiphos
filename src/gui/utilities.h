@@ -168,7 +168,7 @@ void language_init(void);
 /* visually simplify some code that needs to pick out UI details */
 #ifdef USE_GTKBUILDER
 #define UI_GET_ITEM(ui, label) GTK_WIDGET(gtk_builder_get_object(ui, label))
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 #define UI_SUFFIX ".gtkbuilder"
 #else
 #define UI_SUFFIX "_old.gtkbuilder"
@@ -177,7 +177,7 @@ void language_init(void);
 #define UI_GET_ITEM(ui, label) glade_xml_get_widget(ui, label)
 #define UI_SUFFIX ".glade"
 #endif
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 #define UI_VBOX(item, tf, spacing)                             \
 	item = gtk_box_new(GTK_ORIENTATION_VERTICAL, spacing); \
 	if (tf == TRUE)                                        \

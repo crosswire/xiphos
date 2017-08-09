@@ -79,7 +79,7 @@ static void create_menu1(void)
 
 	menu = gtk_menu_new();
 	item =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_menu_item_new_with_mnemonic("_Copy");
 #else
 	    gtk_image_menu_item_new_from_stock("gtk-copy", accel_group);
@@ -187,7 +187,7 @@ static GtkWidget *gui_create_about_modules(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
 #endif
 	dialog_action_area28 =
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_about_mods));
 #else
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_mods));
@@ -204,7 +204,7 @@ static GtkWidget *gui_create_about_modules(void)
 	hbuttonbox7 = gtk_hbutton_box_new();
 #endif
 	gtk_widget_show(hbuttonbox7);
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	gtk_box_pack_start(GTK_BOX(dialog_action_area28), hbuttonbox7,
 			   FALSE, TRUE, 3);
 #else
@@ -215,14 +215,14 @@ static GtkWidget *gui_create_about_modules(void)
 				  GTK_BUTTONBOX_END);
 
 	button =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_button_new_with_mnemonic(_("Close"));
 #else
 	    gtk_button_new_from_stock(GTK_STOCK_CLOSE);
 #endif
 	gtk_widget_show(button);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox7), button);
-#ifdef HAVE_GTK_218
+#if GTK_CHECK_VERSION(2, 18, 0)
 	gtk_widget_set_can_default(button, TRUE);
 #else
 #ifdef USE_GTK_3

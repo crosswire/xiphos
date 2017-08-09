@@ -129,7 +129,7 @@ void gui_verselist_to_bookmarks(GList *verses, gint save_as_single)
 
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
 	info = gui_new_dialog();
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	info->stock_icon = "document-open";
 #else
 	info->stock_icon = GTK_STOCK_OPEN;
@@ -546,7 +546,7 @@ static void create_pixbufs(void)
 	if (!bm_pixbufs->pixbuf_helpdoc)
 #ifdef USE_GTK_3
 		bm_pixbufs->pixbuf_helpdoc =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 		    GDK_PIXBUF(gtk_image_new_from_icon_name("gtk-dnd",
 							    GTK_ICON_SIZE_BUTTON));
 #else

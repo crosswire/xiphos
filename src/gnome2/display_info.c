@@ -190,7 +190,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_container_set_border_width(GTK_CONTAINER(hbox), 6);
 
 	image =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_image_new_from_icon_name("dialog-information",
 					 GTK_ICON_SIZE_DIALOG);
 #else
@@ -199,7 +199,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 #endif
 	gtk_widget_show(image);
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, TRUE, 0);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
 #endif
 	html_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 30)); //gtk_html_new();
@@ -208,7 +208,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	//gtk_container_add(GTK_CONTAINER(scrolledwindow70), html_widget);
 
 	dialog_action_area23 =
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_display_info));
 #else
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_display_info));
@@ -230,7 +230,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 				  GTK_BUTTONBOX_END);
 
 	button_close =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_button_new_from_icon_name("window-close",
 					  GTK_ICON_SIZE_BUTTON);
 #else

@@ -456,7 +456,7 @@ static gboolean on_configure_event(GtkWidget *widget,
 	settings.app_x = x;
 	settings.app_y = y;
 
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	sprintf(layout, "%d", gtk_window_is_maximized(GTK_WINDOW(widgets.app)));
 	xml_set_value("Xiphos", "layout", "maximized", layout);
 #endif
@@ -962,7 +962,7 @@ void create_mainwindow(void)
 	// widgets.epaned
 	widgets.epaned = UI_HPANE();
 	gtk_widget_show(widgets.epaned);
-#ifndef HAVE_GTK_314
+#if !GTK_CHECK_VERSION(3, 14, 0)
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.epaned), 4);
 #endif
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE, 0);
@@ -970,7 +970,7 @@ void create_mainwindow(void)
 	UI_VBOX(widgets.vboxMain, FALSE, 0);
 	gtk_widget_show(widgets.vboxMain);
 	gtk_paned_pack2(GTK_PANED(widgets.epaned), widgets.vboxMain, TRUE, TRUE);
-#ifndef HAVE_GTK_314
+#if !GTK_CHECK_VERSION(3, 14, 0)
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.vboxMain), 2);
 #endif
 
@@ -986,7 +986,7 @@ void create_mainwindow(void)
 	widgets.button_new_tab = gtk_button_new();
 	// Don't show button here in case !settings.browsing
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	tab_button_icon = gtk_image_new_from_icon_name("tab-new-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
 #else
 	tab_button_icon = gtk_image_new_from_stock(GTK_STOCK_ADD, GTK_ICON_SIZE_SMALL_TOOLBAR);

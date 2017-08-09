@@ -200,7 +200,7 @@ G_MODULE_EXPORT void bibletime_bookmarks_activate(GtkMenuItem *menuitem,
 	dialog = gtk_file_chooser_dialog_new(_("Specify bookmarks file"),
 					     GTK_WINDOW(widgets.app),
 					     GTK_FILE_CHOOSER_ACTION_OPEN,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 					     "_Cancel",
 					     GTK_RESPONSE_CANCEL, "_OK",
 					     GTK_RESPONSE_ACCEPT,
@@ -499,7 +499,7 @@ G_MODULE_EXPORT void on_delete_item_activate(GtkMenuItem *menuitem,
 	}
 
 	if (gui_yes_no_dialog(str,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 			      "dialog-warning")) {
 #else
 			      GTK_STOCK_DIALOG_WARNING)) {
@@ -847,7 +847,7 @@ void gui_create_bookmark_menu(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 	glade_file =
 	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else

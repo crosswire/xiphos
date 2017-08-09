@@ -236,7 +236,7 @@ static void menu_position_under(GtkMenu *menu, int *x, int *y,
 	GtkAllocation allocation;
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
-#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
+#if GTK_CHECK_VERSION(2, 20, 0)
 	g_return_if_fail(gtk_widget_get_window(user_data));
 #else
 	g_return_if_fail(GTK_WIDGET_NO_WINDOW(user_data));
@@ -824,7 +824,7 @@ static void _connect_signals(NAVBAR_VERSEKEY navbar, DIALOG_DATA *dialog)
 			 "button_press_event",
 			 G_CALLBACK(select_verse_button_press_callback),
 			 dialog);
-#ifndef HAVE_GTK_34
+#if !GTK_CHECK_VERSION(3, 4, 0)
 	g_signal_connect((gpointer)navbar.button_verse_menu,
 			 "scroll_event",
 			 G_CALLBACK(on_button_verse_menu_verse_scroll_event),
@@ -862,7 +862,7 @@ GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA *dialog)
 #else
 	GladeXML *gxml;
 #endif
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	GtkWidget *eventbox;
 #endif
 
@@ -934,7 +934,7 @@ GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA *dialog)
 	    UI_GET_ITEM(gxml, "label_chapter");
 	dialog->navbar.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
 
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	eventbox = UI_GET_ITEM(gxml, "eventbox_book");
 	g_signal_connect((gpointer)eventbox, "scroll_event",
 			 G_CALLBACK(on_button_verse_menu_book_scroll_event), dialog);

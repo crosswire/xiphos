@@ -925,7 +925,7 @@ on_populate_verse_list_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	GS_DIALOG *info = gui_new_dialog();
 
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	info->stock_icon = g_strdup("dialog-warning");
 #else
 	info->stock_icon = g_strdup(GTK_STOCK_DIALOG_WARNING);
@@ -1018,7 +1018,7 @@ GtkWidget *create_results_menu(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 	glade_file =
 	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
@@ -1076,7 +1076,7 @@ static GtkWidget *create_menu_modules(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 	glade_file =
 	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
@@ -1149,7 +1149,7 @@ GtkWidget *create_menu_prayerlist(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 	glade_file =
 	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
@@ -1195,7 +1195,7 @@ GtkWidget *create_menu_prayerlist_mod(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#ifdef HAVE_GTK_314
+#if GTK_CHECK_VERSION(3, 14, 0)
 	glade_file =
 	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
@@ -1341,7 +1341,7 @@ static void create_search_results_page(GtkWidget *notebook)
 	gtk_widget_show(sidebar.results_list);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow3),
 			  sidebar.results_list);
-#ifndef HAVE_GTK_310
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(sidebar.results_list),
 				     TRUE);
 #endif
@@ -1494,7 +1494,7 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 /* 2x2 button box set: modules/bookmarks/search/vlist */
 /* ---------------------------------------------------------------- */
 
-#ifdef HAVE_GTK_34
+#if GTK_CHECK_VERSION(3, 4, 0)
 	table2 = gtk_grid_new();
 	gtk_widget_show(table2);
 	gtk_box_pack_start(GTK_BOX(vbox1), table2, FALSE, TRUE, 0);
@@ -1510,7 +1510,7 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 	gtk_grid_attach(GTK_GRID(table2), button_bookmarks, 1, 0, 1, 1);
 	gtk_button_set_relief(GTK_BUTTON(button_bookmarks),
 			      GTK_RELIEF_HALF);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(button_bookmarks), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(button_bookmarks), FALSE);
@@ -1520,7 +1520,7 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 	gtk_widget_show(button_search);
 	gtk_grid_attach(GTK_GRID(table2), button_search, 0, 1, 1, 1);
 	gtk_button_set_relief(GTK_BUTTON(button_search), GTK_RELIEF_HALF);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(button_search), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(button_search), FALSE);
@@ -1531,7 +1531,7 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 	gtk_widget_show(button_v_lists);
 	gtk_grid_attach(GTK_GRID(table2), button_v_lists, 1, 1, 1, 1);
 	gtk_button_set_relief(GTK_BUTTON(button_v_lists), GTK_RELIEF_HALF);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(button_v_lists), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(button_v_lists), FALSE);
@@ -1541,7 +1541,7 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 	gtk_widget_show(button_modules);
 	gtk_grid_attach(GTK_GRID(table2), button_modules, 0, 0, 1, 1);
 	gtk_button_set_relief(GTK_BUTTON(button_modules), GTK_RELIEF_HALF);
-#ifdef HAVE_GTK_320
+#if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_widget_set_focus_on_click(GTK_WIDGET(button_modules), FALSE);
 #else
 	gtk_button_set_focus_on_click(GTK_BUTTON(button_modules), FALSE);

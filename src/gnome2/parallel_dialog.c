@@ -429,7 +429,7 @@ static GtkWidget *create_parallel_dialog(void)
 			 G_CALLBACK(_popupmenu_requested_cb), NULL);
 
 	dialog_action_area25 =
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_parallel));
 #else
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_parallel));
@@ -446,7 +446,7 @@ static GtkWidget *create_parallel_dialog(void)
 #endif
 	gtk_widget_show(hbuttonbox4);
 
-#ifdef HAVE_GTK_312
+#if GTK_CHECK_VERSION(3, 12, 0)
 	gtk_box_pack_start(GTK_BOX(dialog_action_area25), hbuttonbox4,
 			   FALSE, TRUE, 3);
 #else
@@ -457,7 +457,7 @@ static GtkWidget *create_parallel_dialog(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox4),
 				  GTK_BUTTONBOX_END);
 	btnDockInt =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_button_new_from_icon_name("window-close",
 					  GTK_ICON_SIZE_BUTTON);
 #else

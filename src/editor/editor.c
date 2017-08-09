@@ -923,7 +923,7 @@ static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 
 	/* cut */
 	item =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_menu_item_new_with_label("Cut");
 #else
 	    gtk_image_menu_item_new_from_stock(GTK_STOCK_CUT, NULL);
@@ -936,7 +936,7 @@ static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 
 	/* copy */
 	item =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_menu_item_new_with_label("Copy");
 #else
 	    gtk_image_menu_item_new_from_stock(GTK_STOCK_COPY, NULL);
@@ -949,7 +949,7 @@ static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 
 	/* paste */
 	item =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_menu_item_new_with_label("Paste");
 #else
 	    gtk_image_menu_item_new_from_stock(GTK_STOCK_PASTE, NULL);
@@ -966,7 +966,7 @@ static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 
 	/* select all */
 	item =
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_menu_item_new_with_label("Select All");
 #else
 	    gtk_image_menu_item_new_from_stock(GTK_STOCK_SELECT_ALL, NULL);

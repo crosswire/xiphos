@@ -622,7 +622,7 @@ on_save_session_activate(GtkMenuItem *menuitem, gpointer user_data)
 	dialog = gtk_file_chooser_dialog_new("Save Session",
 					     NULL,
 					     GTK_FILE_CHOOSER_ACTION_SAVE,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 					     "_Cancel",
 					     GTK_RESPONSE_CANCEL, "_Save",
 					     GTK_RESPONSE_ACCEPT,
@@ -738,7 +738,7 @@ on_open_session_activate(GtkMenuItem *menuitem, gpointer user_data)
 	dialog = gtk_file_chooser_dialog_new("Open Session",
 					     NULL,
 					     GTK_FILE_CHOOSER_ACTION_OPEN,
-#ifdef HAVE_GTK_310
+#if GTK_CHECK_VERSION(3, 10, 0)
 					     "_Cancel",
 					     GTK_RESPONSE_CANCEL, "_Open",
 					     GTK_RESPONSE_ACCEPT,
