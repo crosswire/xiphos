@@ -253,19 +253,19 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 #if GTK_CHECK_VERSION(3, 10, 0)
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      "_Ok", GTK_RESPONSE_OK);
+				      _("_Ok"), GTK_RESPONSE_OK);
 	if (info->yes)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      "_Yes", GTK_RESPONSE_YES);
+				      _("_Yes"), GTK_RESPONSE_YES);
 	if (info->save)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      "_Save", GTK_RESPONSE_YES);
+				      _("_Save"), GTK_RESPONSE_YES);
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      "_No", GTK_RESPONSE_NO);
+				      _("_No"), GTK_RESPONSE_NO);
 	if (info->cancel)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      "_Cancel", GTK_RESPONSE_CANCEL);
+				      _("_Cancel"), GTK_RESPONSE_CANCEL);
 #else
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
