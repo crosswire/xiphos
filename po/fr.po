@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 4.0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-10 10:26+0200\n"
-"PO-Revision-Date: 2017-08-09 15:35+0200\n"
+"PO-Revision-Date: 2017-08-10 10:32+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -440,11 +440,11 @@ msgstr "Entrer la clé : "
 
 #: ../src/gnome2/dialog.c:256
 msgid "_Ok"
-msgstr ""
+msgstr "_Ok"
 
 #: ../src/gnome2/dialog.c:259
 msgid "_Yes"
-msgstr ""
+msgstr "_Oui"
 
 #: ../src/gnome2/dialog.c:262
 msgid "_Save"
@@ -452,7 +452,7 @@ msgstr "_Enregistrer"
 
 #: ../src/gnome2/dialog.c:265
 msgid "_No"
-msgstr ""
+msgstr "_Non"
 
 #: ../src/gnome2/dialog.c:268 ../ui/export-dialog.gtkbuilder.h:2
 #: ../ui/module-manager.gtkbuilder.h:18
