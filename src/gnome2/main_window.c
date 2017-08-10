@@ -934,7 +934,7 @@ void create_mainwindow(void)
 	widgets.app = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(widgets.app), _("Xiphos - Bible Study Software"));
 	g_object_set_data(G_OBJECT(widgets.app), "widgets.app", widgets.app);
-	gtk_widget_set_size_request(widgets.app, 680, 425);
+	gtk_window_set_default_size(GTK_WINDOW(widgets.app), 680, 425);
 	gtk_widget_set_can_focus(widgets.app, 1);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
 
@@ -1119,6 +1119,18 @@ void create_mainwindow(void)
 	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE, 0);
 	gui_set_statusbar(_("Welcome to Xiphos"));
 
+	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, FALSE);
+	gtk_widget_grab_focus(navbar_versekey.lookup_entry);
+
+	gtk_window_set_default_size((GtkWindow *)widgets.app, settings.gs_width, settings.gs_height);
+	gtk_widget_show_all(widgets.app);
+
+	/* must connect signals *after* instantiating window above, */
+	/* immediately above, otherwise window creation induces */
+	/* configure_event, wiping out user's saved geometry specs. */
+	/* *important*: drain gtk event queue first (i.e. sync). */
+
+	sync_windows();
 	g_signal_connect((gpointer)vbox_gs, "key_press_event", G_CALLBACK(on_vbox1_key_press_event), NULL);
 	g_signal_connect((gpointer)vbox_gs, "key_release_event", G_CALLBACK(on_vbox1_key_release_event), NULL);
 
@@ -1132,11 +1144,6 @@ void create_mainwindow(void)
 	g_signal_connect(G_OBJECT(widgets.vpaned2), "button_release_event", G_CALLBACK(epaned_button_release_event), (gchar *)"vpaned2");
 	g_signal_connect(G_OBJECT(widgets.hpaned), "button_release_event", G_CALLBACK(epaned_button_release_event), (gchar *)"hpaned1");
 
-	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, FALSE);
-	gtk_widget_grab_focus(navbar_versekey.lookup_entry);
-
-	gtk_window_set_default_size((GtkWindow *)widgets.app, settings.gs_width, settings.gs_height);
-	gtk_widget_show_all(widgets.app);
 	main_window_created = TRUE;
 }
 
