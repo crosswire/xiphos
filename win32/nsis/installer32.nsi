@@ -44,7 +44,7 @@
     !define APP_NAME "Xiphos"
     !define INSTALLER_NAME "xiphos"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "4.0.5"
+    !define APP_VERS "4.0.6"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
 

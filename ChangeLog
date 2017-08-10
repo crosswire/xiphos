@@ -1,6 +1,41 @@
+2017-08-10  karl <charcoal@users.sf.net>
+
+	* 4.0.6 release.
+
+2017-08-10  karl <charcoal@users.sf.net>
+
+	* correct signal connect ordering so initial move works.
+	* fix #812 replace gtk_widget_set_size_request() with
+	  gtk_window_set_default_size() because some freaks
+	  want to build/run xiphos on truly midget screens (pocketCHIP).
+
+2017-08-09  karl <charcoal@users.sf.net>
+
+	* remove HAVE_GTK_xxx in favor of GTK_CHECK_VERSION (thx @yetist).
+	* remove gtk version checks from wscript.
+	* French translation updates (domcox).
+	* fix webkit2 mis-display (thx @yetist).
+	* preserve biblesync passphrase properly.
+
+2017-06-04  karl <charcoal@users.sf.net>
+
+	* fix return for wk2 search.
+
 2017-06-25  karl <charcoal@users.sf.net>
 
 	* add Alt-L toggle lemma.
+
+2017-05-25  Peter von Kaehne <refdoc@crosswire.org>
+
+	* remove all ImageMagick references.
+
+2017-04-30  karl <charcoal@users.sf.net>
+
+	* add View Xiphos Releases to Help menu.
+
+2017-04-28  Dominique Corbex <dominique@corbex.org>
+
+	* add Italian translation.
 
 2017-04-23  karl <charcoal@users.sf.net>
 

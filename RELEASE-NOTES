@@ -3,6 +3,20 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.0.6
+10 Aug 2017
+
+- fixed longstanding display problem with webkit2 (now req'd for fedora).
+- added Italian translation.
+- updated French translation.
+- added alt-L toggle lemma.
+- added View Xiphos Releases to Help menu.
+- internal: removed all ancient ImageMagick references.
+- internal: removed HAVE_GTK_xxx in favor of GTK_VERSION_CHECK.
+- internal: fixed wk2 search result.
+- internal: fixed biblesync passphrase preservation.
+________________________________________________________________
+
 Release 4.0.5
 23 Apr 2017
 
