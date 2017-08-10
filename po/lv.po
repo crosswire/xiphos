@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-28 13:40+0200\n"
+"POT-Creation-Date: 2017-08-10 10:26+0200\n"
 "PO-Revision-Date: 2010-03-21 01:28+0000\n"
 "Last-Translator: Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
@@ -54,7 +54,7 @@ msgstr ""
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Ja nesaglabāsiet, izmaiņas neatgriezeniski pazudīs."
 
-#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:59
+#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:61
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Fails"
@@ -110,14 +110,14 @@ msgid "Daily Devotion"
 msgstr "Dzēšana"
 
 #: ../src/gnome2/about_modules.c:433 ../src/gnome2/mod_mgr.c:1561
-#: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1030
-#: ../src/main/sidebar.cc:1032
+#: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1029
+#: ../src/main/sidebar.cc:1031
 msgid "Maps"
 msgstr "Kartes"
 
 #: ../src/gnome2/about_modules.c:435 ../src/gnome2/mod_mgr.c:1565
-#: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1039
-#: ../src/main/sidebar.cc:1041
+#: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1038
+#: ../src/main/sidebar.cc:1040
 msgid "Images"
 msgstr "Attēli"
 
@@ -312,7 +312,7 @@ msgstr ""
 #: ../src/gnome2/bookmark_dialog.c:163 ../src/gnome2/bookmarks_menu.c:361
 #: ../src/gnome2/bookmarks_menu.c:653 ../src/gnome2/bookmarks_menu.c:753
 #: ../src/gnome2/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
-#: ../ui/xi-menus.glade.h:56 ../ui/xi-menus-popup.gtkbuilder.h:36
+#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Bookmark"
 msgstr "Grāmatzīme"
 
@@ -334,7 +334,7 @@ msgstr "Mape: "
 msgid "Specify bookmarks file"
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:61
+#: ../src/gnome2/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit"
 msgstr "Rediģēt"
@@ -405,6 +405,27 @@ msgstr ""
 msgid "Enter Key: "
 msgstr ""
 
+#: ../src/gnome2/dialog.c:256
+msgid "_Ok"
+msgstr ""
+
+#: ../src/gnome2/dialog.c:259
+msgid "_Yes"
+msgstr ""
+
+#: ../src/gnome2/dialog.c:262
+msgid "_Save"
+msgstr "_Saglabāt"
+
+#: ../src/gnome2/dialog.c:265
+msgid "_No"
+msgstr ""
+
+#: ../src/gnome2/dialog.c:268 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr ""
+
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
 msgstr "Nesaglabāt un aizvērt"
@@ -432,7 +453,7 @@ msgid "SearchResults"
 msgstr ""
 
 #: ../src/gnome2/export_dialog.c:325 ../ui/export-dialog.glade.h:4
-#: ../ui/export-dialog.gtkbuilder.h:4
+#: ../ui/export-dialog.gtkbuilder.h:5
 msgid "Please check copyright before exporting!"
 msgstr ""
 
@@ -499,38 +520,38 @@ msgstr ""
 msgid "Xiphos: No windows."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:711
+#: ../src/gnome2/main_window.c:715
 msgid "BibleSync: Current navigation sent."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:713
+#: ../src/gnome2/main_window.c:717
 msgid "BibleSync: Not speaking."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:931
+#: ../src/gnome2/main_window.c:935
 msgid "Xiphos - Bible Study Software"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:995
+#: ../src/gnome2/main_window.c:999
 msgid "Open a new tab"
 msgstr "Atvērt jaunu cilni"
 
-#: ../src/gnome2/main_window.c:1052 ../src/gnome2/sidebar.c:614
-#: ../src/gnome2/sidebar.c:619 ../src/main/sidebar.cc:656
-#: ../src/main/sidebar.cc:976 ../src/main/sidebar.cc:977
-#: ../src/main/sidebar.cc:978
+#: ../src/gnome2/main_window.c:1054 ../src/gnome2/sidebar.c:614
+#: ../src/gnome2/sidebar.c:619 ../src/main/sidebar.cc:655
+#: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
+#: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:1092
+#: ../src/gnome2/main_window.c:1094
 msgid "Commentary View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:1100
+#: ../src/gnome2/main_window.c:1102
 msgid "Book View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:1118
+#: ../src/gnome2/main_window.c:1120
 msgid "Welcome to Xiphos"
 msgstr ""
 
@@ -664,7 +685,7 @@ msgstr ""
 msgid "Removing"
 msgstr "Izņemu"
 
-#: ../src/gnome2/mod_mgr.c:194 ../ui/xi-menus.glade.h:154
+#: ../src/gnome2/mod_mgr.c:194 ../ui/xi-menus.glade.h:156
 #: ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove"
 msgstr "Izņemt"
@@ -772,8 +793,8 @@ msgid ""
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:596
-#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2
-#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus-popup.gtkbuilder.h:35
+#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
 msgstr "Par programmu"
 
@@ -823,8 +844,8 @@ msgstr "Pabeigts"
 #: ../src/gnome2/mod_mgr.c:1307 ../src/gnome2/mod_mgr.c:1340
 #: ../src/gnome2/mod_mgr.c:1342 ../src/gnome2/utilities.c:432
 #: ../src/gnome2/utilities.c:495 ../src/gnome2/utilities.c:497
-#: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:808
-#: ../src/main/sidebar.cc:879 ../src/main/sidebar.cc:881
+#: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:807
+#: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
 msgid "Unknown"
 msgstr "Nezināms"
 
@@ -842,39 +863,39 @@ msgid ""
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1536 ../src/gnome2/utilities.c:574
-#: ../src/main/sidebar.cc:960 ../src/main/sidebar.cc:962
+#: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
 msgid "Biblical Texts"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1540 ../src/gnome2/utilities.c:580
-#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:985
-#: ../src/main/sidebar.cc:987
+#: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
+#: ../src/main/sidebar.cc:986
 msgid "Commentaries"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1544 ../src/gnome2/utilities.c:587
-#: ../src/main/sidebar.cc:994 ../src/main/sidebar.cc:996
+#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
 msgid "Dictionaries"
 msgstr "Vārdnīcas"
 
 #: ../src/gnome2/mod_mgr.c:1548 ../src/gnome2/utilities.c:593
-#: ../src/main/sidebar.cc:1003 ../src/main/sidebar.cc:1005
+#: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
 msgid "Glossaries"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1552 ../src/gnome2/utilities.c:600
-#: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1014
+#: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
 msgid "Daily Devotionals"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/utilities.c:606
-#: ../src/main/sidebar.cc:675 ../src/main/sidebar.cc:1021
-#: ../src/main/sidebar.cc:1023
+#: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
+#: ../src/main/sidebar.cc:1022
 msgid "General Books"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1569 ../src/gnome2/utilities.c:624
-#: ../src/main/sidebar.cc:1048 ../src/main/sidebar.cc:1050
+#: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
 msgid "Cult/Unorthodox"
 msgstr ""
 
@@ -894,7 +915,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1592 ../src/gnome2/sidebar.c:630
 #: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:228
-#: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
+#: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
 msgid "Prayer List/Journal"
 msgstr ""
 
@@ -1079,15 +1100,15 @@ msgstr "Paralēlais"
 msgid "Detach/Attach"
 msgstr ""
 
-#: ../src/gnome2/parallel_view.c:117 ../ui/xi-menus.glade.h:64
+#: ../src/gnome2/parallel_view.c:117 ../ui/xi-menus.glade.h:66
 #: ../ui/xi-menus-popup.gtkbuilder.h:43
 msgid "Module Options"
 msgstr ""
 
 #: ../src/gnome2/parallel_view.c:213 ../src/gnome2/sidebar.c:614
 #: ../src/gnome2/sidebar.c:619 ../src/gnome2/tabbed_browser.c:254
-#: ../src/main/sidebar.cc:639 ../src/main/sidebar.cc:968
-#: ../src/main/sidebar.cc:969 ../src/main/sidebar.cc:970
+#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
+#: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
 msgid "Parallel View"
 msgstr ""
 
@@ -1592,7 +1613,7 @@ msgstr ""
 
 #: ../src/main/display.cc:1116 ../src/main/display.cc:1157
 #: ../src/main/display.cc:1241 ../ui/export-dialog.glade.h:14
-#: ../ui/export-dialog.gtkbuilder.h:13
+#: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr "Nodaļa"
 
@@ -1654,64 +1675,64 @@ msgstr ""
 msgid "Unknown parallel module: "
 msgstr ""
 
-#: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:68
+#: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:70
 #: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Strong's Numbers"
 msgstr ""
 
 #: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:102
-#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:71
+#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:73
 #: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Footnotes"
 msgstr ""
 
 #: ../src/main/parallel_view.cc:418 ../ui/search-dialog.glade.h:99
-#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:70
+#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:72
 #: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Morphological Tags"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:427 ../ui/xi-menus.glade.h:76
+#: ../src/main/parallel_view.cc:427 ../ui/xi-menus.glade.h:78
 #: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Hebrew Vowel Points"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:436 ../ui/xi-menus.glade.h:77
+#: ../src/main/parallel_view.cc:436 ../ui/xi-menus.glade.h:79
 #: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Hebrew Cantillation"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:445 ../ui/xi-menus.glade.h:75
+#: ../src/main/parallel_view.cc:445 ../ui/xi-menus.glade.h:77
 #: ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Greek Accents"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:72
+#: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:74
 #: ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Cross-references"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:69
+#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:71
 #: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Lemmas"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:66
+#: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:68
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Headings"
 msgstr ""
 
 #: ../src/main/parallel_view.cc:481 ../src/main/parallel_view.cc:574
-#: ../ui/xi-menus.glade.h:86 ../ui/xi-menus-popup.gtkbuilder.h:64
+#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Morpheme Segmentation"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:67
+#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Words of Christ in Red"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:78
+#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:80
 #: ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Transliteration"
 msgstr ""
@@ -1720,37 +1741,37 @@ msgstr ""
 msgid "Textual Variants"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:520 ../ui/xi-menus.glade.h:80
+#: ../src/main/parallel_view.cc:520 ../ui/xi-menus.glade.h:82
 #: ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Primary Reading"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:81
+#: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:83
 #: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "Secondary Reading"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:82
+#: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:84
 #: ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "All Readings"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:547 ../ui/xi-menus.glade.h:83
+#: ../src/main/parallel_view.cc:547 ../ui/xi-menus.glade.h:85
 #: ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "Transliterated Forms"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:84
+#: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:86
 #: ../ui/xi-menus-popup.gtkbuilder.h:62
 msgid "Enumerations"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:85
+#: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:87
 #: ../ui/xi-menus-popup.gtkbuilder.h:63
 msgid "Glosses"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:749
+#: ../src/main/parallel_view.cc:757
 msgid "view context"
 msgstr ""
 
@@ -2059,11 +2080,11 @@ msgid ""
 "Please report this, with module & verse"
 msgstr ""
 
-#: ../src/main/sidebar.cc:411
+#: ../src/main/sidebar.cc:410
 msgid "verse"
 msgstr ""
 
-#: ../src/main/sidebar.cc:471
+#: ../src/main/sidebar.cc:470
 msgid "chapter"
 msgstr ""
 
@@ -2352,7 +2373,7 @@ msgid "Create new folder"
 msgstr ""
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
-#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:5
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Jauna mape"
 
@@ -2401,7 +2422,7 @@ msgid "Insert Link"
 msgstr "Ievietot Saiti"
 
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
-#: ../ui/export-dialog.gtkbuilder.h:16
+#: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
 msgstr ""
 
@@ -2527,88 +2548,88 @@ msgid "New Document"
 msgstr "Jauns dokuments"
 
 #: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
-#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:38
+#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "Copy/Export Passage"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:3
 msgid "Export Passage Cancel"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:3
+#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:4
 msgid "Export Passage OK"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:5
+#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:6
 msgid "Version"
 msgstr "Versija"
 
-#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:6
+#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:7
 msgid ": "
 msgstr ": "
 
-#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:7
+#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:8
 msgid "Key"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:8
+#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:9
 msgid "<b>Copy</b>"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:9
+#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:10
 msgid "<b>Export</b>"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:11
+#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Export complete book"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
+#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
 #: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "Book"
 msgstr "Grāmata"
 
-#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:12
+#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:13
 msgid "Book Radio Button"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:14
+#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Export complete chapter"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:15
+#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:16
 msgid "Chapter Radio Button"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:17
+#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Export single verse"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
+#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse Radio Button"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:19
+#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:20
 msgid "Verse range"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:20
+#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:21
 msgid "<b>Format</b>"
 msgstr "<b>Formāts</b>"
 
-#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:21
+#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text"
 msgstr "Vienkāršs teksts"
 
-#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:22
+#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:23
 msgid "Plain Text Radio Button"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:23
+#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML"
 msgstr "HTML"
 
-#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:24
+#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:25
 msgid "HTML Radio Button"
 msgstr ""
 
@@ -2618,28 +2639,28 @@ msgid ""
 "than 1 verse."
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:25
+#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:26
 msgid "_Verse numbers in text"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:27
+#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:28
 msgid "Verse Number button"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
+#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:30
 msgid "Indicates whether reference is placed first or last."
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
+#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:29
 #, fuzzy
 msgid "Reference last"
 msgstr "Iestatījumi"
 
-#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
+#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:31
 msgid "Reference last button"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
+#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:33
 msgid "Indicates whether or not version name is included in reference."
 msgstr ""
 
@@ -2648,7 +2669,7 @@ msgstr ""
 msgid "Include Version"
 msgstr "Versija"
 
-#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
+#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:34
 #, fuzzy
 msgid "Version button"
 msgstr "Versija"
@@ -2657,11 +2678,11 @@ msgstr "Versija"
 msgid "Save Export As"
 msgstr ""
 
-#: ../ui/export-dialog.gtkbuilder.h:26
+#: ../ui/export-dialog.gtkbuilder.h:27
 msgid "Indicates whether verse numbers should appear inline in the text."
 msgstr ""
 
-#: ../ui/export-dialog.gtkbuilder.h:31
+#: ../ui/export-dialog.gtkbuilder.h:32
 #, fuzzy
 msgid "Include version"
 msgstr "Versija"
@@ -2727,7 +2748,7 @@ msgid "Remove selection"
 msgstr "Dzēšana"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
-#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:11
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
 msgstr ""
 
@@ -3304,10 +3325,6 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:40
 msgid "Local Install Folder"
-msgstr ""
-
-#: ../ui/module-manager.gtkbuilder.h:18
-msgid "_Cancel"
 msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
@@ -4675,309 +4692,317 @@ msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
-msgid "About _Xiphos"
+msgid "_View Xiphos Releases"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:54
+msgid "Visit the releases web page. Is your Xiphos current?"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
+msgid "About _Xiphos"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:56
 msgid "Learn about Xiphos"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:57 ../ui/xi-menus-popup.gtkbuilder.h:37
+#: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Annotate Verse"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:40
+#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
 msgid "Open Module"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:41
+#: ../ui/xi-menus.glade.h:64 ../ui/xi-menus-popup.gtkbuilder.h:41
 msgid "Note"
 msgstr "Piezīme"
 
-#: ../ui/xi-menus.glade.h:63 ../ui/xi-menus-popup.gtkbuilder.h:42
+#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:42
 msgid "Open in editor"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:44
+#: ../ui/xi-menus.glade.h:67 ../ui/xi-menus-popup.gtkbuilder.h:44
 msgid "Verse Per Line"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:73 ../ui/xi-menus-popup.gtkbuilder.h:52
+#: ../ui/xi-menus.glade.h:75 ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Footnote/Cross-ref Markers"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:74
+#: ../ui/xi-menus.glade.h:76
 msgid "Show non-anonymous markers e.g. \"*n23\""
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:79 ../ui/xi-menus-popup.gtkbuilder.h:57
+#: ../ui/xi-menus.glade.h:81 ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Variants"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:87 ../ui/xi-menus-popup.gtkbuilder.h:65
+#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Image Content"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:66
+#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Respect Font Faces"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:67
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Commentary by Chapter"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:68
+#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:68
 msgid "Doublespace"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:69
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Lookup Selection"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:70
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Use Current Dictionary"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:71
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Browse in BibleMap.org"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:72
+#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Unlock This Module"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:73
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Display Book Heading"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:74
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Display Chapter Heading"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:75
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Rename Pers.Comm."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:76
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Dump Pers.Comm."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:77
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Read Selection Aloud"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:91
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Save these results as a single bookmark"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:90
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Save list as a single bookmark"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:93
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:92
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Save list as a series of bookmarks"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:95
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:95
 msgid ""
 "Provide a dialog in which to paste a line of verse references, to fill the "
 "verse list."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:94
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:94
 msgid "Populate verse list"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:97
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:97
 msgid "Push the entire verse list contents directly into the history list."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:96
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:96
 msgid "Preload history from verse list"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:99
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:99
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:98
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:98
 msgid "Send list via BibleSync"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:100
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:100
 msgid "Export List"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:2
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "Atvērt šo grāmatzīmi jaunā cilnī"
 
-#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:3
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:6
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:7
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Iespraust Grāmatzīmi"
 
-#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:10
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:9
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:12
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Dzēst ierakstu"
 
-#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:14
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:13
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Izplest visu"
 
-#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:16
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:15
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Sakļaut visu"
 
-#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:17
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:18
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:20
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:19
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:19
 #, fuzzy
 msgid "Import Bookmarks"
 msgstr "Iespraust Grāmatzīmi"
 
-#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:22
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:21
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open selected module in a new tab"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:33
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:33
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:32
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid "Open in a separate window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:79
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new simple prayer list"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:78
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Simple"
 msgstr "Vienkāršs"
 
-#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:81
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new subject prayer list"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:80
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Subject"
 msgstr "Temats"
 
-#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:83
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Create a new monthly journal"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:82
+#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Monthly"
 msgstr "Ik mēnesi"
 
-#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:85
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Create a new daily journal"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:84
+#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Daily"
 msgstr "Ikdienas"
 
-#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:87
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Create a new outlined topic"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:86
+#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Outlined"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:89
+#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
 msgid "Open module in editor or plain display window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:88
+#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Open in separate window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add a sub-item"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add Sub-Item"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:26
+#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Add an item"
 msgstr "Pievienot ierakstu"
 
-#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add Item"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:28
+#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Remove this item"
 msgstr "Izņemt šo vienību"
 
-#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Edit this item"
 msgstr ""
 
@@ -5004,9 +5029,6 @@ msgstr ""
 
 #~ msgid "_Open"
 #~ msgstr "_Atvērt"
-
-#~ msgid "_Save"
-#~ msgstr "_Saglabāt"
 
 #~ msgid "Save _As..."
 #~ msgstr "Saglabāt _kā..."

@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-02 21:01+0200\n"
+"POT-Creation-Date: 2017-08-10 10:26+0200\n"
 "PO-Revision-Date: 2017-08-09 15:35+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
@@ -126,14 +126,14 @@ msgid "Daily Devotion"
 msgstr "Calendrier biblique"
 
 #: ../src/gnome2/about_modules.c:433 ../src/gnome2/mod_mgr.c:1561
-#: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1030
-#: ../src/main/sidebar.cc:1032
+#: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1029
+#: ../src/main/sidebar.cc:1031
 msgid "Maps"
 msgstr "Cartes"
 
 #: ../src/gnome2/about_modules.c:435 ../src/gnome2/mod_mgr.c:1565
-#: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1039
-#: ../src/main/sidebar.cc:1041
+#: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1038
+#: ../src/main/sidebar.cc:1040
 msgid "Images"
 msgstr "Images"
 
@@ -438,6 +438,27 @@ msgstr "pour :"
 msgid "Enter Key: "
 msgstr "Entrer la clé : "
 
+#: ../src/gnome2/dialog.c:256
+msgid "_Ok"
+msgstr ""
+
+#: ../src/gnome2/dialog.c:259
+msgid "_Yes"
+msgstr ""
+
+#: ../src/gnome2/dialog.c:262
+msgid "_Save"
+msgstr "_Enregistrer"
+
+#: ../src/gnome2/dialog.c:265
+msgid "_No"
+msgstr ""
+
+#: ../src/gnome2/dialog.c:268 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr "_Annuler"
+
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
 msgstr "Fermer sans sauvegarder"
@@ -465,7 +486,7 @@ msgid "SearchResults"
 msgstr "Résultat de la requête"
 
 #: ../src/gnome2/export_dialog.c:325 ../ui/export-dialog.glade.h:4
-#: ../ui/export-dialog.gtkbuilder.h:4
+#: ../ui/export-dialog.gtkbuilder.h:5
 msgid "Please check copyright before exporting!"
 msgstr "Prière de vérifier le copyright avant l'export!"
 
@@ -533,38 +554,38 @@ msgstr "Le module n'a pas de support pour %s"
 msgid "Xiphos: No windows."
 msgstr "Xiphos : Pas de fenêtres."
 
-#: ../src/gnome2/main_window.c:711
+#: ../src/gnome2/main_window.c:715
 msgid "BibleSync: Current navigation sent."
 msgstr "BibleSync : La navigation courante a été envoyée."
 
-#: ../src/gnome2/main_window.c:713
+#: ../src/gnome2/main_window.c:717
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync : Ne transmet pas."
 
-#: ../src/gnome2/main_window.c:931
+#: ../src/gnome2/main_window.c:935
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Logiciel d'étude biblique"
 
-#: ../src/gnome2/main_window.c:995
+#: ../src/gnome2/main_window.c:999
 msgid "Open a new tab"
 msgstr "Ouvre un nouvel onglet"
 
-#: ../src/gnome2/main_window.c:1052 ../src/gnome2/sidebar.c:614
-#: ../src/gnome2/sidebar.c:619 ../src/main/sidebar.cc:656
-#: ../src/main/sidebar.cc:976 ../src/main/sidebar.cc:977
-#: ../src/main/sidebar.cc:978
+#: ../src/gnome2/main_window.c:1054 ../src/gnome2/sidebar.c:614
+#: ../src/gnome2/sidebar.c:619 ../src/main/sidebar.cc:655
+#: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
+#: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "Vue simple"
 
-#: ../src/gnome2/main_window.c:1092
+#: ../src/gnome2/main_window.c:1094
 msgid "Commentary View"
 msgstr "Commentaire"
 
-#: ../src/gnome2/main_window.c:1100
+#: ../src/gnome2/main_window.c:1102
 msgid "Book View"
 msgstr "Livre"
 
-#: ../src/gnome2/main_window.c:1118
+#: ../src/gnome2/main_window.c:1120
 msgid "Welcome to Xiphos"
 msgstr "Bienvenue dans Xiphos"
 
@@ -882,8 +903,8 @@ msgstr ""
 "de déverrouillage auprès de l'éditeur du document"
 
 #: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:596
-#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2
-#: ../ui/xi-menus.glade.h:57 ../ui/xi-menus-popup.gtkbuilder.h:35
+#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
 msgstr "À propos"
 
@@ -937,8 +958,8 @@ msgstr "Terminé"
 #: ../src/gnome2/mod_mgr.c:1307 ../src/gnome2/mod_mgr.c:1340
 #: ../src/gnome2/mod_mgr.c:1342 ../src/gnome2/utilities.c:432
 #: ../src/gnome2/utilities.c:495 ../src/gnome2/utilities.c:497
-#: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:808
-#: ../src/main/sidebar.cc:879 ../src/main/sidebar.cc:881
+#: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:807
+#: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -960,39 +981,39 @@ msgstr ""
 "par type"
 
 #: ../src/gnome2/mod_mgr.c:1536 ../src/gnome2/utilities.c:574
-#: ../src/main/sidebar.cc:960 ../src/main/sidebar.cc:962
+#: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
 #: ../src/gnome2/mod_mgr.c:1540 ../src/gnome2/utilities.c:580
-#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:985
-#: ../src/main/sidebar.cc:987
+#: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
+#: ../src/main/sidebar.cc:986
 msgid "Commentaries"
 msgstr "Commentaires"
 
 #: ../src/gnome2/mod_mgr.c:1544 ../src/gnome2/utilities.c:587
-#: ../src/main/sidebar.cc:994 ../src/main/sidebar.cc:996
+#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
 #: ../src/gnome2/mod_mgr.c:1548 ../src/gnome2/utilities.c:593
-#: ../src/main/sidebar.cc:1003 ../src/main/sidebar.cc:1005
+#: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
 msgid "Glossaries"
 msgstr "Glossaires"
 
 #: ../src/gnome2/mod_mgr.c:1552 ../src/gnome2/utilities.c:600
-#: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1014
+#: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
 #: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/utilities.c:606
-#: ../src/main/sidebar.cc:675 ../src/main/sidebar.cc:1021
-#: ../src/main/sidebar.cc:1023
+#: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
+#: ../src/main/sidebar.cc:1022
 msgid "General Books"
 msgstr "Livres"
 
 #: ../src/gnome2/mod_mgr.c:1569 ../src/gnome2/utilities.c:624
-#: ../src/main/sidebar.cc:1048 ../src/main/sidebar.cc:1050
+#: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
 msgid "Cult/Unorthodox"
 msgstr "Hétérodoxie"
 
@@ -1014,7 +1035,7 @@ msgstr "Non installé"
 
 #: ../src/gnome2/mod_mgr.c:1592 ../src/gnome2/sidebar.c:630
 #: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:228
-#: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
+#: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
 msgid "Prayer List/Journal"
 msgstr "Liste de prières / Journal"
 
@@ -1217,8 +1238,8 @@ msgstr "Options du module"
 
 #: ../src/gnome2/parallel_view.c:213 ../src/gnome2/sidebar.c:614
 #: ../src/gnome2/sidebar.c:619 ../src/gnome2/tabbed_browser.c:254
-#: ../src/main/sidebar.cc:639 ../src/main/sidebar.cc:968
-#: ../src/main/sidebar.cc:969 ../src/main/sidebar.cc:970
+#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
+#: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
 msgid "Parallel View"
 msgstr "Vue parallèle"
 
@@ -1604,14 +1625,6 @@ msgstr "Barre latérale"
 msgid "Powered by the SWORD Project"
 msgstr "Xiphos utilise les logiciels du Projet SWORD"
 
-#: ../src/gnome2/tabbed_browser.c:91 ../src/gnome2/tabbed_browser.c:96
-msgid "yes"
-msgstr "Oui"
-
-#: ../src/gnome2/tabbed_browser.c:96
-msgid "no"
-msgstr "Non"
-
 #: ../src/gnome2/tabbed_browser.c:358
 msgid "Can't create tabs dir."
 msgstr "Impossible de créer le répertoire tabs."
@@ -1800,7 +1813,7 @@ msgstr ""
 
 #: ../src/main/display.cc:1116 ../src/main/display.cc:1157
 #: ../src/main/display.cc:1241 ../ui/export-dialog.glade.h:14
-#: ../ui/export-dialog.gtkbuilder.h:13
+#: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr "Chapitre"
 
@@ -1958,7 +1971,7 @@ msgstr "Énumérations"
 msgid "Glosses"
 msgstr "Annotations"
 
-#: ../src/main/parallel_view.cc:749
+#: ../src/main/parallel_view.cc:757
 msgid "view context"
 msgstr "Voir le contexte"
 
@@ -2286,11 +2299,11 @@ msgstr ""
 "Erreur de module : Unusable xref encoding.\n"
 "Merci de le signaler, avec le nom du module et le verset."
 
-#: ../src/main/sidebar.cc:411
+#: ../src/main/sidebar.cc:410
 msgid "verse"
 msgstr "verset"
 
-#: ../src/main/sidebar.cc:471
+#: ../src/main/sidebar.cc:470
 msgid "chapter"
 msgstr "chapitre"
 
@@ -2669,7 +2682,7 @@ msgid "Insert Link"
 msgstr "Insérer un lien"
 
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
-#: ../ui/export-dialog.gtkbuilder.h:16
+#: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
 msgstr "Verset"
 
@@ -2797,84 +2810,84 @@ msgstr "Nouveau document"
 msgid "Copy/Export Passage"
 msgstr "Copier/exporter le passage"
 
-#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:3
 msgid "Export Passage Cancel"
 msgstr "Abandon de l'export"
 
-#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:3
+#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:4
 msgid "Export Passage OK"
 msgstr "Continuer l'export"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:5
+#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:6
 msgid "Version"
 msgstr "Version"
 
-#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:6
+#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:7
 msgid ": "
 msgstr ": "
 
-#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:7
+#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:8
 msgid "Key"
 msgstr "Clé"
 
-#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:8
+#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:9
 msgid "<b>Copy</b>"
 msgstr "<b>Copier</b>"
 
-#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:9
+#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:10
 msgid "<b>Export</b>"
 msgstr "<b>Exporter</b>"
 
-#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:11
+#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Export complete book"
 msgstr "Exporter un livre entier"
 
-#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
+#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
 #: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "Book"
 msgstr "Livre"
 
-#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:12
+#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:13
 msgid "Book Radio Button"
 msgstr "Bouton radio Livre"
 
-#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:14
+#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Export complete chapter"
 msgstr "Exporter un chapitre entier"
 
-#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:15
+#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:16
 msgid "Chapter Radio Button"
 msgstr "Bouton radio Chapitre"
 
-#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:17
+#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Export single verse"
 msgstr "Exporte un seul verset"
 
-#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
+#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse Radio Button"
 msgstr "Bouton radio Verset"
 
-#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:19
+#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:20
 msgid "Verse range"
 msgstr "Plage de versets"
 
-#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:20
+#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:21
 msgid "<b>Format</b>"
 msgstr "<b>Format</b>"
 
-#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:21
+#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text"
 msgstr "Texte simple"
 
-#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:22
+#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:23
 msgid "Plain Text Radio Button"
 msgstr "Bouton radio Texte simple"
 
-#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:23
+#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML"
 msgstr "HTML"
 
-#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:24
+#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:25
 msgid "HTML Radio Button"
 msgstr "Bouton radio HTML"
 
@@ -2886,27 +2899,27 @@ msgstr ""
 "Indique si les numéros de versets doivent apparaître en ligne dans un texte "
 "sur plusieurs versets."
 
-#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:25
+#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:26
 msgid "_Verse numbers in text"
 msgstr "Numéros de _versets dans le texte"
 
-#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:27
+#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:28
 msgid "Verse Number button"
 msgstr "Bouton numéro de verset"
 
-#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
+#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:30
 msgid "Indicates whether reference is placed first or last."
 msgstr "Indique si la référence est placée au début ou en fin du texte"
 
-#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
+#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Reference last"
 msgstr "Référence placée en fin de texte"
 
-#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
+#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:31
 msgid "Reference last button"
 msgstr "Bouton de la dernière Référence"
 
-#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
+#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:33
 msgid "Indicates whether or not version name is included in reference."
 msgstr "Indique si le nom de la version est inclus dans la référence"
 
@@ -2914,7 +2927,7 @@ msgstr "Indique si le nom de la version est inclus dans la référence"
 msgid "Include Version"
 msgstr "Nom de la version de Bible"
 
-#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
+#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:34
 msgid "Version button"
 msgstr "Bouton de version"
 
@@ -2922,11 +2935,11 @@ msgstr "Bouton de version"
 msgid "Save Export As"
 msgstr "Enregistrer / Exporter sous"
 
-#: ../ui/export-dialog.gtkbuilder.h:26
+#: ../ui/export-dialog.gtkbuilder.h:27
 msgid "Indicates whether verse numbers should appear inline in the text."
 msgstr "Indique si les numéros de versets doivent apparaître dans le texte"
 
-#: ../ui/export-dialog.gtkbuilder.h:31
+#: ../ui/export-dialog.gtkbuilder.h:32
 msgid "Include version"
 msgstr "Nom de la version de la Bible"
 
@@ -3346,7 +3359,9 @@ msgstr "Boite de dialogue d'annotation"
 msgid ""
 "Add annotation. The verse will display with highlight colors and a *u marker "
 "to show content."
-msgstr "Ajoute une note. Le verset sera surligné et une marque *u permettra de consulter le contenu de la note."
+msgstr ""
+"Ajoute une note. Le verset sera surligné et une marque *u permettra de "
+"consulter le contenu de la note."
 
 #: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
 msgid "New Annotation"
@@ -3541,10 +3556,6 @@ msgstr ""
 #: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:40
 msgid "Local Install Folder"
 msgstr "Répertoire local d'installation"
-
-#: ../ui/module-manager.gtkbuilder.h:18
-msgid "_Cancel"
-msgstr "_Annuler"
 
 #: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
 msgid "Drop down history list"
@@ -3918,7 +3929,9 @@ msgstr "Défauts d'appariement"
 
 #: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Mismatches from your session will be shown in dialogs."
-msgstr "Les défauts d'appariement survenant pendant la session seront affichés dans des boîtes de dialogue."
+msgstr ""
+"Les défauts d'appariement survenant pendant la session seront affichés dans "
+"des boîtes de dialogue."
 
 #: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
 msgid "BSP mismatch button"
@@ -3945,7 +3958,10 @@ msgid ""
 "Interpret the protocol's group number parameter as Xiphos' tab number. "
 "Disabling this may be necessary if some Speakers' use of group number is not "
 "appropriate as a tab number."
-msgstr "Transforme le numéro de groupe de BibleSync en numéro d'onglet de Xiphos. Cette option sera peut-être à désactiver si le numéro de groupe utilisé par certains intervenants n'est pas approprié"
+msgstr ""
+"Transforme le numéro de groupe de BibleSync en numéro d'onglet de Xiphos. "
+"Cette option sera peut-être à désactiver si le numéro de groupe utilisé par "
+"certains intervenants n'est pas approprié"
 
 #: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 msgid "BSP event group-as-tab button"
@@ -3983,7 +3999,9 @@ msgstr "Afficher le calendrier biblique au démarrage"
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
-msgstr "Le calendrier biblique du jour sera affiché au démarrage, si un module de ce type a été prédéfini."
+msgstr ""
+"Le calendrier biblique du jour sera affiché au démarrage, si un module de ce "
+"type a été prédéfini."
 
 # src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
@@ -4961,7 +4979,8 @@ msgstr "Révisions de Xiphos"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Visit the releases web page. Is your Xiphos current?"
-msgstr "Visiter la page Web des révisions de Xiphos. Votre version est-elle à jour?"
+msgstr ""
+"Visiter la page Web des révisions de Xiphos. Votre version est-elle à jour?"
 
 #: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
 msgid "About _Xiphos"
@@ -5291,6 +5310,12 @@ msgstr "Étudier la Bible"
 msgid "Text;Bible;Study;"
 msgstr "Texte;Bible;Étude;"
 
+#~ msgid "yes"
+#~ msgstr "Oui"
+
+#~ msgid "no"
+#~ msgstr "Non"
+
 #~ msgid "network setup errors."
 #~ msgstr "erreurs de configuration du réseau."
 
@@ -5380,9 +5405,6 @@ msgstr "Texte;Bible;Étude;"
 
 #~ msgid "_Open"
 #~ msgstr "_Ouvrir"
-
-#~ msgid "_Save"
-#~ msgstr "_Enregistrer"
 
 #~ msgid "Save _As..."
 #~ msgstr "Enregistrer _sous..."

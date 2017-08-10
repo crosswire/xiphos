@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-28 13:40+0200\n"
+"POT-Creation-Date: 2017-08-10 10:27+0200\n"
 "PO-Revision-Date: 2014-12-23 20:47+0100\n"
 "Last-Translator: Matthew Talbert <ransom1982@gmail.com>\n"
 "Language-Team: Xiphos Dev Team <xiphos-devel@crosswire.org>\n"
@@ -54,7 +54,7 @@ msgstr ""
 "Om du inte sparar så kommer alla förändringar du har gjort att försvinna "
 "permanent."
 
-#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:59
+#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:61
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Arkiv"
@@ -111,14 +111,14 @@ msgid "Daily Devotion"
 msgstr "Dagliga andakter"
 
 #: ../src/gnome2/about_modules.c:433 ../src/gnome2/mod_mgr.c:1561
-#: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1030
-#: ../src/main/sidebar.cc:1032
+#: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1029
+#: ../src/main/sidebar.cc:1031
 msgid "Maps"
 msgstr "Kartor"
 
 #: ../src/gnome2/about_modules.c:435 ../src/gnome2/mod_mgr.c:1565
-#: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1039
-#: ../src/main/sidebar.cc:1041
+#: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1038
+#: ../src/main/sidebar.cc:1040
 msgid "Images"
 msgstr "Bilder"
 
@@ -350,7 +350,7 @@ msgstr ""
 #: ../src/gnome2/bookmark_dialog.c:163 ../src/gnome2/bookmarks_menu.c:361
 #: ../src/gnome2/bookmarks_menu.c:653 ../src/gnome2/bookmarks_menu.c:753
 #: ../src/gnome2/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
-#: ../ui/xi-menus.glade.h:56 ../ui/xi-menus-popup.gtkbuilder.h:36
+#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Bookmark"
 msgstr "Bokmärk"
 
@@ -372,7 +372,7 @@ msgstr "Mapp: "
 msgid "Specify bookmarks file"
 msgstr "Ange bokmärkesfil"
 
-#: ../src/gnome2/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:61
+#: ../src/gnome2/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit"
 msgstr "Redigera"
@@ -445,6 +445,27 @@ msgstr "för:"
 msgid "Enter Key: "
 msgstr "Ange krypteringsnyckel: "
 
+#: ../src/gnome2/dialog.c:256
+msgid "_Ok"
+msgstr ""
+
+#: ../src/gnome2/dialog.c:259
+msgid "_Yes"
+msgstr ""
+
+#: ../src/gnome2/dialog.c:262
+msgid "_Save"
+msgstr "_Spara"
+
+#: ../src/gnome2/dialog.c:265
+msgid "_No"
+msgstr ""
+
+#: ../src/gnome2/dialog.c:268 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr ""
+
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
 msgstr "Stäng utan att spara"
@@ -472,7 +493,7 @@ msgid "SearchResults"
 msgstr "Sökresultat"
 
 #: ../src/gnome2/export_dialog.c:325 ../ui/export-dialog.glade.h:4
-#: ../ui/export-dialog.gtkbuilder.h:4
+#: ../ui/export-dialog.gtkbuilder.h:5
 msgid "Please check copyright before exporting!"
 msgstr "Vänligen kontrollera upphovsrätt innan du exporterar!"
 
@@ -542,38 +563,38 @@ msgstr "Modulen har inget stöd för %s."
 msgid "Xiphos: No windows."
 msgstr "Xiphos: Inga fönster."
 
-#: ../src/gnome2/main_window.c:711
+#: ../src/gnome2/main_window.c:715
 msgid "BibleSync: Current navigation sent."
 msgstr "BibleSync: Nuvarande navigering skickad."
 
-#: ../src/gnome2/main_window.c:713
+#: ../src/gnome2/main_window.c:717
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: Talar ej."
 
-#: ../src/gnome2/main_window.c:931
+#: ../src/gnome2/main_window.c:935
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Bibelstudieprogram"
 
-#: ../src/gnome2/main_window.c:995
+#: ../src/gnome2/main_window.c:999
 msgid "Open a new tab"
 msgstr "Öppna en ny flik"
 
-#: ../src/gnome2/main_window.c:1052 ../src/gnome2/sidebar.c:614
-#: ../src/gnome2/sidebar.c:619 ../src/main/sidebar.cc:656
-#: ../src/main/sidebar.cc:976 ../src/main/sidebar.cc:977
-#: ../src/main/sidebar.cc:978
+#: ../src/gnome2/main_window.c:1054 ../src/gnome2/sidebar.c:614
+#: ../src/gnome2/sidebar.c:619 ../src/main/sidebar.cc:655
+#: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
+#: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "Standardvy"
 
-#: ../src/gnome2/main_window.c:1092
+#: ../src/gnome2/main_window.c:1094
 msgid "Commentary View"
 msgstr "Kommentar-vy"
 
-#: ../src/gnome2/main_window.c:1100
+#: ../src/gnome2/main_window.c:1102
 msgid "Book View"
 msgstr "Bok-vy"
 
-#: ../src/gnome2/main_window.c:1118
+#: ../src/gnome2/main_window.c:1120
 msgid "Welcome to Xiphos"
 msgstr "Välkommen till Xiphos"
 
@@ -772,7 +793,7 @@ msgstr "Förbereder för borttagning"
 msgid "Removing"
 msgstr "Tar bort"
 
-#: ../src/gnome2/mod_mgr.c:194 ../ui/xi-menus.glade.h:154
+#: ../src/gnome2/mod_mgr.c:194 ../ui/xi-menus.glade.h:156
 #: ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove"
 msgstr "Ta bort"
@@ -887,8 +908,8 @@ msgstr ""
 "köpa en upplåsningsnyckel från ägaren av innehållet för att kunna öppna den"
 
 #: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:596
-#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2
-#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus-popup.gtkbuilder.h:35
+#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
 msgstr "Om"
 
@@ -942,8 +963,8 @@ msgstr "Färdigt"
 #: ../src/gnome2/mod_mgr.c:1307 ../src/gnome2/mod_mgr.c:1340
 #: ../src/gnome2/mod_mgr.c:1342 ../src/gnome2/utilities.c:432
 #: ../src/gnome2/utilities.c:495 ../src/gnome2/utilities.c:497
-#: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:808
-#: ../src/main/sidebar.cc:879 ../src/main/sidebar.cc:881
+#: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:807
+#: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -965,39 +986,39 @@ msgstr ""
 "modultyp"
 
 #: ../src/gnome2/mod_mgr.c:1536 ../src/gnome2/utilities.c:574
-#: ../src/main/sidebar.cc:960 ../src/main/sidebar.cc:962
+#: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
 msgid "Biblical Texts"
 msgstr "Biblar"
 
 #: ../src/gnome2/mod_mgr.c:1540 ../src/gnome2/utilities.c:580
-#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:985
-#: ../src/main/sidebar.cc:987
+#: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
+#: ../src/main/sidebar.cc:986
 msgid "Commentaries"
 msgstr "Kommentarer"
 
 #: ../src/gnome2/mod_mgr.c:1544 ../src/gnome2/utilities.c:587
-#: ../src/main/sidebar.cc:994 ../src/main/sidebar.cc:996
+#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
 msgid "Dictionaries"
 msgstr "Uppslagsverk"
 
 #: ../src/gnome2/mod_mgr.c:1548 ../src/gnome2/utilities.c:593
-#: ../src/main/sidebar.cc:1003 ../src/main/sidebar.cc:1005
+#: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
 msgid "Glossaries"
 msgstr "Ordlistor"
 
 #: ../src/gnome2/mod_mgr.c:1552 ../src/gnome2/utilities.c:600
-#: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1014
+#: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
 msgid "Daily Devotionals"
 msgstr "Dagliga andakter"
 
 #: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/utilities.c:606
-#: ../src/main/sidebar.cc:675 ../src/main/sidebar.cc:1021
-#: ../src/main/sidebar.cc:1023
+#: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
+#: ../src/main/sidebar.cc:1022
 msgid "General Books"
 msgstr "Allmäna böcker"
 
 #: ../src/gnome2/mod_mgr.c:1569 ../src/gnome2/utilities.c:624
-#: ../src/main/sidebar.cc:1048 ../src/main/sidebar.cc:1050
+#: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
 msgid "Cult/Unorthodox"
 msgstr "Kult/Oortodoxt"
 
@@ -1019,7 +1040,7 @@ msgstr "Avinstallerade"
 
 #: ../src/gnome2/mod_mgr.c:1592 ../src/gnome2/sidebar.c:630
 #: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:228
-#: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
+#: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
 msgid "Prayer List/Journal"
 msgstr "Bönelista/Journal"
 
@@ -1208,15 +1229,15 @@ msgstr "Parallella"
 msgid "Detach/Attach"
 msgstr "Koppla loss/Fäst"
 
-#: ../src/gnome2/parallel_view.c:117 ../ui/xi-menus.glade.h:64
+#: ../src/gnome2/parallel_view.c:117 ../ui/xi-menus.glade.h:66
 #: ../ui/xi-menus-popup.gtkbuilder.h:43
 msgid "Module Options"
 msgstr "Modulinställningar"
 
 #: ../src/gnome2/parallel_view.c:213 ../src/gnome2/sidebar.c:614
 #: ../src/gnome2/sidebar.c:619 ../src/gnome2/tabbed_browser.c:254
-#: ../src/main/sidebar.cc:639 ../src/main/sidebar.cc:968
-#: ../src/main/sidebar.cc:969 ../src/main/sidebar.cc:970
+#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
+#: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
 msgid "Parallel View"
 msgstr "Parallell vy"
 
@@ -1782,7 +1803,7 @@ msgstr ""
 
 #: ../src/main/display.cc:1116 ../src/main/display.cc:1157
 #: ../src/main/display.cc:1241 ../ui/export-dialog.glade.h:14
-#: ../ui/export-dialog.gtkbuilder.h:13
+#: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr "Kapitel"
 
@@ -1844,64 +1865,64 @@ msgstr "Tillbaka till "
 msgid "Unknown parallel module: "
 msgstr "Okänd parallellmodul:"
 
-#: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:68
+#: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:70
 #: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Strong's Numbers"
 msgstr "Strongs nummer"
 
 #: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:102
-#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:71
+#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:73
 #: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Footnotes"
 msgstr "Fotnoter"
 
 #: ../src/main/parallel_view.cc:418 ../ui/search-dialog.glade.h:99
-#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:70
+#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:72
 #: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Morphological Tags"
 msgstr "Morfologiska symboler"
 
-#: ../src/main/parallel_view.cc:427 ../ui/xi-menus.glade.h:76
+#: ../src/main/parallel_view.cc:427 ../ui/xi-menus.glade.h:78
 #: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Hebrew Vowel Points"
 msgstr "Hebreiska vokal-punkter (nikkud)"
 
-#: ../src/main/parallel_view.cc:436 ../ui/xi-menus.glade.h:77
+#: ../src/main/parallel_view.cc:436 ../ui/xi-menus.glade.h:79
 #: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Hebrew Cantillation"
 msgstr "Hebreisk kantillation"
 
-#: ../src/main/parallel_view.cc:445 ../ui/xi-menus.glade.h:75
+#: ../src/main/parallel_view.cc:445 ../ui/xi-menus.glade.h:77
 #: ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Greek Accents"
 msgstr "Grekiska dialekter"
 
-#: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:72
+#: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:74
 #: ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Cross-references"
 msgstr "Korsreferens"
 
-#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:69
+#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:71
 #: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Lemmas"
 msgstr "Lemman"
 
-#: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:66
+#: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:68
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Headings"
 msgstr "Överskrifter"
 
 #: ../src/main/parallel_view.cc:481 ../src/main/parallel_view.cc:574
-#: ../ui/xi-menus.glade.h:86 ../ui/xi-menus-popup.gtkbuilder.h:64
+#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Morpheme Segmentation"
 msgstr "Morfem segmentering"
 
-#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:67
+#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Words of Christ in Red"
 msgstr "Kristi ord i rött"
 
-#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:78
+#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:80
 #: ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Transliteration"
 msgstr "Translitteration"
@@ -1910,38 +1931,38 @@ msgstr "Translitteration"
 msgid "Textual Variants"
 msgstr "Variationer av grundtexten"
 
-#: ../src/main/parallel_view.cc:520 ../ui/xi-menus.glade.h:80
+#: ../src/main/parallel_view.cc:520 ../ui/xi-menus.glade.h:82
 #: ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Primary Reading"
 msgstr "Primär tolkning"
 
-#: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:81
+#: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:83
 #: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "Secondary Reading"
 msgstr "Sekundär tolkning"
 
-#: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:82
+#: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:84
 #: ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "All Readings"
 msgstr "Alla tolkningar"
 
-#: ../src/main/parallel_view.cc:547 ../ui/xi-menus.glade.h:83
+#: ../src/main/parallel_view.cc:547 ../ui/xi-menus.glade.h:85
 #: ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "Transliterated Forms"
 msgstr "Translittererade former"
 
-#: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:84
+#: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:86
 #: ../ui/xi-menus-popup.gtkbuilder.h:62
 msgid "Enumerations"
 msgstr "Uppräkningar"
 
-#: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:85
+#: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:87
 #: ../ui/xi-menus-popup.gtkbuilder.h:63
 #, fuzzy
 msgid "Glosses"
 msgstr "Ordlistor"
 
-#: ../src/main/parallel_view.cc:749
+#: ../src/main/parallel_view.cc:757
 msgid "view context"
 msgstr "visa sammanhang"
 
@@ -2268,11 +2289,11 @@ msgstr ""
 "Modulfel: Oanvändbar xref-kodning.\n"
 "Vänligen rapportera detta, med modul och vers."
 
-#: ../src/main/sidebar.cc:411
+#: ../src/main/sidebar.cc:410
 msgid "verse"
 msgstr "vers"
 
-#: ../src/main/sidebar.cc:471
+#: ../src/main/sidebar.cc:470
 msgid "chapter"
 msgstr "kapitel"
 
@@ -2600,7 +2621,7 @@ msgid "Create new folder"
 msgstr "Skapa ny mapp"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
-#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:5
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Ny mapp"
 
@@ -2649,7 +2670,7 @@ msgid "Insert Link"
 msgstr "Infoga länk"
 
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
-#: ../ui/export-dialog.gtkbuilder.h:16
+#: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
 msgstr "Vers"
 
@@ -2773,88 +2794,88 @@ msgid "New Document"
 msgstr "Nytt dokument"
 
 #: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
-#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:38
+#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "Copy/Export Passage"
 msgstr "Kopiera/Exportera stycke"
 
-#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:3
 msgid "Export Passage Cancel"
 msgstr "Avbryt exportera stycke"
 
-#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:3
+#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:4
 msgid "Export Passage OK"
 msgstr "Exportera stycke OK"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:5
+#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:6
 msgid "Version"
 msgstr "Version"
 
-#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:6
+#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:7
 msgid ": "
 msgstr ": "
 
-#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:7
+#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:8
 msgid "Key"
 msgstr "Nyckel"
 
-#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:8
+#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:9
 msgid "<b>Copy</b>"
 msgstr "<b>Kopiera</b>"
 
-#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:9
+#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:10
 msgid "<b>Export</b>"
 msgstr "<b>Exportera</b>"
 
-#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:11
+#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Export complete book"
 msgstr "Exporterare hela boken"
 
-#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
+#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
 #: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "Book"
 msgstr "Bok"
 
-#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:12
+#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:13
 msgid "Book Radio Button"
 msgstr "Book Radio Button"
 
-#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:14
+#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Export complete chapter"
 msgstr "Exportera hela kapitlet"
 
-#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:15
+#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:16
 msgid "Chapter Radio Button"
 msgstr "Chapter Radio Button"
 
-#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:17
+#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Export single verse"
 msgstr "Exportera enstaka vers"
 
-#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
+#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse Radio Button"
 msgstr "Verse Radio Button"
 
-#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:19
+#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:20
 msgid "Verse range"
 msgstr "Versomfång"
 
-#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:20
+#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:21
 msgid "<b>Format</b>"
 msgstr "<b>Format</b>"
 
-#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:21
+#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text"
 msgstr "Endast text"
 
-#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:22
+#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:23
 msgid "Plain Text Radio Button"
 msgstr "Plain Text Radio Button"
 
-#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:23
+#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML"
 msgstr "HTML"
 
-#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:24
+#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:25
 msgid "HTML Radio Button"
 msgstr "HTML-alternativknapp"
 
@@ -2865,27 +2886,27 @@ msgid ""
 msgstr ""
 "Indikerar huruvida en vers versnummer ska visas i texten för mer än en vers."
 
-#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:25
+#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:26
 msgid "_Verse numbers in text"
 msgstr "_Versnummer i texten"
 
-#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:27
+#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:28
 msgid "Verse Number button"
 msgstr "Versnummerknapp"
 
-#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
+#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:30
 msgid "Indicates whether reference is placed first or last."
 msgstr "Indikerar huruvida en referens är placerad först eller sist."
 
-#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
+#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Reference last"
 msgstr "Referera senaste"
 
-#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
+#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:31
 msgid "Reference last button"
 msgstr "Referera senste-knapp"
 
-#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
+#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:33
 msgid "Indicates whether or not version name is included in reference."
 msgstr "Indikerar huruvida versionsbenämning ska inkluderas i referenser."
 
@@ -2893,7 +2914,7 @@ msgstr "Indikerar huruvida versionsbenämning ska inkluderas i referenser."
 msgid "Include Version"
 msgstr "Inkludera versionsbenämning"
 
-#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
+#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:34
 msgid "Version button"
 msgstr "Versionsknapp"
 
@@ -2901,11 +2922,11 @@ msgstr "Versionsknapp"
 msgid "Save Export As"
 msgstr "Exportera som"
 
-#: ../ui/export-dialog.gtkbuilder.h:26
+#: ../ui/export-dialog.gtkbuilder.h:27
 msgid "Indicates whether verse numbers should appear inline in the text."
 msgstr "Indikerar huruvida versnummer ska visas i texten."
 
-#: ../ui/export-dialog.gtkbuilder.h:31
+#: ../ui/export-dialog.gtkbuilder.h:32
 msgid "Include version"
 msgstr "Inkludera versionsbenämning"
 
@@ -2967,7 +2988,7 @@ msgid "Remove selection"
 msgstr "Ta bort valda"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
-#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:11
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
 msgstr "Ta bort objekt"
 
@@ -3530,10 +3551,6 @@ msgstr ""
 #: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:40
 msgid "Local Install Folder"
 msgstr "Lokal installationskatalog"
-
-#: ../ui/module-manager.gtkbuilder.h:18
-msgid "_Cancel"
-msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
 msgid "Drop down history list"
@@ -4920,133 +4937,141 @@ msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr "Mer om The Sword Project, ramverket som Xiphos bygger på"
 
 #: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
+msgid "_View Xiphos Releases"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:54
+msgid "Visit the releases web page. Is your Xiphos current?"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
 msgid "About _Xiphos"
 msgstr "Om _Xiphos"
 
-#: ../ui/xi-menus.glade.h:54
+#: ../ui/xi-menus.glade.h:56
 msgid "Learn about Xiphos"
 msgstr "Mer om Xiphos"
 
-#: ../ui/xi-menus.glade.h:57 ../ui/xi-menus-popup.gtkbuilder.h:37
+#: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Annotate Verse"
 msgstr "Kommentera vers"
 
-#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:40
+#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
 msgid "Open Module"
 msgstr "Öppna modul"
 
-#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:41
+#: ../ui/xi-menus.glade.h:64 ../ui/xi-menus-popup.gtkbuilder.h:41
 msgid "Note"
 msgstr "Anteckning"
 
-#: ../ui/xi-menus.glade.h:63 ../ui/xi-menus-popup.gtkbuilder.h:42
+#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:42
 msgid "Open in editor"
 msgstr "Öppna i redigerare"
 
-#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:44
+#: ../ui/xi-menus.glade.h:67 ../ui/xi-menus-popup.gtkbuilder.h:44
 msgid "Verse Per Line"
 msgstr "Vers per rad"
 
-#: ../ui/xi-menus.glade.h:73 ../ui/xi-menus-popup.gtkbuilder.h:52
+#: ../ui/xi-menus.glade.h:75 ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Footnote/Cross-ref Markers"
 msgstr "Fotnot-/Korsreferensmarkör"
 
-#: ../ui/xi-menus.glade.h:74
+#: ../ui/xi-menus.glade.h:76
 msgid "Show non-anonymous markers e.g. \"*n23\""
 msgstr "Visa icke-anonyma  markörer, t ex \"*n23\""
 
-#: ../ui/xi-menus.glade.h:79 ../ui/xi-menus-popup.gtkbuilder.h:57
+#: ../ui/xi-menus.glade.h:81 ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Variants"
 msgstr "Varianter"
 
-#: ../ui/xi-menus.glade.h:87 ../ui/xi-menus-popup.gtkbuilder.h:65
+#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Image Content"
 msgstr "Bildinnehåll"
 
-#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:66
+#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Respect Font Faces"
 msgstr "Respektera typsnitt"
 
-#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:67
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Commentary by Chapter"
 msgstr "Kommentar per kapitel"
 
-#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:68
+#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:68
 msgid "Doublespace"
 msgstr "Dubbelt radavstånd"
 
-#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:69
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Lookup Selection"
 msgstr "Uppslag"
 
-#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:70
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Use Current Dictionary"
 msgstr "Använd nuvarande uppslagsverk"
 
-#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:71
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Browse in BibleMap.org"
 msgstr "Surfa på BibleMap.org"
 
-#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:72
+#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Unlock This Module"
 msgstr "Lås upp denna modul"
 
-#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:73
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Display Book Heading"
 msgstr "Visa boköverskrift"
 
-#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:74
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Display Chapter Heading"
 msgstr "Visa kapitelöverskrift"
 
-#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:75
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Rename Pers.Comm."
 msgstr "Byt namn på egen kommentar"
 
-#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:76
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Dump Pers.Comm."
 msgstr "Dumpa egen kommentar"
 
-#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:77
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Read Selection Aloud"
 msgstr "Läs sektionen högt"
 
-#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:91
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Save these results as a single bookmark"
 msgstr "Spara resultaten som enskilt bokmärke"
 
-#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:90
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Save list as a single bookmark"
 msgstr "Spara listan som enskilt bokmärke"
 
-#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:93
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr "Spara resultaten som serie av bokmärken i deras egen katalog"
 
-#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:92
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Save list as a series of bookmarks"
 msgstr "Spara listan som serie av bokmärken"
 
-#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:95
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:95
 msgid ""
 "Provide a dialog in which to paste a line of verse references, to fill the "
 "verse list."
 msgstr ""
 "Visa ett fönster att klistra in versreferenser i, för att fylla verslistan."
 
-#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:94
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:94
 msgid "Populate verse list"
 msgstr "Populera verslista"
 
-#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:97
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:97
 msgid "Push the entire verse list contents directly into the history list."
 msgstr "Kopiera hela verslistan direkt till historik-listan."
 
-#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:96
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:96
 msgid "Preload history from verse list"
 msgstr "Fyll upp historik från verslista"
 
-#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:99
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:99
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
@@ -5054,99 +5079,99 @@ msgstr ""
 "Skicka denna vers via BibleSync till andra, om du är i Personlig- eller "
 "Talar-läge."
 
-#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:98
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:98
 msgid "Send list via BibleSync"
 msgstr "Skicka lista via BibleSync"
 
-#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:100
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:100
 msgid "Export List"
 msgstr "Exportera lista"
 
-#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:2
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "Öppna detta bokmärke i en ny flik"
 
-#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "Öppna i ny flik"
 
-#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "Öppna detta bokmärke i ett dialogfönster"
 
-#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:3
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "Öppna i ett dialogfönster"
 
-#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:6
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "Lägg till en ny mapp i vald mapp"
 
-#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "Infoga nytt bokmärke här"
 
-#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:7
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Infoga bokmärke"
 
-#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:10
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "Redigera bokmärkesobjekt"
 
-#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:9
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "_Redigera objekt"
 
-#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:12
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Ta bort objekt"
 
-#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:14
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "Expandera alla bokmärkesgrupper"
 
-#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:13
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Expandera alla"
 
-#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:16
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "Kollapsa alla bokmärkesgrupper"
 
-#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:15
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Kollapsa alla"
 
-#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:17
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "Tillåt bokmärke att flyttas från en mapp till en annan"
 
-#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:18
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "Tillåt flyttning"
 
-#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:20
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Ladda in andra bokmärken (standardval: från BibleTime)"
 
-#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:19
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:19
 msgid "Import Bookmarks"
 msgstr "Importera bokmärken"
 
-#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:22
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr "Ta bort mapp och spara den"
 
-#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:21
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr "Exportera till mapp"
 
-#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open selected module in a new tab"
 msgstr "Öppna vald modul i en ny flik"
 
-#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:33
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:33
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
@@ -5154,79 +5179,79 @@ msgstr ""
 "Öppna vald modul i ett\n"
 "\tseparat ['dialogfönster'] "
 
-#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:32
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid "Open in a separate window"
 msgstr "Öppna i separat fönster"
 
-#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:79
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new simple prayer list"
 msgstr "Skapa en ny enkel bönelista"
 
-#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:78
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Simple"
 msgstr "Enkel"
 
-#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:81
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new subject prayer list"
 msgstr "Skapa en ny ämnesbönelista"
 
-#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:80
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Subject"
 msgstr "Ämne"
 
-#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:83
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Create a new monthly journal"
 msgstr "Skapa en ny månatlig journal"
 
-#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:82
+#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Monthly"
 msgstr "Månatlig"
 
-#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:85
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Create a new daily journal"
 msgstr "Skapa en ny daglig journal"
 
-#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:84
+#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Daily"
 msgstr "Daglig"
 
-#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:87
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Create a new outlined topic"
 msgstr "Skapa nytt ämne med innehållsförteckning"
 
-#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:86
+#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Outlined"
 msgstr "Med innehållsförteckning"
 
-#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:89
+#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
 msgid "Open module in editor or plain display window"
 msgstr "Öppna modul i editor eller visningsfönster"
 
-#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:88
+#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Open in separate window"
 msgstr "Öppna i ett separat fönster"
 
-#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add a sub-item"
 msgstr "Lägg till ett underobjekt"
 
-#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add Sub-Item"
 msgstr "Lägg till underobjekt"
 
-#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:26
+#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Add an item"
 msgstr "Lägg till ett objekt"
 
-#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add Item"
 msgstr "Lägg till objekt"
 
-#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:28
+#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Remove this item"
 msgstr "Ta bort detta objekt"
 
-#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Edit this item"
 msgstr "Ändra detta objekt"
 
@@ -5364,9 +5389,6 @@ msgstr ""
 
 #~ msgid "_Open"
 #~ msgstr "_Öppna"
-
-#~ msgid "_Save"
-#~ msgstr "_Spara"
 
 #~ msgid "Save _As..."
 #~ msgstr "Spara s_om..."
