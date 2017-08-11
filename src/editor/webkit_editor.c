@@ -284,7 +284,7 @@ G_MODULE_EXPORT void
 action_copy_activate_cb(GtkWidget *widget, EDITOR *e)
 {
 	if (editor_copy(e))
-		XI_message(("%s", "copy sucess"));
+		XI_message(("%s", "copy success"));
 	else
 		XI_message(("%s", "copy failed"));
 }
