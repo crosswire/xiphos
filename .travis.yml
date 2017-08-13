@@ -1,0 +1,21 @@
+require: sudo
+services:
+  - docker
+
+install:
+  - ./tests/travis/build_linux.sh ${TEST_ARGS}
+
+script:
+  - docker exec -it xiphos_test /xiphos/tests/${TEST}.sh ${TEST_ARGS}
+
+env:
+  # Current version of Fedora
+  - TEST=build_gtk3 TEST_ARGS="fedora 25"
+  - TEST=build_gtk3 TEST_ARGS="fedora 26"
+  - TEST=build_gtk3 TEST_ARGS="fedora rawhide"
+  # Current EPEL/CentOS/RHEL version
+  - TEST=build_gtk3 TEST_ARGS="centos 7"
+  # Current version of Ubuntu
+  - TEST=build_gtk3_webkiteditor TEST_ARGS="ubuntu 17.04"
+  # LTS Ubuntu releases
+  - TEST=build_gtk3_webkiteditor TEST_ARGS="ubuntu 16.04"
