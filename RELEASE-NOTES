@@ -3,6 +3,13 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.0.6a
+20 Aug 2017
+
+Windows only.
+- internal: fixed compiler error causing 1st-time user crash in mod.mgr.
+________________________________________________________________
+
 Release 4.0.6
 10 Aug 2017
 

@@ -1,3 +1,9 @@
+2017-08-210  karl <charcoal@users.sf.net>
+
+	* added -fno-delete-null-pointer-checks to stop stupid crash.
+	  somebody please tell the gnu people that this is just plain wrong.
+	* 4.0.6a release, Windows only.
+
 2017-08-10  karl <charcoal@users.sf.net>
 
 	* 4.0.6 release.
