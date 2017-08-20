@@ -431,6 +431,10 @@ def configure(conf):
     env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
     env.append_value('CCFLAGS', env['CCFLAGS_%s' % opt.debug_level.upper()])
 
+    # stop the insanity. NULLs mean something. shocking, i know, but seriously...
+    env.append_value('CXXFLAGS', ['-fno-delete-null-pointer-checks'])
+    env.append_value('CCFLAGS', ['-fno-delete-null-pointer-checks'])
+
     if opt.delint:
         env.append_value('CXXFLAGS', env['CXXFLAGS_DELINT'])
         env.append_value('CCFLAGS', env['CCFLAGS_DELINT'])
