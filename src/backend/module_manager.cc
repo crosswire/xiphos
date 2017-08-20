@@ -189,6 +189,9 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			char *vers = (char *)module->getConfigEntry("Version");
 			mod_info->new_version = strdup(vers ? vers : " ");
 
+			vers = (char *)module->getConfigEntry("MinimumVersion");
+			mod_info->min_version = strdup(vers ? vers : " ");
+
 			char *installsize = (char *)module->getConfigEntry("InstallSize");
 			if (installsize && (isdigit(*installsize))) {
 				int isize = atoi(installsize);

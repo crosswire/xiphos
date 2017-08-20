@@ -1,4 +1,9 @@
-2017-08-210  karl <charcoal@users.sf.net>
+2017-08-20  karl <charcoal@users.sf.net>
+
+	* added MinimumVersion support:
+	  ignore modules that require support newer than Sword itself.
+
+2017-08-20  karl <charcoal@users.sf.net>
 
 	* added -fno-delete-null-pointer-checks to stop stupid crash.
 	  somebody please tell the gnu people that this is just plain wrong.

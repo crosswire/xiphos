@@ -1682,6 +1682,7 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 		g_free(info->type);
 		g_free(info->new_version);
 		g_free(info->old_version);
+		g_free(info->min_version);
 		g_free(info->installsize);
 		g_free(info);
 		tmp2 = g_list_next(tmp2);

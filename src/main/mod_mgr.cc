@@ -27,6 +27,7 @@
 #include <swmodule.h>
 #include <localemgr.h>
 #include <swlocale.h>
+#include <swversion.h>
 #include "main/mod_mgr.h"
 #include "main/sword.h"
 #include "main/parallel_view.h"
@@ -266,12 +267,26 @@ GList *mod_mgr_list_local_modules(const char *dir,
 {
 	GList *list = NULL;
 	MOD_MGR *mod_info;
+	SWVersion version = SWVersion::currentVersion;
 
 	backend_init_module_mgr(dir, augment, augment);
 
 	backend_module_mgr_list_local_modules_init(!augment);
 	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
-		list = g_list_append(list, (MOD_MGR *)mod_info);
+		if (version.compare(mod_info->min_version) < 0) {
+			/* Sword is too old for this new module. */
+			g_free(mod_info->name);
+			g_free(mod_info->about);
+			g_free(mod_info->abbreviation);
+			g_free(mod_info->type);
+			g_free(mod_info->new_version);
+			g_free(mod_info->old_version);
+			g_free(mod_info->min_version);
+			g_free(mod_info->installsize);
+			g_free(mod_info);
+		} else {
+			list = g_list_append(list, (MOD_MGR *)mod_info);
+		}
 	}
 	return list;
 }
@@ -296,10 +311,24 @@ GList *mod_mgr_remote_list_modules(const char *source_name)
 {
 	GList *list = NULL;
 	MOD_MGR *mod_info;
+	SWVersion version = SWVersion::currentVersion;
 
 	backend_module_mgr_remote_list_modules_init(source_name);
 	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
-		list = g_list_append(list, (MOD_MGR *)mod_info);
+		if (version.compare(mod_info->min_version) < 0) {
+			/* Sword is too old for this new module. */
+			g_free(mod_info->name);
+			g_free(mod_info->about);
+			g_free(mod_info->abbreviation);
+			g_free(mod_info->type);
+			g_free(mod_info->new_version);
+			g_free(mod_info->old_version);
+			g_free(mod_info->min_version);
+			g_free(mod_info->installsize);
+			g_free(mod_info);
+		} else {
+			list = g_list_append(list, (MOD_MGR *)mod_info);
+		}
 	}
 	return list;
 }
