@@ -328,8 +328,8 @@ msgstr "Xiphoksen kehittäminen"
 
 #: ../src/gnome2/about_xiphos.c:129
 #, fuzzy
-msgid "Copyright © 2000-2016 Xiphos Development Team"
-msgstr "Copyright 2000-2016 Xiphoksen kehitystiimi"
+msgid "Copyright © 2000-2017 Xiphos Development Team"
+msgstr "Copyright 2000-2017 Xiphoksen kehitystiimi"
 
 #: ../src/gnome2/about_xiphos.c:131
 msgid ""

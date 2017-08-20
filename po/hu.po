@@ -334,8 +334,8 @@ msgstr "Xiphos fejlesztés"
 
 #: ../src/gnome2/about_xiphos.c:129
 #, fuzzy
-msgid "Copyright © 2000-2016 Xiphos Development Team"
-msgstr "Minden jog fenntartva 2000-2016 A Xiphos Fejlesztői csapat"
+msgid "Copyright © 2000-2017 Xiphos Development Team"
+msgstr "Minden jog fenntartva 2000-2017 A Xiphos Fejlesztői csapat"
 
 #: ../src/gnome2/about_xiphos.c:131
 msgid ""

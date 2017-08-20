@@ -331,8 +331,8 @@ msgid "Xiphos development"
 msgstr "Xiphos-utveckling"
 
 #: ../src/gnome2/about_xiphos.c:129
-msgid "Copyright © 2000-2016 Xiphos Development Team"
-msgstr "Upphovsrätt © 2000-2016 Xiphos Development Team"
+msgid "Copyright © 2000-2017 Xiphos Development Team"
+msgstr "Upphovsrätt © 2000-2017 Xiphos Development Team"
 
 #: ../src/gnome2/about_xiphos.c:131
 msgid ""
