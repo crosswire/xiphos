@@ -268,8 +268,8 @@ msgid "2003"
 msgstr "2003"
 
 #: ../C/xiphos.xml:60(year)
-msgid "2010"
-msgstr "2010"
+msgid "2008-2017"
+msgstr "2008-2017"
 
 #: ../C/xiphos.xml:61(holder) ../C/xiphos.xml:76(publishername)
 #: ../C/xiphos.xml:168(para) ../C/xiphos.xml:169(para)
