@@ -440,13 +440,13 @@ msgstr "Traduction française"
 
 #. to V3.0, and so on.
 #: ../C/xiphos.xml:161(releaseinfo)
-msgid "This manual describes version 4.0.0 of Xiphos."
+msgid "This manual describes version 4.0.6a of Xiphos."
 msgstr ""
 "Ce manuel documente la version &manrevision; de <application>&appname;</"
 "application>"
 
 #: ../C/xiphos.xml:165(revnumber)
-msgid "Xiphos Manual V4.0.0"
+msgid "Xiphos Manual V4.0.6a"
 msgstr "Manuel de Xiphos &manrevision;"
 
 #: ../C/xiphos.xml:166(date)
