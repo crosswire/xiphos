@@ -125,7 +125,8 @@ void main_dialog_goto_bookmark(const gchar *module,
 gint main_dialogs_url_handler(DIALOG_DATA *t, const gchar *url,
 			      gboolean clicked);
 DIALOG_DATA *main_dialogs_open(const gchar *mod_name,
-			       const gchar *key);
+			       const gchar *key,
+			       const gboolean maximize);
 
 #ifdef __cplusplus
 }

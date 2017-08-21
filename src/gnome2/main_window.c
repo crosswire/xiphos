@@ -709,7 +709,8 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			access_on_down_eventbox_button_release_event(CHAPTER_BUTTON);
 		else if (state == GDK_SHIFT_MASK) // N book
 			access_on_down_eventbox_button_release_event(BOOK_BUTTON);
-		else if (state == (GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_SHIFT_MASK)) { // BSP transient navigate
+		else if (state == (GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_SHIFT_MASK)) {
+			// BSP transient navigate
 			if (biblesync_active_xmit_allowed()) {
 				biblesync_prep_and_xmit(sM, sV);
 				gui_set_statusbar(_("BibleSync: Current navigation sent."));
@@ -790,10 +791,12 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 		if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK))
 			new_base_font_size(TRUE);
 		break;
+
 	case XK_minus: // Ctrl-Minus  Decrease base font size
 		if (state == GDK_CONTROL_MASK)
 			new_base_font_size(FALSE);
 		break;
+
 	case XK_0: // Ctrl-0 (zero)  Neutralize base font size.
 		if (state == GDK_CONTROL_MASK) {
 			settings.base_font_size = 1;
@@ -818,10 +821,12 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 		if (state == 0)
 			on_help_contents_activate(NULL, NULL);
 		break;
+
 	case XK_F2: // F2 preferences
 		if (state == 0)
 			on_preferences_activate(NULL, NULL);
 		break;
+
 	case XK_F3: // F3 search
 		if (state == 0)
 			main_open_search_dialog();
@@ -829,6 +834,7 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 						      2);
 		break;
+
 	case XK_F4: // F4 module manager
 		if (state == 0)
 			on_module_manager_activate(NULL, NULL);
@@ -837,13 +843,20 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 								    ((PASSAGE_TAB_INFO *)
 								     cur_passage_tab)->page_widget));
 		break;
+
 	case XK_F10: // Shift-F10 bible module right click
 		if (state == GDK_SHIFT_MASK)
 			gui_menu_popup(NULL, sM, NULL);
 		/* FIXME: needs the html widget as first pram */
 		break;
+
+	case XK_F11: // F11 open current bible in separate window, maximized.
+		if (state == 0)
+			main_dialogs_open(sM, NULL, TRUE);
+		break;
 	}
-	XI_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d", event->hardware_keycode, event->keyval, state));
+	XI_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d",
+		    event->hardware_keycode, event->keyval, state));
 	return FALSE;
 }
 

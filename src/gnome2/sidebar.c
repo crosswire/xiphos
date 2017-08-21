@@ -845,14 +845,15 @@ on_open_in_dialog_activate(GtkMenuItem *menuitem, gpointer user_data)
 						  "0", BOOK_EDITOR);
 		} else {
 			if (mod_type == PERCOM_TYPE)
-				main_dialogs_open(buf_module, (gchar *)
-							      settings.currentverse);
+				main_dialogs_open(buf_module,
+						  (gchar *) settings.currentverse,
+						  FALSE);
 			else
-				main_dialogs_open(buf_module, NULL);
+				main_dialogs_open(buf_module, NULL, FALSE);
 		}
 		g_free(dialog_text);
 	} else
-		main_dialogs_open(buf_module, NULL);
+		main_dialogs_open(buf_module, NULL, FALSE);
 
 	g_free(buf_module);
 	buf_module = NULL;

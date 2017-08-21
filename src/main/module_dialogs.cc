@@ -755,7 +755,7 @@ void main_dialog_goto_bookmark(const gchar *module, const gchar *key)
 		tmp = g_list_next(tmp);
 	}
 
-	t = main_dialogs_open((gchar *)module, key);
+	t = main_dialogs_open((gchar *)module, key, FALSE);
 	BackEnd *be = (BackEnd *)t->backend;
 	if (t->mod_type == BOOK_TYPE) {
 		t->offset = atoi(key);
@@ -1438,16 +1438,18 @@ gint main_dialogs_url_handler(DIALOG_DATA *t, const gchar *url, gboolean clicked
  * Synopsis
  *   #include "modules_dialogs.h"
  *
- *   void main_dialogs_open(gchar * mod_name)
+ *   void main_dialogs_open(const gchar * mod_name, const gchar *key, const gboolean maximize)
  *
  * Description
- *
+ *   open a module as a separate dialog, w/optional key, with possibly maximized window.
  *
  * Return value
  *   void
  */
 
-DIALOG_DATA *main_dialogs_open(const gchar *mod_name, const gchar *key)
+DIALOG_DATA *main_dialogs_open(const gchar *mod_name,
+			       const gchar *key,
+			       const gboolean maximize)
 {
 	BackEnd *be;
 	DIALOG_DATA *t = NULL;
@@ -1556,6 +1558,13 @@ DIALOG_DATA *main_dialogs_open(const gchar *mod_name, const gchar *key)
 	}
 
 	gtk_widget_show(t->dialog);
+
+	// F11-invoked "open maximally."
+	// absurd dimensions are deliberate: just make it huge.
+	if (maximize)
+		gtk_window_resize(GTK_WINDOW(t->dialog), 10000, 10000);
+	sync_windows();
+
 	list_dialogs = g_list_append(list_dialogs, (DIALOG_DATA *)t);
 	be->set_module(t->mod_name);
 	if (type == BOOK_TYPE) {

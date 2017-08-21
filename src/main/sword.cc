@@ -1127,7 +1127,7 @@ void main_display_commentary(const char *mod_name,
 			if (gui_yes_no_dialog(companion_question, NULL)) {
 				main_display_bible(name_set[0], key);
 				for (int i = 1; i < name_length; i++) {
-					main_dialogs_open(name_set[i], key);
+					main_dialogs_open(name_set[i], key, FALSE);
 				}
 			}
 			g_free(companion_question);
@@ -1296,7 +1296,7 @@ void main_display_bible(const char *mod_name,
 			if (gui_yes_no_dialog(companion_question, NULL)) {
 				main_display_commentary(name_set[0], key);
 				for (int i = 1; i < name_length; i++) {
-					main_dialogs_open(name_set[i], key);
+					main_dialogs_open(name_set[i], key, FALSE);
 				}
 			}
 			g_free(companion_question);
