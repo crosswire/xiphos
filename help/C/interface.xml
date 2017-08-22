@@ -816,6 +816,11 @@
 			</listitem>
 			<listitem>
 				<para>
+					<guibutton>F11</guibutton>: opens the current Bible as a separate window.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
 					<guibutton>Alt-A</guibutton> opens an annotation dialog on the current verse.
 				</para>
 			</listitem>

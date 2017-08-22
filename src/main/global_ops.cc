@@ -208,8 +208,6 @@ GLOBAL_OPS *main_new_globals(const gchar *mod_name)
 	    gui_of2tf(module_options[mod_name]["Transliterated Forms"].c_str());
 	ops->enumerated =
 	    gui_of2tf(module_options[mod_name]["Enumerations"].c_str());
-	ops->glosses =
-	    gui_of2tf(module_options[mod_name]["Glosses"].c_str());
 	ops->morphseg =
 	    gui_of2tf(module_options[mod_name]["Morpheme Segmentation"].c_str());
 
@@ -244,6 +242,10 @@ GLOBAL_OPS *main_new_globals(const gchar *mod_name)
 	    (module_options[mod_name]["Hebrew Vowel Points"] != "Off");
 	ops->hebrewcant =
 	    (module_options[mod_name]["Hebrew Cantillation"] != "Off");
+
+	// more special case default on: japanese glosses.
+	ops->glosses =
+	    (module_options[mod_name]["Glosses"] != "Off");
 
 	// we prefer and assume paragraph layout.
 	// we take user preference, and alter our default for
