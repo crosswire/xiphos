@@ -27,11 +27,11 @@ packages installed:
 
 Or for ubuntu, both GTK3 and GTK2 versions, install:
 
-    $ sudo apt-get install cpp intltool libgtk-3-dev libdbus-glib-1-dev libgtkhtml3.14-dev libwebkitgtk-3.0-dev libxml2-dev libgsf-1-dev libgconfmm-2.6-dev libsword-dev uuid-dev gnome-doc-utils rarian-compat libgtkhtml-editor-dev libwebkit-dev libglade2-dev libgtkhtml-4.0-dev libgtkhtml-editor-4.0-dev
+    $ sudo apt-get install cpp intltool libdbus-glib-1-dev libwebkitgtk-3.0-dev libxml2-dev libgsf-1-dev libgconfmm-2.6-dev libsword-dev uuid-dev gnome-doc-utils rarian-compat libwebkitgtk-dev libglade2-dev
 
 Next we need to configure everything:
 
-    $ ./waf configure --prefix=/usr --debug-level=optimized
+    $ ./waf configure --prefix=/usr --debug-level=optimized --enable-webkit-editor
 
 Now we build:
 
@@ -40,4 +40,3 @@ Now we build:
 Then install:
 
     $ sudo ./waf install
-
