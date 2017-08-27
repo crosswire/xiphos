@@ -1,22 +1,17 @@
-# Chinese (Traditional) translation for xiphos
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the xiphos package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-10 10:27+0200\n"
-"PO-Revision-Date: 2010-03-20 18:19+0000\n"
-"Last-Translator: Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>\n"
-"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2017-08-10 10:24+0200\n"
+"PO-Revision-Date: 2017-08-28 03:03+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-21 04:51+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Poedit 2.0.3\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -27,32 +22,32 @@ msgstr ""
 
 #: ../src/backend/sword_main.cc:1149
 msgid "Configuration not found"
-msgstr "無適當組態"
+msgstr ""
 
 #: ../src/editor/webkit_editor.c:311
 msgid "Are you sure you want to delete the note for"
-msgstr "您確定要刪除所屬的附註嗎?"
+msgstr "您是否確定刪除以下經節的筆記:"
 
 #: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
 #: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
 msgid "Open"
-msgstr ""
+msgstr "開啟"
 
 #: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
-msgstr "未命名的文件"
+msgstr "未命名文件"
 
 #: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
-msgstr "儲存變更"
+msgstr "您要先儲存已修改的"
 
 #: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
-msgstr "結束前"
+msgstr "再來關閉文件嗎？"
 
 #: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
-msgstr "如果您不儲存，變更將會永久消失。"
+msgstr "如不儲存，您所作的修改將永久失去。"
 
 #: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:61
 #: ../ui/xi-menus-popup.gtkbuilder.h:39
@@ -61,15 +56,15 @@ msgstr "檔案"
 
 #: ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
-msgstr "小筆記"
+msgstr ""
 
 #: ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
-msgstr "附註編輯器"
+msgstr "筆記編輯工具"
 
 #: ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
-msgstr "禱告表/日記編輯器"
+msgstr "禱告表／日誌編輯工具"
 
 #: ../src/gnome2/about_modules.c:138
 msgid "About Sword Module"
@@ -79,34 +74,31 @@ msgstr "關於 Sword 模組"
 #: ../src/gnome2/about_modules.c:219 ../src/gnome2/about_trans.c:168
 #: ../src/gnome2/find_dialog.c:288
 msgid "Close"
-msgstr ""
+msgstr "關閉"
 
 #: ../src/gnome2/about_modules.c:411
-#, fuzzy
 msgid "<b>Module name:</b> "
-msgstr "模組名稱"
+msgstr "<b>模組名稱:</b> "
 
 #: ../src/gnome2/about_modules.c:418
 msgid "<b>Module abbreviation:</b> "
-msgstr ""
+msgstr "<b>模組名稱縮寫:</b> "
 
 #: ../src/gnome2/about_modules.c:423
 msgid "<b>Version:</b> "
-msgstr ""
+msgstr "<b>版本號:</b> "
 
 #: ../src/gnome2/about_modules.c:426
 msgid "No version stamp found"
-msgstr ""
+msgstr "找不到版本戳記"
 
 #: ../src/gnome2/about_modules.c:429
-#, fuzzy
 msgid "<b>Type:</b> "
-msgstr "模組名稱"
+msgstr "<b>類型:</b> "
 
 #: ../src/gnome2/about_modules.c:431
-#, fuzzy
 msgid "Daily Devotion"
-msgstr "每日進度"
+msgstr "每日靈修"
 
 #: ../src/gnome2/about_modules.c:433 ../src/gnome2/mod_mgr.c:1561
 #: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1029
@@ -118,116 +110,113 @@ msgstr "地圖"
 #: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1038
 #: ../src/main/sidebar.cc:1040
 msgid "Images"
-msgstr "圖片"
+msgstr "插圖"
 
 #: ../src/gnome2/about_modules.c:437
 msgid "Glossary"
-msgstr ""
+msgstr "彙編"
 
 #: ../src/gnome2/about_modules.c:441
 msgid "Cult"
-msgstr ""
+msgstr "少數教派"
 
 #: ../src/gnome2/about_modules.c:445 ../src/gnome2/search_sidebar.c:287
 msgid "Bible"
-msgstr ""
+msgstr "聖經"
 
 #: ../src/gnome2/about_modules.c:448 ../src/gnome2/search_sidebar.c:295
 #: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 msgid "Commentary"
-msgstr ""
+msgstr "註釋書"
 
 #: ../src/gnome2/about_modules.c:451 ../ui/prefs.glade.h:136
 #: ../ui/prefs.gtkbuilder.h:136
 msgid "Dictionary"
-msgstr ""
+msgstr "辭典"
 
 #: ../src/gnome2/about_modules.c:454
-#, fuzzy
 msgid "General Book"
-msgstr "一般書籍"
+msgstr "一般圖書"
 
 #: ../src/gnome2/about_modules.c:459
 msgid "Personal Commentary"
-msgstr ""
+msgstr "個人註釋書"
 
 #: ../src/gnome2/about_modules.c:462
 msgid "Journal"
-msgstr ""
+msgstr "日誌"
 
 #: ../src/gnome2/about_modules.c:465
-#, fuzzy
 msgid "Unknown type"
-msgstr "不詳"
+msgstr "未知的類型"
 
 #: ../src/gnome2/about_modules.c:471
 msgid "<b>Language:</b> "
-msgstr ""
+msgstr "<b>語言:</b> "
 
 #: ../src/gnome2/about_modules.c:474
 msgid "Not specified"
-msgstr ""
+msgstr "未指定"
 
 #: ../src/gnome2/about_modules.c:483
 msgid "<b>Installed size:</b> "
-msgstr ""
+msgstr "<b>安裝後大小:</b> "
 
 #: ../src/gnome2/about_modules.c:491
 msgid "<b>Companion module(s):</b></br>"
-msgstr ""
+msgstr "<b>搭檔模組:</b></br>"
 
 #: ../src/gnome2/about_modules.c:501
 msgid "<b>Features:</b>"
-msgstr ""
+msgstr "<b>功能特色:</b>"
 
 #: ../src/gnome2/about_modules.c:505
 msgid "*&nbsp;Headings"
-msgstr ""
+msgstr "*&nbsp;標題"
 
 #: ../src/gnome2/about_modules.c:513
 msgid "*&nbsp;Footnotes"
-msgstr ""
+msgstr "*&nbsp;註腳"
 
 #: ../src/gnome2/about_modules.c:519
-#, fuzzy
 msgid "*&nbsp;Cross references"
-msgstr "偏好設定"
+msgstr "*&nbsp;交叉參照"
 
 #: ../src/gnome2/about_modules.c:526
 msgid "*&nbsp;Strong's numbers"
-msgstr ""
+msgstr "*&nbsp;史特朗編號"
 
 #: ../src/gnome2/about_modules.c:534
 msgid "*&nbsp;Morphological tags"
-msgstr ""
+msgstr "*&nbsp;詞法標籤"
 
 #: ../src/gnome2/about_modules.c:540
 msgid "*&nbsp;Lemmas"
-msgstr ""
+msgstr "*&nbsp;詞目"
 
 #: ../src/gnome2/about_modules.c:548
 msgid "*&nbsp;Words of Christ in red"
-msgstr ""
+msgstr "*&nbsp;紅字標明基督言說"
 
 #: ../src/gnome2/about_modules.c:553
 msgid "*&nbsp;Greek accents"
-msgstr ""
+msgstr "*&nbsp;希臘文重音"
 
 #: ../src/gnome2/about_modules.c:559
 msgid "*&nbsp;Hebrew Vowel Points"
-msgstr ""
+msgstr "*&nbsp;希伯來文母音點"
 
 #: ../src/gnome2/about_modules.c:565
 msgid "*&nbsp;Hebrew Cantillation"
-msgstr ""
+msgstr "*&nbsp;希伯來吟誦"
 
 #: ../src/gnome2/about_modules.c:571
 msgid "*&nbsp;Variant readings"
-msgstr ""
+msgstr "*&nbsp;異文"
 
 #: ../src/gnome2/about_modules.c:578
 msgid "*&nbsp;Transliteration forms"
-msgstr ""
+msgstr "*&nbsp;轉寫形式"
 
 #: ../src/gnome2/about_modules.c:583
 msgid "*&nbsp;Enumerations"
@@ -235,19 +224,19 @@ msgstr ""
 
 #: ../src/gnome2/about_modules.c:588
 msgid "*&nbsp;Glosses"
-msgstr ""
+msgstr "*&nbsp;註釋"
 
 #: ../src/gnome2/about_modules.c:595
 msgid "*&nbsp;Morpheme Segmentation"
-msgstr ""
+msgstr "*&nbsp;語素切分"
 
 #: ../src/gnome2/about_modules.c:602
 msgid "*&nbsp;<i>No features found</i>"
-msgstr ""
+msgstr "*&nbsp;<i>未註明功能</i>"
 
 #: ../src/gnome2/about_modules.c:612
 msgid "<b>Distribution license:</b>"
-msgstr ""
+msgstr "<b>散布授權條款:</b>"
 
 #: ../src/gnome2/about_modules.c:625
 msgid "<b>Promotional:</b> "
@@ -264,10 +253,15 @@ msgid ""
 "\n"
 " Books can be downloaded from the SWORD Project."
 msgstr ""
+"SWORD 專案致力於製作種類日益豐富的軟體套件包，供研究及學習神和衪的話語。其架"
+"構乃便於聖經經文、註釋書、詞彙、辭典及各類圖書之使用及研習。使用此架構所建立"
+"的前端軟體尤多，同屬此架構下安裝的各組書目均可在各前端軟體中分享。\n"
+"\n"
+" 各類經文及圖書可從 SWORD 專案下載。"
 
 #: ../src/gnome2/about_sword.c:98
 msgid "The SWORD Project"
-msgstr "SWORD 計畫"
+msgstr "Sword 專案"
 
 #: ../src/gnome2/about_trans.c:82
 msgid ""
@@ -282,20 +276,19 @@ msgstr ""
 
 #: ../src/gnome2/about_trans.c:96
 msgid "About Xiphos Translation"
-msgstr "關於 Xiphos 翻譯"
+msgstr "關於 Xiphos 的翻譯"
 
 #: ../src/gnome2/about_trans.c:135
 msgid "See TRANSLATION-HOWTO in Xiphos source"
-msgstr "參閱  Xiphos source 的翻譯說明"
+msgstr ""
 
 #: ../src/gnome2/about_trans.c:141
 msgid "Xiphos development"
-msgstr "開發 Xiphos"
+msgstr ""
 
 #: ../src/gnome2/about_xiphos.c:129
-#, fuzzy
 msgid "Copyright © 2000-2017 Xiphos Development Team"
-msgstr "Xiphos 開發團隊版權所有 2000 - 2015"
+msgstr "著作權所有 © 2000-2017 Xiphos Development Team"
 
 #: ../src/gnome2/about_xiphos.c:131
 msgid ""
@@ -304,6 +297,9 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
+"\n"
+"以 SWORD 專案為房角石。\n"
+"我們感謝 Troy Griffitts 及各友好同儕施予我們 SWORD 專案。"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:163 ../src/gnome2/bookmarks_menu.c:361
@@ -325,11 +321,11 @@ msgstr "資料夾名稱"
 #: ../src/gnome2/bookmark_dialog.c:168 ../src/gnome2/bookmarks_menu.c:758
 #: ../src/gnome2/bookmarks_treeview.c:141
 msgid "Folder: "
-msgstr "資料夾： "
+msgstr "資料夾:"
 
 #: ../src/gnome2/bookmarks_menu.c:200
 msgid "Specify bookmarks file"
-msgstr ""
+msgstr "指定書籤檔案"
 
 #: ../src/gnome2/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
@@ -338,51 +334,53 @@ msgstr "編輯"
 
 #: ../src/gnome2/bookmarks_menu.c:364
 msgid "Folder name: "
-msgstr "資料夾名稱: "
+msgstr "資料夾名稱:"
 
 #: ../src/gnome2/bookmarks_menu.c:367
 msgid "Bookmark name: "
-msgstr "書簽名稱: "
+msgstr "書籤名稱: "
 
 #: ../src/gnome2/bookmarks_menu.c:370 ../src/gnome2/bookmarks_menu.c:661
 msgid "Verse: "
-msgstr "經句: "
+msgstr "經節: "
 
 #: ../src/gnome2/bookmarks_menu.c:371 ../src/gnome2/bookmarks_menu.c:662
 msgid "Module: "
-msgstr "模組: "
+msgstr "模組:"
 
 #: ../src/gnome2/bookmarks_menu.c:493
 msgid "Remove the selected folder"
-msgstr "刪除選取的資料夾"
+msgstr "移除所選的資料夾"
 
 #: ../src/gnome2/bookmarks_menu.c:494
 msgid "(and all its contents)?"
-msgstr "(以及其中的所有內容)?"
+msgstr "（與其中所有的內容）？"
 
 #: ../src/gnome2/bookmarks_menu.c:498
 msgid "Remove the selected bookmark"
-msgstr "刪除選取的書籤"
+msgstr "移除所選的書籤"
 
 #: ../src/gnome2/bookmarks_menu.c:654
 msgid "Add"
-msgstr "新增"
+msgstr "加入"
 
 #: ../src/gnome2/bookmarks_menu.c:660
 msgid "Label: "
-msgstr "標籤: "
+msgstr "標籤:"
 
 #: ../src/gnome2/bookmarks_treeview.c:102 ../src/gnome2/export_bookmarks.c:172
 #: ../src/gnome2/export_bookmarks.c:229
 #, c-format
 msgid "Search result: %s"
-msgstr "搜尋結果: %s"
+msgstr ""
 
 #: ../src/gnome2/bookmarks_treeview.c:747
 msgid ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
 msgstr ""
+"未能支援在多個分頁\n"
+"開啟多重參照書籤。"
 
 #: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1508
 #: ../src/gnome2/sidebar.c:1560
@@ -392,7 +390,7 @@ msgstr "書籤"
 #: ../src/gnome2/cipher_key_dialog.c:63
 #, c-format
 msgid "Cipher key for module %s"
-msgstr ""
+msgstr "模組 %s 之密鑰"
 
 #: ../src/gnome2/cipher_key_dialog.c:64
 msgid "for:"
@@ -400,7 +398,7 @@ msgstr ""
 
 #: ../src/gnome2/cipher_key_dialog.c:67
 msgid "Enter Key: "
-msgstr ""
+msgstr "輸入密鑰: "
 
 #: ../src/gnome2/dialog.c:256
 msgid "_Ok"
@@ -412,7 +410,7 @@ msgstr ""
 
 #: ../src/gnome2/dialog.c:262
 msgid "_Save"
-msgstr "儲存(_S)"
+msgstr ""
 
 #: ../src/gnome2/dialog.c:265
 msgid "_No"
@@ -421,38 +419,38 @@ msgstr ""
 #: ../src/gnome2/dialog.c:268 ../ui/export-dialog.gtkbuilder.h:2
 #: ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
-msgstr ""
+msgstr "取消(_C)"
 
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
-msgstr "不儲檔關閉"
+msgstr "關閉而不儲存"
 
 #: ../src/gnome2/dialog.c:724
 msgid "Xiphos:"
-msgstr "Xiphos"
+msgstr ""
 
 #: ../src/gnome2/dialog.c:854
 msgid "Close _without Saving"
-msgstr "不存檔關閉(_W)"
+msgstr "關閉而不儲存(_W)"
 
 #: ../src/gnome2/export_bookmarks.c:175 ../src/gnome2/export_bookmarks.c:232
 #: ../src/gnome2/sidebar.c:1530 ../src/gnome2/sidebar.c:1578
 #, c-format
 msgid "Verse List"
-msgstr ""
+msgstr "金句表"
 
 #: ../src/gnome2/export_bookmarks.c:659
 msgid "VerseList"
-msgstr ""
+msgstr "金句表"
 
 #: ../src/gnome2/export_bookmarks.c:663
 msgid "SearchResults"
-msgstr ""
+msgstr "Xiphos_搜尋結果"
 
 #: ../src/gnome2/export_dialog.c:325 ../ui/export-dialog.glade.h:4
 #: ../ui/export-dialog.gtkbuilder.h:5
 msgid "Please check copyright before exporting!"
-msgstr "輸出前請先確認相關版權"
+msgstr "匯出前請先查明著作權！"
 
 #: ../src/gnome2/find_dialog.c:183 ../src/gnome2/find_dialog.c:359
 #: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
@@ -461,23 +459,23 @@ msgstr "尋找"
 
 #: ../src/gnome2/find_dialog.c:202
 msgid "Enter Word or Phrase"
-msgstr "輸入字詞"
+msgstr "輸入字詞或字句"
 
 #: ../src/gnome2/find_dialog.c:217
 msgid "Search backwards"
-msgstr "回頭搜尋"
+msgstr "倒向搜尋"
 
 #: ../src/gnome2/find_dialog.c:280
 msgid "Find Next"
-msgstr "找下一個"
+msgstr "尋找下一項"
 
 #: ../src/gnome2/font_dialog.c:296
 msgid "Set Module Font"
-msgstr "設定模組字型"
+msgstr "設定模組的字型"
 
 #: ../src/gnome2/font_dialog.c:330
 msgid "Change font for"
-msgstr "改變字型"
+msgstr "變更字型於"
 
 #: ../src/gnome2/font_dialog.c:334 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
@@ -485,73 +483,72 @@ msgstr "模組"
 
 #: ../src/gnome2/font_dialog.c:338
 msgid "Current font: "
-msgstr "目前字型 "
+msgstr "目前的字型: "
 
 #: ../src/gnome2/font_dialog.c:379 ../src/gnome2/font_dialog.c:395
 #: ../ui/prefs.gtkbuilder.h:3
 msgid "+0"
-msgstr "+0"
+msgstr ""
 
 #: ../src/gnome2/font_dialog.c:398
 msgid "Use the default font for this module"
-msgstr "此模組使用預設字型"
+msgstr "在此模組使用預設的字型"
 
 #: ../src/gnome2/gui.c:173
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr "BUG! Xiphos 由於 \"STRDUP\" 的錯誤必須關閉。"
+msgstr "程式錯誤！Xiphos 由於\"STRDUP\"錯誤而即將崩垮。"
 
 #: ../src/gnome2/gui.c:174 ../src/gnome2/gui.c:204
 msgid "Please report this error to the Xiphos team with:"
-msgstr "請如下回報此錯誤給 Xiphos 團隊:"
+msgstr "請向 Xiphos 開發團隊回報下列的程式錯誤:"
 
 #: ../src/gnome2/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
-msgstr "BUG! Xiphos 由於 \"字串\" 的錯誤而關閉。"
+msgstr "程式錯誤！Xiphos 由於\"STRING\"錯誤而即將崩垮。"
 
 #: ../src/gnome2/main_window.c:587
-#, fuzzy, c-format
+#, c-format
 msgid "Module has no support for %s."
-msgstr "該模組沒有相關資訊"
+msgstr "模組並不支援 %s。"
 
 #: ../src/gnome2/main_window.c:660
-#, fuzzy
 msgid "Xiphos: No windows."
-msgstr "Xiphos"
+msgstr "Xiphos: 沒有視窗。"
 
 #: ../src/gnome2/main_window.c:715
 msgid "BibleSync: Current navigation sent."
-msgstr ""
+msgstr "BibleSync: 已送出目前的導播。"
 
 #: ../src/gnome2/main_window.c:717
 msgid "BibleSync: Not speaking."
-msgstr ""
+msgstr "BibleSync: 非導播中。"
 
 #: ../src/gnome2/main_window.c:935
 msgid "Xiphos - Bible Study Software"
-msgstr "Xiphos - 聖經研讀軟體"
+msgstr "Xiphos - 查經軟體"
 
 #: ../src/gnome2/main_window.c:999
 msgid "Open a new tab"
-msgstr "開新分頁"
+msgstr "開啟新分頁"
 
 #: ../src/gnome2/main_window.c:1054 ../src/gnome2/sidebar.c:614
 #: ../src/gnome2/sidebar.c:619 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
-msgstr "標準檢視模式"
+msgstr "標準閱覽"
 
 #: ../src/gnome2/main_window.c:1094
 msgid "Commentary View"
-msgstr "評註檢視模式"
+msgstr "註釋閱覽"
 
 #: ../src/gnome2/main_window.c:1102
 msgid "Book View"
-msgstr ""
+msgstr "圖書閱覽"
 
 #: ../src/gnome2/main_window.c:1120
 msgid "Welcome to Xiphos"
-msgstr "歡迎使用  Xiphos"
+msgstr "歡迎使用 Xiphos"
 
 #: ../src/gnome2/menu_popup.c:1296
 msgid ""
@@ -564,49 +561,61 @@ msgid ""
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
 msgstr ""
+"不支援 Windows 系統中變更名稱。\n"
+"\n"
+"Xiphos 受限於 Windows 的檔案系統，\n"
+"並不容許變更目前\n"
+"開啟使用中的檔案名稱，\n"
+"它屬於註釋書內容之一部分。\n"
+"因此，在 Windows 系統環境中\n"
+"並不支援變更個人註釋書的名稱。"
 
 #: ../src/gnome2/menu_popup.c:1315
 msgid "Rename Commentary"
-msgstr ""
+msgstr "變更註釋書名稱"
 
 #: ../src/gnome2/menu_popup.c:1318
 msgid "Choose Commentary Name"
-msgstr ""
+msgstr "選取註釋書名稱"
 
 #: ../src/gnome2/menu_popup.c:1320
 msgid "New Name"
-msgstr "新檔名"
+msgstr "New Name"
 
 #: ../src/gnome2/menu_popup.c:1321 ../src/gnome2/treekey-editor.c:138
 #: ../src/gnome2/treekey-editor.c:195 ../src/gnome2/treekey-editor.c:293
 #: ../src/main/prayerlists.cc:230
 msgid "Name: "
-msgstr "名稱: "
+msgstr "名稱:"
 
 #: ../src/gnome2/menu_popup.c:1330 ../src/main/prayerlists.cc:243
 msgid "Module names must contain [A-Za-z0-9_] only."
-msgstr "模組名稱只能使用 [A-Za-z0-9_] 等字元"
+msgstr "模組名稱只能包含 [A-Za-z0-9_] 字元。"
 
 #: ../src/gnome2/menu_popup.c:1336 ../src/main/prayerlists.cc:249
 msgid "Xiphos already knows a module by that name."
-msgstr ""
+msgstr "Xiphos 中已有相同名稱的模組。"
 
 #: ../src/gnome2/menu_popup.c:1378
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
 "%s"
-msgstr "無法新建以下 %s 組態"
+msgstr ""
+"未能成功建立新的組態:\n"
+"%s"
 
 #: ../src/gnome2/menu_popup.c:1387
 msgid ""
 "Configuration build error:\n"
 "\n"
 msgstr ""
+"組態建立錯誤:\n"
+"\n"
 
 #: ../src/gnome2/menu_popup.c:2032
 msgid "No module in this pane."
-msgstr ""
+msgstr "此面板中並無模組。"
 
 #. *****************************************************************************
 #. * defines
@@ -635,6 +644,24 @@ msgid ""
 "Live Chat, or (if no one is responsive in chat) send mail to our users' "
 "mailing list.\n"
 msgstr ""
+"<b>模組管理工具的概覽。</b>\n"
+"\n"
+"這是 Xiphos 取得最新藏書內容的機制。\n"
+"如果您是第一次使用，請花一點時間參閱一下。\n"
+"\n"
+"模組來自不同的<u>藏書庫</u>。<b>模組來源: 新增／移除</b>會顯示目前已知的藏書"
+"庫。\n"
+"\n"
+"<b>模組來源: 選取</b>讓您決定使用來自哪裡的模組，即 Xiphos 取得模組的藏書庫；"
+"也讓您決定收藏於系統哪個位置。請設定<i>安裝來源</i>及<i>安裝目的地</i>，然後"
+"按<i>刷新內容</i>.\n"
+"\n"
+"<b>模組: 安裝／更新</b>讓您在選取來源及目的地後，選擇及取得您所需的模組。\n"
+"\n"
+"<b>模組: 維護</b>讓您製作歸檔保存，以至建立搜尋索引。\n"
+"\n"
+"有關模組管理工具，詳參使用者手冊的第 5 節；您也可使用即時聊天功能求助，又或"
+"（在聊天上線無人解答時）傳送電郵到我們的使用者電郵清單詢問。\n"
 
 #: ../src/gnome2/mod_mgr.c:67
 msgid ""
@@ -670,35 +697,61 @@ msgid ""
 "Both this step-by-step instruction dialog and the general introduction "
 "dialog may be closed at any time."
 msgstr ""
+"<b>歡迎使用 Xiphos。</b>\n"
+"\n"
+"目前尚未安裝聖經模組。在啟始使用時，Xiphos 需要起碼一個聖經模組。為此模組管理"
+"員現已開啟，讓您安裝一本或更多聖經的模組，即從本地的模組套（光碟機、隨身碟）"
+"或從 CrossWire 聖經協會（CrossWire Bible Society）的網路下載。請依照逐步的指"
+"示，及參照已打開的總類模組管理工具的概覽以茲說明。\n"
+"\n"
+"<u>本地安裝方法:</u>\n"
+"- 在<i>模組來源: 新增／移除</i>，加入一個找到新模組的資料夾名稱。\n"
+"  （這是現時 <i>mods.d</i> 和 <i>modules</i> 目錄所在的位置。）\n"
+"- 在<i>模組來源: 選取</i>，點擊 \"本地\" 按鈕，並在下拉選單中選取其目錄。\n"
+"\n"
+"<u>從 CrossWire 網路安裝方法:</u>\n"
+"- 在<i>模組來源: 選取</i>，點擊 \"遠端\" 按鈕，並在下拉選單中選取 "
+"CrossWire。\n"
+"- 點擊在下方的 \"刷新\" 按鈕。\n"
+"\n"
+"<u>在上述兩種情況，您均須:</u>\n"
+"- 在<i>模組: 安裝／更新</i>，依您的喜好選擇聖經及其它模組。\n"
+"- 點擊 \"安裝\"。\n"
+"- 完成後即可關閉模組管理工具。\n"
+"\n"
+"<u>警告</u>: 若您身處宗教逼害之國家，務必慎用。\n"
+" \n"
+"\n"
+"以上逐步指示以及總類簡介的對話框均可隨時關閉。"
 
 #: ../src/gnome2/mod_mgr.c:191
 msgid "Remove these modules?"
-msgstr "刪除這些模組嗎?"
+msgstr "移除以下模組？"
 
 #: ../src/gnome2/mod_mgr.c:192
 msgid "Preparing to remove"
-msgstr "準備刪除"
+msgstr "準備移除模組"
 
 #: ../src/gnome2/mod_mgr.c:193
 msgid "Removing"
-msgstr "刪除中"
+msgstr "正在移除模組"
 
 #: ../src/gnome2/mod_mgr.c:194 ../ui/xi-menus.glade.h:156
 #: ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove"
-msgstr "删除"
+msgstr "移除"
 
 #: ../src/gnome2/mod_mgr.c:195
 msgid "Install these modules?"
-msgstr "安裝這些模組嗎?"
+msgstr "安裝以下模組？"
 
 #: ../src/gnome2/mod_mgr.c:196
 msgid "Preparing to install"
-msgstr "準備安裝"
+msgstr "準備安裝模組"
 
 #: ../src/gnome2/mod_mgr.c:197
 msgid "Installing"
-msgstr "安裝中"
+msgstr "正在安裝模組"
 
 #: ../src/gnome2/mod_mgr.c:198
 msgid "Install"
@@ -706,41 +759,43 @@ msgstr "安裝"
 
 #: ../src/gnome2/mod_mgr.c:199
 msgid "Archive these modules?"
-msgstr ""
+msgstr "備存以下模組？"
 
 #: ../src/gnome2/mod_mgr.c:200
 msgid "Preparing to archive"
-msgstr ""
+msgstr "準備備存歸檔"
 
 #: ../src/gnome2/mod_mgr.c:201
 msgid "Archiving"
-msgstr ""
+msgstr "正在備存歸檔"
 
 #: ../src/gnome2/mod_mgr.c:202
 msgid "Archive"
-msgstr ""
+msgstr "備存歸檔"
 
 #: ../src/gnome2/mod_mgr.c:203
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
-msgstr "要為這些模組編列快速搜尋索引嗎？（每個模組可能都需要幾分鐘時間）"
+msgstr ""
+"為以下模組建立快速搜尋索引\n"
+"（每模組或需時數分鐘）？"
 
 #: ../src/gnome2/mod_mgr.c:204
 msgid "Preparing to index"
-msgstr "準備編列索引"
+msgstr "準備建立索引"
 
 #: ../src/gnome2/mod_mgr.c:205
 msgid "Indexing"
-msgstr "正在編列索引"
+msgstr "正在建立索引"
 
 #: ../src/gnome2/mod_mgr.c:206
 msgid "Index"
-msgstr "索引"
+msgstr "建立索引"
 
 #: ../src/gnome2/mod_mgr.c:207
 msgid "Delete fast-search index for these modules?"
-msgstr "要刪除這些模組的快速搜尋索引嗎？"
+msgstr "刪除以下模組的快速搜尋索引？"
 
 #: ../src/gnome2/mod_mgr.c:208
 msgid "Preparing to delete index"
@@ -756,7 +811,7 @@ msgstr "刪除"
 
 #: ../src/gnome2/mod_mgr.c:311
 msgid "The module has no About information."
-msgstr "該模組沒有相關資訊"
+msgstr "模組並未提供有關資訊。"
 
 #: ../src/gnome2/mod_mgr.c:533
 msgid "Module Name"
@@ -764,31 +819,31 @@ msgstr "模組名稱"
 
 #: ../src/gnome2/mod_mgr.c:562
 msgid "A checkmark means this module is already installed"
-msgstr "打勾代表該模組已經存在"
+msgstr "勾選標記代表已安裝此模組"
 
 #: ../src/gnome2/mod_mgr.c:589
 msgid "Click the box to work on this module"
-msgstr "勾選此模組"
+msgstr "勾選方塊來繼續處理此模組"
 
 #: ../src/gnome2/mod_mgr.c:590
 msgid "Click the box to select this module for install/update"
-msgstr "勾選此模組以便安裝或更新"
+msgstr "勾選方塊來安裝／更新此模組"
 
 #: ../src/gnome2/mod_mgr.c:608
 msgid "Installed"
-msgstr "已安裝"
+msgstr "已裝版"
 
 #: ../src/gnome2/mod_mgr.c:625
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
-msgstr "索引圖示代表您已經為該模組編列且優化其快速搜尋索引"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:649
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
-msgstr "鎖定的圖示代表該模組經過加密，您需要向該模組之提供者購買解密金鑰"
+msgstr "上鎖圖示代表本模組經過加密，必須向內容擁有者購買密鑰，方能解鎖。"
 
 #: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:596
 #: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
@@ -800,11 +855,11 @@ msgstr "關於"
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
-msgstr "更新圖示代表您所安裝的該模組版本較舊，您應該更新其版本"
+msgstr "刷新圖示代表已裝版本的模組已有更新的流通版本: 您應更新這個模組"
 
 #: ../src/gnome2/mod_mgr.c:700
 msgid "Available"
-msgstr "可用"
+msgstr "流通版"
 
 #: ../src/gnome2/mod_mgr.c:709
 msgid "Size"
@@ -812,7 +867,7 @@ msgstr "大小"
 
 #: ../src/gnome2/mod_mgr.c:718
 msgid "Description"
-msgstr "說明"
+msgstr "模組介紹"
 
 #: ../src/gnome2/mod_mgr.c:872
 #, c-format
@@ -820,21 +875,21 @@ msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
-"'mkdir %s' 失敗：\n"
-"%s"
+"`mkdir %s' 未能成功:\n"
+"%s。"
 
 #: ../src/gnome2/mod_mgr.c:906
 msgid " archived in: \n"
-msgstr " 歸檔於: \n"
+msgstr " 已備存歸檔於: \n"
 
 #: ../src/gnome2/mod_mgr.c:988
 msgid "Journals and prayer lists cannot be indexed."
-msgstr "日記檔和禱告表無法編列索引"
+msgstr "不能建立日誌及禱告表的索引。"
 
 #: ../src/gnome2/mod_mgr.c:1019
 #, c-format
 msgid "%s failed"
-msgstr "%s 失敗"
+msgstr "未能成功 %s"
 
 #: ../src/gnome2/mod_mgr.c:1022 ../src/gnome2/mod_mgr.c:1787
 msgid "Finished"
@@ -847,7 +902,7 @@ msgstr "完成"
 #: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:807
 #: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
 msgid "Unknown"
-msgstr "不詳"
+msgstr "（未知語言）"
 
 #: ../src/gnome2/mod_mgr.c:1518
 #, c-format
@@ -855,7 +910,7 @@ msgid ""
 "Repository:\n"
 "%s"
 msgstr ""
-"套件庫:\n"
+"藏書庫:\n"
 "%s"
 
 #: ../src/gnome2/mod_mgr.c:1531
@@ -863,75 +918,79 @@ msgid ""
 "Categorized by\n"
 "Module Type"
 msgstr ""
+"按\n"
+"模組類型分類"
 
 #: ../src/gnome2/mod_mgr.c:1536 ../src/gnome2/utilities.c:574
 #: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
 msgid "Biblical Texts"
-msgstr ""
+msgstr "聖經經文"
 
 #: ../src/gnome2/mod_mgr.c:1540 ../src/gnome2/utilities.c:580
 #: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
 #: ../src/main/sidebar.cc:986
 msgid "Commentaries"
-msgstr ""
+msgstr "註釋書"
 
 #: ../src/gnome2/mod_mgr.c:1544 ../src/gnome2/utilities.c:587
 #: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
 msgid "Dictionaries"
-msgstr "詞典"
+msgstr "辭典"
 
 #: ../src/gnome2/mod_mgr.c:1548 ../src/gnome2/utilities.c:593
 #: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
 msgid "Glossaries"
-msgstr ""
+msgstr "彙編"
 
 #: ../src/gnome2/mod_mgr.c:1552 ../src/gnome2/utilities.c:600
 #: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
 msgid "Daily Devotionals"
-msgstr "每日進度"
+msgstr "每日靈修材料"
 
 #: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/utilities.c:606
 #: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
 #: ../src/main/sidebar.cc:1022
 msgid "General Books"
-msgstr "一般書籍"
+msgstr "一般圖書"
 
 #: ../src/gnome2/mod_mgr.c:1569 ../src/gnome2/utilities.c:624
 #: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
 msgid "Cult/Unorthodox"
-msgstr ""
+msgstr "少數教派／非正典經文"
 
 #: ../src/gnome2/mod_mgr.c:1578
 msgid ""
 "Categorized by\n"
 "Availability"
 msgstr ""
+"按\n"
+"版本流通情況分類"
 
 #: ../src/gnome2/mod_mgr.c:1582
 msgid "Updates"
-msgstr "更新"
+msgstr "更新版本"
 
 #: ../src/gnome2/mod_mgr.c:1587
 msgid "Uninstalled"
-msgstr "解除安裝"
+msgstr "未安裝的版本"
 
 #: ../src/gnome2/mod_mgr.c:1592 ../src/gnome2/sidebar.c:630
 #: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:228
 #: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
 msgid "Prayer List/Journal"
-msgstr "禱告表/日記檔"
+msgstr "禱告表／日誌"
 
 #: ../src/gnome2/mod_mgr.c:1770
 msgid "Refreshing from remote source"
-msgstr "更新遠端資料"
+msgstr "刷新遠端來源"
 
 #: ../src/gnome2/mod_mgr.c:1782
 msgid "Remote source not found"
-msgstr "找不到遠端套件"
+msgstr "找不到遠端來源"
 
 #: ../src/gnome2/mod_mgr.c:1853
 msgid "Configure"
-msgstr "組態"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1882
 msgid "Type"
@@ -943,7 +1002,7 @@ msgstr "標題"
 
 #: ../src/gnome2/mod_mgr.c:1896
 msgid "Source"
-msgstr "套件庫"
+msgstr "來源"
 
 #: ../src/gnome2/mod_mgr.c:1903
 msgid "Directory"
@@ -951,7 +1010,7 @@ msgstr "目錄"
 
 #: ../src/gnome2/mod_mgr.c:1911
 msgid "User"
-msgstr "使用者"
+msgstr "使用者名稱"
 
 #: ../src/gnome2/mod_mgr.c:1918
 msgid "Password"
@@ -959,7 +1018,7 @@ msgstr "密碼"
 
 #: ../src/gnome2/mod_mgr.c:1925
 msgid "UID"
-msgstr "UID"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1940
 msgid "Module Sources"
@@ -967,11 +1026,11 @@ msgstr "模組來源"
 
 #: ../src/gnome2/mod_mgr.c:1943
 msgid "Add/Remove"
-msgstr "新增/移除"
+msgstr "新增／移除"
 
 #: ../src/gnome2/mod_mgr.c:1946
 msgid "Choose"
-msgstr "選擇"
+msgstr "選取"
 
 #: ../src/gnome2/mod_mgr.c:1949 ../src/gnome2/preferences_dialog.c:2021
 #: ../src/gnome2/sidebar.c:1540 ../src/gnome2/sidebar.c:1586
@@ -980,7 +1039,7 @@ msgstr "模組"
 
 #: ../src/gnome2/mod_mgr.c:1951
 msgid "Install/Update"
-msgstr "安裝/更新"
+msgstr "安裝／更新"
 
 #: ../src/gnome2/mod_mgr.c:1954
 msgid "Maintenance"
@@ -988,11 +1047,11 @@ msgstr "維護"
 
 #: ../src/gnome2/mod_mgr.c:2170
 msgid "Please Refresh"
-msgstr "請更新"
+msgstr "請刷新"
 
 #: ../src/gnome2/mod_mgr.c:2171
 msgid "Your module list is not up to date!"
-msgstr "您的模組清單不是最新的"
+msgstr "您的模組清單尚未更新！"
 
 #. Zero Bibles is just not workable in Xiphos.
 #: ../src/gnome2/mod_mgr.c:2488
@@ -1000,16 +1059,16 @@ msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
-"您把最後一本聖經也移除了。\n"
-"Xiphos 請您至少安裝一本聖經。"
+"您已解除安裝最後一組聖經經文\n"
+"Xiphos 要求起碼一組方能運作。"
 
 #: ../src/gnome2/mod_mgr.c:2494
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
-"仍然找不到任何一本聖經。\n"
-"沒有聖經 Xiphos 無事可做呢。"
+"尚未安裝聖經。\n"
+"Xiphos 未能繼續操作。"
 
 #: ../src/gnome2/mod_mgr.c:2619
 #, c-format
@@ -1021,91 +1080,90 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:2685
 msgid "No obsolete modules were found."
-msgstr ""
+msgstr "找不到過時的模組。"
 
 #: ../src/gnome2/mod_mgr.c:2707
 msgid "Standard remote sources have been loaded."
-msgstr "已經載入標準的遠端套件庫資訊。"
+msgstr "已載入標準的遠端來源設定值。"
 
 #: ../src/gnome2/mod_mgr.c:2716
 msgid "Could not load standard sources from CrossWire."
-msgstr "無法從 CrossWire 下載標準套件資訊。"
+msgstr "未能載入 CrossWire 的標準來源。"
 
 #: ../src/gnome2/mod_mgr.c:2867 ../src/gnome2/mod_mgr.c:3123
 msgid "Remove the selected source"
-msgstr "移除所選的套件"
+msgstr "移除所選的來源"
 
 #: ../src/gnome2/mod_mgr.c:2933
 msgid "Enter a remote source"
-msgstr "輸入遠端套件資訊"
+msgstr "輸入一個遠端來源"
 
 #: ../src/gnome2/mod_mgr.c:2942
 msgid "Caption:"
-msgstr "標題："
+msgstr "標題:"
 
 #: ../src/gnome2/mod_mgr.c:2943
 msgid "Type:"
-msgstr "類型："
+msgstr "類型:"
 
 #: ../src/gnome2/mod_mgr.c:2944
 msgid "Host:"
-msgstr "主機："
+msgstr "主機:"
 
 #: ../src/gnome2/mod_mgr.c:2945
 msgid "Directory:"
-msgstr "目錄："
+msgstr "目錄:"
 
 #: ../src/gnome2/mod_mgr.c:2946
 msgid "User (optional):"
-msgstr "使用者 (非必填):"
+msgstr "使用者名稱（選填）:"
 
 #: ../src/gnome2/mod_mgr.c:2947
 msgid "Password (optional):"
-msgstr "密碼 (非必填):"
+msgstr "密碼（選填）:"
 
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2973
 msgid "A source by that name already exists."
-msgstr "同名套件已經存在。"
+msgstr "相同名稱的來源經已存在。"
 
 #: ../src/gnome2/mod_mgr.c:3120
 msgid "Delete a remote source"
-msgstr ""
+msgstr "刪除一個遠端來源"
 
 #: ../src/gnome2/mod_mgr.c:3639
-#, fuzzy
 msgid "[no module]"
-msgstr " 模組"
+msgstr "[沒有模組]"
 
 #: ../src/gnome2/navbar_book.c:356 ../src/gnome2/navbar_book_dialog.c:300
 msgid "Go outward, to the section containing this one"
-msgstr ""
+msgstr "退出上一層的主部"
 
 #: ../src/gnome2/navbar_book.c:380 ../src/gnome2/navbar_book_dialog.c:326
 msgid "Go to previous item"
-msgstr "到前一個"
+msgstr "前往上一項目處"
 
 #: ../src/gnome2/navbar_book.c:403 ../src/gnome2/navbar_book_dialog.c:350
 msgid "Go to next item"
-msgstr "到下一個"
+msgstr "前往下一項目處"
 
 #: ../src/gnome2/navbar_book.c:427 ../src/gnome2/navbar_book_dialog.c:374
 msgid "Go inward, to the first subsection"
-msgstr ""
+msgstr "進入下一層的次部"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:898
 #: ../src/gnome2/navbar_versekey_editor.c:926
 #: ../src/gnome2/navbar_versekey_parallel.c:847
 msgid "Synchronize this window's scrolling with the main window"
-msgstr ""
+msgstr "啟動此視窗與主視窗同步"
 
 #: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2028
 msgid "Parallel"
-msgstr ""
+msgstr "平行"
 
 #: ../src/gnome2/parallel_view.c:112
 msgid "Detach/Attach"
-msgstr ""
+msgstr "接合／分拆"
 
 #: ../src/gnome2/parallel_view.c:117 ../ui/xi-menus.glade.h:66
 #: ../ui/xi-menus-popup.gtkbuilder.h:43
@@ -1117,15 +1175,15 @@ msgstr "模組選項"
 #: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
 msgid "Parallel View"
-msgstr ""
+msgstr "平行閱覽"
 
 #: ../src/gnome2/preferences_dialog.c:864
 msgid "BibleSync session passphrase"
-msgstr ""
+msgstr "BibleSync 進程的密碼串"
 
 #: ../src/gnome2/preferences_dialog.c:866
 msgid "Phrase:"
-msgstr ""
+msgstr "密碼串:"
 
 #. mode selection failed? probably dead interface
 #: ../src/gnome2/preferences_dialog.c:937
@@ -1133,32 +1191,33 @@ msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
+"未能成功選擇模式。\n"
+"設定\"除錯\"重試以便找出原因。"
 
 #: ../src/gnome2/preferences_dialog.c:986
-#, fuzzy
 msgid "Mode selection failed.\n"
-msgstr "刪除選取的資料夾"
+msgstr "未能成功選擇模式。\n"
 
 #: ../src/gnome2/preferences_dialog.c:989
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
-msgstr ""
+msgstr "BibleSync: %s (密碼串\"%s\")."
 
 #: ../src/gnome2/preferences_dialog.c:991
 msgid "Disabled"
-msgstr ""
+msgstr "停用"
 
 #: ../src/gnome2/preferences_dialog.c:993 ../src/main/xml.c:96
 msgid "Personal"
-msgstr ""
+msgstr "個人模式"
 
 #: ../src/gnome2/preferences_dialog.c:995
 msgid "Speaker"
-msgstr ""
+msgstr "揚聲器模式"
 
 #: ../src/gnome2/preferences_dialog.c:996
 msgid "Audience"
-msgstr ""
+msgstr "聽眾模式"
 
 #: ../src/gnome2/preferences_dialog.c:1582
 #: ../src/gnome2/preferences_dialog.c:1616
@@ -1172,11 +1231,11 @@ msgstr ""
 #: ../src/gnome2/preferences_dialog.c:1890
 #: ../src/gnome2/preferences_dialog.c:2338
 msgid "-- Select --"
-msgstr ""
+msgstr "-- 選擇 --"
 
 #: ../src/gnome2/preferences_dialog.c:1853
 msgid "Locale will take effect after restart."
-msgstr "新的語言設定將在重新啟動後生效"
+msgstr "語系檔將於程式重啟後應用。"
 
 #: ../src/gnome2/preferences_dialog.c:1923 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
@@ -1185,7 +1244,7 @@ msgstr "偏好設定"
 
 #: ../src/gnome2/preferences_dialog.c:2001
 msgid "General"
-msgstr "一般"
+msgstr "總類"
 
 #: ../src/gnome2/preferences_dialog.c:2004
 msgid "Options"
@@ -1205,34 +1264,33 @@ msgid "Color"
 msgstr "色彩"
 
 #: ../src/gnome2/preferences_dialog.c:2017
-#, fuzzy
 msgid "Sizes and Faces"
-msgstr "分頁和版面"
+msgstr "大小與字體"
 
 #: ../src/gnome2/preferences_dialog.c:2031
 msgid "Special"
-msgstr "特殊"
+msgstr "專用"
 
 #: ../src/gnome2/preferences_dialog.c:2719 ../src/gnome2/search_dialog.c:519
 msgid "Clear List?"
-msgstr "清理清單?"
+msgstr "清除清單？"
 
 #: ../src/gnome2/preferences_dialog.c:2720 ../src/gnome2/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
-msgstr "您確定要清理模組清單嗎？"
+msgstr "您是否確定清除模組清單中的所有模組？"
 
 #: ../src/gnome2/preferences_dialog.c:2771 ../src/main/search_dialog.cc:658
 msgid "Remove Module?"
-msgstr ""
+msgstr "移除模組？"
 
 #: ../src/gnome2/preferences_dialog.c:2772 ../src/main/search_dialog.cc:659
 msgid "Are you sure you want to remove the selected module?"
-msgstr ""
+msgstr "您是否確定移除所選的個別模組？"
 
 #: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:52
 #: ../src/main/search_sidebar.cc:51
 msgid "Searching the "
-msgstr "尋找該 "
+msgstr ""
 
 #: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:53
 #: ../src/main/search_sidebar.cc:52
@@ -1242,24 +1300,24 @@ msgstr " 模組"
 #: ../src/gnome2/search_dialog.c:64 ../src/main/search_dialog.cc:54
 #: ../src/main/search_sidebar.cc:53
 msgid "found in "
-msgstr "尋找於 "
+msgstr "項結果於 "
 
 #: ../src/gnome2/search_dialog.c:483
 #, c-format
 msgid "New List %s"
-msgstr ""
+msgstr "新清單 %s"
 
 #: ../src/gnome2/search_dialog.c:700
 msgid "The last module list may not be deleted"
-msgstr ""
+msgstr "不能刪除最後一個模組清單"
 
 #: ../src/gnome2/search_dialog.c:715
 msgid "Delete list?"
-msgstr ""
+msgstr "刪除清單？"
 
 #: ../src/gnome2/search_dialog.c:716
 msgid "Are you sure you want to delete:"
-msgstr ""
+msgstr "您是否確定刪除:"
 
 #. *****************************************************************************
 #. * Name
@@ -1342,33 +1400,35 @@ msgstr ""
 
 #: ../src/gnome2/search_dialog.c:1198
 msgid "Module is neither Bible nor commentary"
-msgstr ""
+msgstr "模組並非聖經或註譯書"
 
 #: ../src/gnome2/search_dialog.c:1216 ../src/gnome2/sidebar.c:973
 msgid "BibleSync is not active for transmit."
-msgstr ""
+msgstr "BibleSync 並未在啟動傳輸的狀態。"
 
 #: ../src/gnome2/search_sidebar.c:241
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr ""
+"這是包攬式 (\"AND\") 搜尋:\n"
+"顯示同時相配所有字詞的結果。"
 
 #: ../src/gnome2/search_sidebar.c:253
 msgid "_Open Advanced Search"
-msgstr ""
+msgstr "開啟進階搜尋(_O)"
 
 #: ../src/gnome2/search_sidebar.c:258
 msgid "Open the separate Advanced Search dialog."
-msgstr ""
+msgstr "另自開啟進階搜尋對話框。"
 
 #: ../src/gnome2/search_sidebar.c:274
 msgid "Search Module"
-msgstr ""
+msgstr "搜尋模組"
 
 #: ../src/gnome2/search_sidebar.c:311
 msgid "Search Type"
-msgstr ""
+msgstr "搜尋類型"
 
 #: ../src/gnome2/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
 #: ../ui/search-dialog.gtkbuilder.h:34
@@ -1378,78 +1438,77 @@ msgstr ""
 #: ../src/gnome2/search_sidebar.c:333 ../ui/search-dialog.glade.h:41
 #: ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
-msgstr ""
+msgstr "正規表達式（按: 如 [a-z]*iah，詳參說明及 man page）"
 
 #: ../src/gnome2/search_sidebar.c:340 ../ui/search-dialog.glade.h:43
 #: ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
-msgstr ""
+msgstr "完全相同之詞句"
 
 #: ../src/gnome2/search_sidebar.c:356
 msgid "Search Options"
-msgstr ""
+msgstr "搜尋選項"
 
 #: ../src/gnome2/search_sidebar.c:369 ../ui/search-dialog.glade.h:49
 #: ../ui/search-dialog.gtkbuilder.h:49
 msgid "Match case"
-msgstr "大小寫不同"
+msgstr "符合大小寫"
 
 #: ../src/gnome2/search_sidebar.c:385
 msgid "Search Scope"
-msgstr ""
+msgstr "搜尋區域"
 
 #: ../src/gnome2/search_sidebar.c:398
 msgid "No scope"
-msgstr ""
+msgstr "不限區域"
 
 #: ../src/gnome2/search_sidebar.c:407
 msgid "Use bounds"
-msgstr ""
+msgstr "使用前後範圍"
 
 #: ../src/gnome2/search_sidebar.c:415
 msgid "Last search"
-msgstr ""
+msgstr "上次搜尋結果"
 
 #: ../src/gnome2/search_sidebar.c:432
 msgid "Bounds"
-msgstr ""
+msgstr "前後範圍"
 
 #: ../src/gnome2/search_sidebar.c:447 ../src/gnome2/search_sidebar.c:479
 msgid "Lower"
-msgstr ""
+msgstr "開始"
 
 #: ../src/gnome2/search_sidebar.c:459 ../src/gnome2/search_sidebar.c:486
 msgid "Upper"
-msgstr ""
+msgstr "結束"
 
 #: ../src/gnome2/sidebar.c:834
 msgid "Open module in editor?"
-msgstr ""
+msgstr "在編輯工具中開啟模組？"
 
 #: ../src/gnome2/sidebar.c:835
 msgid "If no, it will open for display only."
-msgstr ""
+msgstr "如答否則只開啟作顯示。"
 
 #: ../src/gnome2/sidebar.c:934
-#, fuzzy
 msgid "Paste verse references"
-msgstr "偏好設定"
+msgstr ""
 
 #: ../src/gnome2/sidebar.c:936
 msgid "List:"
-msgstr ""
+msgstr "列出:"
 
 #: ../src/gnome2/sidebar.c:1519 ../src/gnome2/sidebar.c:1569
 msgid "Search"
-msgstr ""
+msgstr "搜尋"
 
 #: ../src/gnome2/sidebar_dialog.c:170 ../src/gnome2/sidebar_dialog.c:180
 msgid "Sidebar"
-msgstr ""
+msgstr "側邊欄"
 
 #: ../src/gnome2/splash.c:403
 msgid "Powered by the SWORD Project"
-msgstr ""
+msgstr "以 SWORD 專案為房角石"
 
 #: ../src/gnome2/tabbed_browser.c:358
 msgid "Can't create tabs dir."
@@ -1458,99 +1517,108 @@ msgstr ""
 #: ../src/gnome2/treekey-editor.c:136 ../src/gnome2/treekey-editor.c:193
 #: ../src/gnome2/treekey-editor.c:291
 msgid "Prayer List/Journal Item"
-msgstr ""
+msgstr "禱告表／日誌項目"
 
 #: ../src/gnome2/treekey-editor.c:137 ../src/gnome2/treekey-editor.c:194
 #: ../src/gnome2/treekey-editor.c:292
 msgid "New name"
-msgstr ""
+msgstr "新的名稱"
 
 #: ../src/gnome2/treekey-editor.c:252
 msgid "Remove the selected item"
-msgstr ""
+msgstr "移除所選項目"
 
 #: ../src/gnome2/utilities.c:86
 msgid "January"
-msgstr ""
+msgstr "一月"
 
 #: ../src/gnome2/utilities.c:87
 msgid "February"
-msgstr ""
+msgstr "二月"
 
 #: ../src/gnome2/utilities.c:88
 msgid "March"
-msgstr ""
+msgstr "三月"
 
 #: ../src/gnome2/utilities.c:89
 msgid "April"
-msgstr ""
+msgstr "四月"
 
 #: ../src/gnome2/utilities.c:90
 msgid "May"
-msgstr ""
+msgstr "五月"
 
 #: ../src/gnome2/utilities.c:91
 msgid "June"
-msgstr ""
+msgstr "六月"
 
 #: ../src/gnome2/utilities.c:92
 msgid "July"
-msgstr ""
+msgstr "七月"
 
 #: ../src/gnome2/utilities.c:93
 msgid "August"
-msgstr ""
+msgstr "八月"
 
 #: ../src/gnome2/utilities.c:94
 msgid "September"
-msgstr ""
+msgstr "九月"
 
 #: ../src/gnome2/utilities.c:94
 msgid "October"
-msgstr ""
+msgstr "十月"
 
 #: ../src/gnome2/utilities.c:94
 msgid "November"
-msgstr ""
+msgstr "十一月"
 
 #: ../src/gnome2/utilities.c:94
 msgid "December"
-msgstr ""
+msgstr "十二月"
 
 #: ../src/gnome2/utilities.c:2071
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
 msgstr ""
+"未能確定此圖片檔案大小。\n"
+"Xiphos 未能依視窗大小調整圖片。"
 
 #: ../src/main/biblesync_glue.cc:104
 msgid ""
 "Mismatched packet\n"
 "\n"
 msgstr ""
+"錯配的封包\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:124
 msgid ""
 "Presence announcement:\n"
 "\n"
 msgstr ""
+"出席通知:\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:134
 msgid ""
 "Navigation packet:\n"
 "\n"
 msgstr ""
+"導覽的封包:\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:185
-#, fuzzy
 msgid "Unknown module "
-msgstr " 模組"
+msgstr "未知的模組 "
 
 #: ../src/main/biblesync_glue.cc:185
 msgid ""
 ".\n"
 "Navigated indirectly using verse list."
 msgstr ""
+".\n"
+"間接使用金句表導覽。"
 
 #: ../src/main/biblesync_glue.cc:261
 msgid "ERROR: unknown BibleSync indicator: "
@@ -1561,26 +1629,24 @@ msgid "Other indications are:"
 msgstr ""
 
 #: ../src/main/biblesync_glue.cc:546
-#, fuzzy
 msgid "Check the box to listen to this Speaker"
-msgstr "勾選此模組"
+msgstr "勾選此方塊來聆聽此揚聲器"
 
 #: ../src/main/biblesync_glue.cc:559
-#, fuzzy
 msgid "Available Speakers"
-msgstr "可用"
+msgstr "可用的揚聲器"
 
 #: ../src/main/biblesync_glue.cc:568
 msgid "D/I"
-msgstr ""
+msgstr "下載"
 
 #: ../src/main/biblesync_glue.cc:578
 msgid "Last navigation was Direct or Indirect"
-msgstr ""
+msgstr "顯示上次使用直接或間接導播"
 
 #: ../src/main/biblesync_glue.cc:587
 msgid "Last Navigation"
-msgstr ""
+msgstr "上次導播"
 
 #: ../src/main/biblesync_glue.cc:606
 msgid "UUID"
@@ -1588,19 +1654,23 @@ msgstr ""
 
 #: ../src/main/biblesync_glue.cc:626
 msgid "IP address: "
-msgstr ""
+msgstr "IP 位址: "
 
 #: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "Application: "
 msgstr ""
+"\n"
+"應用程式: "
 
 #: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "Device: "
 msgstr ""
+"\n"
+"裝置: "
 
 #: ../src/main/biblesync_glue.cc:626
 msgid ""
@@ -1611,7 +1681,7 @@ msgstr ""
 #: ../src/main/display.cc:89
 msgid ""
 "<br/><br/><center><i>This module has no content at this point.</i></center>"
-msgstr ""
+msgstr "<br/><br/><center><i>模組在此處並無內容。</i></center>"
 
 #: ../src/main/display.cc:249
 #, c-format
@@ -1619,156 +1689,158 @@ msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
+"個人標註標籤的編碼不正確:\n"
+"'%s'"
 
 #: ../src/main/display.cc:1116 ../src/main/display.cc:1157
 #: ../src/main/display.cc:1241 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
-msgstr ""
+msgstr "章"
 
 #: ../src/main/main.c:129
 msgid "Xiphos does not understand more than one argument."
-msgstr ""
+msgstr "Xiphos 並不能解讀超過一個引數。"
 
 #: ../src/main/main.c:240
 msgid "Initiating HTML"
-msgstr ""
+msgstr "HTML 啟始"
 
 #: ../src/main/main.c:245
 msgid "Building Interface"
-msgstr ""
+msgstr "正在建立介面"
 
 #: ../src/main/main.c:248
 msgid "Starting Sword"
-msgstr ""
+msgstr "正在啟動 Sword"
 
 #: ../src/main/main.c:251
 msgid "Loading Settings"
-msgstr ""
+msgstr "正在載入設定"
 
 #: ../src/main/main.c:254
 msgid "Displaying Xiphos"
-msgstr ""
+msgstr "正在顯示 Xiphos"
 
 #: ../src/main/module_dialogs.cc:186 ../src/main/previewer.cc:100
 msgid "Previewer"
-msgstr ""
+msgstr "預覽區"
 
 #: ../src/main/module_dialogs.cc:240 ../src/main/module_dialogs.cc:344
 #: ../src/main/previewer.cc:188
 msgid "Footnote"
-msgstr ""
+msgstr "註腳"
 
 #: ../src/main/module_dialogs.cc:246 ../src/main/module_dialogs.cc:349
 #: ../src/main/previewer.cc:198
 msgid "Cross Reference"
-msgstr ""
+msgstr "交叉參照"
 
 #: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
 #: ../src/main/module_dialogs.cc:354 ../src/main/module_dialogs.cc:366
 #: ../src/main/previewer.cc:203 ../src/main/previewer.cc:223
 msgid "Strongs"
-msgstr ""
+msgstr "史特朗編號"
 
 #: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
 #: ../src/main/module_dialogs.cc:359 ../src/main/module_dialogs.cc:376
 #: ../src/main/previewer.cc:208 ../src/main/previewer.cc:229
 msgid "Morphology"
-msgstr ""
+msgstr "詞法學"
 
 #: ../src/main/module_dialogs.cc:986 ../src/main/url.cc:515
 msgid "Back to "
-msgstr ""
+msgstr "回到 "
 
 #: ../src/main/parallel_view.cc:61
 msgid "Unknown parallel module: "
-msgstr ""
+msgstr "未知的平行模組: "
 
 #: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:70
 #: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Strong's Numbers"
-msgstr ""
+msgstr "史特朗編號"
 
 #: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:102
 #: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:73
 #: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Footnotes"
-msgstr ""
+msgstr "註腳"
 
 #: ../src/main/parallel_view.cc:418 ../ui/search-dialog.glade.h:99
 #: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:72
 #: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Morphological Tags"
-msgstr ""
+msgstr "詞法標籤"
 
 #: ../src/main/parallel_view.cc:427 ../ui/xi-menus.glade.h:78
 #: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Hebrew Vowel Points"
-msgstr ""
+msgstr "希伯來文母音點"
 
 #: ../src/main/parallel_view.cc:436 ../ui/xi-menus.glade.h:79
 #: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Hebrew Cantillation"
-msgstr ""
+msgstr "希伯來吟誦"
 
 #: ../src/main/parallel_view.cc:445 ../ui/xi-menus.glade.h:77
 #: ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Greek Accents"
-msgstr ""
+msgstr "希臘文重音"
 
 #: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:74
 #: ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Cross-references"
-msgstr ""
+msgstr "交叉參照"
 
 #: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:71
 #: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Lemmas"
-msgstr ""
+msgstr "詞目"
 
 #: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:68
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Headings"
-msgstr ""
+msgstr "標題"
 
 #: ../src/main/parallel_view.cc:481 ../src/main/parallel_view.cc:574
 #: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Morpheme Segmentation"
-msgstr ""
+msgstr "語素切分"
 
 #: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Words of Christ in Red"
-msgstr ""
+msgstr "紅字標明基督言說"
 
 #: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:80
 #: ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Transliteration"
-msgstr ""
+msgstr "轉寫／拼音"
 
 #: ../src/main/parallel_view.cc:512
 msgid "Textual Variants"
-msgstr ""
+msgstr "異文文本"
 
 #: ../src/main/parallel_view.cc:520 ../ui/xi-menus.glade.h:82
 #: ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Primary Reading"
-msgstr ""
+msgstr "讀本一"
 
 #: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:83
 #: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "Secondary Reading"
-msgstr ""
+msgstr "讀本二"
 
 #: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:84
 #: ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "All Readings"
-msgstr ""
+msgstr "所有讀本"
 
 #: ../src/main/parallel_view.cc:547 ../ui/xi-menus.glade.h:85
 #: ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "Transliterated Forms"
-msgstr ""
+msgstr "轉寫形式"
 
 #: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:86
 #: ../ui/xi-menus-popup.gtkbuilder.h:62
@@ -1778,107 +1850,107 @@ msgstr ""
 #: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:87
 #: ../ui/xi-menus-popup.gtkbuilder.h:63
 msgid "Glosses"
-msgstr ""
+msgstr "註釋"
 
 #: ../src/main/parallel_view.cc:757
 msgid "view context"
-msgstr ""
+msgstr "查看原文上下"
 
 #: ../src/main/prayerlists.cc:107
 msgid "Growth"
-msgstr ""
+msgstr "靈命成長"
 
 #: ../src/main/prayerlists.cc:108
 msgid "<b>For Growth</b><br/>"
-msgstr ""
+msgstr "<b>有關靈命成長</b><br/>"
 
 #: ../src/main/prayerlists.cc:109 ../src/main/prayerlists.cc:361
 msgid "Salvation"
-msgstr ""
+msgstr "拯救得贖"
 
 #: ../src/main/prayerlists.cc:110
 msgid "<b>For Salvation</b><br/>"
-msgstr ""
+msgstr "<b>有關拯救得贖</b><br/>"
 
 #: ../src/main/prayerlists.cc:111 ../src/main/prayerlists.cc:365
 msgid "Health"
-msgstr ""
+msgstr "健康醫治"
 
 #: ../src/main/prayerlists.cc:112
 msgid "<b>For Health</b><br/>"
-msgstr ""
+msgstr "<b>有關健康醫治</b><br/>"
 
 #: ../src/main/prayerlists.cc:113
 msgid "Misc"
-msgstr ""
+msgstr "其它事項"
 
 #: ../src/main/prayerlists.cc:114
 msgid "<b>Miscellaneous</b><br/>"
-msgstr ""
+msgstr "<b>其它事項</b><br/>"
 
 #: ../src/main/prayerlists.cc:122
 msgid "Point x"
-msgstr ""
+msgstr "重點一"
 
 #: ../src/main/prayerlists.cc:123
 msgid "<b>(x)</b><br/>"
-msgstr ""
+msgstr "<b>(一)</b><br/>"
 
 #: ../src/main/prayerlists.cc:124
 msgid "Point y"
-msgstr ""
+msgstr "重點二"
 
 #: ../src/main/prayerlists.cc:125
 msgid "<b>(y)</b><br/>"
-msgstr ""
+msgstr "<b>(二)</b><br/>"
 
 #: ../src/main/prayerlists.cc:126
 msgid "Point z"
-msgstr ""
+msgstr "重點三"
 
 #: ../src/main/prayerlists.cc:127
 msgid "<b>(z)</b><br/>"
-msgstr ""
+msgstr "<b>(三)</b><br/>"
 
 #: ../src/main/prayerlists.cc:135
 msgid "Minor Topic 1"
-msgstr ""
+msgstr "副題 1"
 
 #: ../src/main/prayerlists.cc:136
 msgid "<b>Subtopic 1</b><br/>"
-msgstr ""
+msgstr "<b>副題 1</b><br/>"
 
 #: ../src/main/prayerlists.cc:138
 msgid "Minor Topic 2"
-msgstr ""
+msgstr "副題 2"
 
 #: ../src/main/prayerlists.cc:139
 msgid "<b>Subtopic 2</b><br/>"
-msgstr ""
+msgstr "<b>副題 2</b><br/>"
 
 #: ../src/main/prayerlists.cc:141
 msgid "Minor Topic 3"
-msgstr ""
+msgstr "副題 3"
 
 #: ../src/main/prayerlists.cc:142
 msgid "<b>Subtopic 3</b><br/>"
-msgstr ""
+msgstr "<b>副題 3</b><br/>"
 
 #: ../src/main/prayerlists.cc:144
 msgid "Minor Topic 4"
-msgstr ""
+msgstr "副題 4"
 
 #: ../src/main/prayerlists.cc:145
 msgid "<b>Subtopic 4</b><br/>"
-msgstr ""
+msgstr "<b>副題 4</b><br/>"
 
 #: ../src/main/prayerlists.cc:229
 msgid "Name for new prayer list or journal"
-msgstr ""
+msgstr "為新的禱告表或日誌命名"
 
 #: ../src/main/prayerlists.cc:257
 msgid "Xiphos finds that prayer list already."
-msgstr ""
+msgstr "Xiphos 搜到已有該張禱告表。"
 
 #. this one matters.
 #: ../src/main/prayerlists.cc:269
@@ -1887,119 +1959,123 @@ msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
 msgstr ""
+"Xiphos 不能建立模組的路徑:\n"
+"%s"
 
 #: ../src/main/prayerlists.cc:308
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
-msgstr ""
+msgstr "本張基本禱表。 \\par\\par 模組為 Xiphos 所產生。"
 
 #: ../src/main/prayerlists.cc:309
 msgid "BasicPrayerList"
-msgstr ""
+msgstr "BasicPrayerList"
 
 #: ../src/main/prayerlists.cc:322
 msgid "MyPrayerList"
-msgstr ""
+msgstr "MyPrayerList"
 
 #: ../src/main/prayerlists.cc:323
 msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
 ">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
 msgstr ""
+"<b>人物:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>教會:</b><br/>座位<br/>崇拜"
+"<br/>宣教用的聖經<br/><br/><br/>"
 
 #: ../src/main/prayerlists.cc:347
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
-msgstr ""
+msgstr "本張主題禱表。 \\par\\par 模組為 Xiphos 所產生。"
 
 #: ../src/main/prayerlists.cc:348
 msgid "SubjectPrayerList"
-msgstr ""
+msgstr "SubjectPrayerList"
 
 #: ../src/main/prayerlists.cc:362
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
-msgstr ""
+msgstr "弟兄<br/>姊妹<br/>同工<br/>幹事<br/>"
 
 #: ../src/main/prayerlists.cc:363
 msgid "Spiritual Growth"
-msgstr ""
+msgstr "靈命成長"
 
 #: ../src/main/prayerlists.cc:364
 msgid "Mike<br/>Steve<br/>"
-msgstr ""
+msgstr "弟兄<br/>姊妹<br/>"
 
 #: ../src/main/prayerlists.cc:366
 msgid "Sue<br/>John<br/>"
-msgstr ""
+msgstr "同工<br/>幹事<br/>"
 
 #: ../src/main/prayerlists.cc:390
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
-msgstr ""
+msgstr "本張月禱表。 \\par\\par 模組為 Xiphos 所產生。"
 
 #: ../src/main/prayerlists.cc:391
 msgid "MonthlyPrayerList"
-msgstr ""
+msgstr "MonthlyPrayerList"
 
 #: ../src/main/prayerlists.cc:439
 msgid "A daily journal. \\par\\par Module created by Xiphos."
-msgstr ""
+msgstr "本則日誌。 \\par\\par 模組為 Xiphos 所產生。"
 
 #: ../src/main/prayerlists.cc:440
 msgid "DailyJournal"
-msgstr ""
+msgstr "DailyJournal"
 
 #: ../src/main/prayerlists.cc:501
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr ""
+msgstr "本則主題大綱。 \\par\\par 模組為 Xiphos 所產生。"
 
 #: ../src/main/prayerlists.cc:502
 msgid "OutlinedTopic"
-msgstr ""
+msgstr "OutlinedTopic"
 
 #: ../src/main/prayerlists.cc:515
 msgid "Major Topic A"
-msgstr ""
+msgstr "主題 A"
 
 #: ../src/main/prayerlists.cc:516
 msgid "<b>Major Topic A</b><br/>"
-msgstr ""
+msgstr "<b>主題 A</b><br/>"
 
 #: ../src/main/prayerlists.cc:518
 msgid "Major Topic B"
-msgstr ""
+msgstr "主題 B"
 
 #: ../src/main/prayerlists.cc:519
 msgid "<b>Major Topic B</b><br/>"
-msgstr ""
+msgstr "<b>主題 B</b><br/>"
 
 #: ../src/main/prayerlists.cc:521
 msgid "Major Topic C"
-msgstr ""
+msgstr "主題 C"
 
 #: ../src/main/prayerlists.cc:522
 msgid "<b>Major Topic C</b><br/>"
-msgstr ""
+msgstr "<b>主題 C</b><br/>"
 
 #: ../src/main/previewer.cc:193
 msgid "User Annotation"
-msgstr ""
+msgstr "使用者標註"
 
 #: ../src/main/search_dialog.cc:188
 #, c-format
 msgid "Search result %s: %s"
-msgstr ""
+msgstr "搜尋 %s:「%s」的結果"
 
 #: ../src/main/search_dialog.cc:404
 msgid "Delete Range?"
-msgstr ""
+msgstr "刪除範圍？"
 
 #: ../src/main/search_dialog.cc:405
 msgid "Are you sure you want to delete this range?"
-msgstr ""
+msgstr "您是否確定刪除此範圍？"
 
 #: ../src/main/search_dialog.cc:618 ../src/main/search_dialog.cc:1021
 #: ../src/main/search_dialog.cc:1024 ../src/main/search_dialog.cc:1044
 #: ../src/main/search_dialog.cc:1047
 msgid "Search: "
-msgstr ""
+msgstr "搜尋:"
 
 #: ../src/main/search_dialog.cc:1381
 #, c-format
@@ -2008,63 +2084,72 @@ msgid ""
 "No such module is installed.\n"
 "%s"
 msgstr ""
+"%s:\n"
+"並未安裝是項模組。\n"
+"%s"
 
 #: ../src/main/search_dialog.cc:1383
 msgid "Please adjust the module list."
-msgstr ""
+msgstr "請調整模組清單。"
 
 #: ../src/main/search_dialog.cc:1399
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr ""
+msgstr "%s 的快速搜尋索引並不存在。%s%s"
 
 #: ../src/main/search_dialog.cc:1401
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
 msgstr ""
+"\n"
+"現在搜尋此模組是使用「多個字詞」類型。"
 
 #: ../src/main/search_dialog.cc:1402
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
 msgstr ""
+"\n"
+"請見模組管理工具之維護面板。"
 
 #: ../src/main/search_dialog.cc:1463
 msgid "Search finished"
-msgstr ""
+msgstr "完成搜尋"
 
 #: ../src/main/search_sidebar.cc:88
 msgid "matches"
-msgstr ""
+msgstr "項乎合"
 
 #: ../src/main/search_sidebar.cc:203
 msgid "There is no commentary module."
-msgstr ""
+msgstr "尚未安裝註釋書模組。"
 
 #: ../src/main/settings.c:106
 msgid "$HOME is not set!"
-msgstr ""
+msgstr "$HOME 並未設定！"
 
 #: ../src/main/settings.c:120
 #, c-format
 msgid "Xiphos can not create directory "
-msgstr ""
+msgstr "Xiphos 不能建立目錄 "
 
 #: ../src/main/settings.c:134 ../src/main/settings.c:144
 #: ../src/main/settings.c:155
 msgid "can not create "
-msgstr ""
+msgstr "不能建立 "
 
 #: ../src/main/settings.c:187
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
+"空白的設定檔 -- 系統已嘗試恢復備分。\n"
+"部分資料可能經已遺失。"
 
 #: ../src/main/settings.c:190
 msgid "Empty settings file -- no backup?!? Information lost!"
-msgstr ""
+msgstr "空白的設定檔 -- 尚未備分？！？資料經已遺失！"
 
 #: ../src/main/settings.c:217
 msgid ""
@@ -2075,16 +2160,24 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
+"尚未安裝聖經經文，\n"
+"因您確定拒絕安裝。\n"
+"\n"
+"因無法顯示任何聖經模組，\n"
+"Xiphos 即不能繼續執行，\n"
+"並即將離開。"
 
 #: ../src/main/settings.c:223
 msgid "Bible module installation complete."
-msgstr ""
+msgstr "聖經模組安裝完成。"
 
 #: ../src/main/sidebar.cc:146
 msgid ""
 "Module error: Unusable xref encoding.\n"
 "Please report this, with module & verse"
 msgstr ""
+"模組錯誤: 交叉參照編碼不穩定。（Unusable xref encoding.）\n"
+"請回報此程式錯誤，包括涉及的模組與經節"
 
 #: ../src/main/sidebar.cc:410
 msgid "verse"
@@ -2099,24 +2192,32 @@ msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
+"Xiphos 找不到\n"
+"語言縮寫檔案。"
 
 #: ../src/main/sword.cc:664
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
+"未能開啟 Xiphos 的\n"
+"語言縮寫檔案。"
 
 #: ../src/main/sword.cc:676
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
+"Xiphos 不能為語言\n"
+"縮寫檔案分配空間。"
 
 #: ../src/main/sword.cc:682
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
+"Xiphos 不能讀取此\n"
+"語言縮寫檔案。"
 
 #. either we were given a null sys_locale, or it didn't match anything.
 #: ../src/main/sword.cc:762
@@ -2125,10 +2226,12 @@ msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr ""
+"沒有找到對應 `%s' 的語系檔。\n"
+"%s"
 
 #: ../src/main/sword.cc:764
 msgid "Book names and menus may not be translated."
-msgstr ""
+msgstr "圖書名稱及選單均不能翻譯。"
 
 #: ../src/main/sword.cc:1119 ../src/main/sword.cc:1288
 #, c-format
@@ -2137,6 +2240,9 @@ msgid ""
 "%s.\n"
 "Would you like to open these as well?%s"
 msgstr ""
+"%s 模組兼具相隨模組:\n"
+"%s.\n"
+"您想連同它們一起開啟？%s"
 
 #: ../src/main/sword.cc:1123 ../src/main/sword.cc:1292
 msgid ""
@@ -2148,7 +2254,7 @@ msgstr ""
 
 #: ../src/main/sword.cc:1416
 msgid "Daily devotional was requested, but there are none installed."
-msgstr ""
+msgstr "已要求每日靈修材料，但找不到已安版本。"
 
 #: ../src/main/sword.cc:1670
 msgid ""
@@ -2163,72 +2269,80 @@ msgid ""
 "\n"
 "Please enter the key in the dialog."
 msgstr ""
+"<b>模組已上鎖。</b>\n"
+"\n"
+"<u>您正在開啟需要<i>密鑰</i>的模組。</u>\n"
+"\n"
+"此模組已上鎖，即其出版商已將模組內容加密。您必須輸入其密鑰，方能顯示內容。此"
+"密鑰應可向證明您購買的該網頁獲得，或在購買後從電子郵件中獲得。\n"
+"\n"
+"請在對話框中輸入密鑰。"
 
 #: ../src/main/tab_history.c:302
 msgid "Clear History"
-msgstr ""
+msgstr "清除閱覽記錄"
 
 #: ../src/main/tab_history.c:308
 msgid "History ➛ Verse List"
-msgstr ""
+msgstr "閱覽記錄 ➛ 金句表"
 
 #: ../src/main/url.cc:106
 msgid "URL not found:"
-msgstr ""
+msgstr "找不到網址 (URL):"
 
 #: ../src/main/url.cc:194
 #, c-format
 msgid "Xiphos could not execute %s"
-msgstr ""
+msgstr "Xiphos 未能執行 %s"
 
 #: ../src/main/url.cc:202
 msgid "Viewer error:\n"
-msgstr ""
+msgstr "檢視工具錯誤:\n"
 
 #: ../src/main/url.cc:273
 #, c-format
 msgid "Show %s in main window"
-msgstr ""
+msgstr "在主視窗顯示 %s 的上下原文"
 
 #: ../src/main/xml.c:87 ../src/main/xml.c:468 ../src/main/xml.c:599
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr ""
+msgstr "未能成功建立文件。\n"
 
 #: ../src/main/xml.c:99
 msgid "What must I do to be saved?"
-msgstr ""
+msgstr "我該如何作才能得拯救？"
 
 #: ../src/main/xml.c:100 ../src/main/xml.c:101
 msgid "Acts 16:31"
-msgstr ""
+msgstr "使徒行傳 16:31"
 
 #: ../src/main/xml.c:102 ../src/main/xml.c:103
 msgid "Eph 2:8,9"
-msgstr ""
+msgstr "以弗所書 2:8,9"
 
 #: ../src/main/xml.c:104 ../src/main/xml.c:105
 msgid "Romans 1:16"
-msgstr ""
+msgstr "羅馬書 1:16"
 
 #: ../src/main/xml.c:107
 msgid "What is the Gospel?"
-msgstr ""
+msgstr "甚麼是福音？"
 
 #: ../src/main/xml.c:108 ../src/main/xml.c:109
 msgid "1 Cor 15:1-4"
-msgstr ""
+msgstr "哥林多前書 15:1-4"
 
 #: ../src/main/xml.c:263 ../src/main/xml.c:409 ../src/main/xml.c:1506
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr ""
+msgstr "未能成功選取文件。\n"
 
 #: ../src/main/xml.c:269 ../src/main/xml.c:415 ../src/main/xml.c:435
 #: ../src/main/xml.c:1063 ../src/main/xml.c:1393 ../src/main/xml.c:1589
 #, c-format
 msgid "empty document \n"
-msgstr ""
+msgstr "空白的文件 \n"
 
 #: ../src/main/xml.c:275
 #, c-format
@@ -2332,23 +2446,23 @@ msgstr ""
 
 #: ../src/main/xml.c:614
 msgid "Old Testament"
-msgstr ""
+msgstr "舊約全書"
 
 #: ../src/main/xml.c:616
 msgid "Gen - Mal"
-msgstr ""
+msgstr "創 - 瑪"
 
 #: ../src/main/xml.c:622
 msgid "New Testament"
-msgstr ""
+msgstr "新約全書"
 
 #: ../src/main/xml.c:624
 msgid "Mat - Rev"
-msgstr ""
+msgstr "太 - 啟"
 
 #: ../src/main/xml.c:633
 msgid "Sample Module List"
-msgstr ""
+msgstr "樣板模組清單"
 
 #: ../src/main/xml.c:1069 ../src/main/xml.c:1399
 #, c-format
@@ -2361,31 +2475,33 @@ msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
+"未能成功儲存設定值！stat %d, size %d\n"
+"%s"
 
 #: ../src/main/xml.c:1553
 msgid "Attempting to revert to previous save."
-msgstr ""
+msgstr "嘗試回復到上次儲存的狀態。"
 
 #: ../ui/bookmarks.glade.h:1 ../ui/bookmarks.gtkbuilder.h:1
 msgid "Add Bookmark"
-msgstr ""
+msgstr "加入書籤"
 
 #: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:13
 msgid "Bookmark Dialog"
-msgstr ""
+msgstr "書籤對話框"
 
 #: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
 msgid "Create new folder"
-msgstr ""
+msgstr "新增資料夾"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
 #: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
-msgstr ""
+msgstr "新增資料夾"
 
 #: ../ui/bookmarks.glade.h:5 ../ui/bookmarks.gtkbuilder.h:3
 msgid "New ..."
-msgstr ""
+msgstr "新資料夾..."
 
 #: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:5
 msgid "Cancel Bookmark"
@@ -2393,77 +2509,76 @@ msgstr ""
 
 #: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:6
 msgid "Label:"
-msgstr ""
+msgstr "標籤:"
 
 #: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:7
 msgid "Label Entry"
-msgstr ""
+msgstr "標籤的輸入方塊"
 
 #: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:8
 #: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:8
 msgid "Verse:"
-msgstr ""
+msgstr "經節或圖文:"
 
 #: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:9
 #: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:9
 msgid "Verse Entry"
-msgstr ""
+msgstr "經節的輸入方塊"
 
 #: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:10
 #: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:10
 msgid "Module:"
-msgstr ""
+msgstr "模組:"
 
 #: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:11
 #: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:11
 msgid "Module Entry"
-msgstr ""
+msgstr "模組的輸入方塊"
 
 #: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:12
 msgid "Bookmark Folder Treeview"
-msgstr ""
+msgstr "樹狀檢視書籤資料夾"
 
 #: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
-msgstr "插入連結"
+msgstr "加插鏈結"
 
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
-msgstr ""
+msgstr "經節"
 
 #: ../ui/editor_link_dialog.xml.h:4
 msgid "Link Text"
-msgstr ""
+msgstr "鏈結文字"
 
 #: ../ui/editor_link_dialog.xml.h:5
 msgid "Link directly"
-msgstr ""
+msgstr "直接連到經文"
 
 #: ../ui/editor_link_dialog.xml.h:6
 msgid "Link via verse list"
-msgstr ""
+msgstr "連到金句表"
 
 #: ../ui/editor_link_dialog.xml.h:7
-#, fuzzy
 msgid "Test Link"
-msgstr "插入連結"
+msgstr "測試鏈結"
 
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
-msgstr ""
+msgstr "離開程式"
 
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:2
 msgid "Exit"
-msgstr ""
+msgstr "離開"
 
 #: ../ui/editor_note.xml.h:3
 msgid "Print this note"
-msgstr ""
+msgstr "列印此筆記"
 
 #: ../ui/editor_note.xml.h:4
 msgid "Preview the note to be printed"
-msgstr ""
+msgstr "預覽要列印的筆記"
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
 msgid "HTML Format switch"
@@ -2471,11 +2586,11 @@ msgstr ""
 
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:6
 msgid "HTML mode"
-msgstr ""
+msgstr "HTML 模式"
 
 #: ../ui/editor_note.xml.h:7
 msgid "Delete the current note"
-msgstr ""
+msgstr "刪除目前的筆記"
 
 #: ../ui/editor_note.xml.h:8
 msgid "_Delete Personal Comment"
@@ -2489,7 +2604,7 @@ msgstr "檔案(_F)"
 
 #: ../ui/editor_note.xml.h:10
 msgid "Save the current note"
-msgstr ""
+msgstr "儲存目前的筆記"
 
 #: ../ui/editor_note.xml.h:11
 msgid "_Save (Personal Comment)"
@@ -2501,15 +2616,15 @@ msgstr "預覽列印(_V)"
 
 #: ../ui/editor_note.xml.h:13 ../ui/editor_studypad.xml.h:19
 msgid "_Print..."
-msgstr "列印(_P)..."
+msgstr "列印...(_P)"
 
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 msgid "E_xit"
-msgstr ""
+msgstr "離開(_X)"
 
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
 msgid "For_mat"
-msgstr ""
+msgstr "格式(_M)"
 
 #: ../ui/editor_note.xml.h:16 ../ui/editor_studypad.xml.h:11
 #: ../ui/gtk2_webedit.ui.h:75 ../ui/gtk_webedit.ui.h:75
@@ -2518,27 +2633,27 @@ msgstr "儲存"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Print this document"
-msgstr ""
+msgstr "列印此文件"
 
 #: ../ui/editor_studypad.xml.h:4
 msgid "Preview the document to be printed"
-msgstr ""
+msgstr "預覽要列印的文件"
 
 #: ../ui/editor_studypad.xml.h:8
 msgid "Open a file in Studypad"
-msgstr ""
+msgstr "在 StudyPad 開啟檔案"
 
 #: ../ui/editor_studypad.xml.h:10
 msgid "Save the current file"
-msgstr ""
+msgstr "儲存目前的檔案"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Save the current file as"
-msgstr ""
+msgstr "另存目前的檔案為"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Save AS"
-msgstr ""
+msgstr "另存新檔"
 
 #: ../ui/editor_studypad.xml.h:14
 msgid "Add this file to your bookmarks"
@@ -2546,16 +2661,16 @@ msgstr ""
 
 #: ../ui/editor_studypad.xml.h:16
 msgid "Create a new document"
-msgstr ""
+msgstr "製作新的文件"
 
 #: ../ui/editor_studypad.xml.h:17
 msgid "New Document"
-msgstr ""
+msgstr "新文件"
 
 #: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
 #: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "Copy/Export Passage"
-msgstr ""
+msgstr "複製／匯出經文"
 
 #: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:3
 msgid "Export Passage Cancel"
@@ -2567,7 +2682,7 @@ msgstr ""
 
 #: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:6
 msgid "Version"
-msgstr ""
+msgstr "版本號"
 
 #: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:7
 msgid ": "
@@ -2575,60 +2690,60 @@ msgstr ""
 
 #: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:8
 msgid "Key"
-msgstr ""
+msgstr "密鑰"
 
 #: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:9
 msgid "<b>Copy</b>"
-msgstr ""
+msgstr "<b>複製</b>"
 
 #: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:10
 msgid "<b>Export</b>"
-msgstr ""
+msgstr "<b>匯出</b>"
 
 #: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Export complete book"
-msgstr ""
+msgstr "匯出全卷"
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
 #: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "Book"
-msgstr ""
+msgstr "全卷"
 
 #: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:13
 msgid "Book Radio Button"
-msgstr ""
+msgstr "全卷的單選按鈕"
 
 #: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Export complete chapter"
-msgstr ""
+msgstr "匯出一整章"
 
 #: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:16
 msgid "Chapter Radio Button"
-msgstr ""
+msgstr "章的單選按鈕"
 
 #: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Export single verse"
-msgstr ""
+msgstr "匯出一節經文"
 
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse Radio Button"
-msgstr ""
+msgstr "經節範圍的單選按鈕"
 
 #: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:20
 msgid "Verse range"
-msgstr ""
+msgstr "經節範圍"
 
 #: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:21
 msgid "<b>Format</b>"
-msgstr ""
+msgstr "<b>格式</b>"
 
 #: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text"
-msgstr ""
+msgstr "純文字"
 
 #: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:23
 msgid "Plain Text Radio Button"
-msgstr ""
+msgstr "純文字的單選按鈕"
 
 #: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML"
@@ -2636,32 +2751,29 @@ msgstr ""
 
 #: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:25
 msgid "HTML Radio Button"
-msgstr ""
+msgstr "HTML 的單選按鈕"
 
 #: ../ui/export-dialog.glade.h:25
 msgid ""
 "Indicates whether verse numbers should appear inline in the text for more "
 "than 1 verse."
-msgstr ""
+msgstr "在匯出多於一節經文時，指明要否顯示每節節數。"
 
 #: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:26
-#, fuzzy
 msgid "_Verse numbers in text"
-msgstr "每句換行(_V)"
+msgstr "每節經文的節數(_V)"
 
 #: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:28
-#, fuzzy
 msgid "Verse Number button"
-msgstr "每句換行(_V)"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:30
 msgid "Indicates whether reference is placed first or last."
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:29
-#, fuzzy
 msgid "Reference last"
-msgstr "偏好設定"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:31
 msgid "Reference last button"
@@ -2672,14 +2784,12 @@ msgid "Indicates whether or not version name is included in reference."
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:32
-#, fuzzy
 msgid "Include Version"
-msgstr "Sword 版本"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:34
-#, fuzzy
 msgid "Version button"
-msgstr "每句換行(_V)"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:34
 msgid "Save Export As"
@@ -2687,30 +2797,28 @@ msgstr ""
 
 #: ../ui/export-dialog.gtkbuilder.h:27
 msgid "Indicates whether verse numbers should appear inline in the text."
-msgstr ""
+msgstr "指明在匯出時要否顯示每節節數。"
 
 #: ../ui/export-dialog.gtkbuilder.h:32
-#, fuzzy
 msgid "Include version"
-msgstr "Sword 版本"
+msgstr "逐節匯出時添附聖經版本名稱"
 
 #: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
-#, fuzzy
 msgid "About Studypad"
-msgstr "小筆記"
+msgstr "關於 StudyPad"
 
 #: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
 msgid "Open about dialog"
-msgstr ""
+msgstr "開啟關於資訊對話框"
 
 #: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:118
 #: ../ui/prefs.gtkbuilder.h:118
 msgid "Bold"
-msgstr ""
+msgstr "粗體"
 
 #: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
 msgid "Make selection bold"
-msgstr ""
+msgstr "選段文字加粗"
 
 #: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
 msgid "Copy"
@@ -2718,343 +2826,312 @@ msgstr "複製"
 
 #: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
 msgid "Copy selection to clipboard"
-msgstr ""
+msgstr "複製選段到剪貼簿"
 
 #: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
 msgid "Cut"
-msgstr ""
+msgstr "剪下"
 
 #: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
-#, fuzzy
 msgid "Cut selection"
-msgstr "刪除"
+msgstr "剪下選段"
 
 #: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
 msgid "Decrease indent"
-msgstr ""
+msgstr "減少往內縮排"
 
 #: ../ui/gtk2_webedit.ui.h:11 ../ui/gtk_webedit.ui.h:11
 msgid "Decrease"
-msgstr ""
+msgstr "減少"
 
 #: ../ui/gtk2_webedit.ui.h:12 ../ui/gtk_webedit.ui.h:12
 msgid "Decrease paragraph indent"
-msgstr ""
+msgstr "減少段落往內縮排"
 
 #: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
-#, fuzzy
 msgid "Delete selection"
-msgstr "刪除"
+msgstr "刪除選段"
 
 #: ../ui/gtk2_webedit.ui.h:14 ../ui/gtk_webedit.ui.h:14
 msgid "Delete"
 msgstr "刪除"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
-#, fuzzy
 msgid "Remove selection"
-msgstr "刪除選取的資料夾"
+msgstr "移除選段"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
 #: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
-msgstr ""
+msgstr "刪除項目"
 
 #: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
-#, fuzzy
 msgid "Delete current item"
-msgstr "刪除此筆附註"
+msgstr "刪除目前項目"
 
 #: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
-#, fuzzy
 msgid "Search current document"
-msgstr "儲存變更"
+msgstr "搜尋目前的文件"
 
 #: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
-#, fuzzy
 msgid "Font"
 msgstr "字型"
 
 #: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
-#, fuzzy
 msgid "Change font"
-msgstr "改變字型"
+msgstr "變更字型"
 
 #: ../ui/gtk2_webedit.ui.h:22 ../ui/gtk_webedit.ui.h:22
 msgid "Increase indent"
-msgstr ""
+msgstr "增加往內縮排"
 
 #: ../ui/gtk2_webedit.ui.h:23 ../ui/gtk_webedit.ui.h:23
 msgid "Increase"
-msgstr ""
+msgstr "增加"
 
 #: ../ui/gtk2_webedit.ui.h:24 ../ui/gtk_webedit.ui.h:24
 msgid "Increase paragraph indent"
-msgstr ""
+msgstr "增加段落往內縮排"
 
 #: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
-#, fuzzy
 msgid "Insert emoticon"
-msgstr "插入連結"
+msgstr "加插表情符號"
 
 #: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
 msgid "Emoticon"
-msgstr ""
+msgstr "表情符號"
 
 #: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
-#, fuzzy
 msgid "Insert an emoticon"
-msgstr "插入連結"
+msgstr "加插一個表情符號"
 
 #: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
-#, fuzzy
 msgid "Insert image"
-msgstr "插入連結"
+msgstr "加插圖片"
 
 #: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
-#, fuzzy
 msgid "Image"
 msgstr "圖片"
 
 #: ../ui/gtk2_webedit.ui.h:30 ../ui/gtk_webedit.ui.h:30
 msgid "Insert image at cursor"
-msgstr ""
+msgstr "在游標位置加插圖片"
 
 #: ../ui/gtk2_webedit.ui.h:31 ../ui/gtk_webedit.ui.h:31
-#, fuzzy
 msgid "Insert link"
-msgstr "插入連結"
+msgstr "加插鏈結"
 
 #: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
 msgid "Link"
-msgstr ""
+msgstr "鏈結"
 
 #: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
-#, fuzzy
 msgid "Insert a link"
-msgstr "插入連結"
+msgstr "加插一項鏈結"
 
 #: ../ui/gtk2_webedit.ui.h:34 ../ui/gtk_webedit.ui.h:34
-#, fuzzy
 msgid "Insert Outline"
-msgstr "插入連結"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:35 ../ui/gtk_webedit.ui.h:35
 msgid "Outline"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:36 ../ui/gtk_webedit.ui.h:36
-#, fuzzy
 msgid "Insert outline"
-msgstr "插入連結"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:37 ../ui/gtk_webedit.ui.h:37
-#, fuzzy
 msgid "Insert rule"
-msgstr "插入連結"
+msgstr "加插水平線"
 
 #: ../ui/gtk2_webedit.ui.h:38 ../ui/gtk_webedit.ui.h:38
 msgid "Rule"
-msgstr ""
+msgstr "規則"
 
 #: ../ui/gtk2_webedit.ui.h:39 ../ui/gtk_webedit.ui.h:39
 msgid "Insert horizontal rule"
-msgstr ""
+msgstr "加插水平線"
 
 #: ../ui/gtk2_webedit.ui.h:40 ../ui/gtk_webedit.ui.h:40
-#, fuzzy
 msgid "Xiphos Link"
-msgstr "Xiphos"
+msgstr "Xiphos 的鏈結"
 
 #: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
-#, fuzzy
 msgid "Xiphos"
-msgstr "Xiphos"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
-#, fuzzy
 msgid "Insert a link to a sword module"
-msgstr "安裝這些模組嗎?"
+msgstr "加插鏈結連到一個 Sword 模組"
 
 #: ../ui/gtk2_webedit.ui.h:43 ../ui/gtk_webedit.ui.h:43
-#, fuzzy
 msgid "Insert table"
-msgstr "插入連結"
+msgstr "加插表格"
 
 #: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
 msgid "Table"
-msgstr ""
+msgstr "表格"
 
 #: ../ui/gtk2_webedit.ui.h:45 ../ui/gtk_webedit.ui.h:45
 msgid "Insert a table"
-msgstr ""
+msgstr "加插一張表格"
 
 #: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
 msgid "Italic"
-msgstr ""
+msgstr "斜體"
 
 #: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
 msgid "Change selection to italic font"
-msgstr ""
+msgstr "變更選段字型為斜體"
 
 #: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
 msgid "Center"
-msgstr ""
+msgstr "置中"
 
 #: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
 msgid "Center justify paragraph"
-msgstr ""
+msgstr "段落置中"
 
 #: ../ui/gtk2_webedit.ui.h:50 ../ui/gtk_webedit.ui.h:50
 msgid "Full"
-msgstr ""
+msgstr "左右對齊"
 
 #: ../ui/gtk2_webedit.ui.h:51 ../ui/gtk_webedit.ui.h:51
 msgid "full justify"
-msgstr ""
+msgstr "左右對齊段落"
 
 #: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
 msgid "Left"
-msgstr ""
+msgstr "靠左"
 
 #: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
 msgid "Left justify paragraph"
-msgstr ""
+msgstr "靠左對齊段落"
 
 #: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
 msgid "Right"
-msgstr ""
+msgstr "靠右"
 
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
-msgstr ""
+msgstr "靠右對齊段落"
 
 #: ../ui/gtk2_webedit.ui.h:56 ../ui/gtk_webedit.ui.h:56
 msgid "New"
-msgstr "新增"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
 msgid "Create new file"
-msgstr ""
+msgstr "建立新的檔案"
 
 #: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
 msgid "Open file"
-msgstr ""
+msgstr "開啟檔案"
 
 #: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
 msgid "Paste"
-msgstr ""
+msgstr "貼上"
 
 #: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
 msgid "Paste clipboard at cursor."
-msgstr ""
+msgstr "在游標處貼上剪貼簿內容。"
 
 #: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
-#, fuzzy
 msgid "Print Document"
-msgstr "未命名的文件"
+msgstr "列印文件"
 
 #: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
-#, fuzzy
 msgid "Print"
 msgstr "列印"
 
 #: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
-#, fuzzy
 msgid "Print the current document"
-msgstr "儲存變更"
+msgstr "列印目前的文件"
 
 #: ../ui/gtk2_webedit.ui.h:65 ../ui/gtk_webedit.ui.h:65
-#, fuzzy
 msgid "Print Preview"
-msgstr "預覽列印(_V)"
+msgstr "預覽列印"
 
 #: ../ui/gtk2_webedit.ui.h:66 ../ui/gtk_webedit.ui.h:66
-#, fuzzy
 msgid "Preview"
-msgstr "預覽(_P)"
+msgstr "預覽"
 
 #: ../ui/gtk2_webedit.ui.h:67 ../ui/gtk_webedit.ui.h:67
 msgid "Print preview of current document"
-msgstr ""
+msgstr "目前文件的列印預覽"
 
 #: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
-#, fuzzy
 msgid "Quit"
-msgstr "結束(_Q)"
+msgstr "離開"
 
 #: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
 msgid "Shut down editor"
-msgstr ""
+msgstr "關掉編輯工具"
 
 #: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
 msgid "Redo"
-msgstr ""
+msgstr "取消復原"
 
 #: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
 msgid "Redo last undo"
-msgstr ""
+msgstr "重做上次復原動作"
 
 #: ../ui/gtk2_webedit.ui.h:72 ../ui/gtk_webedit.ui.h:72
 msgid "Find and replace"
-msgstr ""
+msgstr "尋找與取代"
 
 #: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
 msgid "Replace"
-msgstr ""
+msgstr "取代"
 
 #: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
-#, fuzzy
 msgid "Search and replace"
-msgstr "分頁和版面"
+msgstr "搜尋與取代"
 
 #: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
-#, fuzzy
 msgid "Save changes to file"
-msgstr "儲存變更"
+msgstr "儲存檔案的更動"
 
 #: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
-#, fuzzy
 msgid "Save as"
 msgstr "另存新檔"
 
 #: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
-#, fuzzy
 msgid "Save file as ..."
-msgstr "另存新檔(_A)..."
+msgstr "另存檔案為 ..."
 
 #: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
 msgid "Strikethrough"
-msgstr ""
+msgstr "加刪除線"
 
 #: ../ui/gtk2_webedit.ui.h:80 ../ui/gtk_webedit.ui.h:80
 msgid "Strikethrough selection"
-msgstr ""
+msgstr "選段加刪除線"
 
 #: ../ui/gtk2_webedit.ui.h:81 ../ui/gtk_webedit.ui.h:81
 msgid "Underline"
-msgstr ""
+msgstr "加底線"
 
 #: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
 msgid "Underline selection"
-msgstr ""
+msgstr "選段加底線"
 
 #: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
 msgid "Undo"
-msgstr ""
+msgstr "復原"
 
 #: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
 msgid "Undo last change"
-msgstr ""
+msgstr "復原上次的改動"
 
 #: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:85
-#, fuzzy
 msgid "Editor"
-msgstr "編輯"
+msgstr "編輯工具"
 
 #: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:87
 msgid "Recent files"
-msgstr ""
+msgstr "近來開啟檔案"
 
 #: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:88
 #: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
@@ -3068,71 +3145,71 @@ msgstr "說明(_H)"
 
 #: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:90
 msgid "Normal"
-msgstr ""
+msgstr "普通文字"
 
 #: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
 msgid "Header 1"
-msgstr ""
+msgstr "標題 1"
 
 #: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
 msgid "Header 2"
-msgstr ""
+msgstr "標題 2"
 
 #: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
 msgid "Header 3"
-msgstr ""
+msgstr "標題 3"
 
 #: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
 msgid "Header 4"
-msgstr ""
+msgstr "標題 4"
 
 #: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
 msgid "Header 5"
-msgstr ""
+msgstr "標題 5"
 
 #: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
 msgid "Header 6"
-msgstr ""
+msgstr "標題 6"
 
 #: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
 msgid "Address"
-msgstr ""
+msgstr "地址"
 
 #: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
 msgid "Preformatted"
-msgstr ""
+msgstr "預設格式文字"
 
 #: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
 msgid "Bulleted List"
-msgstr ""
+msgstr "項目符號清單"
 
 #: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
 msgid "Roman Numeral List"
-msgstr ""
+msgstr "羅馬數目序清單"
 
 #: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
 msgid "Numbered List"
-msgstr ""
+msgstr "數目序清單"
 
 #: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
 msgid "Alphabetical List"
-msgstr ""
+msgstr "字母序清單"
 
 #: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
 msgid "Strike"
-msgstr ""
+msgstr "加刪除線"
 
 #: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
 msgid "Set font color of selected text."
-msgstr ""
+msgstr "設定所選文字的字型色彩。"
 
 #: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
 msgid "Highlight selected text by setting background color."
-msgstr ""
+msgstr "設定重點標示文字的背景色彩。"
 
 #: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
-msgstr ""
+msgstr "標記／註銷標記經節"
 
 #: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:12
 msgid "Annotation Dialog"
@@ -3150,16 +3227,15 @@ msgstr ""
 
 #: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:3
 msgid "Mark"
-msgstr ""
+msgstr "標記"
 
 #: ../ui/markverse.glade.h:10 ../ui/markverse.gtkbuilder.h:5
 msgid "Unmark"
-msgstr ""
+msgstr "註銷標記"
 
 #: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
-#, fuzzy
 msgid "Remove annotation."
-msgstr "刪除選取的資料夾"
+msgstr ""
 
 #: ../ui/markverse.glade.h:12 ../ui/markverse.gtkbuilder.h:7
 msgid "Cancel Annotation"
@@ -3167,61 +3243,55 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
 msgid "Module Manager"
-msgstr ""
+msgstr "模組管理工具"
 
 #: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
-#, fuzzy
 msgid "_View Intro"
-msgstr "檢視(_V)"
+msgstr "檢視簡介(_V)"
 
 #: ../ui/module-manager.glade.h:3 ../ui/module-manager.gtkbuilder.h:3
 msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
+msgstr "開啟簡介說明文件解釋怎樣使用模組管理工具。"
 
 #: ../ui/module-manager.glade.h:4 ../ui/module-manager.gtkbuilder.h:4
 msgid "_Load Standard"
-msgstr ""
+msgstr "載入標準的藏書庫(_L)"
 
 #: ../ui/module-manager.glade.h:5 ../ui/module-manager.gtkbuilder.h:5
 msgid ""
 "Load and synchronize the standard set of known repositories, as maintained "
 "at crosswire.org, with your current remote sources."
-msgstr ""
+msgstr "使您目前的遠端來源同步載入由 crosswire.org 所維護的標準藏書庫組合。"
 
 #: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
 msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
-msgstr ""
+msgstr "刷新 Xiphos 關於所選遠端藏書庫流通的模組資訊"
 
 #: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
-#, fuzzy
 msgid "_Install"
-msgstr "安裝"
+msgstr "安裝(_I)"
 
 #: ../ui/module-manager.glade.h:8 ../ui/module-manager.gtkbuilder.h:7
-#, fuzzy
 msgid "Install or update the selected modules"
-msgstr "安裝這些模組嗎?"
+msgstr "安裝或更新所選的模組"
 
 #: ../ui/module-manager.glade.h:9 ../ui/module-manager.gtkbuilder.h:9
-#, fuzzy
 msgid "Remove the selected modules from your system"
-msgstr "移除所選的套件"
+msgstr "從系統移除所選的模組"
 
 #: ../ui/module-manager.glade.h:10 ../ui/module-manager.gtkbuilder.h:10
 msgid "_Archive"
-msgstr ""
+msgstr "備存(_A)"
 
 #: ../ui/module-manager.glade.h:11 ../ui/module-manager.gtkbuilder.h:11
-#, fuzzy
 msgid "Create a zip archive of the selected modules."
-msgstr "要刪除這些模組的快速搜尋索引嗎？"
+msgstr "備存所選模組為 zip 歸檔。"
 
 #: ../ui/module-manager.glade.h:12 ../ui/module-manager.gtkbuilder.h:12
-#, fuzzy
 msgid "_Index"
-msgstr "索引"
+msgstr "建立搜尋索引(_I)"
 
 #: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
 msgid ""
@@ -3229,26 +3299,24 @@ msgid ""
 msgstr ""
 
 #: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
-#, fuzzy
 msgid "_Delete Index"
-msgstr "正在刪除索引"
+msgstr "刪除搜尋索引(_D)"
 
 #: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
-#, fuzzy
 msgid "Delete the fast-search index of the selected modules."
-msgstr "要刪除這些模組的快速搜尋索引嗎？"
+msgstr "刪除所選模組的快速搜尋索引。"
 
 #: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
 msgid "Scan _Obsolete"
-msgstr ""
+msgstr "掃瞄過時模組(_O)"
 
 #: ../ui/module-manager.glade.h:17 ../ui/module-manager.gtkbuilder.h:17
 msgid "Scan for obsolete modules and offer to delete them."
-msgstr ""
+msgstr "掃瞄過時的模組，讓您可選擇刪除它們。"
 
 #: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:19
 msgid "Continue"
-msgstr ""
+msgstr "繼續"
 
 #. do not translate <b> and </b> they are html formating
 #: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:21
@@ -3257,98 +3325,101 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:22
 msgid "<b>Module Manager</b>"
-msgstr ""
+msgstr "<b>模組管理</b>"
 
 #: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:23
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
+msgstr "<b>警告:</b> 若您身處宗教逼害之國家，務必慎用。"
 
 #: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:24
 msgid "<b>Add and Remove Sources</b>"
-msgstr ""
+msgstr "<b>新增與移除來源</b>"
 
 #: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:25
 msgid "Current local sources"
-msgstr ""
+msgstr "目前的本地來源"
 
 #: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:26
 msgid ""
 "Add a local folder as an install source, typically on a cdrom or flash "
 "drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
 msgstr ""
+"從光碟機或隨身碟等媒體加入本地安裝來源的資料夾，其中包含\"mods.d\"和\"modules"
+"\"子資料夾。"
 
 #: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:27
 msgid "Remove one of your local folders as an install source."
-msgstr ""
+msgstr "從安裝來源中移除一個本地資料夾。"
 
 #: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:28
 msgid "Current Remote Sources"
-msgstr ""
+msgstr "目前的遠端來源"
 
 #: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:29
 msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
-msgstr ""
+msgstr "新增一個遠端的安裝來源。您必須提供主機名稱及藏書庫所在的目錄。"
 
 #: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:30
-#, fuzzy
 msgid "Remove a remote install source."
-msgstr "移除所選的套件"
+msgstr "移除一個遠端安裝來源。"
 
 #: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:31
 msgid "<b>Install Source</b>"
-msgstr ""
+msgstr "<b>安裝來源</b>"
 
 #: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:32
 msgid "Local"
-msgstr ""
+msgstr "本機"
 
 #: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:33
 msgid "Remote"
-msgstr ""
+msgstr "遠端"
 
 #: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:34
 msgid "<b>Install Destination</b>"
-msgstr ""
+msgstr "<b>安裝目的地</b>"
 
 #: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:35
 msgid "<i>Personal area, for your use only:</i>"
-msgstr ""
+msgstr "<i>個人區，只有您一人可用:</i>"
 
 #: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:36
 msgid "Home dir"
-msgstr ""
+msgstr "家目錄"
 
 #: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:37
 msgid "<i>System area, for all users:</i>"
-msgstr ""
+msgstr "<i>系統區，所有使用者可用:</i>"
 
 #: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:38
 msgid "Sword sys dir"
-msgstr ""
+msgstr "Sword 的系統目錄"
 
 #: ../ui/module-manager.glade.h:38 ../ui/module-manager.gtkbuilder.h:39
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
+"<b>警告:</b> 若您身處宗教逼害之國家，為免冒遭偵查之險，請勿使用遠端安裝功"
+"能！ "
 
 #: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:40
 msgid "Local Install Folder"
-msgstr ""
+msgstr "本機安裝的資料夾"
 
 #: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
 msgid "Drop down history list"
-msgstr ""
+msgstr "下拉式閱覽記錄清單"
 
 #: ../ui/navbar_versekey.glade.h:2
 msgid "Choose book to display"
-msgstr ""
+msgstr "選取要顯示的圖書"
 
 #: ../ui/navbar_versekey.glade.h:3 ../ui/navbar_versekey.gtkbuilder.h:3
 msgid "Book Selector Button"
-msgstr ""
+msgstr "圖書選擇按鈕"
 
 #: ../ui/navbar_versekey.glade.h:4 ../ui/navbar_versekey.gtkbuilder.h:2
 msgid "<b>Revelation of John</b>"
@@ -3388,11 +3459,11 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:11
 msgid "<b>Font Colors</b>"
-msgstr ""
+msgstr "<b>字型色彩</b>"
 
 #: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:12
 msgid "Background"
-msgstr ""
+msgstr "背景"
 
 #: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
 msgid " "
@@ -3400,55 +3471,55 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
 msgid "Foreground"
-msgstr ""
+msgstr "前景"
 
 #: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
 msgid "Current Verse"
-msgstr ""
+msgstr "目前的經節"
 
 #: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
 msgid "Verse Number"
-msgstr ""
+msgstr "經節數字"
 
 #: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
 msgid "Links"
-msgstr ""
+msgstr "鏈結"
 
 #: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
 msgid "Highlight Foreground"
-msgstr ""
+msgstr "重點標示前景"
 
 #: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
 msgid "Highlight Background"
-msgstr ""
+msgstr "重點標示背景"
 
 #: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
 msgid "Invert color pairs"
-msgstr ""
+msgstr "對掉前背景色彩配"
 
 #: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
 msgid "Normal Text"
-msgstr ""
+msgstr "普通文字"
 
 #: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
 msgid "Highlight"
-msgstr ""
+msgstr "重點標示"
 
 #: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
 msgid "Font Colors"
-msgstr ""
+msgstr "字型色彩"
 
 #: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
 msgid "<b>Font Sizes</b>"
-msgstr ""
+msgstr "<b>字型大小</b>"
 
 #: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
 msgid "All displayed font sizes are relative to this choice"
-msgstr ""
+msgstr "所有字型顯示的大小均依此值相對調整"
 
 #: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:26
 msgid "Base font size"
-msgstr ""
+msgstr "基本字型大小"
 
 #: ../ui/prefs.glade.h:19
 msgid ""
@@ -3464,29 +3535,30 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
 msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr ""
+msgstr "一般選擇 -1，令節數字型不致礙眼"
 
 #: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
 msgid "Verse number size"
-msgstr ""
+msgstr "節數字型大小"
 
 #: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
 msgstr ""
+"依模組所屬語言來設定字型名稱及大小；但仍優先使用個別模組指定的字型及大小值。"
 
 #: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
 msgid "Font preferences, per language"
-msgstr ""
+msgstr "依個別語言的字型設定"
 
 #: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
 msgid "Language Font Combo"
-msgstr ""
+msgstr "語言與字型設定的下拉選單"
 
 #: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
 msgid "Font Misc"
-msgstr ""
+msgstr "字型雜項"
 
 #: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
 msgid "<b>BibleSync</b>"
@@ -3503,164 +3575,161 @@ msgid ""
 "audience's Bible programs to follow along; Audience, to receive the "
 "speaker's navigation."
 msgstr ""
+"Xiphos 是首個運用 BibleSync 聖經程式同步協定的查經軟體。如果您執行多個聖經程"
+"式、以小隊形式操作，或在教室活動中舉行分享學習，BibleSync 均為您的好工具。"
+"BibleSync 有 3 種執行模式：個人模式——同步執行您或工作小隊中的多個聖經應用程"
+"式；揚聲器模式——領導演講聽眾的聖經程式跟隨您的導播；聽眾模式——接收揚聲器的導"
+"播。"
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:36
 msgid "<i>Mode:</i>"
-msgstr ""
+msgstr "<i>模式:</i>"
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:35
 msgid "Select the mode in which BibleSync should operate."
-msgstr ""
+msgstr "選擇 BibleSync 要運作的模式。"
 
 #: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
 msgid "_Off"
-msgstr ""
+msgstr "關(_O)"
 
 #: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
 msgid "Disable BibleSync."
-msgstr ""
+msgstr "停用 BibleSync。"
 
 #: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
 msgid "BSP off radio button"
-msgstr ""
+msgstr "BSP 關的單選按鈕"
 
 #: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
 msgid "_Speaker"
-msgstr ""
+msgstr "揚聲器模式(_S)"
 
 #: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
 msgid "Enable BibleSync as the speaker."
-msgstr ""
+msgstr "啟用 BibleSync 作揚聲器。"
 
 #: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
 msgid "BSP speaker radio button"
-msgstr ""
+msgstr "BSP 揚聲器模式的單選按鈕"
 
 #: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
 msgid "_Audience"
-msgstr ""
+msgstr "聽眾模式(_A)"
 
 #: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
 msgid "Enable BibleSync as a member of the audience."
-msgstr ""
+msgstr "啟用 BibleSync 為聽眾成員。"
 
 #: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
 msgid "BSP audience radio button"
-msgstr ""
+msgstr "BSP 聽眾模式的單選按鈕"
 
 #: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
 msgid "_Personal"
-msgstr ""
+msgstr "個人模式(_P)"
 
 #: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
 msgid "Enable BibleSync for personal or team use."
-msgstr ""
+msgstr "啟用 BibleSync 作個人或小隊使用。"
 
 #: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
-#, fuzzy
 msgid "BSP personal radio button"
-msgstr "每句換行(_V)"
+msgstr "BSP 個人模式的單選按鈕"
 
 #: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
 msgid "Private"
-msgstr ""
+msgstr "私人專用"
 
 #: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
 msgid ""
 "When in Personal mode, only programs running on this machine will hear your "
 "navigation."
-msgstr ""
+msgstr "在個人模式中設定此項，即只有本機執行中的程式會聽到您導播。"
 
 #: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
-#, fuzzy
 msgid "BSP privacy button"
-msgstr "每句換行(_V)"
+msgstr "BSP 私人轉用的按鈕"
 
 #: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:53
 msgid "<i>Navigate:</i>"
-msgstr ""
+msgstr "<i>導播:</i>"
 
 #: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:52
 msgid "Choose how to accept incoming navigation synchronization."
-msgstr ""
+msgstr "選取如何接收外來同步導播的方式。"
 
 #: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
-#, fuzzy
 msgid "_Direct"
-msgstr "目錄"
+msgstr "直接導播(_D)"
 
 #: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
-msgstr ""
+msgstr "BibleSync 導播會直接傳送指明的經節到 Xiphos 中。"
 
 #: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
 msgid "BSP nav direct radio button"
-msgstr ""
+msgstr "BSP 直接導播的單選按鈕"
 
 #: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
-#, fuzzy
 msgid "_Verse list"
-msgstr "經句: "
+msgstr "導播金句表(_V)"
 
 #: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
 msgid "BibleSync navigation will use Xiphos' sidebar verse list."
-msgstr ""
+msgstr "BibleSync 導播會使用 Xiphos 側邊欄中的金句表。"
 
 #: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
 msgid "BSP nav verse list radio button"
-msgstr ""
+msgstr "BSP 導播金句表的單選按鈕"
 
 #: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:61
 msgid "<i>Listen:</i>"
-msgstr ""
+msgstr "<i>聆聽:</i>"
 
 #: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:60
 msgid "Xiphos will listen to Speakers according to choice here."
-msgstr ""
+msgstr "Xiphos 會根據下面選取的揚聲器來聆聽。"
 
 #: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
 msgid "Selective"
-msgstr ""
+msgstr "選擇接收"
 
 #: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
 msgid "Choose the Speakers to be followed."
-msgstr ""
+msgstr "選擇跟隨個別揚聲器的導播。"
 
 #: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
-#, fuzzy
 msgid "BSP listen some radio button"
-msgstr "每句換行(_V)"
+msgstr "BSP 選擇接收的單選按鈕"
 
 #: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
 msgid "All"
-msgstr ""
+msgstr "全部接收"
 
 #: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
 msgid "All Speakers will be followed."
-msgstr ""
+msgstr "跟隨所有揚聲器的導播。"
 
 #: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
-#, fuzzy
 msgid "BSP listen all radio button"
-msgstr "每句換行(_V)"
+msgstr "BSP 全部接收的單選按鈕"
 
 #: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
 msgid "None"
-msgstr ""
+msgstr "無"
 
 #: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
 msgid "No Speakers will be followed."
-msgstr ""
+msgstr "不跟隨任何揚聲器的導播。"
 
 #: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
-#, fuzzy
 msgid "BSP listen none radio button"
-msgstr "每句換行(_V)"
+msgstr "BSP 無的單選按鈕"
 
 #: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:72
-#, fuzzy
 msgid "<i>Special:</i>"
-msgstr "特殊"
+msgstr "<i>特殊:</i>"
 
 #: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:71
 msgid ""
@@ -3668,48 +3737,49 @@ msgid ""
 "presence, mismatch, and debug. Beware enabling these, they can be very "
 "chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
 msgstr ""
+"BibleSync 操作過程中可另行啟動的追蹤功能如出席、錯配、除錯。留意啟動以上功能"
+"會添加大量交談訊息。另外這裡也能設定是否要容許把群組參數當作 Xiphos 的分頁號"
+"碼。"
 
 #: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
-#, fuzzy
 msgid "Presence"
-msgstr "偏好設定"
+msgstr "出席"
 
 #: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
 msgid "Presence announcements will be shown in dialogs."
-msgstr ""
+msgstr "在對話框中顯示出席通知。"
 
 #: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
-#, fuzzy
 msgid "BSP presence button"
-msgstr "每句換行(_V)"
+msgstr "BSP 出席的按鈕"
 
 #: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
 msgid "Mismatch"
-msgstr ""
+msgstr "錯配"
 
 #: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Mismatches from your session will be shown in dialogs."
-msgstr ""
+msgstr "在對話框中顯示錯配資訊。"
 
 #: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
 msgid "BSP mismatch button"
-msgstr ""
+msgstr "BSP 錯配的按鈕"
 
 #: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
 msgid "Debug"
-msgstr ""
+msgstr "除錯"
 
 #: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
 msgid "Packet tracing."
-msgstr ""
+msgstr "封包追蹤。"
 
 #: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
 msgid "BSP event debug button"
-msgstr ""
+msgstr "BSP 事件之除錯按鈕"
 
 #: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
 msgid "_Group as tab"
-msgstr ""
+msgstr "群組當成分頁(_G)"
 
 #: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
 msgid ""
@@ -3717,60 +3787,62 @@ msgid ""
 "Disabling this may be necessary if some Speakers' use of group number is not "
 "appropriate as a tab number."
 msgstr ""
+"詮釋 BibleSync 傳輸協定中的「群組號碼」參數為 Xiphos 所用之「分頁號碼」。如果"
+"您認為揚聲器所用的群組號碼不宜當作分頁號碼時，您或須停用此項。"
 
 #: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 msgid "BSP event group-as-tab button"
-msgstr ""
+msgstr "BSP 事件之群組當成分頁按鈕"
 
 #: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>總類</b> "
 
 #: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
-msgstr ""
+msgstr "選擇特定的語言顯示介面，以別於您本身的系統設定"
 
 #: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
 msgid "Special Locale (requires restart)"
-msgstr ""
+msgstr "特定語系（須重新啟動程式）"
 
 #: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "Special Locale Combo"
-msgstr ""
+msgstr "特定語系的下拉選單"
 
 #: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
 msgid "Show splash screen at start up"
-msgstr ""
+msgstr "啟動程式時顯示啟動畫面"
 
 #: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
 msgid "Show Daily Devotion at start up"
-msgstr ""
+msgstr "啟動程式時顯示每日靈修"
 
 #: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
-msgstr ""
+msgstr "如有設定偏好的每日靈修模組，即在程式啟動時顯示今日的選讀。"
 
 #: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Use default Dictionary"
-msgstr ""
+msgstr "使用預設的辭典"
 
 #: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
-msgstr ""
+msgstr "使雙擊字詞時使用預設的辭典而非目前顯示的辭典"
 
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
 msgid "Use default Dictionary Checkbox"
-msgstr ""
+msgstr "使用預設的辭典核取方塊"
 
 #: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
 msgid "Scroll to Previous/Next Chapter"
-msgstr ""
+msgstr "捲動到上／下一章"
 
 #: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
@@ -3778,197 +3850,194 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr ""
+msgstr "捲動到上／下一章核取方塊"
 
 #: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
 msgid "Resize images"
-msgstr ""
+msgstr "重設圖片大小"
 
 #: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 msgid "Automatically resize image content to fit the pane"
-msgstr ""
+msgstr "依視窗框大小自動調節圖片內容"
 
 #: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 msgid "Resize images checkbox"
-msgstr ""
+msgstr "重設圖片大小核取方塊"
 
 #: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 msgid "Highlight current verse"
-msgstr ""
+msgstr "重點標示目前的經節"
 
 #: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
 msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr ""
+msgstr "鮮色重點標示目前的經節 - 見調色盤"
 
 #: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "Highlight current verse check box"
-msgstr ""
+msgstr "重點標示目前的經節核取方塊"
 
 #: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
-#, fuzzy
 msgid "Highlight user annotations"
-msgstr "強調顯示目前經文(_H)"
+msgstr "重點標示目前的經節核取方塊"
 
 #: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
 msgid "Use inverted highlight on user-annotated verses"
-msgstr ""
+msgstr "用對掉的重點標示色彩來顯示使用者標註的經節"
 
 #: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
 msgid "Highlight user annotations check box"
-msgstr ""
+msgstr "重點標示使用者的標註核取方塊"
 
 #: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
 msgid "Cross-references in verse list"
-msgstr ""
+msgstr "在金句表中顯示交叉參照"
 
 #: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr ""
+msgstr "在金句表中顯示交叉參照而不使用預覽區"
 
 #: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 msgid "Xrefs in verse list check box"
-msgstr ""
+msgstr "在金句表中顯示交叉參照核取方塊"
 
 #: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
 msgid "Enable Prayer Lists"
-msgstr ""
+msgstr "啟用禱告表"
 
 #: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Make journals/prayer lists available"
-msgstr ""
+msgstr "使日誌／禱告表可用"
 
 #: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
 msgid "Enable Prayer Lists Checkbox"
-msgstr ""
+msgstr "啟用禱告表核取方塊"
 
 #: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
 msgid "Enable Statusbar"
-msgstr ""
+msgstr "啟用狀態列"
 
 #: ../ui/prefs.glade.h:115
 msgid "Enable/Disable Statusbar."
-msgstr ""
+msgstr "啟用／停用狀態列。"
 
 #: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:117
-#, fuzzy
 msgid "Verse number"
-msgstr "經句: "
+msgstr "節數"
 
 #: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:116
 msgid "Offset the verse number in several ways"
-msgstr ""
+msgstr "選擇襯托節數的不同方式"
 
 #: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
 msgid "Show verse number in bold text"
-msgstr ""
+msgstr "以粗體文字顯示節數"
 
 #: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 msgid "Verse number bold checkbox"
-msgstr ""
+msgstr "節數粗體核取方塊"
 
 #: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
 msgid "Brackets"
-msgstr ""
+msgstr "括起"
 
 #: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
 msgid "Show verse number with [surrounding brackets]"
-msgstr ""
+msgstr "以 [括號括起] 顯示節數"
 
 #: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
 msgid "Verse number bracket checkbox"
-msgstr ""
+msgstr "括起節數核取方塊"
 
 #: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
-#, fuzzy
 msgid "Superscript"
-msgstr "說明"
+msgstr "上標"
 
 #: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
 msgid "Show verse number as a superscript"
-msgstr ""
+msgstr "以上標文字顯示節數"
 
 #: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Verse number superscript checkbox"
-msgstr ""
+msgstr "上標節數核取方塊"
 
 #: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 msgid "StudyPad default directory"
-msgstr ""
+msgstr "StudyPad 的預設目錄"
 
 #: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "Select A Directory"
-msgstr ""
+msgstr "選擇一個目錄"
 
 #: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 msgid "StudyPad default directory combo"
-msgstr ""
+msgstr "StudyPad 的預設目錄下拉選單"
 
 #: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 msgid "General Misc"
-msgstr ""
+msgstr "總類雜項"
 
 #: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
 msgid "<b>Main Window Modules</b>"
-msgstr ""
+msgstr "<b>主視窗的模組</b>"
 
 #: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
 msgid "Biblical Text"
-msgstr ""
+msgstr "聖經經文"
 
 #: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 msgid "Change Biblical Text Combo"
-msgstr ""
+msgstr "變更聖經經文的下拉選單"
 
 #: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "Change Commentary Combo"
-msgstr ""
+msgstr "變更註釋書的下拉選單"
 
 #: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "Change Dictionary Combo"
-msgstr ""
+msgstr "變更辭典的下拉選單"
 
 #: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 msgid "Change Book Combo"
-msgstr ""
+msgstr "變更圖書的下拉選單"
 
 #: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
-msgstr ""
+msgstr "<b>模組</b>"
 
 #: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
-msgstr ""
+msgstr "清除清單中的所有模組"
 
 #: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
-msgstr ""
+msgstr "清除清單中的所有模組按鈕"
 
 #: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
-msgstr ""
+msgstr "清除清單中所選的模組"
 
 #: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
-msgstr ""
+msgstr "清除清單中所選的模組按鈕"
 
 #: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 msgid "Open a dialog to select modules"
-msgstr ""
+msgstr "開啟選擇模組對話框"
 
 #: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
-msgstr ""
+msgstr "加入模組"
 
 #: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
-msgstr ""
+msgstr "開啟選擇模組對話框的按鈕"
 
 #: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 msgid "Modules Parallel"
@@ -3976,51 +4045,51 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 msgid "<b>Special Purpose Modules</b>"
-msgstr ""
+msgstr "<b>專用模組</b>"
 
 #: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 msgid "Daily Devotional"
-msgstr ""
+msgstr "每日靈修材料"
 
 #: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
 msgid "Daily Devotional Combo"
-msgstr ""
+msgstr "每日靈修材料的下拉選單"
 
 #: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
 msgid "Hebrew Lexicon"
-msgstr ""
+msgstr "希伯來文詞彙"
 
 #: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
 msgid "Hebrew Lexicon Combo"
-msgstr ""
+msgstr "希伯來文詞彙的下拉選單"
 
 #: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
 msgid "Greek Lexicon"
-msgstr ""
+msgstr "希臘文詞彙"
 
 #: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
 msgid "Greek Lexicon Combo"
-msgstr ""
+msgstr "希臘文詞彙的下拉選單"
 
 #: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
 msgid "Default Dictionary"
-msgstr ""
+msgstr "預設使用的辭典"
 
 #: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Change Default Dictionary Combo"
-msgstr ""
+msgstr "變更預設使用的辭典下拉選單"
 
 #: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Personal Notes"
-msgstr ""
+msgstr "個人筆記"
 
 #: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
 msgid "Change Personal Notes Combo"
-msgstr ""
+msgstr "變更個人筆記的下拉選單"
 
 #: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
 msgid "Modules Misc"
-msgstr ""
+msgstr "模組雜項"
 
 #: ../ui/prefs.gtkbuilder.h:1
 msgid "-2"
@@ -4052,15 +4121,15 @@ msgstr ""
 
 #: ../ui/prefs.gtkbuilder.h:115
 msgid "Enable/disable the Statusbar"
-msgstr ""
+msgstr "啟用／停用狀態列"
 
 #: ../ui/search-dialog.glade.h:1 ../ui/search-dialog.gtkbuilder.h:1
 msgid "Advanced Search"
-msgstr ""
+msgstr "進階搜尋"
 
 #: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
 msgid "_Lucene Search Syntax"
-msgstr ""
+msgstr "_Lucene 搜尋語法"
 
 #: ../ui/search-dialog.glade.h:3 ../ui/search-dialog.gtkbuilder.h:3
 msgid ""
@@ -4070,71 +4139,71 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
 msgid "_Attribute Search"
-msgstr ""
+msgstr "屬性搜尋(_A)"
 
 #: ../ui/search-dialog.glade.h:5 ../ui/search-dialog.gtkbuilder.h:5
 msgid "Open a brief explanation of attribute-based searches."
-msgstr ""
+msgstr "開啟關於依屬性搜尋功能的簡單說明。"
 
 #: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
 msgid "for "
-msgstr ""
+msgstr "關鍵字句: "
 
 #: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
 msgid "Main Search Entry"
-msgstr ""
+msgstr "主搜尋輸入方塊"
 
 #: ../ui/search-dialog.glade.h:8 ../ui/search-dialog.gtkbuilder.h:9
 msgid "Start/stop searching"
-msgstr ""
+msgstr "開始／停止搜尋"
 
 #: ../ui/search-dialog.glade.h:9 ../ui/search-dialog.gtkbuilder.h:10
 msgid "Find Button"
-msgstr ""
+msgstr "尋找按鈕"
 
 #: ../ui/search-dialog.glade.h:10 ../ui/search-dialog.gtkbuilder.h:11
 msgid "Search Criteria Treeview"
-msgstr ""
+msgstr "樹狀檢視搜索條件"
 
 #: ../ui/search-dialog.glade.h:11 ../ui/search-dialog.gtkbuilder.h:12
 msgid "<b>Scope</b>"
-msgstr ""
+msgstr "<b>區域</b>"
 
 #: ../ui/search-dialog.glade.h:12 ../ui/search-dialog.gtkbuilder.h:14
 msgid "Search entire module"
-msgstr ""
+msgstr "搜尋模組中的全部內容"
 
 #: ../ui/search-dialog.glade.h:13 ../ui/search-dialog.gtkbuilder.h:13
 msgid "Entire module"
-msgstr ""
+msgstr "模組中全部內容"
 
 #: ../ui/search-dialog.glade.h:14 ../ui/search-dialog.gtkbuilder.h:15
 msgid "Entire module radiobutton"
-msgstr ""
+msgstr "模組中全部內容單選按鈕"
 
 #: ../ui/search-dialog.glade.h:15 ../ui/search-dialog.gtkbuilder.h:17
 msgid "Use the results of the last search as the scope of the search"
-msgstr ""
+msgstr "劃定上次的搜尋結果為搜尋區域"
 
 #: ../ui/search-dialog.glade.h:16 ../ui/search-dialog.gtkbuilder.h:16
 msgid "Current results"
-msgstr ""
+msgstr "目前搜尋結果"
 
 #: ../ui/search-dialog.glade.h:17 ../ui/search-dialog.gtkbuilder.h:18
 msgid "Current results radiobutton"
-msgstr ""
+msgstr "目前搜尋結果的單選按鈕"
 
 #: ../ui/search-dialog.glade.h:18 ../ui/search-dialog.gtkbuilder.h:20
 msgid "Use a custom range for the scope of the search"
-msgstr ""
+msgstr "劃定自訂的範圍為搜尋區域"
 
 #: ../ui/search-dialog.glade.h:19 ../ui/search-dialog.gtkbuilder.h:19
 msgid "Custom verse range"
-msgstr ""
+msgstr "自訂章節範圍"
 
 #: ../ui/search-dialog.glade.h:20 ../ui/search-dialog.gtkbuilder.h:21
 msgid "Custom verse range radiobutton"
-msgstr ""
+msgstr "自訂章節範圍單選按鈕"
 
 #: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
 msgid "Custom Range Selector Combo"
@@ -4142,47 +4211,47 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
 msgid "Use a single module for the search"
-msgstr ""
+msgstr "在單一模組清單搜尋"
 
 #: ../ui/search-dialog.glade.h:24 ../ui/search-dialog.gtkbuilder.h:24
 msgid "Single module"
-msgstr ""
+msgstr "單一模組"
 
 #: ../ui/search-dialog.glade.h:25 ../ui/search-dialog.gtkbuilder.h:26
 msgid "Single module radiobutton"
-msgstr ""
+msgstr "單一模組的單選按鈕"
 
 #: ../ui/search-dialog.glade.h:26 ../ui/search-dialog.gtkbuilder.h:28
 msgid "Use the current module list for the search"
-msgstr ""
+msgstr "在目前的模組清單搜尋"
 
 #: ../ui/search-dialog.glade.h:27 ../ui/search-dialog.gtkbuilder.h:27
 msgid "Module list"
-msgstr ""
+msgstr "模組清單"
 
 #: ../ui/search-dialog.glade.h:28 ../ui/search-dialog.gtkbuilder.h:29
 msgid "Module list radiobutton"
-msgstr ""
+msgstr "模組清單的單選按鈕"
 
 #: ../ui/search-dialog.glade.h:29 ../ui/search-dialog.gtkbuilder.h:31
 msgid "Use a custom module list for the search"
-msgstr ""
+msgstr "在自訂的模組清單搜尋"
 
 #: ../ui/search-dialog.glade.h:30 ../ui/search-dialog.gtkbuilder.h:30
 msgid "Custom module list"
-msgstr ""
+msgstr "自訂的模組清單"
 
 #: ../ui/search-dialog.glade.h:31 ../ui/search-dialog.gtkbuilder.h:32
 msgid "Custom module list radiobutton"
-msgstr ""
+msgstr "自訂的模組清單單選按鈕"
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Module List Combo"
-msgstr ""
+msgstr "自訂的模組清單下拉清單"
 
 #: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
 msgid "<b>Search Type</b>"
-msgstr ""
+msgstr "<b>搜尋類型</b>"
 
 #: ../ui/search-dialog.glade.h:34 ../ui/search-dialog.gtkbuilder.h:35
 msgid ""
@@ -4190,6 +4259,9 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
+"快速的多功能索引式搜尋\n"
+"必先建立搜尋索引才能使用:\n"
+"詳見模組管理工具的維護功能面板"
 
 #: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
@@ -4197,67 +4269,67 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:39 ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi word"
-msgstr ""
+msgstr "多個字詞"
 
 #: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
 msgid "Multi word radiobutton"
-msgstr ""
+msgstr "多個字詞的單選按鈕"
 
 #: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
 msgid "Regular expression radiobutton"
-msgstr ""
+msgstr "正規表達式的單選按鈕"
 
 #: ../ui/search-dialog.glade.h:44 ../ui/search-dialog.gtkbuilder.h:44
 msgid "Exact phrase radiobutton"
-msgstr ""
+msgstr "完全相同之詞句單選按鈕"
 
 #: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
 msgid "Make selections on the Attribute Search tab"
-msgstr ""
+msgstr "依據屬性搜尋分頁的所選項目搜尋"
 
 #: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
 msgid "Attributes"
-msgstr ""
+msgstr "屬性"
 
 #: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
 msgid "Attributes radiobutton"
-msgstr ""
+msgstr "屬性的單選按鈕"
 
 #: ../ui/search-dialog.glade.h:48 ../ui/search-dialog.gtkbuilder.h:48
 msgid "<b>Options</b>"
-msgstr ""
+msgstr "<b>選項</b>"
 
 #: ../ui/search-dialog.glade.h:50 ../ui/search-dialog.gtkbuilder.h:50
 msgid "Match case checkbox"
-msgstr ""
+msgstr "符合大小寫核取方塊"
 
 #: ../ui/search-dialog.glade.h:51 ../ui/search-dialog.gtkbuilder.h:51
 msgid "Search  Criteria"
-msgstr ""
+msgstr "搜索條件"
 
 #: ../ui/search-dialog.glade.h:52 ../ui/search-dialog.gtkbuilder.h:52
 msgid "Show in main window"
-msgstr ""
+msgstr "在主視窗顯示"
 
 #: ../ui/search-dialog.glade.h:53 ../ui/search-dialog.gtkbuilder.h:53
 msgid "Save search results as bookmarks"
-msgstr ""
+msgstr "把搜尋結果儲存為書籤"
 
 #: ../ui/search-dialog.glade.h:54 ../ui/search-dialog.gtkbuilder.h:54
 msgid "Export current search results"
-msgstr ""
+msgstr "匯出目前的搜尋結果"
 
 #: ../ui/search-dialog.glade.h:55 ../ui/search-dialog.gtkbuilder.h:55
 msgid "Export"
-msgstr ""
+msgstr "匯出"
 
 #: ../ui/search-dialog.glade.h:56 ../ui/search-dialog.gtkbuilder.h:56
 msgid "Clear lists for new search"
-msgstr ""
+msgstr "清除搜尋結果"
 
 #: ../ui/search-dialog.glade.h:57 ../ui/search-dialog.gtkbuilder.h:57
 msgid "<b>Found</b>"
-msgstr ""
+msgstr "<b>找到</b>"
 
 #: ../ui/search-dialog.glade.h:58 ../ui/search-dialog.gtkbuilder.h:59
 msgid "Result Summary Window"
@@ -4269,261 +4341,260 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:60 ../ui/search-dialog.gtkbuilder.h:60
 msgid "<b>Search Results</b>"
-msgstr ""
+msgstr "<b>搜尋結果</b>"
 
 #: ../ui/search-dialog.glade.h:61 ../ui/search-dialog.gtkbuilder.h:61
 msgid "<b>Preview</b>"
-msgstr ""
+msgstr "<b>預覽</b>"
 
 #: ../ui/search-dialog.glade.h:62 ../ui/search-dialog.gtkbuilder.h:62
 msgid "Results"
-msgstr ""
+msgstr "搜尋結果"
 
 #: ../ui/search-dialog.glade.h:63 ../ui/search-dialog.gtkbuilder.h:63
 msgid "Create new custom range"
-msgstr ""
+msgstr "自訂新的範圍"
 
 #: ../ui/search-dialog.glade.h:64 ../ui/search-dialog.gtkbuilder.h:64
 msgid "New Range Button"
-msgstr ""
+msgstr "新的範圍按鈕"
 
 #: ../ui/search-dialog.glade.h:65 ../ui/search-dialog.gtkbuilder.h:65
 msgid "Save custom range"
-msgstr ""
+msgstr "儲存自訂的範圍"
 
 #: ../ui/search-dialog.glade.h:66 ../ui/search-dialog.gtkbuilder.h:66
 msgid "Save Range Button"
-msgstr ""
+msgstr "儲存範圍的按鈕"
 
 #: ../ui/search-dialog.glade.h:67 ../ui/search-dialog.gtkbuilder.h:67
 msgid "Delete selected range"
-msgstr ""
+msgstr "刪除所選的範圍"
 
 #: ../ui/search-dialog.glade.h:68 ../ui/search-dialog.gtkbuilder.h:68
 msgid "Delete Range Button"
-msgstr ""
+msgstr "刪除範圍的按鈕"
 
 #: ../ui/search-dialog.glade.h:69 ../ui/search-dialog.gtkbuilder.h:69
 msgid "<b>Ranges</b>"
-msgstr ""
+msgstr "<b>範圍</b>"
 
 #: ../ui/search-dialog.glade.h:70 ../ui/search-dialog.gtkbuilder.h:70
 msgid "<b>Range Name</b>"
-msgstr ""
+msgstr "<b>範圍名稱</b> "
 
 #: ../ui/search-dialog.glade.h:71 ../ui/search-dialog.gtkbuilder.h:71
 msgid "Range Name Entry"
-msgstr ""
+msgstr "範圍名稱的輸入方塊"
 
 #: ../ui/search-dialog.glade.h:72 ../ui/search-dialog.gtkbuilder.h:72
 msgid "<b>Range Definition</b>"
-msgstr ""
+msgstr "<b>範圍定義</b> "
 
 #: ../ui/search-dialog.glade.h:73 ../ui/search-dialog.gtkbuilder.h:73
 msgid "Range Definition Entry"
-msgstr ""
+msgstr "範圍定義的輸入方塊"
 
 #: ../ui/search-dialog.glade.h:74 ../ui/search-dialog.gtkbuilder.h:74
 msgid "e.g. Matt-John;Rev4"
-msgstr ""
+msgstr "例：Matt-John;Rev4（譯註：正體和合本：馬太-約翰福音;啟4）"
 
 #: ../ui/search-dialog.glade.h:75 ../ui/search-dialog.gtkbuilder.h:75
 msgid "Custom Range Preview"
-msgstr ""
+msgstr "自訂範圍預覽"
 
 #: ../ui/search-dialog.glade.h:76 ../ui/search-dialog.gtkbuilder.h:76
 msgid "Custom Verse Ranges"
-msgstr ""
+msgstr "自訂章節範圍"
 
 #: ../ui/search-dialog.glade.h:77 ../ui/search-dialog.gtkbuilder.h:77
 msgid "Create a new module list"
-msgstr ""
+msgstr "制訂一張新的模組清單"
 
 #: ../ui/search-dialog.glade.h:78 ../ui/search-dialog.gtkbuilder.h:78
 msgid "New Custom Module List Button"
-msgstr ""
+msgstr "新增自訂的模組清單按鈕"
 
 #: ../ui/search-dialog.glade.h:79 ../ui/search-dialog.gtkbuilder.h:79
 msgid "Save the module list"
-msgstr ""
+msgstr "儲存所點選的模組清單"
 
 #: ../ui/search-dialog.glade.h:80 ../ui/search-dialog.gtkbuilder.h:80
 msgid "Save Custom Module List Button"
-msgstr ""
+msgstr "儲存所點選的模組清單按鈕"
 
 #: ../ui/search-dialog.glade.h:81 ../ui/search-dialog.gtkbuilder.h:81
 msgid "Delete the selected list"
-msgstr ""
+msgstr "刪除所選的清單"
 
 #: ../ui/search-dialog.glade.h:82 ../ui/search-dialog.gtkbuilder.h:82
 msgid "Clear Custom Module List Button"
-msgstr ""
+msgstr "清除自訂的模組清單按鈕"
 
 #: ../ui/search-dialog.glade.h:83 ../ui/search-dialog.gtkbuilder.h:83
 msgid "<b>Module Lists</b>"
-msgstr ""
+msgstr "<b>模組清單</b> "
 
 #: ../ui/search-dialog.glade.h:84 ../ui/search-dialog.gtkbuilder.h:84
 msgid "<b>List Name</b>"
-msgstr ""
+msgstr "<b>清單名稱</b> "
 
 #: ../ui/search-dialog.glade.h:85 ../ui/search-dialog.gtkbuilder.h:85
 msgid "Custom Module List Name Entry"
-msgstr ""
+msgstr "自訂模組清單的名稱按鈕"
 
 #: ../ui/search-dialog.glade.h:90 ../ui/search-dialog.gtkbuilder.h:90
 msgid "Open a dialog to select modules to add to the list"
-msgstr ""
+msgstr "開啟對話框選擇模組加入清單中"
 
 #: ../ui/search-dialog.glade.h:93 ../ui/search-dialog.gtkbuilder.h:93
 msgid "Custom Module Lists"
-msgstr ""
+msgstr "自訂模組清單"
 
 #: ../ui/search-dialog.glade.h:94 ../ui/search-dialog.gtkbuilder.h:94
 msgid "<b>Attribute</b>"
-msgstr ""
+msgstr "<b>屬性</b>"
 
 #: ../ui/search-dialog.glade.h:95 ../ui/search-dialog.gtkbuilder.h:96
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr ""
+msgstr "搜尋史特朗編號，像是 G4442 或 H1121"
 
 #: ../ui/search-dialog.glade.h:96 ../ui/search-dialog.gtkbuilder.h:95
 msgid "Strongs Numbers"
-msgstr ""
+msgstr "史特朗編號"
 
 #: ../ui/search-dialog.glade.h:97 ../ui/search-dialog.gtkbuilder.h:97
 msgid "Strongs Numbers radiobutton"
-msgstr ""
+msgstr "史特朗編號的單選按鈕"
 
 #: ../ui/search-dialog.glade.h:98 ../ui/search-dialog.gtkbuilder.h:99
 msgid "Search for Morphological tags"
-msgstr ""
+msgstr "搜尋詞法標籤"
 
 #: ../ui/search-dialog.glade.h:100 ../ui/search-dialog.gtkbuilder.h:100
 msgid "Morphological Tags radiobutton"
-msgstr ""
+msgstr "詞法標籤的單選按鈕"
 
 #: ../ui/search-dialog.glade.h:101 ../ui/search-dialog.gtkbuilder.h:102
 msgid "Search in footnotes"
-msgstr ""
+msgstr "在註腳中搜尋"
 
 #: ../ui/search-dialog.glade.h:103 ../ui/search-dialog.gtkbuilder.h:103
 msgid "Footnotes radiobutton"
-msgstr ""
+msgstr "註腳的單選按鈕"
 
 #: ../ui/search-dialog.glade.h:104 ../ui/search-dialog.gtkbuilder.h:104
 msgid "<b>Results Display Options</b>"
-msgstr ""
+msgstr "<b>搜尋結果顯示選項</b>"
 
 #: ../ui/search-dialog.glade.h:105 ../ui/search-dialog.gtkbuilder.h:106
 msgid "In modules that have Strong's Numbers"
-msgstr ""
+msgstr "在有史特朗編號的模組時顯示出來"
 
 #: ../ui/search-dialog.glade.h:106 ../ui/search-dialog.gtkbuilder.h:105
 msgid "Show Strong's Numbers"
-msgstr ""
+msgstr "顯示史特朗編號"
 
 #: ../ui/search-dialog.glade.h:107 ../ui/search-dialog.gtkbuilder.h:107
 msgid "Show Strong's Numbers checkbox"
-msgstr ""
+msgstr "顯示史特朗編號核取方塊"
 
 #: ../ui/search-dialog.glade.h:108 ../ui/search-dialog.gtkbuilder.h:109
 msgid "In modules that have Morphological Tags"
-msgstr ""
+msgstr "在有詞法標籤的模組時顯示出來"
 
 #: ../ui/search-dialog.glade.h:109 ../ui/search-dialog.gtkbuilder.h:108
 msgid "Show Morphological Tags"
-msgstr ""
+msgstr "顯示詞法標籤"
 
 #: ../ui/search-dialog.glade.h:110 ../ui/search-dialog.gtkbuilder.h:110
 msgid "Show Morphological Tags checkbox"
-msgstr ""
+msgstr "顯示詞法標籤機取方塊"
 
 #: ../ui/search-dialog.glade.h:111 ../ui/search-dialog.gtkbuilder.h:112
 msgid "In modules that have Footnotes"
-msgstr ""
+msgstr "在有註腳的模組時顯示出來"
 
 #: ../ui/search-dialog.glade.h:112 ../ui/search-dialog.gtkbuilder.h:111
 msgid "Show Footnotes"
-msgstr ""
+msgstr "顯示註腳"
 
 #: ../ui/search-dialog.glade.h:113 ../ui/search-dialog.gtkbuilder.h:113
 msgid "Show Footnotes checkbox"
-msgstr ""
+msgstr "顯示註腳核取方塊"
 
 #: ../ui/search-dialog.glade.h:114 ../ui/search-dialog.gtkbuilder.h:114
 msgid "Attribute Search"
-msgstr ""
+msgstr "屬性搜尋"
 
 #: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 #: ../ui/selector-prefs.glade.h:1 ../ui/selector-prefs.gtkbuilder.h:1
 msgid "Module Selection"
-msgstr ""
+msgstr "模組選擇"
 
 #: ../ui/search-dialog.gtkbuilder.h:6
 msgid "<b>search module</b>"
-msgstr ""
+msgstr "<b>搜尋模組</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "Export Bookmark Folder"
-msgstr ""
+msgstr "匯出書籤資料夾"
 
 #: ../ui/xi-export-bookmarks.glade.h:2
 msgid "<b>Export to:</b>"
-msgstr ""
+msgstr "<b>匯出為:</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Xiphos bookmarks"
-msgstr ""
+msgstr "Xiphos 書籤"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Html"
-msgstr ""
+msgstr "HTML 文件"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
-msgstr ""
+msgstr "純文字文件"
 
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Include Bible text"
-msgstr ""
+msgstr "連同聖經經文匯出"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
-msgstr ""
+msgstr "取消"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
-msgstr ""
+msgstr "確定"
 
 #: ../ui/xi-menus.glade.h:2 ../ui/xi-menus.gtkbuilder.h:2
 msgid "Open Study_pad"
-msgstr ""
+msgstr "開啟 Studypad(_P)"
 
 #: ../ui/xi-menus.glade.h:3 ../ui/xi-menus.gtkbuilder.h:3
 msgid "_Open Session"
-msgstr "目前進度"
+msgstr "開啟查經進程(_O)"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Open a saved tab settings collection"
-msgstr ""
+msgstr "開啟一組曾為儲存的分頁設定值"
 
 #: ../ui/xi-menus.glade.h:5 ../ui/xi-menus.gtkbuilder.h:4
 msgid "_Save Session"
-msgstr "儲存進度(_S)"
+msgstr "儲存查經進程(_O)"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Save this collection of tab settings"
-msgstr ""
+msgstr "儲存一組現時的分頁設定值"
 
 #: ../ui/xi-menus.glade.h:7 ../ui/xi-menus.gtkbuilder.h:5
-#, fuzzy
 msgid "_New Prayerlist/Journal"
-msgstr "禱告表/日記檔"
+msgstr "新增禱告表／日誌(_N)"
 
 #: ../ui/xi-menus.glade.h:8
 msgid "Create a new journal or prayerlist from a template"
-msgstr ""
+msgstr "從範本製作新的日誌或祈禱表"
 
 #: ../ui/xi-menus.glade.h:10 ../ui/xi-menus.gtkbuilder.h:7
 msgid "_Search"
@@ -4531,15 +4602,15 @@ msgstr "搜尋(_S)"
 
 #: ../ui/xi-menus.glade.h:11
 msgid "Bring the simple sidebar search forward"
-msgstr ""
+msgstr "執行側邊欄的簡單搜尋動作"
 
 #: ../ui/xi-menus.glade.h:12 ../ui/xi-menus.gtkbuilder.h:8
 msgid "_Advanced Search"
-msgstr ""
+msgstr "進階搜尋(_A)"
 
 #: ../ui/xi-menus.glade.h:13
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
+msgstr "開啟進階搜尋對話框，執行複雜查詢功能"
 
 #: ../ui/xi-menus.glade.h:14 ../ui/xi-menus.gtkbuilder.h:9
 msgid "_Preferences"
@@ -4547,11 +4618,11 @@ msgstr "偏好設定(_P)"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Use module manager to install and remove Sword modules"
-msgstr ""
+msgstr "使用模組管理工具來安裝及移除 Sword 模組"
 
 #: ../ui/xi-menus.glade.h:16 ../ui/xi-menus.gtkbuilder.h:10
 msgid "_Module Manager"
-msgstr "模組總管(_M)"
+msgstr "模組管理(_M)"
 
 #: ../ui/xi-menus.glade.h:17 ../ui/xi-menus.gtkbuilder.h:11
 msgid "_View"
@@ -4559,181 +4630,179 @@ msgstr "檢視(_V)"
 
 #: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
-msgstr ""
+msgstr "預覽每日靈修(_D)"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr ""
+msgstr "在預覽區中顯示您所選用每日靈修材料中的今日選材。"
 
 #: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
 msgid "_Bible"
-msgstr ""
+msgstr "聖經(_B)"
 
 #: ../ui/xi-menus.glade.h:21 ../ui/xi-menus.gtkbuilder.h:14
 msgid "_Preview"
-msgstr "預覽(_P)"
+msgstr "預覽區(_P)"
 
 #: ../ui/xi-menus.glade.h:22 ../ui/xi-menus.gtkbuilder.h:15
 msgid "_Commentary/Book"
-msgstr ""
+msgstr "註釋書／圖書(_C)"
 
 #: ../ui/xi-menus.glade.h:23 ../ui/xi-menus.gtkbuilder.h:16
 msgid "Dictionar_y"
-msgstr ""
+msgstr "字典(_Y)"
 
 #: ../ui/xi-menus.glade.h:24 ../ui/xi-menus.gtkbuilder.h:17
 msgid "L_ink Tabs"
-msgstr ""
+msgstr "連結各分頁(_L)"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Make all tabs' Bibles navigate together"
-msgstr ""
+msgstr "同時導播各分頁的經文"
 
 #: ../ui/xi-menus.glade.h:26 ../ui/xi-menus.gtkbuilder.h:18
 msgid "_Read Aloud"
-msgstr "朗讀(_R)"
+msgstr "誦讀(_R)"
 
 #: ../ui/xi-menus.glade.h:27
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
+msgstr "打開文字轉語音功能誦讀所選的聖經章節。"
 
 #: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
 msgid "Show Verse _Numbers"
-msgstr ""
+msgstr "顯示節數(_N)"
 
 #: ../ui/xi-menus.glade.h:29
 msgid "Display verse numbers in the text"
-msgstr ""
+msgstr "在經文中顯示節數"
 
 #: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
 msgid "_Highlight Current Verse"
-msgstr "強調顯示目前經文(_H)"
+msgstr "重點標示目前的經節(_H)"
 
 #: ../ui/xi-menus.glade.h:31
 msgid "Apply a high-contrast highlight to the current verse"
-msgstr ""
+msgstr "鮮色重點標示目前的經節"
 
 #: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
 msgid "_Attach/Detach Sidebar"
-msgstr ""
+msgstr "接合／分拆側邊欄(_A)"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Operate the sidebar as a separate window"
-msgstr ""
+msgstr "側邊欄另開個別的視窗操作"
 
 #: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "_Show/Hide Attached Sidebar"
-msgstr "開/關側邊工具列(_S)"
+msgstr "顯示／隱藏接合的側邊欄(_S)"
 
 #: ../ui/xi-menus.glade.h:35
-#, fuzzy
 msgid "Remove the sidebar entirely from view"
-msgstr "刪除選取的資料夾"
+msgstr "使側邊欄顯示或不顯示側邊欄"
 
 #: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Parallel View in a _Tab"
-msgstr ""
+msgstr "在分頁顯示平行閱覽(_T)"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
+msgstr "在另一分頁平行閱覽整章經文"
 
 #: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "Show Previe_wer in the Sidebar"
-msgstr ""
+msgstr "在側邊欄顯示預覽區(_W)"
 
 #: ../ui/xi-menus.glade.h:39
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr ""
+msgstr "選擇把預覽區置於側邊欄抑或聖經經文底下"
 
 #: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Contents"
-msgstr "內容(_C)"
+msgstr "目錄(_C)"
 
 #: ../ui/xi-menus.glade.h:42
 msgid "Open the help viewer on the Xiphos manual"
-msgstr ""
+msgstr "在說明檢視工具開啟 Xiphos 使用者手冊"
 
 #: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Mailing List"
-msgstr "郵寄名冊(_M)"
+msgstr "電郵清單(_M)"
 
 #: ../ui/xi-menus.glade.h:44
 msgid "Open a browser on the users' mailing list webpage"
-msgstr ""
+msgstr "在網頁瀏覽器中開啟使用者電郵清單的網頁"
 
 #: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Live Chat"
-msgstr "即時對話(_L)"
+msgstr "即時聊天(_L)"
 
 #: ../ui/xi-menus.glade.h:46
 msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
+msgstr "在網頁瀏覽器中開啟 IRC 即時聊天的介面"
 
 #: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "_Report Bug"
-msgstr "回報錯誤(_R)"
+msgstr "回報程式錯誤(_R)"
 
 #: ../ui/xi-menus.glade.h:48
 msgid "Open a browser on our bug tracker"
-msgstr ""
+msgstr "在網頁瀏覽器中開啟本專案的程式錯誤追蹤器"
 
 #: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "About _Translation"
-msgstr ""
+msgstr "關於翻譯(_T)"
 
 #: ../ui/xi-menus.glade.h:50
 msgid "Learn about translating the Xiphos interface to other languages"
-msgstr ""
+msgstr "認識如何翻譯 Xiphos 介面為其它語言"
 
 #: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
 msgid "_About The SWORD Project"
-msgstr ""
+msgstr "關於 Sword 專案(_A)"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
+msgstr "認識 Sword 專案——Xiphos 是屬此專案的其一個應用程式"
 
 #: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "_View Xiphos Releases"
-msgstr ""
+msgstr "Xiphos 釋出版一覽(_V)"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Visit the releases web page. Is your Xiphos current?"
-msgstr ""
+msgstr "瀏覽釋出版網頁，檢查您的 Xiphos 是不是目前的版本。"
 
 #: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
 msgid "About _Xiphos"
-msgstr ""
+msgstr "關於 Xiphos(_X)"
 
 #: ../ui/xi-menus.glade.h:56
 msgid "Learn about Xiphos"
-msgstr ""
+msgstr "認識 Xiphos 專案"
 
 #: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Annotate Verse"
-msgstr ""
+msgstr "標註本經節"
 
 #: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
 msgid "Open Module"
-msgstr ""
+msgstr "開啟模組"
 
 #: ../ui/xi-menus.glade.h:64 ../ui/xi-menus-popup.gtkbuilder.h:41
 msgid "Note"
-msgstr ""
+msgstr "註釋"
 
 #: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:42
 msgid "Open in editor"
-msgstr ""
+msgstr "在編輯工具中開啟"
 
 #: ../ui/xi-menus.glade.h:67 ../ui/xi-menus-popup.gtkbuilder.h:44
-#, fuzzy
 msgid "Verse Per Line"
-msgstr "每句換行(_V)"
+msgstr "每行一節"
 
 #: ../ui/xi-menus.glade.h:75 ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Footnote/Cross-ref Markers"
-msgstr ""
+msgstr "註腳／交叉參照標記"
 
 #: ../ui/xi-menus.glade.h:76
 msgid "Show non-anonymous markers e.g. \"*n23\""
@@ -4741,75 +4810,75 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:81 ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Variants"
-msgstr ""
+msgstr "異文"
 
 #: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Image Content"
-msgstr ""
+msgstr "圖片內容"
 
 #: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Respect Font Faces"
-msgstr ""
+msgstr "遵照字型"
 
 #: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Commentary by Chapter"
-msgstr ""
+msgstr "按整章列出註釋"
 
 #: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:68
 msgid "Doublespace"
-msgstr ""
+msgstr "雙行間距"
 
 #: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Lookup Selection"
-msgstr ""
+msgstr "翻查選段"
 
 #: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Use Current Dictionary"
-msgstr ""
+msgstr "使用目前的辭典"
 
 #: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Browse in BibleMap.org"
-msgstr ""
+msgstr "在 BibleMap.org 中瀏覽"
 
 #: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Unlock This Module"
-msgstr ""
+msgstr "為此模組解鎖"
 
 #: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Display Book Heading"
-msgstr ""
+msgstr "顯示本圖書的標題"
 
 #: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Display Chapter Heading"
-msgstr ""
+msgstr "顯示本章的標題"
 
 #: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Rename Pers.Comm."
-msgstr ""
+msgstr "變更個人註釋書名稱"
 
 #: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Dump Pers.Comm."
-msgstr ""
+msgstr "拋棄個人註釋書"
 
 #: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Read Selection Aloud"
-msgstr ""
+msgstr "誦讀選段"
 
 #: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Save these results as a single bookmark"
-msgstr ""
+msgstr "儲存清單上的搜尋結果為單獨的書籤"
 
 #: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Save list as a single bookmark"
-msgstr ""
+msgstr "儲存金句表為單獨的書籤"
 
 #: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr ""
+msgstr "另建立新資料夾儲存清單上的搜尋結果為單獨的書籤"
 
 #: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Save list as a series of bookmarks"
-msgstr ""
+msgstr "儲存金句表為連串的書籤"
 
 #: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:95
 msgid ""
@@ -4818,105 +4887,102 @@ msgid ""
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:94
-#, fuzzy
 msgid "Populate verse list"
-msgstr "經句: "
+msgstr "自行填入金句表"
 
 #: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:97
 msgid "Push the entire verse list contents directly into the history list."
-msgstr ""
+msgstr "把金句表內容直接輸出為閱覽記錄清單的內容。"
 
 #: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:96
-#, fuzzy
 msgid "Preload history from verse list"
-msgstr "經句: "
+msgstr "預載金句表內容到閱覽記錄"
 
 #: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:99
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
-msgstr ""
+msgstr "在 BibleSync 的個人或揚聲器模式中，傳送金句表給其它聽眾。"
 
 #: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:98
 msgid "Send list via BibleSync"
-msgstr ""
+msgstr "從 BibleSync 傳送金句表"
 
 #: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:100
 msgid "Export List"
-msgstr ""
+msgstr "匯出金句表"
 
 #: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
-msgstr ""
+msgstr "在新分頁開啟此書籤"
 
 #: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
-msgstr ""
+msgstr "在新分頁開啟"
 
 #: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
-msgstr ""
+msgstr "在對話框中開啟此書籤"
 
 #: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
-msgstr ""
+msgstr "在對話框中開啟"
 
 #: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
-msgstr ""
+msgstr "在所選的資料夾中加入新資料夾"
 
 #: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
-msgstr ""
+msgstr "在這裡加插本節經文的書籤"
 
 #: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
-msgstr ""
+msgstr "本節經文加插書籤"
 
 #: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
-msgstr ""
+msgstr "編輯書籤項目"
 
 #: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
-msgstr ""
+msgstr "編輯項目(_E)"
 
 #: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
-msgstr ""
+msgstr "刪除項目"
 
 #: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
-msgstr ""
+msgstr "展開所有書籤群組"
 
 #: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
-msgstr ""
+msgstr "展開所有書籤"
 
 #: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
-msgstr ""
+msgstr "收起所有書籤群組"
 
 #: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
-msgstr ""
+msgstr "收起所有書籤"
 
 #: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
-msgstr ""
+msgstr "容讓項目移動到不同的資料夾中"
 
 #: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
-msgstr ""
+msgstr "可手動重新排序"
 
 #: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr ""
+msgstr "載入其它書籤檔案 (預設使用: BibleTime 書籤)"
 
 #: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:19
-#, fuzzy
 msgid "Import Bookmarks"
-msgstr "書籤"
+msgstr "匯入書籤"
 
 #: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
@@ -4924,33 +4990,35 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
-msgstr ""
+msgstr "匯出資料夾"
 
 #: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open selected module in a new tab"
-msgstr ""
+msgstr "在新分頁開啟所選模組"
 
 #: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:33
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
+"另以分別的['對話框']視窗\n"
+"\t開啟所選的模組"
 
 #: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid "Open in a separate window"
-msgstr ""
+msgstr "另以分別的視窗開啟"
 
 #: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new simple prayer list"
-msgstr ""
+msgstr "製作新的簡單禱表"
 
 #: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Simple"
-msgstr ""
+msgstr "簡單"
 
 #: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new subject prayer list"
-msgstr ""
+msgstr "製作新的主題禱表"
 
 #: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Subject"
@@ -4958,157 +5026,71 @@ msgstr "主題"
 
 #: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Create a new monthly journal"
-msgstr ""
+msgstr "製作新的月禱表"
 
 #: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Monthly"
-msgstr ""
+msgstr "月禱"
 
 #: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Create a new daily journal"
-msgstr ""
+msgstr "製作新的日誌"
 
 #: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Daily"
-msgstr ""
+msgstr "日誌"
 
 #: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Create a new outlined topic"
-msgstr ""
+msgstr "製作新的主題大綱"
 
 #: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Outlined"
-msgstr ""
+msgstr "大綱"
 
 #: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
 msgid "Open module in editor or plain display window"
-msgstr ""
+msgstr "在編輯工具或僅顯示的視窗中開啟模組"
 
 #: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Open in separate window"
-msgstr ""
+msgstr "另開視窗開啟"
 
 #: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add a sub-item"
-msgstr ""
+msgstr "加入一個子項目"
 
 #: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add Sub-Item"
-msgstr ""
+msgstr "加入子項目"
 
 #: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Add an item"
-msgstr ""
+msgstr "加入一個項目"
 
 #: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add Item"
-msgstr ""
+msgstr "加入項目"
 
 #: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Remove this item"
-msgstr ""
+msgstr "移除此項目"
 
 #: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Edit this item"
-msgstr ""
+msgstr "編輯此項目"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Xiphos Bible Guide"
-msgstr "Xiphos 聖經指南"
+msgstr "Xiphos 聖經指引"
 
 #: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
-msgstr "研讀聖經"
+msgstr ""
 
 #: ../xiphos.desktop.in.in.h:3
 msgid "Text;Bible;Study;"
 msgstr ""
 
-#, fuzzy
-#~ msgid "[no dump ready]"
-#~ msgstr " 模組"
-
-#, fuzzy
-#~ msgid "Transmit failed.\n"
-#~ msgstr "%s 失敗"
-
-#~ msgid "Page %d of %d"
-#~ msgstr "第 %d 頁 (共 %d 頁)"
-
-#~ msgid "Save As"
-#~ msgstr "另存新檔"
-
-#~ msgid "HTML Output"
-#~ msgstr "HTML 輸出"
-
-#~ msgid "HTML Source"
-#~ msgstr "HTML 原始檔"
-
-#~ msgid "Plain Source"
-#~ msgstr "純文字來源"
-
-#~ msgid "_Quit"
-#~ msgstr "結束(_Q)"
-
-#~ msgid "_Open"
-#~ msgstr "開啟(_O)"
-
-#~ msgid "Save _As..."
-#~ msgstr "另存新檔(_A)..."
-
-#~ msgid "Open new document"
-#~ msgstr "開啟新檔"
-
-#~ msgid "Delete current note"
-#~ msgstr "刪除此筆附註"
-
-#~ msgid "HTML _Output"
-#~ msgstr "HTML 輸出(_O)"
-
-#~ msgid "_HTML Source"
-#~ msgstr "_HTML 來源"
-
-#~ msgid "_Plain Source"
-#~ msgstr "純文字來源 (_P)"
-
-#~ msgid "Unlock "
-#~ msgstr "解鎖 "
-
-#~ msgid "Preparing to print"
-#~ msgstr "準備列印"
-
-#~ msgid "Printing is not supported on this printer"
-#~ msgstr "不支援本印表機之列印"
-
-#~ msgid "Printer %s does not support PostScript printing."
-#~ msgstr "印表機 %s 無 PostScript 列印功能"
-
-#~ msgid "Printing"
-#~ msgstr "列印"
-
-#~ msgid "Waiting to print"
-#~ msgstr "等待列印"
-
-#~ msgid "An error occurred while printing"
-#~ msgstr "列印錯誤"
-
-#~ msgid "It was not possible to print your document: %s"
-#~ msgstr "無法列印您的文件: %s"
-
-#~ msgid "Tabs and Panes"
-#~ msgstr "分頁和版面"
-
-#~ msgid "Go to "
-#~ msgstr "跳到 "
-
-#~ msgid "Main"
-#~ msgstr "主要"
-
-#~ msgid "Sizes"
-#~ msgstr "大小"
-
-#~ msgid "Books can be downloaded from the SWORD Project"
-#~ msgstr "可自 SOWRD Project 下載其他書籍"
-
-#~ msgid "About the SWORD Project"
-#~ msgstr "關於  SWORD Project"
+#~ msgid "Copyright © 2000-2017 Xiphos Development Team"
+#~ msgstr "版權所有 © 2000-2017 Xiphos 開發團隊"
