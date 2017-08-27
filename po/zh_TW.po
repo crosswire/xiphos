@@ -286,10 +286,6 @@ msgstr ""
 msgid "Xiphos development"
 msgstr ""
 
-#: ../src/gnome2/about_xiphos.c:129
-msgid "Copyright © 2000-2017 Xiphos Development Team"
-msgstr "著作權所有 © 2000-2017 Xiphos Development Team"
-
 #: ../src/gnome2/about_xiphos.c:131
 msgid ""
 "\n"
