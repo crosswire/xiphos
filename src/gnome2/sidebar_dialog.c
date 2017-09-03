@@ -35,6 +35,7 @@
 #include "main/previewer.h"
 #include "main/settings.h"
 #include "main/sword.h"
+#include "main/xml.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -89,6 +90,7 @@ void gui_attach_detach_sidebar(void)
 		gtk_widget_show_all(widgets.dock_sb);
 		gtk_widget_show(sidebar.html_viewer_widget);
 
+		xml_set_value("Xiphos", "misc", "sidebar_docked", "0");
 	} else {
 		settings.docked = TRUE;
 		biblepanesize =
@@ -113,6 +115,8 @@ void gui_attach_detach_sidebar(void)
 
 		gtk_widget_show(sidebar.html_viewer_widget);
 		gtk_widget_destroy(widgets.dock_sb);
+
+		xml_set_value("Xiphos", "misc", "sidebar_docked", "1");
 	}
 	main_set_previewer_widget(TRUE);
 	main_init_previewer();

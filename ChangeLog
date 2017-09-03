@@ -2,6 +2,7 @@
 
 	* #524 fix use of fonts whose names end in digits.
 	  (ex. Goudy Bookletter 1911.)
+	* #788 use saved status of detached sidebar.
 
 2017-08-23  karl <charcoal@users.sf.net>
 

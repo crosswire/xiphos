@@ -234,6 +234,10 @@ void frontend_display(const char *tabs)
 		main_open_search_dialog();
 	if (settings.display_prefs)
 		gui_setup_preferences_dialog();
+	if (!settings.docked) {
+		settings.docked = TRUE;	/* momentary lie */
+		on_attach_detach_sidebar_activate(NULL, 0);
+	}
 
 	if (settings.showdevotional)
 		main_display_devotional();

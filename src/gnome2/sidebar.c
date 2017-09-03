@@ -405,10 +405,12 @@ void gui_set_sidebar_program_start(void)
 	/* set width of bible pane */
 	//gtk_paned_set_position(GTK_PANED(widgets.hpaned), settings.biblepane_width);
 
+#if 0
 	if (!settings.docked) {
 		settings.docked = TRUE;
 		//gui_attach_detach_shortcutbar();
 	}
+#endif
 }
 
 /******************************************************************************
