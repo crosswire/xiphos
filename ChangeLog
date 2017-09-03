@@ -1,7 +1,18 @@
+2017-08-23  karl <charcoal@users.sf.net>
+
+	* #524 fix use of fonts whose names end in digits.
+	  (ex. Goudy Bookletter 1911.)
+
+2017-08-23  karl <charcoal@users.sf.net>
+
+	* #821 update ubuntu installation instructions.
+	* update french and trad.chinese translations.
+	* tweak TODO to ref github wiki.
+
 2017-08-21  karl <charcoal@users.sf.net>
 
-	* add #791 full-screen of current bible on F11.
-	* make Japanese glosses default on.
+	* #791 add full-screen of current bible on F11.
+	* make glosses default on.
 
 2017-08-20  karl <charcoal@users.sf.net>
 

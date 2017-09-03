@@ -64,18 +64,16 @@ static MOD_FONT *mf;
 static gchar *get_html_font_name(gchar *fontname)
 {
 	gchar buf[80];
-	gint len, i = 0;
+	gint idx, i = 0;
 
-	len = strlen(fontname);
-	for (i = 0; (i < 79 && i < len - 3); i++) {
-		if (!isdigit(fontname[i])) {
-			buf[i] = fontname[i];
-			buf[i + 1] = '\0';
-		} else
-			break;
-	}
+	/* strip trailing size digits from picker-chosen name. */
+	idx = strlen(fontname) - 1;
+	while ((idx > 0) && isdigit(fontname[idx]))
+		fontname[idx--] = '\0';
+	if (fontname[idx] = ' ')
+		fontname[idx] = '\0';
 
-	return g_strdup(buf);
+	return g_strdup(fontname);
 }
 
 /******************************************************************************
