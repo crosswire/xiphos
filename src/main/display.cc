@@ -1132,10 +1132,9 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(
 		    (settings.showversenum
-			 ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-			   "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
-			 : "&nbsp; <a name=\"%d\"> </a>"),
-		    0,
+			 ? "&nbsp; <a name=\"0\" href=\"sword:///%s\">"
+			   "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font>&nbsp;"
+			 : "&nbsp; <a name=\"0\"> </a>"),
 		    (char *)key->getText(),
 		    (settings.versestyle
 			 ? settings.verse_num_font_size + settings.base_font_size
@@ -1148,10 +1147,12 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		num = main_format_number(chapter);
 		buf = g_strdup_printf(
-		    "%s%s<br/><a name=\"TOP\"></a><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+		    "<font color=\"%s\">%s%s</font>%s<br/><a name=\"TOP\"></a><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+		    settings.bible_text_color,
 		    (strongs_or_morph
 			 ? block_render(imodule.renderText().c_str())
 			 : imodule.renderText().c_str()),
+		    (settings.showversenum ? "</a>" : ""),
 		    // extra break when excess strongs/morph space.
 		    (strongs_or_morph ? "<br/>" : ""),
 		    _("Chapter"), num);
@@ -1251,10 +1252,9 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		num = main_format_number(key->getVerse());
 		buf = g_strdup_printf(
 		    (settings.showversenum
-			 ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-			   "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
-			 : "&nbsp; <a name=\"%d\"> </a>"),
-		    0,
+			 ? "&nbsp; <a name=\"0\" href=\"sword:///%s\">"
+			   "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font>&nbsp;"
+			 : "&nbsp; <a name=\"0\"> </a>"),
 		    (char *)key->getText(),
 		    (settings.versestyle
 			 ? settings.verse_num_font_size + settings.base_font_size
@@ -1269,10 +1269,14 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 			set_morph_order(imodule);
 		set_render_numbers(imodule, ops);
 
-		swbuf.append((strongs_or_morph
-				  ? block_render(imodule.renderText().c_str())
-				  : imodule.renderText().c_str()));
-		swbuf.append("</div>");
+		buf = g_strdup_printf("<font color=\"%s\">%s</a>%s</div>",
+				      settings.bible_text_color,
+				      (strongs_or_morph
+				       ? block_render(imodule.renderText().c_str())
+				       : imodule.renderText().c_str()),
+				      (settings.showversenum ? "</a>" : ""));
+		swbuf.append(buf);
+		g_free(buf);
 	}
 }
 

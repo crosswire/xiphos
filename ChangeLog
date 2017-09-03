@@ -1,8 +1,9 @@
-2017-08-23  karl <charcoal@users.sf.net>
+2017-09/03  karl <charcoal@users.sf.net>
 
 	* #524 fix use of fonts whose names end in digits.
 	  (ex. Goudy Bookletter 1911.)
 	* #788 use saved status of detached sidebar.
+	* #739 click verse text before/after to cross chapters.
 
 2017-08-23  karl <charcoal@users.sf.net>
 
