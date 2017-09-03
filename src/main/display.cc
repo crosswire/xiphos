@@ -1147,7 +1147,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		num = main_format_number(chapter);
 		buf = g_strdup_printf(
-		    "<font color=\"%s\">%s%s</font>%s<br/><a name=\"TOP\"></a><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+		    "<font color=\"%s\">%s</font>%s%s<br/><a name=\"TOP\"></a><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
 		    settings.bible_text_color,
 		    (strongs_or_morph
 			 ? block_render(imodule.renderText().c_str())
@@ -1269,7 +1269,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 			set_morph_order(imodule);
 		set_render_numbers(imodule, ops);
 
-		buf = g_strdup_printf("<font color=\"%s\">%s</a>%s</div>",
+		buf = g_strdup_printf("<font color=\"%s\">%s</font>%s</div>",
 				      settings.bible_text_color,
 				      (strongs_or_morph
 				       ? block_render(imodule.renderText().c_str())
