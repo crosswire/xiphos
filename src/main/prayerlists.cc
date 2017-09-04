@@ -49,6 +49,11 @@
 
 #include "gui/debug_glib_null.h"
 
+// sword stuff for canonical book names + chapter counts
+// to construct prototype all-chapters outline. (#725)
+#include "sword/versificationmgr.h"
+#include "sword/canon.h"
+
 #ifndef NO_SWORD_NAMESPACE
 using sword::TreeKeyIdx;
 using sword::RawGenBook;
@@ -521,6 +526,65 @@ main_prayerlist_outlined_topic_create(void)
 	appendSibling(treeKey, _("Major Topic C"));
 	setEntryText(book, _("<b>Major Topic C</b><br/>"));
 	add_outline_sections(book, treeKey);
+
+	delete treeKey;
+	return TRUE;
+}
+
+/******************************************************************************
+ * Name
+ *   main_prayerlist_book_chapter_create
+ *
+ * Synopsis
+ *   #include "main/prayer_list.h"
+ *   gint main_prayerlist_book_chapter_create(void)
+ *
+ * Description
+ *   create a per-chapter outline for the entire bible
+ *
+ * Return value
+ *   gboolean
+ */
+
+gboolean
+main_prayerlist_book_chapter_create(void)
+{
+	char *listname = prayerlist_fundamentals(_("A journal sectioned by Bible book and chapter. \\par\\par Module created by Xiphos."),
+						 _("BibleChapter"));
+	if (listname == NULL)
+		return FALSE;
+
+	gchar *path = g_strdup_printf("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
+				      settings.homedir, listname, listname);
+
+	g_free(listname);
+	RawGenBook::createModule(path);
+	RawGenBook *book = new RawGenBook(path);
+
+	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
+	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
+
+	struct sbook *sbook;
+	struct sbook *otnt[2] = { sword::otbooks, sword::ntbooks };
+	gboolean first = TRUE;
+
+	for (int idx = 0; idx < 2; idx++) {
+		for (sbook = otnt[idx]; sbook->chapmax != 0; ++sbook) {
+			if (first) {
+				appendChild(treeKey, sbook->name);
+				first = FALSE;
+			} else
+				appendSibling(treeKey, sbook->name);
+
+			SWBuf content = "";
+			char buf[10];
+			for (int i = 1; i <= sbook->chapmax; ++i) {
+				sprintf(buf, "%d\t<br/>", i);
+				content += (SWBuf)buf;
+			}
+			setEntryText(book, content.c_str());
+		}
+	}
 
 	delete treeKey;
 	return TRUE;

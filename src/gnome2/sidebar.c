@@ -1146,6 +1146,12 @@ on_outlined_topic_activate(GtkMenuItem *menuitem, gpointer user_data)
 	main_prayerlist_outlined_topic_create();
 }
 
+G_MODULE_EXPORT void
+on_book_chapter_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	main_prayerlist_book_chapter_create();
+}
+
 GtkWidget *create_menu_prayerlist(void)
 {
 	GtkWidget *menu;

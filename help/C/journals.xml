@@ -25,7 +25,7 @@
 		Right-click on this entry, and you will be offered a
 		context menu to create new modules.  All the offered
 		options are of the same type, but what is offered is a
-		variety of templates from which to work.  There are 5
+		variety of templates from which to work.  There are 6
 		templates at this time.
 		</para>
 
@@ -54,9 +54,11 @@
 		per-month structure in which to track needed content.
 		<guimenuitem>Daily Journal</guimenuitem> is a full
 		365-day calendar in which to track a personal journal
-		or ongoing prayer needs.  And finally,
+		or ongoing prayer needs.
 		<guimenuitem>Outlined Topic</guimenuitem> is a full,
 		expandable outline suitable for topics and subtopics.
+		<guimenuitem>Book/Chapter</guimenuitem> is a book and
+		chapter outline from Genesis through Revelation.
 		</para>
 
 		<para>

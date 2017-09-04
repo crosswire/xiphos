@@ -849,6 +849,18 @@
         <signal name="activate" handler="on_outlined_topic_activate" swapped="no"/>
       </object>
     </child>
+    <child>
+      <object class="GtkImageMenuItem" id="create_book_chapter_list">
+        <property name="label" translatable="yes">Book/Chapter</property>
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Create a new book/chapter outline</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_book_chapter_activate" swapped="no"/>
+      </object>
+    </child>
   </object>
   <object class="GtkMenu" id="menu_prayerlist_mod">
     <property name="can_focus">False</property>

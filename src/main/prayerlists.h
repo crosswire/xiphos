@@ -31,6 +31,7 @@ gboolean main_prayerlist_subject_create(void);
 gboolean main_prayerlist_monthly_create(void);
 gboolean main_prayerlist_journal_create(void);
 gboolean main_prayerlist_outlined_topic_create(void);
+gboolean main_prayerlist_book_chapter_create(void);
 
 #ifdef __cplusplus
 }

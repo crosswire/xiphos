@@ -759,6 +759,7 @@
 		<itemizedlist>
 			<listitem>
 				<para><guibutton>Ctrl-p/Ctrl-n</guibutton>: Verse previous/next. Also <guibutton>k/j</guibutton>.</para>
+				As well, text of the verses before and after the current chapter can be clicked to navigate across chapters.
 			</listitem>
 			<listitem>
 				<para><guibutton>p/n</guibutton>: Chapter previous/next.</para>
