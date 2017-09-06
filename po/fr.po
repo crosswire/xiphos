@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 4.0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-10 10:26+0200\n"
-"PO-Revision-Date: 2017-08-26 22:42+0200\n"
+"PO-Revision-Date: 2017-09-06 22:00+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -751,7 +751,7 @@ msgstr ""
 "- Cliquer sur <b>Installer</b>.\n"
 "- Fermer le <i>Gestionnaire de modules</i> quand vous avez terminé.\n"
 "\n"
-"<u>Attention</u> : La plus extrême prudence est requise dans les pays ou des faits de persécution ont été rapportés."
+"<u>Attention</u> : La plus extrême prudence est requise dans les pays ou des faits de persécution ont été recensés."
 
 #: ../src/gnome2/mod_mgr.c:191
 msgid "Remove these modules?"
@@ -3451,7 +3451,7 @@ msgstr "<b>Gestionnaire de modules</b>"
 
 #: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:23
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr "<b>ATTENTION :</b> Utiliser avec prudence dans les pays où des faits de persécution ont été rapportés."
+msgstr "<b>ATTENTION :</b> Utiliser avec prudence dans les pays où des faits de persécution ont été recensés."
 
 #: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:24
 msgid "<b>Add and Remove Sources</b>"
