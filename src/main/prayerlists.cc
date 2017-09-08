@@ -320,6 +320,7 @@ main_prayerlist_basic_create(void)
 	g_free(listname);
 	RawGenBook::createModule(path);
 	RawGenBook *book = new RawGenBook(path);
+	g_free(path);
 
 	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
 	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
@@ -359,6 +360,7 @@ main_prayerlist_subject_create(void)
 	g_free(listname);
 	RawGenBook::createModule(path);
 	RawGenBook *book = new RawGenBook(path);
+	g_free(path);
 
 	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
 	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
@@ -402,6 +404,7 @@ main_prayerlist_monthly_create(void)
 	g_free(listname);
 	RawGenBook::createModule(path);
 	RawGenBook *book = new RawGenBook(path);
+	g_free(path);
 
 	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
 	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
@@ -451,6 +454,7 @@ main_prayerlist_journal_create(void)
 	g_free(listname);
 	RawGenBook::createModule(path);
 	RawGenBook *book = new RawGenBook(path);
+	g_free(path);
 
 	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
 	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
@@ -513,6 +517,7 @@ main_prayerlist_outlined_topic_create(void)
 	g_free(listname);
 	RawGenBook::createModule(path);
 	RawGenBook *book = new RawGenBook(path);
+	g_free(path);
 
 	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
 	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
@@ -550,16 +555,16 @@ gboolean
 main_prayerlist_book_chapter_create(void)
 {
 	char *listname = prayerlist_fundamentals(_("A journal sectioned by Bible book and chapter. \\par\\par Module created by Xiphos."),
-						 _("BibleChapter"));
+						 _("BookChapter"));
 	if (listname == NULL)
 		return FALSE;
 
 	gchar *path = g_strdup_printf("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
 				      settings.homedir, listname, listname);
-
 	g_free(listname);
 	RawGenBook::createModule(path);
 	RawGenBook *book = new RawGenBook(path);
+	g_free(path);
 
 	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
 	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
