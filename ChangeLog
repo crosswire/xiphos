@@ -1,8 +1,9 @@
-2017-09/11  karl <charcoal@users.sf.net>
+2017-09-11  karl <charcoal@users.sf.net>
 
 	* #822 prefs option not to use alternating fg/bg in parallel displays.
+	* update appdata to get screenshots from github, not sourceforge.
 
-2017-09/03  karl <charcoal@users.sf.net>
+2017-09-03  karl <charcoal@users.sf.net>
 
 	* #524 fix use of fonts whose names end in digits.
 	  (ex. Goudy Bookletter 1911.)
