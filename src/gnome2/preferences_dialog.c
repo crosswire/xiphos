@@ -112,6 +112,7 @@ struct _preferences_check_buttons
 	GtkWidget *show_splash_screen;
 	GtkWidget *prayerlist;
 	GtkWidget *statusbar;
+	GtkWidget *alternation;
 
 	GtkWidget *show_in_viewer;
 	GtkWidget *show_in_dictionary;
@@ -1448,6 +1449,35 @@ on_checkbutton_statusbar_toggled(GtkToggleButton *togglebutton, gpointer user_da
 
 /******************************************************************************
  * Name
+ *   on_checkbutton_alternation_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_checkbutton_alternation_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_checkbutton_alternation_toggled(GtkToggleButton *togglebutton, gpointer user_data)
+{
+	xml_set_value("Xiphos", "misc", "alternation",
+		      (gtk_toggle_button_get_active(togglebutton) ? "1" : "0"));
+	settings.alternation = gtk_toggle_button_get_active(togglebutton);
+
+	main_update_parallel_page();	/* 1 verse */
+	if (settings.dockedInt) {	/* whole chapter */
+		main_update_parallel_page();
+	} else {
+		main_update_parallel_page_detached();
+	}
+}
+
+/******************************************************************************
+ * Name
  *   on_folder_changed
  *
  * Synopsis
@@ -2170,6 +2200,8 @@ static void setup_check_buttons(void)
 				     settings.prayerlist);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check_button.statusbar),
 				     settings.statusbar);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check_button.alternation),
+				     settings.alternation);
 
 	/* v-- BibleSync --v */
 	/* toggles */
@@ -2244,6 +2276,9 @@ static void setup_check_buttons(void)
 			 NULL);
 	g_signal_connect(check_button.statusbar, "toggled",
 			 G_CALLBACK(on_checkbutton_statusbar_toggled),
+			 NULL);
+	g_signal_connect(check_button.alternation, "toggled",
+			 G_CALLBACK(on_checkbutton_alternation_toggled),
 			 NULL);
 
 	/* v-- BibleSync --v */
@@ -2895,82 +2930,57 @@ static void create_preferences_dialog(void)
 	/* color pickers */
 	color_picker.text_background = UI_GET_ITEM(gxml, "colorbutton1");
 	color_picker.text = UI_GET_ITEM(gxml, "colorbutton2");
-	color_picker.text_current_verse =
-	    UI_GET_ITEM(gxml, "colorbutton3");
+	color_picker.text_current_verse = UI_GET_ITEM(gxml, "colorbutton3");
 	color_picker.verse_numbers = UI_GET_ITEM(gxml, "colorbutton4");
-	color_picker.href_links = UI_GET_ITEM(gxml, "colorbutton5");
-	color_picker.highlight_fg = UI_GET_ITEM(gxml, "colorbutton6");
-	color_picker.highlight_bg = UI_GET_ITEM(gxml, "colorbutton7");
+	color_picker.href_links    = UI_GET_ITEM(gxml, "colorbutton5");
+	color_picker.highlight_fg  = UI_GET_ITEM(gxml, "colorbutton6");
+	color_picker.highlight_bg  = UI_GET_ITEM(gxml, "colorbutton7");
 
 	color_picker.invert_normal = UI_GET_ITEM(gxml, "invert_normal");
 	color_picker.invert_highlight =
 	    UI_GET_ITEM(gxml, "invert_highlight");
 
-	check_button.use_linked_tabs = UI_GET_ITEM(gxml, "checkbutton10");
-	check_button.readaloud = UI_GET_ITEM(gxml, "checkbutton11");
-	check_button.show_verse_num = UI_GET_ITEM(gxml, "checkbutton12");
-	check_button.use_default_dictionary =
-	    UI_GET_ITEM(gxml, "checkbutton6");
-	check_button.show_devotion = UI_GET_ITEM(gxml, "checkbutton7");
-	check_button.show_splash_screen =
-	    UI_GET_ITEM(gxml, "checkbutton8");
-	check_button.use_chapter_scroll =
-	    UI_GET_ITEM(gxml, "checkbutton_scroll");
+	check_button.use_linked_tabs        = UI_GET_ITEM(gxml, "checkbutton10");
+	check_button.readaloud              = UI_GET_ITEM(gxml, "checkbutton11");
+	check_button.show_verse_num         = UI_GET_ITEM(gxml, "checkbutton12");
+	check_button.use_default_dictionary = UI_GET_ITEM(gxml, "checkbutton6");
+	check_button.show_devotion          = UI_GET_ITEM(gxml, "checkbutton7");
+	check_button.show_splash_screen     = UI_GET_ITEM(gxml, "checkbutton8");
+	check_button.use_chapter_scroll     = UI_GET_ITEM(gxml, "checkbutton_scroll");
 
-	check_button.use_imageresize =
-	    UI_GET_ITEM(gxml, "checkbutton_imageresize");
+	check_button.use_imageresize = UI_GET_ITEM(gxml, "checkbutton_imageresize");
 #ifdef WIN32
 	/* webkit image hackery requires resize always be enabled. */
 	gtk_widget_hide(check_button.use_imageresize);
 #endif
-	check_button.use_verse_num_bold =
-	    UI_GET_ITEM(gxml, "checkbutton_verse_num_bold");
-	check_button.use_verse_num_bracket =
-	    UI_GET_ITEM(gxml, "checkbutton_verse_num_bracket");
-	check_button.use_verse_num_superscript =
-	    UI_GET_ITEM(gxml, "checkbutton_verse_num_superscript");
-	check_button.versehighlight =
-	    UI_GET_ITEM(gxml, "checkbutton_versehighlight");
-	check_button.annotate_highlight =
-	    UI_GET_ITEM(gxml, "checkbutton_annotate_highlight");
-	check_button.xrefs_in_verse_list =
-	    UI_GET_ITEM(gxml, "checkbutton_xrefs_in_verse_list");
-	check_button.prayerlist =
-	    UI_GET_ITEM(gxml, "checkbutton_prayerlist");
-	check_button.statusbar = UI_GET_ITEM(gxml, "checkbutton_statusbar");
+	check_button.use_verse_num_bold        = UI_GET_ITEM(gxml, "checkbutton_verse_num_bold");
+	check_button.use_verse_num_bracket     = UI_GET_ITEM(gxml, "checkbutton_verse_num_bracket");
+	check_button.use_verse_num_superscript = UI_GET_ITEM(gxml, "checkbutton_verse_num_superscript");
+	check_button.versehighlight      = UI_GET_ITEM(gxml, "checkbutton_versehighlight");
+	check_button.annotate_highlight  = UI_GET_ITEM(gxml, "checkbutton_annotate_highlight");
+	check_button.xrefs_in_verse_list = UI_GET_ITEM(gxml, "checkbutton_xrefs_in_verse_list");
+	check_button.prayerlist          = UI_GET_ITEM(gxml, "checkbutton_prayerlist");
+	check_button.statusbar           = UI_GET_ITEM(gxml, "checkbutton_statusbar");
+	check_button.alternation         = UI_GET_ITEM(gxml, "checkbutton_alternation");
 
 	/* v-- BibleSync --v */
-	check_button.bs_debug =
-	    UI_GET_ITEM(gxml, "checkbutton_BSP_nav_debug");
-	check_button.bs_presence =
-	    UI_GET_ITEM(gxml, "checkbutton_BSP_presence");
-	check_button.bs_mismatch =
-	    UI_GET_ITEM(gxml, "checkbutton_BSP_mismatch");
-	check_button.bs_group_tab =
-	    UI_GET_ITEM(gxml, "checkbutton_BSP_group_tab");
-	check_button.bs_privacy =
-	    UI_GET_ITEM(gxml, "checkbutton_BSP_privacy");
+	check_button.bs_debug     = UI_GET_ITEM(gxml, "checkbutton_BSP_nav_debug");
+	check_button.bs_presence  = UI_GET_ITEM(gxml, "checkbutton_BSP_presence");
+	check_button.bs_mismatch  = UI_GET_ITEM(gxml, "checkbutton_BSP_mismatch");
+	check_button.bs_group_tab = UI_GET_ITEM(gxml, "checkbutton_BSP_group_tab");
+	check_button.bs_privacy   = UI_GET_ITEM(gxml, "checkbutton_BSP_privacy");
 
-	radio_button.bs_mode_off =
-	    UI_GET_ITEM(gxml, "radiobutton_BSP_off");
-	radio_button.bs_mode_personal =
-	    UI_GET_ITEM(gxml, "radiobutton_BSP_personal");
-	radio_button.bs_mode_speaker =
-	    UI_GET_ITEM(gxml, "radiobutton_BSP_speaker");
-	radio_button.bs_mode_audience =
-	    UI_GET_ITEM(gxml, "radiobutton_BSP_audience");
+	radio_button.bs_mode_off      = UI_GET_ITEM(gxml, "radiobutton_BSP_off");
+	radio_button.bs_mode_personal = UI_GET_ITEM(gxml, "radiobutton_BSP_personal");
+	radio_button.bs_mode_speaker  = UI_GET_ITEM(gxml, "radiobutton_BSP_speaker");
+	radio_button.bs_mode_audience = UI_GET_ITEM(gxml, "radiobutton_BSP_audience");
 
-	radio_button.bs_nav_direct =
-	    UI_GET_ITEM(gxml, "radiobutton_BSP_nav_direct");
-	radio_button.bs_nav_verselist =
-	    UI_GET_ITEM(gxml, "radiobutton_BSP_nav_verselist");
+	radio_button.bs_nav_direct    = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_direct");
+	radio_button.bs_nav_verselist = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_verselist");
 
-	radio_button.bs_listen_some =
-	    UI_GET_ITEM(gxml, "radiobutton_BSP_listen_some");
-	radio_button.bs_listen_all =
-	    UI_GET_ITEM(gxml, "radiobutton_BSP_listen_all");
-	radio_button.bs_listen_none =
-	    UI_GET_ITEM(gxml, "radiobutton_BSP_listen_none");
+	radio_button.bs_listen_some = UI_GET_ITEM(gxml, "radiobutton_BSP_listen_some");
+	radio_button.bs_listen_all  = UI_GET_ITEM(gxml, "radiobutton_BSP_listen_all");
+	radio_button.bs_listen_none = UI_GET_ITEM(gxml, "radiobutton_BSP_listen_none");
 
 	speaker_window = UI_GET_ITEM(gxml, "speakerwindow");
 	biblesync_update_speaker();

@@ -1643,7 +1643,7 @@
                             <property name="draw_indicator">True</property>
                             <child internal-child="accessible">
                               <object class="AtkObject" id="checkbutton_statusbar-atkobject">
-                                <property name="AtkObject::accessible-name" translatable="yes">Enable Prayer Lists Checkbox</property>
+                                <property name="AtkObject::accessible-name" translatable="yes">Enable Statusbar Checkbox</property>
                               </object>
                             </child>
                           </object>
@@ -1651,6 +1651,29 @@
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="position">10</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="checkbutton_alternation">
+                            <property name="label" translatable="yes">Parallel color alternation</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="tooltip_text" translatable="yes">Parallel window can use alternating foreground/background.</property>
+                            <property name="use_underline">True</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="checkbutton_alternation-atkobject">
+                                <property name="AtkObject::accessible-name" translatable="yes">Enable Statusbar Checkbox</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">11</property>
                           </packing>
                         </child>
                         <child>
@@ -1759,7 +1782,7 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="position">11</property>
+                            <property name="position">12</property>
                           </packing>
                         </child>
                         <child>

@@ -1111,6 +1111,13 @@ void load_settings_structure(void)
 		settings.statusbar = 1;
 	}
 
+	if ((buf = xml_get_value("misc", "alternation"))) {
+		settings.alternation = atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc", "alternation", "1");
+		settings.alternation = 1;
+	}
+
 #if 1
 	settings.browsing = 1; /* unconditional - no longer toggle-able. */
 #else

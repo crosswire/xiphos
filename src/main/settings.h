@@ -208,6 +208,9 @@ struct _settings
 	/* statusbar setting */
 	int statusbar;
 
+	/* parallel color alternation */
+	int alternation;
+
 	/* if true parallel tab is showing */
 	int paratab_showing;
 

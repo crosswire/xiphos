@@ -683,7 +683,8 @@ void main_update_parallel_page(void)
 
 			is_rtol = main_is_mod_rtol(mod_name);
 
-			if (modidx % 2 == 1) { /* alternating background color */
+			/* alternating background color */
+			if (settings.alternation && (modidx % 2 == 1)) {
 				rowcolor = settings.bible_text_color;
 				textcolor = settings.bible_bg_color;
 			} else {
@@ -869,7 +870,7 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 		text += "<tr valign=\"top\">";
 
 		// alternate background colors.
-		bgColor = (verse % 2 == 0)
+		bgColor = (settings.alternation && (verse % 2 == 0))
 			? settings.bible_text_color
 			: settings.bible_bg_color;
 
@@ -886,7 +887,7 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 				if ((verse == cur_verse) && is_bible_text[modidx])
 					textColor = settings.currentverse_color;
 				else
-					textColor = (verse % 2 == 0)
+					textColor = (settings.alternation && (verse % 2 == 0))
 						  ? settings.bible_bg_color
 						  : settings.bible_text_color;
 

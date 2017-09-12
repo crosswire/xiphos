@@ -121,37 +121,28 @@ void on_checkbutton11_toggled(GtkToggleButton *togglebutton,
 			      gpointer user_data);
 void on_checkbutton12_toggled(GtkToggleButton *togglebutton,
 			      gpointer user_data);
-void on_checkbutton_verse_num_bold_toggled(GtkToggleButton *
-					       togglebutton,
+void on_checkbutton_verse_num_bold_toggled(GtkToggleButton *togglebutton,
 					   gpointer user_data);
-void on_checkbutton_verse_num_bracket_toggled(GtkToggleButton *
-						  togglebutton,
+void on_checkbutton_verse_num_bracket_toggled(GtkToggleButton *togglebutton,
 					      gpointer user_data);
-void on_checkbutton_verse_num_superscript_toggled(GtkToggleButton *
-						      togglebutton,
-						  gpointer
-						      user_data);
+void on_checkbutton_verse_num_superscript_toggled(GtkToggleButton *togglebutton,
+						  gpointer user_data);
 void on_checkbutton_scroll_toggled(GtkToggleButton *togglebutton,
 				   gpointer user_data);
-void on_checkbutton_imageresize_toggled(GtkToggleButton *
-					    togglebutton,
+void on_checkbutton_imageresize_toggled(GtkToggleButton *togglebutton,
 					gpointer user_data);
-void on_checkbutton_versehighlight_toggled(GtkToggleButton *
-					       togglebutton,
+void on_checkbutton_versehighlight_toggled(GtkToggleButton *togglebutton,
 					   gpointer user_data);
-void on_checkbutton_annotate_highlight_toggled(GtkToggleButton *
-						   togglebutton,
+void on_checkbutton_annotate_highlight_toggled(GtkToggleButton *togglebutton,
 					       gpointer user_data);
-void on_checkbutton_xrefs_in_verse_list_toggled(GtkToggleButton *
-						    togglebutton,
-						gpointer
-						    user_data);
-void on_checkbutton_prayerlist_toggled(GtkToggleButton *
-					   togglebutton,
+void on_checkbutton_xrefs_in_verse_list_toggled(GtkToggleButton *togglebutton,
+						gpointer user_data);
+void on_checkbutton_prayerlist_toggled(GtkToggleButton *togglebutton,
 				       gpointer user_data);
-void on_checkbutton_statusbar_toggled(GtkToggleButton *
-					  togglebutton,
+void on_checkbutton_statusbar_toggled(GtkToggleButton *togglebutton,
 				      gpointer user_data);
+void on_checkbutton_alternation_toggled(GtkToggleButton *togglebutton,
+					gpointer user_data);
 void on_basecombobox1_changed(GtkComboBox *combobox,
 			      gpointer user_data);
 

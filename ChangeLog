@@ -1,3 +1,7 @@
+2017-09/11  karl <charcoal@users.sf.net>
+
+	* #822 prefs option not to use alternating fg/bg in parallel displays.
+
 2017-09/03  karl <charcoal@users.sf.net>
 
 	* #524 fix use of fonts whose names end in digits.
