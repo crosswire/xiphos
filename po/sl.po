@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-10 10:27+0200\n"
+"POT-Creation-Date: 2017-09-11 22:12-0400\n"
 "PO-Revision-Date: 2015-06-04 12:39+0000\n"
 "Last-Translator: Marjan Šavli <marjan.savli@gmail.com>\n"
 "Language-Team: Slovenščina (Slovene) <xiphos-devel@crosswire.org>\n"
@@ -142,12 +142,12 @@ msgid "Bible"
 msgstr "Biblija"
 
 #: ../src/gnome2/about_modules.c:448 ../src/gnome2/search_sidebar.c:295
-#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "Commentary"
 msgstr "Komentar"
 
-#: ../src/gnome2/about_modules.c:451 ../ui/prefs.glade.h:136
-#: ../ui/prefs.gtkbuilder.h:136
+#: ../src/gnome2/about_modules.c:451 ../ui/prefs.glade.h:140
+#: ../ui/prefs.gtkbuilder.h:140
 msgid "Dictionary"
 msgstr "Slovar"
 
@@ -434,8 +434,8 @@ msgstr ""
 "Odpiranje zaznamka z mnogimi sklici v\n"
 "ločeni tabulatorji niso podprti."
 
-#: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1508
-#: ../src/gnome2/sidebar.c:1560
+#: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1517
+#: ../src/gnome2/sidebar.c:1569
 msgid "Bookmarks"
 msgstr "Zaznamki"
 
@@ -487,7 +487,7 @@ msgid "Close _without Saving"
 msgstr "Zapri _brez shranjevanja"
 
 #: ../src/gnome2/export_bookmarks.c:175 ../src/gnome2/export_bookmarks.c:232
-#: ../src/gnome2/sidebar.c:1530 ../src/gnome2/sidebar.c:1578
+#: ../src/gnome2/sidebar.c:1539 ../src/gnome2/sidebar.c:1587
 #, c-format
 msgid "Verse List"
 msgstr "Seznam vrstic"
@@ -522,28 +522,28 @@ msgstr "Iskanje nazaj"
 msgid "Find Next"
 msgstr "Najdi naslednjega"
 
-#: ../src/gnome2/font_dialog.c:296
+#: ../src/gnome2/font_dialog.c:294
 msgid "Set Module Font"
 msgstr "Nastavi pisavo modula"
 
-#: ../src/gnome2/font_dialog.c:330
+#: ../src/gnome2/font_dialog.c:328
 msgid "Change font for"
 msgstr "Spremeni pisavo za"
 
-#: ../src/gnome2/font_dialog.c:334 ../ui/editor_link_dialog.xml.h:3
+#: ../src/gnome2/font_dialog.c:332 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Modul"
 
-#: ../src/gnome2/font_dialog.c:338
+#: ../src/gnome2/font_dialog.c:336
 msgid "Current font: "
 msgstr "Trenutna pisava: "
 
-#: ../src/gnome2/font_dialog.c:379 ../src/gnome2/font_dialog.c:395
+#: ../src/gnome2/font_dialog.c:377 ../src/gnome2/font_dialog.c:393
 #: ../ui/prefs.gtkbuilder.h:3
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:398
+#: ../src/gnome2/font_dialog.c:396
 msgid "Use the default font for this module"
 msgstr "Za ta modul uporabi privzeto pisavo"
 
@@ -569,38 +569,38 @@ msgstr "Modul nima podpore za %s."
 msgid "Xiphos: No windows."
 msgstr "Xiphos: Nobenih oken."
 
-#: ../src/gnome2/main_window.c:715
+#: ../src/gnome2/main_window.c:716
 msgid "BibleSync: Current navigation sent."
 msgstr "BibleSync: Trenutna navigacija poslana."
 
-#: ../src/gnome2/main_window.c:717
+#: ../src/gnome2/main_window.c:718
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: Ne govori."
 
-#: ../src/gnome2/main_window.c:935
+#: ../src/gnome2/main_window.c:948
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Program za proučevanje Biblije"
 
-#: ../src/gnome2/main_window.c:999
+#: ../src/gnome2/main_window.c:1012
 msgid "Open a new tab"
 msgstr "Odpri nov zavihek"
 
-#: ../src/gnome2/main_window.c:1054 ../src/gnome2/sidebar.c:614
-#: ../src/gnome2/sidebar.c:619 ../src/main/sidebar.cc:655
+#: ../src/gnome2/main_window.c:1067 ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/sidebar.c:621 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "Običajen pogled"
 
-#: ../src/gnome2/main_window.c:1094
+#: ../src/gnome2/main_window.c:1107
 msgid "Commentary View"
 msgstr "Pogled komentarjev"
 
-#: ../src/gnome2/main_window.c:1102
+#: ../src/gnome2/main_window.c:1115
 msgid "Book View"
 msgstr "Pogled knjig"
 
-#: ../src/gnome2/main_window.c:1120
+#: ../src/gnome2/main_window.c:1133
 msgid "Welcome to Xiphos"
 msgstr "Dobrodošli v program Xiphos"
 
@@ -638,15 +638,15 @@ msgstr "Novo ime"
 
 #: ../src/gnome2/menu_popup.c:1321 ../src/gnome2/treekey-editor.c:138
 #: ../src/gnome2/treekey-editor.c:195 ../src/gnome2/treekey-editor.c:293
-#: ../src/main/prayerlists.cc:230
+#: ../src/main/prayerlists.cc:235
 msgid "Name: "
 msgstr "Ime: "
 
-#: ../src/gnome2/menu_popup.c:1330 ../src/main/prayerlists.cc:243
+#: ../src/gnome2/menu_popup.c:1330 ../src/main/prayerlists.cc:248
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Imena Modulov smejo vsebovati samo znake [A-Za-z0-9_]."
 
-#: ../src/gnome2/menu_popup.c:1336 ../src/main/prayerlists.cc:249
+#: ../src/gnome2/menu_popup.c:1336 ../src/main/prayerlists.cc:254
 msgid "Xiphos already knows a module by that name."
 msgstr "Xiphos že pozna modul s tem imenom."
 
@@ -800,7 +800,7 @@ msgstr "Priprava na odstranitev"
 msgid "Removing"
 msgstr "Odstranitev"
 
-#: ../src/gnome2/mod_mgr.c:194 ../ui/xi-menus.glade.h:156
+#: ../src/gnome2/mod_mgr.c:194 ../ui/xi-menus.glade.h:158
 #: ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove"
 msgstr "Odstrani"
@@ -962,7 +962,7 @@ msgstr "Dnevnikom in molitvenim seznamom ne moremo zgraditi kazala."
 msgid "%s failed"
 msgstr "%s spodletelo"
 
-#: ../src/gnome2/mod_mgr.c:1022 ../src/gnome2/mod_mgr.c:1787
+#: ../src/gnome2/mod_mgr.c:1022 ../src/gnome2/mod_mgr.c:1788
 msgid "Finished"
 msgstr "Končano"
 
@@ -1045,87 +1045,87 @@ msgstr "Popravki"
 msgid "Uninstalled"
 msgstr "Odstranjeno"
 
-#: ../src/gnome2/mod_mgr.c:1592 ../src/gnome2/sidebar.c:630
-#: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:228
+#: ../src/gnome2/mod_mgr.c:1592 ../src/gnome2/sidebar.c:632
+#: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:233
 #: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
 msgid "Prayer List/Journal"
 msgstr "Molitveni seznam/Dnevnik"
 
-#: ../src/gnome2/mod_mgr.c:1770
+#: ../src/gnome2/mod_mgr.c:1771
 msgid "Refreshing from remote source"
 msgstr "Osveževanje iz oddaljenega vira"
 
-#: ../src/gnome2/mod_mgr.c:1782
+#: ../src/gnome2/mod_mgr.c:1783
 msgid "Remote source not found"
 msgstr "Oddaljenega vira ni najti"
 
-#: ../src/gnome2/mod_mgr.c:1853
+#: ../src/gnome2/mod_mgr.c:1854
 msgid "Configure"
 msgstr "Nastavitev"
 
-#: ../src/gnome2/mod_mgr.c:1882
+#: ../src/gnome2/mod_mgr.c:1883
 msgid "Type"
 msgstr "Tip"
 
-#: ../src/gnome2/mod_mgr.c:1889
+#: ../src/gnome2/mod_mgr.c:1890
 msgid "Caption"
 msgstr "Naslov"
 
-#: ../src/gnome2/mod_mgr.c:1896
+#: ../src/gnome2/mod_mgr.c:1897
 msgid "Source"
 msgstr "Izvor"
 
-#: ../src/gnome2/mod_mgr.c:1903
+#: ../src/gnome2/mod_mgr.c:1904
 msgid "Directory"
 msgstr "Imenik"
 
-#: ../src/gnome2/mod_mgr.c:1911
+#: ../src/gnome2/mod_mgr.c:1912
 msgid "User"
 msgstr "Uporabnik"
 
-#: ../src/gnome2/mod_mgr.c:1918
+#: ../src/gnome2/mod_mgr.c:1919
 msgid "Password"
 msgstr "Geslo"
 
-#: ../src/gnome2/mod_mgr.c:1925
+#: ../src/gnome2/mod_mgr.c:1926
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1940
+#: ../src/gnome2/mod_mgr.c:1941
 msgid "Module Sources"
 msgstr "Viri modulov"
 
-#: ../src/gnome2/mod_mgr.c:1943
+#: ../src/gnome2/mod_mgr.c:1944
 msgid "Add/Remove"
 msgstr "Dodaj/Odstrani"
 
-#: ../src/gnome2/mod_mgr.c:1946
+#: ../src/gnome2/mod_mgr.c:1947
 msgid "Choose"
 msgstr "Izberi"
 
-#: ../src/gnome2/mod_mgr.c:1949 ../src/gnome2/preferences_dialog.c:2021
-#: ../src/gnome2/sidebar.c:1540 ../src/gnome2/sidebar.c:1586
+#: ../src/gnome2/mod_mgr.c:1950 ../src/gnome2/preferences_dialog.c:2051
+#: ../src/gnome2/sidebar.c:1549 ../src/gnome2/sidebar.c:1595
 msgid "Modules"
 msgstr "Moduli"
 
-#: ../src/gnome2/mod_mgr.c:1951
+#: ../src/gnome2/mod_mgr.c:1952
 msgid "Install/Update"
 msgstr "Namesti/Osveži"
 
-#: ../src/gnome2/mod_mgr.c:1954
+#: ../src/gnome2/mod_mgr.c:1955
 msgid "Maintenance"
 msgstr "Vzdrževanje"
 
-#: ../src/gnome2/mod_mgr.c:2170
+#: ../src/gnome2/mod_mgr.c:2171
 msgid "Please Refresh"
 msgstr "Prosimo osvežite"
 
-#: ../src/gnome2/mod_mgr.c:2171
+#: ../src/gnome2/mod_mgr.c:2172
 msgid "Your module list is not up to date!"
 msgstr "Vaš seznam modulov ni osvežen!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2488
+#: ../src/gnome2/mod_mgr.c:2489
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -1133,7 +1133,7 @@ msgstr ""
 "Odstranili ste vašo zadnjo Biblijo.\n"
 "Xiphos zahteva najmanj eno."
 
-#: ../src/gnome2/mod_mgr.c:2494
+#: ../src/gnome2/mod_mgr.c:2495
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -1141,7 +1141,7 @@ msgstr ""
 "Še vedno ni nameščene nobene Biblije.\n"
 "Xiphos ne more nadaljevati brez najmanj ene."
 
-#: ../src/gnome2/mod_mgr.c:2619
+#: ../src/gnome2/mod_mgr.c:2620
 #, c-format
 msgid ""
 "%s obsoletes %s.\n"
@@ -1152,60 +1152,60 @@ msgstr ""
 "Ali želite, da sa pobriše %s?\n"
 "Pazite: Tega se ne da razveljaviti."
 
-#: ../src/gnome2/mod_mgr.c:2685
+#: ../src/gnome2/mod_mgr.c:2686
 msgid "No obsolete modules were found."
 msgstr "Zastarelih modulov ni najti."
 
-#: ../src/gnome2/mod_mgr.c:2707
+#: ../src/gnome2/mod_mgr.c:2708
 msgid "Standard remote sources have been loaded."
 msgstr "Običajni oddaljeni viri so bili naloženi."
 
-#: ../src/gnome2/mod_mgr.c:2716
+#: ../src/gnome2/mod_mgr.c:2717
 msgid "Could not load standard sources from CrossWire."
 msgstr "Iz CrossWire ni bilo mogoče naložiti običajnih virov."
 
-#: ../src/gnome2/mod_mgr.c:2867 ../src/gnome2/mod_mgr.c:3123
+#: ../src/gnome2/mod_mgr.c:2868 ../src/gnome2/mod_mgr.c:3124
 msgid "Remove the selected source"
 msgstr "Odstrani izbran vir"
 
-#: ../src/gnome2/mod_mgr.c:2933
+#: ../src/gnome2/mod_mgr.c:2934
 msgid "Enter a remote source"
 msgstr "Vnesi oddaljen vir"
 
-#: ../src/gnome2/mod_mgr.c:2942
+#: ../src/gnome2/mod_mgr.c:2943
 msgid "Caption:"
 msgstr "Naslov:"
 
-#: ../src/gnome2/mod_mgr.c:2943
+#: ../src/gnome2/mod_mgr.c:2944
 msgid "Type:"
 msgstr "Tip:"
 
-#: ../src/gnome2/mod_mgr.c:2944
+#: ../src/gnome2/mod_mgr.c:2945
 msgid "Host:"
 msgstr "Gostitelj:"
 
-#: ../src/gnome2/mod_mgr.c:2945
+#: ../src/gnome2/mod_mgr.c:2946
 msgid "Directory:"
 msgstr "Mapa:"
 
-#: ../src/gnome2/mod_mgr.c:2946
+#: ../src/gnome2/mod_mgr.c:2947
 msgid "User (optional):"
 msgstr "Uporabnik (opcijsko):"
 
-#: ../src/gnome2/mod_mgr.c:2947
+#: ../src/gnome2/mod_mgr.c:2948
 msgid "Password (optional):"
 msgstr "Geslo (opcijsko):"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2973
+#: ../src/gnome2/mod_mgr.c:2974
 msgid "A source by that name already exists."
 msgstr "Vir s tem imenom že obstaja."
 
-#: ../src/gnome2/mod_mgr.c:3120
+#: ../src/gnome2/mod_mgr.c:3121
 msgid "Delete a remote source"
 msgstr "Izbriši oddaljeni vir"
 
-#: ../src/gnome2/mod_mgr.c:3639
+#: ../src/gnome2/mod_mgr.c:3640
 #, fuzzy
 msgid "[no module]"
 msgstr "[noben modul]"
@@ -1232,7 +1232,7 @@ msgstr "Pojdi noter, k prvemu podpoglavju"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Pomik tega okna uskladi z glavnim oknom"
 
-#: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2028
+#: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2058
 msgid "Parallel"
 msgstr "Vzporedno"
 
@@ -1245,23 +1245,23 @@ msgstr "Odlepi/Prilepi"
 msgid "Module Options"
 msgstr "Opcije modulov"
 
-#: ../src/gnome2/parallel_view.c:213 ../src/gnome2/sidebar.c:614
-#: ../src/gnome2/sidebar.c:619 ../src/gnome2/tabbed_browser.c:254
+#: ../src/gnome2/parallel_view.c:213 ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/sidebar.c:621 ../src/gnome2/tabbed_browser.c:254
 #: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
 msgid "Parallel View"
 msgstr "Vzporedni pogled"
 
-#: ../src/gnome2/preferences_dialog.c:864
+#: ../src/gnome2/preferences_dialog.c:865
 msgid "BibleSync session passphrase"
 msgstr "BibleSync geslo za sejo"
 
-#: ../src/gnome2/preferences_dialog.c:866
+#: ../src/gnome2/preferences_dialog.c:867
 msgid "Phrase:"
 msgstr "Geslo:"
 
 #. mode selection failed? probably dead interface
-#: ../src/gnome2/preferences_dialog.c:937
+#: ../src/gnome2/preferences_dialog.c:938
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
@@ -1269,99 +1269,99 @@ msgstr ""
 "Način izbire je spodletel.\n"
 "Nastavi \"Odprava napak\" in poskusi ponovno, da vidiš zakaj."
 
-#: ../src/gnome2/preferences_dialog.c:986
+#: ../src/gnome2/preferences_dialog.c:987
 #, fuzzy
 msgid "Mode selection failed.\n"
 msgstr "Način izbire spodletel.\n"
 
-#: ../src/gnome2/preferences_dialog.c:989
+#: ../src/gnome2/preferences_dialog.c:990
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr "BibleSync: %s (geslo \"%s\")."
 
-#: ../src/gnome2/preferences_dialog.c:991
+#: ../src/gnome2/preferences_dialog.c:992
 msgid "Disabled"
 msgstr "Onemogočeno"
 
-#: ../src/gnome2/preferences_dialog.c:993 ../src/main/xml.c:96
+#: ../src/gnome2/preferences_dialog.c:994 ../src/main/xml.c:96
 msgid "Personal"
 msgstr "Osebno"
 
-#: ../src/gnome2/preferences_dialog.c:995
+#: ../src/gnome2/preferences_dialog.c:996
 msgid "Speaker"
 msgstr "Govornik"
 
-#: ../src/gnome2/preferences_dialog.c:996
+#: ../src/gnome2/preferences_dialog.c:997
 msgid "Audience"
 msgstr "Občinstvo"
 
-#: ../src/gnome2/preferences_dialog.c:1582
-#: ../src/gnome2/preferences_dialog.c:1616
-#: ../src/gnome2/preferences_dialog.c:1649
-#: ../src/gnome2/preferences_dialog.c:1681
-#: ../src/gnome2/preferences_dialog.c:1712
-#: ../src/gnome2/preferences_dialog.c:1743
-#: ../src/gnome2/preferences_dialog.c:1774
-#: ../src/gnome2/preferences_dialog.c:1806
-#: ../src/gnome2/preferences_dialog.c:1839
-#: ../src/gnome2/preferences_dialog.c:1890
-#: ../src/gnome2/preferences_dialog.c:2338
+#: ../src/gnome2/preferences_dialog.c:1612
+#: ../src/gnome2/preferences_dialog.c:1646
+#: ../src/gnome2/preferences_dialog.c:1679
+#: ../src/gnome2/preferences_dialog.c:1711
+#: ../src/gnome2/preferences_dialog.c:1742
+#: ../src/gnome2/preferences_dialog.c:1773
+#: ../src/gnome2/preferences_dialog.c:1804
+#: ../src/gnome2/preferences_dialog.c:1836
+#: ../src/gnome2/preferences_dialog.c:1869
+#: ../src/gnome2/preferences_dialog.c:1920
+#: ../src/gnome2/preferences_dialog.c:2373
 msgid "-- Select --"
 msgstr "-- Izberi --"
 
-#: ../src/gnome2/preferences_dialog.c:1853
+#: ../src/gnome2/preferences_dialog.c:1883
 msgid "Locale will take effect after restart."
 msgstr "Sprememba jezika bo imela učinek po ponovnem zagonu programa."
 
-#: ../src/gnome2/preferences_dialog.c:1923 ../ui/prefs.glade.h:1
+#: ../src/gnome2/preferences_dialog.c:1953 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "Možnosti"
 
-#: ../src/gnome2/preferences_dialog.c:2001
+#: ../src/gnome2/preferences_dialog.c:2031
 msgid "General"
 msgstr "Splošno"
 
-#: ../src/gnome2/preferences_dialog.c:2004
+#: ../src/gnome2/preferences_dialog.c:2034
 msgid "Options"
 msgstr "Opcije"
 
-#: ../src/gnome2/preferences_dialog.c:2007 ../ui/prefs.glade.h:85
+#: ../src/gnome2/preferences_dialog.c:2037 ../ui/prefs.glade.h:85
 #: ../ui/prefs.gtkbuilder.h:85
 #, fuzzy
 msgid "BibleSync"
 msgstr "BibleSync"
 
-#: ../src/gnome2/preferences_dialog.c:2011
+#: ../src/gnome2/preferences_dialog.c:2041
 msgid "Fonts"
 msgstr "Pisave"
 
-#: ../src/gnome2/preferences_dialog.c:2014
+#: ../src/gnome2/preferences_dialog.c:2044
 msgid "Color"
 msgstr "Barva"
 
-#: ../src/gnome2/preferences_dialog.c:2017
+#: ../src/gnome2/preferences_dialog.c:2047
 #, fuzzy
 msgid "Sizes and Faces"
 msgstr "Velikosti in oblike"
 
-#: ../src/gnome2/preferences_dialog.c:2031
+#: ../src/gnome2/preferences_dialog.c:2061
 msgid "Special"
 msgstr "Posebni"
 
-#: ../src/gnome2/preferences_dialog.c:2719 ../src/gnome2/search_dialog.c:519
+#: ../src/gnome2/preferences_dialog.c:2754 ../src/gnome2/search_dialog.c:519
 msgid "Clear List?"
 msgstr "Počistim seznam?"
 
-#: ../src/gnome2/preferences_dialog.c:2720 ../src/gnome2/search_dialog.c:520
+#: ../src/gnome2/preferences_dialog.c:2755 ../src/gnome2/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr "Ali ste prepričani, da želite počistiti seznam modulov?"
 
-#: ../src/gnome2/preferences_dialog.c:2771 ../src/main/search_dialog.cc:658
+#: ../src/gnome2/preferences_dialog.c:2806 ../src/main/search_dialog.cc:658
 msgid "Remove Module?"
 msgstr "Odstranim modul?"
 
-#: ../src/gnome2/preferences_dialog.c:2772 ../src/main/search_dialog.cc:659
+#: ../src/gnome2/preferences_dialog.c:2807 ../src/main/search_dialog.cc:659
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Ali ste prepričani, da želite odstraniti označen modul?"
 
@@ -1521,7 +1521,7 @@ msgstr ""
 msgid "Module is neither Bible nor commentary"
 msgstr "Modul ni niti Biblija, niti komentar"
 
-#: ../src/gnome2/search_dialog.c:1216 ../src/gnome2/sidebar.c:973
+#: ../src/gnome2/search_dialog.c:1216 ../src/gnome2/sidebar.c:976
 msgid "BibleSync is not active for transmit."
 msgstr "BibleSync ni aktiven za oddajo."
 
@@ -1602,29 +1602,29 @@ msgstr "Nižji"
 msgid "Upper"
 msgstr "Višji"
 
-#: ../src/gnome2/sidebar.c:834
+#: ../src/gnome2/sidebar.c:836
 #, fuzzy
 msgid "Open module in editor?"
 msgstr "Modul odprem v urejevalniku?"
 
-#: ../src/gnome2/sidebar.c:835
+#: ../src/gnome2/sidebar.c:837
 msgid "If no, it will open for display only."
 msgstr "Če ne, bo prikazan samo za branje."
 
-#: ../src/gnome2/sidebar.c:934
+#: ../src/gnome2/sidebar.c:937
 #, fuzzy
 msgid "Paste verse references"
 msgstr "Prilepi sklice vrstic"
 
-#: ../src/gnome2/sidebar.c:936
+#: ../src/gnome2/sidebar.c:939
 msgid "List:"
 msgstr "Seznam:"
 
-#: ../src/gnome2/sidebar.c:1519 ../src/gnome2/sidebar.c:1569
+#: ../src/gnome2/sidebar.c:1528 ../src/gnome2/sidebar.c:1578
 msgid "Search"
 msgstr "Iskanje"
 
-#: ../src/gnome2/sidebar_dialog.c:170 ../src/gnome2/sidebar_dialog.c:180
+#: ../src/gnome2/sidebar_dialog.c:174 ../src/gnome2/sidebar_dialog.c:184
 msgid "Sidebar"
 msgstr "Stranska vrstica"
 
@@ -1822,8 +1822,8 @@ msgstr ""
 "Nepravilno kodirana osebna beležka:\n"
 "'%s'"
 
-#: ../src/main/display.cc:1116 ../src/main/display.cc:1157
-#: ../src/main/display.cc:1241 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1116 ../src/main/display.cc:1158
+#: ../src/main/display.cc:1242 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr "Poglavje"
@@ -1984,119 +1984,119 @@ msgstr "Naštevanja"
 msgid "Glosses"
 msgstr "Razlage"
 
-#: ../src/main/parallel_view.cc:757
+#: ../src/main/parallel_view.cc:758
 msgid "view context"
 msgstr "poglej zvezo"
 
-#: ../src/main/prayerlists.cc:107
+#: ../src/main/prayerlists.cc:112
 msgid "Growth"
 msgstr "Rast"
 
-#: ../src/main/prayerlists.cc:108
+#: ../src/main/prayerlists.cc:113
 #, fuzzy
 msgid "<b>For Growth</b><br/>"
 msgstr "<b>Za rast</b><br/>"
 
-#: ../src/main/prayerlists.cc:109 ../src/main/prayerlists.cc:361
+#: ../src/main/prayerlists.cc:114 ../src/main/prayerlists.cc:368
 msgid "Salvation"
 msgstr "Rešitev duš"
 
-#: ../src/main/prayerlists.cc:110
+#: ../src/main/prayerlists.cc:115
 #, fuzzy
 msgid "<b>For Salvation</b><br/>"
 msgstr "<b>Za rešitev duš</b><br/>"
 
-#: ../src/main/prayerlists.cc:111 ../src/main/prayerlists.cc:365
+#: ../src/main/prayerlists.cc:116 ../src/main/prayerlists.cc:372
 msgid "Health"
 msgstr "Zdravje"
 
-#: ../src/main/prayerlists.cc:112
+#: ../src/main/prayerlists.cc:117
 #, fuzzy
 msgid "<b>For Health</b><br/>"
 msgstr "<b>Za Zdravje</b><br/>"
 
-#: ../src/main/prayerlists.cc:113
+#: ../src/main/prayerlists.cc:118
 msgid "Misc"
 msgstr "Mešano"
 
-#: ../src/main/prayerlists.cc:114
+#: ../src/main/prayerlists.cc:119
 #, fuzzy
 msgid "<b>Miscellaneous</b><br/>"
 msgstr "<b>Mešano</b><br/>"
 
-#: ../src/main/prayerlists.cc:122
+#: ../src/main/prayerlists.cc:127
 msgid "Point x"
 msgstr "Določi x"
 
-#: ../src/main/prayerlists.cc:123
+#: ../src/main/prayerlists.cc:128
 #, fuzzy
 msgid "<b>(x)</b><br/>"
 msgstr "<b>(x)</b><br/>"
 
-#: ../src/main/prayerlists.cc:124
+#: ../src/main/prayerlists.cc:129
 msgid "Point y"
 msgstr "Določi y"
 
-#: ../src/main/prayerlists.cc:125
+#: ../src/main/prayerlists.cc:130
 #, fuzzy
 msgid "<b>(y)</b><br/>"
 msgstr "<b>(y)</b><br/>"
 
-#: ../src/main/prayerlists.cc:126
+#: ../src/main/prayerlists.cc:131
 msgid "Point z"
 msgstr "Določi z"
 
-#: ../src/main/prayerlists.cc:127
+#: ../src/main/prayerlists.cc:132
 #, fuzzy
 msgid "<b>(z)</b><br/>"
 msgstr "<b>(z)</b><br/>"
 
-#: ../src/main/prayerlists.cc:135
+#: ../src/main/prayerlists.cc:140
 msgid "Minor Topic 1"
 msgstr "Podpoglavje 1"
 
-#: ../src/main/prayerlists.cc:136
+#: ../src/main/prayerlists.cc:141
 #, fuzzy
 msgid "<b>Subtopic 1</b><br/>"
 msgstr "<b>Podpoglavje 1</b><br/>"
 
-#: ../src/main/prayerlists.cc:138
+#: ../src/main/prayerlists.cc:143
 msgid "Minor Topic 2"
 msgstr "Podpoglavje 2"
 
-#: ../src/main/prayerlists.cc:139
+#: ../src/main/prayerlists.cc:144
 #, fuzzy
 msgid "<b>Subtopic 2</b><br/>"
 msgstr "<b>Podpoglavje 2</b><br/>"
 
-#: ../src/main/prayerlists.cc:141
+#: ../src/main/prayerlists.cc:146
 msgid "Minor Topic 3"
 msgstr "Podpoglavje 3"
 
-#: ../src/main/prayerlists.cc:142
+#: ../src/main/prayerlists.cc:147
 #, fuzzy
 msgid "<b>Subtopic 3</b><br/>"
 msgstr "<b>Podpoglavje 3</b><br/>"
 
-#: ../src/main/prayerlists.cc:144
+#: ../src/main/prayerlists.cc:149
 msgid "Minor Topic 4"
 msgstr "Podpoglavje 4"
 
-#: ../src/main/prayerlists.cc:145
+#: ../src/main/prayerlists.cc:150
 #, fuzzy
 msgid "<b>Subtopic 4</b><br/>"
 msgstr "<b>Podpoglavje 4</b><br/>"
 
-#: ../src/main/prayerlists.cc:229
+#: ../src/main/prayerlists.cc:234
 msgid "Name for new prayer list or journal"
 msgstr "Ime molitvenega seznama ali dnevnika"
 
-#: ../src/main/prayerlists.cc:257
+#: ../src/main/prayerlists.cc:262
 msgid "Xiphos finds that prayer list already."
 msgstr "Xiphos je že našel ta molitveni seznam."
 
 #. this one matters.
-#: ../src/main/prayerlists.cc:269
+#: ../src/main/prayerlists.cc:274
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
@@ -2105,19 +2105,19 @@ msgstr ""
 "Xiphos ne more ustvariti modulove poti:\n"
 "%s"
 
-#: ../src/main/prayerlists.cc:308
+#: ../src/main/prayerlists.cc:313
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
 msgstr "Osnoven molitveni seznam. \\par\\par Modul je ustvaril Xiphos."
 
-#: ../src/main/prayerlists.cc:309
+#: ../src/main/prayerlists.cc:314
 msgid "BasicPrayerList"
 msgstr "OsnovniMolitveniSeznam"
 
-#: ../src/main/prayerlists.cc:322
+#: ../src/main/prayerlists.cc:328
 msgid "MyPrayerList"
 msgstr "MojMolitveniSeznam"
 
-#: ../src/main/prayerlists.cc:323
+#: ../src/main/prayerlists.cc:329
 #, fuzzy
 msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
@@ -2126,84 +2126,96 @@ msgstr ""
 "<b>Ljudje:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Cerkev:</b><br/>sedež<br/"
 ">družba<br/>Biblija za misijonarje<br/><br/><br/>"
 
-#: ../src/main/prayerlists.cc:347
+#: ../src/main/prayerlists.cc:353
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
 "Molitveni seznam temelječ na področjih. \\par\\par Modul je ustvaril Xiphos."
 
-#: ../src/main/prayerlists.cc:348
+#: ../src/main/prayerlists.cc:354
 msgid "SubjectPrayerList"
 msgstr "MolitveniSeznamPoPodročjih"
 
-#: ../src/main/prayerlists.cc:362
+#: ../src/main/prayerlists.cc:369
 #, fuzzy
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
 msgstr "Bob<br/>Sam<br/>Sue<br/>John<br/>"
 
-#: ../src/main/prayerlists.cc:363
+#: ../src/main/prayerlists.cc:370
 msgid "Spiritual Growth"
 msgstr "Duhovna rast"
 
-#: ../src/main/prayerlists.cc:364
+#: ../src/main/prayerlists.cc:371
 #, fuzzy
 msgid "Mike<br/>Steve<br/>"
 msgstr "Mike<br/>Steve<br/>"
 
-#: ../src/main/prayerlists.cc:366
+#: ../src/main/prayerlists.cc:373
 #, fuzzy
 msgid "Sue<br/>John<br/>"
 msgstr "Sue<br/>John<br/>"
 
-#: ../src/main/prayerlists.cc:390
+#: ../src/main/prayerlists.cc:397
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr "Mesečni molitveni seznam. \\par\\par Modul je ustvaril Xiphos."
 
-#: ../src/main/prayerlists.cc:391
+#: ../src/main/prayerlists.cc:398
 msgid "MonthlyPrayerList"
 msgstr "MesečniMolitveniSeznam"
 
-#: ../src/main/prayerlists.cc:439
+#: ../src/main/prayerlists.cc:447
 msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr "Dnevni dnevnik. \\par\\par Module je ustvaril Xiphos."
 
-#: ../src/main/prayerlists.cc:440
+#: ../src/main/prayerlists.cc:448
 msgid "DailyJournal"
 msgstr "DnevniDnevnik"
 
-#: ../src/main/prayerlists.cc:501
+#: ../src/main/prayerlists.cc:510
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr "Skica teme (npr. pridiga). \\par\\par Modul je ustvaril Xiphos."
 
-#: ../src/main/prayerlists.cc:502
+#: ../src/main/prayerlists.cc:511
 msgid "OutlinedTopic"
 msgstr "SkicaTeme"
 
-#: ../src/main/prayerlists.cc:515
+#: ../src/main/prayerlists.cc:525
 msgid "Major Topic A"
 msgstr "Glavna tema A"
 
-#: ../src/main/prayerlists.cc:516
+#: ../src/main/prayerlists.cc:526
 #, fuzzy
 msgid "<b>Major Topic A</b><br/>"
 msgstr "<b>Glavna tema A</b><br/>"
 
-#: ../src/main/prayerlists.cc:518
+#: ../src/main/prayerlists.cc:528
 msgid "Major Topic B"
 msgstr "Glavna tema B"
 
-#: ../src/main/prayerlists.cc:519
+#: ../src/main/prayerlists.cc:529
 #, fuzzy
 msgid "<b>Major Topic B</b><br/>"
 msgstr "<b>Glavna tema B</b><br/>"
 
-#: ../src/main/prayerlists.cc:521
+#: ../src/main/prayerlists.cc:531
 msgid "Major Topic C"
 msgstr "Glavna tema C"
 
-#: ../src/main/prayerlists.cc:522
+#: ../src/main/prayerlists.cc:532
 #, fuzzy
 msgid "<b>Major Topic C</b><br/>"
 msgstr "<b>Glavna tema C</b><br/>"
+
+#: ../src/main/prayerlists.cc:557
+#, fuzzy
+msgid ""
+"A journal sectioned by Bible book and chapter. \\par\\par Module created by "
+"Xiphos."
+msgstr "Skica teme (npr. pridiga). \\par\\par Modul je ustvaril Xiphos."
+
+#: ../src/main/prayerlists.cc:558
+#, fuzzy
+msgid "BookChapter"
+msgstr "Poglavje"
 
 #: ../src/main/previewer.cc:193
 msgid "User Annotation"
@@ -2878,7 +2890,7 @@ msgid "Export complete book"
 msgstr "Izvozi celotno knjigo"
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
-#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 msgid "Book"
 msgstr "Knjiga"
 
@@ -2995,8 +3007,8 @@ msgstr "Vizitka študijske beležke"
 msgid "Open about dialog"
 msgstr "Odpri okno vizitke"
 
-#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:118
-#: ../ui/prefs.gtkbuilder.h:118
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:122
+#: ../ui/prefs.gtkbuilder.h:122
 msgid "Bold"
 msgstr "Krepko"
 
@@ -4228,183 +4240,201 @@ msgstr "Omogoči statusno vrstico"
 msgid "Enable/Disable Statusbar."
 msgstr "Omogoči/onemogoči statusno vrstico"
 
-#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:117
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
+#, fuzzy
+msgid "Enable Statusbar Checkbox"
+msgstr "Omogoči statusno vrstico"
+
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
+msgid "Parallel color alternation"
+msgstr ""
+
+#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
+msgid "Parallel window can use alternating foreground/background."
+msgstr ""
+
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
+#, fuzzy
+msgid "Enable Parallel Alternation Checkbox"
+msgstr "Omogoči izbiro molitvenih seznamov"
+
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:121
 #, fuzzy
 msgid "Verse number"
 msgstr "Številka vrstice"
 
-#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:116
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:120
 msgid "Offset the verse number in several ways"
 msgstr "Odmik številke vrstice na več načinov"
 
-#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
+#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
 #, fuzzy
 msgid "Show verse number in bold text"
 msgstr "Številke vrstic prikaži s krepkim besedilom"
 
-#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
+#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
 #, fuzzy
 msgid "Verse number bold checkbox"
 msgstr "Izbira krepke (poudarjene) številke vrstice"
 
-#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
+#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
 msgid "Brackets"
 msgstr "Oklepaji"
 
-#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Show verse number with [surrounding brackets]"
 msgstr "Številko vrstice prikaži z [obdajajočimi oklepaji]"
 
-#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 #, fuzzy
 msgid "Verse number bracket checkbox"
 msgstr "Izbira oklepaja za številko vrstice"
 
-#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 #, fuzzy
 msgid "Superscript"
 msgstr "Nadpisano"
 
-#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
+#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 #, fuzzy
 msgid "Show verse number as a superscript"
 msgstr "Številko vrstice prikaži kot nadpisano"
 
-#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 #, fuzzy
 msgid "Verse number superscript checkbox"
 msgstr "Izbira nadpisa številke vrstice"
 
-#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
 #, fuzzy
 msgid "StudyPad default directory"
 msgstr "Privzeta mapa študijske beležnice"
 
-#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
+#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
 msgid "Select A Directory"
 msgstr "Izberi mapo"
 
-#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 msgid "StudyPad default directory combo"
 msgstr "Privzeta mapa študijske beležnice"
 
-#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 msgid "General Misc"
 msgstr "Splošne podrobnosti"
 
-#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>Glavno okno modulov</b>"
 
-#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
 msgid "Biblical Text"
 msgstr "Biblično besedilo"
 
-#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "Change Biblical Text Combo"
 msgstr "Izbira spremembe Bibličnega besedila"
 
-#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 msgid "Change Commentary Combo"
 msgstr "Izbira spremembe okna s komentarjem"
 
-#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 msgid "Change Dictionary Combo"
 msgstr "Izbira spremembe slovarja"
 
-#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
+#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
 msgid "Change Book Combo"
 msgstr "Izbira spremembe knjige"
 
-#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>Moduli</b>"
 
-#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "Iz seznama pobriši vse module"
 
-#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "Izbira brisanja modulov iz seznama"
 
-#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "Označeni modul odstrani iz seznama"
 
-#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "Izbira za izbris označenega modula iz seznama"
 
-#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 #, fuzzy
 msgid "Open a dialog to select modules"
 msgstr "Odpre okno za izbiro modulov"
 
-#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "Dodaj module"
 
-#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
+#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "Gumb za odprtje okna za izbiro"
 
-#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
+#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
 msgid "Modules Parallel"
 msgstr "Moduli vzporedno"
 
-#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
+#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>Moduli s posebnim namenom</b>"
 
-#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
+#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
 msgid "Daily Devotional"
 msgstr "Dnevne posvetitve"
 
-#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
+#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
 msgid "Daily Devotional Combo"
 msgstr "Okno z dnevnimi posvetitvami"
 
-#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
+#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
 msgid "Hebrew Lexicon"
 msgstr "Hebrejski leksikon"
 
-#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
+#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Hebrew Lexicon Combo"
 msgstr "Izbira Hebrejskega leksikona"
 
-#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
+#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Greek Lexicon"
 msgstr "Grški leksikon"
 
-#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
+#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
 msgid "Greek Lexicon Combo"
 msgstr "Izbira Grškega leksikona"
 
-#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
+#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
 msgid "Default Dictionary"
 msgstr "Prizvet slovar"
 
-#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
+#: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
 msgid "Change Default Dictionary Combo"
 msgstr "Izbira spremembe privzetega slovarja"
 
-#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
+#: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
 msgid "Personal Notes"
 msgstr "Osebne beležke"
 
-#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
+#: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
 msgid "Change Personal Notes Combo"
 msgstr "Spremeni okno osebnih beležk"
 
-#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
+#: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
 msgid "Modules Misc"
 msgstr "Podrobnosti Modulov"
 
@@ -5195,23 +5225,23 @@ msgstr "Znebi se osebnih komentarjev"
 msgid "Read Selection Aloud"
 msgstr "Izbrano preberi na glas"
 
-#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid "Save these results as a single bookmark"
 msgstr "Rezultate shrani kot en zaznamek"
 
-#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Save list as a single bookmark"
 msgstr "Shrani seznam kot en sam zaznamek"
 
-#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:93
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:95
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr "Rezultate shrani kor zaporedje zaznamkov v njihovi lastni mapi"
 
-#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:92
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:94
 msgid "Save list as a series of bookmarks"
 msgstr "Shrani seznam kot zaporedje zaznamkov"
 
-#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:95
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:97
 msgid ""
 "Provide a dialog in which to paste a line of verse references, to fill the "
 "verse list."
@@ -5219,21 +5249,21 @@ msgstr ""
 "Zagotovi dialog v katerega se prilepi vrstico z napotitvami drugam, da se "
 "napolni seznam vrstic."
 
-#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:94
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:96
 #, fuzzy
 msgid "Populate verse list"
 msgstr "Poseliti seznam vrstic"
 
-#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:97
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:99
 msgid "Push the entire verse list contents directly into the history list."
 msgstr "Celoten seznam vrstic porine direktno v seznam zgodovine."
 
-#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:96
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:98
 #, fuzzy
 msgid "Preload history from verse list"
 msgstr "Iz seznama vrstic ponovno naloži zgodovino"
 
-#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:99
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:101
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
@@ -5241,11 +5271,11 @@ msgstr ""
 "Ta seznam vrstic pošlji ostalim preko BibleSync, če si v osebnem ali "
 "govorniškem načinu."
 
-#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:98
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:100
 msgid "Send list via BibleSync"
 msgstr "Seznam pošlji preko BibleSync"
 
-#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:100
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:102
 msgid "Export List"
 msgstr "Izvozi seznam"
 
@@ -5388,35 +5418,45 @@ msgid "Outlined"
 msgstr "Skica"
 
 #: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
+#, fuzzy
+msgid "Create a new book/chapter outline"
+msgstr "Ustvari nov obris teme"
+
+#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
+#, fuzzy
+msgid "Book/Chapter"
+msgstr "Poglavje"
+
+#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Open module in editor or plain display window"
 msgstr "Modul odpri v urejevalniku ali preprostem pogovornem oknu"
 
-#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
+#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:90
 #, fuzzy
 msgid "Open in separate window"
 msgstr "Odpri v ločenem oknu"
 
-#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add a sub-item"
 msgstr "Dodaj podstvar"
 
-#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add Sub-Item"
 msgstr "Dodaj Podstvari"
 
-#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:26
+#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Add an item"
 msgstr "Dodaj stvar"
 
-#: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:156 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add Item"
 msgstr "Dodaj stvari"
 
-#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:28
+#: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Remove this item"
 msgstr "Odstrani to stvar"
 
-#: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:159 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Edit this item"
 msgstr "Uredi to stvar"
 
