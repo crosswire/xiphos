@@ -5255,6 +5255,8 @@ nod	Northern Thai
 noe	Nimadi
 nof	Nomane
 nog	Nogai
+# as above, in cyrillic
+nog-Cyrl	Nogai
 noh	Nomu
 noi	Noiri
 nok	Nooksack
@@ -6150,6 +6152,8 @@ sae	Sabanês
 saf	Safaliba
 sag	Sango
 sah	Yakut
+# as above, in cyrillic
+sah-Cyrl	Yakut
 saj	Sahu
 sak	Sake
 sam	Samaritan Aramaic
