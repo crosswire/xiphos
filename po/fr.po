@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 4.0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 22:12-0400\n"
-"PO-Revision-Date: 2017-09-06 22:00+0200\n"
+"PO-Revision-Date: 2017-09-13 23:13+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -2142,7 +2142,7 @@ msgstr "JournalQuotidien"
 
 #: ../src/main/prayerlists.cc:510
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr "Thême structuré (ex message). \\par\\par Module crée par Xiphos."
+msgstr "Thème structuré (ex message). \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:511
 msgid "OutlinedTopic"
@@ -2173,20 +2173,18 @@ msgid "<b>Major Topic C</b><br/>"
 msgstr "<b>Sujet majeur C</b><br/>"
 
 #: ../src/main/prayerlists.cc:557
-#, fuzzy
 msgid ""
 "A journal sectioned by Bible book and chapter. \\par\\par Module created by "
 "Xiphos."
-msgstr "Thême structuré (ex message). \\par\\par Module crée par Xiphos."
+msgstr "Un journal découpé en livres et chapitres de la Bible. \\par\\par Module créé par Xiphos."
 
 #: ../src/main/prayerlists.cc:558
-#, fuzzy
 msgid "BookChapter"
-msgstr "Chapitre"
+msgstr "LivreChapitre"
 
 #: ../src/main/previewer.cc:193
 msgid "User Annotation"
-msgstr "Annotation personnelle de"
+msgstr "Note personnelle sur"
 
 #: ../src/main/search_dialog.cc:188
 #, c-format
@@ -3992,7 +3990,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
 msgid "Special Locale (requires restart)"
-msgstr "Langue spéciale (Nécessite un redémarrage)"
+msgstr "Langue de l'interface (Nécessite un redémarrage)"
 
 #: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "Special Locale Combo"
@@ -4121,22 +4119,20 @@ msgid "Enable/Disable Statusbar."
 msgstr "Affiche/cache la barre de statut."
 
 #: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
-#, fuzzy
 msgid "Enable Statusbar Checkbox"
-msgstr "Afficher la barre de statut"
+msgstr "Active la boite à cocher de la barre de statut"
 
 #: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "Parallel color alternation"
-msgstr ""
+msgstr "Couleurs spécifiques dans la vue parallèle"
 
 #: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
 msgid "Parallel window can use alternating foreground/background."
-msgstr ""
+msgstr "Des couleurs spécifiques d'avant-plan et d'arrière-plan seront appliquées à la vue parallèle."
 
 #: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
-#, fuzzy
 msgid "Enable Parallel Alternation Checkbox"
-msgstr "Case à cocher Activer les listes de prières"
+msgstr "Active la Case à cocher des couleurs spécifiques dans la vue parallèle"
 
 #: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:121
 msgid "Verse number"
@@ -5257,7 +5253,7 @@ msgstr "Ouvrir dans une fenêtre séparée"
 
 #: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new simple prayer list"
-msgstr "Crée une nouvelle simple liste de prières"
+msgstr "Crée une nouvelle liste simple de prières"
 
 #: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Simple"
@@ -5277,7 +5273,7 @@ msgstr "Crée un nouveau journal mensuel"
 
 #: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Monthly"
-msgstr "Liste de prières mensuelle"
+msgstr "Mensuel"
 
 #: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Create a new daily journal"
@@ -5285,25 +5281,23 @@ msgstr "Crée un nouveau journal quotidien"
 
 #: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Daily"
-msgstr "Journal quotidien"
+msgstr "Quotidien"
 
 #: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Create a new outlined topic"
-msgstr "Crée un nouveau thême structuré"
+msgstr "Crée un nouveau thème structuré hiérarchiquement"
 
 #: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Outlined"
-msgstr "Thême structuré"
+msgstr "Thème structuré"
 
 #: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
-#, fuzzy
 msgid "Create a new book/chapter outline"
-msgstr "Crée un nouveau thême structuré"
+msgstr "Crée un nouvelle trame organisée par Livre/Chapitre de la Bible"
 
 #: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
-#, fuzzy
 msgid "Book/Chapter"
-msgstr "Chapitre"
+msgstr "Trame Livre/Chapitre"
 
 #: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Open module in editor or plain display window"
