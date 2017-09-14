@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 4.0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 22:12-0400\n"
-"PO-Revision-Date: 2017-09-13 23:13+0200\n"
+"PO-Revision-Date: 2017-09-14 11:56+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -887,9 +887,7 @@ msgstr "Installé"
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
-msgstr ""
-"L'icône index indique qu'un index optimisé pour des requêtes rapides "
-"(lucène) a été construit à l'aide du bouton indexer."
+msgstr "L'icône index indique qu'un index optimisé pour des requêtes rapides « lucène » a été construit à l'aide du bouton indexer."
 
 #: ../src/gnome2/mod_mgr.c:649
 msgid ""
@@ -1427,7 +1425,7 @@ msgid ""
 "For complete details, search the web for \"lucene search syntax\"."
 msgstr ""
 "<b>Aperçu de la syntaxe des requêtes optimisées « lucene »</b>\n"
-"Correspondance des recherches de versets :\n"
+"Recherche des versets qui contiennent :\n"
 "\n"
 "est amour\n"
 "\t« est » ou « amour »\n"
@@ -1453,8 +1451,7 @@ msgstr ""
 "\tSélectionner aussi l'affichage « Avec nombres \n"
 "\tde Strong » dans l'onglet « Attributs »\n"
 "\n"
-"Pour plus d'amples détails, rechercher sur Internet : « Syntaxe requête "
-"Lucene »."
+"Pour plus d'amples détails, rechercher sur Internet : « Syntaxe requête Lucene »."
 
 #. *****************************************************************************
 #. * Name
@@ -1545,7 +1542,7 @@ msgstr "Type de requête"
 #: ../src/gnome2/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
 #: ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
-msgstr "Optimisée Lucene"
+msgstr "Optimisée « Lucene »"
 
 #: ../src/gnome2/search_sidebar.c:333 ../ui/search-dialog.glade.h:41
 #: ../ui/search-dialog.gtkbuilder.h:41
@@ -2184,7 +2181,7 @@ msgstr "LivreChapitre"
 
 #: ../src/main/previewer.cc:193
 msgid "User Annotation"
-msgstr "Note personnelle sur"
+msgstr "Annotation par l'utilisateur"
 
 #: ../src/main/search_dialog.cc:188
 #, c-format
@@ -2932,7 +2929,7 @@ msgstr "Indique si le nom de la version est inclus dans la référence"
 
 #: ../ui/export-dialog.glade.h:32
 msgid "Include Version"
-msgstr "Nom de la version de Bible"
+msgstr "Inclure la version de Bible"
 
 #: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:34
 msgid "Version button"
@@ -3356,7 +3353,7 @@ msgstr "Met en surbrillance le texte sélectionné"
 
 #: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
-msgstr "Ajouter/Enlever une note à ce verset"
+msgstr "Annoter ce verset"
 
 #: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:12
 msgid "Annotation Dialog"
@@ -3366,13 +3363,11 @@ msgstr "Boite de dialogue d'annotation"
 msgid ""
 "Add annotation. The verse will display with highlight colors and a *u marker "
 "to show content."
-msgstr ""
-"Ajoute une note. Le verset sera surligné et une marque *u permettra de "
-"consulter le contenu de la note."
+msgstr "Ajoute une annotation. Le verset sera surligné et une marque *u permettra de consulter la note."
 
 #: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
 msgid "New Annotation"
-msgstr "Nouvelle note"
+msgstr "Nouvelle annotation"
 
 #: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:3
 msgid "Mark"
@@ -3384,7 +3379,7 @@ msgstr "Supprimer"
 
 #: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
 msgid "Remove annotation."
-msgstr "Supprime la note."
+msgstr "Supprime l'annotation."
 
 #: ../ui/markverse.glade.h:12 ../ui/markverse.gtkbuilder.h:7
 msgid "Cancel Annotation"
@@ -3447,8 +3442,7 @@ msgstr "_Indexer"
 #: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
 msgid ""
 "Build an index of the selected modules, for optimized (\"lucene\") searching."
-msgstr ""
-"Construit un index des modules sélectionnés, pour optimiser les recherches."
+msgstr "Construit un index des modules sélectionnés, pour optimiser les recherches « lucene »."
 
 #: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
 msgid "_Delete Index"
@@ -3558,9 +3552,7 @@ msgstr "Rép Sword-sys"
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>Attention :</b> Ne pas utiliser les dépôts distants dans les pays de "
-"persécution!"
+msgstr "<b>Attention :</b> Si vous vivez dans un pays où des faits de persécution ont été recensés et que vous ne voulez pas prendre le risque d'être repéré, vous NE devez PAS sélectionner une source de dépot distant!"
 
 #: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:40
 msgid "Local Install Folder"
@@ -4348,15 +4340,13 @@ msgstr "Recherche avancée"
 
 #: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
 msgid "_Lucene Search Syntax"
-msgstr "Syntaxe Lucene"
+msgstr "Syntaxe des recherches « Lucene »"
 
 #: ../ui/search-dialog.glade.h:3 ../ui/search-dialog.gtkbuilder.h:3
 msgid ""
 "Open a brief explanation of the syntax used for optimized \"lucene\" "
 "searches."
-msgstr ""
-"Ouvre une brève explication sur la syntaxe utilisée dans les recherches "
-"optimisées (« lucène »)."
+msgstr "Ouvre une brève explication sur la syntaxe utilisée dans les recherches optimisées « lucène »."
 
 #: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
 msgid "_Attribute Search"
@@ -4484,11 +4474,11 @@ msgid ""
 msgstr ""
 "Recherche optimisée basée sur les index,\n"
 "les index doivent avoir été générés auparavant.\n"
-"Voir l'onglet Gérer du gestionnaire de modules."
+"Voir l'onglet « Gérer » du gestionnaire de modules."
 
 #: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr "Bouton radio Optimisée Lucene"
+msgstr "Bouton radio Optimisée « Lucene »"
 
 #: ../ui/search-dialog.glade.h:39 ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi word"
@@ -4509,8 +4499,8 @@ msgstr "Bouton radio Phrase exacte"
 #: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
 msgid "Make selections on the Attribute Search tab"
 msgstr ""
-"Recherche sur les nombres de Strong \n"
-"Plus d'options dans l'onglet Attributs"
+"Recherche sur les nombres de Strong\n"
+"Plus d'options dans l'onglet « Attributs »"
 
 #: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
 msgid "Attributes"
@@ -5017,7 +5007,7 @@ msgstr "En savoir plus sur Xiphos"
 
 #: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Annotate Verse"
-msgstr "Annoter un verset"
+msgstr "Annoter ce verset"
 
 #: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
 msgid "Open Module"
