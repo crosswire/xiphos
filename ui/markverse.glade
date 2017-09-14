@@ -194,7 +194,7 @@
             </child>
             <child>
               <widget class="GtkButton" id="button2">
-                <property name="label">gtk-cancel</property>
+                <property name="label" translatable="yes">gtk-cancel</property>
                 <property name="response_id">-6</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
