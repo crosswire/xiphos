@@ -29,4 +29,4 @@ To install the newly-built package, enter:
 
 $ sudo dpkg -i ../xiphos-svn_version-revision_arch.deb
 
- -- Dominique Corbex <domi@hahaua.corbex.org>, Sun, 28 May 2017 22:30:14 +0200
+ -- Jonathan Marsden <jmarsden@fastmail.fm>, Fri, 12 Nov 2010 18:11:00 -0800
