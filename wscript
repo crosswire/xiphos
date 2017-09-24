@@ -435,6 +435,10 @@ def configure(conf):
     env.append_value('CXXFLAGS', ['-fno-delete-null-pointer-checks'])
     env.append_value('CCFLAGS', ['-fno-delete-null-pointer-checks'])
 
+    # add a linker option to stop very recent dbus linkage nightmare.
+    if not env['IS_WIN32']:
+        env.append_value('LINKFLAGS', '-Wl,-z,muldefs')
+
     if opt.delint:
         env.append_value('CXXFLAGS', env['CXXFLAGS_DELINT'])
         env.append_value('CCFLAGS', env['CCFLAGS_DELINT'])

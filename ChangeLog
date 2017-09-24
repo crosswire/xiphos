@@ -2,6 +2,7 @@
 
 	* #822 prefs option not to use alternating fg/bg in parallel displays.
 	* update appdata to get screenshots from github, not sourceforge.
+	* add -Wl,-z,muldefs to stop failures from recent dbus braindamage.
 
 2017-09-03  karl <charcoal@users.sf.net>
 
