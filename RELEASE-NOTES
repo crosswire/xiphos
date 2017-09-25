@@ -3,6 +3,31 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.0.7
+24 Sep 2017
+
+This represents general bug-fixing and feature implementation from the
+issues list, with a few other matters handled as well.  More than half of
+the open issues list (29 of 54) have been closed since 4.0.6, including
+all but 2 outstanding bug reports.  Some closures were unreproducible
+bugs, or unworkable feature requests that had to be turned down.  Other
+closures are the result of some improvement in the code for this release,
+some as described exactly, some as close efforts given the constraints of
+how Xiphos operates internally.
+
+- changed module option Glosses to default on.
+- added config support, MinimumVersion: ignore modules newer than Sword itself.
+- updated French and traditional Chinese translations.
+- fixed dbus linkage failure due to insanity in latest release (rawhide).
+- #524 fix use of fonts whose names end in digits.
+- #725 add book/chapter journal template.
+- #739 click verse text before/after chapter to navigate across chapters.
+- #788 use saved status of detached sidebar.
+- #791 add maximized detached window of current bible on F11.
+- #821 update installation instructions (ubuntu).
+- #822 prefs option not to use alternating fg/bg in parallel displays.
+________________________________________________________________
+
 Release 4.0.6a
 20 Aug 2017
 
