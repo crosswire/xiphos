@@ -1318,7 +1318,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate(GtkMenuItem *menuitem,
 			_("Choose Commentary Name"));
 	info->label_top = workstr->str;
 	info->text1 = g_strdup(_("New Name"));
-	info->label1 = N_("Name: ");
+	info->label1 = _("Name: ");
 	info->ok = TRUE;
 	info->cancel = TRUE;
 

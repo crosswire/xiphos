@@ -358,17 +358,17 @@ G_MODULE_EXPORT void on_edit_item_activate(GtkMenuItem *menuitem,
 			   4, &module, 5, &mod_desc, 6, &description, -1);
 
 	info = gui_new_dialog();
-	info->title = N_("Bookmark");
+	info->title = _("Bookmark");
 	info->label_top = str->str;
 	if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
-		info->label1 = N_("Folder name: ");
+		info->label1 = _("Folder name: ");
 		is_leaf = FALSE;
 	} else {
-		info->label1 = N_("Bookmark name: ");
+		info->label1 = _("Bookmark name: ");
 		info->text2 = g_strdup(key);
 		info->text3 = g_strdup(module);
-		info->label2 = N_("Verse: ");
-		info->label3 = N_("Module: ");
+		info->label2 = _("Verse: ");
+		info->label3 = _("Module: ");
 		is_leaf = TRUE;
 	}
 

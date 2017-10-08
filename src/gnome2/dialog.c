@@ -627,16 +627,16 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 #if GTK_CHECK_VERSION(3, 10, 0)
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
-				      "_No", GTK_RESPONSE_NO);
+				      _("_No"), GTK_RESPONSE_NO);
 	if (info->yes)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
-				      "_Yes", GTK_RESPONSE_YES);
+				      _("_Yes"), GTK_RESPONSE_YES);
 	if (info->cancel)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
-				      "_Cancel", GTK_RESPONSE_CANCEL);
+				      _("_Cancel"), GTK_RESPONSE_CANCEL);
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
-				      "_OK", GTK_RESPONSE_OK);
+				      _("_OK"), GTK_RESPONSE_OK);
 #else
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
