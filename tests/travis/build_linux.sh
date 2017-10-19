@@ -39,7 +39,7 @@ case "${distro}" in
             installer="${installer} webkitgtk4-devel"
         fi
         ;;
-    ubuntu)
+    ubuntu|debian)
         docker exec -t "${container}" apt-get update
         installer="apt-get install -y
                    libsword-dev \
