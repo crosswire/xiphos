@@ -19,3 +19,5 @@ env:
   - TEST=build_gtk3_webkiteditor TEST_ARGS="ubuntu 17.04"
   # LTS Ubuntu releases
   - TEST=build_gtk3_webkiteditor TEST_ARGS="ubuntu 16.04"
+  # Debian sid
+  - TEST=build_gtk3_webkiteditor TEST_ARGS="debian sid"
