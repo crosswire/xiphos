@@ -1154,8 +1154,8 @@ void BackEnd::save_module_key(char *mod_name, char *key)
 	SWConfig *myConfig = new SWConfig(fullfilename);
 	g_free(fullfilename);
 
-	section = myConfig->Sections.find(mod_name);
-	if (section != myConfig->Sections.end()) {
+	section = myConfig->getSections().find(mod_name);
+	if (section != myConfig->getSections().end()) {
 		entry = section->second.find("CipherKey");
 		if (entry != section->second.end()) {
 			//-- set cipher key

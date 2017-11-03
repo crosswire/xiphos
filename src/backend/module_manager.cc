@@ -474,8 +474,8 @@ GList *backend_module_mgr_list_local_sources(void)
 	ConfigEntMap::iterator sourceBegin;
 	ConfigEntMap::iterator sourceEnd;
 
-	sourcesSection = installConf->Sections.find("Sources");
-	if (sourcesSection != installConf->Sections.end()) {
+	sourcesSection = installConf->getSections().find("Sources");
+	if (sourcesSection != installConf->getSections().end()) {
 		sourceBegin = sourcesSection->second.lower_bound("DIRSource");
 		sourceEnd = sourcesSection->second.upper_bound("DIRSource");
 
@@ -687,7 +687,7 @@ void backend_module_mgr_add_source(const char *vtype,
 	is.u = user;
 	is.p = pass;
 	is.uid = uid;
-	config.Sections["Sources"].insert(ConfigEntMap::value_type(vtype,
+	config.getSections()["Sources"].insert(ConfigEntMap::value_type(vtype,
 								   is.getConfEnt().c_str()));
 	config.save();
 }

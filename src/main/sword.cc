@@ -1621,8 +1621,8 @@ char *main_get_mod_config_file(const char *module_name,
 			name += "/mods.d/";
 			name += ent;
 			SWConfig *config = new SWConfig(name.c_str());
-			if (config->Sections.find(module_name) !=
-			    config->Sections.end()) {
+			if (config->getSections().find(module_name) !=
+			    config->getSections().end()) {
 				gchar *ret_name = g_strdup(ent);
 				g_dir_close(dir);
 				delete config;
