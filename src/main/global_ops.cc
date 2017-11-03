@@ -84,12 +84,12 @@ int main_save_module_options(const char *mod_name,
 	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 
-	module_options.Load();
+	module_options.load();
 	g_free(buf);
 
 	module_options[mod_name][option] = (choice ? "On" : "Off");
 
-	module_options.Save();
+	module_options.save();
 	return true;
 }
 
@@ -115,7 +115,7 @@ main_get_one_option(const char *mod_name, const char *op)
 	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 
-	module_options.Load();
+	module_options.load();
 	g_free(buf);
 
 	return gui_of2tf(module_options[mod_name][op].c_str());
@@ -192,7 +192,7 @@ GLOBAL_OPS *main_new_globals(const gchar *mod_name)
 	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 
-	module_options.Load();
+	module_options.load();
 	g_free(buf);
 
 	ops = g_new0(GLOBAL_OPS, 1);

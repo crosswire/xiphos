@@ -1097,7 +1097,7 @@ char *BackEnd::get_conf_file_item(const char *file, const char *mod_name, const 
 {
 	char *buf = NULL;
 	SWConfig conf_file(file);
-	conf_file.Load();
+	conf_file.load();
 
 	buf = (char *)conf_file[mod_name][item].c_str();
 	if (strlen(buf))
@@ -1113,7 +1113,7 @@ void BackEnd::save_conf_file_item(const char *file,
 {
 	SWConfig conf_file(file);
 	conf_file[mod_name][item] = value;
-	conf_file.Save();
+	conf_file.save();
 }
 
 void BackEnd::save_module_key(char *mod_name, char *key)
@@ -1161,7 +1161,7 @@ void BackEnd::save_module_key(char *mod_name, char *key)
 			//-- set cipher key
 			entry->second = key;
 			//-- save config file
-			myConfig->Save();
+			myConfig->save();
 		}
 	}
 	delete myConfig;

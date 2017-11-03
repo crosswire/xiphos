@@ -190,7 +190,7 @@ prayerlist_construct(gchar *listname, gchar *summary)
 	config[listname]["DisplayLevel"] = "2"; // ?
 	config[listname]["Description"] = listname;
 	config[listname]["About"] = summary; // as provided.
-	config.Save();
+	config.save();
 
 	// fundamentals are complete.  update.
 	main_update_module_lists();

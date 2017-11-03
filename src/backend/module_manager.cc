@@ -561,14 +561,14 @@ void backend_init_module_mgr_config(void)
 
 	config["General"]["PassiveFTP"] = "true";
 	config["Sources"]["FTPSource"] = is.getConfEnt();
-	config.Save();
+	config.save();
 
 	InstallSource is_local("DIR");
 	is_local.caption = "cdrom";
 	is_local.source = "[local]";
 	is_local.directory = "/mnt/cdrom";
 	config["Sources"]["DIRSource"] = is_local.getConfEnt();
-	config.Save();
+	config.save();
 }
 
 int
@@ -616,7 +616,7 @@ void backend_module_mgr_clear_config(void)
 	SWConfig config(confPath.c_str());
 
 	config["General"]["PassiveFTP"] = "true";
-	config.Save();
+	config.save();
 	backend_module_mgr_reread_config();
 }
 
@@ -689,7 +689,7 @@ void backend_module_mgr_add_source(const char *vtype,
 	is.uid = uid;
 	config.Sections["Sources"].insert(ConfigEntMap::value_type(vtype,
 								   is.getConfEnt().c_str()));
-	config.Save();
+	config.save();
 }
 
 /******************************************************************************
