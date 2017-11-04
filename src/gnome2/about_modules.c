@@ -85,13 +85,12 @@ static void create_menu1(void)
 	    gtk_image_menu_item_new_from_stock("gtk-copy", accel_group);
 #endif
 	gtk_widget_show(item);
-	g_signal_connect(G_OBJECT(item), "clicked",
+	g_signal_connect(G_OBJECT(item), "activate",
 			 G_CALLBACK(on_copy_activate), NULL);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
 	gtk_menu_set_accel_group(GTK_MENU(menu), accel_group);
-	gtk_menu_popup((GtkMenu *)menu, NULL, NULL, NULL, NULL, 2,
-		       gtk_get_current_event_time());
+	gtk_menu_popup_at_pointer((GtkMenu *)menu, NULL);	       
 }
 
 static void
