@@ -168,13 +168,7 @@ static gboolean select_book_button_press_callback(GtkWidget *widget,
 		gtk_widget_grab_focus(widget);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
 					     TRUE);
-		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-			       menu_position_under, widget, event->button,
-#ifdef WIN32
-			       event->time + time_add);
-#else
-			       event->time);
-#endif
+		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, 0, 0, NULL);
 		return TRUE;
 	}
 	return FALSE;
@@ -216,9 +210,7 @@ static gboolean select_chapter_button_press_callback(GtkWidget *widget,
 		gtk_widget_grab_focus(widget);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
 					     TRUE);
-		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-			       menu_position_under, widget, event->button,
-			       event->time);
+		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, 0, 0, NULL);
 		return TRUE;
 	}
 	return FALSE;
@@ -259,9 +251,7 @@ static gboolean select_verse_button_press_callback(GtkWidget *widget,
 		gtk_widget_grab_focus(widget);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
 					     TRUE);
-		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-			       menu_position_under, widget, event->button,
-			       event->time);
+		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, 0, 0, NULL);	       
 		return TRUE;
 	}
 	return FALSE;

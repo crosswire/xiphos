@@ -1442,7 +1442,8 @@ gboolean xiphos_open_default(const gchar *file)
 
 #else
 	GError *error = NULL;
-	gtk_show_uri(NULL, file, gtk_get_current_event_time(), &error);
+/*	gtk_show_uri(NULL, file, gtk_get_current_event_time(), &error);*/
+	gtk_show_uri_on_window(NULL, file, gtk_get_current_event_time(), &error);
 	if (error != NULL) {
 		XI_warning(("%s", error->message));
 		g_error_free(error);
