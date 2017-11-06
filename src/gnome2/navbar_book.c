@@ -168,9 +168,13 @@ static gboolean select_button_press_callback(GtkWidget *widget,
 		gtk_widget_grab_focus(widget);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
 					     TRUE);
+#if GTK_CHECK_VERSION(3, 22, 0)
+		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, 0, 0, NULL);
+#else
 		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			       menu_position_under, widget, event->button,
 			       event->time);
+#endif
 		return TRUE;
 	}
 	return FALSE;
