@@ -1442,8 +1442,11 @@ gboolean xiphos_open_default(const gchar *file)
 
 #else
 	GError *error = NULL;
-/*	gtk_show_uri(NULL, file, gtk_get_current_event_time(), &error);*/
+#if GTK_CHECK_VERSION(3, 22, 0)
 	gtk_show_uri_on_window(NULL, file, gtk_get_current_event_time(), &error);
+#else
+	gtk_show_uri(NULL, file, gtk_get_current_event_time(), &error);*/
+#endif
 	if (error != NULL) {
 		XI_warning(("%s", error->message));
 		g_error_free(error);

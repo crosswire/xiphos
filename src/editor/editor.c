@@ -978,7 +978,11 @@ static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 	   NULL); */
 	gtk_menu_shell_append((GtkMenuShell *)menu, (GtkWidget *)item);
 
+#if GTK_CHECK_VERSION(3, 22, 0)
 	gtk_menu_popup_at_pointer((GtkMenu *)menu, NULL);
+#else
+	gtk_menu_popup((GtkMenu *)menu, NULL, NULL, NULL, NULL, 3, time);
+#endif
 }
 
 /******************************************************************************

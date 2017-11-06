@@ -90,7 +90,12 @@ static void create_menu1(void)
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
 	gtk_menu_set_accel_group(GTK_MENU(menu), accel_group);
-	gtk_menu_popup_at_pointer((GtkMenu *)menu, NULL);	       
+#if GTK_CHECK_VERSION(3, 22, 0)
+	gtk_menu_popup_at_pointer((GtkMenu *)menu, NULL);
+#else
+	gtk_menu_popup((GtkMenu *)menu, NULL, NULL, NULL, NULL, 2,
+		gtk_get_current_event_time()); 
+#endif
 }
 
 static void

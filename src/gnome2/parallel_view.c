@@ -138,7 +138,12 @@ void gui_popup_menu_parallel(void)
 			XI_warning(("undockInt is NULL?"));
 		}
 	}
-	gtk_menu_popup_at_pointer((GtkMenu *)menu, NULL);	       
+#if GTK_CHECK_VERSION(3, 22, 0)
+	gtk_menu_popup_at_pointer((GtkMenu *)menu, NULL);
+#else
+	gtk_menu_popup((GtkMenu *)menu, NULL, NULL, NULL, NULL, 0,
+                      gtk_get_current_event_time());
+#endif	   
 }
 
 static gboolean
