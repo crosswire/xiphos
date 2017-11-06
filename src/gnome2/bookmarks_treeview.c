@@ -751,9 +751,13 @@ static gboolean button_release_event(GtkWidget *widget,
 		g_free(caption);
 		g_free(key);
 		g_free(module);
+#if GTK_CHECK_VERSION(3, 22, 0)
+		gtk_menu_popup_at_pointer(GTK_MENU(menu.menu), NULL);
+#else
 		gtk_menu_popup(GTK_MENU(menu.menu),
 			       NULL, NULL, NULL, NULL,
 			       event->button, event->time);
+#endif
 
 		if (!settings.browsing)
 			gtk_widget_hide(menu.in_tab);

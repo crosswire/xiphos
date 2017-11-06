@@ -636,9 +636,13 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 		}
 		if (mod && (main_get_mod_type(mod) == PRAYERLIST_TYPE)) {
 			buf_module = mod;
+#if GTK_CHECK_VERSION(3, 22, 0)
+			gtk_menu_popup_at_pointer(GTK_MENU(sidebar.menu_prayerlist_mod), NULL);
+#else
 			gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist_mod), NULL,
 				       NULL, NULL, NULL, 0,
 				       gtk_get_current_event_time());
+#endif
 			g_free(caption);
 			return FALSE;
 		}
@@ -774,9 +778,13 @@ static gboolean on_treeview_button_press_event(GtkWidget *widget,
 	}
 	switch (event->button) {
 	case 3:
+#if GTK_CHECK_VERSION(3, 22, 0)
+		gtk_menu_popup_at_pointer((GtkMenu *)sidebar.menu_item_save_search, NULL);
+#else
 		gtk_menu_popup((GtkMenu *)sidebar.menu_item_save_search,
 			       NULL, NULL, NULL, NULL, 2,
 			       gtk_get_current_event_time());
+#endif
 		return TRUE;
 
 	default:
@@ -1110,9 +1118,12 @@ static GtkWidget *create_menu_modules(void)
 	glade_xml_signal_autoconnect_full(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func,
 					  NULL);
 #endif
+#if GTK_CHECK_VERSION(3, 22, 0)
+	gtk_menu_popup_at_pointer((GtkMenu *)menu, NULL);
+#else
 	gtk_menu_popup((GtkMenu *)menu, NULL, NULL, NULL, NULL, 2,
 		       gtk_get_current_event_time());
-
+#endif
 	return menu;
 }
 
@@ -1241,9 +1252,13 @@ GtkWidget *create_menu_prayerlist_mod(void)
 G_MODULE_EXPORT void gui_menu_prayerlist_popup(GtkMenuItem *menuitem,
 					       gpointer user_data)
 {
+#if GTK_CHECK_VERSION(3, 22, 0)
+	gtk_menu_popup_at_pointer(GTK_MENU(sidebar.menu_prayerlist), NULL);
+#else
 	gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist),
 		       NULL, NULL, NULL, NULL,
 		       0, gtk_get_current_event_time());
+#endif
 }
 
 static void tree_selection_changed_cb(GtkTreeSelection *selection,
