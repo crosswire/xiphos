@@ -114,8 +114,13 @@ on_help_contents_activate(GtkMenuItem *menuitem, gpointer user_data)
 	g_free(help_file);
 #else
 	GError *error = NULL;
+#if GTK_CHECK_VERSION(3, 22, 0)
+	gtk_show_uri_on_window(NULL, "ghelp:xiphos", gtk_get_current_event_time(),
+		     &error);
+#else
 	gtk_show_uri(NULL, "ghelp:xiphos", gtk_get_current_event_time(),
 		     &error);
+#endif
 	if (error != NULL) {
 		XI_warning(("%s", error->message));
 		g_error_free(error);

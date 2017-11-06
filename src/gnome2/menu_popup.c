@@ -2026,8 +2026,12 @@ void gui_menu_popup(XiphosHtml *html, const gchar *mod_name,
 
 	menu = _create_popup_menu(html, mod_name, d);
 	if (menu)
+#if GTK_CHECK_VERSION(3, 22, 0)
+		gtk_menu_popup_at_pointer((GtkMenu *)menu, NULL);
+#else
 		gtk_menu_popup((GtkMenu *)menu, NULL, NULL, NULL, NULL, 2,
 			       gtk_get_current_event_time());
+#endif
 	else
 		gui_generic_warning(_("No module in this pane."));
 }
