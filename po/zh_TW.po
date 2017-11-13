@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 22:12-0400\n"
+"POT-Creation-Date: 2017-11-13 23:03+0100\n"
 "PO-Revision-Date: 2017-08-28 03:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -66,179 +66,179 @@ msgstr "筆記編輯工具"
 msgid "Prayer List/Journal Editor"
 msgstr "禱告表／日誌編輯工具"
 
-#: ../src/gnome2/about_modules.c:138
+#: ../src/gnome2/about_modules.c:142
 msgid "About Sword Module"
 msgstr "關於 Sword 模組"
 
 #. Don't use an icon with GTK3
-#: ../src/gnome2/about_modules.c:219 ../src/gnome2/about_trans.c:168
+#: ../src/gnome2/about_modules.c:223 ../src/gnome2/about_trans.c:168
 #: ../src/gnome2/find_dialog.c:288
 msgid "Close"
 msgstr "關閉"
 
-#: ../src/gnome2/about_modules.c:411
+#: ../src/gnome2/about_modules.c:415
 msgid "<b>Module name:</b> "
 msgstr "<b>模組名稱:</b> "
 
-#: ../src/gnome2/about_modules.c:418
+#: ../src/gnome2/about_modules.c:422
 msgid "<b>Module abbreviation:</b> "
 msgstr "<b>模組名稱縮寫:</b> "
 
-#: ../src/gnome2/about_modules.c:423
+#: ../src/gnome2/about_modules.c:427
 msgid "<b>Version:</b> "
 msgstr "<b>版本號:</b> "
 
-#: ../src/gnome2/about_modules.c:426
+#: ../src/gnome2/about_modules.c:430
 msgid "No version stamp found"
 msgstr "找不到版本戳記"
 
-#: ../src/gnome2/about_modules.c:429
+#: ../src/gnome2/about_modules.c:433
 msgid "<b>Type:</b> "
 msgstr "<b>類型:</b> "
 
-#: ../src/gnome2/about_modules.c:431
+#: ../src/gnome2/about_modules.c:435
 msgid "Daily Devotion"
 msgstr "每日靈修"
 
-#: ../src/gnome2/about_modules.c:433 ../src/gnome2/mod_mgr.c:1561
+#: ../src/gnome2/about_modules.c:437 ../src/gnome2/mod_mgr.c:1561
 #: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1029
 #: ../src/main/sidebar.cc:1031
 msgid "Maps"
 msgstr "地圖"
 
-#: ../src/gnome2/about_modules.c:435 ../src/gnome2/mod_mgr.c:1565
+#: ../src/gnome2/about_modules.c:439 ../src/gnome2/mod_mgr.c:1565
 #: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1038
 #: ../src/main/sidebar.cc:1040
 msgid "Images"
 msgstr "插圖"
 
-#: ../src/gnome2/about_modules.c:437
+#: ../src/gnome2/about_modules.c:441
 msgid "Glossary"
 msgstr "彙編"
 
-#: ../src/gnome2/about_modules.c:441
+#: ../src/gnome2/about_modules.c:445
 msgid "Cult"
 msgstr "少數教派"
 
-#: ../src/gnome2/about_modules.c:445 ../src/gnome2/search_sidebar.c:287
+#: ../src/gnome2/about_modules.c:449 ../src/gnome2/search_sidebar.c:287
 msgid "Bible"
 msgstr "聖經"
 
-#: ../src/gnome2/about_modules.c:448 ../src/gnome2/search_sidebar.c:295
+#: ../src/gnome2/about_modules.c:452 ../src/gnome2/search_sidebar.c:295
 #: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "Commentary"
 msgstr "註釋書"
 
-#: ../src/gnome2/about_modules.c:451 ../ui/prefs.glade.h:140
+#: ../src/gnome2/about_modules.c:455 ../ui/prefs.glade.h:140
 #: ../ui/prefs.gtkbuilder.h:140
 msgid "Dictionary"
 msgstr "辭典"
 
-#: ../src/gnome2/about_modules.c:454
+#: ../src/gnome2/about_modules.c:458
 msgid "General Book"
 msgstr "一般圖書"
 
-#: ../src/gnome2/about_modules.c:459
+#: ../src/gnome2/about_modules.c:463
 msgid "Personal Commentary"
 msgstr "個人註釋書"
 
-#: ../src/gnome2/about_modules.c:462
+#: ../src/gnome2/about_modules.c:466
 msgid "Journal"
 msgstr "日誌"
 
-#: ../src/gnome2/about_modules.c:465
+#: ../src/gnome2/about_modules.c:469
 msgid "Unknown type"
 msgstr "未知的類型"
 
-#: ../src/gnome2/about_modules.c:471
+#: ../src/gnome2/about_modules.c:475
 msgid "<b>Language:</b> "
 msgstr "<b>語言:</b> "
 
-#: ../src/gnome2/about_modules.c:474
+#: ../src/gnome2/about_modules.c:478
 msgid "Not specified"
 msgstr "未指定"
 
-#: ../src/gnome2/about_modules.c:483
+#: ../src/gnome2/about_modules.c:487
 msgid "<b>Installed size:</b> "
 msgstr "<b>安裝後大小:</b> "
 
-#: ../src/gnome2/about_modules.c:491
+#: ../src/gnome2/about_modules.c:495
 msgid "<b>Companion module(s):</b></br>"
 msgstr "<b>搭檔模組:</b></br>"
 
-#: ../src/gnome2/about_modules.c:501
+#: ../src/gnome2/about_modules.c:505
 msgid "<b>Features:</b>"
 msgstr "<b>功能特色:</b>"
 
-#: ../src/gnome2/about_modules.c:505
+#: ../src/gnome2/about_modules.c:509
 msgid "*&nbsp;Headings"
 msgstr "*&nbsp;標題"
 
-#: ../src/gnome2/about_modules.c:513
+#: ../src/gnome2/about_modules.c:517
 msgid "*&nbsp;Footnotes"
 msgstr "*&nbsp;註腳"
 
-#: ../src/gnome2/about_modules.c:519
+#: ../src/gnome2/about_modules.c:523
 msgid "*&nbsp;Cross references"
 msgstr "*&nbsp;交叉參照"
 
-#: ../src/gnome2/about_modules.c:526
+#: ../src/gnome2/about_modules.c:530
 msgid "*&nbsp;Strong's numbers"
 msgstr "*&nbsp;史特朗編號"
 
-#: ../src/gnome2/about_modules.c:534
+#: ../src/gnome2/about_modules.c:538
 msgid "*&nbsp;Morphological tags"
 msgstr "*&nbsp;詞法標籤"
 
-#: ../src/gnome2/about_modules.c:540
+#: ../src/gnome2/about_modules.c:544
 msgid "*&nbsp;Lemmas"
 msgstr "*&nbsp;詞目"
 
-#: ../src/gnome2/about_modules.c:548
+#: ../src/gnome2/about_modules.c:552
 msgid "*&nbsp;Words of Christ in red"
 msgstr "*&nbsp;紅字標明基督言說"
 
-#: ../src/gnome2/about_modules.c:553
+#: ../src/gnome2/about_modules.c:557
 msgid "*&nbsp;Greek accents"
 msgstr "*&nbsp;希臘文重音"
 
-#: ../src/gnome2/about_modules.c:559
+#: ../src/gnome2/about_modules.c:563
 msgid "*&nbsp;Hebrew Vowel Points"
 msgstr "*&nbsp;希伯來文母音點"
 
-#: ../src/gnome2/about_modules.c:565
+#: ../src/gnome2/about_modules.c:569
 msgid "*&nbsp;Hebrew Cantillation"
 msgstr "*&nbsp;希伯來吟誦"
 
-#: ../src/gnome2/about_modules.c:571
+#: ../src/gnome2/about_modules.c:575
 msgid "*&nbsp;Variant readings"
 msgstr "*&nbsp;異文"
 
-#: ../src/gnome2/about_modules.c:578
+#: ../src/gnome2/about_modules.c:582
 msgid "*&nbsp;Transliteration forms"
 msgstr "*&nbsp;轉寫形式"
 
-#: ../src/gnome2/about_modules.c:583
+#: ../src/gnome2/about_modules.c:587
 msgid "*&nbsp;Enumerations"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:588
+#: ../src/gnome2/about_modules.c:592
 msgid "*&nbsp;Glosses"
 msgstr "*&nbsp;註釋"
 
-#: ../src/gnome2/about_modules.c:595
+#: ../src/gnome2/about_modules.c:599
 msgid "*&nbsp;Morpheme Segmentation"
 msgstr "*&nbsp;語素切分"
 
-#: ../src/gnome2/about_modules.c:602
+#: ../src/gnome2/about_modules.c:606
 msgid "*&nbsp;<i>No features found</i>"
 msgstr "*&nbsp;<i>未註明功能</i>"
 
-#: ../src/gnome2/about_modules.c:612
+#: ../src/gnome2/about_modules.c:616
 msgid "<b>Distribution license:</b>"
 msgstr "<b>散布授權條款:</b>"
 
-#: ../src/gnome2/about_modules.c:625
+#: ../src/gnome2/about_modules.c:629
 msgid "<b>Promotional:</b> "
 msgstr ""
 
@@ -382,8 +382,8 @@ msgstr ""
 "未能支援在多個分頁\n"
 "開啟多重參照書籤。"
 
-#: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1517
-#: ../src/gnome2/sidebar.c:1569
+#: ../src/gnome2/bookmarks_treeview.c:850 ../src/gnome2/sidebar.c:1532
+#: ../src/gnome2/sidebar.c:1584
 msgid "Bookmarks"
 msgstr "書籤"
 
@@ -404,7 +404,7 @@ msgstr "輸入密鑰: "
 msgid "_Ok"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:259
+#: ../src/gnome2/dialog.c:259 ../src/gnome2/dialog.c:633
 msgid "_Yes"
 msgstr ""
 
@@ -412,18 +412,24 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:265
+#: ../src/gnome2/dialog.c:265 ../src/gnome2/dialog.c:630
 msgid "_No"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:268 ../ui/export-dialog.gtkbuilder.h:2
-#: ../ui/module-manager.gtkbuilder.h:18
+#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
+#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
+#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
 msgstr "取消(_C)"
 
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
 msgstr "關閉而不儲存"
+
+#: ../src/gnome2/dialog.c:639
+msgid "_OK"
+msgstr ""
 
 #: ../src/gnome2/dialog.c:724
 msgid "Xiphos:"
@@ -434,7 +440,7 @@ msgid "Close _without Saving"
 msgstr "關閉而不儲存(_W)"
 
 #: ../src/gnome2/export_bookmarks.c:175 ../src/gnome2/export_bookmarks.c:232
-#: ../src/gnome2/sidebar.c:1539 ../src/gnome2/sidebar.c:1587
+#: ../src/gnome2/sidebar.c:1554 ../src/gnome2/sidebar.c:1602
 #, c-format
 msgid "Verse List"
 msgstr "金句表"
@@ -505,6 +511,16 @@ msgstr "請向 Xiphos 開發團隊回報下列的程式錯誤:"
 #: ../src/gnome2/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "程式錯誤！Xiphos 由於\"STRING\"錯誤而即將崩垮。"
+
+#: ../src/gnome2/main_menu.c:743
+#, fuzzy
+msgid "Open Session"
+msgstr "開啟查經進程(_O)"
+
+#: ../src/gnome2/main_menu.c:748
+#, fuzzy
+msgid "_Open"
+msgstr "開啟"
 
 #: ../src/gnome2/main_window.c:587
 #, c-format
@@ -613,7 +629,7 @@ msgstr ""
 "組態建立錯誤:\n"
 "\n"
 
-#: ../src/gnome2/menu_popup.c:2032
+#: ../src/gnome2/menu_popup.c:2036
 msgid "No module in this pane."
 msgstr "此面板中並無模組。"
 
@@ -1033,7 +1049,7 @@ msgid "Choose"
 msgstr "選取"
 
 #: ../src/gnome2/mod_mgr.c:1950 ../src/gnome2/preferences_dialog.c:2051
-#: ../src/gnome2/sidebar.c:1549 ../src/gnome2/sidebar.c:1595
+#: ../src/gnome2/sidebar.c:1564 ../src/gnome2/sidebar.c:1610
 msgid "Modules"
 msgstr "模組"
 
@@ -1135,25 +1151,25 @@ msgstr "刪除一個遠端來源"
 msgid "[no module]"
 msgstr "[沒有模組]"
 
-#: ../src/gnome2/navbar_book.c:356 ../src/gnome2/navbar_book_dialog.c:300
+#: ../src/gnome2/navbar_book.c:360 ../src/gnome2/navbar_book_dialog.c:304
 msgid "Go outward, to the section containing this one"
 msgstr "退出上一層的主部"
 
-#: ../src/gnome2/navbar_book.c:380 ../src/gnome2/navbar_book_dialog.c:326
+#: ../src/gnome2/navbar_book.c:384 ../src/gnome2/navbar_book_dialog.c:330
 msgid "Go to previous item"
 msgstr "前往上一項目處"
 
-#: ../src/gnome2/navbar_book.c:403 ../src/gnome2/navbar_book_dialog.c:350
+#: ../src/gnome2/navbar_book.c:407 ../src/gnome2/navbar_book_dialog.c:354
 msgid "Go to next item"
 msgstr "前往下一項目處"
 
-#: ../src/gnome2/navbar_book.c:427 ../src/gnome2/navbar_book_dialog.c:374
+#: ../src/gnome2/navbar_book.c:431 ../src/gnome2/navbar_book_dialog.c:378
 msgid "Go inward, to the first subsection"
 msgstr "進入下一層的次部"
 
-#: ../src/gnome2/navbar_versekey_dialog.c:898
-#: ../src/gnome2/navbar_versekey_editor.c:926
-#: ../src/gnome2/navbar_versekey_parallel.c:847
+#: ../src/gnome2/navbar_versekey_dialog.c:910
+#: ../src/gnome2/navbar_versekey_editor.c:938
+#: ../src/gnome2/navbar_versekey_parallel.c:859
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "啟動此視窗與主視窗同步"
 
@@ -1170,7 +1186,7 @@ msgstr "接合／分拆"
 msgid "Module Options"
 msgstr "模組選項"
 
-#: ../src/gnome2/parallel_view.c:213 ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/parallel_view.c:216 ../src/gnome2/sidebar.c:616
 #: ../src/gnome2/sidebar.c:621 ../src/gnome2/tabbed_browser.c:254
 #: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
@@ -1398,11 +1414,11 @@ msgid ""
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:1198
+#: ../src/gnome2/search_dialog.c:1202
 msgid "Module is neither Bible nor commentary"
 msgstr "模組並非聖經或註譯書"
 
-#: ../src/gnome2/search_dialog.c:1216 ../src/gnome2/sidebar.c:976
+#: ../src/gnome2/search_dialog.c:1220 ../src/gnome2/sidebar.c:984
 msgid "BibleSync is not active for transmit."
 msgstr "BibleSync 並未在啟動傳輸的狀態。"
 
@@ -1482,23 +1498,23 @@ msgstr "開始"
 msgid "Upper"
 msgstr "結束"
 
-#: ../src/gnome2/sidebar.c:836
+#: ../src/gnome2/sidebar.c:844
 msgid "Open module in editor?"
 msgstr "在編輯工具中開啟模組？"
 
-#: ../src/gnome2/sidebar.c:837
+#: ../src/gnome2/sidebar.c:845
 msgid "If no, it will open for display only."
 msgstr "如答否則只開啟作顯示。"
 
-#: ../src/gnome2/sidebar.c:937
+#: ../src/gnome2/sidebar.c:945
 msgid "Paste verse references"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:939
+#: ../src/gnome2/sidebar.c:947
 msgid "List:"
 msgstr "列出:"
 
-#: ../src/gnome2/sidebar.c:1528 ../src/gnome2/sidebar.c:1578
+#: ../src/gnome2/sidebar.c:1543 ../src/gnome2/sidebar.c:1593
 msgid "Search"
 msgstr "搜尋"
 
@@ -1576,7 +1592,7 @@ msgstr "十一月"
 msgid "December"
 msgstr "十二月"
 
-#: ../src/gnome2/utilities.c:2071
+#: ../src/gnome2/utilities.c:2075
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -2498,7 +2514,7 @@ msgstr "嘗試回復到上次儲存的狀態。"
 msgid "Add Bookmark"
 msgstr "加入書籤"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:13
+#: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:14
 msgid "Bookmark Dialog"
 msgstr "書籤對話框"
 
@@ -2515,39 +2531,39 @@ msgstr "新增資料夾"
 msgid "New ..."
 msgstr "新資料夾..."
 
-#: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:6
 msgid "Cancel Bookmark"
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:6
+#: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:7
 msgid "Label:"
 msgstr "標籤:"
 
-#: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:7
+#: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:8
 msgid "Label Entry"
 msgstr "標籤的輸入方塊"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:8
-#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:8
+#: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:9
+#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:9
 msgid "Verse:"
 msgstr "經節或圖文:"
 
-#: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:9
-#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:9
+#: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:10
+#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:10
 msgid "Verse Entry"
 msgstr "經節的輸入方塊"
 
-#: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:10
-#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:10
+#: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:11
+#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:11
 msgid "Module:"
 msgstr "模組:"
 
-#: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:11
-#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:11
+#: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:12
+#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:12
 msgid "Module Entry"
 msgstr "模組的輸入方塊"
 
-#: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:12
+#: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:13
 msgid "Bookmark Folder Treeview"
 msgstr "樹狀檢視書籤資料夾"
 
@@ -2609,7 +2625,7 @@ msgid "_Delete Personal Comment"
 msgstr ""
 
 #: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:7
-#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:86
+#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:87
 #: ../ui/xi-menus.glade.h:1 ../ui/xi-menus.gtkbuilder.h:1
 msgid "_File"
 msgstr "檔案(_F)"
@@ -3137,85 +3153,85 @@ msgstr "復原"
 msgid "Undo last change"
 msgstr "復原上次的改動"
 
-#: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:85
+#: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:86
 msgid "Editor"
 msgstr "編輯工具"
 
-#: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:87
+#: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:88
 msgid "Recent files"
 msgstr "近來開啟檔案"
 
-#: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:88
+#: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:89
 #: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
 msgid "_Edit"
 msgstr "編輯(_E)"
 
-#: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:89
+#: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:90
 #: ../ui/xi-menus.glade.h:40 ../ui/xi-menus.gtkbuilder.h:25
 msgid "_Help"
 msgstr "說明(_H)"
 
-#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:90
+#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:91
 msgid "Normal"
 msgstr "普通文字"
 
-#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
+#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:92
 msgid "Header 1"
 msgstr "標題 1"
 
-#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
+#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:93
 msgid "Header 2"
 msgstr "標題 2"
 
-#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
+#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:94
 msgid "Header 3"
 msgstr "標題 3"
 
-#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
+#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:95
 msgid "Header 4"
 msgstr "標題 4"
 
-#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
+#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:96
 msgid "Header 5"
 msgstr "標題 5"
 
-#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
+#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:97
 msgid "Header 6"
 msgstr "標題 6"
 
-#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
+#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:98
 msgid "Address"
 msgstr "地址"
 
-#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
+#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:99
 msgid "Preformatted"
 msgstr "預設格式文字"
 
-#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
+#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:100
 msgid "Bulleted List"
 msgstr "項目符號清單"
 
-#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
+#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:101
 msgid "Roman Numeral List"
 msgstr "羅馬數目序清單"
 
-#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
+#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:102
 msgid "Numbered List"
 msgstr "數目序清單"
 
-#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
+#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:103
 msgid "Alphabetical List"
 msgstr "字母序清單"
 
-#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
+#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:104
 msgid "Strike"
 msgstr "加刪除線"
 
-#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
+#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:105
 msgid "Set font color of selected text."
 msgstr "設定所選文字的字型色彩。"
 
-#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
+#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:106
 msgid "Highlight selected text by setting background color."
 msgstr "設定重點標示文字的背景色彩。"
 
@@ -3223,7 +3239,7 @@ msgstr "設定重點標示文字的背景色彩。"
 msgid "Mark/Unmark Verse"
 msgstr "標記／註銷標記經節"
 
-#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:12
+#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:13
 msgid "Annotation Dialog"
 msgstr ""
 
@@ -3249,7 +3265,11 @@ msgstr "註銷標記"
 msgid "Remove annotation."
 msgstr ""
 
-#: ../ui/markverse.glade.h:12 ../ui/markverse.gtkbuilder.h:7
+#: ../ui/markverse.glade.h:12 ../ui/xi-export-bookmarks.glade.h:7
+msgid "gtk-cancel"
+msgstr "取消"
+
+#: ../ui/markverse.glade.h:13 ../ui/markverse.gtkbuilder.h:8
 msgid "Cancel Annotation"
 msgstr ""
 
@@ -4589,10 +4609,6 @@ msgstr "純文字文件"
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Include Bible text"
 msgstr "連同聖經經文匯出"
-
-#: ../ui/xi-export-bookmarks.glade.h:7
-msgid "gtk-cancel"
-msgstr "取消"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"

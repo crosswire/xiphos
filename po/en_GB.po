@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 22:12-0400\n"
+"POT-Creation-Date: 2017-11-13 23:02+0100\n"
 "PO-Revision-Date: 2014-12-21 09:46-0500\n"
 "Last-Translator: Thomas Abthorpe <thomas@goodking.ca>\n"
 "Language-Team: British English <xiphos-devel@crosswire.org>\n"
@@ -74,206 +74,206 @@ msgstr "Note Editor"
 msgid "Prayer List/Journal Editor"
 msgstr "Prayer List/Journal Editor"
 
-#: ../src/gnome2/about_modules.c:138
+#: ../src/gnome2/about_modules.c:142
 msgid "About Sword Module"
 msgstr "About Sword Module"
 
 #. Don't use an icon with GTK3
-#: ../src/gnome2/about_modules.c:219 ../src/gnome2/about_trans.c:168
+#: ../src/gnome2/about_modules.c:223 ../src/gnome2/about_trans.c:168
 #: ../src/gnome2/find_dialog.c:288
 msgid "Close"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:411
+#: ../src/gnome2/about_modules.c:415
 #, fuzzy
 msgid "<b>Module name:</b> "
 msgstr "<b>Module Manager</b>"
 
-#: ../src/gnome2/about_modules.c:418
+#: ../src/gnome2/about_modules.c:422
 #, fuzzy
 msgid "<b>Module abbreviation:</b> "
 msgstr "<b>Module Lists</b>"
 
-#: ../src/gnome2/about_modules.c:423
+#: ../src/gnome2/about_modules.c:427
 #, fuzzy
 msgid "<b>Version:</b> "
 msgstr "<b>Options</b>"
 
-#: ../src/gnome2/about_modules.c:426
+#: ../src/gnome2/about_modules.c:430
 msgid "No version stamp found"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:429
+#: ../src/gnome2/about_modules.c:433
 #, fuzzy
 msgid "<b>Type:</b> "
 msgstr "<b>Scope</b>"
 
-#: ../src/gnome2/about_modules.c:431
+#: ../src/gnome2/about_modules.c:435
 #, fuzzy
 msgid "Daily Devotion"
 msgstr "Daily Devotional"
 
-#: ../src/gnome2/about_modules.c:433 ../src/gnome2/mod_mgr.c:1561
+#: ../src/gnome2/about_modules.c:437 ../src/gnome2/mod_mgr.c:1561
 #: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1029
 #: ../src/main/sidebar.cc:1031
 msgid "Maps"
 msgstr "Maps"
 
-#: ../src/gnome2/about_modules.c:435 ../src/gnome2/mod_mgr.c:1565
+#: ../src/gnome2/about_modules.c:439 ../src/gnome2/mod_mgr.c:1565
 #: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1038
 #: ../src/main/sidebar.cc:1040
 msgid "Images"
 msgstr "Images"
 
-#: ../src/gnome2/about_modules.c:437
+#: ../src/gnome2/about_modules.c:441
 #, fuzzy
 msgid "Glossary"
 msgstr "Glossaries"
 
-#: ../src/gnome2/about_modules.c:441
+#: ../src/gnome2/about_modules.c:445
 msgid "Cult"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:445 ../src/gnome2/search_sidebar.c:287
+#: ../src/gnome2/about_modules.c:449 ../src/gnome2/search_sidebar.c:287
 msgid "Bible"
 msgstr "Bible"
 
-#: ../src/gnome2/about_modules.c:448 ../src/gnome2/search_sidebar.c:295
+#: ../src/gnome2/about_modules.c:452 ../src/gnome2/search_sidebar.c:295
 #: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "Commentary"
 msgstr "Commentary"
 
-#: ../src/gnome2/about_modules.c:451 ../ui/prefs.glade.h:140
+#: ../src/gnome2/about_modules.c:455 ../ui/prefs.glade.h:140
 #: ../ui/prefs.gtkbuilder.h:140
 msgid "Dictionary"
 msgstr "Dictionary"
 
-#: ../src/gnome2/about_modules.c:454
+#: ../src/gnome2/about_modules.c:458
 #, fuzzy
 msgid "General Book"
 msgstr "General Books"
 
-#: ../src/gnome2/about_modules.c:459
+#: ../src/gnome2/about_modules.c:463
 #, fuzzy
 msgid "Personal Commentary"
 msgstr "Rename Commentary"
 
-#: ../src/gnome2/about_modules.c:462
+#: ../src/gnome2/about_modules.c:466
 #, fuzzy
 msgid "Journal"
 msgstr "DailyJournal"
 
-#: ../src/gnome2/about_modules.c:465
+#: ../src/gnome2/about_modules.c:469
 #, fuzzy
 msgid "Unknown type"
 msgstr "Unknown"
 
-#: ../src/gnome2/about_modules.c:471
+#: ../src/gnome2/about_modules.c:475
 #, fuzzy
 msgid "<b>Language:</b> "
 msgstr "<b>Ranges</b>"
 
-#: ../src/gnome2/about_modules.c:474
+#: ../src/gnome2/about_modules.c:478
 msgid "Not specified"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:483
+#: ../src/gnome2/about_modules.c:487
 #, fuzzy
 msgid "<b>Installed size:</b> "
 msgstr "<b>Install Source</b>"
 
-#: ../src/gnome2/about_modules.c:491
+#: ../src/gnome2/about_modules.c:495
 #, fuzzy
 msgid "<b>Companion module(s):</b></br>"
 msgstr "<b>Main Window Modules</b>"
 
-#: ../src/gnome2/about_modules.c:501
+#: ../src/gnome2/about_modules.c:505
 #, fuzzy
 msgid "<b>Features:</b>"
 msgstr "<b>Format</b>"
 
-#: ../src/gnome2/about_modules.c:505
+#: ../src/gnome2/about_modules.c:509
 #, fuzzy
 msgid "*&nbsp;Headings"
 msgstr "Headings"
 
-#: ../src/gnome2/about_modules.c:513
+#: ../src/gnome2/about_modules.c:517
 #, fuzzy
 msgid "*&nbsp;Footnotes"
 msgstr "Footnotes"
 
-#: ../src/gnome2/about_modules.c:519
+#: ../src/gnome2/about_modules.c:523
 #, fuzzy
 msgid "*&nbsp;Cross references"
 msgstr "Cross-references"
 
-#: ../src/gnome2/about_modules.c:526
+#: ../src/gnome2/about_modules.c:530
 #, fuzzy
 msgid "*&nbsp;Strong's numbers"
 msgstr "Strong's Numbers"
 
-#: ../src/gnome2/about_modules.c:534
+#: ../src/gnome2/about_modules.c:538
 #, fuzzy
 msgid "*&nbsp;Morphological tags"
 msgstr "Morphological Tags"
 
-#: ../src/gnome2/about_modules.c:540
+#: ../src/gnome2/about_modules.c:544
 #, fuzzy
 msgid "*&nbsp;Lemmas"
 msgstr "Lemmas"
 
-#: ../src/gnome2/about_modules.c:548
+#: ../src/gnome2/about_modules.c:552
 #, fuzzy
 msgid "*&nbsp;Words of Christ in red"
 msgstr "Words of Christ in Red"
 
-#: ../src/gnome2/about_modules.c:553
+#: ../src/gnome2/about_modules.c:557
 #, fuzzy
 msgid "*&nbsp;Greek accents"
 msgstr "Greek Accents"
 
-#: ../src/gnome2/about_modules.c:559
+#: ../src/gnome2/about_modules.c:563
 #, fuzzy
 msgid "*&nbsp;Hebrew Vowel Points"
 msgstr "Hebrew Vowel Points"
 
-#: ../src/gnome2/about_modules.c:565
+#: ../src/gnome2/about_modules.c:569
 #, fuzzy
 msgid "*&nbsp;Hebrew Cantillation"
 msgstr "Hebrew Cantillation"
 
-#: ../src/gnome2/about_modules.c:571
+#: ../src/gnome2/about_modules.c:575
 msgid "*&nbsp;Variant readings"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:578
+#: ../src/gnome2/about_modules.c:582
 #, fuzzy
 msgid "*&nbsp;Transliteration forms"
 msgstr "Transliteration"
 
-#: ../src/gnome2/about_modules.c:583
+#: ../src/gnome2/about_modules.c:587
 msgid "*&nbsp;Enumerations"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:588
+#: ../src/gnome2/about_modules.c:592
 msgid "*&nbsp;Glosses"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:595
+#: ../src/gnome2/about_modules.c:599
 #, fuzzy
 msgid "*&nbsp;Morpheme Segmentation"
 msgstr "Morpheme Segmentation"
 
-#: ../src/gnome2/about_modules.c:602
+#: ../src/gnome2/about_modules.c:606
 msgid "*&nbsp;<i>No features found</i>"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:612
+#: ../src/gnome2/about_modules.c:616
 #, fuzzy
 msgid "<b>Distribution license:</b>"
 msgstr "<b>Attribute</b>"
 
-#: ../src/gnome2/about_modules.c:625
+#: ../src/gnome2/about_modules.c:629
 #, fuzzy
 msgid "<b>Promotional:</b> "
 msgstr "<b>Options</b>"
@@ -429,8 +429,8 @@ msgstr ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
 
-#: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1517
-#: ../src/gnome2/sidebar.c:1569
+#: ../src/gnome2/bookmarks_treeview.c:850 ../src/gnome2/sidebar.c:1532
+#: ../src/gnome2/sidebar.c:1584
 msgid "Bookmarks"
 msgstr "Bookmarks"
 
@@ -451,7 +451,7 @@ msgstr "Enter Key: "
 msgid "_Ok"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:259
+#: ../src/gnome2/dialog.c:259 ../src/gnome2/dialog.c:633
 msgid "_Yes"
 msgstr ""
 
@@ -459,18 +459,24 @@ msgstr ""
 msgid "_Save"
 msgstr "_Save"
 
-#: ../src/gnome2/dialog.c:265
+#: ../src/gnome2/dialog.c:265 ../src/gnome2/dialog.c:630
 msgid "_No"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:268 ../ui/export-dialog.gtkbuilder.h:2
-#: ../ui/module-manager.gtkbuilder.h:18
+#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
+#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
+#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
 msgstr ""
 
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
 msgstr "Close without Saving"
+
+#: ../src/gnome2/dialog.c:639
+msgid "_OK"
+msgstr ""
 
 #: ../src/gnome2/dialog.c:724
 msgid "Xiphos:"
@@ -481,7 +487,7 @@ msgid "Close _without Saving"
 msgstr "Close _without Saving"
 
 #: ../src/gnome2/export_bookmarks.c:175 ../src/gnome2/export_bookmarks.c:232
-#: ../src/gnome2/sidebar.c:1539 ../src/gnome2/sidebar.c:1587
+#: ../src/gnome2/sidebar.c:1554 ../src/gnome2/sidebar.c:1602
 #, c-format
 msgid "Verse List"
 msgstr "Verse List"
@@ -552,6 +558,15 @@ msgstr "Please report this error to the Xiphos team with:"
 #: ../src/gnome2/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "BUG! Xiphos is about to crash due to a \"STRING\" error."
+
+#: ../src/gnome2/main_menu.c:743
+#, fuzzy
+msgid "Open Session"
+msgstr "_Open Session"
+
+#: ../src/gnome2/main_menu.c:748
+msgid "_Open"
+msgstr "_Open"
 
 #: ../src/gnome2/main_window.c:587
 #, c-format
@@ -660,7 +675,7 @@ msgstr ""
 "Configuration build error:\n"
 "\n"
 
-#: ../src/gnome2/menu_popup.c:2032
+#: ../src/gnome2/menu_popup.c:2036
 msgid "No module in this pane."
 msgstr "No module in this pane."
 
@@ -1092,7 +1107,7 @@ msgid "Choose"
 msgstr "Choose"
 
 #: ../src/gnome2/mod_mgr.c:1950 ../src/gnome2/preferences_dialog.c:2051
-#: ../src/gnome2/sidebar.c:1549 ../src/gnome2/sidebar.c:1595
+#: ../src/gnome2/sidebar.c:1564 ../src/gnome2/sidebar.c:1610
 msgid "Modules"
 msgstr "Modules"
 
@@ -1194,25 +1209,25 @@ msgstr "Delete a remote source"
 msgid "[no module]"
 msgstr "[no module]"
 
-#: ../src/gnome2/navbar_book.c:356 ../src/gnome2/navbar_book_dialog.c:300
+#: ../src/gnome2/navbar_book.c:360 ../src/gnome2/navbar_book_dialog.c:304
 msgid "Go outward, to the section containing this one"
 msgstr "Go outward, to the section containing this one"
 
-#: ../src/gnome2/navbar_book.c:380 ../src/gnome2/navbar_book_dialog.c:326
+#: ../src/gnome2/navbar_book.c:384 ../src/gnome2/navbar_book_dialog.c:330
 msgid "Go to previous item"
 msgstr "Go to previous item"
 
-#: ../src/gnome2/navbar_book.c:403 ../src/gnome2/navbar_book_dialog.c:350
+#: ../src/gnome2/navbar_book.c:407 ../src/gnome2/navbar_book_dialog.c:354
 msgid "Go to next item"
 msgstr "Go to next item"
 
-#: ../src/gnome2/navbar_book.c:427 ../src/gnome2/navbar_book_dialog.c:374
+#: ../src/gnome2/navbar_book.c:431 ../src/gnome2/navbar_book_dialog.c:378
 msgid "Go inward, to the first subsection"
 msgstr "Go inward, to the first subsection"
 
-#: ../src/gnome2/navbar_versekey_dialog.c:898
-#: ../src/gnome2/navbar_versekey_editor.c:926
-#: ../src/gnome2/navbar_versekey_parallel.c:847
+#: ../src/gnome2/navbar_versekey_dialog.c:910
+#: ../src/gnome2/navbar_versekey_editor.c:938
+#: ../src/gnome2/navbar_versekey_parallel.c:859
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Synchronise this window's scrolling with the main window"
 
@@ -1229,7 +1244,7 @@ msgstr "Detach/Attach"
 msgid "Module Options"
 msgstr "Module Options"
 
-#: ../src/gnome2/parallel_view.c:213 ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/parallel_view.c:216 ../src/gnome2/sidebar.c:616
 #: ../src/gnome2/sidebar.c:621 ../src/gnome2/tabbed_browser.c:254
 #: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
@@ -1496,11 +1511,11 @@ msgstr ""
 "* Morphological tags are identified literally, e.g. N-ASF for \"noun, "
 "accusative singular feminine\" -- see the Robinson module for details."
 
-#: ../src/gnome2/search_dialog.c:1198
+#: ../src/gnome2/search_dialog.c:1202
 msgid "Module is neither Bible nor commentary"
 msgstr "Module is neither Bible nor commentary"
 
-#: ../src/gnome2/search_dialog.c:1216 ../src/gnome2/sidebar.c:976
+#: ../src/gnome2/search_dialog.c:1220 ../src/gnome2/sidebar.c:984
 msgid "BibleSync is not active for transmit."
 msgstr "BibleSync is not active for transmit."
 
@@ -1580,23 +1595,23 @@ msgstr "Lower"
 msgid "Upper"
 msgstr "Upper"
 
-#: ../src/gnome2/sidebar.c:836
+#: ../src/gnome2/sidebar.c:844
 msgid "Open module in editor?"
 msgstr "Open module in editor?"
 
-#: ../src/gnome2/sidebar.c:837
+#: ../src/gnome2/sidebar.c:845
 msgid "If no, it will open for display only."
 msgstr "If no, it will open for display only."
 
-#: ../src/gnome2/sidebar.c:937
+#: ../src/gnome2/sidebar.c:945
 msgid "Paste verse references"
 msgstr "Paste verse references"
 
-#: ../src/gnome2/sidebar.c:939
+#: ../src/gnome2/sidebar.c:947
 msgid "List:"
 msgstr "List:"
 
-#: ../src/gnome2/sidebar.c:1528 ../src/gnome2/sidebar.c:1578
+#: ../src/gnome2/sidebar.c:1543 ../src/gnome2/sidebar.c:1593
 msgid "Search"
 msgstr "Search"
 
@@ -1674,7 +1689,7 @@ msgstr "November"
 msgid "December"
 msgstr "December"
 
-#: ../src/gnome2/utilities.c:2071
+#: ../src/gnome2/utilities.c:2075
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -2610,7 +2625,7 @@ msgstr "Attempting to revert to previous save."
 msgid "Add Bookmark"
 msgstr "Add Bookmark"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:13
+#: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:14
 msgid "Bookmark Dialog"
 msgstr "Bookmark Dialogue"
 
@@ -2627,39 +2642,39 @@ msgstr "New Folder"
 msgid "New ..."
 msgstr "New ..."
 
-#: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:6
 msgid "Cancel Bookmark"
 msgstr "Cancel Bookmark"
 
-#: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:6
+#: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:7
 msgid "Label:"
 msgstr "Label:"
 
-#: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:7
+#: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:8
 msgid "Label Entry"
 msgstr "Label Entry"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:8
-#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:8
+#: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:9
+#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:9
 msgid "Verse:"
 msgstr "Verse:"
 
-#: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:9
-#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:9
+#: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:10
+#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:10
 msgid "Verse Entry"
 msgstr "Verse Entry"
 
-#: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:10
-#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:10
+#: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:11
+#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:11
 msgid "Module:"
 msgstr "Module:"
 
-#: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:11
-#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:11
+#: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:12
+#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:12
 msgid "Module Entry"
 msgstr "Module Entry"
 
-#: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:12
+#: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:13
 msgid "Bookmark Folder Treeview"
 msgstr "Bookmark Folder Treeview"
 
@@ -2721,7 +2736,7 @@ msgid "_Delete Personal Comment"
 msgstr "_Delete Personal Comment"
 
 #: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:7
-#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:86
+#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:87
 #: ../ui/xi-menus.glade.h:1 ../ui/xi-menus.gtkbuilder.h:1
 msgid "_File"
 msgstr "_File"
@@ -3251,86 +3266,86 @@ msgstr "Undo"
 msgid "Undo last change"
 msgstr "Undo last change"
 
-#: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:85
+#: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:86
 msgid "Editor"
 msgstr "Editor"
 
-#: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:87
+#: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:88
 msgid "Recent files"
 msgstr "Recent files"
 
-#: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:88
+#: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:89
 #: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
 msgid "_Edit"
 msgstr "_Edit"
 
-#: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:89
+#: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:90
 #: ../ui/xi-menus.glade.h:40 ../ui/xi-menus.gtkbuilder.h:25
 msgid "_Help"
 msgstr "_Help"
 
-#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:90
+#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:91
 msgid "Normal"
 msgstr "Normal"
 
-#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
+#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:92
 msgid "Header 1"
 msgstr "Header 1"
 
-#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
+#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:93
 msgid "Header 2"
 msgstr "Header 2"
 
-#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
+#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:94
 msgid "Header 3"
 msgstr "Header 3"
 
-#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
+#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:95
 msgid "Header 4"
 msgstr "Header 4"
 
-#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
+#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:96
 msgid "Header 5"
 msgstr "Header 5"
 
-#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
+#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:97
 msgid "Header 6"
 msgstr "Header 6"
 
-#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
+#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:98
 msgid "Address"
 msgstr "Address"
 
-#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
+#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:99
 msgid "Preformatted"
 msgstr "Preformatted"
 
-#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
+#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:100
 msgid "Bulleted List"
 msgstr "Bulleted List"
 
-#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
+#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:101
 msgid "Roman Numeral List"
 msgstr "Roman Numeral List"
 
-#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
+#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:102
 msgid "Numbered List"
 msgstr "Numbered List"
 
-#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
+#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:103
 msgid "Alphabetical List"
 msgstr "Alphabetical List"
 
-#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
+#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:104
 #, fuzzy
 msgid "Strike"
 msgstr "Strikethrough"
 
-#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
+#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:105
 msgid "Set font color of selected text."
 msgstr "Set font color of selected text."
 
-#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
+#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:106
 msgid "Highlight selected text by setting background color."
 msgstr "Highlight selected text by setting background color."
 
@@ -3338,7 +3353,7 @@ msgstr "Highlight selected text by setting background color."
 msgid "Mark/Unmark Verse"
 msgstr "Mark/Unmark Verse"
 
-#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:12
+#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:13
 #, fuzzy
 msgid "Annotation Dialog"
 msgstr "User Annotation"
@@ -3367,7 +3382,11 @@ msgstr "Unmark"
 msgid "Remove annotation."
 msgstr "User Annotation"
 
-#: ../ui/markverse.glade.h:12 ../ui/markverse.gtkbuilder.h:7
+#: ../ui/markverse.glade.h:12 ../ui/xi-export-bookmarks.glade.h:7
+msgid "gtk-cancel"
+msgstr "gtk-cancel"
+
+#: ../ui/markverse.glade.h:13 ../ui/markverse.gtkbuilder.h:8
 #, fuzzy
 msgid "Cancel Annotation"
 msgstr "User Annotation"
@@ -4743,10 +4762,6 @@ msgstr "Plain text"
 msgid "Include Bible text"
 msgstr "Include Bible text"
 
-#: ../ui/xi-export-bookmarks.glade.h:7
-msgid "gtk-cancel"
-msgstr "gtk-cancel"
-
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
 msgstr "gtk-ok"
@@ -5377,9 +5392,6 @@ msgstr ""
 
 #~ msgid "_Quit"
 #~ msgstr "_Quit"
-
-#~ msgid "_Open"
-#~ msgstr "_Open"
 
 #~ msgid "Save _As..."
 #~ msgstr "Save _As..."

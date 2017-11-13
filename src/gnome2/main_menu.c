@@ -740,12 +740,12 @@ on_open_session_activate(GtkMenuItem *menuitem, gpointer user_data)
 		}
 	}
 
-	dialog = gtk_file_chooser_dialog_new("Open Session",
+	dialog = gtk_file_chooser_dialog_new(_("Open Session"),
 					     NULL,
 					     GTK_FILE_CHOOSER_ACTION_OPEN,
 #if GTK_CHECK_VERSION(3, 10, 0)
-					     "_Cancel",
-					     GTK_RESPONSE_CANCEL, "_Open",
+					     _("_Cancel"),
+					     GTK_RESPONSE_CANCEL, _("_Open"),
 					     GTK_RESPONSE_ACCEPT,
 #else
 					     GTK_STOCK_CANCEL,
