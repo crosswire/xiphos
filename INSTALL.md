@@ -40,3 +40,7 @@ Now we build:
 Then install:
 
     $ sudo ./waf install
+
+Note that `./waf`  requires Python 2. If the default python binary on your
+system is Python 3, execute the script using `python2 ./waf` to explicitly use
+Python 2.
