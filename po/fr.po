@@ -1,9 +1,10 @@
-# French translation for Xiphos
-# Copyright (C) 2002, 2017 Free Software Foundation, Inc.
-# Contributions are welcome.
+# Messages de traduction en français de Xiphos
+# Copyright (C) 2002, 2017 The Xiphos Developement Team
+# Ce fichier est distribué sous la même license que Xiphos
+# Dominique Corbex <dominique@corbex.org>, 2002.
 #
-# Translation Notes (Any comment welcome)
-# ---------------------------------------
+# Notes de Traduction
+# -------------------
 # SWORD Project           -> Projet SWORD
 # Bookmark                -> Signet
 # Interlinear             -> Parallèle
@@ -13,22 +14,23 @@
 # Viewer                  -> Aperçu
 # Biblical Text           -> Textes bibliques
 # Lemma                   -> Lemme
-# Glosse			-> Annotation
+# Glosse                  -> Annotation
 # Daily Devotion          -> Calendrier biblique
 # Speaker                 -> Intervenant
 # Audience                -> Audience
 #
-# Dominique Corbex <dominique@corbex.org>, 2002, 2017.
+# Toute contribution ou commentaire est le bienvenu
+#
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Xiphos 4.0.6\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: Xiphos 4.0.7\n"
+"Report-Msgid-Bugs-To: https://github.com/crosswire/xiphos/issues\n"
 "POT-Creation-Date: 2017-11-13 23:03+0100\n"
-"PO-Revision-Date: 2017-09-14 11:56+0200\n"
+"PO-Revision-Date: 2017-12-07 20:47+0100\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
-"Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
-"Language: \n"
+"Language-Team: <none>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -466,7 +468,6 @@ msgid "Close without Saving"
 msgstr "Fermer sans sauvegarder"
 
 #: ../src/gnome2/dialog.c:639
-#, fuzzy
 msgid "_OK"
 msgstr "_Ok"
 
@@ -553,7 +554,6 @@ msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRING »."
 
 #: ../src/gnome2/main_menu.c:743
-#, fuzzy
 msgid "Open Session"
 msgstr "Ouvrir une session"
 
