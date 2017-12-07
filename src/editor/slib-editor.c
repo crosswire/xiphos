@@ -368,8 +368,8 @@ static gint open_dialog(EDITOR *e)
 	    gtk_file_chooser_dialog_new(_("Open"), GTK_WINDOW(e->window),
 					GTK_FILE_CHOOSER_ACTION_OPEN,
 #if GTK_CHECK_VERSION(3, 10, 0)
-					"_Cancel", GTK_RESPONSE_CANCEL,
-					"_Open", GTK_RESPONSE_ACCEPT,
+					_("_Cancel"), GTK_RESPONSE_CANCEL,
+					_("_Open"), GTK_RESPONSE_ACCEPT,
 #else
 					GTK_STOCK_CANCEL,
 					GTK_RESPONSE_CANCEL,
@@ -415,8 +415,8 @@ static gint save_dialog(GtkhtmlEditor *editor, EDITOR *e)
 	    gtk_file_chooser_dialog_new(_("Save As"), GTK_WINDOW(editor),
 					GTK_FILE_CHOOSER_ACTION_SAVE,
 #if GTK_CHECK_VERSION(3, 10, 0)
-					"_Cancel", GTK_RESPONSE_CANCEL,
-					"_Open", GTK_RESPONSE_ACCEPT,
+					_("_Cancel"), GTK_RESPONSE_CANCEL,
+					_("_Open"), GTK_RESPONSE_ACCEPT,
 #else
 					GTK_STOCK_CANCEL,
 					GTK_RESPONSE_CANCEL,
