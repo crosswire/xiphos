@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 4.0.7\n"
 "Report-Msgid-Bugs-To: https://github.com/crosswire/xiphos/issues\n"
 "POT-Creation-Date: 2017-11-13 23:03+0100\n"
-"PO-Revision-Date: 2017-12-07 20:47+0100\n"
+"PO-Revision-Date: 2017-12-12 11:03+0100\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: <none>\n"
 "Language: fr\n"
@@ -105,15 +105,15 @@ msgstr "Fermer"
 
 #: ../src/gnome2/about_modules.c:415
 msgid "<b>Module name:</b> "
-msgstr "<b>Module :</b>"
+msgstr "<b>Module : </b>"
 
 #: ../src/gnome2/about_modules.c:422
 msgid "<b>Module abbreviation:</b> "
-msgstr "<b>Abréviation :</b>"
+msgstr "<b>Abréviation : </b>"
 
 #: ../src/gnome2/about_modules.c:427
 msgid "<b>Version:</b> "
-msgstr "<b>Version :</b>"
+msgstr "<b>Version : </b>"
 
 #: ../src/gnome2/about_modules.c:430
 msgid "No version stamp found"
@@ -121,7 +121,7 @@ msgstr "Pas d'indication trouvée"
 
 #: ../src/gnome2/about_modules.c:433
 msgid "<b>Type:</b> "
-msgstr "<b>Type :</b>"
+msgstr "<b>Type : </b>"
 
 #: ../src/gnome2/about_modules.c:435
 msgid "Daily Devotion"
@@ -179,7 +179,7 @@ msgstr "Type inconnu"
 
 #: ../src/gnome2/about_modules.c:475
 msgid "<b>Language:</b> "
-msgstr "<b>Langue :</b>"
+msgstr "<b>Langue : </b>"
 
 #: ../src/gnome2/about_modules.c:478
 msgid "Not specified"
@@ -187,7 +187,7 @@ msgstr "Non spécifiée"
 
 #: ../src/gnome2/about_modules.c:487
 msgid "<b>Installed size:</b> "
-msgstr "<b>Taille :</b>"
+msgstr "<b>Taille : </b>"
 
 #: ../src/gnome2/about_modules.c:495
 msgid "<b>Companion module(s):</b></br>"
