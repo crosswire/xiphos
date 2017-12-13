@@ -10,8 +10,8 @@ script:
 
 env:
   # Current version of Fedora
-  - TEST=build_gtk3 TEST_ARGS="fedora 25"
   - TEST=build_gtk3 TEST_ARGS="fedora 26"
+  - TEST=build_gtk3 TEST_ARGS="fedora 27"
   - TEST=build_gtk3 TEST_ARGS="fedora rawhide"
   # Current EPEL/CentOS/RHEL version
   - TEST=build_gtk3 TEST_ARGS="centos 7"
