@@ -675,85 +675,85 @@ static GtkActionEntry file_entries[] = {
 
     {"print",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     _("_Print..."),
+     "_Print...",
 #else
      GTK_STOCK_PRINT,
 #endif
-     _("_Print..."),
+     N_("_Print..."),
      NULL,
      NULL,
      G_CALLBACK(action_print_cb)},
 
     {"print-preview",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     _("Print Pre_view..."),
+     "Print Pre_view...",
 #else
      GTK_STOCK_PRINT_PREVIEW,
 #endif
-     _("Print Pre_view"),
+     N_("Print Pre_view"),
      NULL,
      NULL,
      G_CALLBACK(action_print_preview_cb)},
 
     {"quit",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     _("_Quit..."),
+     "_Quit...",
 #else
      GTK_STOCK_QUIT,
 #endif
-     _("_Quit"),
+     N_("_Quit"),
      NULL,
      NULL,
      G_CALLBACK(action_quit_cb)},
 
     {"open",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     _("_Open"),
+     "_Open",
 #else
      GTK_STOCK_OPEN,
 #endif
-     _("_Open"),
+     N_("_Open"),
      NULL,
      NULL,
      G_CALLBACK(action_open_cb)},
 
     {"save",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     _("_Save"),
+     "_Save",
 #else
      GTK_STOCK_SAVE,
 #endif
-     _("_Save"),
+     N_("_Save"),
      NULL,
      NULL,
      G_CALLBACK(action_save_cb)},
 
     {"save-as",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     _("Save _As..."),
+     "Save _As...",
 #else
      GTK_STOCK_SAVE_AS,
 #endif
-     _("Save _As..."),
+     N_("Save _As..."),
      NULL,
      NULL,
      G_CALLBACK(action_save_as_cb)},
     {"new",
      "gtk-new",
-     _("New"),
+     N_("New"),
      NULL,
-     _("Open new document"),
+     N_("Open new document"),
      G_CALLBACK(action_new_cb)},
     {"delete",
      "gtk-delete",
-     _("Delete"),
+     N_("Delete"),
      NULL,
-     _("Delete current note"),
+     N_("Delete current note"),
      G_CALLBACK(action_delete_cb)},
 
     {"file-menu",
      NULL,
-     _("_File"),
+     N_("_File"),
      NULL,
      NULL,
      NULL}};
