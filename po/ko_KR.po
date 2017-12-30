@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-13 23:03+0100\n"
+"POT-Creation-Date: 2017-12-30 16:30+0100\n"
 "PO-Revision-Date: 2015-07-15 20:56+0900\n"
 "Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
 "Language-Team: Seong-ho Cho <shcho@gnome.org>\n"
@@ -31,45 +31,170 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "설정이 없습니다"
 
-#: ../src/editor/webkit_editor.c:311
-msgid "Are you sure you want to delete the note for"
-msgstr "정말로 해당 메모를 삭제하시겠습니까?"
+#: ../src/editor/slib-editor.c:209
+#, c-format
+msgid "Page %d of %d"
+msgstr ""
 
-#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
-#: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
+#: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "열기"
 
+#: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
+#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
+#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
+#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr "취소(_C)"
+
+#: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
+#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:748
+#, fuzzy
+msgid "_Open"
+msgstr "열기"
+
+#: ../src/editor/slib-editor.c:415
+#, fuzzy
+msgid "Save As"
+msgstr "다른 이름으로 저장"
+
+#: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
 #: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "제목 없는 문서"
 
+#: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
+msgid "Are you sure you want to delete the note for"
+msgstr "정말로 해당 메모를 삭제하시겠습니까?"
+
+#: ../src/editor/slib-editor.c:659
+msgid "HTML Output"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:665
+#, fuzzy
+msgid "HTML Source"
+msgstr "원본"
+
+#: ../src/editor/slib-editor.c:671
+#, fuzzy
+msgid "Plain Source"
+msgstr "원본"
+
+#: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
+#: ../ui/editor_studypad.xml.h:19
+msgid "_Print..."
+msgstr "인쇄(_P)..."
+
+#: ../src/editor/slib-editor.c:693 ../ui/editor_note.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+msgid "Print Pre_view"
+msgstr "인쇄 미리보기(_V)"
+
+#: ../src/editor/slib-editor.c:704
+#, fuzzy
+msgid "_Quit"
+msgstr "끝내기"
+
+#: ../src/editor/slib-editor.c:726 ../src/gnome2/dialog.c:262
+#, fuzzy
+msgid "_Save"
+msgstr "저장"
+
+#: ../src/editor/slib-editor.c:737
+#, fuzzy
+msgid "Save _As..."
+msgstr "다른 이름으로 저장"
+
+#: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
+msgid "New"
+msgstr "새로 만들기"
+
+#: ../src/editor/slib-editor.c:745
+#, fuzzy
+msgid "Open new document"
+msgstr "새 문서 만들기"
+
+#: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
+msgid "Delete"
+msgstr "삭제"
+
+#: ../src/editor/slib-editor.c:751
+#, fuzzy
+msgid "Delete current note"
+msgstr "현재 메모 삭제"
+
+#: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
+msgid "_File"
+msgstr "파일(_F)"
+
+#: ../src/editor/slib-editor.c:811
+msgid "HTML _Output"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:818
+#, fuzzy
+msgid "_HTML Source"
+msgstr "원본"
+
+#: ../src/editor/slib-editor.c:825
+#, fuzzy
+msgid "_Plain Source"
+msgstr "원본"
+
+#: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
+msgid "_View"
+msgstr "보기(_V)"
+
+#: ../src/editor/slib-editor.c:841 ../ui/editor_note.xml.h:16
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
+msgid "Save"
+msgstr "저장"
+
+#: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
+#: ../ui/editor_link_dialog.xml.h:1
+msgid "Insert Link"
+msgstr "링크 삽입"
+
+#: ../src/editor/slib-editor.c:1208 ../src/editor/slib-editor.c:1249
 #: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "바뀐 내용 문서로 저장"
 
+#: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
 #: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "닫기 전에 확인하셨습니까?"
 
+#: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
 #: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "저장하지 않으면, 바꾼 내용이 완전히 없어집니다."
 
-#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:61
-#: ../ui/xi-menus-popup.gtkbuilder.h:39
+#: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
+#: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "파일"
 
-#: ../src/editor/webkit_editor.c:1255
+#: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "학습장"
 
-#: ../src/editor/webkit_editor.c:1270
+#: ../src/editor/slib-editor.c:1315 ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "메모 편집기"
 
-#: ../src/editor/webkit_editor.c:1287
+#: ../src/editor/slib-editor.c:1333 ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "기도 목록/묵상 일기 편집기"
 
@@ -423,21 +548,9 @@ msgstr ""
 msgid "_Yes"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:262
-#, fuzzy
-msgid "_Save"
-msgstr "저장"
-
 #: ../src/gnome2/dialog.c:265 ../src/gnome2/dialog.c:630
 msgid "_No"
 msgstr ""
-
-#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
-#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
-#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
-msgid "_Cancel"
-msgstr "취소(_C)"
 
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
@@ -532,11 +645,6 @@ msgstr "버그네요?! \"STRING\" 오류 때문에 xiphos가 깨진 것 같습�
 #, fuzzy
 msgid "Open Session"
 msgstr "세션 열기(_O)"
-
-#: ../src/gnome2/main_menu.c:748
-#, fuzzy
-msgid "_Open"
-msgstr "열기"
 
 #: ../src/gnome2/main_window.c:587
 #, c-format
@@ -2652,10 +2760,6 @@ msgstr "모듈 항목"
 msgid "Bookmark Folder Treeview"
 msgstr "책갈피 폴더 트리 보기"
 
-#: ../ui/editor_link_dialog.xml.h:1
-msgid "Insert Link"
-msgstr "링크 삽입"
-
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
@@ -2709,12 +2813,6 @@ msgstr "현재 메모 삭제"
 msgid "_Delete Personal Comment"
 msgstr "현재 개인 주석 삭제(_D)"
 
-#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:7
-#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:87
-#: ../ui/xi-menus.glade.h:1 ../ui/xi-menus.gtkbuilder.h:1
-msgid "_File"
-msgstr "파일(_F)"
-
 #: ../ui/editor_note.xml.h:10
 msgid "Save the current note"
 msgstr "현재 메모 저장"
@@ -2723,14 +2821,6 @@ msgstr "현재 메모 저장"
 msgid "_Save (Personal Comment)"
 msgstr "저장(개인 메모)(_S)"
 
-#: ../ui/editor_note.xml.h:12 ../ui/editor_studypad.xml.h:18
-msgid "Print Pre_view"
-msgstr "인쇄 미리보기(_V)"
-
-#: ../ui/editor_note.xml.h:13 ../ui/editor_studypad.xml.h:19
-msgid "_Print..."
-msgstr "인쇄(_P)..."
-
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 msgid "E_xit"
 msgstr "나가기(_X)"
@@ -2738,11 +2828,6 @@ msgstr "나가기(_X)"
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
 msgid "For_mat"
 msgstr "형식(_M)"
-
-#: ../ui/editor_note.xml.h:16 ../ui/editor_studypad.xml.h:11
-#: ../ui/gtk2_webedit.ui.h:75 ../ui/gtk_webedit.ui.h:75
-msgid "Save"
-msgstr "저장"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Print this document"
@@ -2965,10 +3050,6 @@ msgstr "문단 들여쓰기 깊이를 줄입니다"
 msgid "Delete selection"
 msgstr "선택 부분 삭제"
 
-#: ../ui/gtk2_webedit.ui.h:14 ../ui/gtk_webedit.ui.h:14
-msgid "Delete"
-msgstr "삭제"
-
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 msgid "Remove selection"
 msgstr "선택 부분 제거"
@@ -3129,10 +3210,6 @@ msgstr "오른쪽"
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
 msgstr "문단 정렬을 가로 방향 오른쪽으로 합니다"
-
-#: ../ui/gtk2_webedit.ui.h:56 ../ui/gtk_webedit.ui.h:56
-msgid "New"
-msgstr "새로 만들기"
 
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
 msgid "Create new file"
@@ -4779,10 +4856,6 @@ msgstr "sword 모듈을 설치하고 제거할 때 모듈 관리자를 사용합
 #: ../ui/xi-menus.glade.h:16 ../ui/xi-menus.gtkbuilder.h:10
 msgid "_Module Manager"
 msgstr "모듈 관리자(_M)"
-
-#: ../ui/xi-menus.glade.h:17 ../ui/xi-menus.gtkbuilder.h:11
-msgid "_View"
-msgstr "보기(_V)"
 
 #: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"

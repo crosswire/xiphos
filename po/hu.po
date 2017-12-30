@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-13 23:03+0100\n"
+"POT-Creation-Date: 2017-12-30 16:30+0100\n"
 "PO-Revision-Date: 2010-09-15 13:02+0000\n"
 "Last-Translator: Dmitrijs Ledkovs <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -31,45 +31,159 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "Konfiguráció nem található"
 
-#: ../src/editor/webkit_editor.c:311
-msgid "Are you sure you want to delete the note for"
-msgstr "Biztos benne, hogy törölni akarja a megjegyzést"
+#: ../src/editor/slib-editor.c:209
+#, c-format
+msgid "Page %d of %d"
+msgstr "%d/%d oldal"
 
-#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
-#: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
+#: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Megnyit"
 
+#: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
+#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
+#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
+#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
+#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:748
+msgid "_Open"
+msgstr "_Megnyitás"
+
+#: ../src/editor/slib-editor.c:415
+msgid "Save As"
+msgstr "Mentés másként"
+
+#: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
 #: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "Névtelen dokumentum"
 
+#: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
+msgid "Are you sure you want to delete the note for"
+msgstr "Biztos benne, hogy törölni akarja a megjegyzést"
+
+#: ../src/editor/slib-editor.c:659
+msgid "HTML Output"
+msgstr "HTML-kimenet"
+
+#: ../src/editor/slib-editor.c:665
+msgid "HTML Source"
+msgstr "HTML-forrás"
+
+#: ../src/editor/slib-editor.c:671
+msgid "Plain Source"
+msgstr "Egyszerű forrás"
+
+#: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
+#: ../ui/editor_studypad.xml.h:19
+msgid "_Print..."
+msgstr "N_yomtat..."
+
+#: ../src/editor/slib-editor.c:693 ../ui/editor_note.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+msgid "Print Pre_view"
+msgstr "Nyomtatási ké_p"
+
+#: ../src/editor/slib-editor.c:704
+msgid "_Quit"
+msgstr "_Kilép"
+
+#: ../src/editor/slib-editor.c:726 ../src/gnome2/dialog.c:262
+msgid "_Save"
+msgstr "Menté_s"
+
+#: ../src/editor/slib-editor.c:737
+msgid "Save _As..."
+msgstr "Men_tés másként…"
+
+#: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
+msgid "New"
+msgstr "Új"
+
+#: ../src/editor/slib-editor.c:745
+msgid "Open new document"
+msgstr "Új dokumentum megnyitása"
+
+#: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
+msgid "Delete"
+msgstr "Törlés"
+
+#: ../src/editor/slib-editor.c:751
+msgid "Delete current note"
+msgstr "Aktuális jegyzet törlése"
+
+#: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
+msgid "_File"
+msgstr "_Fájl"
+
+#: ../src/editor/slib-editor.c:811
+msgid "HTML _Output"
+msgstr "HTML-_kimenet"
+
+#: ../src/editor/slib-editor.c:818
+msgid "_HTML Source"
+msgstr "HTML-_forrás"
+
+#: ../src/editor/slib-editor.c:825
+msgid "_Plain Source"
+msgstr "_Egyszerű forrás"
+
+#: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
+msgid "_View"
+msgstr "Né_zet"
+
+#: ../src/editor/slib-editor.c:841 ../ui/editor_note.xml.h:16
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
+msgid "Save"
+msgstr "Ment"
+
+#: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
+#: ../ui/editor_link_dialog.xml.h:1
+msgid "Insert Link"
+msgstr "Hivatkozás beszúrása"
+
+#: ../src/editor/slib-editor.c:1208 ../src/editor/slib-editor.c:1249
 #: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "Változások dokumentumba mentése"
 
+#: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
 #: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "bezárás előtt?"
 
+#: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
 #: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Ha nem ment, akkor a változtatások véglegesen elvesznek."
 
-#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:61
-#: ../ui/xi-menus-popup.gtkbuilder.h:39
+#: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
+#: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Fájl"
 
-#: ../src/editor/webkit_editor.c:1255
+#: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "TanulóTömb"
 
-#: ../src/editor/webkit_editor.c:1270
+#: ../src/editor/slib-editor.c:1315 ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "Jegyzet szerkesztő"
 
-#: ../src/editor/webkit_editor.c:1287
+#: ../src/editor/slib-editor.c:1333 ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "Imalista szerkesztő"
 
@@ -454,19 +568,8 @@ msgstr ""
 msgid "_Yes"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:262
-msgid "_Save"
-msgstr "Menté_s"
-
 #: ../src/gnome2/dialog.c:265 ../src/gnome2/dialog.c:630
 msgid "_No"
-msgstr ""
-
-#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
-#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
-#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
-msgid "_Cancel"
 msgstr ""
 
 #: ../src/gnome2/dialog.c:289
@@ -562,10 +665,6 @@ msgstr "HIBA! Xiphos is about to crash due to a \"STRING\" error."
 #, fuzzy
 msgid "Open Session"
 msgstr "Munkamenet _megnyitása"
-
-#: ../src/gnome2/main_menu.c:748
-msgid "_Open"
-msgstr "_Megnyitás"
 
 #: ../src/gnome2/main_window.c:587
 #, fuzzy, c-format
@@ -2655,10 +2754,6 @@ msgstr "Module Entry"
 msgid "Bookmark Folder Treeview"
 msgstr "Bookmark Folder Treeview"
 
-#: ../ui/editor_link_dialog.xml.h:1
-msgid "Insert Link"
-msgstr "Hivatkozás beszúrása"
-
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
@@ -2714,12 +2809,6 @@ msgstr "Aktuális jegyzet törlése"
 msgid "_Delete Personal Comment"
 msgstr "Személyes megjegyzés _törlése"
 
-#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:7
-#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:87
-#: ../ui/xi-menus.glade.h:1 ../ui/xi-menus.gtkbuilder.h:1
-msgid "_File"
-msgstr "_Fájl"
-
 #: ../ui/editor_note.xml.h:10
 msgid "Save the current note"
 msgstr "Aktuális megjegyzés mentése"
@@ -2728,14 +2817,6 @@ msgstr "Aktuális megjegyzés mentése"
 msgid "_Save (Personal Comment)"
 msgstr "Menté_s (személyes megjegyzés)"
 
-#: ../ui/editor_note.xml.h:12 ../ui/editor_studypad.xml.h:18
-msgid "Print Pre_view"
-msgstr "Nyomtatási ké_p"
-
-#: ../ui/editor_note.xml.h:13 ../ui/editor_studypad.xml.h:19
-msgid "_Print..."
-msgstr "N_yomtat..."
-
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 msgid "E_xit"
 msgstr "K_ilépés"
@@ -2743,11 +2824,6 @@ msgstr "K_ilépés"
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
 msgid "For_mat"
 msgstr "For_mátum"
-
-#: ../ui/editor_note.xml.h:16 ../ui/editor_studypad.xml.h:11
-#: ../ui/gtk2_webedit.ui.h:75 ../ui/gtk_webedit.ui.h:75
-msgid "Save"
-msgstr "Ment"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Print this document"
@@ -2982,10 +3058,6 @@ msgstr ""
 msgid "Delete selection"
 msgstr "Kiválasztott tartomány törlése"
 
-#: ../ui/gtk2_webedit.ui.h:14 ../ui/gtk_webedit.ui.h:14
-msgid "Delete"
-msgstr "Törlés"
-
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
 msgid "Remove selection"
@@ -3166,10 +3238,6 @@ msgstr ""
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
 msgstr ""
-
-#: ../ui/gtk2_webedit.ui.h:56 ../ui/gtk_webedit.ui.h:56
-msgid "New"
-msgstr "Új"
 
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
 #, fuzzy
@@ -4876,10 +4944,6 @@ msgstr ""
 msgid "_Module Manager"
 msgstr "_Modulkezelő"
 
-#: ../ui/xi-menus.glade.h:17 ../ui/xi-menus.gtkbuilder.h:11
-msgid "_View"
-msgstr "Né_zet"
-
 #: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
 msgstr "_Napi áhítat előnézete"
@@ -5368,42 +5432,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Transmit failed.\n"
 #~ msgstr "%s sikertelen"
-
-#~ msgid "Page %d of %d"
-#~ msgstr "%d/%d oldal"
-
-#~ msgid "Save As"
-#~ msgstr "Mentés másként"
-
-#~ msgid "HTML Output"
-#~ msgstr "HTML-kimenet"
-
-#~ msgid "HTML Source"
-#~ msgstr "HTML-forrás"
-
-#~ msgid "Plain Source"
-#~ msgstr "Egyszerű forrás"
-
-#~ msgid "_Quit"
-#~ msgstr "_Kilép"
-
-#~ msgid "Save _As..."
-#~ msgstr "Men_tés másként…"
-
-#~ msgid "Open new document"
-#~ msgstr "Új dokumentum megnyitása"
-
-#~ msgid "Delete current note"
-#~ msgstr "Aktuális jegyzet törlése"
-
-#~ msgid "HTML _Output"
-#~ msgstr "HTML-_kimenet"
-
-#~ msgid "_HTML Source"
-#~ msgstr "HTML-_forrás"
-
-#~ msgid "_Plain Source"
-#~ msgstr "_Egyszerű forrás"
 
 #~ msgid "Unlock "
 #~ msgstr "Felold "

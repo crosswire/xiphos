@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-13 23:03+0100\n"
+"POT-Creation-Date: 2017-12-30 16:30+0100\n"
 "PO-Revision-Date: 2015-06-04 12:39+0000\n"
 "Last-Translator: Marjan Šavli <marjan.savli@gmail.com>\n"
 "Language-Team: Slovenščina (Slovene) <xiphos-devel@crosswire.org>\n"
@@ -36,45 +36,159 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "Nastavitev ni najdena"
 
-#: ../src/editor/webkit_editor.c:311
-msgid "Are you sure you want to delete the note for"
-msgstr "Ali ste prepričani da želite izbrisati zaznamek za"
+#: ../src/editor/slib-editor.c:209
+#, c-format
+msgid "Page %d of %d"
+msgstr "Stran %d od %d"
 
-#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
-#: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
+#: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Odpri"
 
+#: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
+#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
+#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
+#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr "_Prekliči"
+
+#: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
+#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:748
+msgid "_Open"
+msgstr "_Odpri"
+
+#: ../src/editor/slib-editor.c:415
+msgid "Save As"
+msgstr "Shrani kot"
+
+#: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
 #: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "Neimenovan dokument"
 
+#: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
+msgid "Are you sure you want to delete the note for"
+msgstr "Ali ste prepričani da želite izbrisati zaznamek za"
+
+#: ../src/editor/slib-editor.c:659
+msgid "HTML Output"
+msgstr "HTML izvoz"
+
+#: ../src/editor/slib-editor.c:665
+msgid "HTML Source"
+msgstr "HTML koda"
+
+#: ../src/editor/slib-editor.c:671
+msgid "Plain Source"
+msgstr "Navadna koda"
+
+#: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
+#: ../ui/editor_studypad.xml.h:19
+msgid "_Print..."
+msgstr "Na_tisni..."
+
+#: ../src/editor/slib-editor.c:693 ../ui/editor_note.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+msgid "Print Pre_view"
+msgstr "Predo_gled tiskanja"
+
+#: ../src/editor/slib-editor.c:704
+msgid "_Quit"
+msgstr "_Izhod"
+
+#: ../src/editor/slib-editor.c:726 ../src/gnome2/dialog.c:262
+msgid "_Save"
+msgstr "_Shrani"
+
+#: ../src/editor/slib-editor.c:737
+msgid "Save _As..."
+msgstr "Shr_ani kot..."
+
+#: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
+msgid "New"
+msgstr "Nov"
+
+#: ../src/editor/slib-editor.c:745
+msgid "Open new document"
+msgstr "Odpri nov dokument"
+
+#: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
+msgid "Delete"
+msgstr "Izbriši"
+
+#: ../src/editor/slib-editor.c:751
+msgid "Delete current note"
+msgstr "Izbriši trenutni zaznamek"
+
+#: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
+msgid "_File"
+msgstr "_Datoteka"
+
+#: ../src/editor/slib-editor.c:811
+msgid "HTML _Output"
+msgstr "HTML izv_oz"
+
+#: ../src/editor/slib-editor.c:818
+msgid "_HTML Source"
+msgstr "_HTML koda"
+
+#: ../src/editor/slib-editor.c:825
+msgid "_Plain Source"
+msgstr "_Navadna koda"
+
+#: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
+msgid "_View"
+msgstr "P_ogled"
+
+#: ../src/editor/slib-editor.c:841 ../ui/editor_note.xml.h:16
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
+msgid "Save"
+msgstr "Shrani"
+
+#: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
+#: ../ui/editor_link_dialog.xml.h:1
+msgid "Insert Link"
+msgstr "Vstavi povezavo"
+
+#: ../src/editor/slib-editor.c:1208 ../src/editor/slib-editor.c:1249
 #: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "Spremembe shrani v dokument"
 
+#: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
 #: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "pred zaprtjem?"
 
+#: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
 #: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Če ne shranite, bodo narejene spremembe za vedno izgubljene."
 
-#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:61
-#: ../ui/xi-menus-popup.gtkbuilder.h:39
+#: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
+#: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Datoteka"
 
-#: ../src/editor/webkit_editor.c:1255
+#: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "Študijski zaznamki"
 
-#: ../src/editor/webkit_editor.c:1270
+#: ../src/editor/slib-editor.c:1315 ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "Urejevalnik opomb"
 
-#: ../src/editor/webkit_editor.c:1287
+#: ../src/editor/slib-editor.c:1333 ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "Molitveni seznam/Urejevalnik dnevnika"
 
@@ -461,20 +575,9 @@ msgstr ""
 msgid "_Yes"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:262
-msgid "_Save"
-msgstr "_Shrani"
-
 #: ../src/gnome2/dialog.c:265 ../src/gnome2/dialog.c:630
 msgid "_No"
 msgstr ""
-
-#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
-#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
-#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
-msgid "_Cancel"
-msgstr "_Prekliči"
 
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
@@ -569,10 +672,6 @@ msgstr "HROŠČ! Xiphos je tik pred tem da se zruši zaradi \"STRING\" napake."
 #, fuzzy
 msgid "Open Session"
 msgstr "_Odpri sejo"
-
-#: ../src/gnome2/main_menu.c:748
-msgid "_Open"
-msgstr "_Odpri"
 
 #: ../src/gnome2/main_window.c:587
 #, fuzzy, c-format
@@ -2737,10 +2836,6 @@ msgstr "Vnos modula"
 msgid "Bookmark Folder Treeview"
 msgstr "Drevesna struktura map z zaznamki"
 
-#: ../ui/editor_link_dialog.xml.h:1
-msgid "Insert Link"
-msgstr "Vstavi povezavo"
-
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
@@ -2796,12 +2891,6 @@ msgstr "Pobriši trenutno beležko"
 msgid "_Delete Personal Comment"
 msgstr "_Izbriši osebni komentar"
 
-#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:7
-#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:87
-#: ../ui/xi-menus.glade.h:1 ../ui/xi-menus.gtkbuilder.h:1
-msgid "_File"
-msgstr "_Datoteka"
-
 #: ../ui/editor_note.xml.h:10
 msgid "Save the current note"
 msgstr "Shrani trenutno beležko"
@@ -2810,14 +2899,6 @@ msgstr "Shrani trenutno beležko"
 msgid "_Save (Personal Comment)"
 msgstr "_Shrani (osebni komentar)"
 
-#: ../ui/editor_note.xml.h:12 ../ui/editor_studypad.xml.h:18
-msgid "Print Pre_view"
-msgstr "Predo_gled tiskanja"
-
-#: ../ui/editor_note.xml.h:13 ../ui/editor_studypad.xml.h:19
-msgid "_Print..."
-msgstr "Na_tisni..."
-
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 msgid "E_xit"
 msgstr "_Konec"
@@ -2825,11 +2906,6 @@ msgstr "_Konec"
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
 msgid "For_mat"
 msgstr "For_mat"
-
-#: ../ui/editor_note.xml.h:16 ../ui/editor_studypad.xml.h:11
-#: ../ui/gtk2_webedit.ui.h:75 ../ui/gtk_webedit.ui.h:75
-msgid "Save"
-msgstr "Shrani"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Print this document"
@@ -3066,10 +3142,6 @@ msgstr "Zmanjšaj zamik odstavka"
 msgid "Delete selection"
 msgstr "Izbris označenega"
 
-#: ../ui/gtk2_webedit.ui.h:14 ../ui/gtk_webedit.ui.h:14
-msgid "Delete"
-msgstr "Izbriši"
-
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
 msgid "Remove selection"
@@ -3248,10 +3320,6 @@ msgstr "Desno"
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
 msgstr "Odstavek porazdeli desno"
-
-#: ../ui/gtk2_webedit.ui.h:56 ../ui/gtk_webedit.ui.h:56
-msgid "New"
-msgstr "Nov"
 
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
 #, fuzzy
@@ -4993,10 +5061,6 @@ msgstr ""
 msgid "_Module Manager"
 msgstr "Upravljalec _modulov"
 
-#: ../ui/xi-menus.glade.h:17 ../ui/xi-menus.gtkbuilder.h:11
-msgid "_View"
-msgstr "P_ogled"
-
 #: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
 msgstr "Predogled _Dnevnih posvetitev"
@@ -5494,42 +5558,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Transmit failed.\n"
 #~ msgstr "Prenos ni uspel.\n"
-
-#~ msgid "Page %d of %d"
-#~ msgstr "Stran %d od %d"
-
-#~ msgid "Save As"
-#~ msgstr "Shrani kot"
-
-#~ msgid "HTML Output"
-#~ msgstr "HTML izvoz"
-
-#~ msgid "HTML Source"
-#~ msgstr "HTML koda"
-
-#~ msgid "Plain Source"
-#~ msgstr "Navadna koda"
-
-#~ msgid "_Quit"
-#~ msgstr "_Izhod"
-
-#~ msgid "Save _As..."
-#~ msgstr "Shr_ani kot..."
-
-#~ msgid "Open new document"
-#~ msgstr "Odpri nov dokument"
-
-#~ msgid "Delete current note"
-#~ msgstr "Izbriši trenutni zaznamek"
-
-#~ msgid "HTML _Output"
-#~ msgstr "HTML izv_oz"
-
-#~ msgid "_HTML Source"
-#~ msgstr "_HTML koda"
-
-#~ msgid "_Plain Source"
-#~ msgstr "_Navadna koda"
 
 #~ msgid "Unlock "
 #~ msgstr "Odkleni "

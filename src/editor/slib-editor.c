@@ -491,7 +491,7 @@ view_source_dialog(GtkhtmlEditor *editor,
 	dialog = gtk_dialog_new_with_buttons(title, GTK_WINDOW(editor),
 					     GTK_DIALOG_DESTROY_WITH_PARENT,
 #if GTK_CHECK_VERSION(3, 10, 0)
-					     "_Close", GTK_RESPONSE_CLOSE,
+					     _("_Close"), GTK_RESPONSE_CLOSE,
 #else
 					     GTK_STOCK_CLOSE,
 					     GTK_RESPONSE_CLOSE,
@@ -675,85 +675,85 @@ static GtkActionEntry file_entries[] = {
 
     {"print",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     "_Print...",
+     _("_Print..."),
 #else
      GTK_STOCK_PRINT,
 #endif
-     N_("_Print..."),
+     _("_Print..."),
      NULL,
      NULL,
      G_CALLBACK(action_print_cb)},
 
     {"print-preview",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     "Print Pre_view...",
+     _("Print Pre_view..."),
 #else
      GTK_STOCK_PRINT_PREVIEW,
 #endif
-     N_("Print Pre_view"),
+     _("Print Pre_view"),
      NULL,
      NULL,
      G_CALLBACK(action_print_preview_cb)},
 
     {"quit",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     "_Quit...",
+     _("_Quit..."),
 #else
      GTK_STOCK_QUIT,
 #endif
-     N_("_Quit"),
+     _("_Quit"),
      NULL,
      NULL,
      G_CALLBACK(action_quit_cb)},
 
     {"open",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     "_Open",
+     _("_Open"),
 #else
      GTK_STOCK_OPEN,
 #endif
-     N_("_Open"),
+     _("_Open"),
      NULL,
      NULL,
      G_CALLBACK(action_open_cb)},
 
     {"save",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     "_Save",
+     _("_Save"),
 #else
      GTK_STOCK_SAVE,
 #endif
-     N_("_Save"),
+     _("_Save"),
      NULL,
      NULL,
      G_CALLBACK(action_save_cb)},
 
     {"save-as",
 #if GTK_CHECK_VERSION(3, 10, 0)
-     "Save _As...",
+     _("Save _As..."),
 #else
      GTK_STOCK_SAVE_AS,
 #endif
-     N_("Save _As..."),
+     _("Save _As..."),
      NULL,
      NULL,
      G_CALLBACK(action_save_as_cb)},
     {"new",
      "gtk-new",
-     N_("New"),
+     _("New"),
      NULL,
-     N_("Open new document"),
+     _("Open new document"),
      G_CALLBACK(action_new_cb)},
     {"delete",
      "gtk-delete",
-     N_("Delete"),
+     _("Delete"),
      NULL,
-     N_("Delete current note"),
+     _("Delete current note"),
      G_CALLBACK(action_delete_cb)},
 
     {"file-menu",
      NULL,
-     N_("_File"),
+     _("_File"),
      NULL,
      NULL,
      NULL}};

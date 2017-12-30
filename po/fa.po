@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-13 23:02+0100\n"
+"POT-Creation-Date: 2017-12-30 16:30+0100\n"
 "PO-Revision-Date: 2014-12-20 22:37-0000\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
@@ -35,45 +35,159 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "ترکیب پیدا نشد"
 
-#: ../src/editor/webkit_editor.c:311
-msgid "Are you sure you want to delete the note for"
-msgstr "آیا به یقین می‌خواهید این یادداشت حذف شود؟"
+#: ../src/editor/slib-editor.c:209
+#, c-format
+msgid "Page %d of %d"
+msgstr "صفحۀ %d  از %d"
 
-#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
-#: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
+#: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "باز کن"
 
+#: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
+#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
+#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
+#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
+#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:748
+msgid "_Open"
+msgstr "_باز کردن"
+
+#: ../src/editor/slib-editor.c:415
+msgid "Save As"
+msgstr "ضبط کن به اسم"
+
+#: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
 #: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "متن بی‌نام"
 
+#: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
+msgid "Are you sure you want to delete the note for"
+msgstr "آیا به یقین می‌خواهید این یادداشت حذف شود؟"
+
+#: ../src/editor/slib-editor.c:659
+msgid "HTML Output"
+msgstr "نتیجه به صورت اچ.تی.ام.ال"
+
+#: ../src/editor/slib-editor.c:665
+msgid "HTML Source"
+msgstr "منبع به فرمت اچ.تی.ام.ال"
+
+#: ../src/editor/slib-editor.c:671
+msgid "Plain Source"
+msgstr "منبع فرمت نشده"
+
+#: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
+#: ../ui/editor_studypad.xml.h:19
+msgid "_Print..."
+msgstr "_چاپ..."
+
+#: ../src/editor/slib-editor.c:693 ../ui/editor_note.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+msgid "Print Pre_view"
+msgstr "چاپ پیشنگری"
+
+#: ../src/editor/slib-editor.c:704
+msgid "_Quit"
+msgstr "_خروج"
+
+#: ../src/editor/slib-editor.c:726 ../src/gnome2/dialog.c:262
+msgid "_Save"
+msgstr "_ضبط"
+
+#: ../src/editor/slib-editor.c:737
+msgid "Save _As..."
+msgstr "ضبط کن به _اسم"
+
+#: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
+msgid "New"
+msgstr "جدید ..."
+
+#: ../src/editor/slib-editor.c:745
+msgid "Open new document"
+msgstr "ایجاد متن جدید"
+
+#: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
+msgid "Delete"
+msgstr "حذف"
+
+#: ../src/editor/slib-editor.c:751
+msgid "Delete current note"
+msgstr "یادداشت فعلی را حذف کن"
+
+#: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
+msgid "_File"
+msgstr "_پرونده"
+
+#: ../src/editor/slib-editor.c:811
+msgid "HTML _Output"
+msgstr "نتیجه به فرمت – اج.تی.ام.ال"
+
+#: ../src/editor/slib-editor.c:818
+msgid "_HTML Source"
+msgstr "_منبع به فرمت اچ.تی.ام.ال"
+
+#: ../src/editor/slib-editor.c:825
+msgid "_Plain Source"
+msgstr "منبع فرمت نشده"
+
+#: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
+msgid "_View"
+msgstr "_مرور"
+
+#: ../src/editor/slib-editor.c:841 ../ui/editor_note.xml.h:16
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
+msgid "Save"
+msgstr "ضبط"
+
+#: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
+#: ../ui/editor_link_dialog.xml.h:1
+msgid "Insert Link"
+msgstr "ایجاد علامت"
+
+#: ../src/editor/slib-editor.c:1208 ../src/editor/slib-editor.c:1249
 #: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "تغییرات را ضبط کن"
 
+#: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
 #: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "قبل از بستن؟"
 
+#: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
 #: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr "اگر ضبط نکنید، تغییرات به کلی حذف خواهد شد."
 
-#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:61
-#: ../ui/xi-menus-popup.gtkbuilder.h:39
+#: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
+#: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "پرونده"
 
-#: ../src/editor/webkit_editor.c:1255
+#: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "یادداشتهای مطالعات شخصی"
 
-#: ../src/editor/webkit_editor.c:1270
+#: ../src/editor/slib-editor.c:1315 ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "ویرایشگر یادداشتهای شخصی"
 
-#: ../src/editor/webkit_editor.c:1287
+#: ../src/editor/slib-editor.c:1333 ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "لیست دعا/یادداشتهای هر روزه"
 
@@ -456,19 +570,8 @@ msgstr ""
 msgid "_Yes"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:262
-msgid "_Save"
-msgstr "_ضبط"
-
 #: ../src/gnome2/dialog.c:265 ../src/gnome2/dialog.c:630
 msgid "_No"
-msgstr ""
-
-#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
-#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
-#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
-msgid "_Cancel"
 msgstr ""
 
 #: ../src/gnome2/dialog.c:289
@@ -564,10 +667,6 @@ msgstr "اشکال! Xiphos در مورد به علت تصادف به \"رشته\
 #, fuzzy
 msgid "Open Session"
 msgstr "_قسمت را باز کن"
-
-#: ../src/gnome2/main_menu.c:748
-msgid "_Open"
-msgstr "_باز کردن"
 
 #: ../src/gnome2/main_window.c:587
 #, c-format
@@ -2635,10 +2734,6 @@ msgstr "ثبت مدول"
 msgid "Bookmark Folder Treeview"
 msgstr "پرونده را به حالت اول بازگردان"
 
-#: ../ui/editor_link_dialog.xml.h:1
-msgid "Insert Link"
-msgstr "ایجاد علامت"
-
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
@@ -2694,12 +2789,6 @@ msgstr "یادداشت فعلی را حذف کن"
 msgid "_Delete Personal Comment"
 msgstr "_نظرات شخصی را حذف کن"
 
-#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:7
-#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:87
-#: ../ui/xi-menus.glade.h:1 ../ui/xi-menus.gtkbuilder.h:1
-msgid "_File"
-msgstr "_پرونده"
-
 #: ../ui/editor_note.xml.h:10
 msgid "Save the current note"
 msgstr "یادداشت فعلی را ذخیره کن"
@@ -2708,14 +2797,6 @@ msgstr "یادداشت فعلی را ذخیره کن"
 msgid "_Save (Personal Comment)"
 msgstr "_ضبط (نظریات شخصی)"
 
-#: ../ui/editor_note.xml.h:12 ../ui/editor_studypad.xml.h:18
-msgid "Print Pre_view"
-msgstr "چاپ پیشنگری"
-
-#: ../ui/editor_note.xml.h:13 ../ui/editor_studypad.xml.h:19
-msgid "_Print..."
-msgstr "_چاپ..."
-
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 msgid "E_xit"
 msgstr "خروج"
@@ -2723,11 +2804,6 @@ msgstr "خروج"
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
 msgid "For_mat"
 msgstr "فرمت"
-
-#: ../ui/editor_note.xml.h:16 ../ui/editor_studypad.xml.h:11
-#: ../ui/gtk2_webedit.ui.h:75 ../ui/gtk_webedit.ui.h:75
-msgid "Save"
-msgstr "ضبط"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Print this document"
@@ -2961,10 +3037,6 @@ msgstr ""
 msgid "Delete selection"
 msgstr "محدوده منتخب را حذف کن"
 
-#: ../ui/gtk2_webedit.ui.h:14 ../ui/gtk_webedit.ui.h:14
-msgid "Delete"
-msgstr "حذف"
-
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
 msgid "Remove selection"
@@ -3144,10 +3216,6 @@ msgstr ""
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
 msgstr ""
-
-#: ../ui/gtk2_webedit.ui.h:56 ../ui/gtk_webedit.ui.h:56
-msgid "New"
-msgstr "جدید ..."
 
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
 #, fuzzy
@@ -4844,10 +4912,6 @@ msgstr "از مدیر مدول‏ها به جهت نصب و یا حذف مدول
 msgid "_Module Manager"
 msgstr "_مدیر مدول‏ها"
 
-#: ../ui/xi-menus.glade.h:17 ../ui/xi-menus.gtkbuilder.h:11
-msgid "_View"
-msgstr "_مرور"
-
 #: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
 msgstr "صمیمیت پیشنمایش _Daily"
@@ -5374,42 +5438,6 @@ msgstr ""
 
 #~ msgid "recvfrom < 0"
 #~ msgstr "recvfrom < 0"
-
-#~ msgid "Page %d of %d"
-#~ msgstr "صفحۀ %d  از %d"
-
-#~ msgid "Save As"
-#~ msgstr "ضبط کن به اسم"
-
-#~ msgid "HTML Output"
-#~ msgstr "نتیجه به صورت اچ.تی.ام.ال"
-
-#~ msgid "HTML Source"
-#~ msgstr "منبع به فرمت اچ.تی.ام.ال"
-
-#~ msgid "Plain Source"
-#~ msgstr "منبع فرمت نشده"
-
-#~ msgid "_Quit"
-#~ msgstr "_خروج"
-
-#~ msgid "Save _As..."
-#~ msgstr "ضبط کن به _اسم"
-
-#~ msgid "Open new document"
-#~ msgstr "ایجاد متن جدید"
-
-#~ msgid "Delete current note"
-#~ msgstr "یادداشت فعلی را حذف کن"
-
-#~ msgid "HTML _Output"
-#~ msgstr "نتیجه به فرمت – اج.تی.ام.ال"
-
-#~ msgid "_HTML Source"
-#~ msgstr "_منبع به فرمت اچ.تی.ام.ال"
-
-#~ msgid "_Plain Source"
-#~ msgstr "منبع فرمت نشده"
 
 #~ msgid "Unlock "
 #~ msgstr "قفل را باز کن "

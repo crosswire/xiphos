@@ -6,6 +6,7 @@ src/backend/sword_main.cc
 ## Editor Source files
 src/editor/editor.c
 src/editor/link_dialog.c
+src/editor/slib-editor.c
 src/editor/webkit_editor.c
 ## Examples source files
 src/examples/ipc_client.c

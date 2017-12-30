@@ -25,9 +25,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.7\n"
-"Report-Msgid-Bugs-To: https://github.com/crosswire/xiphos/issues\n"
-"POT-Creation-Date: 2017-11-13 23:03+0100\n"
-"PO-Revision-Date: 2017-12-18 10:45+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-30 16:30+0100\n"
+"PO-Revision-Date: 2017-12-30 16:33+0100\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: <none>\n"
 "Language: fr\n"
@@ -50,46 +50,160 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "Configuration non trouvée"
 
-#: ../src/editor/webkit_editor.c:311
-msgid "Are you sure you want to delete the note for"
-msgstr "Êtes-vous certain de vouloir supprimer le commentaire de"
+#: ../src/editor/slib-editor.c:209
+#, c-format
+msgid "Page %d of %d"
+msgstr "Page %d de %d"
 
-#: ../src/editor/webkit_editor.c:605 ../ui/editor_studypad.xml.h:9
-#: ../ui/gtk2_webedit.ui.h:58 ../ui/gtk_webedit.ui.h:58
+#: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Ouvrir"
 
+#: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
+#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
+#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
+#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr "_Annuler"
+
+#: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
+#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:748
+msgid "_Open"
+msgstr "_Ouvrir"
+
+#: ../src/editor/slib-editor.c:415
+msgid "Save As"
+msgstr "Enregistrer sous"
+
+#: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
 #: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "Sans titre"
 
+#: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
+msgid "Are you sure you want to delete the note for"
+msgstr "Êtes-vous certain de vouloir supprimer le commentaire de"
+
+#: ../src/editor/slib-editor.c:659
+msgid "HTML Output"
+msgstr "Sortie HTML"
+
+#: ../src/editor/slib-editor.c:665
+msgid "HTML Source"
+msgstr "Source HTML"
+
+#: ../src/editor/slib-editor.c:671
+msgid "Plain Source"
+msgstr "Source texte"
+
+#: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
+#: ../ui/editor_studypad.xml.h:19
+msgid "_Print..."
+msgstr "_Imprimer..."
+
+#: ../src/editor/slib-editor.c:693 ../ui/editor_note.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+msgid "Print Pre_view"
+msgstr "A_perçu avant impression"
+
+#: ../src/editor/slib-editor.c:704
+msgid "_Quit"
+msgstr "_Quitter"
+
+#: ../src/editor/slib-editor.c:726 ../src/gnome2/dialog.c:262
+msgid "_Save"
+msgstr "_Enregistrer"
+
+#: ../src/editor/slib-editor.c:737
+msgid "Save _As..."
+msgstr "Enregistrer _sous..."
+
+#: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
+msgid "New"
+msgstr "Nouveau"
+
+#: ../src/editor/slib-editor.c:745
+msgid "Open new document"
+msgstr "Ouvre un nouveau document"
+
+#: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
+msgid "Delete"
+msgstr "Supprimer"
+
+#: ../src/editor/slib-editor.c:751
+msgid "Delete current note"
+msgstr "Supprime la note en cours"
+
+#: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
+msgid "_File"
+msgstr "_Fichier"
+
+#: ../src/editor/slib-editor.c:811
+msgid "HTML _Output"
+msgstr "_Sortie HTML"
+
+#: ../src/editor/slib-editor.c:818
+msgid "_HTML Source"
+msgstr "Source _HTML"
+
+#: ../src/editor/slib-editor.c:825
+msgid "_Plain Source"
+msgstr "Source _texte"
+
+#: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
+msgid "_View"
+msgstr "_Affichage"
+
+#: ../src/editor/slib-editor.c:841 ../ui/editor_note.xml.h:16
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
+msgid "Save"
+msgstr "Enregistrer"
+
+#: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
+#: ../ui/editor_link_dialog.xml.h:1
+msgid "Insert Link"
+msgstr "Insérer un lien"
+
+#: ../src/editor/slib-editor.c:1208 ../src/editor/slib-editor.c:1249
 #: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
 msgstr "Voulez-vous enregistrer les modifications apportées au document"
 
+#: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
 #: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
 msgstr "avant de fermer?"
 
+#: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
 #: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 "Si vous n'enregistrez pas, les modifications seront définitivement perdues."
 
-#: ../src/editor/webkit_editor.c:1212 ../ui/xi-menus.glade.h:61
-#: ../ui/xi-menus-popup.gtkbuilder.h:39
+#: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
+#: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Fichier"
 
-#: ../src/editor/webkit_editor.c:1255
+#: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
 msgstr "Bloc-notes"
 
-#: ../src/editor/webkit_editor.c:1270
+#: ../src/editor/slib-editor.c:1315 ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
 msgstr "Éditeur de note"
 
-#: ../src/editor/webkit_editor.c:1287
+#: ../src/editor/slib-editor.c:1333 ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
 msgstr "Éditeur de liste de prières ou de journal"
 
@@ -448,20 +562,9 @@ msgstr "_Ok"
 msgid "_Yes"
 msgstr "_Oui"
 
-#: ../src/gnome2/dialog.c:262
-msgid "_Save"
-msgstr "_Enregistrer"
-
 #: ../src/gnome2/dialog.c:265 ../src/gnome2/dialog.c:630
 msgid "_No"
 msgstr "_Non"
-
-#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
-#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
-#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
-msgid "_Cancel"
-msgstr "_Annuler"
 
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
@@ -556,10 +659,6 @@ msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRING »."
 #: ../src/gnome2/main_menu.c:743
 msgid "Open Session"
 msgstr "Ouvrir une session"
-
-#: ../src/gnome2/main_menu.c:748
-msgid "_Open"
-msgstr "_Ouvrir"
 
 #: ../src/gnome2/main_window.c:587
 #, c-format
@@ -2702,10 +2801,6 @@ msgstr "Entrée Module"
 msgid "Bookmark Folder Treeview"
 msgstr "Arborescence Dossier des signets"
 
-#: ../ui/editor_link_dialog.xml.h:1
-msgid "Insert Link"
-msgstr "Insérer un lien"
-
 #: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
@@ -2759,12 +2854,6 @@ msgstr "Supprime la note actuelle"
 msgid "_Delete Personal Comment"
 msgstr "Supprimer le commentaire"
 
-#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:7
-#: ../ui/gtk2_webedit.ui.h:86 ../ui/gtk_webedit.ui.h:87
-#: ../ui/xi-menus.glade.h:1 ../ui/xi-menus.gtkbuilder.h:1
-msgid "_File"
-msgstr "_Fichier"
-
 #: ../ui/editor_note.xml.h:10
 msgid "Save the current note"
 msgstr "Enregistre la note en cours"
@@ -2773,14 +2862,6 @@ msgstr "Enregistre la note en cours"
 msgid "_Save (Personal Comment)"
 msgstr "Enregistrer le commentaire"
 
-#: ../ui/editor_note.xml.h:12 ../ui/editor_studypad.xml.h:18
-msgid "Print Pre_view"
-msgstr "A_perçu avant impression"
-
-#: ../ui/editor_note.xml.h:13 ../ui/editor_studypad.xml.h:19
-msgid "_Print..."
-msgstr "_Imprimer..."
-
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 msgid "E_xit"
 msgstr "_Quitter"
@@ -2788,11 +2869,6 @@ msgstr "_Quitter"
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
 msgid "For_mat"
 msgstr "For_mat"
-
-#: ../ui/editor_note.xml.h:16 ../ui/editor_studypad.xml.h:11
-#: ../ui/gtk2_webedit.ui.h:75 ../ui/gtk_webedit.ui.h:75
-msgid "Save"
-msgstr "Enregistrer"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Print this document"
@@ -3017,10 +3093,6 @@ msgstr "Diminue le retrait du paragraphe"
 msgid "Delete selection"
 msgstr "Supprimer la sélection"
 
-#: ../ui/gtk2_webedit.ui.h:14 ../ui/gtk_webedit.ui.h:14
-msgid "Delete"
-msgstr "Supprime"
-
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 msgid "Remove selection"
 msgstr "Enlève la sélection"
@@ -3072,7 +3144,7 @@ msgstr "Insére une émoticône"
 
 #: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
 msgid "Insert image"
-msgstr "Insérer une image"
+msgstr "Insére une image"
 
 #: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
 msgid "Image"
@@ -3181,10 +3253,6 @@ msgstr "Aligner à droite"
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
 msgstr "Aligne le paragraphe à droite"
-
-#: ../ui/gtk2_webedit.ui.h:56 ../ui/gtk_webedit.ui.h:56
-msgid "New"
-msgstr "Nouveau"
 
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
 msgid "Create new file"
@@ -4875,10 +4943,6 @@ msgstr "Installe ou supprime des modules du Projet SWORD"
 msgid "_Module Manager"
 msgstr "Gérer les modules"
 
-#: ../ui/xi-menus.glade.h:17 ../ui/xi-menus.gtkbuilder.h:11
-msgid "_View"
-msgstr "_Affichage"
-
 #: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
 msgstr "Calendrier biblique"
@@ -5439,42 +5503,6 @@ msgstr "Texte;Bible;Étude;"
 #~ "Multidiffusion impossible. BibleSync est à présent déactivé. Si votre "
 #~ "connection réseau a changé pendant que ce programme était actif, il peut "
 #~ "être suffisant de la réactiver."
-
-#~ msgid "Page %d of %d"
-#~ msgstr "Page %d de %d"
-
-#~ msgid "Save As"
-#~ msgstr "Enregistrer sous"
-
-#~ msgid "HTML Output"
-#~ msgstr "Sortie HTML"
-
-#~ msgid "HTML Source"
-#~ msgstr "Source HTML"
-
-#~ msgid "Plain Source"
-#~ msgstr "Source texte"
-
-#~ msgid "_Quit"
-#~ msgstr "_Quitter"
-
-#~ msgid "Save _As..."
-#~ msgstr "Enregistrer _sous..."
-
-#~ msgid "Open new document"
-#~ msgstr "Ouvre un nouveau document"
-
-#~ msgid "Delete current note"
-#~ msgstr "Supprime la note en cours"
-
-#~ msgid "HTML _Output"
-#~ msgstr "_Sortie HTML"
-
-#~ msgid "_HTML Source"
-#~ msgstr "Source _HTML"
-
-#~ msgid "_Plain Source"
-#~ msgstr "Source _texte"
 
 #~ msgid "Unlock "
 #~ msgstr "Entrez la clé de déverrouillage "
