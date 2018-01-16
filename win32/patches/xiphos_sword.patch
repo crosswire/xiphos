@@ -1,16 +1,16 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 993a996..01e2ddc 100644
+index 5cbd06a..4bde25b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -63,6 +63,7 @@ FIND_PACKAGE(ICU QUIET)
- FIND_PACKAGE(CURL QUIET)
+@@ -63,6 +63,7 @@ FIND_PACKAGE(CLucene QUIET)
+ FIND_PACKAGE(ZLIB QUIET)
  FIND_PACKAGE(PkgConfig QUIET)
  FIND_PACKAGE(Regex QUIET)
 +FIND_PACKAGE(Glib QUIET REQUIRED)
  
  ###########################################################################################
  # Based on user input and the results of the above tests, we may need to mux with the source
-@@ -228,12 +229,14 @@ IF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
+@@ -243,12 +244,14 @@ IF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
  	SET(SWORD_LINK_LIBRARIES ${SWORD_LINK_LIBRARIES} ${REGEX_LIBRARY})
  ENDIF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
  
@@ -182,7 +182,7 @@ index 0000000..69975c5
 +endmacro(libfind_library)
 +
 diff --git a/src/mgr/curlftpt.cpp b/src/mgr/curlftpt.cpp
-index 165c054..1157b95 100644
+index b287405..fd6198b 100644
 --- a/src/mgr/curlftpt.cpp
 +++ b/src/mgr/curlftpt.cpp
 @@ -29,6 +29,8 @@
@@ -204,7 +204,7 @@ index 165c054..1157b95 100644
  				return -1; /* failure, can't open file to write */
  		}
 diff --git a/src/mgr/curlhttpt.cpp b/src/mgr/curlhttpt.cpp
-index 2974fdc..36501d7 100644
+index b9219a0..74d3c86 100644
 --- a/src/mgr/curlhttpt.cpp
 +++ b/src/mgr/curlhttpt.cpp
 @@ -34,6 +34,8 @@
@@ -226,7 +226,7 @@ index 2974fdc..36501d7 100644
  				return -1; /* failure, can't open file to write */
  		}
 diff --git a/src/mgr/filemgr.cpp b/src/mgr/filemgr.cpp
-index fc4afd9..9ff12d8 100644
+index be4efcc..1c1a39e 100644
 --- a/src/mgr/filemgr.cpp
 +++ b/src/mgr/filemgr.cpp
 @@ -23,6 +23,8 @@
@@ -236,9 +236,9 @@ index fc4afd9..9ff12d8 100644
 +#include <glib.h>
 +#include <glib/gstdio.h>
  
+ #include <stdlib.h>
  #include <dirent.h>
- #include <fcntl.h>
-@@ -124,7 +126,7 @@ FileDesc::FileDesc(FileMgr *parent, const char *path, int mode, int perms, bool
+@@ -125,7 +127,7 @@ FileDesc::FileDesc(FileMgr *parent, const char *path, int mode, int perms, bool
  
  FileDesc::~FileDesc() {
  	if (fd > 0)
@@ -247,7 +247,7 @@ index fc4afd9..9ff12d8 100644
  		
  	if (path)
  		delete [] path;
-@@ -226,14 +228,23 @@ int FileMgr::sysOpen(FileDesc *file) {
+@@ -218,14 +220,23 @@ int FileMgr::sysOpen(FileDesc *file) {
  				file->next = files;
  				files = file;
  			}
@@ -274,7 +274,7 @@ index fc4afd9..9ff12d8 100644
  
  					if (file->fd >= 0)
  						break;
-@@ -276,7 +287,7 @@ signed char FileMgr::trunc(FileDesc *file) {
+@@ -268,7 +279,7 @@ signed char FileMgr::trunc(FileDesc *file) {
  		if (i == 9999)
  			return -2;
  
@@ -283,7 +283,7 @@ index fc4afd9..9ff12d8 100644
  		if (fd < 0)
  			return -3;
  	
-@@ -290,7 +301,7 @@ signed char FileMgr::trunc(FileDesc *file) {
+@@ -282,7 +293,7 @@ signed char FileMgr::trunc(FileDesc *file) {
  		if (size < 1) {
  			// zero out the file
  			::close(file->fd);
@@ -292,7 +292,7 @@ index fc4afd9..9ff12d8 100644
  			::close(file->fd);
  			file->fd = -77;	// force file open by filemgr
  			// copy tmp file back (dumb, but must preserve file permissions)
-@@ -328,7 +339,7 @@ signed char FileMgr::existsFile(const char *ipath, const char *ifileName)
+@@ -320,7 +331,7 @@ signed char FileMgr::existsFile(const char *ipath, const char *ifileName)
  		ch = path + strlen(path);
  		sprintf(ch, "/%s", ifileName);
  	}
@@ -301,7 +301,7 @@ index fc4afd9..9ff12d8 100644
  	delete [] path;
  	return retVal;
  }
-@@ -350,7 +361,7 @@ signed char FileMgr::existsDir(const char *ipath, const char *idirName)
+@@ -342,7 +353,7 @@ signed char FileMgr::existsDir(const char *ipath, const char *idirName)
  		ch = path + strlen(path);
  		sprintf(ch, "/%s", idirName);
  	}
@@ -310,7 +310,7 @@ index fc4afd9..9ff12d8 100644
  	delete [] path;
  	return retVal;
  }
-@@ -369,17 +380,13 @@ int FileMgr::createParent(const char *pName) {
+@@ -361,17 +372,13 @@ int FileMgr::createParent(const char *pName) {
  	}
  	buf[end] = 0;
  	if (strlen(buf)>0) {
@@ -331,7 +331,7 @@ index fc4afd9..9ff12d8 100644
  					);
  			}
  		}
-@@ -391,7 +398,7 @@ int FileMgr::createParent(const char *pName) {
+@@ -383,7 +390,7 @@ int FileMgr::createParent(const char *pName) {
  	
  
  int FileMgr::openFileReadOnly(const char *fName) {
@@ -340,7 +340,7 @@ index fc4afd9..9ff12d8 100644
  	return fd;
  }
  
-@@ -399,10 +406,10 @@ int FileMgr::openFileReadOnly(const char *fName) {
+@@ -391,10 +398,10 @@ int FileMgr::openFileReadOnly(const char *fName) {
  int FileMgr::createPathAndFile(const char *fName) {
  	int fd;
  	
@@ -353,7 +353,7 @@ index fc4afd9..9ff12d8 100644
  	}
  	return fd;
  }
-@@ -412,7 +419,7 @@ int FileMgr::copyFile(const char *sourceFile, const char *targetFile) {
+@@ -404,7 +411,7 @@ int FileMgr::copyFile(const char *sourceFile, const char *targetFile) {
  	int sfd, dfd, len;
  	char buf[4096];
  
@@ -362,7 +362,7 @@ index fc4afd9..9ff12d8 100644
  		return -1;
  	if ((dfd = createPathAndFile(targetFile)) < 1)
  		return -1;
-@@ -430,7 +437,7 @@ int FileMgr::copyFile(const char *sourceFile, const char *targetFile) {
+@@ -422,7 +429,7 @@ int FileMgr::copyFile(const char *sourceFile, const char *targetFile) {
  
  
  int FileMgr::removeFile(const char *fName) {
@@ -371,58 +371,59 @@ index fc4afd9..9ff12d8 100644
  }
  
  char FileMgr::getLine(FileDesc *fDesc, SWBuf &line) {
-@@ -507,14 +514,14 @@ char FileMgr::isDirectory(const char *path) {
+@@ -499,15 +506,15 @@ char FileMgr::isDirectory(const char *path) {
  
  
  int FileMgr::copyDir(const char *srcDir, const char *destDir) {
 -	DIR *dir;
 -	struct dirent *ent;
++	GDir *dir;
++	const gchar *ent;
+ 	int retVal = 0;
 -	if ((dir = opendir(srcDir))) {
 -		rewinddir(dir);
--		while ((ent = readdir(dir))) {
+-		while ((ent = readdir(dir)) && !retVal) {
 -			if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
 -				SWBuf srcPath  = (SWBuf)srcDir  + (SWBuf)"/" + ent->d_name;
 -				SWBuf destPath = (SWBuf)destDir + (SWBuf)"/" + ent->d_name;
-+	GDir *dir;
-+	const gchar *ent;
 +	if ((dir = g_dir_open(srcDir, 0, NULL))) {
-+	  g_dir_rewind(dir);
-+	  while ((ent = g_dir_read_name(dir))) {
++		g_dir_rewind(dir);
++		while ((ent = g_dir_read_name(dir)) && !retVal) {
 +			if ((strcmp(ent, ".")) && (strcmp(ent, ".."))) {
 +				SWBuf srcPath  = (SWBuf)srcDir  + (SWBuf)"/" + ent;
 +				SWBuf destPath = (SWBuf)destDir + (SWBuf)"/" + ent;
  				if (!isDirectory(srcPath.c_str())) {
- 					copyFile(srcPath.c_str(), destPath.c_str());
+ 					retVal = copyFile(srcPath.c_str(), destPath.c_str());
  				}
-@@ -523,20 +530,20 @@ int FileMgr::copyDir(const char *srcDir, const char *destDir) {
+@@ -516,20 +523,20 @@ int FileMgr::copyDir(const char *srcDir, const char *destDir) {
  				}
  			}
  		}
 -		closedir(dir);
 +		g_dir_close(dir);
  	}
- 	return 0;
+ 	return retVal;
  }
  
  
  int FileMgr::removeDir(const char *targetDir) {
 -	DIR *dir = opendir(targetDir);
 -	struct dirent *ent;
-+  GDir *dir = g_dir_open(targetDir, 0, NULL);
++	GDir *dir = g_dir_open(targetDir, 0, NULL);
 +	const gchar *ent;
  	if (dir) {
 -		rewinddir(dir);
 -		while ((ent = readdir(dir))) {
 -			if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
 -				SWBuf targetPath = (SWBuf)targetDir + (SWBuf)"/" + ent->d_name;
-+	  g_dir_rewind(dir);
-+	  while ((ent = g_dir_read_name(dir))) {
++		g_dir_rewind(dir);
++		while ((ent = g_dir_read_name(dir))) {
 +			if ((strcmp(ent, ".")) && (strcmp(ent, ".."))) {
 +				SWBuf targetPath = (SWBuf)targetDir + (SWBuf)"/" + ent;
  				if (!isDirectory(targetPath.c_str())) {
  					FileMgr::removeFile(targetPath.c_str());
  				}
-@@ -545,7 +552,7 @@ int FileMgr::removeDir(const char *targetDir) {
+@@ -538,7 +545,7 @@ int FileMgr::removeDir(const char *targetDir) {
  				}
  			}
  		}
@@ -431,8 +432,21 @@ index fc4afd9..9ff12d8 100644
  		FileMgr::removeFile(targetDir);
  /*
  		int status = FileMgr::removeFile(targetDir);
+@@ -578,10 +585,10 @@ long FileMgr::resourceConsumption() {
+ SWBuf FileMgr::getHomeDir() {
+ 
+ 	// figure out 'home' directory for app data
+-	SWBuf homeDir = getenv("HOME");
++	SWBuf homeDir = g_getenv("HOME");
+ 	if (!homeDir.length()) {
+ 		// silly windows
+-		homeDir = getenv("APPDATA");
++		homeDir = g_getenv("APPDATA");
+ 	}
+ 	if (homeDir.length()) {
+ 		if ((homeDir[homeDir.length()-1] != '\\') && (homeDir[homeDir.length()-1] != '/')) {
 diff --git a/src/mgr/installmgr.cpp b/src/mgr/installmgr.cpp
-index 20020ea..18122fb 100644
+index fe1a674..aa21e33 100644
 --- a/src/mgr/installmgr.cpp
 +++ b/src/mgr/installmgr.cpp
 @@ -31,6 +31,8 @@ extern "C" {
@@ -444,7 +458,7 @@ index 20020ea..18122fb 100644
  
  #include <swmgr.h>
  #include <swmodule.h>
-@@ -270,20 +272,19 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -274,20 +276,19 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
  		}
  		else {	//remove all files in DataPath directory
  
@@ -469,9 +483,9 @@ index 20020ea..18122fb 100644
 -						modFile += ent->d_name;
 +				  modFile += ent;
  						SWConfig *config = new SWConfig(modFile.c_str());
- 						if (config->Sections.find(modName) != config->Sections.end()) {
+ 						if (config->getSections().find(modName) != config->getSections().end()) {
  							delete config;
-@@ -291,8 +292,8 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -295,8 +296,8 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
  						}
  						else	delete config;
  					}
@@ -482,7 +496,7 @@ index 20020ea..18122fb 100644
  			}
  		}
  		return 0;
-@@ -401,8 +402,8 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -409,8 +410,8 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  	SWBuf buffer;
  	bool aborted = false;
  	bool cipher = false;
@@ -493,32 +507,32 @@ index 20020ea..18122fb 100644
  	SWBuf modFile;
  
  	SWLog::getSystemLog()->logDebug("***** InstallMgr::installModule\n");
-@@ -514,18 +515,18 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -522,18 +523,18 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  		}
  		if (!aborted) {
  			SWBuf confDir = sourceDir + "mods.d/";
 -			if ((dir = opendir(confDir.c_str()))) {	// find and copy .conf file
 -				rewinddir(dir);
--				while ((ent = readdir(dir))) {
+-				while ((ent = readdir(dir)) && !retVal) {
 -					if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
 +			if ((dir = g_dir_open(confDir.c_str(), 0, NULL))) {	// find and copy .conf file
 +				g_dir_rewind(dir);
-+				while ((ent = g_dir_read_name(dir))) {
++				while ((ent = g_dir_read_name(dir)) && !retVal) {
 +					if ((strcmp(ent, ".")) && (strcmp(ent, ".."))) {
  						modFile = confDir;
 -						modFile += ent->d_name;
 +						modFile += ent;
  						SWConfig *config = new SWConfig(modFile.c_str());
- 						if (config->Sections.find(modName) != config->Sections.end()) {
+ 						if (config->getSections().find(modName) != config->getSections().end()) {
  							SWBuf targetFile = destMgr->configPath; //"./mods.d/";
  							removeTrailingSlash(targetFile);
  							targetFile += "/";
 -							targetFile += ent->d_name;
 +							targetFile += ent;
- 							FileMgr::copyFile(modFile.c_str(), targetFile.c_str());
+ 							retVal = FileMgr::copyFile(modFile.c_str(), targetFile.c_str());
  							if (cipher) {
  								if (getCipherCode(modName, config)) {
-@@ -542,7 +543,7 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -550,7 +551,7 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  						delete config;
  					}
  				}
@@ -526,9 +540,9 @@ index 20020ea..18122fb 100644
 +				g_dir_close(dir);
  			}
  		}
- 		return (aborted) ? -1 : 0;
+ 		return (aborted) ? -9 : retVal;
 diff --git a/src/mgr/swmgr.cpp b/src/mgr/swmgr.cpp
-index fe84189..edc23f9 100644
+index a4413d0..fc9d465 100644
 --- a/src/mgr/swmgr.cpp
 +++ b/src/mgr/swmgr.cpp
 @@ -23,6 +23,8 @@
@@ -540,20 +554,7 @@ index fe84189..edc23f9 100644
  
  #include <sys/stat.h>
  #ifndef _MSC_VER
-@@ -297,10 +299,10 @@ void SWMgr::init() {
- SWBuf SWMgr::getHomeDir() {
- 
- 	// figure out 'home' directory for app data
--	SWBuf homeDir = getenv("HOME");
-+	SWBuf homeDir = g_getenv("HOME");
- 	if (!homeDir.length()) {
- 		// silly windows
--		homeDir = getenv("APPDATA");
-+		homeDir = g_getenv("APPDATA");
- 	}
- 	if (homeDir.length()) {
- 		if ((homeDir[homeDir.length()-1] != '\\') && (homeDir[homeDir.length()-1] != '/')) {
-@@ -483,7 +485,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -524,7 +526,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  			// check environment variable SWORD_PATH
  			SWLog::getSystemLog()->logDebug("Checking $SWORD_PATH...");
  
@@ -562,7 +563,7 @@ index fe84189..edc23f9 100644
  			if (envsworddir.length()) {
  				
  				SWLog::getSystemLog()->logDebug("found (%s).", envsworddir.c_str());
-@@ -614,14 +616,15 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -657,14 +659,15 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  
  	SWLog::getSystemLog()->logDebug("Checking $ALLUSERSPROFILE/Application Data/sword/...");
  
@@ -580,7 +581,7 @@ index fe84189..edc23f9 100644
  		SWLog::getSystemLog()->logDebug("Checking %s for mods.d...", path.c_str());
  		if (FileMgr::existsDir(path.c_str(), "mods.d")) {
  			SWLog::getSystemLog()->logDebug("found.");
-@@ -663,7 +666,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -706,7 +709,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  
  	if (homeDir.length()) {
  		path = homeDir;
@@ -589,7 +590,7 @@ index fe84189..edc23f9 100644
  		SWLog::getSystemLog()->logDebug("  Checking for %smods.conf...", path.c_str());
  		if (FileMgr::existsFile(path.c_str(), "mods.conf")) {
  			SWLog::getSystemLog()->logDebug("found.");
-@@ -700,29 +703,29 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -743,29 +746,29 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  
  void SWMgr::loadConfigDir(const char *ipath)
  {
@@ -627,8 +628,8 @@ index fe84189..edc23f9 100644
  		
  		if (!config) {	// if no .conf file exist yet, create a default
  			newmodfile = ipath;
-@@ -842,7 +845,7 @@ signed char SWMgr::Load() {
- 			SWBuf homeDir = getHomeDir();
+@@ -885,7 +888,7 @@ signed char SWMgr::load() {
+ 			SWBuf homeDir = FileMgr::getSystemFileMgr()->getHomeDir();
  			if (homeDir.length() && configType != 2) { // 2 = user only
  				SWBuf path = homeDir;
 -				path += ".sword/";
@@ -636,7 +637,7 @@ index fe84189..edc23f9 100644
  				augmentModules(path.c_str(), mgrModeMultiMod);
  				path = homeDir;
  				path += "sword/";
-@@ -1331,21 +1334,21 @@ void SWMgr::deleteModule(const char *modName) {
+@@ -1330,21 +1333,21 @@ void SWMgr::addStripFilters(SWModule *module, ConfigEntMap &section)
  
  void SWMgr::InstallScan(const char *dirname)
  {
@@ -665,7 +666,7 @@ index fe84189..edc23f9 100644
  
  					// mods.d
  					if (configType) {
-@@ -1354,7 +1357,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1353,7 +1356,7 @@ void SWMgr::InstallScan(const char *dirname)
  						targetName = configPath;
  						if ((configPath[strlen(configPath)-1] != '\\') && (configPath[strlen(configPath)-1] != '/'))
  							targetName += "/";
@@ -674,7 +675,7 @@ index fe84189..edc23f9 100644
  						conffd = FileMgr::getSystemFileMgr()->open(targetName.c_str(), FileMgr::WRONLY|FileMgr::CREAT, FileMgr::IREAD|FileMgr::IWRITE);
  					}
  
-@@ -1376,7 +1379,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1375,7 +1378,7 @@ void SWMgr::InstallScan(const char *dirname)
  			}
  			if (conffd)
  				FileMgr::getSystemFileMgr()->close(conffd);
@@ -684,7 +685,7 @@ index fe84189..edc23f9 100644
  	}
  }
 diff --git a/src/utilfuns/zlib/untgz.c b/src/utilfuns/zlib/untgz.c
-index a7b7164..9da6131 100644
+index 5c95a90..3dcda89 100644
 --- a/src/utilfuns/zlib/untgz.c
 +++ b/src/utilfuns/zlib/untgz.c
 @@ -5,6 +5,9 @@
