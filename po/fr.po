@@ -27,14 +27,15 @@ msgstr ""
 "Project-Id-Version: Xiphos 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-30 16:30+0100\n"
-"PO-Revision-Date: 2017-12-30 16:33+0100\n"
-"Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
-"Language-Team: <none>\n"
+"PO-Revision-Date: 2018-03-18 08:34+0100\n"
+"Last-Translator: L'Africain\n"
+"Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -182,7 +183,7 @@ msgstr "Voulez-vous enregistrer les modifications apportées au document"
 #: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
 #: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
-msgstr "avant de fermer?"
+msgstr "avant de fermer ?"
 
 #: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
 #: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
@@ -599,7 +600,7 @@ msgstr "Résultat de la requête"
 #: ../src/gnome2/export_dialog.c:325 ../ui/export-dialog.glade.h:4
 #: ../ui/export-dialog.gtkbuilder.h:5
 msgid "Please check copyright before exporting!"
-msgstr "Prière de vérifier le copyright avant l'export!"
+msgstr "Prière de vérifier le copyright avant l'export !"
 
 #: ../src/gnome2/find_dialog.c:183 ../src/gnome2/find_dialog.c:359
 #: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
@@ -645,7 +646,7 @@ msgstr "Police par défaut dans ce module"
 
 #: ../src/gnome2/gui.c:173
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRDUP »"
+msgstr "BUG ! Xiphos va s'arrêter sur une erreur « STRDUP »"
 
 #: ../src/gnome2/gui.c:174 ../src/gnome2/gui.c:204
 msgid "Please report this error to the Xiphos team with:"
@@ -654,7 +655,7 @@ msgstr ""
 
 #: ../src/gnome2/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
-msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRING »."
+msgstr "BUG ! Xiphos va s'arrêter sur une erreur « STRING »."
 
 #: ../src/gnome2/main_menu.c:743
 msgid "Open Session"
@@ -797,20 +798,20 @@ msgid ""
 "Live Chat, or (if no one is responsive in chat) send mail to our users' "
 "mailing list.\n"
 msgstr ""
-"<b>Bienvenue dans le Gestionnaire de modules!</b>\n"
+"<b>Bienvenue dans le Gestionnaire de modules !</b>\n"
 "\n"
 "C'est l'outil utilisé par Xiphos pour installer et mettre à jour les modules "
 "de textes bibliques, commentaires ou autres. Si vous ne l'avez pas encore "
 "utilisé, prenez quelques instants pour le découvrir.\n"
 "\n"
-"Les modules proviennent de diverses sources appelées <i>dépots</i>.\n"
+"Les modules proviennent de diverses sources appelées <i>dépôts</i>.\n"
 "\n"
-"<b>Dépots → Ajouter/Supprimer</b>: liste les dépots actuellement "
+"<b>Dépôts → Ajouter/Supprimer</b>: liste les dépôts actuellement "
 "répertoriés.\n"
 "\n"
-"<b>Dépots → Sélection</b>: permet de définir la provenance des modules, à "
+"<b>Dépôts → Sélection</b>: permet de définir la provenance des modules, à "
 "partir de quel dépôt Xiphos doit les rapatrier, ainsi que l'endroit où ils "
-"doivent être placés sur le système. Sélectionnez <i>Source des dépots</i> et "
+"doivent être placés sur le système. Sélectionnez <i>Source des dépôts</i> et "
 "<i>Dossier d'installation</i>, puis ensuite <b>Actualiser</b>.\n"
 "\n"
 "<b>Modules → Installer/Maj</b>: permet de sélectionner et d'installer des "
@@ -818,7 +819,6 @@ msgstr ""
 "\n"
 "<b>Modules → Maintenance</b>: sert à l'archivage et la création d'index.\n"
 "\n"
-"Pour plus d'informations à propos du gestionnaire de modules, se référer à "
 "la section 5 du manuel d'aide.\n"
 
 #: ../src/gnome2/mod_mgr.c:67
@@ -860,7 +860,7 @@ msgstr ""
 "Aucune Bible n'a été détectée. Pour démarrer, Xiphos a maintenant besoin "
 "d'au moins un texte biblique.\n"
 "Le <i>Gestionnaire de modules</i> a donc été ouvert pour vous permettre "
-"d'installer une ou plusieurs Bibles à partir d'un dépot local (cdrom, disque "
+"d'installer une ou plusieurs Bibles à partir d'un dépôt local (cdrom, disque "
 "flash), ou par téléchargement depuis le serveur de la Société Biblique "
 "Crosswire.\n"
 "Merci de se référer aux instructions suivantes, ainsi qu'à celles présentes "
@@ -871,11 +871,11 @@ msgstr ""
 "- Dans <b>Dépôts → Ajouter/Supprimer</b>, ajouter le nom du nouveau "
 "répertoire local où se trouvent les modules. (Répertoire contenant les "
 "dossiers nommés <i>mods.d</i> et <i>modules</i>)\n"
-"- Dans <b>Dépôts → Sélection</b>, sélectionner « Dépot local » puis le nom "
+"- Dans <b>Dépôts → Sélection</b>, sélectionner « Dépôt local » puis le nom "
 "du répertoire dans le menu déroulant.\n"
 "\n"
 "<u>Installation par téléchargement :</u>\n"
-"- Dans <b>Dépôts → Sélection</b>, sélectionner « Dépot distant » puis « "
+"- Dans <b>Dépôts → Sélection</b>, sélectionner « Dépôt distant » puis « "
 "Crosswire » dans le menu déroulant.\n"
 "- Cliquer sur <b>Actualiser</b> au bas de la fenêtre.\n"
 "\n"
@@ -1194,7 +1194,7 @@ msgstr "UID"
 
 #: ../src/gnome2/mod_mgr.c:1941
 msgid "Module Sources"
-msgstr "Dépots"
+msgstr "Dépôts"
 
 #: ../src/gnome2/mod_mgr.c:1944
 msgid "Add/Remove"
@@ -1223,7 +1223,7 @@ msgstr "Rafraîchir"
 
 #: ../src/gnome2/mod_mgr.c:2172
 msgid "Your module list is not up to date!"
-msgstr "La liste des modules n'est pas à jour!"
+msgstr "La liste des modules n'est pas à jour !"
 
 #. Zero Bibles is just not workable in Xiphos.
 #: ../src/gnome2/mod_mgr.c:2489
@@ -1250,8 +1250,8 @@ msgid ""
 "Beware: This cannot be undone."
 msgstr ""
 "%s remplace %s.\n"
-"Effacer %s?\n"
-"Attention: pas de retour en arrière possible"
+"Effacer %s ?\n"
+"Attention : pas de retour en arrière possible"
 
 #: ../src/gnome2/mod_mgr.c:2686
 msgid "No obsolete modules were found."
@@ -1451,15 +1451,15 @@ msgstr "Spécial"
 
 #: ../src/gnome2/preferences_dialog.c:2754 ../src/gnome2/search_dialog.c:519
 msgid "Clear List?"
-msgstr "Effacer la liste?"
+msgstr "Effacer la liste ?"
 
 #: ../src/gnome2/preferences_dialog.c:2755 ../src/gnome2/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
-msgstr "Êtes-vous certain d'effacer la liste des modules?"
+msgstr "Êtes-vous certain d'effacer la liste des modules ?"
 
 #: ../src/gnome2/preferences_dialog.c:2806 ../src/main/search_dialog.cc:658
 msgid "Remove Module?"
-msgstr "Enlever les modules?"
+msgstr "Enlever les modules ?"
 
 #: ../src/gnome2/preferences_dialog.c:2807 ../src/main/search_dialog.cc:659
 msgid "Are you sure you want to remove the selected module?"
@@ -1491,7 +1491,7 @@ msgstr "Le dernier module de la liste ne peut être supprimé"
 
 #: ../src/gnome2/search_dialog.c:715
 msgid "Delete list?"
-msgstr "Supprimer la liste?"
+msgstr "Supprimer la liste ?"
 
 #: ../src/gnome2/search_dialog.c:716
 msgid "Are you sure you want to delete:"
@@ -1551,7 +1551,7 @@ msgstr ""
 "\tLa phrase « est amour »\n"
 "amour*\n"
 "\tUn mot commençant par « amour »\n"
-"\t(amour ou amours ou amour-là ou etc...)\n"
+"\t(amour ou amours ou amour-là ou etc…)\n"
 "est AND amour\n"
 "\tLe mot « est » et le mot « amour »\n"
 "\t&amp;&amp; peuvent être utilisés à la place de AND\n"
@@ -1711,7 +1711,7 @@ msgstr "Haute"
 
 #: ../src/gnome2/sidebar.c:844
 msgid "Open module in editor?"
-msgstr "Ouvrir le module dans l'éditeur?"
+msgstr "Ouvrir le module dans l'éditeur ?"
 
 #: ../src/gnome2/sidebar.c:845
 msgid "If no, it will open for display only."
@@ -1897,7 +1897,7 @@ msgid ""
 "Device: "
 msgstr ""
 "\n"
-"Périphérique :"
+"Périphérique : "
 
 #: ../src/main/biblesync_glue.cc:626
 msgid ""
@@ -2210,8 +2210,8 @@ msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
 ">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
 msgstr ""
-"<b>Personnes:</b><br/>Personne 1<br/>Personne 2<br/>Personne 3<br/><br/"
-"><b>Assemblée:</b><br/>Participants<br/>Fonctionnement<br/>Missions<br/><br/"
+"<b>Personnes :</b><br/>Personne 1<br/>Personne 2<br/>Personne 3<br/><br/"
+"><b>Assemblée :</b><br/>Participants<br/>Fonctionnement<br/>Missions<br/><br/"
 "><br/>"
 
 #: ../src/main/prayerlists.cc:353
@@ -2310,11 +2310,11 @@ msgstr "Résultat de la requête %s : %s"
 
 #: ../src/main/search_dialog.cc:404
 msgid "Delete Range?"
-msgstr "Supprimer la plage?"
+msgstr "Supprimer la plage ?"
 
 #: ../src/main/search_dialog.cc:405
 msgid "Are you sure you want to delete this range?"
-msgstr "Êtes-vous certain de supprimer cette plage?"
+msgstr "Êtes-vous certain de supprimer cette plage ?"
 
 #: ../src/main/search_dialog.cc:618 ../src/main/search_dialog.cc:1021
 #: ../src/main/search_dialog.cc:1024 ../src/main/search_dialog.cc:1044
@@ -2356,7 +2356,7 @@ msgid ""
 "See the Module Manager, Maintenance pane."
 msgstr ""
 "\n"
-"Voir le Gestionnaire de modules, onglet Maintenance"
+"Voir le Gestionnaire de modules, onglet Maintenance."
 
 #: ../src/main/search_dialog.cc:1463
 msgid "Search finished"
@@ -2372,7 +2372,7 @@ msgstr "Il n'y a pas de module commentaire."
 
 #: ../src/main/settings.c:106
 msgid "$HOME is not set!"
-msgstr "$HOME n'est pas défini!"
+msgstr "$HOME n'est pas défini !"
 
 #: ../src/main/settings.c:120
 #, c-format
@@ -2395,7 +2395,7 @@ msgstr ""
 #: ../src/main/settings.c:190
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
-"Fichier de configuration vide -- pas de sauvegarde?!? Informations perdues!"
+"Fichier de configuration vide -- pas de sauvegarde ?!? Informations perdues !"
 
 #: ../src/main/settings.c:217
 msgid ""
@@ -2406,7 +2406,7 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
-"Aucune Bible n'a été installée!\n"
+"Aucune Bible n'a été installée !\n"
 "\n"
 "Xiphos ne peut fonctionner sans une Bible à présenter,\n"
 "et va maintenant se terminer."
@@ -2486,7 +2486,7 @@ msgid ""
 msgstr ""
 "Le module %s a les modules compagnons :\n"
 "%s.\n"
-"Voulez-vous les ouvrir également?%s"
+"Voulez-vous les ouvrir également ?%s"
 
 #: ../src/main/sword.cc:1123 ../src/main/sword.cc:1292
 msgid ""
@@ -2579,7 +2579,7 @@ msgstr "Romains 1:16"
 
 #: ../src/main/xml.c:107
 msgid "What is the Gospel?"
-msgstr "Qu'est-ce que l'Évangile?"
+msgstr "Qu'est-ce que l'Évangile ?"
 
 #: ../src/main/xml.c:108 ../src/main/xml.c:109
 msgid "1 Cor 15:1-4"
@@ -2737,7 +2737,7 @@ msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
-"La sauvegarde de la configuration a échouée! stat %d, taille %d\n"
+"La sauvegarde de la configuration a échouée ! stat %d, taille %d\n"
 "%s"
 
 #: ../src/main/xml.c:1553
@@ -2925,7 +2925,7 @@ msgstr "Version"
 
 #: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:7
 msgid ": "
-msgstr ": "
+msgstr " : "
 
 #: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:8
 msgid "Key"
@@ -3501,8 +3501,8 @@ msgid ""
 "Load and synchronize the standard set of known repositories, as maintained "
 "at crosswire.org, with your current remote sources."
 msgstr ""
-"Charge et synchronise l'ensemble type de dépots référencés, maintenu à "
-"crosswire.org, avec vos dépots actuels."
+"Charge et synchronise l'ensemble type de dépôts référencés, maintenu à "
+"crosswire.org, avec vos dépôts actuels."
 
 #: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
 msgid ""
@@ -3595,7 +3595,7 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:27
 msgid "Remove one of your local folders as an install source."
-msgstr "Supprime un répertoire local en tant que dépot."
+msgstr "Supprime un répertoire local en tant que dépôt."
 
 #: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:28
 msgid "Current Remote Sources"
@@ -3606,7 +3606,7 @@ msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
 msgstr ""
-"Ajoute un dépot d'installation à distance personnalisé. Il est nécessaire de "
+"Ajoute un dépôt d'installation à distance personnalisé. Il est nécessaire de "
 "connaître au préalable le nom de domaine et le répertoire de stockage."
 
 #: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:30
@@ -3652,7 +3652,7 @@ msgid ""
 msgstr ""
 "<b>Attention :</b> Si vous vivez dans un pays où des faits de persécution "
 "ont été recensés et que vous ne voulez pas prendre le risque d'être repéré, "
-"vous NE devez PAS sélectionner une source de dépot distant!"
+"vous NE devez PAS sélectionner une source de dépôt distant !"
 
 #: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:40
 msgid "Local Install Folder"
@@ -3805,7 +3805,7 @@ msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
 msgstr ""
-"Sélectionne les choix de police pour tout module dans une langue donnée; "
+"Sélectionne les choix de police pour tout module dans une langue donnée ; "
 "toujours remplaçable par un choix spécifique sur un module particulier"
 
 #: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
@@ -5091,7 +5091,7 @@ msgstr "Révisions de Xiphos"
 #: ../ui/xi-menus.glade.h:54
 msgid "Visit the releases web page. Is your Xiphos current?"
 msgstr ""
-"Visiter la page Web des révisions de Xiphos. Votre version est-elle à jour?"
+"Visiter la page Web des révisions de Xiphos. Votre version est-elle à jour ?"
 
 #: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
 msgid "About _Xiphos"
@@ -5689,7 +5689,7 @@ msgstr "Texte;Bible;Étude;"
 #~ msgstr "Importer les signets de Bibletime"
 
 #~ msgid "Cipher Key?"
-#~ msgstr "Clé de déverrouillage?"
+#~ msgstr "Clé de déverrouillage ?"
 
 #~ msgid "Change parallel 1"
 #~ msgstr "Changer parallèle 1"
@@ -5743,7 +5743,7 @@ msgstr "Texte;Bible;Étude;"
 #~ "Attention : Prudence dans les pays de persécution.\n"
 #~ "\n"
 #~ "Autorisez-vous Xiphos à lancer le gestionnaire de modules pour "
-#~ "télécharger un texte biblique?"
+#~ "télécharger un texte biblique ?"
 
 #~ msgid "<b>Parallel View</b>"
 #~ msgstr "<b>Vue parallèle</b>"
@@ -5924,7 +5924,7 @@ msgstr "Texte;Bible;Étude;"
 #~ msgstr "%s non trouvé"
 
 #~ msgid "has been modified. Do you wish to save it?"
-#~ msgstr "a été modifié. Voulez-vous l'enregistrer?"
+#~ msgstr "a été modifié. Voulez-vous l'enregistrer ?"
 
 #~ msgid "not loaded"
 #~ msgstr "non chargé"
