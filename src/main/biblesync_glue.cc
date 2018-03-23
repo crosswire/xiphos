@@ -182,8 +182,11 @@ biblesync_navigate(char cmd, string speaker_uuid,
 							   (gchar *)bible.c_str(), (gchar *)ref.c_str());
 
 			if (!is_module) {
-				message = BSP + _("Unknown module ") + bible + _(".\nNavigated indirectly using verse list.");
-				gui_generic_warning((char *)message.c_str());
+				if (!settings.bs_warned_bad_mod) {
+					message = BSP + _("Unknown module ") + bible + _(".\nNavigated indirectly using verse list.");
+					gui_generic_warning((char *)message.c_str());
+					settings.bs_warned_bad_mod = TRUE;
+				}
 			}
 		}
 
