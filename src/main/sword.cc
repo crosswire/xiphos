@@ -1234,6 +1234,8 @@ void main_display_dictionary(const char *mod_name,
 void main_display_bible(const char *mod_name,
 			const char *key)
 {
+	gchar *bs_key = g_strdup(key);	// avoid tab data corruption problem.
+
 	/* keeps us out of a crash causing loop */
 	extern guint scroll_adj_signal;
 	extern GtkAdjustment *adjustment;
@@ -1372,7 +1374,8 @@ void main_display_bible(const char *mod_name,
 			gui_keep_parallel_dialog_in_sync();
 	}
 
-	biblesync_prep_and_xmit(mod_name, key);
+	biblesync_prep_and_xmit(mod_name, bs_key);
+	g_free(bs_key);
 
 	if (adjustment)
 		g_signal_handler_unblock(adjustment, scroll_adj_signal);
