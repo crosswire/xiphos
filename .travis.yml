@@ -10,14 +10,14 @@ script:
 
 env:
   # Current version of Fedora
-  - TEST=build_gtk3 TEST_ARGS="fedora 26"
   - TEST=build_gtk3 TEST_ARGS="fedora 27"
   - TEST=build_gtk3 TEST_ARGS="fedora rawhide"
   # Current EPEL/CentOS/RHEL version
   - TEST=build_gtk3 TEST_ARGS="centos 7"
+  # None of the Deb/Ubuntu versions support Sword 1.8+
   # Current version of Ubuntu
-  - TEST=build_gtk3_webkiteditor TEST_ARGS="ubuntu 17.04"
+  #- TEST=build_gtk3_webkiteditor TEST_ARGS="ubuntu 17.10"
   # LTS Ubuntu releases
-  - TEST=build_gtk3_webkiteditor TEST_ARGS="ubuntu 16.04"
+  #- TEST=build_gtk3_webkiteditor TEST_ARGS="ubuntu 16.04"
   # Debian sid
-  - TEST=build_gtk3_webkiteditor TEST_ARGS="debian sid"
+  #- TEST=build_gtk3_webkiteditor TEST_ARGS="debian sid"

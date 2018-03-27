@@ -376,7 +376,7 @@ def configure(conf):
     env.append_value('ALL_LIBS', 'GTKUPRINT')
 
     conf.check_cfg(package='sword',
-                   args='"sword >= 1.7.3" --cflags --libs',
+                   args='"sword >= 1.8.0" --cflags --libs',
                    uselib_store='SWORD',
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
