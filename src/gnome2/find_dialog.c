@@ -163,12 +163,7 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 	GtkWidget *hbox66;
 	GtkWidget *dialog_action_area29;
 	GtkWidget *hbuttonbox8;
-#if !GTK_CHECK_VERSION(3, 10, 0)
-	GtkWidget *alignment;
-#endif
-	GtkWidget *hbox5;
 	GtkWidget *image;
-	GtkWidget *label12;
 	//gchar title[80];
 
 	//sprintf(title, "%s - %s", settings.program_title, _("Find"));
@@ -244,43 +239,23 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 #if GTK_CHECK_VERSION(3, 10, 0)
 	    gtk_button_new_from_icon_name("edit-find",
 					  GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_label(GTK_BUTTON(dialog->find), _("Find"));
 #else
 	    gtk_button_new_from_stock(GTK_STOCK_FIND); //gtk_button_new_with_label(_("Find"));
 #endif
 	gtk_widget_show(dialog->find);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->find);
 
-	dialog->next = gtk_button_new();
+#if GTK_CHECK_VERSION(3, 10, 0)
+	dialog->next = gtk_button_new_from_icon_name("edit-find", GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_label(GTK_BUTTON(dialog->next), _("Find Next"));
+#else
+	dialog->next = gtk_button_new_with_label(_("Find Next"));
+	image = gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON(dialog->next), image);
+#endif
 	gtk_widget_show(dialog->next);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->next);
-//GTK_WIDGET_SET_FLAGS(dialog->next, GTK_CAN_DEFAULT);
-
-#if !GTK_CHECK_VERSION(3, 10, 0)
-	alignment = gtk_alignment_new(0.5, 0.5, 0, 0);
-	gtk_widget_show(alignment);
-	gtk_container_add(GTK_CONTAINER(dialog->next), alignment);
-
-#endif
-	UI_HBOX(hbox5, FALSE, 2);
-	gtk_widget_show(hbox5);
-#if !GTK_CHECK_VERSION(3, 10, 0)
-	gtk_container_add(GTK_CONTAINER(alignment), hbox5);
-#endif
-
-	image =
-#if GTK_CHECK_VERSION(3, 10, 0)
-	    gtk_image_new_from_icon_name("edit-find",
-					 GTK_ICON_SIZE_BUTTON);
-#else
-	    gtk_image_new_from_stock(GTK_STOCK_FIND, GTK_ICON_SIZE_BUTTON);
-#endif
-	gtk_widget_show(image);
-	gtk_box_pack_start(GTK_BOX(hbox5), image, FALSE, FALSE, 0);
-
-	label12 = gtk_label_new_with_mnemonic(_("Find Next"));
-	gtk_widget_show(label12);
-	gtk_box_pack_start(GTK_BOX(hbox5), label12, FALSE, FALSE, 0);
-	gtk_label_set_justify(GTK_LABEL(label12), GTK_JUSTIFY_LEFT);
 
 	dialog->close =
 #if GTK_CHECK_VERSION(3, 10, 0)
