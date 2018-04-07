@@ -265,6 +265,7 @@ static void _export_chapter(EXPORT_DATA data, int type)
 	for (key->setVerse(1);
 	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !mod->popError();
 	     (*mod)++) {
+		myverse = key->getVerse();
 
 		if (data.verse_num)
 			g_string_append_printf(str,
@@ -281,7 +282,6 @@ static void _export_chapter(EXPORT_DATA data, int type)
 			g_string_append_printf(str, " %s%s",
 					       (char *)mod->stripText(),
 					       (settings.versestyle ? "\n" : ""));
-		++myverse;
 	}
 	if (type == HTML)
 		g_string_append_printf(str, "%s", "</body></html>");
