@@ -9,5 +9,4 @@ bld.install_files('${PACKAGE_DATA_DIR}', """
 languages
 editor_studypad.xml
 editor_note.xml
-editor_link_dialog.xml
 """)
