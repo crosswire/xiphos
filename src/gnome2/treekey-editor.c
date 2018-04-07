@@ -380,10 +380,15 @@ static gboolean on_button_release(GtkWidget *widget,
 		path = gtk_tree_model_get_path(model, &selected);
 		depth = gtk_tree_path_get_depth(path);
 
-		if (depth > 1)
+		if (depth > 1) {
+#if GTK_CHECK_VERSION(3, 22, 0)
+			gtk_menu_popup_at_widget(GTK_MENU(menu), widget, 0, 0, NULL);
+#else
 			gtk_menu_popup(GTK_MENU(menu),
 				       NULL, NULL, NULL, NULL,
 				       0, gtk_get_current_event_time());
+#endif
+		}
 
 		gtk_tree_path_free(path);
 		return FALSE;
