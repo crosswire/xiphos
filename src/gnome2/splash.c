@@ -634,7 +634,7 @@ void gui_splash_init(void)
 	if (!settings.showsplash)
 		return;
 
-	builder_file = gui_general_user_file("xi-splash.ui", FALSE);
+	builder_file = gui_general_user_file("xi-splash" UI_SUFFIX, FALSE);
 	g_return_if_fail((builder_file != NULL));
 
 	builder = gtk_builder_new();
