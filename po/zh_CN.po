@@ -193,7 +193,7 @@ msgstr "关于 Sword 模块"
 #: ../src/gnome2/about_modules.c:223 ../src/gnome2/about_trans.c:168
 #: ../src/gnome2/find_dialog.c:288
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: ../src/gnome2/about_modules.c:415
 #, fuzzy
