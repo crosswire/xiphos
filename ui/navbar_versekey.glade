@@ -171,14 +171,6 @@
                                 <property name="position">0</property>
                               </packing>
                             </child>
-                            <child>
-                              <widget class="GtkImage" id="image13">
-                                <property name="pixbuf">arrow_up_box.png</property>
-                              </widget>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
                           </widget>
                         </child>
                       </widget>
@@ -202,14 +194,6 @@
                               </widget>
                               <packing>
                                 <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkImage" id="image15">
-                                <property name="pixbuf">arrow_down_box.png</property>
-                              </widget>
-                              <packing>
-                                <property name="position">1</property>
                               </packing>
                             </child>
                           </widget>
@@ -299,14 +283,6 @@
                                 <property name="position">0</property>
                               </packing>
                             </child>
-                            <child>
-                              <widget class="GtkImage" id="image9">
-                                <property name="pixbuf">arrow_up_box.png</property>
-                              </widget>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
                           </widget>
                         </child>
                       </widget>
@@ -330,14 +306,6 @@
                               </widget>
                               <packing>
                                 <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkImage" id="image11">
-                                <property name="pixbuf">arrow_down_box.png</property>
-                              </widget>
-                              <packing>
-                                <property name="position">1</property>
                               </packing>
                             </child>
                           </widget>
@@ -424,14 +392,6 @@
                                 <property name="position">0</property>
                               </packing>
                             </child>
-                            <child>
-                              <widget class="GtkImage" id="image7">
-                                <property name="pixbuf">arrow_up_box.png</property>
-                              </widget>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
                           </widget>
                         </child>
                       </widget>
@@ -458,14 +418,6 @@
                               </widget>
                               <packing>
                                 <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkImage" id="image16">
-                                <property name="pixbuf">arrow_down_box.png</property>
-                              </widget>
-                              <packing>
-                                <property name="position">1</property>
                               </packing>
                             </child>
                           </widget>
