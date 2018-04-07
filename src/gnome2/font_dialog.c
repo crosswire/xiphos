@@ -205,7 +205,7 @@ static void dialog_destroy(GObject *object, gpointer data)
 
 static void font_set(GtkFontButton *button, gchar *arg1, gpointer data)
 {
-	new_gdk_font = gtk_font_button_get_font_name(button);
+	new_gdk_font = gtk_font_chooser_get_font(GTK_FONT_CHOOSER(button));
 	XI_message(("%s", new_gdk_font));
 	new_font_set = 1;
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_no_font), FALSE);
@@ -486,10 +486,8 @@ void gui_set_module_font(gchar *mod_name)
 	gtk_label_set_text(GTK_LABEL(label_mod), mf->mod_name);
 	gtk_label_set_text(GTK_LABEL(label_current_font), mf->old_font);
 	if (mf->old_font) {
-		gchar *str = g_strdup_printf("%s, 12", mf->old_font);
-		gtk_font_button_set_font_name((GtkFontButton *)
-					      font_button,
-					      str);
+		gchar *str = g_strdup_printf("%s 12", mf->old_font);
+		gtk_font_chooser_set_font(GTK_FONT_CHOOSER(font_button), str);
 		g_free(str);
 	}
 	if (mf->old_font_size) {
