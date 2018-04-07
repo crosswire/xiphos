@@ -517,162 +517,6 @@ static gboolean on_button_verse_menu_book_scroll_event(GtkWidget *widget,
 
 /******************************************************************************
  * Name
- *   on_up_enter_notify_event
- *
- * Synopsis
- *   #include "gui/navbar_versekey.h"
- *
- *   gboolean on_up_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
- *                                       gpointer  user_data)
- *
- * Description
- *   mimic a button by hiding/showing arrow pixmaps when mouse enters spin
- *   buttons
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_up_enter_notify_event(GtkWidget *widget,
-					 GdkEventCrossing *event,
-					 gpointer user_data)
-{
-	switch (GPOINTER_TO_INT(user_data)) {
-	case BOOK_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_book_up);
-		gtk_widget_show(navbar_versekey.arrow_book_up_box);
-		break;
-	case CHAPTER_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_chapter_up);
-		gtk_widget_show(navbar_versekey.arrow_chapter_up_box);
-		break;
-	case VERSE_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_verse_up);
-		gtk_widget_show(navbar_versekey.arrow_verse_up_box);
-		break;
-	}
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
- *   on_down_enter_notify_event
- *
- * Synopsis
- *   #include "gui/navbar_versekey.h"
- *
- *   gboolean on_down_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
-                                        gpointer user_data)
- *
- * Description
- *   mimic a button by hiding/showing arrow pixmaps when mouse enters spin
- *   buttons
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_down_enter_notify_event(GtkWidget *widget,
-					   GdkEventCrossing *event,
-					   gpointer user_data)
-{
-	switch (GPOINTER_TO_INT(user_data)) {
-	case BOOK_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_book_down);
-		gtk_widget_show(navbar_versekey.arrow_book_down_box);
-		break;
-	case CHAPTER_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_chapter_down);
-		gtk_widget_show(navbar_versekey.arrow_chapter_down_box);
-		break;
-	case VERSE_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_verse_down);
-		gtk_widget_show(navbar_versekey.arrow_verse_down_box);
-		break;
-	}
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
- *   on_up_leave_notify_event
- *
- * Synopsis
- *   #include "gui/navbar_versekey.h"
- *
- *   gboolean on_up_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
-                                        gpointer user_data)
- *
- * Description
- *   mimic a button by hiding/showing arrow pixmaps when mouse leaves spin
- *   buttons
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_up_leave_notify_event(GtkWidget *widget,
-					 GdkEventCrossing *event,
-					 gpointer user_data)
-{
-	switch (GPOINTER_TO_INT(user_data)) {
-	case BOOK_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_book_up_box);
-		gtk_widget_show(navbar_versekey.arrow_book_up);
-		break;
-	case CHAPTER_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_chapter_up_box);
-		gtk_widget_show(navbar_versekey.arrow_chapter_up);
-		break;
-	case VERSE_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_verse_up_box);
-		gtk_widget_show(navbar_versekey.arrow_verse_up);
-		break;
-	}
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
- *   on_down_leave_notify_event
- *
- * Synopsis
- *   #include "gui/navbar_versekey.h"
- *
- *   gboolean on_down_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
-                                        gpointer user_data)
- *
- * Description
- *   mimic a button by hiding/showing arrow pixmaps when mouse leaves spin
- *   buttons
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_down_leave_notify_event(GtkWidget *widget,
-					   GdkEventCrossing *event,
-					   gpointer user_data)
-{
-	switch (GPOINTER_TO_INT(user_data)) {
-	case BOOK_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_book_down_box);
-		gtk_widget_show(navbar_versekey.arrow_book_down);
-		break;
-	case CHAPTER_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_chapter_down_box);
-		gtk_widget_show(navbar_versekey.arrow_chapter_down);
-		break;
-	case VERSE_BUTTON:
-		gtk_widget_hide(navbar_versekey.arrow_verse_down_box);
-		gtk_widget_show(navbar_versekey.arrow_verse_down);
-		break;
-	}
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
  *   on_up_eventbox_button_release_event
  *
  * Synopsis
@@ -830,62 +674,6 @@ static void _connect_signals(NAVBAR_VERSEKEY navbar)
 			 "button_release_event",
 			 G_CALLBACK(on_down_eventbox_button_release_event),
 			 GINT_TO_POINTER(VERSE_BUTTON));
-	/*     */
-	g_signal_connect((gpointer)navbar.button_book_up,
-			 "enter_notify_event",
-			 G_CALLBACK(on_up_enter_notify_event),
-			 GINT_TO_POINTER(BOOK_BUTTON));
-	g_signal_connect((gpointer)navbar.button_book_up,
-			 "leave_notify_event",
-			 G_CALLBACK(on_up_leave_notify_event),
-			 GINT_TO_POINTER(BOOK_BUTTON));
-
-	g_signal_connect((gpointer)navbar.button_book_down,
-			 "enter_notify_event",
-			 G_CALLBACK(on_down_enter_notify_event),
-			 GINT_TO_POINTER(BOOK_BUTTON));
-	g_signal_connect((gpointer)navbar.button_book_down,
-			 "leave_notify_event",
-			 G_CALLBACK(on_down_leave_notify_event),
-			 GINT_TO_POINTER(BOOK_BUTTON));
-
-	/*    */
-	g_signal_connect((gpointer)navbar.button_chapter_up,
-			 "enter_notify_event",
-			 G_CALLBACK(on_up_enter_notify_event),
-			 GINT_TO_POINTER(CHAPTER_BUTTON));
-	g_signal_connect((gpointer)navbar.button_chapter_up,
-			 "leave_notify_event",
-			 G_CALLBACK(on_up_leave_notify_event),
-			 GINT_TO_POINTER(CHAPTER_BUTTON));
-
-	g_signal_connect((gpointer)navbar.button_chapter_down,
-			 "enter_notify_event",
-			 G_CALLBACK(on_down_enter_notify_event),
-			 GINT_TO_POINTER(CHAPTER_BUTTON));
-	g_signal_connect((gpointer)navbar.button_chapter_down,
-			 "leave_notify_event",
-			 G_CALLBACK(on_down_leave_notify_event),
-			 GINT_TO_POINTER(CHAPTER_BUTTON));
-
-	/*    */
-	g_signal_connect((gpointer)navbar.button_verse_up,
-			 "enter_notify_event",
-			 G_CALLBACK(on_up_enter_notify_event),
-			 GINT_TO_POINTER(VERSE_BUTTON));
-	g_signal_connect((gpointer)navbar.button_verse_up,
-			 "leave_notify_event",
-			 G_CALLBACK(on_up_leave_notify_event),
-			 GINT_TO_POINTER(VERSE_BUTTON));
-
-	g_signal_connect((gpointer)navbar.button_verse_down,
-			 "enter_notify_event",
-			 G_CALLBACK(on_down_enter_notify_event),
-			 GINT_TO_POINTER(VERSE_BUTTON));
-	g_signal_connect((gpointer)navbar.button_verse_down,
-			 "leave_notify_event",
-			 G_CALLBACK(on_down_leave_notify_event),
-			 GINT_TO_POINTER(VERSE_BUTTON));
 
 	g_signal_connect((gpointer)navbar.button_history_back,
 			 "clicked",
@@ -983,19 +771,11 @@ GtkWidget *gui_navbar_versekey_new(void)
 	navbar_versekey.button_verse_up = UI_GET_ITEM(gxml, "eventbox7");
 	navbar_versekey.button_verse_down = UI_GET_ITEM(gxml, "eventbox1");
 
-	navbar_versekey.arrow_book_up_box = UI_GET_ITEM(gxml, "image13");
 	navbar_versekey.arrow_book_up = UI_GET_ITEM(gxml, "image12");
-	navbar_versekey.arrow_book_down_box = UI_GET_ITEM(gxml, "image15");
 	navbar_versekey.arrow_book_down = UI_GET_ITEM(gxml, "image14");
-	navbar_versekey.arrow_chapter_up_box = UI_GET_ITEM(gxml, "image9");
 	navbar_versekey.arrow_chapter_up = UI_GET_ITEM(gxml, "image8");
-	navbar_versekey.arrow_chapter_down_box =
-	    UI_GET_ITEM(gxml, "image11");
 	navbar_versekey.arrow_chapter_down = UI_GET_ITEM(gxml, "image10");
-	navbar_versekey.arrow_verse_up_box = UI_GET_ITEM(gxml, "image7");
 	navbar_versekey.arrow_verse_up = UI_GET_ITEM(gxml, "image6");
-	navbar_versekey.arrow_verse_down_box =
-	    UI_GET_ITEM(gxml, "image16");
 	navbar_versekey.arrow_verse_down = UI_GET_ITEM(gxml, "image5");
 
 	navbar_versekey.button_book_menu =
