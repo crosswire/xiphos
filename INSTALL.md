@@ -27,7 +27,7 @@ packages installed:
 
 Or for ubuntu, both GTK3 and GTK2 versions, install:
 
-    $ sudo apt-get install cpp intltool libdbus-glib-1-dev libwebkitgtk-3.0-dev libxml2-dev libgsf-1-dev libgconfmm-2.6-dev libsword-dev uuid-dev gnome-doc-utils rarian-compat libwebkitgtk-dev libglade2-dev
+    $ sudo apt-get install cpp intltool libdbus-glib-1-dev libwebkitgtk-3.0-dev libxml2-dev libgsf-1-dev libsword-dev uuid-dev gnome-doc-utils rarian-compat libwebkitgtk-dev libglade2-dev libgconf2-dev libbiblesync-dev
 
 Next we need to configure everything:
 
