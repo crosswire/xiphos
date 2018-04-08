@@ -1174,6 +1174,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	char oldAutoNorm = key->isAutoNormalize();
 	key->setAutoNormalize(0);
 
+	swbuf.append("<i>");
 	for (int i = 0; i < 2; ++i) {
 		// Get chapter 0 iff we're in chapter 1.
 		if ((i == 0) && (chapter != 1))
@@ -1205,6 +1206,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 	}
+	swbuf.append("</i>");
 
 	key->setAutoNormalize(oldAutoNorm);
 
