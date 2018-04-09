@@ -1218,6 +1218,10 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		// <div>...</div> instances, nor will <div> try to nest.
 
 		GString *divBuf = g_string_new(imodule.renderText().c_str());
+		if (divBuf->len == 0) {
+			g_string_free(divBuf, TRUE);
+			continue;
+		}
 		gchar *strBegin = divBuf->str, *strEnd, *strChase;	// analyzer indices.
 
 		while ((strBegin < (divBuf->str + divBuf->len)) &&
