@@ -93,8 +93,9 @@ const gchar *no_content =
 <style type=\"text/css\"><!-- \
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right; } \
-body {background-color:%s;color:%s;} \
-a:link{color:%s} %s%s -->\
+body { background-color:%s; color:%s; } \
+.introMaterial { font-style: italic; } \
+a:link{ color:%s } %s %s -->\
 </style>%s</head><body>"
 // 6 interpolable strings: bg/txt/link colors, block, renderHeader, external css.
 
@@ -1174,7 +1175,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	char oldAutoNorm = key->isAutoNormalize();
 	key->setAutoNormalize(0);
 
-	swbuf.append("<i>");
+	swbuf.append("<div class=\"introMaterial\">");
 	for (int i = 0; i < 2; ++i) {
 		// Get chapter 0 iff we're in chapter 1.
 		if ((i == 0) && (chapter != 1))
@@ -1198,15 +1199,48 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 				       cache_flags);
 		buf = g_strdup_printf("%s<br />", cVerse.GetText());
 #else
+# if 0
 		buf = g_strdup_printf("%s<br />",
 				      (strongs_or_morph
 					   ? block_render(imodule.renderText().c_str())
 					   : imodule.renderText().c_str()));
+# else
+		// gosh this is gross.
+		// hunt down self-closing <div ... /> and stomp them with spaces.
+		// this is disgustingly special-case, caused by self-closing <div>
+		// being treated by webkit as unclosed, in turn causing
+		// .introMaterial modifier to take effect over the whole chapter.
+		// this is a temporary, stopgap measure until Sword stops generating
+		// self-closing <div>. then the previous simplicity just above the #else
+		// will be resumed. we are not properly parsing this; we are depending
+		// on the observed artifact that self-closing <div> occurs as a rather
+		// neat, compact unit, and notably that there won't be any ordinary
+		// <div>...</div> instances, nor will <div> try to nest.
+
+		GString *divBuf = g_string_new(imodule.renderText().c_str());
+		gchar *strBegin = divBuf->str, *strEnd, *strChase;	// analyzer indices.
+
+		while ((strBegin < (divBuf->str + divBuf->len)) &&
+		       (strBegin = strstr(strBegin, "<div "))) {	// open, then...
+			if (strEnd = strstr(strBegin, "/>")) {		// ...self-close. augh!
+				strEnd += 2;				// 1st char after.
+				for (strChase = strBegin; strChase < strEnd; ++strChase)
+					*strChase = ' ';		// stomp stomp stomp.
+				strBegin = strEnd;
+			}
+			else
+				strBegin += 5;	// skip: next candidate.
+		}
+
+		buf = g_strdup_printf("%s<br />",
+				      (strongs_or_morph ? block_render(divBuf->str) : divBuf->str));
+		g_string_free(divBuf, TRUE);
+# endif
 #endif /* !0 */
 		swbuf.append(buf);
 		g_free(buf);
 	}
-	swbuf.append("</i>");
+	swbuf.append("</div>");
 
 	key->setAutoNormalize(oldAutoNorm);
 
