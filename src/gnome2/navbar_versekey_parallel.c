@@ -169,7 +169,7 @@ static gboolean select_book_button_press_callback(GtkWidget *widget,
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
 					     TRUE);
 #if GTK_CHECK_VERSION(3, 22, 0)					     
-		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, 0, 0, NULL);
+		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, NULL);
 #else
 		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			       menu_position_under, widget, event->button,
@@ -221,7 +221,7 @@ static gboolean select_chapter_button_press_callback(GtkWidget *widget,
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
 					     TRUE);
 #if GTK_CHECK_VERSION(3, 22, 0)
-		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, 0, 0, NULL);
+		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, NULL);
 #else
 		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			       menu_position_under, widget, event->button,
@@ -268,7 +268,7 @@ static gboolean select_verse_button_press_callback(GtkWidget *widget,
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
 					     TRUE);
 #if GTK_CHECK_VERSION(3, 22, 0)
-		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, 0, 0, NULL);
+		gtk_menu_popup_at_widget(GTK_MENU(menu), widget, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, NULL);
 #else
 		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			       menu_position_under, widget, event->button,
