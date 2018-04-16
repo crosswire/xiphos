@@ -1374,7 +1374,9 @@ void main_display_bible(const char *mod_name,
 			gui_keep_parallel_dialog_in_sync();
 	}
 
-	biblesync_prep_and_xmit(mod_name, bs_key);
+	// multicast now, iff user has not asked for keyboard-only xmit.
+	if (!settings.bs_keyboard)
+		biblesync_prep_and_xmit(mod_name, bs_key);
 	g_free(bs_key);
 
 	if (adjustment)

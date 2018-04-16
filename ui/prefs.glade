@@ -986,11 +986,19 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="labeln2">
+                          <widget class="GtkCheckButton" id="checkbutton_BSP_keyboard">
+                            <property name="label" translatable="yes">_Keyboard only</property>
                             <property name="visible">True</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes"> </property>
-                            <property name="use_markup">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">When checked, do not transmit every time Xiphos navigates; instead, transmit only using keyboard shortcut (Ctrl-Shift-Alt-N).</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP keyboard button</atkproperty>
+                            </accessibility>
                           </widget>
                           <packing>
                             <property name="expand">True</property>

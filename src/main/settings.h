@@ -129,17 +129,18 @@ struct _settings
 	    addhistoryitem;
 
 	int
-	    bs_mode,	 // [0..3] for radio button select
+	    bs_mode,         // [0..3] for radio button select
 			     // 0=disable; 1=personal; 2=speaker; 3=audience.
 	    bs_privacy,      // in personal mode, whether private (ttl 0)
 	    bs_navdirect,    // or via verse list (false).
-	    bs_debug,	// show pkt traces.
+	    bs_debug,        // show pkt traces.
 	    bs_presence,     // show presence announcements.
 	    bs_mismatch,     // show mismatch packets.
 	    bs_receiving,    // lock: don't re-xmit what we recv.
 	    bs_listen_set,   // 0 = some, 1 = all, 2 = none.
 	    bs_group_tab,
-	    bs_warned_bad_mod; // user told once about others' bad modnames.
+	    bs_warned_bad_mod,// user told once about others' bad modnames.
+	    bs_keyboard;     // do not xmit every nav; xmit only via keyboard shortcut
 	char *bs_passphrase; // session exclusion/isolation.
 
 	/* gbs */

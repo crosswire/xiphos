@@ -248,6 +248,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	settings.bs_mismatch = FALSE;
 	settings.bs_group_tab = TRUE;
 	settings.bs_warned_bad_mod = FALSE;
+	settings.bs_keyboard = FALSE;
 	settings.bs_receiving = FALSE;
 	settings.bs_listen_set = 0; // selective
 	settings.bs_passphrase = g_strdup("BibleSync");
