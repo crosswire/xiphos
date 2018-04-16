@@ -165,7 +165,7 @@
                   <object class="GtkImage" id="image12">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">zoom-out</property>
+                    <property name="icon_name">pan-up-symbolic</property>
                   </object>
                 </child>
               </object>
@@ -184,7 +184,7 @@
                   <object class="GtkImage" id="image14">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">zoom-in</property>
+                    <property name="icon_name">pan-down-symbolic</property>
                   </object>
                 </child>
               </object>
@@ -270,7 +270,7 @@
                   <object class="GtkImage" id="image8">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">zoom-out</property>
+                    <property name="icon_name">pan-up-symbolic</property>
                   </object>
                 </child>
               </object>
@@ -289,7 +289,7 @@
                   <object class="GtkImage" id="image10">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">zoom-in</property>
+                    <property name="icon_name">pan-down-symbolic</property>
                   </object>
                 </child>
               </object>
@@ -375,7 +375,7 @@
                   <object class="GtkImage" id="image6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">zoom-out</property>
+                    <property name="icon_name">pan-up-symbolic</property>
                   </object>
                 </child>
               </object>
@@ -394,7 +394,7 @@
                   <object class="GtkImage" id="image5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">zoom-in</property>
+                    <property name="icon_name">pan-down-symbolic</property>
                   </object>
                 </child>
               </object>
