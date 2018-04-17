@@ -951,6 +951,9 @@ on_radiobutton_biblesync_mode(GtkToggleButton *togglebutton,
 						     (settings.bs_mode == 3));
 		}
 
+		gtk_widget_set_sensitive(check_button.bs_keyboard,
+					 ((settings.bs_mode == 1) || (settings.bs_mode == 2)));
+
 		if (biblesync_personal()) {
 			gtk_widget_set_sensitive(check_button.bs_privacy, TRUE);
 			on_checkbutton_biblesync_toggled(GTK_TOGGLE_BUTTON(check_button.bs_privacy),
@@ -2221,6 +2224,8 @@ static void setup_check_buttons(void)
 				     settings.bs_privacy);
 	gtk_widget_set_sensitive(check_button.bs_privacy,
 				 biblesync_personal());
+	gtk_widget_set_sensitive(check_button.bs_keyboard,
+				 ((settings.bs_mode == 1) || (settings.bs_mode == 2)));
 
 	/* mode */
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radio_button.bs_mode_off),
