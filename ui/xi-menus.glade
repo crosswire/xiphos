@@ -390,16 +390,6 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkMenuItem" id="attach_detach_sidebar">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Attach/Detach Sidebar</property>
-		      <property name="use_underline">True</property>
-		      <property name="tooltip" translatable="yes">Operate the sidebar as a separate window</property>
-		      <signal name="activate" handler="on_attach_detach_sidebar_activate" last_modification_time="Sat, 07 Mar 2009 00:36:34 GMT"/>
-		    </widget>
-		  </child>
-
-		  <child>
 		    <widget class="GtkMenuItem" id="show_hide_sidebar">
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Show/Hide Attached Sidebar</property>

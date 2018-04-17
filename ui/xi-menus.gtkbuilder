@@ -254,15 +254,6 @@
               </object>
             </child>
             <child>
-              <object class="GtkMenuItem" id="attach_detach_sidebar">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Attach/Detach Sidebar</property>
-                <property name="use_underline">True</property>
-                <signal name="activate" handler="on_attach_detach_sidebar_activate" swapped="no"/>
-              </object>
-            </child>
-            <child>
               <object class="GtkMenuItem" id="show_hide_sidebar">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
