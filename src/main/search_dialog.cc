@@ -862,8 +862,10 @@ void main_selection_finds_list_changed(GtkTreeSelection *
 	path_str = gtk_tree_path_to_string(path);
 	XI_message(("\npath: %s\ntext: %s", path_str, text));
 	tmp = g_list_nth(list_of_finds, atoi(path_str));
-	tmp = (GList *)tmp->data;
-	add_module_finds(tmp);
+	if (tmp) {
+		tmp = (GList *)tmp->data;
+		add_module_finds(tmp);
+	}
 
 	if (text)
 		g_free(text);
