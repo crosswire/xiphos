@@ -3,6 +3,78 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.1.0
+19 Apr 2017
+
+There has been much bugfixing and a number of features and enhancements.
+Internal compatibility updates were made for the new Sword 1.8 release,
+notably providing some new av11n schemes.  Several flaws in Advanced
+Search were corrected.  Ongoing changes to stay current with our display
+toolkit were made.  Export output has gained headers showing what search
+was executed on what module, and an export verse counting error was fixed.
+Pre-book and -chapter material is visually offset from main text.  (For
+examples, see module ESV2011 at every chapter 1.)  Due to the availability
+of the new Android/iOS Sword app Bishop, which supports BibleSync, Xiphos'
+use of BibleSync has been given some attention for this release: fixed one
+bug; tightened up how a warning is used; added optional on-demand-only
+keyboard-driven nav sync xmit as an enhancement, so that Xiphos need not
+xmit every time the user navigates.
+
+On Linux, when run under Wayland instead of Xorg, some mild rendering flaws
+are seen.  Wayland is new, and working under it has provided some surprises.
+Please help us work toward correcting these by submitting bug reports when
+appropriate.
+
+Issues addressed:
+- #753 Unexpected Search Results
+- #783 Add support for ancillary configuration files to unlock modules from STEP Bible
+- #809 Using meson to build xiphos
+- #823 Flatpak available on Flathub
+- #826 Module Manager problems in Xiphos 4.0.7 (win32) during attempts to install Update module
+- #828 #873 find dialog has an unknown button.
+- #829 UI problem in Windows edition of Xiphos 4.0.6a (doubled arrows)
+- #830 Add header lines to adv.search export
+- #831 Module Manager problems in 4.0.7 (Ubuntu Linux)
+- #834 libwebkitgtk-3.0-0 which is deprecated
+- #836 Replace lucene with soundex
+- #837 settings.xml is in *nix EOL format on windows
+- #838 Modules - About - Copy
+- #843 Xiphos hates superscripts
+- #845 show pre-chapter/-book material with italics
+- #846 can't handle OT quote display variant
+- #847 Compilation failed on Ubuntu 16.04
+- #848 Xiphos doesn't use non-break space
+- #850 Lack of space in the "about" module window
+- #851 corrected use of verse number in chapter export
+- #853 unexpected file list at the previewer pane
+- #854 UI cut off on left side
+- #855 Xiphos crashes at first start (with workaround)
+- #857 Show the text of all the verses of a xref
+- #858 Detached sidebar empty
+- #859 windows 10
+- #861 Need help compiling 4.0.7
+- #862 Please update your translation tools
+- #864 Cannot compile through AUR
+- #865 Windows: Splash screen stuck, program unresponsive
+- #869 Advanced search crashes if using custom list for second/third/etc. time
+- #870 Advanced search, exact phrase fails due to notes
+- #871 Update dependencies
+- #872 Bible showing weird characters
+- #874 use gtkbox to replace gtk{v,h}box for xi-splash.ui
+- #875 use gtkgrid to replace gtktable in edit_link_dialog.xml
+- #876 #860 fixed gtk_font_button_get(set)_font_name deprecated
+- #877 remove repeated arrow display
+- #878 Xiphos website needs updating
+- #881 #882 Wayland use under Gnome 3.26 or above leads to crash on Navbar click
+- #887 Add keyboard-only BibleSync navigation
+- #888 update biblesync glue for biblesync 1.2.0
+- biblesync: avoid versekey data corruption by using a copy -- orig. is destroyed.
+- biblesync: tell user exactly once that others are xmitting unknown bible modnames.
+- translation updates
+- compatibility update for sword 1.8
+- added gtk version checks and fixed numerous gtk deprecations.
+________________________________________________________________
+
 Release 4.0.7
 24 Sep 2017
 
