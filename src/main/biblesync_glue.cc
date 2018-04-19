@@ -812,8 +812,7 @@ void biblesync_transmit_verse_list(char *modname, char *vlist)
 	// see comment below in biblesync_prep_and_xmit() on abbreviation use.
 	const char *abbreviation = main_get_abbreviation(modname);
 
-	biblesync->Transmit(BSP_SYNC,
-			    (abbreviation
+	biblesync->Transmit((abbreviation
 				 ? (string)abbreviation
 				 : (string)modname),
 			    (string)vlist);
@@ -889,8 +888,7 @@ void biblesync_prep_and_xmit(const char *mod_name, const char *key)
 		// interoperability with non-Sword apps requires that
 		// we attempt to be locally friendly in name use.
 
-		biblesync->Transmit(BSP_SYNC,
-				    (string)(abbreviation
+		biblesync->Transmit((string)(abbreviation
 						 ? abbreviation
 						 : mod_name),
 				    (string)osis_key,

@@ -389,7 +389,7 @@ def configure(conf):
     env.append_value('ALL_LIBS', 'ICUI18N')
 
     conf.check_cfg(package='biblesync',
-                   args='"biblesync >= 1.1.2" --cflags --libs',
+                   args='"biblesync >= 1.2.0" --cflags --libs',
                    uselib_store='BIBLESYNC',
                    errmsg='fail',
                    mandatory=True)
