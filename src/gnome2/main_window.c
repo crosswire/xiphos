@@ -631,6 +631,32 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
 						      0);
 		}
+		else if (state == (GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_SHIFT_MASK)) {
+			// BSP chat
+			if (settings.bs_mode == 0)
+				gui_generic_warning(_("BibleSync is not active."));
+			else {
+				GS_DIALOG *info = gui_new_dialog();
+#if GTK_CHECK_VERSION(3, 10, 0)
+				info->stock_icon = g_strdup("dialog-question");
+#else
+				info->stock_icon = g_strdup(GTK_STOCK_DIALOG_QUESTION);
+#endif
+				info->label_top = g_strdup(_("BibleSync Chat"));
+				info->text1 = g_strdup(_("[say this]"));
+				info->label1 = _("Comment:");
+				info->ok = TRUE;
+				info->cancel = TRUE;
+
+				gint test = gui_gs_dialog(info);
+				if (test == GS_OK)
+					biblesync_chat(info->text1);
+
+				g_free(info->label_top);
+				g_free(info->text1);
+				g_free(info);
+			}
+		}
 		break;
 
 	case XK_d:

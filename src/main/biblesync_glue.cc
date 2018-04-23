@@ -81,7 +81,7 @@ biblesync_navigate(char cmd, string speaker_uuid,
 	const char *real_name = NULL;
 
 	// parameter overload usage.
-	string &presence = alt;
+	string &presence = alt, &chat = alt;
 	string &user = bible, &ipaddr = ref, &app = group, &device = domain;
 
 	// lockout: prevent re-xmit of what we're processing.
@@ -260,6 +260,12 @@ biblesync_navigate(char cmd, string speaker_uuid,
 		speaker_display_update = true;
 		break;
 
+	// chat message
+	case 'C':
+		XI_message(("chat: key [%s]", speaker_uuid.c_str()));
+		gui_generic_warning((char *)chat.c_str());
+		break;
+
 	default:
 		message = _("ERROR: unknown BibleSync indicator: ")
 			+ cmd
@@ -283,6 +289,25 @@ biblesync_navigate(char cmd, string speaker_uuid,
 
 	// unlock.
 	settings.bs_receiving = FALSE;
+}
+
+/******************************************************************************
+ * Name
+ *  biblesync_chat
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   void biblesync_chat(const char *message)
+ *
+ * Description
+ *   C-accessible function to send a chat message.
+ *
+ * Return value
+ *   void
+ */
+void biblesync_chat(const char *message)
+{
+	biblesync->Chat(message);
 }
 
 /******************************************************************************
