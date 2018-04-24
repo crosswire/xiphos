@@ -27,6 +27,8 @@
 
 #include "main/configs.h"
 
+#include "biblesync/biblesync-version.hh"
+
 #ifdef __cplusplus
 
 #include <map>
@@ -71,7 +73,9 @@ void biblesync_privacy(gboolean privacy);
 void biblesync_prep_and_xmit(const char *mod_name,
 			     const char *key);
 void biblesync_set_clear_all_listen(gboolean listen);
+#if BIBLESYNC_VERSION_NUM >= 2000000000
 void biblesync_chat(const char *message);
+#endif
 
 #ifdef __cplusplus
 }

@@ -33,6 +33,8 @@
 #include "main/url.hh"
 #include "main/biblesync_glue.h"
 
+#include "biblesync/biblesync-version.hh"
+
 #include "gui/xiphos.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
@@ -631,6 +633,7 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
 						      0);
 		}
+#if BIBLESYNC_VERSION_NUM >= 2000000000
 		else if (state == (GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_SHIFT_MASK)) {
 			// BSP chat
 			if (settings.bs_mode == 0)
@@ -657,6 +660,7 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 				g_free(info);
 			}
 		}
+#endif /* biblesync >= 2.0.0 */
 		break;
 
 	case XK_d:
