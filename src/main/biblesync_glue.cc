@@ -267,6 +267,10 @@ biblesync_navigate(char cmd, string speaker_uuid,
 	// chat message
 	case 'C':
 		XI_message(("chat: key [%s]", speaker_uuid.c_str()));
+		if (settings.bs_debug) {
+			message = _("Chat packet:\n\n") + dump;
+			gui_generic_warning((char *)message.c_str());
+		}
 		gui_generic_warning((char *)chat.c_str());
 		break;
 #endif
