@@ -274,6 +274,32 @@ on_about_the_sword_project_activate(GtkMenuItem *menuitem,
 
 /******************************************************************************
  * Name
+ *  on_about_biblesync_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_about_bibelsync_activate(GtkMenuItem * menuitem,
+ *				      gpointer user_data)
+ *
+ * Description
+ *   display - BibleSync - about information
+ *
+ * Return value
+ *   void
+ */
+G_MODULE_EXPORT void
+on_about_biblesync_activate(GtkMenuItem *menuitem,
+			    gpointer user_data)
+{
+	GtkWidget *dlg;
+
+	dlg = gui_create_about_biblesync();
+	gtk_widget_show(dlg);
+}
+
+/******************************************************************************
+ * Name
  *  on_about_translation_activate
  *
  * Synopsis

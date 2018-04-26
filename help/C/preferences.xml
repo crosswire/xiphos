@@ -110,9 +110,9 @@
 		<para>
 		BibleSync is a shared navigation protocol using LAN multicast.  It is useful for a single person when running Bible programs on
 		multiple machines or devices, all of which you wish to navigate through the Bible together, or for a group working closely together,
-		such as translators.  Also, it has a "lecture" mode, where a speaker's Bible program induces the audience's programs to follow along.
-		The difference in the modes regards who transmits and who receives navigation.  In Personal mode, BibleSync navigation is both
-		transmitted and received; as Speaker, it transmits only; as Audience, it receives only.
+		such as a bible study or a group of translators.  Also, it has a "lecture" mode, where a speaker's Bible program induces the
+		audience's programs to follow along.  The difference in the modes regards who transmits and who receives navigation.  In Personal
+		mode, BibleSync navigation is both transmitted and received; as Speaker, it transmits only; as Audience, it receives only.
 		</para>
 		<para>
 		To enable BibleSync, select a mode from the radio buttons.  Also, choose whether to accept navigation directly, so that Xiphos moves
@@ -136,9 +136,12 @@
 		<application>Xiphos</application>, receipt of multi-references always induces indirect verse list navigation.
 		</para>
 		<para>
+		As of Biblesync 2.0.0, a simple chat facility is available, accessed using <guibutton>Ctrl-Alt-Shift-C</guibutton>.
+		</para>
+		<para>
 		<application>Xiphos</application> is the first Bible program with a BibleSync implementation; as such, its utility may be limited for
-		now.  But a number of other programs' authors and support organizations have indicated their intention to support BibleSync as well,
-		including Laridian, theWord, BibleAnalyzer, and Accordance, as well as other Sword Project applications.
+		now.  Another Sword Project application, Bishop (for Android and iOS), also has gained support for BibleSync.  Watch for other
+		applications (not all being Sword applications) to provide support.
 		</para>
                 </sect3>
 	</sect2>

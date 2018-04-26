@@ -889,8 +889,14 @@
 			</listitem>
 			<listitem>
 				<para>
-					<guibutton>Ctrl-Alt-Shift-N</guibutton> causes BibleSync to navigate your current main window point
-					transiently as a one-shot event.  BibleSync must be transmit-ready, that is, in Personal or Speaker mode.
+					<guibutton>Ctrl-Alt-Shift-N</guibutton> causes BibleSync to send your current point
+					as a one-shot event.  BibleSync must be transmit-ready, that is, in Personal or
+					Speaker mode. Use this when you have set BibleSync for "keyboard only" in Preferences.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Ctrl-Alt-Shift-C</guibutton> provides for sending chat messages to others.
 				</para>
 			</listitem>
 		</itemizedlist>

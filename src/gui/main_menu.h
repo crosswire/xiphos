@@ -45,6 +45,8 @@ void on_report_bug_activate(GtkMenuItem *menuitem,
 			    gpointer user_data);
 void on_about_the_sword_project_activate(GtkMenuItem *menuitem,
 					 gpointer user_data);
+void on_about_biblesync_activate(GtkMenuItem *menuitem,
+				 gpointer user_data);
 void on_about_translation_activate(GtkMenuItem *menuitem,
 				   gpointer user_data);
 void on_daily_devotion_activate(GtkMenuItem *menuitem,

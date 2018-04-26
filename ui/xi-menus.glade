@@ -575,6 +575,27 @@
 		  </child>
 
 		  <child>
+		    <widget class="GtkImageMenuItem" id="about_biblesync">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">About _BibleSync</property>
+		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Learn about BibleSync, the shared navigation protocol</property>
+		      <signal name="activate" handler="on_about_biblesync_activate" last_modification_time="Fri, 06 Mar 2009 19:29:06 GMT"/>
+
+		      <child internal-child="image">
+			<widget class="GtkImage" id="image1260">
+			  <property name="visible">True</property>
+			  <property name="pixbuf">biblesync_icon-16.png</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
 		    <widget class="GtkImageMenuItem" id="view_releases">
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_View Xiphos Releases</property>

@@ -365,6 +365,16 @@
               </object>
             </child>
             <child>
+              <object class="GtkImageMenuItem" id="about_biblesync">
+                <property name="label" translatable="yes">About _BibleSync</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_underline">True</property>
+                <property name="use_stock">True</property>
+                <signal name="activate" handler="on_about_biblesync_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
               <object class="GtkImageMenuItem" id="view_releases">
                 <property name="label" translatable="yes">_View Xiphos Releases</property>
                 <property name="visible">True</property>

@@ -31,6 +31,8 @@
 #include "main/settings.h"
 #include "main/sword.h"
 
+#include "biblesync/biblesync-version.hh"
+
 /******************************************************************************
  * Name
  *   on_dialog_response
@@ -96,6 +98,63 @@ Books can be downloaded from the SWORD Project.");
 
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(about1), "http://www.crosswire.org/");
 	gtk_about_dialog_set_website_label(GTK_ABOUT_DIALOG(about1), _("The SWORD Project"));
+
+	gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(about1), about1_logo_pixbuf);
+
+	set_window_icon(GTK_WINDOW(about1));
+
+	return about1;
+}
+
+/******************************************************************************
+ * Name
+ *   gui_create_about_biblesync
+ *
+ * Synopsis
+ *   #include "gui/about_sword.h"
+ *
+ *   void gui_create_about_biblesync(void);
+ *
+ * Description
+ *   Create BibleSync about dialog and return pointer on it.
+ *
+ * Return value
+ *   GtkWidget *
+ */
+
+GtkWidget *gui_create_about_biblesync(void)
+{
+	GdkPixbuf *about1_logo_pixbuf;
+	GtkWidget *about1;
+	gchar *about =
+	    _("BibleSync is a network protocol providing the ability to share \
+your navigation within your Bible study program with cooperating programs \
+on the same local network.\n\n\
+Enable it from Preferences:\n\
+In personal mode, to share within a small group;\n\
+or as either speaker or audience in a formal lecture setting.\n\n\
+There are options for how BibleSync behaves in Xiphos:\n\
+- Whether to follow others' navigation directly or indirectly.\n\
+- Whether to send your navigation every time or only via keyboard.\n\
+- To select speakers to whom Xiphos should listen.\n\n\
+A simple chat capability provides brief messages to be shared as well.\n\n\
+See the manual for details.\n\
+(Preferences -> BibleSync Settings and Interface -> Keyboard Shortcuts.)");
+
+	about1_logo_pixbuf = pixbuf_finder("biblesync-v1-50.png", 0, NULL);
+
+	about1 = gtk_about_dialog_new();
+	g_signal_connect(about1, "response",
+			 G_CALLBACK(on_dialog_response), NULL);
+	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(about1),
+					  "BibleSync Protocol");
+	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(about1), BIBLESYNC_VERSION_STR);
+	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(about1), about);
+
+	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(about1),
+				     "https://github.com/karlkleinpaste/biblesync/tree/master/man");
+	gtk_about_dialog_set_website_label(GTK_ABOUT_DIALOG(about1),
+					   _("BibleSync technical details"));
 
 	gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(about1), about1_logo_pixbuf);
 
