@@ -271,7 +271,12 @@ biblesync_navigate(char cmd, string speaker_uuid,
 			message = _("Chat packet:\n\n") + dump;
 			gui_generic_warning((char *)message.c_str());
 		}
-		gui_generic_warning((char *)chat.c_str());
+		gui_generic_warning((char *)((string)"BibleSync\n"
+					     + user
+					     + " @ "
+					     + ipaddr
+					     + _(" says:\n\n")
+					     + chat).c_str());
 		break;
 #endif
 

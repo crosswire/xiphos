@@ -128,14 +128,14 @@ GtkWidget *gui_create_about_biblesync(void)
 	GtkWidget *about1;
 	gchar *about =
 	    _("BibleSync is a network protocol providing the ability to share \
-your navigation within your Bible study program with cooperating programs \
-on the same local network.\n\n\
-Enable it from Preferences:\n\
-In personal mode, to share within a small group;\n\
+navigation within your Bible study program with cooperating programs \
+on the local network.\n\n\
+Enable BibleSync from Preferences:\n\
+in personal mode, to share within a small group;\n\
 or as either speaker or audience in a formal lecture setting.\n\n\
 There are options for how BibleSync behaves in Xiphos:\n\
-- Whether to follow others' navigation directly or indirectly.\n\
-- Whether to send your navigation every time or only via keyboard.\n\
+- To follow others' navigation directly or indirectly.\n\
+- To send your navigation every time or only via keyboard.\n\
 - To select speakers to whom Xiphos should listen.\n\n\
 A simple chat capability provides brief messages to be shared as well.\n\n\
 See the manual for details.\n\
