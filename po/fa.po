@@ -449,8 +449,8 @@ msgid "Xiphos development"
 msgstr "بسط و گسترش زیفوس"
 
 #: ../src/gnome2/about_xiphos.c:129
-msgid "Copyright © 2000-2017 Xiphos Development Team"
-msgstr "حق چاپ برای تیم گسترش زیفوس محفوظ می‏باشد 2000-2017"
+msgid "Copyright © 2000-2018 Xiphos Development Team"
+msgstr "حق چاپ برای تیم گسترش زیفوس محفوظ می‏باشد 2000-2018"
 
 #: ../src/gnome2/about_xiphos.c:131
 msgid ""

@@ -443,8 +443,8 @@ msgid "Xiphos development"
 msgstr "SIte de développement de Xiphos"
 
 #: ../src/gnome2/about_xiphos.c:129
-msgid "Copyright © 2000-2017 Xiphos Development Team"
-msgstr "Copyright © 2000-2017 Équipe de développement Xiphos"
+msgid "Copyright © 2000-2018 Xiphos Development Team"
+msgstr "Copyright © 2000-2018 Équipe de développement Xiphos"
 
 #: ../src/gnome2/about_xiphos.c:131
 msgid ""
