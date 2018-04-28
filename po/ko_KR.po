@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-30 16:30+0100\n"
+"POT-Creation-Date: 2018-04-27 23:35-0400\n"
 "PO-Revision-Date: 2015-07-15 20:56+0900\n"
 "Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
 "Language-Team: Seong-ho Cho <shcho@gnome.org>\n"
@@ -44,14 +44,14 @@ msgstr "열기"
 
 #: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
 #: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
-#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
+#: ../src/gnome2/main_menu.c:773 ../ui/bookmarks.gtkbuilder.h:5
 #: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
 #: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
 msgstr "취소(_C)"
 
 #: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
-#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:748
+#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:774
 #, fuzzy
 msgid "_Open"
 msgstr "열기"
@@ -65,6 +65,11 @@ msgstr "다른 이름으로 저장"
 #: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "제목 없는 문서"
+
+#: ../src/editor/slib-editor.c:494
+#, fuzzy
+msgid "_Close"
+msgstr "닫기"
 
 #: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
 msgid "Are you sure you want to delete the note for"
@@ -162,7 +167,7 @@ msgid "Save"
 msgstr "저장"
 
 #: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
-#: ../ui/editor_link_dialog.xml.h:1
+#: ../ui/editor_link_dialog.gtkbuilder.h:1
 msgid "Insert Link"
 msgstr "링크 삽입"
 
@@ -204,7 +209,7 @@ msgstr "sword 모듈 정보"
 
 #. Don't use an icon with GTK3
 #: ../src/gnome2/about_modules.c:223 ../src/gnome2/about_trans.c:168
-#: ../src/gnome2/find_dialog.c:288
+#: ../src/gnome2/find_dialog.c:263
 msgid "Close"
 msgstr "닫기"
 
@@ -257,12 +262,12 @@ msgid "Bible"
 msgstr "성서"
 
 #: ../src/gnome2/about_modules.c:452 ../src/gnome2/search_sidebar.c:295
-#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 msgid "Commentary"
 msgstr "해설"
 
-#: ../src/gnome2/about_modules.c:455 ../ui/prefs.glade.h:140
-#: ../ui/prefs.gtkbuilder.h:140
+#: ../src/gnome2/about_modules.c:455 ../ui/prefs.glade.h:143
+#: ../ui/prefs.gtkbuilder.h:143
 msgid "Dictionary"
 msgstr "사전"
 
@@ -374,7 +379,7 @@ msgstr "<b>배포 라이선스:</b>"
 msgid "<b>Promotional:</b> "
 msgstr "<b>홍보문:</b>"
 
-#: ../src/gnome2/about_sword.c:79
+#: ../src/gnome2/about_sword.c:81
 msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package "
 "for research and study of God and His Word. The SWORD Project framework "
@@ -393,9 +398,34 @@ msgstr ""
 "\n"
 "서적은 SWORD 프로젝트에서 다운로드할 수 있습니다."
 
-#: ../src/gnome2/about_sword.c:98
+#: ../src/gnome2/about_sword.c:100
 msgid "The SWORD Project"
 msgstr "SWORD 프로젝트"
+
+#: ../src/gnome2/about_sword.c:130
+msgid ""
+"BibleSync is a network protocol providing the ability to share navigation "
+"within your Bible study program with cooperating programs on the local "
+"network.\n"
+"\n"
+"Enable BibleSync from Preferences:\n"
+"in personal mode, to share within a small group;\n"
+"or as either speaker or audience in a formal lecture setting.\n"
+"\n"
+"There are options for how BibleSync behaves in Xiphos:\n"
+"- To follow others' navigation directly or indirectly.\n"
+"- To send your navigation every time or only via keyboard.\n"
+"- To select speakers to whom Xiphos should listen.\n"
+"\n"
+"A simple chat capability provides brief messages to be shared as well.\n"
+"\n"
+"See the manual for details.\n"
+"(Preferences -> BibleSync Settings and Interface -> Keyboard Shortcuts.)"
+msgstr ""
+
+#: ../src/gnome2/about_sword.c:157
+msgid "BibleSync technical details"
+msgstr ""
 
 #: ../src/gnome2/about_trans.c:82
 msgid ""
@@ -587,45 +617,46 @@ msgstr "검색 결과"
 msgid "Please check copyright before exporting!"
 msgstr "내보내기 전에 저작권을 확인하십시오!"
 
-#: ../src/gnome2/find_dialog.c:183 ../src/gnome2/find_dialog.c:359
-#: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
+#: ../src/gnome2/find_dialog.c:178 ../src/gnome2/find_dialog.c:242
+#: ../src/gnome2/find_dialog.c:334 ../ui/gtk2_webedit.ui.h:18
+#: ../ui/gtk_webedit.ui.h:18
 msgid "Find"
 msgstr "찾기"
 
-#: ../src/gnome2/find_dialog.c:202
+#: ../src/gnome2/find_dialog.c:197
 msgid "Enter Word or Phrase"
 msgstr "단어 또는 어구를 입력하십시오"
 
-#: ../src/gnome2/find_dialog.c:217
+#: ../src/gnome2/find_dialog.c:212
 msgid "Search backwards"
 msgstr "후방 검색"
 
-#: ../src/gnome2/find_dialog.c:280
+#: ../src/gnome2/find_dialog.c:251 ../src/gnome2/find_dialog.c:253
 msgid "Find Next"
 msgstr "다음 겁색"
 
-#: ../src/gnome2/font_dialog.c:294
+#: ../src/gnome2/font_dialog.c:298
 msgid "Set Module Font"
 msgstr "모듈 글꼴 설정"
 
-#: ../src/gnome2/font_dialog.c:328
+#: ../src/gnome2/font_dialog.c:332
 msgid "Change font for"
 msgstr "다음에 대한 글꼴 바꾸기"
 
-#: ../src/gnome2/font_dialog.c:332 ../ui/editor_link_dialog.xml.h:3
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.gtkbuilder.h:4
 msgid "Module"
 msgstr "모듈"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:340
 msgid "Current font: "
 msgstr "현재 글꼴: "
 
-#: ../src/gnome2/font_dialog.c:377 ../src/gnome2/font_dialog.c:393
+#: ../src/gnome2/font_dialog.c:381 ../src/gnome2/font_dialog.c:397
 #: ../ui/prefs.gtkbuilder.h:3
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:396
+#: ../src/gnome2/font_dialog.c:400
 msgid "Use the default font for this module"
 msgstr "이 모듈의 기본 글꼴로 사용"
 
@@ -641,52 +672,72 @@ msgstr "다음 내용을 첨부하여 xiphos 팀에게 오류를 보고하십시
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "버그네요?! \"STRING\" 오류 때문에 xiphos가 깨진 것 같습니다."
 
-#: ../src/gnome2/main_menu.c:743
+#: ../src/gnome2/main_menu.c:769
 #, fuzzy
 msgid "Open Session"
 msgstr "세션 열기(_O)"
 
-#: ../src/gnome2/main_window.c:587
+#: ../src/gnome2/main_window.c:589
 #, c-format
 msgid "Module has no support for %s."
 msgstr "모듈은 %s을(를) 지원하지 않습니다."
 
-#: ../src/gnome2/main_window.c:660
+#: ../src/gnome2/main_window.c:640
+#, fuzzy
+msgid "BibleSync is not active."
+msgstr "BibleSync에서 전송 준비를 하지 않았습니다."
+
+# 주: 고유명사이므로 번역해선 안됨. xiphos도 음역하지 않았으므로 용어 번역 일관성을 따르기 위해 번역하지 마십시오.
+#: ../src/gnome2/main_window.c:648
+#, fuzzy
+msgid "BibleSync Chat"
+msgstr "BibleSync"
+
+#: ../src/gnome2/main_window.c:649
+msgid "[say this]"
+msgstr ""
+
+#: ../src/gnome2/main_window.c:650
+#, fuzzy
+msgid "Comment:"
+msgstr "해설"
+
+#: ../src/gnome2/main_window.c:690
 msgid "Xiphos: No windows."
 msgstr "xiphos: 창이 없습니다."
 
-#: ../src/gnome2/main_window.c:716
+#: ../src/gnome2/main_window.c:746
 msgid "BibleSync: Current navigation sent."
 msgstr "BibleSync: 현재 내비게이션을 보냈습니다."
 
-#: ../src/gnome2/main_window.c:718
+#: ../src/gnome2/main_window.c:748
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: 스피커로 출력하지 않습니다."
 
-#: ../src/gnome2/main_window.c:948
+#: ../src/gnome2/main_window.c:978
 msgid "Xiphos - Bible Study Software"
 msgstr "xiphos - 성경 공부 프로그램"
 
-#: ../src/gnome2/main_window.c:1012
+#: ../src/gnome2/main_window.c:1042
 msgid "Open a new tab"
 msgstr "새 탭 열기"
 
-#: ../src/gnome2/main_window.c:1067 ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/main_window.c:1097 ../src/gnome2/sidebar.c:616
 #: ../src/gnome2/sidebar.c:621 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "표준 보기"
 
-#: ../src/gnome2/main_window.c:1107
+#: ../src/gnome2/main_window.c:1137
 msgid "Commentary View"
 msgstr "해설 보기"
 
-#: ../src/gnome2/main_window.c:1115
+#: ../src/gnome2/main_window.c:1145
 msgid "Book View"
 msgstr "책 보기"
 
-#: ../src/gnome2/main_window.c:1133
+#: ../src/gnome2/main_window.c:1163
 msgid "Welcome to Xiphos"
 msgstr "xiphos를 사용하시는 여러분 반갑습니다"
 
@@ -992,7 +1043,7 @@ msgstr ""
 "잠금 아이콘은 모듈을 암호화했다는 뜻이며, 이 아이콘이 나타나면 컨텐드 소유자 "
 "로부터 잠금 해제 키를 구매해야합니다."
 
-#: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:596
+#: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:640
 #: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
 #: ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
@@ -1181,7 +1232,7 @@ msgstr "추가/제거"
 msgid "Choose"
 msgstr "선택"
 
-#: ../src/gnome2/mod_mgr.c:1950 ../src/gnome2/preferences_dialog.c:2051
+#: ../src/gnome2/mod_mgr.c:1950 ../src/gnome2/preferences_dialog.c:2056
 #: ../src/gnome2/sidebar.c:1564 ../src/gnome2/sidebar.c:1610
 msgid "Modules"
 msgstr "모듈"
@@ -1304,12 +1355,12 @@ msgid "Go inward, to the first subsection"
 msgstr "첫번째 하위 절이 있는 안쪽으로 이동"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:910
-#: ../src/gnome2/navbar_versekey_editor.c:938
+#: ../src/gnome2/navbar_versekey_editor.c:939
 #: ../src/gnome2/navbar_versekey_parallel.c:859
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "이 동기화의 스크롤을 메인 창의 스크롤과 동기화"
 
-#: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2058
+#: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2063
 msgid "Parallel"
 msgstr "나란히 보기"
 
@@ -1329,16 +1380,16 @@ msgstr "모듈 옵션"
 msgid "Parallel View"
 msgstr "나란히 보기"
 
-#: ../src/gnome2/preferences_dialog.c:865
+#: ../src/gnome2/preferences_dialog.c:866
 msgid "BibleSync session passphrase"
 msgstr "BiboeSync 세션 암호"
 
-#: ../src/gnome2/preferences_dialog.c:867
+#: ../src/gnome2/preferences_dialog.c:868
 msgid "Phrase:"
 msgstr "어구:"
 
 #. mode selection failed? probably dead interface
-#: ../src/gnome2/preferences_dialog.c:938
+#: ../src/gnome2/preferences_dialog.c:940
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
@@ -1346,97 +1397,97 @@ msgstr ""
 "모드 선택에 실패했습니다.\n"
 "\"디버깅\"를 설정하고 원인을 살펴보십시오."
 
-#: ../src/gnome2/preferences_dialog.c:987
+#: ../src/gnome2/preferences_dialog.c:992
 msgid "Mode selection failed.\n"
 msgstr "모드 선택에 실패했습니다.\n"
 
-#: ../src/gnome2/preferences_dialog.c:990
+#: ../src/gnome2/preferences_dialog.c:995
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr "BibleSync: %s (암호: \"%s\"),"
 
-#: ../src/gnome2/preferences_dialog.c:992
+#: ../src/gnome2/preferences_dialog.c:997
 msgid "Disabled"
 msgstr "비활성"
 
-#: ../src/gnome2/preferences_dialog.c:994 ../src/main/xml.c:96
+#: ../src/gnome2/preferences_dialog.c:999 ../src/main/xml.c:96
 msgid "Personal"
 msgstr "개인"
 
-#: ../src/gnome2/preferences_dialog.c:996
+#: ../src/gnome2/preferences_dialog.c:1001
 msgid "Speaker"
 msgstr "독서자"
 
-#: ../src/gnome2/preferences_dialog.c:997
+#: ../src/gnome2/preferences_dialog.c:1002
 msgid "Audience"
 msgstr "청자"
 
-#: ../src/gnome2/preferences_dialog.c:1612
-#: ../src/gnome2/preferences_dialog.c:1646
-#: ../src/gnome2/preferences_dialog.c:1679
-#: ../src/gnome2/preferences_dialog.c:1711
-#: ../src/gnome2/preferences_dialog.c:1742
-#: ../src/gnome2/preferences_dialog.c:1773
-#: ../src/gnome2/preferences_dialog.c:1804
-#: ../src/gnome2/preferences_dialog.c:1836
-#: ../src/gnome2/preferences_dialog.c:1869
-#: ../src/gnome2/preferences_dialog.c:1920
-#: ../src/gnome2/preferences_dialog.c:2373
+#: ../src/gnome2/preferences_dialog.c:1617
+#: ../src/gnome2/preferences_dialog.c:1651
+#: ../src/gnome2/preferences_dialog.c:1684
+#: ../src/gnome2/preferences_dialog.c:1716
+#: ../src/gnome2/preferences_dialog.c:1747
+#: ../src/gnome2/preferences_dialog.c:1778
+#: ../src/gnome2/preferences_dialog.c:1809
+#: ../src/gnome2/preferences_dialog.c:1841
+#: ../src/gnome2/preferences_dialog.c:1874
+#: ../src/gnome2/preferences_dialog.c:1925
+#: ../src/gnome2/preferences_dialog.c:2385
 msgid "-- Select --"
 msgstr "-- 선택 --"
 
-#: ../src/gnome2/preferences_dialog.c:1883
+#: ../src/gnome2/preferences_dialog.c:1888
 msgid "Locale will take effect after restart."
 msgstr "다시 시작하고 나서 로캘을 적용합니다."
 
-#: ../src/gnome2/preferences_dialog.c:1953 ../ui/prefs.glade.h:1
+#: ../src/gnome2/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "기본 설정"
 
-#: ../src/gnome2/preferences_dialog.c:2031
+#: ../src/gnome2/preferences_dialog.c:2036
 msgid "General"
 msgstr "일반"
 
-#: ../src/gnome2/preferences_dialog.c:2034
+#: ../src/gnome2/preferences_dialog.c:2039
 msgid "Options"
 msgstr "옵션"
 
 # 주: 고유명사이므로 번역해선 안됨. xiphos도 음역하지 않았으므로 용어 번역 일관성을 따르기 위해 번역하지 마십시오.
-#: ../src/gnome2/preferences_dialog.c:2037 ../ui/prefs.glade.h:85
-#: ../ui/prefs.gtkbuilder.h:85
+#: ../src/gnome2/preferences_dialog.c:2042 ../ui/prefs.glade.h:88
+#: ../ui/prefs.gtkbuilder.h:88
 msgid "BibleSync"
 msgstr "BibleSync"
 
-#: ../src/gnome2/preferences_dialog.c:2041
+#: ../src/gnome2/preferences_dialog.c:2046
 msgid "Fonts"
 msgstr "글꼴"
 
-#: ../src/gnome2/preferences_dialog.c:2044
+#: ../src/gnome2/preferences_dialog.c:2049
 msgid "Color"
 msgstr "색상"
 
-#: ../src/gnome2/preferences_dialog.c:2047
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "Sizes and Faces"
 msgstr "크기 및 모양새"
 
-#: ../src/gnome2/preferences_dialog.c:2061
+#: ../src/gnome2/preferences_dialog.c:2066
 msgid "Special"
 msgstr "특수"
 
-#: ../src/gnome2/preferences_dialog.c:2754 ../src/gnome2/search_dialog.c:519
+#: ../src/gnome2/preferences_dialog.c:2766 ../src/gnome2/search_dialog.c:519
 msgid "Clear List?"
 msgstr "목록을 지웁니까?"
 
-#: ../src/gnome2/preferences_dialog.c:2755 ../src/gnome2/search_dialog.c:520
+#: ../src/gnome2/preferences_dialog.c:2767 ../src/gnome2/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr "정말로 모듈 목록을 지우시겠습니까?"
 
-#: ../src/gnome2/preferences_dialog.c:2806 ../src/main/search_dialog.cc:658
+#: ../src/gnome2/preferences_dialog.c:2818 ../src/main/search_dialog.cc:678
 msgid "Remove Module?"
 msgstr "모듈을 제거합니까?"
 
-#: ../src/gnome2/preferences_dialog.c:2807 ../src/main/search_dialog.cc:659
+#: ../src/gnome2/preferences_dialog.c:2819 ../src/main/search_dialog.cc:679
 msgid "Are you sure you want to remove the selected module?"
 msgstr "정말로 선택한 모듈을 제거하시겠습니까?"
 
@@ -1627,13 +1678,13 @@ msgstr "검색 형식"
 msgid "Optimized (\"Lucene\")"
 msgstr "최적화(\"루씬\")"
 
-#: ../src/gnome2/search_sidebar.c:333 ../ui/search-dialog.glade.h:41
-#: ../ui/search-dialog.gtkbuilder.h:41
+#: ../src/gnome2/search_sidebar.c:333 ../src/main/search_dialog.cc:100
+#: ../ui/search-dialog.glade.h:41 ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "정규 표현식"
 
-#: ../src/gnome2/search_sidebar.c:340 ../ui/search-dialog.glade.h:43
-#: ../ui/search-dialog.gtkbuilder.h:43
+#: ../src/gnome2/search_sidebar.c:340 ../src/main/search_dialog.cc:102
+#: ../ui/search-dialog.glade.h:43 ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "어구 일치"
 
@@ -1776,7 +1827,7 @@ msgstr ""
 "그림 파일의 크기를 알 수 없습니다.\n"
 "xiphos에서 창 크기에 맞춰 그림을 크기조절 할 수 없습니다."
 
-#: ../src/main/biblesync_glue.cc:104
+#: ../src/main/biblesync_glue.cc:107
 msgid ""
 "Mismatched packet\n"
 "\n"
@@ -1784,7 +1835,7 @@ msgstr ""
 "일치하지 않는 패킷\n"
 "\n"
 
-#: ../src/main/biblesync_glue.cc:124
+#: ../src/main/biblesync_glue.cc:127
 msgid ""
 "Presence announcement:\n"
 "\n"
@@ -1792,7 +1843,7 @@ msgstr ""
 "존재 알림:\n"
 "\n"
 
-#: ../src/main/biblesync_glue.cc:134
+#: ../src/main/biblesync_glue.cc:137
 msgid ""
 "Navigation packet:\n"
 "\n"
@@ -1800,11 +1851,11 @@ msgstr ""
 "탐색 패킷:\n"
 "\n"
 
-#: ../src/main/biblesync_glue.cc:185
+#: ../src/main/biblesync_glue.cc:189
 msgid "Unknown module "
 msgstr "알 수 없는 모듈"
 
-#: ../src/main/biblesync_glue.cc:185
+#: ../src/main/biblesync_glue.cc:189
 msgid ""
 ".\n"
 "Navigated indirectly using verse list."
@@ -1812,43 +1863,58 @@ msgstr ""
 ".\n"
 "절 목록으로 간접 탐색했습니다."
 
-#: ../src/main/biblesync_glue.cc:261
+#: ../src/main/biblesync_glue.cc:271
+#, fuzzy
+msgid ""
+"Chat packet:\n"
+"\n"
+msgstr ""
+"탐색 패킷:\n"
+"\n"
+
+#: ../src/main/biblesync_glue.cc:278
+msgid ""
+" says:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:284
 msgid "ERROR: unknown BibleSync indicator: "
 msgstr "오류: 알 수 없는 BibleSync 표시자: "
 
-#: ../src/main/biblesync_glue.cc:264
+#: ../src/main/biblesync_glue.cc:287
 msgid "Other indications are:"
 msgstr "다른 표시:"
 
-#: ../src/main/biblesync_glue.cc:546
+#: ../src/main/biblesync_glue.cc:590
 msgid "Check the box to listen to this Speaker"
 msgstr "이 독서자의 읽기를 들으려면 상자에 표시하십시오"
 
-#: ../src/main/biblesync_glue.cc:559
+#: ../src/main/biblesync_glue.cc:603
 msgid "Available Speakers"
 msgstr "존재하는 독서자"
 
-#: ../src/main/biblesync_glue.cc:568
+#: ../src/main/biblesync_glue.cc:612
 msgid "D/I"
 msgstr "D/I"
 
-#: ../src/main/biblesync_glue.cc:578
+#: ../src/main/biblesync_glue.cc:622
 msgid "Last navigation was Direct or Indirect"
 msgstr "마지막 탐색은 직간접적인 방식입니다"
 
-#: ../src/main/biblesync_glue.cc:587
+#: ../src/main/biblesync_glue.cc:631
 msgid "Last Navigation"
 msgstr "마지막 탐색"
 
-#: ../src/main/biblesync_glue.cc:606
+#: ../src/main/biblesync_glue.cc:650
 msgid "UUID"
 msgstr "UUID"
 
-#: ../src/main/biblesync_glue.cc:626
+#: ../src/main/biblesync_glue.cc:670
 msgid "IP address: "
 msgstr "IP 주소: "
 
-#: ../src/main/biblesync_glue.cc:626
+#: ../src/main/biblesync_glue.cc:670
 msgid ""
 "\n"
 "Application: "
@@ -1856,7 +1922,7 @@ msgstr ""
 "\n"
 "프로그램: "
 
-#: ../src/main/biblesync_glue.cc:626
+#: ../src/main/biblesync_glue.cc:670
 msgid ""
 "\n"
 "Device: "
@@ -1864,7 +1930,7 @@ msgstr ""
 "\n"
 "장치: "
 
-#: ../src/main/biblesync_glue.cc:626
+#: ../src/main/biblesync_glue.cc:670
 msgid ""
 "\n"
 "UUID: "
@@ -1877,7 +1943,7 @@ msgid ""
 "<br/><br/><center><i>This module has no content at this point.</i></center>"
 msgstr "<br/><br/><center><i>이 모듈은 현재 내용이 없습니다</i></center>"
 
-#: ../src/main/display.cc:249
+#: ../src/main/display.cc:250
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
@@ -1886,8 +1952,8 @@ msgstr ""
 "개인 주석을 올버르지 못한 방법으로 인코딩했습니다:\n"
 "'%s'"
 
-#: ../src/main/display.cc:1116 ../src/main/display.cc:1158
-#: ../src/main/display.cc:1242 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1117 ../src/main/display.cc:1159
+#: ../src/main/display.cc:1282 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr "장"
@@ -2264,26 +2330,41 @@ msgstr "장"
 msgid "User Annotation"
 msgstr "사용자 주석"
 
-#: ../src/main/search_dialog.cc:188
+#: ../src/main/search_dialog.cc:104
+#, fuzzy
+msgid "Multi-word"
+msgstr "여러 단어 일치"
+
+#: ../src/main/search_dialog.cc:106
+#, fuzzy
+msgid "Optimized (\"lucene\")"
+msgstr "최적화(\"루씬\")"
+
+#: ../src/main/search_dialog.cc:107
+#, fuzzy
+msgid "Attribute"
+msgstr "속성"
+
+#: ../src/main/search_dialog.cc:208
 #, c-format
 msgid "Search result %s: %s"
 msgstr "%s 검색 결과: %s"
 
-#: ../src/main/search_dialog.cc:404
+#: ../src/main/search_dialog.cc:424
 msgid "Delete Range?"
 msgstr "범위를 삭제합니까?"
 
-#: ../src/main/search_dialog.cc:405
+#: ../src/main/search_dialog.cc:425
 msgid "Are you sure you want to delete this range?"
 msgstr "정말로 이 범위를 삭제하시겠습니까?"
 
-#: ../src/main/search_dialog.cc:618 ../src/main/search_dialog.cc:1021
-#: ../src/main/search_dialog.cc:1024 ../src/main/search_dialog.cc:1044
-#: ../src/main/search_dialog.cc:1047
+#: ../src/main/search_dialog.cc:638 ../src/main/search_dialog.cc:1043
+#: ../src/main/search_dialog.cc:1046 ../src/main/search_dialog.cc:1066
+#: ../src/main/search_dialog.cc:1069
 msgid "Search: "
 msgstr "검색:"
 
-#: ../src/main/search_dialog.cc:1381
+#: ../src/main/search_dialog.cc:1404
 #, c-format
 msgid ""
 "%s:\n"
@@ -2294,16 +2375,16 @@ msgstr ""
 "설치한 모듈이 없습니다.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1383
+#: ../src/main/search_dialog.cc:1406
 msgid "Please adjust the module list."
 msgstr "모듈 목록을 조정하십시오."
 
-#: ../src/main/search_dialog.cc:1399
+#: ../src/main/search_dialog.cc:1422
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "%s.%s%s의 비 고속 검색 인덱스가 있습니다"
 
-#: ../src/main/search_dialog.cc:1401
+#: ../src/main/search_dialog.cc:1424
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -2311,7 +2392,7 @@ msgstr ""
 "\n"
 "이 모듈 검색 방식은 이제 `여러 단어'를 사용한 방식입니다."
 
-#: ../src/main/search_dialog.cc:1402
+#: ../src/main/search_dialog.cc:1425
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -2319,7 +2400,7 @@ msgstr ""
 "\n"
 "관리 창의 모듈 관리자를 참고하십시오."
 
-#: ../src/main/search_dialog.cc:1463
+#: ../src/main/search_dialog.cc:1486
 msgid "Search finished"
 msgstr "검색이 끝났습니다"
 
@@ -2439,7 +2520,7 @@ msgstr ""
 msgid "Book names and menus may not be translated."
 msgstr "책 이름과 메뉴는 번역하면 안됩니다."
 
-#: ../src/main/sword.cc:1119 ../src/main/sword.cc:1288
+#: ../src/main/sword.cc:1119 ../src/main/sword.cc:1290
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2450,7 +2531,7 @@ msgstr ""
 "%s.\n"
 "이 모듈 역시 마찬가지로 여시겠습니까?%s"
 
-#: ../src/main/sword.cc:1123 ../src/main/sword.cc:1292
+#: ../src/main/sword.cc:1123 ../src/main/sword.cc:1294
 msgid ""
 "\n"
 "\n"
@@ -2462,11 +2543,11 @@ msgstr ""
 "우선 메인 창을 열고 다른 창은\n"
 "다른 창에 열겠습니다."
 
-#: ../src/main/sword.cc:1416
+#: ../src/main/sword.cc:1421
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "매일 묵상을 요청했으나 설치하지 않았습니다."
 
-#: ../src/main/sword.cc:1670
+#: ../src/main/sword.cc:1675
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2760,26 +2841,26 @@ msgstr "모듈 항목"
 msgid "Bookmark Folder Treeview"
 msgstr "책갈피 폴더 트리 보기"
 
-#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/editor_link_dialog.gtkbuilder.h:2
+msgid "Test Link"
+msgstr "링크 시험"
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:3 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
 msgstr "절"
 
-#: ../ui/editor_link_dialog.xml.h:4
+#: ../ui/editor_link_dialog.gtkbuilder.h:5
 msgid "Link Text"
 msgstr "링크 문구"
 
-#: ../ui/editor_link_dialog.xml.h:5
+#: ../ui/editor_link_dialog.gtkbuilder.h:6
 msgid "Link directly"
 msgstr "직접 링크"
 
-#: ../ui/editor_link_dialog.xml.h:6
+#: ../ui/editor_link_dialog.gtkbuilder.h:7
 msgid "Link via verse list"
 msgstr "절 목록으로 링크"
-
-#: ../ui/editor_link_dialog.xml.h:7
-msgid "Test Link"
-msgstr "링크 시험"
 
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
@@ -2903,7 +2984,7 @@ msgid "Export complete book"
 msgstr "전체 책 내보내기"
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
-#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 msgid "Book"
 msgstr "책"
 
@@ -3009,8 +3090,8 @@ msgstr "학습장 정보"
 msgid "Open about dialog"
 msgstr "정보 대화상자 열기"
 
-#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:122
-#: ../ui/prefs.gtkbuilder.h:122
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:125
+#: ../ui/prefs.gtkbuilder.h:125
 msgid "Bold"
 msgstr "굵게"
 
@@ -3329,7 +3410,7 @@ msgid "_Edit"
 msgstr "편집(_E)"
 
 #: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:90
-#: ../ui/xi-menus.glade.h:40 ../ui/xi-menus.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "_Help"
 msgstr "도움말(_H)"
 
@@ -3899,55 +3980,70 @@ msgstr "BibleSync 탐색에서는 xiphos 측면의 절 목록을 사용합니다
 msgid "BSP nav verse list radio button"
 msgstr "BSP 탐색 절 목록 라디오 단추"
 
-#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:61
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
+msgid "_Keyboard only"
+msgstr ""
+
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
+msgid ""
+"When checked, do not transmit every time Xiphos navigates; instead, transmit "
+"only using keyboard shortcut (Ctrl-Shift-Alt-N)."
+msgstr ""
+
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+#, fuzzy
+msgid "BSP keyboard button"
+msgstr "BSP 개인 라디오 단추"
+
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:64
 msgid "<i>Listen:</i>"
 msgstr "<i>듣기:</i>"
 
-#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:60
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:63
 msgid "Xiphos will listen to Speakers according to choice here."
 msgstr "xiphos는 여기에서 선택한 대로 연사의 전송 내용을 감청합니다."
 
-#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
 msgid "Selective"
 msgstr "선택"
 
-#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
 msgid "Choose the Speakers to be followed."
 msgstr "팔로잉할 독서자를 선택하십시오."
 
-#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
 msgid "BSP listen some radio button"
 msgstr "BSP에서 일부 라디오 단추 선택 내용 감청"
 
-#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
 msgid "All"
 msgstr "모두"
 
-#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
 msgid "All Speakers will be followed."
 msgstr "모든 독서자를 끌어옵니다."
 
-#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
 msgid "BSP listen all radio button"
 msgstr "BSP 모두 듣기 라디오 단추"
 
-#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
 msgid "None"
 msgstr "없음"
 
-#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
 msgid "No Speakers will be followed."
 msgstr "청자를 끌어오지 않습니다."
 
-#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
 msgid "BSP listen none radio button"
 msgstr "BSP에서 라디오 단추 선택 내용 감청하지 않음"
 
-#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:72
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:75
 msgid "<i>Special:</i>"
 msgstr "<i>특수:</i>"
 
-#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:71
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:74
 msgid ""
 "Additional traces can be presented during BibleSync operation by enabling "
 "presence, mismatch, and debug. Beware enabling these, they can be very "
@@ -3958,47 +4054,47 @@ msgstr ""
 "하십시오. 또한 xiphos 탭 번호 처럼 그룹 매개 변수를 허용할지 여부도 결정하십"
 "시오."
 
-#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
 msgid "Presence"
 msgstr "과정 기록"
 
-#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Presence announcements will be shown in dialogs."
 msgstr "과정 기록은 대화상자에 나타납니다."
 
-#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
 msgid "BSP presence button"
 msgstr "BSP 과정 기록 표시 단추"
 
-#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
 msgid "Mismatch"
 msgstr "불일치"
 
-#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
 msgid "Mismatches from your session will be shown in dialogs."
 msgstr "세션 불일치 내용은 대화상자에 나타납니다."
 
-#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
 msgid "BSP mismatch button"
 msgstr "BSP 불일치 단추"
 
-#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
 msgid "Debug"
 msgstr "디버깅"
 
-#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
 msgid "Packet tracing."
 msgstr "패킷 추적 중."
 
-#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 msgid "BSP event debug button"
 msgstr "BSP 이벤트 디버깅 단추"
 
-#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
+#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:85
 msgid "_Group as tab"
 msgstr "탭 그룹(_G)"
 
-#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
 msgid ""
 "Interpret the protocol's group number parameter as Xiphos' tab number. "
 "Disabling this may be necessary if some Speakers' use of group number is not "
@@ -4007,37 +4103,37 @@ msgstr ""
 "프로토콜의 그룹 번호 매개변수를 xiphos의 탭 번호로 해석합니다. 일부 독서자의 "
 "그룹 번호가 탭 번호로 적합하지 않다면 이 설정의 비활성화가 필요합니다."
 
-#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
 msgid "BSP event group-as-tab button"
 msgstr "BSP 이벤트 탭 그룹 단추"
 
-#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "<b>General</b>"
 msgstr "<b>일반</b>"
 
-#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr "다른 설정 내용이 아닌 인터페이스를 표시할 각각의 언어를 선택하십시오"
 
-#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
 msgid "Special Locale (requires restart)"
 msgstr "특수 로캘(다시 시작해야 함)"
 
-#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
+#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
 msgid "Special Locale Combo"
 msgstr "특수 로캘 추가 기능"
 
-#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Show splash screen at start up"
 msgstr "시작할 때 스플래시 화면 표시"
 
-#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
 msgid "Show Daily Devotion at start up"
 msgstr "시작할 때 매일 말씀 표시"
 
-#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
@@ -4045,286 +4141,286 @@ msgstr ""
 "올바른 매일 말씀 모듈을 설정하지 않았다면, 프로그램을 시작할 때 오늘의 항목"
 "이 나타납니다."
 
-#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
 msgid "Use default Dictionary"
 msgstr "기본 사전 사용"
 
-#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
 msgstr "현재 표시한 사전 대신 기본 사전을 항상 사용하려면 두 번 누릅니다"
 
-#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
 msgid "Use default Dictionary Checkbox"
 msgstr "기본 사전을 사용하도록 하는 확인 상자"
 
-#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
 msgid "Scroll to Previous/Next Chapter"
 msgstr "이전/다음 장으로 스크롤"
 
-#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr "성경의 이전 또는 다음 장으로 스크롤 하도록 스크롤바를 사용합니다"
 
-#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "이전/다음 장으로 스크롤하는 확인 상자"
 
-#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 msgid "Resize images"
 msgstr "그림 크기 조절"
 
-#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
 msgid "Automatically resize image content to fit the pane"
 msgstr "그림을 창에 자동으로 맞추려 크기 조절합니다"
 
-#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "Resize images checkbox"
 msgstr "그림 크기를 조절하도록 하는 확인 상자"
 
-#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
 msgid "Highlight current verse"
 msgstr "현재 절 강조"
 
-#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr "현재 절을 고대비로 강조합니다 - 색 선택 창 참고"
 
-#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
 msgid "Highlight current verse check box"
 msgstr "현재 절을 강조하는 확인 상자"
 
-#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
 msgid "Highlight user annotations"
 msgstr "사용자 주석 강조"
 
-#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "사용자가 별도로 주석을 단 절을 역상 강조하는 기능을 사용합니다"
 
-#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 msgid "Highlight user annotations check box"
 msgstr "사용자 주석 강조 확인 상자"
 
-#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
 msgid "Cross-references in verse list"
 msgstr "절 목록 교차 참조"
 
-#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr "미리보기 대신 성경 교차 참조의 절 목록을 사용합니다"
 
-#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
 msgid "Xrefs in verse list check box"
 msgstr "절 목록 교차 참조 확인 상자"
 
-#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
 msgid "Enable Prayer Lists"
 msgstr "기도 목록 활성화"
 
-#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
 msgid "Make journals/prayer lists available"
 msgstr "묵상 일기/기도 목록을 활성화합니다"
 
-#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
 msgid "Enable Prayer Lists Checkbox"
 msgstr "기도 목록 활성화 확인 상자"
 
-#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "Enable Statusbar"
 msgstr "상태 표시줄 활성화"
 
-#: ../ui/prefs.glade.h:115
+#: ../ui/prefs.glade.h:118
 msgid "Enable/Disable Statusbar."
 msgstr "상태 표시줄을 활성화/비활성화합니다."
 
-#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
 #, fuzzy
 msgid "Enable Statusbar Checkbox"
 msgstr "상태 표시줄 활성화"
 
-#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 msgid "Parallel color alternation"
 msgstr ""
 
-#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
 msgid "Parallel window can use alternating foreground/background."
 msgstr ""
 
-#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
+#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
 #, fuzzy
 msgid "Enable Parallel Alternation Checkbox"
 msgstr "기도 목록 활성화 확인 상자"
 
-#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:121
+#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:124
 msgid "Verse number"
 msgstr "절 번호"
 
-#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:120
+#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:123
 msgid "Offset the verse number in several ways"
 msgstr "다양한 방식의 절 번호 오프셋입니다"
 
-#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Show verse number in bold text"
 msgstr "절 번호를 굵은 문자로 표시"
 
-#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 msgid "Verse number bold checkbox"
 msgstr "절 번호를 굵게 하는 확인 상자"
 
-#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "Brackets"
 msgstr "꺽쇠괄호"
 
-#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
+#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 msgid "Show verse number with [surrounding brackets]"
 msgstr "절 번호를 [꺽쇠 괄호로 둘러싸서] 표시합니다"
 
-#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 msgid "Verse number bracket checkbox"
 msgstr "절 번호를 꺽쇠 괄호로 표시하는 확인 상자"
 
-#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
 msgid "Superscript"
 msgstr "위첨자"
 
-#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
+#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
 msgid "Show verse number as a superscript"
 msgstr "절 번호를 위첨자로 표시"
 
-#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 msgid "Verse number superscript checkbox"
 msgstr "절 번호 위첨자로 표시하는 확인 상자"
 
-#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 msgid "StudyPad default directory"
 msgstr "학습장 기본 디렉터리"
 
-#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "Select A Directory"
 msgstr "디렉터리 선택"
 
-#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
 msgid "StudyPad default directory combo"
 msgstr "학습장 기본 디렉터리 기능을 붙입니다"
 
-#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "General Misc"
 msgstr "일반 기타"
 
-#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>메인 창 모듈</b>"
 
-#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 msgid "Biblical Text"
 msgstr "성경 문구"
 
-#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
+#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 msgid "Change Biblical Text Combo"
 msgstr "성경 문구 추가 기능 바꾸기"
 
-#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 msgid "Change Commentary Combo"
 msgstr "해설 추가 기능 바꾸기"
 
-#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 msgid "Change Dictionary Combo"
 msgstr "사전 추가 기능 바꾸기"
 
-#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 msgid "Change Book Combo"
 msgstr "책 추가 기능 바꾸기"
 
-#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>모듈</b>"
 
-#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "목록에서 모든 모듈 지우기"
 
-#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "목록 단추에서 모듈 지우기"
 
-#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "목록에서 선택한 모듈 제거"
 
-#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
+#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "목록 단추에서 선택한 모듈 삭제"
 
-#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
+#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
 msgid "Open a dialog to select modules"
 msgstr "선택한 모듈을 대화상자로 열기"
 
-#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
+#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "모듈 추가"
 
-#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
+#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "선택 대화상자 단추 열기"
 
-#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
+#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
 msgid "Modules Parallel"
 msgstr "모듈 병렬"
 
-#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
+#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>특정 용도 모듈</b>"
 
-#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
+#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Daily Devotional"
 msgstr "매일 묵상"
 
-#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
+#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Daily Devotional Combo"
 msgstr "매일 묵상 추가 기능"
 
-#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
+#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
 msgid "Hebrew Lexicon"
 msgstr "히브리어 어휘"
 
-#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
+#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
 msgid "Hebrew Lexicon Combo"
 msgstr "희브리어 어휘 추가 기능"
 
-#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
+#: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
 msgid "Greek Lexicon"
 msgstr "그리스어 어휘"
 
-#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
+#: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
 msgid "Greek Lexicon Combo"
 msgstr "그리스어 어휘 추가 기능"
 
-#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
+#: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
 msgid "Default Dictionary"
 msgstr "기본 사전"
 
-#: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
+#: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
 msgid "Change Default Dictionary Combo"
 msgstr "기본 사전 추가 기능 바꾸기"
 
-#: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
+#: ../ui/prefs.glade.h:165 ../ui/prefs.gtkbuilder.h:165
 msgid "Personal Notes"
 msgstr "개인 메모"
 
-#: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
+#: ../ui/prefs.glade.h:166 ../ui/prefs.gtkbuilder.h:166
 msgid "Change Personal Notes Combo"
 msgstr "개별 참고 추가 기능 바꾸기"
 
-#: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
+#: ../ui/prefs.glade.h:167 ../ui/prefs.gtkbuilder.h:167
 msgid "Modules Misc"
 msgstr "모듈 기타"
 
@@ -4356,7 +4452,7 @@ msgstr "+4"
 msgid "+5"
 msgstr "+5"
 
-#: ../ui/prefs.gtkbuilder.h:115
+#: ../ui/prefs.gtkbuilder.h:118
 msgid "Enable/disable the Statusbar"
 msgstr "상태 표시줄 활성화/비활성화"
 
@@ -4914,86 +5010,88 @@ msgid "Apply a high-contrast highlight to the current verse"
 msgstr "현재 절을 고대비 강조 표시합니다"
 
 #: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
-msgid "_Attach/Detach Sidebar"
-msgstr "가장자리 표시줄 붙이기/떼어내기(_A)"
-
-#: ../ui/xi-menus.glade.h:33
-msgid "Operate the sidebar as a separate window"
-msgstr "가장자리 표시줄을 별도의 창으로 취급합니다"
-
-#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "_Show/Hide Attached Sidebar"
 msgstr "창에 붙인 가장자리 표시줄 표시/숨김(_S)"
 
-#: ../ui/xi-menus.glade.h:35
+#: ../ui/xi-menus.glade.h:33
 msgid "Remove the sidebar entirely from view"
 msgstr "보기 화면에서 가장자리 표시줄을 완전히 제거합니다"
 
-#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "Show Parallel View in a _Tab"
 msgstr "나란히 보기를 탭에 표시(_T)"
 
-#: ../ui/xi-menus.glade.h:37
+#: ../ui/xi-menus.glade.h:35
 msgid "Provide the full-chapter parallel Bible window as another tab"
 msgstr "전체 장에 대한 성경 나란히 보기 창을 다른 탭처럼 표시합니다"
 
-#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Previe_wer in the Sidebar"
 msgstr "가장자리 표시줄에 미리보기 표시(_W)"
 
-#: ../ui/xi-menus.glade.h:39
+#: ../ui/xi-menus.glade.h:37
 msgid "Select Previewer position between sidebar or beneath Bible"
 msgstr ""
 "미리보기 위치를 가장자리 표시줄로 할 지 성경 아랫 부분에 할 지 선택합니다"
 
-#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
+#: ../ui/xi-menus.glade.h:39 ../ui/xi-menus.gtkbuilder.h:25
 msgid "_Contents"
 msgstr "내용(_C)"
 
-#: ../ui/xi-menus.glade.h:42
+#: ../ui/xi-menus.glade.h:40
 msgid "Open the help viewer on the Xiphos manual"
 msgstr "도움말 보기 창에 xiphos 도움말을 엽니다"
 
-#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
+#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Mailing List"
 msgstr "메일링 리스트(_M)"
 
-#: ../ui/xi-menus.glade.h:44
+#: ../ui/xi-menus.glade.h:42
 msgid "Open a browser on the users' mailing list webpage"
 msgstr "사용자 메일링 리스트 웹 페이지를 브라우저에 엽니다"
 
-#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
+#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Live Chat"
 msgstr "실시간 대화(_L)"
 
-#: ../ui/xi-menus.glade.h:46
+#: ../ui/xi-menus.glade.h:44
 msgid "Open a browser on an interface to live IRC chat"
 msgstr "실시간 IRC 대화 인터페이스를 브라우저에 엽니다"
 
-#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
+#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Report Bug"
 msgstr "문제점 보고(_R)"
 
-#: ../ui/xi-menus.glade.h:48
+#: ../ui/xi-menus.glade.h:46
 msgid "Open a browser on our bug tracker"
 msgstr "문제점 추적 시스템을 브라우저에 엽니다"
 
-#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "About _Translation"
 msgstr "번역 정보(_T)"
 
-#: ../ui/xi-menus.glade.h:50
+#: ../ui/xi-menus.glade.h:48
 msgid "Learn about translating the Xiphos interface to other languages"
 msgstr "xiphos 인터페이스를 다른 언어로 번역하는 방법을 알아봅니다"
 
-#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "_About The SWORD Project"
 msgstr "SWORD 프로젝트 정보(_A)"
 
 # 참고: Sword 는 프로젝트 이름 고유 명사이므로 번역하지 말 것.
-#: ../ui/xi-menus.glade.h:52
+#: ../ui/xi-menus.glade.h:50
 msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr "xiphos에 있는 프로그램 중 하나인 sword 프로젝트를 알아봅니다"
+
+# 주: 고유명사이므로 번역해선 안됨. xiphos도 음역하지 않았으므로 용어 번역 일관성을 따르기 위해 번역하지 마십시오.
+#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
+#, fuzzy
+msgid "About _BibleSync"
+msgstr "BibleSync"
+
+#: ../ui/xi-menus.glade.h:52
+msgid "Learn about BibleSync, the shared navigation protocol"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "_View Xiphos Releases"
@@ -5333,3 +5431,9 @@ msgstr "성경 공부"
 #: ../xiphos.desktop.in.in.h:3
 msgid "Text;Bible;Study;"
 msgstr ""
+
+#~ msgid "_Attach/Detach Sidebar"
+#~ msgstr "가장자리 표시줄 붙이기/떼어내기(_A)"
+
+#~ msgid "Operate the sidebar as a separate window"
+#~ msgstr "가장자리 표시줄을 별도의 창으로 취급합니다"

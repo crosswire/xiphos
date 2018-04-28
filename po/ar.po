@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-30 16:30+0100\n"
+"POT-Creation-Date: 2018-04-27 23:35-0400\n"
 "PO-Revision-Date: 2010-09-30 00:09+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Arabic <support@crosswire.org>\n"
@@ -42,14 +42,14 @@ msgstr "فتح"
 
 #: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
 #: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
-#: ../src/gnome2/main_menu.c:747 ../ui/bookmarks.gtkbuilder.h:5
+#: ../src/gnome2/main_menu.c:773 ../ui/bookmarks.gtkbuilder.h:5
 #: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
 #: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
 msgstr ""
 
 #: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
-#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:748
+#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:774
 msgid "_Open"
 msgstr "ا _ فتح"
 
@@ -61,6 +61,10 @@ msgstr "حفظ باسم"
 #: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
 msgstr "بدون عنوان الوثيقة"
+
+#: ../src/editor/slib-editor.c:494
+msgid "_Close"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
 msgid "Are you sure you want to delete the note for"
@@ -149,7 +153,7 @@ msgid "Save"
 msgstr "حفظ"
 
 #: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
-#: ../ui/editor_link_dialog.xml.h:1
+#: ../ui/editor_link_dialog.gtkbuilder.h:1
 msgid "Insert Link"
 msgstr "إدراج ارتباط"
 
@@ -191,7 +195,7 @@ msgstr "حول وحدة السيف"
 
 #. Don't use an icon with GTK3
 #: ../src/gnome2/about_modules.c:223 ../src/gnome2/about_trans.c:168
-#: ../src/gnome2/find_dialog.c:288
+#: ../src/gnome2/find_dialog.c:263
 msgid "Close"
 msgstr ""
 
@@ -250,12 +254,12 @@ msgid "Bible"
 msgstr "الكتاب المقدس"
 
 #: ../src/gnome2/about_modules.c:452 ../src/gnome2/search_sidebar.c:295
-#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 msgid "Commentary"
 msgstr "تعليق"
 
-#: ../src/gnome2/about_modules.c:455 ../ui/prefs.glade.h:140
-#: ../ui/prefs.gtkbuilder.h:140
+#: ../src/gnome2/about_modules.c:455 ../ui/prefs.glade.h:143
+#: ../ui/prefs.gtkbuilder.h:143
 msgid "Dictionary"
 msgstr "القاموس"
 
@@ -389,7 +393,7 @@ msgstr "<b>السمة</b>"
 msgid "<b>Promotional:</b> "
 msgstr "<b>خيارات</b>"
 
-#: ../src/gnome2/about_sword.c:79
+#: ../src/gnome2/about_sword.c:81
 msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package "
 "for research and study of God and His Word. The SWORD Project framework "
@@ -406,9 +410,34 @@ msgstr ""
 "باستخدام العديد من الواجهات هذا الإطار. من كتب قد تكون مشتركة إن تثبيت تعيين "
 "بين جميع الواجهات باستخدام الإطار. التحميل كتب يمكن من مشروع السيف."
 
-#: ../src/gnome2/about_sword.c:98
+#: ../src/gnome2/about_sword.c:100
 msgid "The SWORD Project"
 msgstr "السيف المشروع"
+
+#: ../src/gnome2/about_sword.c:130
+msgid ""
+"BibleSync is a network protocol providing the ability to share navigation "
+"within your Bible study program with cooperating programs on the local "
+"network.\n"
+"\n"
+"Enable BibleSync from Preferences:\n"
+"in personal mode, to share within a small group;\n"
+"or as either speaker or audience in a formal lecture setting.\n"
+"\n"
+"There are options for how BibleSync behaves in Xiphos:\n"
+"- To follow others' navigation directly or indirectly.\n"
+"- To send your navigation every time or only via keyboard.\n"
+"- To select speakers to whom Xiphos should listen.\n"
+"\n"
+"A simple chat capability provides brief messages to be shared as well.\n"
+"\n"
+"See the manual for details.\n"
+"(Preferences -> BibleSync Settings and Interface -> Keyboard Shortcuts.)"
+msgstr ""
+
+#: ../src/gnome2/about_sword.c:157
+msgid "BibleSync technical details"
+msgstr ""
 
 #: ../src/gnome2/about_trans.c:82
 #, fuzzy
@@ -598,45 +627,46 @@ msgstr "SearchResults"
 msgid "Please check copyright before exporting!"
 msgstr "يرجى التحقق من حقوق التأليف والنشر قبل تصدير!"
 
-#: ../src/gnome2/find_dialog.c:183 ../src/gnome2/find_dialog.c:359
-#: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
+#: ../src/gnome2/find_dialog.c:178 ../src/gnome2/find_dialog.c:242
+#: ../src/gnome2/find_dialog.c:334 ../ui/gtk2_webedit.ui.h:18
+#: ../ui/gtk_webedit.ui.h:18
 msgid "Find"
 msgstr "البحث"
 
-#: ../src/gnome2/find_dialog.c:202
+#: ../src/gnome2/find_dialog.c:197
 msgid "Enter Word or Phrase"
 msgstr "أدخل كلمة أو عبارة"
 
-#: ../src/gnome2/find_dialog.c:217
+#: ../src/gnome2/find_dialog.c:212
 msgid "Search backwards"
 msgstr "البحث الى الوراء"
 
-#: ../src/gnome2/find_dialog.c:280
+#: ../src/gnome2/find_dialog.c:251 ../src/gnome2/find_dialog.c:253
 msgid "Find Next"
 msgstr "بحث عن التالي"
 
-#: ../src/gnome2/font_dialog.c:294
+#: ../src/gnome2/font_dialog.c:298
 msgid "Set Module Font"
 msgstr "مجموعة الخط الوحدة"
 
-#: ../src/gnome2/font_dialog.c:328
+#: ../src/gnome2/font_dialog.c:332
 msgid "Change font for"
 msgstr "تغيير الخط"
 
-#: ../src/gnome2/font_dialog.c:332 ../ui/editor_link_dialog.xml.h:3
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.gtkbuilder.h:4
 msgid "Module"
 msgstr "وحدة"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:340
 msgid "Current font: "
 msgstr "الخط الحالي :"
 
-#: ../src/gnome2/font_dialog.c:377 ../src/gnome2/font_dialog.c:393
+#: ../src/gnome2/font_dialog.c:381 ../src/gnome2/font_dialog.c:397
 #: ../ui/prefs.gtkbuilder.h:3
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:396
+#: ../src/gnome2/font_dialog.c:400
 msgid "Use the default font for this module"
 msgstr "استخدام الخط الافتراضي لهذه الوحدة"
 
@@ -652,53 +682,71 @@ msgstr "الرجاء الإبلاغ عن هذا الخطأ لفريق Xiphos م�
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "علة! Xiphos على وشك أن تحطم نتيجة لخطأ في \"السلسلة\"."
 
-#: ../src/gnome2/main_menu.c:743
+#: ../src/gnome2/main_menu.c:769
 #, fuzzy
 msgid "Open Session"
 msgstr "ا _ فتح الدورة"
 
-#: ../src/gnome2/main_window.c:587
+#: ../src/gnome2/main_window.c:589
 #, fuzzy, c-format
 msgid "Module has no support for %s."
 msgstr "في الوحدات النمطية التي لديها أرقام سترونغ"
 
-#: ../src/gnome2/main_window.c:660
+#: ../src/gnome2/main_window.c:640
+msgid "BibleSync is not active."
+msgstr ""
+
+#: ../src/gnome2/main_window.c:648
+#, fuzzy
+msgid "BibleSync Chat"
+msgstr "الكتاب المقدس"
+
+#: ../src/gnome2/main_window.c:649
+msgid "[say this]"
+msgstr ""
+
+#: ../src/gnome2/main_window.c:650
+#, fuzzy
+msgid "Comment:"
+msgstr "تعليق"
+
+#: ../src/gnome2/main_window.c:690
 #, fuzzy
 msgid "Xiphos: No windows."
 msgstr "Xiphos :"
 
-#: ../src/gnome2/main_window.c:716
+#: ../src/gnome2/main_window.c:746
 msgid "BibleSync: Current navigation sent."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:718
+#: ../src/gnome2/main_window.c:748
 msgid "BibleSync: Not speaking."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:948
+#: ../src/gnome2/main_window.c:978
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos -- دراسة الكتاب المقدس البرمجيات"
 
-#: ../src/gnome2/main_window.c:1012
+#: ../src/gnome2/main_window.c:1042
 msgid "Open a new tab"
 msgstr "فتح علامة تبويب جديدة"
 
-#: ../src/gnome2/main_window.c:1067 ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/main_window.c:1097 ../src/gnome2/sidebar.c:616
 #: ../src/gnome2/sidebar.c:621 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "عرض قياسي"
 
-#: ../src/gnome2/main_window.c:1107
+#: ../src/gnome2/main_window.c:1137
 msgid "Commentary View"
 msgstr "تعليق الصورة"
 
-#: ../src/gnome2/main_window.c:1115
+#: ../src/gnome2/main_window.c:1145
 msgid "Book View"
 msgstr "عرض كتاب"
 
-#: ../src/gnome2/main_window.c:1133
+#: ../src/gnome2/main_window.c:1163
 msgid "Welcome to Xiphos"
 msgstr "مرحبا بكم في Xiphos"
 
@@ -951,7 +999,7 @@ msgstr ""
 "رمز القفل وسائل هذه الوحدة مشفرة ، ويتطلب أن تقوم بشراء فتح المفتاح من مالك "
 "المحتوى"
 
-#: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:596
+#: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:640
 #: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
 #: ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
@@ -1134,7 +1182,7 @@ msgstr "إضافة / إزالة"
 msgid "Choose"
 msgstr "اختر"
 
-#: ../src/gnome2/mod_mgr.c:1950 ../src/gnome2/preferences_dialog.c:2051
+#: ../src/gnome2/mod_mgr.c:1950 ../src/gnome2/preferences_dialog.c:2056
 #: ../src/gnome2/sidebar.c:1564 ../src/gnome2/sidebar.c:1610
 msgid "Modules"
 msgstr "وحدات"
@@ -1251,12 +1299,12 @@ msgid "Go inward, to the first subsection"
 msgstr "الذهاب إلى الداخل ، إلى الفرع الأول"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:910
-#: ../src/gnome2/navbar_versekey_editor.c:938
+#: ../src/gnome2/navbar_versekey_editor.c:939
 #: ../src/gnome2/navbar_versekey_parallel.c:859
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "تزامن هذا الإطار في التمرير مع النافذة الرئيسية"
 
-#: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2058
+#: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2063
 msgid "Parallel"
 msgstr "مواز"
 
@@ -1276,113 +1324,113 @@ msgstr "خيارات الوحدة"
 msgid "Parallel View"
 msgstr "عرض مواز"
 
-#: ../src/gnome2/preferences_dialog.c:865
+#: ../src/gnome2/preferences_dialog.c:866
 msgid "BibleSync session passphrase"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:867
+#: ../src/gnome2/preferences_dialog.c:868
 msgid "Phrase:"
 msgstr ""
 
 #. mode selection failed? probably dead interface
-#: ../src/gnome2/preferences_dialog.c:938
+#: ../src/gnome2/preferences_dialog.c:940
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:987
+#: ../src/gnome2/preferences_dialog.c:992
 #, fuzzy
 msgid "Mode selection failed.\n"
 msgstr "قراءة بصوت عال التحديد"
 
-#: ../src/gnome2/preferences_dialog.c:990
+#: ../src/gnome2/preferences_dialog.c:995
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:992
+#: ../src/gnome2/preferences_dialog.c:997
 msgid "Disabled"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:994 ../src/main/xml.c:96
+#: ../src/gnome2/preferences_dialog.c:999 ../src/main/xml.c:96
 msgid "Personal"
 msgstr "الشخصية"
 
-#: ../src/gnome2/preferences_dialog.c:996
+#: ../src/gnome2/preferences_dialog.c:1001
 msgid "Speaker"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:997
+#: ../src/gnome2/preferences_dialog.c:1002
 msgid "Audience"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1612
-#: ../src/gnome2/preferences_dialog.c:1646
-#: ../src/gnome2/preferences_dialog.c:1679
-#: ../src/gnome2/preferences_dialog.c:1711
-#: ../src/gnome2/preferences_dialog.c:1742
-#: ../src/gnome2/preferences_dialog.c:1773
-#: ../src/gnome2/preferences_dialog.c:1804
-#: ../src/gnome2/preferences_dialog.c:1836
-#: ../src/gnome2/preferences_dialog.c:1869
-#: ../src/gnome2/preferences_dialog.c:1920
-#: ../src/gnome2/preferences_dialog.c:2373
+#: ../src/gnome2/preferences_dialog.c:1617
+#: ../src/gnome2/preferences_dialog.c:1651
+#: ../src/gnome2/preferences_dialog.c:1684
+#: ../src/gnome2/preferences_dialog.c:1716
+#: ../src/gnome2/preferences_dialog.c:1747
+#: ../src/gnome2/preferences_dialog.c:1778
+#: ../src/gnome2/preferences_dialog.c:1809
+#: ../src/gnome2/preferences_dialog.c:1841
+#: ../src/gnome2/preferences_dialog.c:1874
+#: ../src/gnome2/preferences_dialog.c:1925
+#: ../src/gnome2/preferences_dialog.c:2385
 msgid "-- Select --"
 msgstr "-- اختر --"
 
-#: ../src/gnome2/preferences_dialog.c:1883
+#: ../src/gnome2/preferences_dialog.c:1888
 msgid "Locale will take effect after restart."
 msgstr "واللغة نافذة المفعول بعد إعادة التشغيل."
 
-#: ../src/gnome2/preferences_dialog.c:1953 ../ui/prefs.glade.h:1
+#: ../src/gnome2/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "تفضيلات"
 
-#: ../src/gnome2/preferences_dialog.c:2031
+#: ../src/gnome2/preferences_dialog.c:2036
 msgid "General"
 msgstr "العام"
 
-#: ../src/gnome2/preferences_dialog.c:2034
+#: ../src/gnome2/preferences_dialog.c:2039
 msgid "Options"
 msgstr "خيارات"
 
-#: ../src/gnome2/preferences_dialog.c:2037 ../ui/prefs.glade.h:85
-#: ../ui/prefs.gtkbuilder.h:85
+#: ../src/gnome2/preferences_dialog.c:2042 ../ui/prefs.glade.h:88
+#: ../ui/prefs.gtkbuilder.h:88
 #, fuzzy
 msgid "BibleSync"
 msgstr "الكتاب المقدس"
 
-#: ../src/gnome2/preferences_dialog.c:2041
+#: ../src/gnome2/preferences_dialog.c:2046
 msgid "Fonts"
 msgstr "حرة"
 
-#: ../src/gnome2/preferences_dialog.c:2044
+#: ../src/gnome2/preferences_dialog.c:2049
 msgid "Color"
 msgstr "اللون"
 
-#: ../src/gnome2/preferences_dialog.c:2047
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "Sizes and Faces"
 msgstr "الأحجام وجوه"
 
-#: ../src/gnome2/preferences_dialog.c:2061
+#: ../src/gnome2/preferences_dialog.c:2066
 msgid "Special"
 msgstr "خاص"
 
-#: ../src/gnome2/preferences_dialog.c:2754 ../src/gnome2/search_dialog.c:519
+#: ../src/gnome2/preferences_dialog.c:2766 ../src/gnome2/search_dialog.c:519
 msgid "Clear List?"
 msgstr "قائمة واضحة؟"
 
-#: ../src/gnome2/preferences_dialog.c:2755 ../src/gnome2/search_dialog.c:520
+#: ../src/gnome2/preferences_dialog.c:2767 ../src/gnome2/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr "هل أنت متأكد أنك تريد مسح قائمة وحدة؟"
 
-#: ../src/gnome2/preferences_dialog.c:2806 ../src/main/search_dialog.cc:658
+#: ../src/gnome2/preferences_dialog.c:2818 ../src/main/search_dialog.cc:678
 msgid "Remove Module?"
 msgstr "إزالة وحدة؟"
 
-#: ../src/gnome2/preferences_dialog.c:2807 ../src/main/search_dialog.cc:659
+#: ../src/gnome2/preferences_dialog.c:2819 ../src/main/search_dialog.cc:679
 msgid "Are you sure you want to remove the selected module?"
 msgstr "هل أنت متأكد أنك تريد إزالة الوحدة المختارة؟"
 
@@ -1554,13 +1602,13 @@ msgstr "نوع البحث"
 msgid "Optimized (\"Lucene\")"
 msgstr "الأمثل (\"وسين\")"
 
-#: ../src/gnome2/search_sidebar.c:333 ../ui/search-dialog.glade.h:41
-#: ../ui/search-dialog.gtkbuilder.h:41
+#: ../src/gnome2/search_sidebar.c:333 ../src/main/search_dialog.cc:100
+#: ../ui/search-dialog.glade.h:41 ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "التعبير العادية"
 
-#: ../src/gnome2/search_sidebar.c:340 ../ui/search-dialog.glade.h:43
-#: ../ui/search-dialog.gtkbuilder.h:43
+#: ../src/gnome2/search_sidebar.c:340 ../src/main/search_dialog.cc:102
+#: ../ui/search-dialog.glade.h:43 ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "بالضبط مثل العبارة"
 
@@ -1705,87 +1753,99 @@ msgstr ""
 "لا يمكن ان حجم ملف صورة يتم تحديدها بعد. Xiphos لا يمكن تغيير حجم الصور "
 "لتناسب النافذة."
 
-#: ../src/main/biblesync_glue.cc:104
+#: ../src/main/biblesync_glue.cc:107
 msgid ""
 "Mismatched packet\n"
 "\n"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:124
+#: ../src/main/biblesync_glue.cc:127
 msgid ""
 "Presence announcement:\n"
 "\n"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:134
+#: ../src/main/biblesync_glue.cc:137
 msgid ""
 "Navigation packet:\n"
 "\n"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:185
+#: ../src/main/biblesync_glue.cc:189
 #, fuzzy
 msgid "Unknown module "
 msgstr "كله وحدة"
 
-#: ../src/main/biblesync_glue.cc:185
+#: ../src/main/biblesync_glue.cc:189
 msgid ""
 ".\n"
 "Navigated indirectly using verse list."
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:261
+#: ../src/main/biblesync_glue.cc:271
+msgid ""
+"Chat packet:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:278
+msgid ""
+" says:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:284
 msgid "ERROR: unknown BibleSync indicator: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:264
+#: ../src/main/biblesync_glue.cc:287
 msgid "Other indications are:"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:546
+#: ../src/main/biblesync_glue.cc:590
 #, fuzzy
 msgid "Check the box to listen to this Speaker"
 msgstr "انقر فوق مربع للعمل في هذه الوحدة"
 
-#: ../src/main/biblesync_glue.cc:559
+#: ../src/main/biblesync_glue.cc:603
 #, fuzzy
 msgid "Available Speakers"
 msgstr "متاح"
 
-#: ../src/main/biblesync_glue.cc:568
+#: ../src/main/biblesync_glue.cc:612
 msgid "D/I"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:578
+#: ../src/main/biblesync_glue.cc:622
 msgid "Last navigation was Direct or Indirect"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:587
+#: ../src/main/biblesync_glue.cc:631
 #, fuzzy
 msgid "Last Navigation"
 msgstr "خلاص"
 
-#: ../src/main/biblesync_glue.cc:606
+#: ../src/main/biblesync_glue.cc:650
 msgid "UUID"
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:626
+#: ../src/main/biblesync_glue.cc:670
 msgid "IP address: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:626
+#: ../src/main/biblesync_glue.cc:670
 msgid ""
 "\n"
 "Application: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:626
+#: ../src/main/biblesync_glue.cc:670
 msgid ""
 "\n"
 "Device: "
 msgstr ""
 
-#: ../src/main/biblesync_glue.cc:626
+#: ../src/main/biblesync_glue.cc:670
 msgid ""
 "\n"
 "UUID: "
@@ -1796,7 +1856,7 @@ msgid ""
 "<br/><br/><center><i>This module has no content at this point.</i></center>"
 msgstr ""
 
-#: ../src/main/display.cc:249
+#: ../src/main/display.cc:250
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
@@ -1805,8 +1865,8 @@ msgstr ""
 "ترميز غير صحيح تسمية الشخصية الشرح : \n"
 "%s"
 
-#: ../src/main/display.cc:1116 ../src/main/display.cc:1158
-#: ../src/main/display.cc:1242 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1117 ../src/main/display.cc:1159
+#: ../src/main/display.cc:1282 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr "الفصل"
@@ -2186,26 +2246,41 @@ msgstr "الفصل"
 msgid "User Annotation"
 msgstr "مستخدم التعليق"
 
-#: ../src/main/search_dialog.cc:188
+#: ../src/main/search_dialog.cc:104
+#, fuzzy
+msgid "Multi-word"
+msgstr "كلمة متعددة"
+
+#: ../src/main/search_dialog.cc:106
+#, fuzzy
+msgid "Optimized (\"lucene\")"
+msgstr "الأمثل (\"وسين\")"
+
+#: ../src/main/search_dialog.cc:107
+#, fuzzy
+msgid "Attribute"
+msgstr "سمات"
+
+#: ../src/main/search_dialog.cc:208
 #, c-format
 msgid "Search result %s: %s"
 msgstr "%s نتيجة البحث : %s"
 
-#: ../src/main/search_dialog.cc:404
+#: ../src/main/search_dialog.cc:424
 msgid "Delete Range?"
 msgstr "حذف النطاق؟"
 
-#: ../src/main/search_dialog.cc:405
+#: ../src/main/search_dialog.cc:425
 msgid "Are you sure you want to delete this range?"
 msgstr "هل أنت متأكد أنك تريد حذف هذا النطاق؟"
 
-#: ../src/main/search_dialog.cc:618 ../src/main/search_dialog.cc:1021
-#: ../src/main/search_dialog.cc:1024 ../src/main/search_dialog.cc:1044
-#: ../src/main/search_dialog.cc:1047
+#: ../src/main/search_dialog.cc:638 ../src/main/search_dialog.cc:1043
+#: ../src/main/search_dialog.cc:1046 ../src/main/search_dialog.cc:1066
+#: ../src/main/search_dialog.cc:1069
 msgid "Search: "
 msgstr "البحث :"
 
-#: ../src/main/search_dialog.cc:1381
+#: ../src/main/search_dialog.cc:1404
 #, c-format
 msgid ""
 "%s:\n"
@@ -2216,16 +2291,16 @@ msgstr ""
 " : تثبيت وحدة ، هي ليست\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1383
+#: ../src/main/search_dialog.cc:1406
 msgid "Please adjust the module list."
 msgstr "الرجاء ضبط قائمة الوحدات."
 
-#: ../src/main/search_dialog.cc:1399
+#: ../src/main/search_dialog.cc:1422
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "لا مؤشر سريع البحث وجود ل %s%s%s"
 
-#: ../src/main/search_dialog.cc:1401
+#: ../src/main/search_dialog.cc:1424
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -2233,7 +2308,7 @@ msgstr ""
 "\n"
 "بحث في هذا النموذج هو الآن `كلمة متعددة."
 
-#: ../src/main/search_dialog.cc:1402
+#: ../src/main/search_dialog.cc:1425
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -2241,7 +2316,7 @@ msgstr ""
 "\n"
 "راجع مدير وحدة ، صيانة جزء."
 
-#: ../src/main/search_dialog.cc:1463
+#: ../src/main/search_dialog.cc:1486
 msgid "Search finished"
 msgstr "الانتهاء من البحث"
 
@@ -2346,7 +2421,7 @@ msgstr ""
 msgid "Book names and menus may not be translated."
 msgstr "قد لا أسماء الكتاب والقوائم يمكن ترجمتها."
 
-#: ../src/main/sword.cc:1119 ../src/main/sword.cc:1288
+#: ../src/main/sword.cc:1119 ../src/main/sword.cc:1290
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2354,7 +2429,7 @@ msgid ""
 "Would you like to open these as well?%s"
 msgstr ""
 
-#: ../src/main/sword.cc:1123 ../src/main/sword.cc:1292
+#: ../src/main/sword.cc:1123 ../src/main/sword.cc:1294
 msgid ""
 "\n"
 "\n"
@@ -2362,11 +2437,11 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1416
+#: ../src/main/sword.cc:1421
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "وطلب اليومية تعبدي ، ولكن هناك شيء مثبت."
 
-#: ../src/main/sword.cc:1670
+#: ../src/main/sword.cc:1675
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2645,28 +2720,28 @@ msgstr "وحدة الدخول"
 msgid "Bookmark Folder Treeview"
 msgstr "المرجعية مجلد تريفيف"
 
-#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/editor_link_dialog.gtkbuilder.h:2
+#, fuzzy
+msgid "Test Link"
+msgstr "إدراج ارتباط"
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:3 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
 msgstr "آية"
 
-#: ../ui/editor_link_dialog.xml.h:4
+#: ../ui/editor_link_dialog.gtkbuilder.h:5
 #, fuzzy
 msgid "Link Text"
 msgstr "نص عادي"
 
-#: ../ui/editor_link_dialog.xml.h:5
+#: ../ui/editor_link_dialog.gtkbuilder.h:6
 msgid "Link directly"
 msgstr ""
 
-#: ../ui/editor_link_dialog.xml.h:6
+#: ../ui/editor_link_dialog.gtkbuilder.h:7
 msgid "Link via verse list"
 msgstr ""
-
-#: ../ui/editor_link_dialog.xml.h:7
-#, fuzzy
-msgid "Test Link"
-msgstr "إدراج ارتباط"
 
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
@@ -2790,7 +2865,7 @@ msgid "Export complete book"
 msgstr "تصدير الكتاب كاملة"
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
-#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 msgid "Book"
 msgstr "كتاب"
 
@@ -2905,8 +2980,8 @@ msgstr "فتح Study_pad"
 msgid "Open about dialog"
 msgstr "فتح في الحوار"
 
-#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:122
-#: ../ui/prefs.gtkbuilder.h:122
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:125
+#: ../ui/prefs.gtkbuilder.h:125
 msgid "Bold"
 msgstr ""
 
@@ -3265,7 +3340,7 @@ msgid "_Edit"
 msgstr "_Edit"
 
 #: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:90
-#: ../ui/xi-menus.glade.h:40 ../ui/xi-menus.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "_Help"
 msgstr "_Help"
 
@@ -3836,148 +3911,163 @@ msgstr ""
 msgid "BSP nav verse list radio button"
 msgstr "وحدة قائمة زر راديو"
 
-#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:61
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
+msgid "_Keyboard only"
+msgstr ""
+
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
+msgid ""
+"When checked, do not transmit every time Xiphos navigates; instead, transmit "
+"only using keyboard shortcut (Ctrl-Shift-Alt-N)."
+msgstr ""
+
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+#, fuzzy
+msgid "BSP keyboard button"
+msgstr "التعبير العادية زر راديو"
+
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:64
 #, fuzzy
 msgid "<i>Listen:</i>"
 msgstr "<b>اسم قائمة</b>"
 
-#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:60
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:63
 msgid "Xiphos will listen to Speakers according to choice here."
 msgstr ""
 
-#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
 msgid "Selective"
 msgstr ""
 
-#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
-msgid "Choose the Speakers to be followed."
-msgstr ""
-
-#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
-#, fuzzy
-msgid "BSP listen some radio button"
-msgstr "راديو عادي نص الزر"
-
-#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
-msgid "All"
-msgstr ""
-
 #: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
-msgid "All Speakers will be followed."
+msgid "Choose the Speakers to be followed."
 msgstr ""
 
 #: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
 #, fuzzy
-msgid "BSP listen all radio button"
-msgstr "التعبير العادية زر راديو"
+msgid "BSP listen some radio button"
+msgstr "راديو عادي نص الزر"
 
 #: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
-msgid "None"
+msgid "All"
 msgstr ""
 
 #: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
-msgid "No Speakers will be followed."
+msgid "All Speakers will be followed."
 msgstr ""
 
 #: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
 #, fuzzy
+msgid "BSP listen all radio button"
+msgstr "التعبير العادية زر راديو"
+
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
+msgid "None"
+msgstr ""
+
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
+msgid "No Speakers will be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+#, fuzzy
 msgid "BSP listen none radio button"
 msgstr "راديو عادي نص الزر"
 
-#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:72
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:75
 #, fuzzy
 msgid "<i>Special:</i>"
 msgstr "خاص"
 
-#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:71
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:74
 msgid ""
 "Additional traces can be presented during BibleSync operation by enabling "
 "presence, mismatch, and debug. Beware enabling these, they can be very "
 "chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
 msgstr ""
 
-#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
 #, fuzzy
 msgid "Presence"
 msgstr "تفضيلات"
 
-#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Presence announcements will be shown in dialogs."
 msgstr ""
 
-#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
 #, fuzzy
 msgid "BSP presence button"
 msgstr "الآية زر الراديو"
 
-#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
 #, fuzzy
 msgid "Mismatch"
 msgstr "المباريات"
 
-#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
 msgid "Mismatches from your session will be shown in dialogs."
 msgstr ""
 
-#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
 msgid "BSP mismatch button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
 msgid "Debug"
 msgstr ""
 
-#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
 msgid "Packet tracing."
 msgstr ""
 
-#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 msgid "BSP event debug button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
+#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:85
 msgid "_Group as tab"
 msgstr ""
 
-#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
 msgid ""
 "Interpret the protocol's group number parameter as Xiphos' tab number. "
 "Disabling this may be necessary if some Speakers' use of group number is not "
 "appropriate as a tab number."
 msgstr ""
 
-#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
 #, fuzzy
 msgid "BSP event group-as-tab button"
 msgstr "وحدة واحدة زر راديو"
 
-#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "<b>General</b>"
 msgstr "<b>العام</b>"
 
-#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr "اختر لغة معينة للعرض واجهة ، وغيرها من الإعداد المعتاد"
 
-#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
 msgid "Special Locale (requires restart)"
 msgstr "اللغة الخاصة (يتطلب إعادة التشغيل)"
 
-#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
+#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
 msgid "Special Locale Combo"
 msgstr "لغة خاصة كومبو"
 
-#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Show splash screen at start up"
 msgstr "تظهر شاشة البداية في البدء"
 
-#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
 msgid "Show Daily Devotion at start up"
 msgstr "ديلي شو تفانيه في البدء"
 
-#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
@@ -3985,11 +4075,11 @@ msgstr ""
 "إذا كان لديك مجموعة مفضل التفاني وحدة يوميا ، سيظهر دخولها لهذا اليوم عند "
 "بدء التشغيل."
 
-#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
 msgid "Use default Dictionary"
 msgstr "استخدام القاموس الافتراضي"
 
-#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
@@ -3997,285 +4087,285 @@ msgstr ""
 "جعل الافتراضي انقر نقرا مزدوجا فوق الكلمة دائما استخدام القاموس بدلا من "
 "القاموس المعروضة حاليا"
 
-#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
 msgid "Use default Dictionary Checkbox"
 msgstr "استخدام القاموس الافتراضي خانة"
 
-#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
 msgid "Scroll to Previous/Next Chapter"
 msgstr "انتقل إلى الفصل السابق / التالي"
 
-#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 "نص الكتاب المقدس استخدام شريط التمرير للانتقال إلى الفصل التالي أو السابق"
 
-#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "انتقل إلى السابق / خانة الفصل التالي"
 
-#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 msgid "Resize images"
 msgstr "تغيير حجم الصور"
 
-#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
 msgid "Automatically resize image content to fit the pane"
 msgstr "تغيير حجم الصور تلقائيا لتتناسب مع محتوى جزء"
 
-#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "Resize images checkbox"
 msgstr "تغيير حجم الصور مربع"
 
-#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
 msgid "Highlight current verse"
 msgstr "تسليط الضوء على الآية الحالية"
 
-#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr "تطبيق عالية التباين تسليط الضوء على الآية الحالية -- انظر جامعي اللون"
 
-#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
 msgid "Highlight current verse check box"
 msgstr "تسليط الضوء على الاختيار الآية الحالية مربع"
 
-#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
 msgid "Highlight user annotations"
 msgstr "الشروح تمييز المستخدم"
 
-#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "استخدام الضوء المعكوس على الآيات المستخدم المشروح"
 
-#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 msgid "Highlight user annotations check box"
 msgstr "الشروح المستخدم تمييز خانة"
 
-#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
 msgid "Cross-references in verse list"
 msgstr "إحالات في قائمة الآية"
 
-#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr "استخدم قائمة الآية لمراجع الكتاب المقدس الصليب بدلا من المشاهد في"
 
-#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
 msgid "Xrefs in verse list check box"
 msgstr "Xrefs في قائمة الآية خانة الاختيار"
 
-#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
 msgid "Enable Prayer Lists"
 msgstr "قوائم تمكين الصلاة"
 
-#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
 msgid "Make journals/prayer lists available"
 msgstr "جعل المجلات / قوائم صلاة متاحة"
 
-#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
 msgid "Enable Prayer Lists Checkbox"
 msgstr "قوائم الصلاة تمكين خانة"
 
-#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "Enable Statusbar"
 msgstr ""
 
-#: ../ui/prefs.glade.h:115
+#: ../ui/prefs.glade.h:118
 msgid "Enable/Disable Statusbar."
-msgstr ""
-
-#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
-#, fuzzy
-msgid "Enable Statusbar Checkbox"
-msgstr "قوائم الصلاة تمكين خانة"
-
-#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
-msgid "Parallel color alternation"
-msgstr ""
-
-#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
-msgid "Parallel window can use alternating foreground/background."
 msgstr ""
 
 #: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
 #, fuzzy
+msgid "Enable Statusbar Checkbox"
+msgstr "قوائم الصلاة تمكين خانة"
+
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
+msgid "Parallel color alternation"
+msgstr ""
+
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
+msgid "Parallel window can use alternating foreground/background."
+msgstr ""
+
+#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
+#, fuzzy
 msgid "Enable Parallel Alternation Checkbox"
 msgstr "قوائم الصلاة تمكين خانة"
 
-#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:121
+#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:124
 #, fuzzy
 msgid "Verse number"
 msgstr "الآية رقم"
 
-#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:120
+#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:123
 msgid "Offset the verse number in several ways"
 msgstr ""
 
-#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 #, fuzzy
 msgid "Show verse number in bold text"
 msgstr "أرقام الآية العرض في النص"
 
-#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 #, fuzzy
 msgid "Verse number bold checkbox"
 msgstr "الآية رقم حجم"
 
-#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "Brackets"
 msgstr ""
 
-#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
+#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 msgid "Show verse number with [surrounding brackets]"
 msgstr ""
 
-#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 #, fuzzy
 msgid "Verse number bracket checkbox"
 msgstr "تغيير حجم الصور مربع"
 
-#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
 #, fuzzy
 msgid "Superscript"
 msgstr "الوصف"
 
-#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
+#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
 #, fuzzy
 msgid "Show verse number as a superscript"
 msgstr "_Numbers إظهار الآية"
 
-#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 #, fuzzy
 msgid "Verse number superscript checkbox"
 msgstr "الآية رقم حجم"
 
-#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 #, fuzzy
 msgid "StudyPad default directory"
 msgstr "StudyPad الدليل الافتراضي التحرير والسرد"
 
-#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "Select A Directory"
 msgstr "تحديد دليل"
 
-#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
 msgid "StudyPad default directory combo"
 msgstr "StudyPad الدليل الافتراضي التحرير والسرد"
 
-#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "General Misc"
 msgstr "متفرقات عامة"
 
-#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>نافذة الوحدات الرئيسية</b>"
 
-#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 msgid "Biblical Text"
 msgstr "نص الكتاب المقدس"
 
-#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
+#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 msgid "Change Biblical Text Combo"
 msgstr "تغيير النص الانجيلي كومبو"
 
-#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 msgid "Change Commentary Combo"
 msgstr "تغيير التعليق كومبو"
 
-#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 msgid "Change Dictionary Combo"
 msgstr "تغيير قاموس كومبو"
 
-#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 msgid "Change Book Combo"
 msgstr "تغيير كتاب كومبو"
 
-#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>وحدات</b>"
 
-#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "واضح من جميع وحدات قائمة"
 
-#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "واضحة وحدات من قائمة زر"
 
-#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "إزالة وحدة مختارة من قائمة"
 
-#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
+#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "حذف وحدة مختارة من قائمة زر"
 
-#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
+#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
 msgid "Open a dialog to select modules"
 msgstr "فتح الحوار لتحديد وحدات"
 
-#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
+#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "إضافة وحدات"
 
-#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
+#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "اختيار زر فتح حوار"
 
-#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
+#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
 msgid "Modules Parallel"
 msgstr "وحدات متوازية"
 
-#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
+#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>وحدات للاستعمالات الخاصة</b>"
 
-#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
+#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Daily Devotional"
 msgstr "صحيفة عبادي"
 
-#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
+#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Daily Devotional Combo"
 msgstr "يوميا عبادي كومبو"
 
-#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
+#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
 msgid "Hebrew Lexicon"
 msgstr "معجم العبرية"
 
-#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
+#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
 msgid "Hebrew Lexicon Combo"
 msgstr "معجم العبرية كومبو"
 
-#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
+#: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
 msgid "Greek Lexicon"
 msgstr "معجم اليونانية"
 
-#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
+#: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
 msgid "Greek Lexicon Combo"
 msgstr "معجم اليونانية كومبو"
 
-#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
+#: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
 msgid "Default Dictionary"
 msgstr "القاموس الافتراضي"
 
-#: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
+#: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
 msgid "Change Default Dictionary Combo"
 msgstr "تغيير القاموس الافتراضي كومبو"
 
-#: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
+#: ../ui/prefs.glade.h:165 ../ui/prefs.gtkbuilder.h:165
 msgid "Personal Notes"
 msgstr "ملاحظات شخصية"
 
-#: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
+#: ../ui/prefs.glade.h:166 ../ui/prefs.gtkbuilder.h:166
 msgid "Change Personal Notes Combo"
 msgstr "تغيير الملاحظات الشخصية كومبو"
 
-#: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
+#: ../ui/prefs.glade.h:167 ../ui/prefs.gtkbuilder.h:167
 msgid "Modules Misc"
 msgstr "وحدات متفرقات"
 
@@ -4309,7 +4399,7 @@ msgstr ""
 msgid "+5"
 msgstr ""
 
-#: ../ui/prefs.gtkbuilder.h:115
+#: ../ui/prefs.gtkbuilder.h:118
 msgid "Enable/disable the Statusbar"
 msgstr ""
 
@@ -4867,84 +4957,85 @@ msgid "Apply a high-contrast highlight to the current verse"
 msgstr "تسليط الضوء على تطبيق عالية على النقيض من الآية الحالية"
 
 #: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
-msgid "_Attach/Detach Sidebar"
-msgstr "_Attach / فصل الشريط الجانبي"
-
-#: ../ui/xi-menus.glade.h:33
-msgid "Operate the sidebar as a separate window"
-msgstr "تشغيل الشريط الجانبي كإطار منفصل"
-
-#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "_Show/Hide Attached Sidebar"
 msgstr "_Show / إخفاء الشريط الجانبي المرفقة"
 
-#: ../ui/xi-menus.glade.h:35
+#: ../ui/xi-menus.glade.h:33
 msgid "Remove the sidebar entirely from view"
 msgstr "إزالة الشريط الجانبي بالكامل من رأي"
 
-#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "Show Parallel View in a _Tab"
 msgstr "تظهر الصورة وبالتوازي في _Tab"
 
-#: ../ui/xi-menus.glade.h:37
+#: ../ui/xi-menus.glade.h:35
 msgid "Provide the full-chapter parallel Bible window as another tab"
 msgstr "توفير كامل الفصل إطار الكتاب المقدس كما مواز آخر التبويب"
 
-#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Previe_wer in the Sidebar"
 msgstr "وتظهر في الشريط الجانبي Previe_wer"
 
-#: ../ui/xi-menus.glade.h:39
+#: ../ui/xi-menus.glade.h:37
 msgid "Select Previewer position between sidebar or beneath Bible"
 msgstr "حدد موقف المشاهد بين الشريط الجانبي أو تحت الكتاب المقدس"
 
-#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
+#: ../ui/xi-menus.glade.h:39 ../ui/xi-menus.gtkbuilder.h:25
 msgid "_Contents"
 msgstr "_Contents"
 
-#: ../ui/xi-menus.glade.h:42
+#: ../ui/xi-menus.glade.h:40
 msgid "Open the help viewer on the Xiphos manual"
 msgstr "فتح عارض تعليمات في دليل Xiphos"
 
-#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
+#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Mailing List"
 msgstr "_Mailing قائمة"
 
-#: ../ui/xi-menus.glade.h:44
+#: ../ui/xi-menus.glade.h:42
 msgid "Open a browser on the users' mailing list webpage"
 msgstr "فتح المستعرض على المستخدمين صفحة ويب قائمة بريدية"
 
-#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
+#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Live Chat"
 msgstr "_Live دردشة"
 
-#: ../ui/xi-menus.glade.h:46
+#: ../ui/xi-menus.glade.h:44
 msgid "Open a browser on an interface to live IRC chat"
 msgstr "افتح مستعرض على واجهة للعيش الايرسي دردشة"
 
-#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
+#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Report Bug"
 msgstr "_Report الشوائب"
 
-#: ../ui/xi-menus.glade.h:48
+#: ../ui/xi-menus.glade.h:46
 msgid "Open a browser on our bug tracker"
 msgstr "فتح مستعرض على تعقب الشوائب"
 
-#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "About _Translation"
 msgstr "حول _Translation"
 
-#: ../ui/xi-menus.glade.h:50
+#: ../ui/xi-menus.glade.h:48
 msgid "Learn about translating the Xiphos interface to other languages"
 msgstr "تعلم ترجمة عن واجهة Xiphos إلى لغات أخرى"
 
-#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "_About The SWORD Project"
 msgstr "_about مشروع السيف"
 
-#: ../ui/xi-menus.glade.h:52
+#: ../ui/xi-menus.glade.h:50
 msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr "تعرف على مشروع السيف ، الذي هو واحد التطبيق Xiphos"
+
+#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
+#, fuzzy
+msgid "About _BibleSync"
+msgstr "الكتاب المقدس"
+
+#: ../ui/xi-menus.glade.h:52
+msgid "Learn about BibleSync, the shared navigation protocol"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "_View Xiphos Releases"
@@ -5284,6 +5375,12 @@ msgstr "دراسة الكتاب المقدس"
 #: ../xiphos.desktop.in.in.h:3
 msgid "Text;Bible;Study;"
 msgstr ""
+
+#~ msgid "_Attach/Detach Sidebar"
+#~ msgstr "_Attach / فصل الشريط الجانبي"
+
+#~ msgid "Operate the sidebar as a separate window"
+#~ msgstr "تشغيل الشريط الجانبي كإطار منفصل"
 
 #, fuzzy
 #~ msgid "[no dump ready]"
