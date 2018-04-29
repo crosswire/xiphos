@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * gnome2/mod_mgr.c
+ * mod_mgr.c
  *
  * Copyright (C) 2000-2018 Xiphos Developer Team
  *

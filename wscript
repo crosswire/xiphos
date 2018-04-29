@@ -465,7 +465,7 @@ def build(bld):
         src/backend
         src/editor
         src/main
-        src/gnome2
+        src/gtk
         src/xiphos_html
         ui
     """)
@@ -479,8 +479,8 @@ def build(bld):
         import shutil
         bld.add_subdirs('src/examples')
         # this seems bad, but I don't know how to do it otherwise
-        shutil.copy('src/gnome2/ipc-interface.xml', 'src/examples')
-        shutil.copy('src/gnome2/marshal.list', 'src/examples')
+        shutil.copy('src/gtk/ipc-interface.xml', 'src/examples')
+        shutil.copy('src/gtk/marshal.list', 'src/examples')
 
 
     bld.install_files('${PACKAGE_DOC_DIR}', """
@@ -547,7 +547,7 @@ def dist_hook():
 
 def run(ctx):
     '''Execute xiphos binary from build directory'''
-    subprocess.call(os.path.join(blddir,'default/src/gnome2/xiphos'))
+    subprocess.call(os.path.join(blddir,'default/src/gtk/xiphos'))
 
 
 def test(ctx):

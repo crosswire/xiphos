@@ -1073,7 +1073,7 @@ void main_load_module_tree(GtkWidget *tree)
 	// DICT_MODS => 'L' ("Lexicons / Dictionaries")
 	// BOOK_MODS => 'G' ("Generic Books")
 	// see src/main/sword.h regarding these definitions.
-	// see also similar code in src/gnome2/{mod_mgr,utilities}.c.
+	// see also similar code in src/gtk/{mod_mgr,utilities}.c.
 	// it is just necessary that we undo some of this inefficiency.
 
 	tmp2 = tmp;

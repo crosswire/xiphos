@@ -90,7 +90,7 @@ void gui_get_clipboard_text_for_lookup(GtkClipboard *clipboard,
 
 	if (text == NULL)
 		return;
-	XI_message(("src/gnome2/dictlex.c: text =>%s<", text));
+	XI_message(("src/gtk/dictlex.c: text =>%s<", text));
 
 	key = g_strdelimit((char *)text, "&.,\"<>;:?", ' ');
 	key = g_strstrip((char *)key);

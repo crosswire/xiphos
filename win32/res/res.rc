@@ -30,7 +30,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // remains consistent on all systems.
 // IDI_ICON1               ICON                    "..\\..\\pixmaps\\gs2-48x48.ico"
 // as above if windres -ires.rc -ores.o called from win32\res directory
-// as below if windres -iwin32/res/res.rc -osrc/gnome2/res.o called from xiphos directory
+// as below if windres -iwin32/res/res.rc -osrc/gtk/res.o called from xiphos directory
 IDI_ICON1               ICON                    "pixmaps/gs2-48x48.ico"
 
 #ifdef APSTUDIO_INVOKED

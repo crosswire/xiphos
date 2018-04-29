@@ -1,4 +1,4 @@
-interface_xml := ../gnome2/ipc-interface.xml
+interface_xml := ../gtk/ipc-interface.xml
 
 pkg_packages := dbus-1 dbus-glib-1
 

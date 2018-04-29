@@ -43,15 +43,15 @@ msgid "Open"
 msgstr "열기"
 
 #: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
-#: ../src/gnome2/dialog.c:268 ../src/gnome2/dialog.c:636
-#: ../src/gnome2/main_menu.c:773 ../ui/bookmarks.gtkbuilder.h:5
+#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636
+#: ../src/gtk/main_menu.c:773 ../ui/bookmarks.gtkbuilder.h:5
 #: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
 #: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
 msgstr "취소(_C)"
 
 #: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
-#: ../src/editor/slib-editor.c:715 ../src/gnome2/main_menu.c:774
+#: ../src/editor/slib-editor.c:715 ../src/gtk/main_menu.c:774
 #, fuzzy
 msgid "_Open"
 msgstr "열기"
@@ -104,7 +104,7 @@ msgstr "인쇄 미리보기(_V)"
 msgid "_Quit"
 msgstr "끝내기"
 
-#: ../src/editor/slib-editor.c:726 ../src/gnome2/dialog.c:262
+#: ../src/editor/slib-editor.c:726 ../src/gtk/dialog.c:262
 #, fuzzy
 msgid "_Save"
 msgstr "저장"
@@ -203,183 +203,183 @@ msgstr "메모 편집기"
 msgid "Prayer List/Journal Editor"
 msgstr "기도 목록/묵상 일기 편집기"
 
-#: ../src/gnome2/about_modules.c:142
+#: ../src/gtk/about_modules.c:142
 msgid "About Sword Module"
 msgstr "sword 모듈 정보"
 
 #. Don't use an icon with GTK3
-#: ../src/gnome2/about_modules.c:223 ../src/gnome2/about_trans.c:168
-#: ../src/gnome2/find_dialog.c:263
+#: ../src/gtk/about_modules.c:223 ../src/gtk/about_trans.c:168
+#: ../src/gtk/find_dialog.c:263
 msgid "Close"
 msgstr "닫기"
 
-#: ../src/gnome2/about_modules.c:415
+#: ../src/gtk/about_modules.c:415
 msgid "<b>Module name:</b> "
 msgstr "<b>모듈 이름:</b>"
 
-#: ../src/gnome2/about_modules.c:422
+#: ../src/gtk/about_modules.c:422
 msgid "<b>Module abbreviation:</b> "
 msgstr "<b>모듈 약자:</b>"
 
-#: ../src/gnome2/about_modules.c:427
+#: ../src/gtk/about_modules.c:427
 msgid "<b>Version:</b> "
 msgstr "<b>버전:</b>"
 
-#: ../src/gnome2/about_modules.c:430
+#: ../src/gtk/about_modules.c:430
 msgid "No version stamp found"
 msgstr "버전 스탬프가 없습니다"
 
-#: ../src/gnome2/about_modules.c:433
+#: ../src/gtk/about_modules.c:433
 msgid "<b>Type:</b> "
 msgstr "<b>형식:</b>"
 
-#: ../src/gnome2/about_modules.c:435
+#: ../src/gtk/about_modules.c:435
 msgid "Daily Devotion"
 msgstr "매일 묵상"
 
-#: ../src/gnome2/about_modules.c:437 ../src/gnome2/mod_mgr.c:1561
-#: ../src/gnome2/utilities.c:612 ../src/main/sidebar.cc:1029
+#: ../src/gtk/about_modules.c:437 ../src/gtk/mod_mgr.c:1561
+#: ../src/gtk/utilities.c:612 ../src/main/sidebar.cc:1029
 #: ../src/main/sidebar.cc:1031
 msgid "Maps"
 msgstr "지도"
 
-#: ../src/gnome2/about_modules.c:439 ../src/gnome2/mod_mgr.c:1565
-#: ../src/gnome2/utilities.c:618 ../src/main/sidebar.cc:1038
+#: ../src/gtk/about_modules.c:439 ../src/gtk/mod_mgr.c:1565
+#: ../src/gtk/utilities.c:618 ../src/main/sidebar.cc:1038
 #: ../src/main/sidebar.cc:1040
 msgid "Images"
 msgstr "그림"
 
-#: ../src/gnome2/about_modules.c:441
+#: ../src/gtk/about_modules.c:441
 msgid "Glossary"
 msgstr "용어집"
 
-#: ../src/gnome2/about_modules.c:445
+#: ../src/gtk/about_modules.c:445
 msgid "Cult"
 msgstr "이단"
 
-#: ../src/gnome2/about_modules.c:449 ../src/gnome2/search_sidebar.c:287
+#: ../src/gtk/about_modules.c:449 ../src/gtk/search_sidebar.c:287
 msgid "Bible"
 msgstr "성서"
 
-#: ../src/gnome2/about_modules.c:452 ../src/gnome2/search_sidebar.c:295
+#: ../src/gtk/about_modules.c:452 ../src/gtk/search_sidebar.c:295
 #: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 msgid "Commentary"
 msgstr "해설"
 
-#: ../src/gnome2/about_modules.c:455 ../ui/prefs.glade.h:143
+#: ../src/gtk/about_modules.c:455 ../ui/prefs.glade.h:143
 #: ../ui/prefs.gtkbuilder.h:143
 msgid "Dictionary"
 msgstr "사전"
 
-#: ../src/gnome2/about_modules.c:458
+#: ../src/gtk/about_modules.c:458
 msgid "General Book"
 msgstr "일반 서적"
 
-#: ../src/gnome2/about_modules.c:463
+#: ../src/gtk/about_modules.c:463
 msgid "Personal Commentary"
 msgstr "개별 해설"
 
-#: ../src/gnome2/about_modules.c:466
+#: ../src/gtk/about_modules.c:466
 msgid "Journal"
 msgstr "저널"
 
-#: ../src/gnome2/about_modules.c:469
+#: ../src/gtk/about_modules.c:469
 msgid "Unknown type"
 msgstr "알 수 없는 형식"
 
-#: ../src/gnome2/about_modules.c:475
+#: ../src/gtk/about_modules.c:475
 msgid "<b>Language:</b> "
 msgstr "<b>언어:</b>"
 
-#: ../src/gnome2/about_modules.c:478
+#: ../src/gtk/about_modules.c:478
 msgid "Not specified"
 msgstr "지정 안함"
 
-#: ../src/gnome2/about_modules.c:487
+#: ../src/gtk/about_modules.c:487
 msgid "<b>Installed size:</b> "
 msgstr "<b>설치 크기:</b>"
 
-#: ../src/gnome2/about_modules.c:495
+#: ../src/gtk/about_modules.c:495
 msgid "<b>Companion module(s):</b></br>"
 msgstr "<b>부록 모듈:</b></br>"
 
-#: ../src/gnome2/about_modules.c:505
+#: ../src/gtk/about_modules.c:505
 msgid "<b>Features:</b>"
 msgstr "<b>기능:</b>"
 
-#: ../src/gnome2/about_modules.c:509
+#: ../src/gtk/about_modules.c:509
 msgid "*&nbsp;Headings"
 msgstr "*&nbsp;제목"
 
-#: ../src/gnome2/about_modules.c:517
+#: ../src/gtk/about_modules.c:517
 msgid "*&nbsp;Footnotes"
 msgstr "*&nbsp;각주"
 
-#: ../src/gnome2/about_modules.c:523
+#: ../src/gtk/about_modules.c:523
 msgid "*&nbsp;Cross references"
 msgstr "*&nbsp;상호 참조"
 
-#: ../src/gnome2/about_modules.c:530
+#: ../src/gtk/about_modules.c:530
 msgid "*&nbsp;Strong's numbers"
 msgstr "*&nbsp;불규칙 변화 수"
 
-#: ../src/gnome2/about_modules.c:538
+#: ../src/gtk/about_modules.c:538
 msgid "*&nbsp;Morphological tags"
 msgstr "*&nbsp;어형론상 태그"
 
-#: ../src/gnome2/about_modules.c:544
+#: ../src/gtk/about_modules.c:544
 msgid "*&nbsp;Lemmas"
 msgstr "*&nbsp;부명제"
 
-#: ../src/gnome2/about_modules.c:552
+#: ../src/gtk/about_modules.c:552
 msgid "*&nbsp;Words of Christ in red"
 msgstr "*&nbsp;적 그리스도 구절"
 
-#: ../src/gnome2/about_modules.c:557
+#: ../src/gtk/about_modules.c:557
 msgid "*&nbsp;Greek accents"
 msgstr "*&nbsp;그리스어 강세 부호"
 
-#: ../src/gnome2/about_modules.c:563
+#: ../src/gtk/about_modules.c:563
 msgid "*&nbsp;Hebrew Vowel Points"
 msgstr "*&nbsp;히브리어 모음 부호"
 
-#: ../src/gnome2/about_modules.c:569
+#: ../src/gtk/about_modules.c:569
 msgid "*&nbsp;Hebrew Cantillation"
 msgstr "*&nbsp;히브리어 가사"
 
-#: ../src/gnome2/about_modules.c:575
+#: ../src/gtk/about_modules.c:575
 msgid "*&nbsp;Variant readings"
 msgstr "*&nbsp;이문(異文)"
 
-#: ../src/gnome2/about_modules.c:582
+#: ../src/gtk/about_modules.c:582
 msgid "*&nbsp;Transliteration forms"
 msgstr "*&nbsp;음역 양식"
 
-#: ../src/gnome2/about_modules.c:587
+#: ../src/gtk/about_modules.c:587
 msgid "*&nbsp;Enumerations"
 msgstr "*&nbsp;목록"
 
-#: ../src/gnome2/about_modules.c:592
+#: ../src/gtk/about_modules.c:592
 msgid "*&nbsp;Glosses"
 msgstr "*&nbsp;해설 목록"
 
-#: ../src/gnome2/about_modules.c:599
+#: ../src/gtk/about_modules.c:599
 msgid "*&nbsp;Morpheme Segmentation"
 msgstr "*&nbsp;형태소 분리"
 
-#: ../src/gnome2/about_modules.c:606
+#: ../src/gtk/about_modules.c:606
 msgid "*&nbsp;<i>No features found</i>"
 msgstr "*&nbsp;<i>기능이 없습니다</i>"
 
-#: ../src/gnome2/about_modules.c:616
+#: ../src/gtk/about_modules.c:616
 msgid "<b>Distribution license:</b>"
 msgstr "<b>배포 라이선스:</b>"
 
-#: ../src/gnome2/about_modules.c:629
+#: ../src/gtk/about_modules.c:629
 msgid "<b>Promotional:</b> "
 msgstr "<b>홍보문:</b>"
 
-#: ../src/gnome2/about_sword.c:81
+#: ../src/gtk/about_sword.c:81
 msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package "
 "for research and study of God and His Word. The SWORD Project framework "
@@ -398,11 +398,11 @@ msgstr ""
 "\n"
 "서적은 SWORD 프로젝트에서 다운로드할 수 있습니다."
 
-#: ../src/gnome2/about_sword.c:100
+#: ../src/gtk/about_sword.c:100
 msgid "The SWORD Project"
 msgstr "SWORD 프로젝트"
 
-#: ../src/gnome2/about_sword.c:130
+#: ../src/gtk/about_sword.c:130
 msgid ""
 "BibleSync is a network protocol providing the ability to share navigation "
 "within your Bible study program with cooperating programs on the local "
@@ -423,11 +423,11 @@ msgid ""
 "(Preferences -> BibleSync Settings and Interface -> Keyboard Shortcuts.)"
 msgstr ""
 
-#: ../src/gnome2/about_sword.c:157
+#: ../src/gtk/about_sword.c:157
 msgid "BibleSync technical details"
 msgstr ""
 
-#: ../src/gnome2/about_trans.c:82
+#: ../src/gtk/about_trans.c:82
 msgid ""
 "Do you like using Xiphos to study the Bible? Would you like to see its user "
 "interface in your native language? You could translate Xiphos! \n"
@@ -444,23 +444,23 @@ msgstr ""
 "아래 링크를 방문하여 저희에게 연락주십시오. 그리고 xiphos팀의 열정에 함께해주"
 "십시오. 여러분의 도움을 감사하게 생각합니다!"
 
-#: ../src/gnome2/about_trans.c:96
+#: ../src/gtk/about_trans.c:96
 msgid "About Xiphos Translation"
 msgstr "xiphos 번역 참고"
 
-#: ../src/gnome2/about_trans.c:135
+#: ../src/gtk/about_trans.c:135
 msgid "See TRANSLATION-HOWTO in Xiphos source"
 msgstr "xiphos 소스 코드의 TRANSLATION-HOWTO를 참고하십시오"
 
-#: ../src/gnome2/about_trans.c:141
+#: ../src/gtk/about_trans.c:141
 msgid "Xiphos development"
 msgstr "xiphos 개발"
 
-#: ../src/gnome2/about_xiphos.c:129
+#: ../src/gtk/about_xiphos.c:129
 msgid "Copyright © 2000-2018 Xiphos Development Team"
 msgstr "Copyright © 2000-2018 Xiphos Development Team"
 
-#: ../src/gnome2/about_xiphos.c:131
+#: ../src/gtk/about_xiphos.c:131
 msgid ""
 "\n"
 "Powered by The SWORD Project.\n"
@@ -472,79 +472,79 @@ msgstr ""
 "Troy Griffitts과 SWORD 프로젝트에 도움을 준 모든 분께 감사드립니다."
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:163 ../src/gnome2/bookmarks_menu.c:361
-#: ../src/gnome2/bookmarks_menu.c:653 ../src/gnome2/bookmarks_menu.c:753
-#: ../src/gnome2/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
+#: ../src/gtk/bookmark_dialog.c:163 ../src/gtk/bookmarks_menu.c:361
+#: ../src/gtk/bookmarks_menu.c:653 ../src/gtk/bookmarks_menu.c:753
+#: ../src/gtk/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
 #: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Bookmark"
 msgstr "책갈피"
 
-#: ../src/gnome2/bookmark_dialog.c:165 ../src/gnome2/bookmarks_menu.c:755
-#: ../src/gnome2/bookmarks_treeview.c:139
+#: ../src/gtk/bookmark_dialog.c:165 ../src/gtk/bookmarks_menu.c:755
+#: ../src/gtk/bookmarks_treeview.c:139
 msgid "Enter Folder Name"
 msgstr "폴더 이름을 입력하십시오"
 
-#: ../src/gnome2/bookmark_dialog.c:167 ../src/gnome2/bookmarks_menu.c:757
+#: ../src/gtk/bookmark_dialog.c:167 ../src/gtk/bookmarks_menu.c:757
 msgid "Folder Name"
 msgstr "폴더 이름"
 
-#: ../src/gnome2/bookmark_dialog.c:168 ../src/gnome2/bookmarks_menu.c:758
-#: ../src/gnome2/bookmarks_treeview.c:141
+#: ../src/gtk/bookmark_dialog.c:168 ../src/gtk/bookmarks_menu.c:758
+#: ../src/gtk/bookmarks_treeview.c:141
 msgid "Folder: "
 msgstr "폴더: "
 
-#: ../src/gnome2/bookmarks_menu.c:200
+#: ../src/gtk/bookmarks_menu.c:200
 msgid "Specify bookmarks file"
 msgstr "책갈피 파일을 지정하십시오"
 
-#: ../src/gnome2/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
+#: ../src/gtk/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit"
 msgstr "편집"
 
-#: ../src/gnome2/bookmarks_menu.c:364
+#: ../src/gtk/bookmarks_menu.c:364
 msgid "Folder name: "
 msgstr "폴더 이름: "
 
-#: ../src/gnome2/bookmarks_menu.c:367
+#: ../src/gtk/bookmarks_menu.c:367
 msgid "Bookmark name: "
 msgstr "책갈피 이름: "
 
-#: ../src/gnome2/bookmarks_menu.c:370 ../src/gnome2/bookmarks_menu.c:661
+#: ../src/gtk/bookmarks_menu.c:370 ../src/gtk/bookmarks_menu.c:661
 msgid "Verse: "
 msgstr "절: "
 
-#: ../src/gnome2/bookmarks_menu.c:371 ../src/gnome2/bookmarks_menu.c:662
+#: ../src/gtk/bookmarks_menu.c:371 ../src/gtk/bookmarks_menu.c:662
 msgid "Module: "
 msgstr "모듈: "
 
-#: ../src/gnome2/bookmarks_menu.c:493
+#: ../src/gtk/bookmarks_menu.c:493
 msgid "Remove the selected folder"
 msgstr "선택한 폴더를 제거합니까"
 
-#: ../src/gnome2/bookmarks_menu.c:494
+#: ../src/gtk/bookmarks_menu.c:494
 msgid "(and all its contents)?"
 msgstr "(폴더의 모든 내용 포함)?"
 
-#: ../src/gnome2/bookmarks_menu.c:498
+#: ../src/gtk/bookmarks_menu.c:498
 msgid "Remove the selected bookmark"
 msgstr "선택한 책갈피를 제거합니까"
 
-#: ../src/gnome2/bookmarks_menu.c:654
+#: ../src/gtk/bookmarks_menu.c:654
 msgid "Add"
 msgstr "추가"
 
-#: ../src/gnome2/bookmarks_menu.c:660
+#: ../src/gtk/bookmarks_menu.c:660
 msgid "Label: "
 msgstr "레이블: "
 
-#: ../src/gnome2/bookmarks_treeview.c:102 ../src/gnome2/export_bookmarks.c:172
-#: ../src/gnome2/export_bookmarks.c:229
+#: ../src/gtk/bookmarks_treeview.c:102 ../src/gtk/export_bookmarks.c:172
+#: ../src/gtk/export_bookmarks.c:229
 #, c-format
 msgid "Search result: %s"
 msgstr "검색 결과: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:747
+#: ../src/gtk/bookmarks_treeview.c:747
 msgid ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
@@ -552,196 +552,196 @@ msgstr ""
 "다중 참조 책갈피에서 여는 중이며\n"
 "탭 분리를 지원하지않습니다."
 
-#: ../src/gnome2/bookmarks_treeview.c:850 ../src/gnome2/sidebar.c:1532
-#: ../src/gnome2/sidebar.c:1584
+#: ../src/gtk/bookmarks_treeview.c:850 ../src/gtk/sidebar.c:1532
+#: ../src/gtk/sidebar.c:1584
 msgid "Bookmarks"
 msgstr "책갈피"
 
-#: ../src/gnome2/cipher_key_dialog.c:63
+#: ../src/gtk/cipher_key_dialog.c:63
 #, c-format
 msgid "Cipher key for module %s"
 msgstr "%s 모듈의 암호 키"
 
-#: ../src/gnome2/cipher_key_dialog.c:64
+#: ../src/gtk/cipher_key_dialog.c:64
 msgid "for:"
 msgstr "다음에 대해:"
 
-#: ../src/gnome2/cipher_key_dialog.c:67
+#: ../src/gtk/cipher_key_dialog.c:67
 msgid "Enter Key: "
 msgstr "키 입력: "
 
-#: ../src/gnome2/dialog.c:256
+#: ../src/gtk/dialog.c:256
 msgid "_Ok"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:259 ../src/gnome2/dialog.c:633
+#: ../src/gtk/dialog.c:259 ../src/gtk/dialog.c:633
 msgid "_Yes"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:265 ../src/gnome2/dialog.c:630
+#: ../src/gtk/dialog.c:265 ../src/gtk/dialog.c:630
 msgid "_No"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:289
+#: ../src/gtk/dialog.c:289
 msgid "Close without Saving"
 msgstr "저장 않고 닫기"
 
-#: ../src/gnome2/dialog.c:639
+#: ../src/gtk/dialog.c:639
 msgid "_OK"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:724
+#: ../src/gtk/dialog.c:724
 msgid "Xiphos:"
 msgstr "xiphos:"
 
-#: ../src/gnome2/dialog.c:854
+#: ../src/gtk/dialog.c:854
 msgid "Close _without Saving"
 msgstr "저장 않고 닫기(_W)"
 
-#: ../src/gnome2/export_bookmarks.c:175 ../src/gnome2/export_bookmarks.c:232
-#: ../src/gnome2/sidebar.c:1554 ../src/gnome2/sidebar.c:1602
+#: ../src/gtk/export_bookmarks.c:175 ../src/gtk/export_bookmarks.c:232
+#: ../src/gtk/sidebar.c:1554 ../src/gtk/sidebar.c:1602
 #, c-format
 msgid "Verse List"
 msgstr "절 목록"
 
-#: ../src/gnome2/export_bookmarks.c:659
+#: ../src/gtk/export_bookmarks.c:659
 msgid "VerseList"
 msgstr "절 목록"
 
-#: ../src/gnome2/export_bookmarks.c:663
+#: ../src/gtk/export_bookmarks.c:663
 msgid "SearchResults"
 msgstr "검색 결과"
 
-#: ../src/gnome2/export_dialog.c:325 ../ui/export-dialog.glade.h:4
+#: ../src/gtk/export_dialog.c:325 ../ui/export-dialog.glade.h:4
 #: ../ui/export-dialog.gtkbuilder.h:5
 msgid "Please check copyright before exporting!"
 msgstr "내보내기 전에 저작권을 확인하십시오!"
 
-#: ../src/gnome2/find_dialog.c:178 ../src/gnome2/find_dialog.c:242
-#: ../src/gnome2/find_dialog.c:334 ../ui/gtk2_webedit.ui.h:18
+#: ../src/gtk/find_dialog.c:178 ../src/gtk/find_dialog.c:242
+#: ../src/gtk/find_dialog.c:334 ../ui/gtk2_webedit.ui.h:18
 #: ../ui/gtk_webedit.ui.h:18
 msgid "Find"
 msgstr "찾기"
 
-#: ../src/gnome2/find_dialog.c:197
+#: ../src/gtk/find_dialog.c:197
 msgid "Enter Word or Phrase"
 msgstr "단어 또는 어구를 입력하십시오"
 
-#: ../src/gnome2/find_dialog.c:212
+#: ../src/gtk/find_dialog.c:212
 msgid "Search backwards"
 msgstr "후방 검색"
 
-#: ../src/gnome2/find_dialog.c:251 ../src/gnome2/find_dialog.c:253
+#: ../src/gtk/find_dialog.c:251 ../src/gtk/find_dialog.c:253
 msgid "Find Next"
 msgstr "다음 겁색"
 
-#: ../src/gnome2/font_dialog.c:298
+#: ../src/gtk/font_dialog.c:298
 msgid "Set Module Font"
 msgstr "모듈 글꼴 설정"
 
-#: ../src/gnome2/font_dialog.c:332
+#: ../src/gtk/font_dialog.c:332
 msgid "Change font for"
 msgstr "다음에 대한 글꼴 바꾸기"
 
-#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.gtkbuilder.h:4
+#: ../src/gtk/font_dialog.c:336 ../ui/editor_link_dialog.gtkbuilder.h:4
 msgid "Module"
 msgstr "모듈"
 
-#: ../src/gnome2/font_dialog.c:340
+#: ../src/gtk/font_dialog.c:340
 msgid "Current font: "
 msgstr "현재 글꼴: "
 
-#: ../src/gnome2/font_dialog.c:381 ../src/gnome2/font_dialog.c:397
+#: ../src/gtk/font_dialog.c:381 ../src/gtk/font_dialog.c:397
 #: ../ui/prefs.gtkbuilder.h:3
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:400
+#: ../src/gtk/font_dialog.c:400
 msgid "Use the default font for this module"
 msgstr "이 모듈의 기본 글꼴로 사용"
 
-#: ../src/gnome2/gui.c:173
+#: ../src/gtk/gui.c:173
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
 msgstr "버그네요?! \"STRDUP\" 오류 때문에 xiphos가 깨진 것 같습니다."
 
-#: ../src/gnome2/gui.c:174 ../src/gnome2/gui.c:204
+#: ../src/gtk/gui.c:174 ../src/gtk/gui.c:204
 msgid "Please report this error to the Xiphos team with:"
 msgstr "다음 내용을 첨부하여 xiphos 팀에게 오류를 보고하십시오:"
 
-#: ../src/gnome2/gui.c:203
+#: ../src/gtk/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "버그네요?! \"STRING\" 오류 때문에 xiphos가 깨진 것 같습니다."
 
-#: ../src/gnome2/main_menu.c:769
+#: ../src/gtk/main_menu.c:769
 #, fuzzy
 msgid "Open Session"
 msgstr "세션 열기(_O)"
 
-#: ../src/gnome2/main_window.c:589
+#: ../src/gtk/main_window.c:589
 #, c-format
 msgid "Module has no support for %s."
 msgstr "모듈은 %s을(를) 지원하지 않습니다."
 
-#: ../src/gnome2/main_window.c:640
+#: ../src/gtk/main_window.c:640
 #, fuzzy
 msgid "BibleSync is not active."
 msgstr "BibleSync에서 전송 준비를 하지 않았습니다."
 
 # 주: 고유명사이므로 번역해선 안됨. xiphos도 음역하지 않았으므로 용어 번역 일관성을 따르기 위해 번역하지 마십시오.
-#: ../src/gnome2/main_window.c:648
+#: ../src/gtk/main_window.c:648
 #, fuzzy
 msgid "BibleSync Chat"
 msgstr "BibleSync"
 
-#: ../src/gnome2/main_window.c:649
+#: ../src/gtk/main_window.c:649
 msgid "[say this]"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:650
+#: ../src/gtk/main_window.c:650
 #, fuzzy
 msgid "Comment:"
 msgstr "해설"
 
-#: ../src/gnome2/main_window.c:690
+#: ../src/gtk/main_window.c:690
 msgid "Xiphos: No windows."
 msgstr "xiphos: 창이 없습니다."
 
-#: ../src/gnome2/main_window.c:746
+#: ../src/gtk/main_window.c:746
 msgid "BibleSync: Current navigation sent."
 msgstr "BibleSync: 현재 내비게이션을 보냈습니다."
 
-#: ../src/gnome2/main_window.c:748
+#: ../src/gtk/main_window.c:748
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: 스피커로 출력하지 않습니다."
 
-#: ../src/gnome2/main_window.c:978
+#: ../src/gtk/main_window.c:978
 msgid "Xiphos - Bible Study Software"
 msgstr "xiphos - 성경 공부 프로그램"
 
-#: ../src/gnome2/main_window.c:1042
+#: ../src/gtk/main_window.c:1042
 msgid "Open a new tab"
 msgstr "새 탭 열기"
 
-#: ../src/gnome2/main_window.c:1097 ../src/gnome2/sidebar.c:616
-#: ../src/gnome2/sidebar.c:621 ../src/main/sidebar.cc:655
+#: ../src/gtk/main_window.c:1097 ../src/gtk/sidebar.c:616
+#: ../src/gtk/sidebar.c:621 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "표준 보기"
 
-#: ../src/gnome2/main_window.c:1137
+#: ../src/gtk/main_window.c:1137
 msgid "Commentary View"
 msgstr "해설 보기"
 
-#: ../src/gnome2/main_window.c:1145
+#: ../src/gtk/main_window.c:1145
 msgid "Book View"
 msgstr "책 보기"
 
-#: ../src/gnome2/main_window.c:1163
+#: ../src/gtk/main_window.c:1163
 msgid "Welcome to Xiphos"
 msgstr "xiphos를 사용하시는 여러분 반갑습니다"
 
-#: ../src/gnome2/menu_popup.c:1296
+#: ../src/gtk/menu_popup.c:1296
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -760,33 +760,33 @@ msgstr ""
 "따라서 윈도우 운영체제 환경에서는 개별 해설의 이름을\n"
 "바꿀 수 없습니다."
 
-#: ../src/gnome2/menu_popup.c:1315
+#: ../src/gtk/menu_popup.c:1315
 msgid "Rename Commentary"
 msgstr "해설 이름 바꾸기"
 
-#: ../src/gnome2/menu_popup.c:1318
+#: ../src/gtk/menu_popup.c:1318
 msgid "Choose Commentary Name"
 msgstr "해설 이름 선택"
 
-#: ../src/gnome2/menu_popup.c:1320
+#: ../src/gtk/menu_popup.c:1320
 msgid "New Name"
 msgstr "새 이름 부여하기"
 
-#: ../src/gnome2/menu_popup.c:1321 ../src/gnome2/treekey-editor.c:138
-#: ../src/gnome2/treekey-editor.c:195 ../src/gnome2/treekey-editor.c:293
+#: ../src/gtk/menu_popup.c:1321 ../src/gtk/treekey-editor.c:138
+#: ../src/gtk/treekey-editor.c:195 ../src/gtk/treekey-editor.c:293
 #: ../src/main/prayerlists.cc:235
 msgid "Name: "
 msgstr "이름: "
 
-#: ../src/gnome2/menu_popup.c:1330 ../src/main/prayerlists.cc:248
+#: ../src/gtk/menu_popup.c:1330 ../src/main/prayerlists.cc:248
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "모듈 이름은 영문 대소문자, 숫자, 밑줄문자만 가능합니다."
 
-#: ../src/gnome2/menu_popup.c:1336 ../src/main/prayerlists.cc:254
+#: ../src/gtk/menu_popup.c:1336 ../src/main/prayerlists.cc:254
 msgid "Xiphos already knows a module by that name."
 msgstr "xiphos에 이미 해당 이름을 가진 모듈이 있습니다."
 
-#: ../src/gnome2/menu_popup.c:1378
+#: ../src/gtk/menu_popup.c:1378
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -795,7 +795,7 @@ msgstr ""
 "새 설정에 실패했습니다:\n"
 "%s"
 
-#: ../src/gnome2/menu_popup.c:1387
+#: ../src/gtk/menu_popup.c:1387
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -803,14 +803,14 @@ msgstr ""
 "설정 빌드 오류:\n"
 "\n"
 
-#: ../src/gnome2/menu_popup.c:2036
+#: ../src/gtk/menu_popup.c:2036
 msgid "No module in this pane."
 msgstr "이 창에 모듈이 없습니다."
 
 #. *****************************************************************************
 #. * defines
 #.
-#: ../src/gnome2/mod_mgr.c:64
+#: ../src/gtk/mod_mgr.c:64
 msgid ""
 "<b>Overview of the Module Manager.</b>\n"
 "\n"
@@ -856,7 +856,7 @@ msgstr ""
 "대화방에서 도움을 구하시든지, (대화방에서 아무도 반응하지 않는다면) 사용자 메"
 "일링 리스트에 전자메일을 보내십시오.\n"
 
-#: ../src/gnome2/mod_mgr.c:67
+#: ../src/gtk/mod_mgr.c:67
 msgid ""
 "<b>Welcome to Xiphos.</b>\n"
 "\n"
@@ -918,56 +918,56 @@ msgstr ""
 "\n"
 "절차 대화상자와 일반 소개 대화상자는 언제든 닫을 수 있습니다."
 
-#: ../src/gnome2/mod_mgr.c:191
+#: ../src/gtk/mod_mgr.c:191
 msgid "Remove these modules?"
 msgstr "이 모듈을 제거합니까?"
 
-#: ../src/gnome2/mod_mgr.c:192
+#: ../src/gtk/mod_mgr.c:192
 msgid "Preparing to remove"
 msgstr "제거 준비 중"
 
-#: ../src/gnome2/mod_mgr.c:193
+#: ../src/gtk/mod_mgr.c:193
 msgid "Removing"
 msgstr "제거 중"
 
-#: ../src/gnome2/mod_mgr.c:194 ../ui/xi-menus.glade.h:158
+#: ../src/gtk/mod_mgr.c:194 ../ui/xi-menus.glade.h:158
 #: ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove"
 msgstr "제거"
 
-#: ../src/gnome2/mod_mgr.c:195
+#: ../src/gtk/mod_mgr.c:195
 msgid "Install these modules?"
 msgstr "이 모듈을 설치합니까?"
 
-#: ../src/gnome2/mod_mgr.c:196
+#: ../src/gtk/mod_mgr.c:196
 msgid "Preparing to install"
 msgstr "설치 준비 중"
 
-#: ../src/gnome2/mod_mgr.c:197
+#: ../src/gtk/mod_mgr.c:197
 msgid "Installing"
 msgstr "설치 중"
 
-#: ../src/gnome2/mod_mgr.c:198
+#: ../src/gtk/mod_mgr.c:198
 msgid "Install"
 msgstr "설치"
 
-#: ../src/gnome2/mod_mgr.c:199
+#: ../src/gtk/mod_mgr.c:199
 msgid "Archive these modules?"
 msgstr "이 모듈을 보관처리 합니까?"
 
-#: ../src/gnome2/mod_mgr.c:200
+#: ../src/gtk/mod_mgr.c:200
 msgid "Preparing to archive"
 msgstr "보관처리 준비 중"
 
-#: ../src/gnome2/mod_mgr.c:201
+#: ../src/gtk/mod_mgr.c:201
 msgid "Archiving"
 msgstr "보관처리 중"
 
-#: ../src/gnome2/mod_mgr.c:202
+#: ../src/gtk/mod_mgr.c:202
 msgid "Archive"
 msgstr "보관처리"
 
-#: ../src/gnome2/mod_mgr.c:203
+#: ../src/gtk/mod_mgr.c:203
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
@@ -975,59 +975,59 @@ msgstr ""
 "이 모듈에 대한 고속 검색 인덱스를\n"
 "만드시겠습니까(모듈에 대해 수 분이 걸림)?"
 
-#: ../src/gnome2/mod_mgr.c:204
+#: ../src/gtk/mod_mgr.c:204
 msgid "Preparing to index"
 msgstr "색인 준비 중"
 
-#: ../src/gnome2/mod_mgr.c:205
+#: ../src/gtk/mod_mgr.c:205
 msgid "Indexing"
 msgstr "색인 중"
 
-#: ../src/gnome2/mod_mgr.c:206
+#: ../src/gtk/mod_mgr.c:206
 msgid "Index"
 msgstr "색인"
 
-#: ../src/gnome2/mod_mgr.c:207
+#: ../src/gtk/mod_mgr.c:207
 msgid "Delete fast-search index for these modules?"
 msgstr "이 모듈에 대한 빠른 검색 색인을 삭제하시겠습니까?"
 
-#: ../src/gnome2/mod_mgr.c:208
+#: ../src/gtk/mod_mgr.c:208
 msgid "Preparing to delete index"
 msgstr "색인 삭제 준비 중"
 
-#: ../src/gnome2/mod_mgr.c:209
+#: ../src/gtk/mod_mgr.c:209
 msgid "Deleting index"
 msgstr "색인을 삭제합니다"
 
-#: ../src/gnome2/mod_mgr.c:210
+#: ../src/gtk/mod_mgr.c:210
 msgid "Deletion"
 msgstr "삭제"
 
-#: ../src/gnome2/mod_mgr.c:311
+#: ../src/gtk/mod_mgr.c:311
 msgid "The module has no About information."
 msgstr "모듈 정보가 없습니다."
 
-#: ../src/gnome2/mod_mgr.c:533
+#: ../src/gtk/mod_mgr.c:533
 msgid "Module Name"
 msgstr "모듈 이름"
 
-#: ../src/gnome2/mod_mgr.c:562
+#: ../src/gtk/mod_mgr.c:562
 msgid "A checkmark means this module is already installed"
 msgstr "표시 기호는 이 모듈을 이미 설치했다는 뜻입니다"
 
-#: ../src/gnome2/mod_mgr.c:589
+#: ../src/gtk/mod_mgr.c:589
 msgid "Click the box to work on this module"
 msgstr "이 모듈을 다루려면 박스를 누르십시오"
 
-#: ../src/gnome2/mod_mgr.c:590
+#: ../src/gtk/mod_mgr.c:590
 msgid "Click the box to select this module for install/update"
 msgstr "설치/업데이트할 모듈을 선택하려면 박스를 주르십시오"
 
-#: ../src/gnome2/mod_mgr.c:608
+#: ../src/gtk/mod_mgr.c:608
 msgid "Installed"
 msgstr "설치함"
 
-#: ../src/gnome2/mod_mgr.c:625
+#: ../src/gtk/mod_mgr.c:625
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
@@ -1035,7 +1035,7 @@ msgstr ""
 "색인 아이콘은 고속 검색 목적으로 이 모듈에 대해 최적화('루씬') 색인을 만들었"
 "다는 뜻입니다(이 기능에 대해서는 관리자 창을 살펴보십시오)"
 
-#: ../src/gnome2/mod_mgr.c:649
+#: ../src/gtk/mod_mgr.c:649
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
@@ -1043,13 +1043,13 @@ msgstr ""
 "잠금 아이콘은 모듈을 암호화했다는 뜻이며, 이 아이콘이 나타나면 컨텐드 소유자 "
 "로부터 잠금 해제 키를 구매해야합니다."
 
-#: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:640
+#: ../src/gtk/mod_mgr.c:664 ../src/main/biblesync_glue.cc:640
 #: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
 #: ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
 msgstr "정보"
 
-#: ../src/gnome2/mod_mgr.c:688
+#: ../src/gtk/mod_mgr.c:688
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
@@ -1057,19 +1057,19 @@ msgstr ""
 "새로 고침 아이콘은 설치한 모듈이 새 버전의 모듈보다 오래됐다는 뜻입니다: 모듈"
 "을 업데이트해야합니다"
 
-#: ../src/gnome2/mod_mgr.c:700
+#: ../src/gtk/mod_mgr.c:700
 msgid "Available"
 msgstr "가용성"
 
-#: ../src/gnome2/mod_mgr.c:709
+#: ../src/gtk/mod_mgr.c:709
 msgid "Size"
 msgstr "크기"
 
-#: ../src/gnome2/mod_mgr.c:718
+#: ../src/gtk/mod_mgr.c:718
 msgid "Description"
 msgstr "설명"
 
-#: ../src/gnome2/mod_mgr.c:872
+#: ../src/gtk/mod_mgr.c:872
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -1078,33 +1078,33 @@ msgstr ""
 "`mkdir %s' 실패\n"
 "%s."
 
-#: ../src/gnome2/mod_mgr.c:906
+#: ../src/gtk/mod_mgr.c:906
 msgid " archived in: \n"
 msgstr " 다음에 보관: \n"
 
-#: ../src/gnome2/mod_mgr.c:988
+#: ../src/gtk/mod_mgr.c:988
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "묵상 일기 및 기도 목록을 색인할 수 없습니다."
 
-#: ../src/gnome2/mod_mgr.c:1019
+#: ../src/gtk/mod_mgr.c:1019
 #, c-format
 msgid "%s failed"
 msgstr "%s 실패"
 
-#: ../src/gnome2/mod_mgr.c:1022 ../src/gnome2/mod_mgr.c:1788
+#: ../src/gtk/mod_mgr.c:1022 ../src/gtk/mod_mgr.c:1788
 msgid "Finished"
 msgstr "마침"
 
-#: ../src/gnome2/mod_mgr.c:1195 ../src/gnome2/mod_mgr.c:1197
-#: ../src/gnome2/mod_mgr.c:1307 ../src/gnome2/mod_mgr.c:1340
-#: ../src/gnome2/mod_mgr.c:1342 ../src/gnome2/utilities.c:432
-#: ../src/gnome2/utilities.c:495 ../src/gnome2/utilities.c:497
-#: ../src/gnome2/utilities.c:1071 ../src/main/sidebar.cc:807
+#: ../src/gtk/mod_mgr.c:1195 ../src/gtk/mod_mgr.c:1197
+#: ../src/gtk/mod_mgr.c:1307 ../src/gtk/mod_mgr.c:1340
+#: ../src/gtk/mod_mgr.c:1342 ../src/gtk/utilities.c:432
+#: ../src/gtk/utilities.c:495 ../src/gtk/utilities.c:497
+#: ../src/gtk/utilities.c:1071 ../src/main/sidebar.cc:807
 #: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../src/gnome2/mod_mgr.c:1518
+#: ../src/gtk/mod_mgr.c:1518
 #, c-format
 msgid ""
 "Repository:\n"
@@ -1113,7 +1113,7 @@ msgstr ""
 "저장소:\n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1531
+#: ../src/gtk/mod_mgr.c:1531
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -1121,44 +1121,44 @@ msgstr ""
 "모듈 형식별\n"
 "분류"
 
-#: ../src/gnome2/mod_mgr.c:1536 ../src/gnome2/utilities.c:574
+#: ../src/gtk/mod_mgr.c:1536 ../src/gtk/utilities.c:574
 #: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
 msgid "Biblical Texts"
 msgstr "성경"
 
-#: ../src/gnome2/mod_mgr.c:1540 ../src/gnome2/utilities.c:580
+#: ../src/gtk/mod_mgr.c:1540 ../src/gtk/utilities.c:580
 #: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
 #: ../src/main/sidebar.cc:986
 msgid "Commentaries"
 msgstr "해설"
 
-#: ../src/gnome2/mod_mgr.c:1544 ../src/gnome2/utilities.c:587
+#: ../src/gtk/mod_mgr.c:1544 ../src/gtk/utilities.c:587
 #: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
 msgid "Dictionaries"
 msgstr "사전"
 
-#: ../src/gnome2/mod_mgr.c:1548 ../src/gnome2/utilities.c:593
+#: ../src/gtk/mod_mgr.c:1548 ../src/gtk/utilities.c:593
 #: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
 msgid "Glossaries"
 msgstr "용어집"
 
-#: ../src/gnome2/mod_mgr.c:1552 ../src/gnome2/utilities.c:600
+#: ../src/gtk/mod_mgr.c:1552 ../src/gtk/utilities.c:600
 #: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
 msgid "Daily Devotionals"
 msgstr "매일 묵상"
 
-#: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/utilities.c:606
+#: ../src/gtk/mod_mgr.c:1557 ../src/gtk/utilities.c:606
 #: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
 #: ../src/main/sidebar.cc:1022
 msgid "General Books"
 msgstr "일반 서적"
 
-#: ../src/gnome2/mod_mgr.c:1569 ../src/gnome2/utilities.c:624
+#: ../src/gtk/mod_mgr.c:1569 ../src/gtk/utilities.c:624
 #: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
 msgid "Cult/Unorthodox"
 msgstr "광신도/이단"
 
-#: ../src/gnome2/mod_mgr.c:1578
+#: ../src/gtk/mod_mgr.c:1578
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -1166,95 +1166,95 @@ msgstr ""
 "가용성별\n"
 "분류"
 
-#: ../src/gnome2/mod_mgr.c:1582
+#: ../src/gtk/mod_mgr.c:1582
 msgid "Updates"
 msgstr "업데이트"
 
-#: ../src/gnome2/mod_mgr.c:1587
+#: ../src/gtk/mod_mgr.c:1587
 msgid "Uninstalled"
 msgstr "설치하지 않음"
 
-#: ../src/gnome2/mod_mgr.c:1592 ../src/gnome2/sidebar.c:632
-#: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:233
+#: ../src/gtk/mod_mgr.c:1592 ../src/gtk/sidebar.c:632
+#: ../src/gtk/utilities.c:632 ../src/main/prayerlists.cc:233
 #: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
 msgid "Prayer List/Journal"
 msgstr "기도 목록/묵상 일기"
 
-#: ../src/gnome2/mod_mgr.c:1771
+#: ../src/gtk/mod_mgr.c:1771
 msgid "Refreshing from remote source"
 msgstr "원격 원본으로 새로 고치는 중"
 
-#: ../src/gnome2/mod_mgr.c:1783
+#: ../src/gtk/mod_mgr.c:1783
 msgid "Remote source not found"
 msgstr "원격 원본이 없습니다"
 
-#: ../src/gnome2/mod_mgr.c:1854
+#: ../src/gtk/mod_mgr.c:1854
 msgid "Configure"
 msgstr "설정"
 
-#: ../src/gnome2/mod_mgr.c:1883
+#: ../src/gtk/mod_mgr.c:1883
 msgid "Type"
 msgstr "형식"
 
-#: ../src/gnome2/mod_mgr.c:1890
+#: ../src/gtk/mod_mgr.c:1890
 msgid "Caption"
 msgstr "설명 제목"
 
-#: ../src/gnome2/mod_mgr.c:1897
+#: ../src/gtk/mod_mgr.c:1897
 msgid "Source"
 msgstr "원본"
 
-#: ../src/gnome2/mod_mgr.c:1904
+#: ../src/gtk/mod_mgr.c:1904
 msgid "Directory"
 msgstr "디렉터리"
 
-#: ../src/gnome2/mod_mgr.c:1912
+#: ../src/gtk/mod_mgr.c:1912
 msgid "User"
 msgstr "사용자"
 
-#: ../src/gnome2/mod_mgr.c:1919
+#: ../src/gtk/mod_mgr.c:1919
 msgid "Password"
 msgstr "암호"
 
-#: ../src/gnome2/mod_mgr.c:1926
+#: ../src/gtk/mod_mgr.c:1926
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1941
+#: ../src/gtk/mod_mgr.c:1941
 msgid "Module Sources"
 msgstr "모듈 원본"
 
-#: ../src/gnome2/mod_mgr.c:1944
+#: ../src/gtk/mod_mgr.c:1944
 msgid "Add/Remove"
 msgstr "추가/제거"
 
-#: ../src/gnome2/mod_mgr.c:1947
+#: ../src/gtk/mod_mgr.c:1947
 msgid "Choose"
 msgstr "선택"
 
-#: ../src/gnome2/mod_mgr.c:1950 ../src/gnome2/preferences_dialog.c:2056
-#: ../src/gnome2/sidebar.c:1564 ../src/gnome2/sidebar.c:1610
+#: ../src/gtk/mod_mgr.c:1950 ../src/gtk/preferences_dialog.c:2056
+#: ../src/gtk/sidebar.c:1564 ../src/gtk/sidebar.c:1610
 msgid "Modules"
 msgstr "모듈"
 
-#: ../src/gnome2/mod_mgr.c:1952
+#: ../src/gtk/mod_mgr.c:1952
 msgid "Install/Update"
 msgstr "설치/업데이트"
 
-#: ../src/gnome2/mod_mgr.c:1955
+#: ../src/gtk/mod_mgr.c:1955
 msgid "Maintenance"
 msgstr "관리"
 
-#: ../src/gnome2/mod_mgr.c:2171
+#: ../src/gtk/mod_mgr.c:2171
 msgid "Please Refresh"
 msgstr "새로 고치십시오"
 
-#: ../src/gnome2/mod_mgr.c:2172
+#: ../src/gtk/mod_mgr.c:2172
 msgid "Your module list is not up to date!"
 msgstr "모듈 목록이 최신이 아닙니다!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2489
+#: ../src/gtk/mod_mgr.c:2489
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -1262,7 +1262,7 @@ msgstr ""
 "마지막 성경을 제거했습니다.\n"
 "xiphos에는 최소한 하나의 성경이 필요합니다."
 
-#: ../src/gnome2/mod_mgr.c:2495
+#: ../src/gtk/mod_mgr.c:2495
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -1270,7 +1270,7 @@ msgstr ""
 "여전히 설치한 성경이 없습니다.\n"
 "xiphos는 성경이 아무것도 없으면 계속 실행할 수 없습니다."
 
-#: ../src/gnome2/mod_mgr.c:2620
+#: ../src/gtk/mod_mgr.c:2620
 #, c-format
 msgid ""
 "%s obsoletes %s.\n"
@@ -1281,115 +1281,115 @@ msgstr ""
 "%3$s을(를) 삭제하시겠습니까?\n"
 "참고: 되돌릴 수 없습니다."
 
-#: ../src/gnome2/mod_mgr.c:2686
+#: ../src/gtk/mod_mgr.c:2686
 msgid "No obsolete modules were found."
 msgstr "오래된 모듈이 없습니다."
 
-#: ../src/gnome2/mod_mgr.c:2708
+#: ../src/gtk/mod_mgr.c:2708
 msgid "Standard remote sources have been loaded."
 msgstr "표준 원격 원본을 불러왔습니다."
 
-#: ../src/gnome2/mod_mgr.c:2717
+#: ../src/gtk/mod_mgr.c:2717
 msgid "Could not load standard sources from CrossWire."
 msgstr "CrossWire에서 표준 원본을 불러올 수 없습니다."
 
-#: ../src/gnome2/mod_mgr.c:2868 ../src/gnome2/mod_mgr.c:3124
+#: ../src/gtk/mod_mgr.c:2868 ../src/gtk/mod_mgr.c:3124
 msgid "Remove the selected source"
 msgstr "선택한 원본 제거"
 
-#: ../src/gnome2/mod_mgr.c:2934
+#: ../src/gtk/mod_mgr.c:2934
 msgid "Enter a remote source"
 msgstr "원격 원본 정보를 입력하십시오"
 
-#: ../src/gnome2/mod_mgr.c:2943
+#: ../src/gtk/mod_mgr.c:2943
 msgid "Caption:"
 msgstr "설명 제목:"
 
-#: ../src/gnome2/mod_mgr.c:2944
+#: ../src/gtk/mod_mgr.c:2944
 msgid "Type:"
 msgstr "형식:"
 
-#: ../src/gnome2/mod_mgr.c:2945
+#: ../src/gtk/mod_mgr.c:2945
 msgid "Host:"
 msgstr "호스트:"
 
-#: ../src/gnome2/mod_mgr.c:2946
+#: ../src/gtk/mod_mgr.c:2946
 msgid "Directory:"
 msgstr "디렉터리:"
 
-#: ../src/gnome2/mod_mgr.c:2947
+#: ../src/gtk/mod_mgr.c:2947
 msgid "User (optional):"
 msgstr "사용자(선택):"
 
-#: ../src/gnome2/mod_mgr.c:2948
+#: ../src/gtk/mod_mgr.c:2948
 msgid "Password (optional):"
 msgstr "암호(선택):"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2974
+#: ../src/gtk/mod_mgr.c:2974
 msgid "A source by that name already exists."
 msgstr "해당 이름을 가진 공금원이 이미 있습니다."
 
-#: ../src/gnome2/mod_mgr.c:3121
+#: ../src/gtk/mod_mgr.c:3121
 msgid "Delete a remote source"
 msgstr "원격 공금원 삭제"
 
-#: ../src/gnome2/mod_mgr.c:3640
+#: ../src/gtk/mod_mgr.c:3640
 msgid "[no module]"
 msgstr "[모듈 없음]"
 
-#: ../src/gnome2/navbar_book.c:360 ../src/gnome2/navbar_book_dialog.c:304
+#: ../src/gtk/navbar_book.c:360 ../src/gtk/navbar_book_dialog.c:304
 msgid "Go outward, to the section containing this one"
 msgstr "이 절이 들어있는 절 바깥 장으로 이동"
 
-#: ../src/gnome2/navbar_book.c:384 ../src/gnome2/navbar_book_dialog.c:330
+#: ../src/gtk/navbar_book.c:384 ../src/gtk/navbar_book_dialog.c:330
 msgid "Go to previous item"
 msgstr "이전 항목으로 이동"
 
-#: ../src/gnome2/navbar_book.c:407 ../src/gnome2/navbar_book_dialog.c:354
+#: ../src/gtk/navbar_book.c:407 ../src/gtk/navbar_book_dialog.c:354
 msgid "Go to next item"
 msgstr "다음 항목으로 이동"
 
-#: ../src/gnome2/navbar_book.c:431 ../src/gnome2/navbar_book_dialog.c:378
+#: ../src/gtk/navbar_book.c:431 ../src/gtk/navbar_book_dialog.c:378
 msgid "Go inward, to the first subsection"
 msgstr "첫번째 하위 절이 있는 안쪽으로 이동"
 
-#: ../src/gnome2/navbar_versekey_dialog.c:910
-#: ../src/gnome2/navbar_versekey_editor.c:939
-#: ../src/gnome2/navbar_versekey_parallel.c:859
+#: ../src/gtk/navbar_versekey_dialog.c:910
+#: ../src/gtk/navbar_versekey_editor.c:939
+#: ../src/gtk/navbar_versekey_parallel.c:859
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "이 동기화의 스크롤을 메인 창의 스크롤과 동기화"
 
-#: ../src/gnome2/parallel_dialog.c:348 ../src/gnome2/preferences_dialog.c:2063
+#: ../src/gtk/parallel_dialog.c:348 ../src/gtk/preferences_dialog.c:2063
 msgid "Parallel"
 msgstr "나란히 보기"
 
-#: ../src/gnome2/parallel_view.c:112
+#: ../src/gtk/parallel_view.c:112
 msgid "Detach/Attach"
 msgstr "붙이기/떼어내기"
 
-#: ../src/gnome2/parallel_view.c:117 ../ui/xi-menus.glade.h:66
+#: ../src/gtk/parallel_view.c:117 ../ui/xi-menus.glade.h:66
 #: ../ui/xi-menus-popup.gtkbuilder.h:43
 msgid "Module Options"
 msgstr "모듈 옵션"
 
-#: ../src/gnome2/parallel_view.c:216 ../src/gnome2/sidebar.c:616
-#: ../src/gnome2/sidebar.c:621 ../src/gnome2/tabbed_browser.c:254
+#: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:616
+#: ../src/gtk/sidebar.c:621 ../src/gtk/tabbed_browser.c:254
 #: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
 msgid "Parallel View"
 msgstr "나란히 보기"
 
-#: ../src/gnome2/preferences_dialog.c:866
+#: ../src/gtk/preferences_dialog.c:866
 msgid "BibleSync session passphrase"
 msgstr "BiboeSync 세션 암호"
 
-#: ../src/gnome2/preferences_dialog.c:868
+#: ../src/gtk/preferences_dialog.c:868
 msgid "Phrase:"
 msgstr "어구:"
 
 #. mode selection failed? probably dead interface
-#: ../src/gnome2/preferences_dialog.c:940
+#: ../src/gtk/preferences_dialog.c:940
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
@@ -1397,129 +1397,129 @@ msgstr ""
 "모드 선택에 실패했습니다.\n"
 "\"디버깅\"를 설정하고 원인을 살펴보십시오."
 
-#: ../src/gnome2/preferences_dialog.c:992
+#: ../src/gtk/preferences_dialog.c:992
 msgid "Mode selection failed.\n"
 msgstr "모드 선택에 실패했습니다.\n"
 
-#: ../src/gnome2/preferences_dialog.c:995
+#: ../src/gtk/preferences_dialog.c:995
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr "BibleSync: %s (암호: \"%s\"),"
 
-#: ../src/gnome2/preferences_dialog.c:997
+#: ../src/gtk/preferences_dialog.c:997
 msgid "Disabled"
 msgstr "비활성"
 
-#: ../src/gnome2/preferences_dialog.c:999 ../src/main/xml.c:96
+#: ../src/gtk/preferences_dialog.c:999 ../src/main/xml.c:96
 msgid "Personal"
 msgstr "개인"
 
-#: ../src/gnome2/preferences_dialog.c:1001
+#: ../src/gtk/preferences_dialog.c:1001
 msgid "Speaker"
 msgstr "독서자"
 
-#: ../src/gnome2/preferences_dialog.c:1002
+#: ../src/gtk/preferences_dialog.c:1002
 msgid "Audience"
 msgstr "청자"
 
-#: ../src/gnome2/preferences_dialog.c:1617
-#: ../src/gnome2/preferences_dialog.c:1651
-#: ../src/gnome2/preferences_dialog.c:1684
-#: ../src/gnome2/preferences_dialog.c:1716
-#: ../src/gnome2/preferences_dialog.c:1747
-#: ../src/gnome2/preferences_dialog.c:1778
-#: ../src/gnome2/preferences_dialog.c:1809
-#: ../src/gnome2/preferences_dialog.c:1841
-#: ../src/gnome2/preferences_dialog.c:1874
-#: ../src/gnome2/preferences_dialog.c:1925
-#: ../src/gnome2/preferences_dialog.c:2385
+#: ../src/gtk/preferences_dialog.c:1617
+#: ../src/gtk/preferences_dialog.c:1651
+#: ../src/gtk/preferences_dialog.c:1684
+#: ../src/gtk/preferences_dialog.c:1716
+#: ../src/gtk/preferences_dialog.c:1747
+#: ../src/gtk/preferences_dialog.c:1778
+#: ../src/gtk/preferences_dialog.c:1809
+#: ../src/gtk/preferences_dialog.c:1841
+#: ../src/gtk/preferences_dialog.c:1874
+#: ../src/gtk/preferences_dialog.c:1925
+#: ../src/gtk/preferences_dialog.c:2385
 msgid "-- Select --"
 msgstr "-- 선택 --"
 
-#: ../src/gnome2/preferences_dialog.c:1888
+#: ../src/gtk/preferences_dialog.c:1888
 msgid "Locale will take effect after restart."
 msgstr "다시 시작하고 나서 로캘을 적용합니다."
 
-#: ../src/gnome2/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
+#: ../src/gtk/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "기본 설정"
 
-#: ../src/gnome2/preferences_dialog.c:2036
+#: ../src/gtk/preferences_dialog.c:2036
 msgid "General"
 msgstr "일반"
 
-#: ../src/gnome2/preferences_dialog.c:2039
+#: ../src/gtk/preferences_dialog.c:2039
 msgid "Options"
 msgstr "옵션"
 
 # 주: 고유명사이므로 번역해선 안됨. xiphos도 음역하지 않았으므로 용어 번역 일관성을 따르기 위해 번역하지 마십시오.
-#: ../src/gnome2/preferences_dialog.c:2042 ../ui/prefs.glade.h:88
+#: ../src/gtk/preferences_dialog.c:2042 ../ui/prefs.glade.h:88
 #: ../ui/prefs.gtkbuilder.h:88
 msgid "BibleSync"
 msgstr "BibleSync"
 
-#: ../src/gnome2/preferences_dialog.c:2046
+#: ../src/gtk/preferences_dialog.c:2046
 msgid "Fonts"
 msgstr "글꼴"
 
-#: ../src/gnome2/preferences_dialog.c:2049
+#: ../src/gtk/preferences_dialog.c:2049
 msgid "Color"
 msgstr "색상"
 
-#: ../src/gnome2/preferences_dialog.c:2052
+#: ../src/gtk/preferences_dialog.c:2052
 msgid "Sizes and Faces"
 msgstr "크기 및 모양새"
 
-#: ../src/gnome2/preferences_dialog.c:2066
+#: ../src/gtk/preferences_dialog.c:2066
 msgid "Special"
 msgstr "특수"
 
-#: ../src/gnome2/preferences_dialog.c:2766 ../src/gnome2/search_dialog.c:519
+#: ../src/gtk/preferences_dialog.c:2766 ../src/gtk/search_dialog.c:519
 msgid "Clear List?"
 msgstr "목록을 지웁니까?"
 
-#: ../src/gnome2/preferences_dialog.c:2767 ../src/gnome2/search_dialog.c:520
+#: ../src/gtk/preferences_dialog.c:2767 ../src/gtk/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr "정말로 모듈 목록을 지우시겠습니까?"
 
-#: ../src/gnome2/preferences_dialog.c:2818 ../src/main/search_dialog.cc:678
+#: ../src/gtk/preferences_dialog.c:2818 ../src/main/search_dialog.cc:678
 msgid "Remove Module?"
 msgstr "모듈을 제거합니까?"
 
-#: ../src/gnome2/preferences_dialog.c:2819 ../src/main/search_dialog.cc:679
+#: ../src/gtk/preferences_dialog.c:2819 ../src/main/search_dialog.cc:679
 msgid "Are you sure you want to remove the selected module?"
 msgstr "정말로 선택한 모듈을 제거하시겠습니까?"
 
-#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:52
+#: ../src/gtk/search_dialog.c:62 ../src/main/search_dialog.cc:52
 #: ../src/main/search_sidebar.cc:51
 msgid "Searching the "
 msgstr "검색 "
 
-#: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:53
+#: ../src/gtk/search_dialog.c:63 ../src/main/search_dialog.cc:53
 #: ../src/main/search_sidebar.cc:52
 msgid " Module"
 msgstr " 모듈"
 
-#: ../src/gnome2/search_dialog.c:64 ../src/main/search_dialog.cc:54
+#: ../src/gtk/search_dialog.c:64 ../src/main/search_dialog.cc:54
 #: ../src/main/search_sidebar.cc:53
 msgid "found in "
 msgstr "다음에서 찾음 "
 
-#: ../src/gnome2/search_dialog.c:483
+#: ../src/gtk/search_dialog.c:483
 #, c-format
 msgid "New List %s"
 msgstr "새 목록 %s"
 
-#: ../src/gnome2/search_dialog.c:700
+#: ../src/gtk/search_dialog.c:700
 msgid "The last module list may not be deleted"
 msgstr "마지막 모듈 목록은 삭제하지 않을 수도 있습니다"
 
-#: ../src/gnome2/search_dialog.c:715
+#: ../src/gtk/search_dialog.c:715
 msgid "Delete list?"
 msgstr "목록을 삭제합니까?"
 
-#: ../src/gnome2/search_dialog.c:716
+#: ../src/gtk/search_dialog.c:716
 msgid "Are you sure you want to delete:"
 msgstr "정말로 다음을 삭제하시겠습니까:"
 
@@ -1539,7 +1539,7 @@ msgstr "정말로 다음을 삭제하시겠습니까:"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:845
+#: ../src/gtk/search_dialog.c:845
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1609,7 +1609,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:903
+#: ../src/gtk/search_dialog.c:903
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1641,15 +1641,15 @@ msgstr ""
 "accusative singular feminine\" 입니다. 자세한 사용법은 Robinson 모듈을 살펴보"
 "십시오."
 
-#: ../src/gnome2/search_dialog.c:1202
+#: ../src/gtk/search_dialog.c:1202
 msgid "Module is neither Bible nor commentary"
 msgstr "모듈이 성경 또는 해설이 아닙니다."
 
-#: ../src/gnome2/search_dialog.c:1220 ../src/gnome2/sidebar.c:984
+#: ../src/gtk/search_dialog.c:1220 ../src/gtk/sidebar.c:984
 msgid "BibleSync is not active for transmit."
 msgstr "BibleSync에서 전송 준비를 하지 않았습니다."
 
-#: ../src/gnome2/search_sidebar.c:241
+#: ../src/gtk/search_sidebar.c:241
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
@@ -1657,169 +1657,169 @@ msgstr ""
 "포함(\"AND\") 검색 방식입니다:\n"
 "모든 단어가 들어있는 결과를 찾습니다."
 
-#: ../src/gnome2/search_sidebar.c:253
+#: ../src/gtk/search_sidebar.c:253
 msgid "_Open Advanced Search"
 msgstr "고급 검색 열기(_O)"
 
-#: ../src/gnome2/search_sidebar.c:258
+#: ../src/gtk/search_sidebar.c:258
 msgid "Open the separate Advanced Search dialog."
 msgstr "고급 검색 대화상자를 따로 엽니다."
 
-#: ../src/gnome2/search_sidebar.c:274
+#: ../src/gtk/search_sidebar.c:274
 msgid "Search Module"
 msgstr "모듈 검색"
 
-#: ../src/gnome2/search_sidebar.c:311
+#: ../src/gtk/search_sidebar.c:311
 msgid "Search Type"
 msgstr "검색 형식"
 
-#: ../src/gnome2/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
+#: ../src/gtk/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
 #: ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
 msgstr "최적화(\"루씬\")"
 
-#: ../src/gnome2/search_sidebar.c:333 ../src/main/search_dialog.cc:100
+#: ../src/gtk/search_sidebar.c:333 ../src/main/search_dialog.cc:100
 #: ../ui/search-dialog.glade.h:41 ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "정규 표현식"
 
-#: ../src/gnome2/search_sidebar.c:340 ../src/main/search_dialog.cc:102
+#: ../src/gtk/search_sidebar.c:340 ../src/main/search_dialog.cc:102
 #: ../ui/search-dialog.glade.h:43 ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "어구 일치"
 
-#: ../src/gnome2/search_sidebar.c:356
+#: ../src/gtk/search_sidebar.c:356
 msgid "Search Options"
 msgstr "검색 옵션"
 
-#: ../src/gnome2/search_sidebar.c:369 ../ui/search-dialog.glade.h:49
+#: ../src/gtk/search_sidebar.c:369 ../ui/search-dialog.glade.h:49
 #: ../ui/search-dialog.gtkbuilder.h:49
 msgid "Match case"
 msgstr "대소문자 일치"
 
-#: ../src/gnome2/search_sidebar.c:385
+#: ../src/gtk/search_sidebar.c:385
 msgid "Search Scope"
 msgstr "검색 범위"
 
-#: ../src/gnome2/search_sidebar.c:398
+#: ../src/gtk/search_sidebar.c:398
 msgid "No scope"
 msgstr "범위 없음"
 
-#: ../src/gnome2/search_sidebar.c:407
+#: ../src/gtk/search_sidebar.c:407
 msgid "Use bounds"
 msgstr "범위 사용"
 
-#: ../src/gnome2/search_sidebar.c:415
+#: ../src/gtk/search_sidebar.c:415
 msgid "Last search"
 msgstr "마지막 검색"
 
-#: ../src/gnome2/search_sidebar.c:432
+#: ../src/gtk/search_sidebar.c:432
 msgid "Bounds"
 msgstr "범위"
 
-#: ../src/gnome2/search_sidebar.c:447 ../src/gnome2/search_sidebar.c:479
+#: ../src/gtk/search_sidebar.c:447 ../src/gtk/search_sidebar.c:479
 msgid "Lower"
 msgstr "아래로"
 
-#: ../src/gnome2/search_sidebar.c:459 ../src/gnome2/search_sidebar.c:486
+#: ../src/gtk/search_sidebar.c:459 ../src/gtk/search_sidebar.c:486
 msgid "Upper"
 msgstr "위로"
 
-#: ../src/gnome2/sidebar.c:844
+#: ../src/gtk/sidebar.c:844
 msgid "Open module in editor?"
 msgstr "편집기에서 모듈을 여시겠습니까?"
 
-#: ../src/gnome2/sidebar.c:845
+#: ../src/gtk/sidebar.c:845
 msgid "If no, it will open for display only."
 msgstr "그렇지 않으면, 디스플레이만 엽니다."
 
-#: ../src/gnome2/sidebar.c:945
+#: ../src/gtk/sidebar.c:945
 msgid "Paste verse references"
 msgstr "절 참조 붙여넣기"
 
-#: ../src/gnome2/sidebar.c:947
+#: ../src/gtk/sidebar.c:947
 msgid "List:"
 msgstr "목록:"
 
-#: ../src/gnome2/sidebar.c:1543 ../src/gnome2/sidebar.c:1593
+#: ../src/gtk/sidebar.c:1543 ../src/gtk/sidebar.c:1593
 msgid "Search"
 msgstr "검색"
 
-#: ../src/gnome2/sidebar_dialog.c:174 ../src/gnome2/sidebar_dialog.c:184
+#: ../src/gtk/sidebar_dialog.c:174 ../src/gtk/sidebar_dialog.c:184
 msgid "Sidebar"
 msgstr "가장자리 표시줄"
 
-#: ../src/gnome2/splash.c:403
+#: ../src/gtk/splash.c:403
 msgid "Powered by the SWORD Project"
 msgstr "SWORD 프로젝트에서 기술 제공함"
 
-#: ../src/gnome2/tabbed_browser.c:358
+#: ../src/gtk/tabbed_browser.c:358
 msgid "Can't create tabs dir."
 msgstr "탭 디렉터리를 만들 수 없습니다."
 
-#: ../src/gnome2/treekey-editor.c:136 ../src/gnome2/treekey-editor.c:193
-#: ../src/gnome2/treekey-editor.c:291
+#: ../src/gtk/treekey-editor.c:136 ../src/gtk/treekey-editor.c:193
+#: ../src/gtk/treekey-editor.c:291
 msgid "Prayer List/Journal Item"
 msgstr "기도 목록/묵상 일기 항목"
 
-#: ../src/gnome2/treekey-editor.c:137 ../src/gnome2/treekey-editor.c:194
-#: ../src/gnome2/treekey-editor.c:292
+#: ../src/gtk/treekey-editor.c:137 ../src/gtk/treekey-editor.c:194
+#: ../src/gtk/treekey-editor.c:292
 msgid "New name"
 msgstr "새 이름"
 
-#: ../src/gnome2/treekey-editor.c:252
+#: ../src/gtk/treekey-editor.c:252
 msgid "Remove the selected item"
 msgstr "선택한 항목 제거"
 
-#: ../src/gnome2/utilities.c:86
+#: ../src/gtk/utilities.c:86
 msgid "January"
 msgstr "1월"
 
-#: ../src/gnome2/utilities.c:87
+#: ../src/gtk/utilities.c:87
 msgid "February"
 msgstr "2월"
 
-#: ../src/gnome2/utilities.c:88
+#: ../src/gtk/utilities.c:88
 msgid "March"
 msgstr "3월"
 
-#: ../src/gnome2/utilities.c:89
+#: ../src/gtk/utilities.c:89
 msgid "April"
 msgstr "4월"
 
-#: ../src/gnome2/utilities.c:90
+#: ../src/gtk/utilities.c:90
 msgid "May"
 msgstr "5월"
 
-#: ../src/gnome2/utilities.c:91
+#: ../src/gtk/utilities.c:91
 msgid "June"
 msgstr "6월"
 
-#: ../src/gnome2/utilities.c:92
+#: ../src/gtk/utilities.c:92
 msgid "July"
 msgstr "7월"
 
-#: ../src/gnome2/utilities.c:93
+#: ../src/gtk/utilities.c:93
 msgid "August"
 msgstr "8월"
 
-#: ../src/gnome2/utilities.c:94
+#: ../src/gtk/utilities.c:94
 msgid "September"
 msgstr "9월"
 
-#: ../src/gnome2/utilities.c:94
+#: ../src/gtk/utilities.c:94
 msgid "October"
 msgstr "10월"
 
-#: ../src/gnome2/utilities.c:94
+#: ../src/gtk/utilities.c:94
 msgid "November"
 msgstr "11월"
 
-#: ../src/gnome2/utilities.c:94
+#: ../src/gtk/utilities.c:94
 msgid "December"
 msgstr "12월"
 
-#: ../src/gnome2/utilities.c:2075
+#: ../src/gtk/utilities.c:2075
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
