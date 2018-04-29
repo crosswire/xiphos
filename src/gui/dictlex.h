@@ -41,6 +41,8 @@ void dict_key_entry_changed(GtkEntry *entry, gpointer data);
 void button_back_clicked(GtkButton *button, gpointer user_data);
 void button_forward_clicked(GtkButton *button,
 			    gpointer user_data);
+void dict_find_all_strongs(GtkButton *button,
+			   gpointer user_data);
 
 #ifdef __cplusplus
 }

@@ -45,12 +45,12 @@ GtkWidget *remember_search; /* needed to change button in search stop */
 
 /******************************************************************************
  * Name
- *    on_search_button_clicked
+ *    sidebar_on_search_button_clicked
  *
  * Synopsis
  *   #include "shortcutbar_search.h"
  *
- *   void on_search_button_clicked(GtkButton * button, gpointer user_data)
+ *   void sidebar_on_search_button_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
  *   prepare to begin search
@@ -59,8 +59,8 @@ GtkWidget *remember_search; /* needed to change button in search stop */
  *   void
  */
 
-static void on_search_button_clicked(GtkButton *button,
-				     gpointer user_data)
+void sidebar_on_search_button_clicked(GtkButton *button,
+				      gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
@@ -517,10 +517,10 @@ void gui_create_search_sidebar(void)
 			 "toggled",
 			 G_CALLBACK(on_rrbUseBounds_toggled), NULL);
 	g_signal_connect(G_OBJECT(remember_search), "clicked",
-			 G_CALLBACK(on_search_button_clicked), NULL);
+			 G_CALLBACK(sidebar_on_search_button_clicked), NULL);
 
 	g_signal_connect(G_OBJECT(ss.entrySearch), "activate",
-			 G_CALLBACK(on_search_button_clicked), NULL);
+			 G_CALLBACK(sidebar_on_search_button_clicked), NULL);
 
 	g_signal_connect(G_OBJECT(ss.advanced_search), "clicked",
 			 G_CALLBACK(main_open_search_dialog), NULL);

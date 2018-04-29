@@ -51,6 +51,7 @@ extern SIDESEARCH ss;
 void gui_search_update_sidebar(char percent, void *userData);
 void gui_create_search_sidebar(void);
 void sidebar_optimized_toggled(GtkToggleButton *togglebutton, gpointer user_data);
+void sidebar_on_search_button_clicked(GtkButton *button, gpointer user_data);
 
 #ifdef __cplusplus
 }

@@ -45,6 +45,7 @@ struct _app_widgets
 	    *workbook_lower,			 /* notebook - dict/lex, gbs, and interlinear */
 	    *notebook_gbs,			 /* notebook - gbs */
 	    *notebook_dict,			 /* notebook - dict/lex */
+	    *all_strongs,			 /* "find all uses of this strong's number" */
 	    *box_comm,				 /* notebook - commentaries */
 	    *notebook_bible_parallel,		 /* notebook -  */
 	    *notebook_text,			 /* notebook - bible texts */

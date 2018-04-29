@@ -40,6 +40,7 @@
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 #include "gui/utilities.h"
+#include "gui/search_sidebar.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -229,6 +230,54 @@ void button_forward_clicked(GtkButton *button, gpointer user_data)
 
 /******************************************************************************
  * Name
+ *   dict_find_all_strongs
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void dict_find_all_strongs (GtkWidget *widget, gpointer user_data)
+ *
+ * Description
+ *   copy the number w/[HG] prefix as lemma to sidebar search to start
+ *   search in MainWindowModule for all uses of this strong's number.
+ *
+ * Return value
+ *   void
+ */
+void dict_find_all_strongs(GtkButton *button,
+			   gpointer user_data)
+{
+	const gchar *feature, *key, *start, *lemma;
+	gboolean hebrew, greek;
+
+	/* we should be here iff dict displays a strong's dict. */
+	feature = main_get_mod_config_entry(settings.DictWindowModule, "Feature");
+	if (!feature)
+		return;
+	hebrew = !strcmp(feature, "HebrewDef");
+	greek  = !strcmp(feature, "GreekDef");
+	/* if we are here without _either_ heb or grk, we shouldn't be here. */
+	if (!hebrew && !greek)
+		return;
+
+	/* get current dict key at its useful beginning. */
+	key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
+	for (start = key; start && (*start == '0'); ++start)
+		/* nothing */ ;
+
+	/* heb numbers use a pointless leading 0, grk does not. */
+	if (hebrew) --start;
+
+	lemma = g_strdup_printf("lemma:%c%s", (hebrew ? 'H' : 'G'), start);
+	gtk_entry_set_text(GTK_ENTRY(ss.entrySearch), lemma);
+	g_free((gpointer)lemma);
+
+	/* artificial: no button or userdata context. */
+	sidebar_on_search_button_clicked(NULL, NULL);
+}
+
+/******************************************************************************
+ * Name
  *   menu_deactivate_callback
  *
  * Synopsis
@@ -384,6 +433,12 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(dict_drop_down);
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
 
+	/* button to induce search for all occurrences of this word */
+	/* initially hidden -- shown iff display is a strong's dict */
+	widgets.all_strongs = gtk_button_new_with_label(_("Find All"));
+	gtk_widget_hide(widgets.all_strongs);
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.all_strongs, FALSE, TRUE, 0);
+
 #if GTK_CHECK_VERSION(3, 14, 0)
 	arrow1 =
 	    gtk_image_new_from_icon_name("open-menu-symbolic",
@@ -460,6 +515,10 @@ GtkWidget *gui_create_dictionary_pane(void)
 			 G_CALLBACK(button_back_clicked), NULL);
 	g_signal_connect((gpointer)button11, "clicked",
 			 G_CALLBACK(button_forward_clicked), NULL);
+
+	g_signal_connect((gpointer)widgets.all_strongs, "clicked",
+			 G_CALLBACK(dict_find_all_strongs), NULL);
+
 	return box_dict;
 }
 

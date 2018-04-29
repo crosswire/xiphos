@@ -1165,7 +1165,7 @@ void main_display_commentary(const char *mod_name,
 void main_display_dictionary(const char *mod_name,
 			     const char *key)
 {
-	const gchar *old_key;
+	const gchar *old_key, *feature;
 
 	// for devotional use.
 	gchar buf[10];
@@ -1183,12 +1183,19 @@ void main_display_dictionary(const char *mod_name,
 	if (key == NULL)
 		key = (char *)"Grace";
 
+	feature = (char *)backend->get_mgr()->getModule(mod_name)->getConfigEntry("Feature");
+
+	// turn on "all strong's" iff we have that kind of dictionary.
+	if (feature && (!strcmp(feature, "HebrewDef") || !strcmp(feature, "GreekDef")))
+		gtk_widget_show(widgets.all_strongs);
+	else
+		gtk_widget_hide(widgets.all_strongs);
+
 	if (strcmp(settings.DictWindowModule, mod_name)) {
 		// new dict -- is it actually a devotional?
 		time_t curtime;
-		char *feature;
-		if ((feature = (char *)backend->get_mgr()->getModule(mod_name)->getConfigEntry("Feature")) &&
-		    !strcmp(feature, "DailyDevotion")) {
+
+		if (feature && !strcmp(feature, "DailyDevotion")) {
 			if ((strlen(key) != 5) || // blunt tests.
 			    (key[0] < '0') || (key[0] > '9') ||
 			    (key[1] < '0') || (key[1] > '9') ||
