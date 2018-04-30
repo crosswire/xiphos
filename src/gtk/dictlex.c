@@ -429,15 +429,22 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_box_pack_start(GTK_BOX(hbox2), widgets.entry_dict, TRUE, TRUE,
 			   0);
 
+	/* button to induce search for all occurrences of this word */
+	/* initially hidden -- shown iff display is a strong's dict */
+#if GTK_CHECK_VERSION(3, 10, 0)
+	widgets.all_strongs = gtk_button_new_from_icon_name("edit-find",
+							    GTK_ICON_SIZE_BUTTON);
+#else
+	widgets.all_strongs = gtk_button_new_from_stock(GTK_STOCK_FIND);
+#endif
+	gtk_widget_set_tooltip_text(GTK_WIDGET(widgets.all_strongs),
+				    _("Do sidebar search for this Strong's number"));
+	gtk_widget_hide(widgets.all_strongs);
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.all_strongs, FALSE, TRUE, 0);
+
 	dict_drop_down = gtk_toggle_button_new();
 	gtk_widget_show(dict_drop_down);
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
-
-	/* button to induce search for all occurrences of this word */
-	/* initially hidden -- shown iff display is a strong's dict */
-	widgets.all_strongs = gtk_button_new_with_label(_("Find All"));
-	gtk_widget_hide(widgets.all_strongs);
-	gtk_box_pack_start(GTK_BOX(hbox2), widgets.all_strongs, FALSE, TRUE, 0);
 
 #if GTK_CHECK_VERSION(3, 14, 0)
 	arrow1 =
