@@ -266,7 +266,8 @@ void dict_find_all_strongs(GtkButton *button,
 		/* nothing */ ;
 
 	/* heb numbers use a pointless leading 0, grk does not. */
-	if (hebrew) --start;
+	if (hebrew && (start > key))
+		--start;
 
 	lemma = g_strdup_printf("lemma:%c%s", (hebrew ? 'H' : 'G'), start);
 	gtk_entry_set_text(GTK_ENTRY(ss.entrySearch), lemma);
