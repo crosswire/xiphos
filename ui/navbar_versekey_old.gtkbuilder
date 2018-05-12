@@ -177,33 +177,16 @@
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox12">
+                  <object class="GtkImage" id="image12">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImage" id="image12">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_up.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="image13">
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_up_box.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="pixbuf">arrow_up.png</property>
                   </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -218,33 +201,16 @@
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox13">
+                  <object class="GtkImage" id="image14">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImage" id="image14">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_down.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="image15">
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_down_box.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="pixbuf">arrow_down.png</property>
                   </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -339,33 +305,16 @@
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox10">
+                  <object class="GtkImage" id="image8">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImage" id="image8">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_up.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="image9">
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_up_box.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="pixbuf">arrow_up.png</property>
                   </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -380,33 +329,16 @@
                 <property name="can_focus">False</property>
                 <property name="above_child">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox11">
+                  <object class="GtkImage" id="image10">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImage" id="image10">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_down.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="image11">
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_down_box.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="pixbuf">arrow_down.png</property>
                   </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -499,33 +431,16 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkHBox" id="hbox9">
+                  <object class="GtkImage" id="image6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImage" id="image6">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_up.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="image7">
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_up_box.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="pixbuf">arrow_up.png</property>
                   </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -543,33 +458,16 @@
                 <signal name="button-release-event" handler="on_eventbox1_button_release_event" swapped="no"/>
                 <signal name="enter-notify-event" handler="on_eventbox1_enter_notify_event" swapped="no"/>
                 <child>
-                  <object class="GtkHBox" id="hbox8">
+                  <object class="GtkImage" id="image5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImage" id="image5">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_down.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="image16">
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">arrow_down_box.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="pixbuf">arrow_down.png</property>
                   </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
               </object>
               <packing>
