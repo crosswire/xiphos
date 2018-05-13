@@ -107,20 +107,36 @@ on_help_contents_activate(GtkMenuItem *menuitem, gpointer user_data)
 		    g_build_filename(help_file, "share", "help",
 				     "xiphos_fa.chm", NULL);
 	else
+#ifdef CMAKE_BUILD
+		help_file =
+		    g_build_filename(help_file, "share", "help",
+				     "xiphos_C.chm", NULL);
+#else
 		help_file =
 		    g_build_filename(help_file, "share", "help",
 				     "xiphos.chm", NULL);
+#endif /* CMAKE_BUILD */
 	xiphos_open_default(help_file);
 	g_free(help_file);
 #else
 	GError *error = NULL;
 #if GTK_CHECK_VERSION(3, 22, 0)
+#ifdef CMAKE_BUILD
+	gtk_show_uri_on_window(NULL, "help:xiphos", gtk_get_current_event_time(),
+			       &error);
+#else
 	gtk_show_uri_on_window(NULL, "ghelp:xiphos", gtk_get_current_event_time(),
+			       &error);
+#endif /* CMAKE_BUILD */
+#else
+#ifdef CMAKE_BUILD
+	gtk_show_uri(NULL, "help:xiphos", gtk_get_current_event_time(),
 		     &error);
 #else
 	gtk_show_uri(NULL, "ghelp:xiphos", gtk_get_current_event_time(),
 		     &error);
-#endif
+#endif /* CMAKE_BUILD */
+#endif /* GTK_CHECK_VERSION */
 	if (error != NULL) {
 		XI_warning(("%s", error->message));
 		g_error_free(error);

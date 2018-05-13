@@ -1,0 +1,58 @@
+<page id="xiphos-20-modules-introduction" type="topic"
+      xmlns="http://projectmallard.org/1.0/"
+	 xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>How to manage modules.</desc>
+
+    <link type="guide" xref="index#module-manager"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- Introduction To Module Manager -->
+
+  <title>Introduction To The Module Manager</title>
+
+  <p>The "module" is the unit of content in <app>Xiphos</app>, and Sword
+  generally; a Sword module is a resource available for viewing in Sword
+  applications.  There are several varieties: Most importantly, Bible texts, as
+  well as dictionaries and lexicons, commentaries, and general books, any of
+  which may include image content (e.g. atlases).  They are installed either
+  from a local directory structure (typically on removable media, such as a
+  CDROM distribution) or remotely via ftp from a repository such as Crosswire,
+  which is the home of Sword, and from which all officially Sword-sanctioned
+  modules are available.  Also, many other modules are available from
+  non-Crosswire repositories.  In particular, there is the Xiphos repository,
+  containing a variety of otherwise-unofficial modules produced primarily by
+  contributors to <app>Xiphos</app> itself.</p>
+
+  <p>If you have other Sword applications installed, they will all share the
+  same set of Sword modules that you install through the Module Manager.</p>
+  <media style="image" mime="image/png" src="figures/module.png" />
+
+  <p>Notice the <gui>View Intro</gui> button above. You may see an introductory
+  explanation of Module Manager operation at any time.</p>
+</page>

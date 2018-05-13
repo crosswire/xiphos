@@ -1,0 +1,173 @@
+<page id="xiphos-33-original-language" type="topic"
+      xmlns="http://projectmallard.org/1.0/"
+	 xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Study the original Greek and Hebrew Texts.</desc>
+
+    <link type="guide" xref="index#search-function"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- ============= Original Language Research  ============-->
+
+  <title>Original Language Research</title>
+
+  <section id="orig-lang-install-modules">
+
+    <title>Installing Needed Modules</title>
+
+    <p>Xiphos is ideally suited for studying the original Greek and Hebrew. To
+    get started, you will want the following modules:</p>
+
+    <p>From Crosswire Repository:</p>
+    <list>
+      <item>
+	<p>StrongsHebrew Dictionary (or get StrongsRealHebrew from the Xiphos
+	Repository)</p>
+      </item>
+      <item>
+	<p>StrongsGreek Dictionary (or get StrongsRealGreek from the Xiphos
+	Repository)</p>
+      </item>
+      <item>
+	<p>Robinson Dictionary</p>
+      </item>
+      <item>
+	<p>KJV Bible</p>
+      </item>
+    </list>
+
+    <p>From Xiphos Repository:</p>
+    <list>
+      <item>
+	<p>StrongsRealGreek Dictionary (same as StrongsGreek, but with Greek
+	characters, B-Greek transliteration, and self-referencing links)</p>
+      </item>
+      <item>
+	<p>StrongsRealHebrew Dictionary (same as StrongsHebrew, but with Hebrew
+	characters and self-referencing links)</p>
+      </item>
+      <item>
+	<p>InvertedStrongsRealGreek (key in or copy actual Greek word, rather
+	than number)</p>
+      </item>
+    </list>
+  </section>
+
+  <section id="orig-lang-setup">
+
+    <title>Setting Up</title>
+
+    <p>While still in the module manager, create indexes for all of the modules
+    you just installed. Then close the module manager and open <guiseq><gui>Edit
+    </gui><gui>	Preferences</gui></guiseq> and go to <guiseq><gui>Modules</gui>
+    <gui>Misc</gui></guiseq>. Set your Hebrew and Greek lexicons according to
+    what you installed.
+    Close preferences and open the KJV module. Turn on the module options
+    <guiseq><gui>Right Click</gui><gui>Module Options</gui><gui>Show Strongs
+    </gui></guiseq> and <guiseq><gui>Right Click</gui><gui>Module Options
+    </gui><gui>Show Morphology</gui></guiseq>. You should see the Bible text
+    change to show Strongs numbers underneath the appropriate English words.
+    Hover over the numbers (or letters for morphology) with the mouse and you
+    will see the definition displayed in the previewer pane. Click on the link
+    and the definition will show in the dictionary pane. If you are using
+    StrongsRealGreek or	StrongsRealHebrew, you can click on any other number
+    referenced in the definition and you will be taken to that entry.</p>
+  </section>
+
+  <section id="orig-lang-search">
+
+    <title>Searching for Strongs Numbers</title>
+
+    <p>Choose <guiseq><gui>Edit</gui><gui>Advanced Search</gui></guiseq>or press
+    <key>F3</key>. Under <gui>Search Type</gui>, select <gui>Optimized
+    ("Lucene")</gui>. Click on the <gui>Attribute Search</gui> tab, and make
+    check the box that says <gui>Strongs Numbers</gui>. Now click in the entry
+    field at the top and search for the number you are looking for preceded by
+    "lemma:" and "G" for Greek or "H" for Hebrew. So to look for the Hebrew word
+    tsad-deek (6662), enter "lemma:H6662". Once the search is done, the results
+    pane will be shown. Notice that when you click on a result, it will show the
+    result in the preview pane, and the strong's numbers will show as well,
+    following immediately after the words they match. Also note that hovering
+    over these numbers will show the definition in the main preview pane.</p>
+  </section>
+
+  <section id="orig-lang-additional">
+
+    <title>Additional Modules</title>
+
+    <p>For more advanced research, the following modules are also available:</p>
+
+    <list>
+      <item>
+	<p>2TGreek (Xiphos Repository) : This module contains the entire Bible
+	in Greek. It combines the LXX and Tischendorf8 NT into one easy-to-use
+	module. In addition, it contains Strongs, Morphology,Greek Accents,
+	and primary/secondary readings. As with all modules that include
+	Strongs, Xiphos displays 2TGreek in beautiful interlinear form.</p>
+      </item>
+      <item>
+	<p>Elzevir Textus Receptus (Crosswire Beta Repository as of this
+	writing) : 1624 edition with Strongs and Morphology</p>
+      </item>
+      <item>
+	<p>LXX (Crosswire Repository) : the Septuagint with Strongs, Morphology,
+	and footnotes</p>
+      </item>
+      <item>
+	<p>MorphGNT (Crosswire Beta Repository as of this writing) : This is
+	derived from the morphologically parsed GNT provided by UPenn's CCAT. It
+	was reformatted and error-corrected by James Tauber. It includes Greek
+	accents	and Morphology.</p>
+      </item>
+      <item>
+	<p>TR (Crosswire Repository) : This is the Textus Receptus with Strongs
+	and Morphology</p>
+      </item>
+      <item>
+	<p>TischMorph (Xiphos Repository) : As described above, this has
+	Strongs, Morphology, accents, and alternate readings.</p>
+      </item>
+      <item>
+	<p>WHNU (Crosswire Repository) : Westcott-Hort of 1881 with Strongs and
+	Morphology</p>
+      </item>
+      <item>
+	<p>GreekHebrew (Crosswire Repository) : This is a dictionary keyed to
+	Strongs. It contains words in the LXX that are also found in the New
+	Testament. In addition, it contains the equivalent Hebrew words also
+	keyed to Strongs.</p>
+      </item>
+      <item>
+	<p>Didache (Crosswire Beta Repository as of this writing) : This is an
+	early Christian treatise in Greek dated to the late first or early
+	second century. It includes Strongs, Morphology, and Greek accents.</p>
+      </item>
+    </list>
+  </section>
+
+</page>

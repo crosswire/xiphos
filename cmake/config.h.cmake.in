@@ -1,0 +1,67 @@
+/* Xiphos config.h
+   The Xiphos Development Team */
+
+/* Configuration header created by CMake - do not edit */
+
+#ifndef _CONFIG_H_CMAKE
+#define _CONFIG_H_CMAKE
+
+// It's a CMAKE build
+#define CMAKE_BUILD 1
+
+
+/* Xiphos stuff */
+
+// Version of Xiphos
+#define VERSION "@PROJECT_VERSION@"
+
+// Define to the address where bug reports for this package should be sent.
+#define PACKAGE_BUGREPORT "@XIPHOS_BUG_REPORT@"
+
+// Define pixmaps dir
+#cmakedefine PACKAGE_PIXMAPS_DIR "@PACKAGE_PIXMAPS_DIR@"
+
+// Define share dir
+#cmakedefine SHARE_DIR "@SHARE_DIR@"
+
+// I18n support
+#cmakedefine ENABLE_NLS 1
+
+// Gettext Text Domain
+#cmakedefine GETTEXT_PACKAGE "@GETTEXT_PACKAGE@"
+
+// Define locale dir
+#cmakedefine PACKAGE_LOCALE_DIR "@PACKAGE_LOCALE_DIR@"
+
+// Use Webkit Editor
+#cmakedefine USE_WEBKIT_EDITOR 1
+
+// Use Gtk3
+#cmakedefine USE_GTK_3 1
+
+// Use GtkBuilder
+#cmakedefine USE_GTKBUILDER 1
+
+// Use Webkit 2
+#cmakedefine USE_WEBKIT2 1
+
+// dBus
+#cmakedefine HAVE_DBUS 1
+
+// Building for Windows©
+#cmakedefine WIN32 1
+
+// Enable the GS_message-style tracing printfs
+#cmakedefine CHATTY 1
+
+// Debug
+#cmakedefine DEBUG 1
+
+
+/* System stuff */
+
+// strcasestr
+#cmakedefine HAVE_STRCASESTR 1
+
+
+#endif

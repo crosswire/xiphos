@@ -1,0 +1,72 @@
+<page id="xiphos-50-preferences-general-settings" type="topic" xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Locale, General Preferences and StudyPad directory.</desc>
+
+    <link type="guide" xref="index#preferences"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- General Settings -->
+
+  <title>General Settings</title>
+
+  <media style="image" mime="image/png"
+  	 src="figures/preferences_general-misc.png" />
+
+  <p>If you wish <app>Xiphos</app> to display its interface in a language
+  other than the default, you may select one here.  A restart will be
+  required, so that the locale can be initialized.</p>
+
+  <p>If you enable <gui>Default Dictionary</gui>, then that named dictionary
+  (see <gui>Special</gui> below) module will always be used when
+  double-clicking a word anywhere in <app>Xiphos</app>.</p>
+
+  <p>Certain dictionary-style modules are <gui>Daily Devotionals</gui> whose
+  keys are numerically in the form "Month.Day".  If you have such a module
+  installed and it has been selected as your preferred devotional, then you
+  can ask that <app>Xiphos</app> display today's selection during startup.</p>
+
+  <p>If you enable <gui>Resize images</gui>, <app>Xiphos</app> will
+  automatically resize image content in commentaries, general books, and
+  dictionaries so as to fit the subwindow which contains them.</p>
+
+  <p><gui>Highlight current verse</gui>, if enabled, will cause <app>Xiphos
+  </app> to substitute mere current verse colorization with a high-contrast
+  alternate color scheme on the current verse.  The colors used may be chosen
+  from the color selector pane (see below).</p>
+
+  <p><gui>Highlight user annotations</gui> uses inverted highlight color
+  choices when marking user-annotated verses.</p>
+
+  <p>By default, <gui>Cross-references</gui> go into the Previewer.  Selecting
+  this checkbox puts them into the verse list instead.</p>
+
+  <p>Verse number display can be offset in several ways provided by the
+  checkboxes.</p>
+
+</page>

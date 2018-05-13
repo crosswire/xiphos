@@ -1,0 +1,311 @@
+<page id="xiphos-32-search-syntax" type="topic"
+      xmlns="http://projectmallard.org/1.0/"
+	 xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Search Syntax using Regular Expression.</desc>
+
+    <link type="guide" xref="index#search-function"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- id="hdbk-op-search-dialog-text-regexp" -->
+
+  <title>Search Syntax</title>
+
+  <p>Regular expression searches provide a way to do simple or complex searches
+  for strings that match a pattern or set of patterns (branches) separated by
+  vertical bars &quot;|&quot;. While a pattern can be built to look for a word
+  or phrase, a simple pattern that consists of a word does not look for only
+  that word but for any place the string of letters that make that word are
+  found. A search for &quot;right&quot; will return verses that contain the
+  word &quot;right&quot;, but also &quot;<em>right</em>eous&quot;,
+  &quot;<em>right</em> eousness&quot;, &quot;un<em>right</em>eous&quot;,
+  &quot;up<em>right</em>&quot; and even &quot;b<em>right</em>&quot;. A search
+  for &quot;hall not&quot; is not a search for &quot;hall&quot; AND
+  &quot;not&quot; but for the string &quot;hall not&quot; with a space between
+  the second &quot;l&quot; and the &quot;n&quot;. The search for &quot;hall
+  not&quot; will find occurrences of &quot;s<em>hall not</em>&quot;.</p>
+
+  <p>The power of Regular Expressions is in the patterns (or templates) used to
+  define a search. A pattern consists of ordinary characters and some special
+  characters that are used and interpreted by a set of rules. Special characters
+  include .\[^*$?+. Ordinary (or simple) characters are any characters that are
+  not special. The backslash, &quot;\&quot;, is used to convert special
+  characters to ordinary and ordinary characters to special.</p>
+
+  <p>Example: the pattern &quot;<em>i. love\.</em>&quot; will find sentences
+  that end with &quot;h<em>i</em>s <em>love</em>&quot; or &quot;<em>i</em>n
+  <em>love</em>&quot; or &quot; <em>i</em>s <em>love</em>&quot; followed by a
+  period. The first period in &quot;i. love \.&quot; is a special character that
+  means allow any character in this position. The backslash in &quot;i.
+  love\.&quot; means that the period following it is not to be considered a
+  special character, but is an ordinary period.</p>
+
+  <section id="hdbk-op-search-dialog-text-regexp-rules">
+
+    <title>Rules for Regular Expression Search Requests</title>
+    <list>
+      <item>
+	<p>. The period matches any character.</p>
+      </item>
+      <item>
+	<p>* The asterisk matches 0 or more characters of the
+	preceding: set, character or indicated character.</p>
+      </item>
+      <item>
+	<p>+ The plus sign matches 1 or more characters of the
+	preceding: set, character or indicated character.</p>
+      </item>
+      <item>
+	<p>? The question mark matches 0 or 1 character of the
+	preceding: set, character or indicated character.</p>
+      </item>
+      <item>
+	<p>[ ] Square brackets match any one of the characters
+	specified inside [ ].</p>
+      </item>
+      <item>
+	<p>^ A caret as the first character inside [ ] means NOT.</p>
+      </item>
+      <item>
+	<p>^ A caret beginning a pattern anchors the beginning of a
+	line.</p>
+      </item>
+      <item>
+	<p>$ A dollar at the end of a pattern anchors the end of a
+	line.</p>
+      </item>
+      <item>
+	<p>| A vertical bar means logical OR.</p>
+      </item>
+      <item>
+	<p>( ) Parentheses enclose expressions for grouping.
+	<em>Not supported!</em></p>
+      </item>
+      <item>
+	<p>\ A backslash can be used prior to any special character
+	to match that character.</p>
+      </item>
+      <item>
+	<p>\ A backslash can be used prior to an ordinary character
+	to make it a special character.</p>
+      </item>
+    </list>
+
+    <section id="period">
+
+      <title>The Period</title>
+
+      <p>The Period &quot;.&quot; will match any single character even
+      a space or other non-alphabet character.
+      <em>s.t</em> matches <em>s</em>i<em>t</em>,
+      <em>s</em>e<em>t</em>,<em> s</em>o<em>t</em>,
+      etc., which could be located in <em>s</em>i<em>t</em>ting,
+      compas<em>s</em>e<em>t</em>h and <em>s</em>o<em>t</em>tish
+      <em>b..t</em> matches <em>b</em>oo<em>t</em>,
+      <em>b</em>oa<em>t</em> and <em>b</em>ea<em>t
+      foot.tool </em>matches <em>foot</em>s<em>tool </em>and
+      <em>foot tool</em></p>
+    </section>
+
+
+    <section id="asterisk">
+
+      <title>The Asterisk</title>
+
+      <p>The asterisk &quot;*&quot; matches zero or more characters of the
+      preceding: set, character or indicated character. Using a period asterisk
+      combination &quot;.*&quot; after a commonly found pattern can cause the
+      search to take a very long time, making the program seem to freeze.
+      <em>be*n</em> matches<em> beeen, been, ben</em>, and <em>bn</em> which
+      could locate Reu<em>ben</em> and She<em>bn</em>a.</p>
+    </section>
+
+
+    <section id="plus">
+
+      <title>The Plus Sign</title>
+
+      <p>The Plus Sign &quot;+&quot; matches one or more characters of the
+      preceding: set, character or indicated character. Using a period and plus
+      sign combination &quot;.+&quot; after a commonly found pattern can cause
+      the search to take a very long time, making the program seem to freeze.
+      <em>be+n</em> matches <em>beeen, been</em> and <em>ben</em>, but not
+      <em>bn</em>.</p>
+    </section>
+
+
+    <section id="question">
+
+      <title>The Question Mark</title>
+
+      <p>The Question Mark &quot;?&quot;matches zero or one character of the
+      preceding: set, character or indicated character. <em>be?n</em> matches
+      <em>ben</em> and <em>bn</em> but not <em>been</em>.
+      <em>trees?</em> matches <em>trees</em> or <em>tree</em>.</p>
+    </section>
+
+
+    <section id="bracket">
+
+      <title>The Square Brackets </title>
+
+      <p>The Square Brackets &quot;[]&quot; enclose a set of characters that can
+      match. The period, asterisk, plus sign and question mark are not special
+      inside the brackets. A minus sign can be used to indicate a range. If you
+      want a caret &quot;^&quot; to be part of the range do not place it first
+      after the left bracket or it will be a special character. To include a
+      &quot;]&quot; in the set make it the first (or second after a special
+      &quot;^&quot;) character in the set. To include a minus sign in the set
+      make it the first (or second after a special &quot;^&quot;) or last
+      character in the set.
+      <em>s[eia]t</em> matches <em>set</em>, <em>sit</em>,
+      and <em>sat</em>, but not <em>s</em>o<em>t</em>.
+      <em>s[eia]+t </em>matches as above but also, <em>seat,
+      seet, siet</em>, etc.
+      <em>[a-d]</em> matches <em>a, b, c,</em> or <em>d</em>.
+      <em>[A-Z]</em> matches any uppercase letter.
+      [.;:?!] matches ., ;, :, ?, or ! but not a comma.
+      [ ]^-] matches ] or ^ or -</p>
+    </section>
+
+
+    <section id="caret">
+
+      <title>The Caret first in Square Brackets </title>
+
+      <p>If the Caret is the first character after the left bracket
+      (&quot;[^&quot;) it means NOT. <em>s[^io]t</em> matches <em>set,
+      sat</em>, etc., but not <em>s</em>i<em>t</em> and
+      <em>s</em>o<em>t</em>.</p>
+    </section>
+
+    <section id="caret-s">
+
+      <title>The Caret as Start of Line Anchor </title>
+
+      <p>If the Caret is the first character in a pattern (&quot;^xxx&quot;) it
+      anchors the pattern to the start of a line. Any match must be at the
+      beginning of a line. Because of unfiltered formatting characters in some
+      texts, this feature does not always work, but may if a few periods are
+      placed after the caret to account for the formatting characters. <em>^In
+      the beginning</em> matches lines that start with &quot;<em>In the
+      beginning</em>&quot;. (May need to use: <em>^.....In the
+      beginning</em>)</p>
+    </section>
+
+
+    <section id="dollar">
+
+      <title>The Dollar Sign as End of Line Anchor </title>
+
+      <p>If the Dollar Sign is the last character (&quot;xxx$&quot;) in a
+      pattern it anchors the pattern to the end of a line. Any match must be at
+      the end of a line. Because of unfiltered formatting characters in some
+      texts, this feature does not always work, but may if a few periods are
+      placed before the dollar sign to account for the formatting characters.
+      <em>Amen\.$</em> matches lines that end with &quot;<em>Amen.</em>&quot;
+      (May need to use Amen\....$, Amen\..........$,
+      or even Amen\....................$)</p>
+    </section>
+
+
+    <section id="bar">
+
+      <title>The Vertical Bar </title>
+
+      <p>The Vertical Bar &quot;|&quot; between patterns means OR.
+      <em>John|Peter</em> matches <em>John</em> or <em>Peter.
+      John .*Peter|Peter .*John</em> matches <em>John</em>
+      ... <em>Peter</em> or <em>Peter</em> ... <em>John</em>.
+      (.* slows a search)
+      <em>pain|suffering|sorrow</em> matches <em>pain</em>,
+      or <em>suffering</em>, or <em>sorrow</em>.</p>
+    </section>
+
+
+    <section id="parenth">
+
+      <title>The Parentheses</title>
+
+      <p><em>The use of Parentheses &quot;( )&quot; is not supported!</em></p>
+    </section>
+
+
+    <section id="backslash">
+
+      <title>The Backslash Prior to a Special Character</title>
+      <p>The Backslash prior to a special character (&quot;\*&quot;) indicates
+      that the character is not being used in its special meaning, but is just
+      to match itself. <em>amen\.</em> matches <em>amen.</em> but not
+      <em>amen</em>t and will not locate firm<em>amen</em>t.</p>
+    </section>
+
+    <section id="backslash-o">
+
+      <title>The Backslash Prior to an Ordinary Character </title>
+
+
+      <p>The Backslash prior to an ordinary character (&quot;\o&quot;) indicates
+      that the character is not being used to match itself, but has special
+      meaning.</p>
+
+      <list>
+	<item>
+	  <p>\b if use outside [ ] means word boundary. If used inside [ ] means
+	  backspace. <em>\brighteous\b</em> matches <em>righteous</em> but not
+	  un<em>righteous</em> or <em>righteous</em>ness</p>
+	</item>
+	<item>
+	  <p>\B means non-word boundary.  <em>\Brighteous\B</em> matches
+	  un<em>righteous</em>ness and un<em>righteous</em>ly but not
+	  <em>righteous</em>, un<em>righteous</em> or
+	  <em>righteous</em>ness.</p>
+	</item>
+	<item>
+	  <p>\d means digit; same as [0-9].</p>
+	</item>
+	<item>
+	  <p>\D means non-digit, same as [^0-9].</p>
+	</item>
+	<item>
+	  <p>\s means space. </p>
+	</item>
+	<item>
+	  <p>\S means not a space. </p>
+	</item>
+	<item>
+	  <p>\w means alphanumeric; same as [a-zA-Z0-9_].</p>
+	</item>
+	<item>
+	  <p>\W means not alphanumeric; same as [^a-zA-Z0-9_].</p>
+	</item>
+      </list>
+    </section>
+  </section>
+
+</page>

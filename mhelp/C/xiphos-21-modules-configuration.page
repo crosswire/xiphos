@@ -1,0 +1,106 @@
+<page id="xiphos-21-modules-configuration" type="topic"
+      xmlns="http://projectmallard.org/1.0/"
+	 xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Configure the modules sources.</desc>
+
+    <link type="guide" xref="index#module-manager"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- Sword Configure-->
+
+  <title>Sword Modules Configuration</title>
+
+  <section id="sword-sources">
+    <title>Module Sources Settings</title>
+    <media style="image" mime="image/png" src="figures/sword_sources.png" />
+
+    <p>There are other repositories available besides CrossWire's own, though
+    the modules available from other repositories do not represent content
+    officially sanctioned by Crosswire. On the web, see this page for list of
+    those repositories known:
+    <link href="http://www.crosswire.org/wiki/Module_Repositories">
+    http://www.crosswire.org/wiki/Module_Repositories</link></p>
+
+    <p>The list of standard repositories is maintained at CrossWire. Xiphos
+    normally auto-synchronizes with that list one time, when the user first puts
+    the Module Manager to use. The list may change, as new repositories come
+    into existence; occasional re-synchronization with the list is suggested,
+    which is accomplished by clicking <gui>Load Standard</gui>.</p>
+  </section>
+
+  <section id="installation">
+    <title>Sword Module Installations</title>
+    <media style="image" mime="image/png" src="figures/sword_config.png" />
+
+    <p>After you have selected your Install Source, click the <gui>Refresh</gui>
+    button to cause <app>Xiphos</app> to find the module summary available from
+    that source before moving on.</p>
+
+    <p>Take note of the "Install Destination". In most cases, you will have a
+    choice of a personal area or a system area. The details vary according to
+    your operating system.</p>
+
+    <section id="destination-linux">
+      <title>Linux</title>
+      <p>Unless you run as root (via su or sudo) you will only be able to
+      install in your personal area, under ~/.sword. If you run as root, or
+      change permissions on the shared directory, you will also be able to
+      install modules for all users, typically in /usr/share/sword. There have
+      been some requests for Xiphos to provide a means by which an ordinary
+      (non-root) user could start the program, gain temporary write access to
+      the system area while installing modules, and then revoke that access
+      after installation is complete.
+      Attempting to devise a scheme to do this has proven quite difficult,
+      given the different superuser management schemes employed by various Linux
+      distributions. Therefore, at this time there are no ongoing plans to try
+      to solve this problem, and users are advised to enable write access to the
+      system area outside Xiphos.</p>
+    </section>
+
+    <section id="destination-xp">
+      <title>Windows XP</title>
+      <p>You may install modules to a shared folder so the modules are available
+      to all users. If you have previously used "The Sword Project for Windows",
+      this folder will be "C:\Program Files\Crosswire\The Sword Project\Sword".
+      Otherwise it will be
+      "C:\Documents and Settings\All Users\Application Data\Sword". You may also
+      install modules to a location that can only be seen by you. This location
+      is "C:\Documents and Settings\YOUR NAME\Application Data\Sword".</p>
+    </section>
+
+    <section id="destination-vista">
+      <title>Windows Vista</title>
+      <p>Vista works much the same as XP, except for the locations. The private
+      location is "C:\Users\YOUR NAME\AppData\Roaming\Sword". The shared
+      location is "C:\ProgramData\Sword".</p>
+    </section>
+
+  </section>
+
+</page>

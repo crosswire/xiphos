@@ -1,0 +1,136 @@
+<page id="xiphos-40-personal-commentary" type="topic" xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Build up a personal commentary.</desc>
+
+    <link type="guide" xref="index#personal-comments"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <title>Personal Commentary Editor</title>
+
+  <!-- Personal Commentary-->
+
+  <p>To build up a personal commentary you will need to install the editable
+  'Personal' sword module from the English Commentaries section. Right click
+  it and choose <guiseq><gui>Edit</gui><gui>Note</gui><gui>Personal</gui></guiseq>
+  in the menu.</p>
+
+  <p>An editor window similar to the <gui>Study Pad</gui> will appear. Edit your
+  comment and save it; in the future it will appear as your comment to the
+  relevant verse.</p>
+
+  <media style="image" mime="image/png" src="figures/personal.png" />
+
+  <p>Locationbar</p>
+  <list>
+    <item>
+      <p> Synchronise Button</p>
+    </item>
+    <item>
+      <p>Bible Book, Chapter and Verse Selectors</p>
+    </item>
+    <item><p>Location Summary</p>
+    </item>
+  </list>
+
+  <p>Use the <gui>Synchronise Button</gui> to quickly change location of your
+  editor to that of the underlying Bibletext or use the	<gui>Book</gui>,
+  <gui>Chapter</gui>, and <gui>Verse</gui> selectors to choose to edit your
+  comment to one particular verse.</p>
+
+  <p>Toolbar 1</p>
+  <list>
+    <item>
+      <p>Font Size and Environment</p>
+    </item>
+    <item>
+      <p>Font Type</p>
+    </item>
+    <item>
+      <p>Bold, Italics, Underscored, Crossed Out</p>
+    </item>
+    <item>
+      <p>Left, Centre and Right  Bound</p>
+    </item>
+    <item>
+      <p>Shift Paragraph Right or Left</p>
+    </item>
+    <item>
+      <p>Colour Selector</p>
+    </item>
+  </list>
+
+  <p>Toolbar 2</p>
+  <list>
+    <item>
+      <p>Save, Delete and Print</p>
+    </item>
+    <item>
+      <p>Cut, Copy, Paste and Undo</p>
+    </item>
+    <item>
+      <p>Find and 'Find and Replace'</p>
+    </item>
+    <item>
+      <p>Spellcheck</p>
+    </item>
+  </list>
+
+  <p>In order for spellcheck to be available, one of the languages under
+  <guiseq><gui>Edit</gui><gui>Current languages</gui></guiseq> must be set.</p>
+
+  <p>To create a link to other verses right click the text and choose
+  <gui>Link..</gui>. In the pop-up window enter the link location and the module
+  linked to.</p>
+
+  <p>It is possible to rename a personal commentary to suit a particular subject
+  of study for that commentary.  Thus, multiple personal commentaries may be
+  installed: Rename the existing personal commentary, and then re-install
+  another instance of the personal commentary if desired.  Personal commentary
+  names can consist only of letters and digits, and cannot duplicate an existing
+  module's name.  Rename is accessible off the right-click menu.</p>
+
+  <p>If the study embodied in a particular personal commentary is no longer
+  needed, archival is available in the module manager, prior to removal, for
+  possible future re-installation.  See the module manager's Remove/Archive
+  page.  Any module may be archived, not just personal commentaries.</p>
+
+  <p>Although there are 31,102 verses in standard versification, it is
+  unlikely that more than a tiny fraction of all verses will have personal
+  commentary attached to them.  A verse list showing where personal commentary
+  notes exist is available from <guiseq><gui>Right Click</gui><gui>Dump
+  Pers.Comm.</gui></guiseq>.</p>
+
+  <note style="tip">
+    <p>The created commentary page will be attached to an individual verse only.
+    To write commentary pages from within Xiphos, attached to longer stretches
+    of text use the <gui>Link..</gui> function to link several pages together</p>
+  </note>
+
+
+</page>

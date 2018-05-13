@@ -1,0 +1,86 @@
+<page id="xiphos-51-preferences-biblesync" type="topic" xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Controls for BibleSync.</desc>
+
+    <link type="guide" xref="index#preferences"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- BibleSync Settings -->
+
+  <title>BibleSync Settings</title>
+
+  <media style="image" mime="image/png"
+	 src="figures/preferences_general-biblesync.png" />
+
+  <p>BibleSync is a shared navigation protocol using LAN multicast.  It is
+  useful for a single person when running Bible programs on multiple machines
+  or devices, all of which you wish to navigate through the Bible together, or
+  for a group working closely together, such as translators. Also, it has a
+  "lecture" mode, where a speaker's Bible program induces the audience's
+  programs to follow along. The difference in the modes regards who transmits
+  and who receives navigation. In Personal mode, BibleSync navigation is both
+  transmitted and received; as Speaker, it transmits only; as Audience, it
+  receives only.
+  The difference in the modes regards who transmits and who receives
+  navigation.  In Personal mode, BibleSync navigation is both	transmitted and
+  received; as Speaker, it transmits only; as Audience, it receives only.</p>
+
+  <p>To enable BibleSync, select a mode from the radio buttons.  Also, choose
+  whether to accept navigation directly, so that Xiphos moves	immediately to a
+  specified verse, or whether incoming navigation is instead sent to the verse
+  list, where you can decide whether to follow.</p>
+
+  <p>If you use a firewall, you must punch a hole in it for UDP port 22272.</p>
+
+  <p>If you run more than one BibleSync-compatible program on your computer
+  and do not wish your activity among them to be shared on the local net, you
+  can use Personal mode combined with the Private checkbox.  This will tell
+  <app>Xiphos</app> not to broadcast outside your system.</p>
+
+  <p>You can send a verse list from the sidebar search or Advanced Search
+  window via BibleSync; see the context (right-click) menu.  A particularly
+  good use case for this is when using a simpler Bible program, such as on a
+  mobile device, with another such as	<app>Xiphos</app> that has significant
+  search capability: Do searches in <app>Xiphos</app> and send the resulting
+  verse list to the mobile device.  Be aware that size limitations on the
+  protocol are small, and though a search may	generate hundreds of results
+  in the verse list, at most a few dozen will pass in the protocol to the
+  receivers.  For <app>Xiphos</app>, receipt of multi-references always
+  induces indirect verse list navigation.</p>
+
+  <p>As of Biblesync 2.0.0, a simple chat facility is available, accessed
+  using <gui>Ctrl-Alt-Shift-C</gui>.</p>
+
+  <p><app>Xiphos</app> is the first Bible program with a BibleSync
+  implementation; as such, its utility may be limited for now. Another Sword
+  Project application, Bishop (for Android and iOS), also has gained support
+  for BibleSync. Watch for other applications (not all being Sword applications)
+  to provide support.</p>
+
+</page>

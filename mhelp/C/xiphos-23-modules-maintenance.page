@@ -1,0 +1,60 @@
+<page id="xiphos-23-modules-maintenance" type="topic"
+      xmlns="http://projectmallard.org/1.0/"
+	 xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Removal, Archival and Indexing tasks.</desc>
+
+    <link type="guide" xref="index#module-manager"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- Maintaining Modules -->
+
+  <title>Sword Modules Maintenance</title>
+
+  <media style="image" mime="image/png" src="figures/sword_remove.png" />
+
+  <p>Several maintenance functions are available: Removal, archival, index, and
+  index deletion.</p>
+
+  <p>Removal disposes of a module entirely.  There is no recovery of the module
+  unless you have previously archived a copy of it.</p>
+
+  <p>Archival is available for any module, although it is provided with personal
+  commentaries specifically in mind. A *.zip of the module is left in the
+  directory ~/.sword/zip.  Archival prior to removal of personal commentaries is
+  recommended, in order to be available for future re-install if the subject
+  matter of the personal commentary becomes important again.</p>
+
+  <p>Indexing is provided so that the underlying Sword search support can create
+  the index needed for the "lucene" fast-search functions. If the index is not
+  created, plain multi-word search will still be available, but it will be much
+  slower. With the index in place, searches through an entire Bible can take
+  just a few seconds.</p>
+
+  <p>Indexes may be deleted as well.</p>
+</page>

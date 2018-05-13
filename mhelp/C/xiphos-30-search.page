@@ -1,0 +1,218 @@
+<page id="xiphos-30-search" type="topic" xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>To conduct a quick search.</desc>
+
+    <link type="guide" xref="index#search-function"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- ============= Search  ============-->
+
+  <title>Simple Searches</title>
+
+  <p>To conduct a quick search within the current Bible or commentary module,
+  the Search Bar in the Sidebar should usually be adequate. Click either in the
+  menu bar <guiseq><gui>Edit </gui><gui>Search</gui></guiseq> or in the Sidebar
+  <guiseq><gui>Modules</gui><gui>Search</gui></guiseq> to access it.</p>
+
+  <media style="image" mime="image/png" src="figures/interface_searchpane.png" />
+
+  <p>The <gui>Search Dialog</gui> consists of the following parts:</p>
+
+  <list>
+    <item>
+      <p>Search Key Entry box</p>
+    </item>
+    <item>
+      <p>Search Module Selector</p>
+    </item>
+    <item>
+      <p>Search Type Selector</p>
+    </item>
+    <item>
+      <p>Search Options Checkbox</p>
+    </item>
+    <item>
+      <p>Search Scope Selector</p>
+    </item>
+    <item>
+      <p>Search Results View</p>
+    </item>
+  </list>
+
+  <section id="xiphos-search-key">
+
+    <title>Search Key Entry Box</title>
+
+    <p>Allows entry of the key for which you would like to search. The search
+    key can be a word, part of a word, several words, a phrase, or a regular
+    expression depending on the type of search selected. When the search key is
+    entered and all other selections in the search dialog are complete, click
+    the <gui>Find</gui> button to begin the search.</p>
+
+    <p>This search uses the optimized search method (see next section) if the
+    module has previously been indexed, and will use AND semantics by default
+    (matched verses contain all words you entered).</p>
+
+  </section>
+
+  <section id="xiphos-search-modselect">
+
+    <title>Search Module Selector</title>
+
+    <p>Allows selection of which modules you would like to search. Select
+    <gui>Bible</gui> to search Bible versions or <gui>Commentary</gui> to search
+    commentaries. Only the currently active module will be searched.</p>
+
+  </section>
+
+  <section id="xiphos-search-typeselect">
+
+    <title>Search Type Selector</title>
+
+    <p>Allows selection of the type of search. There are three search types
+    available:</p>
+
+    <terms>
+      <item>
+	<title><gui>Multi word</gui></title>
+
+	<p>This type will match any verse that has all the words in the search
+	key, regardless of where they appear in the verse.  By default, "lucene"
+	fast search will be used, with fallback to the slower plain version of
+	multi-word search in the absence of an index.</p>
+      </item>
+
+      <item>
+	<title><gui>Regular expression</gui></title>
+	<p>This search uses a regular expression as a search key. A regular
+	expression is a	pattern used to match a string of text. A regular
+	expression can be used to find verses with words that match a particular
+	pattern. For example the regular expression <input>[a-z]*iah </input>
+	will match verses that contain the words Aiah, Ahaziah,	Athaliah and
+	Amariah.</p>
+
+	<p>A complete discussion of regular expressions is beyond the scope of
+	this manual, but more information can be found in the grep man page.</p>
+      </item>
+
+      <item>
+	<title><gui>Exact phrase</gui></title>
+
+	<p>This type will match the search key exatly as entered. If the search
+	key is <input>it is good</input>, this search would match a verse which
+	contains "<em>it is good</em>," but would not match a verse which
+	contains "<em>good</em>, and doeth <em>it</em> not, to him it
+	<em>is</em> sin."</p>
+      </item>
+
+    </terms>
+  </section>
+
+  <section id="xiphos-search-options">
+
+    <title>Search Options Checkbox</title>
+
+    <p>Allows selecting of search options. The only available option is
+    <gui>Match case</gui>. Check this box to make the search case sensitive.</p>
+  </section>
+
+  <section id="xiphos-search-scopeselect">
+
+    <title>Search Scope Selector</title>
+
+    <p>Allows defining the range within the specificed module that will	be
+    searched. There are three search scopes available:</p>
+
+    <terms>
+      <item>
+	<title><gui>No scope</gui></title>
+
+	<p>This button causes the search to include the entire module.</p>
+      </item>
+
+      <item>
+	<title><gui>Use bounds</gui></title>
+
+	<p>Selecting this button produces two dropdown selector boxes marked
+	<gui>Lower</gui> and <gui>Upper</gui>. Select the first book to search
+	in the <gui>Lower</gui> box and	the last book to search in the
+	<gui>Upper</gui> box. The search will begin with the <gui>Lower</gui>
+	book and end with the <gui>Upper</gui> book and include all books in
+	between.</p>
+
+	<p>Chapter and verse numbers can be entered into the search bound boxes
+	as well to further narrow the search. </p>
+      </item>
+
+      <item>
+	<title><gui>Last search</gui></title>
+
+	<p>Select this button to do a new search including only the verses
+	returned as a result of the last search. Use this with a new search key
+	to narrow the search further.</p>
+      </item>
+    </terms>
+  </section>
+
+  <section id="xiphos-search-results">
+
+    <title>Search Results View</title>
+
+    <p>This shows a list of the current search results for previewing,
+    navigation, or saving.</p>
+    <terms>
+      <item>
+	<title>Preview</title>
+
+	<p>To preview the search result, simply click on an individual result.
+	The entry will show in the preview pane.</p>
+      </item>
+
+      <item>
+	<title>Navigation</title>
+
+	<p>Navigation to the search result can be done in two ways. To open the
+	result in a new tab, middle-click the mouse. To open the result in the
+	current tab, double-click the result.</p>
+      </item>
+
+      <item>
+	<title>Save Results</title>
+
+	<p>You may save your results as a list of bookmarks. To do this,
+	right-click and select <gui>Save List</gui>. You will be prompted to
+	enter a name for the folder that your results will be saved to. After
+	you have saved the results, you may view them by going to your bookmarks
+	and finding the folder you just named.</p>
+      </item>
+
+    </terms>
+  </section>
+
+</page>

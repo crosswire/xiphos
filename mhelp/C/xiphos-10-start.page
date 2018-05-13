@@ -1,0 +1,148 @@
+<page id="xiphos-10-start" type="topic" xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Running Xiphos.</desc>
+
+    <link type="guide" xref="index#getting-started"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+
+  <title>Starting Xiphos</title>
+
+  <section id="start-xiphos">
+
+    <title>How to start Xiphos</title>
+    <p>You can start <app>Xiphos</app> in the following ways:</p>
+    <terms>
+      <item>
+	<title>Applications menu</title>
+	<p>Choose <guiseq><gui>Education</gui>
+	<gui>Xiphos Bible Guide</gui>
+	</guiseq>.
+	</p>
+
+      </item>
+      <item>
+	<title>Command line</title>
+	<p>Type <cmd>xiphos</cmd>, then press <key>Return</key>.</p>
+      </item>
+      <item>
+	<title>Windows</title>
+	<p>Go to <guiseq><gui>All
+	Programs</gui><gui>Xiphos</gui><gui>Xiphos</gui></guiseq>.</p>
+      </item>
+    </terms>
+  </section>
+
+  <section id="first-time">
+    <!--Starting Xiphos for the First Time  -->
+
+    <title>First Start</title>
+
+    <p>When you start <app>Xiphos</app> for the first time, <app>Xiphos</app>
+    creates a default selection of options for display.  Also, if no other Sword
+    application has ever been run, and thus there are no Bible modules
+    installed, then <app>Xiphos</app> starts the Module Manager so that you can
+    select and install a Bible module in your language preference.</p>
+
+    <media type="image" mime="image/png" src="figures/first_start.png" />
+
+    <p><app>Xiphos</app> then opens its interface with one tab displayed,
+    showing Romans 8:28. Once the interface is open, you can use
+    <guiseq><gui>Edit</gui><gui>Preferences</gui></guiseq> to change any of the
+    selections already made by default.</p>
+
+  </section>
+
+  <section id="launching-xiphos">
+
+  <!-- Xiphos on first time use -->
+
+  <title>Launching Xiphos</title>
+  <p>When you start <app>Xiphos</app>, the following interface is displayed:</p>
+
+  <!--  Xiphos interface -->
+  <media type="image" mime="image/png" src="figures/interface.png" />
+
+  <p>The <app>Xiphos</app> interface contains the following elements:</p>
+  <terms>
+    <item>
+      <title>Menubar</title>
+      <p>The menus on the menubar contain several commands which extend the use
+      of <app>Xiphos</app>. These include the StudyPad and advanced search
+      functions. The menus also help you to customize your use of
+      <app>Xiphos</app>.</p>
+    </item>
+    <item>
+      <title>Toolbar</title>
+      <p>The <gui>toolbar</gui> contains buttons that let you quickly navigate
+      through the Bible.</p>
+    </item>
+    <item>
+      <title>Sidebar</title>
+      <p>The <gui>Sidebar</gui> provides access to several features. It contains
+      your bookmarks and the list of installed books. It can also be used to
+      perform simple searches.</p>
+    </item>
+    <item>
+      <title>Bible Text Pane</title>
+      <p>The <gui>Bible Text pane</gui> displays the Bible text which is
+      currently being viewed.</p>
+    </item>
+    <item>
+      <title>Previewer</title>
+      <p>The <gui>Previewer</gui> displays Bible text module options. These
+      include Strong's numbers, footnotes and morphological tags. It is located
+      below the Bible Text Pane.</p>
+    </item>
+    <item>
+      <title>Commentary Pane</title>
+      <p>The <gui>Commentary pane</gui> displays commentaries on the current
+      Bible Text being used.</p>
+    </item>
+    <item>
+      <title>Book Pane</title>
+      <p>The <gui>Book Pane</gui> displays general books available from the
+      Sword Project. These include modules like "Calvin's Institutes",
+      "Josephus: The Complete Works" etc. This Pane can be accessed via the Book
+      View tab just below the Commentary Pane.</p>
+    </item>
+    <item>
+      <title>Dictionary/Book Pane</title>
+      <p>The <gui>Dictionary/Book Pane</gui> displays dictionary information on
+      selected words in the <gui>Bible Text Pane</gui>. It is located just below
+      the Commentary Pane.</p>
+    </item>
+  </terms>
+  <p>When you right-click in the different interface sections, the interface
+  displays a context popup menu, which provides access to more module-specific
+  options, including display controls and printing services.</p>
+
+  </section>
+
+</page>

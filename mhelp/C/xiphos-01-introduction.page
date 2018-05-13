@@ -1,0 +1,83 @@
+<page id="xiphos-01-introduction" type="topic" xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>A brief introduction to the Xiphos application.</desc>
+
+    <link type="guide" xref="index"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+<!--    <title type='link' role="trail"></title> -->
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <title>Introduction</title>
+
+  <p>Xiphos is a Bible study and research tool based upon the "SWORD Project"
+  libraries and the GTK libraries. You can use Xiphos to do the following:</p>
+    <list>
+       <item>
+          <p>View your favorite Scripture verse</p>
+       </item>
+       <item>
+          <p>Make sermon or personal notes on selected passages</p>
+       </item>
+       <item>
+           <p>Automatically follow Bible footnotes and cross-references</p>
+       </item>
+       <item>
+           <p>Compare translations in parallel</p>
+       </item>
+       <item>
+         <p>Work in original language study using the available Hebrew and
+	 Greek translations</p>
+        </item>
+      </list>
+      <p>Xiphos aims to provide a simple and clean user interface while
+      providing a powerful tool allowing a personalized Bible study environment.
+      </p>
+
+      <!-- Figure -->
+      <media type="image" mime="image/png" src="figures/interface.png" />
+
+      <!-- The SWORD Project -->
+
+      <media type="image" mime="image/png" style="floatstart" src="figures/sword3.png" />
+
+      <p>"The SWORD Project" is based at <link href="http://www.crosswire.org">
+      http://www.crosswire.org</link>. Other apps under the same banner are
+      <app>MacSword</app> for the Macintosh, <app>BibleDesktop</app>, a Java
+      app, <app>BibleTime</app> (another Linux program), and <app>The SWORD
+      Project for Windows</app> (aka <app>BibleCS</app> or <app>WinSword</app>).
+      </p>
+
+      <!-- Where important notices are kept regarding Xiphos  -->
+      <note style="warning">
+        <p>Xiphos is currently in development, so this manual may not
+        reflect the program as you see it. If it does not, please file a
+        bug at the <link href="https://github.com/crosswire/xiphos">
+	project website</link>, or email <sys>xiphos-devel@crosswire.org</sys>.
+        All help is appreciated, as it will improve the software.</p>
+      </note>
+
+</page>

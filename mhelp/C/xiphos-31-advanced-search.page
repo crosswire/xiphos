@@ -1,0 +1,121 @@
+<page id="xiphos-31-advanced-search" type="topic"
+      xmlns="http://projectmallard.org/1.0/"
+	 xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>For complicated searches in the Advanced Search window.</desc>
+
+    <link type="guide" xref="index#search-function"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- xiphos-advanced-search -->
+
+  <title>Advanced Searches</title>
+
+  <p>More complicated searches might require the use of the advanced search
+  functions, found under <guiseq><gui>Edit</gui><gui>Advanced
+  Search</gui></guiseq>.</p>
+
+  <media style="image" mime="image/png" src="figures/search_search.png" />
+
+  <p>In <gui>Advanced Search</gui>, much more complex queries can be
+  constructed, involving custom search ranges, custom lists of modules over
+  which to search, regular expression matching (see next section), and
+  attribute-based searches such as are found in footnotes or Strong's Hebrew
+  and Greek dictionary references.</p>
+
+  <p>The default search uses "lucene" fast searching. It is an optimized search
+  requiring a pre-built index; see the <gui>Module Manager's</gui> Maintenance
+  page for index creation. In the absence of an index, fallback to the slower,
+  plain multi-word search will be done, or can be selected deliberately here. A
+  web search will provide several references to the syntax needed to put to use
+  the power of optimized Lucene search. A few examples follow:</p>
+
+  <p>Simple Searches: just type in the words you want to search for. To return
+  only verses that include all of the words, prefix the word with "+". So, in
+  the KJV, you could find Psalm 23 by searching for "+Lord +shepherd +want". To
+  search for an entire phrase, surround the entire phrase with quotes, like
+  "maketh me to lie down" (note that quotes are unnecessary in all of the other
+  examples).</p>
+
+  <p>Single Letter Wildcard: to search for "veil" or "vail", use this syntax
+  "v?il". The "?" represents a single character	that could be anything. A more
+  complex example returns both spellings for Isaiah used in the KJV. "?saia?"
+  will return results for "Isaiah" and "Esaias".</p>
+
+  <p>Multiple Letter Wildcard: to search for "prophet" or "prophesy" or
+  "prophecy" or "prophesied", use this syntax "prophe*".</p>
+
+  <p>AND syntax: in the advanced search to return results for all of the search
+  terms, you must put "AND" in between the terms. To continue our example, if we
+  wish to search for any occurrence of Isaiah or Esaias that also mention either
+  prophet, or prophecy, or prophesy, we can do a search like this: "?saia? AND
+  prophe*".</p>
+
+  <p>By default, two standard search ranges are defined, for Old and New
+  Testament; you may wish to define others for e.g. "Gospels" or "Paul's
+  Epistles". One custom module list containing only the first Bible found will
+  be present. If desired, new searches can be performed across only the current
+  results of the previous search.  Any modules may be searched, including
+  general books and even dictionaries, in any combination.</p>
+
+  <p>Note the tooltip in the screenshot above, for Attributes search. This
+  qualifier is used to perform searches on attributes that are carried with
+  verses, instead of verse content proper, such as footnote content or Strong's
+  Hebrew and Greek references. If this button is selected, specific attribute
+  qualifiers must be made in the Attribute Search tab, at the right end of the
+  tab set. Strong's references are identified with a leading "H" or "G" and the
+  numeric Strong's identifier. Thus, a search of KJV for Strong's Greek #140,
+  using "G140", will return the single result of Matthew 12:18.</p>
+
+  <p>If you have indexed your modules, there is a much faster way to search for
+  Strong's references. Enter your search preceded by "lemma:", so to search for
+  Strong's Greek #140, enter "lemma:G140". You must have selected <gui>Optimized
+  ("Lucene")</gui> for this to work.</p>
+
+  <p>Explanations of search syntax are available when either Optimized or
+  Attribute search is selected.</p>
+
+  <p>The "Find" button also stops an in-progress search, as its tooltip
+  indicates.</p>
+
+  <p>Results will show in the <gui>Results</gui> tab. If you wish to show
+  Strongs, Morphology, or Footnote tags, make those selections on the
+  <gui>Attributes Search</gui> tab. Clicking once on the result will show the
+  result in the <gui>Advanced Search</gui> previewer. Hovering over Strongs,
+  Morphology, Footnote, or Cross-reference tags will show the results in the
+  main previewer. Double-clicking a result will cause the current tab to
+  navigate to that result. This applies to search results in general books and
+  commentaries as well, but note that the respective tab must be visible.</p>
+
+  <note style="warning">
+    <p>Changes to some of the settings (e.g. scope of search, searched modules,
+    etc.) in Advanced Search will affect the simple search via the side pane but
+    not vice versa.</p>
+  </note>
+
+</page>

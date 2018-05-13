@@ -1,0 +1,85 @@
+<page id="xiphos-52-preferences-fonts-colors" type="topic" xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Setting Font Colors.</desc>
+
+    <link type="guide" xref="index#preferences"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- Fonts And Colors -->
+
+  <title>Fonts And Colors</title>
+
+  <section id="font-color">
+
+    <title>Setting Font Colors</title>
+
+    <media type="image" mime="image/png"
+	   src="figures/preferences_fonts-color.png" />
+
+    <p>The <gui>Invert color pairs</gui> buttons are provided to make it easy,
+    for example, to move the main window into "night mode," with white text on
+    black background.</p>
+
+  </section>
+
+  <section id="font-misc">
+
+    <title>Miscellaneous Font Settings</title>
+
+    <media style="image" mime="image/png"
+	   src="figures/preferences_fonts-misc.png" />
+
+    <p>In individual modules' display, the right-click menu's <gui>Module
+    Options</gui> selector provides font name and size selection.</p>
+
+    <p>The base font size is the size initially chosen for all modules displayed
+    by <app>Xiphos</app>.  The verse number and individual modules' font size
+    choices are relative to the base font size.</p>
+
+    <p>The font name and size used for display is chosen from this order:</p>
+
+    <list>
+      <item>
+        <p>The selection made via the context menu for the specific module,
+	under <gui>Module Options</gui>.</p>
+      </item>
+      <item>
+        <p>The per-language selection made under Preferences, here.</p>
+      </item>
+      <item>
+        <p>The module's own default selection, in its configuration file.</p>
+      </item>
+      <item>
+        <p>The application default.</p>
+      </item>
+    </list>
+
+  </section>
+
+</page>

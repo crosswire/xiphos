@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Xiphos Bible Guide
+Comment=Study the Bible
+Keywords=Text;Bible;Study;
+Exec=@PROJECT_NAME@
+TryExec=xiphos
+Icon=xiphos
+Terminal=false
+Type=Application
+Categories=Education;
+StartupNotify=true

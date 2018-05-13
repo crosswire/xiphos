@@ -1,0 +1,55 @@
+<page id="xiphos-24-modules-third-party" type="topic"
+      xmlns="http://projectmallard.org/1.0/"
+	 xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Installing Non-Standard Modules.</desc>
+
+    <link type="guide" xref="index#module-manager"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- Installing Non-Standard Modules -->
+
+  <title>Third-Party Modules</title>
+
+  <p>Some resource modules in Sword Project format are available from sources
+  other than Crosswire and not from a module manager-ready repository.
+  Necessarily, installing such a module is a manual task.</p>
+
+  <p>Modules are normally packaged as *.zip files; they contain a configuration
+  file plus a number of data files. Installation of such a module is done by
+  cd'ing to your personal Sword (not <app>Xiphos</app>) configuration directory,
+  ~/.sword, and unzipping the file there. The configuration file will be left in
+  "mods.d", and the module's data files will go into a subdirectory of
+  "modules". Alternatively, if you have write access to the system Sword
+  directory, typically /usr/share/sword, you may cd there instead before
+  unzipping.</p>
+
+  <p>Restart <app>Xiphos</app> after installing such a module, so that a fresh
+  instance of the program can notice the new module in place.</p>
+
+</page>

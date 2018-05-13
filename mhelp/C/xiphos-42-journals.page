@@ -1,0 +1,102 @@
+<page id="xiphos-42-journals" type="topic" xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Creating a journal or prayer list.</desc>
+
+    <link type="guide" xref="index#personal-comments"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- Journals and Prayer Lists -->
+
+  <title>Journals and Prayer Lists</title>
+
+  <p><app>Xiphos</app> supports	user-created and -editable modules to contain
+  general content.  Initially conceived as simple prayer lists,	they have
+  expanded to include daily journals and topic-outline content.  The user can
+  maintain prayer lists, or prepare sermons, or write any structured content
+  desired.</p>
+
+  <p>To enable prayer list and journal support, see the	Preferences dialog as
+  previously described.  There, in <guiseq><gui>General</gui><gui> Options
+  </gui></guiseq>, check the item labeled <gui>Enable Prayer Lists</gui>.
+  You will see a new item appear at the bottom of the sidebar's module list for
+  "Prayer Lists/Journals".</p>
+
+  <p>Right-click on this entry, and you will be offered a context menu to create
+  new modules.  All the offered options are of the same type, but what is
+  offered is a variety of templates from which to work.  There are 6 templates
+  at this time.</p>
+
+  <media type="image" mime="image/png" src="figures/journal.png" />
+
+  <p>Their structure is the same, but the offered templates provide a variety of
+  hints regarding ways to organize content.  <gui>Simple</gui> is trivial, and
+  can be considered a mental Post-It note.  <gui>Subject</gui> is useful as
+  a more organized version.
+  <gui>Monthly</gui> provides a per-month structure in  which to track needed
+  content.
+  <gui>Daily Journal</gui> is a full 365-day calendar in which to track a
+  personal journal or ongoing prayer needs.
+  <gui>Outlined Topic</gui> is a full, expandable outline suitable for topics
+  and subtopics.
+  <gui>Book/Chapter</gui> is a book and chapter outline from Genesis through
+  Revelation.</p>
+
+  <p>Journals and prayer lists have the structure of a general book: If simply
+  selected for display from the module list, they will appear in the usual
+  subwindow for general books.</p>
+
+  <p>Editing a journal or prayer list is done by right-clicking the module name
+  to get its context menu, whose middle item is <gui>Open in Editor</gui>.  The
+  sections and subsections will be listed in the left margin.  Click one, and
+  the editor navigates to that section.  The context menu on right-click of
+  section keys provides for adding, deleting, and editing the names of sections
+  and subsections.</p>
+
+  <p>If the general book subwindow is currently displaying the journal or prayer
+  list being edited, it will synchronize with new content when <gui>Save</gui>
+  is used.</p>
+
+  <p>As mentioned, these user-edited modules are in effect general books.  This
+  means they can be viewed in any Sword Project application.  Thus, you can use
+  these modules immediately in <app>BibleTime</app>, for example; or from the
+  Module Manager's <gui>Maintenance</gui> page, you can archive a zip file to
+  copy to a Windows system where you can then install the zip content as a
+  module for the Windows user interface.  Few other Sword Project applications
+  provide for editing these modules, however, meaning that they will appear in
+  such other applications as just ordinary general books.</p>
+
+  <p>In the future, it is planned that a module sharing facility will become
+  available, by which user-edited modules such as these can be uploaded to
+  become available to a wide audience.  The current install repository facility
+  will be expanded to provide upload as well as the existing download capability
+  in order to support this.  Thus, users will be able to share their sermons,
+  Bible studies, and other personally-authored content with other Sword
+  application users.</p>
+
+</page>

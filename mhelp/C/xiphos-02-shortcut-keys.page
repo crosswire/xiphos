@@ -1,0 +1,175 @@
+<page id="xiphos-02-shortcut-keys" type="topic"
+      xmlns="http://projectmallard.org/1.0/"
+	 xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Use keyboard shortcuts to help you work more quickly.</desc>
+
+    <link type="guide" xref="index"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <title>Keyboard Shortcuts</title>
+  <p>Several keyboard shortcuts exist in <app>Xiphos</app>, listed below in
+  rough functional groupings.</p>
+
+  <p>Window selection/opening and navbar selection:</p>
+  <list>
+    <item>
+      <p><gui>Ctrl-L</gui> focuses and selects the main verse navbar text. You
+      can then immediately type in new verse selection text.  Be aware that, as
+      is the case with most Sword applications, <app>Xiphos</app> understands
+      many abbreviations: "G" is adequate to specify Genesis, for example, and
+      any book name by itself implies 1:1.</p>
+    </item>
+    <item>
+      <p><gui>Alt-C</gui> brings the Commentary View forward when previously
+      obscured by the Book View.</p>
+    </item>
+    <item>
+      <p><gui>Alt-G</gui> is the opposite of Alt-C, focusing on the general
+      book.</p>
+    </item>
+    <item>
+      <p><gui>Alt-D</gui> focuses on the dictionary navbar text.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-T</gui> opens a new tab.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-[1-9]</gui> makes the Nth tab current.</p>
+    </item>
+  </list>
+  <p>Verse navigation and Bible features:</p>
+  <list>
+    <item>
+      <p><gui>Ctrl-p/Ctrl-n</gui>: Verse previous/next. Also <gui>k/j</gui>.</p>
+
+      <p>As well, text of the verses before and after the current chapter can be
+      clicked to navigate across chapters.</p>
+    </item>
+    <item>
+      <p><gui>p/n</gui>: Chapter previous/next.</p>
+    </item>
+    <item>
+      <p><gui>P/N</gui>: Book previous/next.</p>
+    </item>
+    <item>
+      <p><gui>Shift-F10</gui> brings up the context menu for the Bible pane.</p>
+    </item>
+    <item>
+      <p><gui>Alt-S</gui>: Toggle Strong's display.</p>
+    </item>
+    <item>
+      <p><gui>Alt-M</gui>: Toggle morphology display.</p>
+    </item>
+    <item>
+      <p><gui>Alt-L</gui>: Toggle lemma display.</p>
+    </item>
+    <item>
+      <p><gui>Alt-R</gui>: Toggle "red words of Christ" display.</p>
+    </item>
+    <item>
+      <p><gui>Alt-T</gui>: Toggle transliteration.</p>
+    </item>
+  </list>
+  <p>	Opening special windows:</p>
+  <list>
+    <item>
+      <p><gui>F1</gui> opens this manual.</p>
+    </item>
+    <item>
+      <p><gui>F2</gui>: opens the <gui>Preferences</gui> dialog.</p>
+    </item>
+    <item>
+      <p><gui>F3</gui>: opens <gui>Advanced Search</gui>.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-F3</gui>: brings forward the simple sidebar search.</p>
+    </item>
+    <item>
+      <p><gui>F4</gui>: opens the <gui>Module Manager</gui>.</p>
+    </item>
+    <item>
+      <p><gui>F11</gui>: opens the current Bible as a separate window.</p>
+    </item>
+    <item>
+      <p><gui>Alt-A</gui> opens an annotation dialog on the current verse.</p>
+    </item>
+    <item>
+      <p><gui>Alt-B</gui> opens a bookmark dialog on the current verse.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-F</gui> opens the "Find" dialog.  The subwindow to which it
+      applies depends on which of them are visible: The Bible is first
+      preference, then the commentary or general book, then the dictionary. So a
+      tab can be dedicated to just a book, and Ctrl-F will perform "Find" within
+      that pane.</p>
+    </item>
+    <item>
+      <p><gui>Alt-P</gui> detaches/re-attaches the parallel view dialog.</p>
+    </item>
+    <item>
+      <p><gui>Alt-Z</gui> opens editor on the personal commentary named
+      Personal.</p>
+    </item>
+  </list>
+  <p>Font size control:</p>
+  <list>
+    <item>
+      <p><gui>Ctrl-Plus/Ctrl-Minus</gui> increases/decreases the base font
+      size.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-0</gui> (zero) sets the base font size to zero.</p>
+    </item>
+  </list>
+  <p>	BibleSync:</p>
+  <list>
+    <item>
+      <p><gui>Ctrl-Alt-Shift-P</gui> puts BibleSync into Personal mode.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-Alt-Shift-S</gui> puts BibleSync into Speaker mode.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-Alt-Shift-A</gui> puts BibleSync into Audience mode.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-Alt-Shift-O</gui> turns off BibleSync.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-Alt-Shift-N</gui> causes BibleSync to navigate your current
+      point as a one-shot event. BibleSync must be transmit-ready, that is, in
+      Personal or Speaker mode. Use this when you have set BibleSync for
+      "keyboard only" in Preferences.</p>
+    </item>
+    <item>
+      <p><gui>Ctrl-Alt-Shift-C</gui> provides for sending chat messages to
+      others.</p>
+    </item>
+  </list>
+</page>

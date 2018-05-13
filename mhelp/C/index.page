@@ -1,0 +1,67 @@
+<page  xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its"
+       xmlns:e="http://projectmallard.org/experimental/"
+       type="guide" style="2column task"
+       id="index">
+
+  <info>
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+    <desc>Xiphos is an application to aid in study of the Bible.</desc>
+
+    <title type='link' role="trail">
+      <media type="image" its:translate="no" src="figures/xiphos-trail-icon.png"/>
+    </title>
+
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <title its:translate="no">
+  <media type="image" its:translate="no" src="figures/xiphos-icon.png">
+    <span its:translate="yes">Xiphos logo</span>
+  </media>Xiphos
+  </title>
+
+  <p>Xiphos is a Bible study tool, offering a rich and featureful environment
+  for reading, study, and research using modules from The SWORD Project and
+  elsewhere.</p>
+
+  <section id="getting-started" style="2column">
+    <title>First steps</title>
+  </section>
+
+  <section id="module-manager" style="2column">
+    <title>Module Manager</title>
+  </section>
+
+  <section id="search-function" style="2column">
+    <title>Search Functions</title>
+  </section>
+
+  <section id="personal-comments" style="2column">
+    <title>Add Comments and  Notes</title>
+  </section>
+
+  <section id="preferences" style="2column">
+    <title>Preferences</title>
+  </section>
+
+</page>

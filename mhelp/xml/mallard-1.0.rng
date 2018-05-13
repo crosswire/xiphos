@@ -1,0 +1,2158 @@
+<?xml version="1.0"?>
+<grammar
+    xmlns="http://relaxng.org/ns/structure/1.0"
+    xmlns:mal="http://projectmallard.org/1.0/"
+    ns="http://projectmallard.org/1.0/">
+
+<start>
+  <ref name="mal_page"/>
+</start>
+
+<define name="mal_page">
+  <element name="page">
+    <ref name="mal_page_attr"/>
+    <optional>
+      <ref name="mal_info"/>
+    </optional>
+    <ref name="mal_block_title"/>
+    <optional>
+      <ref name="mal_block_subtitle"/>
+    </optional>
+    <zeroOrMore>
+      <choice>
+        <ref name="mal_block"/>
+        <ref name="mal_links"/>
+      </choice>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_section"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_links"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_page_attr">
+  <group>
+    <attribute name="id">
+      <data type="NMTOKEN" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </attribute>
+    <optional>
+      <attribute name="type">
+        <data type="NMTOKEN" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <ref name="mal_attr_version"/>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_section">
+  <element name="section">
+    <ref name="mal_section_attr"/>
+    <optional>
+      <ref name="mal_info"/>
+    </optional>
+    <ref name="mal_block_title"/>
+    <optional>
+      <ref name="mal_block_subtitle"/>
+    </optional>
+    <zeroOrMore>
+      <choice>
+        <ref name="mal_block"/>
+        <ref name="mal_links"/>
+      </choice>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_section"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_links"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_section_attr">
+  <group>
+    <attribute name="id">
+      <data type="ID" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </attribute>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info">
+  <element name="info">
+    <ref name="mal_info_attr"/>
+    <ref name="mal_info_content"/>
+  </element>
+</define>
+
+<define name="mal_info_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_content">
+  <interleave>
+    <optional>
+      <ref name="mal_info_desc"/>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_info_credit"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_info_license"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_info_link"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_info_title"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_info_revision"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_external"/>
+    </zeroOrMore>
+  </interleave>
+</define>
+
+<define name="mal_info_credit">
+  <element name="credit">
+    <ref name="mal_info_credit_attr"/>
+    <ref name="mal_info_credit_content"/>
+  </element>
+</define>
+
+<define name="mal_info_credit_attr">
+  <group>
+    <optional>
+      <attribute name="type">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_credit_content">
+  <interleave>
+    <ref name="mal_info_name"/>
+    <zeroOrMore>
+      <ref name="mal_info_email"/>
+    </zeroOrMore>
+    <optional>
+      <ref name="mal_info_years"/>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_external"/>
+    </zeroOrMore>
+  </interleave>
+</define>
+
+<define name="mal_info_link">
+  <element name="link">
+    <ref name="mal_info_link_attr"/>
+    <zeroOrMore>
+      <ref name="mal_info_link_content"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_info_link_attr">
+  <group>
+    <attribute name="type">
+      <data type="NMTOKEN" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </attribute>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_attr_link"/>
+    </oneOrMore>
+    <optional>
+      <attribute name="group">
+        <text/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_link_content">
+  <ref name="mal_external"/>
+</define>
+
+<define name="mal_info_title">
+  <element name="title">
+    <ref name="mal_info_title_attr"/>
+    <ref name="mal_info_title_inline"/>
+  </element>
+</define>
+
+<define name="mal_info_title_attr">
+  <group>
+    <attribute name="type">
+      <data type="NMTOKEN" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </attribute>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="role">
+        <data type="NMTOKEN" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_title_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_info_license">
+  <element name="license">
+    <ref name="mal_info_license_attr"/>
+    <oneOrMore>
+      <ref name="mal_info_license_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_info_license_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="href">
+        <text/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_license_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_info_desc">
+  <element name="desc">
+    <ref name="mal_info_desc_attr"/>
+    <ref name="mal_info_desc_inline"/>
+  </element>
+</define>
+
+<define name="mal_info_desc_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_desc_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_info_revision">
+  <element name="revision">
+    <ref name="mal_info_revision_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <optional>
+      <ref name="mal_block_desc"/>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_info_revision_content"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_info_revision_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="version">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="docversion">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="pkgversion">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="date">
+        <data type="date" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="status">
+        <data type="NMTOKEN" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_revision_content">
+  <ref name="mal_external"/>
+</define>
+
+<define name="mal_info_years">
+  <element name="years">
+    <ref name="mal_info_years_attr"/>
+    <ref name="mal_info_years_inline"/>
+  </element>
+</define>
+
+<define name="mal_info_years_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_years_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_info_email">
+  <element name="email">
+    <ref name="mal_info_email_attr"/>
+    <ref name="mal_info_email_inline"/>
+  </element>
+</define>
+
+<define name="mal_info_email_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_email_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_info_name">
+  <element name="name">
+    <ref name="mal_info_name_attr"/>
+    <ref name="mal_info_name_inline"/>
+  </element>
+</define>
+
+<define name="mal_info_name_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_info_name_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_links">
+  <element name="links">
+    <ref name="mal_links_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_links_content"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_links_attr">
+  <group>
+    <attribute name="type">
+      <data type="NMTOKEN" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </attribute>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="groups">
+        <text/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_links_content">
+  <ref name="mal_external"/>
+</define>
+
+<define name="mal_block">
+  <choice>
+    <ref name="mal_block_elements"/>
+    <element>
+      <anyName>
+        <except>
+          <nsName ns="http://projectmallard.org/1.0/"/>
+          <nsName ns=""/>
+        </except>
+      </anyName>
+      <zeroOrMore>
+        <attribute>
+          <anyName/>
+          <text/>
+        </attribute>
+      </zeroOrMore>
+      <interleave>
+        <zeroOrMore>
+          <ref name="mal_external"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="mal_block_elements"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </choice>
+</define>
+
+<define name="mal_block_elements">
+  <choice>
+    <ref name="mal_block_code"/>
+    <ref name="mal_block_comment"/>
+    <ref name="mal_block_example"/>
+    <ref name="mal_block_figure"/>
+    <ref name="mal_block_list"/>
+    <ref name="mal_block_listing"/>
+    <ref name="mal_block_media"/>
+    <ref name="mal_block_note"/>
+    <ref name="mal_block_p"/>
+    <ref name="mal_block_quote"/>
+    <ref name="mal_block_screen"/>
+    <ref name="mal_block_steps"/>
+    <ref name="mal_block_synopsis"/>
+    <ref name="mal_block_terms"/>
+    <ref name="mal_block_tree"/>
+    <ref name="mal_table"/>
+  </choice>
+</define>
+
+<define name="mal_block_attr">
+  <empty/>
+</define>
+
+<define name="mal_block_code">
+  <element name="code">
+    <ref name="mal_block_code_attr"/>
+    <ref name="mal_block_code_inline"/>
+  </element>
+</define>
+
+<define name="mal_block_code_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="mime">
+        <text/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_code_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_block_example">
+  <element name="example">
+    <ref name="mal_block_example_attr"/>
+    <oneOrMore>
+      <ref name="mal_block_example_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_example_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_example_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_media">
+  <element name="media">
+    <ref name="mal_block_media_attr"/>
+    <zeroOrMore>
+      <ref name="mal_block_media_content"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_block_media_attr">
+  <group>
+    <optional>
+      <attribute name="type">
+        <choice>
+          <value>image</value>
+          <value>video</value>
+          <value>audio</value>
+          <value>application</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="mime">
+        <text/>
+      </attribute>
+    </optional>
+    <attribute name="src">
+      <text/>
+    </attribute>
+    <optional>
+      <attribute name="height">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="width">
+        <text/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_media_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_p">
+  <element name="p">
+    <ref name="mal_block_p_attr"/>
+    <ref name="mal_block_p_inline"/>
+  </element>
+</define>
+
+<define name="mal_block_p_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_p_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_block_screen">
+  <element name="screen">
+    <ref name="mal_block_screen_attr"/>
+    <ref name="mal_block_screen_inline"/>
+  </element>
+</define>
+
+<define name="mal_block_screen_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="mime">
+        <text/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_screen_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_block_quote">
+  <element name="quote">
+    <ref name="mal_block_quote_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <optional>
+      <ref name="mal_block_cite"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_quote_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_quote_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_quote_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_comment">
+  <element name="comment">
+    <ref name="mal_block_comment_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <optional>
+      <ref name="mal_block_cite"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_comment_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_comment_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_comment_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_figure">
+  <element name="figure">
+    <ref name="mal_block_figure_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <optional>
+      <ref name="mal_block_desc"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_figure_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_figure_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_figure_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_listing">
+  <element name="listing">
+    <ref name="mal_block_listing_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <optional>
+      <ref name="mal_block_desc"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_listing_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_listing_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_listing_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_note">
+  <element name="note">
+    <ref name="mal_block_note_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_note_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_note_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_note_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_synopsis">
+  <element name="synopsis">
+    <ref name="mal_block_synopsis_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <optional>
+      <ref name="mal_block_desc"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_synopsis_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_synopsis_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_synopsis_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_list">
+  <element name="list">
+    <ref name="mal_block_list_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_list_item"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_list_attr">
+  <group>
+    <optional>
+      <attribute name="type">
+        <data type="NMTOKEN" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_list_item">
+  <element name="item">
+    <ref name="mal_block_list_item_attr"/>
+    <oneOrMore>
+      <ref name="mal_block_list_item_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_list_item_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_list_item_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_steps">
+  <element name="steps">
+    <ref name="mal_block_steps_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_steps_item"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_steps_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_steps_item">
+  <element name="item">
+    <ref name="mal_block_steps_item_attr"/>
+    <oneOrMore>
+      <ref name="mal_block_steps_item_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_steps_item_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_steps_item_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_terms">
+  <element name="terms">
+    <ref name="mal_block_terms_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_terms_item"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_terms_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_terms_item">
+  <element name="item">
+    <ref name="mal_block_terms_item_attr"/>
+    <oneOrMore>
+      <ref name="mal_block_title"/>
+    </oneOrMore>
+    <oneOrMore>
+      <ref name="mal_block_terms_item_content"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_terms_item_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_terms_item_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_tree">
+  <element name="tree">
+    <ref name="mal_block_tree_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <oneOrMore>
+      <ref name="mal_block_tree_item"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_block_tree_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_tree_item">
+  <element name="item">
+    <ref name="mal_block_tree_item_attr"/>
+    <ref name="mal_block_tree_item_inline"/>
+    <zeroOrMore>
+      <ref name="mal_block_tree_item"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_block_tree_item_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_tree_item_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_table">
+  <element name="table">
+    <ref name="mal_table_attr"/>
+    <optional>
+      <ref name="mal_block_title"/>
+    </optional>
+    <optional>
+      <ref name="mal_block_desc"/>
+    </optional>
+    <optional>
+      <choice>
+        <oneOrMore>
+          <ref name="mal_table_col"/>
+        </oneOrMore>
+        <oneOrMore>
+          <ref name="mal_table_colgroup"/>
+        </oneOrMore>
+      </choice>
+    </optional>
+    <choice>
+      <oneOrMore>
+        <ref name="mal_table_tr"/>
+      </oneOrMore>
+      <group>
+        <optional>
+          <ref name="mal_table_thead"/>
+        </optional>
+        <oneOrMore>
+          <ref name="mal_table_tbody"/>
+        </oneOrMore>
+        <optional>
+          <ref name="mal_table_tfoot"/>
+        </optional>
+      </group>
+    </choice>
+  </element>
+</define>
+
+<define name="mal_table_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="frame">
+        <choice>
+          <value>all</value>
+          <value>none</value>
+          <list>
+            <zeroOrMore>
+              <choice>
+                <value>top</value>
+                <value>bottom</value>
+                <value>left</value>
+                <value>right</value>
+              </choice>
+            </zeroOrMore>
+          </list>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rules">
+        <choice>
+          <value>all</value>
+          <value>groups</value>
+          <value>none</value>
+          <list>
+            <zeroOrMore>
+              <choice>
+                <value>rows</value>
+                <value>rowgroups</value>
+                <value>cols</value>
+                <value>colgroups</value>
+              </choice>
+            </zeroOrMore>
+          </list>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="shade">
+        <choice>
+          <value>all</value>
+          <value>groups</value>
+          <value>none</value>
+          <list>
+            <zeroOrMore>
+              <choice>
+                <value>rows</value>
+                <value>rowgroups</value>
+                <value>cols</value>
+                <value>colgroups</value>
+              </choice>
+            </zeroOrMore>
+          </list>
+        </choice>
+      </attribute>
+    </optional>
+    <ref name="mal_block_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_table_col">
+  <element name="col">
+    <ref name="mal_table_col_attr"/>
+  </element>
+</define>
+
+<define name="mal_table_col_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_table_colgroup">
+  <element name="colgroup">
+    <ref name="mal_table_colgroup_attr"/>
+    <zeroOrMore>
+      <ref name="mal_table_col"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_table_colgroup_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_table_tr">
+  <element name="tr">
+    <ref name="mal_table_tr_attr"/>
+    <zeroOrMore>
+      <ref name="mal_table_td"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_table_tr_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_table_thead">
+  <element name="thead">
+    <ref name="mal_table_thead_attr"/>
+    <oneOrMore>
+      <ref name="mal_table_tr"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_table_thead_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_table_tbody">
+  <element name="tbody">
+    <ref name="mal_table_tbody_attr"/>
+    <oneOrMore>
+      <ref name="mal_table_tr"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_table_tbody_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_table_tfoot">
+  <element name="tfoot">
+    <ref name="mal_table_tfoot_attr"/>
+    <oneOrMore>
+      <ref name="mal_table_tr"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="mal_table_tfoot_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_table_td">
+  <element name="td">
+    <ref name="mal_table_td_attr"/>
+    <zeroOrMore>
+      <ref name="mal_table_td_content"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="mal_table_td_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rowspan">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="colspan">
+        <text/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_table_td_content">
+  <ref name="mal_block"/>
+</define>
+
+<define name="mal_block_title">
+  <element name="title">
+    <ref name="mal_block_title_attr"/>
+    <ref name="mal_block_title_inline"/>
+  </element>
+</define>
+
+<define name="mal_block_title_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_title_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_block_subtitle">
+  <element name="subtitle">
+    <ref name="mal_block_subtitle_attr"/>
+    <ref name="mal_block_subtitle_inline"/>
+  </element>
+</define>
+
+<define name="mal_block_subtitle_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_subtitle_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_block_desc">
+  <element name="desc">
+    <ref name="mal_block_desc_attr"/>
+    <ref name="mal_block_desc_inline"/>
+  </element>
+</define>
+
+<define name="mal_block_desc_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_desc_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_block_cite">
+  <element name="cite">
+    <ref name="mal_block_cite_attr"/>
+    <ref name="mal_block_cite_inline"/>
+  </element>
+</define>
+
+<define name="mal_block_cite_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="date">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="href">
+        <text/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_block_cite_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline">
+  <interleave>
+    <zeroOrMore>
+      <ref name="mal_inline_app"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_cmd"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_code"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_em"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_file"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_gui"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_guiseq"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_input"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_key"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_keyseq"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_link"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_media"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_output"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_span"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_sys"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_var"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element>
+        <anyName>
+          <except>
+            <nsName ns="http://projectmallard.org/1.0/"/>
+            <nsName ns=""/>
+          </except>
+        </anyName>
+        <zeroOrMore>
+          <attribute>
+            <anyName/>
+            <text/>
+          </attribute>
+        </zeroOrMore>
+        <ref name="mal_inline"/>
+      </element>
+    </zeroOrMore>
+    <optional>
+      <text/>
+    </optional>
+  </interleave>
+</define>
+
+<define name="mal_inline_attr">
+  <empty/>
+</define>
+
+<define name="mal_inline_app">
+  <element name="app">
+    <ref name="mal_inline_app_attr"/>
+    <ref name="mal_inline_app_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_app_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_app_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_code">
+  <element name="code">
+    <ref name="mal_inline_code_attr"/>
+    <ref name="mal_inline_code_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_code_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="mime">
+        <text/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_code_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_cmd">
+  <element name="cmd">
+    <ref name="mal_inline_cmd_attr"/>
+    <ref name="mal_inline_cmd_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_cmd_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="mime">
+        <text/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_cmd_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_output">
+  <element name="output">
+    <ref name="mal_inline_output_attr"/>
+    <ref name="mal_inline_output_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_output_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_output_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_em">
+  <element name="em">
+    <ref name="mal_inline_em_attr"/>
+    <ref name="mal_inline_em_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_em_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_em_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_file">
+  <element name="file">
+    <ref name="mal_inline_file_attr"/>
+    <ref name="mal_inline_file_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_file_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_file_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_gui">
+  <element name="gui">
+    <ref name="mal_inline_gui_attr"/>
+    <ref name="mal_inline_gui_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_gui_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_gui_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_guiseq">
+  <element name="guiseq">
+    <ref name="mal_inline_guiseq_attr"/>
+    <ref name="mal_inline_guiseq_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_guiseq_attr">
+  <group>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_guiseq_inline">
+  <interleave>
+    <oneOrMore>
+      <ref name="mal_inline_gui"/>
+    </oneOrMore>
+    <text/>
+  </interleave>
+</define>
+
+<define name="mal_inline_link">
+  <element name="link">
+    <ref name="mal_inline_link_attr"/>
+    <ref name="mal_inline_link_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_link_attr">
+  <group>
+    <oneOrMore>
+      <ref name="mal_attr_link"/>
+    </oneOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="role">
+        <text/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_link_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_media">
+  <element name="media">
+    <ref name="mal_inline_media_attr"/>
+    <ref name="mal_inline_media_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_media_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="type">
+        <choice>
+          <value>image</value>
+          <value>video</value>
+          <value>audio</value>
+          <value>application</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="mime">
+        <text/>
+      </attribute>
+    </optional>
+    <attribute name="src">
+      <text/>
+    </attribute>
+    <optional>
+      <attribute name="height">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="width">
+        <text/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_media_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_keyseq">
+  <element name="keyseq">
+    <ref name="mal_inline_keyseq_attr"/>
+    <ref name="mal_inline_keyseq_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_keyseq_attr">
+  <group>
+    <optional>
+      <attribute name="type">
+        <choice>
+          <value>combo</value>
+          <value>sequence</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_keyseq_inline">
+  <interleave>
+    <zeroOrMore>
+      <ref name="mal_inline_key"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="mal_inline_keyseq"/>
+    </zeroOrMore>
+    <text/>
+  </interleave>
+</define>
+
+<define name="mal_inline_key">
+  <element name="key">
+    <ref name="mal_inline_key_attr"/>
+    <ref name="mal_inline_key_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_key_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_key_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_span">
+  <element name="span">
+    <ref name="mal_inline_span_attr"/>
+    <ref name="mal_inline_span_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_span_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_span_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_sys">
+  <element name="sys">
+    <ref name="mal_inline_sys_attr"/>
+    <ref name="mal_inline_sys_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_sys_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_sys_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_input">
+  <element name="input">
+    <ref name="mal_inline_input_attr"/>
+    <ref name="mal_inline_input_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_input_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_input_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_inline_var">
+  <element name="var">
+    <ref name="mal_inline_var_attr"/>
+    <ref name="mal_inline_var_inline"/>
+  </element>
+</define>
+
+<define name="mal_inline_var_attr">
+  <group>
+    <zeroOrMore>
+      <ref name="mal_attr_link"/>
+    </zeroOrMore>
+    <optional>
+      <attribute name="style">
+        <data type="NMTOKENS" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+      </attribute>
+    </optional>
+    <ref name="mal_inline_attr"/>
+    <zeroOrMore>
+      <ref name="mal_attr_external"/>
+    </zeroOrMore>
+  </group>
+</define>
+
+<define name="mal_inline_var_inline">
+  <ref name="mal_inline"/>
+</define>
+
+<define name="mal_external">
+  <element>
+    <anyName>
+      <except>
+        <nsName ns="http://projectmallard.org/1.0/"/>
+        <nsName ns=""/>
+      </except>
+    </anyName>
+    <zeroOrMore>
+      <attribute>
+        <anyName/>
+        <text/>
+      </attribute>
+    </zeroOrMore>
+    <interleave>
+      <zeroOrMore>
+        <ref name="mal_anything"/>
+      </zeroOrMore>
+      <optional>
+        <text/>
+      </optional>
+    </interleave>
+  </element>
+</define>
+
+<define name="mal_anything">
+  <element>
+    <anyName/>
+    <zeroOrMore>
+      <attribute>
+        <anyName/>
+        <text/>
+      </attribute>
+    </zeroOrMore>
+    <interleave>
+      <zeroOrMore>
+        <ref name="mal_anything"/>
+      </zeroOrMore>
+      <optional>
+        <text/>
+      </optional>
+    </interleave>
+  </element>
+</define>
+
+<define name="mal_attr_external">
+  <attribute>
+    <anyName>
+      <except>
+        <nsName ns="http://projectmallard.org/1.0/"/>
+        <nsName ns=""/>
+      </except>
+    </anyName>
+    <text/>
+  </attribute>
+</define>
+
+<define name="mal_attr_version">
+  <attribute name="version">
+    <text/>
+  </attribute>
+</define>
+
+<define name="mal_attr_link">
+  <choice>
+    <attribute name="xref">
+      <text/>
+    </attribute>
+    <attribute name="href">
+      <text/>
+    </attribute>
+    <attribute name="action">
+      <text/>
+    </attribute>
+  </choice>
+</define>
+
+<define name="mal_attr_mal_link">
+  <group>
+    <optional>
+      <attribute name="mal:xref">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="mal:action">
+        <text/>
+      </attribute>
+    </optional>
+  </group>
+</define>
+
+</grammar>

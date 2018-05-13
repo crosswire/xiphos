@@ -1,0 +1,90 @@
+<page id="xiphos-41-studypad" type="topic" xmlns="http://projectmallard.org/1.0/"
+       xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Collect and export Bible study material from Xiphos into other programmes.</desc>
+
+    <link type="guide" xref="index#personal-comments"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- ============= The Studypad ============================= -->
+
+  <title>The Studypad</title>
+
+  <p>The Studypad can be opened by choosing <guiseq><gui>File</gui><gui>Open
+  StudyPad</gui></guiseq></p>
+
+  <p>This is what the Studypad typically looks like:</p>
+
+  <media style="image" mime="image/png" src="figures/studypad.png" />
+
+  <p> The Studypad will save into your working directory, making it useful for
+  collecting and exporting information and Bible study material from Xiphos into
+  other programmes.</p>
+
+  <p> Toolbar 1</p>
+  <list>
+    <item>
+      <p>Font Size and Environment</p>
+    </item>
+    <item>
+      <p>Font Type</p>
+    </item>
+    <item>
+      <p>Bold, Italics, Underscored, Crossed Out</p>
+    </item>
+    <item>
+      <p>Left, Centre and Right  Bound</p>
+    </item>
+    <item>
+      <p>Shift Paragraph Right or Left</p>
+    </item>
+    <item>
+      <p>Colour Selector</p>
+    </item>
+  </list>
+
+  <p> Toolbar 2</p>
+  <list>
+    <item>
+      <p>New, Save, Delete and Print</p>
+    </item>
+    <item>
+      <p>Cut, Copy, Paste and Undo</p>
+    </item>
+    <item>
+      <p>Find and 'Find and Replace'</p>
+    </item>
+    <item>
+      <p>Spellcheck</p>
+    </item>
+  </list>
+
+  <p>In order for spellcheck to be available, one of the languages under
+  <guiseq><gui>Edit</gui><gui>Current languages</gui></guiseq> must be set.</p>
+
+</page>

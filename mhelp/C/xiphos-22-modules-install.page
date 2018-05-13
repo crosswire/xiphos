@@ -1,0 +1,67 @@
+<page id="xiphos-22-modules-install" type="topic"
+      xmlns="http://projectmallard.org/1.0/"
+	 xmlns:its="http://www.w3.org/2005/11/its">
+
+  <info>
+    <desc>Installing and Updating Modules.</desc>
+
+    <link type="guide" xref="index#module-manager"/>
+
+    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <!-- Installing, Updating Modules -->
+
+  <title>Sword Modules Installation</title>
+
+  <media style="image" mime="image/png" src="figures/sword_install.png" />
+
+  <p>The module manager generates both a per-type module list as well as a
+  parallel availability list. The latter is intended to make it easier to find
+  new items without having to work one's way through the per-type list, one
+  subtree at a	time.  Modules which are either not yet installed or updated
+  beyond what is currently installed will appear in both lists.</p>
+
+  <p>Modules that are already installed will show a checkmark beside them. If a
+  fast search ("lucene") index is available, a magnifying glass will be
+  displayed, otherwise an "X" will be shown; creation of the index is available
+  on the Maintenance pane. Locked modules, which require that you purchase an
+  unlock key from the module's copyright holder, will show a lock symbol. If
+  there are modules installed for which a more recent version is available, a
+  refresh icon will appear between the differing old and new version stamps.
+  There may be an approximate size displayed, if the repository management
+  provides this information, otherwise a question mark ("-?-") will be shown.
+  </p>
+
+  <p>Select new modules to be installed by clicking the checkboxes and then the
+  Install button at the bottom. Any number of modules may be requested for
+  installation at one time.</p>
+
+  <p>If you acquire a locked module and have obtained the cipher key for it, the
+  module is then unlocked in the main window: Open the module, which will
+  probably appear blank, then using the right-click context menu, choose
+  "Unlock This Module."</p>
+
+</page>

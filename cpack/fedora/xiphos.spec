@@ -1,0 +1,145 @@
+Name:           xiphos
+Version:        4.1.0
+Release:        1%{?dist}
+Summary:        Bible study and research tool
+License:        GPLv2+
+URL:            http://xiphos.org/
+Source0:        https://github.com/crosswire/xiphos/releases/download/%{version}/xiphos-%{version}.tar.gz
+BuildRequires:  biblesync-devel >= 2.0.1
+BuildRequires:  desktop-file-utils
+BuildRequires:  dbus-glib-devel
+BuildRequires:  libappstream-glib-devel
+BuildRequires:  GConf2-devel
+BuildRequires:  gettext
+BuildRequires:  desktop-file-utils
+BuildRequires:  libglade2-devel
+BuildRequires:  intltool
+BuildRequires:  libgsf-devel
+BuildRequires:  libuuid-devel
+BuildRequires:  rarian-compat
+BuildRequires:  sword-devel >= 1.8.1
+BuildRequires:  gtk3-devel
+BuildRequires:  webkitgtk4-devel
+BuildRequires:  gtkhtml3-devel
+Requires:       yelp
+# added (CMake port)
+BuildRequires:  itstool
+BuildRequires:  yelp-tools
+#
+Provides:       xiphos
+Provides:       xiphos-common
+Provides:       xiphos-gtk2
+Provides:       xiphos-gtk3
+Obsoletes:      xiphos-gtk2
+Obsoletes:      xiphos-gtk3
+Obsoletes:      xiphos-common
+
+%if 0%{?rhel} > 0 && 0%{?rhel} <= 7
+ExcludeArch: ppc64
+%endif
+
+%description
+Xiphos is a Bible study tool written for Linux,
+NIX, and Windows under the GNOME toolkit, offering a rich and featureful
+environment for reading, study, and research using modules from The SWORD
+Project and elsewhere.
+This build produced by Xiphos development; not from official Fedora repo.
+
+%prep
+%setup -q
+rm -rf src/biblesync
+
+%build
+export CC="gcc -fPIC"
+export CXX="g++ -fPIC"
+%ifarch %{power64}
+ CFLAGS="$CFLAGS -D__SANE_USERSPACE_TYPES__"
+ CXXFLAGS="$CXXFLAGS -D__SANE_USERSPACE_TYPES__"
+%endif
+export CXXFLAGS
+export CFLAGS
+
+# Build
+mkdir build
+pushd build
+LDFLAGS='%{?__global_ldflags}'       \
+%cmake -DCMAKE_BUILD_TYPE="Debug"    \
+       -DGTKHTML=ON \
+       ..
+%make_build
+popd
+
+%install
+# Install
+pushd build
+%make_install
+popd
+
+desktop-file-install --delete-original         \
+	--add-category=X-Bible                     \
+	--add-category=X-Religion                  \
+	--dir=%{buildroot}%{_datadir}/applications \
+	--copy-name-to-generic-name                \
+	%{buildroot}%{_datadir}/applications/xiphos.desktop
+
+# package docs with macro
+rm -frv %{buildroot}%{_docdir}/%{name}
+
+%find_lang %{name}
+
+# Post-install options
+%post
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+
+# Post-uninstall options
+%postun
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
+
+# Pre-uninstall options
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+
+%files -f %{name}.lang
+%{_datadir}/doc
+%{_bindir}/xiphos
+%{_bindir}/xiphos-nav
+%{_datadir}/appdata/xiphos.appdata.xml
+%{_datadir}/applications/xiphos.desktop
+%{_datadir}/help/
+%{_datadir}/icons/hicolor/scalable/apps/xiphos.svg
+%{_datadir}/xiphos/
+%{_datadir}/man
+
+%changelog
+* Sun May 13 2018 Dominique Corbex <dominique@corbex.org> - 4.1.0-1
+- 4.1.0 - Build with CMake.
+
+* Sun Sep 24 2017 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.7-1xi
+- 4.0.7.
+
+* Sun Aug 20 2017 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.6a-1xi
+- 4.0.6a.
+
+* Wed Aug 09 2017 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.6-1xi
+- 4.0.6.
+
+* Sun Apr 23 2017 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.5-1xi
+- 4.0.5.
+
+* Sun Aug 30 2015 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.4-1xi
+- 4.0.4.
+
+* Thu Aug 06 2015 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.3-1xi
+- 4.0.3.
+
+* Wed Apr 15 2015 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.2-1xi
+- 4.0.2.
+
+* Mon Mar 30 2015 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.1-1xi
+- 4.0.1.
+
+* Wed Dec 24 2014 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.0-1xi
+- 4.0 release.
