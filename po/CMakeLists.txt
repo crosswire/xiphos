@@ -73,7 +73,7 @@ if (GETTEXT_FOUND)
 
   # target to refresh POT file
   find_program(INTLTOOL_UPDATE intltool-update)
-  add_custom_target (pot
+  add_custom_target (xiphos_pot
     COMMAND ${INTLTOOL_UPDATE} --pot --gettext-package=${PROJECT_NAME}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/po
     COMMENT "Updating pot file."
@@ -81,7 +81,7 @@ if (GETTEXT_FOUND)
 
   # target for updating a given PO file
   foreach (language ${langs})
-    add_custom_target (${language}.po
+    add_custom_target (xiphos_${language}.po
       COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --update --verbose ${language}.po ${PROJECT_NAME}.pot
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/po
       COMMENT "Updating ${language}.po file"
@@ -92,7 +92,7 @@ if (GETTEXT_FOUND)
 
   # target for updating all PO files
   set (PO_UPDATE_ALL pwd ${PO_UPDATE_ALL})
-  add_custom_target (po
+  add_custom_target (xiphos_po
     COMMAND ${PO_UPDATE_ALL}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/po
     COMMENT "Updating all PO files"

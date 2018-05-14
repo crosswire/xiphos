@@ -15,7 +15,7 @@ For updating the Portable Object Template (xiphos.pot), this is the file that
 you get when you extract texts from Xiphos sources, go to your CMake build
 folder and run:
 
-    make pot
+    make xiphos_pot
 
 Updating a specific PO file:
 ----------------------------
@@ -24,14 +24,14 @@ For merging new strings into the Portable Object File,  this is the file that
 you receive back from the translators, a file that includes the original texts
 and the translations, go to your CMake build folder and run:
 
-    make <LANG>.po
+    make xiphos_<LANG>.po
 
 Updating all PO files:
 ----------------------
 
 For merging new strings in all PO files, go to your CMake build folder and run:
 
-    make po
+    make xiphos_po
 
 
 Xiphos Manual i18n

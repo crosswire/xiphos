@@ -33,15 +33,15 @@ targets for updating source files:
 ----------------------------------
 updating xiphos pot file
 
-    $ make pot
+    $ make xiphos_pot
 
 updating all po files
 
-    $ make po
+    $ make xiphos_po
 
 updating a specific po file
 
-    $ make <lang>.po
+    $ make xiphos_<lang>.po
 
 updating help pot file
 
