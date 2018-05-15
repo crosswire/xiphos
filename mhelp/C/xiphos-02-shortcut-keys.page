@@ -1,13 +1,16 @@
-<page id="xiphos-02-shortcut-keys" type="topic"
-      xmlns="http://projectmallard.org/1.0/"
-	 xmlns:its="http://www.w3.org/2005/11/its">
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      xmlns:ui="http://projectmallard.org/ui/1.0/"
+      type="topic"
+      id="xiphos-02-shortcut-keys">
 
   <info>
     <desc>Use keyboard shortcuts to help you work more quickly.</desc>
 
     <link type="guide" xref="index"/>
 
-    <revision docversion="4.1.0" version="1.0" date="2018-04-24" status="draft"/>
+    <revision pkgversion="4.1.0" date="2018-04-24" status="draft"/>
+    <revision pkgversion="4.1.1" date="2018-05-15" status="candidate"/>
 
     <title type='link' role="trail"></title>
     <title type='text'>Xiphos</title>
@@ -32,144 +35,260 @@
 
   </info>
 
-  <title>Keyboard Shortcuts</title>
-  <p>Several keyboard shortcuts exist in <app>Xiphos</app>, listed below in
-  rough functional groupings.</p>
+  <title>Shortcuts keys</title>
 
-  <p>Window selection/opening and navbar selection:</p>
-  <list>
-    <item>
-      <p><gui>Ctrl-L</gui> focuses and selects the main verse navbar text. You
-      can then immediately type in new verse selection text.  Be aware that, as
-      is the case with most Sword applications, <app>Xiphos</app> understands
-      many abbreviations: "G" is adequate to specify Genesis, for example, and
-      any book name by itself implies 1:1.</p>
-    </item>
-    <item>
-      <p><gui>Alt-C</gui> brings the Commentary View forward when previously
-      obscured by the Book View.</p>
-    </item>
-    <item>
-      <p><gui>Alt-G</gui> is the opposite of Alt-C, focusing on the general
-      book.</p>
-    </item>
-    <item>
-      <p><gui>Alt-D</gui> focuses on the dictionary navbar text.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-T</gui> opens a new tab.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-[1-9]</gui> makes the Nth tab current.</p>
-    </item>
-  </list>
-  <p>Verse navigation and Bible features:</p>
-  <list>
-    <item>
-      <p><gui>Ctrl-p/Ctrl-n</gui>: Verse previous/next. Also <gui>k/j</gui>.</p>
+  <p>Use <gui>shortcut keys</gui> to perform common tasks more quickly than with
+  the mouse and menus. The following tables list all of <app>Xiphos's</app>
+  shortcut keys.</p>
 
-      <p>As well, text of the verses before and after the current chapter can be
-      clicked to navigate across chapters.</p>
-    </item>
-    <item>
-      <p><gui>p/n</gui>: Chapter previous/next.</p>
-    </item>
-    <item>
-      <p><gui>P/N</gui>: Book previous/next.</p>
-    </item>
-    <item>
-      <p><gui>Shift-F10</gui> brings up the context menu for the Bible pane.</p>
-    </item>
-    <item>
-      <p><gui>Alt-S</gui>: Toggle Strong's display.</p>
-    </item>
-    <item>
-      <p><gui>Alt-M</gui>: Toggle morphology display.</p>
-    </item>
-    <item>
-      <p><gui>Alt-L</gui>: Toggle lemma display.</p>
-    </item>
-    <item>
-      <p><gui>Alt-R</gui>: Toggle "red words of Christ" display.</p>
-    </item>
-    <item>
-      <p><gui>Alt-T</gui>: Toggle transliteration.</p>
-    </item>
-  </list>
-  <p>	Opening special windows:</p>
-  <list>
-    <item>
-      <p><gui>F1</gui> opens this manual.</p>
-    </item>
-    <item>
-      <p><gui>F2</gui>: opens the <gui>Preferences</gui> dialog.</p>
-    </item>
-    <item>
-      <p><gui>F3</gui>: opens <gui>Advanced Search</gui>.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-F3</gui>: brings forward the simple sidebar search.</p>
-    </item>
-    <item>
-      <p><gui>F4</gui>: opens the <gui>Module Manager</gui>.</p>
-    </item>
-    <item>
-      <p><gui>F11</gui>: opens the current Bible as a separate window.</p>
-    </item>
-    <item>
-      <p><gui>Alt-A</gui> opens an annotation dialog on the current verse.</p>
-    </item>
-    <item>
-      <p><gui>Alt-B</gui> opens a bookmark dialog on the current verse.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-F</gui> opens the "Find" dialog.  The subwindow to which it
-      applies depends on which of them are visible: The Bible is first
-      preference, then the commentary or general book, then the dictionary. So a
-      tab can be dedicated to just a book, and Ctrl-F will perform "Find" within
-      that pane.</p>
-    </item>
-    <item>
-      <p><gui>Alt-P</gui> detaches/re-attaches the parallel view dialog.</p>
-    </item>
-    <item>
-      <p><gui>Alt-Z</gui> opens editor on the personal commentary named
-      Personal.</p>
-    </item>
-  </list>
-  <p>Font size control:</p>
-  <list>
-    <item>
-      <p><gui>Ctrl-Plus/Ctrl-Minus</gui> increases/decreases the base font
-      size.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-0</gui> (zero) sets the base font size to zero.</p>
-    </item>
-  </list>
-  <p>	BibleSync:</p>
-  <list>
-    <item>
-      <p><gui>Ctrl-Alt-Shift-P</gui> puts BibleSync into Personal mode.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-Alt-Shift-S</gui> puts BibleSync into Speaker mode.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-Alt-Shift-A</gui> puts BibleSync into Audience mode.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-Alt-Shift-O</gui> turns off BibleSync.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-Alt-Shift-N</gui> causes BibleSync to navigate your current
-      point as a one-shot event. BibleSync must be transmit-ready, that is, in
-      Personal or Speaker mode. Use this when you have set BibleSync for
-      "keyboard only" in Preferences.</p>
-    </item>
-    <item>
-      <p><gui>Ctrl-Alt-Shift-C</gui> provides for sending chat messages to
-      others.</p>
-    </item>
-  </list>
+  <table rules="rows" frame="top bottom" ui:expanded="true">
+    <title>Window selection/opening and navbar selection</title>
+    <thead>
+      <tr>
+	<td><p>Action</p></td>
+          <td><p>Keyboard shortcut</p></td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><p>Focus and select the main verse navbar text.  You can then
+	  immediately type in new verse selection text.  Be aware that, as is
+	  the case with most Sword applications, <app>Xiphos</app> understands
+	  many abbreviations: "G" is adequate to specify Genesis, for example,
+	  and any book name by itself implies 1:1.</p></td>
+	  <td><p><keyseq><key>Ctrl</key><key>L</key></keyseq></p></td>
+	</tr>
+	<tr>
+	  <td><p>Bring the Commentary View forward when previously obscured by
+	  the Book View.</p></td>
+	  <td><p><keyseq><key>Alt</key><key>C</key></keyseq></p></td>
+	</tr>
+	<tr>
+	  <td><p>Focus on the general book.</p></td>
+	  <td><p><keyseq><key>Alt</key><key>G</key></keyseq></p></td>
+	</tr>
+	<tr>
+	  <td><p>Focus on the dictionary navbar text.</p></td>
+	  <td><p><keyseq><key>Alt</key><key>D</key></keyseq></p></td>
+	</tr>
+	<tr>
+	  <td><p>Open a new tab.</p></td>
+	  <td><p><keyseq><key>Ctrl</key><key>T</key></keyseq></p></td>
+	</tr>
+	<tr>
+	  <td><p>Make the tab #1 current.</p></td>
+	  <td><p><keyseq><key>Ctrl</key><key>1</key></keyseq></p></td>
+	</tr>
+	<tr>
+	  <td><p>Make the tab #2 current.</p></td>
+	  <td><p><keyseq><key>Ctrl</key><key>2</key></keyseq></p></td>
+	</tr>
+	<tr>
+	  <td><p>...</p></td>
+	  <td><p>...</p></td>
+	</tr>
+	<tr>
+	  <td><p>Make the tab #9 current.</p></td>
+	  <td><p><keyseq><key>Ctrl</key><key>9</key></keyseq></p></td>
+	</tr>
+      </tbody>
+  </table>
+
+  <table rules="rows" frame="top bottom"  ui:expanded="false">
+    <title>Verse navigation and Bible features</title>
+    <thead>
+      <tr>
+	<td><p>Action</p></td>
+	<td><p>Keyboard shortcut</p></td>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+	<td><p>Previous verse</p></td>
+	<td><p><keyseq><key>Ctrl</key><key>p</key></keyseq></p>
+	<p><keyseq><key>k</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Next verse</p></td>
+	<td><p><keyseq><key>Ctrl</key><key>n</key></keyseq></p>
+	<p><keyseq><key>j</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Previous chapter</p></td>
+	<td><p><keyseq><key>p</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Next chapter</p></td>
+	<td><p><keyseq><key>n</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Previous book</p></td>
+	<td><p><keyseq><key>P</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Next book</p></td>
+	<td><p><keyseq><key>N</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Bring up the context menu for the Bible pane.</p></td>
+	<td><p><keyseq><key>Shift</key><key>F10</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Toggle Strong's display.</p></td>
+	<td><p><keyseq><key>Alt</key><key>S</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Toggle morphology display.</p></td>
+	<td><p><keyseq><key>Alt</key><key>M</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Toggle lemma display.</p></td>
+	<td><p><keyseq><key>Alt</key><key>L</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Toggle "red words of Christ" display.</p></td>
+	<td><p><keyseq><key>Alt</key><key>R</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Toggle transliteration.</p></td>
+	<td><p><keyseq><key>Alt</key><key>T</key></keyseq></p></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table rules="rows" frame="top bottom"  ui:expanded="false">
+    <title>Opening special windows</title>
+    <thead>
+      <tr>
+        <td><p>Action</p></td>
+        <td><p>Keyboard shortcut</p></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+	<td><p>Open this manual.</p></td>
+	<td><p><keyseq><key>F1</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Open the <gui>Preferences</gui> dialog.</p></td>
+    	<td><p><keyseq><key>F2</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Open <gui>Advanced Search</gui>.</p></td>
+    	<td><p><keyseq><key>F3</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Bring forward the simple sidebar search.</p></td>
+    	<td><p><keyseq><key>Ctrl</key><key>F3</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Open the <gui>Module Manager</gui>.</p></td>
+    	<td><p><keyseq><key>F4</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Open the current Bible as a separate window.</p></td>
+    	<td><p><keyseq><key>F11</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Open an annotation dialog on the current verse.</p></td>
+    	<td><p><keyseq><key>Alt</key><key>A</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Open a bookmark dialog on the current verse.</p></td>
+    	<td><p><keyseq><key>Alt</key><key>B</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Open the "Find" dialog.  The subwindow to which it applies
+	depends on which of them are visible: The Bible is first preference,
+	then the commentary or general book, then the dictionary. So a tab can
+	be dedicated to just a book, and the "Find" will be performed within
+	that pane.</p></td>
+    	<td><p><keyseq><key>Ctrl</key><key>F</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Detach/re-attach the parallel view dialog.</p></td>
+    	<td><p><keyseq><key>Alt</key><key>P</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Open editor on the personal commentary named Personal.</p></td>
+    	<td><p><keyseq><key>Alt</key><key>Z</key></keyseq></p></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table rules="rows" frame="top bottom"  ui:expanded="false">
+    <title>Font size control</title>
+    <thead>
+      <tr>
+        <td><p>Action</p></td>
+        <td><p>Keyboard shortcut</p></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+	<td><p>Increase the base font size.</p></td>
+    	<td><p><keyseq><key>Ctrl</key><key>+</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Decrease the base font size.</p></td>
+    	<td><p><keyseq><key>Ctrl</key><key>-</key></keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Set the base font size to zero.</p></td>
+    	<td><p><keyseq><key>Ctrl</key><key>0</key></keyseq></p></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table rules="rows" frame="top bottom"  ui:expanded="false">
+    <title>BibleSync</title>
+    <thead>
+      <tr>
+        <td><p>Action</p></td>
+        <td><p>Keyboard shortcut</p></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+	<td><p>Put BibleSync into Personal mode.</p></td>
+    	<td><p><keyseq>
+	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>P</key>
+	</keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Put BibleSync into Speaker mode.</p></td>
+    	<td><p><keyseq>
+	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>S</key>
+	</keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Put BibleSync into Audience mode.</p></td>
+    	<td><p><keyseq>
+	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>A</key>
+	</keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Turn off BibleSync.</p></td>
+    	<td><p><keyseq>
+	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>O</key>
+	</keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Cause BibleSync to navigate your current point as a one-shot
+	event. BibleSync must be transmit-ready, that is, in Personal or Speaker
+	mode. Use this when you have set BibleSync for "keyboard only" in
+	Preferences.</p></td>
+    	<td><p><keyseq>
+	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>N</key>
+	</keyseq></p></td>
+      </tr>
+      <tr>
+	<td><p>Provide for sending chat messages to others.</p></td>
+    	<td><p><keyseq>
+	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>C</key>
+	</keyseq></p></td>
+      </tr>
+    </tbody>
+  </table>
 </page>
