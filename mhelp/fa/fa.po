@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-11-12 15:56+0100\n"
+"POT-Creation-Date: 2018-05-15 22:24+0200\n"
 "PO-Revision-Date: 2009-09-23 22:44-0800\n"
 "Last-Translator: Mansour <manhid1@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,48 +16,47 @@ msgid "translator-credits"
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/index.page:9
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:9
 msgid "Xiphos is an application to aid in study of the Bible."
 msgstr ""
 "زیفوس برنامه‏ای است که به منظور کمک رسانی در مطالعۀ کتاب‏مقدس تهیه شده است."
 
 #. (itstool) path: info/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/index.page:15
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-20-modules-introduction.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-22-modules-install.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-23-modules-maintenance.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-24-modules-third-party.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-53-preferences-modules.page:12
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-60-online-help.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:15
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:16
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-20-modules-introduction.page:13
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:13
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-22-modules-install.page:13
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-23-modules-maintenance.page:13
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-24-modules-third-party.page:13
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:13
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:13
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:13
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-53-preferences-modules.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-60-online-help.page:12
 #, fuzzy
 msgctxt "text"
 msgid "Xiphos"
 msgstr "زیفوس"
 
 #. (itstool) path: media/span
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/index.page:39
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:39
 #, fuzzy
 msgid "Xiphos logo"
 msgstr "زیفوس"
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/index.page:44
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:43
 msgid ""
 "Xiphos is a Bible study tool, offering a rich and featureful environment for "
 "reading, study, and research using modules from The SWORD Project and "
@@ -65,42 +64,42 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/index.page:49
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:48
 msgid "First steps"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/index.page:53
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:52
 msgid "Module Manager"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/index.page:57
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:56
 msgid "Search Functions"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/index.page:61
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:60
 msgid "Add Comments and Notes"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/index.page:65
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:64
 msgid "Preferences"
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:5
-msgid "Introduction to the Xiphos application."
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:5
+msgid "A brief introduction to the Xiphos application."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:34
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:34
 msgid "Introduction"
 msgstr "مقدمه"
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:36
 #, fuzzy
 msgid ""
 "Xiphos is a Bible study and research tool based upon the \"SWORD Project\" "
@@ -111,29 +110,29 @@ msgstr ""
 "<application>زیفوس</application> را می‏توانید برای موارد زیر بکار ببرید:"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:40
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:40
 msgid "View your favorite Scripture verse"
 msgstr "مشاهدۀ آیات مورد علاقه"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:43
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:43
 msgid "Make sermon or personal notes on selected passages"
 msgstr ""
 "یادداشتهای موعظه و یادداشتهای شخصی خود را در مورد آیات مورد نظر می‏توانید "
 "تایپ کنید"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:46
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:46
 msgid "Automatically follow Bible footnotes and cross-references"
 msgstr "بصورت اتوماتیک پانویس‏های کتاب‏مقدس و سایر کتب مرجع را دنبال کنید "
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:49
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:49
 msgid "Compare translations in parallel"
 msgstr "ترجمه‏های گوناگون را بصورت موازی مقایسه کنید"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:52
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:52
 msgid ""
 "Work in original language study using the available Hebrew and Greek "
 "translations"
@@ -142,7 +141,7 @@ msgstr ""
 "مطالعاتی و تحقیقاتی انجام دهید"
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:56
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:56
 #, fuzzy
 msgid ""
 "Xiphos aims to provide a simple and clean user interface while providing a "
@@ -159,8 +158,8 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:60
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:87
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:61
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:90
 msgctxt "_"
 msgid ""
 "external ref='figures/interface.png' md5='87110fb5a2a686a1f9ba07bffd222bc4'"
@@ -171,14 +170,14 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:64
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:65
 msgctxt "_"
 msgid ""
 "external ref='figures/sword3.png' md5='3d9c6ae738d16324db1e79e7ef9eff8b'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:66
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:67
 #, fuzzy
 msgid ""
 "\"The SWORD Project\" is based at <link href=\"http://www.crosswire.org\"> "
@@ -197,7 +196,7 @@ msgstr ""
 "لینوکس است، می‏باشند."
 
 #. (itstool) path: note/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-01-introduction.page:75
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:76
 #, fuzzy
 msgid ""
 "Xiphos is currently in development, so this manual may not reflect the "
@@ -214,248 +213,522 @@ msgstr ""
 "شما پیشاپیش سپاسگزاریم"
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:8
 msgid "Use keyboard shortcuts to help you work more quickly."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:34
-msgid "Keyboard Shortcuts"
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:38
+msgid "Shortcuts keys"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:35
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:40
 msgid ""
-"Several keyboard shortcuts exist in <app>Xiphos</app>, listed below in rough "
-"functional groupings."
+"Use <gui>shortcut keys</gui> to perform common tasks more quickly than with "
+"the mouse and menus. The following tables list all of <app>Xiphos's</app> "
+"shortcut keys."
 msgstr ""
 
-#. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:38
-msgid "Window selection/opening and navbar selection:"
+#. (itstool) path: table/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:45
+msgid "Window selection/opening and navbar selection"
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:41
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:48
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:102
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:164
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:224
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:248
+msgid "Action"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:49
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:103
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:165
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:225
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:249
+#, fuzzy
+msgid "Keyboard shortcut"
+msgstr "میان‏بر به ابزار جانبی"
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:55
 msgid ""
-"<gui>Ctrl-L</gui> focuses and selects the main verse navbar text. You can "
-"then immediately type in new verse selection text. Be aware that, as is the "
-"case with most Sword applications, <app>Xiphos</app> understands many "
-"abbreviations: \"G\" is adequate to specify Genesis, for example, and any "
-"book name by itself implies 1:1."
+"Focus and select the main verse navbar text. You can then immediately type "
+"in new verse selection text. Be aware that, as is the case with most Sword "
+"applications, <app>Xiphos</app> understands many abbreviations: \"G\" is "
+"adequate to specify Genesis, for example, and any book name by itself "
+"implies 1:1."
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:48
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:60
+msgid "<keyseq><key>Ctrl</key><key>L</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:63
 msgid ""
-"<gui>Alt-C</gui> brings the Commentary View forward when previously obscured "
-"by the Book View."
+"Bring the Commentary View forward when previously obscured by the Book View."
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:52
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:65
+msgid "<keyseq><key>Alt</key><key>C</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:68
+msgid "Focus on the general book."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:69
+msgid "<keyseq><key>Alt</key><key>G</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:72
+msgid "Focus on the dictionary navbar text."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:73
+msgid "<keyseq><key>Alt</key><key>D</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:76
+msgid "Open a new tab."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:77
+msgid "<keyseq><key>Ctrl</key><key>T</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:80
+msgid "Make the tab #1 current."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:81
+msgid "<keyseq><key>Ctrl</key><key>1</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:84
+msgid "Make the tab #2 current."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:85
+msgid "<keyseq><key>Ctrl</key><key>2</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:88
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:89
+msgid "..."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:92
+msgid "Make the tab #9 current."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:93
+msgid "<keyseq><key>Ctrl</key><key>9</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: table/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:99
+msgid "Verse navigation and Bible features"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:108
+#, fuzzy
+msgid "Previous verse"
+msgstr "پیش‏نگر"
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:109
+msgid "<keyseq><key>Ctrl</key><key>p</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:110
+msgid "<keyseq><key>k</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:113
+msgid "Next verse"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:114
+msgid "<keyseq><key>Ctrl</key><key>n</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:115
+msgid "<keyseq><key>j</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:118
+msgid "Previous chapter"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:119
+msgid "<keyseq><key>p</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:122
+msgid "Next chapter"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:123
+msgid "<keyseq><key>n</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:126
+msgid "Previous book"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:127
+msgid "<keyseq><key>P</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:130
+msgid "Next book"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:131
+msgid "<keyseq><key>N</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:134
+msgid "Bring up the context menu for the Bible pane."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:135
+msgid "<keyseq><key>Shift</key><key>F10</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:138
+msgid "Toggle Strong's display."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:139
+msgid "<keyseq><key>Alt</key><key>S</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:142
+msgid "Toggle morphology display."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:143
+msgid "<keyseq><key>Alt</key><key>M</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:146
+msgid "Toggle lemma display."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:147
+msgid "<keyseq><key>Alt</key><key>L</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:150
+msgid "Toggle \"red words of Christ\" display."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:151
+msgid "<keyseq><key>Alt</key><key>R</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:154
+msgid "Toggle transliteration."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:155
+msgid "<keyseq><key>Alt</key><key>T</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: table/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:161
+msgid "Opening special windows"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:170
+msgid "Open this manual."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:171
+msgid "<keyseq><key>F1</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:174
+msgid "Open the <gui>Preferences</gui> dialog."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:175
+msgid "<keyseq><key>F2</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:178
+msgid "Open <gui>Advanced Search</gui>."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:179
+msgid "<keyseq><key>F3</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:182
+msgid "Bring forward the simple sidebar search."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:183
+msgid "<keyseq><key>Ctrl</key><key>F3</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:186
+msgid "Open the <gui>Module Manager</gui>."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:187
+msgid "<keyseq><key>F4</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:190
+msgid "Open the current Bible as a separate window."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:191
+msgid "<keyseq><key>F11</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:194
+msgid "Open an annotation dialog on the current verse."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:195
+msgid "<keyseq><key>Alt</key><key>A</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:198
+msgid "Open a bookmark dialog on the current verse."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:199
+msgid "<keyseq><key>Alt</key><key>B</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:202
 msgid ""
-"<gui>Alt-G</gui> is the opposite of Alt-C, focusing on the general book."
+"Open the \"Find\" dialog. The subwindow to which it applies depends on which "
+"of them are visible: The Bible is first preference, then the commentary or "
+"general book, then the dictionary. So a tab can be dedicated to just a book, "
+"and the \"Find\" will be performed within that pane."
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:55
-msgid "<gui>Alt-D</gui> focuses on the dictionary navbar text."
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:207
+msgid "<keyseq><key>Ctrl</key><key>F</key></keyseq>"
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:58
-msgid "<gui>Ctrl-T</gui> opens a new tab."
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:210
+msgid "Detach/re-attach the parallel view dialog."
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:61
-msgid "<gui>Ctrl-[1-9]</gui> makes the Nth tab current."
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:211
+msgid "<keyseq><key>Alt</key><key>P</key></keyseq>"
 msgstr ""
 
-#. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:64
-msgid "Verse navigation and Bible features:"
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:214
+msgid "Open editor on the personal commentary named Personal."
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:67
-msgid "<gui>Ctrl-p/Ctrl-n</gui>: Verse previous/next. Also <gui>k/j</gui>."
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:215
+msgid "<keyseq><key>Alt</key><key>Z</key></keyseq>"
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:69
+#. (itstool) path: table/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:221
+msgid "Font size control"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:230
+msgid "Increase the base font size."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:231
+msgid "<keyseq><key>Ctrl</key><key>+</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:234
+msgid "Decrease the base font size."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:235
+msgid "<keyseq><key>Ctrl</key><key>-</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:238
+msgid "Set the base font size to zero."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:239
+msgid "<keyseq><key>Ctrl</key><key>0</key></keyseq>"
+msgstr ""
+
+#. (itstool) path: table/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:245
+msgid "BibleSync"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:254
+msgid "Put BibleSync into Personal mode."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:255
 msgid ""
-"As well, text of the verses before and after the current chapter can be "
-"clicked to navigate across chapters."
+"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>P</key> </keyseq>"
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:73
-msgid "<gui>p/n</gui>: Chapter previous/next."
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:260
+msgid "Put BibleSync into Speaker mode."
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:76
-msgid "<gui>P/N</gui>: Book previous/next."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:79
-msgid "<gui>Shift-F10</gui> brings up the context menu for the Bible pane."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:82
-msgid "<gui>Alt-S</gui>: Toggle Strong's display."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:85
-msgid "<gui>Alt-M</gui>: Toggle morphology display."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:88
-msgid "<gui>Alt-L</gui>: Toggle lemma display."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:91
-msgid "<gui>Alt-R</gui>: Toggle \"red words of Christ\" display."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:94
-msgid "<gui>Alt-T</gui>: Toggle transliteration."
-msgstr ""
-
-#. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:97
-msgid "Opening special windows:"
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:100
-msgid "<gui>F1</gui> opens this manual."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:103
-msgid "<gui>F2</gui>: opens the <gui>Preferences</gui> dialog."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:106
-msgid "<gui>F3</gui>: opens <gui>Advanced Search</gui>."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:109
-msgid "<gui>Ctrl-F3</gui>: brings forward the simple sidebar search."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:112
-msgid "<gui>F4</gui>: opens the <gui>Module Manager</gui>."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:115
-msgid "<gui>F11</gui>: opens the current Bible as a separate window."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:118
-msgid "<gui>Alt-A</gui> opens an annotation dialog on the current verse."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:121
-msgid "<gui>Alt-B</gui> opens a bookmark dialog on the current verse."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:124
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:261
 msgid ""
-"<gui>Ctrl-F</gui> opens the \"Find\" dialog. The subwindow to which it "
-"applies depends on which of them are visible: The Bible is first preference, "
-"then the commentary or general book, then the dictionary. So a tab can be "
-"dedicated to just a book, and Ctrl-F will perform \"Find\" within that pane."
+"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>S</key> </keyseq>"
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:130
-msgid "<gui>Alt-P</gui> detaches/re-attaches the parallel view dialog."
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:266
+msgid "Put BibleSync into Audience mode."
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:133
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:267
 msgid ""
-"<gui>Alt-Z</gui> opens editor on the personal commentary named Personal."
+"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>A</key> </keyseq>"
 msgstr ""
 
-#. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:136
-msgid "Font size control:"
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:272
+msgid "Turn off BibleSync."
 msgstr ""
 
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:139
-msgid "<gui>Ctrl-Plus/Ctrl-Minus</gui> increases/decreases the base font size."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:142
-msgid "<gui>Ctrl-0</gui> (zero) sets the base font size to zero."
-msgstr ""
-
-#. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:145
-msgid "BibleSync:"
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:148
-msgid "<gui>Ctrl-Alt-Shift-P</gui> puts BibleSync into Personal mode."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:151
-msgid "<gui>Ctrl-Alt-Shift-S</gui> puts BibleSync into Speaker mode."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:154
-msgid "<gui>Ctrl-Alt-Shift-A</gui> puts BibleSync into Audience mode."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:157
-msgid "<gui>Ctrl-Alt-Shift-O</gui> turns off BibleSync."
-msgstr ""
-
-#. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-02-shortcut-keys.page:160
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:273
 msgid ""
-"<gui>Ctrl-Alt-Shift-N</gui> causes BibleSync to navigate your current main "
-"window point transiently as a one-shot event. BibleSync must be transmit-"
-"ready, that is, in Personal or Speaker mode."
+"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>O</key> </keyseq>"
 msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:278
+msgid ""
+"Cause BibleSync to navigate your current point as a one-shot event. "
+"BibleSync must be transmit-ready, that is, in Personal or Speaker mode. Use "
+"this when you have set BibleSync for \"keyboard only\" in Preferences."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:282
+msgid ""
+"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>N</key> </keyseq>"
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:287
+msgid "Provide for sending chat messages to others."
+msgstr ""
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:288
+msgid ""
+"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>C</key> </keyseq>"
+msgstr ""
+
+#. (itstool) path: info/desc
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:5
+#, fuzzy
+msgid "Running Xiphos."
+msgstr "بارگذاری زیفوس"
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:35
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:35
 msgid "Starting Xiphos"
 msgstr "زیفوس در حال بارگذاری"
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:39
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:39
 #, fuzzy
 msgid "How to start Xiphos"
 msgstr "زیفوس در حال بارگذاری"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:40
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:40
 #, fuzzy
 msgid "You can start <app>Xiphos</app> in the following ways:"
 msgstr ""
@@ -463,12 +736,12 @@ msgstr ""
 "اجرا نمایید:"
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:43
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:43
 msgid "Applications menu"
 msgstr "فهرست برنامه‏ها"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:44
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:44
 #, fuzzy
 msgid ""
 "Choose <guiseq><gui>Education</gui> <gui>Xiphos Bible Guide</gui> </guiseq>."
@@ -477,12 +750,12 @@ msgstr ""
 "سپس به راهنمای زیفوس کتاب‏مقدس بروید</guimenuitem></menuchoice>."
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:51
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:51
 msgid "Command line"
 msgstr "خط فرمان"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:52
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:52
 #, fuzzy
 msgid "Type <cmd>xiphos</cmd>, then press <key>Return</key>."
 msgstr ""
@@ -490,12 +763,12 @@ msgstr ""
 "keycap>را بزنید."
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:55
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:55
 msgid "Windows"
 msgstr "پنجره‏ها"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:56
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:56
 #, fuzzy
 msgid ""
 "Go to <guiseq><gui>All Programs</gui><gui>Xiphos</gui><gui>Xiphos</gui></"
@@ -505,12 +778,12 @@ msgstr ""
 "guisubmenu><guimenuitem>زیفوس</guimenuitem></menuchoice>را برگزیند."
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:64
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:65
 msgid "First Start"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:66
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:67
 #, fuzzy
 msgid ""
 "When you start <app>Xiphos</app> for the first time, <app>Xiphos</app> "
@@ -532,14 +805,14 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:71
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:73
 msgctxt "_"
 msgid ""
 "external ref='figures/first_start.png' md5='69d5c34ac05637124bca6036dbda52d8'"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:73
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:75
 #, fuzzy
 msgid ""
 "<app>Xiphos</app> then opens its interface with one tab displayed, showing "
@@ -555,12 +828,12 @@ msgstr ""
 "بدهد."
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:83
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:86
 msgid "Launching Xiphos"
 msgstr "بارگذاری زیفوس"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:84
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:87
 #, fuzzy
 msgid "When you start <app>Xiphos</app>, the following interface is displayed:"
 msgstr ""
@@ -568,26 +841,25 @@ msgstr ""
 "را مشاهده خواهید کرد:"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:89
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:92
 #, fuzzy
 msgid "The <app>Xiphos</app> interface contains the following elements:"
 msgstr "محیط کاری <application>زیفوس</application>دارای عناصر زیر می‏باشد."
 
 #. (itstool) path: item/title
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:92
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:39
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:95
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:39
 msgid "Menubar"
 msgstr "خط فرمان"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:93
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:96
 #, fuzzy
 msgid ""
 "The menus on the menubar contain several commands which extend the use of "
-"<app>Xiphos </app>. These include the StudyPad and advanced search "
-"functions. The menus also help you to customize your use of <app>Xiphos</"
-"app>."
+"<app>Xiphos</app>. These include the StudyPad and advanced search functions. "
+"The menus also help you to customize your use of <app>Xiphos</app>."
 msgstr ""
 "خط فرمان دارای چند فرمان است که کاربرد<application>زیفوس</application>را "
 "گسترش می‏بخشد. این فرامین شامل محلی برای یادداشت‏های مطالعه و نیز توابع جستجوی "
@@ -595,12 +867,12 @@ msgstr ""
 "<application>زیفوس </application>را بسیار شخصی و به دلخواه خود بنمایید."
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:98
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:102
 msgid "Toolbar"
 msgstr "ستون ابزار"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:99
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:103
 #, fuzzy
 msgid ""
 "The <gui>toolbar</gui> contains buttons that let you quickly navigate "
@@ -610,12 +882,12 @@ msgstr ""
 "سرعت و سهولت بتوانید از کتاب‏مقدس استفاده نمایید."
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:103
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:107
 msgid "Sidebar"
 msgstr "ستون جانبی"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:104
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:108
 #, fuzzy
 msgid ""
 "The <gui>Sidebar</gui> provides access to several features. It contains your "
@@ -627,12 +899,12 @@ msgstr ""
 "ابزار همچنین برای جستجوهای ساده نیز قابل استفاده است."
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:109
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:113
 msgid "Bible Text Pane"
 msgstr "چارچوب متن کتاب‏مقدس"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:110
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:114
 #, fuzzy
 msgid ""
 "The <gui>Bible Text pane</gui> displays the Bible text which is currently "
@@ -643,13 +915,13 @@ msgstr ""
 
 #. (itstool) path: item/title
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:114
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:363
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:118
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:382
 msgid "Previewer"
 msgstr "پیش‏نگر"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:115
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:119
 #, fuzzy
 msgid ""
 "The <gui>Previewer</gui> displays Bible text module options. These include "
@@ -661,12 +933,12 @@ msgstr ""
 "می‏باشند. این فرمان در زیر چاچوب متن کتاب‏مقدس قرار دارد."
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:119
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:124
 msgid "Commentary Pane"
 msgstr "چارچوب تفاسیر"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:120
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:125
 #, fuzzy
 msgid ""
 "The <gui>Commentary pane</gui> displays commentaries on the current Bible "
@@ -676,12 +948,12 @@ msgstr ""
 "کتاب‏مقدس در حال استفاده است، نشان می‏دهد."
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:124
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:129
 msgid "Book Pane"
 msgstr "چارچوب کتاب"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:125
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:130
 #, fuzzy
 msgid ""
 "The <gui>Book Pane</gui> displays general books available from the Sword "
@@ -696,12 +968,12 @@ msgstr ""
 "استفاده قرار داد."
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:130
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:136
 msgid "Dictionary/Book Pane"
 msgstr "چارچوب فرهنگ واژه‏ها/کتاب"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:131
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:137
 #, fuzzy
 msgid ""
 "The <gui>Dictionary/Book Pane</gui> displays dictionary information on "
@@ -713,7 +985,7 @@ msgstr ""
 "از گزینه تفسیر قرار دارد."
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-10-start.page:135
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:142
 #, fuzzy
 msgid ""
 "When you right-click in the different interface sections, the interface "
@@ -725,18 +997,18 @@ msgstr ""
 "کنترل‏های صفحۀ نمایش و خدمات چاپ."
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:5
 msgid "An explanation of the areas shown in the <app>Xiphos</app> window."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:34
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:34
 #, fuzzy
-msgid "Xiphos main window"
+msgid "Xiphos Main Window"
 msgstr "زیفوس در حال اجرا می‏باشد"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:40
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:40
 #, fuzzy
 msgid ""
 "At the top of the <app>Xiphos</app> main window is the menubar. Almost all "
@@ -754,7 +1026,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:44
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:44
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_menubar.png' "
@@ -762,12 +1034,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:50
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:50
 msgid "Toolbars"
 msgstr "ستون‏فرمان"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:51
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:51
 msgid ""
 "The function of the Toolbar is to provide control over the Bible and "
 "Commentary Panes. Activation of the Toolbar option is done by moving the "
@@ -790,7 +1062,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:55
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:56
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_toolbar.png' "
@@ -798,59 +1070,59 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:57
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:58
 #, fuzzy
 msgid "The <gui>Toolbar</gui> consists of the following functions:"
 msgstr "گزینۀ <interface>ابزار</interface>شامل کاربردهای زیر است:"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:60
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:61
 msgid "History View Toggle and drop-down menu"
 msgstr "تاریخچه مرور انتخاب و لیست"
 
 #. (itstool) path: item/p
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:63
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:82
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:64
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:83
 msgid "Bible Book Selector"
 msgstr "انتخاب بخشی از کتاب‏مقدس"
 
 #. (itstool) path: item/p
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:66
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:88
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:67
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:89
 msgid "Bible Chapter Selector"
 msgstr "انتخاب فصلی از کتاب‏مقدس"
 
 #. (itstool) path: item/p
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:69
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:94
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:70
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:96
 msgid "Bible Verse Selector"
 msgstr "انتخاب آیه‏ای از کتاب‏مقدس"
 
 #. (itstool) path: item/p
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:72
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:100
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:73
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:103
 msgid "Bible Passage Summary"
 msgstr "خلاصۀ بخش بخصوصی از کتاب‏مقدس"
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:77
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:78
 msgid "History Forward/Backward Selector"
 msgstr "انتخاب کردن تاریخچۀ پیشین/پسین"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:78
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:79
 msgid "Switches between current and previous passage selections."
 msgstr "حرکت بین قسمت برگزیده شدۀ فعلی و پیشین."
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:83
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:84
 #, fuzzy
 msgid ""
-"Selects the Biblical book to be displayed in the <gui>Bible Text Pane</gui> "
+"Selects the Biblical book to be displayed in the <gui>Bible Text Pane </gui> "
 "and <gui>Commentary Pane</gui>. Changes take immediate effect."
 msgstr ""
 "این فرمان یک کتاب از کتاب‏مقدس را که مایل هستید در بخش <interface>چارچوب متن "
@@ -858,7 +1130,7 @@ msgstr ""
 "تغییری در این قسمت بلافاصله اعمال خواهد شد."
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:89
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:90
 #, fuzzy
 msgid ""
 "Selects the Biblical chapter of current book to be displayed in the "
@@ -870,7 +1142,7 @@ msgstr ""
 "تغییری در این قسمت بلافاصله اعمال خواهد شد."
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:95
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:97
 #, fuzzy
 msgid ""
 "Selects the Biblical verse of current chapter to be displayed in the "
@@ -882,7 +1154,7 @@ msgstr ""
 "تغییری در این قسمت بلافاصله اعمال خواهد شد."
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:101
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:104
 #, fuzzy
 msgid ""
 "Allows manual editing of passages which are displayed in the <gui>Bible Text "
@@ -897,7 +1169,7 @@ msgstr ""
 "در این قسمت بلافاصله اعمال خواهد شد."
 
 #. (itstool) path: note/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:104
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:108
 msgid ""
 "Ensure that edited book,chapter and verse naming is correct, otherwise the "
 "wrong or no information will be displayed."
@@ -906,7 +1178,7 @@ msgstr ""
 "درستی نامگذاری شده است، در غیر اینصورت اطلاعات اشتباه نمایش داده خواهد شد."
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:114
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:118
 msgid "The Sidebar"
 msgstr "ابزار جانبی"
 
@@ -915,7 +1187,7 @@ msgstr "ابزار جانبی"
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:115
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:119
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_sidepane.png' "
@@ -923,7 +1195,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:117
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:121
 #, fuzzy
 msgid ""
 "On the left hand side of <app>Xiphos</app> there is the Sidebar. Here the "
@@ -942,7 +1214,7 @@ msgstr ""
 "مسیرهای کوتاه فعال و اجرا خواهند شد. "
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:124
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:129
 msgid ""
 "To switch between all Sidebar functions, buttons have been placed at the top "
 "of the Sidebar."
@@ -953,7 +1225,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:126
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:131
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_shortcut.png' "
@@ -961,7 +1233,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:133
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:138
 msgid "The Bible Text Pane"
 msgstr "چارچوب متن کتاب‏مقدس"
 
@@ -970,7 +1242,7 @@ msgstr "چارچوب متن کتاب‏مقدس"
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:134
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:139
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_biblepane.png' "
@@ -978,7 +1250,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:135
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:140
 #, fuzzy
 msgid ""
 "Positioned to the right of the Shortcut bar is the Bible text pane. All "
@@ -992,22 +1264,22 @@ msgstr ""
 "خواهد شد. "
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:140
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:145
 msgid "Opening A Specific Bible Translation"
 msgstr "باز کردن ترجمۀ خاصی از کتاب‏مقدس"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:141
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:146
 msgid ""
 "In order to change the current Bible translation to another of your choice:"
 msgstr "به منظور تعویض ترجمۀ فعلی کتاب‏مقدس به یکی دیگر از ترجمه‏ها:"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:144
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:150
 #, fuzzy
 msgid ""
 "right-click in the <gui>Bible Text Pane</gui>. In the popup menu choose "
-"<guiseq><gui>File</gui><gui>Open Module</gui> </guiseq>and select your "
+"<guiseq><gui>File</gui><gui>Open Module</gui></guiseq>and select your "
 "specific translation that you want to view."
 msgstr ""
 "بر روی <interface>چارچوب متن کتاب‏مقدس</interface>رایت‏کلیک کنید. از صفحۀ "
@@ -1016,11 +1288,11 @@ msgstr ""
 "و سپس ترجمه‏ای را دوست دارید، استفاده کنید، باز نمایید."
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:149
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:155
 #, fuzzy
 msgid ""
 "under the <gui>Modules</gui> option in the <gui>Sidebar</gui>, choose "
-"<guiseq> <gui>Biblical Texts</gui><gui>language choice</gui></guiseq> and "
+"<guiseq><gui>Biblical Texts</gui><gui>language choice</gui> </guiseq> and "
 "select your specific translation."
 msgstr ""
 "زیر عنوان<guibutton> مدول‏ها،</guibutton>در بخش <interface>ستون جانبی</"
@@ -1029,24 +1301,24 @@ msgstr ""
 "ترجمۀ خاصی را که دوست دارید، می‏توانید انتخاب کنید."
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:157
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:163
 msgid "Using the Parallel View Mode"
 msgstr "استفاده از کاربرد موازی"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:159
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:165
 msgid ""
 "A nice function in <app>Xiphos</app> is the ability to view your specified "
 "bible text in several parallel translations of your choice. The Parallel "
-"View mode can be accessed by selecting <gui>Parallel View</gui> just below "
-"the <gui>Bible Text Pane </gui>, next to the <gui>Standard View</gui> tab."
+"View mode can be accessed by selecting <gui>Parallel View</gui>  just below "
+"the <gui>Bible Text Pane</gui>, next to the <gui>Standard View </gui> tab."
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:164
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:171
 msgid ""
-"You must choose which modules to display in parallel with the "
-"<gui>Preferences </gui> dialog found under the <gui>Edit</gui> menu. In the "
+"You must choose which modules to display in parallel with the <gui> "
+"Preferences</gui> dialog found under the <gui>Edit</gui> menu. In the "
 "dialog, choose Modules, then Parallel. You can add or subtract from the list "
 "of modules that will be shown in the parallel view. The toolbar gives you a "
 "selector tool to erase the list, delete a module from the list, and add "
@@ -1054,7 +1326,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:170
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:178
 msgid ""
 "The <gui>Parallel View</gui> shows just one verse at a time. You can change "
 "the verse by selecting another verse, chapter, or book at the toolbar. Also "
@@ -1068,7 +1340,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:175
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:183
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_parallel.png' "
@@ -1076,11 +1348,11 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:177
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:185
 msgid ""
 "Additionally, a separate Parallel View window can be selected from the right "
 "click menu with <gui>Detach/Attach</gui>. Your Bible pane will return to its "
-"normal single text view, and the new Parazllel View window will show the "
+"normal single text view, and the new Parallel View window will show the "
 "complete chapter, showing the same translations."
 msgstr ""
 
@@ -1089,7 +1361,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:181
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:189
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_parallel-separate.png' "
@@ -1097,20 +1369,20 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:185
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:193
 msgid "Opening A Separate Bible Translation"
 msgstr "ترجمۀ دیگری از کتاب‏مقدس را باز می‏کند"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:186
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:194
 #, fuzzy
 msgid ""
-"In order to view a Bible translation separate from the <app>Xiphos</app> "
+"In order to view a Bible translation separate from the <app>Xiphos </app> "
 "main window interface, under the <gui>Modules</gui> option in the "
 "<gui>Sidebar</gui>, choose <guiseq><gui>Biblical Texts</gui><gui>language "
-"choice</gui></guiseq>. Then right-click on a translation and choose "
-"<gui>Open in dialog</gui>. The module will open in a separate, detached "
-"window of its own."
+"choice</gui></guiseq>. Then right-click on a translation and choose <gui> "
+"Open in dialog</gui>. The module will open in a separate, detached window of "
+"its own."
 msgstr ""
 "تحت <guibutton>مدول‏های</guibutton>موجود در<interface>ستون جانبی،</"
 "interface>گزینۀ<menuchoice><guimenuitem>متون کتاب‏مقدس</"
@@ -1119,7 +1391,7 @@ msgstr ""
 "گزینۀ<guimenuitem>در بارۀ</guimenuitem>را برگزینید."
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:192
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:201
 msgid ""
 "Detached Bible and commentary windows have a synchronization button in the "
 "upper-left position beside the navigation bar. When this button is "
@@ -1132,17 +1404,17 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:202
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:212
 msgid "Finding Out About The Current Translation"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:203
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:213
 msgid "To find out about the Bible translation currently being displayed:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:206
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:216
 #, fuzzy
 msgid ""
 "right-click in the <gui>Bible Text pane</gui>. In the popup menu choose "
@@ -1153,12 +1425,12 @@ msgstr ""
 "guibutton>را انتخاب و کاربرد مورد نظر را علامت گذاری کنید."
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:210
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:220
 #, fuzzy
 msgid ""
-"Under the <gui>Modules</gui> option in the <gui>Sidebar</gui>,choose "
-"<guiseq> <gui>Biblical Texts</gui><gui>language choice</gui></guiseq>. Then "
-"right-click on a translation and choose the <gui>About</gui> option."
+"Under the <gui>Modules</gui> option in the <gui>Sidebar</gui>, choose "
+"<guiseq><gui>Biblical Texts</gui><gui>language choice</gui> </guiseq>. Then "
+"right-click on a translation and choose the <gui> About</gui> option."
 msgstr ""
 "تحت <guibutton>مدول‏های</guibutton>موجود در<interface>ستون جانبی،</"
 "interface>گزینۀ<menuchoice><guimenuitem>متون کتاب‏مقدس</"
@@ -1167,65 +1439,65 @@ msgstr ""
 "گزینۀ<guimenuitem>در بارۀ</guimenuitem>را برگزینید."
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:218
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:229
 msgid "Module Options"
 msgstr "گزینه‏های مدول"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:219
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:230
 msgid ""
 "Most Bible translations have additional options which the user can select."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:222
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:234
 msgid "Words Of Christ In Red"
 msgstr "کلمات عیسی مسیح به رنگ قرمز"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:225
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:237
 msgid "Strong's Numbers"
 msgstr "شماره‏های کشف‏الآیات استرانگ"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:228
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:240
 msgid "Morphological Tags"
 msgstr "علائم واژه‏شناسی"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:231
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:243
 msgid "Footnotes"
 msgstr "پانویس‏ها"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:234
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:246
 msgid "Scripture Cross-Reference"
 msgstr "ارجاعات به کتاب‏مقدس"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:237
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:249
 msgid "Headings"
 msgstr "سر تیترها"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:240
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:252
 msgid "Image Content"
 msgstr "محتویات تصویر"
 
 #. (itstool) path: note/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:244
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:256
 msgid ""
 "Translations in other languages such as Greek or Hebrew have specific "
 "options which deal only with the specific language."
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:247
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:259
 msgid "In order to access these options:"
 msgstr "به منظور دستیابی به این گزینه‏ها:"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:250
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:262
 #, fuzzy
 msgid ""
 "right-click in the <gui>Bible Text pane</gui>. In the popup menu (example "
@@ -1240,7 +1512,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:255
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:267
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_biblepane-options.png' "
@@ -1248,15 +1520,15 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:259
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:271
 msgid "View Options"
 msgstr "گزینه‏های مرور"
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:260
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:272
 msgid ""
 "There are several additional modes that can be selected from the menubar's "
-"<gui> View</gui> pulldown."
+"<gui>View</gui> pulldown."
 msgstr ""
 
 #. (itstool) path: section/media
@@ -1264,7 +1536,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:262
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:274
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_menubar-view.png' "
@@ -1272,7 +1544,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:264
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:276
 msgid ""
 "The first 4 checkboxes control whether each named subwindow is displayed. "
 "The viewable state of the subwindows is remembered on a per-tab basis. This "
@@ -1282,12 +1554,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:270
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:283
 msgid "The remaining checkboxes control these other display features:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:273
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:286
 msgid ""
 "Link Tabs - When more than one tab is open, each one's verse is navigated "
 "separately in the disabled case. If tab linking is enabled, then all tabs "
@@ -1295,7 +1567,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:278
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:292
 msgid ""
 "Read Aloud - If you enable this, then <app>Xiphos</app> will funnel all "
 "selected verses through the <app>festival</app> text-to-speech system. "
@@ -1304,7 +1576,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:283
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:297
 msgid ""
 "Also, mouse-selected text may be read aloud from Bibles, commentaries, and "
 "general books, using the right-click menu, regardless of whether Read Aloud "
@@ -1312,14 +1584,14 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:288
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:302
 msgid ""
 "Show Verse Numbers - Normally enabled, this toggle can be disabled to "
 "prevent display of verse numbers within the text."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:292
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:306
 msgid ""
 "Highlight Current Verse - Initially disabled, this toggle replaces mere "
 "alternate colorization of the current verse with a substitute high-contrast "
@@ -1327,12 +1599,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:300
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:315
 msgid "Display Control with CSS"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:301
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:316
 msgid ""
 "Users familiar with CSS (cascading style sheets) may wish to create the file "
 "\"default-style.css\" in the .xiphos directory to contain whatever CSS "
@@ -1342,12 +1614,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:309
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:324
 msgid "User Annotation"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:310
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:325
 msgid ""
 "Many users wish to make personal annotations on individual verses, without "
 "the need to put a full \"personal commentary\" module to use. <app>Xiphos</"
@@ -1362,7 +1634,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:320
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:336
 msgid ""
 "Selecting an already-annotated verse will (in the usual case) bring up the "
 "existing content for re-editing. An already-annotated verse can be unmarked; "
@@ -1370,7 +1642,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:324
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:340
 msgid ""
 "If the user deletes the module name from the reference at the top of the "
 "dialog, then the annotation will apply to any Bible module at the selected "
@@ -1380,28 +1652,28 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:331
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:348
 msgid "Geography Support"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:332
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:349
 msgid ""
 "A connection to browsing BibleMap.org is available by mouse-selecting a "
 "place name in any text. Use the right-click context menu to select "
-"<guiseq><gui>Lookup Selection</gui><gui>Browse in BibleMap.org</gui></"
+"<guiseq><gui>Lookup Selection</gui><gui>Browse in BibleMap.org</gui> </"
 "guiseq>. A web browser will be brought up to show the selected name's "
 "geography via BibleMap, which provides Biblical detail overlaid on a Google "
 "Maps interface."
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:340
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:358
 msgid "Specific Word Meanings"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:341
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:359
 msgid ""
 "In order to check the meaning of a specific word, double-click on the word "
 "you wish to lookup. The word should then highlight itself and the "
@@ -1410,17 +1682,17 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:347
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:366
 msgid "Finding A Specific Word"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:348
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:367
 msgid "To find a specific word within a passage:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:351
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:370
 msgid ""
 "right-click in the <gui>Bible Text Pane</gui>. In the popup menu, choose "
 "<guiseq><gui>Edit</gui><gui>Find</gui></guiseq>. A dialog will appear, which "
@@ -1433,7 +1705,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:364
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:383
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_viewer.png' "
@@ -1441,14 +1713,14 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:366
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:385
 msgid ""
 "The Previewer is where the user sees Strong's numbers, morphological tags, "
 "footnotes, and cross-references that the <gui>Bible Text Pane</gui> provides."
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:369
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:389
 msgid ""
 "Footnote content is displayed in the Previewer when you hover over the "
 "indicator <gui>*n</gui> in the Bible text; it remains visible until your "
@@ -1460,7 +1732,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:377
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:397
 msgid ""
 "Cross-reference indicators <gui>*x</gui> work much the same way. Clicking "
 "the indicator will send the set of references to the <gui>Verse List</gui> "
@@ -1470,7 +1742,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:383
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:404
 msgid ""
 "Any verses shown in reverse-highlight have personal annotation associated "
 "with them, and such verses will include <gui>*u</gui> at the beginning of "
@@ -1479,7 +1751,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:388
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:409
 msgid ""
 "If a devotional has been set via the Preferences dialog, then the day's "
 "devotional reference will also appear in the previewer, either on program "
@@ -1487,7 +1759,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:396
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:417
 msgid "The Commentary Pane"
 msgstr ""
 
@@ -1496,7 +1768,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:397
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:418
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_commentarypane.png' "
@@ -1504,18 +1776,18 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:399
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:420
 msgid ""
 "The <gui>Commentary pane</gui> is where the commentary modules are "
 "displayed. This provides easy reading, reference, and access to different "
 "commentaries currently installed. The passage viewed by the <gui>Commentary "
 "pane</gui> is directly controlled by the current passage viewed in the "
 "<gui>Bible Text pane</gui>, so in order to change to a different passage "
-"commentary, select the desired passage on the <gui>Toolbar </gui>."
+"commentary, select the desired passage on the <gui>Toolbar</gui>."
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:406
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:427
 msgid ""
 "If there are images that are part of a commentary, general book, or "
 "dictionary/lexicon, they may be clicked to invoke a viewer on that single "
@@ -1525,7 +1797,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: note/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:411
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:433
 msgid ""
 "By changing to passage settings on the <gui>Toolbar</gui>, the contents in "
 "the <gui>Bible Text pane</gui> and the <gui>Commentary Pane</gui> will be "
@@ -1533,44 +1805,44 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:416
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:439
 msgid "Finding Out About The Commentary Module"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:417
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:440
 msgid "To find out about the commentary currently being displayed:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:420
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:443
 msgid ""
 "right-click in the <gui>Commentary Pane</gui>. In the popup menu choose "
 "<gui>About </gui> module name."
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:427
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:450
 msgid "Commentary Headings."
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:428
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:451
 msgid ""
 "Many commentaries have additional headings which enable introductory "
 "information about the book and chapter currently being displayed in the "
-"<gui>Bible Text pane </gui>. In order to view them:"
+"<gui>Bible Text pane</gui>. In order to view them:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:433
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:456
 msgid ""
 "right-click in the <gui>Commentary Pane</gui>. In the popup menu choose "
 "<gui>Display Book Heading</gui> or <gui>Display Chapter Heading</gui>."
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:441
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:465
 msgid "Dictionary Pane"
 msgstr ""
 
@@ -1579,7 +1851,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:442
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:466
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_dictionary.png' "
@@ -1587,24 +1859,24 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-11-interface.page:444
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-11-interface.page:468
 msgid ""
 "The Dictionary Pane's content is driven by its up/down selectors, typing in "
 "its navbar text, or double-clicks in the Bible, Commentary, or Book Panes."
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-20-modules-introduction.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-20-modules-introduction.page:6
 msgid "How to manage modules."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-20-modules-introduction.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-20-modules-introduction.page:37
 msgid "Introduction To The Module Manager"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-20-modules-introduction.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-20-modules-introduction.page:39
 msgid ""
 "The \"module\" is the unit of content in <app>Xiphos</app>, and Sword "
 "generally; a Sword module is a resource available for viewing in Sword "
@@ -1621,7 +1893,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-20-modules-introduction.page:49
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-20-modules-introduction.page:52
 msgid ""
 "If you have other Sword applications installed, they will all share the same "
 "set of Sword modules that you install through the Module Manager."
@@ -1632,31 +1904,31 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-20-modules-introduction.page:51
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-20-modules-introduction.page:54
 msgctxt "_"
 msgid ""
 "external ref='figures/module.png' md5='8246c23467c9ea773a6f43feda2ab090'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-20-modules-introduction.page:53
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-20-modules-introduction.page:56
 msgid ""
 "Notice the <gui>View Intro</gui> button above. You may see an introductory "
 "explanation of Module Manager operation at any time."
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:6
 msgid "Configure the modules sources."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:37
 msgid "Sword Modules Configuration"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:39
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:40
 msgid "Module Sources Settings"
 msgstr ""
 
@@ -1665,7 +1937,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:40
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:41
 msgctxt "_"
 msgid ""
 "external ref='figures/sword_sources.png' "
@@ -1673,7 +1945,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:42
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:43
 msgid ""
 "There are other repositories available besides CrossWire's own, though the "
 "modules available from other repositories do not represent content "
@@ -1684,17 +1956,17 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:48
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:50
 msgid ""
 "The list of standard repositories is maintained at CrossWire. Xiphos "
 "normally auto-synchronizes with that list one time, when the user first puts "
 "the Module Manager to use. The list may change, as new repositories come "
 "into existence; occasional re-synchronization with the list is suggested, "
-"which is accomplished by clicking <gui> Load Standard</gui>."
+"which is accomplished by clicking <gui>Load Standard</gui>."
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:56
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:58
 msgid "Sword Module Installations"
 msgstr ""
 
@@ -1703,7 +1975,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:57
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:59
 msgctxt "_"
 msgid ""
 "external ref='figures/sword_config.png' "
@@ -1711,7 +1983,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:59
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:61
 msgid ""
 "After you have selected your Install Source, click the <gui>Refresh</gui> "
 "button to cause <app>Xiphos</app> to find the module summary available from "
@@ -1719,7 +1991,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:62
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:65
 msgid ""
 "Take note of the \"Install Destination\". In most cases, you will have a "
 "choice of a personal area or a system area. The details vary according to "
@@ -1727,12 +1999,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:66
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:70
 msgid "Linux"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:67
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:71
 msgid ""
 "Unless you run as root (via su or sudo) you will only be able to install in "
 "your personal area, under ~/.sword. If you run as root, or change "
@@ -1749,12 +2021,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:80
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:87
 msgid "Windows XP"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:81
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:88
 msgid ""
 "You may install modules to a shared folder so the modules are available to "
 "all users. If you have previously used \"The Sword Project for Windows\", "
@@ -1766,12 +2038,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:90
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:98
 msgid "Windows Vista"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-21-modules-configuration.page:91
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:99
 msgid ""
 "Vista works much the same as XP, except for the locations. The private "
 "location is \"C:\\Users\\YOUR NAME\\AppData\\Roaming\\Sword\". The shared "
@@ -1779,12 +2051,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-22-modules-install.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-22-modules-install.page:6
 msgid "Installing and Updating Modules."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-22-modules-install.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-22-modules-install.page:37
 msgid "Sword Modules Installation"
 msgstr ""
 
@@ -1793,7 +2065,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-22-modules-install.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-22-modules-install.page:39
 msgctxt "_"
 msgid ""
 "external ref='figures/sword_install.png' "
@@ -1801,7 +2073,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-22-modules-install.page:40
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-22-modules-install.page:41
 msgid ""
 "The module manager generates both a per-type module list as well as a "
 "parallel availability list. The latter is intended to make it easier to find "
@@ -1811,7 +2083,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-22-modules-install.page:45
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-22-modules-install.page:47
 msgid ""
 "Modules that are already installed will show a checkmark beside them. If a "
 "fast search (\"lucene\") index is available, a magnifying glass will be "
@@ -1826,7 +2098,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-22-modules-install.page:54
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-22-modules-install.page:58
 msgid ""
 "Select new modules to be installed by clicking the checkboxes and then the "
 "Install button at the bottom. Any number of modules may be requested for "
@@ -1834,7 +2106,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-22-modules-install.page:57
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-22-modules-install.page:62
 msgid ""
 "If you acquire a locked module and have obtained the cipher key for it, the "
 "module is then unlocked in the main window: Open the module, which will "
@@ -1843,12 +2115,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-23-modules-maintenance.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-23-modules-maintenance.page:6
 msgid "Removal, Archival and Indexing tasks."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-23-modules-maintenance.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-23-modules-maintenance.page:37
 msgid "Sword Modules Maintenance"
 msgstr ""
 
@@ -1857,7 +2129,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-23-modules-maintenance.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-23-modules-maintenance.page:39
 msgctxt "_"
 msgid ""
 "external ref='figures/sword_remove.png' "
@@ -1865,21 +2137,21 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-23-modules-maintenance.page:40
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-23-modules-maintenance.page:41
 msgid ""
 "Several maintenance functions are available: Removal, archival, index, and "
 "index deletion."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-23-modules-maintenance.page:43
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-23-modules-maintenance.page:44
 msgid ""
 "Removal disposes of a module entirely. There is no recovery of the module "
 "unless you have previously archived a copy of it."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-23-modules-maintenance.page:46
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-23-modules-maintenance.page:47
 msgid ""
 "Archival is available for any module, although it is provided with personal "
 "commentaries specifically in mind. A *.zip of the module is left in the "
@@ -1889,7 +2161,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-23-modules-maintenance.page:51
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-23-modules-maintenance.page:53
 msgid ""
 "Indexing is provided so that the underlying Sword search support can create "
 "the index needed for the \"lucene\" fast-search functions. If the index is "
@@ -1899,22 +2171,22 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-23-modules-maintenance.page:56
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-23-modules-maintenance.page:59
 msgid "Indexes may be deleted as well."
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-24-modules-third-party.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-24-modules-third-party.page:6
 msgid "Installing Non-Standard Modules."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-24-modules-third-party.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-24-modules-third-party.page:37
 msgid "Third-Party Modules"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-24-modules-third-party.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-24-modules-third-party.page:39
 msgid ""
 "Some resource modules in Sword Project format are available from sources "
 "other than Crosswire and not from a module manager-ready repository. "
@@ -1922,7 +2194,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-24-modules-third-party.page:42
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-24-modules-third-party.page:43
 msgid ""
 "Modules are normally packaged as *.zip files; they contain a configuration "
 "file plus a number of data files. Installation of such a module is done by "
@@ -1935,29 +2207,29 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-24-modules-third-party.page:49
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-24-modules-third-party.page:52
 msgid ""
 "Restart <app>Xiphos</app> after installing such a module, so that a fresh "
 "instance of the program can notice the new module in place."
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:5
 msgid "To conduct a quick search."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:36
 msgid "Simple Searches"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:38
 msgid ""
 "To conduct a quick search within the current Bible or commentary module, the "
 "Search Bar in the Sidebar should usually be adequate. Click either in the "
 "menu bar <guiseq><gui>Edit </gui><gui>Search</gui></guiseq> or in the "
-"Sidebar <guiseq><gui>Modules</gui><gui>Search</gui> </guiseq> to access it."
+"Sidebar <guiseq><gui>Modules</gui><gui>Search</gui></guiseq> to access it."
 msgstr ""
 
 #. (itstool) path: page/media
@@ -1965,7 +2237,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:43
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:43
 msgctxt "_"
 msgid ""
 "external ref='figures/interface_searchpane.png' "
@@ -1973,58 +2245,58 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:45
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:45
 #, fuzzy
 msgid "The <gui>Search Dialog</gui> consists of the following parts:"
 msgstr "گزینۀ <interface>ابزار</interface>شامل کاربردهای زیر است:"
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:49
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:49
 msgid "Search Key Entry box"
 msgstr ""
 
 #. (itstool) path: item/p
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:52
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:85
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:52
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:86
 msgid "Search Module Selector"
 msgstr ""
 
 #. (itstool) path: item/p
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:55
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:95
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:55
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:96
 msgid "Search Type Selector"
 msgstr ""
 
 #. (itstool) path: item/p
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:58
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:135
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:58
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:139
 msgid "Search Options Checkbox"
 msgstr ""
 
 #. (itstool) path: item/p
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:61
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:143
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:61
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:147
 msgid "Search Scope Selector"
 msgstr ""
 
 #. (itstool) path: item/p
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:64
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:179
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:64
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:185
 msgid "Search Results View"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:70
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:70
 msgid "Search Key Entry Box"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:72
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:72
 msgid ""
 "Allows entry of the key for which you would like to search. The search key "
 "can be a word, part of a word, several words, a phrase, or a regular "
@@ -2034,7 +2306,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:77
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:78
 msgid ""
 "This search uses the optimized search method (see next section) if the "
 "module has previously been indexed, and will use AND semantics by default "
@@ -2042,7 +2314,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:87
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:88
 msgid ""
 "Allows selection of which modules you would like to search. Select "
 "<gui>Bible</gui> to search Bible versions or <gui>Commentary</gui> to search "
@@ -2050,19 +2322,19 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:97
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:98
 msgid ""
 "Allows selection of the type of search. There are three search types "
 "available:"
 msgstr ""
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:101
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:103
 msgid "<gui>Multi word</gui>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:103
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:105
 msgid ""
 "This type will match any verse that has all the words in the search key, "
 "regardless of where they appear in the verse. By default, \"lucene\" fast "
@@ -2071,12 +2343,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:110
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:112
 msgid "<gui>Regular expression</gui>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:111
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:113
 msgid ""
 "This search uses a regular expression as a search key. A regular expression "
 "is a pattern used to match a string of text. A regular expression can be "
@@ -2086,19 +2358,19 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:117
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:120
 msgid ""
 "A complete discussion of regular expressions is beyond the scope of this "
 "manual, but more information can be found in the grep man page."
 msgstr ""
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:122
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:125
 msgid "<gui>Exact phrase</gui>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:124
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:127
 msgid ""
 "This type will match the search key exatly as entered. If the search key is "
 "<input>it is good</input>, this search would match a verse which contains "
@@ -2107,36 +2379,36 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:137
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:141
 msgid ""
 "Allows selecting of search options. The only available option is <gui>Match "
 "case</gui>. Check this box to make the search case sensitive."
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:145
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:149
 msgid ""
 "Allows defining the range within the specificed module that will be "
 "searched. There are three search scopes available:"
 msgstr ""
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:150
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:154
 msgid "<gui>No scope</gui>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:152
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:156
 msgid "This button causes the search to include the entire module."
 msgstr ""
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:156
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:160
 msgid "<gui>Use bounds</gui>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:158
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:162
 msgid ""
 "Selecting this button produces two dropdown selector boxes marked "
 "<gui>Lower</gui> and <gui>Upper</gui>. Select the first book to search in "
@@ -2146,19 +2418,19 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:164
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:169
 msgid ""
 "Chapter and verse numbers can be entered into the search bound boxes as well "
 "to further narrow the search."
 msgstr ""
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:169
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:174
 msgid "<gui>Last search</gui>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:171
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:176
 msgid ""
 "Select this button to do a new search including only the verses returned as "
 "a result of the last search. Use this with a new search key to narrow the "
@@ -2166,31 +2438,31 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:181
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:187
 msgid ""
 "This shows a list of the current search results for previewing, navigation, "
 "or saving."
 msgstr ""
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:184
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:191
 msgid "Preview"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:186
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:193
 msgid ""
 "To preview the search result, simply click on an individual result. The "
 "entry will show in the preview pane."
 msgstr ""
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:191
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:198
 msgid "Navigation"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:193
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:200
 msgid ""
 "Navigation to the search result can be done in two ways. To open the result "
 "in a new tab, middle-click the mouse. To open the result in the current tab, "
@@ -2198,12 +2470,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:199
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:206
 msgid "Save Results"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-30-search.page:201
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-30-search.page:208
 msgid ""
 "You may save your results as a list of bookmarks. To do this, right-click "
 "and select <gui>Save List</gui>. You will be prompted to enter a name for "
@@ -2213,17 +2485,17 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:6
 msgid "For complicated searches in the Advanced Search window."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:37
 msgid "Advanced Searches"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:39
 msgid ""
 "More complicated searches might require the use of the advanced search "
 "functions, found under <guiseq><gui>Edit</gui><gui>Advanced Search</gui></"
@@ -2235,7 +2507,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:41
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:43
 msgctxt "_"
 msgid ""
 "external ref='figures/search_search.png' "
@@ -2243,7 +2515,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:43
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:45
 msgid ""
 "In <gui>Advanced Search</gui>, much more complex queries can be constructed, "
 "involving custom search ranges, custom lists of modules over which to "
@@ -2253,7 +2525,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:48
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:51
 msgid ""
 "The default search uses \"lucene\" fast searching. It is an optimized search "
 "requiring a pre-built index; see the <gui>Module Manager's</gui> Maintenance "
@@ -2264,7 +2536,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:54
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:58
 msgid ""
 "Simple Searches: just type in the words you want to search for. To return "
 "only verses that include all of the words, prefix the word with \"+\". So, "
@@ -2275,7 +2547,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:60
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:65
 msgid ""
 "Single Letter Wildcard: to search for \"veil\" or \"vail\", use this syntax "
 "\"v?il\". The \"?\" represents a single character that could be anything. A "
@@ -2284,14 +2556,14 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:65
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:70
 msgid ""
 "Multiple Letter Wildcard: to search for \"prophet\" or \"prophesy\" or "
 "\"prophecy\" or \"prophesied\", use this syntax \"prophe*\"."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:68
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:73
 msgid ""
 "AND syntax: in the advanced search to return results for all of the search "
 "terms, you must put \"AND\" in between the terms. To continue our example, "
@@ -2301,7 +2573,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:73
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:79
 msgid ""
 "By default, two standard search ranges are defined, for Old and New "
 "Testament; you may wish to define others for e.g. \"Gospels\" or \"Paul's "
@@ -2312,7 +2584,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:79
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:86
 msgid ""
 "Note the tooltip in the screenshot above, for Attributes search. This "
 "qualifier is used to perform searches on attributes that are carried with "
@@ -2326,7 +2598,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:87
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:95
 msgid ""
 "If you have indexed your modules, there is a much faster way to search for "
 "Strong's references. Enter your search preceded by \"lemma:\", so to search "
@@ -2335,21 +2607,21 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:92
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:100
 msgid ""
 "Explanations of search syntax are available when either Optimized or "
 "Attribute search is selected."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:95
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:103
 msgid ""
 "The \"Find\" button also stops an in-progress search, as its tooltip "
 "indicates."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:97
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:106
 msgid ""
 "Results will show in the <gui>Results</gui> tab. If you wish to show "
 "Strongs, Morphology, or Footnote tags, make those selections on the "
@@ -2362,7 +2634,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: note/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-31-advanced-search.page:106
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-31-advanced-search.page:116
 msgid ""
 "Changes to some of the settings (e.g. scope of search, searched modules, "
 "etc.) in Advanced Search will affect the simple search via the side pane but "
@@ -2370,17 +2642,17 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:6
 msgid "Search Syntax using Regular Expression."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:37
 msgid "Search Syntax"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:39
 msgid ""
 "Regular expression searches provide a way to do simple or complex searches "
 "for strings that match a pattern or set of patterns (branches) separated by "
@@ -2396,7 +2668,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:50
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:53
 msgid ""
 "The power of Regular Expressions is in the patterns (or templates) used to "
 "define a search. A pattern consists of ordinary characters and some special "
@@ -2407,7 +2679,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:56
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:60
 msgid ""
 "Example: the pattern \"<em>i. love\\.</em>\" will find sentences that end "
 "with \"h<em>i</em>s <em>love</em>\" or \"<em>i</em>n <em>love</em>\" or \" "
@@ -2418,89 +2690,89 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:65
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:70
 msgid "Rules for Regular Expression Search Requests"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:68
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:73
 msgid ". The period matches any character."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:71
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:76
 msgid ""
 "* The asterisk matches 0 or more characters of the preceding: set, character "
 "or indicated character."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:75
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:80
 msgid ""
 "+ The plus sign matches 1 or more characters of the preceding: set, "
 "character or indicated character."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:79
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:84
 msgid ""
 "? The question mark matches 0 or 1 character of the preceding: set, "
 "character or indicated character."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:83
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:88
 msgid ""
 "[ ] Square brackets match any one of the characters specified inside [ ]."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:87
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:92
 msgid "^ A caret as the first character inside [ ] means NOT."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:90
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:95
 msgid "^ A caret beginning a pattern anchors the beginning of a line."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:94
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:99
 msgid "$ A dollar at the end of a pattern anchors the end of a line."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:98
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:103
 msgid "| A vertical bar means logical OR."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:101
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:106
 msgid ""
 "( ) Parentheses enclose expressions for grouping. <em>Not supported!</em>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:105
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:110
 msgid ""
 "\\ A backslash can be used prior to any special character to match that "
 "character."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:109
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:114
 msgid ""
 "\\ A backslash can be used prior to an ordinary character to make it a "
 "special character."
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:116
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:121
 msgid "The Period"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:118
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:123
 msgid ""
 "The Period \".\" will match any single character even a space or other non-"
 "alphabet character. <em>s.t</em> matches <em>s</em>i<em>t</em>, <em>s</"
@@ -2512,12 +2784,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:133
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:138
 msgid "The Asterisk"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:135
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:140
 msgid ""
 "The asterisk \"*\" matches zero or more characters of the preceding: set, "
 "character or indicated character. Using a period asterisk combination \".*\" "
@@ -2528,12 +2800,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:148
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:151
 msgid "The Plus Sign"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:150
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:153
 msgid ""
 "The Plus Sign \"+\" matches one or more characters of the preceding: set, "
 "character or indicated character. Using a period and plus sign combination "
@@ -2543,12 +2815,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:161
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:164
 msgid "The Question Mark"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:163
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:166
 msgid ""
 "The Question Mark \"?\"matches zero or one character of the preceding: set, "
 "character or indicated character. <em>be?n</em> matches <em>ben</em> and "
@@ -2557,12 +2829,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:173
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:175
 msgid "The Square Brackets"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:175
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:177
 msgid ""
 "The Square Brackets \"[]\" enclose a set of characters that can match. The "
 "period, asterisk, plus sign and question mark are not special inside the "
@@ -2580,12 +2852,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:198
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:199
 msgid "The Caret first in Square Brackets"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:200
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:201
 msgid ""
 "If the Caret is the first character after the left bracket (\"[^\") it means "
 "NOT. <em>s[^io]t</em> matches <em>set, sat</em>, etc., but not <em>s</"
@@ -2593,12 +2865,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:207
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:209
 msgid "The Caret as Start of Line Anchor"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:209
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:211
 msgid ""
 "If the Caret is the first character in a pattern (\"^xxx\") it anchors the "
 "pattern to the start of a line. Any match must be at the beginning of a "
@@ -2610,12 +2882,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:221
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:224
 msgid "The Dollar Sign as End of Line Anchor"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:223
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:226
 msgid ""
 "If the Dollar Sign is the last character (\"xxx$\") in a pattern it anchors "
 "the pattern to the end of a line. Any match must be at the end of a line. "
@@ -2627,12 +2899,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:236
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:239
 msgid "The Vertical Bar"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:238
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:241
 msgid ""
 "The Vertical Bar \"|\" between patterns means OR. <em>John|Peter</em> "
 "matches <em>John</em> or <em>Peter. John .*Peter|Peter .*John</em> matches "
@@ -2642,22 +2914,22 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:250
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:253
 msgid "The Parentheses"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:252
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:255
 msgid "<em>The use of Parentheses \"( )\" is not supported!</em>"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:258
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:261
 msgid "The Backslash Prior to a Special Character"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:259
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:262
 msgid ""
 "The Backslash prior to a special character (\"\\*\") indicates that the "
 "character is not being used in its special meaning, but is just to match "
@@ -2666,19 +2938,19 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:267
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:270
 msgid "The Backslash Prior to an Ordinary Character"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:270
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:273
 msgid ""
 "The Backslash prior to an ordinary character (\"\\o\") indicates that the "
 "character is not being used to match itself, but has special meaning."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:275
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:279
 msgid ""
 "\\b if use outside [ ] means word boundary. If used inside [ ] means "
 "backspace. <em>\\brighteous\\b</em> matches <em>righteous</em> but not "
@@ -2686,7 +2958,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:280
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:284
 msgid ""
 "\\B means non-word boundary. <em>\\Brighteous\\B</em> matches "
 "un<em>righteous</em>ness and un<em>righteous</em>ly but not <em>righteous</"
@@ -2694,118 +2966,118 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:285
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:290
 msgid "\\d means digit; same as [0-9]."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:288
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:293
 msgid "\\D means non-digit, same as [^0-9]."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:291
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:296
 msgid "\\s means space."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:294
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:299
 msgid "\\S means not a space."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:297
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:302
 msgid "\\w means alphanumeric; same as [a-zA-Z0-9_]."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-32-search-syntax.page:300
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-32-search-syntax.page:305
 msgid "\\W means not alphanumeric; same as [^a-zA-Z0-9_]."
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:6
 msgid "Study the original Greek and Hebrew Texts."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:37
 msgid "Original Language Research"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:40
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:41
 msgid "Installing Needed Modules"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:42
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:43
 msgid ""
 "Xiphos is ideally suited for studying the original Greek and Hebrew. To get "
 "started, you will want the following modules:"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:45
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:46
 msgid "From Crosswire Repository:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:48
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:49
 msgid ""
 "StrongsHebrew Dictionary (or get StrongsRealHebrew from the Xiphos "
 "Repository)"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:52
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:53
 msgid ""
 "StrongsGreek Dictionary (or get StrongsRealGreek from the Xiphos Repository)"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:56
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:57
 msgid "Robinson Dictionary"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:59
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:60
 msgid "KJV Bible"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:63
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:64
 msgid "From Xiphos Repository:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:66
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:67
 msgid ""
 "StrongsRealGreek Dictionary (same as StrongsGreek, but with Greek "
 "characters, B-Greek transliteration, and self-referencing links)"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:70
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:71
 msgid ""
 "StrongsRealHebrew Dictionary (same as StrongsHebrew, but with Hebrew "
 "characters and self-referencing links)"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:74
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:75
 msgid ""
 "InvertedStrongsRealGreek (key in or copy actual Greek word, rather than "
 "number)"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:82
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:83
 msgid "Setting Up"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:84
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:85
 msgid ""
 "While still in the module manager, create indexes for all of the modules you "
 "just installed. Then close the module manager and open <guiseq><gui>Edit </"
@@ -2825,12 +3097,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:103
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:104
 msgid "Searching for Strongs Numbers"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:105
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:106
 msgid ""
 "Choose <guiseq><gui>Edit</gui><gui>Advanced Search</gui></guiseq>or press "
 "<key>F3</key>. Under <gui>Search Type</gui>, select <gui>Optimized (\"Lucene"
@@ -2846,17 +3118,17 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:120
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:121
 msgid "Additional Modules"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:122
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:123
 msgid "For more advanced research, the following modules are also available:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:126
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:127
 msgid ""
 "2TGreek (Xiphos Repository) : This module contains the entire Bible in "
 "Greek. It combines the LXX and Tischendorf8 NT into one easy-to-use module. "
@@ -2866,21 +3138,21 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:133
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:134
 msgid ""
 "Elzevir Textus Receptus (Crosswire Beta Repository as of this writing) : "
 "1624 edition with Strongs and Morphology"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:137
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:138
 msgid ""
 "LXX (Crosswire Repository) : the Septuagint with Strongs, Morphology, and "
 "footnotes"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:141
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:142
 msgid ""
 "MorphGNT (Crosswire Beta Repository as of this writing) : This is derived "
 "from the morphologically parsed GNT provided by UPenn's CCAT. It was "
@@ -2889,28 +3161,28 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:147
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:148
 msgid ""
 "TR (Crosswire Repository) : This is the Textus Receptus with Strongs and "
 "Morphology"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:151
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:152
 msgid ""
 "TischMorph (Xiphos Repository) : As described above, this has Strongs, "
 "Morphology, accents, and alternate readings."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:155
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:156
 msgid ""
 "WHNU (Crosswire Repository) : Westcott-Hort of 1881 with Strongs and "
 "Morphology"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:159
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:160
 msgid ""
 "GreekHebrew (Crosswire Repository) : This is a dictionary keyed to Strongs. "
 "It contains words in the LXX that are also found in the New Testament. In "
@@ -2918,7 +3190,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-33-original-language.page:165
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-33-original-language.page:166
 msgid ""
 "Didache (Crosswire Beta Repository as of this writing) : This is an early "
 "Christian treatise in Greek dated to the late first or early second century. "
@@ -2926,17 +3198,17 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:5
 msgid "Build up a personal commentary."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:34
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:34
 msgid "Personal Commentary Editor"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:38
 msgid ""
 "To build up a personal commentary you will need to install the editable "
 "'Personal' sword module from the English Commentaries section. Right click "
@@ -2945,7 +3217,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:43
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:43
 msgid ""
 "An editor window similar to the <gui>Study Pad</gui> will appear. Edit your "
 "comment and save it; in the future it will appear as your comment to the "
@@ -2957,34 +3229,34 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:47
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:47
 msgctxt "_"
 msgid ""
 "external ref='figures/personal.png' md5='8e113d15df0d8fc9b8c17e6189d0d40a'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:49
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:49
 msgid "Locationbar"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:52
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:52
 msgid "Synchronise Button"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:55
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:55
 msgid "Bible Book, Chapter and Verse Selectors"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:57
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:57
 msgid "Location Summary"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:61
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:61
 msgid ""
 "Use the <gui>Synchronise Button</gui> to quickly change location of your "
 "editor to that of the underlying Bibletext or use the <gui>Book</gui>, "
@@ -2993,86 +3265,86 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:66
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:49
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:66
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:49
 msgid "Toolbar 1"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:69
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:52
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:69
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:52
 msgid "Font Size and Environment"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:72
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:55
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:72
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:55
 msgid "Font Type"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:75
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:58
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:75
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:58
 msgid "Bold, Italics, Underscored, Crossed Out"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:78
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:61
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:78
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:61
 msgid "Left, Centre and Right Bound"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:81
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:64
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:81
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:64
 msgid "Shift Paragraph Right or Left"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:84
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:67
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:84
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:67
 msgid "Colour Selector"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:88
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:71
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:88
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:71
 msgid "Toolbar 2"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:91
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:91
 msgid "Save, Delete and Print"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:94
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:77
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:94
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:77
 msgid "Cut, Copy, Paste and Undo"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:97
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:80
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:97
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:80
 msgid "Find and 'Find and Replace'"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:100
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:83
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:100
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:83
 msgid "Spellcheck"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:104
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:87
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:104
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:87
 msgid ""
 "In order for spellcheck to be available, one of the languages under "
 "<guiseq><gui>Edit</gui><gui>Current languages</gui></guiseq> must be set."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:107
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:107
 msgid ""
 "To create a link to other verses right click the text and choose <gui>Link.."
 "</gui>. In the pop-up window enter the link location and the module linked "
@@ -3080,7 +3352,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:111
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:111
 msgid ""
 "It is possible to rename a personal commentary to suit a particular subject "
 "of study for that commentary. Thus, multiple personal commentaries may be "
@@ -3091,7 +3363,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:118
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:118
 msgid ""
 "If the study embodied in a particular personal commentary is no longer "
 "needed, archival is available in the module manager, prior to removal, for "
@@ -3100,7 +3372,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:123
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:123
 msgid ""
 "Although there are 31,102 verses in standard versification, it is unlikely "
 "that more than a tiny fraction of all verses will have personal commentary "
@@ -3110,7 +3382,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: note/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-40-personal-commentary.page:130
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-40-personal-commentary.page:130
 msgid ""
 "The created commentary page will be attached to an individual verse only. To "
 "write commentary pages from within Xiphos, attached to longer stretches of "
@@ -3118,25 +3390,25 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:5
 msgid ""
 "Collect and export Bible study material from Xiphos into other programmes."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:36
 msgid "The Studypad"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:38
 msgid ""
 "The Studypad can be opened by choosing <guiseq><gui>File</gui><gui>Open "
 "StudyPad</gui></guiseq>"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:41
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:41
 msgid "This is what the Studypad typically looks like:"
 msgstr ""
 
@@ -3145,14 +3417,14 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:43
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:43
 msgctxt "_"
 msgid ""
 "external ref='figures/studypad.png' md5='4e12bccca903cf700e1799d509f995e6'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:45
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:45
 msgid ""
 "The Studypad will save into your working directory, making it useful for "
 "collecting and exporting information and Bible study material from Xiphos "
@@ -3160,22 +3432,22 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-41-studypad.page:74
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-41-studypad.page:74
 msgid "New, Save, Delete and Print"
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:5
 msgid "Creating a journal or prayer list."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:36
 msgid "Journals and Prayer Lists"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:38
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:38
 msgid ""
 "<app>Xiphos</app> supports user-created and -editable modules to contain "
 "general content. Initially conceived as simple prayer lists, they have "
@@ -3185,7 +3457,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:44
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:44
 msgid ""
 "To enable prayer list and journal support, see the Preferences dialog as "
 "previously described. There, in <guiseq><gui>General</gui><gui> Options </"
@@ -3195,7 +3467,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:50
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:50
 msgid ""
 "Right-click on this entry, and you will be offered a context menu to create "
 "new modules. All the offered options are of the same type, but what is "
@@ -3208,14 +3480,14 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:55
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:55
 msgctxt "_"
 msgid ""
 "external ref='figures/journal.png' md5='658993f44714b0be5b2a40a4f4a2bcd2'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:57
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:57
 msgid ""
 "Their structure is the same, but the offered templates provide a variety of "
 "hints regarding ways to organize content. <gui>Simple</gui> is trivial, and "
@@ -3229,7 +3501,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:70
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:70
 msgid ""
 "Journals and prayer lists have the structure of a general book: If simply "
 "selected for display from the module list, they will appear in the usual "
@@ -3237,7 +3509,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:74
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:74
 msgid ""
 "Editing a journal or prayer list is done by right-clicking the module name "
 "to get its context menu, whose middle item is <gui>Open in Editor</gui>. The "
@@ -3248,7 +3520,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:81
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:81
 msgid ""
 "If the general book subwindow is currently displaying the journal or prayer "
 "list being edited, it will synchronize with new content when <gui>Save</gui> "
@@ -3256,7 +3528,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:85
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:85
 msgid ""
 "As mentioned, these user-edited modules are in effect general books. This "
 "means they can be viewed in any Sword Project application. Thus, you can use "
@@ -3269,7 +3541,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-42-journals.page:94
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-42-journals.page:94
 msgid ""
 "In the future, it is planned that a module sharing facility will become "
 "available, by which user-edited modules such as these can be uploaded to "
@@ -3281,12 +3553,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:5
 msgid "Locale, General Preferences and StudyPad directory."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:36
 msgid "General Settings"
 msgstr ""
 
@@ -3295,7 +3567,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:39
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:39
 msgctxt "_"
 msgid ""
 "external ref='figures/preferences_general-misc.png' "
@@ -3303,7 +3575,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:41
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:41
 msgid ""
 "If you wish <app>Xiphos</app> to display its interface in a language other "
 "than the default, you may select one here. A restart will be required, so "
@@ -3311,7 +3583,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:45
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:45
 msgid ""
 "If you enable <gui>Default Dictionary</gui>, then that named dictionary (see "
 "<gui>Special</gui> below) module will always be used when double-clicking a "
@@ -3319,7 +3591,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:49
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:49
 msgid ""
 "Certain dictionary-style modules are <gui>Daily Devotionals</gui> whose keys "
 "are numerically in the form \"Month.Day\". If you have such a module "
@@ -3328,7 +3600,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:54
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:54
 msgid ""
 "If you enable <gui>Resize images</gui>, <app>Xiphos</app> will automatically "
 "resize image content in commentaries, general books, and dictionaries so as "
@@ -3336,7 +3608,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:58
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:58
 msgid ""
 "<gui>Highlight current verse</gui>, if enabled, will cause <app>Xiphos </"
 "app> to substitute mere current verse colorization with a high-contrast "
@@ -3345,33 +3617,33 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:63
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:63
 msgid ""
 "<gui>Highlight user annotations</gui> uses inverted highlight color choices "
 "when marking user-annotated verses."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:66
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:66
 msgid ""
 "By default, <gui>Cross-references</gui> go into the Previewer. Selecting "
 "this checkbox puts them into the verse list instead."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-50-preferences-general-settings.page:69
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-50-preferences-general-settings.page:69
 msgid ""
 "Verse number display can be offset in several ways provided by the "
 "checkboxes."
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:5
 msgid "Controls for BibleSync."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:36
 msgid "BibleSync Settings"
 msgstr ""
 
@@ -3380,7 +3652,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:39
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:39
 msgctxt "_"
 msgid ""
 "external ref='figures/preferences_general-biblesync.png' "
@@ -3388,7 +3660,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:41
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:41
 msgid ""
 "BibleSync is a shared navigation protocol using LAN multicast. It is useful "
 "for a single person when running Bible programs on multiple machines or "
@@ -3398,11 +3670,14 @@ msgid ""
 "programs to follow along. The difference in the modes regards who transmits "
 "and who receives navigation. In Personal mode, BibleSync navigation is both "
 "transmitted and received; as Speaker, it transmits only; as Audience, it "
+"receives only. The difference in the modes regards who transmits and who "
+"receives navigation. In Personal mode, BibleSync navigation is both "
+"transmitted and received; as Speaker, it transmits only; as Audience, it "
 "receives only."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:51
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:54
 msgid ""
 "To enable BibleSync, select a mode from the radio buttons. Also, choose "
 "whether to accept navigation directly, so that Xiphos moves immediately to a "
@@ -3411,12 +3686,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:56
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:59
 msgid "If you use a firewall, you must punch a hole in it for UDP port 22272."
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:58
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:61
 msgid ""
 "If you run more than one BibleSync-compatible program on your computer and "
 "do not wish your activity among them to be shared on the local net, you can "
@@ -3425,7 +3700,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:63
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:66
 msgid ""
 "You can send a verse list from the sidebar search or Advanced Search window "
 "via BibleSync; see the context (right-click) menu. A particularly good use "
@@ -3440,27 +3715,34 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: page/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-51-preferences-biblesync.page:74
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:77
+msgid ""
+"As of Biblesync 2.0.0, a simple chat facility is available, accessed using "
+"<gui>Ctrl-Alt-Shift-C</gui>."
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-51-preferences-biblesync.page:80
 msgid ""
 "<app>Xiphos</app> is the first Bible program with a BibleSync "
-"implementation; as such, its utility may be limited for now. But a number of "
-"other programs' authors and support organizations have indicated their "
-"intention to support BibleSync as well, including Laridian, theWord, "
-"BibleAnalyzer, and Accordance, as well as other Sword Project applications."
+"implementation; as such, its utility may be limited for now. Another Sword "
+"Project application, Bishop (for Android and iOS), also has gained support "
+"for BibleSync. Watch for other applications (not all being Sword "
+"applications) to provide support."
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:5
 msgid "Setting Font Colors."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:36
 msgid "Fonts And Colors"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:40
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:40
 msgid "Setting Font Colors"
 msgstr ""
 
@@ -3469,7 +3751,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:43
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:43
 msgctxt "_"
 msgid ""
 "external ref='figures/preferences_fonts-color.png' "
@@ -3477,7 +3759,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:45
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:45
 msgid ""
 "The <gui>Invert color pairs</gui> buttons are provided to make it easy, for "
 "example, to move the main window into \"night mode,\" with white text on "
@@ -3485,7 +3767,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:53
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:53
 msgid "Miscellaneous Font Settings"
 msgstr ""
 
@@ -3494,7 +3776,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:56
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:56
 msgctxt "_"
 msgid ""
 "external ref='figures/preferences_fonts-misc.png' "
@@ -3502,14 +3784,14 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:58
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:58
 msgid ""
 "In individual modules' display, the right-click menu's <gui>Module Options</"
 "gui> selector provides font name and size selection."
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:61
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:61
 msgid ""
 "The base font size is the size initially chosen for all modules displayed by "
 "<app>Xiphos</app>. The verse number and individual modules' font size "
@@ -3517,40 +3799,40 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:65
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:65
 msgid "The font name and size used for display is chosen from this order:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:69
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:69
 msgid ""
 "The selection made via the context menu for the specific module, under "
 "<gui>Module Options</gui>."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:73
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:73
 msgid "The per-language selection made under Preferences, here."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:76
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:76
 msgid "The module's own default selection, in its configuration file."
 msgstr ""
 
 #. (itstool) path: item/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-52-preferences-fonts-colors.page:79
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:79
 #, fuzzy
 msgid "The application default."
 msgstr "فهرست برنامه‏ها"
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-53-preferences-modules.page:5
-msgid "Insert some description text here."
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-53-preferences-modules.page:5
+msgid "Modules preferences."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-53-preferences-modules.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-53-preferences-modules.page:36
 msgid "Module Settings"
 msgstr ""
 
@@ -3559,7 +3841,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-53-preferences-modules.page:39
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-53-preferences-modules.page:39
 msgctxt "_"
 msgid ""
 "external ref='figures/preferences_modules-parallel.png' "
@@ -3571,7 +3853,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-53-preferences-modules.page:42
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-53-preferences-modules.page:42
 msgctxt "_"
 msgid ""
 "external ref='figures/preferences_modules-misc.png' "
@@ -3579,22 +3861,22 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: info/desc
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-60-online-help.page:5
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-60-online-help.page:5
 msgid "Get help."
 msgstr ""
 
 #. (itstool) path: page/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-60-online-help.page:36
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-60-online-help.page:36
 msgid "Online Help"
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-60-online-help.page:40
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-60-online-help.page:40
 msgid "Users Mailing List"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-60-online-help.page:42
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-60-online-help.page:42
 msgid ""
 "One way you can get help with Xiphos is using our low-traffic users' mailing "
 "list. You can sign up by clicking <link href=\"http://www.crosswire.org/"
@@ -3604,12 +3886,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-60-online-help.page:52
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-60-online-help.page:52
 msgid "Live Chat"
 msgstr ""
 
 #. (itstool) path: section/p
-#: /home/domi/xiphos/xiphos-cmake/mallard/C/xiphos-60-online-help.page:54
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-60-online-help.page:54
 msgid ""
 "Another way to get help is with online chat. Xiphos has an IRC channel on "
 "freenode, #xiphos. If you don't know what that means, it's ok. Just click "
@@ -3734,9 +4016,6 @@ msgstr ""
 #~ msgstr "ابزار"
 
 #~ msgid "Sidebar Shortcuts"
-#~ msgstr "میان‏بر به ابزار جانبی"
-
-#~ msgid "Sidebar shortcuts"
 #~ msgstr "میان‏بر به ابزار جانبی"
 
 #~ msgid "The Bible Textpane"
