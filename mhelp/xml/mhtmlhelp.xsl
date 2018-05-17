@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
+Copyright (C) 2018 Xiphos Development Team
+
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free
 Software Foundation; either version 2 of the License, or (at your option) any
@@ -19,12 +21,14 @@ along with this program; see the file COPYING.LGPL.  If not, see <http://www.gnu
 
   <!-- This stylesheet will generate a TOC file for HTML Help -->
 
+  <!-- NOTE: TOC encoding seems to be not UTF-8 compliant,
+       which will causes problems with non latin-alphabets -->
+
    <xsl:output
        method="html"
-       version="4.0"
        indent="yes"
        omit-xml-declaration="yes"
-       encoding="utf-8"
+       encoding="Windows-1252"
        standalone="yes" />
 
    <xsl:strip-space elements="*"/>
@@ -33,7 +37,7 @@ along with this program; see the file COPYING.LGPL.  If not, see <http://www.gnu
    <xsl:template match="/">
      <HTML>
        <HEAD>
-	 <meta name="GENERATOR" content="Microsoft® HTML Help Workshop 4.1"/>
+	 <meta name="GENERATOR" content="Xiphos help/CMakeLists.txt"/>
 	   <!-- Sitemap 1.0 -->
        </HEAD>
        <BODY>
@@ -93,6 +97,4 @@ along with this program; see the file COPYING.LGPL.  If not, see <http://www.gnu
        </OBJECT>
      </LI>
    </xsl:template>
-
-
 </xsl:stylesheet>
