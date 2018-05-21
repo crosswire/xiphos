@@ -44,7 +44,8 @@
     the modules available from other repositories do not represent content
     officially sanctioned by Crosswire. On the web, see this page for list of
     those repositories known:
-    <link href="http://www.crosswire.org/wiki/Module_Repositories">
+    <link href="http://www.crosswire.org/wiki/Module_Repositories"
+	  its:translate="no">
     http://www.crosswire.org/wiki/Module_Repositories</link></p>
 
     <p>The list of standard repositories is maintained at CrossWire. Xiphos

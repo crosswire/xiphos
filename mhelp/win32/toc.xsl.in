@@ -21,14 +21,14 @@ along with this program; see the file COPYING.LGPL.  If not, see <http://www.gnu
 
   <!-- This stylesheet will generate a TOC file for HTML Help -->
 
-  <!-- NOTE: TOC encoding seems to be not UTF-8 compliant,
-       which will causes problems with non latin-alphabets -->
+  <!-- NOTE: TOC encoding seems to be not UTF-8 compliant, we get
+       the lang related Windows Codepage from the file: ms-codepages -->
 
    <xsl:output
        method="html"
        indent="yes"
        omit-xml-declaration="yes"
-       encoding="Windows-1252"
+       encoding="@MS_WINDOWS_CODEPAGE@"
        standalone="yes" />
 
    <xsl:strip-space elements="*"/>

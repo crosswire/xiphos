@@ -64,19 +64,21 @@
 
       <media type="image" mime="image/png" style="floatstart" src="figures/sword3.png" />
 
-      <p>"The SWORD Project" is based at <link href="http://www.crosswire.org">
-      http://www.crosswire.org</link>. Other apps under the same banner are
-      <app>MacSword</app> for the Macintosh, <app>BibleDesktop</app>, a Java
-      app, <app>BibleTime</app> (another Linux program), and <app>The SWORD
-      Project for Windows</app> (aka <app>BibleCS</app> or <app>WinSword</app>).
+      <p>"The SWORD Project" is based at <link href="http://www.crosswire.org"
+      its:translate="no">http://www.crosswire.org</link>. Other apps under the
+      same banner are <app>MacSword</app> for the Macintosh, <app>BibleDesktop
+      </app>, a Java app, <app>BibleTime</app> (another Linux program), and
+      <app>The SWORD Project for Windows</app> (aka <app>BibleCS</app> or
+      <app>WinSword</app>).
       </p>
 
       <!-- Where important notices are kept regarding Xiphos  -->
       <note style="warning">
         <p>Xiphos is currently in development, so this manual may not
         reflect the program as you see it. If it does not, please file a
-        bug at the <link href="https://github.com/crosswire/xiphos">
-	project website</link>, or email <sys>xiphos-devel@crosswire.org</sys>.
+        bug at the <link href="https://github.com/crosswire/xiphos"
+	its:translate="no">project website</link>, or email
+	<sys its:translate="no">xiphos-devel@crosswire.org</sys>.
         All help is appreciated, as it will improve the software.</p>
       </note>
 

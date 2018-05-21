@@ -6,7 +6,9 @@
 
   <info>
     <revision pkgversion="4.1.0" date="2018-04-24" status="draft"/>
-    <desc>Xiphos is an application to aid in study of the Bible.</desc>
+<!--    <desc>Xiphos is an application to aid in study of the Bible.</desc> -->
+    <desc>Bible study tool for reading, study, and research using modules from
+    The SWORD Project and elsewhere.</desc>
 
     <title type='link' role="trail">
       <media type="image" its:translate="no" src="figures/xiphos-trail-icon.png"/>

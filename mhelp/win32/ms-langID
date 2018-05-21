@@ -1,0 +1,807 @@
+aa 0x1000 Afar
+aa_DJ 0x1000 Afar Djibouti
+aa_ER 0x1000 Afar Eritrea
+aa_ET 0x1000 Afar Ethiopia
+af 0x0036 Afrikaans
+af_NA 0x1000 Afrikaans Namibia
+af_ZA 0x0436 Afrikaans South Africa
+agq 0x1000 Aghem
+agq_CM 0x1000 Aghem Cameroon
+ak 0x1000 Akan
+ak_GH 0x1000 Akan Ghana
+am 0x005E Amharic
+am_ET 0x045E Amharic Ethiopia
+ar 0x0001 Arabic
+ar_001 0x1000 Arabic World
+ar_AE 0x3801 Arabic U.A.E.
+ar_BH 0x3C01 Arabic Bahrain
+ar_DJ 0x1000 Arabic Djibouti
+ar_DZ 0x1401 Arabic Algeria
+ar_EG 0x0c01 Arabic Egypt
+ar_ER 0x1000 Arabic Eritrea
+ar_IL 0x1000 Arabic Israel
+ar_IQ 0x0801 Arabic Iraq
+ar_JO 0x2C01 Arabic Jordan
+ar_KM 0x1000 Arabic Comoros
+ar_KW 0x3401 Arabic Kuwait
+ar_LB 0x3001 Arabic Lebanon
+ar_LY 0x1001 Arabic Libya
+ar_MA 0x1801 Arabic Morocco
+ar_MR 0x1000 Arabic Mauritania
+ar_OM 0x2001 Arabic Oman
+ar_PS 0x1000 Arabic Palestinian Authority
+ar_QA 0x4001 Arabic Qatar
+ar_SA 0x0401 Arabic Saudi Arabia
+ar_SD 0x1000 Arabic Sudan
+ar_SO 0x1000 Arabic Somalia
+ar_SS 0x1000 Arabic South Sudan
+ar_SY 0x2801 Arabic Syria
+ar_TD 0x1000 Arabic Chad
+ar_TN 0x1C01 Arabic Tunisia
+ar_YE 0x2401 Arabic Yemen
+arn 0x007A Mapudungun
+arn_CL 0x047A Mapudungun Chile
+as 0x004D Assamese
+as_IN 0x044D Assamese India
+asa 0x1000 Asu
+asa_TZ 0x1000 Asu Tanzania
+ast 0x1000 Asturian
+ast_ES 0x1000 Asturian Spain
+az 0x002C Azerbaijani (Latin)
+az_Cyrl 0x742C Azerbaijani (Cyrillic)
+az_Cyrl_AZ 0x082C Azerbaijani (Cyrillic) Azerbaijan
+az_Latn 0x782C Azerbaijani (Latin)
+az_Latn_AZ 0x042C Azerbaijani (Latin) Azerbaijan
+ba 0x006D Bashkir
+ba_RU 0x046D Bashkir Russia
+bas 0x1000 Basaa
+bas_CM 0x1000 Basaa Cameroon
+be 0x0023 Belarusian
+be_BY 0x0423 Belarusian Belarus
+bem 0x1000 Bemba
+bem_ZM 0x1000 Bemba Zambia
+bez 0x1000 Bena
+bez_TZ 0x1000 Bena Tanzania
+bg 0x0002 Bulgarian
+bg_BG 0x0402 Bulgarian Bulgaria
+bm 0x1000 Bamanankan
+bm_Latn_ML 0x1000 Bamanankan (Latin) Mali
+bn 0x0045 Bangla
+bn_BD 0x0845 Bangla Bangladesh
+bn_IN 0x0445 Bangla India
+bo 0x0051 Tibetan
+bo_CN 0x0451 Tibetan People's Republic of China
+bo_IN 0x1000 Tibetan India
+br 0x007E Breton
+br_FR 0x047E Breton France
+brx 0x1000 Bodo
+brx_IN 0x1000 Bodo India
+bs 0x781A Bosnian (Latin)
+bs_Cyrl 0x641A Bosnian (Cyrillic)
+bs_Cyrl_BA 0x201A Bosnian (Cyrillic) Bosnia and Herzegovina
+bs_Latn 0x681A Bosnian (Latin)
+bs_Latn_BA 0x141A Bosnian (Latin) Bosnia and Herzegovina
+bs, hr, or sr 0x001A Croatian
+byn 0x1000 Blin
+byn_ER 0x1000 Blin Eritrea
+ca 0x0003 Catalan
+ca_AD 0x1000 Catalan Andorra
+ca_ES 0x0403 Catalan Spain
+ca_ES_valencia 0x0803 Valencian Spain
+ca_FR 0x1000 Catalan France
+ca_IT 0x1000 Catalan Italy
+cd_RU 0x1000 Chechen Russia
+cgg 0x1000 Chiga
+cgg_UG 0x1000 Chiga Uganda
+chr 0x005C Cherokee
+chr_Cher 0x7c5C Cherokee
+chr_Cher_US 0x045C Cherokee United States
+co 0x0083 Corsican
+co_FR 0x0483 Corsican France
+cs 0x0005 Czech
+cs_CZ 0x0405 Czech Czech Republic
+cu_RU 0x1000 Church Slavic Russia
+cy 0x0052 Welsh
+cy_GB 0x0452 Welsh United Kingdom
+da 0x0006 Danish
+da_DK 0x0406 Danish Denmark
+da_GL 0x1000 Danish Greenland
+dav 0x1000 Taita
+dav_KE 0x1000 Taita Kenya
+de 0x0007 German
+de_AT 0x0C07 German Austria
+de_BE 0x1000 German Belgium
+de_CH 0x0807 German Switzerland
+de_DE 0x0407 German Germany
+de_IT 0x1000 German Italy
+de_LI 0x1407 German Liechtenstein
+de_LU 0x1007 German Luxembourg
+dje 0x1000 Zarma
+dje_NE 0x1000 Zarma Niger
+dsb 0x7C2E Lower Sorbian
+dsb_DE 0x082E Lower Sorbian Germany
+dsb or hsb 0x002E Upper Sorbian
+dua 0x1000 Duala
+dua_CM 0x1000 Duala Cameroon
+dv 0x0065 Divehi
+dv_MV 0x0465 Divehi Maldives
+dyo 0x1000 Jola-Fonyi
+dyo_SN 0x1000 Jola-Fonyi Senegal
+dz 0x1000 Dzongkha
+dz_BT 0x0C51 Dzongkha Bhutan
+ebu 0x1000 Embu
+ebu_KE 0x1000 Embu Kenya
+ee 0x1000 Ewe
+ee_GH 0x1000 Ewe Ghana
+ee_TG 0x1000 Ewe Togo
+el 0x0008 Greek
+el_CY 0x1000 Greek Cyprus
+el_GR 0x0408 Greek Greece
+en 0x0009 English
+en_001 0x1000 English World
+en_029 0x2409 English Caribbean
+en_150 0x1000 English Europe
+en_AG 0x1000 English Antigua and Barbuda
+en_AI 0x1000 English Anguilla
+en_AS 0x1000 English American Samoa
+en_AT 0x1000 English Austria
+en_AU 0x0C09 English Australia
+en_BB 0x1000 English Barbados
+en_BE 0x1000 English Belgium
+en_BI 0x1000 English Burundi
+en_BM 0x1000 English Bermuda
+en_BS 0x1000 English Bahamas
+en_BW 0x1000 English Botswana
+en_BZ 0x2809 English Belize
+en_CA 0x1009 English Canada
+en_CC 0x1000 English Cocos [Keeling] Islands
+en_CH 0x1000 English Switzerland
+en_CK 0x1000 English Cook Islands
+en_CM 0x1000 English Cameroon
+en_CX 0x1000 English Christmas Island
+en_CY 0x1000 English Cyprus
+en_DE 0x1000 English Germany
+en_DK 0x1000 English Denmark
+en_DM 0x1000 English Dominica
+en_ER 0x1000 English Eritrea
+en_FI 0x1000 English Finland
+en_FJ 0x1000 English Fiji
+en_FK 0x1000 English Falkland Islands
+en_FM 0x1000 English Micronesia
+en_GB 0x0809 English United Kingdom
+en_GD 0x1000 English Grenada
+en_GG 0x1000 English Guernsey
+en_GH 0x1000 English Ghana
+en_GI 0x1000 English Gibraltar
+en_GM 0x1000 English Gambia
+en_GU 0x1000 English Guam
+en_GY 0x1000 English Guyana
+en_HK 0x3C09 English Hong Kong
+en_IE 0x1809 English Ireland
+en_IL 0x1000 English Israel
+en_IM 0x1000 English Isle of Man
+en_IN 0x4009 English India
+en_IO 0x1000 English British Indian Ocean Territory
+en_JE 0x1000 English Jersey
+en_JM 0x2009 English Jamaica
+en_KE 0x1000 English Kenya
+en_KI 0x1000 English Kiribati
+en_KN 0x1000 English Saint Kitts and Nevis
+en_KY 0x1000 English Cayman Islands
+en_LC 0x1000 English Saint Lucia
+en_LR 0x1000 English Liberia
+en_LS 0x1000 English Lesotho
+en_MG 0x1000 English Madagascar
+en_MH 0x1000 English Marshall Islands
+en_MO 0x1000 English Macao SAR
+en_MP 0x1000 English Northern Mariana Islands
+en_MS 0x1000 English Montserrat
+en_MT 0x1000 English Malta
+en_MU 0x1000 English Mauritius
+en_MW 0x1000 English Malawi
+en_MY 0x4409 English Malaysia
+en_NA 0x1000 English Namibia
+en_NF 0x1000 English Norfolk Island
+en_NG 0x1000 English Nigeria
+en_NL 0x1000 English Netherlands
+en_NR 0x1000 English Nauru
+en_NU 0x1000 English Niue
+en_NZ 0x1409 English New Zealand
+en_PG 0x1000 English Papua New Guinea
+en_PH 0x3409 English Republic of the Philippines
+en_PK 0x1000 English Pakistan
+en_PN 0x1000 English Pitcairn Islands
+en_PR 0x1000 English Puerto Rico
+en_PW 0x1000 English Palau
+en_RW 0x1000 English Rwanda
+en_SB 0x1000 English Solomon Islands
+en_SC 0x1000 English Seychelles
+en_SD 0x1000 English Sudan
+en_SE 0x1000 English Sweden
+en_SG 0x4809 English Singapore
+en_SH 0x1000 English St Helena, Ascension, Tristan da Cunha
+en_SI 0x1000 English Slovenia
+en_SL 0x1000 English Sierra Leone
+en_SS 0x1000 English South Sudan
+en_SX 0x1000 English Sint Maarten
+en_SZ 0x1000 English Swaziland
+en_TC 0x1000 English Turks and Caicos Islands
+en_TK 0x1000 English Tokelau
+en_TO 0x1000 English Tonga
+en_TT 0x2c09 English Trinidad and Tobago
+en_TV 0x1000 English Tuvalu
+en_TZ 0x1000 English Tanzania
+en_UG 0x1000 English Uganda
+en_UM 0x1000 English US Minor Outlying Islands
+en_US 0x0409 English United States
+en_VC 0x1000 English Saint Vincent and the Grenadines
+en_VG 0x1000 English British Virgin Islands
+en_VI 0x1000 English US Virgin Islands
+en_VU 0x1000 English Vanuatu
+en_WS 0x1000 English Samoa
+en_ZA 0x1C09 English South Africa
+en_ZM 0x1000 English Zambia
+en_ZW 0x3009 English Zimbabwe
+eo 0x1000 Esperanto
+eo_001 0x1000 Esperanto World
+es 0x000A Spanish
+es_419 0x580A Spanish Latin America
+es_AR 0x2C0A Spanish Argentina
+es_BO 0x400A Spanish Bolivia
+es_BR 0x1000 Spanish Brazil
+es_BZ 0x1000 Spanish Belize
+es_CL 0x340A Spanish Chile
+es_CO 0x240A Spanish Colombia
+es_CR 0x140A Spanish Costa Rica
+es_CU 0x5c0A Spanish Cuba
+es_DO 0x1c0A Spanish Dominican Republic
+es_EC 0x300A Spanish Ecuador
+es_ES 0x0c0A Spanish Spain
+es_ES_tradnl 0x040A Spanish Spain
+es_GQ 0x1000 Spanish Equatorial Guinea
+es_GT 0x100A Spanish Guatemala
+es_HN 0x480A Spanish Honduras
+es_MX 0x080A Spanish Mexico
+es_NI 0x4C0A Spanish Nicaragua
+es_PA 0x180A Spanish Panama
+es_PE 0x280A Spanish Peru
+es_PH 0x1000 Spanish Philippines
+es_PR 0x500A Spanish Puerto Rico
+es_PY 0x3C0A Spanish Paraguay
+es_SV 0x440A Spanish El Salvador
+es_US 0x540A Spanish United States
+es_UY 0x380A Spanish Uruguay
+es_VE 0x200A Spanish Bolivarian Republic of Venezuela
+et 0x0025 Estonian
+et_EE 0x0425 Estonian Estonia
+eu 0x002D Basque
+eu_ES 0x042D Basque Spain
+ewo 0x1000 Ewondo
+ewo_CM 0x1000 Ewondo Cameroon
+fa 0x0029 Persian
+fa_AF 0x1000 Persian Afghanistan
+fa_IR 0x0429 Persian Iran
+ff 0x0067 Fulah
+ff_CM 0x1000 Fulah Cameroon
+ff_GN 0x1000 Fulah Guinea
+ff_Latn 0x7C67 Fulah
+ff_Latn_SN 0x0867 Fulah Senegal
+ff_MR 0x1000 Fulah Mauritania
+fi 0x000B Finnish
+fi_FI 0x040B Finnish Finland
+fil 0x0064 Filipino
+fil_PH 0x0464 Filipino Philippines
+fo 0x0038 Faroese
+fo_DK 0x1000 Faroese Denmark
+fo_FO 0x0438 Faroese Faroe Islands
+fr 0x000C French
+fr_BE 0x080C French Belgium
+fr_BF 0x1000 French Burkina Faso
+fr_BI 0x1000 French Burundi
+fr_BJ 0x1000 French Benin
+fr_BL 0x1000 French Saint Barthélemy
+fr_CA 0x0c0C French Canada
+fr_CD 0x240C French Congo, DRC
+fr_CF 0x1000 French Central African Republic
+fr_CG 0x1000 French Congo
+fr_CH 0x100C French Switzerland
+fr_CI 0x300C French Côte d'Ivoire
+fr_CM 0x2c0C French Cameroon
+fr_DJ 0x1000 French Djibouti
+fr_DZ 0x1000 French Algeria
+fr_FR 0x040C French France
+fr_GA 0x1000 French Gabon
+fr_GF 0x1000 French French Guiana
+fr_GN 0x1000 French Guinea
+fr_GP 0x1000 French Guadeloupe
+fr_GQ 0x1000 French Equatorial Guinea
+fr_HT 0x3c0C French Haiti
+fr_KM 0x1000 French Comoros
+fr_LU 0x140C French Luxembourg
+fr_MA 0x380C French Morocco
+fr_MC 0x180C French Principality of Monaco
+fr_MF 0x1000 French Saint Martin
+fr_MG 0x1000 French Madagascar
+fr_ML 0x340C French Mali
+fr_MQ 0x1000 French Martinique
+fr_MR 0x1000 French Mauritania
+fr_MU 0x1000 French Mauritius
+fr_NC 0x1000 French New Caledonia
+fr_NE 0x1000 French Niger
+fr_PF 0x1000 French French Polynesia
+fr_PM 0x1000 French Saint Pierre and Miquelon
+fr_RE 0x200C French Reunion
+fr_RW 0x1000 French Rwanda
+fr_SC 0x1000 French Seychelles
+fr_SN 0x280C French Senegal
+fr_SY 0x1000 French Syria
+fr_TD 0x1000 French Chad
+fr_TG 0x1000 French Togo
+fr_TN 0x1000 French Tunisia
+fr_VU 0x1000 French Vanuatu
+fr_WF 0x1000 French Wallis and Futuna
+fr_YT 0x1000 French Mayotte
+fur 0x1000 Friulian
+fur_IT 0x1000 Friulian Italy
+fy 0x0062 Frisian
+fy_NL 0x0462 Frisian Netherlands
+ga 0x003C Irish
+ga_IE 0x083C Irish Ireland
+gd 0x0091 Scottish Gaelic
+gd_GB 0x0491 Scottish Gaelic United Kingdom
+gl 0x0056 Galician
+gl_ES 0x0456 Galician Spain
+gn 0x0074 Guarani
+gn_PY 0x0474 Guarani Paraguay
+gsw 0x0084 Alsatian
+gsw_CH 0x1000 Alsatian Switzerland
+gsw_FR 0x0484 Alsatian France
+gsw_LI 0x1000 Alsatian Liechtenstein
+gu 0x0047 Gujarati
+gu_IN 0x0447 Gujarati India
+guz 0x1000 Gusii
+guz_KE 0x1000 Gusii Kenya
+gv 0x1000 Manx
+gv_IM 0x1000 Manx Isle of Man
+ha 0x0068 Hausa (Latin)
+ha_Latn 0x7C68 Hausa (Latin)
+ha_Latn_GH 0x1000 Hausa (Latin) Ghana
+ha_Latn_NE 0x1000 Hausa (Latin) Niger
+ha_Latn_NG 0x0468 Hausa (Latin) Nigeria
+haw 0x0075 Hawaiian
+haw_US 0x0475 Hawaiian United States
+he 0x000D Hebrew
+he_IL 0x040D Hebrew Israel
+hi 0x0039 Hindi
+hi_IN 0x0439 Hindi India
+hr_BA 0x101A Croatian (Latin) Bosnia and Herzegovina
+hr_HR 0x041A Croatian Croatia
+hsb_DE 0x042E Upper Sorbian Germany
+hu 0x000E Hungarian
+hu_HU 0x040E Hungarian Hungary
+hy 0x002B Armenian
+hy_AM 0x042B Armenian Armenia
+ia 0x1000 Interlingua
+ia_001 0x1000 Interlingua World
+ia_FR 0x1000 Interlingua France
+id 0x0021 Indonesian
+id_ID 0x0421 Indonesian Indonesia
+ig 0x0070 Igbo
+ig_NG 0x0470 Igbo Nigeria
+ii 0x0078 Yi
+ii_CN 0x0478 Yi People's Republic of China
+is 0x000F Icelandic
+is_IS 0x040F Icelandic Iceland
+it 0x0010 Italian
+it_CH 0x0810 Italian Switzerland
+it_IT 0x0410 Italian Italy
+it_SM 0x1000 Italian San Marino
+it_VA 0x1000 Italian Vatican City
+iu 0x005D Inuktitut (Latin)
+iu_Cans 0x785D Inuktitut (Syllabics)
+iu_Cans_CA 0x045d Inuktitut (Syllabics) Canada
+iu_Latn 0x7C5D Inuktitut (Latin)
+iu_Latn_CA 0x085D Inuktitut (Latin) Canada
+ja 0x0011 Japanese
+ja_JP 0x0411 Japanese Japan
+jgo 0x1000 Ngomba
+jgo_CM 0x1000 Ngomba Cameroon
+jmc 0x1000 Machame
+jmc_TZ 0x1000 Machame Tanzania
+jv 0x1000 Javanese
+jv_Latn 0x1000 Javanese Latin
+jv_Latn_ID 0x1000 Javanese Latin, Indonesia
+ka 0x0037 Georgian
+ka_GE 0x0437 Georgian Georgia
+kab 0x1000 Kabyle
+kab_DZ 0x1000 Kabyle Algeria
+kam 0x1000 Kamba
+kam_KE 0x1000 Kamba Kenya
+kde 0x1000 Makonde
+kde_TZ 0x1000 Makonde Tanzania
+kea 0x1000 Kabuverdianu
+kea_CV 0x1000 Kabuverdianu Cabo Verde
+khq 0x1000 Koyra Chiini
+khq_ML 0x1000 Koyra Chiini Mali
+ki 0x1000 Kikuyu
+ki_KE 0x1000 Kikuyu Kenya
+kk 0x003F Kazakh
+kk_KZ 0x043F Kazakh Kazakhstan
+kkj 0x1000 Kako
+kkj_CM 0x1000 Kako Cameroon
+kl 0x006F Greenlandic
+kl_GL 0x046F Greenlandic Greenland
+kln 0x1000 Kalenjin
+kln_KE 0x1000 Kalenjin Kenya
+km 0x0053 Khmer
+km_KH 0x0453 Khmer Cambodia
+kn 0x004B Kannada
+kn_IN 0x044B Kannada India
+ko 0x0012 Korean
+ko_KP 0x1000 Korean North Korea
+ko_KR 0x0412 Korean Korea
+kok 0x0057 Konkani
+kok_IN 0x0457 Konkani India
+ks 0x0060 Kashmiri
+ks_Arab 0x0460 Kashmiri Perso-Arabic
+ks_Arab_IN 0x1000 Kashmiri Perso-Arabic
+ksb 0x1000 Shambala
+ksb_TZ 0x1000 Shambala Tanzania
+ksf 0x1000 Bafia
+ksf_CM 0x1000 Bafia Cameroon
+ksh 0x1000 Ripuarian
+ksh_DE 0x1000 Ripuarian Germany
+ku 0x0092 Central Kurdish
+ku_Arab 0x7c92 Central Kurdish
+ku_Arab_IQ 0x0492 Central Kurdish Iraq
+ku_Arab_IR 0x1000 Kurdish Perso-Arabic, Iran
+kw 0x1000 Cornish
+kw_GB 0x1000 Cornish United Kingdom
+ky 0x0040 Kyrgyz
+ky_KG 0x0440 Kyrgyz Kyrgyzstan
+lag 0x1000 Langi
+lag_TZ 0x1000 Langi Tanzania
+lb 0x006E Luxembourgish
+lb_LU 0x046E Luxembourgish Luxembourg
+lg 0x1000 Ganda
+lg_UG 0x1000 Ganda Uganda
+lkt 0x1000 Lakota
+lkt_US 0x1000 Lakota United States
+ln 0x1000 Lingala
+ln_AO 0x1000 Lingala Angola
+ln_CD 0x1000 Lingala Congo DRC
+ln_CF 0x1000 Lingala Central African Republic
+ln_CG 0x1000 Lingala Congo
+lo 0x0054 Lao
+lo_LA 0x0454 Lao Lao P.D.R.
+lrc_IQ 0x1000 Northern Luri Iraq
+lrc_IR 0x1000 Northern Luri Iran
+lt 0x0027 Lithuanian
+lt_LT 0x0427 Lithuanian Lithuania
+lu 0x1000 Luba-Katanga
+lu_CD 0x1000 Luba-Katanga Congo DRC
+luo 0x1000 Luo
+luo_KE 0x1000 Luo Kenya
+luy 0x1000 Luyia
+luy_KE 0x1000 Luyia Kenya
+lv 0x0026 Latvian
+lv_LV 0x0426 Latvian Latvia
+mas 0x1000 Masai
+mas_KE 0x1000 Masai Kenya
+mas_TZ 0x1000 Masai Tanzania
+mer 0x1000 Meru
+mer_KE 0x1000 Meru Kenya
+mfe 0x1000 Morisyen
+mfe_MU 0x1000 Morisyen Mauritius
+mg 0x1000 Malagasy
+mg_MG 0x1000 Malagasy Madagascar
+mgh 0x1000 Makhuwa-Meetto
+mgh_MZ 0x1000 Makhuwa-Meetto Mozambique
+mgo 0x1000 Meta'
+mgo_CM 0x1000 Meta' Cameroon
+mi 0x0081 Maori
+mi_NZ 0x0481 Maori New Zealand
+mk 0x002F Macedonian
+mk_MK 0x042F Macedonian Macedonia (Former Yugoslav Republic of Macedonia)
+ml 0x004C Malayalam
+ml_IN 0x044C Malayalam India
+mn 0x0050 Mongolian (Cyrillic)
+mn_Cyrl 0x7850 Mongolian (Cyrillic)
+mn_MN 0x0450 Mongolian (Cyrillic) Mongolia
+mn_Mong 0x7C50 Mongolian (Traditional Mongolian)
+mn_Mong_CN 0x0850 Mongolian (Traditional Mongolian) People's Republic of China
+mn_Mong_MN 0x0C50 Mongolian (Traditional Mongolian) Mongolia
+moh 0x007C Mohawk
+moh_CA 0x047C Mohawk Canada
+mr 0x004E Marathi
+mr_IN 0x044E Marathi India
+ms 0x003E Malay
+ms_BN 0x083E Malay Brunei Darussalam
+ms_MY 0x043E Malay Malaysia
+mt 0x003A Maltese
+mt_MT 0x043A Maltese Malta
+mua 0x1000 Mundang
+mua_CM 0x1000 Mundang Cameroon
+my 0x0055 Burmese
+my_MM 0x0455 Burmese Myanmar
+mzn_IR 0x1000 Mazanderani Iran
+naq 0x1000 Nama
+naq_NA 0x1000 Nama Namibia
+nb 0x7C14 Norwegian (Bokmal)
+nb_NO 0x0414 Norwegian (Bokmal) Norway
+nb_SJ 0x1000 Norwegian Bokmål Svalbard and Jan Mayen
+nd 0x1000 North Ndebele
+nd_ZW 0x1000 North Ndebele Zimbabwe
+nds 0x1000 Low German
+nds_DE 0x1000 Low German  Germany
+nds_NL 0x1000 Low German Netherlands
+ne 0x0061 Nepali
+ne_IN 0x0861 Nepali India
+ne_NP 0x0461 Nepali Nepal
+nl 0x0013 Dutch
+nl_AW 0x1000 Dutch Aruba
+nl_BE 0x0813 Dutch Belgium
+nl_BQ 0x1000 Dutch Bonaire, Sint Eustatius and Saba
+nl_CW 0x1000 Dutch Curaçao
+nl_NL 0x0413 Dutch Netherlands
+nl_SR 0x1000 Dutch Suriname
+nl_SX 0x1000 Dutch Sint Maarten
+nmg 0x1000 Kwasio
+nmg_CM 0x1000 Kwasio Cameroon
+nn 0x7814 Norwegian (Nynorsk)
+nn_NO 0x0814 Norwegian (Nynorsk) Norway
+nnh 0x1000 Ngiemboon
+nnh_CM 0x1000 Ngiemboon Cameroon
+no 0x0014 Norwegian (Bokmal)
+nqo 0x1000 N'ko
+nqo_GN 0x1000 N'ko Guinea
+nr 0x1000 South Ndebele
+nr_ZA 0x1000 South Ndebele South Africa
+nso 0x006C Sesotho sa Leboa
+nso_ZA 0x046C Sesotho sa Leboa South Africa
+nus 0x1000 Nuer
+nus_SD 0x1000 Nuer Sudan
+nyn 0x1000 Nyankole
+nyn_UG 0x1000 Nyankole Uganda
+oc 0x0082 Occitan
+oc_FR 0x0482 Occitan France
+om 0x0072 Oromo
+om_ET 0x0472 Oromo Ethiopia
+om_KE 0x1000 Oromo Kenya
+or 0x0048 Odia
+or_IN 0x0448 Odia India
+os 0x1000 Ossetian
+os_GE 0x1000 Ossetian Cyrillic, Georgia
+os_RU 0x1000 Ossetian Cyrillic, Russia
+pa 0x0046 Punjabi
+pa_Arab 0x7C46 Punjabi
+pa_Arab_PK 0x0846 Punjabi Islamic Republic of Pakistan
+pa_IN 0x0446 Punjabi India
+pl 0x0015 Polish
+pl_PL 0x0415 Polish Poland
+prg_001 0x1000 Prussian
+prs 0x008C Dari
+prs_AF 0x048C Dari Afghanistan
+ps 0x0063 Pashto
+ps_AF 0x0463 Pashto Afghanistan
+pt 0x0016 Portuguese
+pt_AO 0x1000 Portuguese Angola
+pt_BR 0x0416 Portuguese Brazil
+pt_CH 0x1000 Portuguese Switzerland
+pt_CV 0x1000 Portuguese Cabo Verde
+pt_GQ 0x1000 Portuguese Equatorial Guinea
+pt_GW 0x1000 Portuguese Guinea-Bissau
+pt_LU 0x1000 Portuguese Luxembourg
+pt_MO 0x1000 Portuguese Macao SAR
+pt_MZ 0x1000 Portuguese Mozambique
+pt_PT 0x0816 Portuguese Portugal
+pt_ST 0x1000 Portuguese São Tomé and Príncipe
+pt_TL 0x1000 Portuguese Timor-Leste
+qps_ploc 0x0501 Pseudo Language Pseudo locale used for localization testing
+qps_ploca 0x05FE Pseudo Language Pseudo locale for east Asian/complex script localization testing
+qps_plocm 0x09FF Pseudo Language Pseudo locale used for localization testing of mirrored locales
+quc 0x0086 K'iche
+quc_Latn_GT 0x0486 K'iche Guatemala
+quz 0x006B Quechua
+quz_BO 0x046B Quechua Bolivia
+quz_EC 0x086B Quechua Ecuador
+quz_PE 0x0C6B Quechua Peru
+rm 0x0017 Romansh
+rm_CH 0x0417 Romansh Switzerland
+rn 0x1000 Rundi
+rn_BI 0x1000 Rundi Burundi
+ro 0x0018 Romanian
+ro_MD 0x0818 Romanian Moldova
+ro_RO 0x0418 Romanian Romania
+rof 0x1000 Rombo
+rof_TZ 0x1000 Rombo Tanzania
+ru 0x0019 Russian
+ru_BY 0x1000 Russian Belarus
+ru_KG 0x1000 Russian Kyrgyzstan
+ru_KZ 0x1000 Russian Kazakhstan
+ru_MD 0x0819 Russian Moldova
+ru_RU 0x0419 Russian Russia
+ru_UA 0x1000 Russian Ukraine
+rw 0x0087 Kinyarwanda
+rw_RW 0x0487 Kinyarwanda Rwanda
+rwk 0x1000 Rwa
+rwk_TZ 0x1000 Rwa Tanzania
+sa 0x004F Sanskrit
+sa_IN 0x044F Sanskrit India
+sah 0x0085 Sakha
+sah_RU 0x0485 Sakha Russia
+saq 0x1000 Samburu
+saq_KE 0x1000 Samburu Kenya
+sbp 0x1000 Sangu
+sbp_TZ 0x1000 Sangu Tanzania
+sd 0x0059 Sindhi
+sd_Arab 0x7C59 Sindhi
+sd_Arab_PK 0x0859 Sindhi Islamic Republic of Pakistan
+se 0x003B Sami (Northern)
+se_FI 0x0C3B Sami (Northern) Finland
+se_NO 0x043B Sami (Northern) Norway
+se_SE 0x083B Sami (Northern) Sweden
+seh 0x1000 Sena
+seh_MZ 0x1000 Sena Mozambique
+ses 0x1000 Koyraboro Senni
+ses_ML 0x1000 Koyraboro Senni Mali
+sg 0x1000 Sango
+sg_CF 0x1000 Sango Central African Republic
+shi 0x1000 Tachelhit
+shi_Latn 0x1000 Tachelhit (Latin)
+shi_Latn_MA 0x1000 Tachelhit (Latin) Morocco
+shi_Tfng 0x1000 Tachelhit Tifinagh
+shi_Tfng_MA 0x1000 Tachelhit Tifinagh, Morocco
+si 0x005B Sinhala
+si_LK 0x045B Sinhala Sri Lanka
+sk 0x001B Slovak
+sk_SK 0x041B Slovak Slovakia
+sl 0x0024 Slovenian
+sl_SI 0x0424 Slovenian Slovenia
+sma 0x783B Sami (Southern)
+sma_NO 0x183B Sami (Southern) Norway
+sma_SE 0x1C3B Sami (Southern) Sweden
+smj 0x7C3B Sami (Lule)
+smj_NO 0x103B Sami (Lule) Norway
+smj_SE 0x143B Sami (Lule) Sweden
+smn 0x703B Sami (Inari)
+smn_FI 0x243B Sami (Inari) Finland
+sms 0x743B Sami (Skolt)
+sms_FI 0x203B Sami (Skolt) Finland
+sn 0x1000 Shona
+sn_Latn 0x1000 Shona Latin
+sn_Latn_ZW 0x1000 Shona Zimbabwe
+so 0x0077 Somali
+so_DJ 0x1000 Somali Djibouti
+so_ET 0x1000 Somali Ethiopia
+so_KE 0x1000 Somali Kenya
+so_SO 0x0477 Somali Somalia
+sq 0x001C Albanian
+sq_AL 0x041C Albanian Albania
+sq_MK 0x1000 Albanian Macedonia, FYRO
+sr 0x7C1A Serbian (Latin)
+sr_Cyrl 0x6C1A Serbian (Cyrillic)
+sr_Cyrl_BA 0x1C1A Serbian (Cyrillic) Bosnia and Herzegovina
+sr_Cyrl_CS 0x0C1A Serbian (Cyrillic) Serbia and Montenegro (Former)
+sr_Cyrl_ME 0x301A Serbian (Cyrillic) Montenegro
+sr_Cyrl_RS 0x281A Serbian (Cyrillic) Serbia
+sr_Latn 0x701A Serbian (Latin)
+sr_Latn_BA 0x181A Serbian (Latin) Bosnia and Herzegovina
+sr_Latn_CS 0x081A Serbian (Latin) Serbia and Montenegro (Former)
+sr_Latn_ME 0x2c1A Serbian (Latin) Montenegro
+sr_Latn_RS 0x241A Serbian (Latin) Serbia
+ss 0x1000 Swati
+ss_SZ 0x1000 Swati Swaziland
+ss_ZA 0x1000 Swati South Africa
+ssy 0x1000 Saho
+ssy_ER 0x1000 Saho Eritrea
+st 0x0030 Sotho
+st_LS 0x1000 Southern Sotho Lesotho
+st_ZA 0x0430 Sotho South Africa
+sv 0x001D Swedish
+sv_AX 0x1000 Swedish Åland Islands
+sv_FI 0x081D Swedish Finland
+sv_SE 0x041D Swedish Sweden
+sw 0x0041 Kiswahili
+sw_KE 0x0441 Kiswahili Kenya
+sw_TZ 0x1000 Kiswahili Tanzania
+sw_UG 0x1000 Kiswahili Uganda
+swc 0x1000 Congo Swahili
+swc_CD 0x1000 Congo Swahili Congo DRC
+syr 0x005A Syriac
+syr_SY 0x045A Syriac Syria
+ta 0x0049 Tamil
+ta_IN 0x0449 Tamil India
+ta_LK 0x0849 Tamil Sri Lanka
+ta_MY 0x1000 Tamil Malaysia
+ta_SG 0x1000 Tamil Singapore
+te 0x004A Telugu
+te_IN 0x044A Telugu India
+teo 0x1000 Teso
+teo_KE 0x1000 Teso Kenya
+teo_UG 0x1000 Teso Uganda
+tg 0x0028 Tajik (Cyrillic)
+tg_Cyrl 0x7C28 Tajik (Cyrillic)
+tg_Cyrl_TJ 0x0428 Tajik (Cyrillic) Tajikistan
+th 0x001E Thai
+th_TH 0x041E Thai Thailand
+ti 0x0073 Tigrinya
+ti_ER 0x0873 Tigrinya Eritrea
+ti_ET 0x0473 Tigrinya Ethiopia
+tig 0x1000 Tigre
+tig_ER 0x1000 Tigre Eritrea
+tk 0x0042 Turkmen
+tk_TM 0x0442 Turkmen Turkmenistan
+tn 0x0032 Setswana
+tn_BW 0x0832 Setswana Botswana
+tn_ZA 0x0432 Setswana South Africa
+to 0x1000 Tongan
+to_TO 0x1000 Tongan Tonga
+tr 0x001F Turkish
+tr_CY 0x1000 Turkish Cyprus
+tr_TR 0x041F Turkish Turkey
+ts 0x0031 Tsonga
+ts_ZA 0x0431 Tsonga South Africa
+tt 0x0044 Tatar
+tt_RU 0x0444 Tatar Russia
+twq 0x1000 Tasawaq
+twq_NE 0x1000 Tasawaq Niger
+tzm 0x005F Tamazight (Latin)
+tzm_Latn 0x7C5F Tamazight (Latin)
+tzm_Latn_DZ 0x085F Tamazight (Latin) Algeria
+tzm_Latn_MA 0x1000 Central Atlas Tamazight (Latin) Morocco
+ug 0x0080 Uyghur
+ug_CN 0x0480 Uyghur People's Republic of China
+uk 0x0022 Ukrainian
+uk_UA 0x0422 Ukrainian Ukraine
+ur 0x0020 Urdu
+ur_IN 0x0820 Urdu India
+ur_PK 0x0420 Urdu Islamic Republic of Pakistan
+uz 0x0043 Uzbek (Latin)
+uz_Arab 0x1000 Uzbek Perso-Arabic
+uz_Arab_AF 0x1000 Uzbek Perso-Arabic, Afghanistan
+uz_Cyrl 0x7843 Uzbek (Cyrillic)
+uz_Cyrl_UZ 0x0843 Uzbek (Cyrillic) Uzbekistan
+uz_Latn 0x7C43 Uzbek (Latin)
+uz_Latn_UZ 0x0443 Uzbek (Latin) Uzbekistan
+vai 0x1000 Vai
+vai_Latn 0x1000 Vai (Latin)
+vai_Latn_LR 0x1000 Vai (Latin)  Liberia
+vai_Vaii 0x1000 Vai
+vai_Vaii_LR 0x1000 Vai Liberia
+ve 0x0033 Venda
+ve_ZA 0x0433 Venda South Africa
+vi 0x002A Vietnamese
+vi_VN 0x042A Vietnamese Vietnam
+vo 0x1000 Volapük
+vo_001 0x1000 Volapük World
+vun 0x1000 Vunjo
+vun_TZ 0x1000 Vunjo Tanzania
+wae 0x1000 Walser
+wae_CH 0x1000 Walser Switzerland
+wal 0x1000 Wolaytta
+wal_ET 0x1000 Wolaytta Ethiopia
+wo 0x0088 Wolof
+wo_SN 0x0488 Wolof Senegal
+xh 0x0034 Xhosa
+xh_ZA 0x0434 Xhosa South Africa
+xog 0x1000 Soga
+xog_UG 0x1000 Soga Uganda
+yav 0x1000 Yangben
+yav_CM 0x1000 Yangben Cameroon
+yo 0x006A Yoruba
+yo_BJ 0x1000 Yoruba Benin
+yo_NG 0x046A Yoruba Nigeria
+zgh 0x1000 Standard Moroccan Tamazight
+zgh_Tfng 0x1000 Standard Moroccan Tamazight Tifinagh
+zgh_Tfng_MA 0x1000 Standard Moroccan Tamazight Morocco
+zh 0x7804 Chinese (Simplified)
+zh_CN 0x0804 Chinese (Simplified) People's Republic of China
+zh_Hans 0x0004 Chinese (Simplified)
+zh_Hant 0x7C04 Chinese (Traditional)
+zh_HK 0x0C04 Chinese (Traditional) Hong Kong S.A.R.
+zh_MO 0x1404 Chinese (Traditional) Macao S.A.R.
+zh_SG 0x1004 Chinese (Simplified) Singapore
+zh_TW 0x0404 Chinese (Traditional) Taiwan
+zu 0x0035 Zulu
+zu_ZA 0x0435 Zulu South Africa

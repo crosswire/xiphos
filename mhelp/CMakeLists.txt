@@ -51,6 +51,7 @@ if (HELP)
     xiphos-52-preferences-fonts-colors.page
     xiphos-53-preferences-modules.page
     xiphos-60-online-help.page
+    xiphos-90-credits.page
     )
 
   # list of figures
@@ -170,7 +171,8 @@ if (HELP)
   set (mallard-schema ${CMAKE_CURRENT_SOURCE_DIR}/xml/mallard-1.0.rng)
   foreach (lang ${help_all_langs})
     add_custom_command (OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/validate.txt
-      COMMAND ${XMLLINT} --noout --xinclude --noent --relaxng ${mallard-schema} *.page > ${CMAKE_CURRENT_BINARY_DIR}/${lang}/validate.txt 2>&1
+#      COMMAND ${XMLLINT} --noout --xinclude --noent --relaxng ${mallard-schema} *.page > ${CMAKE_CURRENT_BINARY_DIR}/${lang}/validate.txt 2>&1
+      COMMAND ${XMLLINT} --noout --xinclude --noent --relaxng ${mallard-schema} *.page
       DEPENDS help-${lang}-pages
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
       COMMENT "'${lang}' help - mallard pages validation report"
@@ -241,7 +243,7 @@ if (HELP)
 
 
   ### optional features
-  # TODO: switch from yelp-x utilities which are bash script to plain XSLT
+  # TODO: in th future, switch from yelp-x utilities which are bash script to plain XSLT
 
   # export mallard files to epub
 
@@ -286,32 +288,29 @@ if (HELP)
     # TODO: switch to plain XSLT
     message(STATUS "Configuring Help to HTML export")
     foreach (lang ${help_all_langs})
+
       # list help pages to convert
       set (mallard_pages)
       foreach(page ${help_pages})
 	list(APPEND mallard_pages ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${page})
       endforeach(page)
 
-      # convert Mallard pages into html files
+      # convert Mallard pages into html files using a custom css
+      set(custom_css ${CMAKE_CURRENT_SOURCE_DIR}/xml/html.css.custom.xsl)
       add_custom_command (OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/html.timestamp
-	COMMAND ${YELP_BUILD} html ${mallard_pages}
-	COMMAND ${CMAKE_COMMAND} -E remove ${lang}.css
-	COMMAND ${CMAKE_COMMAND} -E touch ${lang}.css
+	COMMAND ${YELP_BUILD} html -x ${custom_css} ${mallard_pages}
 	DEPENDS validate-${lang}-pages
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
 	COMMENT "Generating '${lang}' html files"
 	)
-
       add_custom_target(${lang}-html-files
 	DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/html.timestamp
 	)
-
       add_dependencies(handbook ${lang}-html-files)
 
     endforeach ()
 
     set (have_html_help ON PARENT_SCOPE)
-
   endfunction (xiphos_export_to_html)
 
 
@@ -330,27 +329,27 @@ if (HELP)
     if (NOT have_html_help)
       xiphos_export_to_html()
     endif ()
-    # generate .chm file for each <lang>
+
+    # generate a .chm file for each <lang>
     foreach (lang ${help_all_langs})
       message(STATUS "Configuring Windows© Help file for '${lang}'")
 
-      # 1. format lang to MS pattern
-      string(REGEX REPLACE "[_]" "-" ms_lang ${lang})
-      # find MS language code for ms_lang
-      file(STRINGS ms_langcodes_file ms_found_code REGEX "^${ms_lang}[ ]")
-      # if empty, default to en-US
-      if (NOT ms_found_code)
-	set(ms_found_code "C 0x0409 English (United States)")
+      # Create xiphos.hhp file (PROJECT)
+      # 1. find the according Microsoft language ID
+      file(STRINGS win32/ms-langID ms_langID REGEX "^${lang}[ ]")
+      # if empty, default to the en-US langID
+      if (NOT ms_langID)
+	set(ms_langID "C 0x0409 English (United States)")
       endif ()
-      # format to HHP style
-      string(LENGTH ${ms_lang} len_lang)
+      # remove lang, keep only langID and country values
+      string(LENGTH ${lang} len_lang)
       math(EXPR len_lang "${len_lang} + 1")
-      string(SUBSTRING ${ms_found_code} ${len_lang} -1 MS_LANGUAGE_CODE)
+      string(SUBSTRING ${ms_langID} ${len_lang} -1 MS_LANGUAGE_CODE)
 
-      # 2. set output file name
+      # 2. set the .chm output file name
       set(MS_COMPILED_FILE "xiphos_${lang}.chm")
 
-      # 3. set list of files to compile
+      # 3. set the list of files to compile
       foreach(line ${help_pages})
 	set(MS_FILES_LIST "${MS_FILES_LIST}${line}\n")
       endforeach()
@@ -359,20 +358,38 @@ if (HELP)
       endforeach()
 
       # 4. create HHP file (Project file)
-      configure_file(${PROJECT_SOURCE_DIR}/mhelp/xiphos.hhp.in
+      configure_file(${PROJECT_SOURCE_DIR}/mhelp/win32/xiphos.hhp.in
 	${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhp)
 
-      # 5. Create HHC file (TOC)
+      # Create xiphos.hhc (TOC)
+      # 1. find MS codepage for lang
+      file(STRINGS win32/ms-codepages ms_codepage REGEX "^${lang}[ ]")
+      # if codepage unset, default to windows-1252
+      if (${lang} STREQUAL ${ms_codepage})
+	message(WARNING "No codepage set for ${lang}, please add it to the win32/ms-codepages file")
+	set(ms_codepage "${lang} windows-1252")
+      endif ()
+      # remove lang
+      string(LENGTH ${lang} len_lang)
+      math(EXPR len_lang "${len_lang} + 1")
+      string(SUBSTRING ${ms_codepage} ${len_lang} -1 MS_WINDOWS_CODEPAGE)
+
+      # 3. create XSLT file
+      configure_file(${CMAKE_CURRENT_SOURCE_DIR}/win32/toc.xsl.in
+	${CMAKE_CURRENT_BINARY_DIR}/${lang}/toc.xsl)
+
+      # 4. build HHC file
       add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhc
 	  # Create HHC file (TOC)
-	  COMMAND ${XSLTPROC} --html ${CMAKE_CURRENT_SOURCE_DIR}/xml/mhtmlhelp.xsl ${CMAKE_CURRENT_BINARY_DIR}/${lang}/index.html > ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhc
+	  COMMAND ${XSLTPROC} --html ${CMAKE_CURRENT_BINARY_DIR}/${lang}/toc.xsl ${CMAKE_CURRENT_BINARY_DIR}/${lang}/index.html > ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhc
 	  # Compile HTML files
 	  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/html.timestamp
 	  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
-	  COMMENT "Generating '${lang}' Windows© HHC (Table of Contents) file"
+	  COMMENT "Generating '${lang}' Windows HHC (Table of Contents) file"
 	  )
 
-      # 6. TODO: Create HHK file (Index file) - workaround:
+	# 6. TODO: Create a HHK file (Index file)
+	# here is a workaround:
       file (WRITE ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhk
 	"<!DOCTYPE html>"
 	"<html>"
@@ -388,7 +405,7 @@ if (HELP)
 
       # 7. Build CHM
       if (WIN32 AND NOT CMAKE_CROSSCOMPILING)
-	# pure Windows©: building help with HHC.EXE [NOTE: First switch to XSLT]
+	# pure Windows: building help with HHC.EXE [NOTE: First switch to XSLT]
 	add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${MS_COMPILED_FILE}
 	  COMMAND ${HHC_EXE} xiphos.hhp
 	  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
@@ -423,6 +440,7 @@ if (HELP)
   endif (MSHELP)
 
   # create PDF (experimental)
+  # needs htmldoc > 1.9.0
 
   if (PDFHELP)
     set(lang "C")
@@ -433,11 +451,11 @@ if (HELP)
       xiphos_export_to_html()
     endif ()
     # create PDF file
-    # TODO: htmldoc is not utf-8 aware, we needs to run iconv first
-    # NOTE: another option is to run: COMMAND ${WKHTMLTOPDF} *.html xiphos.pdf
-    # but actually it needs a patched version of QT (and its dependencies)
+    # TODO: htmldoc is not full utf-8 aware, we needs to run iconv first
+    # NOTE: a better option is to run: COMMAND ${WKHTMLTOPDF} *.html xiphos.pdf
+    # but actually it needs a patched version of QT.
     add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.pdf
-      COMMAND ${HTMLDOC} --webpage --linkstyle plain -f xiphos.pdf *.html
+      COMMAND ${HTMLDOC} --webpage --continuous --browserwidth 1200  --footer : --fontsize 8 --headfootsize 8 --no-jpeg --no-strict --linkstyle plain -f xiphos.pdf xiphos*.html
       DEPENDS ${lang}-html-files
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
       COMMENT "Generating '${lang}' PDF file"

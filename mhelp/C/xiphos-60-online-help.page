@@ -41,10 +41,10 @@
 
     <p>One way you can get help with Xiphos is using our low-traffic users'
     mailing list. You can sign up by clicking
-    <link href="http://www.crosswire.org/mailman/listinfo/xiphos-users/">this
-    link</link>. Once you are signed up, you can email the list with any
-    problems you are having and other users or the developers will respond,
-    typically within a day.</p>
+    <link href="http://www.crosswire.org/mailman/listinfo/xiphos-users/"
+	  its:translate="no">this link</link>. Once you are signed up, you can
+    email the list with any problems you are having and other users or the
+    developers will respond, typically within a day.</p>
   </section>
 
   <section id="xiphos-live-chat">
@@ -53,9 +53,9 @@
 
     <p>Another way to get help is with online chat. Xiphos has an IRC channel
     on freenode, #xiphos. If you don't know what that means, it's ok. Just click
-    <link href="http://webchat.freenode.net/?randomnick=1&amp;channels=xiphos&amp;prompt=1">this
-    link</link> (it will open your web browser), type a nickname or accept the
-    default, and click "Click to join chatroom".
+    <link href="http://webchat.freenode.net/?randomnick=1&amp;channels=xiphos&amp;prompt=1"
+	  its:translate="no">this link</link> (it will open your web browser),
+    type a nickname or accept the default, and click "Click to join chatroom".
     This will take you to a chatroom where the developers and other users are
     available to help you with issues you may be having. Although many times
     someone will answer your question immediately, sometimes you may have to

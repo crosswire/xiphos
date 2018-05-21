@@ -1,0 +1,123 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      xmlns:ui="http://projectmallard.org/ui/1.0/"
+      type="topic"
+      id="xiphos-90-credits">
+
+  <info>
+    <desc>Credits and contact information.</desc>
+
+    <link type="guide" xref="index"/>
+
+    <revision pkgversion="4.1.1" date="2018-05-20" status="draft"/>
+
+    <title type='link' role="trail"></title>
+    <title type='text'>Xiphos</title>
+
+    <credit type="author" its:translate="no">
+      <name>Andy Piper</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Pierre Benz</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Dr Peter von Kaehne</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Karl Kleinpaste</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Talbert</name>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <title>Credits and Acknowledgment</title>
+
+  <section id="license">
+    <title>License</title>
+    <p>
+      Permission is granted to copy, distribute and/or modify this document
+      under the terms of the GNU General Public License (GPL), Version 2 or
+      any later version published by the Free Software Foundation. You can
+      find a copy of the GPL at this
+      <link href="http://www.gnu.org/licenses/gpl-2.0.html"
+	    its:translate="no">link</link> or in the file COPYING distributed
+      with this manual.
+    </p>
+  </section>
+
+  <section id="current">
+    <title>Authors of the <app>Xiphos</app> User Documentation</title>
+    <p>This manual was written by:</p>
+    <list>
+      <item its:translate="no">
+	<p>Andy Piper</p>
+      </item>
+      <item its:translate="no">
+	<p>Pierre Benz</p>
+      </item>
+      <item its:translate="no">
+	<p>Dr Peter von Kaehne</p>
+      </item>
+      <item its:translate="no">
+	<p>Karl Kleinpaste</p>
+      </item>
+      <item its:translate="no">
+	<p>Matthew Talbert</p>
+      </item>
+    </list>
+  </section>
+
+
+  <section id="contact">
+    <title>Contact information</title>
+    <p>The <app>Xiphos</app> software and Manual:</p>
+    <list>
+      <item>
+	<p>
+	  <link href="http://xiphos.org/" its:translate="no">
+	    Website
+	  </link>
+	</p>
+      </item>
+      <item>
+	<p>
+	  <link href="https://www.crosswire.org/mailman/listinfo/xiphos-users/"
+		its:translate="no">
+	    Mailing list
+	  </link>
+	</p>
+      </item>
+      <item>
+	<p>
+	  <link href="https://github.com/crosswire/xiphos/issues"
+		its:translate="no">
+	    <app>Xiphos</app> Issues and Bug reports
+	  </link>
+	</p>
+      </item>
+    </list>
+
+    <p>The SWORD Project:</p>
+    <list>
+      <item>
+	<p>
+	  <link href="http://www.crosswire.org" its:translate="no">
+	    Crosswire website
+	  </link>
+	</p>
+      </item>
+      <item>
+	<p>
+	  <link href="http://tracker.crosswire.org/browse/MOD/"
+		its:translate="no">
+	    Modules Issues and Bug tracking
+	  </link>
+	</p>
+      </item>
+    </list>
+  </section>
+</page>
