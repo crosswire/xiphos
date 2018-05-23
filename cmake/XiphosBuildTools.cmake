@@ -90,5 +90,5 @@ endif (EPUB)
 
 # Html to Pdf Help converter
 if (PDFHELP)
-  xiphos_find_program (HTMLDOC htmldoc)
+  xiphos_find_program (EBOOK_CONVERT ebook-convert)
 endif (PDFHELP)
