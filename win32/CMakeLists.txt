@@ -21,6 +21,13 @@
 
 # define common dirs
 if (WIN32)
+  # set icon file
+  set(XIPHOS_MAIN_ICON "${CMAKE_SOURCE_DIR}/pixmaps/gs2-48x48.ico")
+  # generate resource file
+    configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/res/xiphos-winres.rc.in
+    ${CMAKE_BINARY_DIR}/src/gtk/xiphos-winres.rc
+  )
   # don't install in /usr
   if (CMAKE_INSTALL_PREFIX MATCHES "^/usr")
     set (CMAKE_INSTALL_PREFIX "install")

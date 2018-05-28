@@ -232,6 +232,11 @@ if (WIN32)
     PRIVATE
     ${PROJECT_SOURCE_DIR}/win32/include
     )
+  # add rc file
+  target_sources(xiphos
+    PRIVATE
+    xiphos-winres.rc
+    )
 endif ()
 
 
