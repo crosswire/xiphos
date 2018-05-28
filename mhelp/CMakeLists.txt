@@ -438,11 +438,11 @@ if (HELP)
       endif(WIN32 AND NOT CMAKE_CROSSCOMPILING)
 
       # add target to current target
-      add_custom_target(${lang}-ms-help
+      add_custom_target(${lang}-windows-help
 	DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${MS_COMPILED_FILE}
 	)
 
-      add_dependencies(handbook ${lang}-ms-help)
+      add_dependencies(handbook ${lang}-windows-help)
 
       # install MS-Help files
       install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${MS_COMPILED_FILE}
