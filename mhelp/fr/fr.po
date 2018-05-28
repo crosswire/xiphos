@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Xiphos 3.4.0\n"
+"Project-Id-Version: Xiphos 4.1.0\n"
 "Report-Msgid-Bugs-To: Dominique Corbex <dominique@corbex.org>\n"
-"POT-Creation-Date: 2018-05-15 22:24+0200\n"
-"PO-Revision-Date: 2018-05-16 21:44+0200\n"
+"POT-Creation-Date: 2018-05-28 21:55+0200\n"
+"PO-Revision-Date: 2018-05-28 23:09+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: emacs + po-mode; French <gnomefr@traduc.org>\n"
 "Language: fr_FR\n"
@@ -23,12 +23,14 @@ msgid "translator-credits"
 msgstr "Traduit par"
 
 #. (itstool) path: info/desc
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:9
-msgid "Xiphos is an application to aid in study of the Bible."
-msgstr "Xiphos est un logiciel d'aide à l'étude de la Bible."
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:10
+msgid ""
+"Bible study tool for reading, study, and research using modules from The "
+"SWORD Project and elsewhere."
+msgstr "Outil d'étude des textes bibliques pour lire, étudier, faire des recherches sur des  modules provenant du Projet SWORD ou d'ailleurs."
 
 #. (itstool) path: info/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:15
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:17
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:12
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:16
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:12
@@ -50,17 +52,18 @@ msgstr "Xiphos est un logiciel d'aide à l'étude de la Bible."
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-52-preferences-fonts-colors.page:12
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-53-preferences-modules.page:12
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-60-online-help.page:12
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:15
 msgctxt "text"
 msgid "Xiphos"
 msgstr "Xiphos"
 
 #. (itstool) path: media/span
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:39
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:41
 msgid "Xiphos logo"
 msgstr "Logo Xiphos"
 
 #. (itstool) path: page/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:43
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:45
 msgid ""
 "Xiphos is a Bible study tool, offering a rich and featureful environment for "
 "reading, study, and research using modules from The SWORD Project and "
@@ -71,27 +74,27 @@ msgstr ""
 "issus de modules du Projet SWORD et d'ailleurs."
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:48
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:50
 msgid "First steps"
 msgstr "Premiers pas"
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:52
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:54
 msgid "Module Manager"
 msgstr "Gérer les modules"
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:56
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:58
 msgid "Search Functions"
 msgstr "Fonctions de recherche"
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:60
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:62
 msgid "Add Comments and Notes"
 msgstr "Ajouter des commentaires et des notes"
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:64
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/index.page:66
 msgid "Preferences"
 msgstr "Préférences"
 
@@ -110,7 +113,9 @@ msgstr "Introduction"
 msgid ""
 "Xiphos is a Bible study and research tool based upon the \"SWORD Project\" "
 "libraries and the GTK libraries. You can use Xiphos to do the following:"
-msgstr "Xiphos est un logiciel d'étude biblique basé sur le Projet SWORD et les librairies GTK. Il permet d'effectuer les tâches suivantes :"
+msgstr ""
+"Xiphos est un logiciel d'étude biblique basé sur le Projet SWORD et les "
+"librairies GTK. Il permet d'effectuer les tâches suivantes :"
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:40
@@ -146,15 +151,13 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:56
-#, fuzzy
 msgid ""
 "Xiphos aims to provide a simple and clean user interface while providing a "
 "powerful tool allowing a personalized Bible study environment."
 msgstr ""
-"<app>Xiphos</app> a pour but de fournir, à l'aide d'une interface "
-"utilisateur simple, épurée, \n"
-"un outil riche, permettant de disposer d'un environnement personnalisé dédié "
-"à l'étude biblique."
+"<app>Xiphos</app> a pour but de fournir, à l'aide d'une interface utilisateur simple, épurée, \n"
+"un outil riche, permettant de disposer d'un environnement personnalisé dédié à l'étude biblique.<\n"
+"<app>Xiphos</app> vise à proposer à travers une interface utilisateur simple et claire, un outil puissant offrant un environnement d'étude biblique personnalisé."
 
 #. (itstool) path: page/media
 #. (itstool) path: section/media
@@ -185,27 +188,31 @@ msgstr "sword3.png"
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:67
 msgid ""
-"\"The SWORD Project\" is based at <link href=\"http://www.crosswire.org\"> "
-"http://www.crosswire.org</link>. Other apps under the same banner are "
-"<app>MacSword</app> for the Macintosh, <app>BibleDesktop</app>, a Java app, "
-"<app>BibleTime</app> (another Linux program), and <app>The SWORD Project for "
-"Windows</app> (aka <app>BibleCS</app> or <app>WinSword</app>)."
+"\"The SWORD Project\" is based at <_:link-1/>. Other apps under the same "
+"banner are <app>MacSword</app> for the Macintosh, <app>BibleDesktop </app>, "
+"a Java app, <app>BibleTime</app> (another Linux program), and <app>The SWORD "
+"Project for Windows</app> (aka <app>BibleCS</app> or <app>WinSword</app>)."
 msgstr ""
-"Le Projet SWORD est hébergé à <link href=\"http://www.crosswire.org\">http://www.crosswire.org</link>. D'autres applications sous la même bannière sont :\n"
+"Le Projet SWORD est hébergé à < :link-1>. D'autres applications sous la même bannière sont :\n"
 "<app>MacSword</app> pour Macintosh,\n"
 "<app>BibleDesktop</app>, une application Java,\n"
 "<app>BibleTime</app> (un autre programme Linux), et\n"
 "<app>The SWORD Project for Windows</app> (<app>BibleCS</app> ou <app>WinSword</app>)."
 
 #. (itstool) path: note/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:76
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-01-introduction.page:77
 msgid ""
 "Xiphos is currently in development, so this manual may not reflect the "
-"program as you see it. If it does not, please file a bug at the <link href="
-"\"https://github.com/crosswire/xiphos\"> project website</link>, or email "
-"<sys>xiphos-devel@crosswire.org</sys>. All help is appreciated, as it will "
-"improve the software."
-msgstr "<app>Xiphos</app> est en cours de développement, il se peut donc que des différences apparaissent entre le contenu de ce manuel et le logiciel tel que vous l'utilisez. Si cela est le cas, envoyez un rapport de bogue au <link href=\"https://github.com/crosswire/xiphos\"> site web du projet</link>, ou un email à <sys>xiphos-devel@crosswire.org</sys> Toute aide est appréciée car elle permettra d'améliorer le programme."
+"program as you see it. If it does not, please file a bug at the <_:link-1/>, "
+"or email <_:sys-2/>. All help is appreciated, as it will improve the "
+"software."
+msgstr ""
+"<app>Xiphos</app> est en cours de développement, il se peut donc que des "
+"différences apparaissent entre le contenu de ce manuel et le logiciel tel "
+"que vous l'utilisez. Si cela est le cas, envoyez un rapport de bogue au "
+"<link href=\"https://github.com/crosswire/xiphos\"> site web du projet</"
+"link>, ou un email à <sys>xiphos-devel@crosswire.org</sys> Toute aide est "
+"appréciée car elle permettra d'améliorer le programme."
 
 #. (itstool) path: info/desc
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:8
@@ -223,370 +230,195 @@ msgid ""
 "Use <gui>shortcut keys</gui> to perform common tasks more quickly than with "
 "the mouse and menus. The following tables list all of <app>Xiphos's</app> "
 "shortcut keys."
-msgstr ""
+msgstr "Les raccourcis clavier permettent d'effectuer des tâches courantes plus rapidement qu'avec la souris et les menus. Les tableaux suivants énumèrent tous les raccourcis clavier de <app>Xiphos</app>."
 
 #. (itstool) path: table/title
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:45
-#, fuzzy
 msgid "Window selection/opening and navbar selection"
-msgstr "Sélection/ouverture des fenêtres et barre de navigation"
+msgstr "Sélection/ouverture de fenêtre et de la barre de navigation"
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:48
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:102
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:164
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:224
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:248
-#, fuzzy
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:118
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:204
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:286
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:316
 msgid "Action"
-msgstr "Article 0"
+msgstr "Action"
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:49
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:103
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:165
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:225
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:249
-#, fuzzy
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:119
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:205
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:287
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:317
 msgid "Keyboard shortcut"
-msgstr "Raccourcis clavier"
+msgstr "Raccourci clavier"
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:55
-#, fuzzy
 msgid ""
 "Focus and select the main verse navbar text. You can then immediately type "
 "in new verse selection text. Be aware that, as is the case with most Sword "
 "applications, <app>Xiphos</app> understands many abbreviations: \"G\" is "
 "adequate to specify Genesis, for example, and any book name by itself "
 "implies 1:1."
-msgstr ""
-"<gui>Ctrl-L</gui> sélectionne la zone de saisie de référence biblique. Il "
-"est ainsi possible de saisir directement une nouvelle référence de verset. "
-"Il est à noter que <app>Xiphos</app>, comme d'autres applications Sword, "
-"accepte de nombreuses abréviations. «­­&#160;G&#160;»  correspond à Genèse par "
-"exemple, et n'importe quel nom de livre saisi seul implique chapitre 1, "
-"verset 1."
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:60
-msgid "<keyseq><key>Ctrl</key><key>L</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:63
-#, fuzzy
-msgid ""
-"Bring the Commentary View forward when previously obscured by the Book View."
-msgstr ""
-"<gui>Alt-C</gui> ramène au premier-plan le volet <gui>Commentaire</gui> si "
-"celui-ci est masqué par le volet <gui>Livre</gui>."
+msgstr "Sélection et activation du focus sur la zone de saisie de référence biblique. Il est ainsi possible de saisir directement une nouvelle référence de verset. <app>Xiphos</app>, comme la plupart des autres applications Sword, accepte de nombreuses abréviations. «­­&#160;G&#160;»  correspond à Genèse par exemple, et n'importe quel nom de livre seul implique chapitre 1, verset 1."
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:65
-msgid "<keyseq><key>Alt</key><key>C</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:68
-msgid "Focus on the general book."
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:69
-msgid "<keyseq><key>Alt</key><key>G</key></keyseq>"
-msgstr ""
+msgid ""
+"Bring the Commentary View forward when previously obscured by the Book View."
+msgstr "Faire revenir au premier-plan le volet <gui>Commentaire</gui> si celui-ci est masqué par le volet <gui>Livre</gui>."
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:72
-#, fuzzy
+msgid "Focus on the general book."
+msgstr "Activer le focus sur le volet <gui>Livre</gui>."
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:78
 msgid "Focus on the dictionary navbar text."
-msgstr ""
-"<gui>Alt-D</gui> place le focus sur la barre de navigation du volet "
-"<gui>Dictionnaire</gui>."
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:73
-msgid "<keyseq><key>Alt</key><key>D</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:76
-msgid "Open a new tab."
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:77
-msgid "<keyseq><key>Ctrl</key><key>T</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:80
-msgid "Make the tab #1 current."
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:81
-msgid "<keyseq><key>Ctrl</key><key>1</key></keyseq>"
-msgstr ""
+msgstr "Activer le focus sur la barre de navigation du volet <gui>Dictionnaire</gui>."
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:84
+msgid "Open a new tab."
+msgstr "Ouvrir un nouvel onglet."
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:90
+msgid "Make the tab #1 current."
+msgstr "Activer l'onglet N°1."
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:96
 msgid "Make the tab #2 current."
-msgstr ""
+msgstr "Activer l'onglet n°2."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:85
-msgid "<keyseq><key>Ctrl</key><key>2</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:88
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:89
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:102
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:103
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:92
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:106
 msgid "Make the tab #9 current."
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:93
-msgid "<keyseq><key>Ctrl</key><key>9</key></keyseq>"
-msgstr ""
+msgstr "Activer l'onglet n°9."
 
 #. (itstool) path: table/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:99
-#, fuzzy
-msgid "Verse navigation and Bible features"
-msgstr "Changement de verset et propriétés du texte biblique :"
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:108
-#, fuzzy
-msgid "Previous verse"
-msgstr "Aperçu"
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:109
-msgid "<keyseq><key>Ctrl</key><key>p</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:110
-msgid "<keyseq><key>k</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:113
-msgid "Next verse"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:114
-msgid "<keyseq><key>Ctrl</key><key>n</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:115
-msgid "<keyseq><key>j</key></keyseq>"
-msgstr ""
+msgid "Verse navigation and Bible features"
+msgstr "Navigation dans les versets et attributs du texte biblique"
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:118
-msgid "Previous chapter"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:119
-msgid "<keyseq><key>p</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:122
-msgid "Next chapter"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:123
-msgid "<keyseq><key>n</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:126
-msgid "Previous book"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:127
-msgid "<keyseq><key>P</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:130
-msgid "Next book"
-msgstr ""
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:124
+msgid "Previous verse"
+msgstr "Verset précédent"
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:131
-msgid "<keyseq><key>N</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:134
-#, fuzzy
-msgid "Bring up the context menu for the Bible pane."
-msgstr ""
-"<gui>Maj-F10</gui> appelle le menu contextuel du volet des <gui>textes "
-"bibliques</gui>."
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:135
-msgid "<keyseq><key>Shift</key><key>F10</key></keyseq>"
-msgstr ""
+msgid "Next verse"
+msgstr "Verset suivant"
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:138
-#, fuzzy
-msgid "Toggle Strong's display."
-msgstr "<gui>Alt-S</gui> bascule l'affichage des nombres de Strong."
+msgid "Previous chapter"
+msgstr "chapitre précédent"
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:139
-msgid "<keyseq><key>Alt</key><key>S</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:142
-#, fuzzy
-msgid "Toggle morphology display."
-msgstr "<gui>Alt-M</gui> bascule l'affichage des étiquettes morphologiques."
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:143
-msgid "<keyseq><key>Alt</key><key>M</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:146
-#, fuzzy
-msgid "Toggle lemma display."
-msgstr "<gui>Alt-M</gui> bascule l'affichage des étiquettes morphologiques."
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:147
-msgid "<keyseq><key>Alt</key><key>L</key></keyseq>"
-msgstr ""
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:144
+msgid "Next chapter"
+msgstr "Chapitre suivant"
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:150
-#, fuzzy
-msgid "Toggle \"red words of Christ\" display."
-msgstr ""
-"<gui>Alt-R</gui> bascule l'affichage des « Paroles de Christ en rouge »."
+msgid "Previous book"
+msgstr "Livre précédent"
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:151
-msgid "<keyseq><key>Alt</key><key>R</key></keyseq>"
-msgstr ""
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:156
+msgid "Next book"
+msgstr "Livre suivant"
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:154
-#, fuzzy
-msgid "Toggle transliteration."
-msgstr "<gui>Alt-S</gui> bascule l'affichage des nombres de Strong."
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:162
+msgid "Bring up the context menu for the Bible pane."
+msgstr "Ouvrir le menu contextuel du volet des <gui>textes bibliques</gui>."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:155
-msgid "<keyseq><key>Alt</key><key>T</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: table/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:161
-#, fuzzy
-msgid "Opening special windows"
-msgstr "Ouverture de fenêtres spéciales :"
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:170
-#, fuzzy
-msgid "Open this manual."
-msgstr "<gui>F1</gui> ouvre ce manuel."
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:171
-msgid "<keyseq><key>F1</key></keyseq>"
-msgstr ""
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:168
+msgid "Toggle Strong's display."
+msgstr "Basculer l'affichage des nombres de Strong."
 
 #. (itstool) path: td/p
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:174
-#, fuzzy
+msgid "Toggle morphology display."
+msgstr "Basculer l'affichage des étiquettes morphologiques."
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:180
+msgid "Toggle lemma display."
+msgstr "Basculer l'affichage des lemmes."
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:186
+msgid "Toggle \"red words of Christ\" display."
+msgstr "Basculer l'affichage des « Paroles de Christ en rouge »."
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:192
+msgid "Toggle transliteration."
+msgstr "Basculer l'affichage des nombres de Strong."
+
+#. (itstool) path: table/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:201
+msgid "Opening special windows"
+msgstr "Ouvrir des fenêtres particulières"
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:210
+msgid "Open this manual."
+msgstr "Ouvrir ce manuel."
+
+#. (itstool) path: td/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:216
 msgid "Open the <gui>Preferences</gui> dialog."
-msgstr "<gui>F2</gui>: ouvre la fenêtre des <gui>Préférences</gui>·"
+msgstr "Ouvrir la fenêtre des <gui>Préférences</gui>·"
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:175
-msgid "<keyseq><key>F2</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:178
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:222
 #, fuzzy
 msgid "Open <gui>Advanced Search</gui>."
-msgstr "<gui>F3</gui> : ouvre la <gui>Recherche avancée</gui>"
+msgstr "Ouvrir la <gui>Recherche avancée</gui>."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:179
-msgid "<keyseq><key>F3</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:182
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:228
 #, fuzzy
 msgid "Bring forward the simple sidebar search."
 msgstr ""
 "<gui>Ctrl-F3</gui> met en avant la recherche rapide dans le volet latéral."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:183
-msgid "<keyseq><key>Ctrl</key><key>F3</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:186
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:234
 #, fuzzy
 msgid "Open the <gui>Module Manager</gui>."
 msgstr "<gui>F4</gui> : ouvre le <gui>Gestionnaire de modules</gui>."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:187
-msgid "<keyseq><key>F4</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:190
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:240
 msgid "Open the current Bible as a separate window."
 msgstr ""
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:191
-msgid "<keyseq><key>F11</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:194
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:246
 #, fuzzy
 msgid "Open an annotation dialog on the current verse."
 msgstr "<gui>Alt-A</gui> ouvre la fenêtre d'annotation du verset en cours."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:195
-msgid "<keyseq><key>Alt</key><key>A</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:198
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:252
 #, fuzzy
 msgid "Open a bookmark dialog on the current verse."
 msgstr ""
@@ -594,12 +426,7 @@ msgstr ""
 "en cours"
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:199
-msgid "<keyseq><key>Alt</key><key>B</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:202
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:258
 #, fuzzy
 msgid ""
 "Open the \"Find\" dialog. The subwindow to which it applies depends on which "
@@ -616,23 +443,13 @@ msgstr ""
 "livre."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:207
-msgid "<keyseq><key>Ctrl</key><key>F</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:210
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:268
 #, fuzzy
 msgid "Detach/re-attach the parallel view dialog."
 msgstr "<gui>Alt-P</gui> détache / rattache la fenêtre de vue parallèle."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:211
-msgid "<keyseq><key>Alt</key><key>P</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:214
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:274
 #, fuzzy
 msgid "Open editor on the personal commentary named Personal."
 msgstr ""
@@ -640,105 +457,61 @@ msgstr ""
 "(<guiseq><gui>Modules</gui><gui>commentaires</gui><gui>English</"
 "gui><gui>Personal</gui></guiseq>)."
 
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:215
-msgid "<keyseq><key>Alt</key><key>Z</key></keyseq>"
-msgstr ""
-
 #. (itstool) path: table/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:221
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:283
 #, fuzzy
 msgid "Font size control"
 msgstr "Réglage des tailles de police :"
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:230
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:292
 msgid "Increase the base font size."
 msgstr ""
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:231
-msgid "<keyseq><key>Ctrl</key><key>+</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:234
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:298
 msgid "Decrease the base font size."
 msgstr ""
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:235
-msgid "<keyseq><key>Ctrl</key><key>-</key></keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:238
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:304
 #, fuzzy
 msgid "Set the base font size to zero."
 msgstr ""
 "<gui>Ctrl-0</gui> (zéro) initialise la taille de police de base à zéro."
 
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:239
-msgid "<keyseq><key>Ctrl</key><key>0</key></keyseq>"
-msgstr ""
-
 #. (itstool) path: table/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:245
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:313
 #, fuzzy
 msgid "BibleSync"
 msgstr "BibleSync :"
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:254
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:322
 #, fuzzy
 msgid "Put BibleSync into Personal mode."
 msgstr "<gui>Ctrl-Alt-Shift-P</gui> met BibleSync en mode Personnel."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:255
-msgid ""
-"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>P</key> </keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:260
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:329
 #, fuzzy
 msgid "Put BibleSync into Speaker mode."
 msgstr "<gui>Ctrl-Alt-Shift-S</gui> met BibleSync en mode Orateur."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:261
-msgid ""
-"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>S</key> </keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:266
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:336
 #, fuzzy
 msgid "Put BibleSync into Audience mode."
 msgstr "<gui>Ctrl-Alt-Shift-A</gui> met BibleSync en mode Audience."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:267
-msgid ""
-"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>A</key> </keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:272
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:343
 #, fuzzy
 msgid "Turn off BibleSync."
 msgstr "Paramètres de BibleSync."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:273
-msgid ""
-"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>O</key> </keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:278
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:350
 #, fuzzy
 msgid ""
 "Cause BibleSync to navigate your current point as a one-shot event. "
@@ -750,22 +523,10 @@ msgstr ""
 "être prêt à transmettre, en mode Personnel ou Orateur."
 
 #. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:282
-msgid ""
-"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>N</key> </keyseq>"
-msgstr ""
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:287
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:360
 #, fuzzy
 msgid "Provide for sending chat messages to others."
 msgstr "<gui>Ctrl-Alt-Shift-S</gui> met BibleSync en mode Orateur."
-
-#. (itstool) path: td/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-02-shortcut-keys.page:288
-msgid ""
-"<keyseq> <key>Ctrl</key><key>Alt</key><key>Shift</key><key>C</key> </keyseq>"
-msgstr ""
 
 #. (itstool) path: info/desc
 #: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-10-start.page:5
@@ -2227,9 +1988,7 @@ msgid ""
 "There are other repositories available besides CrossWire's own, though the "
 "modules available from other repositories do not represent content "
 "officially sanctioned by Crosswire. On the web, see this page for list of "
-"those repositories known: <link href=\"http://www.crosswire.org/wiki/"
-"Module_Repositories\"> http://www.crosswire.org/wiki/Module_Repositories</"
-"link>"
+"those repositories known: <_:link-1/>"
 msgstr ""
 "Il y a d'autres dépots disponibles en plus de ceux de Crosswire, bien que "
 "les modules offerts par ces autres dépots ne présentent pas un contenu "
@@ -2239,7 +1998,7 @@ msgstr ""
 "ulink>."
 
 #. (itstool) path: section/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:50
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:51
 #, fuzzy
 msgid ""
 "The list of standard repositories is maintained at CrossWire. Xiphos "
@@ -2256,7 +2015,7 @@ msgstr ""
 "réalisé en cliquant sur <gui>Charger standard</gui>."
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:58
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:59
 msgid "Sword Module Installations"
 msgstr "Destination des modules Sword"
 
@@ -2265,7 +2024,7 @@ msgstr "Destination des modules Sword"
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:59
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:60
 #, fuzzy
 msgctxt "_"
 msgid ""
@@ -2274,7 +2033,7 @@ msgid ""
 msgstr "sword_config.png"
 
 #. (itstool) path: section/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:61
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:62
 #, fuzzy
 msgid ""
 "After you have selected your Install Source, click the <gui>Refresh</gui> "
@@ -2286,7 +2045,7 @@ msgstr ""
 "niveau du dépot."
 
 #. (itstool) path: section/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:65
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:66
 msgid ""
 "Take note of the \"Install Destination\". In most cases, you will have a "
 "choice of a personal area or a system area. The details vary according to "
@@ -2297,12 +2056,12 @@ msgstr ""
 "est dépendant du système d'exploitation."
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:70
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:71
 msgid "Linux"
 msgstr "Linux"
 
 #. (itstool) path: section/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:71
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:72
 msgid ""
 "Unless you run as root (via su or sudo) you will only be able to install in "
 "your personal area, under ~/.sword. If you run as root, or change "
@@ -2334,12 +2093,12 @@ msgstr ""
 "en dehors de Xiphos."
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:87
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:88
 msgid "Windows XP"
 msgstr "Windows XP"
 
 #. (itstool) path: section/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:88
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:89
 msgid ""
 "You may install modules to a shared folder so the modules are available to "
 "all users. If you have previously used \"The Sword Project for Windows\", "
@@ -2360,12 +2119,12 @@ msgstr ""
 "d'utilisateur}\\Application Data\\Sword&#160;»"
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:98
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:99
 msgid "Windows Vista"
 msgstr "Windows Vista"
 
 #. (itstool) path: section/p
-#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:99
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-21-modules-configuration.page:100
 msgid ""
 "Vista works much the same as XP, except for the locations. The private "
 "location is \"C:\\Users\\YOUR NAME\\AppData\\Roaming\\Sword\". The shared "
@@ -4892,10 +4651,9 @@ msgstr "Liste de diffusion des utilisateurs"
 #, fuzzy
 msgid ""
 "One way you can get help with Xiphos is using our low-traffic users' mailing "
-"list. You can sign up by clicking <link href=\"http://www.crosswire.org/"
-"mailman/listinfo/xiphos-users/\">this link</link>. Once you are signed up, "
-"you can email the list with any problems you are having and other users or "
-"the developers will respond, typically within a day."
+"list. You can sign up by clicking <_:link-1/>. Once you are signed up, you "
+"can email the list with any problems you are having and other users or the "
+"developers will respond, typically within a day."
 msgstr ""
 "Une façon d'obtenir de l'aide au sujet de <app>Xiphos</app> est d'utiliser "
 "nos listes de diffusion à faible trafic. il suffit de s'abonner en "
@@ -4915,14 +4673,12 @@ msgstr "Discussion en ligne"
 #, fuzzy
 msgid ""
 "Another way to get help is with online chat. Xiphos has an IRC channel on "
-"freenode, #xiphos. If you don't know what that means, it's ok. Just click "
-"<link href=\"http://webchat.freenode.net/?randomnick=1&amp;"
-"channels=xiphos&amp;prompt=1\">this link</link> (it will open your web "
-"browser), type a nickname or accept the default, and click \"Click to join "
-"chatroom\". This will take you to a chatroom where the developers and other "
-"users are available to help you with issues you may be having. Although many "
-"times someone will answer your question immediately, sometimes you may have "
-"to wait a few minutes or longer."
+"freenode, #xiphos. If you don't know what that means, it's ok. Just click <_:"
+"link-1/> (it will open your web browser), type a nickname or accept the "
+"default, and click \"Click to join chatroom\". This will take you to a "
+"chatroom where the developers and other users are available to help you with "
+"issues you may be having. Although many times someone will answer your "
+"question immediately, sometimes you may have to wait a few minutes or longer."
 msgstr ""
 "Une autre façon d'obtenir de l'aide est d'utiliser le chat en ligne. "
 "<app>Xiphos</app> a un canal IRC ouvert sur freenode, #xiphos;. Un moyen "
@@ -4935,6 +4691,68 @@ msgstr ""
 "les réponses aux questions sont immédiates, mais parfois cela peut prendre "
 "quelques minutes voire plus longtemps. [NDT : Le chat en ligne est en "
 "anglais]"
+
+#. (itstool) path: info/desc
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:8
+msgid "Credits and contact information."
+msgstr ""
+
+#. (itstool) path: page/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:37
+msgid "Credits and Acknowledgment"
+msgstr ""
+
+#. (itstool) path: section/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:40
+msgid "License"
+msgstr "Licence"
+
+#. (itstool) path: section/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:41
+#, fuzzy
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU General Public License (GPL), Version 2 or any later "
+"version published by the Free Software Foundation. You can find a copy of "
+"the GPL at this <_:link-1/> or in the file COPYING distributed with this "
+"manual."
+msgstr ""
+"L'autorisation de copier, distribuer et/ou modifier le présent document est "
+"soumise aux conditions de la licence relative à la documentation gratuite "
+"GNU (GPL), version 2 ou toute version publiée ultérieurement par la Free "
+"Software Foundation. Vous pouvez trouver une copie de cette licence à "
+"l'adresse suivante : <ulink type=\"help\" url=\"ghelp:fdl\">lien</ulink> ou "
+"dans le fichier COPYING distribué avec le présent manuel."
+
+#. (itstool) path: section/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:53
+msgid "Authors of the <app>Xiphos</app> User Documentation"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:54
+msgid "This manual was written by:"
+msgstr "Ce manuel a été écrit par :"
+
+#. (itstool) path: section/title
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:76
+msgid "Contact information"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:77
+#, fuzzy
+msgid "The <app>Xiphos</app> software and Manual:"
+msgstr "Manuel de <app>Xiphos</app> :"
+
+#. (itstool) path: section/p
+#: /home/domi/Development/xiphos-rpm/xiphos-4.1.0/mhelp/C/xiphos-90-credits.page:104
+#, fuzzy
+msgid "The SWORD Project:"
+msgstr "Le logo du Projet SWORD"
+
+#~ msgid "Xiphos is an application to aid in study of the Bible."
+#~ msgstr "Xiphos est un logiciel d'aide à l'étude de la Bible."
 
 #, fuzzy
 #~ msgid ""
@@ -4986,9 +4804,6 @@ msgstr ""
 #~ "@@image: 'figures/preferences.png'; md5=c0327215cc24ff1c3c012eafb960036c"
 #~ msgstr "preferences.png"
 
-#~ msgid "<app>Xiphos</app> Manual"
-#~ msgstr "Manuel de <app>Xiphos</app> :"
-
 #~ msgid "2003"
 #~ msgstr "2003"
 
@@ -5020,21 +4835,6 @@ msgstr ""
 #~ "manuel d'aide sont à envoyer au <ulink type=\"http\" url=\"http://"
 #~ "sourceforge.net/tracker/?group_id=5528\">Tracker de SourceForge</ulink>  "
 #~ "ou à la liste de diffusion <email>xiphos-devel@crosswire.org</email>"
-
-#~ msgid ""
-#~ "Permission is granted to copy, distribute and/or modify this document "
-#~ "under the terms of the GNU General Public License (GPL), Version 2 or any "
-#~ "later version published by the Free Software Foundation. You can find a "
-#~ "copy of the GPL at this <ulink type=\"help\" url=\"ghelp:gpl\">link</"
-#~ "ulink> or in the file COPYING distributed with this manual."
-#~ msgstr ""
-#~ "L'autorisation de copier, distribuer et/ou modifier le présent document "
-#~ "est soumise aux conditions de la licence relative à la documentation "
-#~ "gratuite GNU (GPL), version 2 ou toute version publiée ultérieurement par "
-#~ "la Free Software Foundation. Vous pouvez trouver une copie de cette "
-#~ "licence à l'adresse suivante : <ulink type=\"help\" url=\"ghelp:fdl"
-#~ "\">lien</ulink> ou dans le fichier COPYING distribué avec le présent "
-#~ "manuel."
 
 #~ msgid ""
 #~ "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
@@ -5176,9 +4976,6 @@ msgstr ""
 #~ "Projet SWORD \n"
 #~ "et les bibliothèques GTK. <app>Xiphos</app> permet d'effectuer les tâches "
 #~ "suivantes :"
-
-#~ msgid "The SWORD Project logo"
-#~ msgstr "Le logo du Projet SWORD"
 
 #~ msgid "Getting Started with Xiphos"
 #~ msgstr "Premiers pas"
@@ -6336,9 +6133,6 @@ msgstr ""
 #~ msgid "Authors"
 #~ msgstr "Auteurs"
 
-#~ msgid "This manual was written by:"
-#~ msgstr "Ce manuel a été écrit par :"
-
 #~ msgid "Andy Piper"
 #~ msgstr "Andy Piper"
 
@@ -6366,9 +6160,6 @@ msgstr ""
 #~ "sont à envoyer à la liste de développement de Xiphos <email>xiphos-"
 #~ "devel@crosswire.org</email>. Les commentaires  peuvent aussi être envoyés "
 #~ "via le tracker du projet à SourceForge."
-
-#~ msgid "License"
-#~ msgstr "Licence"
 
 #~ msgid ""
 #~ "This program is free software; you can redistribute it and/or modify it "
