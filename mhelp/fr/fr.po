@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.1.0\n"
 "Report-Msgid-Bugs-To: Dominique Corbex <dominique@corbex.org>\n"
-"POT-Creation-Date: 2018-05-29 16:01+0200\n"
-"PO-Revision-Date: 2018-05-29 18:03+0200\n"
+"POT-Creation-Date: 2018-05-29 21:36+0200\n"
+"PO-Revision-Date: 2018-05-29 23:36+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: emacs + po-mode; French <gnomefr@traduc.org>\n"
 "Language: fr_FR\n"
@@ -639,10 +639,8 @@ msgstr "Démarrer Xiphos"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-10-start.page:88
-#, fuzzy
 msgid "When you start <app>Xiphos</app>, the following interface is displayed:"
-msgstr ""
-"Quand vous démarrez <app>Xiphos</app>, l'interface suivante est affichée :"
+msgstr "Quand vous démarrez <app>Xiphos</app>, l'interface suivante est affichée :"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-10-start.page:93
@@ -658,15 +656,11 @@ msgstr "Barre de menu"
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-10-start.page:97
-#, fuzzy
 msgid ""
 "The menus on the menubar contain several commands which extend the use of "
 "<app>Xiphos</app>. These include the StudyPad and advanced search functions. "
 "The menus also help you to customize your use of <app>Xiphos</app>."
-msgstr ""
-"La <gui>Barre de menu</gui> permet d'accéder aux fonctions complémentaires "
-"de <app>Xiphos</app>, comme le bloc-notes où la recherche avancée. Elle "
-"permet également d'ajuster les préférences de <app>Xiphos</app>."
+msgstr "Les menus de la <gui>Barre de menu</gui> permettent d'accéder aux fonctions complémentaires de <app>Xiphos</app>. Elles incluent le bloc-notes et les fonctions de recherche avancée. Les menus permettent aussi de personnaliser votre utilisation de <app>Xiphos</app>."
 
 #. (itstool) path: item/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-10-start.page:103
@@ -1191,7 +1185,6 @@ msgstr "Ouvrir le texte·biblique dans une fenêtre distincte"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-11-interface.page:195
-#, fuzzy
 msgid ""
 "In order to view a Bible translation separate from the <app>Xiphos </app> "
 "main window interface, under the <gui>Modules</gui> option in the "
@@ -1199,14 +1192,7 @@ msgid ""
 "choice</gui></guiseq>. Then right-click on a translation and choose <gui> "
 "Open in dialog</gui>. The module will open in a separate, detached window of "
 "its own."
-msgstr ""
-"Pour ouvrir un texte biblique dans une fenêtre distincte de la fenêtre "
-"principale de   <app>&appname,</app>, dans l'option  <gui>Modules</gui> du "
-"<gui>volet latéral</gui>, choisir <guiseq><gui>Textes bibliques</"
-"gui><gui>langue de votre choix</gui></guiseq>. Faire un clic droit sur la "
-"version souhaitée, puis dans le menu contextuel qui s'affiche, choisir "
-"l'option <gui>Ouvrir dans une fenêtre</gui>. Le module s'ouvrira dans une "
-"fenêtre distincte."
+msgstr "Pour ouvrir un texte biblique dans une fenêtre distincte de la fenêtre principale de <app>Xiphos</app>, choisissez dans l'option <gui>Modules</gui> du <gui>volet latéral</gui>, <guiseq><gui>Textes bibliques</gui><gui>langue de votre choix</gui></guiseq>. Faites ensuite un clic droit sur la version souhaitée, puis dans le menu contextuel qui s'affiche, choisissez l'option <gui>Ouvrir dans une fenêtre</gui>. Le module s'ouvrira alors dans une fenêtre séparée."
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-11-interface.page:202
@@ -1933,7 +1919,13 @@ msgid ""
 "those repositories known: <link href=\"http://www.crosswire.org/wiki/"
 "Module_Repositories\"> http://www.crosswire.org/wiki/Module_Repositories</"
 "link>"
-msgstr "Il y a d'autres sources disponibles à part celle de Crosswire, bien que les modules offerts par ces autres sources ne présentent pas un contenu officiellement certifié par Crosswire. Sur le web, cette page recense les sources connues : <link href=\"http://www.crosswire.org/wiki/Module_Repositories\">http://www.crosswire.org/wiki/Module_Repositories</link>."
+msgstr ""
+"Il y a d'autres sources disponibles à part celle de Crosswire, bien que les "
+"modules offerts par ces autres sources ne présentent pas un contenu "
+"officiellement certifié par Crosswire. Sur le web, cette page recense les "
+"sources connues : <link href=\"http://www.crosswire.org/wiki/"
+"Module_Repositories\">http://www.crosswire.org/wiki/Module_Repositories</"
+"link>."
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-21-modules-configuration.page:51
@@ -1943,7 +1935,14 @@ msgid ""
 "puts the Module Manager to use. The list may change, as new repositories "
 "come into existence; occasional re-synchronization with the list is "
 "suggested, which is accomplished by clicking <gui>Load Standard </gui>."
-msgstr "La liste des sources standard est maintenue par Crosswire. Normalement, <app>Xiphos</app> s'auto-synchronise une seule fois avec cette liste, lorsque l'utilisateur se sert pour la toute première fois du gestionnaire de modules. La liste peut évidemment changer, au fur et à mesure que de nouvelles sources se font jour; une resynchronisation occasionnelle avec cette liste est donc suggérée, ce qui se fait en cliquant sur <gui>Charger standard</gui>."
+msgstr ""
+"La liste des sources standard est maintenue par Crosswire. Normalement, "
+"<app>Xiphos</app> s'auto-synchronise une seule fois avec cette liste, "
+"lorsque l'utilisateur se sert pour la toute première fois du gestionnaire de "
+"modules. La liste peut évidemment changer, au fur et à mesure que de "
+"nouvelles sources se font jour; une resynchronisation occasionnelle avec "
+"cette liste est donc suggérée, ce qui se fait en cliquant sur <gui>Charger "
+"standard</gui>."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-21-modules-configuration.page:60
@@ -1969,7 +1968,10 @@ msgid ""
 "After you have selected your Install Source, click the <gui>Refresh</gui> "
 "button to cause <app>Xiphos</app> to find the module summary available from "
 "that source before moving on."
-msgstr "Après avoir sélectionné votre source d'installation, cliquez le bouton <gui>Rafraîchir</gui>, ce qui conduit <app>Xiphos</app> à répertorier les modules disponibles au niveau de la source."
+msgstr ""
+"Après avoir sélectionné votre source d'installation, cliquez le bouton "
+"<gui>Rafraîchir</gui>, ce qui conduit <app>Xiphos</app> à répertorier les "
+"modules disponibles au niveau de la source."
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-21-modules-configuration.page:67
@@ -1977,7 +1979,10 @@ msgid ""
 "Take note of the \"Install Destination\". In most cases, you will have a "
 "choice of a personal area or a system area. The details vary according to "
 "your operating system."
-msgstr "Note au sujet du « Répertoire d'installation » : dans la plupart des cas, il est proposé le choix entre un espace personnel et un espace système. Le détail est dépendant du système d'exploitation."
+msgstr ""
+"Note au sujet du « Répertoire d'installation » : dans la plupart des cas, il "
+"est proposé le choix entre un espace personnel et un espace système. Le "
+"détail est dépendant du système d'exploitation."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-21-modules-configuration.page:72
@@ -1999,7 +2004,22 @@ msgid ""
 "employed by various Linux distributions. Therefore, at this time there are "
 "no ongoing plans to try to solve this problem, and users are advised to "
 "enable write access to the system area outside <app>Xiphos</app>."
-msgstr "À moins d'avoir les privilèges du superutilisateur (via su ou sudo), l'installation n'est possible que dans son espace personnel, sous le répertoire ~/.sword. En étant superutilisateur, ou en modifiant les permissions de l'espace système (généralement : /usr/share/sword), il est possible d'installer des modules accessibles à tous les utilisateurs. Il y a eu des requêtes pour que soit incorporé à <app>Xiphos</app> un moyen permettant à un utilisateur ordinaire (non-root) d'obtenir temporairement les droits d'accès à l'espace système pendant l'installation des modules, puis d'annuler ces droits une fois l'installation terminée. Il a été plutôt difficile d'établir un moyen de satisfaire cette demande, étant donné les différentes gestions de droits du super-utilisateur employées dans l'éventail des distributions Linux. En ce moment, il n'y a aucun projet en cours essayant de résoudre ce problème, il est donc conseillé aux utilisateurs de gérer les droits d'accès en écriture à l'emplacement système en dehors de <app>Xiphos</app>."
+msgstr ""
+"À moins d'avoir les privilèges du superutilisateur (via su ou sudo), "
+"l'installation n'est possible que dans son espace personnel, sous le "
+"répertoire ~/.sword. En étant superutilisateur, ou en modifiant les "
+"permissions de l'espace système (généralement : /usr/share/sword), il est "
+"possible d'installer des modules accessibles à tous les utilisateurs. Il y a "
+"eu des requêtes pour que soit incorporé à <app>Xiphos</app> un moyen "
+"permettant à un utilisateur ordinaire (non-root) d'obtenir temporairement "
+"les droits d'accès à l'espace système pendant l'installation des modules, "
+"puis d'annuler ces droits une fois l'installation terminée. Il a été plutôt "
+"difficile d'établir un moyen de satisfaire cette demande, étant donné les "
+"différentes gestions de droits du super-utilisateur employées dans "
+"l'éventail des distributions Linux. En ce moment, il n'y a aucun projet en "
+"cours essayant de résoudre ce problème, il est donc conseillé aux "
+"utilisateurs de gérer les droits d'accès en écriture à l'emplacement système "
+"en dehors de <app>Xiphos</app>."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-21-modules-configuration.page:89
@@ -2245,14 +2265,27 @@ msgid ""
 "subdirectory of \"modules\". Alternatively, if you have write access to the "
 "system Sword directory, typically /usr/share/sword, you may cd there instead "
 "before unzipping."
-msgstr "Les modules sont ordinairement compressés au format zip. Ils contiennent un fichier de configuration ainsi qu'un certain nombre de fichiers de données. Installer manuellement un module présenté sous cette forme impose au préalable de se placer dans son répertoire personnel de configuration de Sword. Ce répertoire se nomme ~/.sword, (ce n'est pas celui de <app>Xiphos</app>) puis de décompresser le fichier zip à cet endroit. Le fichier de configuration sera placé dans le répertoire « mods.d »,et les fichiers de données dans les sous-répertoires de « modules ». Si vous avez les droits en écriture du répertoire général de Sword, à savoir usr/share/sword, vous pouvez aussi décompresser le fichier zip dans ce répertoire, le module sera alors accessible à tous les utilisateurs."
+msgstr ""
+"Les modules sont ordinairement compressés au format zip. Ils contiennent un "
+"fichier de configuration ainsi qu'un certain nombre de fichiers de données. "
+"Installer manuellement un module présenté sous cette forme impose au "
+"préalable de se placer dans son répertoire personnel de configuration de "
+"Sword. Ce répertoire se nomme ~/.sword, (ce n'est pas celui de <app>Xiphos</"
+"app>) puis de décompresser le fichier zip à cet endroit. Le fichier de "
+"configuration sera placé dans le répertoire « mods.d »,et les fichiers de "
+"données dans les sous-répertoires de « modules ». Si vous avez les droits en "
+"écriture du répertoire général de Sword, à savoir usr/share/sword, vous "
+"pouvez aussi décompresser le fichier zip dans ce répertoire, le module sera "
+"alors accessible à tous les utilisateurs."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-24-modules-third-party.page:53
 msgid ""
 "Restart <app>Xiphos</app> after installing such a module, so that a fresh "
 "instance of the program can notice the new module in place."
-msgstr "Il est nécessaire de redémarrer <app>Xiphos</app> après avoir installé un module non-standard, de façon à ce que ce nouveau module soit pris en compte."
+msgstr ""
+"Il est nécessaire de redémarrer <app>Xiphos</app> après avoir installé un "
+"module non-standard, de façon à ce que ce nouveau module soit pris en compte."
 
 #. (itstool) path: info/desc
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:5
@@ -2271,7 +2304,11 @@ msgid ""
 "Search Bar in the Sidebar should usually be adequate. Click either in the "
 "menu bar <guiseq><gui>Edit </gui><gui>Search</gui></guiseq> or in the "
 "Sidebar <guiseq><gui>Modules</gui><gui>Search</gui></guiseq> to access it."
-msgstr "Pour effectuer une recherche rapide dans le texte Biblique ou le commentaire en cours, la fonction de recherche du volet latéral est en général adéquate. Cliquez sur le menu <guiseq><gui>Éditer</gui><gui>Rechercher</gui></guiseq> ou le bouton <gui>Rechercher</gui> du volet latéral pour l'activer."
+msgstr ""
+"Pour effectuer une recherche rapide dans le texte Biblique ou le commentaire "
+"en cours, la fonction de recherche du volet latéral est en général adéquate. "
+"Cliquez sur le menu <guiseq><gui>Éditer</gui><gui>Rechercher</gui></guiseq> "
+"ou le bouton <gui>Rechercher</gui> du volet latéral pour l'activer."
 
 #. (itstool) path: page/media
 #. This is a reference to an external file such as an image or video. When
@@ -2289,7 +2326,8 @@ msgstr "interface_searchpane.png"
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:46
 msgid "The <gui>Search Dialog</gui> consists of the following parts:"
-msgstr "Le formulaire <gui>Rechercher</gui> est constitué des éléments suivants :"
+msgstr ""
+"Le formulaire <gui>Rechercher</gui> est constitué des éléments suivants :"
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:50
@@ -2368,7 +2406,11 @@ msgid ""
 "Allows selection of which modules you would like to search. Select "
 "<gui>Bible</gui> to search Bible versions or <gui>Commentary</gui> to search "
 "commentaries. Only the currently active module will be searched."
-msgstr "Permet la sélection du module sur lequel la requête sera exécutée. Sélectionner <gui>Texte biblique</gui> pour exécuter une requête dans le texte biblique ou <gui>Commentaire</gui> pour le module de commentaires. La requête ne s'exécute que dans les modules en cours de consultation."
+msgstr ""
+"Permet la sélection du module sur lequel la requête sera exécutée. "
+"Sélectionner <gui>Texte biblique</gui> pour exécuter une requête dans le "
+"texte biblique ou <gui>Commentaire</gui> pour le module de commentaires. La "
+"requête ne s'exécute que dans les modules en cours de consultation."
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:99
@@ -2391,13 +2433,17 @@ msgid ""
 "regardless of where they appear in the verse. By default, \"lucene\" fast "
 "search will be used, with fallback to the slower plain version of multi-word "
 "search in the absence of an index."
-msgstr "Ce type retournera les versets contenant tous les mots de l'expression à rechercher, quelque soit l'ordre dans lequel ils apparaissent dans le verset. Par défaut, la recherche rapide de type « Lucène » est utilisée, avec repli sur la variante de recherche ordinaire « multi-mots » plus lente en l'absence d'un index."
+msgstr ""
+"Ce type retournera les versets contenant tous les mots de l'expression à "
+"rechercher, quelque soit l'ordre dans lequel ils apparaissent dans le "
+"verset. Par défaut, la recherche rapide de type « Lucène » est utilisée, "
+"avec repli sur la variante de recherche ordinaire « multi-mots » plus lente "
+"en l'absence d'un index."
 
 #. (itstool) path: item/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:113
-#, fuzzy
 msgid "<gui>Regular expression</gui>"
-msgstr "Expression rationnelle"
+msgstr "<gui>Expression rationnelle</gui>"
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:114
@@ -2420,7 +2466,10 @@ msgstr ""
 msgid ""
 "A complete discussion of regular expressions is beyond the scope of this "
 "manual, but more information can be found in the grep man page."
-msgstr "Un exposé complet de l'emploi des expressions rationnelles dépasse le cadre de ce manuel, mais plus d'information à ce sujet peut être obtenu en parcourant le manuel de <cmd>grep</cmd>."
+msgstr ""
+"Un exposé complet de l'emploi des expressions rationnelles dépasse le cadre "
+"de ce manuel, mais plus d'information à ce sujet peut être obtenu en "
+"parcourant le manuel de <cmd>grep</cmd>."
 
 #. (itstool) path: item/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:126
@@ -2434,21 +2483,30 @@ msgid ""
 "<input>it is good</input>, this search would match a verse which contains "
 "\"<em>it is good</em>,\" but would not match a verse which contains "
 "\"<em>good</em>, and doeth <em>it</em> not, to him it <em>is</em> sin.\""
-msgstr "Ce type retournera les résultats correspondants à la clé de recherche exactement comme elle a été saisie. Si la phrase à rechercher est <input>en vérité</input>, les passages obtenus contiendront « <em>en vérité</em> », mais pas « <em>en</em> toute <em>vérité</em> »."
+msgstr ""
+"Ce type retournera les résultats correspondants à la clé de recherche "
+"exactement comme elle a été saisie. Si la phrase à rechercher est <input>en "
+"vérité</input>, les passages obtenus contiendront « <em>en vérité</em> », "
+"mais pas « <em>en</em> toute <em>vérité</em> »."
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:142
 msgid ""
 "Allows selecting of search options. The only available option is <gui>Match "
 "case</gui>. Check this box to make the search case sensitive."
-msgstr "Permet de définir les options de recherche. La seule option disponible est <gui>Respecter la casse</gui>. Cocher cette boîte rend la recherche sensible à la casse des caractères."
+msgstr ""
+"Permet de définir les options de recherche. La seule option disponible est "
+"<gui>Respecter la casse</gui>. Cocher cette boîte rend la recherche sensible "
+"à la casse des caractères."
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:150
 msgid ""
 "Allows defining the range within the specificed module that will be "
 "searched. There are three search scopes available:"
-msgstr "Permet de définir la plage de versets à parcourir dans le module spécifié. Trois plages de recherche sont possibles :"
+msgstr ""
+"Permet de définir la plage de versets à parcourir dans le module spécifié. "
+"Trois plages de recherche sont possibles :"
 
 #. (itstool) path: item/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:155
@@ -2458,7 +2516,8 @@ msgstr "<gui>Sans limites</gui>"
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:157
 msgid "This button causes the search to include the entire module."
-msgstr "Ce bouton entraîne une exécution de requête sur l'ensemble des versets."
+msgstr ""
+"Ce bouton entraîne une exécution de requête sur l'ensemble des versets."
 
 #. (itstool) path: item/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:161
@@ -2473,14 +2532,23 @@ msgid ""
 "the <gui>Lower</gui> box and the last book to search in the <gui>Upper</gui> "
 "box. The search will begin with the <gui>Lower</gui> book and end with the "
 "<gui>Upper</gui> book and include all books in between."
-msgstr "En sélectionnant ce bouton, vous ouvrez deux zones supplémentaires de saisie des limites de la recherche. Le premier livre, début de la recherche, est à saisir dans la limite <gui>Basse</gui> et le deuxième livre, fin de la recherche, dans la limite <gui>Haute</gui>. La requête commencera au premier verset du livre indiqué dans la limite <gui>Basse</gui> et se terminera au dernier verset du livre indiqué dans la limite <gui>Haute</gui>, en incluant tous les versets situés entre les deux limites."
+msgstr ""
+"En sélectionnant ce bouton, vous ouvrez deux zones supplémentaires de saisie "
+"des limites de la recherche. Le premier livre, début de la recherche, est à "
+"saisir dans la limite <gui>Basse</gui> et le deuxième livre, fin de la "
+"recherche, dans la limite <gui>Haute</gui>. La requête commencera au premier "
+"verset du livre indiqué dans la limite <gui>Basse</gui> et se terminera au "
+"dernier verset du livre indiqué dans la limite <gui>Haute</gui>, en incluant "
+"tous les versets situés entre les deux limites."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:170
 msgid ""
 "Chapter and verse numbers can be entered into the search bound boxes as well "
 "to further narrow the search."
-msgstr "Des numéros de chapitres ou de versets peuvent aussi être saisis dans les deux zones basse et haute afin de mieux cibler la recherche."
+msgstr ""
+"Des numéros de chapitres ou de versets peuvent aussi être saisis dans les "
+"deux zones basse et haute afin de mieux cibler la recherche."
 
 #. (itstool) path: item/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:175
@@ -2504,7 +2572,9 @@ msgstr ""
 msgid ""
 "This shows a list of the current search results for previewing, navigation, "
 "or saving."
-msgstr "Ceci affiche la liste des résultats de la dernière recherche, pour les aperçus, la navigation ou l'enregistrement sous forme de signets."
+msgstr ""
+"Ceci affiche la liste des résultats de la dernière recherche, pour les "
+"aperçus, la navigation ou l'enregistrement sous forme de signets."
 
 #. (itstool) path: item/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:192
@@ -2516,7 +2586,9 @@ msgstr "Aperçu"
 msgid ""
 "To preview the search result, simply click on an individual result. The "
 "entry will show in the preview pane."
-msgstr "Pour visualiser le résultat, un simple clic sur un élément affiche le contenu dans le volet <gui>Aperçu</gui>"
+msgstr ""
+"Pour visualiser le résultat, un simple clic sur un élément affiche le "
+"contenu dans le volet <gui>Aperçu</gui>"
 
 #. (itstool) path: item/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:199
@@ -2547,7 +2619,13 @@ msgid ""
 "the folder that your results will be saved to. After you have saved the "
 "results, you may view them by going to your bookmarks and finding the folder "
 "you just named."
-msgstr "Les résultats de la requête peuvent être enregistrés sous forme de signets. Dans le menu contextuel obtenu à l'aide du bouton droit de la souris, sélectionner <gui>Convertir en signets</gui>, il sera alors demandé le nom du dossier sous lequel la liste sera enregistrée. Ensuite, une fois la liste sauvegardée, il devient possible de retrouver les résultats de la requête en affichant les signets puis en choisissant le dossier précédemment dénommé."
+msgstr ""
+"Les résultats de la requête peuvent être enregistrés sous forme de signets. "
+"Dans le menu contextuel obtenu à l'aide du bouton droit de la souris, "
+"sélectionner <gui>Convertir en signets</gui>, il sera alors demandé le nom "
+"du dossier sous lequel la liste sera enregistrée. Ensuite, une fois la liste "
+"sauvegardée, il devient possible de retrouver les résultats de la requête en "
+"affichant les signets puis en choisissant le dossier précédemment dénommé."
 
 #. (itstool) path: info/desc
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:6
@@ -2565,7 +2643,10 @@ msgid ""
 "More complicated searches might require the use of the advanced search "
 "functions, found under <guiseq><gui>Edit</gui><gui>Advanced Search</gui></"
 "guiseq>."
-msgstr "Des recherches plus élaborées peuvent nécessiter l'utilisation des fonctions de recherche avancée, activées par l'utilisation du  menu <guiseq><gui>Éditer</gui><gui>Recherche avancée</gui></guiseq>."
+msgstr ""
+"Des recherches plus élaborées peuvent nécessiter l'utilisation des fonctions "
+"de recherche avancée, activées par l'utilisation du  menu "
+"<guiseq><gui>Éditer</gui><gui>Recherche avancée</gui></guiseq>."
 
 #. (itstool) path: page/media
 #. This is a reference to an external file such as an image or video. When
@@ -2588,7 +2669,12 @@ msgid ""
 "search, regular expression matching (see next section), and attribute-based "
 "searches such as are found in footnotes or Strong's Hebrew and Greek "
 "dictionary references."
-msgstr "La <gui>Recherche avancée</gui> permet de construire des requêtes bien plus élaborées. Les  limites du texte et les listes de modules peuvent être  enregistrées pour servir ultérieurement. Les requêtes peuvent s'effectuer sur les attributs du texte comme les notes de bas de page ou les références de Strong des dictionnaires grec et hébreu."
+msgstr ""
+"La <gui>Recherche avancée</gui> permet de construire des requêtes bien plus "
+"élaborées. Les  limites du texte et les listes de modules peuvent être  "
+"enregistrées pour servir ultérieurement. Les requêtes peuvent s'effectuer "
+"sur les attributs du texte comme les notes de bas de page ou les références "
+"de Strong des dictionnaires grec et hébreu."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:52
@@ -2599,7 +2685,15 @@ msgid ""
 "plain multi-word search will be done, or can be selected deliberately here. "
 "A web search will provide several references to the syntax needed to put to "
 "use the power of optimized Lucene search. A few examples follow:"
-msgstr "La requête par défaut utilise une méthode de recherche rapide de type « Lucène ». C'est une recherche optimisée nécessitant au préalable la construction d'un index; Voir la page « Maintenance » du <gui>Gestionnaire de modules</gui> pour la création d'index. En l'absence d'index, la recherche se fait en mode multi-mots, plus lente, elle peut d'alleurs être sélectionnée délibérement. Une recherche sur Internet fournira plusieurs références sur la syntaxe nécessaire pour mettre à profit la puissance des requêtes optimisées Lucene. Quelques exemples suivent :"
+msgstr ""
+"La requête par défaut utilise une méthode de recherche rapide de type "
+"« Lucène ». C'est une recherche optimisée nécessitant au préalable la "
+"construction d'un index; Voir la page « Maintenance » du <gui>Gestionnaire "
+"de modules</gui> pour la création d'index. En l'absence d'index, la "
+"recherche se fait en mode multi-mots, plus lente, elle peut d'alleurs être "
+"sélectionnée délibérement. Une recherche sur Internet fournira plusieurs "
+"références sur la syntaxe nécessaire pour mettre à profit la puissance des "
+"requêtes optimisées Lucene. Quelques exemples suivent :"
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:59
@@ -2610,7 +2704,13 @@ msgid ""
 "\". To search for an entire phrase, surround the entire phrase with quotes, "
 "like \"maketh me to lie down\" (note that quotes are unnecessary in all of "
 "the other examples)."
-msgstr "Requêtes simples : saisir simplement les mots recherchés. Pour obtenir seulement les versets contenant tous les mots, il suffit de faire précéder les mots du signe « <em>+</em> ». Ainsi la requête « <em>+L'Eternel +mon +berger</em> » trouve le Psaume 23. Pour rechercher une phrase entière, il suffit de l'entourer de guillemets, comme dans \" <em>Il me fait reposer dans de verts pâturages</em> \"."
+msgstr ""
+"Requêtes simples : saisir simplement les mots recherchés. Pour obtenir "
+"seulement les versets contenant tous les mots, il suffit de faire précéder "
+"les mots du signe « <em>+</em> ». Ainsi la requête « <em>+L'Eternel +mon "
+"+berger</em> » trouve le Psaume 23. Pour rechercher une phrase entière, il "
+"suffit de l'entourer de guillemets, comme dans \" <em>Il me fait reposer "
+"dans de verts pâturages</em> \"."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:66
@@ -2619,14 +2719,22 @@ msgid ""
 "\"v?il\". The \"?\" represents a single character that could be anything. A "
 "more complex example returns both spellings for Isaiah used in the KJV. \"?"
 "saia?\" will return results for \"Isaiah\" and \"Esaias\"."
-msgstr "Caractère de substitution unique ( ? ) : Le «­­ ? » représente un caractère quelconque. Par exemple, « <em>cri?</em> » permet de rechercher « <em>cris</em> », « <em>crie</em> »,·« <em>crié</em> » etc.. Ceci est pratique pour retrouver les noms qui peuvent avoir plusieurs écritures ainsi, « <em>?saïe</em> » retournera « Esaïe » ou « Isaïe »"
+msgstr ""
+"Caractère de substitution unique ( ? ) : Le «­­ ? » représente un caractère "
+"quelconque. Par exemple, « <em>cri?</em> » permet de rechercher « <em>cris</"
+"em> », « <em>crie</em> »,·« <em>crié</em> » etc.. Ceci est pratique pour "
+"retrouver les noms qui peuvent avoir plusieurs écritures ainsi, « <em>?saïe</"
+"em> » retournera « Esaïe » ou « Isaïe »"
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:71
 msgid ""
 "Multiple Letter Wildcard: to search for \"prophet\" or \"prophesy\" or "
 "\"prophecy\" or \"prophesied\", use this syntax \"prophe*\"."
-msgstr "Caractère de substitution multiple ( * ) : « * » remplace toute une série de caractères. Ainsi « <em>proph*</em> » retrouve « prophète », « prophétiser », « prophétie » etc.."
+msgstr ""
+"Caractère de substitution multiple ( * ) : « * » remplace toute une série de "
+"caractères. Ainsi « <em>proph*</em> » retrouve « prophète », "
+"« prophétiser », « prophétie » etc.."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:74
@@ -2636,7 +2744,13 @@ msgid ""
 "if we wish to search for any occurrence of Isaiah or Esaias that also "
 "mention either prophet, or prophecy, or prophesy, we can do a search like "
 "this: \"?saia? AND prophe*\"."
-msgstr "Syntaxe AND : Dans la recherche avancée, pour retourner les résultats pour tous les termes d'une requête, il est nécessaire de placer l'opérateur logique « <em>AND</em> » entre les termes. Ainsi pour retrouver les occurences de « Isaïe » ou « Esaïe » qui font mention également de « prophète » ou « prophétie », la requête appropriée est « <em>?saïe AND proph*</em> »."
+msgstr ""
+"Syntaxe AND : Dans la recherche avancée, pour retourner les résultats pour "
+"tous les termes d'une requête, il est nécessaire de placer l'opérateur "
+"logique « <em>AND</em> » entre les termes. Ainsi pour retrouver les "
+"occurences de « Isaïe » ou « Esaïe » qui font mention également de "
+"« prophète » ou « prophétie », la requête appropriée est « <em>?saïe AND "
+"proph*</em> »."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:80
@@ -2647,7 +2761,16 @@ msgid ""
 "will be present. If desired, new searches can be performed across only the "
 "current results of the previous search. Any modules may be searched, "
 "including general books and even dictionaries, in any combination."
-msgstr "Par défaut, deux plages de versets sont définies, correspondant à l'Ancien Testament et au Nouveau Testament. D'autres limites peuvent être définies à volonté par l'utilisateur comme par exemple les « Évangiles » ou les « Épîtres de Paul ». Une liste des modules contenant seulement le premier module de texte biblique installé est définie par défaut. Si besoin, de nouvelles requêtes peuvent être réalisés sur la plage des versets obtenu par la requête précédente. Des listes de modules peuvent être crées en incluant tout module, ce qui permet d'exécuter des requêtes sur les livres ou les dictionnaires, dans n'importe quelle combinaison."
+msgstr ""
+"Par défaut, deux plages de versets sont définies, correspondant à l'Ancien "
+"Testament et au Nouveau Testament. D'autres limites peuvent être définies à "
+"volonté par l'utilisateur comme par exemple les « Évangiles » ou les "
+"« Épîtres de Paul ». Une liste des modules contenant seulement le premier "
+"module de texte biblique installé est définie par défaut. Si besoin, de "
+"nouvelles requêtes peuvent être réalisés sur la plage des versets obtenu par "
+"la requête précédente. Des listes de modules peuvent être crées en incluant "
+"tout module, ce qui permet d'exécuter des requêtes sur les livres ou les "
+"dictionnaires, dans n'importe quelle combinaison."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:87
@@ -2661,7 +2784,17 @@ msgid ""
 "or \"G\" and the numeric Strong's identifier. Thus, a search of KJV for "
 "Strong's Greek #140, using \"G140\", will return the single result of "
 "Matthew 12:18."
-msgstr "Noter la bulle d'aide dans la capture d'écran ci-dessus, Cette option est utilisée pour exécuter des requêtes sur les attributs relatifs à des versets et non sur le contenu des versets. Les attributs sont par exemple les notes de bas de page ou les nombres de Strong grec et hébreu. Si cette option est sélectionnée, les qualificatifs d'attribut doivent être saisis dans  l'onglet Attribut, situé à droite des autres onglets. Les références de Strong  sont identifiées par le nombre de Strong précédé par la lettre « H » (Hébreu) ou la lettre « G » (Grec). Ainsi une requête sur le nombre de Strong grec n° 140, en utilisant « G140 », retourne  Matthieu 12:18 comme résultat."
+msgstr ""
+"Noter la bulle d'aide dans la capture d'écran ci-dessus, Cette option est "
+"utilisée pour exécuter des requêtes sur les attributs relatifs à des versets "
+"et non sur le contenu des versets. Les attributs sont par exemple les notes "
+"de bas de page ou les nombres de Strong grec et hébreu. Si cette option est "
+"sélectionnée, les qualificatifs d'attribut doivent être saisis dans  "
+"l'onglet Attribut, situé à droite des autres onglets. Les références de "
+"Strong  sont identifiées par le nombre de Strong précédé par la lettre "
+"« H » (Hébreu) ou la lettre « G » (Grec). Ainsi une requête sur le nombre de "
+"Strong grec n° 140, en utilisant « G140 », retourne  Matthieu 12:18 comme "
+"résultat."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:96
@@ -2670,14 +2803,21 @@ msgid ""
 "Strong's references. Enter your search preceded by \"lemma:\", so to search "
 "for Strong's Greek #140, enter \"lemma:G140\". You must have selected "
 "<gui>Optimized (\"Lucene\")</gui> for this to work."
-msgstr "Si vos modules sont indexés, il existe un moyen beaucoup plus rapide pour rechercher des références de Strong. Une requête doit être précédée du mot « <em>lemma</em> », par exemple pour rechercher le nombre de Strong grec 140, saisir « <em>lemma:G140</em> ». Le bouton radio <gui>Optimisée Lucene</gui> doit être sélectionné pour que cette requête fonctionne."
+msgstr ""
+"Si vos modules sont indexés, il existe un moyen beaucoup plus rapide pour "
+"rechercher des références de Strong. Une requête doit être précédée du mot "
+"« <em>lemma</em> », par exemple pour rechercher le nombre de Strong grec "
+"140, saisir « <em>lemma:G140</em> ». Le bouton radio <gui>Optimisée Lucene</"
+"gui> doit être sélectionné pour que cette requête fonctionne."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:101
 msgid ""
 "Explanations of search syntax are available when either Optimized or "
 "Attribute search is selected."
-msgstr "Des explications sur la syntaxe de recherche sont accessibles quand soit « Optimisée lucène » ou « Attributs » sont sélectionnés."
+msgstr ""
+"Des explications sur la syntaxe de recherche sont accessibles quand soit "
+"« Optimisée lucène » ou « Attributs » sont sélectionnés."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:104
@@ -2699,7 +2839,17 @@ msgid ""
 "main previewer. Double-clicking a result will cause the current tab to "
 "navigate to that result. This applies to search results in general books and "
 "commentaries as well, but note that the respective tab must be visible."
-msgstr "Les résultats sont affichés dans l'onglet <gui>Résultats</gui>. Pour inclure les nombres de Strong, les étiquettes morphologiques ou les notes de bas de page, sélectionnez ces options dans l'onglet <gui>Attributs</gui>. Un simple clic sur un résultat affiche le contenu dans le volet <gui>Aperçu</gui> de la fenêtre <gui>Recherche Avancée</gui>. Un survol des nombres de Strong, étiquettes morphologiques ou notes de bas de page affiche le contenu dans le volet <gui>Aperçu</gui> de la fenêtre principale. Un double-clic fait naviguer l'onglet courant à la portion du texte contenant le résultat, ceci s'applique également aux commentaires et aux livres à la condition que les respectifs volets soient visibles."
+msgstr ""
+"Les résultats sont affichés dans l'onglet <gui>Résultats</gui>. Pour inclure "
+"les nombres de Strong, les étiquettes morphologiques ou les notes de bas de "
+"page, sélectionnez ces options dans l'onglet <gui>Attributs</gui>. Un simple "
+"clic sur un résultat affiche le contenu dans le volet <gui>Aperçu</gui> de "
+"la fenêtre <gui>Recherche Avancée</gui>. Un survol des nombres de Strong, "
+"étiquettes morphologiques ou notes de bas de page affiche le contenu dans le "
+"volet <gui>Aperçu</gui> de la fenêtre principale. Un double-clic fait "
+"naviguer l'onglet courant à la portion du texte contenant le résultat, ceci "
+"s'applique également aux commentaires et aux livres à la condition que les "
+"respectifs volets soient visibles."
 
 #. (itstool) path: note/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-31-advanced-search.page:117
@@ -2707,7 +2857,11 @@ msgid ""
 "Changes to some of the settings (e.g. scope of search, searched modules, "
 "etc.) in Advanced Search will affect the simple search via the side pane but "
 "not vice versa."
-msgstr "Les changements d'options (étendue de la recherche, modules à rechercher, etc) dans la fenêtre de recherche avancée sont reportés au niveau des options de la recherche simple du <gui>volet latéral</gui> mais pas l'inverse."
+msgstr ""
+"Les changements d'options (étendue de la recherche, modules à rechercher, "
+"etc) dans la fenêtre de recherche avancée sont reportés au niveau des "
+"options de la recherche simple du <gui>volet latéral</gui> mais pas "
+"l'inverse."
 
 #. (itstool) path: info/desc
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:6
@@ -2733,7 +2887,19 @@ msgid ""
 "\"hall not\" is not a search for \"hall\" AND \"not\" but for the string "
 "\"hall not\" with a space between the second \"l\" and the \"n\". The search "
 "for \"hall not\" will find occurrences of \"s<em>hall not</em>\"."
-msgstr "La recherche au moyen d'expressions rationnelles permet d'effectuer des recherches simples ou complexes sur des chaînes de caractères correspondant à un motif, ou un ensemble de motifs séparés par une barre verticale « | ». Alors qu'un motif peut être crée pour rechercher un mot ou une phrase, un motif simple composé d'un seul mot ne permettra pas de rechercher seulement ce mot, mais toute séquence de caractères contenant ce mot. Une recherche du mot « droit » ne retournera pas seulement la liste des versets contenant le mot « <em>droit</em> »  mais aussi ceux contenant les mots « a<em>droit</em> », « <em>droit</em>e ». La recherche de « ne pas » ne retournera pas les versets contenant les mots « ne » ET « pas » mais les versets contenant la séquence « ne pas » avec une espace entre les deux mots. Une recherche de « ne pas » trouvera aussi les versets contenant « <em>ne pas</em>se »."
+msgstr ""
+"La recherche au moyen d'expressions rationnelles permet d'effectuer des "
+"recherches simples ou complexes sur des chaînes de caractères correspondant "
+"à un motif, ou un ensemble de motifs séparés par une barre verticale « | ». "
+"Alors qu'un motif peut être crée pour rechercher un mot ou une phrase, un "
+"motif simple composé d'un seul mot ne permettra pas de rechercher seulement "
+"ce mot, mais toute séquence de caractères contenant ce mot. Une recherche du "
+"mot « droit » ne retournera pas seulement la liste des versets contenant le "
+"mot « <em>droit</em> »  mais aussi ceux contenant les mots « a<em>droit</"
+"em> », « <em>droit</em>e ». La recherche de « ne pas » ne retournera pas les "
+"versets contenant les mots « ne » ET « pas » mais les versets contenant la "
+"séquence « ne pas » avec une espace entre les deux mots. Une recherche de "
+"« ne pas » trouvera aussi les versets contenant « <em>ne pas</em>se »."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:53
@@ -2744,7 +2910,14 @@ msgid ""
 "characters include .\\[^*$?+. Ordinary (or simple) characters are any "
 "characters that are not special. The backslash, \"\\\", is used to convert "
 "special characters to ordinary and ordinary characters to special."
-msgstr "La puissance des expressions rationnelles provient des motifs utilisés pour définir une clé de recherche. Un motif est constitué de caractères ordinaires et de quelques caractères  spéciaux qui sont interprétés suivant des règles précises. Les caractères spéciaux sont \\[^*$?+. Les autres caractères sont des caractères ordinaires. L'antislash « \\ », est utilisé pour convertir les caractères spéciaux en caractères ordinaires et inversement les caractères ordinaires en caractères spéciaux."
+msgstr ""
+"La puissance des expressions rationnelles provient des motifs utilisés pour "
+"définir une clé de recherche. Un motif est constitué de caractères "
+"ordinaires et de quelques caractères  spéciaux qui sont interprétés suivant "
+"des règles précises. Les caractères spéciaux sont \\[^*$?+. Les autres "
+"caractères sont des caractères ordinaires. L'antislash « \\ », est utilisé "
+"pour convertir les caractères spéciaux en caractères ordinaires et "
+"inversement les caractères ordinaires en caractères spéciaux."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:60
@@ -2755,7 +2928,14 @@ msgid ""
 "love \\.\" is a special character that means allow any character in this "
 "position. The backslash in \"i. love\\.\" means that the period following it "
 "is not to be considered a special character, but is an ordinary period."
-msgstr "Exemple : le motif « <em>.amour\\.</em> » retournera les phrases qui se terminent par « s<em>o</em>n <em>amour</em> » ou « <em>l</em>'<em>amour</em> » ou « <em>d</em>'<em>amour</em> » suivi d'un point. Le premier point dans <em>.amour\\.</em> est un caractère spécial dont la signification est de remplacer n'importe quel caractère à cette position. L'antislash dans <em>.amour\\.</em> indique que le point  suivant ne doit pas être considéré comme un caractère spécial, mais comme un point ordinaire."
+msgstr ""
+"Exemple : le motif « <em>.amour\\.</em> » retournera les phrases qui se "
+"terminent par « s<em>o</em>n <em>amour</em> » ou « <em>l</em>'<em>amour</"
+"em> » ou « <em>d</em>'<em>amour</em> » suivi d'un point. Le premier point "
+"dans <em>.amour\\.</em> est un caractère spécial dont la signification est "
+"de remplacer n'importe quel caractère à cette position. L'antislash dans "
+"<em>.amour\\.</em> indique que le point  suivant ne doit pas être considéré "
+"comme un caractère spécial, mais comme un point ordinaire."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:70
@@ -2772,42 +2952,57 @@ msgstr "« . » Le point remplace n'importe quel caractère."
 msgid ""
 "* The asterisk matches 0 or more characters of the preceding: set, character "
 "or indicated character."
-msgstr "« * » L'astérisque correspond à toute répétition de caractères d'une chaîne ou d'une expression rationnelle la précédant, incluant zéro caractère."
+msgstr ""
+"« * » L'astérisque correspond à toute répétition de caractères d'une chaîne "
+"ou d'une expression rationnelle la précédant, incluant zéro caractère."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:80
 msgid ""
 "+ The plus sign matches 1 or more characters of the preceding: set, "
 "character or indicated character."
-msgstr "« + » Le signe plus correspond à une répétition ou plus de la précédente expression régulière. Il joue un rôle similaire à « * » (astérisque), mais ne correspond pas à zéro occurrence."
+msgstr ""
+"« + » Le signe plus correspond à une répétition ou plus de la précédente "
+"expression régulière. Il joue un rôle similaire à « * » (astérisque), mais "
+"ne correspond pas à zéro occurrence."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:84
 msgid ""
 "? The question mark matches 0 or 1 character of the preceding: set, "
 "character or indicated character."
-msgstr "« ? » Le point d'interrogation correspond à aucune ou une instance de la précédente expression rationnelle. Il est généralement utilisé pour correspondre à des caractères uniques."
+msgstr ""
+"« ? » Le point d'interrogation correspond à aucune ou une instance de la "
+"précédente expression rationnelle. Il est généralement utilisé pour "
+"correspondre à des caractères uniques."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:88
 msgid ""
 "[ ] Square brackets match any one of the characters specified inside [ ]."
-msgstr "« [...] » Les crochets englobent un ensemble de caractères pour réaliser une correspondance dans une seule expression rationnelle."
+msgstr ""
+"« [...] » Les crochets englobent un ensemble de caractères pour réaliser une "
+"correspondance dans une seule expression rationnelle."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:92
 msgid "^ A caret as the first character inside [ ] means NOT."
-msgstr "« ^ » La puissance comme premier caractère à l'intérieur d'accolades inverse la signification de l'ensemble des caractères de  l'expression rationnelle."
+msgstr ""
+"« ^ » La puissance comme premier caractère à l'intérieur d'accolades inverse "
+"la signification de l'ensemble des caractères de  l'expression rationnelle."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:95
 msgid "^ A caret beginning a pattern anchors the beginning of a line."
-msgstr "« ^ » La puissance en dehors d'accolades correspond au début d'une ligne."
+msgstr ""
+"« ^ » La puissance en dehors d'accolades correspond au début d'une ligne."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:99
 msgid "$ A dollar at the end of a pattern anchors the end of a line."
-msgstr "« $ » Le signe dollar à la fin d'une expression rationnelle correspond à la fin d'une ligne."
+msgstr ""
+"« $ » Le signe dollar à la fin d'une expression rationnelle correspond à la "
+"fin d'une ligne."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:103
@@ -2818,21 +3013,27 @@ msgstr "« | » La barre verticale signifie OU logique"
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:106
 msgid ""
 "( ) Parentheses enclose expressions for grouping. <em>Not supported!</em>"
-msgstr "« () » Les parenthèses servent à regrouper des expressions. <em>Non supporté dans <app>Xiphos</app></em>"
+msgstr ""
+"« () » Les parenthèses servent à regrouper des expressions. <em>Non supporté "
+"dans <app>Xiphos</app></em>"
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:110
 msgid ""
 "\\ A backslash can be used prior to any special character to match that "
 "character."
-msgstr "« \\ » L'antislash échappe un caractère spécial, ce qui signifie que le caractère est interprété littéralement."
+msgstr ""
+"« \\ » L'antislash échappe un caractère spécial, ce qui signifie que le "
+"caractère est interprété littéralement."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:114
 msgid ""
 "\\ A backslash can be used prior to an ordinary character to make it a "
 "special character."
-msgstr "« \\ » L'antislash utilisé devant un caractère ordinaire, le transforme en caractère spécial.."
+msgstr ""
+"« \\ » L'antislash utilisé devant un caractère ordinaire, le transforme en "
+"caractère spécial.."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:121
@@ -2841,7 +3042,6 @@ msgstr "Le point"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:123
-#, fuzzy
 msgid ""
 "The Period \".\" will match any single character even a space or other non-"
 "alphabet character. <em>s.t</em> matches <em>s</em>i<em>t</em>, <em>s</"
@@ -2850,7 +3050,11 @@ msgid ""
 "em>o<em>t</em>tish <em>b..t</em> matches <em>b</em>oo<em>t</em>, <em>b</"
 "em>oa<em>t</em> and <em>b</em>ea<em>t foot.tool </em>matches <em>foot</"
 "em>s<em>tool </em>and <em>foot tool</em>"
-msgstr "Le point « . » remplace n'importe quel caractère y compris l'espace et d'autres caractères non alphabétiques. Par exemple : « 13. » correspond à 13 plus au moins un caractère (incluant une espace), ce qui retourne 1133, 11333 mais pas 13 (un caractère supplémentaire est manquant)."
+msgstr ""
+"Le point « . » remplace n'importe quel caractère y compris l'espace et "
+"d'autres caractères non alphabétiques. Par exemple : « 13. » correspond à 13 "
+"plus au moins un caractère (incluant une espace), ce qui retourne 1133, "
+"11333 mais pas 13 (un caractère supplémentaire est manquant)."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:138
@@ -2859,7 +3063,6 @@ msgstr "L'astérisque"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:140
-#, fuzzy
 msgid ""
 "The asterisk \"*\" matches zero or more characters of the preceding: set, "
 "character or indicated character. Using a period asterisk combination \".*\" "
@@ -2867,11 +3070,7 @@ msgid ""
 "time, making the program seem to freeze. <em>be*n</em> matches<em> beeen, "
 "been, ben</em>, and <em>bn</em> which could locate Reu<em>ben</em> and "
 "She<em>bn</em>a."
-msgstr ""
-"L'astérisque «­­&#160;*&#160;» correspond à toute répétition de caractères "
-"d'une chaîne ou d'une expression rationnelle la précédant, incluant zéro "
-"caractère. Par exemple : «­­&#160;1133*&#160;» correspond à 11 plus un ou plus "
-"de 3 ainsi que d'autres caractères : 113, 1133, 111312 et ainsi de suite."
+msgstr "L'astérisque « * » correspond à toute répétition de caractères d'une chaîne ou d'une expression rationnelle la précédant, incluant zéro caractère. Utiliser cette combinaison Point Astérisque « .* » après une chaîne de recherche fréquemment rencontrée peut prendre un temps très long, pouvant faire croire que le programme est bloqué. Exemple : « 1133* » correspond à 11 plus un ou plus de 3 ainsi que d'autres caractères : 113, 1133, 111312 et ainsi de suite."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:151
@@ -2880,17 +3079,13 @@ msgstr "Le signe plus"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:153
-#, fuzzy
 msgid ""
 "The Plus Sign \"+\" matches one or more characters of the preceding: set, "
 "character or indicated character. Using a period and plus sign combination "
 "\".+\" after a commonly found pattern can cause the search to take a very "
 "long time, making the program seem to freeze. <em>be+n</em> matches "
 "<em>beeen, been</em> and <em>ben</em>, but not <em>bn</em>."
-msgstr ""
-"Le signe plus «­­&#160;+&#160;» correspond à une répétition ou plus de la "
-"précédente expression rationnelle. Il joue un rôle similaire à «­­&#160;"
-"*&#160;» (astérisque), mais ne correspond pas à zéro occurrence."
+msgstr "Le signe plus « + » correspond à une répétition ou plus de la précédente expression rationnelle. Il joue un rôle similaire à « * » (astérisque), mais ne correspond pas à zéro occurrence. Utiliser cette combinaison Point Signe Plus « .+ » après une chaîne de recherche fréquemment rencontrée peut prendre un temps très long, pouvant faire croire que le programme est bloqué. Exemple : Recherche de « abc » retourne « abcc », « abcerty », mais pas « abdf » ou « ab »."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:164
@@ -2899,16 +3094,12 @@ msgstr "Le point d'interrogation."
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:166
-#, fuzzy
 msgid ""
 "The Question Mark \"?\"matches zero or one character of the preceding: set, "
 "character or indicated character. <em>be?n</em> matches <em>ben</em> and "
 "<em>bn</em> but not <em>been</em>. <em>trees?</em> matches <em>trees</em> or "
 "<em>tree</em>."
-msgstr ""
-"Le point d'interrogation «­­&#160;?&#160;» correspond à aucune ou à une "
-"instance au·plus·de la précédente expression rationnelle. Il est "
-"généralement utilisé pour correspondre à des caractères uniques."
+msgstr "Le point d'interrogation « ? » correspond à zéro ou une instance au plus du caractère ou motif précédent. Exemple : « rai?n » retournera « rang » et « grain »."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:175
@@ -2932,20 +3123,7 @@ msgid ""
 "matches <em>a, b, c,</em> or <em>d</em>. <em>[A-Z]</em> matches any "
 "uppercase letter. [.;:?!] matches ., ;, :, ?, or ! but not a comma. [ ]^-] "
 "matches ] or ^ or -"
-msgstr ""
-"Les crochets «­­&#160;[...]&#160;» englobent un ensemble de caractères pour "
-"réaliser une correspondance dans une seule expression rationnelle. «­­&#160;"
-"[xyz]&#160;» correspond aux caractères x, y ou z. «­­&#160;[c-n]&#160;» "
-"correspond à tout caractère compris entre c et n. «­­&#160;[B-Pk-y]&#160;» "
-"correspond à tout caractère compris entre B et P et entre k et y. «­­&#160;[a-"
-"z0-9]&#160;» correspond à toute lettre en minuscule et à tout chiffre. «­­"
-"&#160;[^b-d]&#160;» correspond à tous les caractères sauf ceux compris entre "
-"b et d. Ceci est un exemple de l'inversion de la signification de "
-"l'expression rationnelle suivante grâce à l'opérateur «­­&#160;"
-"^&#160;» (prenant le même rôle que «­­&#160;!&#160;» dans un contexte "
-"différent). Les séquences combinées de caractères entre crochets "
-"correspondent à des modèles de mots communs. «­­&#160;[Oo][Uu][Ii]&#160;» "
-"correspond à oui, Oui, OUI, oUi et ainsi de suite. "
+msgstr "Les crochets « [...] » englobent un ensemble de caractères pour réaliser une correspondance dans une seule expression rationnelle. « [xyz] » correspond aux caractères x, y ou z. « [c-n] » correspond à tout caractère compris entre c et n. « [B-Pk-y] » correspond à tout caractère compris entre B et P et entre k et y. « [a-z0-9] » correspond à toute lettre en minuscule et à tout chiffre. « [^b-d] » correspond à tous les caractères sauf ceux compris entre b et d. Ceci est un exemple de l'inversion de la signification de l'expression rationnelle suivante grâce à l'opérateur « ^ » (prenant le même rôle que « ! » dans un contexte différent). Les séquences combinées de caractères entre crochets correspondent à des modèles de mots communs. « [Oo][Uu][Ii] » correspond à oui, Oui, OUI, oUi et ainsi de suite. "
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:199
@@ -2959,10 +3137,7 @@ msgid ""
 "If the Caret is the first character after the left bracket (\"[^\") it means "
 "NOT. <em>s[^io]t</em> matches <em>set, sat</em>, etc., but not <em>s</"
 "em>i<em>t</em> and <em>s</em>o<em>t</em>."
-msgstr ""
-"Si la puissance «­­&#160;^&#160;» est le premier caractère d'une expression "
-"entre crochets, il  inverse la signification de l'ensemble des caractères de "
-"l'expression rationnelle."
+msgstr "Si la puissance « ^ » est le premier caractère d'une expression entre crochets, il  inverse la signification de l'ensemble des caractères de l'expression rationnelle."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:209
@@ -2979,7 +3154,15 @@ msgid ""
 "caret to account for the formatting characters. <em>^In the beginning</em> "
 "matches lines that start with \"<em>In the beginning</em>\". (May need to "
 "use: <em>^.....In the beginning</em>)"
-msgstr "La puissance « ^ » correspond au début d'une ligne. Toutes les réponses correspondront au début d'une ligne comportant la séquence recherchée. Cependant, comme certains modules de textes contiennent des caractères non filtrés en début de ligne, cette fonction ne retourne pas toujours les résultats escomptés. Ajouter quelques points après la puissance, permet de contourner le défaut de format de certains textes. « <em>^Au commencement</em> » recherche les phrases commençant par « <em>Au commencement</em> ». (Mais il est préférable d'utiliser : « <em>^....Au commencement</em> »)."
+msgstr ""
+"La puissance « ^ » correspond au début d'une ligne. Toutes les réponses "
+"correspondront au début d'une ligne comportant la séquence recherchée. "
+"Cependant, comme certains modules de textes contiennent des caractères non "
+"filtrés en début de ligne, cette fonction ne retourne pas toujours les "
+"résultats escomptés. Ajouter quelques points après la puissance, permet de "
+"contourner le défaut de format de certains textes. « <em>^Au commencement</"
+"em> » recherche les phrases commençant par « <em>Au commencement</em> ». "
+"(Mais il est préférable d'utiliser : « <em>^....Au commencement</em> »)."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:224
@@ -2996,7 +3179,16 @@ msgid ""
 "to account for the formatting characters. <em>Amen\\.$</em> matches lines "
 "that end with \"<em>Amen.</em>\" (May need to use Amen\\....$, Amen"
 "\\..........$, or even Amen\\....................$)"
-msgstr "Le signe dollar « $ » à la fin d'une expression régulière correspond à la fin d'une ligne. « XXX$ » correspond à XXX à la fin d'une ligne. « ^$ » correspond à des lignes blanches. Cependant, comme certains modules de textes contiennent des caractères non filtrés en fin de ligne, cette fonction ne retourne pas toujours les résultats escomptés. Ainsi ajouter quelques points après le dollar permet de contourner ce défaut de format de certains textes. « <em>Amen\\.$</em> » retourne les phrases qui se terminent par « <em>Amen.</em> » (Il est préférable d'utiliser « Amen\\....$ », « Amen\\..........$ », ou même « Amen\\....................$ »)."
+msgstr ""
+"Le signe dollar « $ » à la fin d'une expression régulière correspond à la "
+"fin d'une ligne. « XXX$ » correspond à XXX à la fin d'une ligne. « ^$ » "
+"correspond à des lignes blanches. Cependant, comme certains modules de "
+"textes contiennent des caractères non filtrés en fin de ligne, cette "
+"fonction ne retourne pas toujours les résultats escomptés. Ainsi ajouter "
+"quelques points après le dollar permet de contourner ce défaut de format de "
+"certains textes. « <em>Amen\\.$</em> » retourne les phrases qui se terminent "
+"par « <em>Amen.</em> » (Il est préférable d'utiliser « Amen\\....$ », « Amen"
+"\\..........$ », ou même « Amen\\....................$ »)."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:239
@@ -3011,7 +3203,14 @@ msgid ""
 "<em>John</em> ... <em>Peter</em> or <em>Peter</em> ... <em>John</em>. (.* "
 "slows a search) <em>pain|suffering|sorrow</em> matches <em>pain</em>, or "
 "<em>suffering</em>, or <em>sorrow</em>."
-msgstr "La barre verticale « | » correspond à l'opérateur logique OU et permet donc de définir une alternative. « <em>Jean | Pierre</em> » retrouve les phrases contenant « <em>Jean</em> » ou « <em>Pierre</em> ». De même, « <em> Jean.*Pierre | Pierre.*Jean</em> » retourne « <em>Jean</em> ... <em>Pierre</em> » ou « <em>Pierre</em> ... <em>Jean</em> ». (* ralentit la recherche). « <em>douleur | souffrance | tourment</em> » retourne <em>douleur</em> ou <em>souffrance</em> ou <em>tourment</em>."
+msgstr ""
+"La barre verticale « | » correspond à l'opérateur logique OU et permet donc "
+"de définir une alternative. « <em>Jean | Pierre</em> » retrouve les phrases "
+"contenant « <em>Jean</em> » ou « <em>Pierre</em> ». De même, « <em> Jean."
+"*Pierre | Pierre.*Jean</em> » retourne « <em>Jean</em> ... <em>Pierre</em> » "
+"ou « <em>Pierre</em> ... <em>Jean</em> ». (* ralentit la recherche). "
+"« <em>douleur | souffrance | tourment</em> » retourne <em>douleur</em> ou "
+"<em>souffrance</em> ou <em>tourment</em>."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:253
@@ -3035,7 +3234,11 @@ msgid ""
 "character is not being used in its special meaning, but is just to match "
 "itself. <em>amen\\.</em> matches <em>amen.</em> but not <em>amen</em>t and "
 "will not locate firm<em>amen</em>t."
-msgstr "L'antislash précédant un caractère spécial « \\* » indique que ce caractère n'a plus de signification spéciale, mais devient un caractère ordinaire. <em>amen\\.</em> retourne <em>amen.</em> mais pas <em>amen</em>t et ne trouvera donc pas firm<em>amen</em>t."
+msgstr ""
+"L'antislash précédant un caractère spécial « \\* » indique que ce caractère "
+"n'a plus de signification spéciale, mais devient un caractère ordinaire. "
+"<em>amen\\.</em> retourne <em>amen.</em> mais pas <em>amen</em>t et ne "
+"trouvera donc pas firm<em>amen</em>t."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:270
@@ -3054,27 +3257,19 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:279
-#, fuzzy
 msgid ""
 "\\b if use outside [ ] means word boundary. If used inside [ ] means "
 "backspace. <em>\\brighteous\\b</em> matches <em>righteous</em> but not "
 "un<em>righteous</em> or <em>righteous</em>ness"
-msgstr ""
-"\\b ce symbole d'ancrage indique une limite de mot obligatoire, à l'endroit "
-"où il est inséré dans le motif. Par contre, s'il est utilisé entre crochets, "
-"il correspond au caractère «­­&#160;retour arrière&#160;». <em>\\bjuste\\b</"
-"em> retourne <em>juste</em> mais pas in<em>juste</em> ou <em>juste</em>sse."
+msgstr "\\b ce symbole d'ancrage indique une limite de mot obligatoire, à l'endroit où il est inséré dans le motif. Par contre, s'il est utilisé entre crochets, il correspond au caractère « retour arrière ». <em>\\bjuste\\b</em> retourne <em>juste</em> mais pas in<em>juste</em> ou <em>juste</em>sse."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:284
-#, fuzzy
 msgid ""
 "\\B means non-word boundary. <em>\\Brighteous\\B</em> matches "
 "un<em>righteous</em>ness and un<em>righteous</em>ly but not <em>righteous</"
 "em>, un<em>righteous</em> or <em>righteous</em>ness."
-msgstr ""
-"\\B indique qu'il n'y a pas de limite de mot <em>\\Bleur\\B</em> trouve "
-"cha<em>leur</em>euse mais pas cha<em>leur</em> ou <em>leur</em>re."
+msgstr "\\B indique qu'il n'y a pas de limite de mot <em>\\Bleur\\B</em> trouve cha<em>leur</em>euse mais pas cha<em>leur</em> ou <em>leur</em>re."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-32-search-syntax.page:290
@@ -3123,13 +3318,10 @@ msgstr "Installer les modules nécessaires"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-33-original-language.page:44
-#, fuzzy
 msgid ""
 "<app>Xiphos</app> is ideally suited for studying the original Greek and "
 "Hebrew. To get started, you will want the following modules:"
-msgstr ""
-"Xiphos convient parfaitement à l'étude des textes originaux en grec ou "
-"hébreu. Pour commencer, il est recommandé d'installer les modules suivants :"
+msgstr "Xiphos convient parfaitement à l'étude des textes originaux en grec ou hébreu. Pour commencer, il est recommandé d'installer les modules suivants :"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-33-original-language.page:47
@@ -3206,7 +3398,6 @@ msgstr "Configurer"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-33-original-language.page:86
-#, fuzzy
 msgid ""
 "While still in the module manager, create indexes for all of the modules you "
 "just installed. Then close the module manager and open <guiseq><gui>Edit </"
@@ -3223,22 +3414,7 @@ msgid ""
 "dictionary pane. If you are using StrongsRealGreek or StrongsRealHebrew, you "
 "can click on any other number referenced in the definition and you will be "
 "taken to that entry."
-msgstr ""
-"Ouvrir le gestionnaire de modules et créer un index pour tous les modules "
-"installés. Ensuite fermer le gestionnaire de modules et ouvrir la fenêtre "
-"des préférences comme suit : <guiseq><gui>Éditer</gui><gui>·Préférences</"
-"gui></guiseq>·et aller dans·<guiseq><gui>Modules</gui><gui>Spécial</gui></"
-"guiseq>. Définir ensuite les lexiques hébreu et grec en fonction de ceux "
-"installés. Fermer la fenêtre des préférences. Dans la fenêtre principale, "
-"choisir la Bible Louis Segond 1910, afficher le menu contextuel par un clic "
-"droit de la souris et sélectionner <guiseq><gui>Options du module</"
-"gui><gui>Nombres de ·Strong</gui></guiseq>·et·<guiseq><gui>Options du "
-"module</gui><gui>Étiquettes morphologiques</gui></guiseq>. L'affichage du "
-"texte biblique change de façon à afficher les nombres de Strong sous les "
-"mots appropriés. Un survol des nombres de Strong (ou des étiquettes "
-"morphologiques) à l'aide de la souris fait apparaître la définition dans le "
-"volet <gui>Aperçu</gui>. Un clic sur le lien affiche la définition dans le "
-"volet <gui>Dictionnaire</gui>."
+msgstr "En restant dans le gestionnaire de modules, créez un index pour tous les modulesque vous venez d'installer. Ensuite fermez le gestionnaire de modules et ouvrez la fenêtre des préférences comme suit : <guiseq><gui>Éditer</gui><gui>·Préférences</gui></guiseq>·et allez dans·<guiseq><gui>Modules</gui><gui>Spécial</gui></guiseq>. Définissez ensuite les lexiques hébreu et grec en fonction de ceux que vous avez installés. Fermez la fenêtre des préférences. Dans la fenêtre principale, choisissez la Bible Louis Segond 1910, affichez le menu contextuel par un clic droit de la souris et sélectionnez <guiseq><gui>Options du module</gui><gui>Nombres de ·Strong</gui></guiseq>·et·<guiseq><gui>Options du module</gui><gui>Étiquettes morphologiques</gui></guiseq>. Vous devriez voir l'affichage du texte biblique changer de façon à afficher les nombres de Strong sous les mots apparentés. Un survol des nombres de Strong (ou des étiquettes morphologiques) à l'aide de la souris fait apparaître la définition dans le volet <gui>Aperçu</gui>. Un clic sur le lien affichera la définition dans le volet <gui>Dictionnaire</gui>. Si vous utilisez StrongsRealGreek ou StrongsRealHebrew, vous pouvez cliquer sur n'importe quel nombre référencé dans la définition et vous serez conduits à cette index."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-33-original-language.page:105
@@ -3247,7 +3423,6 @@ msgstr "Rechercher des Nombres de Strong"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-33-original-language.page:107
-#, fuzzy
 msgid ""
 "Choose <guiseq><gui>Edit</gui><gui>Advanced Search</gui></guiseq> or press "
 "<key>F3</key>. Under <gui>Search Type</gui>, select <gui>Optimized (\"Lucene"
@@ -3260,21 +3435,7 @@ msgid ""
 "result in the preview pane, and the strong's numbers will show as well, "
 "following immediately after the words they match. Also note that hovering "
 "over these numbers will show the definition in the main preview pane."
-msgstr ""
-"Ouvrir la fenêtre <gui>Recherche avancée</gui> par <guiseq><gui>Éditer</"
-"gui><gui>Recherche avancée</gui></guiseq> ou·en pressant·<keycap>F3</"
-"keycap>. Dans <gui>Type de requête</gui>, choisir <gui>Optimisée Lucene</"
-"gui>. Ensuite sélectionner l'onglet <gui>Attributs</gui>, et cocher la case "
-"<gui>Nombres de Strong</gui>. Il est maintenant possible de rechercher un "
-"nombre de Strong dans la zone de saisie en le faisant précéder de «&#160;"
-"<em>lemma:</em>&#160;» accompagné de «&#160;<em>G</em>&#160;» pour la langue "
-"grecque et «&#160;<em>H</em>&#160;» pour la langue hébraïque. Ainsi pour "
-"rechercher le mot hébreu <em>tsad-deek (6662)</em>, entrer : «&#160;"
-"<em>lemma:G662</em>&#160;». Une fois la recherche terminée et les résultats "
-"affichés, un clic sur un résultat fait afficher le contenu dans la zone "
-"<gui>Aperçu</gui> ainsi que les nombres de Strong suivant immédiatement les "
-"mots associés. Noter que survoler ces nombres avec la souris fait apparaitre "
-"la définition dans le volet <gui>Aperçu</gui> de la fenêtre principale."
+msgstr "Ouvrir la fenêtre <gui>Recherche avancée</gui> par <guiseq><gui>Éditer</gui><gui>Recherche avancée</gui></guiseq> ou·en pressant·<key>F3</key>. Dans <gui>Type de requête</gui>, choisir <gui>Optimisée Lucene</gui>. Ensuite sélectionner l'onglet <gui>Attributs</gui>, et cocher la case <gui>Nombres de Strong</gui>. Il est maintenant possible de rechercher un nombre de Strong dans la zone de saisie en le faisant précéder de « <em>lemma:</em> » accompagné de « <em>G</em> » pour la langue grecque et « <em>H</em> » pour la langue hébraïque. Ainsi pour rechercher le mot hébreu <em>tsad-deek (6662)</em>, entrer : « <em>lemma:G662</em> ». Une fois la recherche terminée et les résultats affichés, un clic sur un résultat fait afficher le contenu dans la zone <gui>Aperçu</gui> ainsi que les nombres de Strong suivant immédiatement les mots associés. Noter que survoler ces nombres avec la souris fait apparaitre la définition dans le volet <gui>Aperçu</gui> de la fenêtre principale."
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-33-original-language.page:122
@@ -3290,17 +3451,13 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-33-original-language.page:128
-#, fuzzy
 msgid ""
 "2TGreek (Xiphos Repository) : This module contains the entire Bible in "
 "Greek. It combines the LXX and Tischendorf8 NT into one easy-to-use module. "
 "In addition, it contains Strongs, Morphology,Greek Accents, and primary/"
 "secondary readings. As with all modules that include Strongs, <app>Xipho</"
 "app> displays 2TGreek in beautiful interlinear form."
-msgstr ""
-"2TGreek (Dépot de Xiphos) : Ce module contient la Bible entière en langue "
-"grecque. Il combine les modules LXX et Tischendorf8·NT en un seul module "
-"avec nombres de Strong, étiquettes morphologiques et accents grecs"
+msgstr "2TGreek (Source Xiphos) : Ce module contient la Bible entière en grec. Il combine les modules LXX et Tischendorf8·NT en un seul module. Il contient les nombres de Strong, les étiquettes morphologiques, les accents grecs et les lectures primaires et secondaires. Comme pour tout module qui contient les nombres de Strong, <app>Xiphos</app> affiche 2TGreek dans une beau format interlinéaire."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-33-original-language.page:136
@@ -3396,31 +3553,20 @@ msgstr "Éditeur de commentaires personnels."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-40-personal-commentary.page:39
-#, fuzzy
 msgid ""
 "To build up a personal commentary you will need to install the editable "
 "'Personal' sword module from the English Commentaries section. Right click "
 "it and choose <guiseq><gui>Edit</gui><gui>Note</gui><gui>Personal</gui></"
 "guiseq> in the menu."
-msgstr ""
-"Pour construire son propre commentaire personnel, il est nécessaire "
-"d'installer le module Sword « Personal », depuis la liste des modules "
-"Commentaires en anglais. Ensuite, pour ajouter ses commentaires, appeler le "
-"menu contextuel par un clic du bouton droit à l'aide de la souris sur le "
-"volet des commentaires, puis sélectionner <guiseq><gui>Édition</"
-"gui><gui>Modifier le commentaire</gui></guiseq>."
+msgstr "Pour construire son propre commentaire personnel, il est nécessaire d'installer le module Sword « Personal », depuis la liste des Commentaires en anglais. Ensuite, pour ajouter vos propres commentaires, cliquez du bouton droit à l'aide de la souris sur le volet des commentaires, puis sélectionnez <guiseq><gui>Édition</gui><gui>Modifier le commentaire</gui></guiseq>."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-40-personal-commentary.page:44
-#, fuzzy
 msgid ""
 "An editor window similar to the <gui>Study Pad</gui> will appear. Edit your "
 "comment and save it; in the future it will appear as your comment to the "
 "relevant verse."
-msgstr ""
-"Un éditeur semblable au<gui> bloc-notes </gui> va apparaître. Votre "
-"commentaire est à éditer puis à enregistrer. Il apparaîtra plus tard comme "
-"commentaire personnel au verset correspondant."
+msgstr "Un éditeur semblable au<gui> bloc-notes </gui> va apparaître. Vous pouvez ensuite éditer votre commentaire, puis l'enregistrer. Il apparaîtra ensuite comme commentaire personnel au verset correspondant."
 
 #. (itstool) path: page/media
 #. This is a reference to an external file such as an image or video. When
@@ -3456,18 +3602,12 @@ msgstr "Référence de l'emplacement"
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-40-personal-commentary.page:62
-#, fuzzy
 msgid ""
 "Use the <gui>Synchronise Button</gui> to quickly change location of your "
 "editor to that of the underlying Bibletext or use the <gui>Book</gui>, "
 "<gui>Chapter</gui>, and <gui>Verse</gui> selectors to choose to edit your "
 "comment to one particular verse."
-msgstr ""
-"Le bouton <gui>Synchroniser</gui> permet de  remplacer  l'adresse du verset "
-"affiché par celle du verset en cours  dans le volet des<gui> textes "
-"bibliques</gui>.  Sinon, l'utilisation des sélecteurs de <gui>Livre</gui>, "
-"<gui>Chapitre</gui>, <gui>Verset</gui> permet  d'éditer le commentaire d'un "
-"autre verset."
+msgstr "Utilisez le bouton <gui>Synchroniser</gui> pour rapidement changer la référence du verset de l'éditeur par celle du verset en cours  dans le volet des<gui> textes bibliques</gui>, ou utilisez les sélecteurs de <gui>Livre</gui>, <gui>Chapitre</gui>, <gui>Verset</gui> pour éditer votre commentaire d'un verset particulier."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-40-personal-commentary.page:67
@@ -3543,7 +3683,6 @@ msgstr "Vérification de l'orthographe"
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-40-personal-commentary.page:105
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-41-studypad.page:88
-#, fuzzy
 msgid ""
 "In order for spellcheck to be available, one of the languages under "
 "<guiseq><gui>Edit</gui><gui>Current languages</gui></guiseq> must be set."
@@ -3554,15 +3693,11 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-40-personal-commentary.page:108
-#, fuzzy
 msgid ""
 "To create a link to other verses right click the text and choose <gui>Link.."
 "</gui>. In the pop-up window enter the link location and the module linked "
 "to."
-msgstr ""
-"Pour créer un lien vers d'autres versets, faire un clic droit à l'aide de la "
-"souris sur la partie texte. Puis dans le menu contextuel qui s'affiche, "
-"choisir <gui>Lien</gui>, saisir ensuite l'adresse et le nom du module à lier."
+msgstr "Pour créer un lien vers d'autres versets, cliquez du bouton droit de la souris sur la partie texte. Puis dans le menu contextuel qui s'affiche, saisissez ensuite la référence du lien et le nom du module à lier."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-40-personal-commentary.page:112
@@ -3602,33 +3737,22 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-40-personal-commentary.page:124
-#, fuzzy
 msgid ""
 "Although there are 31,102 verses in standard versification, it is unlikely "
 "that more than a tiny fraction of all verses will have personal commentary "
 "attached to them. A verse list showing where personal commentary notes exist "
 "is available from <guiseq><gui>Right Click</gui><gui>Dump Pers.Comm.</gui></"
 "guiseq>."
-msgstr ""
-"Bien que dans le schéma de versification le plus courant la Bible compte "
-"31192 versets, il est peu probable que plus d'une petite fraction de "
-"l'ensemble des versets contienne des commentaires personnels. Une liste "
-"signalant les versets avec commentaire personnel s'obtient à l'aide du choix "
-"<gui>Liste des versets commentés</gui> du menu contextuel obtenu par un clic "
-"droit de la souris."
+msgstr "Bien que dans le schéma de versification le plus courant, la Bible compte 31192 versets, il est peu probable que plus d'une petite fraction des versets contienne un commentaire personnel. Une liste de versets avec un commentaire personnel est accessible à l'aide du choix <gui>Liste des versets commentés</gui> du menu contextuel obtenu par un clic droit de la souris."
 
 #. (itstool) path: note/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-40-personal-commentary.page:131
-#, fuzzy
 msgid ""
 "The created commentary page will be attached to an individual verse only. To "
 "write commentary pages from within <app>Xiphos</app>, attached to longer "
 "stretches of text use the <gui>Link..</gui> function to link several pages "
 "together"
-msgstr ""
-"Le commentaire crée sera associé à un verset seulement. Pour écrire des "
-"commentaires rattachés à de plus longues portions de texte, utiliser la "
-"fonction <gui>Lien</gui> pour relier les commentaires entre eux."
+msgstr "Le commentaire crée sera associé à un verset seulement. Pour écrire des commentaires rattachés à de plus longues portions de texte, utilisez la fonction <gui>Lien</gui> pour relier les commentaires entre eux."
 
 #. (itstool) path: info/desc
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-41-studypad.page:5
@@ -3645,7 +3769,6 @@ msgstr "Bloc-notes"
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-41-studypad.page:39
-#, fuzzy
 msgid ""
 "The Studypad can be opened by choosing <guiseq><gui>File</gui><gui>Open "
 "StudyPad</gui></guiseq>"
@@ -3672,14 +3795,11 @@ msgstr "studypad.png"
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-41-studypad.page:46
-#, fuzzy
 msgid ""
 "The Studypad will save into your working directory, making it useful for "
 "collecting and exporting information and Bible study material from "
 "<app>Xiphos</app> into other programmes."
-msgstr ""
-"Le bloc-notes enregistre les données dans votre répertoire de travail, ce "
-"qui est pratique pour échanger des informations avec d'autres applications. "
+msgstr "Le bloc-notes enregistrera les données dans votre répertoire de travail, ce qui est pratique pour échanger des informations et du matériel d'étude biblique de <app>Xiphos</app> vers d'autres applications."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-41-studypad.page:75
@@ -3698,24 +3818,16 @@ msgstr "Listes de prières et Journaux"
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-42-journals.page:39
-#, fuzzy
 msgid ""
 "<app>Xiphos</app> supports user-created and -editable modules to contain "
 "general content. Initially conceived as simple prayer lists, they have "
 "expanded to include daily journals and topic-outline content. The user can "
 "maintain prayer lists, or prepare sermons, or write any structured content "
 "desired."
-msgstr ""
-"<app>Xiphos</app> accepte la création et l'édition par l'utilisateur de "
-"modules contenant du texte. Originellement conçus pour l'édition de simples "
-"listes de prières, ces modules incluent désormais des journaux quotidiens et "
-"des thêmes structurées. Il est ainsi possible de tenir à jour des listes de "
-"prières, de préparer des sermons, ou d'écrire n'importe quel contenu "
-"structuré."
+msgstr "<app>Xiphos</app> accepte la création et l'édition par l'utilisateur de modules contenant du texte. Originellement conçus pour l'édition de simples listes de prières, ces modules incluent désormais les journaux quotidiens et des thêmes structurées. Il est ainsi possible de tenir à jour des listes de prières, de préparer des messages, ou d'écrire n'importe quel contenu structuré."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-42-journals.page:45
-#, fuzzy
 msgid ""
 "To enable prayer list and journal support, see the Preferences dialog as "
 "previously described. There, in <guiseq><gui>General</gui><gui> Options </"
@@ -3732,17 +3844,12 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-42-journals.page:51
-#, fuzzy
 msgid ""
 "Right-click on this entry, and you will be offered a context menu to create "
 "new modules. All the offered options are of the same type, but what is "
 "offered is a variety of templates from which to work. There are 6 templates "
 "at this time."
-msgstr ""
-"Un clic droit de la souris sur cette entrée présente un menu contextuel "
-"permettant de créer de nouveaux modules. Toutes les options présentées sont "
-"du même type mais avec des modèles différents à partir desquels travailler. "
-"Il existe 5 modèles pour le moment."
+msgstr "Faites un clic droit de la souris sur cette entrée et il vous sera présenté un menu contextuel permettant de créer de nouveaux modules. Toutes les options présentées sont du même type mais avec des modèles différents à partir desquels travailler. Il existe 6 modèles pour le moment."
 
 #. (itstool) path: page/media
 #. This is a reference to an external file such as an image or video. When
@@ -3793,7 +3900,6 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-42-journals.page:75
-#, fuzzy
 msgid ""
 "Editing a journal or prayer list is done by right-clicking the module name "
 "to get its context menu, whose middle item is <gui>Open in Editor</gui>. The "
@@ -3812,19 +3918,14 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-42-journals.page:82
-#, fuzzy
 msgid ""
 "If the general book subwindow is currently displaying the journal or prayer "
 "list being edited, it will synchronize with new content when <gui>Save</gui> "
 "is used."
-msgstr ""
-"Si le volet <gui>Livre</gui> affiche une liste de prières ou un journal en "
-"cours d'édition, le contenu est mis à jour dès que le bouton "
-"<gui>Enregistrer</gui> est activé."
+msgstr "Si le volet <gui>Livre</gui> affiche une liste de prières ou un journal en cours d'édition, le contenu est mis à jour dès que le bouton <gui>Enregistrer</gui> est activé."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-42-journals.page:86
-#, fuzzy
 msgid ""
 "As mentioned, these user-edited modules are in effect general books. This "
 "means they can be viewed in any Sword Project application. Thus, you can use "
@@ -3834,18 +3935,7 @@ msgid ""
 "module for the Windows user interface. Few other Sword Project applications "
 "provide for editing these modules, however, meaning that they will appear in "
 "such other applications as just ordinary general books."
-msgstr ""
-"Comme précédemment mentionné, les modules créés et édités par l'utilisateur "
-"sont en fait des des modules de type Livre. Ces modules sont donc "
-"utilisables immédiatement dans n'importe quelle application utilisant "
-"l'architecture logicielle du Projet SWORD, comme par exemple <app>BibleTime</"
-"app>. Il est possible également à l'aide de l'onglet <gui>Gérer</gui> du "
-"gestionnaire de modules de réaliser un archivage au format zip, puis de "
-"copier le fichier ainsi obtenu sur un sytème Windows puis d'installer le "
-"module pour une application Windows utilisant le Projet SWORD. Peu d'autres "
-"applications utilisant l'architecture logicielle du Projet SWORD offrent des "
-"outils d'édition de tels modules, ceci implique qu'ils apparaitront "
-"simplement comme des livres ordinaires."
+msgstr "Comme précédemment mentionné, ces modules édités par l'utilisateur sont en fait des modules de type Livre. Cela signifie qu'ils sont utilisables dans n'importe quelle applicationdu Projet SWORD. Vous pouvez donc utiliser immédiatement ces modules dans <app>BibleTime</app>, par exemple. Il est possible également à l'aide de l'onglet <gui>Gérer</gui> du gestionnaire de modules de réaliser un archivage au format zip, puis de copier le fichier ainsi obtenu sur un sytème Windows puis d'installer le module pour une application Windows utilisant le Projet SWORD. Peu d'autres applications utilisant l'architecture logicielle du Projet SWORD offrent des outils d'édition de tels modules, ceci implique qu'ils apparaitront simplement comme des livres ordinaires."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-42-journals.page:95
@@ -3892,95 +3982,59 @@ msgstr "preferences_general-misc.png"
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-50-preferences-general-settings.page:42
-#, fuzzy
 msgid ""
 "If you wish <app>Xiphos</app> to display its interface in a language other "
 "than the default, you may select one here. A restart will be required, so "
 "that the locale can be initialized."
-msgstr ""
-"Pour afficher l'interface de <app>Xiphos</app> dans un autre langage, \n"
-"définir cette autre langue ici. Un redémarrage sera néanmoins nécessaire, de "
-"sorte que \n"
-"la traduction puisse être initialisée."
+msgstr "Si vous désirez afficher l'interface de <app>Xiphos</app> dans une autre langue que celle par défaut, vous pouvez définir cette langue ici. Un redémarrage sera néanmoins nécessaire, de sorte que cette langue soit prise en compte."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-50-preferences-general-settings.page:46
-#, fuzzy
 msgid ""
 "If you enable <gui>Default Dictionary</gui>, then that named dictionary (see "
 "<gui>Special</gui> below) module will always be used when double-clicking a "
 "word anywhere in <app>Xiphos</app>."
-msgstr ""
-"Si un <guilabel>Dictionaire par défaut</guilabel> est activé, ce "
-"dictionnaire \n"
-"(voir <gui>Spécial</gui> ci-dessous) sera toujours utilisé \n"
-"lorsqu'un double-click sera exécuté sur n'importe quel mot dans <app>Xiphos\n"
-"</app>."
+msgstr "Si un <gui>Dictionaire par défaut</gui> est activé, ce dictionnaire (voir <gui>Spécial</gui> ci-dessous) sera toujours utilisé lorsqu'un double-click sera exécuté sur un mot, n'importe où dans <app>Xiphos</app>."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-50-preferences-general-settings.page:50
-#, fuzzy
 msgid ""
 "Certain dictionary-style modules are <gui>Daily Devotionals</gui> whose keys "
 "are numerically in the form \"Month.Day\". If you have such a module "
 "installed and it has been selected as your preferred devotional, then you "
 "can ask that <app>Xiphos</app> display today's selection during startup."
-msgstr ""
-"Les <guilabel>Calendriers bibliques</guilabel> sont des modules "
-"dictionnaires spécifiques dont les entrées sont de la forme numérique \"Mois:"
-"Jour\" (ex&#160;: 12:25). Si un module de ce type a été installé puis "
-"déclaré comme Calendrier biblique dans les préférences diverses des modules, "
-"<app>Xiphos</app> peut présenter le texte du jour lors du démarrage."
+msgstr "Certains modules de type dictionnaire sont des <gui>Calendriers bibliques</gui> dont les entrées sont de la forme numérique \"Mois:Jour\" (ex : 12:25). Si un module de ce type a été installé puis a été ensuite déclaré comme votre Calendrier biblique, vous pouvez demander à <app>Xiphos</app> de présenter le texte du jour lors du démarrage."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-50-preferences-general-settings.page:55
-#, fuzzy
 msgid ""
 "If you enable <gui>Resize images</gui>, <app>Xiphos</app> will automatically "
 "resize image content in commentaries, general books, and dictionaries so as "
 "to fit the subwindow which contains them."
-msgstr ""
-"Si l'option <guilabel>Réduction des images</guilabel> est activée, "
-"<app>Xiphos</app> retaille automatiquement les images des commentaires, "
-"dictionnaires, livres de façon à ce qu'elles s'adaptent à la taille de la "
-"fenêtre où elles sont affichées."
+msgstr "Si l'option <gui>Réduction des images</gui> est activée, <app>Xiphos</app> redimensionne automatiquement les images des commentaires, dictionnaires et livres de façon à ce qu'elles s'adaptent à la taille de la fenêtre où elles sont affichées."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-50-preferences-general-settings.page:59
-#, fuzzy
 msgid ""
 "<gui>Highlight current verse</gui>, if enabled, will cause <app>Xiphos </"
 "app> to substitute mere current verse colorization with a high-contrast "
 "alternate color scheme on the current verse. The colors used may be chosen "
 "from the color selector pane (see below)."
-msgstr ""
-"L'option <guilabel>Verset en cours surligné</guilabel>, une fois activée, "
-"permet de remplacer la colorisation du verset en cours par un schéma de "
-"couleurs au contraste plus élevé. Les couleurs peuvent être personalisées "
-"dans le panneau de sélection de couleurs (voir ci-dessous)."
+msgstr "<gui>Verset en cours surligné</gui>, cette option une fois activée, permet de remplacer la colorisation du verset en cours par un schéma de couleurs au contraste plus élevé. Les couleurs peuvent être personalisées dans le panneau de sélection de couleurs (voir ci-dessous)."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-50-preferences-general-settings.page:64
-#, fuzzy
 msgid ""
 "<gui>Highlight user annotations</gui> uses inverted highlight color choices "
 "when marking user-annotated verses."
-msgstr ""
-"<guilabel>Annotations personnelles surlignées</guilabel> utilise les choix \n"
-"de couleurs du surlignement pour marquer les versets annotés par "
-"l'utilisateur."
+msgstr "<gui>Annotations personnelles surlignées</gui> utilise les choix de couleurs du surlignement pour marquer les versets annotés par l'utilisateur."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-50-preferences-general-settings.page:67
-#, fuzzy
 msgid ""
 "By default, <gui>Cross-references</gui> go into the Previewer. Selecting "
 "this checkbox puts them into the verse list instead."
-msgstr ""
-"Par défaut, les <guilabel>Références croisées</guilabel> sont affichées dans "
-"le volet \n"
-"<gui>Aperçu</gui>. Cocher cette option les fait apparaître dans la liste\n"
-"de versets."
+msgstr "Par défaut, les <gui>Références croisées</gui> sont affichées dans le volet <gui>Aperçu</gui>. En cochant cette option, on les fait apparaître dans la liste de versets."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-50-preferences-general-settings.page:70
@@ -4015,7 +4069,6 @@ msgstr "preferences_general-misc.png"
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-51-preferences-biblesync.page:42
-#, fuzzy
 msgid ""
 "BibleSync is a shared navigation protocol using LAN multicast. It is useful "
 "for a single person when running Bible programs on multiple machines or "
@@ -4043,18 +4096,12 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-51-preferences-biblesync.page:55
-#, fuzzy
 msgid ""
 "To enable BibleSync, select a mode from the radio buttons. Also, choose "
 "whether to accept navigation directly, so that <app>Xiphos</app> moves "
 "immediately to a specified verse, or whether incoming navigation is instead "
 "sent to the verse list, where you can decide whether to follow."
-msgstr ""
-"Pour activer BibleSync, sélectionner un mode parmi les boutons radio. "
-"Choisir aussi l'opportunité d'accepter ou non la navigation entrante "
-"directement, de sorte que Xiphos se déplace immédiatement à un verset "
-"spécifié, ou si la navigation entrante est envoyée à la liste de versets, de "
-"façon à pouvoir décider ensuite de la suivre ou pas."
+msgstr "Pour activer BibleSync, sélectionner un mode parmi les boutons radio. Choisissez aussi l'opportunité d'accepter ou non la navigation entrante directement, de sorte que Xiphos se déplace immédiatement à un verset spécifié, ou sinon, si la navigation entrante est envoyée à la liste de versets, de façon à pouvoir décider ensuite de la suivre ou pas."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-51-preferences-biblesync.page:60
@@ -4108,12 +4155,14 @@ msgstr ""
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-51-preferences-biblesync.page:78
 msgid ""
 "As of Biblesync 2.0.0, a simple chat facility is available, accessed using "
-"<_:keyseq-1/>."
+"<keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key><key>C</key> </keyseq>."
 msgstr ""
+"Depuis Biblesync 2.0.0, un service de chat simplifié est accessible par "
+"\"<keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key><key>C</key> </"
+"keyseq>."
 
 #. (itstool) path: page/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-51-preferences-biblesync.page:83
-#, fuzzy
 msgid ""
 "<app>Xiphos</app> is the first Bible program with a BibleSync "
 "implementation; as such, its utility may be limited for now. Another Sword "
@@ -4122,11 +4171,10 @@ msgid ""
 "applications) to provide support."
 msgstr ""
 "<app>Xiphos</app> est le premier programme biblique mettant en œuvre le "
-"protocole BibleSync; en tant que telle, son utilité est peut être limitée "
-"pour l'instant. Mais un nombre d'auteurs d'autres programmes et des "
-"organisations de soutien ont indiqué leur intention de supporter BibleSync, "
-"y compris Laridian, theWord, BibleAnalyzer et Accordance, aussi bien que "
-"d'autres applications du Projet Sword."
+"protocole BibleSync; par conséquent son utilité est peut être limitée pour "
+"l'instant. Une autre application du Projet Sword, Bishop (Pour Android et "
+"iOS), prend aussi en charge Biblesync. Attendez-vous à voir apparaître "
+"d'autres applications (pas forcément issues du Projet Sword) à l'employer."
 
 #. (itstool) path: info/desc
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-52-preferences-fonts-colors.page:5
@@ -4346,12 +4394,12 @@ msgstr ""
 #. (itstool) path: info/desc
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:8
 msgid "Credits and contact information."
-msgstr ""
+msgstr "Crédits et informations de contact."
 
 #. (itstool) path: page/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:37
 msgid "Credits and Acknowledgment"
-msgstr ""
+msgstr "Crédits et remerciements"
 
 #. (itstool) path: section/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:40
@@ -4360,47 +4408,38 @@ msgstr "Licence"
 
 #. (itstool) path: section/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:41
-#, fuzzy
 msgid ""
 "Permission is granted to copy, distribute and/or modify this document under "
 "the terms of the GNU General Public License (GPL), Version 2 or any later "
 "version published by the Free Software Foundation. You can find a copy of "
-"the GPL at this <_:link-1/> or in the file COPYING distributed with this "
-"manual."
-msgstr ""
-"L'autorisation de copier, distribuer et/ou modifier le présent document est "
-"soumise aux conditions de la licence relative à la documentation gratuite "
-"GNU (GPL), version 2 ou toute version publiée ultérieurement par la Free "
-"Software Foundation. Vous pouvez trouver une copie de cette licence à "
-"l'adresse suivante : <ulink type=\"help\" url=\"ghelp:fdl\">lien</ulink> ou "
-"dans le fichier COPYING distribué avec le présent manuel."
+"the GPL at this <link href=\"http://www.gnu.org/licenses/gpl-2.0.html"
+"\">link</link> or in the file COPYING distributed with this manual."
+msgstr "L'autorisation de copier, distribuer et/ou modifier le présent document est soumise aux conditions de la licence relative à la documentation gratuite GNU (GPL), version 2 ou toute version publiée ultérieurement par la Free Software Foundation. Vous pouvez trouver une copie de cette licence à l'adresse suivante : <link href=\"http://www.gnu.org/licenses/gpl-2.0.html\">lien</link> ou dans le fichier COPYING distribué avec le présent manuel."
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:53
+#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:52
 msgid "Authors of the <app>Xiphos</app> User Documentation"
-msgstr ""
+msgstr "Auteurs de la documentation de <app>Xiphos</app>"
 
 #. (itstool) path: section/p
-#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:54
+#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:53
 msgid "This manual was written by:"
 msgstr "Ce manuel a été écrit par :"
 
 #. (itstool) path: section/title
-#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:76
+#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:75
 msgid "Contact information"
-msgstr ""
+msgstr "Informations de contact"
 
 #. (itstool) path: section/p
-#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:77
-#, fuzzy
+#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:76
 msgid "The <app>Xiphos</app> software and Manual:"
 msgstr "Manuel de <app>Xiphos</app> :"
 
 #. (itstool) path: section/p
-#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:104
-#, fuzzy
+#: /home/domi/Development/xiphos/mhelp/C/xiphos-90-credits.page:103
 msgid "The SWORD Project:"
-msgstr "Le logo du Projet SWORD"
+msgstr "Le Projet SWORD :"
 
 #~ msgid ""
 #~ "Xiphos is a Bible study and research tool based upon the \"SWORD Project"
