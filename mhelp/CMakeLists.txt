@@ -217,8 +217,13 @@ if (HELP)
 
   # target to refresh .pot file
   set (help_pot ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.pot)
+  # list help pages to translate
+  set (pot_pages)
+  foreach(page ${help_pages})
+    list(APPEND pot_pages ${CMAKE_CURRENT_BINARY_DIR}/C/${page})
+  endforeach(page)
   add_custom_target (help_pot
-    COMMAND ${ITSTOOL} -o ${help_pot} ${CMAKE_CURRENT_SOURCE_DIR}/C/*.page
+    COMMAND ${ITSTOOL} -o ${help_pot} ${pot_pages}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT "Updating help pot file."
     )
