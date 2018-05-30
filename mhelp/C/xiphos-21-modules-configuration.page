@@ -8,6 +8,7 @@
     <link type="guide" xref="index#module-manager"/>
 
     <revision pkgversion="4.1.0" date="2018-04-24" status="draft"/>
+    <revision pkgversion="4.1.0" date="2018-05-28" status="candidate"/>
 
     <title type='link' role="trail"></title>
     <title type='text'>Xiphos</title>
@@ -44,15 +45,15 @@
     the modules available from other repositories do not represent content
     officially sanctioned by Crosswire. On the web, see this page for list of
     those repositories known:
-    <link href="http://www.crosswire.org/wiki/Module_Repositories"
-	  its:translate="no">
+    <link href="http://www.crosswire.org/wiki/Module_Repositories">
     http://www.crosswire.org/wiki/Module_Repositories</link></p>
 
-    <p>The list of standard repositories is maintained at CrossWire. Xiphos
-    normally auto-synchronizes with that list one time, when the user first puts
-    the Module Manager to use. The list may change, as new repositories come
-    into existence; occasional re-synchronization with the list is suggested,
-    which is accomplished by clicking <gui>Load Standard</gui>.</p>
+    <p>The list of standard repositories is maintained at CrossWire.
+    <app>Xiphos</app> normally auto-synchronizes with that list one time, when
+    the user first puts the Module Manager to use. The list may change, as new
+    repositories come into existence; occasional re-synchronization with the
+    list is suggested, which is accomplished by clicking <gui>Load Standard
+    </gui>.</p>
   </section>
 
   <section id="installation">
@@ -73,15 +74,15 @@
       install in your personal area, under ~/.sword. If you run as root, or
       change permissions on the shared directory, you will also be able to
       install modules for all users, typically in /usr/share/sword. There have
-      been some requests for Xiphos to provide a means by which an ordinary
-      (non-root) user could start the program, gain temporary write access to
-      the system area while installing modules, and then revoke that access
-      after installation is complete.
+      been some requests for <app>Xiphos</app> to provide a means by which an
+      ordinary (non-root) user could start the program, gain temporary write
+      access to the system area while installing modules, and then revoke that
+      access after installation is complete.
       Attempting to devise a scheme to do this has proven quite difficult,
       given the different superuser management schemes employed by various Linux
       distributions. Therefore, at this time there are no ongoing plans to try
       to solve this problem, and users are advised to enable write access to the
-      system area outside Xiphos.</p>
+      system area outside <app>Xiphos</app>.</p>
     </section>
 
     <section id="destination-xp">

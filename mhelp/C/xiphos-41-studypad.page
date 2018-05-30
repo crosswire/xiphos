@@ -7,6 +7,7 @@
     <link type="guide" xref="index#personal-comments"/>
 
     <revision pkgversion="4.1.0" date="2018-04-24" status="draft"/>
+    <revision pkgversion="4.1.0" date="2018-05-29" status="candidate"/>
 
     <title type='link' role="trail"></title>
     <title type='text'>Xiphos</title>
@@ -43,8 +44,8 @@
   <media style="image" mime="image/png" src="figures/studypad.png" />
 
   <p> The Studypad will save into your working directory, making it useful for
-  collecting and exporting information and Bible study material from Xiphos into
-  other programmes.</p>
+  collecting and exporting information and Bible study material from
+  <app>Xiphos</app> into other programmes.</p>
 
   <p> Toolbar 1</p>
   <list>

@@ -57,32 +57,46 @@
 	  the case with most Sword applications, <app>Xiphos</app> understands
 	  many abbreviations: "G" is adequate to specify Genesis, for example,
 	  and any book name by itself implies 1:1.</p></td>
-	  <td><p><keyseq><key>Ctrl</key><key>L</key></keyseq></p></td>
+	  <td its:translate="no">
+	    <p><keyseq><key>Ctrl</key><key>L</key></keyseq></p>
+	  </td>
 	</tr>
 	<tr>
 	  <td><p>Bring the Commentary View forward when previously obscured by
 	  the Book View.</p></td>
-	  <td><p><keyseq><key>Alt</key><key>C</key></keyseq></p></td>
+	  <td its:translate="no">
+	    <p><keyseq><key>Alt</key><key>C</key></keyseq></p>
+	  </td>
 	</tr>
 	<tr>
 	  <td><p>Focus on the general book.</p></td>
-	  <td><p><keyseq><key>Alt</key><key>G</key></keyseq></p></td>
+	  <td its:translate="no">
+	    <p><keyseq><key>Alt</key><key>G</key></keyseq></p>
+	  </td>
 	</tr>
 	<tr>
 	  <td><p>Focus on the dictionary navbar text.</p></td>
-	  <td><p><keyseq><key>Alt</key><key>D</key></keyseq></p></td>
+	  <td its:translate="no">
+	    <p><keyseq><key>Alt</key><key>D</key></keyseq></p>
+	  </td>
 	</tr>
 	<tr>
 	  <td><p>Open a new tab.</p></td>
-	  <td><p><keyseq><key>Ctrl</key><key>T</key></keyseq></p></td>
+	  <td its:translate="no">
+	    <p><keyseq><key>Ctrl</key><key>T</key></keyseq></p>
+	  </td>
 	</tr>
 	<tr>
 	  <td><p>Make the tab #1 current.</p></td>
-	  <td><p><keyseq><key>Ctrl</key><key>1</key></keyseq></p></td>
+	  <td its:translate="no">
+	    <p><keyseq><key>Ctrl</key><key>1</key></keyseq></p>
+	  </td>
 	</tr>
 	<tr>
 	  <td><p>Make the tab #2 current.</p></td>
-	  <td><p><keyseq><key>Ctrl</key><key>2</key></keyseq></p></td>
+	  <td its:translate="no">
+	    <p><keyseq><key>Ctrl</key><key>2</key></keyseq></p>
+	  </td>
 	</tr>
 	<tr>
 	  <td><p>...</p></td>
@@ -90,7 +104,9 @@
 	</tr>
 	<tr>
 	  <td><p>Make the tab #9 current.</p></td>
-	  <td><p><keyseq><key>Ctrl</key><key>9</key></keyseq></p></td>
+	  <td its:translate="no">
+	    <p><keyseq><key>Ctrl</key><key>9</key></keyseq></p>
+	  </td>
 	</tr>
       </tbody>
   </table>
@@ -106,53 +122,77 @@
     <tbody>
       <tr>
 	<td><p>Previous verse</p></td>
-	<td><p><keyseq><key>Ctrl</key><key>p</key></keyseq></p>
-	<p><keyseq><key>k</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>p</key></keyseq></p>
+	  <p><keyseq><key>k</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Next verse</p></td>
-	<td><p><keyseq><key>Ctrl</key><key>n</key></keyseq></p>
-	<p><keyseq><key>j</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>n</key></keyseq></p>
+	  <p><keyseq><key>j</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Previous chapter</p></td>
-	<td><p><keyseq><key>p</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>p</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Next chapter</p></td>
-	<td><p><keyseq><key>n</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>n</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Previous book</p></td>
-	<td><p><keyseq><key>P</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>P</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Next book</p></td>
-	<td><p><keyseq><key>N</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>N</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Bring up the context menu for the Bible pane.</p></td>
-	<td><p><keyseq><key>Shift</key><key>F10</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Shift</key><key>F10</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Toggle Strong's display.</p></td>
-	<td><p><keyseq><key>Alt</key><key>S</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>S</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Toggle morphology display.</p></td>
-	<td><p><keyseq><key>Alt</key><key>M</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>M</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Toggle lemma display.</p></td>
-	<td><p><keyseq><key>Alt</key><key>L</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>L</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Toggle "red words of Christ" display.</p></td>
-	<td><p><keyseq><key>Alt</key><key>R</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>R</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Toggle transliteration.</p></td>
-	<td><p><keyseq><key>Alt</key><key>T</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>T</key></keyseq></p>
+	</td>
       </tr>
     </tbody>
   </table>
@@ -168,35 +208,51 @@
     <tbody>
       <tr>
 	<td><p>Open this manual.</p></td>
-	<td><p><keyseq><key>F1</key></keyseq></p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>F1</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Open the <gui>Preferences</gui> dialog.</p></td>
-    	<td><p><keyseq><key>F2</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>F2</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Open <gui>Advanced Search</gui>.</p></td>
-    	<td><p><keyseq><key>F3</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>F3</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Bring forward the simple sidebar search.</p></td>
-    	<td><p><keyseq><key>Ctrl</key><key>F3</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>F3</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Open the <gui>Module Manager</gui>.</p></td>
-    	<td><p><keyseq><key>F4</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>F4</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Open the current Bible as a separate window.</p></td>
-    	<td><p><keyseq><key>F11</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>F11</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Open an annotation dialog on the current verse.</p></td>
-    	<td><p><keyseq><key>Alt</key><key>A</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>A</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Open a bookmark dialog on the current verse.</p></td>
-    	<td><p><keyseq><key>Alt</key><key>B</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>B</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Open the "Find" dialog.  The subwindow to which it applies
@@ -204,15 +260,21 @@
 	then the commentary or general book, then the dictionary. So a tab can
 	be dedicated to just a book, and the "Find" will be performed within
 	that pane.</p></td>
-    	<td><p><keyseq><key>Ctrl</key><key>F</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>F</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Detach/re-attach the parallel view dialog.</p></td>
-    	<td><p><keyseq><key>Alt</key><key>P</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>P</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Open editor on the personal commentary named Personal.</p></td>
-    	<td><p><keyseq><key>Alt</key><key>Z</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>Z</key></keyseq></p>
+	</td>
       </tr>
     </tbody>
   </table>
@@ -228,15 +290,21 @@
     <tbody>
       <tr>
 	<td><p>Increase the base font size.</p></td>
-    	<td><p><keyseq><key>Ctrl</key><key>+</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>+</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Decrease the base font size.</p></td>
-    	<td><p><keyseq><key>Ctrl</key><key>-</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>-</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Set the base font size to zero.</p></td>
-    	<td><p><keyseq><key>Ctrl</key><key>0</key></keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>0</key></keyseq></p>
+	</td>
       </tr>
     </tbody>
   </table>
@@ -252,42 +320,48 @@
     <tbody>
       <tr>
 	<td><p>Put BibleSync into Personal mode.</p></td>
-    	<td><p><keyseq>
-	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>P</key>
-	</keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key>
+	  <key>P</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Put BibleSync into Speaker mode.</p></td>
-    	<td><p><keyseq>
-	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>S</key>
-	</keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key>
+	  <key>S</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Put BibleSync into Audience mode.</p></td>
-    	<td><p><keyseq>
-	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>A</key>
-	</keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key>
+	  <key>A</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Turn off BibleSync.</p></td>
-    	<td><p><keyseq>
-	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>O</key>
-	</keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key>
+	  <key>O</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Cause BibleSync to navigate your current point as a one-shot
 	event. BibleSync must be transmit-ready, that is, in Personal or Speaker
 	mode. Use this when you have set BibleSync for "keyboard only" in
 	Preferences.</p></td>
-    	<td><p><keyseq>
-	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>N</key>
-	</keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key>
+	  <key>N</key></keyseq></p>
+	</td>
       </tr>
       <tr>
 	<td><p>Provide for sending chat messages to others.</p></td>
-    	<td><p><keyseq>
-	  <key>Ctrl</key><key>Alt</key><key>Shift</key><key>C</key>
-	</keyseq></p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key>
+	  <key>C</key></keyseq></p>
+	</td>
       </tr>
     </tbody>
   </table>

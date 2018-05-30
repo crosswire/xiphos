@@ -7,6 +7,7 @@
     <link type="guide" xref="index#preferences"/>
 
     <revision pkgversion="4.1.0" date="2018-04-24" status="draft"/>
+    <revision pkgversion="4.1.0" date="2018-05-29" status="candidate"/>
 
     <title type='link' role="trail"></title>
     <title type='text'>Xiphos</title>
@@ -52,9 +53,9 @@
   received; as Speaker, it transmits only; as Audience, it receives only.</p>
 
   <p>To enable BibleSync, select a mode from the radio buttons.  Also, choose
-  whether to accept navigation directly, so that Xiphos moves	immediately to a
-  specified verse, or whether incoming navigation is instead sent to the verse
-  list, where you can decide whether to follow.</p>
+  whether to accept navigation directly, so that <app>Xiphos</app> moves
+  immediately to a specified verse, or whether incoming navigation is instead
+  sent to the verse list, where you can decide whether to follow.</p>
 
   <p>If you use a firewall, you must punch a hole in it for UDP port 22272.</p>
 
@@ -75,7 +76,9 @@
   induces indirect verse list navigation.</p>
 
   <p>As of Biblesync 2.0.0, a simple chat facility is available, accessed
-  using <gui>Ctrl-Alt-Shift-C</gui>.</p>
+  using <keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key><key>C</key>
+  </keyseq>.</p>
+
 
   <p><app>Xiphos</app> is the first Bible program with a BibleSync
   implementation; as such, its utility may be limited for now. Another Sword

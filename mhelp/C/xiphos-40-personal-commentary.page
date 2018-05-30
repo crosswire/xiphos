@@ -7,6 +7,7 @@
     <link type="guide" xref="index#personal-comments"/>
 
     <revision pkgversion="4.1.0" date="2018-04-24" status="draft"/>
+    <revision pkgversion="4.1.0" date="2018-05-29" status="candidate"/>
 
     <title type='link' role="trail"></title>
     <title type='text'>Xiphos</title>
@@ -128,8 +129,9 @@
 
   <note style="tip">
     <p>The created commentary page will be attached to an individual verse only.
-    To write commentary pages from within Xiphos, attached to longer stretches
-    of text use the <gui>Link..</gui> function to link several pages together</p>
+    To write commentary pages from within <app>Xiphos</app>, attached to longer
+    stretches of text use the <gui>Link..</gui> function to link several pages
+    together</p>
   </note>
 
 

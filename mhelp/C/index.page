@@ -6,7 +6,7 @@
 
   <info>
     <revision pkgversion="4.1.0" date="2018-04-24" status="draft"/>
-<!--    <desc>Xiphos is an application to aid in study of the Bible.</desc> -->
+    <revision pkgversion="4.1.0" date="2018-05-28" status="candidate"/>
     <desc>Bible study tool for reading, study, and research using modules from
     The SWORD Project and elsewhere.</desc>
 
@@ -42,9 +42,9 @@
   </media>Xiphos
   </title>
 
-  <p>Xiphos is a Bible study tool, offering a rich and featureful environment
-  for reading, study, and research using modules from The SWORD Project and
-  elsewhere.</p>
+  <p><app>Xiphos</app> is a Bible study tool, offering a rich and featureful
+  environment for reading, study, and research using modules from The SWORD
+  Project and elsewhere.</p>
 
   <section id="getting-started" style="2column">
     <title>First steps</title>

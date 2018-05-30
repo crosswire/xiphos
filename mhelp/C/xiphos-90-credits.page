@@ -10,6 +10,7 @@
     <link type="guide" xref="index"/>
 
     <revision pkgversion="4.1.1" date="2018-05-20" status="draft"/>
+    <revision pkgversion="4.1.0" date="2018-05-30" status="candidate"/>
 
     <title type='link' role="trail"></title>
     <title type='text'>Xiphos</title>
@@ -43,9 +44,8 @@
       under the terms of the GNU General Public License (GPL), Version 2 or
       any later version published by the Free Software Foundation. You can
       find a copy of the GPL at this
-      <link href="http://www.gnu.org/licenses/gpl-2.0.html"
-	    its:translate="no">link</link> or in the file COPYING distributed
-      with this manual.
+      <link its:translate="no" href="http://www.gnu.org/licenses/gpl-2.0.html">link</link> or
+      in the file COPYING distributed with this manual.
     </p>
   </section>
 

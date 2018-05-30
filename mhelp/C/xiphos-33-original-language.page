@@ -8,6 +8,7 @@
     <link type="guide" xref="index#search-function"/>
 
     <revision pkgversion="4.1.0" date="2018-04-24" status="draft"/>
+    <revision pkgversion="4.1.0" date="2018-05-29" status="candidate"/>
 
     <title type='link' role="trail"></title>
     <title type='text'>Xiphos</title>
@@ -40,8 +41,8 @@
 
     <title>Installing Needed Modules</title>
 
-    <p>Xiphos is ideally suited for studying the original Greek and Hebrew. To
-    get started, you will want the following modules:</p>
+    <p><app>Xiphos</app> is ideally suited for studying the original Greek and
+    Hebrew. To get started, you will want the following modules:</p>
 
     <p>From Crosswire Repository:</p>
     <list>
@@ -103,8 +104,8 @@
 
     <title>Searching for Strongs Numbers</title>
 
-    <p>Choose <guiseq><gui>Edit</gui><gui>Advanced Search</gui></guiseq>or press
-    <key>F3</key>. Under <gui>Search Type</gui>, select <gui>Optimized
+    <p>Choose <guiseq><gui>Edit</gui><gui>Advanced Search</gui></guiseq> or
+    press <key>F3</key>. Under <gui>Search Type</gui>, select <gui>Optimized
     ("Lucene")</gui>. Click on the <gui>Attribute Search</gui> tab, and make
     check the box that says <gui>Strongs Numbers</gui>. Now click in the entry
     field at the top and search for the number you are looking for preceded by
@@ -128,7 +129,8 @@
 	in Greek. It combines the LXX and Tischendorf8 NT into one easy-to-use
 	module. In addition, it contains Strongs, Morphology,Greek Accents,
 	and primary/secondary readings. As with all modules that include
-	Strongs, Xiphos displays 2TGreek in beautiful interlinear form.</p>
+	Strongs, <app>Xipho</app> displays 2TGreek in beautiful interlinear
+	form.</p>
       </item>
       <item>
 	<p>Elzevir Textus Receptus (Crosswire Beta Repository as of this
