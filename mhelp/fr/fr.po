@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 4.1.0\n"
 "Report-Msgid-Bugs-To: Dominique Corbex <dominique@corbex.org>\n"
 "POT-Creation-Date: 2018-05-29 21:36+0200\n"
-"PO-Revision-Date: 2018-05-29 23:36+0200\n"
+"PO-Revision-Date: 2018-05-30 09:51+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.org>\n"
 "Language-Team: emacs + po-mode; French <gnomefr@traduc.org>\n"
 "Language: fr_FR\n"
@@ -570,7 +570,7 @@ msgstr "Ligne de commande"
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-10-start.page:53
 msgid "Type <cmd>xiphos</cmd>, then press <key>Return</key>."
-msgstr "Entrez <cmd>xiphos</cmd>, puis appuyez sur <keycap>Entrée</keycap>."
+msgstr "Entrez <cmd>xiphos</cmd>, puis appuyez sur <key>Entrée</key>."
 
 #. (itstool) path: item/title
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-10-start.page:56
@@ -942,11 +942,7 @@ msgid ""
 "Allows manual editing of passages which are displayed in the <gui>Bible Text "
 "Pane</gui> and <gui>Commentary Pane</gui>. Changes take effect once Enter is "
 "typed."
-msgstr ""
-"Permet la saisie manuelle d'un passage à afficher dans le volet des "
-"<gui>textes bibliques</gui> et celui des <gui>Commentaires</gui>. Le "
-"changement prend effet immédiatement après appui sur la touche "
-"<keycap>Entrée</keycap>."
+msgstr "Permet la saisie manuelle d'un passage à afficher dans le volet des <gui>textes bibliques</gui> et celui des <gui>Commentaires</gui>. Le changement prend effet immédiatement après appui sur la touche <key>Entrée</key>."
 
 #. (itstool) path: note/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-11-interface.page:109
@@ -2453,13 +2449,7 @@ msgid ""
 "used to find verses with words that match a particular pattern. For example "
 "the regular expression <input>[a-z]*iah </input> will match verses that "
 "contain the words Aiah, Ahaziah, Athaliah and Amariah."
-msgstr ""
-"Cette requête utilise une expression rationnelle comme clé de recherche. Une "
-"expression rationnelle est basée sur un langage et une syntaxe spécifiques "
-"permettant de retrouver un mot, une phrase à l'aide de combinaisons "
-"complexes. Par exemple l'expression rationnelle <userinput>\\ A[a-z]*iah </"
-"userinput> permet de retrouver les passages qui contiennent les mots Aiah, "
-"Ahaziah, Athaliah et Amariah."
+msgstr "Cette requête utilise une expression rationnelle comme clé de recherche. Une expression rationnelle est basée sur un langage et une syntaxe spécifiques permettant de retrouver un mot, une phrase à l'aide de combinaisons complexes. Par exemple l'expression rationnelle <input>\\ A[a-z]*iah </input> permet de retrouver les passages qui contiennent les mots Aiah, Ahaziah, Athaliah et Amariah."
 
 #. (itstool) path: item/p
 #: /home/domi/Development/xiphos/mhelp/C/xiphos-30-search.page:121
