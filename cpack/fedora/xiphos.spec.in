@@ -1,10 +1,13 @@
-Name:           xiphos
-Version:        4.1.0
+Name:           @CPACK_PACKAGE_NAME@
+Version:        @CPACK_PACKAGE_VERSION@
 Release:        1%{?dist}
 Summary:        Bible study and research tool
 License:        GPLv2+
-URL:            http://xiphos.org/
+URL:            @XIPHOS_WEBSITE@
+Vendor:         @CPACK_PACKAGE_VENDOR@
+
 Source0:        https://github.com/crosswire/xiphos/releases/download/%{version}/xiphos-%{version}.tar.gz
+
 BuildRequires:  biblesync-devel >= 2.0.1
 BuildRequires:  desktop-file-utils
 BuildRequires:  dbus-glib-devel
@@ -21,10 +24,10 @@ BuildRequires:  sword-devel >= 1.8.1
 BuildRequires:  gtk3-devel
 BuildRequires:  webkitgtk4-devel
 BuildRequires:  gtkhtml3-devel
-Requires:       yelp
-# added (CMake port)
-BuildRequires:  itstool
 BuildRequires:  yelp-tools
+Requires:       yelp
+BuildRequires:  itstool
+
 #
 Provides:       xiphos
 Provides:       xiphos-common
@@ -40,7 +43,7 @@ ExcludeArch: ppc64
 
 %description
 Xiphos is a Bible study tool written for Linux,
-NIX, and Windows under the GNOME toolkit, offering a rich and featureful
+UNIX, and Windows under the GNOME toolkit, offering a rich and featureful
 environment for reading, study, and research using modules from The SWORD
 Project and elsewhere.
 This build produced by Xiphos development; not from official Fedora repo.

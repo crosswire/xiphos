@@ -213,11 +213,20 @@ The following command will generate `zip` and `tar.gz` source files:
     $ make package_source
 
 
-Creating Binary Packages
-------------------------
+Creating Debian Binary Packages
+-------------------------------
 This command generates `DEB` packages. It should work on any linux host but it
 will produce better deb packages when Debian specific tools ‘dpkg-xxx’ are
 usable on the build system.
 
     $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWEBKIT1=ON <XIPHOS_SOURCE_DIR>
     $ make package
+
+
+Creating a Fedora Binary Package
+--------------------------------
+This command generates a `RPM` package and a standard `spec` file as well.
+
+    $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON <XIPHOS_SOURCE_DIR>
+    $ make package
+
