@@ -53,7 +53,7 @@ https://www.gnu.org/software/gettext/manual/html_node/Usual-Language-Codes.html
 
 Then, in in your build directory, run:
 
-    $ make handbook
+    $ make mhelp
 
 This will create the corresponding <LANG> folder and the <LANG>.po file into
 this folder.
@@ -63,7 +63,7 @@ this folder.
 
 go to your CMake build folder and run:
 
-    make help_pot
+    make mhelp_pot
 
 This takes the list of Mallard pages, extracts the translatable strings and
 merges them into a PO template (POT) file which will be named xiphos.pot.
@@ -80,7 +80,7 @@ file.
 
 In your build directory, run
 
-    make help_<LANG>.po
+    make mhelp_<LANG>.po
 
 The POT file is then merged in the current PO file.
 
@@ -90,5 +90,5 @@ The POT file is then merged in the current PO file.
 
 go to your CMake build folder and run:
 
-    make help_po
+    make mhelp_po
 

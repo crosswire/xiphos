@@ -57,7 +57,6 @@ if (HELP)
   # list of figures
   list (APPEND help_figures
     figures/first_start.png
-    figures/gtkhtml3-vs-mozembed.png
     figures/interface_biblepane-options.png
     figures/interface_biblepane.png
     figures/interface_commentarypane.png
@@ -81,7 +80,6 @@ if (HELP)
     figures/preferences_general-biblesync.png
     figures/preferences_modules-misc.png
     figures/preferences_modules-parallel.png
-    figures/preferences.png
     figures/search_search.png
     figures/studypad.png
     figures/sword3.png
@@ -93,7 +91,8 @@ if (HELP)
     figures/xiphos-trail-icon.png
     )
 
-  add_custom_target(handbook) # help is a reserved keyword
+  # we use 'mhelp' (mallard help) as 'help' is a CMake reserved keyword
+  add_custom_target(mhelp)
 
   # read languages from LINGUAS
   file (READ ${CMAKE_CURRENT_SOURCE_DIR}/HELP_LINGUAS linguas)
@@ -112,7 +111,7 @@ if (HELP)
   add_custom_target(help-C-pages
     DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/C/pages.timestamp
     )
-  add_dependencies(handbook help-C-pages)
+  add_dependencies(mhelp help-C-pages)
 
   # 2. create translated pages for all other languages than C
   foreach (lang ${help_locales})
@@ -162,7 +161,7 @@ if (HELP)
       DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/pages.timestamp
       )
 
-    add_dependencies(handbook help-${lang}-pages)
+    add_dependencies(mhelp help-${lang}-pages)
 
   endforeach (lang)
 
@@ -181,7 +180,7 @@ if (HELP)
       DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/validate.txt
       )
 
-    add_dependencies(handbook validate-${lang}-pages)
+    add_dependencies(mhelp validate-${lang}-pages)
 
   endforeach (lang)
 
@@ -222,7 +221,7 @@ if (HELP)
   foreach(page ${help_pages})
     list(APPEND pot_pages ${CMAKE_CURRENT_BINARY_DIR}/C/${page})
   endforeach(page)
-  add_custom_target (help_pot
+  add_custom_target (mhelp_pot
     COMMAND ${ITSTOOL} -o ${help_pot} ${pot_pages}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT "Updating help pot file."
@@ -231,7 +230,7 @@ if (HELP)
   # target for updating a given .po file
   set (help_po_update_all echo)
   foreach (lang ${help_locales})
-    add_custom_target (help_${lang}.po
+    add_custom_target (mhelp_${lang}.po
       COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --update --verbose ${lang}.po ${help_pot}
       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${lang}
       COMMENT "Updating ${lang}.po file"
@@ -241,7 +240,7 @@ if (HELP)
   endforeach()
 
   # target for updating all po files
-  add_custom_target (help_po
+  add_custom_target (mhelp_po
     COMMAND ${help_po_update_all}
     VERBATIM
     )
@@ -284,11 +283,11 @@ if (HELP)
 	COMMENT "Generating '${lang}' ePub Help file"
 	)
 
-      add_custom_target(${lang}-epub-help
+      add_custom_target(mhelp-epub-${lang}
 	DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${PROJECT_NAME}-${lang}.epub
 	)
 
-      add_dependencies(handbook ${lang}-epub-help)
+      add_dependencies(mhelp mhelp-epub-${lang})
 
       # install ePub file
       install (FILES
@@ -313,21 +312,20 @@ if (HELP)
 	list(APPEND mallard_pages ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${page})
       endforeach(page)
 
-      # use a custom css (specify font size, hide footer..)
-      set(custom_css ${CMAKE_CURRENT_SOURCE_DIR}/xml/html.css.custom.xsl)
       # convert Mallard pages into html files
       add_custom_command (OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/html.timestamp
-	COMMAND ${YELP_BUILD} html -x ${custom_css} ${mallard_pages}
+	COMMAND ${CMAKE_COMMAND} -E make_directory html
+	COMMAND ${YELP_BUILD} html -o html ${mallard_pages}
 	# make a tarball of all the .html files
-	COMMAND ${CMAKE_COMMAND} -E tar cvzf xiphos-html-help.tar.gz *.html
+	COMMAND ${CMAKE_COMMAND} -E tar cvzf xiphos-html-help.tar.gz html
 	DEPENDS validate-${lang}-pages
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
 	COMMENT "Generating '${lang}' html files"
 	)
-      add_custom_target(${lang}-html-help
+      add_custom_target(mhelp-html-${lang}
 	DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/html.timestamp
 	)
-      add_dependencies(handbook ${lang}-html-help)
+      add_dependencies(mhelp mhelp-html-${lang})
 
       # install HTML files
       install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos-html-help.tar.gz
@@ -351,106 +349,52 @@ if (HELP)
     # 2. Error: Anchor undefined:
     #    due to missing anchors in index.html
 
-    # generate a .chm file for each <lang>
     foreach (lang ${help_all_langs})
-      # Create xiphos.hhp file (PROJECT)
-      # 1. find the according Microsoft language ID
-      file(STRINGS win32/ms-langID ms_langID REGEX "^${lang}[ ]")
-      # if empty, default to the en-US langID
-      if (NOT ms_langID)
-	set(ms_langID "C 0x0409 English (United States)")
-      endif ()
-      # remove lang, keep only langID and country values
-      string(LENGTH ${lang} len_lang)
-      math(EXPR len_lang "${len_lang} + 1")
-      string(SUBSTRING ${ms_langID} ${len_lang} -1 MS_LANGUAGE_CODE)
+      # make a distinct directory
+      file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}/chm)
 
-      # 2. set the .chm output file name
+      # list pages to convert
+      set (mallard_pages)
+      foreach(page ${help_pages})
+	list(APPEND mallard_pages ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${page})
+      endforeach(page)
+
+      # use a custom css for generating HTML4 copatible pages
+      set(custom_css ${CMAKE_CURRENT_SOURCE_DIR}/xml/html.css.custom.xsl)
+
+      # use a Mallard cache file
+      set(cache_cache ${CMAKE_CURRENT_BINARY_DIR}/${lang}/chm/cache.xml)
+
+      # use XSLT to create HtmlHelp files
+      set(mal2hh_xslt ${CMAKE_CURRENT_SOURCE_DIR}/xml/mal2hh.xsl)
+
+      # set the output file name
       set(MS_COMPILED_FILE "xiphos_${lang}.chm")
 
-      # 3. set the list of files to compile
-      foreach(line ${help_pages})
-	set(MS_FILES_LIST "${MS_FILES_LIST}${line}\n")
-      endforeach()
-      foreach(line ${help_figures})
-	set(MS_FILES_LIST "${MS_FILES_LIST}${line}\n")
-      endforeach()
-
-      # 4. create HHP file (Project file)
-      configure_file(${PROJECT_SOURCE_DIR}/mhelp/win32/xiphos.hhp.in
-	${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhp)
-
-      # Create xiphos.hhc (TOC)
-      # 1. find MS codepage for lang
-      file(STRINGS win32/ms-codepages ms_codepage REGEX "^${lang}[ ]")
-      # if codepage unset, default to windows-1252
-      if (${lang} STREQUAL ${ms_codepage})
-	message(WARNING "No codepage set for ${lang}, please add it to the win32/ms-codepages file")
-	set(ms_codepage "${lang} windows-1252")
-      endif ()
-      # remove lang
-      string(LENGTH ${lang} len_lang)
-      math(EXPR len_lang "${len_lang} + 1")
-      string(SUBSTRING ${ms_codepage} ${len_lang} -1 MS_WINDOWS_CODEPAGE)
-
-      # 3. create XSLT file
-      configure_file(${CMAKE_CURRENT_SOURCE_DIR}/win32/toc.xsl.in
-	${CMAKE_CURRENT_BINARY_DIR}/${lang}/toc.xsl)
-
-      # 4. build HHC file
-      add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhc
-	# Create HHC file (TOC)
-	COMMAND ${XSLTPROC} --html ${CMAKE_CURRENT_BINARY_DIR}/${lang}/toc.xsl ${CMAKE_CURRENT_BINARY_DIR}/${lang}/index.html > ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhc
-	# Compile HTML files
-	DEPENDS ${lang}-html-help
-	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
-	COMMENT "Generating '${lang}' Windows HHC (Table of Contents) file"
-	)
-
-      # 6. TODO: Create a valid HHK file (Index file)
-      # here is a workaround:
-      file (WRITE ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhk
-	"<!DOCTYPE html>"
-	"<html>"
-	"<head>"
-	"<!-- Sitemap 1.0 -->"
-	"</head><body>"
-	"<object type=\"text/site properties\">"
-	"</object>"
-	"<ul>"
-	"</ul>"
-	"</body></html>"
-	)
-
-      # 7. Build CHM
-      if (WIN32 AND NOT CMAKE_CROSSCOMPILING)
-	# pure Windows: building help with HHC.EXE [NOTE: First switch to XSLT]
-	add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${MS_COMPILED_FILE}
-	  COMMAND ${HHC_EXE} xiphos.hhp
-	  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
-	  COMMENT "Generating '${lang}' Windows© Help file - HHC.EXE"
-	  )
-      else (WIN32 AND NOT CMAKE_CROSSCOMPILING)
-	# Linux: building help using the chmcmd utility from Free Pascal
-	add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${MS_COMPILED_FILE}
-	  # Compile HTML files
-	  COMMAND ${CHMCMD} xiphos.hhp
-	  COMMAND chmod 644 ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${MS_COMPILED_FILE}
-	  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.hhc
-	  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
+      # Compile the Microsoft Windows Help File (.chm)
+      if (WIN32 AND CMAKE_CROSSCOMPILING)
+	# Linux: build help with the chmcmd utility (from Free Pascal Compiler)
+	add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/chm/${MS_COMPILED_FILE}
+	  COMMAND ${YELP_BUILD} cache -o ${cache_cache} ${mallard_pages}
+	  COMMAND ${YELP_BUILD} html -c ${cache_cache} -x ${custom_css} ${mallard_pages}
+	  COMMAND ${XSLTPROC} --stringparam htmlhelp.chm "${MS_COMPILED_FILE}" ${mal2hh_xslt} ${cache_cache}
+	  COMMAND ${CHMCMD} htmlhelp.hhp
+	  COMMAND chmod 644 ${CMAKE_CURRENT_BINARY_DIR}/${lang}/chm/${MS_COMPILED_FILE}
+	  DEPENDS validate-${lang}-pages
+	  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}/chm
 	  COMMENT "Generating '${lang}' Windows© Help file - chmcmd"
 	  )
-      endif(WIN32 AND NOT CMAKE_CROSSCOMPILING)
+      endif(WIN32 AND CMAKE_CROSSCOMPILING)
 
       # add target to current target
-      add_custom_target(${lang}-windows-help
-	DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${MS_COMPILED_FILE}
+      add_custom_target(mhelp-windows-${lang}
+	DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/chm/${MS_COMPILED_FILE}
 	)
 
-      add_dependencies(handbook ${lang}-windows-help)
+      add_dependencies(mhelp mhelp-windows-${lang})
 
       # install MS-Help files
-      install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${lang}/${MS_COMPILED_FILE}
+      install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${lang}/chm/${MS_COMPILED_FILE}
 	DESTINATION ${CMAKE_INSTALL_DATADIR}/help
 	COMPONENT data
 	)
@@ -468,17 +412,17 @@ if (HELP)
     # convert from ePub to PDF
     add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.pdf
       COMMAND ${EBOOK_CONVERT} xiphos-C.epub xiphos.pdf --base-font-size 8 --linearize-tables --chapter //h:h1 --use-auto-toc
-      DEPENDS ${lang}-epub-help
+      DEPENDS mhelp-epub-${lang}
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${lang}
       COMMENT "Generating '${lang}' PDF file"
       )
 
     # add target to current target
-    add_custom_target(${lang}-pdf-help
+    add_custom_target(mhelp-pdf-${lang}
       DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${lang}/xiphos.pdf
       )
 
-    add_dependencies(handbook ${lang}-pdf-help)
+    add_dependencies(mhelp mhelp-pdf-${lang})
 
     # install PDF file
     install (FILES
@@ -489,6 +433,6 @@ if (HELP)
 
   endif (PDFHELP)
 
-  add_dependencies(xiphos handbook)
+  add_dependencies(xiphos mhelp)
 
 endif (HELP)

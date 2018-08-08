@@ -26,7 +26,7 @@ build xiphos_html lib
 
 build help
 
-    $ make handbook
+    $ make mhelp
 
 
 targets for updating source files:
@@ -45,12 +45,12 @@ updating a specific po file
 
 updating help pot file
 
-    $ make help_pot
+    $ make mhelp_pot
 
 updating help all po files
 
-    $ make help_po
+    $ make mhelp_po
 
 updating a specific help po file
 
-    $ make help_<lang>.po
+    $ make mhelp_<lang>.po
