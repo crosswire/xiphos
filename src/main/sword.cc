@@ -559,30 +559,6 @@ const char *main_get_sword_version(void)
 	return backend->get_sword_version();
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *
- *
- * Synopsis
- *   #include "main/.h"
- *
- *
- *
- * Description
- *
- *
- * Return value
- *   char*
- */
-
-char *main_get_treekey_local_name(unsigned long offset)
-{
-	return backend->treekey_get_local_name(offset);
-}
-#endif
-
 /******************************************************************************
  * Name
  *   get_search_results_text
@@ -1450,17 +1426,6 @@ void main_display_devotional(void)
 	g_free(prettybuf);
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-void main_refresh_all(void)
-{
-	main_display_bible(settings.MainWindowModule, settings.currentverse);
-	main_display_commentary(settings.CommWindowModule, settings.currentverse);
-	main_display_book(settings.book_mod, settings.book_key);
-	main_display_dictionary(settings.DictWindowModule, settings.dictkey);
-}
-#endif
-
 void main_setup_displays(void)
 {
 	backend->textDisplay = new GTKChapDisp(widgets.html_text, backend);
@@ -1582,30 +1547,6 @@ int main_optimal_search(char *mod_name)
 	SWModule *mod = mgr->Modules.find(mod_name)->second;
 	return mod->isSearchOptimallySupported("God", -4, 0, 0);
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *  get_mod_about_info
- *
- * Synopsis
- *   #include "main/module.h"
- *
- *   gchar *get_mod_about_info(char * mod_name)
- *
- * Description
- *
- *
- * Return value
- *   gchar *
- */
-
-char *main_get_mod_about_info(char *mod_name)
-{
-	return backend->get_config_entry(mod_name, (char *)"About");
-}
-#endif
 
 char *main_get_mod_config_entry(const char *module_name,
 				const char *entry)
@@ -1749,30 +1690,6 @@ char *main_get_striptext(char *module_name, char *key)
 	return backend->get_strip_text(module_name, key);
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   main_get_striptext
- *
- * Synopsis
- *   #include "main/sword.h"
- *
- *   char *main_get_striptext(char *module_name, char *key)
- *
- * Description
- *
- *
- * Return value
- *   char *
- */
-
-char *main_get_striptext_from_string(char *module_name, char *string)
-{
-	return backend->get_strip_text_from_string(module_name, string);
-}
-#endif
-
 /******************************************************************************
  * Name
  *   main_get_rendered_text
@@ -1814,30 +1731,6 @@ char *main_get_raw_text(char *module_name, char *key)
 {
 	return backend->get_raw_text(module_name, key);
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   main_get_raw_text
- *
- * Synopsis
- *   #include "main/sword.h"
- *
- *   char *main_get_raw_text(char *module_name, char *key)
- *
- * Description
- *
- *
- * Return value
- *   char *
- */
-
-char *main_get_book_key_from_offset(unsigned long offset)
-{
-	return backend->get_key_from_offset(offset);
-}
-#endif
 
 /******************************************************************************
  * Name
@@ -1924,46 +1817,6 @@ main_format_number(int x)
 	}
 	return digits;
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *  main_deformat_number
- *
- * Synopsis
- *   #include "main/sword.h"
- *   int main_deformat_number(char *digitstring)
- *
- * Description
- *   returns the numeric value of the digitstring with
- *   respect to whether it's ordinary digits or farsi.
- *
- * Return value
- *   int
- */
-
-int
-main_deformat_number(char *digitstring)
-{
-	if (re_encode_digits) {
-		// we can afford to make big assumptions because
-		// we produced this string, so we can play fast-n-loose.
-		// - digits have a particular content.
-		// - never negative.
-		// - one digit == 2 characters & only the 2nd is important.
-		char *d;
-		int result = 0;
-		d = digitstring;
-		while (*d) {
-			result = 10 * result + (*(++d) - '\260');
-			++d;
-		}
-		return result;
-	}
-	return atoi(digitstring);
-}
-#endif
 
 /******************************************************************************
  * Name

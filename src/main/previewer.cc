@@ -68,16 +68,6 @@ void main_set_previewer_widget(int in_sidebar)
 		previewer_html_widget = widgets.html_previewer_text;
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-GtkWidget *main_get_previewer_widget(void)
-{
-	return settings.show_previewer_in_sidebar
-		   ? sidebar.html_viewer_widget
-		   : widgets.html_previewer_text;
-}
-#endif
-
 /******************************************************************************
  * Name
  *   main_init_previewer
@@ -112,35 +102,6 @@ void main_init_previewer(void)
 	HtmlOutput(str->str, previewer_html_widget, NULL, NULL);
 	g_string_free(str, TRUE);
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   main_clear_viewer
- *
- * Synopsis
- *   #include "main/previewer.h"
- *
- *   void main_clear_viewer(void)
- *
- * Description
- *   clear the information viewer
- *
- * Return value
- *   void
- */
-
-void main_clear_viewer(void)
-{
-#ifdef USE_PREVIEWER_AUTOCLEAR
-	if (!previewer_html_widget ||
-	    !GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
-		return;
-	main_init_previewer();
-#endif /* USE_PREVIEWER_AUTOCLEAR */
-}
-#endif
 
 /******************************************************************************
  * Name

@@ -848,34 +848,6 @@ void free_font(MOD_FONT *mf)
 	g_free(mf);
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   remove_linefeeds
- *
- * Synopsis
- *   #include "gui/utilities.h"
- *
- *   gchar * remove_linefeeds(gchar * buf)
- *
- * Description
- *   remove line feeds so we can display string in appbar
- *
- * Return value
- *   gchar *
- */
-
-gchar *remove_linefeeds(gchar *buf)
-{
-	gchar *key = NULL;
-
-	key = g_strdelimit(buf, "\n", ' ');
-
-	return (key ? g_strdup(key) : NULL);
-}
-#endif
-
 /******************************************************************************
  * Name
  *  add_mods_2_gtk_menu
@@ -911,70 +883,6 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget *menu,
 		tmp = g_list_next(tmp);
 	}
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *  ncr_to_utf8
- *
- * Synopsis
- *   #include "gui/utilities.h"
- *
- *   gchar * util_ncr2utf8(gchar * text)
- *
- * Description
- *   Converts a string containing numeric character references (NCR) to utf-8 encoding
- *
- *   A numeric character reference (NCR) is a common markup construct used in html
- *   pages. It consists of a short sequence of characters that represent a single
- *   character from the Universal Character Set (UCS) of Unicode.
- *
- *   NCR markup : &#<unicode-value>;  ex: &#233;
- *
- * Return value
- *   gchar
- */
-
-gchar *ncr_to_utf8(gchar *text)
-{
-	gchar *ncr;
-	gunichar unicode;
-	gchar utf8[7];
-	guint len;
-	GString *newtext = g_string_new(NULL);
-
-	for (ncr = strstr(text, "&#");
-	     ncr; text = ncr, ncr = strstr(text, "&#")) {
-		newtext = g_string_append_len(newtext, text, ncr - text);
-
-		// convert ncr value (string) to unicode (guint32)
-		unicode = 0;
-		for (ncr = ncr + 2; // just past "&#"
-		     (*ncr != '\0') && (*ncr >= '0') && (*ncr <= '9');
-		     ncr++)
-			unicode = (unicode * 10) + ((*ncr) - '0');
-
-		// converts unicode char to utf8
-		// need proper terminator + validation of content
-		if ((*ncr == ';') && g_unichar_validate(unicode)) {
-			ncr++; // step past ';'
-			len = g_unichar_to_utf8(unicode, utf8);
-			utf8[len] = '\0';
-			newtext = g_string_append(newtext, utf8);
-		} else {
-			g_string_append_printf(newtext, "&#%d;", unicode);
-			XI_message(("ncr2utf8: invalid unicode &#%d;\n",
-				    unicode));
-		}
-	}
-
-	if (*text != '\0') // residual text?  paste it on.
-		newtext = g_string_append(newtext, text);
-
-	return g_string_free(newtext, FALSE);
-}
-#endif
 
 //
 // for choosing variants, primary/secondary/all.
