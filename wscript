@@ -8,13 +8,17 @@ import Utils
 import Options
 import ccroot
 import preproc
+import subprocess
+import shutil
+import glob
+
 preproc.go_absolute=1
 preproc.strict_quotes=0
 
 import waffles.misc
 import waffles.gnome as gnome
 
-VERSION='4.1.0'
+VERSION=subprocess.check_output(['git', 'describe', '--tags']).strip()
 
 APPNAME='xiphos'
 PACKAGE='xiphos'
@@ -537,10 +541,6 @@ def build(bld):
             gnome.postinstall_icons() # Updating the icon cache
 
     bld.add_post_fun(post)
-
-import shutil
-import subprocess
-import glob
 
 def dist_hook():
     shutil.rmtree('win32')
