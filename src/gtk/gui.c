@@ -68,9 +68,6 @@ void gui_init(int argc, char *argv[])
 	if (!gtk_init_with_args(&argc, &argv, NULL, NULL, NULL, NULL)) {
 		exit(1);
 	};
-#ifndef WIN32
-	gconf_setup();
-#endif
 #ifdef HAVE_DBUS
 	ipc = ipc_init_dbus_connection(ipc);
 #endif
@@ -80,69 +77,6 @@ void gui_main(void)
 {
 	gtk_main();
 }
-
-/******************************************************************************
- * Name
- *    gconf_setup
- *
- * Synopsis
- *   #include "main/settings.h"
- *
- *   void gconf_setup()
- *
- * Description
- *   verifies and initializes the GConf subsystem, so that "sword://" and
- *   similar can be handled by url-comprehending programs such as browsers.
- *   dialogs for permission/success/failure => conditional on debug build.
- *
- * Return value
- *   void
- */
-
-/* NOTE: removed query for user permission to install handlers around -r4528. */
-/* we don't ask any more, because there's no good reason not to take over.    */
-
-char *gconf_keys[GS_GCONF_MAX][2] = {
-    {"/desktop/gnome/url-handlers/bible/command", "xiphos-nav \"%s\""},
-    {"/desktop/gnome/url-handlers/bible/enabled", (char *)1},
-    {"/desktop/gnome/url-handlers/bible/needs_terminal", (char *)0},
-    {"/desktop/gnome/url-handlers/sword/command", "xiphos-nav \"%s\""},
-    {"/desktop/gnome/url-handlers/sword/enabled", (char *)1},
-    {"/desktop/gnome/url-handlers/sword/needs_terminal", (char *)0}};
-
-#ifndef WIN32
-void gconf_setup()
-{
-	gchar *str;
-	GConfClient *client = gconf_client_get_default();
-
-	if (client == NULL)
-		return; /* we're not running under GConf */
-
-	/*
-	 * This is deliberately somewhat simple-minded, at least for now.
-	 * We care about one thing: Is anything set to handle "bible://"?
-	 *
-	 * Unfortunate consequence of changing xiphos2 => xiphos:
-	 * We must fix broken keys.
-	 */
-	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
-					     NULL)) == NULL) ||
-	     (strncmp(str, "xiphos ", 7) == 0))) {
-		/*
-		 * Mechanical as can be, one after another.
-		 */
-		int i;
-		for (i = 0; i < GS_GCONF_MAX; ++i) {
-			(((i % 3) == 0) /* contrived hack */
-			     ? gconf_client_set_string(client, gconf_keys[i][0], gconf_keys[i][1], NULL)
-			     : gconf_client_set_bool(client,
-						     gconf_keys[i][0],
-						     (gconf_keys[i][1] ? TRUE : FALSE), NULL));
-		}
-	}
-}
-#endif /* WIN32 */
 
 #ifdef DEBUG
 
