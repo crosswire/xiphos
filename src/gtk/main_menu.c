@@ -666,7 +666,7 @@ on_save_session_activate(GtkMenuItem *menuitem, gpointer user_data)
 		}
 	}
 
-	dialog = gtk_file_chooser_dialog_new("Save Session",
+	dialog = gtk_file_chooser_dialog_new(_("Save Session"),
 					     NULL,
 					     GTK_FILE_CHOOSER_ACTION_SAVE,
 #if GTK_CHECK_VERSION(3, 10, 0)
