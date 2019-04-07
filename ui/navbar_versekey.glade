@@ -456,7 +456,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">&#x25CF;</property>
-                <property name="tooltip" translatable="yes">Enter a Verse reference in Book 1:1 format and press Return</property>
+                <property name="tooltip" translatable="yes">Enter a Verse reference in Book 1:1 (or 1.1) format and press Return</property>
                 <accessibility>
                   <atkproperty name="AtkObject::accessible-name" translatable="yes">Reference Entry</atkproperty>
                 </accessibility>
