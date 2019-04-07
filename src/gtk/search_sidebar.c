@@ -255,7 +255,7 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox5), ss.advanced_search, TRUE, FALSE,
 			   0);
 	gtk_widget_set_tooltip_text(ss.advanced_search,
-				    _("Open the separate Advanced Search dialog."));
+				    _("Open the separate Advanced Search dialog"));
 	gtk_button_set_relief(GTK_BUTTON(ss.advanced_search),
 			      GTK_RELIEF_HALF);
 
