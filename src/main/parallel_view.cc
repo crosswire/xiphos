@@ -58,7 +58,7 @@ extern GtkWidget *sbIntChapter;
 extern GtkWidget *sbIntVerse;
 extern GtkWidget *entryIntLookup;
 
-SWBuf unknown_parallel = N_("Unknown parallel module: ");
+SWBuf unknown_parallel = _("Unknown parallel module: ");
 
 /******************************************************************************
  * static
