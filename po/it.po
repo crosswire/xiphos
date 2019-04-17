@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 23:35-0400\n"
-"PO-Revision-Date: 2019-04-07 12:52+0200\n"
+"PO-Revision-Date: 2019-04-11 16:05+0200\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: Italian <it@li.org>\n"
 "Language: it\n"
@@ -734,15 +734,15 @@ msgstr "Apri una nuova scheda"
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
-msgstr "Vista predefinita"
+msgstr "Finestra predefinita"
 
 #: ../src/gtk/main_window.c:1137
 msgid "Commentary View"
-msgstr "Vista dei commenti"
+msgstr "Finestra dei commenti"
 
 #: ../src/gtk/main_window.c:1145
 msgid "Book View"
-msgstr "Vista dei libri"
+msgstr "Finestra dei libri"
 
 #: ../src/gtk/main_window.c:1163
 msgid "Welcome to Xiphos"
@@ -1397,7 +1397,7 @@ msgstr "Opzioni del modulo"
 #: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
 msgid "Parallel View"
-msgstr "Vista parallela"
+msgstr "Finestra parallela"
 
 #: ../src/gtk/preferences_dialog.c:866
 msgid "BibleSync session passphrase"
@@ -4305,7 +4305,7 @@ msgstr ""
 #: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
 msgid "Enable Parallel Alternation Checkbox"
 msgstr ""
-"Abilitare la casella di spunta per colori specifici nella vista parallela"
+"Abilitare la casella di spunta per colori specifici nella finestra parallela"
 
 #: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:124
 msgid "Verse number"
@@ -5079,11 +5079,11 @@ msgstr "_Mostra/Nascondi barra laterale allegata"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Remove the sidebar entirely from view"
-msgstr "Rimuovi completamente la barra laterale dalla vista"
+msgstr "Rimuovi completamente la barra laterale dalla finestra"
 
 #: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "Show Parallel View in a _Tab"
-msgstr "Visualizza Vis_ta parallela in una scheda"
+msgstr "Visualizza Fines_tra parallela in una scheda"
 
 #: ../ui/xi-menus.glade.h:35
 msgid "Provide the full-chapter parallel Bible window as another tab"
