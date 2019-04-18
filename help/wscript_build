@@ -4,6 +4,7 @@
 DOC_LINGUAS = '''
     fr
     fa
+    it
 '''
 DOC_INCLUDES = '''
     introduction.xml
