@@ -97,8 +97,8 @@
     </section>
 
     <section id="destination-vista">
-      <title>Windows Vista</title>
-      <p>Vista works much the same as XP, except for the locations. The private
+      <title>Windows Vista 7, 8 and 10</title>
+      <p>The other versions of Windows works much the same as XP, except for the locations. The private
       location is "C:\Users\YOUR NAME\AppData\Roaming\Sword". The shared
       location is "C:\ProgramData\Sword".</p>
     </section>
