@@ -37,19 +37,25 @@ if (CMAKE_CROSSCOMPILING AND WIN32)
   set(ENV{PKG_CONFIG_LIBDIR} ${CMAKE_FIND_ROOT_PATH}/lib/pkgconfig)
 endif(CMAKE_CROSSCOMPILING AND WIN32)
 
+
 # find the pkg-config executable in order to find modules
 find_package(PkgConfig QUIET REQUIRED)
 
+
+# Biblesync dependencies
+if(WIN32)
+  pkg_check_modules(Biblesync REQUIRED IMPORTED_TARGET
+    "biblesync>=2.0.1"
+    )
+else()
+  find_package(Biblesync REQUIRED IMPORTED_TARGET "biblesync>=1.2.0")
+endif()
 
 # Sword dependencies
 pkg_check_modules(Sword REQUIRED IMPORTED_TARGET
   "sword>=1.8.1"
   )
 
-# Biblesync dependencies
-pkg_check_modules(Biblesync REQUIRED IMPORTED_TARGET
-  "biblesync>=2.0.1"
-  )
 
 # core dependencies
 if(WIN32)
