@@ -1,3 +1,14 @@
+2019-05-10 Dominique Corbex <domcox@users.sf.net>
+
+	* remove Waf
+	* remove Debian directory (Not needed anymore: CMake builds debs)
+	* update Italian translation (thanks to LAfricain)
+
+2018-05-13 Dominique Corbex <domcox@users.sf.net>
+
+	* CMake port
+	* move Help from Docbook to Mallard
+
 2018-04-18  karl <charcoal@users.sf.net>
 
 	* 4.1.0 release.
@@ -104,7 +115,7 @@
 
 	* add pixmaps/screenshots directory, using images from sourceforge.
 	* fix #749: annotation dialog tooltips.
-	
+
 2016-02-15  karl <charcoal@users.sf.net>
 
 	* move to github: import source, add .gitignore & others, change
@@ -112,7 +123,7 @@
 	* delint a warning in parallel_view.cc.
 	* add language abbrevs from IBT modules.
 	* disable "match case" in searches when in clucene mode.
-	
+
 2016-01-13  karl <charcoal@users.sf.net>
 
 	* change module lang sort from strcmp/strcoll to ICU ucol_strcollUTF8.
@@ -365,7 +376,7 @@
 2013-01-27  karl <charcoal@users.sf.net>
 
 	* update gtk2/gtk3 changes to avoid excess #if use.
-	
+
 2013-01-25  greg <hellings@users.sf.net>
 
 	* Fixed many of the GTK3 deprecation warnings.
@@ -382,7 +393,7 @@
 2012-12-15  karl <charcoal@users.sf.net>
 
 	* delete dead/historic/useless KJV "&para;" (¶) handling.
-	
+
 2012-11-03  karl <charcoal@users.sf.net>
 
 	* add dbus-daemon spawn for win32 (incomplete).
@@ -401,7 +412,7 @@
 2012-09-30  karl <charcoal@users.sf.net>
 
 	* code simplification: remove gtkhtml3, once and for all.
-	  we have committed to XHTML filters in Sword.  those filters 
+	  we have committed to XHTML filters in Sword.  those filters
 	  depend on <span>, which means that the gtkhtml3 backend is no
 	  longer an option.  the world must catch up and deploy webkit.
 
@@ -506,7 +517,7 @@
 	* apply proper font specs to adv.search display.
 	* vastly simplified font size references (one calculation, many refs).
 	* alter bible context boundary: vv.1,2 anchored at chapter beginning.
-	* eliminate context boundary when base font size is large.	
+	* eliminate context boundary when base font size is large.
 	* only bible texts get green current verse in full-chapter parallel.
 
 2011-12-12  karl <charcoal@users.sf.net>
@@ -621,7 +632,7 @@
 	  * src/gnome2/commentary_dialog.c (gui_create_commentary_dialog):
 	  * src/gnome2/dictlex_dialog.c (gui_create_dictlex_dialog):
 	  * src/gnome2/gbs_dialog.c (gui_create_gbs_dialog):
-	
+
 	* committed work on gtkbuilder and webkit done by
 	   Greg and Terry
 
@@ -634,7 +645,7 @@
 	* EDIT: fix -> work on :)
 	* fix link handling - webkit
 	* fix popup menus  - webkit
-	* fix printing - webkit 
+	* fix printing - webkit
 
 2010-11-06  karl <charcoal@users.sf.net>
 
@@ -804,12 +815,12 @@
 
 	* introduce sync_windows() and stop_window_sync flag as a fix to
 	  the problem of universal sync not working.
-	
+
 2009-03-12  karl <charcoal@users.sf.net>
 
 	* add #name capability for footnote-specific navigation
 	  (e.g. sword://NETnote/Gen1:2#n13).
-	
+
 2010-01-02 matthew <ransom1982@users.sourceforge.net>
 
 	* make copy to clipboard smart for html
@@ -821,25 +832,25 @@
 2009-12-28  karl <charcoal@users.sf.net>
 
 	* fix #2922262 update dict pane when base font changes.
-	
+
 2009-12-24  karl <charcoal@users.sf.net>
 
 	* 3.1.2 release.
 	* updates to src/gnome2/Makefile.am: distribution tarball sanity.
-	
+
 2009-12-19  karl <charcoal@users.sf.net>
 
 	* change freenode webchat to use $USER (g_get_user_name()).
-	
+
 2009-12-14  karl <charcoal@users.sf.net>
 
 	* preferences locale list: display language names, not xx_YY.
 	* fixed <div align=(right|left)> problem.
-	
+
 2009-12-14 simon<DrMeers@users.sourceforge.net>
 
 	* fixed tab bug -- closing tab B focused tab A, but cur_passage_tab
-	  got set to tab C! 
+	  got set to tab C!
 
 2009-12-04 simon<DrMeers@users.sourceforge.net>
 
@@ -977,7 +988,7 @@
 2009-08-20 matthew <ransom1982@users.sourceforge.net>
 
 	* fix #2825281 Sidebar/Regular Expression search: not finding all matches
-	
+
 2009-08-17  karl <charcoal@users.sf.net>
 
 	* change main window title per actually-displayed modules.
@@ -996,9 +1007,9 @@
 2009-08-10 terry <tbiggs@users.sourceforge.net>
 
 	* added ui/editor_link_dialog.xml, editor/link_dialog.c and
-	  editor/link_dialog.h 
+	  editor/link_dialog.h
 	* added New menu item and button to studypad (slib-editor)
-	* added Delete menu item and button to note editor (slib-editor) 
+	* added Delete menu item and button to note editor (slib-editor)
 
 2009-08-09  karl <charcoal@users.sf.net>
 
@@ -1291,7 +1302,7 @@
 
 2009-03-03  terry <tbiggs@users.sourceforge.net>
 
-	* added gmodule-export-2.0 PKG_CHECK_MODULES(GNOME,.....) in 
+	* added gmodule-export-2.0 PKG_CHECK_MODULES(GNOME,.....) in
 	  configure.in so Ubuntu will work with new popups.
 
 2009-03-01  terry <tbiggs@users.sourceforge.net>
@@ -1303,7 +1314,7 @@
 
 2009-02-25  terry <tbiggs@users.sourceforge.net>
 
-	* work on bug #2599921 Copy fails in detached windows 
+	* work on bug #2599921 Copy fails in detached windows
 	  fixed for Bible and Commentary dialogs
 
 2009-02-19  terry <tbiggs@users.sourceforge.net>
@@ -1319,15 +1330,15 @@
 
 	* add transliteration.
 	* disable transliteration for WIN32 pending ICU integration.
-	
+
 2009-02-14  karl <charcoal@users.sf.net>
 
 	* fix #2593915 - crash on menuitem in detached bible window
-	
+
 2009-02-08  karl <charcoal@users.sf.net>
 
 	* 3.0.0 release.
-	
+
 2009-02-06  terry <tbiggs@users.sourceforge.net>
 
 	* added prayerlist/journal editor stuff to gtkhtml editor
@@ -1353,16 +1364,16 @@
 
 	* generalize sword_uri's use of show_in_previewer to any lexdict.
 	* add --enable-autoclear to choose previewer content transient-ness.
-	
+
 2009-01-30  karl <charcoal@users.sf.net>
 
 	* replace URLs gnomesword.sf.net -> xiphos.sf.net.
-	
+
 2009-01-29  terry <tbiggs@users.sourceforge.net>
 
 	* remove files ui/editor_note_WIN32.xml & ui/editor_studypad_WIN32.xml
 	  which are not used
-	
+
 2009-01-29  karl <charcoal@users.sf.net>
 
 	* replace previous trunk content with that of branches/2.4.x.
@@ -1393,7 +1404,7 @@
 2009-01-17  terry <tbiggs@users.sourceforge.net>
 
 	* added show_in_previewer() to main/url.cc to display
-          module links (sword://<module>/<key>) in the previewer 
+          module links (sword://<module>/<key>) in the previewer
          (only WebstersLinked at the moment)
 
 2009-01-14  terry <tbiggs@users.sourceforge.net>
@@ -1401,7 +1412,7 @@
 	* previewer can now be diaplayed on the sidebar
 	* started work on tabbed parallel view
 	* added gui/parallel_tab.h and gnome2/parallel_tab.c
-	* added <Show Parallel View in a tab> and 
+	* added <Show Parallel View in a tab> and
           <Show Previewer in the Sidebar> items to the <View> menu
 	* you need to configure with --enable-paratab to try both of
           these changes.
@@ -1410,7 +1421,7 @@
 
 	* fixed bug #2486766 Mozembed Parallel View doesn't respect cross-refernce
 	* Parallel opts now are stored and used on next start.
-	* added context menu to detached parallel view 
+	* added context menu to detached parallel view
 
 2009-01-03  karl <charcoal@users.sf.net>
 
@@ -1494,7 +1505,7 @@
 
 	* fixed bug #2423941 Printing, then navigating genbook causes crash
 	* fixed bug #2413029 Printing User Created Modules ignores markup
-	
+
 2008-12-13 matthew <ransom1982@users.sourceforge.net>
 
 	* added help menu items for mailing list and irc chat
@@ -1505,7 +1516,7 @@
 
 	* fixed printing in studypad
 	* hid print menu items in WIN32 - I hope
-	
+
 2008-12-10  terry <tbiggs@users.sourceforge.net>
 
 	* fixed studypad open and save as dialogs
@@ -1577,7 +1588,7 @@
 
 2008-11-25  terry <tbiggs@users.sourceforge.net>
 
-	* mostly fixed bug 2264209 Scrolling to next/previous chapter no 
+	* mostly fixed bug 2264209 Scrolling to next/previous chapter no
 	  longer works - scrolling down works - scrolling up skips a chapter
 	  or two at times - only works for gtkhtml builds - never worked for
 	  mozembed so I hide the option in the prefs dialog for mozembed builds
@@ -1803,7 +1814,7 @@
 
 2008-07-15  karl <charcoal@users.sf.net>
 
-	* prayer list reconstruction: 
+	* prayer list reconstruction:
 	  - stop crash caused by mkdir failure, due to no genbooks.
 	  - totally rework creator logic to avoid duplicated code.
 	  - set prayerlist Lang= from sword_locale.
@@ -1818,7 +1829,7 @@
 	* reworked excess/duplicate languageMap crud from backend
 	  (sword_main.cc & module_manager.cc): moved to main/sword.cc.
 	* tweaked module categorization so first_time_user gets one list.
-	
+
 2008-07-11  karl <charcoal@users.sf.net>
 
 	* make genbook bookmarks use the key string, not a numeric offset.
@@ -1833,10 +1844,10 @@
 	* fix bug, adv.search: deleted module trips custom list usage.
 
 2008-07-08  karl <charcoal@users.sf.net>
-	
+
 	* move nav keys: Ctrl-n/p (verse), n/p (chapter), N/P (book).
 	* better wording on parent/child book navbar buttons.
-	
+
 2008-07-06  karl <charcoal@users.sf.net>
 
 	* feat.req #1991842 pers.comm suggestions:
@@ -1930,7 +1941,7 @@
 
 	* added 'General->Misc->Enable paryer list' option to preferences_dialog
 	* removed --enable-prayer_list switch from configure.in
-	* FIXED: 2nd part of bug #1906647 Showing Commentary Pane 	
+	* FIXED: 2nd part of bug #1906647 Showing Commentary Pane
 
 2008-03-22  karl <charcoal@users.sf.net>
 
@@ -1970,7 +1981,7 @@
 
 2008-02-11  dom <domcox@users.sf.net>
 
-	* window minimum size reduced from 800x480 to 800x425, 
+	* window minimum size reduced from 800x480 to 800x425,
 	  thus allowing gs to run on an eeepc.
 
 2008-02-08  karl <charcoal@users.sf.net>
@@ -1993,11 +2004,11 @@
 	* fix glitch caused by display.cc dialog integration last week.
 
 2008-01-16  karl <charcoal@users.sf.net>
-	
+
 	* fix #1872525 Fix build errors with gcc-4.3
 	* restructure and simplify readability of HtmlOutput.
 	* solve gtkhtml3 side of "first display of genbook is blank".
-	
+
 2008-01-15  karl <charcoal@users.sf.net>
 
 	* restructured a lot of display.cc to use common HTML output code.
@@ -2217,10 +2228,10 @@
 
 2007-07-29  dom <domcox@users.sf.net>
 
-	* sidebar search fix: text in upper case or multiple occurances 
+	* sidebar search fix: text in upper case or multiple occurances
 	of the same word were not highlighted in the previewer.
 	(multi-word & phrase search types)
-	
+
 2007-07-28  dom <domcox@users.sf.net>
 
 	* i18n cleanup (end) : navbar
@@ -2379,10 +2390,10 @@
 2007-04-30  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #1708829 crash on opening note editor
-	* started work on a prayer list 
+	* started work on a prayer list
 	  added gnome2/prayer_list.c and gui/prayer_list.h
 	  added main/prayer_list.cc and main/prayer_list.h
-	  
+
 2007-04-27  dom <domcox@users.sf.net>
 
 	* Norsk Bokmål (nb_NO) translation by harald@thingelstad.org added
@@ -2396,7 +2407,7 @@
 	* fixed modulecache header invalidation bug.
 
 2007-04-24  terry <tbiggs@users.sourceforge.net>
-	
+
 	* fixed bug #1706475 no genbooks + genbook navbar => crash
 	* added support for gtkhtml-3.14
 
@@ -2408,10 +2419,10 @@
 2007-03-31  terry <tbiggs@users.sourceforge.net>
 
 	* added new navbar to bible and commentary dialogs
-	
+
 2007-03-29  terry <tbiggs@users.sourceforge.net>
 
-	* added navbar_versekey 
+	* added navbar_versekey
 
 
 2007-03-25  karl <charcoal@users.sf.net>
@@ -2430,15 +2441,15 @@
 
 	* manual updates, reflect 2.2.3: archive/rename/dump of pers.comm.
 	* make the inability to rename under Cygwin obvious to the user.
-	
+
 2007-03-19  karl <charcoal@users.sf.net>
 
 	* fix bug #1681135 Module manager crashes Gnomesword on startup.
-	
+
 2007-03-18  karl <charcoal@users.sf.net>
 
 	* fix egregious book selection bug in module cache.
-	
+
 2007-03-16  karl <charcoal@users.sf.net>
 
 	* feat.req #1631815: open single-image window on click
@@ -2447,7 +2458,7 @@
 
 2007-03-15  dom <domcox@users.sf.net>
 
-	* added StringMgr, a class which provides string handling 
+	* added StringMgr, a class which provides string handling
 	  functions, for utf-8 support if icu is disabled in sword
 
 2007-03-13  karl <charcoal@users.sf.net>
@@ -2504,13 +2515,13 @@
 	* switched commentary dialog to gecko
 	* switched dictionary dialog to gecko
 	* switched genbook dialog to gecko
-	* dictionary and genbook dialogs need menus 
+	* dictionary and genbook dialogs need menus
 
 2007-02-13 terry <tbiggs@users.sf.net>
 
 	* switched about_module dialog to gecko
 	* switched bibletext dialog to gecko
-	
+
 2007-02-05 terry <tbiggs@users.sf.net>
 
 	* moved right to left text display to gtkhtml
@@ -2522,7 +2533,7 @@
 2007-01-30  karl <charcoal@users.sf.net>
 
 	* moved sidebar buttons to top of sidebar.
-	
+
 2007-01-30  karl <charcoal@users.sf.net>
 
 	* moved sidebar buttons to top of sidebar.
@@ -2534,11 +2545,11 @@
 2007-01-28 terry <tbiggs@users.sf.net>
 
 	* fixed bug #1646579: sidebar search, no bounds => crash
-	
+
 2007-01-27 terry <tbiggs@users.sf.net>
 
 	* created a development branch
-	
+
 2007-01-26  karl <karl@charcoal.com>
 
 	* update configure.in for version 2.2.1 at -r1480.
@@ -2669,7 +2680,7 @@
 
 	* fixed bug #1617225: gnomesword crashes, when clicking on combobox...
 	* fixed bug: gnomesword crashes, when clicking left right arrows on dict bar
-	* fixed bug: gnomesword crashes, when clicking <view context> in 
+	* fixed bug: gnomesword crashes, when clicking <view context> in
 	  parallel view with less that 5 modules selected.
 
 2006-12-17  karl <karl@charcoal.com>
@@ -2681,7 +2692,7 @@
 
 	* fixed configure.in glitch: fr_FR => fr.
 	* undocumented "open current in dialog" which no longer exists.
-	
+
 2006-12-13  karl <karl@charcoal.com>
 
 	* documented adv.search: usage details; no footnote search.
@@ -2689,7 +2700,7 @@
 2006-12-13  terry <tbiggs@users.sf.net>
 
 	* fixed Joshua 15:58 bug in adv search dialog
-	
+
 2006-12-12  karl <karl@charcoal.com>
 
 	* fixed bug: avoid gratuitous text redraw when turning off read-aloud.
@@ -2697,7 +2708,7 @@
 2006-12-12  terry <tbiggs@users.sf.net>
 
 	* fixed bug #1613439: Sidebar setting does not survive program restart
-	* fix the rest of bug #1613439: This problem also occurred with the 
+	* fix the rest of bug #1613439: This problem also occurred with the
 	  preview and dictionary panes
 	* removed gnome2/hint.c and gui/hint.h they are no longer used and
 	  never did work right.
@@ -2714,7 +2725,7 @@
 
 	* search dialog: added dnd suport to verse list on results table
 	  drag verse to main text window to display verse in main window.
-	  
+
 2006-12-06  terry <tbiggs@users.sf.net>
 
 	* fixed broken add module to mod list in search dialog
@@ -2737,7 +2748,7 @@
 	* added image auto-resizing in commentaries, books, and dictionaries.
 	* updated startup to move ".gnomesword-2.0" to ".gnomesword".
 	* added hot keys to the File menu.
-	
+
 2006-11-30  karl <karl@charcoal.com>
 
 	* fixed bug: don't crash on commentary middle-click.
@@ -2775,9 +2786,9 @@
 2006-11-23  terry <tbiggs@users.sf.net>
 
 	* bumped to 2.1.10
-	* fixed bug #1601744:title of module in titlebar not displaying 
+	* fixed bug #1601744:title of module in titlebar not displaying
 	  for GetLut1545
-	* fixed module manager to work on first run 
+	* fixed module manager to work on first run
 	* corrected tooltip for search dialog - Search Type -> Attributes
 	  from //Word/Strongs/G1722 to //Word/Lemma/G1722 this will do a search
 	  for Strongs Numbers.
@@ -2787,7 +2798,7 @@
 
 	* added feature #861174: move Unlock Module to right-click menu end.
 	* added feature #1194037: add View->Show Verse Numbers toggle.
-	
+
 2006-11-15  karl <karl@charcoal.com>
 
 	* fixed bug #1575275: expand set of g_strdelimit() chars in
@@ -2796,7 +2807,7 @@
 2006-11-15  karl <karl@charcoal.com>
 
 	* fixed bug #1504139 by adding reporter's supplied cs.po.
-	
+
 2006-11-15  karl <karl@charcoal.com>
 
 	* fixed bug #1535122 by applying reporter's supplied patch. thanx.
@@ -2834,7 +2845,7 @@
 
 	* bumped to 2.1.7
 	* fixed bug 1480183 - crash when using KJV 2.2
-	
+
 
 2006-04-12  terry <tbiggs@users.sf.net>
 
@@ -2849,24 +2860,24 @@
 
 2006-03-28  terry <tbiggs@users.sf.net>
 
-	* fixed bug 1174943 'gtkmozembed ISBE crash' 
+	* fixed bug 1174943 'gtkmozembed ISBE crash'
 	* fixed bug 1419036 'clicking \"view context\" in parallel view segfaults'
-	
+
 
 2006-03-26 terry <tbiggs@users.sf.net>
 
 	* fixed bug 1419024 'segfault when clicking \"book view\" tab'
 	* fixed bug 1419034 'commentary window is visible even if unchecked in view menu'
 	* fixed bug 1419041 'highlighting a word and doing \"Lookup Selection\" broken'
-	* fixed bug 1419045 'clicking \"general books\" in modules window segfaults'	
+	* fixed bug 1419045 'clicking \"general books\" in modules window segfaults'
 	* closed bug 1437634 'crashes when I try to search' could not duplicate
-	
+
 
 2005-12-15 terry <tbiggs@users.sf.net>
 
 	* added m4/gnomesword-mozilla.m4 which contains a macro for finding
 	  mozilla - taken from gtkmozedit-0.3.1
-	  
+
 
 2005-12-09 terry <tbiggs@users.sf.net>
 
@@ -2877,14 +2888,14 @@
 2005-12-01 terry <tbiggs@users.sf.net>
 
 	* changed to use gtkhtml editor componet for building with gtkhtml-3.8
-	* added ui/editor_studypad.xml and ui/editor_note.xml for use 
+	* added ui/editor_studypad.xml and ui/editor_note.xml for use
 	  with editor componet.
 	* added editor/html-editor.c and editor/html-editor.h
-	
+
 
 2005-08-04 terry <tbiggs@users.sf.net>
 
-	* added about_gnomesword.c.patch from Eicke Godehardt - ported about 
+	* added about_gnomesword.c.patch from Eicke Godehardt - ported about
 	  dialog from 'gnome about dialog' to 'gtk about dialog.'
 
 2005-07-26 terry <tbiggs@users.sf.net>
@@ -2897,17 +2908,17 @@
 
 	* added ui/module-manager.glade and ui/sword3.png
 	* the module manager is built by libglade
-	
 
-2005-07-09 terry <tbiggs@users.sf.net> 
+
+2005-07-09 terry <tbiggs@users.sf.net>
 
 	* added gnomesword1/ui directory.
 	* moved gui/prefs.glade to ui/prefs.glade
 	* added ui/bookmarks.glade
 
-2005-07-08 terry <tbiggs@users.sf.net> 
+2005-07-08 terry <tbiggs@users.sf.net>
 
-	* added gui/prefs.glade gui/Makefile.am and gui/logo.png 
+	* added gui/prefs.glade gui/Makefile.am and gui/logo.png
 	* now trying libglade to build the preferences dialog.
 	* if this works out we will put the *.glade files in their own dir.
 
@@ -2915,36 +2926,36 @@
 2005-04-25  terry <tbiggs@users.sf.net>
 
 	* added main/previewer.cc and main/previewer.h
-	
-	
+
+
 2005-03-26  terry <tbiggs@users.sf.net>
 
 	* fixed resize bug
 	* fixed to build with gtkmozembed on gento distro (I hope)
-	
+
 
 2005-03-22  terry <tbiggs@users.sf.net>
 
 	* changed back to pkgconfig to find sword.
-	
+
 
 2005-03-19  terry <tbiggs@users.sf.net>
 
 	* removed backend/sword.cpp and backend/sword.h
-	
+
 
 2005-03-16  terry <tbiggs@users.sf.net>
 
 	* changed to new nabar in parallel dialog. I think that this was the
 	  last of the old style navbars.
-	
+
 
 2005-03-15  terry <tbiggs@users.sf.net>
 
 	* added cancel button to studypad's close confirmation dialog
 	* disabled the setup_druid - use some sane settings on first run
 	  instead.
-	
+
 
 2005-03-05  terry <tbiggs@users.sf.net>
 
@@ -2952,7 +2963,7 @@
 
 2005-03-01  terry <tbiggs@users.sf.net>
 
-	* added four buttons to editor 
+	* added four buttons to editor
 	  Insert image
 	  Insert link
 	  Insert rule
@@ -2961,25 +2972,25 @@
 2005-02-24  terry <tbiggs@users.sf.net>
 
 	* added a bookmark dialog for adding bookmarks.
-	* added a bookmark item to the popup menus for bible, commentary, book 
-	  and dictionary panes that opens the bookmark dialog.	  
-	  
+	* added a bookmark item to the popup menus for bible, commentary, book
+	  and dictionary panes that opens the bookmark dialog.
+
 2005-02-23  terry <tbiggs@users.sf.net>
 
-	* removed gtkhtml 3.0 tests from configure.in since 3.1 is needed 
+	* removed gtkhtml 3.0 tests from configure.in since 3.1 is needed
 
 2005-02-21  terry <tbiggs@users.sf.net>
 
 	* fixed to take advantage of clucene searching if Sword is built using
-	  clucene and the module being search has the search frame work 
+	  clucene and the module being search has the search frame work
 	  (lucene indexes). The frame work is built using mkfastmod.
 	  "mkfastmod KJV"
-	  
-	  
+
+
 2005-02-10  terry <tbiggs@users.sf.net>
 
 	* moved editor files to src/editor
-	
+
 
 2005-02-08  pierre <pierrebenz@users.sf.net>
 	* removed obsolete doc images
@@ -2991,7 +3002,7 @@
 
 	* added new navbar for main window.
 	* added main/navbar.cc and main/navbar.h
-	
+
 
 2005-01-31  terry <tbiggs@users.sf.net>
 
@@ -3016,7 +3027,7 @@
 	* added documentation patch from Peter von Kaehne
 	* fixed documentation build for book format (translators,
 	  gnomesword.xml is now depreciated, translate to  new format please)
-	
+
 2005-01-18  pierre <pierrebenz@users.sf.net>
 
 	* added documentation guidelines (still incomplete)
@@ -3025,12 +3036,12 @@
 
 2004-09-26  terry <tbiggs@users.sf.net>
 
-	* gnomesword can be build using gtkmozembed for the Bible, commentary 
+	* gnomesword can be build using gtkmozembed for the Bible, commentary
 	  and dictionary panes.
-	* added backend/gs_osishtmlhref.* and backend/gs_markupfiltmgr.* for 
+	* added backend/gs_osishtmlhref.* and backend/gs_markupfiltmgr.* for
 	  gtkmozembed.
 	* added main/embed.cc and main/embed.h for gtkmozembed.
-	
+
 
 2004-08-19  terry <tbiggs@users.sf.net>
 
@@ -3038,66 +3049,66 @@
 	  backend/gs_gbfhtmlhref.* and backend/gs_markupfiltmgr.*
 	* removed files - main/bibletext.*, main/commentary.*, main/dictlex.*
 	  and main/percomm.*
-	* replaced hint dialog with Information Viewer (moved the viewer 
+	* replaced hint dialog with Information Viewer (moved the viewer
 	  from the sidebar notebook to it's own location at bottom of sidebar
 	  but always visible)
-	
+
 
 2004-08-12  terry <tbiggs@users.sf.net>
 
 	* bumped to 2.1.2
 	* made gs cvs dependant on sword-1.5.8 (sword-cvs)
-	
+
 
 2004-08-10  terry <tbiggs@users.sf.net>
 
-	* added shadows (borders) to most of the scroll windows can be turned 
-	  off by setting settings.shadow_type=GTK_SHADOW_NONE (0) in 
+	* added shadows (borders) to most of the scroll windows can be turned
+	  off by setting settings.shadow_type=GTK_SHADOW_NONE (0) in
 	  main_window.c create_mainwindow(). Default=GTK_SHADOW_IN (1).
 
 2004-08-07  terry <tbiggs@users.sf.net>
 
 	* added doc patch from Jeff Ratliff - covers the sidebar search.
-	
+
 2004-01-14  Andy <andyp@users.sf.net>
 
 	* added gnomesword.doap.rdf, the DOAP description for the project
-	  currently used on the website and may gain wider usage in time, 
+	  currently used on the website and may gain wider usage in time,
 	  either way it is useful to have it maintained in CVS
 
 2004-07-14  terry <tbiggs@users.sf.net>
 
 	* fixed broken include in /backend/sword.cpp
 	* bumped to 2.1.1 and released
-	
-	
+
+
 2004-07-13  terry <tbiggs@users.sf.net>
 
 	* bumped to 2.1.0 and released
-	
-	
+
+
 2004-05-15  Pierre <pierrebenz@users.sf.net>
 
 	* changed settings directory to .gnomesword-2.0
-	
-	
+
+
 2004-05-15 Terry <tbiggs@users.sf.net>
 
 	* removed backend/mgr.hh and backend/mgr.cc
 	* removed backend/sword_defs.h
-	
-	
+
+
 2004-05-14 Terry <tbiggs@users.sf.net>
 
 	* removed backend/key.hh and backend/key.cc
 	* removed main/key.h and main/key.c
-	
+
 
 2004-05-13 Terry <tbiggs@users.sf.net>
 
 	* removed main/search.h and main/search.c
 	* removed main/module.h and main/module.c
-	
+
 
 2004-04-21 Terry <tbiggs@users.sf.net>
 
@@ -3110,7 +3121,7 @@
 
 	* removed backend/tree.cc and backend/tree.hh
 	* removed gui/gtkhtml_display.h and gnome2/gtkhtml_display.c
-		
+
 
 2004-04-02 Terry <tbiggs@users.sf.net>
 
@@ -3118,7 +3129,7 @@
 	* added gnome2/note_toolbar_edit.c and gui/note_toolbar_edit.h
 	* added gnome2/note_toolbar_style.c and gui/note_toolbar_style.h
 	* removed gnome2/percomm.c and gui/percomm.h
-	
+
 
 2004-03-30  Terry <tbiggs@users.sf.net>
 
@@ -3142,19 +3153,19 @@
 	* completely reworked gnome2/bibletext_dialog.c
 	* removed gui/bibletext_menu.h and gnome2/bibletext_menu.c
 	* added main/module_dialogs.cc and main/module_dialogs.h
-	
-	
+
+
 2004-03-11  Terry <tbiggs@users.sf.net>
 
 	* added backend/sword_main.cc and backend/sword_main.hh
-	
+
 
 2004-03-03  Terry <tbiggs@users.sf.net>
 
 	* renamed gui/mod_global_ops.h and gnome2/mod_global_ops.c to
 	  main/global_ops.cc and main/global_ops.hh
 	* renamed main/commentary.c to main/commentary.cc
-	
+
 
 2004-03-02  Terry <tbiggs@users.sf.net>
 
@@ -3165,15 +3176,15 @@
 
 2004-02-26  Terry <tbiggs@users.sf.net>
 
-	* added attribute search to search dialog 
+	* added attribute search to search dialog
 	  search for Strongs numbers, morph tags and footnotes.
 	  Requires sword cvs (1.5.8).
 
 2004-02-25  Terry <tbiggs@users.sf.net>
 
 	* reworked main/lists.c
-	
-	
+
+
 2004-02-21  Terry <tbiggs@users.sf.net>
 
 	* completely reworked gnome2/dictlex.c
@@ -3182,7 +3193,7 @@
 2004-02-19  Terry <tbiggs@users.sf.net>
 
 	* completely reworked gnome2/commentary.c
-	
+
 
 2004-02-12  Terry <tbiggs@users.sf.net>
 
@@ -3191,19 +3202,19 @@
 	* completely reworked gnome2/bibletext.c
 	* added files gnome2/url.c and gui/url.h
 	* moved url handler to gnome2/url.c
-	
+
 
 2004-02-07  Terry <tbiggs@users.sf.net>
 
 	* added sword url handler to gnome2/utilities.c
-	  pass uri in the form of sword://KJV/1John5:8 
+	  pass uri in the form of sword://KJV/1John5:8
 	  to the command line.
 
 
 2004-02-04  Terry <tbiggs@users.sf.net>
 
 	* added tabbed browsing option to preferences dialog
-	
+
 
 2004-02-03  Moses <m-mcknight@users.sf.net>
 
@@ -3215,7 +3226,7 @@
 
 	* added a 'Sources' item to the module manager - for adding and removing
 	  remote sources. (will only add at the moment)
-	  
+
 
 2004-01-15  Moses <m-mcknight@users.sf.net>
 
@@ -3225,9 +3236,9 @@
 2004-01-14  Andy <andyp@users.sf.net>
 
 	* updated spec file to fix build for users and support the renaming of
-	  the package to gnomesword. We now obsolete gnomesword2 (weird but 
+	  the package to gnomesword. We now obsolete gnomesword2 (weird but
 	  hopefully it will hold up ok).
-	  
+
 
 2004-01-13  Terry <tbiggs@users.sf.net>
 
@@ -3240,10 +3251,10 @@
 
 2004-01-09  Terry <tbiggs@users.sf.net>
 
-	* added space between items in Bible and commentary dialog navigation 
+	* added space between items in Bible and commentary dialog navigation
 	  tool bars
 	* added global option support to gbs (for Andy's Life Time module)
-	* the footnotes in lifetimes look bad - in BT also 
+	* the footnotes in lifetimes look bad - in BT also
 	  (may be a filter problem)
 	* added files gui/mod_global_ops.h and gnome2/mod_global_ops.c
 
@@ -3253,19 +3264,19 @@
 	* internationalization improvements (close RFE #861280)
 	* reworked Makefile.am, added 'make rpm' rule, reorganized
 	* bumped version to 2.1.dev1 (this is a dev/test cycle)
-	(NB GNOME 1.x build is probably broken due to gnomesword2 
+	(NB GNOME 1.x build is probably broken due to gnomesword2
 	referenced in the configure and Makefile stuff)
-	
+
 
 2004-01-05  Terry <tbiggs@users.sf.net>
 
-	* added check for ".sword/InstallMgr/InstallMgr.conf" in users home 
+	* added check for ".sword/InstallMgr/InstallMgr.conf" in users home
 	  directory.
 	* added progress bar for refresh remote
 	* added dialog to warn user to restart gs when modules have been changed
 	  until we can do better.
 	* changed dialog to restart gs if user answers yes.
-	
+
 
 2004-01-05  Terry <tbiggs@users.sf.net>
 
@@ -3282,7 +3293,7 @@
 
 	* updated some strings
 	* cleaned up HTML output for generic book display
-	
+
 
 2003-12-31  Andy <andyp@users.sf.net>
 
@@ -3302,18 +3313,18 @@
 
 	* fixed bug #866548
 	* added space to navigation toolbar by adding empty labels
-	
+
 
 2003-12-26  Terry <tbiggs@users.sf.net>
 
-	* added tooltips to all items on the navigation 
+	* added tooltips to all items on the navigation
 	  toolbar in toolbar_nav.c
-	
+
 
 2003-12-25  Terry <tbiggs@users.sf.net>
 
 	* moved Spell.idl and spell_gnome_spell.c form /main to /gnome2
-	* made some changes in spell dialog - spell check starts when the dialog 
+	* made some changes in spell dialog - spell check starts when the dialog
 	  opens - removed the spell check button (start buttton)
 
 
@@ -3322,7 +3333,7 @@
 	* bumped to version 2.0.0 (yay! a real stable release!)
 	* added French manual (thanks to Dominique Corbex)
 	* updated French translation
-	* disabled out-of-date translations for GNOME2 build 
+	* disabled out-of-date translations for GNOME2 build
 	  (only en_GB and fr_FR are current)
 	* cleaned English manual
 	* added screenshots for English manual
@@ -3339,7 +3350,7 @@
 
 	* fixed bug #863854 that I caused when I fixed to build with
 	  -DGTK_DISABLE_DEPRECATED -- still builds with -DGTK_DISABLE_DEPRECATED
-	  
+
 
 2003-12-19  Terry <tbiggs@users.sf.net>
 
@@ -3348,14 +3359,14 @@
 
 2003-12-18  Terry <tbiggs@users.sf.net>
 
-	* clicking on verse (link) in preview pane (sidebar or search_dialog) 
-	  now displays verse in main text pane. 
+	* clicking on verse (link) in preview pane (sidebar or search_dialog)
+	  now displays verse in main text pane.
 	* fixed bug #862463
 
 2003-12-17  Terry <tbiggs@users.sf.net>
 
 	* fixed bug - Greek and Hebrew module not saved in setup_druid.
-	  
+
 
 2003-12-16  Andy <andyp@users.sf.net>
 
@@ -3372,7 +3383,7 @@
 
 	* added support for preverse headings
 	* updated fr_FR.po from Dominique Corbex <dominique.corbex@wanadoo.fr>
-	* applied patch from Dominique Corbex 
+	* applied patch from Dominique Corbex
 
 
 2003-12-13  Terry <tbiggs@users.sf.net>
@@ -3396,11 +3407,11 @@
 
 2003-12-10  Andy <andyp@users.sf.net>
 
-	* fix bug reporting URL in configure.in (the project is not hosted at 
+	* fix bug reporting URL in configure.in (the project is not hosted at
 	  gnome.org.... yet...)
 	* updated spec file
 	* fixed e-mail addresses in various files
-	
+
 
 2003-12-10  Terry <tbiggs@users.sf.net>
 
@@ -3412,7 +3423,7 @@
 
 2003-12-09  Andy <andyp@users.sf.net>
 
-	* added manual to the build. Sweeping changes to the doc/ directory. 
+	* added manual to the build. Sweeping changes to the doc/ directory.
 	  Plus, we now depend on scrollkeeper.
 	* updated .spec file for more prereqs and scrollkeeper scripts, use
 	  generic prefixes per GNOME packaging examples
@@ -3429,34 +3440,34 @@
 	* removed old html docs files - they were empty anyway
 	* clarified purpose of src/gnome2/dummy.cpp and src/gnome/dummy.cpp.
 	  These files force g++ linkage. Added comments inside so that idiots
-	  like me don't try to remove them when helpfully "cleaning up" the 
+	  like me don't try to remove them when helpfully "cleaning up" the
 	  source tree :-)
 	* updated spec file with better Requires/BuildRequires
 	* enabled Help->Contents to actually launch the Help. This needed a
-	  patch on gui.c to fix gnome_program_init(), Makefile.am changes, and 
+	  patch on gui.c to fix gnome_program_init(), Makefile.am changes, and
 	  a small change in main_menu.c.
 
 
 2003-12-08  Terry <tbiggs@users.sf.net>
 
 	* bumped to  0.9.dev18
-	* added enable-pspell to configure.in (for compatability with systems 
+	* added enable-pspell to configure.in (for compatability with systems
 	  that don't have the right gnome-spell) will go away later.
 
 
 2003-12-07  Andy <andyp@users.sf.net>
 
 	* weekend hackathon :-)
-	* replaced all string references to stock icons with the macro 
+	* replaced all string references to stock icons with the macro
 	  equivalents wherever possible
-	* changed GNOME_STOCK_PIXMAP_* and GNOME_STOCK_MENU_* pixmaps 
+	* changed GNOME_STOCK_PIXMAP_* and GNOME_STOCK_MENU_* pixmaps
 	  references to the modern equivalents - these are now deprecated
-	* gtk_widget_set_usize is now deprecated. Replaced with correct 
+	* gtk_widget_set_usize is now deprecated. Replaced with correct
 	  gtk_widget_set_size_request and fixed -2 -> -1 references
-	* comprehensive review of strings: fixed typos, updated, added, 
+	* comprehensive review of strings: fixed typos, updated, added,
 	  changed around - should be ready for the translators now
 	* started to update the preferences dialog. Removed the layout section
-	  as this is now done with the session. Removed frames and replaced 
+	  as this is now done with the session. Removed frames and replaced
 	  with bold headings. Layouts and indents still need updating.
 
 
@@ -3477,16 +3488,16 @@
 
 	* removed 'point to' and 'add to root' items form bookmark menus.
 	* removed 'view hints' from main menu.
-	
+
 
 2003-12-05  Andy <andyp@users.sf.net>
 
 	* string updates to editors and about boxes
-	
+
 
 2003-12-05  Andy <andyp@users.sf.net>
 
-	* added spec file based on original by Hugo van der Kooij. This will be 
+	* added spec file based on original by Hugo van der Kooij. This will be
           generated by configure with the correct information for building based on
           the tarball created by 'make dist'. This is a first draft but it appears to
           work for me.
@@ -3494,35 +3505,35 @@
 
 2003-12-04  Terry <tbiggs@users.sf.net>
 
-	* work on removing GtkFrames and replacing them with GNOME2-style bold 
+	* work on removing GtkFrames and replacing them with GNOME2-style bold
           headings
-	
+
 
 2003-12-03  Terry <tbiggs@users.sf.net>
 
 	* bumped to 0.9.dev17
-	* added gui_alert_dialog() to gnome2/dialog.c - much closer to HIG 
+	* added gui_alert_dialog() to gnome2/dialog.c - much closer to HIG
 	  for alerts than gui_gs_dialog().
-	* added new create_dialog_request() should be easier to get to conform 
+	* added new create_dialog_request() should be easier to get to conform
 	  to the HIG it's called by gui_gs_dialog().
-		
+
 
 2003-12-02  Terry <tbiggs@users.sf.net>
 
-	* work in dialog.c 
-	   * rearanged buttons 
+	* work in dialog.c
+	   * rearanged buttons
 	   * stock icon can be added
 	   * if title string is not passed to gui_gs_dialog(GS_DIALOG * info)
 	     you get no title instead of default title.
 	   * top label is formatted bold.
-	   * changed code to use gtk_dialog "response" signal when 
+	   * changed code to use gtk_dialog "response" signal when
 	     buttons are clicked instead of button "clicked" signal
-	     
+
 
 2003-12-01  Terry <tbiggs@users.sf.net>
 
 	* fixed bug #852017 (?) - gs will run if setup_druid is canceled
-	  but now pops up a dialog and asks if the user wishes to run the 
+	  but now pops up a dialog and asks if the user wishes to run the
 	  preferences_dialog
 
 
@@ -3530,7 +3541,7 @@
 
 	* stripped out the colour-changing code from the setup_druid as
 	  it is inconsistent to change the heading colour between pages
-	
+
 
 2003-11-29  Terry <tbiggs@users.sf.net>
 
@@ -3605,7 +3616,7 @@
 
 	* removed redundant icon
 	* tweaked gnomesword2.desktop.in again, more HIG-compliant
-	* updated src/gnome2/about_sword.c to fix typo, prettify, remove deprecated 
+	* updated src/gnome2/about_sword.c to fix typo, prettify, remove deprecated
 	  calls
 
 2003-11-18  Terry <tbiggs@users.sf.net>
@@ -3613,7 +3624,7 @@
 	* bumped to 0.9.dev12
 	* changed configure.in so gnome2 build is the default
 	* added Andy's changes to gnomesword2.desktop.in
-	* fixed bugs 842314, 842319, 842324, 842677 and 842688	
+	* fixed bugs 842314, 842319, 842324, 842677 and 842688
 
 
 2003-11-13  Terry <tbiggs@users.sf.net>
@@ -3621,15 +3632,15 @@
 	* bumped to 0.9.dev11
 	* removed shortcut bar from preferences dialog - gnome2
 	* removed shortcut bar page from preferences dialog - gnome2
-	* fixed text pane max width bug 
-	* fixed save search results list to bookmarks for sidebar search - gnome2	
+	* fixed text pane max width bug
+	* fixed save search results list to bookmarks for sidebar search - gnome2
 
 
 2003-10-27  Terry <tbiggs@users.sf.net>
 
 	* bumped gnome2 port to 0.9.dev9
 	* fixed a couple of crashes
-	
+
 
 2003-10-21  Terry <tbiggs@users.sf.net>
 
@@ -3643,7 +3654,7 @@
 
 2003-10-06  Terry <tbiggs@users.sf.net>
 
-	* bumped gnomesword-2.0 to 0.9.dev7	
+	* bumped gnomesword-2.0 to 0.9.dev7
 	* added book_closed.png, book_open.png and helpdoc.png from Devhelp-0.7
 	  for gnome2/gbs.c treeview.
 
@@ -3663,21 +3674,21 @@
 2003-09-10  Terry <tbiggs@users.sf.net>
 
 	* moved add_module_to_language_folder, add_language_folder and
-	  gui_load_module_tree from sidebar.c to utilities.c to be used by other 
+	  gui_load_module_tree from sidebar.c to utilities.c to be used by other
 	  files.
 	* replaced the search_dialog ctree with a treeview widget.
-	
+
 2003-09-06  Terry <tbiggs@users.sf.net>
 
 	* bumped to 0.9.dev6
-	
-	
+
+
 2003-07-30  Terry <tbiggs@users.sf.net>
 
 	* Added chapter_display_textview to gnome2/gtkhtml_display.c
 	  for right to left support
-	* added 
-	  'AC_ARG_ENABLE(gnome2,[--enable-gnome2 build],gnome2=$enableval,gnome2="no") 
+	* added
+	  'AC_ARG_ENABLE(gnome2,[--enable-gnome2 build],gnome2=$enableval,gnome2="no")
 	  to configure.in for building the gnome2 port
 
 
@@ -3689,7 +3700,7 @@
 2003-06-28  Terry <tbiggs@users.sf.net>
 
 	* requires Sword cvs (1.5.6)
-	
+
 
 2003-06-24  Terry <tbiggs@users.sf.net>
 
@@ -3729,7 +3740,7 @@
 2003-05-01  Terry <tbiggs@users.sf.net>
 
 	* added url_requested() to gnome/html.c to display images
-	
+
 
 2003-04-29  Terry <tbiggs@users.sf.net>
 
@@ -3742,30 +3753,30 @@
 	    gdk-pixbuf-0.18 or later
 	* added chapter_display_mozilla() that uses gtkembedmoz()
 	  to display Hebrew right to left. Just a workaround until
-	  the port to Gnome2. 
-	* added two patches from Tim Silversides. 
-	  1. The First starts search when a user presses return in the 
+	  the port to Gnome2.
+	* added two patches from Tim Silversides.
+	  1. The First starts search when a user presses return in the
 	     search text entry.
-	  2. The second gives the user a choice of whether or not to 
+	  2. The second gives the user a choice of whether or not to
 	     preview printing.
-	     
+
 
 2003-04-25  Terry <tbiggs@users.sf.net>
 
-	* added module selection (Bible or Commentary) 
+	* added module selection (Bible or Commentary)
 	  to shortcut bar search
 
 
 2003-04-07  Terry <tbiggs@users.sf.net>
 
-	* module opions are now saved (agin)	
+	* module opions are now saved (agin)
 
 
 2003-04-05  Terry <tbiggs@users.sf.net>
 
 	* removed gui/editor_search.h and gnome/editor_search.c
 	  they are no longer needed (editors use gnome/find_dialog.c)
-	  
+
 
 2003-04-01  Terry <tbiggs@users.sf.net>
 
@@ -3773,19 +3784,19 @@
 	* removed backend/preferences.*
 	* removed backend/bookmarks.*
 	* removed backend/percomm_.*
-	
+
 
 2003-03-27  Terry <tbiggs@users.sf.net>
 
 	* removed backend/shortcutbar.*
 	* removed backend/parallel.*
-	
+
 
 2003-03-13  Terry <tbiggs@users.sf.net>
 
 	* bumped to dev3
 	* fixed crash on open related to using old configs and bookmarks
-	* added config.*, key.*, module.* and mgr.* to backend 
+	* added config.*, key.*, module.* and mgr.* to backend
 	* added configs.*, key.* and module.* to main
 	* moved the code for using old configs and bookmarks from
 	  main.c to settings.c.
@@ -3823,7 +3834,7 @@
 
 	* changed popup menu in gbs pane to new style
 	  to match Bible and commentary popups
-	* added popup menu to gbs dialog 
+	* added popup menu to gbs dialog
 
 2003-02-08  Terry Biggs <tbiggs@users.sf.net>
 
@@ -3842,7 +3853,7 @@
 
 	* removed the lookup_widget() function from gnome/utilities.c
 	  it is no longer needed.
-	* removed gtk_widget_ref() and gtk_object_set_data_full() 
+	* removed gtk_widget_ref() and gtk_object_set_data_full()
 	  from gnome/preferences_dialog.c and gnome/main_window.c
 
 
@@ -3864,8 +3875,8 @@
 	* added same popup menu to Bible text dialog
 
 2003-01-22  Terry Biggs <tbiggs@users.sf.net>
-	
-	* removed strip_words_in_red() from 
+
+	* removed strip_words_in_red() from
 	  gnome/gtkhtml_display.c
 	* added "Red letter words" to module global options
 	  toolbar for modules that have words of Christ in red
@@ -3881,7 +3892,7 @@
 
 	* renamed gui/_editor.h to gui/editor.h
 	* renamed gnome/_editor.c to gnome/editor.c
-	
+
 
 2002-12-23  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -3895,7 +3906,7 @@
 2002-12-21  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* moved editors from upper workbook to lower workbook
-	
+
 
 2002-12-21  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -3930,7 +3941,7 @@
 
 	* added gnome/dialog.c and gui/dialog.h this is to
 	  replace gnomedialog
-	  
+
 
 2002-09-11  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -3943,14 +3954,14 @@
 	* renamed gnomesword.desktop to gnomesword1.desktop
 	* changed executable name to gnomesword1
 	* gnomesword1 can be installed without affecting gnomesword
-	
+
 
 2002-08-23  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* changed settings to use .gnomesword-1.0 directory
 	  so you can run gnomesword1 and gnomesword and keep settings
-	  seperate.	
-	
+	  seperate.
+
 
 2002-08-17  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -3960,8 +3971,8 @@
 2002-08-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* fixed one module and settings set to first module crash
-	* fixed crash when parallel module was not available	
-	
+	* fixed crash when parallel module was not available
+
 
 2002-08-09  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -3984,7 +3995,7 @@
 
 	* added main/spell_ispell.c for ispell support
 	* ispell support requires ./configure --enable-with_ispell
-	
+
 
 2002-07-29  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -3992,8 +4003,8 @@
 	* moved widgets from settings structure to
 	  a widgets structure in gui/gnomesword.h
 	* combined backend_first_init() and backend_init_sword()
-	  into backend_init()	
-	
+	  into backend_init()
+
 
 2002-07-27  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4001,7 +4012,7 @@
 	* added gui/editor_spell.h and gnome/editor_spell.c
 	* spell checking now requires pspell but gnomesword will be built
 	  without spell checking if configure does not find pspell.
-	* gui stuff is removed from backend and main execpt main/settings.h	
+	* gui stuff is removed from backend and main execpt main/settings.h
 
 
 2002-07-24  Terry Biggs <tbiggs@users.sourceforge.net>
@@ -4027,10 +4038,10 @@
 	* moved main/find_dlg_defs.h to gui/find_dlg_defs.h
 	* moved change_verse(gchar * key) from gs_gnomesword.c
 	  to gnome/main_window.c gui_change_verse(gchar * key).
-	* moved change_module_and_key(gchar * module_name, gchar * key) 
-	  from gs_gnomesword.c to gnome/main_window.c 
+	* moved change_module_and_key(gchar * module_name, gchar * key)
+	  from gs_gnomesword.c to gnome/main_window.c
 	  gui_change_module_and_key(gchar * module_name, gchar * key).
-	
+
 
 2002-07-18  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4040,8 +4051,8 @@
 
 2002-07-17  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* changed gnome/bibletext_dialog.c, gnome/commentary_dialog.c 
-	  and gnome/dictlex_dialog.c to open unlimited dialogs (well, 
+	* changed gnome/bibletext_dialog.c, gnome/commentary_dialog.c
+	  and gnome/dictlex_dialog.c to open unlimited dialogs (well,
 	  limited by system resorces)
 
 
@@ -4094,7 +4105,7 @@
 	* added backend/sword_defs.h
 	* Bibletext, commentary, and dictlex panes are now
 	  created when needed not on startup.
-	
+
 
 2002-07-01  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4103,7 +4114,7 @@
 	* removed /backend/bibletext_view_.*
 	* changed gnome/commentary_dialog.c to open multiple dialogs.
 	* changed gnome/dictlex_dialog.c to open multiple dialogs.
-	* added gnome/gtkhtml_display.c and gui/gtkhtml_display.h these 
+	* added gnome/gtkhtml_display.c and gui/gtkhtml_display.h these
 	  will replace backend/display.* eventually
 
 
@@ -4116,7 +4127,7 @@
 
 	* renamed gui/_dictlex.h to gui/dictlex.h
 	* renamed gnome/_dictlex.c to gnome/dictlex.c
-	
+
 
 2002-06-22  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4129,7 +4140,7 @@
 
 	* renamed gui/_gbs.h to gui/gbs.h
 	* renamed gnome/_gbs.c to gnome/gbs.c
-	
+
 
 2002-06-08  Victor Porton  <porton@localhost>
 
@@ -4143,7 +4154,7 @@
 
 	* added frame label to docked parallel and studypad to
 	  give a more uniform look.
-	
+
 
 
 2002-06-05  Terry Biggs <tbiggs@users.sourceforge.net>
@@ -4159,7 +4170,7 @@
 	* added function headers to shortcutbar files
 	* moved main/gs_viewcomm_dlg.* to gnome/commentary_dialog.*
 	* moved main/gs_viewdict_dlg.* to gnome/dictlex_dialog.*
-	
+
 
 2002-06-03  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4180,7 +4191,7 @@
 	* added gnome/toolbar_nav.*
 	* removed main/gs_getinfo_dlg.* - was not used
 	* renamed main/gs_information_dlg.* to main/display_info.*
-	* renamed backend/display_info.* to backend/display_info_.* 
+	* renamed backend/display_info.* to backend/display_info_.*
 	* added gnome/_display_info.*
 
 
@@ -4188,14 +4199,14 @@
 
 	* removed main/gs_editor.* all the functions moved to other files
 	* added gnome/studypad.*
-	
+
 
 2002-05-15  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* moved main/gs_editor_replace.* to gnome/editor_replace.*
 	* moved main/gs_editor_search.* to gnome/gs_editor_search.*
 	* moved main/gs_editor_toolbar.* to gnome/editor_toolbar.*
-	
+
 
 2002-05-12  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4205,7 +4216,7 @@
 2002-05-11  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* moved main/gs_detach_int.* to gnome/parallel_dialog.*
-	
+
 
 2002-05-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4223,14 +4234,14 @@
 	* the setup_druid caused a segfault after the finish button
 	  is pressed - it causes a problem with the splash screen :(
 	* added show toolbar item to Bible and commentary pane menus
-	
+
 
 2002-05-08  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added gnome/commentary_find_dialog.*
 	* added gnome/gbs_find_dialog.*
 	* removed main/gs_find_dlg.*
-	
+
 
 2002-05-07  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4254,12 +4265,12 @@
 	* renamee main/gs_commentary.* to main/commentary.*
 	* renamed backend/commentary.* to backend/commentary_.*
 	* added gnome/_commentary.*
-	
+
 
 
 2002-05-02  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* split main/gs_editor into gnome/link_dialog, gnome/_editor, 
+	* split main/gs_editor into gnome/link_dialog, gnome/_editor,
 	* gnome/editor_menu and main/gs_editor more work to be dome.
 	* added main/percomm and backend/percomm_
 
@@ -4268,13 +4279,13 @@
 
 	* renamed main/gs_unlockkey_dlg.* gnome/cipher_key_dialog.*
 	* added backend/bibletext.* and main/gs_bibletext.*
-	
+
 
 2002-04-22  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* renamed backend/viewcomm_dlg.* to backend/viewcomm.* 
+	* renamed backend/viewcomm_dlg.* to backend/viewcomm.*
 	* removed gui stuff from viewcomm.*
-	* renamed backend/verselist_sb.* to backend/verselist.* 
+	* renamed backend/verselist_sb.* to backend/verselist.*
 
 2002-04-20  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4298,8 +4309,8 @@
 
 	* added src/gnome src/backend src/main
 	* created new cvs module gnomesword1
-	
-	
+
+
 2002-04-12  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* add gs_ and sw_ dictlex.* files and moved the code
@@ -4310,11 +4321,11 @@
 2002-04-11  Victor Porton  <porton@localhost>
 
 	* fixed bug about verses with numbers 0 and -1
-	
+
 
 2002-04-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* added patch from Daniel Glassey to fix strongs, morph and 
+	* added patch from Daniel Glassey to fix strongs, morph and
 	  footnote button crash.
 	* fixed paragraph mark in chapter display
 
@@ -4342,7 +4353,7 @@
 	  it was no longer used.
 	* added view in viewer and/or Dict/Lex pane option to
 	  preferences dialog.
-	* added choice for viewer lex modules - you can now view one 
+	* added choice for viewer lex modules - you can now view one
 	  module in the viewer and another in the Dict/Lex pane.
 	* hopefully fixed the detach parallel crash.
 
@@ -4354,10 +4365,10 @@
 2002-03-28  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* reworked some of the save and load bookmarks code
-	  to work with Victor's changes	
+	  to work with Victor's changes
 	* removed unused button form shortcut bar verse list
 	* added view tab item to gbs popup menu
-	
+
 2002-03-28  Victor Porton  <porton@localhost>
 
 	* rewritten some of bookmarks code
@@ -4405,7 +4416,7 @@
 2002-03-01 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added gs_editor_search.* (from GtkHTML editor)
-	
+
 
 2002-02-23 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4418,15 +4429,15 @@
 
 2002-02-19 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* one more time - change look of search results - removed preview 
-	  of verses - it was to slow.	  
-	  
+	* one more time - change look of search results - removed preview
+	  of verses - it was to slow.
+
 
 2002-02-15 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* made parallel page undockable
-	* when int page is undocked it displays a chapter at 
-	 a time with the mods side by side in an html table 
+	* when int page is undocked it displays a chapter at
+	 a time with the mods side by side in an html table
 	 like BibleTime.
 	* added gs_undock_int.* and gs_undock_sb.*
 
@@ -4434,7 +4445,7 @@
 
 	* added editor to gbs
 	* made shortcut bar dockable
-	
+
 
 2002-02-01 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4461,50 +4472,50 @@
 
 2001-12-18 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* added gs_html_editor.*, gs_editor_replace.* and gs_editor_toolbar.* most of this code is 
+	* added gs_html_editor.*, gs_editor_replace.* and gs_editor_toolbar.* most of this code is
 	  from gtkhtml-1.0
 	* removed printer.*  - now using gtk_html_print_with_header_footer for printing.
 	* added html formatting to studypad and note editor using gtkhtml
-	* global options stored for each module added modops.conf to ~/.GnomeSword for storing 
+	* global options stored for each module added modops.conf to ~/.GnomeSword for storing
 	  module options
 
 
 2001-12-05 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added global options menu to viewtext dialog
-	
+
 
 2001-12-04 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* bumped to release 0.7.0
 	* now using SWORD MarkupFilterMgr
-	
-	
+
+
 2001-11-25 Moses Mcknight<m-mcknight@users.sf.net>
 
 	* added hpaned to search results
-	
+
 
 2001-11-06 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* fixed some problems with the shortcut bar
 	* added menu item to module shortcut bars to add all modules to the shortcut bar
-	
+
 
 2001-11-03 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* one more time - change look of search results - to give preview of verses found
 	  using a clist for verse ref and verse preview.
-	  
+
 
 2001-11-01 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* Added two buttons to main toolbar - Footnotes and Morph Tags
-	
-	
+
+
 2001-10-22 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* made dependant on sword cvs to get ready for 
+	* made dependant on sword cvs to get ready for
 	  sword-1.5.3
 	* removed all local render filters (now using sword's)
 
@@ -4526,15 +4537,15 @@
 
 2001-10-01 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* fixed another shortcut bar bug - caused crash when deleting last 
+	* fixed another shortcut bar bug - caused crash when deleting last
 	  shortcut item in a group
-	  
+
 
 2001-09-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added po directory and gettext support
 	* added _() to strings that need to be translated - lots of work left to do
-	
+
 
 2001-09-18 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4546,7 +4557,7 @@
 
 	* fixed shortcut-bar crash on changing groups
 	  which started with gal snapshot 200109150708 release
-	  
+
 
 2001-09-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4558,7 +4569,7 @@
 
 	*  fixed bug that cause gs to crash when selecting text
 	   in parallel page
-	
+
 
 2001-09-04 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4566,18 +4577,18 @@
 	   to GSFont= and GSFont size= to avoid conflicts since we
 	   use different forms.
 	* Fixed not remembered morph tags state bug
-	
+
 
 2001-08-23 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* added expand all and collapse all items to the 
+	* added expand all and collapse all items to the
 	   bookmark tree's popup menu
-	
+
 
 2001-08-22 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added about.png
-	
+
 
 2001-08-21Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4609,7 +4620,7 @@
 	* fix gconf_init bug
 	* fix to work with gal-0.10.99.2 and under to 0.4.99
 	* view text dialog is now resizeable
-	* parallel verses are now in an html table 
+	* parallel verses are now in an html table
 
 
 2001-08-13 Terry Biggs <tbiggs@users.sourceforge.net>
@@ -4621,14 +4632,14 @@
 	* added choice of Lexicon to be used when strongs number
 	  is clicked to preferences dialog
 	* when mouse is moved over strongs number of morph tag
-	  lexicon of choice will be displayed in the verse list window 
+	  lexicon of choice will be displayed in the verse list window
 	  if it is visible. Clicking will open lexicon in 'Dictionay / Lexicon"
 	  window.
 	* changed files gs_sword.cpp and gs_sword.h to sw_gnomesword.cpp
 	   and sw_gnomesword.h
 	* added files sw_viewcomm_dlg.cpp, sw_viewcomm_dlg.h, sw_viewdict_dlg.cpp,
 	   and sw_viewdict_dlg.h
-	* Strongs and footnotes settings for the parallel window are now saved 
+	* Strongs and footnotes settings for the parallel window are now saved
 	   and used on program start.
 
 
@@ -4653,9 +4664,9 @@
 
 2001-08-03 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* added verse list to shortcut bar 
+	* added verse list to shortcut bar
 	* added files sw_verselist_sb.cpp and sw_verselist_sb.h
-	* removed files gs_verselist_dlg.c gs_verselist_dlg.h 
+	* removed files gs_verselist_dlg.c gs_verselist_dlg.h
 				sw_verselist_dlg.cpp sw_verselist_dlg.h
 
 
@@ -4676,18 +4687,18 @@
 	* set version to 0.4.9
 	* new preferences dialog
 	* added files gs_preferences_dlg.c and gs_preferences_dlg.h
-	* removed interface.c and interface.h	
+	* removed interface.c and interface.h
 
 2001-07-25 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added e-splash.c and e-spalash.h to src from gIDE from evolution
 	* added splash.png to pixmaps
-	* added splash screen	
+	* added splash screen
 
 2001-07-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* added [view context] link to each parallel verse that will swap 
-	 it with the module in the main window. 
+	* added [view context] link to each parallel verse that will swap
+	 it with the module in the main window.
 	* added Strongs, Footnotes and Morph Tags to parallel popup menu.
 
 2001-07-16 Terry Biggs <tbiggs@users.sourceforge.net>
@@ -4700,7 +4711,7 @@
 2001-07-14 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* Create new bookmark group and file is working.
-	
+
 2001-07-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* load and save bookmark ctree is working
@@ -4719,13 +4730,13 @@
 
 	* worked on unicode support stuff - help
 	* added gs_bookmarks.* and sw_latin1utf8.*
-	* added ctree to shortcut bar for bookmarks	
+	* added ctree to shortcut bar for bookmarks
 
 
 2001-07-03 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* worked on unicode support stuff - help
-	* added a view text dialog 
+	* added a view text dialog
 	* changed about module dialog to html
 
 2001-06-30 Terry Biggs <tbiggs@users.sourceforge.net>
@@ -4734,7 +4745,7 @@
 
 
 2001-05-14 Terry Biggs <tbiggs@users.sourceforge.net>
- 
+
 	* added gs_viewtext_dlg.c and gs_viewtext_dlg.h
 	* changed gs_viewcomm.* and gs_viewdict.* to gs_viewcomm_dlg.* and gs_viewdict_dlg.*
 
@@ -4764,18 +4775,18 @@
 	* added dialog for viewing commentary modules
 	* added files - gs_viewcomm.c and gs_viewcomm.h
 	* fixed delete note bug
-	
+
 
 2001-03-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* changes in the look of Bible text modules
 
 2001-03-17 Terry Biggs <tbiggs@users.sourceforge.net>
-	
-	* added files  gs_display.cpp and gs_display.h 
+
+	* added files  gs_display.cpp and gs_display.h
 
 2001-03-15 Terry Biggs <tbiggs@users.sourceforge.net>
-	
+
 	* Added a number of files gs_rwphtml.cpp, gs_rwphtml.h,
 	  gs_thmlhtml.cpp and gs_thmlhtml.h which are filters and
 	  will be removed with the next release of sword - also added
@@ -4783,7 +4794,7 @@
 
 
 2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
-		
+
 	* changed main.cpp to main.c
 
 
@@ -4792,27 +4803,27 @@
 	* added html window for dict/lex modules
 	* changed the html parallel window to a single window that will
 	  display five Bible text modules
-		
-	
-	
+
+
+
 2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*release 0.3.9pre1
 	*GtkHTML-0.8.0 is not required to build gnomesword
 	*but gnomesword can be built with GtkHTML
 	*gs_rwphtml.cpp works now.
-	
+
 
 2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
-	
+
 	*GtkHTML-0.8.0 is now required to build gnomesword
 	*GtkHTML is to display Bible texts and commentaries
-	
-	
+
+
 2001-02-08 Terry Biggs <tbiggs@users.sourceforge.net>
-	
+
 	*added GtkHTML to display commentaries
-	
+
 
 2001-02-03 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4827,10 +4838,10 @@
 
 
 2001-01-08 Terry Biggs <tbiggs@users.sourceforge.net>
-        	
+
 	*fixed listeditor bug - crashed with seg fault
 	 when last item was moved up.
-	 
+
 
 2001-01-05 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4841,50 +4852,50 @@
 	spell.c, spell.h, spell_gui.c, spell_gui.h, char_table.c and char_table.h
 	for spell checking
 	*added dialog for viewing dictionary modules
-	
+
 
 2000-12-23 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	*now using gal 4.0 
-	*removed all of the Evolution code but 
+	*now using gal 4.0
+	*removed all of the Evolution code but
 	/widgets/shortcut-bar and /widgets/misc.
-	 
+
 
 2000-12-15 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*changed filestuff.cpp to gs_file.c
 	*changed filestuff.h to gs_file.c
-	
+
 
 2000-12-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*changed listeditor.cpp to gs_listeditor.c
 	*added gs_studypad.c and gs_studypad.h
-	
 
-2000-12-08 Terry Biggs <tbiggs@users.sourceforge.net> 
+
+2000-12-08 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* shortcut bar bug fixed - really
 	* release 0.3.7a
-		
+
 
 2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* release 0.3.7	
-	* shortcut bar bug fixed	
+	* release 0.3.7
+	* shortcut bar bug fixed
 	panesize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
         if(panesize > 0 )
         {
         	settings->shortcutbarsize = panesize;
         	return true;
         }
-        
+
 
 2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* release 0.3.6
 	* fixed show print button in studypad
-	
+
 
 2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -4898,30 +4909,30 @@
 	*release 0.3.4
 	*scroll bug fixed in display.cpp - thanks to Gregg Berg
 	for finding and fixing this bug.
-	
+
 
 2000-11-20 Terry Biggs <tbiggs@users.sourceforge.net>
-	
+
 	*release 0.3.2
 	*fixed crash with seg fault on initial startup after build,
-	 thanks to Fred Smith <fredex@fcshome.stoneham.ma.us> 
+	 thanks to Fred Smith <fredex@fcshome.stoneham.ma.us>
 	 for finding and fixing this bug.
-	 
+
 
 2000-11-14 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*separate initSword() and initGnomeSword()
-	
+
 
 2000-11-09 Terry Biggs <tbiggs@users.sourceforge.net>
-	
+
 	*add a configuration option for the shortcut bar
 		show history group
 
 
 
 2000-11-9  Terry Biggs <tbiggs@users.sourceforge.net>
-	
+
 	*release 0.3.0
 	*requires sword-1.5.1a
 	*requires gnome-print-0.20 or higher
@@ -4936,7 +4947,7 @@
 	#include  <widgets/e-paned/e-hpaned.h/>
 	#include  <widgets/e-paned/e-vpaned.h/>
 	in GnomeSword.cpp, callback.cpp and interface.c
-	changed to 
+	changed to
 	#include  <widgets/e-paned/e-hpaned.h>
 	#include  <widgets/e-paned/e-vpaned.h>
 
@@ -4946,17 +4957,17 @@
 	*release 0.2.5
 
 2000-10-03  Terry Biggs <tbiggs@users.sourceforge.net>
-	
+
 	*added history group to shortcut bar
 
 2000-09-29  Terry Biggs <tbiggs@users.sourceforge.net>
-	
+
 	*patch supplied by Chad Thomas <cbthomas@students.uiuc.edu>
 	to allow lookup of Strongs numbers in dict/lex text by
 	double clicking the number.
 
 2000-09-27  Terry Biggs <tbiggs@users.sourceforge.net>
-        
+
         *changed panes to e-panes from the evolution package
 
 2000-09-21  Terry Biggs <tbiggs@users.sourceforge.net>
@@ -4982,22 +4993,22 @@
 2000-09-06  Terry Biggs <tbiggs@users.sourceforge.net>
 
         * fixed a segfault that cause gnomesword to crash while
-        displaying verses from a search. 
+        displaying verses from a search.
 
 2000-09-03  Terry Biggs <tbiggs@users.sourceforge.net>
 
-        * coding style changes 
+        * coding style changes
         * fixed some code problems - memory not freed
-        
+
 2000-08-30  Michael Meeks  <michael@helixcode.com>
 
 	* widgets/Makefile.am (SUBDIRS): add e-paned back.
 
-2000-08-27  Michael Meeks  <michael@helixcode.com> 
- 
+2000-08-27  Michael Meeks  <michael@helixcode.com>
+
         * configure.in: Added sword seek and use logic, from 'BibleTime'
         * gnomesword/Makefile.am: Rationalize the conditionals, sort.
- 
+
 2000-08-28  - you can now change the size of the search dialog
             - note editor will now save note when formatting is off
 
@@ -5022,14 +5033,14 @@
 2000-07-10	- bug fixes
 		- button to create new file in studypad added
 		- follow button added to notes editor
-		
+
 2000-07-03  	- new bookmark editor
 		- added command line options to set options and bookmark files to defalt settings
-												
+
 2000-06-15  	- changed from options array to settings structure - stored in binary file
 		- added module About Dialog to show module information
 		- word wrap added to printing - using printing code from gedit-0.7.9
-						
+
 2000-06-09  	- added printing using gnome-print-0.20. You can print the text in
 		studypad. Print needs more work - later.
 		- added scroll buttons to dictionary-lexicon key entry.

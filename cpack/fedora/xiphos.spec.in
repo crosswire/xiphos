@@ -1,17 +1,15 @@
 Name:           @CPACK_PACKAGE_NAME@
 Version:        @CPACK_PACKAGE_VERSION@
-Release:        1%{?dist}
+Release:        8%{?dist}
 Summary:        Bible study and research tool
 License:        GPLv2+
 URL:            @XIPHOS_WEBSITE@
+Source0:        https://github.com/crosswire/%{name}/archive/%{version}.tar.gz
 Vendor:         @CPACK_PACKAGE_VENDOR@
 
-Source0:        https://github.com/crosswire/xiphos/releases/download/%{version}/xiphos-%{version}.tar.gz
-
-BuildRequires:  biblesync-devel >= 2.0.1
+BuildRequires:  biblesync-devel >= 2.0.1-3
 BuildRequires:  desktop-file-utils
 BuildRequires:  dbus-glib-devel
-BuildRequires:  libappstream-glib-devel
 BuildRequires:  GConf2-devel
 BuildRequires:  gettext
 BuildRequires:  desktop-file-utils
@@ -24,18 +22,19 @@ BuildRequires:  sword-devel >= 1.8.1
 BuildRequires:  gtk3-devel
 BuildRequires:  webkitgtk4-devel
 BuildRequires:  gtkhtml3-devel
-BuildRequires:  yelp-tools
-Requires:       yelp
+BuildRequires:  cmake
+BuildRequires:  gcc
+BuildRequires:  gcc-c++
 BuildRequires:  itstool
+BuildRequires:  libappstream-glib-devel
+BuildRequires:  yelp-tools
+BuildRequires:  util-linux
+Requires:       yelp
 
 #
-Provides:       xiphos
-Provides:       xiphos-common
-Provides:       xiphos-gtk2
-Provides:       xiphos-gtk3
-Obsoletes:      xiphos-gtk2
-Obsoletes:      xiphos-gtk3
-Obsoletes:      xiphos-common
+Obsoletes:      xiphos-gtk2 < 4.1
+Obsoletes:      xiphos-gtk3 < 4.1
+Obsoletes:      xiphos-common < 4.1
 
 %if 0%{?rhel} > 0 && 0%{?rhel} <= 7
 ExcludeArch: ppc64
@@ -53,8 +52,8 @@ This build produced by Xiphos development; not from official Fedora repo.
 rm -rf src/biblesync
 
 %build
-export CC="gcc -fPIC"
-export CXX="g++ -fPIC"
+export CFLAGS="$CFLAGS -fPIC"
+export CXXFLAGS="$CXXFLAGS -fPIC"
 %ifarch %{power64}
  CFLAGS="$CFLAGS -D__SANE_USERSPACE_TYPES__"
  CXXFLAGS="$CXXFLAGS -D__SANE_USERSPACE_TYPES__"
@@ -66,9 +65,10 @@ export CFLAGS
 mkdir build
 pushd build
 LDFLAGS='%{?__global_ldflags}'       \
-%cmake -DCMAKE_BUILD_TYPE="Debug"    \
-       -DGTKHTML=ON \
-       ..
+%cmake -DGTKHTML:BOOL=ON \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    ..
+
 %make_build
 popd
 
@@ -90,34 +90,23 @@ rm -frv %{buildroot}%{_docdir}/%{name}
 
 %find_lang %{name}
 
-# Post-install options
-%post
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-# Post-uninstall options
-%postun
-if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-# Pre-uninstall options
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
 %files -f %{name}.lang
+%doc AUTHORS ChangeLog README.md RELEASE-NOTES TODO
++%license COPYING
 %{_datadir}/doc
 %{_bindir}/xiphos
 %{_bindir}/xiphos-nav
 %{_datadir}/appdata/xiphos.appdata.xml
 %{_datadir}/applications/xiphos.desktop
-%{_datadir}/help/
 %{_datadir}/icons/hicolor/scalable/apps/xiphos.svg
 %{_datadir}/xiphos/
-%{_datadir}/man
+%{_datadir}/help/
+%{_mandir}/man1/%{name}.1.gz
+%{_mandir}/man1/%{name}-nav.1.gz
+
 
 %changelog
-* Sun May 13 2018 Dominique Corbex <dominique@corbex.org> - 4.1.0-1
+* Sun May 10 2019 Dominique Corbex <dominique@corbex.org> - 4.1.0-1
 - 4.1.0 - Build with CMake.
 
 * Sun Sep 24 2017 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.7-1xi

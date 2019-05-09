@@ -1,3 +1,7 @@
+2019-05-10 Dominique Corbex <domcox@users.sf.net>
+
+	* move to integrated CPack NSIS generator
+
 2009-06-21  matysek <matysek03@users.sf.net>
 
 	* addend and enabled Slovak translation

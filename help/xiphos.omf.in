@@ -1,9 +1,0 @@
-<?xml version="1.0" standalone="no"?>
-<omf>
-  <resource>
-    <subject category="GNOME|Applications"/>
-    <type>manual</type>
-    <relation seriesid="3376140e-2a26-11d8-9eab-83cf5b4f5f4e"/>
-    <rights type="GNU FDL" license.version="1.1" holder="Pierre Benz"/>
-  </resource>
-</omf>

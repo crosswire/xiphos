@@ -133,6 +133,16 @@ if (WIN32)
   endif (GTK2)
 
   # install required deps binaries
+  # bin: Evolving versions
+  install(DIRECTORY ${SYS_ROOT_BIN}
+    DESTINATION ${CMAKE_INSTALL_BINDIR}/..
+    COMPONENT binaries
+    FILES_MATCHING
+    PATTERN "libcrypto-*.dll"
+    PATTERN "libssl-*.dll"
+    PATTERN "libidn*.dll"
+    )
+  # bin: Stable versions
   install(FILES
     ${SYS_ROOT_BIN}/libsword.dll
     ${SYS_ROOT_BIN}/libgconf-2-4.dll
@@ -192,7 +202,6 @@ if (WIN32)
     ${SYS_ROOT_BIN}/libgnurx-0.dll
     ${SYS_ROOT_BIN}/libenchant.dll
     ${SYS_ROOT_BIN}/libcurl-4.dll
-    ${SYS_ROOT_BIN}/libidn-11.dll
     ${SYS_ROOT_BIN}/libssh2-1.dll
     ${SYS_ROOT_BIN}/libclucene-core.dll
     ${SYS_ROOT_BIN}/libclucene-shared.dll
@@ -204,8 +213,6 @@ if (WIN32)
     ${SYS_ROOT_BIN}/libstdc++-6.dll
     ${SYS_ROOT_BIN}/gdb.exe
     ${SYS_ROOT_BIN}/libwebp-7.dll
-    ${SYS_ROOT_BIN}/libcrypto-10.dll
-    ${SYS_ROOT_BIN}/libssl-10.dll
     ${SYS_ROOT_BIN}/libgstapp-1.0-0.dll
     ${SYS_ROOT_BIN}/libgstbase-1.0-0.dll
     ${SYS_ROOT_BIN}/libgstreamer-1.0-0.dll

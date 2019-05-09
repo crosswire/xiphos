@@ -19,6 +19,10 @@
 
 # Generate installer for Windows©
 
+
+
+
+
 # Disable the component-based installation mechanism.
 set(CPACK_MONOLITHIC_INSTALL ON)
 
@@ -34,9 +38,15 @@ set (CPACK_NSIS_MUI_ICON "${PROJECT_SOURCE_DIR}/win32/nsis/pixmaps/icon-install.
 # uninstall program
 set (CPACK_NSIS_MUI_UNIICON "${PROJECT_SOURCE_DIR}/win32/nsis/pixmaps/icon-uninstall.ico")
 
-# CPACK_NSIS_INSTALLER_MUI_ICON_CODE is undocumented, but adds code for setting
-# up MUI_ICON and MUI_UNICON, we use it for adding the font installer macro.
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_installer_mui_icon_code.nsh
+# CPACK_NSIS_INSTALLER_MUI_ICON_CODE is undocumented, but code is inserted for
+# setting up MUI_ICON and MUI_UNICON.
+# We use it for adding the font installer macro.
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_installer_mui_icon_code.nsh.in
+  ${CMAKE_CURRENT_BINARY_DIR}/nsis_installer_mui_icon_code.nsh
+  @ONLY
+  NEWLINE_STYLE WIN32
+  )
+file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_installer_mui_icon_code.nsh
   CPACK_NSIS_INSTALLER_MUI_ICON_CODE)
 
 # The filename of a bitmap to use as the NSIS MUI_WELCOMEFINISHPAGE_BITMAP
@@ -50,15 +60,28 @@ set (CPACK_NSIS_MUI_UNWELCOMEFINISHPAGE_BITMAP
 # Extra NSIS commands that will be added to the beginning of the
 # install Section
 # set (CPACK_NSIS_EXTRA_PREINSTALL_COMMANDS "")
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_extra_preinstall_commands.nsh
-  CPACK_NSIS_EXTRA_PREINSTALL_COMMANDS)
+# Placeholder for inserting a custom file
+#file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_preinstall_commands.nsh
+#  CPACK_NSIS_EXTRA_PREINSTALL_COMMANDS)
 
 # Extra NSIS commands that will be added to the end of the install Section
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_extra_install_commands.nsh
+# We use it for installing extra fonts and make Xiphos handle sword:// urls
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_extra_install_commands.nsh.in
+  ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_install_commands.nsh
+  @ONLY
+  NEWLINE_STYLE WIN32
+  )
+file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_install_commands.nsh
   CPACK_NSIS_EXTRA_INSTALL_COMMANDS)
 
 # Extra NSIS commands that will be added to the uninstall Section
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_extra_uninstall_commands.nsh
+# We use it for disabling Xiphos to handle sword:// urls
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_extra_uninstall_commands.nsh.in
+  ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_uninstall_commands.nsh
+  @ONLY
+  NEWLINE_STYLE WIN32
+  )
+file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_uninstall_commands.nsh
   CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS)
 
 # The arguments that will be passed to the NSIS SetCompressor command
@@ -91,13 +114,15 @@ set (CPACK_NSIS_CONTACT "${XIPHOS_BUG_REPORT}")
 
 # Additional NSIS commands for creating start menu shortcuts.
 #set(CPACK_NSIS_CREATE_ICONS_EXTRA "")
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_create_icons_extra.nsh
-  CPACK_NSIS_CREATE_ICONS_EXTRA)
+# Placeholder for inserting a custom file
+#file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_create_icons_extra.nsh
+#  CPACK_NSIS_CREATE_ICONS_EXTRA)
 
 # Additional NSIS commands to uninstall start menu shortcuts.
 #set(CPACK_NSIS_DELETE_ICONS_EXTRA "")
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_delete_icons_extra.nsh
-  CPACK_NSIS_DELETE_ICONS_EXTRA)
+# Placeholder for inserting a custom file
+#file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_delete_icons_extra.nsh
+#  CPACK_NSIS_DELETE_ICONS_EXTRA)
 
 # Creating NSIS start menu links assumes that they are in ‘bin’ unless
 # this variable is set. For example, you would set this to ‘exec’ if

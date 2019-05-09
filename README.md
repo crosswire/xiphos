@@ -14,6 +14,9 @@ http://xiphos.org/download/
 
 Please see the INSTALL file.
 
+## Translating Xiphos
+
+Please see files in the doc/ directory.
 
 ## History and Acknowledgements
 

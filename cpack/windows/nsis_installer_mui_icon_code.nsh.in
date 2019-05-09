@@ -1,0 +1,38 @@
+#
+#
+######################################
+#
+# CPACK_NSIS_INSTALLER_MUI_ICON_CODE
+#
+#######################################
+#
+#
+
+ ; Re-create already defined settings but discarded by using this code
+ !define MUI_ICON "@PROJECT_SOURCE_DIR@/win32/nsis/pixmaps/icon-install.ico"
+ !define MUI_UNICON "@PROJECT_SOURCE_DIR@/win32/nsis/pixmaps/icon-uninstall.ico"
+
+
+ ; Add our own settings:
+
+ ; RTL header image
+ !define MUI_UI_HEADERIMAGE_RTL "@PROJECT_SOURCE_DIR@/win32/nsis/pixmaps/header-r.bmp"
+
+
+ ; Sword settings
+ !define INSTPATH_SWORD "Sword"
+
+ ; REG keys to handle url  sword://  by Xiphos
+ !define SWURL_REG_ROOT "HKCR" # HKEY_CLASSES_ROOT
+ !define SWURL_REG_KEY "sword"
+ !define SWURL_REG_KEY_ICON "${SWURL_REG_KEY}/DefaultIcon"
+ !define SWURL_REG_KEY_COMMAND "${SWURL_REG_KEY}/shell/open/command"
+
+
+ ; Include Macro for registering fonts
+ !include "@PROJECT_SOURCE_DIR@/win32/nsis/include/fontreg.nsh"
+
+#
+#
+######################################
+

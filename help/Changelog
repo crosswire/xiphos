@@ -1,8 +1,0 @@
-2006-12-16  Dominique Corbex  <domcox@users.sourceforge.net>
-
-	* Added French translation
-
-2006-12-03  Dominique Corbex  <domcox@users.sourceforge.net>
-
-	* Changelog: Added changelog for documentation.
-	* Migrating to gnome-doc-utils
