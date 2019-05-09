@@ -24,6 +24,12 @@ Download the latest .exe file from: http://xiphos.org/download/ or https://githu
 Compile Xiphos from source
 ==========================
 
+Current issues
+--------------
+Due to a bug in yelp-tools, avoid to have a space in your path to the build directory.
+The build will fail quite miserably otherwise, unless you disable building EPUB files. (-DEPUB=OFF)
+
+
 Dependencies
 ------------
 
