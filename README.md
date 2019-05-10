@@ -12,11 +12,11 @@ http://xiphos.org/download/
 
 ## Building Xiphos
 
-Please see the INSTALL file.
+Please see the `INSTALL.md` file.
 
 ## Translating Xiphos
 
-Please see files in the doc/ directory.
+Please see files in the `doc` directory.
 
 ## History and Acknowledgements
 
