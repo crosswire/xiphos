@@ -322,6 +322,12 @@ well for building a regular RPM package.
     $ make -j$(nproc)
     $ cpack -G RPM
 
+or for building a regular RPM package (recommended):
+
+    $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON ../xiphos
+	$ make package_source
+	$ fedpkg --release f30 local
+
 
 Cross-Compiling Xiphos for Windows®
 ===================================

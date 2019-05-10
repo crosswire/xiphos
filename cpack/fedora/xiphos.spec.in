@@ -1,10 +1,10 @@
 Name:           @CPACK_PACKAGE_NAME@
 Version:        @CPACK_PACKAGE_VERSION@
-Release:        8%{?dist}
+Release:        99%{?dist}
 Summary:        Bible study and research tool
 License:        GPLv2+
 URL:            @XIPHOS_WEBSITE@
-Source0:        https://github.com/crosswire/%{name}/archive/%{version}.tar.gz
+Source0:        https://github.com/crosswire/%{name}/archive/xiphos-%{version}.tar.gz
 Vendor:         @CPACK_PACKAGE_VENDOR@
 
 BuildRequires:  biblesync-devel >= 2.0.1-3
@@ -13,11 +13,9 @@ BuildRequires:  dbus-glib-devel
 BuildRequires:  GConf2-devel
 BuildRequires:  gettext
 BuildRequires:  desktop-file-utils
-BuildRequires:  libglade2-devel
 BuildRequires:  intltool
 BuildRequires:  libgsf-devel
 BuildRequires:  libuuid-devel
-BuildRequires:  rarian-compat
 BuildRequires:  sword-devel >= 1.8.1
 BuildRequires:  gtk3-devel
 BuildRequires:  webkitgtk4-devel
@@ -92,7 +90,7 @@ rm -frv %{buildroot}%{_docdir}/%{name}
 
 %files -f %{name}.lang
 %doc AUTHORS ChangeLog README.md RELEASE-NOTES TODO
-+%license COPYING
+%license COPYING
 %{_datadir}/doc
 %{_bindir}/xiphos
 %{_bindir}/xiphos-nav
@@ -106,7 +104,7 @@ rm -frv %{buildroot}%{_docdir}/%{name}
 
 
 %changelog
-* Sun May 10 2019 Dominique Corbex <dominique@corbex.org> - 4.1.0-1
+* Fri May 10 2019 Dominique Corbex <dominique@corbex.org> - 4.1.0-1
 - 4.1.0 - Build with CMake.
 
 * Sun Sep 24 2017 Karl Kleinpaste <charcoal@users.sf.net> - 4.0.7-1xi

@@ -127,7 +127,7 @@ set(CPACK_VERBATIM_VARIABLES ON)
 
 # The name of the source package.
 set(CPACK_SOURCE_PACKAGE_FILE_NAME
-  "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-src")
+  "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
 
 # A boolean variable which enables stripping of all source files
 set(CPACK_SOURCE_STRIP_FILES ON)
