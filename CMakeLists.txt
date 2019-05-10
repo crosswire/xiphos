@@ -99,7 +99,7 @@ add_subdirectory(ui)
 add_subdirectory(po)
 add_subdirectory(desktop)
 add_subdirectory(doc)
-add_subdirectory(mhelp)
+add_subdirectory(help)
 
 # create packages
 add_subdirectory(cpack)
