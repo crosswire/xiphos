@@ -1436,7 +1436,7 @@ void main_display_devotional(void)
 	loctime = localtime(&curtime);
 	strftime(buf, 10, "%m.%d", loctime);
 	prettybuf = g_strdup_printf("<b>%s %d</b>",
-				    month_names[loctime->tm_mon],
+				    gettext(month_names[loctime->tm_mon]),
 				    loctime->tm_mday);
 
 	text = backend->get_render_text(settings.devotionalmod, buf);

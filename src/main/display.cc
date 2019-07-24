@@ -1063,7 +1063,7 @@ GTKEntryDisp::display(SWModule &imodule)
 						day = (char *)"XX";
 					int idx_month = atoi(month) - 1;
 					pretty = g_strdup_printf("<b>%s %s</b><br/>",
-								 month_names[idx_month],
+								 gettext(month_names[idx_month]),
 								 day);
 					swbuf.append(pretty);
 					g_free(pretty);
