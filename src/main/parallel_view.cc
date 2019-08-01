@@ -616,9 +616,9 @@ void get_heading(SWBuf &text, BackEnd *p, gint modidx)
 						  heading)) != NULL) {
 		const gchar *preverse2, *buf;
 
-		preverse2 = p->render_this_text(
-		    settings.parallel_list[modidx], preverse);
-		buf = g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2);
+		preverse2 = p->render_this_text(settings.parallel_list[modidx], preverse);
+		buf = g_strdup_printf("<br/><b>%s</b><br/><br/>",
+				      (preverse2 ? preverse2 : ""));
 
 		text += buf;
 
