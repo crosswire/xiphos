@@ -30,7 +30,7 @@
 
 // Used in places like the ubiquitous _popmenu_requested_cb
 typedef WkHtml XiphosHtml;
-typedef WkHtmlPriv XiphosHtmlPriv;
+typedef WkHtmlPrivate XiphosHtmlPriv;
 
 // Other layers of compatibility - pulled from display_info.c and other places
 #define XIPHOS_HTML WK_HTML
@@ -47,7 +47,7 @@ typedef WkHtmlPriv XiphosHtmlPriv;
 #define XIPHOS_HTML_INITIALIZE wk_html_initialize
 
 #define XIPHOS_TYPE_HTML WK_TYPE_HTML
-#define XIPHOS_HTML_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE((object), WK_TYPE_HTML, WkHtmlPriv))
+#define XIPHOS_HTML_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE((object), WK_TYPE_HTML, WkHtmlPrivate))
 
 XiphosHtml *xiphos_html_new(DIALOG_DATA *dialog, gboolean is_dialog,
 			    gint pane);

@@ -40,8 +40,6 @@
 #include "gui/dictlex.h"
 #include "main/sword.h"
 
-#define WK_HTML_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE((object), WK_TYPE_HTML, WkHtmlPriv))
-
 extern gboolean shift_key_pressed;
 extern gboolean in_url;
 
@@ -59,6 +57,10 @@ enum {
 static guint signals[LAST_SIGNAL] = {0};
 
 static GObjectClass *parent_class = NULL;
+static void wk_html_class_init(WkHtmlClass *klass);
+static void wk_html_init(WkHtml *html);
+
+G_DEFINE_TYPE_WITH_PRIVATE (WkHtml, wk_html, WEBKIT_TYPE_WEB_VIEW)
 
 static gboolean button_release_handler(GtkWidget *widget, GdkEventButton *event)
 {
@@ -82,8 +84,8 @@ static gboolean button_release_handler(GtkWidget *widget, GdkEventButton *event)
 
 static gboolean button_press_handler(GtkWidget *widget, GdkEventButton *event)
 {
-	WkHtmlPriv *priv;
-	priv = WK_HTML_GET_PRIVATE(WK_HTML(widget));
+	WkHtmlPrivate *priv;
+	priv = wk_html_get_instance_private(WK_HTML(widget));
 
 	if (event->type == GDK_2BUTTON_PRESS && !x_uri) {
 		db_click = TRUE;
@@ -139,8 +141,8 @@ static void link_handler(GtkWidget *widget,
 	uri = webkit_hit_test_result_get_link_uri(hit_test_result);
 #endif
 
-	WkHtmlPriv *priv;
-	priv = WK_HTML_GET_PRIVATE(WK_HTML(widget));
+	WkHtmlPrivate *priv;
+	priv = wk_html_get_instance_private(WK_HTML(widget));
 	XI_message(("html_link_message: uri = %s", (uri ? uri : "-none-")));
 
 	if (x_uri) {
@@ -181,11 +183,11 @@ static void html_realize(GtkWidget *widget)
 			 G_CALLBACK(link_handler), NULL);
 }
 
-static void html_init(WkHtml *html)
+static void wk_html_init(WkHtml *html)
 {
-	WkHtmlPriv *priv;
+	WkHtmlPrivate *priv;
 
-	html->priv = priv = WK_HTML_GET_PRIVATE(html);
+	html->priv = priv = wk_html_get_instance_private(html);
 
 	priv->base_uri = NULL;
 	priv->anchor = NULL;
@@ -203,7 +205,7 @@ static void html_dispose(GObject *object)
 static void html_finalize(GObject *object)
 {
 	WkHtml *html = WK_HTML(object);
-	WkHtmlPriv *priv = html->priv;
+	WkHtmlPrivate *priv = html->priv;
 
 	if (priv->timeout)
 		g_source_remove(priv->timeout);
@@ -213,7 +215,7 @@ static void html_finalize(GObject *object)
 	parent_class->finalize(object);
 }
 
-static void html_class_init(WkHtmlClass *klass)
+static void wk_html_class_init(WkHtmlClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS(klass);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS(klass);
@@ -254,37 +256,11 @@ static void html_class_init(WkHtmlClass *klass)
 			 NULL,
 			 wk_marshal_VOID__POINTER_BOOLEAN,
 			 G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_BOOLEAN);
-
-	g_type_class_add_private(klass, sizeof(WkHtmlPriv));
-}
-
-GType wk_html_get_type(void)
-{
-	static GType type = 0;
-
-	if (G_UNLIKELY(type == 0)) {
-		static const GTypeInfo info = {
-		    sizeof(WkHtmlClass),
-		    NULL,
-		    NULL,
-		    (GClassInitFunc)html_class_init,
-		    NULL,
-		    NULL,
-		    sizeof(WkHtml),
-		    0,
-		    (GInstanceInitFunc)html_init,
-		};
-
-		type = g_type_register_static(WEBKIT_TYPE_WEB_VIEW, "WkHtml",
-					      &info, (GTypeFlags)0);
-	}
-
-	return type;
 }
 
 void wk_html_set_base_uri(WkHtml *html, const gchar *uri)
 {
-	WkHtmlPriv *priv;
+	WkHtmlPrivate *priv;
 
 	g_return_if_fail(WK_HTML_IS_HTML(html));
 
@@ -428,7 +404,7 @@ gboolean wk_html_find_again(WkHtml *html, gboolean forward)
 
 void wk_html_jump_to_anchor(WkHtml *html, gchar *anchor)
 {
-	WkHtmlPriv *priv;
+	WkHtmlPrivate *priv;
 
 	g_return_if_fail(html != NULL);
 

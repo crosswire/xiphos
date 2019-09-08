@@ -41,12 +41,12 @@ G_BEGIN_DECLS
 #define WK_HTML_IS_HTML_CLASS(k) (G_TYPE_CHECK_INSTANCE_GET_CLASS((o), WK_TYPE_HTML, WkHtmlClass))
 typedef struct _WkHtml WkHtml;
 typedef struct _WkHtmlClass WkHtmlClass;
-typedef struct _WkHtmlPriv WkHtmlPriv;
+typedef struct _WkHtmlPriv WkHtmlPrivate;
 
 struct _WkHtml
 {
 	WebKitWebView parent;
-	WkHtmlPriv *priv;
+	WkHtmlPrivate *priv;
 };
 struct _WkHtmlPriv
 {
