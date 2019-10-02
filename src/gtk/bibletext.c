@@ -56,31 +56,6 @@ gboolean shift_key_pressed = FALSE;
 guint scroll_adj_signal;
 GtkAdjustment *adjustment;
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *
- *
- * Synopsis
- *   #include "gui/.h"
- *
- *
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void gui_popup_pm_text(void)
-{
-	/* gui_menu_popup (settings.MainWindowModule,
-	   NULL); */
-}
-#endif
-
 static gboolean
 _popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 {

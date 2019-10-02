@@ -483,12 +483,6 @@ static void on_notebook_bible_parallel_switch_page(GtkNotebook *notebook,
 						   gint page_num,
 						   GList **tl)
 {
-#if 0
-	if (page_num == 0)
-		gui_set_drop_target(widgets.html_text);
-	else
-		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_text));
-#endif /* 0 */
 }
 
 #ifdef USE_GTK_3
@@ -504,17 +498,9 @@ static void on_notebook_comm_book_switch_page(GtkNotebook *notebook,
 	gchar *url = NULL;
 
 	if (page_num == 0) {
-#if 0
-		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_book));
-		gui_set_drop_target(widgets.html_comm);
-#endif /* 0 */
 		settings.comm_showing = TRUE;
 		gtk_widget_show(nav_toolbar);
 	} else {
-#if 0
-		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_comm));
-		gui_set_drop_target(widgets.html_book);
-#endif /* 0 */
 		settings.comm_showing = FALSE;
 		if (!settings.showtexts)
 			gtk_widget_hide(nav_toolbar);

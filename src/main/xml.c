@@ -190,31 +190,6 @@ void xml_add_bookmark_to_parent(xmlNodePtr parent,
 	   (const xmlChar *) caption); */
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   xml_write_bookmark_doc
- *
- * Synopsis
- *   #include "main/xml.h"
- *
- *   void xml_write_bookmark_doc(const xmlChar * xml_filename)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void xml_write_bookmark_doc(const xmlChar *xml_filename)
-{
-	XI_print(("\nsaving = %s\n", xml_filename));
-	xmlSaveFormatFile((const char *)xml_filename, bookmark_doc, 1);
-}
-#endif
-
 /******************************************************************************
  * Name
  *

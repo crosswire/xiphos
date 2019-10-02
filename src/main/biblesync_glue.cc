@@ -770,28 +770,6 @@ int biblesync_personal()
 	return biblesync->getMode() == BSP_MODE_PERSONAL;
 }
 
-#if 0
-// unneeded at this time. disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *  biblesync_active
- *
- * Synopsis
- *   #include "backend/biblesync.hh"
- *   void biblesync_active()
- *
- * Description
- *   determines whether BibleSync is active or disabled.
- *
- * Return value
- *   int
- */
-int biblesync_active()
-{
-	return biblesync->getMode() != BSP_MODE_DISABLE;
-}
-#endif
-
 /******************************************************************************
  * Name
  *  biblesync_active_xmit_allowed

@@ -222,29 +222,6 @@ void gui_keep_parallel_dialog_in_sync(void)
 		sync_with_main();
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   gui_set_parallel_navbar
- *
- * Synopsis
- *   #include "gui/parallel_dialog.h"
- *
- *   void gui_set_parallel_navbar(const char key)
- *
- *
- *
- * Return value
- *   void
- */
-
-void gui_set_parallel_navbar(const char *key)
-{
-	main_navbar_set(navbar, key);
-}
-#endif
-
 /******************************************************************************
  * Name
  *   create_nav_toolbar
@@ -376,30 +353,6 @@ static GtkWidget *create_parallel_dialog(void)
 			   TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(box_parallel_labels),
 				       2);
-
-#if 0
-	if (settings.parallel_list) {
-		GtkWidget *plabel;
-		gchar *label;
-		gint modidx;
-
-		for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
-			plabel = gtk_label_new(NULL);
-			gtk_widget_show(plabel);
-			gtk_box_pack_start(GTK_BOX(box_parallel_labels),
-					   plabel, FALSE, FALSE, 0);
-			gtk_label_set_use_markup(GTK_LABEL(plabel), TRUE);
-
-			label =
-			    g_strdup_printf
-			    ("<span color='%s' weight='bold'>%s</span>",
-			     settings.bible_verse_num_color,
-			     settings.parallel_list[modidx]);
-			gtk_label_set_markup(GTK_LABEL(plabel), label);
-			g_free(label);
-		}
-	}
-#endif /* 0 */
 
 #ifndef USE_WEBKIT2
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);

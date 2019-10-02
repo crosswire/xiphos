@@ -1100,9 +1100,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	int chapter = key->getChapter();
 	int curBook = key->getBook();
 	int curTest = key->getTestament();
-#if 0
-	const char *ModuleName = imodule.getName();
-#endif
 
 	key->setVerse(1);
 	imodule--;
@@ -1184,27 +1181,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		key->setChapter(i * chapter);
 		key->setVerse(0);
 
-#if 0 // with footnote counting, we no longer cache before/after verses.
-		ModuleCache::CacheVerse& cVerse = ModuleMap
-		    [ModuleName]
-		    [key->Testament()]
-		    [key->Book()]
-		    [key->Chapter()]
-		    [key->Verse()];
-	
-		if (!cVerse.CacheIsValid(cache_flags))
-			cVerse.SetText((strongs_or_morph
-					? block_render(imodule.renderText().c_str())
-					: imodule.renderText().c_str()),
-				       cache_flags);
-		buf = g_strdup_printf("%s<br />", cVerse.GetText());
-#else
-# if 0
-		buf = g_strdup_printf("%s<br />",
-				      (strongs_or_morph
-					   ? block_render(imodule.renderText().c_str())
-					   : imodule.renderText().c_str()));
-# else
 		// gosh this is gross.
 		// hunt down self-closing <div ... /> and stomp them with spaces.
 		// this is disgustingly special-case, caused by self-closing <div>
@@ -1239,8 +1215,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		buf = g_strdup_printf("%s<br />",
 				      (strongs_or_morph ? block_render(divBuf->str) : divBuf->str));
 		g_string_free(divBuf, TRUE);
-# endif
-#endif /* !0 */
 		swbuf.append(buf);
 		g_free(buf);
 	}
@@ -1258,9 +1232,6 @@ void
 GTKChapDisp::getVerseAfter(SWModule &imodule)
 {
 	gchar *buf;
-#if 0
-	const char *ModuleName = imodule.Name();
-#endif
 	sword::VerseKey *key = (VerseKey *)(SWKey *) imodule;
 
 	imodule++;

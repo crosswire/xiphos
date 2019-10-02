@@ -144,66 +144,6 @@ static void set_global_textual_reading(const char *option, int choice)
 	g_free(buf);
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   main_parallel_change_verse
- *
- * Synopsis
- *   #include ".h"
- *
- *   gchar *main_parallel_change_verse(void)
- *
- * Description
- *   this is for the parallel dialog only
- *
- *
- *
- * Return value
- *   gchar *
- */
-
-gchar *main_parallel_change_verse(void)
-{
-	gchar *retval;
-	const gchar *bookname;
-	gchar buf[256];
-	gint chapter, verse;
-	char *newbook;
-	char *numC, *numV;
-
-	bookname = gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
-	chapter =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(sbIntChapter));
-	verse =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(sbIntVerse));
-
-	sprintf(buf, "%s %d:%d", bookname, chapter, verse);
-
-	newbook = backend_p->key_get_book(settings.parallel_list[0], buf);
-	chapter = backend_p->key_get_chapter(settings.parallel_list[0], buf);
-	verse = backend_p->key_get_verse(settings.parallel_list[0], buf);
-
-	if (strcmp(bookname, newbook))
-		gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), newbook);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter),
-				  chapter);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), verse);
-
-	numC = main_format_number(chapter);
-	numV = main_format_number(verse);
-	sprintf(buf, "%s %s:%s", newbook, numC, numV);
-	g_free(numC);
-	g_free(numV);
-
-	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
-	retval = buf;
-	g_free(newbook);
-	return retval;
-}
-#endif
-
 /******************************************************************************
  * Name
  *   gui_set_parallel_module_global_options
@@ -479,11 +419,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 			 (char *)"Headings");
 
 	item = gtk_check_menu_item_new_with_label(_("Morpheme Segmentation"));
-#if 0
-	gtk_widget_show(item);
-#else
 	gtk_widget_hide(item);
-#endif
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), settings.parallel_segmentation);
@@ -1035,58 +971,6 @@ void main_swap_parallel_with_main(char *intmod)
 	main_update_parallel_page();
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 0);
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   load_menu_formmod_list
- *
- * Synopsis
- *   #include "main/parallel_view.h
- *
- *   void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,
- *			gchar *label, GCallback mycallback)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void main_load_menu_form_mod_list(GtkWidget *pmInt, gchar *label,
-				  GCallback mycallback)
-{
-	GList *tmp = get_list(TEXT_DESC_LIST);
-	GtkWidget *view_module;
-	GtkWidget *view_module_menu;
-
-	view_module = gtk_menu_item_new_with_label(label);
-	gtk_widget_show(view_module);
-	gtk_container_add(GTK_CONTAINER(pmInt), view_module);
-
-	view_module_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_module),
-				  view_module_menu);
-	/*	view_module_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU
-					      (view_module_menu));*/
-	while (tmp != NULL) {
-		GtkWidget *item =
-		    gtk_menu_item_new_with_label((gchar *)tmp->data);
-		gtk_widget_show(item);
-		g_signal_connect(G_OBJECT(item), "activate",
-				 G_CALLBACK(mycallback),
-				 g_strdup((gchar *)tmp->data));
-
-		gtk_container_add(GTK_CONTAINER(view_module_menu),
-				  item);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-}
-#endif
 
 /******************************************************************************
  * Name

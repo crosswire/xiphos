@@ -113,14 +113,6 @@ void gui_get_clipboard_text_for_lookup(GtkClipboard *clipboard,
 		g_free(dict);
 }
 
-#if 0
-static void set_label(gchar * mod_name)
-{
-	gtk_label_set_text(GTK_LABEL(widgets.label_dict), mod_name);
-
-}
-#endif
-
 /******************************************************************************
  * Name
  *   on_entryDictLookup_changed
@@ -142,66 +134,6 @@ void on_entryDictLookup_changed(GtkEditable *editable, gpointer data)
 {
 	main_dictionary_entry_changed(settings.DictWindowModule);
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   gui_display_dictlex
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void gui_display_dictlex(gchar * key)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void gui_display_dictlex(gchar *key)
-{
-	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
-}
-#endif
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *  gui_set_dictlex_mod_and_key
- *
- * Synopsis
- *   #include "_dictlex.h"
- *
- *   void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key)
- *
- * Description
- *   sets the dictionary module and key.  Primarily added for use in tabbed browsing
- *
- * Return value
- *   void
- */
-
-void gui_set_dictlex_mod_and_key(gchar *mod_name, gchar *key)
-{
-	const gchar *old_key;
-
-	//xml_set_value("Xiphos", "modules", "dict", mod_name);
-	//settings.DictWindowModule = xml_get_value("modules", "dict");
-	//set_label(settings.DictWindowModule);
-	if (key == NULL)
-		key = "Grace";
-
-	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
-	if (!strcmp(old_key, key))
-		on_entryDictLookup_changed(NULL, NULL);
-	else
-		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
-}
-#endif
 
 void dict_key_entry_changed(GtkEntry *entry, gpointer data)
 {
