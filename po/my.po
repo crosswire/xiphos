@@ -1,0 +1,5145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Xiphos\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-27 23:35-0400\n"
+"PO-Revision-Date: 2019-11-04 11:47-0500\n"
+"Language: my\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Cyrille <lafricain79@gmail.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: ../src/backend/sword_main.cc:792
+msgid ""
+"Xiphos failure: \"can't happen\", display_mod: null\n"
+"Please report this. sword_main.cc:set_treekey\n"
+"What were you doing when this occurred?"
+msgstr ""
+
+#: ../src/backend/sword_main.cc:1149
+msgid "Configuration not found"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:209
+#, c-format
+msgid "Page %d of %d"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
+msgid "Open"
+msgstr "ဖွင့်ပါ"
+
+#: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
+#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:773
+#: ../ui/bookmarks.gtkbuilder.h:5 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/gtk_webedit.ui.h:85 ../ui/markverse.gtkbuilder.h:7
+#: ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr "_ရုတ်သိမ်းပါ"
+
+#: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
+#: ../src/editor/slib-editor.c:715 ../src/gtk/main_menu.c:774
+msgid "_Open"
+msgstr "ဖွင့်ပါ"
+
+#: ../src/editor/slib-editor.c:415
+msgid "Save As"
+msgstr "အသစ် သိမ်းဆည်း"
+
+#: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
+#: ../src/editor/webkit_editor.c:688
+msgid "Untitled document"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:494
+msgid "_Close"
+msgstr "_ပိတ်ပါ"
+
+#: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
+msgid "Are you sure you want to delete the note for"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:659
+msgid "HTML Output"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:665
+msgid "HTML Source"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:671
+msgid "Plain Source"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
+#: ../ui/editor_studypad.xml.h:19
+msgid "_Print..."
+msgstr "_ပရင့်ထုတ်ခြင်း…"
+
+#: ../src/editor/slib-editor.c:693 ../ui/editor_note.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+msgid "Print Pre_view"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:704
+msgid "_Quit"
+msgstr "_ထွက်ပါ"
+
+#: ../src/editor/slib-editor.c:726 ../src/gtk/dialog.c:262
+msgid "_Save"
+msgstr "_သိမ်းပါ"
+
+#: ../src/editor/slib-editor.c:737
+msgid "Save _As..."
+msgstr "အသစ် သိမ်းဆည်း"
+
+#: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
+msgid "New"
+msgstr "အသစ်"
+
+#: ../src/editor/slib-editor.c:745
+msgid "Open new document"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
+msgid "Delete"
+msgstr "ဖျက်ပါ"
+
+#: ../src/editor/slib-editor.c:751
+msgid "Delete current note"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
+msgid "_File"
+msgstr "ဖိုင်"
+
+#: ../src/editor/slib-editor.c:811
+msgid "HTML _Output"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:818
+msgid "_HTML Source"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:825
+msgid "_Plain Source"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
+msgid "_View"
+msgstr "မြင်ကွင်း"
+
+#: ../src/editor/slib-editor.c:841 ../ui/editor_note.xml.h:16
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
+msgid "Save"
+msgstr "သိမ်းပါ"
+
+#: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
+#: ../ui/editor_link_dialog.gtkbuilder.h:1
+msgid "Insert Link"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:1208 ../src/editor/slib-editor.c:1249
+#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
+msgid "Save the changes to document"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
+#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
+msgid "before closing?"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
+#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
+msgid "If you don't save, changes will be permanently lost."
+msgstr ""
+
+#: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
+#: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
+msgid "File"
+msgstr "ဖိုင်"
+
+#: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
+msgid "StudyPad"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:1315 ../src/editor/webkit_editor.c:1270
+msgid "Note Editor"
+msgstr ""
+
+#: ../src/editor/slib-editor.c:1333 ../src/editor/webkit_editor.c:1287
+msgid "Prayer List/Journal Editor"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:142
+msgid "About Sword Module"
+msgstr ""
+
+#. Don't use an icon with GTK3
+#: ../src/gtk/about_modules.c:223 ../src/gtk/about_trans.c:168
+#: ../src/gtk/find_dialog.c:263
+msgid "Close"
+msgstr "ပိတ်ပါ"
+
+#: ../src/gtk/about_modules.c:415
+msgid "<b>Module name:</b> "
+msgstr ""
+
+#: ../src/gtk/about_modules.c:422
+msgid "<b>Module abbreviation:</b> "
+msgstr ""
+
+#: ../src/gtk/about_modules.c:427
+msgid "<b>Version:</b> "
+msgstr ""
+
+#: ../src/gtk/about_modules.c:430
+msgid "No version stamp found"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:433
+msgid "<b>Type:</b> "
+msgstr ""
+
+#: ../src/gtk/about_modules.c:435
+msgid "Daily Devotion"
+msgstr "နေ့စဥ်ဖတ်ရန်ကျမ်း"
+
+#: ../src/gtk/about_modules.c:437 ../src/gtk/mod_mgr.c:1561
+#: ../src/gtk/utilities.c:612 ../src/main/sidebar.cc:1029
+#: ../src/main/sidebar.cc:1031
+msgid "Maps"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:439 ../src/gtk/mod_mgr.c:1565
+#: ../src/gtk/utilities.c:618 ../src/main/sidebar.cc:1038
+#: ../src/main/sidebar.cc:1040
+msgid "Images"
+msgstr "ရုပ်ပုံများ"
+
+#: ../src/gtk/about_modules.c:441
+msgid "Glossary"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:445
+msgid "Cult"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:449 ../src/gtk/search_sidebar.c:287
+msgid "Bible"
+msgstr "သမ္မာကျမ်းစာများ"
+
+#: ../src/gtk/about_modules.c:452 ../src/gtk/search_sidebar.c:295
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
+msgid "Commentary"
+msgstr "ရှင်းလင်းချက်မှတ်စု"
+
+#: ../src/gtk/about_modules.c:455 ../ui/prefs.glade.h:143
+#: ../ui/prefs.gtkbuilder.h:143
+msgid "Dictionary"
+msgstr "အဘိဓာန်များ"
+
+#: ../src/gtk/about_modules.c:458
+msgid "General Book"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:463
+msgid "Personal Commentary"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:466
+msgid "Journal"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:469
+msgid "Unknown type"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:475
+msgid "<b>Language:</b> "
+msgstr "<b>ဘာသာစကား</b> "
+
+#: ../src/gtk/about_modules.c:478
+msgid "Not specified"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:487
+msgid "<b>Installed size:</b> "
+msgstr ""
+
+#: ../src/gtk/about_modules.c:495
+msgid "<b>Companion module(s):</b></br>"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:505
+msgid "<b>Features:</b>"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:509
+msgid "*&nbsp;Headings"
+msgstr "*&nbsp;ခေါင်းစဉ်များ"
+
+#: ../src/gtk/about_modules.c:517
+msgid "*&nbsp;Footnotes"
+msgstr "*&nbsp;အောက်ခြေမှတ်စု"
+
+#: ../src/gtk/about_modules.c:523
+msgid "*&nbsp;Cross references"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:530
+msgid "*&nbsp;Strong's numbers"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:538
+msgid "*&nbsp;Morphological tags"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:544
+msgid "*&nbsp;Lemmas"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:552
+msgid "*&nbsp;Words of Christ in red"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:557
+msgid "*&nbsp;Greek accents"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:563
+msgid "*&nbsp;Hebrew Vowel Points"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:569
+msgid "*&nbsp;Hebrew Cantillation"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:575
+msgid "*&nbsp;Variant readings"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:582
+msgid "*&nbsp;Transliteration forms"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:587
+msgid "*&nbsp;Enumerations"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:592
+msgid "*&nbsp;Glosses"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:599
+msgid "*&nbsp;Morpheme Segmentation"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:606
+msgid "*&nbsp;<i>No features found</i>"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:616
+msgid "<b>Distribution license:</b>"
+msgstr ""
+
+#: ../src/gtk/about_modules.c:629
+msgid "<b>Promotional:</b> "
+msgstr ""
+
+#: ../src/gtk/about_sword.c:81
+msgid ""
+"The SWORD Project is an effort to create an ever-expanding software package "
+"for research and study of God and His Word. The SWORD Project framework "
+"allows easy use and study of Bible texts, commentaries, lexicons, "
+"dictionaries, and other books. Many frontends are built using this "
+"framework. An installed set of books may be shared among all frontends using "
+"the framework.\n"
+"\n"
+" Books can be downloaded from the SWORD Project."
+msgstr ""
+
+#: ../src/gtk/about_sword.c:100
+msgid "The SWORD Project"
+msgstr ""
+
+#: ../src/gtk/about_sword.c:130
+msgid ""
+"BibleSync is a network protocol providing the ability to share navigation "
+"within your Bible study program with cooperating programs on the local "
+"network.\n"
+"\n"
+"Enable BibleSync from Preferences:\n"
+"in personal mode, to share within a small group;\n"
+"or as either speaker or audience in a formal lecture setting.\n"
+"\n"
+"There are options for how BibleSync behaves in Xiphos:\n"
+"- To follow others' navigation directly or indirectly.\n"
+"- To send your navigation every time or only via keyboard.\n"
+"- To select speakers to whom Xiphos should listen.\n"
+"\n"
+"A simple chat capability provides brief messages to be shared as well.\n"
+"\n"
+"See the manual for details.\n"
+"(Preferences -> BibleSync Settings and Interface -> Keyboard Shortcuts.)"
+msgstr ""
+
+#: ../src/gtk/about_sword.c:157
+msgid "BibleSync technical details"
+msgstr ""
+
+#: ../src/gtk/about_trans.c:82
+msgid ""
+"Do you like using Xiphos to study the Bible? Would you like to see its user "
+"interface in your native language? You could translate Xiphos! \n"
+"\n"
+"We are always looking for contributions of new translations of Xiphos into "
+"other languages. If you are able to translate for us, please see the link "
+"below, contact us, and get involved with our efforts. Your help will be much "
+"appreciated!"
+msgstr ""
+
+#: ../src/gtk/about_trans.c:96
+msgid "About Xiphos Translation"
+msgstr ""
+
+#: ../src/gtk/about_trans.c:135
+msgid "See TRANSLATION-HOWTO in Xiphos source"
+msgstr ""
+
+#: ../src/gtk/about_trans.c:141
+msgid "Xiphos development"
+msgstr ""
+
+#: ../src/gtk/about_xiphos.c:129
+msgid "Copyright © 2000-2018 Xiphos Development Team"
+msgstr ""
+
+#: ../src/gtk/about_xiphos.c:131
+msgid ""
+"\n"
+"Powered by The SWORD Project.\n"
+"We would like to thank Troy Griffitts and all the other folks who have given "
+"us The SWORD Project."
+msgstr ""
+
+#. info->stock_icon = GTK_STOCK_OPEN;
+#: ../src/gtk/bookmark_dialog.c:163 ../src/gtk/bookmarks_menu.c:361
+#: ../src/gtk/bookmarks_menu.c:653 ../src/gtk/bookmarks_menu.c:753
+#: ../src/gtk/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
+#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:36
+msgid "Bookmark"
+msgstr "စာညှပ်"
+
+#: ../src/gtk/bookmark_dialog.c:165 ../src/gtk/bookmarks_menu.c:755
+#: ../src/gtk/bookmarks_treeview.c:139
+msgid "Enter Folder Name"
+msgstr ""
+
+#: ../src/gtk/bookmark_dialog.c:167 ../src/gtk/bookmarks_menu.c:757
+msgid "Folder Name"
+msgstr "ဖိုင်တွဲ အမည်"
+
+#: ../src/gtk/bookmark_dialog.c:168 ../src/gtk/bookmarks_menu.c:758
+#: ../src/gtk/bookmarks_treeview.c:141
+msgid "Folder: "
+msgstr "ဖိုင်တွဲ- "
+
+#: ../src/gtk/bookmarks_menu.c:200
+msgid "Specify bookmarks file"
+msgstr ""
+
+#: ../src/gtk/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
+#: ../ui/xi-menus-popup.gtkbuilder.h:29
+msgid "Edit"
+msgstr "တည်းဖြတ်"
+
+#: ../src/gtk/bookmarks_menu.c:364
+msgid "Folder name: "
+msgstr "ဖိုင်တွဲ အမည်- "
+
+#: ../src/gtk/bookmarks_menu.c:367
+msgid "Bookmark name: "
+msgstr ""
+
+#: ../src/gtk/bookmarks_menu.c:370 ../src/gtk/bookmarks_menu.c:661
+msgid "Verse: "
+msgstr "လင်္ကာ "
+
+#: ../src/gtk/bookmarks_menu.c:371 ../src/gtk/bookmarks_menu.c:662
+msgid "Module: "
+msgstr "မော်ကျူးများ- "
+
+#: ../src/gtk/bookmarks_menu.c:493
+msgid "Remove the selected folder"
+msgstr ""
+
+#: ../src/gtk/bookmarks_menu.c:494
+msgid "(and all its contents)?"
+msgstr ""
+
+#: ../src/gtk/bookmarks_menu.c:498
+msgid "Remove the selected bookmark"
+msgstr ""
+
+#: ../src/gtk/bookmarks_menu.c:654
+msgid "Add"
+msgstr "ထပ်ထည့်ပါ"
+
+#: ../src/gtk/bookmarks_menu.c:660
+msgid "Label: "
+msgstr ""
+
+#: ../src/gtk/bookmarks_treeview.c:102 ../src/gtk/export_bookmarks.c:172
+#: ../src/gtk/export_bookmarks.c:229
+#, c-format
+msgid "Search result: %s"
+msgstr ""
+
+#: ../src/gtk/bookmarks_treeview.c:747
+msgid ""
+"Opening a multi-reference bookmark in\n"
+"separate tabs is not supported."
+msgstr ""
+
+#: ../src/gtk/bookmarks_treeview.c:850 ../src/gtk/sidebar.c:1532
+#: ../src/gtk/sidebar.c:1584
+msgid "Bookmarks"
+msgstr "မှတ်သားပါ"
+
+#: ../src/gtk/cipher_key_dialog.c:63
+#, c-format
+msgid "Cipher key for module %s"
+msgstr ""
+
+#: ../src/gtk/cipher_key_dialog.c:64
+msgid "for:"
+msgstr ""
+
+#: ../src/gtk/cipher_key_dialog.c:67
+msgid "Enter Key: "
+msgstr ""
+
+#: ../src/gtk/dialog.c:256
+msgid "_Ok"
+msgstr "အိုကေ"
+
+#: ../src/gtk/dialog.c:259 ../src/gtk/dialog.c:633
+msgid "_Yes"
+msgstr "_ဟုတ်သည်"
+
+#: ../src/gtk/dialog.c:265 ../src/gtk/dialog.c:630
+msgid "_No"
+msgstr ""
+
+#: ../src/gtk/dialog.c:289
+msgid "Close without Saving"
+msgstr ""
+
+#: ../src/gtk/dialog.c:639
+msgid "_OK"
+msgstr "အိုကေ"
+
+#: ../src/gtk/dialog.c:724
+msgid "Xiphos:"
+msgstr ""
+
+#: ../src/gtk/dialog.c:854
+msgid "Close _without Saving"
+msgstr ""
+
+#: ../src/gtk/export_bookmarks.c:175 ../src/gtk/export_bookmarks.c:232
+#: ../src/gtk/sidebar.c:1554 ../src/gtk/sidebar.c:1602
+#, c-format
+msgid "Verse List"
+msgstr ""
+
+#: ../src/gtk/export_bookmarks.c:659
+msgid "VerseList"
+msgstr ""
+
+#: ../src/gtk/export_bookmarks.c:663
+msgid "SearchResults"
+msgstr ""
+
+#: ../src/gtk/export_dialog.c:325 ../ui/export-dialog.glade.h:4
+#: ../ui/export-dialog.gtkbuilder.h:5
+msgid "Please check copyright before exporting!"
+msgstr ""
+
+#: ../src/gtk/find_dialog.c:178 ../src/gtk/find_dialog.c:242
+#: ../src/gtk/find_dialog.c:334 ../ui/gtk2_webedit.ui.h:18
+#: ../ui/gtk_webedit.ui.h:18
+msgid "Find"
+msgstr "ရှာပါ"
+
+#: ../src/gtk/find_dialog.c:197
+msgid "Enter Word or Phrase"
+msgstr ""
+
+#: ../src/gtk/find_dialog.c:212
+msgid "Search backwards"
+msgstr ""
+
+#: ../src/gtk/find_dialog.c:251 ../src/gtk/find_dialog.c:253
+msgid "Find Next"
+msgstr ""
+
+#: ../src/gtk/font_dialog.c:298
+msgid "Set Module Font"
+msgstr ""
+
+#: ../src/gtk/font_dialog.c:332
+msgid "Change font for"
+msgstr ""
+
+#: ../src/gtk/font_dialog.c:336 ../ui/editor_link_dialog.gtkbuilder.h:4
+msgid "Module"
+msgstr "မော်ကျူး"
+
+#: ../src/gtk/font_dialog.c:340
+msgid "Current font: "
+msgstr ""
+
+#: ../src/gtk/font_dialog.c:381 ../src/gtk/font_dialog.c:397
+#: ../ui/prefs.gtkbuilder.h:3
+msgid "+0"
+msgstr "+၀"
+
+#: ../src/gtk/font_dialog.c:400
+msgid "Use the default font for this module"
+msgstr ""
+
+#: ../src/gtk/gui.c:173
+msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
+msgstr ""
+
+#: ../src/gtk/gui.c:174 ../src/gtk/gui.c:204
+msgid "Please report this error to the Xiphos team with:"
+msgstr ""
+
+#: ../src/gtk/gui.c:203
+msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
+msgstr ""
+
+#: ../src/gtk/main_menu.c:769
+msgid "Open Session"
+msgstr ""
+
+#: ../src/gtk/main_window.c:589
+#, c-format
+msgid "Module has no support for %s."
+msgstr ""
+
+#: ../src/gtk/main_window.c:640
+msgid "BibleSync is not active."
+msgstr ""
+
+#: ../src/gtk/main_window.c:648
+msgid "BibleSync Chat"
+msgstr ""
+
+#: ../src/gtk/main_window.c:649
+msgid "[say this]"
+msgstr ""
+
+#: ../src/gtk/main_window.c:650
+msgid "Comment:"
+msgstr ""
+
+#: ../src/gtk/main_window.c:690
+msgid "Xiphos: No windows."
+msgstr ""
+
+#: ../src/gtk/main_window.c:746
+msgid "BibleSync: Current navigation sent."
+msgstr ""
+
+#: ../src/gtk/main_window.c:748
+msgid "BibleSync: Not speaking."
+msgstr ""
+
+#: ../src/gtk/main_window.c:978
+msgid "Xiphos - Bible Study Software"
+msgstr ""
+
+#: ../src/gtk/main_window.c:1042
+msgid "Open a new tab"
+msgstr ""
+
+#: ../src/gtk/main_window.c:1097 ../src/gtk/sidebar.c:616
+#: ../src/gtk/sidebar.c:621 ../src/main/sidebar.cc:655
+#: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
+#: ../src/main/sidebar.cc:977
+msgid "Standard View"
+msgstr ""
+
+#: ../src/gtk/main_window.c:1137
+msgid "Commentary View"
+msgstr ""
+
+#: ../src/gtk/main_window.c:1145
+msgid "Book View"
+msgstr ""
+
+#: ../src/gtk/main_window.c:1163
+msgid "Welcome to Xiphos"
+msgstr ""
+
+#: ../src/gtk/menu_popup.c:1296
+msgid ""
+"Renaming is not available in Windows.\n"
+"\n"
+"Xiphos is limited by Windows' filesystem,\n"
+"because it disallows the renaming of filename\n"
+"components of currently-open files,\n"
+"such as the contents of this commentary.\n"
+"Therefore, personal commentary renaming is\n"
+"not available in the Windows environment."
+msgstr ""
+
+#: ../src/gtk/menu_popup.c:1315
+msgid "Rename Commentary"
+msgstr ""
+
+#: ../src/gtk/menu_popup.c:1318
+msgid "Choose Commentary Name"
+msgstr ""
+
+#: ../src/gtk/menu_popup.c:1320
+msgid "New Name"
+msgstr "အမည်သစ်"
+
+#: ../src/gtk/menu_popup.c:1321 ../src/gtk/treekey-editor.c:138
+#: ../src/gtk/treekey-editor.c:195 ../src/gtk/treekey-editor.c:293
+#: ../src/main/prayerlists.cc:235
+msgid "Name: "
+msgstr "အမည်- "
+
+#: ../src/gtk/menu_popup.c:1330 ../src/main/prayerlists.cc:248
+msgid "Module names must contain [A-Za-z0-9_] only."
+msgstr ""
+
+#: ../src/gtk/menu_popup.c:1336 ../src/main/prayerlists.cc:254
+msgid "Xiphos already knows a module by that name."
+msgstr ""
+
+#: ../src/gtk/menu_popup.c:1378
+#, c-format
+msgid ""
+"Failed to create new configuration:\n"
+"%s"
+msgstr ""
+
+#: ../src/gtk/menu_popup.c:1387
+msgid ""
+"Configuration build error:\n"
+"\n"
+msgstr ""
+
+#: ../src/gtk/menu_popup.c:2036
+msgid "No module in this pane."
+msgstr ""
+
+#. *****************************************************************************
+#. * defines
+#.
+#: ../src/gtk/mod_mgr.c:64
+msgid ""
+"<b>Overview of the Module Manager.</b>\n"
+"\n"
+"This is Xiphos' mechanism to get new and updated content.\n"
+"If you have never been here before, please take a moment to look it over.\n"
+"\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
+"\n"
+"<b>Module Sources: Choose</b> is for deciding from where modules should "
+"come, that is, from which repository Xiphos should obtain them, as well as "
+"where they should be placed on your system. Set <i>Install Source</i> and "
+"<i>Install Destination</i>, then click <i>Refresh</i>.\n"
+"\n"
+"<b>Modules: Install/Update</b> is for selecting and obtaining modules after "
+"choosing source and destination.\n"
+"\n"
+"<b>Modules: Maintenance</b> is for archive and index creation.\n"
+"\n"
+"See section 5 of our manual for Module Manager detail, or ask for help via "
+"Live Chat, or (if no one is responsive in chat) send mail to our users' "
+"mailing list.\n"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:67
+msgid ""
+"<b>Welcome to Xiphos.</b>\n"
+"\n"
+"There are no Bibles installed. In order to initialize, Xiphos needs at least "
+"one Bible module. To facilitate this, the Module Manager has been opened so "
+"that you may install one or more Bibles, either from a local module set "
+"(cdrom, flash drive) or over the network from CrossWire Bible Society. "
+"Please refer to these step-by-step instructions, and to the general module "
+"manager overview that has also been opened.\n"
+"\n"
+"<u>For local install:</u>\n"
+"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where "
+"modules can be found.\n"
+"  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n"
+"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select "
+"your folder from the pulldown.\n"
+"\n"
+"<u>For network install from CrossWire:</u>\n"
+"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select "
+"CrossWire from the pulldown.\n"
+"- Click the \"Refresh\" button at the bottom.\n"
+"\n"
+"<u>In either case:</u>\n"
+"- In <i>Modules: Install/Update</i>, select Bibles and other modules of your "
+"preference.\n"
+"- Click \"Install\".\n"
+"- Close the Module Manager when you are done.\n"
+"\n"
+"<u>Warning</u>: If you live in a persecuted country, use with care.\n"
+"\n"
+"Both this step-by-step instruction dialog and the general introduction "
+"dialog may be closed at any time."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:191
+msgid "Remove these modules?"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:192
+msgid "Preparing to remove"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:193
+msgid "Removing"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:194 ../ui/xi-menus.glade.h:158
+#: ../ui/xi-menus-popup.gtkbuilder.h:27
+msgid "Remove"
+msgstr "ဖယ်ရှားပါ"
+
+#: ../src/gtk/mod_mgr.c:195
+msgid "Install these modules?"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:196
+msgid "Preparing to install"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:197
+msgid "Installing"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:198
+msgid "Install"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:199
+msgid "Archive these modules?"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:200
+msgid "Preparing to archive"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:201
+msgid "Archiving"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:202
+msgid "Archive"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:203
+msgid ""
+"Build fast-search index for these\n"
+"modules (may take minutes/module)?"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:204
+msgid "Preparing to index"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:205
+msgid "Indexing"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:206
+msgid "Index"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:207
+msgid "Delete fast-search index for these modules?"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:208
+msgid "Preparing to delete index"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:209
+msgid "Deleting index"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:210
+msgid "Deletion"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:311
+msgid "The module has no About information."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:533
+msgid "Module Name"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:562
+msgid "A checkmark means this module is already installed"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:589
+msgid "Click the box to work on this module"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:590
+msgid "Click the box to select this module for install/update"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:608
+msgid "Installed"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:625
+msgid ""
+"The index icon means you have built an optimized ('lucene') index for this "
+"module for fast searching (see the Maintenance pane for this function)"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:649
+msgid ""
+"The lock icon means this module is encrypted, and requires that you purchase "
+"an unlock key from the content owner"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:664 ../src/main/biblesync_glue.cc:640
+#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus-popup.gtkbuilder.h:35
+msgid "About"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:688
+msgid ""
+"The refresh icon means the Installed module is older than the newer "
+"Available module: You should update the module"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:700
+msgid "Available"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:709
+msgid "Size"
+msgstr "အရွယ်အစား"
+
+#: ../src/gtk/mod_mgr.c:718
+msgid "Description"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:872
+#, c-format
+msgid ""
+"`mkdir %s' failed:\n"
+"%s."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:906
+msgid " archived in: \n"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:988
+msgid "Journals and prayer lists cannot be indexed."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1019
+#, c-format
+msgid "%s failed"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1022 ../src/gtk/mod_mgr.c:1788
+msgid "Finished"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1195 ../src/gtk/mod_mgr.c:1197
+#: ../src/gtk/mod_mgr.c:1307 ../src/gtk/mod_mgr.c:1340
+#: ../src/gtk/mod_mgr.c:1342 ../src/gtk/utilities.c:432
+#: ../src/gtk/utilities.c:495 ../src/gtk/utilities.c:497
+#: ../src/gtk/utilities.c:1071 ../src/main/sidebar.cc:807
+#: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
+msgid "Unknown"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1518
+#, c-format
+msgid ""
+"Repository:\n"
+"%s"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1531
+msgid ""
+"Categorized by\n"
+"Module Type"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1536 ../src/gtk/utilities.c:574
+#: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
+msgid "Biblical Texts"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1540 ../src/gtk/utilities.c:580
+#: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
+#: ../src/main/sidebar.cc:986
+msgid "Commentaries"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1544 ../src/gtk/utilities.c:587
+#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
+msgid "Dictionaries"
+msgstr "အဘိဓာန်များ"
+
+#: ../src/gtk/mod_mgr.c:1548 ../src/gtk/utilities.c:593
+#: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
+msgid "Glossaries"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1552 ../src/gtk/utilities.c:600
+#: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
+msgid "Daily Devotionals"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1557 ../src/gtk/utilities.c:606
+#: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
+#: ../src/main/sidebar.cc:1022
+msgid "General Books"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1569 ../src/gtk/utilities.c:624
+#: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
+msgid "Cult/Unorthodox"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1578
+msgid ""
+"Categorized by\n"
+"Availability"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1582
+msgid "Updates"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1587
+msgid "Uninstalled"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1592 ../src/gtk/sidebar.c:632
+#: ../src/gtk/utilities.c:632 ../src/main/prayerlists.cc:233
+#: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
+msgid "Prayer List/Journal"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1771
+msgid "Refreshing from remote source"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1783
+msgid "Remote source not found"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1854
+msgid "Configure"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1883
+msgid "Type"
+msgstr "အမျိုးအစား"
+
+#: ../src/gtk/mod_mgr.c:1890
+msgid "Caption"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1897
+msgid "Source"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1904
+msgid "Directory"
+msgstr "ဒါရိုက်တာ"
+
+#: ../src/gtk/mod_mgr.c:1912
+msgid "User"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1919
+msgid "Password"
+msgstr "စကားဝှက်"
+
+#: ../src/gtk/mod_mgr.c:1926
+msgid "UID"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1941
+msgid "Module Sources"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1944
+msgid "Add/Remove"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1947
+msgid "Choose"
+msgstr "ရွေးပါ"
+
+#: ../src/gtk/mod_mgr.c:1950 ../src/gtk/preferences_dialog.c:2056
+#: ../src/gtk/sidebar.c:1564 ../src/gtk/sidebar.c:1610
+msgid "Modules"
+msgstr "မော်ကျူးများ"
+
+#: ../src/gtk/mod_mgr.c:1952
+msgid "Install/Update"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:1955
+msgid "Maintenance"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2171
+msgid "Please Refresh"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2172
+msgid "Your module list is not up to date!"
+msgstr ""
+
+#. Zero Bibles is just not workable in Xiphos.
+#: ../src/gtk/mod_mgr.c:2489
+msgid ""
+"You have uninstalled your last Bible.\n"
+"Xiphos requires at least one."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2495
+msgid ""
+"There are still no Bibles installed.\n"
+"Xiphos cannot continue without one."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2620
+#, c-format
+msgid ""
+"%s obsoletes %s.\n"
+"Would you like to delete %s?\n"
+"Beware: This cannot be undone."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2686
+msgid "No obsolete modules were found."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2708
+msgid "Standard remote sources have been loaded."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2717
+msgid "Could not load standard sources from CrossWire."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2868 ../src/gtk/mod_mgr.c:3124
+msgid "Remove the selected source"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2934
+msgid "Enter a remote source"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2943
+msgid "Caption:"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2944
+msgid "Type:"
+msgstr "အမျိုးအစား-"
+
+#: ../src/gtk/mod_mgr.c:2945
+msgid "Host:"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2946
+msgid "Directory:"
+msgstr "ဒါရိုက်တာ-"
+
+#: ../src/gtk/mod_mgr.c:2947
+msgid "User (optional):"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:2948
+msgid "Password (optional):"
+msgstr ""
+
+#. this can happen at most once
+#: ../src/gtk/mod_mgr.c:2974
+msgid "A source by that name already exists."
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:3121
+msgid "Delete a remote source"
+msgstr ""
+
+#: ../src/gtk/mod_mgr.c:3640
+msgid "[no module]"
+msgstr ""
+
+#: ../src/gtk/navbar_book.c:360 ../src/gtk/navbar_book_dialog.c:304
+msgid "Go outward, to the section containing this one"
+msgstr ""
+
+#: ../src/gtk/navbar_book.c:384 ../src/gtk/navbar_book_dialog.c:330
+msgid "Go to previous item"
+msgstr ""
+
+#: ../src/gtk/navbar_book.c:407 ../src/gtk/navbar_book_dialog.c:354
+msgid "Go to next item"
+msgstr ""
+
+#: ../src/gtk/navbar_book.c:431 ../src/gtk/navbar_book_dialog.c:378
+msgid "Go inward, to the first subsection"
+msgstr ""
+
+#: ../src/gtk/navbar_versekey_dialog.c:910
+#: ../src/gtk/navbar_versekey_editor.c:939
+#: ../src/gtk/navbar_versekey_parallel.c:859
+msgid "Synchronize this window's scrolling with the main window"
+msgstr ""
+
+#: ../src/gtk/parallel_dialog.c:348 ../src/gtk/preferences_dialog.c:2063
+msgid "Parallel"
+msgstr ""
+
+#: ../src/gtk/parallel_view.c:112
+msgid "Detach/Attach"
+msgstr ""
+
+#: ../src/gtk/parallel_view.c:117 ../ui/xi-menus.glade.h:66
+#: ../ui/xi-menus-popup.gtkbuilder.h:43
+msgid "Module Options"
+msgstr ""
+
+#: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:616
+#: ../src/gtk/sidebar.c:621 ../src/gtk/tabbed_browser.c:254
+#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
+#: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
+msgid "Parallel View"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:866
+msgid "BibleSync session passphrase"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:868
+msgid "Phrase:"
+msgstr ""
+
+#. mode selection failed? probably dead interface
+#: ../src/gtk/preferences_dialog.c:940
+msgid ""
+"Mode selection failed.\n"
+"Set \"Debug\" and try again to see why."
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:992
+msgid "Mode selection failed.\n"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:995
+#, c-format
+msgid "BibleSync: %s (passphrase \"%s\")."
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:997
+msgid "Disabled"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:999 ../src/main/xml.c:96
+msgid "Personal"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:1001
+msgid "Speaker"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:1002
+msgid "Audience"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:1617 ../src/gtk/preferences_dialog.c:1651
+#: ../src/gtk/preferences_dialog.c:1684 ../src/gtk/preferences_dialog.c:1716
+#: ../src/gtk/preferences_dialog.c:1747 ../src/gtk/preferences_dialog.c:1778
+#: ../src/gtk/preferences_dialog.c:1809 ../src/gtk/preferences_dialog.c:1841
+#: ../src/gtk/preferences_dialog.c:1874 ../src/gtk/preferences_dialog.c:1925
+#: ../src/gtk/preferences_dialog.c:2385
+msgid "-- Select --"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:1888
+msgid "Locale will take effect after restart."
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:9
+msgid "Preferences"
+msgstr "ဦးစားပေးများ"
+
+#: ../src/gtk/preferences_dialog.c:2036
+msgid "General"
+msgstr "အထွေထွေ"
+
+#: ../src/gtk/preferences_dialog.c:2039
+msgid "Options"
+msgstr "ရွေးချယ်မှု"
+
+#: ../src/gtk/preferences_dialog.c:2042 ../ui/prefs.glade.h:88
+#: ../ui/prefs.gtkbuilder.h:88
+msgid "BibleSync"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:2046
+msgid "Fonts"
+msgstr "ဖောင့်"
+
+#: ../src/gtk/preferences_dialog.c:2049
+msgid "Color"
+msgstr "အရောင်"
+
+#: ../src/gtk/preferences_dialog.c:2052
+msgid "Sizes and Faces"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:2066
+msgid "Special"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:2766 ../src/gtk/search_dialog.c:519
+msgid "Clear List?"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:2767 ../src/gtk/search_dialog.c:520
+msgid "Are you sure you want to clear the module list?"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:2818 ../src/main/search_dialog.cc:678
+msgid "Remove Module?"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:2819 ../src/main/search_dialog.cc:679
+msgid "Are you sure you want to remove the selected module?"
+msgstr ""
+
+#: ../src/gtk/search_dialog.c:62 ../src/main/search_dialog.cc:52
+#: ../src/main/search_sidebar.cc:51
+msgid "Searching the "
+msgstr ""
+
+#: ../src/gtk/search_dialog.c:63 ../src/main/search_dialog.cc:53
+#: ../src/main/search_sidebar.cc:52
+msgid " Module"
+msgstr "မော်ကျူး"
+
+#: ../src/gtk/search_dialog.c:64 ../src/main/search_dialog.cc:54
+#: ../src/main/search_sidebar.cc:53
+msgid "found in "
+msgstr ""
+
+#: ../src/gtk/search_dialog.c:483
+#, c-format
+msgid "New List %s"
+msgstr ""
+
+#: ../src/gtk/search_dialog.c:700
+msgid "The last module list may not be deleted"
+msgstr ""
+
+#: ../src/gtk/search_dialog.c:715
+msgid "Delete list?"
+msgstr ""
+
+#: ../src/gtk/search_dialog.c:716
+msgid "Are you sure you want to delete:"
+msgstr ""
+
+#. *****************************************************************************
+#. * Name
+#. *   on_lucene_intro_clicked
+#. *
+#. * Synopsis
+#. *   #include "gui/search_dialog.h"
+#. *
+#. *   void on_lucene_intro_clicked(GtkToggleButton *button,
+#. *				  gpointer user_data)
+#. *
+#. * Description
+#. *
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gtk/search_dialog.c:845
+msgid ""
+"<b>Syntax overview for optimized \"lucene\" searches</b>\n"
+"Search for verses that contain...\n"
+"\n"
+"loved one\n"
+"\t \"loved\" or \"one\"\n"
+"\tThis is the same as searching for loved OR one\n"
+"\"loved one\"\n"
+"\tThe phrase \"loved one\"\n"
+"love*\n"
+"\tA word starting with \"love\"\n"
+"\t(love OR loves OR loved OR etc...)\n"
+"loved AND one\n"
+"\tThe word \"loved\" and the word \"one\"\n"
+"\t&amp;&amp; can be used in place of AND\n"
+"+loved one\n"
+"\tVerses that <b>must</b> contain \"loved\" and <b>may</b> contain \"one\"\n"
+"loved NOT one\n"
+"\t\"loved\" but not \"one\"\n"
+"(loved one) AND God\n"
+"\t\"loved\" or \"one\" and \"God\"\n"
+"lemma:G2316\n"
+"\tSearch for the Strong's Greek (\"G\") word number 2316.\n"
+"\tAlso, select Strong's display on the <i>Attribute Search</i> tab.\n"
+"\n"
+"For complete details, search the web for \"lucene search syntax\"."
+msgstr ""
+
+#. *****************************************************************************
+#. * Name
+#. *   on_attributes_intro_clicked
+#. *
+#. * Synopsis
+#. *   #include "gui/search_dialog.h"
+#. *
+#. *   void on_attributes_intro_clicked(GtkToggleButton *button,
+#. *				  gpointer user_data)
+#. *
+#. * Description
+#. *
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gtk/search_dialog.c:903
+msgid ""
+"<b>Attribute-based searches</b>\n"
+"Searches for content contained in markup outside the main text. Attributes "
+"are footnotes, Strong's numbers, and morphological symbols.\n"
+"\n"
+"Be aware that most such searches can now be done faster via optimized "
+"\"lucene\" searches using keyword qualifiers.\n"
+"\n"
+"To use attribute searches, you must select the appropriate button on the "
+"<i>Attribute Search</i> tab.\n"
+"* Footnote text is searched just like regular text.\n"
+"* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) "
+"and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
+"* Morphological tags are identified literally, e.g. N-ASF for \"noun, "
+"accusative singular feminine\" -- see the Robinson module for details."
+msgstr ""
+
+#: ../src/gtk/search_dialog.c:1202
+msgid "Module is neither Bible nor commentary"
+msgstr ""
+
+#: ../src/gtk/search_dialog.c:1220 ../src/gtk/sidebar.c:984
+msgid "BibleSync is not active for transmit."
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:241
+msgid ""
+"This is an inclusive (\"AND\") search:\n"
+"Find matches showing all words."
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:253
+msgid "_Open Advanced Search"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:258
+msgid "Open the separate Advanced Search dialog."
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:274
+msgid "Search Module"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:311
+msgid "Search Type"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
+#: ../ui/search-dialog.gtkbuilder.h:34
+msgid "Optimized (\"Lucene\")"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:333 ../src/main/search_dialog.cc:100
+#: ../ui/search-dialog.glade.h:41 ../ui/search-dialog.gtkbuilder.h:41
+msgid "Regular expression"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:340 ../src/main/search_dialog.cc:102
+#: ../ui/search-dialog.glade.h:43 ../ui/search-dialog.gtkbuilder.h:43
+msgid "Exact phrase"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:356
+msgid "Search Options"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:369 ../ui/search-dialog.glade.h:49
+#: ../ui/search-dialog.gtkbuilder.h:49
+msgid "Match case"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:385
+msgid "Search Scope"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:398
+msgid "No scope"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:407
+msgid "Use bounds"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:415
+msgid "Last search"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:432
+msgid "Bounds"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:447 ../src/gtk/search_sidebar.c:479
+msgid "Lower"
+msgstr ""
+
+#: ../src/gtk/search_sidebar.c:459 ../src/gtk/search_sidebar.c:486
+msgid "Upper"
+msgstr ""
+
+#: ../src/gtk/sidebar.c:844
+msgid "Open module in editor?"
+msgstr ""
+
+#: ../src/gtk/sidebar.c:845
+msgid "If no, it will open for display only."
+msgstr ""
+
+#: ../src/gtk/sidebar.c:945
+msgid "Paste verse references"
+msgstr ""
+
+#: ../src/gtk/sidebar.c:947
+msgid "List:"
+msgstr ""
+
+#: ../src/gtk/sidebar.c:1543 ../src/gtk/sidebar.c:1593
+msgid "Search"
+msgstr "ရှာဖွေ"
+
+#: ../src/gtk/sidebar_dialog.c:174 ../src/gtk/sidebar_dialog.c:184
+msgid "Sidebar"
+msgstr ""
+
+#: ../src/gtk/splash.c:403
+msgid "Powered by the SWORD Project"
+msgstr ""
+
+#: ../src/gtk/tabbed_browser.c:358
+msgid "Can't create tabs dir."
+msgstr ""
+
+#: ../src/gtk/treekey-editor.c:136 ../src/gtk/treekey-editor.c:193
+#: ../src/gtk/treekey-editor.c:291
+msgid "Prayer List/Journal Item"
+msgstr ""
+
+#: ../src/gtk/treekey-editor.c:137 ../src/gtk/treekey-editor.c:194
+#: ../src/gtk/treekey-editor.c:292
+msgid "New name"
+msgstr "အမည်သစ်"
+
+#: ../src/gtk/treekey-editor.c:252
+msgid "Remove the selected item"
+msgstr ""
+
+#: ../src/gtk/utilities.c:86
+msgid "January"
+msgstr "ဇန်နဝါရီ"
+
+#: ../src/gtk/utilities.c:87
+msgid "February"
+msgstr "ဖေဖဝါရီ"
+
+#: ../src/gtk/utilities.c:88
+msgid "March"
+msgstr "မတ်"
+
+#: ../src/gtk/utilities.c:89
+msgid "April"
+msgstr "ဧပြီ"
+
+#: ../src/gtk/utilities.c:90
+msgid "May"
+msgstr "မေ"
+
+#: ../src/gtk/utilities.c:91
+msgid "June"
+msgstr "ဇွန်"
+
+#: ../src/gtk/utilities.c:92
+msgid "July"
+msgstr "ဇူလိုင်"
+
+#: ../src/gtk/utilities.c:93
+msgid "August"
+msgstr "သြဂုတ်"
+
+#: ../src/gtk/utilities.c:94
+msgid "September"
+msgstr "စက်တင်ဘာ"
+
+#: ../src/gtk/utilities.c:94
+msgid "October"
+msgstr "အောက်တိုဘာ"
+
+#: ../src/gtk/utilities.c:94
+msgid "November"
+msgstr "နိုဝင်ဘာ"
+
+#: ../src/gtk/utilities.c:94
+msgid "December"
+msgstr "ဒီဇင်ဘာ"
+
+#: ../src/gtk/utilities.c:2075
+msgid ""
+"An image file's size could not be determined.\n"
+"Xiphos cannot resize images to fit window."
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:107
+msgid ""
+"Mismatched packet\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:127
+msgid ""
+"Presence announcement:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:137
+msgid ""
+"Navigation packet:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:189
+msgid "Unknown module "
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:189
+msgid ""
+".\n"
+"Navigated indirectly using verse list."
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:271
+msgid ""
+"Chat packet:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:278
+msgid ""
+" says:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:284
+msgid "ERROR: unknown BibleSync indicator: "
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:287
+msgid "Other indications are:"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:590
+msgid "Check the box to listen to this Speaker"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:603
+msgid "Available Speakers"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:612
+msgid "D/I"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:622
+msgid "Last navigation was Direct or Indirect"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:631
+msgid "Last Navigation"
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:650
+msgid "UUID"
+msgstr "UUID"
+
+#: ../src/main/biblesync_glue.cc:670
+msgid "IP address: "
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:670
+msgid ""
+"\n"
+"Application: "
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:670
+msgid ""
+"\n"
+"Device: "
+msgstr ""
+
+#: ../src/main/biblesync_glue.cc:670
+msgid ""
+"\n"
+"UUID: "
+msgstr ""
+"\n"
+"UUID: "
+
+#: ../src/main/display.cc:89
+msgid ""
+"<br/><br/><center><i>This module has no content at this point.</i></center>"
+msgstr ""
+
+#: ../src/main/display.cc:250
+#, c-format
+msgid ""
+"Improperly encoded personal annotation label:\n"
+"'%s'"
+msgstr ""
+
+#: ../src/main/display.cc:1117 ../src/main/display.cc:1159
+#: ../src/main/display.cc:1282 ../ui/export-dialog.glade.h:14
+#: ../ui/export-dialog.gtkbuilder.h:14
+msgid "Chapter"
+msgstr "အခန်းကြီး"
+
+#: ../src/main/main.c:129
+msgid "Xiphos does not understand more than one argument."
+msgstr ""
+
+#: ../src/main/main.c:240
+msgid "Initiating HTML"
+msgstr ""
+
+#: ../src/main/main.c:245
+msgid "Building Interface"
+msgstr ""
+
+#: ../src/main/main.c:248
+msgid "Starting Sword"
+msgstr ""
+
+#: ../src/main/main.c:251
+msgid "Loading Settings"
+msgstr ""
+
+#: ../src/main/main.c:254
+msgid "Displaying Xiphos"
+msgstr ""
+
+#: ../src/main/module_dialogs.cc:186 ../src/main/previewer.cc:100
+msgid "Previewer"
+msgstr ""
+
+#: ../src/main/module_dialogs.cc:240 ../src/main/module_dialogs.cc:344
+#: ../src/main/previewer.cc:188
+msgid "Footnote"
+msgstr "အောက်ခြေမှတ်စု"
+
+#: ../src/main/module_dialogs.cc:246 ../src/main/module_dialogs.cc:349
+#: ../src/main/previewer.cc:198
+msgid "Cross Reference"
+msgstr ""
+
+#: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
+#: ../src/main/module_dialogs.cc:354 ../src/main/module_dialogs.cc:366
+#: ../src/main/previewer.cc:203 ../src/main/previewer.cc:223
+msgid "Strongs"
+msgstr ""
+
+#: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
+#: ../src/main/module_dialogs.cc:359 ../src/main/module_dialogs.cc:376
+#: ../src/main/previewer.cc:208 ../src/main/previewer.cc:229
+msgid "Morphology"
+msgstr ""
+
+#: ../src/main/module_dialogs.cc:986 ../src/main/url.cc:515
+msgid "Back to "
+msgstr ""
+
+#: ../src/main/parallel_view.cc:61
+msgid "Unknown parallel module: "
+msgstr ""
+
+#: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:70
+#: ../ui/xi-menus-popup.gtkbuilder.h:47
+msgid "Strong's Numbers"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:102
+#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:73
+#: ../ui/xi-menus-popup.gtkbuilder.h:50
+msgid "Footnotes"
+msgstr "အောက်ခြေမှတ်စုများ"
+
+#: ../src/main/parallel_view.cc:418 ../ui/search-dialog.glade.h:99
+#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus-popup.gtkbuilder.h:49
+msgid "Morphological Tags"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:427 ../ui/xi-menus.glade.h:78
+#: ../ui/xi-menus-popup.gtkbuilder.h:54
+msgid "Hebrew Vowel Points"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:436 ../ui/xi-menus.glade.h:79
+#: ../ui/xi-menus-popup.gtkbuilder.h:55
+msgid "Hebrew Cantillation"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:445 ../ui/xi-menus.glade.h:77
+#: ../ui/xi-menus-popup.gtkbuilder.h:53
+msgid "Greek Accents"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:74
+#: ../ui/xi-menus-popup.gtkbuilder.h:51
+msgid "Cross-references"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:71
+#: ../ui/xi-menus-popup.gtkbuilder.h:48
+msgid "Lemmas"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:68
+#: ../ui/xi-menus-popup.gtkbuilder.h:45
+msgid "Headings"
+msgstr "ခေါင်းစဉ်များ"
+
+#: ../src/main/parallel_view.cc:481 ../src/main/parallel_view.cc:574
+#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:64
+msgid "Morpheme Segmentation"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:69
+#: ../ui/xi-menus-popup.gtkbuilder.h:46
+msgid "Words of Christ in Red"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:80
+#: ../ui/xi-menus-popup.gtkbuilder.h:56
+msgid "Transliteration"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:512
+msgid "Textual Variants"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:520 ../ui/xi-menus.glade.h:82
+#: ../ui/xi-menus-popup.gtkbuilder.h:58
+msgid "Primary Reading"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus-popup.gtkbuilder.h:59
+msgid "Secondary Reading"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus-popup.gtkbuilder.h:60
+msgid "All Readings"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:547 ../ui/xi-menus.glade.h:85
+#: ../ui/xi-menus-popup.gtkbuilder.h:61
+msgid "Transliterated Forms"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus-popup.gtkbuilder.h:62
+msgid "Enumerations"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus-popup.gtkbuilder.h:63
+msgid "Glosses"
+msgstr ""
+
+#: ../src/main/parallel_view.cc:758
+msgid "view context"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:112
+msgid "Growth"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:113
+msgid "<b>For Growth</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:114 ../src/main/prayerlists.cc:368
+msgid "Salvation"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:115
+msgid "<b>For Salvation</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:116 ../src/main/prayerlists.cc:372
+msgid "Health"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:117
+msgid "<b>For Health</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:118
+msgid "Misc"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:119
+msgid "<b>Miscellaneous</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:127
+msgid "Point x"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:128
+msgid "<b>(x)</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:129
+msgid "Point y"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:130
+msgid "<b>(y)</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:131
+msgid "Point z"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:132
+msgid "<b>(z)</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:140
+msgid "Minor Topic 1"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:141
+msgid "<b>Subtopic 1</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:143
+msgid "Minor Topic 2"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:144
+msgid "<b>Subtopic 2</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:146
+msgid "Minor Topic 3"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:147
+msgid "<b>Subtopic 3</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:149
+msgid "Minor Topic 4"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:150
+msgid "<b>Subtopic 4</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:234
+msgid "Name for new prayer list or journal"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:262
+msgid "Xiphos finds that prayer list already."
+msgstr ""
+
+#. this one matters.
+#: ../src/main/prayerlists.cc:274
+#, c-format
+msgid ""
+"Xiphos cannot create module's path:\n"
+"%s"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:313
+msgid "A basic prayer list. \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:314
+msgid "BasicPrayerList"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:328
+msgid "MyPrayerList"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:329
+msgid ""
+"<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
+">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:353
+msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:354
+msgid "SubjectPrayerList"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:369
+msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:370
+msgid "Spiritual Growth"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:371
+msgid "Mike<br/>Steve<br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:373
+msgid "Sue<br/>John<br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:397
+msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:398
+msgid "MonthlyPrayerList"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:447
+msgid "A daily journal. \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:448
+msgid "DailyJournal"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:510
+msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:511
+msgid "OutlinedTopic"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:525
+msgid "Major Topic A"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:526
+msgid "<b>Major Topic A</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:528
+msgid "Major Topic B"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:529
+msgid "<b>Major Topic B</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:531
+msgid "Major Topic C"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:532
+msgid "<b>Major Topic C</b><br/>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:557
+msgid ""
+"A journal sectioned by Bible book and chapter. \\par\\par Module created by "
+"Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:558
+msgid "BookChapter"
+msgstr ""
+
+#: ../src/main/previewer.cc:193
+msgid "User Annotation"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:104
+msgid "Multi-word"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:106
+msgid "Optimized (\"lucene\")"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:107
+msgid "Attribute"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:208
+#, c-format
+msgid "Search result %s: %s"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:424
+msgid "Delete Range?"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:425
+msgid "Are you sure you want to delete this range?"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:638 ../src/main/search_dialog.cc:1043
+#: ../src/main/search_dialog.cc:1046 ../src/main/search_dialog.cc:1066
+#: ../src/main/search_dialog.cc:1069
+msgid "Search: "
+msgstr "ရှာဖွေ- "
+
+#: ../src/main/search_dialog.cc:1404
+#, c-format
+msgid ""
+"%s:\n"
+"No such module is installed.\n"
+"%s"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:1406
+msgid "Please adjust the module list."
+msgstr ""
+
+#: ../src/main/search_dialog.cc:1422
+#, c-format
+msgid "No fast-search index exists for %s.%s%s"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:1424
+msgid ""
+"\n"
+"Search on this module is now `multi word'."
+msgstr ""
+
+#: ../src/main/search_dialog.cc:1425
+msgid ""
+"\n"
+"See the Module Manager, Maintenance pane."
+msgstr ""
+
+#: ../src/main/search_dialog.cc:1486
+msgid "Search finished"
+msgstr ""
+
+#: ../src/main/search_sidebar.cc:88
+msgid "matches"
+msgstr ""
+
+#: ../src/main/search_sidebar.cc:203
+msgid "There is no commentary module."
+msgstr ""
+
+#: ../src/main/settings.c:106
+msgid "$HOME is not set!"
+msgstr ""
+
+#: ../src/main/settings.c:120
+#, c-format
+msgid "Xiphos can not create directory "
+msgstr ""
+
+#: ../src/main/settings.c:134 ../src/main/settings.c:144
+#: ../src/main/settings.c:155
+msgid "can not create "
+msgstr ""
+
+#: ../src/main/settings.c:187
+msgid ""
+"Empty settings file -- backup recovery attempted.\n"
+"Some information may have been lost."
+msgstr ""
+
+#: ../src/main/settings.c:190
+msgid "Empty settings file -- no backup?!? Information lost!"
+msgstr ""
+
+#: ../src/main/settings.c:217
+msgid ""
+"There are no Bibles installed.\n"
+"Evidently, you declined to install any.\n"
+"\n"
+"Without any Bible modules to display,\n"
+"Xiphos cannot proceed,\n"
+"and will now exit."
+msgstr ""
+
+#: ../src/main/settings.c:223
+msgid "Bible module installation complete."
+msgstr ""
+
+#: ../src/main/sidebar.cc:146
+msgid ""
+"Module error: Unusable xref encoding.\n"
+"Please report this, with module & verse"
+msgstr ""
+
+#: ../src/main/sidebar.cc:410
+msgid "verse"
+msgstr ""
+
+#: ../src/main/sidebar.cc:470
+msgid "chapter"
+msgstr "အခန်းကြီး"
+
+#: ../src/main/sword.cc:658
+msgid ""
+"Xiphos's file for language\n"
+"abbreviations is missing."
+msgstr ""
+
+#: ../src/main/sword.cc:664
+msgid ""
+"Xiphos's language abbreviation\n"
+"file cannot be opened."
+msgstr ""
+
+#: ../src/main/sword.cc:676
+msgid ""
+"Xiphos cannot allocate space\n"
+"for language abbreviations."
+msgstr ""
+
+#: ../src/main/sword.cc:682
+msgid ""
+"Xiphos cannot read the\n"
+"language abbreviation file."
+msgstr ""
+
+#. either we were given a null sys_locale, or it didn't match anything.
+#: ../src/main/sword.cc:762
+#, c-format
+msgid ""
+"No matching locale found for `%s'.\n"
+"%s"
+msgstr ""
+
+#: ../src/main/sword.cc:764
+msgid "Book names and menus may not be translated."
+msgstr ""
+
+#: ../src/main/sword.cc:1119 ../src/main/sword.cc:1290
+#, c-format
+msgid ""
+"Module %s has companion modules:\n"
+"%s.\n"
+"Would you like to open these as well?%s"
+msgstr ""
+
+#: ../src/main/sword.cc:1123 ../src/main/sword.cc:1294
+msgid ""
+"\n"
+"\n"
+"The first will open in the main window\n"
+"and others in separate windows."
+msgstr ""
+
+#: ../src/main/sword.cc:1421
+msgid "Daily devotional was requested, but there are none installed."
+msgstr ""
+
+#: ../src/main/sword.cc:1675
+msgid ""
+"<b>Locked Module.</b>\n"
+"\n"
+"<u>You are opening a module which requires a <i>key</i>.</u>\n"
+"\n"
+"The module is locked, meaning that the content is encrypted by its "
+"publisher, and you must enter its key in order for the content to become "
+"useful.  This key should have been received by you on the web page which "
+"confirmed your purchase, or perhaps sent via email after purchase.\n"
+"\n"
+"Please enter the key in the dialog."
+msgstr ""
+
+#: ../src/main/tab_history.c:302
+msgid "Clear History"
+msgstr ""
+
+#: ../src/main/tab_history.c:308
+msgid "History ➛ Verse List"
+msgstr ""
+
+#: ../src/main/url.cc:106
+msgid "URL not found:"
+msgstr "URL မတွေ့ပါ။"
+
+#: ../src/main/url.cc:194
+#, c-format
+msgid "Xiphos could not execute %s"
+msgstr ""
+
+#: ../src/main/url.cc:202
+msgid "Viewer error:\n"
+msgstr ""
+
+#: ../src/main/url.cc:273
+#, c-format
+msgid "Show %s in main window"
+msgstr ""
+
+#: ../src/main/xml.c:87 ../src/main/xml.c:468 ../src/main/xml.c:599
+#, c-format
+msgid "Document not created successfully. \n"
+msgstr ""
+
+#: ../src/main/xml.c:99
+msgid "What must I do to be saved?"
+msgstr ""
+
+#: ../src/main/xml.c:100 ../src/main/xml.c:101
+msgid "Acts 16:31"
+msgstr "တမန် ၁၆,၃၁"
+
+#: ../src/main/xml.c:102 ../src/main/xml.c:103
+msgid "Eph 2:8,9"
+msgstr "ဧဖက် ၂,၈.၉"
+
+#: ../src/main/xml.c:104 ../src/main/xml.c:105
+msgid "Romans 1:16"
+msgstr "ရောမဩဝါဒစာ ၁,၁၆"
+
+#: ../src/main/xml.c:107
+msgid "What is the Gospel?"
+msgstr ""
+
+#: ../src/main/xml.c:108 ../src/main/xml.c:109
+msgid "1 Cor 15:1-4"
+msgstr "၁ ကော် ၁၅,၁-၄"
+
+#: ../src/main/xml.c:263 ../src/main/xml.c:409 ../src/main/xml.c:1506
+#, c-format
+msgid "Document not parsed successfully. \n"
+msgstr ""
+
+#: ../src/main/xml.c:269 ../src/main/xml.c:415 ../src/main/xml.c:435
+#: ../src/main/xml.c:1063 ../src/main/xml.c:1393 ../src/main/xml.c:1589
+#, c-format
+msgid "empty document \n"
+msgstr ""
+
+#: ../src/main/xml.c:275
+#, c-format
+msgid "wrong type, root node != SwordBookmarks\n"
+msgstr ""
+
+#: ../src/main/xml.c:421
+#, c-format
+msgid "wrong type, root node != Copy_Export\n"
+msgstr ""
+
+#: ../src/main/xml.c:498
+#, c-format
+msgid "%s<center>%s<br>Chapter %d</center><br>"
+msgstr "%s<center>%s<br>အခန်းကြီး %d</center><br>"
+
+#: ../src/main/xml.c:502
+#, c-format
+msgid "<br><center>Chapter %d</center><br>"
+msgstr "<br><center>အခန်းကြီး %d</center><br>"
+
+#: ../src/main/xml.c:505
+#, c-format
+msgid ""
+"%s\n"
+"\n"
+"Chapter %d\n"
+"\n"
+msgstr ""
+"%s\n"
+"\n"
+"အခန်းကြီး %d\n"
+"\n"
+
+#: ../src/main/xml.c:508
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Chapter %d\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"အခန်းကြီး %d\n"
+"\n"
+
+#: ../src/main/xml.c:517
+#, c-format
+msgid "%s%s: %s Chapter %d<br><br>"
+msgstr "%s%s: %s အခန်းကြီး %d<br><br>"
+
+#: ../src/main/xml.c:520
+#, c-format
+msgid ""
+"%s: %s Chapter %d\n"
+"\n"
+msgstr ""
+"%s: %s အခန်းကြီး %d\n"
+"\n"
+
+#: ../src/main/xml.c:528
+#, c-format
+msgid "&nbsp;&nbsp;[%d]"
+msgstr "&nbsp;&nbsp;[%d]"
+
+#: ../src/main/xml.c:531
+#, c-format
+msgid " [%d]"
+msgstr " [%d]"
+
+#: ../src/main/xml.c:540
+#, c-format
+msgid "%s%s (%s %d:%d%s)</body></html>"
+msgstr "%s%s (%s %d:%d%s)</body></html>"
+
+#: ../src/main/xml.c:543
+#, c-format
+msgid "%s(%s %d:%d%s)%s </body></html>"
+msgstr "%s(%s %d:%d%s)%s </body></html>"
+
+#: ../src/main/xml.c:545
+#, c-format
+msgid "%s (%s %d:%d%s)"
+msgstr "%s (%s %d:%d%s)"
+
+#: ../src/main/xml.c:548
+#, c-format
+msgid "(%s %d:%d%s) %s"
+msgstr "(%s %d:%d%s) %s"
+
+#: ../src/main/xml.c:556
+#, c-format
+msgid " %s%s"
+msgstr " %s%s"
+
+#: ../src/main/xml.c:558 ../src/main/xml.c:562
+#, c-format
+msgid "%s(%s %d:%d-%d%s)"
+msgstr "%s(%s %d:%d-%d%s)"
+
+#: ../src/main/xml.c:560
+#, c-format
+msgid "(%s %d:%d-%d%s)<br>"
+msgstr "(%s %d:%d-%d%s)<br>"
+
+#: ../src/main/xml.c:565
+#, c-format
+msgid "(%s %d:%d-%d%s)\n"
+msgstr "(%s %d:%d-%d%s)\n"
+
+#: ../src/main/xml.c:614
+msgid "Old Testament"
+msgstr ""
+
+#: ../src/main/xml.c:616
+msgid "Gen - Mal"
+msgstr "ကမ္ဘာ-မာလ"
+
+#: ../src/main/xml.c:622
+msgid "New Testament"
+msgstr ""
+
+#: ../src/main/xml.c:624
+msgid "Mat - Rev"
+msgstr "မာတေး-ဗျာ"
+
+#: ../src/main/xml.c:633
+msgid "Sample Module List"
+msgstr ""
+
+#: ../src/main/xml.c:1069 ../src/main/xml.c:1399
+#, c-format
+msgid "wrong type, root node != %s\n"
+msgstr ""
+
+#: ../src/main/xml.c:1551
+#, c-format
+msgid ""
+"Save of settings failed! stat %d, size %d\n"
+"%s"
+msgstr ""
+
+#: ../src/main/xml.c:1553
+msgid "Attempting to revert to previous save."
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:1 ../ui/bookmarks.gtkbuilder.h:1
+msgid "Add Bookmark"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:14
+msgid "Bookmark Dialog"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
+msgid "Create new folder"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:5
+msgid "New Folder"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:5 ../ui/bookmarks.gtkbuilder.h:3
+msgid "New ..."
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:6
+msgid "Cancel Bookmark"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:7
+msgid "Label:"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:8
+msgid "Label Entry"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:9
+#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:9
+msgid "Verse:"
+msgstr "လင်္ကာ-"
+
+#: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:10
+#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:10
+msgid "Verse Entry"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:11
+#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:11
+msgid "Module:"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:12
+#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:12
+msgid "Module Entry"
+msgstr ""
+
+#: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:13
+msgid "Bookmark Folder Treeview"
+msgstr ""
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:2
+msgid "Test Link"
+msgstr ""
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:3 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:17
+msgid "Verse"
+msgstr ""
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:5
+msgid "Link Text"
+msgstr ""
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:6
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:7
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
+msgid "Exit the program"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:2
+msgid "Exit"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:3
+msgid "Print this note"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:4
+msgid "Preview the note to be printed"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
+msgid "HTML Format switch"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:6
+msgid "HTML mode"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:7
+msgid "Delete the current note"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:8
+msgid "_Delete Personal Comment"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:10
+msgid "Save the current note"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:11
+msgid "_Save (Personal Comment)"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
+msgid "E_xit"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
+msgid "For_mat"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:3
+msgid "Print this document"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:4
+msgid "Preview the document to be printed"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:8
+msgid "Open a file in Studypad"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:10
+msgid "Save the current file"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:12
+msgid "Save the current file as"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:13
+msgid "Save AS"
+msgstr "အသစ် သိမ်းဆည်း"
+
+#: ../ui/editor_studypad.xml.h:14
+msgid "Add this file to your bookmarks"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:16
+msgid "Create a new document"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:17
+msgid "New Document"
+msgstr "မှတ်တမ်းမှတ်ရာအသစ်"
+
+#: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:38
+msgid "Copy/Export Passage"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:3
+msgid "Export Passage Cancel"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:4
+msgid "Export Passage OK"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:6
+msgid "Version"
+msgstr "ဗားရှင်း"
+
+#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:7
+msgid ": "
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:8
+msgid "Key"
+msgstr "-"
+
+#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:9
+msgid "<b>Copy</b>"
+msgstr "<b>မိတ္တူကူးယူပါ</b>"
+
+#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:10
+msgid "<b>Export</b>"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:12
+msgid "Export complete book"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
+msgid "Book"
+msgstr "စာအုပ်"
+
+#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:13
+msgid "Book Radio Button"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:15
+msgid "Export complete chapter"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:16
+msgid "Chapter Radio Button"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:18
+msgid "Export single verse"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:19
+msgid "Verse Radio Button"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:20
+msgid "Verse range"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:21
+msgid "<b>Format</b>"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:22
+msgid "Plain Text"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:23
+msgid "Plain Text Radio Button"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:24
+msgid "HTML"
+msgstr "HTML"
+
+#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:25
+msgid "HTML Radio Button"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:25
+msgid ""
+"Indicates whether verse numbers should appear inline in the text for more "
+"than 1 verse."
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:26
+msgid "_Verse numbers in text"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:28
+msgid "Verse Number button"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:30
+msgid "Indicates whether reference is placed first or last."
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:29
+msgid "Reference last"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:31
+msgid "Reference last button"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:33
+msgid "Indicates whether or not version name is included in reference."
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:32
+msgid "Include Version"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:34
+msgid "Version button"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:34
+msgid "Save Export As"
+msgstr ""
+
+#: ../ui/export-dialog.gtkbuilder.h:27
+msgid "Indicates whether verse numbers should appear inline in the text."
+msgstr ""
+
+#: ../ui/export-dialog.gtkbuilder.h:32
+msgid "Include version"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
+msgid "About Studypad"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
+msgid "Open about dialog"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:125
+#: ../ui/prefs.gtkbuilder.h:125
+msgid "Bold"
+msgstr "စာလုံးမဲ"
+
+#: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
+msgid "Make selection bold"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
+msgid "Copy"
+msgstr "မိတ္တူကူးယူပါ"
+
+#: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
+msgid "Copy selection to clipboard"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
+msgid "Cut"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
+msgid "Cut selection"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
+msgid "Decrease indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:11 ../ui/gtk_webedit.ui.h:11
+msgid "Decrease"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:12 ../ui/gtk_webedit.ui.h:12
+msgid "Decrease paragraph indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
+msgid "Delete selection"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
+msgid "Remove selection"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:11
+msgid "Delete Item"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
+msgid "Delete current item"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
+msgid "Search current document"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
+msgid "Font"
+msgstr "ဖောင့်"
+
+#: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
+msgid "Change font"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:22 ../ui/gtk_webedit.ui.h:22
+msgid "Increase indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:23 ../ui/gtk_webedit.ui.h:23
+msgid "Increase"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:24 ../ui/gtk_webedit.ui.h:24
+msgid "Increase paragraph indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
+msgid "Insert emoticon"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
+msgid "Emoticon"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
+msgid "Insert an emoticon"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
+msgid "Insert image"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
+msgid "Image"
+msgstr "ပုံရိပ်များ"
+
+#: ../ui/gtk2_webedit.ui.h:30 ../ui/gtk_webedit.ui.h:30
+msgid "Insert image at cursor"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:31 ../ui/gtk_webedit.ui.h:31
+msgid "Insert link"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
+msgid "Link"
+msgstr "ကွင်းဆက်"
+
+#: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
+msgid "Insert a link"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:34 ../ui/gtk_webedit.ui.h:34
+msgid "Insert Outline"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:35 ../ui/gtk_webedit.ui.h:35
+msgid "Outline"
+msgstr "ကောက်ကြောင်း"
+
+#: ../ui/gtk2_webedit.ui.h:36 ../ui/gtk_webedit.ui.h:36
+msgid "Insert outline"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:37 ../ui/gtk_webedit.ui.h:37
+msgid "Insert rule"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:38 ../ui/gtk_webedit.ui.h:38
+msgid "Rule"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:39 ../ui/gtk_webedit.ui.h:39
+msgid "Insert horizontal rule"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:40 ../ui/gtk_webedit.ui.h:40
+msgid "Xiphos Link"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
+msgid "Xiphos"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
+msgid "Insert a link to a sword module"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:43 ../ui/gtk_webedit.ui.h:43
+msgid "Insert table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
+msgid "Table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:45 ../ui/gtk_webedit.ui.h:45
+msgid "Insert a table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
+msgid "Italic"
+msgstr "စာလုံးစောင်း"
+
+#: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
+msgid "Change selection to italic font"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
+msgid "Center"
+msgstr "အလည်"
+
+#: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
+msgid "Center justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:50 ../ui/gtk_webedit.ui.h:50
+msgid "Full"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:51 ../ui/gtk_webedit.ui.h:51
+msgid "full justify"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
+msgid "Left"
+msgstr "ဘယ်ဘက်"
+
+#: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
+msgid "Left justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
+msgid "Right"
+msgstr "ညာဖက်"
+
+#: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
+msgid "Right justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
+msgid "Create new file"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
+msgid "Open file"
+msgstr "ဖိုင် ဖွင့်ပါ"
+
+#: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
+msgid "Paste"
+msgstr "ပြန်ထည့်ပါ"
+
+#: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
+msgid "Paste clipboard at cursor."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
+msgid "Print Document"
+msgstr "မှတ်တမ်းမှတ်ရာ ပရင့် ထုတ်ပါ"
+
+#: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
+msgid "Print"
+msgstr "ပုံနှိပ်"
+
+#: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
+msgid "Print the current document"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:65 ../ui/gtk_webedit.ui.h:65
+msgid "Print Preview"
+msgstr "အစမ်းကြည့်ခြင်း ပရင့်ထုတ်ပါ"
+
+#: ../ui/gtk2_webedit.ui.h:66 ../ui/gtk_webedit.ui.h:66
+msgid "Preview"
+msgstr "အစမ်းကြည့်ပါ"
+
+#: ../ui/gtk2_webedit.ui.h:67 ../ui/gtk_webedit.ui.h:67
+msgid "Print preview of current document"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
+msgid "Quit"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
+msgid "Shut down editor"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
+msgid "Redo"
+msgstr "အနီရောင်"
+
+#: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
+msgid "Redo last undo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:72 ../ui/gtk_webedit.ui.h:72
+msgid "Find and replace"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
+msgid "Replace"
+msgstr "အစားထိုးပါ"
+
+#: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
+msgid "Search and replace"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
+msgid "Save changes to file"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
+msgid "Save as"
+msgstr "အနေဖြင့် သိမ်းဆည်းမှု"
+
+#: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
+msgid "Save file as ..."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
+msgid "Strikethrough"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:80 ../ui/gtk_webedit.ui.h:80
+msgid "Strikethrough selection"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:81 ../ui/gtk_webedit.ui.h:81
+msgid "Underline"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
+msgid "Underline selection"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
+msgid "Undo"
+msgstr "ပြန်​ဖြည်ပါ"
+
+#: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
+msgid "Undo last change"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:86
+msgid "Editor"
+msgstr "တည်းဖြတ်သူ"
+
+#: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:88
+msgid "Recent files"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:89
+#: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
+msgid "_Edit"
+msgstr "တည်းဖြတ်ပါ"
+
+#: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:90
+#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
+msgid "_Help"
+msgstr "ကူညီပါ"
+
+#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:91
+msgid "Normal"
+msgstr "သာမန်"
+
+#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:92
+msgid "Header 1"
+msgstr "ခေါင်းစဉ် ၁"
+
+#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:93
+msgid "Header 2"
+msgstr "ခေါင်းစဉ် ၂"
+
+#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:94
+msgid "Header 3"
+msgstr "ခေါင်းစဉ် ၃"
+
+#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:95
+msgid "Header 4"
+msgstr "ခေါင်းစဉ် ၄"
+
+#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:96
+msgid "Header 5"
+msgstr "ခေါင်းစဉ် ၅"
+
+#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:97
+msgid "Header 6"
+msgstr "ခေါင်းစဉ် ၆"
+
+#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:98
+msgid "Address"
+msgstr "လိပ်စာ"
+
+#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:99
+msgid "Preformatted"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:100
+msgid "Bulleted List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:101
+msgid "Roman Numeral List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:102
+msgid "Numbered List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:103
+msgid "Alphabetical List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:104
+msgid "Strike"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:105
+msgid "Set font color of selected text."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:106
+msgid "Highlight selected text by setting background color."
+msgstr ""
+
+#: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
+msgid "Mark/Unmark Verse"
+msgstr ""
+
+#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:13
+msgid "Annotation Dialog"
+msgstr ""
+
+#: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:2
+msgid ""
+"Add annotation. The verse will display with highlight colors and a *u marker "
+"to show content."
+msgstr ""
+
+#: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
+msgid "New Annotation"
+msgstr ""
+
+#: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:3
+msgid "Mark"
+msgstr ""
+
+#: ../ui/markverse.glade.h:10 ../ui/markverse.gtkbuilder.h:5
+msgid "Unmark"
+msgstr ""
+
+#: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
+msgid "Remove annotation."
+msgstr ""
+
+#: ../ui/markverse.glade.h:12 ../ui/xi-export-bookmarks.glade.h:7
+msgid "gtk-cancel"
+msgstr ""
+
+#: ../ui/markverse.glade.h:13 ../ui/markverse.gtkbuilder.h:8
+msgid "Cancel Annotation"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
+msgid "Module Manager"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
+msgid "_View Intro"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:3 ../ui/module-manager.gtkbuilder.h:3
+msgid "Open a brief introductory explanation of how the Module Manager works."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:4 ../ui/module-manager.gtkbuilder.h:4
+msgid "_Load Standard"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:5 ../ui/module-manager.gtkbuilder.h:5
+msgid ""
+"Load and synchronize the standard set of known repositories, as maintained "
+"at crosswire.org, with your current remote sources."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
+msgid ""
+"Refresh Xiphos' knowledge of what modules are available at the selected "
+"remote repository"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
+msgid "_Install"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:8 ../ui/module-manager.gtkbuilder.h:7
+msgid "Install or update the selected modules"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:9 ../ui/module-manager.gtkbuilder.h:9
+msgid "Remove the selected modules from your system"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:10 ../ui/module-manager.gtkbuilder.h:10
+msgid "_Archive"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:11 ../ui/module-manager.gtkbuilder.h:11
+msgid "Create a zip archive of the selected modules."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:12 ../ui/module-manager.gtkbuilder.h:12
+msgid "_Index"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
+msgid ""
+"Build an index of the selected modules, for optimized (\"lucene\") searching."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
+msgid "_Delete Index"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
+msgid "Delete the fast-search index of the selected modules."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
+msgid "Scan _Obsolete"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:17 ../ui/module-manager.gtkbuilder.h:17
+msgid "Scan for obsolete modules and offer to delete them."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:19
+msgid "Continue"
+msgstr ""
+
+#. do not translate <b> and </b> they are html formating
+#: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:21
+msgid "<b>Sword</b>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:22
+msgid "<b>Module Manager</b>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:23
+msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:24
+msgid "<b>Add and Remove Sources</b>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:25
+msgid "Current local sources"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:26
+msgid ""
+"Add a local folder as an install source, typically on a cdrom or flash "
+"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:27
+msgid "Remove one of your local folders as an install source."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:28
+msgid "Current Remote Sources"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:29
+msgid ""
+"Add a custom remote install source. You must know its hostname and the "
+"folder where its repository lives."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:30
+msgid "Remove a remote install source."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:31
+msgid "<b>Install Source</b>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:32
+msgid "Local"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:33
+msgid "Remote"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:34
+msgid "<b>Install Destination</b>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:35
+msgid "<i>Personal area, for your use only:</i>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:36
+msgid "Home dir"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:37
+msgid "<i>System area, for all users:</i>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:38
+msgid "Sword sys dir"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:38 ../ui/module-manager.gtkbuilder.h:39
+msgid ""
+"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
+"detection you should NOT use  the remote installation feature! "
+msgstr ""
+
+#: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:40
+msgid "Local Install Folder"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
+msgid "Drop down history list"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:2
+msgid "Choose book to display"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:3 ../ui/navbar_versekey.gtkbuilder.h:3
+msgid "Book Selector Button"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:4 ../ui/navbar_versekey.gtkbuilder.h:2
+msgid "<b>Revelation of John</b>"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:5
+msgid "Choose chapter to display"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:6 ../ui/navbar_versekey.gtkbuilder.h:5
+msgid "Toggle Chapter Button"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:7 ../ui/navbar_versekey.gtkbuilder.h:4
+msgid "1"
+msgstr "၁"
+
+#: ../ui/navbar_versekey.glade.h:8
+msgid "Choose Verse to display"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:9 ../ui/navbar_versekey.gtkbuilder.h:6
+msgid "Toggle Verse Button"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
+msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
+msgid "Reference Entry"
+msgstr ""
+
+#: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:10
+msgid "Cover"
+msgstr ""
+
+#: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:11
+msgid "<b>Font Colors</b>"
+msgstr "<b>ဖောင့်အရောင်</b>"
+
+#: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:12
+msgid "Background"
+msgstr "နောက်ခံ"
+
+#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
+msgid " "
+msgstr " "
+
+#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
+msgid "Foreground"
+msgstr ""
+
+#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
+msgid "Current Verse"
+msgstr ""
+
+#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
+msgid "Verse Number"
+msgstr ""
+
+#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
+msgid "Links"
+msgstr "ကွင်းဆက်များ"
+
+#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
+msgid "Highlight Foreground"
+msgstr ""
+
+#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
+msgid "Highlight Background"
+msgstr ""
+
+#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
+msgid "Invert color pairs"
+msgstr ""
+
+#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
+msgid "Normal Text"
+msgstr ""
+
+#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
+msgid "Highlight"
+msgstr ""
+
+#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
+msgid "Font Colors"
+msgstr "ဖောင့်အရောင်"
+
+#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
+msgid "<b>Font Sizes</b>"
+msgstr "<b>ဖောင့်အရောင်</b>"
+
+#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
+msgid "All displayed font sizes are relative to this choice"
+msgstr ""
+
+#: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:26
+msgid "Base font size"
+msgstr ""
+
+#: ../ui/prefs.glade.h:19
+msgid ""
+"-2\n"
+"-1\n"
+"+0\n"
+"+1\n"
+"+2\n"
+"+3\n"
+"+4\n"
+"+5"
+msgstr ""
+"-၂\n"
+"-၁\n"
+"+၀\n"
+"+၁\n"
+"+၂\n"
+"+၃\n"
+"+၄\n"
+"+၅"
+
+#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
+msgid "Commonly -1, to make verse numbers less obtrusive"
+msgstr ""
+
+#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
+msgid "Verse number size"
+msgstr ""
+
+#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
+msgid ""
+"Name and size choice for any module in a given language; still overridden by "
+"a specific choice on a particular module"
+msgstr ""
+
+#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
+msgid "Font preferences, per language"
+msgstr ""
+
+#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
+msgid "Language Font Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
+msgid "Font Misc"
+msgstr ""
+
+#: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
+msgid "<b>BibleSync</b>"
+msgstr "<b>BibleSync</b>"
+
+#: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:34
+msgid ""
+"Xiphos is the first Bible study program to provide an implementation of "
+"BibleSync, a synchronization protocol for Bible programs. If you work with "
+"multiple Bible programs, or if you work in a team, or if you have classroom "
+"activities using shared study, BibleSync can be a useful tool for you. "
+"BibleSync operates in 1 of 3 modes: Personal, to synchronize multiple Bible "
+"applications of your own, or in a working team; Speaker, to drive a lecture "
+"audience's Bible programs to follow along; Audience, to receive the "
+"speaker's navigation."
+msgstr ""
+
+#: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:36
+msgid "<i>Mode:</i>"
+msgstr ""
+
+#: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:35
+msgid "Select the mode in which BibleSync should operate."
+msgstr ""
+
+#: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
+msgid "_Off"
+msgstr ""
+
+#: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
+msgid "Disable BibleSync."
+msgstr ""
+
+#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
+msgid "BSP off radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
+msgid "_Speaker"
+msgstr ""
+
+#: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
+msgid "Enable BibleSync as the speaker."
+msgstr ""
+
+#: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
+msgid "BSP speaker radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
+msgid "_Audience"
+msgstr ""
+
+#: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
+msgid "Enable BibleSync as a member of the audience."
+msgstr ""
+
+#: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
+msgid "BSP audience radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
+msgid "_Personal"
+msgstr ""
+
+#: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
+msgid "Enable BibleSync for personal or team use."
+msgstr ""
+
+#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
+msgid "BSP personal radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
+msgid "Private"
+msgstr ""
+
+#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
+msgid ""
+"When in Personal mode, only programs running on this machine will hear your "
+"navigation."
+msgstr ""
+
+#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
+msgid "BSP privacy button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:53
+msgid "<i>Navigate:</i>"
+msgstr ""
+
+#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:52
+msgid "Choose how to accept incoming navigation synchronization."
+msgstr ""
+
+#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
+msgid "_Direct"
+msgstr ""
+
+#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
+msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
+msgstr ""
+
+#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
+msgid "BSP nav direct radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
+msgid "_Verse list"
+msgstr ""
+
+#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
+msgid "BibleSync navigation will use Xiphos' sidebar verse list."
+msgstr ""
+
+#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
+msgid "BSP nav verse list radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
+msgid "_Keyboard only"
+msgstr ""
+
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
+msgid ""
+"When checked, do not transmit every time Xiphos navigates; instead, transmit "
+"only using keyboard shortcut (Ctrl-Shift-Alt-N)."
+msgstr ""
+
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+msgid "BSP keyboard button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:64
+msgid "<i>Listen:</i>"
+msgstr ""
+
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:63
+msgid "Xiphos will listen to Speakers according to choice here."
+msgstr ""
+
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
+msgid "Selective"
+msgstr ""
+
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
+msgid "Choose the Speakers to be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
+msgid "BSP listen some radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
+msgid "All"
+msgstr ""
+
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
+msgid "All Speakers will be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
+msgid "BSP listen all radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
+msgid "None"
+msgstr "ဘာမျှမရှိ"
+
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
+msgid "No Speakers will be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+msgid "BSP listen none radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:75
+msgid "<i>Special:</i>"
+msgstr ""
+
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:74
+msgid ""
+"Additional traces can be presented during BibleSync operation by enabling "
+"presence, mismatch, and debug. Beware enabling these, they can be very "
+"chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
+msgstr ""
+
+#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
+msgid "Presence"
+msgstr ""
+
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
+msgid "Presence announcements will be shown in dialogs."
+msgstr ""
+
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
+msgid "BSP presence button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
+msgid "Mismatch"
+msgstr ""
+
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
+msgid "Mismatches from your session will be shown in dialogs."
+msgstr ""
+
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
+msgid "BSP mismatch button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
+msgid "Debug"
+msgstr ""
+
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
+msgid "Packet tracing."
+msgstr ""
+
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
+msgid "BSP event debug button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:85
+msgid "_Group as tab"
+msgstr ""
+
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
+msgid ""
+"Interpret the protocol's group number parameter as Xiphos' tab number. "
+"Disabling this may be necessary if some Speakers' use of group number is not "
+"appropriate as a tab number."
+msgstr ""
+
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
+msgid "BSP event group-as-tab button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
+msgid "<b>General</b>"
+msgstr ""
+
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
+msgid ""
+"Select a particular language for interface display, other than your usual "
+"setting"
+msgstr ""
+
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
+msgid "Special Locale (requires restart)"
+msgstr ""
+
+#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
+msgid "Special Locale Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
+msgid "Show splash screen at start up"
+msgstr ""
+
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
+msgid "Show Daily Devotion at start up"
+msgstr ""
+
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
+msgid ""
+"If you have set a preferred daily devotion module, its entry for today will "
+"be shown at startup."
+msgstr ""
+
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
+msgid "Use default Dictionary"
+msgstr ""
+
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
+msgid ""
+"Make double-click of a word always use default dictionary instead of "
+"dictionary currently displayed"
+msgstr ""
+
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
+msgid "Use default Dictionary Checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
+msgid "Scroll to Previous/Next Chapter"
+msgstr ""
+
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
+msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
+msgstr ""
+
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
+msgid "Scroll to Previous/Next Chapter Checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
+msgid "Resize images"
+msgstr ""
+
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
+msgid "Automatically resize image content to fit the pane"
+msgstr ""
+
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
+msgid "Resize images checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
+msgid "Highlight current verse"
+msgstr ""
+
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
+msgid "Apply high-contrast highlight to current verse - see color pickers"
+msgstr ""
+
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
+msgid "Highlight current verse check box"
+msgstr ""
+
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
+msgid "Highlight user annotations"
+msgstr ""
+
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
+msgid "Use inverted highlight on user-annotated verses"
+msgstr ""
+
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
+msgid "Highlight user annotations check box"
+msgstr ""
+
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
+msgid "Cross-references in verse list"
+msgstr ""
+
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
+msgid "Use the verse list for Bible cross-references instead of the previewer"
+msgstr ""
+
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
+msgid "Xrefs in verse list check box"
+msgstr ""
+
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
+msgid "Enable Prayer Lists"
+msgstr ""
+
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
+msgid "Make journals/prayer lists available"
+msgstr ""
+
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
+msgid "Enable Prayer Lists Checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
+msgid "Enable Statusbar"
+msgstr ""
+
+#: ../ui/prefs.glade.h:118
+msgid "Enable/Disable Statusbar."
+msgstr ""
+
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
+msgid "Enable Statusbar Checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
+msgid "Parallel color alternation"
+msgstr ""
+
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
+msgid "Parallel window can use alternating foreground/background."
+msgstr ""
+
+#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
+msgid "Enable Parallel Alternation Checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:124
+msgid "Verse number"
+msgstr ""
+
+#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:123
+msgid "Offset the verse number in several ways"
+msgstr ""
+
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
+msgid "Show verse number in bold text"
+msgstr ""
+
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
+msgid "Verse number bold checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
+msgid "Brackets"
+msgstr ""
+
+#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
+msgid "Show verse number with [surrounding brackets]"
+msgstr ""
+
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
+msgid "Verse number bracket checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
+msgid "Superscript"
+msgstr "အပေါ်ထပ်တင်ပါ"
+
+#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
+msgid "Show verse number as a superscript"
+msgstr ""
+
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
+msgid "Verse number superscript checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
+msgid "StudyPad default directory"
+msgstr ""
+
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
+msgid "Select A Directory"
+msgstr ""
+
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
+msgid "StudyPad default directory combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
+msgid "General Misc"
+msgstr ""
+
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
+msgid "<b>Main Window Modules</b>"
+msgstr ""
+
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
+msgid "Biblical Text"
+msgstr "သမ္မာကျမ်းစာစာသား"
+
+#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
+msgid "Change Biblical Text Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
+msgid "Change Commentary Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
+msgid "Change Dictionary Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
+msgid "Change Book Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
+#: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
+msgid "<b>Modules</b>"
+msgstr "<b>မော်ကျူးများ</b>"
+
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
+#: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
+msgid "Clear all modules from the list"
+msgstr ""
+
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
+#: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
+msgid "Clear Modules from List Button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
+#: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
+msgid "Remove the selected module from the list"
+msgstr ""
+
+#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
+#: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
+msgid "Delete Selected Module From List Button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
+msgid "Open a dialog to select modules"
+msgstr ""
+
+#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
+#: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
+msgid "Add Modules"
+msgstr ""
+
+#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
+#: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
+msgid "Open Selection Dialog Button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
+msgid "Modules Parallel"
+msgstr ""
+
+#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
+msgid "<b>Special Purpose Modules</b>"
+msgstr ""
+
+#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
+msgid "Daily Devotional"
+msgstr ""
+
+#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
+msgid "Daily Devotional Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
+msgid "Hebrew Lexicon"
+msgstr ""
+
+#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
+msgid "Hebrew Lexicon Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
+msgid "Greek Lexicon"
+msgstr ""
+
+#: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
+msgid "Greek Lexicon Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
+msgid "Default Dictionary"
+msgstr ""
+
+#: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
+msgid "Change Default Dictionary Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:165 ../ui/prefs.gtkbuilder.h:165
+msgid "Personal Notes"
+msgstr ""
+
+#: ../ui/prefs.glade.h:166 ../ui/prefs.gtkbuilder.h:166
+msgid "Change Personal Notes Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:167 ../ui/prefs.gtkbuilder.h:167
+msgid "Modules Misc"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:1
+msgid "-2"
+msgstr "-၂"
+
+#: ../ui/prefs.gtkbuilder.h:2
+msgid "-1"
+msgstr "-၁"
+
+#: ../ui/prefs.gtkbuilder.h:4
+msgid "+1"
+msgstr "+၁"
+
+#: ../ui/prefs.gtkbuilder.h:5
+msgid "+2"
+msgstr "+၂"
+
+#: ../ui/prefs.gtkbuilder.h:6
+msgid "+3"
+msgstr "+၃"
+
+#: ../ui/prefs.gtkbuilder.h:7
+msgid "+4"
+msgstr "+၄"
+
+#: ../ui/prefs.gtkbuilder.h:8
+msgid "+5"
+msgstr "+၅"
+
+#: ../ui/prefs.gtkbuilder.h:118
+msgid "Enable/disable the Statusbar"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:1 ../ui/search-dialog.gtkbuilder.h:1
+msgid "Advanced Search"
+msgstr "အဆင့်မြင့်ရှာဖွေ"
+
+#: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
+msgid "_Lucene Search Syntax"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:3 ../ui/search-dialog.gtkbuilder.h:3
+msgid ""
+"Open a brief explanation of the syntax used for optimized \"lucene\" "
+"searches."
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
+msgid "_Attribute Search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:5 ../ui/search-dialog.gtkbuilder.h:5
+msgid "Open a brief explanation of attribute-based searches."
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
+msgid "for "
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
+msgid "Main Search Entry"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:8 ../ui/search-dialog.gtkbuilder.h:9
+msgid "Start/stop searching"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:9 ../ui/search-dialog.gtkbuilder.h:10
+msgid "Find Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:10 ../ui/search-dialog.gtkbuilder.h:11
+msgid "Search Criteria Treeview"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:11 ../ui/search-dialog.gtkbuilder.h:12
+msgid "<b>Scope</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:12 ../ui/search-dialog.gtkbuilder.h:14
+msgid "Search entire module"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:13 ../ui/search-dialog.gtkbuilder.h:13
+msgid "Entire module"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:14 ../ui/search-dialog.gtkbuilder.h:15
+msgid "Entire module radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:15 ../ui/search-dialog.gtkbuilder.h:17
+msgid "Use the results of the last search as the scope of the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:16 ../ui/search-dialog.gtkbuilder.h:16
+msgid "Current results"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:17 ../ui/search-dialog.gtkbuilder.h:18
+msgid "Current results radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:18 ../ui/search-dialog.gtkbuilder.h:20
+msgid "Use a custom range for the scope of the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:19 ../ui/search-dialog.gtkbuilder.h:19
+msgid "Custom verse range"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:20 ../ui/search-dialog.gtkbuilder.h:21
+msgid "Custom verse range radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
+msgid "Custom Range Selector Combo"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
+msgid "Use a single module for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:24 ../ui/search-dialog.gtkbuilder.h:24
+msgid "Single module"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:25 ../ui/search-dialog.gtkbuilder.h:26
+msgid "Single module radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:26 ../ui/search-dialog.gtkbuilder.h:28
+msgid "Use the current module list for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:27 ../ui/search-dialog.gtkbuilder.h:27
+msgid "Module list"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:28 ../ui/search-dialog.gtkbuilder.h:29
+msgid "Module list radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:29 ../ui/search-dialog.gtkbuilder.h:31
+msgid "Use a custom module list for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:30 ../ui/search-dialog.gtkbuilder.h:30
+msgid "Custom module list"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:31 ../ui/search-dialog.gtkbuilder.h:32
+msgid "Custom module list radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:32
+msgid "Custom Module List Combo"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
+msgid "<b>Search Type</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:34 ../ui/search-dialog.gtkbuilder.h:35
+msgid ""
+"Fast, featureful, index-based search\n"
+"Indexes must have been built beforehand:\n"
+"See Module Manager's maintenance functions"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
+msgid "Optimized (\"Lucene\") radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:39 ../ui/search-dialog.gtkbuilder.h:39
+msgid "Multi word"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
+msgid "Multi word radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
+msgid "Regular expression radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:44 ../ui/search-dialog.gtkbuilder.h:44
+msgid "Exact phrase radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
+msgid "Make selections on the Attribute Search tab"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
+msgid "Attributes"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
+msgid "Attributes radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:48 ../ui/search-dialog.gtkbuilder.h:48
+msgid "<b>Options</b>"
+msgstr "<b>ရွေးပိုင်ခွင့်များ</b>"
+
+#: ../ui/search-dialog.glade.h:50 ../ui/search-dialog.gtkbuilder.h:50
+msgid "Match case checkbox"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:51 ../ui/search-dialog.gtkbuilder.h:51
+msgid "Search  Criteria"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:52 ../ui/search-dialog.gtkbuilder.h:52
+msgid "Show in main window"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:53 ../ui/search-dialog.gtkbuilder.h:53
+msgid "Save search results as bookmarks"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:54 ../ui/search-dialog.gtkbuilder.h:54
+msgid "Export current search results"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:55 ../ui/search-dialog.gtkbuilder.h:55
+msgid "Export"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:56 ../ui/search-dialog.gtkbuilder.h:56
+msgid "Clear lists for new search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:57 ../ui/search-dialog.gtkbuilder.h:57
+msgid "<b>Found</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:58 ../ui/search-dialog.gtkbuilder.h:59
+msgid "Result Summary Window"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:59 ../ui/search-dialog.gtkbuilder.h:58
+msgid "Result Summary Table"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:60 ../ui/search-dialog.gtkbuilder.h:60
+msgid "<b>Search Results</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:61 ../ui/search-dialog.gtkbuilder.h:61
+msgid "<b>Preview</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:62 ../ui/search-dialog.gtkbuilder.h:62
+msgid "Results"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:63 ../ui/search-dialog.gtkbuilder.h:63
+msgid "Create new custom range"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:64 ../ui/search-dialog.gtkbuilder.h:64
+msgid "New Range Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:65 ../ui/search-dialog.gtkbuilder.h:65
+msgid "Save custom range"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:66 ../ui/search-dialog.gtkbuilder.h:66
+msgid "Save Range Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:67 ../ui/search-dialog.gtkbuilder.h:67
+msgid "Delete selected range"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:68 ../ui/search-dialog.gtkbuilder.h:68
+msgid "Delete Range Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:69 ../ui/search-dialog.gtkbuilder.h:69
+msgid "<b>Ranges</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:70 ../ui/search-dialog.gtkbuilder.h:70
+msgid "<b>Range Name</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:71 ../ui/search-dialog.gtkbuilder.h:71
+msgid "Range Name Entry"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:72 ../ui/search-dialog.gtkbuilder.h:72
+msgid "<b>Range Definition</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:73 ../ui/search-dialog.gtkbuilder.h:73
+msgid "Range Definition Entry"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:74 ../ui/search-dialog.gtkbuilder.h:74
+msgid "e.g. Matt-John;Rev4"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:75 ../ui/search-dialog.gtkbuilder.h:75
+msgid "Custom Range Preview"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:76 ../ui/search-dialog.gtkbuilder.h:76
+msgid "Custom Verse Ranges"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:77 ../ui/search-dialog.gtkbuilder.h:77
+msgid "Create a new module list"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:78 ../ui/search-dialog.gtkbuilder.h:78
+msgid "New Custom Module List Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:79 ../ui/search-dialog.gtkbuilder.h:79
+msgid "Save the module list"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:80 ../ui/search-dialog.gtkbuilder.h:80
+msgid "Save Custom Module List Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:81 ../ui/search-dialog.gtkbuilder.h:81
+msgid "Delete the selected list"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:82 ../ui/search-dialog.gtkbuilder.h:82
+msgid "Clear Custom Module List Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:83 ../ui/search-dialog.gtkbuilder.h:83
+msgid "<b>Module Lists</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:84 ../ui/search-dialog.gtkbuilder.h:84
+msgid "<b>List Name</b>"
+msgstr "<b>အမည်စာရင်း</b>"
+
+#: ../ui/search-dialog.glade.h:85 ../ui/search-dialog.gtkbuilder.h:85
+msgid "Custom Module List Name Entry"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:90 ../ui/search-dialog.gtkbuilder.h:90
+msgid "Open a dialog to select modules to add to the list"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:93 ../ui/search-dialog.gtkbuilder.h:93
+msgid "Custom Module Lists"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:94 ../ui/search-dialog.gtkbuilder.h:94
+msgid "<b>Attribute</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:95 ../ui/search-dialog.gtkbuilder.h:96
+msgid "Search for Strongs Numbers like G4442 or H1121"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:96 ../ui/search-dialog.gtkbuilder.h:95
+msgid "Strongs Numbers"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:97 ../ui/search-dialog.gtkbuilder.h:97
+msgid "Strongs Numbers radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:98 ../ui/search-dialog.gtkbuilder.h:99
+msgid "Search for Morphological tags"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:100 ../ui/search-dialog.gtkbuilder.h:100
+msgid "Morphological Tags radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:101 ../ui/search-dialog.gtkbuilder.h:102
+msgid "Search in footnotes"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:103 ../ui/search-dialog.gtkbuilder.h:103
+msgid "Footnotes radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:104 ../ui/search-dialog.gtkbuilder.h:104
+msgid "<b>Results Display Options</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:105 ../ui/search-dialog.gtkbuilder.h:106
+msgid "In modules that have Strong's Numbers"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:106 ../ui/search-dialog.gtkbuilder.h:105
+msgid "Show Strong's Numbers"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:107 ../ui/search-dialog.gtkbuilder.h:107
+msgid "Show Strong's Numbers checkbox"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:108 ../ui/search-dialog.gtkbuilder.h:109
+msgid "In modules that have Morphological Tags"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:109 ../ui/search-dialog.gtkbuilder.h:108
+msgid "Show Morphological Tags"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:110 ../ui/search-dialog.gtkbuilder.h:110
+msgid "Show Morphological Tags checkbox"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:111 ../ui/search-dialog.gtkbuilder.h:112
+msgid "In modules that have Footnotes"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:112 ../ui/search-dialog.gtkbuilder.h:111
+msgid "Show Footnotes"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:113 ../ui/search-dialog.gtkbuilder.h:113
+msgid "Show Footnotes checkbox"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:114 ../ui/search-dialog.gtkbuilder.h:114
+msgid "Attribute Search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
+#: ../ui/selector-prefs.glade.h:1 ../ui/selector-prefs.gtkbuilder.h:1
+msgid "Module Selection"
+msgstr ""
+
+#: ../ui/search-dialog.gtkbuilder.h:6
+msgid "<b>search module</b>"
+msgstr ""
+
+#: ../ui/xi-export-bookmarks.glade.h:1
+msgid "Export Bookmark Folder"
+msgstr ""
+
+#: ../ui/xi-export-bookmarks.glade.h:2
+msgid "<b>Export to:</b>"
+msgstr ""
+
+#: ../ui/xi-export-bookmarks.glade.h:3
+msgid "Xiphos bookmarks"
+msgstr "Xiphos မှတ်သားပါ"
+
+#: ../ui/xi-export-bookmarks.glade.h:4
+msgid "Html"
+msgstr "Html"
+
+#: ../ui/xi-export-bookmarks.glade.h:5
+msgid "Plain text"
+msgstr ""
+
+#: ../ui/xi-export-bookmarks.glade.h:6
+msgid "Include Bible text"
+msgstr ""
+
+#: ../ui/xi-export-bookmarks.glade.h:8
+msgid "gtk-ok"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:2 ../ui/xi-menus.gtkbuilder.h:2
+msgid "Open Study_pad"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:3 ../ui/xi-menus.gtkbuilder.h:3
+msgid "_Open Session"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:4
+msgid "Open a saved tab settings collection"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:5 ../ui/xi-menus.gtkbuilder.h:4
+msgid "_Save Session"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:6
+msgid "Save this collection of tab settings"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:7 ../ui/xi-menus.gtkbuilder.h:5
+msgid "_New Prayerlist/Journal"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:8
+msgid "Create a new journal or prayerlist from a template"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:10 ../ui/xi-menus.gtkbuilder.h:7
+msgid "_Search"
+msgstr "ရှာဖွေ"
+
+#: ../ui/xi-menus.glade.h:11
+msgid "Bring the simple sidebar search forward"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:12 ../ui/xi-menus.gtkbuilder.h:8
+msgid "_Advanced Search"
+msgstr "အဆင့်မြင့်ရှာဖွေ"
+
+#: ../ui/xi-menus.glade.h:13
+msgid "Open the advanced search dialog, to run complex queries"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:14 ../ui/xi-menus.gtkbuilder.h:9
+msgid "_Preferences"
+msgstr "ဦးစားပေးချက်များ"
+
+#: ../ui/xi-menus.glade.h:15
+msgid "Use module manager to install and remove Sword modules"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:16 ../ui/xi-menus.gtkbuilder.h:10
+msgid "_Module Manager"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
+msgid "Preview _Daily Devotion"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:19
+msgid "Show today's entry from your selected daily devotional in the previewer"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
+msgid "_Bible"
+msgstr "သမ္မာကျမ်းစာ"
+
+#: ../ui/xi-menus.glade.h:21 ../ui/xi-menus.gtkbuilder.h:14
+msgid "_Preview"
+msgstr "အစမ်းကြည့်ပါ"
+
+#: ../ui/xi-menus.glade.h:22 ../ui/xi-menus.gtkbuilder.h:15
+msgid "_Commentary/Book"
+msgstr "ရှင်းလင်းချက်မှတ်စု/စာအုပ်"
+
+#: ../ui/xi-menus.glade.h:23 ../ui/xi-menus.gtkbuilder.h:16
+msgid "Dictionar_y"
+msgstr "အဘိဓာန်များ"
+
+#: ../ui/xi-menus.glade.h:24 ../ui/xi-menus.gtkbuilder.h:17
+msgid "L_ink Tabs"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:25
+msgid "Make all tabs' Bibles navigate together"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:26 ../ui/xi-menus.gtkbuilder.h:18
+msgid "_Read Aloud"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:27
+msgid "Turn on text-to-speech reading of Bible verses as they are selected"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
+msgid "Show Verse _Numbers"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:29
+msgid "Display verse numbers in the text"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
+msgid "_Highlight Current Verse"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:31
+msgid "Apply a high-contrast highlight to the current verse"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
+msgid "_Show/Hide Attached Sidebar"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:33
+msgid "Remove the sidebar entirely from view"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
+msgid "Show Parallel View in a _Tab"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:35
+msgid "Provide the full-chapter parallel Bible window as another tab"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
+msgid "Show Previe_wer in the Sidebar"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:37
+msgid "Select Previewer position between sidebar or beneath Bible"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:39 ../ui/xi-menus.gtkbuilder.h:25
+msgid "_Contents"
+msgstr "မာတိကာများ"
+
+#: ../ui/xi-menus.glade.h:40
+msgid "Open the help viewer on the Xiphos manual"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
+msgid "_Mailing List"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:42
+msgid "Open a browser on the users' mailing list webpage"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
+msgid "_Live Chat"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:44
+msgid "Open a browser on an interface to live IRC chat"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
+msgid "_Report Bug"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:46
+msgid "Open a browser on our bug tracker"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
+msgid "About _Translation"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:48
+msgid "Learn about translating the Xiphos interface to other languages"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
+msgid "_About The SWORD Project"
+msgstr "အကြောင်း The SWORD Project"
+
+#: ../ui/xi-menus.glade.h:50
+msgid "Learn about The Sword Project, of which Xiphos is one application"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
+msgid "About _BibleSync"
+msgstr "အကြောင်း _BibleSync"
+
+#: ../ui/xi-menus.glade.h:52
+msgid "Learn about BibleSync, the shared navigation protocol"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
+msgid "_View Xiphos Releases"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:54
+msgid "Visit the releases web page. Is your Xiphos current?"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
+msgid "About _Xiphos"
+msgstr "အကြောင်း _Xiphos"
+
+#: ../ui/xi-menus.glade.h:56
+msgid "Learn about Xiphos"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:37
+msgid "Annotate Verse"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
+msgid "Open Module"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:64 ../ui/xi-menus-popup.gtkbuilder.h:41
+msgid "Note"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:42
+msgid "Open in editor"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:67 ../ui/xi-menus-popup.gtkbuilder.h:44
+msgid "Verse Per Line"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:75 ../ui/xi-menus-popup.gtkbuilder.h:52
+msgid "Footnote/Cross-ref Markers"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:76
+msgid "Show non-anonymous markers e.g. \"*n23\""
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:81 ../ui/xi-menus-popup.gtkbuilder.h:57
+msgid "Variants"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
+msgid "Image Content"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:66
+msgid "Respect Font Faces"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:67
+msgid "Commentary by Chapter"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:68
+msgid "Doublespace"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
+msgid "Lookup Selection"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
+msgid "Use Current Dictionary"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
+msgid "Browse in BibleMap.org"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
+msgid "Unlock This Module"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
+msgid "Display Book Heading"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
+msgid "Display Chapter Heading"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
+msgid "Rename Pers.Comm."
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:76
+msgid "Dump Pers.Comm."
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:77
+msgid "Read Selection Aloud"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:93
+msgid "Save these results as a single bookmark"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:92
+msgid "Save list as a single bookmark"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:95
+msgid "Save these results as a series of bookmarks in their own folder"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:94
+msgid "Save list as a series of bookmarks"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:97
+msgid ""
+"Provide a dialog in which to paste a line of verse references, to fill the "
+"verse list."
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:96
+msgid "Populate verse list"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:99
+msgid "Push the entire verse list contents directly into the history list."
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:98
+msgid "Preload history from verse list"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:101
+msgid ""
+"Send this verse list via BibleSync to others, if you are in Personal or "
+"Speaker mode."
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:100
+msgid "Send list via BibleSync"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:102
+msgid "Export List"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:2
+msgid "Open this bookmark in a new tab"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:1
+msgid "Open in new tab"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:4
+msgid "Open this bookmark in a dialog"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:3
+msgid "Open in a dialog"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:6
+msgid "Add new folder to selected folder"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:8
+msgid "Insert new bookmark here"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:7
+msgid "Insert Bookmark"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:10
+msgid "Edit bookmark item"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:9
+msgid "_Edit Item"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:12
+msgid "Delete item"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:14
+msgid "Expand all Bookmarks groups"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:13
+msgid "Expand All"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:16
+msgid "Collapse all Bookmarks groups"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:15
+msgid "Collapse All"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:17
+msgid "Allow items to be moved from one folder to another"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:18
+msgid "Allow Reordering"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:20
+msgid "Load other bookmarks file (default: from BibleTime)"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:19
+msgid "Import Bookmarks"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:22
+msgid "Remove folder and save it"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:21
+msgid "Export Folder"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:31
+msgid "Open selected module in a new tab"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:33
+msgid ""
+"Open selected module in a\n"
+"\tseparate ['dialog'] window"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:32
+msgid "Open in a separate window"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:79
+msgid "Create a new simple prayer list"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:78
+msgid "Simple"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:81
+msgid "Create a new subject prayer list"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:80
+msgid "Subject"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:83
+msgid "Create a new monthly journal"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:82
+msgid "Monthly"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:85
+msgid "Create a new daily journal"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:84
+msgid "Daily"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:87
+msgid "Create a new outlined topic"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:86
+msgid "Outlined"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
+msgid "Create a new book/chapter outline"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
+msgid "Book/Chapter"
+msgstr "စာအုပ်/အခဏ်း"
+
+#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:91
+msgid "Open module in editor or plain display window"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:90
+msgid "Open in separate window"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:24
+msgid "Add a sub-item"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:23
+msgid "Add Sub-Item"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:26
+msgid "Add an item"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:156 ../ui/xi-menus-popup.gtkbuilder.h:25
+msgid "Add Item"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:28
+msgid "Remove this item"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:159 ../ui/xi-menus-popup.gtkbuilder.h:30
+msgid "Edit this item"
+msgstr ""
+
+#: ../xiphos.desktop.in.in.h:1
+msgid "Xiphos Bible Guide"
+msgstr ""
+
+#: ../xiphos.desktop.in.in.h:2
+msgid "Study the Bible"
+msgstr ""
+
+#: ../xiphos.desktop.in.in.h:3
+msgid "Text;Bible;Study;"
+msgstr ""
