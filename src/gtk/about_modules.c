@@ -202,7 +202,7 @@ static GtkWidget *gui_create_about_modules(void)
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area28),
 				       10);
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	hbuttonbox7 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 #else
 	hbuttonbox7 = gtk_hbutton_box_new();
@@ -226,15 +226,7 @@ static GtkWidget *gui_create_about_modules(void)
 #endif
 	gtk_widget_show(button);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox7), button);
-#if GTK_CHECK_VERSION(2, 18, 0)
 	gtk_widget_set_can_default(button, TRUE);
-#else
-#ifdef USE_GTK_3
-	gtk_widget_set_can_default(button, 1);
-#else
-	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
-#endif
-#endif
 	g_signal_connect(G_OBJECT(button), "clicked",
 			 G_CALLBACK(about_modules_ok), NULL);
 	return dialog_about_mods;

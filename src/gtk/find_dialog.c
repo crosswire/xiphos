@@ -181,7 +181,7 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 	   FALSE); */
 	gtk_container_set_border_width(GTK_CONTAINER(dialog->dialog), 6);
 	gtk_window_set_resizable(GTK_WINDOW(dialog->dialog), FALSE);
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog->dialog), FALSE);
 #endif
 	dialog_vbox29 =
@@ -216,17 +216,13 @@ static void create_find_dialog(GtkWidget *htmlwidget)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dialog->backward), FALSE);
 
 	dialog_action_area29 =
-#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog->dialog));
-#else
-	    gtk_dialog_get_action_area(GTK_DIALOG(dialog->dialog));
-#endif
 	g_object_set_data(G_OBJECT(dialog->dialog),
 			  "dialog_action_area29", dialog_action_area29);
 	gtk_widget_show(dialog_action_area29);
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area29), 10);
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	hbuttonbox8 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 #else
 	hbuttonbox8 = gtk_hbutton_box_new();

@@ -850,9 +850,7 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 				 const gchar *label_text)
 {
 	GtkWidget *box;
-#ifdef USE_GTK_3
-//	GdkRGBA color;
-#else
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	GdkColor color;
 #endif
 
@@ -861,8 +859,8 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	tbinf->button_close = gtk_button_new_from_icon_name("window-close-symbolic", GTK_ICON_SIZE_MENU);
 #if GTK_CHECK_VERSION(3, 20, 0)
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
-#else
 #endif
+
 #else
 	GtkWidget *tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
 	tbinf->button_close = gtk_button_new();
@@ -870,7 +868,9 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
 #endif
 
-#ifndef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
+	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
+#else
 	gtk_rc_parse_string("style \"tab-button-style\"\n"
 			    "{\n"
 			    "    GtkWidget::focus-padding = 0\n"
@@ -884,11 +884,9 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 			    "widget \"*.button-close\" style \"tab-button-style\"");
 	gtk_widget_set_name(GTK_WIDGET(tbinf->button_close),
 			    "button-close");
-#else
-	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
 #endif
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	GtkRequisition r;
 	gtk_widget_size_request(tbinf->button_close, &r);
 #endif
@@ -898,8 +896,7 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	tbinf->tab_label = GTK_LABEL(gtk_label_new(label_text));
 	gtk_widget_show(GTK_WIDGET(tbinf->tab_label));
 
-#ifdef USE_GTK_3
-#else
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	color.red = 0;
 	color.green = 0;
 	color.blue = 0;
@@ -947,7 +944,7 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
  * Return value
  *   void
  */
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 void gui_notebook_main_switch_page(GtkNotebook *notebook,
 				   gpointer arg,
 				   gint page_num, GList **tl)

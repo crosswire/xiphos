@@ -294,7 +294,7 @@ gboolean gui_expand_treeview_to_path(GtkTreeView *tree,
  * Return value
  *   void
  */
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 static void on_notebook_switch_page(GtkNotebook *notebook,
 				    gpointer arg,
 				    guint page_num, gpointer user_data)

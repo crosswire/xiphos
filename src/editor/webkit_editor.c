@@ -802,7 +802,7 @@ static GtkWidget *editor_new(const gchar *title, EDITOR *e)
 	buttons_state.nochange = 1;
 
 	gbuilder_file = gui_general_user_file(
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	    "gtk_webedit.ui"
 #else
 	    "gtk2_webedit.ui"

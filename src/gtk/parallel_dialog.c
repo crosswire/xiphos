@@ -439,7 +439,7 @@ static GtkWidget *create_parallel_dialog(void)
 	gtk_widget_show(dialog_action_area25);
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area25), 10);
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	hbuttonbox4 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 #else
 	hbuttonbox4 = gtk_hbutton_box_new();

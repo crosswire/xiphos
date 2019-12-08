@@ -194,7 +194,7 @@ static void add_columns(GtkTreeView *treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	GtkRequisition size;
 #endif
 
@@ -210,7 +210,7 @@ static void add_columns(GtkTreeView *treeview)
 
 	gtk_tree_view_append_column(treeview, column);
 /* get cell (row) height */
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	gtk_cell_renderer_get_preferred_size(renderer,
 					     GTK_WIDGET(treeview),
 					     NULL, &size);

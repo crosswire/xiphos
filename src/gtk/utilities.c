@@ -2002,7 +2002,7 @@ const char *AnalyzeForImageSize(const char *origtext, GdkWindow *window)
 		if (window_y == -999) {
 /* we have images, but we don't know bounds yet */
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 			window_x = gdk_window_get_width(window);
 			window_y = gdk_window_get_height(window);
 #else

@@ -174,7 +174,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_window_set_default_size(GTK_WINDOW(dialog_display_info), 350, 200);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_display_info), TRUE);
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_display_info),
 				     FALSE);
 #endif
@@ -208,17 +208,13 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	//gtk_container_add(GTK_CONTAINER(scrolledwindow70), html_widget);
 
 	dialog_action_area23 =
-#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_display_info));
-#else
-	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_display_info));
-#endif
 	g_object_set_data(G_OBJECT(dialog_display_info),
 			  "dialog_action_area23", dialog_action_area23);
 	gtk_widget_show(dialog_action_area23);
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area23), 10);
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	hbuttonbox2 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 #else
 	hbuttonbox2 = gtk_hbutton_box_new();

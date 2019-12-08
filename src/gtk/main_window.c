@@ -491,7 +491,7 @@ static void on_notebook_bible_parallel_switch_page(GtkNotebook *notebook,
 #endif /* 0 */
 }
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 static void on_notebook_comm_book_switch_page(GtkNotebook *notebook,
 					      gpointer arg,
 					      gint page_num, GList **tl)
@@ -504,17 +504,9 @@ static void on_notebook_comm_book_switch_page(GtkNotebook *notebook,
 	gchar *url = NULL;
 
 	if (page_num == 0) {
-#if 0
-		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_book));
-		gui_set_drop_target(widgets.html_comm);
-#endif /* 0 */
 		settings.comm_showing = TRUE;
 		gtk_widget_show(nav_toolbar);
 	} else {
-#if 0
-		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_comm));
-		gui_set_drop_target(widgets.html_book);
-#endif /* 0 */
 		settings.comm_showing = FALSE;
 		if (!settings.showtexts)
 			gtk_widget_hide(nav_toolbar);
@@ -1156,7 +1148,7 @@ void create_mainwindow(void)
 		gtk_widget_show(widgets.appbar);
 	}
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(widgets.appbar), TRUE);
 #endif
 	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE, 0);

@@ -100,7 +100,7 @@ on_dialog_response(GtkDialog *dialog, gint response_id,
  *   GtkWidget *
  */
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 # ifdef USE_WEBKIT2
 #  define	BUILD_TYPE	"gtk3 webkit2"
 # else

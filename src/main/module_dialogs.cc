@@ -643,7 +643,7 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA *d)
 	list_store = GTK_LIST_STORE(model);
 
 	if (!firsttime) {
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 		height = gdk_window_get_height(GDK_WINDOW(d->listview));
 #else
 		gdk_drawable_get_size((GdkDrawable *)d->listview->window,
