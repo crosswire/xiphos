@@ -44,8 +44,6 @@ extern "C" {
 #include "main/xml.h"
 #include "backend/sword_main.hh"
 
-#include "xiphos_html/xiphos_html.h"
-
 #include "gui/debug_glib_null.h"
 
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\

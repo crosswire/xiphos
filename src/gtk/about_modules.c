@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/about_modules.h"
 #include "gui/utilities.h"
@@ -66,7 +66,7 @@ static void about_modules_ok(GtkButton *button, gpointer user_data)
 static void on_copy_activate(GtkMenuItem *menuitem, gpointer data)
 {
 	XI_message(("on_copy_activate"));
-	XIPHOS_HTML_COPY_SELECTION(text_html);
+	xiphos_html_copy_selection(text_html);
 }
 
 static void create_menu1(void)
@@ -179,7 +179,7 @@ static GtkWidget *gui_create_about_modules(void)
 					    settings.shadow_type);
 #endif
 
-	text_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 12));
+	text_html = GTK_WIDGET(xiphos_html_new(NULL, FALSE, 12));
 	gtk_widget_show(text_html);
 	g_signal_connect((gpointer)text_html,
 			 "popupmenu_requested",

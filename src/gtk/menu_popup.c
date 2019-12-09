@@ -35,7 +35,7 @@
 #include <unistd.h>
 #include <ctype.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/menu_popup.h"
 #include "gui/cipher_key_dialog.h"
@@ -390,9 +390,9 @@ G_MODULE_EXPORT void on_popup_print_activate(GtkMenuItem *menuitem,
 	/* there is some weirdness here, from having eliminated gtkhtml3.
 	 * we must understand why this is an interesting conditional.  */
 	if (is_dialog) {
-		XIPHOS_HTML_PRINT_DOCUMENT((XiphosHtml *)user_data);
+		xiphos_html_print((XiphosHtml *)user_data);
 	} else {
-		XIPHOS_HTML_PRINT_DOCUMENT((XiphosHtml *)user_data);
+		xiphos_html_print((XiphosHtml *)user_data);
 	}
 }
 
@@ -439,9 +439,9 @@ G_MODULE_EXPORT void on_popup_copy_activate(GtkMenuItem *menuitem,
 {
 	/* ditto above comment re: printing */
 	if (is_dialog) {
-		XIPHOS_HTML_COPY_SELECTION(dialog->html);
+		xiphos_html_copy_selection(dialog->html);
 	} else {
-		XIPHOS_HTML_COPY_SELECTION(_get_html());
+		xiphos_html_copy_selection(_get_html());
 	}
 }
 
@@ -1226,7 +1226,7 @@ G_MODULE_EXPORT void on_use_current_dictionary_activate(GtkMenuItem *
 							    menuitem,
 							gpointer user_data)
 {
-	XIPHOS_HTML_COPY_SELECTION(_get_html());
+	xiphos_html_copy_selection(_get_html());
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict, 0,
 				   -1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
@@ -1252,7 +1252,7 @@ G_MODULE_EXPORT void on_lookup_google_activate(GtkMenuItem *menuitem,
 {
 	gchar *dict_key;
 
-	XIPHOS_HTML_COPY_SELECTION(_get_html());
+	xiphos_html_copy_selection(_get_html());
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict, 0,
 				   -1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
@@ -1463,7 +1463,7 @@ G_MODULE_EXPORT void on_read_selection_aloud_activate(GtkMenuItem *
 	int len;
 	GtkWidget *html_widget = _get_html();
 
-	XIPHOS_HTML_COPY_SELECTION(html_widget);
+	xiphos_html_copy_selection(html_widget);
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict, 0,
 				   -1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
@@ -1806,7 +1806,7 @@ static void _lookup_selection(GtkMenuItem *menuitem,
 	if (!html)
 		return;
 	mod_name = main_module_name_from_description(dict_mod_description);
-	XIPHOS_HTML_COPY_SELECTION(html);
+	xiphos_html_copy_selection(html);
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict, 0,
 				   -1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);

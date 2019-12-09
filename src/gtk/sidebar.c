@@ -50,7 +50,7 @@
 #include "gui/tabbed_browser.h"
 #include "gui/search_dialog.h"
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -1505,7 +1505,7 @@ GtkWidget *gui_create_sidebar(GtkWidget *paned)
 #endif
 
 	sidebar.html_viewer_widget =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
+	    GTK_WIDGET(xiphos_html_new(NULL, FALSE, SB_VIEWER_TYPE));
 	gtk_widget_show(sidebar.html_viewer_widget);
 #ifdef USE_WEBKIT2
 	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), sidebar.html_viewer_widget, TRUE, TRUE, 0);

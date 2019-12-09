@@ -29,7 +29,7 @@
 #include "gui/utilities.h"
 #include "main/settings.h"
 #include "main/sword.h"
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 typedef struct _find_dialog FIND_DIALOG;
 
@@ -93,7 +93,7 @@ static void find_clicked(GtkButton *button, FIND_DIALOG *d)
 	gchar *text = (gchar *)gtk_entry_get_text(GTK_ENTRY(d->entry));
 	sprintf(settings.findText, "%s", text);
 
-	XIPHOS_HTML_FIND((void *)d->htmlwidget, text);
+	xiphos_html_find((void *)d->htmlwidget, text);
 }
 
 /******************************************************************************
@@ -114,7 +114,7 @@ static void find_clicked(GtkButton *button, FIND_DIALOG *d)
 
 static void next_clicked(GtkButton *button, FIND_DIALOG *d)
 {
-	XIPHOS_HTML_FIND_AGAIN((void *)d->htmlwidget, 1);
+	xiphos_html_find_again((void *)d->htmlwidget, 1);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d->backward), 0);
 }
 

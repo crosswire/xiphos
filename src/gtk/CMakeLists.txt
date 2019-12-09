@@ -209,8 +209,7 @@ target_link_libraries(xiphos
   Xiphos::Main
   Xiphos::Backend
   Xiphos::Editor
-  Xiphos::Webkit
-  Xiphos::Xiphos_html
+  Xiphos::Xiphos-html
   )
 
 

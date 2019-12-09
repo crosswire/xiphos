@@ -88,8 +88,7 @@ src/main/sword_treekey.cc
 src/main/tab_history.c
 src/main/url.cc
 src/main/xml.c
-src/webkit/wk-html.c
-src/xiphos_html/xiphos_html.c
+src/xiphos-html/xiphos-html.c
 ## Glade files
 ui/bookmarks.glade
 [type: gettext/glade]ui/bookmarks.gtkbuilder

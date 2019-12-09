@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
@@ -222,7 +222,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA *vt)
 					    settings.shadow_type);
 	gtk_paned_add1((GtkPaned *)paned, swVText);
 
-	vt->html = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, DIALOG_TEXT_TYPE));
+	vt->html = GTK_WIDGET(xiphos_html_new(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
 	g_signal_connect((gpointer)vt->html,
@@ -240,7 +240,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA *vt)
 
 	gtk_paned_add2((GtkPaned *)paned, swVText);
 
-	vt->previewer = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, VIEWER_TYPE));
+	vt->previewer = GTK_WIDGET(xiphos_html_new(vt, TRUE, VIEWER_TYPE));
 	gtk_widget_show(vt->previewer);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
 

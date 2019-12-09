@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/commentary_dialog.h"
 #include "gui/dialog.h"
@@ -257,7 +257,7 @@ void gui_create_commentary_dialog(DIALOG_DATA *d, gboolean do_edit)
 #endif
 
 	d->html =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA *)d), TRUE,
+	    GTK_WIDGET(xiphos_html_new(((DIALOG_DATA *)d), TRUE,
 				       DIALOG_COMMENTARY_TYPE));
 	gtk_widget_show(d->html);
 #ifdef USE_WEBKIT2

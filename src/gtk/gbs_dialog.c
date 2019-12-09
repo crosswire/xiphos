@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/gbs_dialog.h"
 #include "gui/navbar_book_dialog.h"
@@ -313,7 +313,7 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 #endif
 
 	dlg->html =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA *)dlg), TRUE, DIALOG_BOOK_TYPE));
+	    GTK_WIDGET(xiphos_html_new(((DIALOG_DATA *)dlg), TRUE, DIALOG_BOOK_TYPE));
 	gtk_widget_show(dlg->html);
 #ifdef USE_WEBKIT2
 	gtk_paned_pack2(GTK_PANED(hpaned), dlg->html, FALSE, TRUE);

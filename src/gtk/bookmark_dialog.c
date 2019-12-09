@@ -39,8 +39,6 @@
 #include "main/settings.h"
 #include "main/xml.h"
 
-#include "xiphos_html/xiphos_html.h"
-
 #include "gui/debug_glib_null.h"
 
 extern GtkTreeStore *model;

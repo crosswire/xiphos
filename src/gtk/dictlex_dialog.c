@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/dictlex_dialog.h"
 #include "gui/main_window.h"
@@ -411,7 +411,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 #endif
 
 	dlg->html =
-	    GTK_WIDGET(XIPHOS_HTML_NEW((DIALOG_DATA *)dlg, TRUE,
+	    GTK_WIDGET(xiphos_html_new((DIALOG_DATA *)dlg, TRUE,
 				       DIALOG_DICTIONARY_TYPE));
 #ifdef USE_WEBKIT2
 	gtk_container_add(GTK_CONTAINER(frameDictHTML), dlg->html);

@@ -27,7 +27,7 @@
 #ifndef USE_GTKBUILDER
 #include <glade/glade-xml.h>
 #endif
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/parallel_tab.h"
 #include "gui/parallel_view.h"
@@ -306,7 +306,7 @@ GtkWidget *_create_parallel_tab(void)
 #endif
 
 	widgets.html_parallel_dialog =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
+	    GTK_WIDGET(xiphos_html_new(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel_dialog);
 #ifdef USE_WEBKIT2
 	gtk_box_pack_start(GTK_BOX(parallel_vbox), widgets.html_parallel_dialog, TRUE, TRUE, 0);

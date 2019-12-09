@@ -65,7 +65,7 @@
 #endif /* !WIN32 */
 #include <errno.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include <gsf/gsf-utils.h>
 #include <gsf/gsf-outfile-zip.h>
@@ -1359,7 +1359,7 @@ HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor)
 	int len = strlen(text);
 
 	XiphosHtml *html = XIPHOS_HTML(gtkText);
-	XIPHOS_HTML_OPEN_STREAM(html, "text/html");
+	xiphos_html_open_stream(html, "text/html");
 
 	// EVIL EVIL EVIL EVIL.
 	// crazy nonsense with xulrunner 1.9.2.3, failure to jump to anchor.
@@ -1371,9 +1371,7 @@ HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor)
 		// first, scribble out everything up to the closing </head>.
 		buf = strstr(text, "</head>"); // yes, lowercase.
 		assert(buf != NULL);	   // don't be so stupid as not to include <head></head>.
-		int offset = buf - text;
-		XIPHOS_HTML_WRITE(html, text, offset);
-		len -= offset;
+		xiphos_html_write(html, text);
 
 		// now write the javascript snippet.
 		buf =
@@ -1381,17 +1379,17 @@ HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor)
 				    " window.onload = function () { window.location.hash = \"%s\"; }"
 				    " </script>",
 				    (settings.special_anchor ? settings.special_anchor : anchor));
-		XIPHOS_HTML_WRITE(html, buf, strlen(buf));
+		xiphos_html_write(html, buf);
 		g_free(buf);
 	}
 
 	if (!anchor)
-		XIPHOS_HTML_WRITE(html, text, len);
+		xiphos_html_write(html, text);
 
 	/* use anchor if asked, but if so, special anchor takes priority. */
-	XIPHOS_HTML_CLOSE(html);
+	xiphos_html_close(html);
 	if (anchor || settings.special_anchor)
-		XIPHOS_HTML_JUMP_TO_ANCHOR(html, (settings.special_anchor
+		xiphos_html_jump_to_anchor(html, (settings.special_anchor
 						      ? settings.special_anchor
 						      : anchor));
 

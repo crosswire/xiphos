@@ -27,7 +27,7 @@
 #include <swbuf.h>
 #include <swmodule.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "main/previewer.h"
 #include "main/search_dialog.h"
@@ -939,10 +939,9 @@ void main_finds_verselist_selection_changed(GtkTreeSelection *selection,
 	free_font(mf);
 	g_string_append(html_text, text_str->str);
 	g_string_append(html_text, "</font></body></html>");
-	XIPHOS_HTML_OPEN_STREAM(search1.preview_html, "text/html");
-	XIPHOS_HTML_WRITE(search1.preview_html,
-			  html_text->str, html_text->len);
-	XIPHOS_HTML_CLOSE(search1.preview_html);
+	xiphos_html_open_stream(XIPHOS_HTML(search1.preview_html), "text/html");
+	xiphos_html_write(XIPHOS_HTML(search1.preview_html), html_text->str);
+	xiphos_html_close(XIPHOS_HTML(search1.preview_html));
 	g_string_free(html_text, TRUE);
 
 	XI_message(("main_finds_verselist_selection_changed: %s %s", module, key));

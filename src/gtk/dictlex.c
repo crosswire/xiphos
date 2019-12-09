@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/dictlex.h"
 #include "gui/bookmark_dialog.h"
@@ -501,7 +501,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 #endif
 
 	widgets.html_dict =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DICTIONARY_TYPE));
+	    GTK_WIDGET(xiphos_html_new(NULL, FALSE, DICTIONARY_TYPE));
 	gtk_widget_show(widgets.html_dict);
 #ifdef USE_WEBKIT2
 	gtk_box_pack_start(GTK_BOX(box_dict), widgets.html_dict, TRUE, TRUE, 0);

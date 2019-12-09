@@ -27,7 +27,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "editor/slib-editor.h"
 
@@ -180,7 +180,7 @@ GtkWidget *gui_create_book_pane(void)
 #endif
 
 	widgets.html_book =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, BOOK_TYPE));
+	    GTK_WIDGET(xiphos_html_new(NULL, FALSE, BOOK_TYPE));
 	gtk_widget_show(widgets.html_book);
 #ifdef USE_WEBKIT2
 	gtk_box_pack_start(GTK_BOX(box), widgets.html_book, TRUE, TRUE, 0);

@@ -39,7 +39,6 @@
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
-#include "xiphos_html/xiphos_html.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -238,7 +237,6 @@ int main(int argc, char *argv[])
 	gui_splash_init();
 
 	gui_splash_step(_("Initiating HTML"), 0.0, 0);
-	XIPHOS_HTML_INITIALIZE();
 
 	base_step = 1;
 

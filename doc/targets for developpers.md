@@ -16,13 +16,9 @@ build editor lib
 
     $ make editor
 
-build webkit lib
+build xiphos-html lib
 
-    $ make webkit
-
-build xiphos_html lib
-
-    $ make xiphos_html
+    $ make xiphos-html
 
 build help
 

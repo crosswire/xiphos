@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/xiphos.h"
 #include "gui/bibletext.h"
@@ -121,7 +121,7 @@ GtkWidget *gui_create_bible_pane(void)
 #endif
 
 	widgets.html_text =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, TEXT_TYPE));
+	    GTK_WIDGET(xiphos_html_new(NULL, FALSE, TEXT_TYPE));
 	gtk_widget_show(widgets.html_text);
 #ifdef USE_WEBKIT2
 	gtk_box_pack_start(GTK_BOX(vbox), widgets.html_text, TRUE, TRUE, 0);

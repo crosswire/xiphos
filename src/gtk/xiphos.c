@@ -68,8 +68,6 @@
 #include "main/lists.h"
 #include "main/xml.h"
 
-#include "xiphos_html/xiphos_html.h"
-
 #include "gui/debug_glib_null.h"
 
 /******************************************************************************
@@ -295,8 +293,6 @@ void shutdown_frontend(void)
 	xml_free_settings_doc();
 
 	main_shutdown_list();
-
-	XIPHOS_HTML_SHUTDOWN();
 
 	gui_notebook_main_shutdown(settings.browsing);
 

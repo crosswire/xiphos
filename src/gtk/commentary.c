@@ -26,7 +26,7 @@
 #include <errno.h>
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/dialog.h"
 #include "gui/commentary.h"
@@ -139,7 +139,7 @@ GtkWidget *gui_create_commentary_pane(void)
 #endif
 
 	widgets.html_comm =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, COMMENTARY_TYPE));
+	    GTK_WIDGET(xiphos_html_new(NULL, FALSE, COMMENTARY_TYPE));
 	gtk_widget_show(widgets.html_comm);
 #ifdef USE_WEBKIT2
 	gtk_box_pack_start(GTK_BOX(box_comm), widgets.html_comm, TRUE, TRUE, 0);

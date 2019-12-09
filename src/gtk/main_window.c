@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
@@ -1111,7 +1111,7 @@ void create_mainwindow(void)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *) scrolledwindow, settings.shadow_type);
 #endif
-	widgets.html_previewer_text = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, VIEWER_TYPE));
+	widgets.html_previewer_text = GTK_WIDGET(xiphos_html_new(NULL, FALSE, VIEWER_TYPE));
 	gtk_widget_show(widgets.html_previewer_text);
 #ifdef USE_WEBKIT2
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), widgets.html_previewer_text, TRUE, TRUE, 0);

@@ -28,7 +28,7 @@
 #include <glade/glade-xml.h>
 #endif
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include <regex.h>
 #include <string.h>
@@ -193,10 +193,9 @@ void button_clean(GtkButton *button, gpointer user_data)
 			"<body text=\"%s\" bgcolor=\"%s\"> </body></html>",
 			settings.bible_text_color,
 			settings.bible_bg_color);
-	XIPHOS_HTML_OPEN_STREAM(search1.preview_html, "text/html");
-	XIPHOS_HTML_WRITE(search1.preview_html, html_text->str,
-			  html_text->len);
-	XIPHOS_HTML_CLOSE(search1.preview_html);
+	xiphos_html_open_stream(search1.preview_html, "text/html");
+	xiphos_html_write(search1.preview_html, html_text->str);
+	xiphos_html_close(search1.preview_html);
 	g_string_free(html_text, TRUE);
 }
 
@@ -1663,7 +1662,7 @@ static void _add_html_widget(GtkWidget *vbox)
 #endif
 
 	search1.preview_html =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
+	    GTK_WIDGET(xiphos_html_new(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
 	gtk_widget_show(search1.preview_html);
 #ifdef USE_WEBKIT2
 	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE, TRUE, 0);

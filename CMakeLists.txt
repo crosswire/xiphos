@@ -86,8 +86,7 @@ add_subdirectory(win32)
 add_subdirectory(src/backend)
 add_subdirectory(src/editor)
 add_subdirectory(src/main)
-add_subdirectory(src/webkit)
-add_subdirectory(src/xiphos_html)
+add_subdirectory(src/xiphos-html)
 add_subdirectory(src/gtk)
 
 # build xiphos-nav

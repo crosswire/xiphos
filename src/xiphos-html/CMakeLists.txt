@@ -17,44 +17,45 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 #
 
-# building xiphos_html
+# building xiphos-html
 
 # marshalling
 add_custom_command (
   OUTPUT
-  ${CMAKE_CURRENT_BINARY_DIR}/marshal.h
-  ${CMAKE_CURRENT_BINARY_DIR}/marshal.c
+  ${CMAKE_CURRENT_BINARY_DIR}/xiphos-html-marshal.h
+  ${CMAKE_CURRENT_BINARY_DIR}/xiphos-html-marshal.c
   # Marshalling
   COMMAND ${GLIB_GENMARSHAL}
-  ${CMAKE_CURRENT_SOURCE_DIR}/marshal.list
-  --prefix=xihtml_marshal
-  --header > ${CMAKE_CURRENT_BINARY_DIR}//marshal.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/html-marshal.list
+  --prefix=_xiphos_html_marshal
+  --header > ${CMAKE_CURRENT_BINARY_DIR}/xiphos-html-marshal.h
 
   COMMAND ${GLIB_GENMARSHAL}
-  ${CMAKE_CURRENT_SOURCE_DIR}/marshal.list
-  --prefix=xihtml_marshal
-  --body > ${CMAKE_CURRENT_BINARY_DIR}/marshal.c
+  ${CMAKE_CURRENT_SOURCE_DIR}/html-marshal.list
+  --prefix=_xiphos_html_marshal
+  --body > ${CMAKE_CURRENT_BINARY_DIR}/xiphos-html-marshal.c
 
-  MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/marshal.list
+  MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/html-marshal.list
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  COMMENT "Marshalling xiphos_html files"
+  COMMENT "Marshalling xiphos-html files"
   )
 
 
 # build
-add_library (xiphos_html
+add_library (xiphos-html
   STATIC
-  xiphos_html.c
-  xiphos_html.h
-  ${CMAKE_CURRENT_BINARY_DIR}/marshal.c
+  xiphos-html.c
+  xiphos-html.h
+  ${CMAKE_CURRENT_BINARY_DIR}/xiphos-html-marshal.c
   )
 
 # Add alias
-add_library(Xiphos::Xiphos_html ALIAS xiphos_html)
+add_library(Xiphos::Xiphos-html ALIAS xiphos-html)
 
 # specify include directories to use when compiling
-target_include_directories(xiphos_html
+target_include_directories(xiphos-html
   PRIVATE
+  ${CMAKE_CURRENT_BINARY_DIR}
   Threads::Threads
   PkgConfig::Core
   PkgConfig::Gtk
@@ -62,7 +63,7 @@ target_include_directories(xiphos_html
   )
 
 # specify libraries or flags to use when linking
-target_link_libraries(xiphos_html
+target_link_libraries(xiphos-html
   PRIVATE
   Threads::Threads
   PkgConfig::Core

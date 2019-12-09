@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/display_info.h"
 #include "gui/utilities.h"
@@ -202,7 +202,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 #if !GTK_CHECK_VERSION(3, 10, 0)
 	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
 #endif
-	html_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 30)); //gtk_html_new();
+	html_widget = GTK_WIDGET(xiphos_html_new(NULL, FALSE, 30)); //gtk_html_new();
 	gtk_widget_show(html_widget);
 	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
 	//gtk_container_add(GTK_CONTAINER(scrolledwindow70), html_widget);

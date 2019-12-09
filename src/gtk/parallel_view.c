@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html/xiphos_html.h"
+#include "xiphos-html/xiphos-html.h"
 
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
@@ -199,7 +199,7 @@ void gui_create_parallel_page(void)
 #endif
 
 	widgets.html_parallel =
-	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
+	    GTK_WIDGET(xiphos_html_new(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel);
 #ifdef USE_WEBKIT2
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), widgets.html_parallel);

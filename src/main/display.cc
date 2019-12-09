@@ -41,8 +41,6 @@
 #include <ctype.h>
 #include <assert.h>
 
-#include "xiphos_html/xiphos_html.h"
-
 #include "main/display.hh"
 #include "main/settings.h"
 #include "main/global_ops.hh"
