@@ -211,6 +211,7 @@ target_link_libraries(xiphos
   Xiphos::Editor
   Xiphos::Webkit
   Xiphos::Xiphos_html
+  Subproject::zip
   )
 
 

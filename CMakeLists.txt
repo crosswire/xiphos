@@ -103,6 +103,7 @@ add_subdirectory(help)
 
 # create packages
 add_subdirectory(cpack)
+add_subdirectory(subprojects/zip)
 
 # report
 include (XiphosReport)
