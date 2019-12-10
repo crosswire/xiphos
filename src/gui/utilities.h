@@ -25,7 +25,6 @@
 #include <libxml/parser.h>
 #include "main/configs.h"
 #include "main/module_dialogs.h"
-#include <gsf/gsf-outfile.h>
 
 /* Unicode collation necessities */
 #include "unicode/utypes.h"
@@ -109,12 +108,8 @@ void HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf,
 void set_window_icon(GtkWindow *window);
 gboolean xiphos_open_default(const gchar *file);
 
-void archive_addfile(GsfOutfile *output, const gchar *file,
-		     const gchar *name);
-void archive_adddir(GsfOutfile *output, gchar *path,
-		    const gchar *name);
-void xiphos_create_archive(gchar *conf_file, gchar *datapath,
-			   gchar *zip, const gchar *destination);
+gboolean xiphos_create_archive (gchar *conf_name, gchar *datapath,
+                                gchar *zip_file, const gchar *destination);
 
 void ReadAloud(unsigned int verse, const char *suppliedtext);
 void StartFestival(void);

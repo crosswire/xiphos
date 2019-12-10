@@ -38,6 +38,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <gtk/gtk.h>
+#include <zip.h>
 
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"
@@ -66,14 +67,6 @@
 #include <errno.h>
 
 #include "xiphos_html/xiphos_html.h"
-
-#include <gsf/gsf-utils.h>
-#include <gsf/gsf-outfile-zip.h>
-#include <gsf/gsf-output-stdio.h>
-#include <gsf/gsf-output.h>
-#include <gsf/gsf-input.h>
-#include <gsf/gsf-outfile.h>
-#include <gsf/gsf-input-stdio.h>
 
 #include "gui/debug_glib_null.h"
 
@@ -1388,134 +1381,158 @@ gchar *xiphos_win32_get_subdir(const gchar *subdir)
 #endif
 
 /**
- * archive_addfile
- * @output: a #GsfOutfile, the parent of the desired child
- * @file: a #gchar, the on disk path of the file to add
- * @name: a #gchar, the name (without path) of the file to add
+ * fill_filetime
+ * @filename:
+ * @tmzip:
  *
- * add a single file to the #GsfOutfile
- *
- * Since 3.1.2
+ * fill file's mtime into tmzip
  */
-void archive_addfile(GsfOutfile *output, const gchar *file,
-		     const gchar *name)
+static void fill_filetime (const gchar *filename, tm_zip *tmzip)
 {
-	GsfInput *inputchild = NULL;
-	GsfOutput *outputchild = NULL;
+	struct tm *filedate;
+	time_t tm_t = 0;
 
-	inputchild = GSF_INPUT(gsf_input_stdio_new(file, NULL));
-	outputchild = gsf_outfile_new_child(output, name, FALSE);
-	gsf_input_copy(inputchild, outputchild);
-	gsf_output_close(outputchild);
-	g_object_unref(inputchild);
-	g_object_unref(outputchild);
+	if (g_file_test (filename, G_FILE_TEST_IS_REGULAR)) {
+		GStatBuf buf;
+		if (g_stat (filename, &buf) == 0) {
+			tm_t = buf.st_mtime;
+		}
+	}
+	filedate = localtime(&tm_t);
+
+	tmzip->tm_sec  = filedate->tm_sec;
+	tmzip->tm_min  = filedate->tm_min;
+	tmzip->tm_hour = filedate->tm_hour;
+	tmzip->tm_mday = filedate->tm_mday;
+	tmzip->tm_mon  = filedate->tm_mon ;
+	tmzip->tm_year = filedate->tm_year;
+}
+
+/**
+ * archive_addfile
+ * @zip: a #zip object
+ * @name: a #gchar, the name (without path) of the file to add
+ * @path: a #gchar, the on disk path of the file to add
+ *
+ * add a single file to the #zip
+ */
+static gboolean archive_addfile(zipFile zip, const gchar *name, const gchar *path)
+{
+	zip_fileinfo zi;
+	gchar *contents;
+	gsize length;
+	gboolean ret = FALSE;
+
+	zi.dosDate = 0;
+	zi.internal_fa = 0;
+	zi.external_fa = 0;
+	fill_filetime (path, &zi.tmz_date);
+
+	ret = zipOpenNewFileInZip(zip, name, &zi, NULL, 0, NULL, 0, NULL, Z_DEFLATED, Z_BEST_SPEED);
+	if (ret != ZIP_OK) {
+		zipCloseFileInZip(zip);
+		return FALSE;
+	}
+
+	if (g_file_get_contents (path, &contents, &length, NULL)) {
+		ret = zipWriteInFileInZip(zip, contents, length);
+		if (ret != ZIP_OK) {
+			zipCloseFileInZip(zip);
+			g_free (contents);
+			return FALSE;
+		}
+		g_free (contents);
+	}
+
+	zipCloseFileInZip(zip);
+	return TRUE;
 }
 
 /**
  * archive_adddir
- * @output: a #GsfOutfile, the parent of the desired child
- * @path: a #gchar, the on disk path of the desired child directory
- * @name: a #gchar, the name (without path) of the desired child dir
+ * @zip: a #zip object
+ * @prefix: a #gchar, the name of the desired child dir
+ * @dirpath: a #gchar, the on disk path of the desired child directory
  *
- * add a child directory and all subdirs and files to the GsfOutfile;
+ * add a child directory and all subdirs and files to the zip object.
  * recursive
- *
- * Since 3.1.2
  */
-void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
+static gboolean archive_adddir(zipFile zip, const gchar *prefix, const gchar *dirpath)
 {
 	GDir *dir;
 	const gchar *file;
-	GsfOutfile *child;
+	gboolean ret = FALSE;
 
-	child = GSF_OUTFILE(gsf_outfile_new_child(output, name, TRUE));
-	dir = g_dir_open(path, 0, NULL);
+	dir = g_dir_open(dirpath, 0, NULL);
 	while ((file = g_dir_read_name(dir))) {
-		gchar *complete_file = g_build_filename(path, file, NULL);
-		if (g_file_test(complete_file, G_FILE_TEST_IS_DIR))
-			archive_adddir(GSF_OUTFILE(child), complete_file,
-				       file);
-		else
-			archive_addfile(GSF_OUTFILE(child), complete_file,
-					file);
+		gchar *complete_file = g_build_filename(dirpath, file, NULL);
+		gchar *new_prefix = g_build_filename (prefix, file, NULL);
+		if (g_file_test(complete_file, G_FILE_TEST_IS_DIR)) {
+			ret = archive_adddir(zip, new_prefix, complete_file);
+		} else {
+			ret = archive_addfile(zip, new_prefix, complete_file);
+		}
 		g_free(complete_file);
+		g_free (new_prefix);
+		if (ret == FALSE) {
+			g_dir_close(dir);
+			return FALSE;
+		}
 	}
 	g_dir_close(dir);
+	return TRUE;
 }
 
 /**
  * xiphos_create_archive
- * @conf_file: a #gchar with the location of the module's .conf
+ * @conf_name: a #gchar with the location of the module's .conf
  * @datapath: a #gchar with the location of the module's data
- * @zip: a #gchar with the name of the zip file
+ * @zip_file: a #gchar with the name of the zip file
  * @destination: #gchar with the location to store the zip
  *
  * archive the specified module in the specified location
  *
  * Since 3.1.2
  */
-void xiphos_create_archive(gchar *conf_file, gchar *datapath,
-			   gchar *zip, const gchar *destination)
+gboolean xiphos_create_archive (gchar *conf_name, gchar *datapath,
+                                gchar *zip_file, const gchar *destination)
 {
-	GsfOutfile *outputfile;
-	GsfOutput *output;
-	GsfOutfile *tmp;
-	gchar **path;
-	gchar *moddirname;
-	GString *modpath;
-	int i;
+	zipFile zip;
+	gchar *prefix;
+	gchar *dirpath;
+	gchar *name;
+	gchar *conf_path;
+	gboolean ret = FALSE;
 
-	/* don't confuse gsf by init'ing more than once. */
-	static gboolean have_init_gsf = FALSE;
-	if (!have_init_gsf) {
-		gsf_init();
-		have_init_gsf = TRUE;
+	zip = zipOpen(zip_file, APPEND_STATUS_CREATE);
+	if (zip == NULL) {
+		return FALSE;
 	}
-
-	/* the module dir is the last part of the path */
-	path = g_strsplit(datapath, "/", -1);
-	moddirname = g_strdup(path[g_strv_length(path) - 1]);
-
-	/* create a relative path without preceding "." */
-	/* or the trailing dir name */
-	modpath = g_string_new(NULL);
-	for (i = 1; i <= (g_strv_length(path) - 2); i++) {
-		modpath = g_string_append(modpath, path[i]);
-		if (i < g_strv_length(path) - 2) /* avoid a trailing / */
-			modpath = g_string_append(modpath, "/");
+	dirpath = g_build_filename(destination, datapath, NULL);
+	if (g_str_has_prefix (datapath, "./")) {
+		prefix = datapath+2;
+	} else {
+		prefix = datapath;
 	}
-
-	/* open zip file for writing */
-	output = gsf_output_stdio_new(zip, NULL);
-	outputfile = gsf_outfile_zip_new(output, NULL);
-
-	/* add the module directory */
-	tmp =
-	    GSF_OUTFILE(gsf_outfile_new_child(outputfile, modpath->str, TRUE));
 
 	/* add all data files */
-	archive_adddir(tmp,
-		       g_build_filename(destination, datapath, NULL),
-		       moddirname);
-	gsf_output_close(GSF_OUTPUT(tmp));
-	g_object_unref(tmp);
+	ret = archive_adddir(zip, prefix, dirpath);
+	g_free(dirpath);
+
+	if (!ret) {
+		zipClose(zip, NULL);
+		return ret;
+	}
 
 	/* add conf file */
-	tmp =
-	    GSF_OUTFILE(gsf_outfile_new_child(outputfile, "mods.d", TRUE));
-	archive_addfile(tmp,
-			g_build_filename(destination, "mods.d", conf_file,
-					 NULL),
-			conf_file);
+	name = g_build_filename ("mods.d", conf_name, NULL);
+	conf_path = g_build_filename(destination, "mods.d", conf_name, NULL);
+	ret = archive_addfile (zip, name, conf_path);
+	g_free (name);
+	g_free (conf_path);
 
-	/* cleanup */
-	gsf_output_close(GSF_OUTPUT(outputfile));
-	gsf_output_close(output);
-	g_object_unref(tmp);
-	g_object_unref(outputfile);
-	g_object_unref(output);
-	g_strfreev(path);
-	g_free(moddirname);
+	zipClose(zip, NULL);
+	return ret;
 }
 
 //

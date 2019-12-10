@@ -86,7 +86,7 @@ pkg_check_modules(Gnome REQUIRED IMPORTED_TARGET
   "gobject-2.0"
   "libsoup-2.4"
   "pango"
-  "libgsf-1>=1.14"
+  "minizip"
   "libxml-2.0>=2.7.8"
   )
 
