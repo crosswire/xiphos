@@ -4,10 +4,13 @@ sudo: required
 language: bash
 services:
   - docker
+git:
+  depth: false
 
 before_install:
   - curl -Ls -o docker-build https://github.com/mate-desktop/mate-dev-scripts/raw/master/travis/docker-build
   - chmod +x docker-build
+  - git fetch --tags
 
 install:
   - sudo apt-get install -y python3-pip python3-setuptools
@@ -32,6 +35,7 @@ requires:
     - appstream-glib
     - autoconf
     - automake
+    - git
     - gconf
     - cmake
     - dbus-glib
@@ -62,6 +66,7 @@ requires:
     - cpp
     - desktop-file-utils
     - fp-utils
+    - git
     - gsettings-desktop-schemas-dev
     - intltool
     - itstool
@@ -88,6 +93,7 @@ requires:
     - cmake
     - dbus-glib-devel
     - desktop-file-utils
+    - git
     - gcc-c++
     - gconfmm26-devel
     - gtk3-devel
@@ -110,6 +116,7 @@ requires:
     - cpp
     - desktop-file-utils
     - fp-utils
+    - git
     - gsettings-desktop-schemas-dev
     - intltool
     - itstool
