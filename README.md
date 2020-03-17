@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/crosswire/xiphos.svg?branch=master)](https://travis-ci.org/crosswire/xiphos)
+
 # Xiphos
 
 Xiphos is a Bible study application for Linux, UNIX, and Windows operating
