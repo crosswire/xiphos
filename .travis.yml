@@ -31,6 +31,7 @@ requires:
   archlinux:
     - appstream-glib
     - cmake
+    - dbus-glib
     - docbook-utils
     - enchant
     - git
@@ -97,6 +98,7 @@ requires:
     - uuid-dev
     - uuid-runtime
     - yelp-tools
+    - xzip  # Needed to build gtkhtml from source
 
   fedora:
     - biblesync-devel
@@ -144,6 +146,7 @@ requires:
     - uuid-dev
     - uuid-runtime
     - yelp-tools
+    - xzip  # Needed to build gtkhtml from source
 
 variables:
   - CFLAGS="-Wall -Werror=format-security"
@@ -156,7 +159,7 @@ before_scripts:
         install -m600 /dev/stdin /etc/sudoers.d/70-wheel <<< '%wheel ALL=(ALL) ALL'
         install -m600 /dev/stdin /etc/sudoers.d/99-aur_install <<< 'Defaults:aur_install !authenticate'
         aur_install() {
-          [[ -d "$1" ]] || exit 0
+          [[ -d "$1" ]] && exit 0
           su -l aur_install -c "git clone https://aur.archlinux.org/$1.git"
           su -l aur_install -c "cd $1 && makepkg --noconfirm -si"
         }
