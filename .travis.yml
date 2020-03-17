@@ -81,7 +81,6 @@ requires:
     - itstool
     - libbiblesync-dev
     - libdbus-glib-1-dev
-    - libgconf2-dev
     - libglade2-dev
     - libgsf-1-dev
     - libenchant-dev
@@ -106,7 +105,6 @@ requires:
     - desktop-file-utils
     - docbook-utils
     - gcc-c++
-    - gconfmm26-devel
     - gtk3-devel
     - gtkhtml3-devel
     - intltool
@@ -163,7 +161,6 @@ before_scripts:
           su -l aur_install -c "cd $1 && makepkg --noconfirm -si"
         }
         aur_install biblesync
-        aur_install gconf
         aur_install gtkhtml4
     fi
     if [ "${DISTRO_NAME}" == "debian" -o "${DISTRO_NAME}" == "ubuntu" ]; then
