@@ -174,7 +174,7 @@ before_scripts:
         make -j2
         make install
     fi
-    if [ "${DISTRO_NAME}" == "ubuntu" -o "${DISTRO_NAME}" == "archlinux" ];then
+    if [ "${DISTRO_NAME}" == "ubuntu" ];then
         # build biblesync from source
         cd "${START_DIR}"
         curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
@@ -185,8 +185,6 @@ before_scripts:
         cmake -DBUILD_SHARED_LIBS=TRUE -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=/usr/lib ..
         make -j2
         make install
-    fi
-    if [ "${DISTRO_NAME}" == "ubuntu" ]; then
         # update sword from 1.7.3 to 1.8.1
         cd "${START_DIR}"
         curl -Ls -o sword-1.8.1.tar.gz https://www.crosswire.org/ftpmirror/pub/sword/source/v1.8/sword-1.8.1.tar.gz
