@@ -35,7 +35,6 @@ requires:
     - enchant
     - git
     - gnome-common
-    - gnome-doc-utils
     - gtk3
     - gtkmm
     - intltool
@@ -72,14 +71,15 @@ requires:
 
   debian:
     - appstream-util
-    - libbiblesync-dev
     - cmake
+    - docbook-utils
     - g++
     - desktop-file-utils
     - fp-utils
     - gsettings-desktop-schemas-dev
     - intltool
     - itstool
+    - libbiblesync-dev
     - libdbus-glib-1-dev
     - libgconf2-dev
     - libglade2-dev
@@ -104,6 +104,7 @@ requires:
     - cmake
     - dbus-glib-devel
     - desktop-file-utils
+    - docbook-utils
     - gcc-c++
     - gconfmm26-devel
     - gtk3-devel
@@ -153,10 +154,11 @@ before_scripts:
   - |
     START_DIR="$(pwd)"
     if [ "${DISTRO_NAME}" == "archlinux" ];then
-        useradd -r -m -U -G wheel -k /dev/null aur_install
+        id -u aur_install &>/dev/null || useradd -r -m -U -G wheel -k /dev/null aur_install
         install -m600 /dev/stdin /etc/sudoers.d/70-wheel <<< '%wheel ALL=(ALL) ALL'
         install -m600 /dev/stdin /etc/sudoers.d/99-aur_install <<< 'Defaults:aur_install !authenticate'
         aur_install() {
+          [[ -d "$1" ]] || exit 0
           su -l aur_install -c "git clone https://aur.archlinux.org/$1.git"
           su -l aur_install -c "cd $1 && makepkg --noconfirm -si"
         }
