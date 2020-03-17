@@ -22,9 +22,7 @@ env:
   - DISTRO="archlinux:latest"
   - DISTRO="debian:sid"
   - DISTRO="fedora:latest"
-  - DISTRO="ubuntu:16.04"
-  - DISTRO="ubuntu:18.04"
-  - DISTRO="ubuntu:latest"
+  - DISTRO="ubuntu:19.10"
 
 ##########################################################
 # THE FOLLOWING LINES IS USED BY docker-build
@@ -134,13 +132,10 @@ requires:
     - libdbus-glib-1-dev
     - libenchant-dev
     - libgail-3-dev
-    - libgconfmm-2.6-dev
     - libglade2-dev
     - libgsf-1-dev
     - libgtk-3-dev
     - libsword-dev
-    - libwebkitgtk-3.0-dev
-    - libwebkitgtk-dev
     - libwebkit2gtk-4.0-dev
     - libxml2-dev
     - libxml2-utils
@@ -173,14 +168,13 @@ before_scripts:
         # build gtkhtml4 from source
         cd "${START_DIR}"
         curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
-        curl -Ls -o enchant-2.patch "https://aur.archlinux.org/cgit/aur.git/plain/enchant-2.patch?h=gtkhtml4"
         tar xf gtkhtml-4.10.0.tar.xz
         cd gtkhtml-4.10.0
         ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib/gtkhtml4 --localstatedir=/var --disable-static
         make -j2
         make install
     fi
-    if [ "${DISTRO_NAME}" == "ubuntu" ];then
+    if [ "${DISTRO_NAME}" == "ubuntu" -o "${DISTRO_NAME}" == "archlinux" ];then
         # build biblesync from source
         cd "${START_DIR}"
         curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
@@ -191,6 +185,8 @@ before_scripts:
         cmake -DBUILD_SHARED_LIBS=TRUE -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=/usr/lib ..
         make -j2
         make install
+    fi
+    if [ "${DISTRO_NAME}" == "ubuntu" ]; then
         # update sword from 1.7.3 to 1.8.1
         cd "${START_DIR}"
         curl -Ls -o sword-1.8.1.tar.gz https://www.crosswire.org/ftpmirror/pub/sword/source/v1.8/sword-1.8.1.tar.gz
@@ -213,5 +209,6 @@ build_scripts:
   - |
     mkdir -p build
     cd build
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON ..
+    export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON -DCMAKE_MAKE_PROGRAM=/usr/bin/make ..
     make -j2

@@ -18,8 +18,8 @@
 #
 
 # the oldest stable cmake version we support
-cmake_minimum_required (VERSION 3.6 FATAL_ERROR)
-cmake_policy(VERSION 3.6)
+cmake_minimum_required (VERSION 3.11 FATAL_ERROR)
+cmake_policy(VERSION 3.11)
 
 
 ### set project name and version HERE ###
