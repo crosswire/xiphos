@@ -9,3 +9,12 @@ src/examples/ipc-interface.xml
 win*/binaries/
 win32/nsis/xiphos*.exe
 win32/po/messages.mo
+
+# Files involved in testing builds
+sword-*
+gtkhtml-4.10.0*
+enchant-2.patch
+docker-build
+build_scripts
+biblesync-1.2.0*
+before_scripts

@@ -60,8 +60,9 @@ requires:
 
   debian:
     - appstream-util
+    - libbiblesync-dev
     - cmake
-    - cpp
+    - g++
     - desktop-file-utils
     - fp-utils
     - gsettings-desktop-schemas-dev
@@ -79,6 +80,7 @@ requires:
     - libwebkit2gtk-4.0-dev
     - libxml2-dev
     - libxml2-utils
+    - make
     - python-dev
     - swig
     - uuid-dev
@@ -109,7 +111,7 @@ requires:
   ubuntu:
     - appstream-util
     - cmake
-    - cpp
+    - g++
     - desktop-file-utils
     - fp-utils
     - gsettings-desktop-schemas-dev
@@ -128,6 +130,7 @@ requires:
     - libwebkit2gtk-4.0-dev
     - libxml2-dev
     - libxml2-utils
+    - make
     - python-dev
     - swig
     - uuid-dev
@@ -139,42 +142,35 @@ variables:
 
 before_scripts:
   - |
-    if [ "${DISTRO_NAME}" != "fedora" ];then
+    START_DIR="$(pwd)"
+    if [ "${DISTRO_NAME}" == "ubuntu" -o "${DISTRO_NAME}" == "debian" ]; then
+        # build gtkhtml4 from source
+        cd "${START_DIR}"
+        curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
+        curl -Ls -o enchant-2.patch "https://aur.archlinux.org/cgit/aur.git/plain/enchant-2.patch?h=gtkhtml4"
+        tar xf gtkhtml-4.10.0.tar.xz
+        cd gtkhtml-4.10.0
+        if [ "${DISTRO_NAME}" == "archlinux" ];then
+          patch -Np0 -i ../enchant-2.patch
+          autoreconf -i
+        fi
+        ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib/gtkhtml4 --localstatedir=/var --disable-static
+        make -j2
+        make install
+    fi
+    if [ "${DISTRO_NAME}" == "ubuntu" ];then
         # build biblesync from source
-        cd ${START_DIR}
+        cd "${START_DIR}"
         curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
         tar xf biblesync-1.2.0.tar.gz
         cd biblesync-1.2.0
         mkdir -p build
         cd build
         cmake -DBUILD_SHARED_LIBS=TRUE -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=/usr/lib ..
-        if [ $CPU_COUNT -gt 1 ]; then
-            make -j $CPU_COUNT
-        else
-            make
-        fi
+        make -j2
         make install
-        # build gtkhtml4 from source
-        cd ${START_DIR}
-        curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
-        curl -Ls -o enchant-2.patch "https://aur.archlinux.org/cgit/aur.git/plain/enchant-2.patch?h=gtkhtml4"
-        tar xf gtkhtml-4.10.0.tar.xz
-        cd gtkhtml-4.10.0
-        if [ "${DISTRO_NAME}" == "archlinux" ];then
-            patch -Np0 -i ../enchant-2.patch
-            autoreconf -i
-        fi
-        ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib/gtkhtml4 --localstatedir=/var --disable-static
-        if [ $CPU_COUNT -gt 1 ]; then
-            make -j $CPU_COUNT
-        else
-            make
-        fi
-        make install
-    fi
-    if [ "${DISTRO_NAME}" == "debian" -o "${DISTRO_NAME}" == "ubuntu" ];then
         # update sword from 1.7.3 to 1.8.1
-        cd ${START_DIR}
+        cd "${START_DIR}"
         curl -Ls -o sword-1.8.1.tar.gz https://www.crosswire.org/ftpmirror/pub/sword/source/v1.8/sword-1.8.1.tar.gz
         curl -Ls -o sword-1.8.1-cmake.diff https://src.fedoraproject.org/rpms/sword/raw/master/f/sword-1.8.1-cmake.diff
         curl -Ls -o sword-1.8.1-icu61.diff https://src.fedoraproject.org/rpms/sword/raw/master/f/sword-1.8.1-icu61.diff
@@ -184,14 +180,10 @@ before_scripts:
         patch -p1 -i ../sword-1.8.1-cmake.diff
         patch -p1 -i ../sword-1.8.1-icu61.diff
         patch -p1 -i ../sword-1.8.1-swig.diff
-        mkdir build
+        mkdir -p build
         cd build
         cmake -DLIBSWORD_LIBRARY_TYPE="Shared" -DSYSCONF_INSTALL_DIR='/etc' -DSWORD_BUILD_TESTS="Yes" -DSWORD_BINDINGS="Python" -DCMAKE_INSTALL_PREFIX=/usr -DLIB_INSTALL_DIR=/usr/lib/x86_64-linux-gnu ..
-        if [ $CPU_COUNT -gt 1 ]; then
-            make -j $CPU_COUNT
-        else
-            make
-        fi
+        make -j2
         make install
     fi
 
@@ -200,8 +192,4 @@ build_scripts:
     mkdir -p build
     cd build
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON ..
-    if [ $CPU_COUNT -gt 1 ]; then
-        make -j $CPU_COUNT
-    else
-        make
-    fi
+    make -j2
