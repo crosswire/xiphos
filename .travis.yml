@@ -19,7 +19,7 @@ script:
   - ./docker-build --name ${DISTRO} -vvvv --config .travis.yml --build scripts
 
 env:
-  - DISTRO="archlinux/base"
+  - DISTRO="archlinux:latest"
   - DISTRO="debian:sid"
   - DISTRO="fedora:latest"
   - DISTRO="ubuntu:16.04"
@@ -32,31 +32,45 @@ env:
 requires:
   archlinux:
     - appstream-glib
-    - autoconf
-    - automake
-    - gconf
     - cmake
-    - dbus-glib
     - docbook-utils
     - enchant
-    - file
-    - gcc
-    - gettext
+    - git
     - gnome-common
     - gnome-doc-utils
-    - grep
     - gtk3
+    - gtkmm
     - intltool
-    - iso-codes
-    - itstool
     - libgsf
-    - m4
-    - make
-    - patch
-    - pkgconf
-    - python2
+    - libxml2
+    - python
     - sword
     - webkit2gtk
+    # base-devel group (for AUR installs):
+    - autoconf
+    - automake
+    - binutils
+    - bison
+    - fakeroot
+    - file
+    - findutils
+    - flex
+    - gawk
+    - gcc
+    - gettext
+    - grep
+    - groff
+    - gzip
+    - libtool
+    - m4
+    - make
+    - pacman
+    - patch
+    - pkgconf
+    - sed
+    - sudo
+    - texinfo
+    - which
 
   debian:
     - appstream-util
@@ -143,17 +157,25 @@ variables:
 before_scripts:
   - |
     START_DIR="$(pwd)"
-    if [ "${DISTRO_NAME}" == "ubuntu" -o "${DISTRO_NAME}" == "debian" ]; then
+    if [ "${DISTRO_NAME}" == "archlinux" ];then
+        useradd -r -m -U -G wheel -k /dev/null aur_install
+        install -m600 /dev/stdin /etc/sudoers.d/70-wheel <<< '%wheel ALL=(ALL) ALL'
+        install -m600 /dev/stdin /etc/sudoers.d/99-aur_install <<< 'Defaults:aur_install !authenticate'
+        aur_install() {
+          su -l aur_install -c "git clone https://aur.archlinux.org/$1.git"
+          su -l aur_install -c "cd $1 && makepkg --noconfirm -si"
+        }
+        aur_install biblesync
+        aur_install gconf
+        aur_install gtkhtml4
+    fi
+    if [ "${DISTRO_NAME}" == "debian" -o "${DISTRO_NAME}" == "ubuntu" ]; then
         # build gtkhtml4 from source
         cd "${START_DIR}"
         curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
         curl -Ls -o enchant-2.patch "https://aur.archlinux.org/cgit/aur.git/plain/enchant-2.patch?h=gtkhtml4"
         tar xf gtkhtml-4.10.0.tar.xz
         cd gtkhtml-4.10.0
-        if [ "${DISTRO_NAME}" == "archlinux" ];then
-          patch -Np0 -i ../enchant-2.patch
-          autoreconf -i
-        fi
         ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib/gtkhtml4 --localstatedir=/var --disable-static
         make -j2
         make install
