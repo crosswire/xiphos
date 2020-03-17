@@ -4,13 +4,6 @@
 void gui_init(int argc, char *argv[]);
 void gui_main(void);
 
-#ifndef WIN32
-#include <gconf/gconf-client.h>
-void gconf_setup(void);
-#endif
-
-#define GS_GCONF_MAX 6
-
 #ifdef DEBUG
 
 gchar *XI_g_strdup_printf(const char *filename,

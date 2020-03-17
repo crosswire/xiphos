@@ -21,7 +21,7 @@
 # that's all.  the parse code is mind-numbingly simple and fast.
 #
 # --initial list from Bibletime-1.3--
-# 
+#
 # Afar
 aa	Qafár af
 # Abkhazian
@@ -175,6 +175,8 @@ ja	日本語
 ka	ქართული
 # Kekchi
 kek	Q'eqchi'
+# Kikongo
+kg	Kikongo
 # Kikuyu
 ki	Gĩkũyũ
 # Kuanyama
@@ -3954,7 +3956,7 @@ kzy	Kango (Tshopo District)
 kzz	Kalabra
 laa	Lapuyan Subanun
 lab	Linear A
-# Lacandon 
+# Lacandon
 lac	Hach T'ən
 lad	Ladino
 lae	Pattani
