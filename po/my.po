@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 23:35-0400\n"
-"PO-Revision-Date: 2019-11-04 11:47-0500\n"
+"PO-Revision-Date: 2019-11-19 14:22-0500\n"
 "Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -570,7 +570,7 @@ msgstr ""
 #: ../src/gtk/sidebar.c:1554 ../src/gtk/sidebar.c:1602
 #, c-format
 msgid "Verse List"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/export_bookmarks.c:659
 msgid "VerseList"
@@ -683,22 +683,22 @@ msgstr ""
 
 #: ../src/gtk/main_window.c:1042
 msgid "Open a new tab"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/main_window.c:1097 ../src/gtk/sidebar.c:616
 #: ../src/gtk/sidebar.c:621 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/main_window.c:1137
 msgid "Commentary View"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/main_window.c:1145
 msgid "Book View"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/main_window.c:1163
 msgid "Welcome to Xiphos"
@@ -1014,13 +1014,13 @@ msgstr ""
 #: ../src/gtk/mod_mgr.c:1536 ../src/gtk/utilities.c:574
 #: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
 msgid "Biblical Texts"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1540 ../src/gtk/utilities.c:580
 #: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
 #: ../src/main/sidebar.cc:986
 msgid "Commentaries"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1544 ../src/gtk/utilities.c:587
 #: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
@@ -1035,13 +1035,13 @@ msgstr ""
 #: ../src/gtk/mod_mgr.c:1552 ../src/gtk/utilities.c:600
 #: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
 msgid "Daily Devotionals"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1557 ../src/gtk/utilities.c:606
 #: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
 #: ../src/main/sidebar.cc:1022
 msgid "General Books"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1569 ../src/gtk/utilities.c:624
 #: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
@@ -1056,11 +1056,11 @@ msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1582
 msgid "Updates"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1587
 msgid "Uninstalled"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1592 ../src/gtk/sidebar.c:632
 #: ../src/gtk/utilities.c:632 ../src/main/prayerlists.cc:233
@@ -1110,11 +1110,11 @@ msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1941
 msgid "Module Sources"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1944
 msgid "Add/Remove"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1947
 msgid "Choose"
@@ -1127,15 +1127,15 @@ msgstr "မော်ကျူးများ"
 
 #: ../src/gtk/mod_mgr.c:1952
 msgid "Install/Update"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1955
 msgid "Maintenance"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:2171
 msgid "Please Refresh"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:2172
 msgid "Your module list is not up to date!"
@@ -1342,11 +1342,11 @@ msgstr "အရောင်"
 
 #: ../src/gtk/preferences_dialog.c:2052
 msgid "Sizes and Faces"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/preferences_dialog.c:2066
 msgid "Special"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/preferences_dialog.c:2766 ../src/gtk/search_dialog.c:519
 msgid "Clear List?"
@@ -1499,11 +1499,11 @@ msgstr ""
 
 #: ../src/gtk/search_sidebar.c:274
 msgid "Search Module"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/search_sidebar.c:311
 msgid "Search Type"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
 #: ../ui/search-dialog.gtkbuilder.h:34
@@ -1531,7 +1531,7 @@ msgstr ""
 
 #: ../src/gtk/search_sidebar.c:385
 msgid "Search Scope"
-msgstr ""
+msgstr "@@@"
 
 #: ../src/gtk/search_sidebar.c:398
 msgid "No scope"
@@ -3277,7 +3277,7 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
 msgid "Module Manager"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
 msgid "_View Intro"
@@ -3501,7 +3501,7 @@ msgstr " "
 
 #: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
 msgid "Foreground"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
 msgid "Current Verse"
@@ -3509,7 +3509,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
 msgid "Verse Number"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
 msgid "Links"
@@ -3847,7 +3847,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
 msgid "Special Locale (requires restart)"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
 msgid "Special Locale Combo"
@@ -3979,7 +3979,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:124
 msgid "Verse number"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:123
 msgid "Offset the verse number in several ways"
@@ -4106,7 +4106,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Daily Devotional"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Daily Devotional Combo"
@@ -4130,7 +4130,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
 msgid "Default Dictionary"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
 msgid "Change Default Dictionary Combo"
@@ -4716,7 +4716,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
 msgid "Show Verse _Numbers"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/xi-menus.glade.h:29
 msgid "Display verse numbers in the text"
@@ -4724,7 +4724,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
 msgid "_Highlight Current Verse"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/xi-menus.glade.h:31
 msgid "Apply a high-contrast highlight to the current verse"
@@ -4732,7 +4732,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
 msgid "_Show/Hide Attached Sidebar"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Remove the sidebar entirely from view"
@@ -4740,7 +4740,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "Show Parallel View in a _Tab"
-msgstr ""
+msgstr "@@@"
 
 #: ../ui/xi-menus.glade.h:35
 msgid "Provide the full-chapter parallel Bible window as another tab"
