@@ -1084,18 +1084,10 @@ static gint show_strongs(DIALOG_DATA *t, const gchar *type,
 {
 	const gchar *modbuf = NULL;
 
-	if (!strncmp(t->mod_name, "NASB", 4)) {
-		if (!strcmp(type, "Greek"))
-			modbuf = "NASGreek";
-		else
-			modbuf = "NASHebrew";
-
-	} else {
-		if (!strcmp(type, "Greek"))
-			modbuf = settings.lex_greek;
-		else if (!strcmp(type, "Hebrew"))
-			modbuf = settings.lex_hebrew;
-	}
+	if (!strcmp(type, "Greek"))
+		modbuf = settings.lex_greek;
+	else if (!strcmp(type, "Hebrew"))
+		modbuf = settings.lex_hebrew;
 
 	if (clicked) {
 		static GtkWidget *dlg;

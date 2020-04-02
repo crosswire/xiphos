@@ -364,20 +364,13 @@ static gint show_strongs(const gchar *stype, const gchar *svalue,
 {
 	const gchar *modbuf = NULL;
 
-	if (!strncmp(settings.MainWindowModule, "NASB", 4)) {
+	if (stype && (*stype != '\0')) {
 		if (!strcmp(stype, "Greek"))
-			modbuf = "NASGreek";
+			modbuf = settings.lex_greek;
 		else
-			modbuf = "NASHebrew";
-	} else {
-		if (stype && (*stype != '\0')) {
-			if (!strcmp(stype, "Greek"))
-				modbuf = settings.lex_greek;
-			else
-				modbuf = settings.lex_hebrew;
-		} else
-			modbuf = "InvStrongsRealGreek";
-	}
+			modbuf = settings.lex_hebrew;
+	} else
+		modbuf = "InvStrongsRealGreek";
 
 	if (clicked) {
 		main_display_dictionary(modbuf, (gchar *)svalue);
