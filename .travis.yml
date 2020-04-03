@@ -1,22 +1,27 @@
 # vim: set ts=2 sts=2 sw=2 expandtab :
-dist: xenial
-sudo: required
+dist: bionic
 language: bash
+os: linux
 services:
   - docker
+
+addons:
+  apt:
+    packages:
+      - python3-github
+      - python3-pip
+      - python3-setuptools
 
 before_install:
   - curl -Ls -o docker-build https://github.com/mate-desktop/mate-dev-scripts/raw/master/travis/docker-build
   - chmod +x docker-build
 
 install:
-  - sudo apt-get install -y python3-pip python3-setuptools
   - sudo pip3 install --upgrade pip
-  - sudo pip install PyGithub
   - ./docker-build --name ${DISTRO} --config .travis.yml --install
 
 script:
-  - ./docker-build --name ${DISTRO} -vvvv --config .travis.yml --build scripts
+  - travis_retry ./docker-build --name ${DISTRO} -vvvv --config .travis.yml --build scripts
 
 env:
   - DISTRO="archlinux:latest"
@@ -158,10 +163,10 @@ before_scripts:
         id -u aur_install &>/dev/null || useradd -r -m -U -G wheel -k /dev/null aur_install
         install -m600 /dev/stdin /etc/sudoers.d/70-wheel <<< '%wheel ALL=(ALL) ALL'
         install -m600 /dev/stdin /etc/sudoers.d/99-aur_install <<< 'Defaults:aur_install !authenticate'
+        curl -o /home/aur_install/aur_install https://raw.githubusercontent.com/gik0geck0/aur_install/master/aur_install.sh
+        chmod +x /home/aur_install/aur_install
         aur_install() {
-          [[ -d "$1" ]] && exit 0
-          su -l aur_install -c "git clone https://aur.archlinux.org/$1.git"
-          su -l aur_install -c "cd $1 && makepkg --noconfirm -si"
+          su -l aur_install -c "./aur_install $1"
         }
         aur_install biblesync
         aur_install gtkhtml4
