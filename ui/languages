@@ -22,6 +22,11 @@
 #
 # --initial list from Bibletime-1.3--
 #
+# language names are not national/political identifiers.
+# absurdly long names just screw up the module tree displays.
+# all the long parenthesized identifiers have been trimmed.
+# keep it short and to the point.
+#
 # Afar
 aa	Qafár af
 # Abkhazian
@@ -1064,7 +1069,8 @@ bcl	Central Bicolano
 bcm	Bannoni
 bcn	Bali (Nigeria)
 bco	Kaluli
-bcp	Bali (République démocratique du Congo)
+#bcp	Bali (République démocratique du Congo)
+bcp	Bali
 bcq	Bench
 bcr	Babine
 bcs	Kohumono
@@ -1264,7 +1270,8 @@ bkl	Berik
 bkm	Kom (Cameroon)
 bkn	Bukitan
 bko	Kwa'
-bkp	Boko (République démocratique du Congo)
+#bkp	Boko (République démocratique du Congo)
+bkp	Boko
 bkq	Bakairí
 bkr	Bakumpai
 bks	Masbate Sorsogon
@@ -1324,7 +1331,8 @@ bmu	Burum-Mindik
 bmv	Bum
 bmw	Bomwali
 bmx	Baimak
-bmy	Bemba (République démocratique du Congo)
+#bmy	Bemba (République démocratique du Congo)
+bmy	Bemba
 bmz	Baramu
 bna	Bonerate
 bnb	Bookan
@@ -3415,7 +3423,8 @@ keg	Tese
 kei	Kei
 kej	Kadar
 #kek	Kekchí				// dup
-kel	Kela (République démocratique du Congo)
+#kel	Kela (République démocratique du Congo)
+kel	Kela
 kem	Kemak
 ken	Kenyang
 keo	Kakwa
@@ -3505,7 +3514,8 @@ khu	Nkhumbi
 khv	Khvarshi
 khw	Khowar
 khx	Kanu
-khy	Kele (République démocratique du Congo)
+#khy	Kele (République démocratique du Congo)
+khy	Kele
 khz	Keapara
 kia	Kim
 kib	Koalib
@@ -3634,7 +3644,8 @@ kms	Kamasau
 kmt	Kemtuik
 kmu	Kanite
 kmv	Créole français de Karipúna
-kmw	Komo (République démocratique du Congo)
+#kmw	Komo (République démocratique du Congo)
+kmw	Komo
 kmx	Waboda
 kmy	Koma
 kmz	Khorasani Turkish
@@ -3810,7 +3821,8 @@ ktq	Katabaga
 ktr	Kota Marudu Tinagas
 kts	South Muyu
 ktt	Ketum
-ktu	Kikongo ya Leta (République démocratique du Congo)
+#ktu	Kikongo ya Leta (République démocratique du Congo)
+ktu	Kikongo ya Leta
 ktv	Eastern Katu
 ktw	Kato
 ktx	Kaxararí
@@ -4057,7 +4069,8 @@ leh	Lenje
 lei	Lemio
 lej	Lengola
 lek	Leipon
-lel	Lele (République démocratique du  Congo)
+#lel	Lele (République démocratique du  Congo)
+lel	Lele
 lem	Nomaande
 len	Lenca
 leo	Leti (Cameroon)
@@ -4639,7 +4652,8 @@ mnd	Mondé
 mne	Naba
 mnf	Mundani
 mng	Eastern Mnong
-mnh	Mono (République démocratique du Congo)
+#mnh	Mono (République démocratique du Congo)
+mnh	Mono
 mni	Manipuri
 mnj	Munji
 mnk	Mandinka
@@ -4768,7 +4782,8 @@ msf	Mekwei
 msg	Moraid
 msh	Masikoro Malagasy
 msi	Sabah Malay
-msj	Ma (République démocratique du Congo)
+#msj	Ma (République démocratique du Congo)
+msj	Ma
 msk	Mansaka
 msl	Molof
 msm	Agusan Manobo
@@ -5092,8 +5107,10 @@ nfr	Nafaanra
 nfu	Mfumte
 nga	Ngbaka
 ngb	Northern Ngbandi
-ngc	Ngombe (République démocratique du Congo)
-ngd	Ngando (République centrafricaine)
+#ngc	Ngombe (République démocratique du Congo)
+ngc	Ngombe
+#ngd	Ngando (République centrafricaine)
+ngd	Ngando
 nge	Ngemba
 ngg	Ngbaka Manza
 ngh	N/u
@@ -5397,7 +5414,8 @@ nwr	Nawaru
 nwx	Middle Newar
 nwy	Nottoway-Meherrin
 nxa	Nauete
-nxd	Ngando (République démocratique du Congo)
+#nxd	Ngando (République démocratique du Congo)
+nxd	Ngando
 nxe	Nage
 nxg	Ngad'a
 nxi	Nindi
@@ -6449,7 +6467,8 @@ snc	Sinaugoro
 snd	Sindhi
 sne	Bau Bidayuh
 snf	Noon
-sng	Sanga (République démocratique du Congo)
+#sng	Sanga (République démocratique du Congo)
+sng	Sanga
 snh	Shinabo
 sni	Sensi
 snj	Riverain Sango
@@ -6470,7 +6489,8 @@ sny	Saniyo-Hiyewe
 snz	Sinsauru
 soa	Thai Song
 sob	Sobei
-soc	So (République démocratique du Congo)
+#soc	So (République démocratique du Congo)
+soc	So
 sod	Songoora
 soe	Songomeno
 sog	Sogdian
@@ -7903,7 +7923,8 @@ yab	Yuhup
 yac	Pass Valley Yali
 yad	Yagua
 yae	Pumé
-yaf	Yaka (République démocratique du Congo)
+#yaf	Yaka (République démocratique du Congo)
+yaf	Yaka
 yag	Yámana
 yah	Yazgulyam
 yai	Yagnobi
@@ -8215,7 +8236,8 @@ zms	Mbesa
 zmt	Maringarr
 zmu	Muruwari
 zmv	Mbariman-Gudhinma
-zmw	Mbo (République démocratique du Congo)
+#zmw	Mbo (République démocratique du Congo)
+zmw	Mbo
 zmx	Bomitaba
 zmy	Mariyedi
 zmz	Mbandja
