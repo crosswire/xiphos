@@ -13,7 +13,7 @@ jobs:
       - uses: olegtarasov/get-tag@v2
       - name: create source tarball
         shell: bash
-        run: git archive --prefix=xiphos-${GIT_TAG_NAME}/ -o xiphos-${GIT_TAG_NAME}.tar.xz
+        run: git archive --prefix=xiphos-${GIT_TAG_NAME}/ -o xiphos-${GIT_TAG_NAME}.tar.xz HEAD
       - name: stash tarball
         uses: actions/upload-artifact@master
         with:
