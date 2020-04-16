@@ -14,6 +14,5 @@ fi
 cd /workspace
 rm -rf build
 cmake -B build -DGTKHTML:BOOL=ON .
-make -C build -j5
-make -C build -j5 help
+make -C build
 make -C build package
