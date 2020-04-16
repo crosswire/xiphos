@@ -10,24 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: install build deps
-        shell: bash
-        run: |
-          set -ex -o pipefail
-          sudo apt-get install appstream-util cmake g++ desktop-file-utils \
-          fp-utils gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev \
-          libenchant-dev libgail-3-dev libglade2-dev libgsf-1-dev libgtk-3-dev \
-          libsword-dev libwebkit2gtk-4.0-dev libxml2-dev libxml2-utils make \
-          python-dev swig uuid-dev uuid-runtime yelp-tools xzip libbiblesync-dev \
-          libsword-dev
       - name: test build
         shell: bash
         run: |
           set -ex -o pipefail
-          cmake -B build .
-          make -C build -j4
-          make -C build package_source
-          make -C build package
+          docker run -v "${GITHUB_WORKSPACE}:/workspace" -t -i ubuntu:latest \
+          "apt-get install appstream-util cmake g++ desktop-file-utils \
+          fp-utils gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev \
+          libenchant-dev libgail-3-dev libglade2-dev libgsf-1-dev libgtk-3-dev \
+          libsword-dev libwebkit2gtk-4.0-dev libxml2-dev libxml2-utils make \
+          python-dev swig uuid-dev uuid-runtime yelp-tools xzip libbiblesync-dev \
+          libsword-dev && \
+          cd /worksapce && \
+          cmake -B build . && \
+          make -C build -j5 && \
+          make -C build package_source && \
+          make -C build package"
       - name: stash tarball
         uses: actions/upload-artifact@master
         with:
@@ -63,7 +61,11 @@ jobs:
           set -ex -o pipefail
           tar -xaf xiphos-${{ github.ref }}.tar.gz
           docker run -v "${GITHUB_WORKSPACE}:/workspace" -t -i fedora:31 \
-          "dnf build-dep -y xiphos && cd /workspace && cmake -B build -DGTKHTML:BOOL=ON . && make -C build -j5 && make -C build package"
+          "dnf build-dep -y xiphos && \
+           cd /workspace && \
+           cmake -B build -DGTKHTML:BOOL=ON . \
+           && make -C build -j5 \
+           && make -C build package"
       - name: stash rpm
         uses: actions/upload-artifact@master
         with:
