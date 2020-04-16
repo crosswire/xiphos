@@ -18,7 +18,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: archive
-          path: xiphos-${GET_TAG_NAME}.tar.xz
+          path: xiphos-${GIT_TAG_NAME}.tar.xz
 
   build_rpm:
     needs: source
