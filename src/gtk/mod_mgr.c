@@ -981,13 +981,6 @@ static void remove_install_modules(GList *modules, int activity)
 
 		if (activity == FASTMOD) {
 			XI_print(("index %s\n", buf));
-#if 0
-			// why did we ever preclude indexing these?
-			if (main_get_mod_config_entry
-			    (module_name, "GSType"))
-				gui_generic_warning(_("Journals and prayer lists cannot be indexed."));
-			else
-#endif
 			result =
 			    ((main_module_mgr_index_mod(module_name))
 				 ? 0

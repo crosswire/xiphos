@@ -394,12 +394,6 @@ void main_navigate_tab_history(gint direction)
 	} else {
 		if (tab->current_history_item > 0) {
 			--tab->current_history_item;
-#if 0
-			if (tab->first_back_click &&
-			    (tab->current_history_item > 0))
-				--tab->current_history_item;
-#endif
-
 			main_change_verse_tab_history(tab->current_history_item);
 			tab->first_back_click = FALSE;
 		}

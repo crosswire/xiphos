@@ -81,29 +81,6 @@ static GtkWidget *create_menu_modules(void);
 void on_export_verselist_activate(GtkMenuItem *menuitem,
 				  gpointer user_data);
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void gui_sync_module_treeview(gint direction)
-{
-}
-#endif
-
 #ifdef USE_TREEVIEW_PATH
 /******************************************************************************
  * Name
@@ -391,26 +368,10 @@ void gui_set_sidebar_program_start(void)
 		gtk_paned_set_position(GTK_PANED(widgets.epaned),
 				       settings.sidebar_width);
 	}
-	/*
-	else if (!settings.showshortcutbar && settings.showdevotional) {
-		gtk_widget_show(widgets.shortcutbar);
-		gui_sidebar_showhide();
-	}
-*/
 	else {
 		gtk_widget_hide(widgets.shortcutbar);
 		gtk_paned_set_position(GTK_PANED(widgets.epaned), 1);
 	}
-
-	/* set width of bible pane */
-	//gtk_paned_set_position(GTK_PANED(widgets.hpaned), settings.biblepane_width);
-
-#if 0
-	if (!settings.docked) {
-		settings.docked = TRUE;
-		//gui_attach_detach_shortcutbar();
-	}
-#endif
 }
 
 /******************************************************************************

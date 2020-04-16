@@ -80,15 +80,3 @@ ModuleCacheErase(const char *modname)
 		ModuleMap.erase(itr);
 	// or just ModuleMap.erase(modname), i guess.
 }
-
-#if 0
-// unused at this time -- we don't cache book content.
-void
-BookModuleCacheErase(const char *modname)
-{
-	BookCacheMap::iterator itr = BookModuleMap.find(modname);
-
-	if (itr != BookModuleMap.end())
-		BookModuleMap.erase(itr);
-}
-#endif

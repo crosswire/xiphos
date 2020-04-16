@@ -169,18 +169,6 @@ void gui_recompute_view_menu_choices(void)
 	change_tabs_no_redisplay = FALSE;
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-void setup_book_editor_tab(PASSAGE_TAB_INFO *pt)
-{
-	/*pt->editor = editor_create_new_book_editor(pt->book_mod, PRAYERLIST_TYPE);
-	   gtk_widget_show(GTK_WIDGET(pt->editor));
-
-	   gtk_box_pack_start (GTK_BOX (widgets.vboxMain), GTK_WIDGET(pt->editor),
-	   TRUE, TRUE, 0); */
-}
-#endif
-
 /******************************************************************************
  * Name
  *  set_current_tab
@@ -1492,38 +1480,6 @@ void gui_close_all_tabs(void)
 	cur_passage_tab = NULL;
 	//      gui_set_text_frame_label(cur_t);
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *  gui_open_tabs
- *
- * Synopsis
- *   #include "tabbed_browser.h"
- *
- *   void gui_open_tabs(void)
- *
- * Description
- *   called from preferences dialog when enable browsing is chosen
- *
- * Return value
- *   void
- */
-void gui_open_tabs(void)
-{
-	if (stop_refresh)
-		return;
-
-	removed_page = 1;
-	cur_passage_tab = NULL;
-	passage_list = NULL;
-
-	gui_load_tabs(default_tab_filename);
-
-	gtk_widget_show(widgets.button_new_tab);
-}
-#endif
 
 /******************************************************************************
  * Name

@@ -78,33 +78,6 @@ static void on_dialog_destroy(GObject *object, DIALOG_DATA *d)
 	dialog_freed = FALSE;
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   gui_close_comm_dialog
- *
- * Synopsis
- *   #include "commentary_dialog.h"
- *
- *   void gui_close_comm_dialog(DIALOG_DATA * d)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void gui_close_comm_dialog(DIALOG_DATA *d)
-{
-	if (d->dialog) {
-		dialog_freed = FALSE;
-		gtk_widget_destroy(d->dialog);
-	}
-}
-#endif
-
 /******************************************************************************
  * Name
  *   on_dialog_motion_notify_event
@@ -129,32 +102,6 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
 	cur_d = d;
 	return FALSE;
 }
-
-#if 0
-/******************************************************************************
- * Name
- *   sync_with_main
- *
- * Synopsis
- *   #include "gui/commentary_dialog.h"
- *
- *   void sync_with_main(DIALOG_DATA * d)
- *
- * Descriptiond->navbar.lookup_entry
- *   bring the the View Commentay Dialog module into sync with main window
- *
- * Return value
- *   void
- */
-
-static void sync_with_main(DIALOG_DATA *d)
-{
-	gchar *url = g_strdup_printf("sword:///%s", settings.currentverse);
-	main_dialogs_url_handler(d, url, TRUE);
-	cur_d = d;
-	g_free(url);
-}
-#endif
 
 /******************************************************************************
  * Name
@@ -276,20 +223,3 @@ void gui_create_commentary_dialog(DIALOG_DATA *d, gboolean do_edit)
 			 "motion_notify_event",
 			 G_CALLBACK(on_dialog_motion_notify_event), d);
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-void gui_commentary_dialog_sync_toggled(GtkToggleButton *button,
-					DIALOG_DATA *d)
-{
-	if (d == NULL)
-		d = cur_d;
-	if (gtk_toggle_button_get_active(button)) {
-		sync_with_main(d);
-		d->sync = TRUE;
-	} else
-		d->sync = FALSE;
-}
-#endif
-
-/******   end of file   ******/

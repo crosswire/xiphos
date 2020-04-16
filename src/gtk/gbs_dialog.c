@@ -337,32 +337,3 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 			 G_CALLBACK(dialog_destroy), (DIALOG_DATA *)dlg);
 	cur_dlg = dlg;
 }
-
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-/******************************************************************************
- * Name
- *   gui_close_gbs_dialog
- *
- * Synopsis
- *   #include "gbs_dialog.h"
- *
- *   void gui_close_gbs_dialog(DL_DIALOG *dlg)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void gui_close_gbs_dialog(DIALOG_DATA *dlg)
-{
-	if (dlg->dialog) {
-		dialog_freed = FALSE;
-		gtk_widget_destroy(dlg->dialog);
-	}
-}
-#endif
-
-//******  end of file  ******/

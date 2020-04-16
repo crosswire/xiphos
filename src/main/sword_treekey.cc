@@ -129,18 +129,6 @@ void setEntryText(RawGenBook *book, const gchar *text)
 	}
 }
 
-#if 0
-// unneeded at this time.  disabled to silence cppcheck.
-void appendSibbling(TreeKeyIdx *treeKey, const gchar *name)
-{
-	if (treeKey->getOffset()) {
-		treeKey->append();
-		treeKey->setLocalName(name);
-		treeKey->save();
-	}
-}
-#endif
-
 void appendChild(TreeKeyIdx *treeKey, const gchar *name)
 {
 	treeKey->appendChild();

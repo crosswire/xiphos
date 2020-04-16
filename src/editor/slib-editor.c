@@ -102,173 +102,6 @@ static void change_window_title(GtkWidget *window, const gchar *window_title)
 	gtk_window_set_title(GTK_WINDOW(window), window_title);
 }
 
-#if 0
-static gint
-_calc_header_height(GtkHTML * html, GtkPrintOperation * operation,
-		    GtkPrintContext * context)
-{
-	PangoContext *pango_context;
-	PangoFontDescription *desc;
-	PangoFontMetrics *metrics;
-	gint header_height;
-
-	pango_context = gtk_print_context_create_pango_context(context);
-	desc = pango_font_description_from_string("Sans Regular 10");
-
-	metrics =
-	    pango_context_get_metrics(pango_context, desc,
-				      pango_language_get_default());
-	header_height =
-	    pango_font_metrics_get_ascent(metrics) +
-	    pango_font_metrics_get_descent(metrics);
-	pango_font_metrics_unref(metrics);
-
-	pango_font_description_free(desc);
-	g_object_unref(pango_context);
-
-	return header_height;
-}
-
-static gint
-_calc_footer_height(GtkHTML * html, GtkPrintOperation * operation,
-		    GtkPrintContext * context)
-{
-	PangoContext *pango_context;
-	PangoFontDescription *desc;
-	PangoFontMetrics *metrics;
-	gint footer_height;
-
-	pango_context = gtk_print_context_create_pango_context(context);
-	desc = pango_font_description_from_string("Sans Regular 10");
-
-	metrics =
-	    pango_context_get_metrics(pango_context, desc,
-				      pango_language_get_default());
-	footer_height =
-	    pango_font_metrics_get_ascent(metrics) +
-	    pango_font_metrics_get_descent(metrics);
-	pango_font_metrics_unref(metrics);
-
-	pango_font_description_free(desc);
-	g_object_unref(pango_context);
-
-	return footer_height;
-}
-
-static void
-_draw_header(GtkHTML * html, GtkPrintOperation * operation,
-	     GtkPrintContext * context,
-	     gint page_nr, PangoRectangle * rec, EDITOR * e)
-{
-	PangoFontDescription *desc;
-	PangoLayout *layout;
-	gdouble x, y;
-	gchar *text;
-	cairo_t *cr;
-
-	text = g_strdup(e->filename);
-
-	desc = pango_font_description_from_string("Sans Regular 10");
-	layout = gtk_print_context_create_pango_layout(context);
-	pango_layout_set_alignment(layout, PANGO_ALIGN_CENTER);
-	pango_layout_set_font_description(layout, desc);
-	pango_layout_set_text(layout, text, -1);
-	pango_layout_set_width(layout, rec->width);
-
-	x = pango_units_to_double(rec->x);
-	y = pango_units_to_double(rec->y);
-
-	cr = gtk_print_context_get_cairo_context(context);
-
-	cairo_save(cr);
-	cairo_set_source_rgb(cr, .0, .0, .0);
-	cairo_move_to(cr, x, y);
-	pango_cairo_show_layout(cr, layout);
-	cairo_restore(cr);
-
-	g_object_unref(layout);
-	pango_font_description_free(desc);
-
-	g_free(text);
-}
-
-
-static void
-_draw_footer(GtkHTML * html, GtkPrintOperation * operation,
-	     GtkPrintContext * context,
-	     gint page_nr, PangoRectangle * rec, EDITOR * e)
-{
-	PangoFontDescription *desc;
-	PangoLayout *layout;
-	gdouble x, y;
-	gint n_pages;
-	gchar *text;
-	cairo_t *cr;
-
-	g_object_get(operation, "n-pages", &n_pages, NULL);
-	text = g_strdup_printf(_("Page %d of %d"), page_nr + 1, n_pages);
-
-	desc = pango_font_description_from_string("Sans Regular 10");
-	layout = gtk_print_context_create_pango_layout(context);
-	pango_layout_set_alignment(layout, PANGO_ALIGN_CENTER);
-	pango_layout_set_font_description(layout, desc);
-	pango_layout_set_text(layout, text, -1);
-	pango_layout_set_width(layout, rec->width);
-
-	x = pango_units_to_double(rec->x);
-	y = pango_units_to_double(rec->y);
-
-	cr = gtk_print_context_get_cairo_context(context);
-
-	cairo_save(cr);
-	cairo_set_source_rgb(cr, .0, .0, .0);
-	cairo_move_to(cr, x, y);
-	pango_cairo_show_layout(cr, layout);
-	cairo_restore(cr);
-
-	g_object_unref(layout);
-	pango_font_description_free(desc);
-
-	g_free(text);
-}
-
-static GtkPrintOperationResult
-_do_print(EDITOR * e, GtkPrintOperationAction action)
-{
-	GtkPrintOperation *operation;
-	GtkPrintSettings *psettings;
-	GtkPageSetup *setup;
-	GtkPrintOperationResult result;
-	GError *error = NULL;
-
-	operation = gtk_print_operation_new();
-	psettings = gtk_print_settings_new();
-
-	psettings = gtk_print_operation_get_print_settings(operation);
-
-	setup = gtk_page_setup_new();
-	gtk_page_setup_set_top_margin(setup, 30, GTK_UNIT_PIXEL);
-	gtk_page_setup_set_left_margin(setup, 50, GTK_UNIT_PIXEL);
-
-#ifdef WIN32
-	gtk_print_operation_set_unit(operation, GTK_UNIT_POINTS);
-#endif
-	gtk_print_operation_set_default_page_setup(operation, setup);
-
-	result = gtk_html_print_operation_run(GTK_HTML(e->html_widget), operation, action, GTK_WINDOW(e->window), (GtkHTMLPrintCalcHeight) _calc_header_height,	/* GtkHTMLPrintCalcHeight  calc_header_height */
-					      (GtkHTMLPrintCalcHeight) _calc_footer_height,	/* GtkHTMLPrintCalcHeight  calc_footer_height */
-					      (GtkHTMLPrintDrawFunc) _draw_header,	/* GtkHTMLPrintDrawFunc draw_header */
-					      (GtkHTMLPrintDrawFunc) _draw_footer,	/* GtkHTMLPrintDrawFunc draw_footer */
-					      e,	/* gpointer user_data */
-					      &error);
-
-	g_object_unref(operation);
-	handle_error(&error);
-
-	return result;
-}
-#endif /* 0 */
-
 static const gchar *file_ui =
     "<ui>\n"
     "  <menubar name='main-menu'>\n"
@@ -360,9 +193,6 @@ static gint open_dialog(EDITOR *e)
 {
 	GtkWidget *dialog;
 	gint response;
-#if 0
-	const gchar *filename;
-#endif
 
 	dialog =
 	    gtk_file_chooser_dialog_new(_("Open"), GTK_WINDOW(e->window),
@@ -377,13 +207,6 @@ static gint open_dialog(EDITOR *e)
 					GTK_RESPONSE_ACCEPT,
 #endif
 					NULL);
-
-/*gtk_file_chooser_set_do_overwrite_confirmation (
-	   GTK_FILE_CHOOSER (dialog), TRUE); */
-
-#if 0
-	filename = gtkhtml_editor_get_filename(GTKHTML_EDITOR(e->window));
-#endif
 
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
 					    settings.studypaddir);
