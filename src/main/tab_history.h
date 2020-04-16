@@ -26,13 +26,16 @@
 extern "C" {
 #endif
 
-#define TABHISTORYLENGTH 50
+#define TABHISTORYLENGTH 50	/* history list max length */
+#define TABELEMENTLENGTH 75	/* individual element content max length */
+				/* some language names take absurd space */
+				/* someday, this too may be found insufficient */
 
 struct _tab_history
 {
-	gchar verseref[TABHISTORYLENGTH];
-	gchar textmod[TABHISTORYLENGTH];
-	gchar commod[TABHISTORYLENGTH];
+	gchar verseref[TABELEMENTLENGTH];
+	gchar textmod[TABELEMENTLENGTH];
+	gchar commod[TABELEMENTLENGTH];
 };
 typedef struct _tab_history TAB_HISTORY;
 
