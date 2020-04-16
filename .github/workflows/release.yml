@@ -84,4 +84,7 @@ jobs:
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: *.tar.gz, *.zip, *.rpm., *.deb
+          artifacts: "*.tar.gz, *.zip, *.rpm., *.deb"
+          allowUpdates: true
+          name: Release ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
