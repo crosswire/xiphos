@@ -8,24 +8,45 @@ name: Release a build
 jobs:
   source:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        fedora:
+          - "31"
+          - "30"
     steps:
       - uses: actions/checkout@v1
-      - name: test build
+      - name: create source tarball
+        shell: bash
+        run: git archive --prefix=xiphos-${{ github.ref }}/ -o xiphos-${{ github.ref }}.tar.xz
+      - name: stash tarball
+        uses: actions/upload-artifact@master
+        with:
+          name: archive
+          path: xiphos-${{ github.ref }}.tar.xz
+
+  build_rpm:
+    needs: source
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        fedora:
+          - "31"
+          - "30"
+    steps:
+      - name: fetch source tarball
+        uses: actions/download-artifact@master
+        with:
+          name: archive
+      - name: prepare build environment
         shell: bash
         run: |
-          set -ex -o pipefail
-          docker run -v "${GITHUB_WORKSPACE}:/workspace" -t -i ubuntu:latest \
-          "apt-get install appstream-util cmake g++ desktop-file-utils \
-          fp-utils gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev \
-          libenchant-dev libgail-3-dev libglade2-dev libgsf-1-dev libgtk-3-dev \
-          libsword-dev libwebkit2gtk-4.0-dev libxml2-dev libxml2-utils make \
-          python-dev swig uuid-dev uuid-runtime yelp-tools xzip libbiblesync-dev \
-          libsword-dev && \
-          cd /worksapce && \
-          cmake -B build . && \
-          make -C build -j5 && \
-          make -C build package_source && \
-          make -C build package"
+          set -e
+          tar xaf xiphos-${{ github.ref }}.tar.xz --strip-components=1
+          # Echo version into repo here!
+      - name: test build
+        shell: bash
+        run: release/build.sh fedora:${{ matrix.fedora }}
       - name: stash tarball
         uses: actions/upload-artifact@master
         with:
@@ -36,50 +57,56 @@ jobs:
         with:
           name: src
           path: build/xiphos-${{ github.ref }}.zip
+      - name: stash rpm
+        uses: actions/upload-artifact@master
+        with:
+          name: bin
+          path: build/xiphos-${{ github.ref }}-1.fc${{ matrix.fedora }}.x86_64.rpm
+
+  build_deb:
+    needs: source
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ubuntu:
+          - "18.04"
+          - "19.10"
+    steps:
+      - name: fetch source tarball
+        uses: actions/download-artifact@master
+        with:
+          name: archive
+      - name: prepare build environment
+        shell: bash
+        run: |
+          set -e
+          tar xaf xiphos-${{ github.ref }}.tar.xz --strip-components=1
+          # Echo version into repo here!
+      - name: test build
+        shell: bash
+        run: release/build.sh ubuntu:${{ matrix.ubuntu }}
       - name: stash deb
         uses: actions/upload-artifact@master
         with:
           name: bin
-          path: build/xiphos_${{ github.ref }}-1_amd64.deb
+          path: build/xiphos_${{ github.ref }}-1_amd.deb
       - name: stash data deb
         uses: actions/upload-artifact@master
         with:
           name: bin
           path: build/xiphos-data_${{ github.ref }}-1_all.deb
 
-  build_rpm:
-    needs: source
-    runs-on: ubuntu-latest
-    steps:
-      - name: fetch source tarball
-        uses: actions/download-artifact@master
-        with:
-          name: src
-      - name: try build
-        shell: bash
-        run: |
-          set -ex -o pipefail
-          tar -xaf xiphos-${{ github.ref }}.tar.gz
-          docker run -v "${GITHUB_WORKSPACE}:/workspace" -t -i fedora:31 \
-          "dnf build-dep -y xiphos && \
-           cd /workspace && \
-           cmake -B build -DGTKHTML:BOOL=ON . \
-           && make -C build -j5 \
-           && make -C build package"
-      - name: stash rpm
-        uses: actions/upload-artifact@master
-        with:
-          name: bin
-          path: xiphos-${{ github.ref }}/build/xiphos-${{ github.ref }}-1.fc31.x86_64.rpm
-
   release:
-    needs: build_rpm
+    needs:
+      - build_rpm
+      - build_deb
     runs-on: ubuntu-latest
     steps:
       - name: fetch artifacts
         uses: actions/download-artifact@master
         with:
-          name: src
+          name: archive
       - name: fetch artifacts
         uses: actions/download-artifact@master
         with:
@@ -87,7 +114,7 @@ jobs:
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "*.tar.gz, *.zip, *.rpm., *.deb"
+          artifacts: "*.tar.xz, *.zip, *.rpm., *.deb"
           allowUpdates: true
           name: Release ${{ github.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
