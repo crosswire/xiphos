@@ -11,14 +11,18 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: olegtarasov/get-tag@v2
+        id: tag
       - name: create source tarball
         shell: bash
-        run: git archive --prefix=xiphos-${GIT_TAG_NAME}/ -o xiphos-${GIT_TAG_NAME}.tar.xz HEAD
+        run: |
+          set -ex
+          git archive --prefix=xiphos-${{ steps.tag.outputs.tag }}/ -o xiphos-${{ steps.tag.outputs.tag }}.tar HEAD
+          xz -9 xiphos-${{ steps.tag.outputs.tag }}.tar
       - name: stash tarball
         uses: actions/upload-artifact@master
         with:
           name: archive
-          path: xiphos-${GIT_TAG_NAME}.tar.xz
+          path: xiphos-${{ steps.tag.outputs.tag }}.tar.xz
 
   build_rpm:
     needs: source
@@ -30,7 +34,6 @@ jobs:
           - "31"
           - "30"
     steps:
-      - uses: olegtarasov/get-tag@v2
       - name: fetch source tarball
         uses: actions/download-artifact@master
         with:
@@ -39,7 +42,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          tar xaf xiphos-${GET_TAG_NAME}.tar.xz --strip-components=1
+          tar xaf xiphos-${{ steps.tag.outputs.tag }}.tar.xz --strip-components=1
           # Echo version into repo here!
       - name: test build
         shell: bash
@@ -48,17 +51,17 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: src
-          path: build/xiphos-${GET_TAG_NAME}.tar.gz
+          path: build/xiphos-${{ steps.tag.outputs.tag }}.tar.gz
       - name: stash zipfile
         uses: actions/upload-artifact@master
         with:
           name: src
-          path: build/xiphos-${GET_TAG_NAME}.zip
+          path: build/xiphos-${{ steps.tag.outputs.tag }}.zip
       - name: stash rpm
         uses: actions/upload-artifact@master
         with:
           name: bin
-          path: build/xiphos-${GET_TAG_NAME}-1.fc${{ matrix.fedora }}.x86_64.rpm
+          path: build/xiphos-${{ steps.tag.outputs.tag }}-1.fc${{ matrix.fedora }}.x86_64.rpm
 
   build_deb:
     needs: source
@@ -79,7 +82,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          tar xaf xiphos-${GET_TAG_NAME}.tar.xz --strip-components=1
+          tar xaf xiphos-${{ steps.tag.outputs.tag }}.tar.xz --strip-components=1
           # Echo version into repo here!
       - name: test build
         shell: bash
@@ -88,12 +91,12 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: bin
-          path: build/xiphos_${GET_TAG_NAME}-1_amd.deb
+          path: build/xiphos_${{ steps.tag.outputs.tag }}-1_amd.deb
       - name: stash data deb
         uses: actions/upload-artifact@master
         with:
           name: bin
-          path: build/xiphos-data_${GET_TAG_NAME}-1_all.deb
+          path: build/xiphos-data_${{ steps.tag.outputs.tag }}-1_all.deb
 
   release:
     needs:
@@ -115,5 +118,5 @@ jobs:
         with:
           artifacts: "*.tar.xz, *.zip, *.rpm., *.deb"
           allowUpdates: true
-          name: Release ${GET_TAG_NAME}
+          name: Release ${{ steps.tag.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
