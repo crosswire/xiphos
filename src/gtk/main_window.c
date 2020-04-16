@@ -1138,9 +1138,6 @@ void create_mainwindow(void)
 
 	// Statusbar
 	widgets.appbar = gtk_statusbar_new();
-	if (settings.statusbar) {
-		gtk_widget_show(widgets.appbar);
-	}
 
 #ifndef USE_GTK_3
 	gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(widgets.appbar), TRUE);
@@ -1153,6 +1150,9 @@ void create_mainwindow(void)
 
 	gtk_window_set_default_size((GtkWindow *)widgets.app, settings.gs_width, settings.gs_height);
 	gtk_widget_show_all(widgets.app);
+
+	if (settings.statusbar != 1)
+		gtk_widget_hide(widgets.appbar);
 
 	/* must connect signals *after* instantiating window above, */
 	/* immediately above, otherwise window creation induces */
