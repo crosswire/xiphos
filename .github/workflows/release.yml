@@ -21,11 +21,12 @@ jobs:
           python-dev swig uuid-dev uuid-runtime yelp-tools xzip
       - name: test build
         shell: bash
-        set -ex -o pipefail
-        cmake -B build .
-        make -C build -j4
-        make -C build package_source
-        make -C build package
+        run: |
+          set -ex -o pipefail
+          cmake -B build .
+          make -C build -j4
+          make -C build package_source
+          make -C build package
       - name: stash tarball
         uses: actions/upload-artifact@master
         with:
