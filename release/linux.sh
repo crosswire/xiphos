@@ -3,7 +3,7 @@ set -ex -o pipefail
 CMAKE_OPTS=
 if [ $(command -v apt-get) ]; then
 	apt-get update
-	apt-get install appstream-util cmake g++ desktop-file-utils \
+	apt-get -y install appstream-util cmake g++ desktop-file-utils \
 		fp-utils gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev \
 		libenchant-dev libgail-3-dev libglade2-dev libgsf-1-dev libgtk-3-dev \
 		libsword-dev libwebkit2gtk-4.0-dev libxml2-dev libxml2-utils make \
@@ -11,7 +11,7 @@ if [ $(command -v apt-get) ]; then
 		libsword-dev zip
 	CMAKE_OPTS="-DPACKAGE_RPM:BOOL=OFF"
 elif [ $(command -v dnf) ]; then
-	dnf install -y 'dnf-command(builddep)' make zip
+	dnf install -y 'dnf-command(builddep)' make rpmbuild zip
 	dnf builddep -y xiphos
 	CMAKE_OPTS="-DPACKAGE_DEB:BOOL=OFF"
 fi
