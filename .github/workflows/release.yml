@@ -34,6 +34,8 @@ jobs:
           - "31"
           - "30"
     steps:
+      - uses: olegtarasov/get-tag@v2
+        id: tag
       - name: fetch source tarball
         uses: actions/download-artifact@master
         with:
@@ -74,6 +76,7 @@ jobs:
           - "19.10"
     steps:
       - uses: olegtarasov/get-tag@v2
+        id: tag
       - name: fetch source tarball
         uses: actions/download-artifact@master
         with:
@@ -105,6 +108,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: olegtarasov/get-tag@v2
+        id: tag
       - name: fetch artifacts
         uses: actions/download-artifact@master
         with:
