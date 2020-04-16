@@ -44,9 +44,8 @@ jobs:
         shell: bash
         run: |
           set -e
-          pwd
-          ls
-          tar xaf xiphos-${{ steps.tag.outputs.tag }}.tar.xz --strip-components=1
+          ls -lR
+          tar xaf archive/xiphos-${{ steps.tag.outputs.tag }}.tar.xz --strip-components=1
           # Echo version into repo here!
       - name: test build
         shell: bash
@@ -87,7 +86,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          tar xaf xiphos-${{ steps.tag.outputs.tag }}.tar.xz --strip-components=1
+          tar xaf archive/xiphos-${{ steps.tag.outputs.tag }}.tar.xz --strip-components=1
           # Echo version into repo here!
       - name: test build
         shell: bash
@@ -122,7 +121,7 @@ jobs:
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "*.tar.xz, *.zip, *.rpm., *.deb"
+          artifacts: "archive/*.tar.xz, bin/*.rpm., bin/*.deb"
           allowUpdates: true
           name: Release ${{ steps.tag.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
