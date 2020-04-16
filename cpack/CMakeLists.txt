@@ -199,10 +199,14 @@ endif(UNIX)
 
 # call generators
 if (UNIX)
-    # CPack RPM generator
-    include(fedora/XiphosRPMPkg.cmake)
-    # CPack Debian generator (Unix only)
-    include(debian/XiphosDebianPkg.cmake)
+    if (PACKAGE_RPM)
+        # CPack RPM generator
+        include(fedora/XiphosRPMPkg.cmake)
+    endif (PACKAGE_RPM)
+    if (PACKAGE_DEB)
+        # CPack Debian generator (Unix only)
+        include(debian/XiphosDebianPkg.cmake)
+    endif (PACKAGE_DEB)
 endif (UNIX)
 
 if(WIN32)

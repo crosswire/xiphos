@@ -36,6 +36,8 @@ option (DEBUG    "Enable Xiphos g_str debugging functions."       OFF)
 option (DELINT   "Build with: -Wall -Werror."                     OFF)
 option (CONSOLE  "Enable console window in win32."                ON)
 option (POSTINST "Enable post-install tasks."                     ON)
+option (PACKAGE_RPM "Configure CPack to make RPM."                ON)
+option (PACKAGE_DEB "Configure CPack to make DEB."                ON)
 set (HELPDIR ${CMAKE_INSTALL_DATADIR}/help
   CACHE STRING "user documentation [default: ${CMAKE_INSTALL_DATADIR}/help]")
 
