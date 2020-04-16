@@ -47,6 +47,7 @@ az-Cyrl	Азәрбајҹан
 az-Latn	Azərbaycan
 # Bashkir
 ba	Башҡорт
+ba-Cyrl	Башҡорт
 # Belarusian
 be	Беларуская
 # Bulgarian
@@ -66,6 +67,7 @@ bs	Bosanski
 ca	Català
 # Chechen
 ce	Нохчийн
+ce-Cyrl	Нохчийн
 # Cebuano (cf. wikipedia)
 #ceb	Sinugboanong Binisaya
 ceb	Sinugboanon
@@ -138,6 +140,8 @@ got	𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰
 gv	Gaelg
 # Greek, Ancient (to 1453)
 grc	Κοινὴ Ἑλληνική
+# Gujarati
+gu	ગુજરાતી
 # Hebrew
 he	עברית
 # Hawaiian
@@ -208,7 +212,7 @@ kv	Коми
 kw	Kernewek
 # Kirghiz
 ky	Кыргызча
-ky-Arab	Кыргызча
+ky-Arab	قىرعىز تىلى
 # addition from IBT modules
 ky-Cyrl	кыргызча
 # Latin
@@ -515,7 +519,7 @@ acb	Áncá
 acc	Cubulco Achí
 acd	Gikyode
 ace	Achinese
-acf	Saint Lucian Creole French
+acf	Créole français de la Sainte Lucie
 ach	Acoli
 aci	Aka-Cari
 ack	Aka-Kora
@@ -611,8 +615,9 @@ agt	Central Cagayan Agta
 agu	Aguacateco
 agv	Remontado Agta
 agw	Kahua
-agx	Aghul
-agx-Cyrl	Aghul
+#Aghul
+agx	Агъул чӀал
+agx-Cyrl	Агъул чӀал
 agy	Southern Alta
 agz	Mt. Iriga Agta
 aha	Ahanta
@@ -653,7 +658,7 @@ aiw	Aari
 aix	Aighon
 aiy	Ali
 aja	Aja (Sudan)
-ajg	Aja (Benin)
+ajg	Aja (Bénin)
 aji	Ajië
 ajp	South Levantine Arabic
 ajt	Judeo-Tunisian Arabic
@@ -703,6 +708,7 @@ alq	Algonquin
 alr	Alutor
 als	Tosk Albanian
 alt	Southern Altai
+alt-Cyrl	тÿштÿк алтай
 # remove leading ' (consequent to eBible repo discoveries)
 alu	Are'are
 alw	Alaba-K’abeena
@@ -810,8 +816,10 @@ aqn	Northern Alta
 aqp	Atakapa
 aqr	Arhâ
 ara	Arabic
-arb	Standard Arabic
-arc	Official Aramaic (700-300 BCE)
+#Standard Arab
+arb	العربية الفصحى
+#Official Aramaic (700-300 BCE)
+arc	ܐܪܡܝܐ
 ard	Arabana
 are	Western Arrarnta
 arg	Aragonese
@@ -907,8 +915,9 @@ auw	Awyi
 aux	Aurá
 auy	Awiyaana
 auz	Uzbeki Arabic
-av	Avaric
-av-Cyrl	Avaric
+#Avaric (Cyrillic script)
+av	Авар мацӏ
+av-Cyrl	Авар мацӏ
 ava	Avaric
 avb	Avau
 avd	Alviri-Vidari
@@ -943,7 +952,7 @@ awx	Awara
 awy	Edera Awyu
 axb	Abipon
 axg	Mato Grosso Arára
-axk	Yaka (Central African Republic)
+axk	Yaka (République centrafricaine)
 axm	Middle Armenian
 axx	Xaragure
 aya	Awar
@@ -1055,7 +1064,7 @@ bcl	Central Bicolano
 bcm	Bannoni
 bcn	Bali (Nigeria)
 bco	Kaluli
-bcp	Bali (Democratic Republic of Congo)
+bcp	Bali (République démocratique du Congo)
 bcq	Bench
 bcr	Babine
 bcs	Kohumono
@@ -1255,7 +1264,7 @@ bkl	Berik
 bkm	Kom (Cameroon)
 bkn	Bukitan
 bko	Kwa'
-bkp	Boko (Democratic Republic of Congo)
+bkp	Boko (République démocratique du Congo)
 bkq	Bakairí
 bkr	Bakumpai
 bks	Masbate Sorsogon
@@ -1315,7 +1324,7 @@ bmu	Burum-Mindik
 bmv	Bum
 bmw	Bomwali
 bmx	Baimak
-bmy	Bemba (Democratic Republic of Congo)
+bmy	Bemba (République démocratique du Congo)
 bmz	Baramu
 bna	Bonerate
 bnb	Bookan
@@ -1364,7 +1373,7 @@ bou	Bondei
 bov	Tuwuli
 bow	Rema
 box	Buamu
-boy	Bodo (Central African Republic)
+boy	Bodo (République centrafricaine)
 boz	Tiéyaxo Bozo
 bpa	Dakaka
 bpb	Barbacoas
@@ -1391,7 +1400,7 @@ bpy	Bishnupriya
 bpz	Bilba
 bqa	Tchumbuli
 bqb	Bagusa
-bqc	Boko (Benin)
+bqc	Boko (Bénin)
 bqd	Bung
 bqf	Baga Kaloum
 bqg	Bago-Kusuntu
@@ -1490,7 +1499,7 @@ btx	Batak Karo
 bty	Bobot
 btz	Batak Alas-Kluet
 bua	Buriat
-bua-Cyrl	Buriat
+bua-Cyrl	буряад хэлэн
 bub	Bua
 buc	Bushi
 bud	Ntcham
@@ -1776,7 +1785,8 @@ cjs-Cyrl	Шор тили
 cjv	Chuave
 cjy	Jinyu Chinese
 cka	Khumi Awa Chin
-ckb	Central Kurdish
+# Central Kurdish
+ckb	سۆرانی
 ckc	Northern Cakchiquel
 ckd	South Central Cakchiquel
 cke	Eastern Cakchiquel
@@ -1819,7 +1829,8 @@ cmi	Emberá-Chamí
 cmk	Chimakum
 cml	Campalagian
 cmm	Michigamea
-cmn	Mandarin Chinese
+#Mandarin Chinese
+cmn	官话
 cmo	Central Mnong
 cmr	Mro Chin
 cms	Messapic
@@ -1898,7 +1909,7 @@ crn	El Nayar Cora
 cro	Crow
 crq	Iyo'wujwa Chorote
 crr	Carolina Algonquian
-crs	Seselwa Creole French
+crs	Créole français Seselwa
 crt	Iyojwa'ja Chorote
 crv	Chaura
 crw	Chrau
@@ -2029,7 +2040,7 @@ dde	Doondo
 ddg	Fataluku
 ddi	Diodio
 ddj	Jaru
-ddn	Dendi (Benin)
+ddn	Dendi (Bénin)
 ddo	Dido
 dds	Donno So Dogon
 ddw	Dawera-Daweloor
@@ -2045,7 +2056,7 @@ del	Delaware
 dem	Dem
 den	Slave (Athapascan)
 dep	Pidgin Delaware
-deq	Dendi (Central African Republic)
+deq	Dendi (République centrafricaine)
 der	Deori
 des	Desano
 deu	German
@@ -2146,7 +2157,8 @@ dmy	Demta
 dna	Upper Grand Valley Dani
 dnd	Daonda
 dne	Ndendeule
-dng	Dungan
+#Dungan
+dng	Хуэйзў йүян
 dni	Lower Grand Valley Dani
 dnk	Dengka
 dnn	Dzùùngoo
@@ -2243,6 +2255,7 @@ dwl	Walo Kumbe Dogon
 dwr	Dawro
 dws	Dutton World Speedwords
 dww	Dawawa
+dwy	Dhuwaya
 dya	Dyan
 dyb	Dyaberdyaber
 dyd	Dyugun
@@ -2431,12 +2444,12 @@ for	Fore
 fos	Siraya
 fpe	Fernando Po Creole English
 fqs	Fas
-fra	French
-frc	Cajun French
+fra	Français
+frc	Cajun
 frd	Fordata
 frk	Frankish
-frm	Middle French (ca. 1400-1600)
-fro	Old French (842-ca. 1400)
+frm	Moyen Français (entre 1400-1600)
+fro	Vieux français (842 à 1400)
 frp	Franco-Provençal
 frq	Forak
 frr	Northern Frisian
@@ -2472,7 +2485,6 @@ gad	Gaddang
 gae	Guarequena
 gaf	Gende
 gag	Gagauz
-#gag-Cyrl	Gagauz
 gag-Cyrl	Гагаузы
 gag-Latn	Gagauz
 gah	Alekano
@@ -2494,7 +2506,7 @@ gaw	Nobonob
 gax	Borana-Arsi-Guji Oromo
 gay	Gayo
 gaz	West Central Oromo
-gba	Gbaya (Central African Republic)
+gba	Gbaya (République centrafricaine)
 gbb	Kaytetye
 gbc	Garawa
 gbd	Karadjeri
@@ -2521,10 +2533,10 @@ gbz	Zoroastrian Dari
 gcc	Mali
 gcd	Ganggalida
 gce	Galice
-gcf	Guadeloupean Creole French
+gcf	Créole français de la Guadeloupe
 gcl	Grenadian Creole English
 gcn	Gaina
-gcr	Guianese Creole French
+gcr	Créole français de la Guyane
 gct	Colonia Tovar German
 gda	Gade Lohar
 gdb	Pottangi Ollar Gadaba
@@ -2625,7 +2637,7 @@ glj	Gula Iro
 glk	Gilaki
 glo	Galambu
 glr	Glaro-Twabo
-glu	Gula (Chad)
+glu	Gula (Tchad)
 glv	Manx
 glw	Glavda
 gly	Gule
@@ -2735,7 +2747,8 @@ guf	Gupapuyngu
 gug	Paraguayan Guaraní
 guh	Guahibo
 gui	Eastern Bolivian Guaraní
-guj	Gujarati
+#Gujarati
+guj	ગુજરાતી
 guk	Gumuz
 gul	Sea Island Creole English
 gum	Guambiano
@@ -3295,7 +3308,7 @@ kad	Kadara
 kae	Ketangalan
 kaf	Katso
 kag	Kajaman
-kah	Kara (Central African Republic)
+kah	Kara (République centrafricaine)
 kai	Karekare
 kaj	Jju
 kak	Kayapa Kallahan
@@ -3319,7 +3332,8 @@ kaz	Kazakh
 kba	Kalarko
 kbb	Kaxuiâna
 kbc	Kadiwéu
-kbd	Kabardian
+#Kabardian
+kbd	Адыгэбзэ
 kbe	Kanju
 kbf	Kakauhua
 kbg	Khamba
@@ -3329,7 +3343,7 @@ kbj	Kari
 kbk	Grass Koiari
 kbl	Kanembu
 kbm	Iwal
-kbn	Kare (Central African Republic)
+kbn	Kare (République centrafricaine)
 kbo	Keliko
 kbp	Kabiyé
 kbq	Kamano
@@ -3354,7 +3368,7 @@ kci	Kamantan
 kcj	Kobiana
 kck	Kalanga
 kcl	Kela (Papua New Guinea)
-kcm	Gula (Central African Republic)
+kcm	Gula (République centrafricaine)
 kcn	Nubi
 kco	Kinalakna
 kcp	Kanga
@@ -3401,7 +3415,7 @@ keg	Tese
 kei	Kei
 kej	Kadar
 #kek	Kekchí				// dup
-kel	Kela (Democratic Republic of Congo)
+kel	Kela (République démocratique du Congo)
 kem	Kemak
 ken	Kenyang
 keo	Kakwa
@@ -3491,7 +3505,7 @@ khu	Nkhumbi
 khv	Khvarshi
 khw	Khowar
 khx	Kanu
-khy	Kele (Democratic Republic of Congo)
+khy	Kele (République démocratique du Congo)
 khz	Keapara
 kia	Kim
 kib	Koalib
@@ -3526,7 +3540,8 @@ kjd	Southern Kiwai
 kje	Kisar
 kjf	Khalaj
 kjg	Khmu
-kjh	Khakas
+#Khakas
+kjh	Xaкac тiлi
 kji	Zabana
 kjj	Khinalugh
 kjk	Highland Konjo
@@ -3613,11 +3628,13 @@ kmo	Kwoma
 kmp	Gimme
 kmq	Kwama
 kmr	Northern Kurdish
+kmr-Cyrl	Кӧрманщи
+kmr-Latn	Kurmandji
 kms	Kamasau
 kmt	Kemtuik
 kmu	Kanite
-kmv	Karipúna Creole French
-kmw	Komo (Democratic Republic of Congo)
+kmv	Créole français de Karipúna
+kmw	Komo (République démocratique du Congo)
 kmx	Waboda
 kmy	Koma
 kmz	Khorasani Turkish
@@ -3696,6 +3713,7 @@ kpv	Komi-Zyrian
 kpw	Kobon
 kpx	Mountain Koiali
 kpy	Koryak
+kpy-Cyrl	Нымылг’ын 
 kpz	Kupsabiny
 kqa	Mum
 kqb	Kovai
@@ -3792,7 +3810,7 @@ ktq	Katabaga
 ktr	Kota Marudu Tinagas
 kts	South Muyu
 ktt	Ketum
-ktu	Kituba (Democratic Republic of Congo)
+ktu	Kikongo ya Leta (République démocratique du Congo)
 ktv	Eastern Katu
 ktw	Kato
 ktx	Kaxararí
@@ -3811,7 +3829,8 @@ kui	Kuikúro-Kalapálo
 kuj	Kuria
 kuk	Kepo'
 kul	Kulere
-kum	Kumyk
+# Kumyk
+kum	Къумукъ тил
 kun	Kunama
 kuo	Kumukio
 kup	Kunimaipa
@@ -3970,7 +3989,7 @@ lal	Lalia
 lam	Lamba
 lan	Laru
 lao	Lao
-lap	Laka (Chad)
+lap	Laka (Tchad)
 laq	Qabiao
 lar	Larteh
 las	Lama (Togo)
@@ -4038,7 +4057,7 @@ leh	Lenje
 lei	Lemio
 lej	Lengola
 lek	Leipon
-lel	Lele (Democratic Republic of Congo)
+lel	Lele (République démocratique du  Congo)
 lem	Nomaande
 len	Lenca
 leo	Leti (Cameroon)
@@ -4053,6 +4072,7 @@ lew	Ledo Kaili
 lex	Luang
 ley	Lemolang
 lez	Lezghian
+lez-Cyrl	Лезги чIал
 lfa	Lefa
 lfn	Lingua Franca Nova
 lga	Lungga
@@ -4092,7 +4112,7 @@ lij	Ligurian
 lik	Lika
 lil	Lillooet
 lim	Limburgan
-lin	Lingala
+lin	Lingála
 lio	Liki
 lip	Sekpele
 liq	Libido
@@ -4200,7 +4220,7 @@ loq	Lobala
 lor	Téén
 los	Loniu
 lot	Otuho
-lou	Louisiana Creole French
+lou	Créole français de la Louisiane
 lov	Lopi
 low	Tampias Lobu
 lox	Loun
@@ -4619,7 +4639,7 @@ mnd	Mondé
 mne	Naba
 mnf	Mundani
 mng	Eastern Mnong
-mnh	Mono (Democratic Republic of Congo)
+mnh	Mono (République démocratique du Congo)
 mni	Manipuri
 mnj	Munji
 mnk	Mandinka
@@ -4748,7 +4768,7 @@ msf	Mekwei
 msg	Moraid
 msh	Masikoro Malagasy
 msi	Sabah Malay
-msj	Ma (Democratic Republic of Congo)
+msj	Ma (République démocratique du Congo)
 msk	Mansaka
 msl	Molof
 msm	Agusan Manobo
@@ -5072,8 +5092,8 @@ nfr	Nafaanra
 nfu	Mfumte
 nga	Ngbaka
 ngb	Northern Ngbandi
-ngc	Ngombe (Democratic Republic of Congo)
-ngd	Ngando (Central African Republic)
+ngc	Ngombe (République démocratique du Congo)
+ngd	Ngando (République centrafricaine)
 nge	Ngemba
 ngg	Ngbaka Manza
 ngh	N/u
@@ -5206,7 +5226,7 @@ nmf	Tangkhul Naga
 nmg	Kwasio
 nmh	Monsang Naga
 nmi	Nyam
-nmj	Ngombe (Central African Republic)
+nmj	Ngombe (République centrafricaine)
 nmk	Namakura
 nml	Ndemli
 nmm	Manangba
@@ -5256,9 +5276,9 @@ noc	Nuk
 nod	Northern Thai
 noe	Nimadi
 nof	Nomane
-nog	Nogai
-# as above, in cyrillic
-nog-Cyrl	Nogai
+# Nogai
+nog	Ногай тили
+nog-Cyrl	Ногай тили
 noh	Nomu
 noi	Noiri
 nok	Nooksack
@@ -5278,6 +5298,8 @@ noz	Nayi
 npa	Nar Phu
 npb	Nupbikha
 nph	Phom Naga
+# Nepali
+npi	नेपाली
 npl	Southeastern Puebla Nahuatl
 npn	Mondropolon
 npo	Pochuri Naga
@@ -5335,6 +5357,7 @@ nto	Ntomba
 ntp	Northern Tepehuan
 ntr	Delo
 nts	Natagaimas
+ntu	Natügu
 ntw	Nottoway
 nty	Mantsi
 ntz	Natanzi
@@ -5374,7 +5397,7 @@ nwr	Nawaru
 nwx	Middle Newar
 nwy	Nottoway-Meherrin
 nxa	Nauete
-nxd	Ngando (Democratic Republic of Congo)
+nxd	Ngando (République démocratique du Congo)
 nxe	Nage
 nxg	Ngad'a
 nxi	Nindi
@@ -5539,6 +5562,8 @@ oru	Ormuri
 orv	Old Russian
 orw	Oro Win
 orx	Oro
+# Orya
+ory	ଓଡ଼ିଆ
 orz	Ormu
 osa	Osage
 osc	Oscan
@@ -5795,7 +5820,7 @@ pnv	Pinigura
 pnw	Panytyima
 pnx	Phong-Kniang
 pny	Pinyin
-pnz	Pana (Central African Republic)
+pnz	Pana (République centrafricaine)
 poa	Eastern Pokomam
 pob	Western Pokomchí
 poc	Central Pokomam
@@ -6022,7 +6047,7 @@ rax	Rang
 ray	Rapa
 raz	Rahambuu
 rbb	Rumai Palaung
-rcf	Réunion Creole French
+rcf	Créole français de la Réunion
 rdb	Rudbari
 rea	Rerau
 reb	Rembong
@@ -6153,9 +6178,9 @@ sad	Sandawe
 sae	Sabanês
 saf	Safaliba
 sag	Sango
-sah	Yakut
-# as above, in cyrillic
-sah-Cyrl	Yakut
+# Yakut
+sah	Саха тыла
+sah-Cyrl	Саха тыла
 saj	Sahu
 sak	Sake
 sam	Samaritan Aramaic
@@ -6201,7 +6226,7 @@ sbz	Sara Kaba
 sca	Sansu
 scb	Chut
 sce	Dongxiang
-scf	San Miguel Creole French
+scf	Créole français de San Miguel
 scg	Sanggau
 sch	Sakachep
 sci	Sri Lankan Creole Malay
@@ -6424,7 +6449,7 @@ snc	Sinaugoro
 snd	Sindhi
 sne	Bau Bidayuh
 snf	Noon
-sng	Sanga (Democratic Republic of Congo)
+sng	Sanga (République démocratique du Congo)
 snh	Shinabo
 sni	Sensi
 snj	Riverain Sango
@@ -6445,7 +6470,7 @@ sny	Saniyo-Hiyewe
 snz	Sinsauru
 soa	Thai Song
 sob	Sobei
-soc	So (Democratic Republic of Congo)
+soc	So (République démocratique du Congo)
 sod	Songoora
 soe	Songomeno
 sog	Sogdian
@@ -6658,7 +6683,8 @@ szp	Suabo
 szv	Isu (Fako Division)
 szw	Sawai
 taa	Lower Tanana
-tab	Tabassaran
+# Tabassaran
+tab	Табасаран чIал
 tac	Lowland Tarahumara
 tad	Tause
 tae	Tariana
@@ -6871,6 +6897,7 @@ tkn	Toku-No-Shima
 tkp	Tikopia
 tkq	Tee
 tkr	Tsakhur
+tkr-Cyrl	ЦIаьхна миз
 tks	Takestani
 tkt	Kathoriya Tharu
 tku	Upper Necaxa Totonac
@@ -7171,7 +7198,8 @@ tyr	Tai Daeng
 tys	Tày Sa Pa
 tyt	Tày Tac
 tyu	Kua
-tyv	Tuvinian
+#Tuvinian
+tyv	Тыва дыл
 tyx	Teke-Tyee
 tyz	Tày
 tza	Tanzanian Sign Language
@@ -7564,9 +7592,11 @@ wrd	Warduji
 wrg	Warungu
 wrh	Wiradhuri
 wri	Wariyangga
+wrk	Garrwa
 wrl	Warlmanpa
 wrm	Warumungu
 wrn	Warnang
+wro	Worrorra
 wrp	Waropen
 wrr	Wardaman
 wrs	Waris
@@ -7618,7 +7648,8 @@ xad	Adai
 xae	Aequian
 xag	Aghwan
 xai	Kaimbé
-xal	Kalmyk
+#Kalmyk
+xal	Хальмг келн
 # remove leading / (consequent to eBible repo discoveries)
 xam	Xam
 xan	Xamtanga
@@ -7872,7 +7903,7 @@ yab	Yuhup
 yac	Pass Valley Yali
 yad	Yagua
 yae	Pumé
-yaf	Yaka (Democratic Republic of Congo)
+yaf	Yaka (République démocratique du Congo)
 yag	Yámana
 yah	Yazgulyam
 yai	Yagnobi
@@ -8033,9 +8064,9 @@ yra	Yerakai
 yrb	Yareba
 yre	Yaouré
 yri	Yarí
-yrk	Nenets
-# add dup for cyrillic version
-yrk-Cyrl	Nenets
+#Nenets add dup for cyrillic version
+yrk	Ненэцяʼ вада
+yrk-Cyrl	Ненэцяʼ вада
 yrl	Nhengatu
 yrn	Yerong
 yrs	Yarsun
@@ -8184,7 +8215,7 @@ zms	Mbesa
 zmt	Maringarr
 zmu	Muruwari
 zmv	Mbariman-Gudhinma
-zmw	Mbo (Democratic Republic of Congo)
+zmw	Mbo (République démocratique du Congo)
 zmx	Bomitaba
 zmy	Mariyedi
 zmz	Mbandja

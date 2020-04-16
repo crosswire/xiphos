@@ -1,22 +1,22 @@
-# translation of xiphos.pot to British English
-# Copyright (C) 2008
-# This file is distributed under the same license as the Xiphos package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# Thomas Abthorpe <tabthorpe@FreeBSD.org>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: xiphos\n"
+"Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 23:35-0400\n"
-"PO-Revision-Date: 2020-02-04 08:37-0500\n"
-"Last-Translator: Cyrille <lafricain79@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
-"Language: ru\n"
+"PO-Revision-Date: 2019-11-19 14:22-0500\n"
+"Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-21 04:50+0000\n"
+"Last-Translator: Cyrille <lafricain79@gmail.com>\n"
+"Language-Team: \n"
 "X-Generator: Poedit 2.0.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -27,18 +27,18 @@ msgstr ""
 
 #: ../src/backend/sword_main.cc:1149
 msgid "Configuration not found"
-msgstr "Конфигурация не найдена"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:209
 #, c-format
 msgid "Page %d of %d"
-msgstr "Страница %d из %d"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
 #: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
 #: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
-msgstr "Открыть"
+msgstr "ဖွင့်ပါ"
 
 #: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
 #: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:773
@@ -46,199 +46,194 @@ msgstr "Открыть"
 #: ../ui/gtk_webedit.ui.h:85 ../ui/markverse.gtkbuilder.h:7
 #: ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
-msgstr ""
+msgstr "_ရုတ်သိမ်းပါ"
 
 #: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
 #: ../src/editor/slib-editor.c:715 ../src/gtk/main_menu.c:774
 msgid "_Open"
-msgstr "_Открыть"
+msgstr "ဖွင့်ပါ"
 
 #: ../src/editor/slib-editor.c:415
 msgid "Save As"
-msgstr "Сохранить Как"
+msgstr "အသစ် သိမ်းဆည်း"
 
 #: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
 #: ../src/editor/webkit_editor.c:688
 msgid "Untitled document"
-msgstr "Безымянный документ"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:494
 msgid "_Close"
-msgstr ""
+msgstr "_ပိတ်ပါ"
 
 #: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
 msgid "Are you sure you want to delete the note for"
-msgstr "Вы уверены что хотите удалить заметку для"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:659
 msgid "HTML Output"
-msgstr "Результат в HTML"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:665
 msgid "HTML Source"
-msgstr "Исходный текст в HTML"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:671
 msgid "Plain Source"
-msgstr "Простой исходный текст"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
 #: ../ui/editor_studypad.xml.h:19
 msgid "_Print..."
-msgstr "_Печать..."
+msgstr "_ပရင့်ထုတ်ခြင်း…"
 
 #: ../src/editor/slib-editor.c:693 ../ui/editor_note.xml.h:12
 #: ../ui/editor_studypad.xml.h:18
 msgid "Print Pre_view"
-msgstr "П_редпросмотр Печати"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:704
 msgid "_Quit"
-msgstr "_Выход"
+msgstr "_ထွက်ပါ"
 
 #: ../src/editor/slib-editor.c:726 ../src/gtk/dialog.c:262
 msgid "_Save"
-msgstr "_Сохранить"
+msgstr "_သိမ်းပါ"
 
 #: ../src/editor/slib-editor.c:737
 msgid "Save _As..."
-msgstr "Сохранить _Как..."
+msgstr "အသစ် သိမ်းဆည်း"
 
 #: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
 #: ../ui/gtk_webedit.ui.h:56
 msgid "New"
-msgstr "Новый"
+msgstr "အသစ်"
 
 #: ../src/editor/slib-editor.c:745
 msgid "Open new document"
-msgstr "Открыть новый документ"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
 #: ../ui/gtk_webedit.ui.h:14
 msgid "Delete"
-msgstr "Удалить"
+msgstr "ဖျက်ပါ"
 
 #: ../src/editor/slib-editor.c:751
 msgid "Delete current note"
-msgstr "Удалить текущую заметку"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
 #: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
 #: ../ui/xi-menus.gtkbuilder.h:1
 msgid "_File"
-msgstr "_Файл"
+msgstr "ဖိုင်"
 
 #: ../src/editor/slib-editor.c:811
 msgid "HTML _Output"
-msgstr "_Результат в HTML"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:818
 msgid "_HTML Source"
-msgstr "_Исходный текст в HTML"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:825
 msgid "_Plain Source"
-msgstr "_Простой исходный текст"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
 #: ../ui/xi-menus.gtkbuilder.h:11
 msgid "_View"
-msgstr "_Вид"
+msgstr "မြင်ကွင်း"
 
 #: ../src/editor/slib-editor.c:841 ../ui/editor_note.xml.h:16
 #: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
 #: ../ui/gtk_webedit.ui.h:75
 msgid "Save"
-msgstr "Сохранить"
+msgstr "သိမ်းပါ"
 
 #: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
 #: ../ui/editor_link_dialog.gtkbuilder.h:1
 msgid "Insert Link"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:1208 ../src/editor/slib-editor.c:1249
 #: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
 msgid "Save the changes to document"
-msgstr "Сохранить изменения в документе"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
 #: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
 msgid "before closing?"
-msgstr "перед закрытием?"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
 #: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
 msgid "If you don't save, changes will be permanently lost."
-msgstr "Если вы не сохраните, изменения будут потеряны."
+msgstr ""
 
 #: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
 #: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
-msgstr "Файл"
+msgstr "ဖိုင်"
 
 #: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
-msgstr "StudyPad"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:1315 ../src/editor/webkit_editor.c:1270
 msgid "Note Editor"
-msgstr "Редактор Заметок"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:1333 ../src/editor/webkit_editor.c:1287
 msgid "Prayer List/Journal Editor"
-msgstr "Молитвенный Список/Редактор Журнала"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:142
 msgid "About Sword Module"
-msgstr "О Модуле Sword"
+msgstr ""
 
 #. Don't use an icon with GTK3
 #: ../src/gtk/about_modules.c:223 ../src/gtk/about_trans.c:168
 #: ../src/gtk/find_dialog.c:263
 msgid "Close"
-msgstr ""
+msgstr "ပိတ်ပါ"
 
 #: ../src/gtk/about_modules.c:415
-#, fuzzy
 msgid "<b>Module name:</b> "
-msgstr "<b>Менеджер Модулей</b>"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:422
-#, fuzzy
 msgid "<b>Module abbreviation:</b> "
-msgstr "<b>Список Модулей</b>"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:427
-#, fuzzy
 msgid "<b>Version:</b> "
-msgstr "<b>Опции</b>"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:430
 msgid "No version stamp found"
 msgstr ""
 
 #: ../src/gtk/about_modules.c:433
-#, fuzzy
 msgid "<b>Type:</b> "
-msgstr "<b>Диапазон</b>"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:435
-#, fuzzy
 msgid "Daily Devotion"
-msgstr "Стих Дня"
+msgstr "နေ့စဥ်ဖတ်ရန်ကျမ်း"
 
 #: ../src/gtk/about_modules.c:437 ../src/gtk/mod_mgr.c:1561
 #: ../src/gtk/utilities.c:612 ../src/main/sidebar.cc:1029
 #: ../src/main/sidebar.cc:1031
 msgid "Maps"
-msgstr "Карты"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:439 ../src/gtk/mod_mgr.c:1565
 #: ../src/gtk/utilities.c:618 ../src/main/sidebar.cc:1038
 #: ../src/main/sidebar.cc:1040
 msgid "Images"
-msgstr "Изображения"
+msgstr "ရုပ်ပုံများ"
 
 #: ../src/gtk/about_modules.c:441
 msgid "Glossary"
@@ -250,120 +245,101 @@ msgstr ""
 
 #: ../src/gtk/about_modules.c:449 ../src/gtk/search_sidebar.c:287
 msgid "Bible"
-msgstr "Библия"
+msgstr "သမ္မာကျမ်းစာများ"
 
 #: ../src/gtk/about_modules.c:452 ../src/gtk/search_sidebar.c:295
 #: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 msgid "Commentary"
-msgstr "Комментарий"
+msgstr "ရှင်းလင်းချက်မှတ်စု"
 
 #: ../src/gtk/about_modules.c:455 ../ui/prefs.glade.h:143
 #: ../ui/prefs.gtkbuilder.h:143
 msgid "Dictionary"
-msgstr "Словарь"
+msgstr "အဘိဓာန်များ"
 
 #: ../src/gtk/about_modules.c:458
-#, fuzzy
 msgid "General Book"
-msgstr "Книги"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:463
-#, fuzzy
 msgid "Personal Commentary"
-msgstr "Переименовать Комментарий"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:466
-#, fuzzy
 msgid "Journal"
-msgstr "Дневной журнал"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:469
-#, fuzzy
 msgid "Unknown type"
-msgstr "Неизвестно"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:475
-#, fuzzy
 msgid "<b>Language:</b> "
-msgstr "<b>Диапазоны</b>"
+msgstr "<b>ဘာသာစကား</b> "
 
 #: ../src/gtk/about_modules.c:478
 msgid "Not specified"
 msgstr ""
 
 #: ../src/gtk/about_modules.c:487
-#, fuzzy
 msgid "<b>Installed size:</b> "
-msgstr "<b>Источник Установки</b>"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:495
-#, fuzzy
 msgid "<b>Companion module(s):</b></br>"
-msgstr "<b>Окно Модуля</b>"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:505
-#, fuzzy
 msgid "<b>Features:</b>"
-msgstr "<b>Формат</b>"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:509
-#, fuzzy
 msgid "*&nbsp;Headings"
-msgstr "Заглавия"
+msgstr "*&nbsp;ခေါင်းစဉ်များ"
 
 #: ../src/gtk/about_modules.c:517
-#, fuzzy
 msgid "*&nbsp;Footnotes"
-msgstr "Сноски"
+msgstr "*&nbsp;အောက်ခြေမှတ်စု"
 
 #: ../src/gtk/about_modules.c:523
-#, fuzzy
 msgid "*&nbsp;Cross references"
-msgstr "Параллельные места"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:530
-#, fuzzy
 msgid "*&nbsp;Strong's numbers"
-msgstr "Номера Стронга"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:538
-#, fuzzy
 msgid "*&nbsp;Morphological tags"
-msgstr "Морфологические тэги"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:544
-#, fuzzy
 msgid "*&nbsp;Lemmas"
-msgstr "Леммы"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:552
-#, fuzzy
 msgid "*&nbsp;Words of Christ in red"
-msgstr "Слова Христа Красным"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:557
-#, fuzzy
 msgid "*&nbsp;Greek accents"
-msgstr "Греческие Ударения"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:563
-#, fuzzy
 msgid "*&nbsp;Hebrew Vowel Points"
-msgstr "Пункты Гласных Иврита"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:569
-#, fuzzy
 msgid "*&nbsp;Hebrew Cantillation"
-msgstr "Повествование как в Иврите"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:575
 msgid "*&nbsp;Variant readings"
 msgstr ""
 
 #: ../src/gtk/about_modules.c:582
-#, fuzzy
 msgid "*&nbsp;Transliteration forms"
-msgstr "Транслитерация"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:587
 msgid "*&nbsp;Enumerations"
@@ -374,23 +350,20 @@ msgid "*&nbsp;Glosses"
 msgstr ""
 
 #: ../src/gtk/about_modules.c:599
-#, fuzzy
 msgid "*&nbsp;Morpheme Segmentation"
-msgstr "Сегментация по Морфемам"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:606
 msgid "*&nbsp;<i>No features found</i>"
 msgstr ""
 
 #: ../src/gtk/about_modules.c:616
-#, fuzzy
 msgid "<b>Distribution license:</b>"
-msgstr "<b>Свойство</b>"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:629
-#, fuzzy
 msgid "<b>Promotional:</b> "
-msgstr "<b>Опции</b>"
+msgstr ""
 
 #: ../src/gtk/about_sword.c:81
 msgid ""
@@ -406,7 +379,7 @@ msgstr ""
 
 #: ../src/gtk/about_sword.c:100
 msgid "The SWORD Project"
-msgstr "Проект SWORD"
+msgstr ""
 
 #: ../src/gtk/about_sword.c:130
 msgid ""
@@ -434,7 +407,6 @@ msgid "BibleSync technical details"
 msgstr ""
 
 #: ../src/gtk/about_trans.c:82
-#, fuzzy
 msgid ""
 "Do you like using Xiphos to study the Bible? Would you like to see its user "
 "interface in your native language? You could translate Xiphos! \n"
@@ -444,28 +416,22 @@ msgid ""
 "below, contact us, and get involved with our efforts. Your help will be much "
 "appreciated!"
 msgstr ""
-"Перевод программы на русский язык подготовил Константин Маслюк, если вам "
-"кажется, что-то переведено не так, пишите на kalemas@mail.ru.\n"
-"\n"
-"Также мы всегда рады переводам Xiphos на другие языки. Если ты можешь "
-"сделать перевод, пожалуйста, свяжись с нами по ссылке ниже."
 
 #: ../src/gtk/about_trans.c:96
 msgid "About Xiphos Translation"
-msgstr "О Переводе Xiphos"
+msgstr ""
 
 #: ../src/gtk/about_trans.c:135
 msgid "See TRANSLATION-HOWTO in Xiphos source"
-msgstr "Смотри TRANSLATION-HOWTO в исходных файлах Xiphos"
+msgstr ""
 
 #: ../src/gtk/about_trans.c:141
 msgid "Xiphos development"
-msgstr "Разработка Xiphos"
+msgstr ""
 
 #: ../src/gtk/about_xiphos.c:129
-#, fuzzy
 msgid "Copyright © 2000-2018 Xiphos Development Team"
-msgstr "Копирайт 2000-2018 The Xiphos Development Team"
+msgstr ""
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""
@@ -474,10 +440,6 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"\n"
-"Создано на основе Проекта SWORD.\n"
-"Мы хотим поблагодарить Troy Griffitts и других ребят, давших нам Проект "
-"SWORD."
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gtk/bookmark_dialog.c:163 ../src/gtk/bookmarks_menu.c:361
@@ -485,73 +447,72 @@ msgstr ""
 #: ../src/gtk/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
 #: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Bookmark"
-msgstr "Закладка"
+msgstr "စာညှပ်"
 
 #: ../src/gtk/bookmark_dialog.c:165 ../src/gtk/bookmarks_menu.c:755
 #: ../src/gtk/bookmarks_treeview.c:139
 msgid "Enter Folder Name"
-msgstr "Введите Название Папки"
+msgstr ""
 
 #: ../src/gtk/bookmark_dialog.c:167 ../src/gtk/bookmarks_menu.c:757
 msgid "Folder Name"
-msgstr "Имя Папки"
+msgstr "ဖိုင်တွဲ အမည်"
 
 #: ../src/gtk/bookmark_dialog.c:168 ../src/gtk/bookmarks_menu.c:758
 #: ../src/gtk/bookmarks_treeview.c:141
 msgid "Folder: "
-msgstr "Папка: "
+msgstr "ဖိုင်တွဲ- "
 
 #: ../src/gtk/bookmarks_menu.c:200
-#, fuzzy
 msgid "Specify bookmarks file"
-msgstr "Редактировать пункт закладки"
+msgstr ""
 
 #: ../src/gtk/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit"
-msgstr "Редактирование"
+msgstr "တည်းဖြတ်"
 
 #: ../src/gtk/bookmarks_menu.c:364
 msgid "Folder name: "
-msgstr "Имя Папки: "
+msgstr "ဖိုင်တွဲ အမည်- "
 
 #: ../src/gtk/bookmarks_menu.c:367
 msgid "Bookmark name: "
-msgstr "Имя Закладки: "
+msgstr ""
 
 #: ../src/gtk/bookmarks_menu.c:370 ../src/gtk/bookmarks_menu.c:661
 msgid "Verse: "
-msgstr "Стих: "
+msgstr "လင်္ကာ "
 
 #: ../src/gtk/bookmarks_menu.c:371 ../src/gtk/bookmarks_menu.c:662
 msgid "Module: "
-msgstr "Модуль: "
+msgstr "မော်ကျူးများ- "
 
 #: ../src/gtk/bookmarks_menu.c:493
 msgid "Remove the selected folder"
-msgstr "Удалить выбранную папку"
+msgstr ""
 
 #: ../src/gtk/bookmarks_menu.c:494
 msgid "(and all its contents)?"
-msgstr "(и все содержимое)?"
+msgstr ""
 
 #: ../src/gtk/bookmarks_menu.c:498
 msgid "Remove the selected bookmark"
-msgstr "Удалить выбранную закладку?"
+msgstr ""
 
 #: ../src/gtk/bookmarks_menu.c:654
 msgid "Add"
-msgstr "Добавить"
+msgstr "ထပ်ထည့်ပါ"
 
 #: ../src/gtk/bookmarks_menu.c:660
 msgid "Label: "
-msgstr "Метка: "
+msgstr ""
 
 #: ../src/gtk/bookmarks_treeview.c:102 ../src/gtk/export_bookmarks.c:172
 #: ../src/gtk/export_bookmarks.c:229
 #, c-format
 msgid "Search result: %s"
-msgstr "Результат поиска: %s"
+msgstr ""
 
 #: ../src/gtk/bookmarks_treeview.c:747
 msgid ""
@@ -562,7 +523,7 @@ msgstr ""
 #: ../src/gtk/bookmarks_treeview.c:850 ../src/gtk/sidebar.c:1532
 #: ../src/gtk/sidebar.c:1584
 msgid "Bookmarks"
-msgstr "Закладки"
+msgstr "မှတ်သားပါ"
 
 #: ../src/gtk/cipher_key_dialog.c:63
 #, c-format
@@ -571,20 +532,19 @@ msgstr ""
 
 #: ../src/gtk/cipher_key_dialog.c:64
 msgid "for:"
-msgstr "для:"
+msgstr ""
 
 #: ../src/gtk/cipher_key_dialog.c:67
-#, fuzzy
 msgid "Enter Key: "
-msgstr "Введите Шифровой Ключ: "
+msgstr ""
 
 #: ../src/gtk/dialog.c:256
 msgid "_Ok"
-msgstr ""
+msgstr "အိုကေ"
 
 #: ../src/gtk/dialog.c:259 ../src/gtk/dialog.c:633
 msgid "_Yes"
-msgstr ""
+msgstr "_ဟုတ်သည်"
 
 #: ../src/gtk/dialog.c:265 ../src/gtk/dialog.c:630
 msgid "_No"
@@ -592,25 +552,25 @@ msgstr ""
 
 #: ../src/gtk/dialog.c:289
 msgid "Close without Saving"
-msgstr "Закрыть без Сохранения"
+msgstr ""
 
 #: ../src/gtk/dialog.c:639
 msgid "_OK"
-msgstr ""
+msgstr "အိုကေ"
 
 #: ../src/gtk/dialog.c:724
 msgid "Xiphos:"
-msgstr "Xiphos:"
+msgstr ""
 
 #: ../src/gtk/dialog.c:854
 msgid "Close _without Saving"
-msgstr "Закрыть _без Сохранения"
+msgstr ""
 
 #: ../src/gtk/export_bookmarks.c:175 ../src/gtk/export_bookmarks.c:232
 #: ../src/gtk/sidebar.c:1554 ../src/gtk/sidebar.c:1602
 #, c-format
 msgid "Verse List"
-msgstr "Список Стихов"
+msgstr "@@@"
 
 #: ../src/gtk/export_bookmarks.c:659
 msgid "VerseList"
@@ -623,95 +583,91 @@ msgstr ""
 #: ../src/gtk/export_dialog.c:325 ../ui/export-dialog.glade.h:4
 #: ../ui/export-dialog.gtkbuilder.h:5
 msgid "Please check copyright before exporting!"
-msgstr "Пожалуйста, проверьте копирайт перед экспортом!"
+msgstr ""
 
 #: ../src/gtk/find_dialog.c:178 ../src/gtk/find_dialog.c:242
 #: ../src/gtk/find_dialog.c:334 ../ui/gtk2_webedit.ui.h:18
 #: ../ui/gtk_webedit.ui.h:18
 msgid "Find"
-msgstr "Найти"
+msgstr "ရှာပါ"
 
 #: ../src/gtk/find_dialog.c:197
 msgid "Enter Word or Phrase"
-msgstr "Введите Слово или Фразу"
+msgstr ""
 
 #: ../src/gtk/find_dialog.c:212
 msgid "Search backwards"
-msgstr "Поиск назад"
+msgstr ""
 
 #: ../src/gtk/find_dialog.c:251 ../src/gtk/find_dialog.c:253
 msgid "Find Next"
-msgstr "Найти Следующий"
+msgstr ""
 
 #: ../src/gtk/font_dialog.c:298
 msgid "Set Module Font"
-msgstr "Выбрать Шрифт Модуля"
+msgstr ""
 
 #: ../src/gtk/font_dialog.c:332
 msgid "Change font for"
-msgstr "Изменить шрифт для"
+msgstr ""
 
 #: ../src/gtk/font_dialog.c:336 ../ui/editor_link_dialog.gtkbuilder.h:4
 msgid "Module"
-msgstr "Модуль"
+msgstr "မော်ကျူး"
 
 #: ../src/gtk/font_dialog.c:340
 msgid "Current font: "
-msgstr "Текущий шрифт: "
+msgstr ""
 
 #: ../src/gtk/font_dialog.c:381 ../src/gtk/font_dialog.c:397
 #: ../ui/prefs.gtkbuilder.h:3
 msgid "+0"
-msgstr "+0"
+msgstr "+၀"
 
 #: ../src/gtk/font_dialog.c:400
 msgid "Use the default font for this module"
-msgstr "Использовать для этого модуля шрифт по-умолчанию"
+msgstr ""
 
 #: ../src/gtk/gui.c:173
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr "BUG! Xiphos сейчас завершит работу из-заошибки \"STRDUP\"."
+msgstr ""
 
 #: ../src/gtk/gui.c:174 ../src/gtk/gui.c:204
 msgid "Please report this error to the Xiphos team with:"
-msgstr "Пожалуйста сообщите об этой ошибке команде Xiphos с:"
+msgstr ""
 
 #: ../src/gtk/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
-msgstr "BUG! Xiphos завершит работу из-зи ошибки \"STRING\"."
+msgstr ""
 
 #: ../src/gtk/main_menu.c:769
-#, fuzzy
 msgid "Open Session"
-msgstr "_Открыть Сессию"
+msgstr ""
 
 #: ../src/gtk/main_window.c:589
-#, fuzzy, c-format
+#, c-format
 msgid "Module has no support for %s."
-msgstr "В модулях, имеющих Номера Стронга"
+msgstr ""
 
 #: ../src/gtk/main_window.c:640
 msgid "BibleSync is not active."
 msgstr ""
 
 #: ../src/gtk/main_window.c:648
-#, fuzzy
 msgid "BibleSync Chat"
-msgstr "Библия"
+msgstr ""
 
 #: ../src/gtk/main_window.c:649
 msgid "[say this]"
 msgstr ""
 
 #: ../src/gtk/main_window.c:650
-#, fuzzy
 msgid "Comment:"
-msgstr "Комментарий"
+msgstr ""
 
 #: ../src/gtk/main_window.c:690
-#, fuzzy
 msgid "Xiphos: No windows."
-msgstr "Xiphos:"
+msgstr ""
 
 #: ../src/gtk/main_window.c:746
 msgid "BibleSync: Current navigation sent."
@@ -723,30 +679,30 @@ msgstr ""
 
 #: ../src/gtk/main_window.c:978
 msgid "Xiphos - Bible Study Software"
-msgstr "Xiphos - Программа для изучения Библии"
+msgstr ""
 
 #: ../src/gtk/main_window.c:1042
 msgid "Open a new tab"
-msgstr "Открыть новую вкладку"
+msgstr "@@@"
 
 #: ../src/gtk/main_window.c:1097 ../src/gtk/sidebar.c:616
 #: ../src/gtk/sidebar.c:621 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
-msgstr "Стандартный Вид"
+msgstr "@@@"
 
 #: ../src/gtk/main_window.c:1137
 msgid "Commentary View"
-msgstr "Вид Комментария"
+msgstr "@@@"
 
 #: ../src/gtk/main_window.c:1145
 msgid "Book View"
-msgstr "Вид Книги"
+msgstr "@@@"
 
 #: ../src/gtk/main_window.c:1163
 msgid "Welcome to Xiphos"
-msgstr "Добро пожаловать в Xiphos"
+msgstr ""
 
 #: ../src/gtk/menu_popup.c:1296
 msgid ""
@@ -759,40 +715,32 @@ msgid ""
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
 msgstr ""
-"Переименовывание не доступно в Windows.\n"
-"\n"
-"Xiphos ограничен файловой системой Windows,\n"
-"поскольку она не позволяет переименовывание\n"
-"компонентов открытых фалов,\n"
-"таких, как компоненты этих комментариев.\n"
-"Следовательно, переименовывание личных комментариев\n"
-"не доступно в окружении Windows."
 
 #: ../src/gtk/menu_popup.c:1315
 msgid "Rename Commentary"
-msgstr "Переименовать Комментарий"
+msgstr ""
 
 #: ../src/gtk/menu_popup.c:1318
 msgid "Choose Commentary Name"
-msgstr "Выберите Имя Комментария"
+msgstr ""
 
 #: ../src/gtk/menu_popup.c:1320
 msgid "New Name"
-msgstr "Новое Имя"
+msgstr "အမည်သစ်"
 
 #: ../src/gtk/menu_popup.c:1321 ../src/gtk/treekey-editor.c:138
 #: ../src/gtk/treekey-editor.c:195 ../src/gtk/treekey-editor.c:293
 #: ../src/main/prayerlists.cc:235
 msgid "Name: "
-msgstr "Имя: "
+msgstr "အမည်- "
 
 #: ../src/gtk/menu_popup.c:1330 ../src/main/prayerlists.cc:248
 msgid "Module names must contain [A-Za-z0-9_] only."
-msgstr "Имена модулей могут состоять только из символов  [A-Za-z0-9_]."
+msgstr ""
 
 #: ../src/gtk/menu_popup.c:1336 ../src/main/prayerlists.cc:254
 msgid "Xiphos already knows a module by that name."
-msgstr "Xiphos уже известен модуль с таким именем."
+msgstr ""
 
 #: ../src/gtk/menu_popup.c:1378
 #, c-format
@@ -800,16 +748,12 @@ msgid ""
 "Failed to create new configuration:\n"
 "%s"
 msgstr ""
-"Не удалось создать новую конфигурацию:\n"
-"%s"
 
 #: ../src/gtk/menu_popup.c:1387
 msgid ""
 "Configuration build error:\n"
 "\n"
 msgstr ""
-"Ошибка создания конфигурации:\n"
-"\n"
 
 #: ../src/gtk/menu_popup.c:2036
 msgid "No module in this pane."
@@ -842,29 +786,6 @@ msgid ""
 "Live Chat, or (if no one is responsive in chat) send mail to our users' "
 "mailing list.\n"
 msgstr ""
-"<b>Добро пожаловать в Менеджер Модулей.</b>\n"
-"\n"
-"Это механизм Xiphos для получения нового и обновления старого контента.\n"
-"Похоже вы никогда не были здесь, так что изучите какие возможности он "
-"предоставляет.\n"
-"(Это сообщение отбражается только один раз.)\n"
-"\n"
-"Модули находятся в различных <u>репозиториях</u>.  <b>Источники Модулей: "
-"Добавить/Удалить</b> покажет какие репозитории доступны на данный момент.\n"
-"\n"
-"<b>Источники Модулей: Установки</b> необходима для выбора, откуда модули "
-"должны скачиваться, или, откуда Xiphos должен получать их, а так же куда они "
-"должны быть помещены на вашей системе. Настройте <i>Источник Установки</i> и "
-"<i>Папка Установки</i>, затем нажмите <i>Обновить</i>.\n"
-"\n"
-"<b>Модули: Установить/Обновить</b> нужна для выбора и получения модулей "
-"после выбора источника и папки назначения.\n"
-"\n"
-"<b>Модули: Обслуживание</b> для архивирования и создания индексов.\n"
-"\n"
-"Смотри раздел 5 руководства Менеджера Модулей, или попроси о помощи через "
-"Live Chat, или (если никто не отвечает в чате) пошли электронное письмо в "
-"наш список рассылки пользователей.\n"
 
 #: ../src/gtk/mod_mgr.c:67
 msgid ""
@@ -903,154 +824,146 @@ msgstr ""
 
 #: ../src/gtk/mod_mgr.c:191
 msgid "Remove these modules?"
-msgstr "Удалить эти модули?"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:192
 msgid "Preparing to remove"
-msgstr "Подготовка к удалению"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:193
 msgid "Removing"
-msgstr "Удаление"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:194 ../ui/xi-menus.glade.h:158
 #: ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove"
-msgstr "Удалить"
+msgstr "ဖယ်ရှားပါ"
 
 #: ../src/gtk/mod_mgr.c:195
 msgid "Install these modules?"
-msgstr "Установить эти модули?"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:196
 msgid "Preparing to install"
-msgstr "Подготовка к установке"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:197
 msgid "Installing"
-msgstr "Установка"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:198
 msgid "Install"
-msgstr "Установить"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:199
 msgid "Archive these modules?"
-msgstr "Архивировать эти модули?"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:200
 msgid "Preparing to archive"
-msgstr "Подготовка к архивированию"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:201
 msgid "Archiving"
-msgstr "Архивация"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:202
 msgid "Archive"
-msgstr "Архивировать"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:203
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
 msgstr ""
-"Создать базу индексов для быстрого поиска для этих \n"
-"модулей (может занять несколько минут/модуль):"
 
 #: ../src/gtk/mod_mgr.c:204
 msgid "Preparing to index"
-msgstr "Подготовка к индексации"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:205
 msgid "Indexing"
-msgstr "Индексация"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:206
 msgid "Index"
-msgstr "Индексировать"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:207
 msgid "Delete fast-search index for these modules?"
-msgstr "Удалить базы индексов для быстрого поиска для этих модулей?"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:208
 msgid "Preparing to delete index"
-msgstr "Подготовкка к удаленю индексов"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:209
 msgid "Deleting index"
-msgstr "Удаление индексации"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:210
 msgid "Deletion"
-msgstr "Удаление"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:311
 msgid "The module has no About information."
-msgstr "Данный модуль не содержит информации о себе."
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:533
 msgid "Module Name"
-msgstr "Имя Модуля"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:562
 msgid "A checkmark means this module is already installed"
-msgstr "Отметка означает, что модуль уже установлен"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:589
 msgid "Click the box to work on this module"
-msgstr "Нажми на отметку, чтобы работать с данным модулем"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:590
 msgid "Click the box to select this module for install/update"
-msgstr "Нажми на отметку, чтобы установить/обновить этот модуль"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:608
 msgid "Installed"
-msgstr "Установленное"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:625
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
-"Эта иконка означает, что для данного модуля база индексов ('lucene') уже "
-"создана. База индексов необходима для быстрого оптимизированного поиска."
 
 #: ../src/gtk/mod_mgr.c:649
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
-"Блокирующая иконка означает что этот модуль зашифрован, необходимо заказать "
-"ключ у владельца"
 
 #: ../src/gtk/mod_mgr.c:664 ../src/main/biblesync_glue.cc:640
 #: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
 #: ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
-msgstr "О модуле..."
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:688
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
 msgstr ""
-"Иконка обновления означает что установленный модуль старее чем доступный: "
-"необходимо обновить модуль"
 
 #: ../src/gtk/mod_mgr.c:700
 msgid "Available"
-msgstr "Доступно"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:709
 msgid "Size"
-msgstr "Размер"
+msgstr "အရွယ်အစား"
 
 #: ../src/gtk/mod_mgr.c:718
 msgid "Description"
-msgstr "Описание"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:872
 #, c-format
@@ -1058,25 +971,23 @@ msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
-"`не удалось mkdir %s':\n"
-"%s."
 
 #: ../src/gtk/mod_mgr.c:906
 msgid " archived in: \n"
-msgstr " архивация за : \n"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:988
 msgid "Journals and prayer lists cannot be indexed."
-msgstr "Журналы и списки молитв не могут быть проиндексированы"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1019
 #, c-format
 msgid "%s failed"
-msgstr "%s провалилось"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1022 ../src/gtk/mod_mgr.c:1788
 msgid "Finished"
-msgstr "Закончено"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1195 ../src/gtk/mod_mgr.c:1197
 #: ../src/gtk/mod_mgr.c:1307 ../src/gtk/mod_mgr.c:1340
@@ -1085,7 +996,7 @@ msgstr "Закончено"
 #: ../src/gtk/utilities.c:1071 ../src/main/sidebar.cc:807
 #: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
 msgid "Unknown"
-msgstr "Неизвестно"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1518
 #, c-format
@@ -1093,32 +1004,28 @@ msgid ""
 "Repository:\n"
 "%s"
 msgstr ""
-"Репозиторий:\n"
-"%s"
 
 #: ../src/gtk/mod_mgr.c:1531
 msgid ""
 "Categorized by\n"
 "Module Type"
 msgstr ""
-"Категоризованно по\n"
-"Типу Модуля"
 
 #: ../src/gtk/mod_mgr.c:1536 ../src/gtk/utilities.c:574
 #: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
 msgid "Biblical Texts"
-msgstr "Библейские Тексты"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1540 ../src/gtk/utilities.c:580
 #: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
 #: ../src/main/sidebar.cc:986
 msgid "Commentaries"
-msgstr "Комментарии"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1544 ../src/gtk/utilities.c:587
 #: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
 msgid "Dictionaries"
-msgstr "Словари"
+msgstr "အဘိဓာန်များ"
 
 #: ../src/gtk/mod_mgr.c:1548 ../src/gtk/utilities.c:593
 #: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
@@ -1128,13 +1035,13 @@ msgstr ""
 #: ../src/gtk/mod_mgr.c:1552 ../src/gtk/utilities.c:600
 #: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
 msgid "Daily Devotionals"
-msgstr "Стих Дня"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1557 ../src/gtk/utilities.c:606
 #: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
 #: ../src/main/sidebar.cc:1022
 msgid "General Books"
-msgstr "Книги"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1569 ../src/gtk/utilities.c:624
 #: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
@@ -1146,95 +1053,93 @@ msgid ""
 "Categorized by\n"
 "Availability"
 msgstr ""
-"Категоризованно по\n"
-"Доступности"
 
 #: ../src/gtk/mod_mgr.c:1582
 msgid "Updates"
-msgstr "Обновления"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1587
 msgid "Uninstalled"
-msgstr "Удаленные"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1592 ../src/gtk/sidebar.c:632
 #: ../src/gtk/utilities.c:632 ../src/main/prayerlists.cc:233
 #: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
 msgid "Prayer List/Journal"
-msgstr "Молитвенные Списки"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1771
 msgid "Refreshing from remote source"
-msgstr "Обновление из удаленного источника"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1783
 msgid "Remote source not found"
-msgstr "Удаленный источник не найден"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1854
 msgid "Configure"
-msgstr "Настроить"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1883
 msgid "Type"
-msgstr "Тип"
+msgstr "အမျိုးအစား"
 
 #: ../src/gtk/mod_mgr.c:1890
 msgid "Caption"
-msgstr "Заголовок"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1897
 msgid "Source"
-msgstr "Источник"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1904
 msgid "Directory"
-msgstr "Каталог"
+msgstr "ဒါရိုက်တာ"
 
 #: ../src/gtk/mod_mgr.c:1912
 msgid "User"
-msgstr "Пользователь"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1919
 msgid "Password"
-msgstr "Пароль"
+msgstr "စကားဝှက်"
 
 #: ../src/gtk/mod_mgr.c:1926
 msgid "UID"
-msgstr "UID"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1941
 msgid "Module Sources"
-msgstr "Источники Модулей"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1944
 msgid "Add/Remove"
-msgstr "Добавить/Удалить"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1947
 msgid "Choose"
-msgstr "Установки"
+msgstr "ရွေးပါ"
 
 #: ../src/gtk/mod_mgr.c:1950 ../src/gtk/preferences_dialog.c:2056
 #: ../src/gtk/sidebar.c:1564 ../src/gtk/sidebar.c:1610
 msgid "Modules"
-msgstr "Модули"
+msgstr "မော်ကျူးများ"
 
 #: ../src/gtk/mod_mgr.c:1952
 msgid "Install/Update"
-msgstr "Установить/Обновить"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:1955
 msgid "Maintenance"
-msgstr "Обслуживание"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:2171
 msgid "Please Refresh"
-msgstr "Пожалуйста Обновите"
+msgstr "@@@"
 
 #: ../src/gtk/mod_mgr.c:2172
 msgid "Your module list is not up to date!"
-msgstr "Ваш список модулей не обновлен!"
+msgstr ""
 
 #. Zero Bibles is just not workable in Xiphos.
 #: ../src/gtk/mod_mgr.c:2489
@@ -1242,16 +1147,12 @@ msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
-"Вы удалили вашу последнюю Библию.\n"
-"Xiphos нужна хотябы одна."
 
 #: ../src/gtk/mod_mgr.c:2495
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
-"По-прежнему ни одной Библии не установлено.\n"
-"Без нее Xiphos не может работать."
 
 #: ../src/gtk/mod_mgr.c:2620
 #, c-format
@@ -1267,75 +1168,72 @@ msgstr ""
 
 #: ../src/gtk/mod_mgr.c:2708
 msgid "Standard remote sources have been loaded."
-msgstr "Стандартные источники были загруженны."
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:2717
 msgid "Could not load standard sources from CrossWire."
 msgstr ""
-"Не могу загрузить стандартные источники\n"
-"с сайта CrossWire."
 
 #: ../src/gtk/mod_mgr.c:2868 ../src/gtk/mod_mgr.c:3124
 msgid "Remove the selected source"
-msgstr "Удалить выбранный источник"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:2934
 msgid "Enter a remote source"
-msgstr "Настройка Удаленного Источника:"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:2943
 msgid "Caption:"
-msgstr "Заголовок:"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:2944
 msgid "Type:"
-msgstr "Тип:"
+msgstr "အမျိုးအစား-"
 
 #: ../src/gtk/mod_mgr.c:2945
 msgid "Host:"
-msgstr "Хост:"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:2946
 msgid "Directory:"
-msgstr "Каталог:"
+msgstr "ဒါရိုက်တာ-"
 
 #: ../src/gtk/mod_mgr.c:2947
 msgid "User (optional):"
-msgstr "Пользователь (опционально):"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:2948
 msgid "Password (optional):"
-msgstr "Пароль (опционально):"
+msgstr ""
 
 #. this can happen at most once
 #: ../src/gtk/mod_mgr.c:2974
 msgid "A source by that name already exists."
-msgstr "Источник с таким именем уже существует."
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:3121
 msgid "Delete a remote source"
-msgstr "Удалить удаленный источник"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:3640
-#, fuzzy
 msgid "[no module]"
-msgstr "Весь модуль"
+msgstr ""
 
 #: ../src/gtk/navbar_book.c:360 ../src/gtk/navbar_book_dialog.c:304
 msgid "Go outward, to the section containing this one"
-msgstr "Перейти наружу, к выделению, состоящему из данного"
+msgstr ""
 
 #: ../src/gtk/navbar_book.c:384 ../src/gtk/navbar_book_dialog.c:330
 msgid "Go to previous item"
-msgstr "Перейти к предыдущему пункту"
+msgstr ""
 
 #: ../src/gtk/navbar_book.c:407 ../src/gtk/navbar_book_dialog.c:354
 msgid "Go to next item"
-msgstr "Перейти к следующему пункту"
+msgstr ""
 
 #: ../src/gtk/navbar_book.c:431 ../src/gtk/navbar_book_dialog.c:378
 msgid "Go inward, to the first subsection"
-msgstr "Перейти внутрь, к подвыделению"
+msgstr ""
 
 #: ../src/gtk/navbar_versekey_dialog.c:910
 #: ../src/gtk/navbar_versekey_editor.c:939
@@ -1345,23 +1243,23 @@ msgstr ""
 
 #: ../src/gtk/parallel_dialog.c:348 ../src/gtk/preferences_dialog.c:2063
 msgid "Parallel"
-msgstr "Параллель"
+msgstr ""
 
 #: ../src/gtk/parallel_view.c:112
 msgid "Detach/Attach"
-msgstr "Разъединить/Соединить"
+msgstr ""
 
 #: ../src/gtk/parallel_view.c:117 ../ui/xi-menus.glade.h:66
 #: ../ui/xi-menus-popup.gtkbuilder.h:43
 msgid "Module Options"
-msgstr "Опции Модуля"
+msgstr ""
 
 #: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:616
 #: ../src/gtk/sidebar.c:621 ../src/gtk/tabbed_browser.c:254
 #: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
 msgid "Parallel View"
-msgstr "Параллельный Вид"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:866
 msgid "BibleSync session passphrase"
@@ -1379,9 +1277,8 @@ msgid ""
 msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:992
-#, fuzzy
 msgid "Mode selection failed.\n"
-msgstr "Прочесть Выделение"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:995
 #, c-format
@@ -1394,7 +1291,7 @@ msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:999 ../src/main/xml.c:96
 msgid "Personal"
-msgstr "Личное"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:1001
 msgid "Speaker"
@@ -1411,78 +1308,76 @@ msgstr ""
 #: ../src/gtk/preferences_dialog.c:1874 ../src/gtk/preferences_dialog.c:1925
 #: ../src/gtk/preferences_dialog.c:2385
 msgid "-- Select --"
-msgstr "-- Выбрать --"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:1888
 msgid "Locale will take effect after restart."
-msgstr "Параметры языка вступят в силу после перезапуска."
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
-msgstr "Настройки"
+msgstr "ဦးစားပေးများ"
 
 #: ../src/gtk/preferences_dialog.c:2036
 msgid "General"
-msgstr "Общие"
+msgstr "အထွေထွေ"
 
 #: ../src/gtk/preferences_dialog.c:2039
 msgid "Options"
-msgstr "Опции"
+msgstr "ရွေးချယ်မှု"
 
 #: ../src/gtk/preferences_dialog.c:2042 ../ui/prefs.glade.h:88
 #: ../ui/prefs.gtkbuilder.h:88
-#, fuzzy
 msgid "BibleSync"
-msgstr "Библия"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:2046
 msgid "Fonts"
-msgstr "Шрифты"
+msgstr "ဖောင့်"
 
 #: ../src/gtk/preferences_dialog.c:2049
 msgid "Color"
-msgstr "Цвет"
+msgstr "အရောင်"
 
 #: ../src/gtk/preferences_dialog.c:2052
-#, fuzzy
 msgid "Sizes and Faces"
-msgstr "Вкладки и Панели"
+msgstr "@@@"
 
 #: ../src/gtk/preferences_dialog.c:2066
 msgid "Special"
-msgstr "Специальные"
+msgstr "@@@"
 
 #: ../src/gtk/preferences_dialog.c:2766 ../src/gtk/search_dialog.c:519
 msgid "Clear List?"
-msgstr "Очистить Список?"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:2767 ../src/gtk/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
-msgstr "Вы уверены что хотите очистить список модулей?"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:2818 ../src/main/search_dialog.cc:678
 msgid "Remove Module?"
-msgstr "Удалить Модуль?"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:2819 ../src/main/search_dialog.cc:679
 msgid "Are you sure you want to remove the selected module?"
-msgstr "Вы уверены, что хотите удалить выбранный модуль?"
+msgstr ""
 
 #: ../src/gtk/search_dialog.c:62 ../src/main/search_dialog.cc:52
 #: ../src/main/search_sidebar.cc:51
 msgid "Searching the "
-msgstr "Поиск "
+msgstr ""
 
 #: ../src/gtk/search_dialog.c:63 ../src/main/search_dialog.cc:53
 #: ../src/main/search_sidebar.cc:52
 msgid " Module"
-msgstr " Модуль"
+msgstr "မော်ကျူး"
 
 #: ../src/gtk/search_dialog.c:64 ../src/main/search_dialog.cc:54
 #: ../src/main/search_sidebar.cc:53
 msgid "found in "
-msgstr "найдено в "
+msgstr ""
 
 #: ../src/gtk/search_dialog.c:483
 #, c-format
@@ -1491,15 +1386,15 @@ msgstr ""
 
 #: ../src/gtk/search_dialog.c:700
 msgid "The last module list may not be deleted"
-msgstr "Последний список модулей не может быть удален"
+msgstr ""
 
 #: ../src/gtk/search_dialog.c:715
 msgid "Delete list?"
-msgstr "Удалить Список?"
+msgstr ""
 
 #: ../src/gtk/search_dialog.c:716
 msgid "Are you sure you want to delete:"
-msgstr "Вы уверены что хотите удалить:"
+msgstr ""
 
 #. *****************************************************************************
 #. * Name
@@ -1593,13 +1488,10 @@ msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr ""
-"Это включающий (\"AND\") поиск:\n"
-"Находит совпадения по всем словам."
 
 #: ../src/gtk/search_sidebar.c:253
-#, fuzzy
 msgid "_Open Advanced Search"
-msgstr "П_родвинутый Поиск"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:258
 msgid "Open the separate Advanced Search dialog."
@@ -1607,77 +1499,75 @@ msgstr ""
 
 #: ../src/gtk/search_sidebar.c:274
 msgid "Search Module"
-msgstr "Поиск по Модулю"
+msgstr "@@@"
 
 #: ../src/gtk/search_sidebar.c:311
 msgid "Search Type"
-msgstr "Тип Поиска"
+msgstr "@@@"
 
 #: ../src/gtk/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
 #: ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
-msgstr "Оптимизированный (\"Lucene\")"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:333 ../src/main/search_dialog.cc:100
 #: ../ui/search-dialog.glade.h:41 ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
-msgstr "Регулярное выражение"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:340 ../src/main/search_dialog.cc:102
 #: ../ui/search-dialog.glade.h:43 ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
-msgstr "Точная фраза"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:356
 msgid "Search Options"
-msgstr "Опции Поиска"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:369 ../ui/search-dialog.glade.h:49
 #: ../ui/search-dialog.gtkbuilder.h:49
 msgid "Match case"
-msgstr "Соответствие регистру"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:385
 msgid "Search Scope"
-msgstr "Диапазон Поиска"
+msgstr "@@@"
 
 #: ../src/gtk/search_sidebar.c:398
 msgid "No scope"
-msgstr "Нет Диапазона"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:407
 msgid "Use bounds"
-msgstr "Задать Диапазон"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:415
 msgid "Last search"
-msgstr "Последний поиск"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:432
 msgid "Bounds"
-msgstr "Границы"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:447 ../src/gtk/search_sidebar.c:479
 msgid "Lower"
-msgstr "Нижняя"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:459 ../src/gtk/search_sidebar.c:486
 msgid "Upper"
-msgstr "Верхняя"
+msgstr ""
 
 #: ../src/gtk/sidebar.c:844
-#, fuzzy
 msgid "Open module in editor?"
-msgstr "Открыть в редакторе"
+msgstr ""
 
 #: ../src/gtk/sidebar.c:845
 msgid "If no, it will open for display only."
 msgstr ""
 
 #: ../src/gtk/sidebar.c:945
-#, fuzzy
 msgid "Paste verse references"
-msgstr "Настройки"
+msgstr ""
 
 #: ../src/gtk/sidebar.c:947
 msgid "List:"
@@ -1685,15 +1575,15 @@ msgstr ""
 
 #: ../src/gtk/sidebar.c:1543 ../src/gtk/sidebar.c:1593
 msgid "Search"
-msgstr "Поиск"
+msgstr "ရှာဖွေ"
 
 #: ../src/gtk/sidebar_dialog.c:174 ../src/gtk/sidebar_dialog.c:184
 msgid "Sidebar"
-msgstr "Боковая Панель"
+msgstr ""
 
 #: ../src/gtk/splash.c:403
 msgid "Powered by the SWORD Project"
-msgstr "Основано на Проекте SWORD"
+msgstr ""
 
 #: ../src/gtk/tabbed_browser.c:358
 msgid "Can't create tabs dir."
@@ -1702,73 +1592,70 @@ msgstr ""
 #: ../src/gtk/treekey-editor.c:136 ../src/gtk/treekey-editor.c:193
 #: ../src/gtk/treekey-editor.c:291
 msgid "Prayer List/Journal Item"
-msgstr "Пункт Молитвенного Списка"
+msgstr ""
 
 #: ../src/gtk/treekey-editor.c:137 ../src/gtk/treekey-editor.c:194
 #: ../src/gtk/treekey-editor.c:292
 msgid "New name"
-msgstr "Новое имя"
+msgstr "အမည်သစ်"
 
 #: ../src/gtk/treekey-editor.c:252
 msgid "Remove the selected item"
-msgstr "Удалить выбранный пункт"
+msgstr ""
 
 #: ../src/gtk/utilities.c:86
 msgid "January"
-msgstr "Январь"
+msgstr "ဇန်နဝါရီ"
 
 #: ../src/gtk/utilities.c:87
 msgid "February"
-msgstr "Февраль"
+msgstr "ဖေဖဝါရီ"
 
 #: ../src/gtk/utilities.c:88
 msgid "March"
-msgstr "Март"
+msgstr "မတ်"
 
 #: ../src/gtk/utilities.c:89
 msgid "April"
-msgstr "Апрель"
+msgstr "ဧပြီ"
 
 #: ../src/gtk/utilities.c:90
 msgid "May"
-msgstr "Май"
+msgstr "မေ"
 
 #: ../src/gtk/utilities.c:91
 msgid "June"
-msgstr "Июнь"
+msgstr "ဇွန်"
 
 #: ../src/gtk/utilities.c:92
 msgid "July"
-msgstr "Июль"
+msgstr "ဇူလိုင်"
 
 #: ../src/gtk/utilities.c:93
 msgid "August"
-msgstr "Август"
+msgstr "သြဂုတ်"
 
 #: ../src/gtk/utilities.c:94
 msgid "September"
-msgstr "Сентябрь"
+msgstr "စက်တင်ဘာ"
 
 #: ../src/gtk/utilities.c:94
 msgid "October"
-msgstr "Октябрь"
+msgstr "အောက်တိုဘာ"
 
 #: ../src/gtk/utilities.c:94
 msgid "November"
-msgstr "Ноябрь"
+msgstr "နိုဝင်ဘာ"
 
 #: ../src/gtk/utilities.c:94
 msgid "December"
-msgstr "Декабрь"
+msgstr "ဒီဇင်ဘာ"
 
 #: ../src/gtk/utilities.c:2075
-#, fuzzy
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
 msgstr ""
-"Размер изображения не может быть установлен.\n"
-"Xiphos не может изменить размер чтобы подогнать окно."
 
 #: ../src/main/biblesync_glue.cc:107
 msgid ""
@@ -1789,9 +1676,8 @@ msgid ""
 msgstr ""
 
 #: ../src/main/biblesync_glue.cc:189
-#, fuzzy
 msgid "Unknown module "
-msgstr "Весь модуль"
+msgstr ""
 
 #: ../src/main/biblesync_glue.cc:189
 msgid ""
@@ -1820,14 +1706,12 @@ msgid "Other indications are:"
 msgstr ""
 
 #: ../src/main/biblesync_glue.cc:590
-#, fuzzy
 msgid "Check the box to listen to this Speaker"
-msgstr "Нажми на отметку, чтобы работать с данным модулем"
+msgstr ""
 
 #: ../src/main/biblesync_glue.cc:603
-#, fuzzy
 msgid "Available Speakers"
-msgstr "Доступно"
+msgstr ""
 
 #: ../src/main/biblesync_glue.cc:612
 msgid "D/I"
@@ -1838,13 +1722,12 @@ msgid "Last navigation was Direct or Indirect"
 msgstr ""
 
 #: ../src/main/biblesync_glue.cc:631
-#, fuzzy
 msgid "Last Navigation"
-msgstr "Спасение"
+msgstr ""
 
 #: ../src/main/biblesync_glue.cc:650
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: ../src/main/biblesync_glue.cc:670
 msgid "IP address: "
@@ -1867,6 +1750,8 @@ msgid ""
 "\n"
 "UUID: "
 msgstr ""
+"\n"
+"UUID: "
 
 #: ../src/main/display.cc:89
 msgid ""
@@ -1879,69 +1764,66 @@ msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
-"Непавильно кодированная метка личного примечания:\n"
-"'%s'"
 
 #: ../src/main/display.cc:1117 ../src/main/display.cc:1159
 #: ../src/main/display.cc:1282 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
-msgstr "Глава"
+msgstr "အခန်းကြီး"
 
 #: ../src/main/main.c:129
 msgid "Xiphos does not understand more than one argument."
-msgstr "Xiphos не понимает более одного аргумента."
+msgstr ""
 
 #: ../src/main/main.c:240
-#, fuzzy
 msgid "Initiating HTML"
-msgstr "Запуск Gecko"
+msgstr ""
 
 #: ../src/main/main.c:245
 msgid "Building Interface"
-msgstr "Создание Интерфейса"
+msgstr ""
 
 #: ../src/main/main.c:248
 msgid "Starting Sword"
-msgstr "Запускается Sword"
+msgstr ""
 
 #: ../src/main/main.c:251
 msgid "Loading Settings"
-msgstr "Загрузка Настроек"
+msgstr ""
 
 #: ../src/main/main.c:254
 msgid "Displaying Xiphos"
-msgstr "Интерфейс Xiphos"
+msgstr ""
 
 #: ../src/main/module_dialogs.cc:186 ../src/main/previewer.cc:100
 msgid "Previewer"
-msgstr "Предпросмотр"
+msgstr ""
 
 #: ../src/main/module_dialogs.cc:240 ../src/main/module_dialogs.cc:344
 #: ../src/main/previewer.cc:188
 msgid "Footnote"
-msgstr "Сноска"
+msgstr "အောက်ခြေမှတ်စု"
 
 #: ../src/main/module_dialogs.cc:246 ../src/main/module_dialogs.cc:349
 #: ../src/main/previewer.cc:198
 msgid "Cross Reference"
-msgstr "Параллельные Места"
+msgstr ""
 
 #: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
 #: ../src/main/module_dialogs.cc:354 ../src/main/module_dialogs.cc:366
 #: ../src/main/previewer.cc:203 ../src/main/previewer.cc:223
 msgid "Strongs"
-msgstr "Стронги"
+msgstr ""
 
 #: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
 #: ../src/main/module_dialogs.cc:359 ../src/main/module_dialogs.cc:376
 #: ../src/main/previewer.cc:208 ../src/main/previewer.cc:229
 msgid "Morphology"
-msgstr "Морфология"
+msgstr ""
 
 #: ../src/main/module_dialogs.cc:986 ../src/main/url.cc:515
 msgid "Back to "
-msgstr "Назад к "
+msgstr ""
 
 #: ../src/main/parallel_view.cc:61
 msgid "Unknown parallel module: "
@@ -1950,89 +1832,88 @@ msgstr ""
 #: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:70
 #: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Strong's Numbers"
-msgstr "Номера Стронга"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:102
 #: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:73
 #: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Footnotes"
-msgstr "Сноски"
+msgstr "အောက်ခြေမှတ်စုများ"
 
 #: ../src/main/parallel_view.cc:418 ../ui/search-dialog.glade.h:99
 #: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:72
 #: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Morphological Tags"
-msgstr "Морфологические тэги"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:427 ../ui/xi-menus.glade.h:78
 #: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Hebrew Vowel Points"
-msgstr "Пункты Гласных Иврита"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:436 ../ui/xi-menus.glade.h:79
 #: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Hebrew Cantillation"
-msgstr "Повествование как в Иврите"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:445 ../ui/xi-menus.glade.h:77
 #: ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Greek Accents"
-msgstr "Греческие Ударения"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:74
 #: ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Cross-references"
-msgstr "Параллельные места"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:71
 #: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Lemmas"
-msgstr "Леммы"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:68
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Headings"
-msgstr "Заглавия"
+msgstr "ခေါင်းစဉ်များ"
 
 #: ../src/main/parallel_view.cc:481 ../src/main/parallel_view.cc:574
 #: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Morpheme Segmentation"
-msgstr "Сегментация по Морфемам"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Words of Christ in Red"
-msgstr "Слова Христа Красным"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:80
 #: ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Transliteration"
-msgstr "Транслитерация"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:512
 msgid "Textual Variants"
-msgstr "Текстовые Варианты"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:520 ../ui/xi-menus.glade.h:82
 #: ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Primary Reading"
-msgstr "Основное Чтение"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:83
 #: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "Secondary Reading"
-msgstr "Побочное Чтение"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:84
 #: ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "All Readings"
-msgstr "Все Чтения"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:547 ../ui/xi-menus.glade.h:85
 #: ../ui/xi-menus-popup.gtkbuilder.h:61
-#, fuzzy
 msgid "Transliterated Forms"
-msgstr "Транслитерация"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:86
 #: ../ui/xi-menus-popup.gtkbuilder.h:62
@@ -2046,103 +1927,103 @@ msgstr ""
 
 #: ../src/main/parallel_view.cc:758
 msgid "view context"
-msgstr "видовой контекст"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:112
 msgid "Growth"
-msgstr "Рост"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:113
 msgid "<b>For Growth</b><br/>"
-msgstr "<b>Для Роста</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:114 ../src/main/prayerlists.cc:368
 msgid "Salvation"
-msgstr "Спасение"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:115
 msgid "<b>For Salvation</b><br/>"
-msgstr "<b>Для спасения</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:116 ../src/main/prayerlists.cc:372
 msgid "Health"
-msgstr "Здоровье"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:117
 msgid "<b>For Health</b><br/>"
-msgstr "<b>Для Здоровья</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:118
 msgid "Misc"
-msgstr "Разное"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:119
 msgid "<b>Miscellaneous</b><br/>"
-msgstr "<b>Разное</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:127
 msgid "Point x"
-msgstr "Пункт x"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:128
 msgid "<b>(x)</b><br/>"
-msgstr "<b>(x)</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:129
 msgid "Point y"
-msgstr "Пункт y"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:130
 msgid "<b>(y)</b><br/>"
-msgstr "<b>(y)</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:131
 msgid "Point z"
-msgstr "Пункт z"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:132
 msgid "<b>(z)</b><br/>"
-msgstr "<b>(z)</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:140
 msgid "Minor Topic 1"
-msgstr "Тема 1"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:141
 msgid "<b>Subtopic 1</b><br/>"
-msgstr "<b>Подтема 1</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:143
 msgid "Minor Topic 2"
-msgstr "Тема 2"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:144
 msgid "<b>Subtopic 2</b><br/>"
-msgstr "<b>Подтема 2</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:146
 msgid "Minor Topic 3"
-msgstr "Тема 3"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:147
 msgid "<b>Subtopic 3</b><br/>"
-msgstr "<b>Подтема 3</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:149
 msgid "Minor Topic 4"
-msgstr "Тема 4"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:150
 msgid "<b>Subtopic 4</b><br/>"
-msgstr "<b>Подтема 4</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:234
 msgid "Name for new prayer list or journal"
-msgstr "Имя нового молитвенного списка или журнала"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:262
 msgid "Xiphos finds that prayer list already."
-msgstr "Этот молитвенный список готов."
+msgstr ""
 
 #. this one matters.
 #: ../src/main/prayerlists.cc:274
@@ -2151,151 +2032,141 @@ msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
 msgstr ""
-"Xiphos не может создать путь модуля:\n"
-"%s"
 
 #: ../src/main/prayerlists.cc:313
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
-msgstr "Базовый молитвенный список. \\par\\par Модуль создан Xiphos."
+msgstr ""
 
 #: ../src/main/prayerlists.cc:314
 msgid "BasicPrayerList"
-msgstr "BasicPrayerList"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:328
 msgid "MyPrayerList"
-msgstr "MyPrayerList"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:329
 msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
 ">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
 msgstr ""
-"<b>Люди:</b><br>Вова<br>Саша<br>Света<br><br><b>Церковь:</"
-"b><br>сиденье<br>товарищество<br>Библии для миссионеров<br><br><br>"
 
 #: ../src/main/prayerlists.cc:353
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
-"Молитвенный список, основанный на темах. \\par\\par Модуль создан Xiphos."
 
 #: ../src/main/prayerlists.cc:354
 msgid "SubjectPrayerList"
-msgstr "SubjectPrayerList"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:369
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
-msgstr "Вова<br>Саша<br>Света<br>Ваня<br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:370
 msgid "Spiritual Growth"
-msgstr "Духовный Рост"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:371
 msgid "Mike<br/>Steve<br/>"
-msgstr "Миша<br>Степан<br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:373
 msgid "Sue<br/>John<br/>"
-msgstr "Света<br>Ваня<br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:397
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
-msgstr "Месячный молитвенный список. \\par\\par Модуль создан Xiphos."
+msgstr ""
 
 #: ../src/main/prayerlists.cc:398
 msgid "MonthlyPrayerList"
-msgstr "MonthlyPrayerList"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:447
 msgid "A daily journal. \\par\\par Module created by Xiphos."
-msgstr "Дневной журнал. \\par\\par Модуль создан Xiphos."
+msgstr ""
 
 #: ../src/main/prayerlists.cc:448
 msgid "DailyJournal"
-msgstr "Дневной журнал"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:510
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr "Выделеная тема (например, проповедь). \\par\\par Модуль создан Xiphos."
+msgstr ""
 
 #: ../src/main/prayerlists.cc:511
 msgid "OutlinedTopic"
-msgstr "OutlinedTopic"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:525
 msgid "Major Topic A"
-msgstr "Главная Тема А"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:526
 msgid "<b>Major Topic A</b><br/>"
-msgstr "<b>Главная Тема А</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:528
 msgid "Major Topic B"
-msgstr "Главная Тема Б"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:529
 msgid "<b>Major Topic B</b><br/>"
-msgstr "<b>Главная Тема Б</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:531
 msgid "Major Topic C"
-msgstr "Главная Тема В"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:532
 msgid "<b>Major Topic C</b><br/>"
-msgstr "<b>Главная Тема В</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:557
-#, fuzzy
 msgid ""
 "A journal sectioned by Bible book and chapter. \\par\\par Module created by "
 "Xiphos."
-msgstr "Выделеная тема (например, проповедь). \\par\\par Модуль создан Xiphos."
+msgstr ""
 
 #: ../src/main/prayerlists.cc:558
-#, fuzzy
 msgid "BookChapter"
-msgstr "Глава"
+msgstr ""
 
 #: ../src/main/previewer.cc:193
 msgid "User Annotation"
-msgstr "Пользователькое Примечание"
+msgstr ""
 
 #: ../src/main/search_dialog.cc:104
-#, fuzzy
 msgid "Multi-word"
-msgstr "Свободная форма"
+msgstr ""
 
 #: ../src/main/search_dialog.cc:106
-#, fuzzy
 msgid "Optimized (\"lucene\")"
-msgstr "Оптимизированный (\"Lucene\")"
+msgstr ""
 
 #: ../src/main/search_dialog.cc:107
-#, fuzzy
 msgid "Attribute"
-msgstr "Свойства"
+msgstr ""
 
 #: ../src/main/search_dialog.cc:208
 #, c-format
 msgid "Search result %s: %s"
-msgstr "Результаты поиска %s: %s"
+msgstr ""
 
 #: ../src/main/search_dialog.cc:424
 msgid "Delete Range?"
-msgstr "Удалить диапазон?"
+msgstr ""
 
 #: ../src/main/search_dialog.cc:425
 msgid "Are you sure you want to delete this range?"
-msgstr "Вы уверены, что хотите удалить этот диапазон?"
+msgstr ""
 
 #: ../src/main/search_dialog.cc:638 ../src/main/search_dialog.cc:1043
 #: ../src/main/search_dialog.cc:1046 ../src/main/search_dialog.cc:1066
 #: ../src/main/search_dialog.cc:1069
 msgid "Search: "
-msgstr "Поиск: "
+msgstr "ရှာဖွေ- "
 
 #: ../src/main/search_dialog.cc:1404
 #, c-format
@@ -2304,42 +2175,35 @@ msgid ""
 "No such module is installed.\n"
 "%s"
 msgstr ""
-"%s:\n"
-"Такого модуля не установлено.\n"
-"%s"
 
 #: ../src/main/search_dialog.cc:1406
 msgid "Please adjust the module list."
-msgstr "Пожалуйста подгоните список модулей."
+msgstr ""
 
 #: ../src/main/search_dialog.cc:1422
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr "Нет базы индексов для модуля %s.%s%s"
+msgstr ""
 
 #: ../src/main/search_dialog.cc:1424
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
 msgstr ""
-"\n"
-"Поиск в режиме `Свободная форма'."
 
 #: ../src/main/search_dialog.cc:1425
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
 msgstr ""
-"\n"
-"Посмотри Мэнеджер Модулей, пункт Обслуживание."
 
 #: ../src/main/search_dialog.cc:1486
 msgid "Search finished"
-msgstr "Поиск закончен"
+msgstr ""
 
 #: ../src/main/search_sidebar.cc:88
 msgid "matches"
-msgstr "совпадает"
+msgstr ""
 
 #: ../src/main/search_sidebar.cc:203
 msgid "There is no commentary module."
@@ -2347,19 +2211,17 @@ msgstr ""
 
 #: ../src/main/settings.c:106
 msgid "$HOME is not set!"
-msgstr "$HOME не настроена!"
+msgstr ""
 
 #: ../src/main/settings.c:120
-#, fuzzy, c-format
+#, c-format
 msgid "Xiphos can not create directory "
 msgstr ""
-"Xiphos не может создать путь модуля:\n"
-"%s"
 
 #: ../src/main/settings.c:134 ../src/main/settings.c:144
 #: ../src/main/settings.c:155
 msgid "can not create "
-msgstr "не может быть создано "
+msgstr ""
 
 #: ../src/main/settings.c:187
 msgid ""
@@ -2372,7 +2234,6 @@ msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 
 #: ../src/main/settings.c:217
-#, fuzzy
 msgid ""
 "There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -2381,16 +2242,10 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
-"Ни одной Библии не установлено.\n"
-"Видимо, вы отказались от установки.\n"
-"\n"
-"Xiphos не может работать без,\n"
-"хотя бы, одного модуля Библии,\n"
-"и заканчивает работу."
 
 #: ../src/main/settings.c:223
 msgid "Bible module installation complete."
-msgstr "Установка модуля Библии выполнена."
+msgstr ""
 
 #: ../src/main/sidebar.cc:146
 msgid ""
@@ -2400,56 +2255,47 @@ msgstr ""
 
 #: ../src/main/sidebar.cc:410
 msgid "verse"
-msgstr "стих"
+msgstr ""
 
 #: ../src/main/sidebar.cc:470
 msgid "chapter"
-msgstr "глава"
+msgstr "အခန်းကြီး"
 
 #: ../src/main/sword.cc:658
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
-"Файл Xiphos'а для языковых\n"
-"аббревиатур потерян."
 
 #: ../src/main/sword.cc:664
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
-"Файл языковых аббревиатур Xiphos'а\n"
-"не может быть открыт."
 
 #: ../src/main/sword.cc:676
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
-"Xiphos не может выделить место\n"
-"для языковых аббревиатур."
 
 #: ../src/main/sword.cc:682
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
-"Xiphos не может прочитать\n"
-"файл языковых аббревиатур."
 
 #. either we were given a null sys_locale, or it didn't match anything.
 #: ../src/main/sword.cc:762
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
-msgstr "Не найдено подходящей локали для"
+msgstr ""
 
 #: ../src/main/sword.cc:764
-#, fuzzy
 msgid "Book names and menus may not be translated."
-msgstr "Названия книг и меню могут быть не переведены"
+msgstr ""
 
 #: ../src/main/sword.cc:1119 ../src/main/sword.cc:1290
 #, c-format
@@ -2469,7 +2315,7 @@ msgstr ""
 
 #: ../src/main/sword.cc:1421
 msgid "Daily devotional was requested, but there are none installed."
-msgstr "Не установлено ни одного модуля необходимого типа."
+msgstr ""
 
 #: ../src/main/sword.cc:1675
 msgid ""
@@ -2487,113 +2333,120 @@ msgstr ""
 
 #: ../src/main/tab_history.c:302
 msgid "Clear History"
-msgstr "Очистить Историю"
+msgstr ""
 
 #: ../src/main/tab_history.c:308
-#, fuzzy
 msgid "History ➛ Verse List"
-msgstr "Список Стихов"
+msgstr ""
 
 #: ../src/main/url.cc:106
 msgid "URL not found:"
-msgstr "URL не найден:"
+msgstr "URL မတွေ့ပါ။"
 
 #: ../src/main/url.cc:194
 #, c-format
 msgid "Xiphos could not execute %s"
-msgstr "Xiphos не может выполнить %s"
+msgstr ""
 
 #: ../src/main/url.cc:202
 msgid "Viewer error:\n"
-msgstr "Ошибка Просмоторщика:\n"
+msgstr ""
 
 #: ../src/main/url.cc:273
 #, c-format
 msgid "Show %s in main window"
-msgstr "Показать %s в главном окне"
+msgstr ""
 
 #: ../src/main/xml.c:87 ../src/main/xml.c:468 ../src/main/xml.c:599
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr "Документ не создан. \n"
+msgstr ""
 
 #: ../src/main/xml.c:99
 msgid "What must I do to be saved?"
-msgstr "Что Я должен делать, чтобы спастись?"
+msgstr ""
 
 #: ../src/main/xml.c:100 ../src/main/xml.c:101
 msgid "Acts 16:31"
-msgstr "Деяния 16:31"
+msgstr "တမန် ၁၆,၃၁"
 
 #: ../src/main/xml.c:102 ../src/main/xml.c:103
 msgid "Eph 2:8,9"
-msgstr "Еф 2:8,9"
+msgstr "ဧဖက် ၂,၈.၉"
 
 #: ../src/main/xml.c:104 ../src/main/xml.c:105
 msgid "Romans 1:16"
-msgstr "Римлянам 1:16"
+msgstr "ရောမဩဝါဒစာ ၁,၁၆"
 
 #: ../src/main/xml.c:107
 msgid "What is the Gospel?"
-msgstr "Что такое Проповедь Евангелия?"
+msgstr ""
 
 #: ../src/main/xml.c:108 ../src/main/xml.c:109
 msgid "1 Cor 15:1-4"
-msgstr "1 Кор 15:1-4"
+msgstr "၁ ကော် ၁၅,၁-၄"
 
 #: ../src/main/xml.c:263 ../src/main/xml.c:409 ../src/main/xml.c:1506
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr "Документ не обработан. \n"
+msgstr ""
 
 #: ../src/main/xml.c:269 ../src/main/xml.c:415 ../src/main/xml.c:435
 #: ../src/main/xml.c:1063 ../src/main/xml.c:1393 ../src/main/xml.c:1589
 #, c-format
 msgid "empty document \n"
-msgstr "пустой документ \n"
+msgstr ""
 
 #: ../src/main/xml.c:275
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr "не правильный тип, корневой объект != SwordBookmarks\n"
+msgstr ""
 
 #: ../src/main/xml.c:421
-#, fuzzy, c-format
+#, c-format
 msgid "wrong type, root node != Copy_Export\n"
-msgstr "неверный тип, root node != %s\n"
+msgstr ""
 
 #: ../src/main/xml.c:498
 #, c-format
 msgid "%s<center>%s<br>Chapter %d</center><br>"
-msgstr ""
+msgstr "%s<center>%s<br>အခန်းကြီး %d</center><br>"
 
 #: ../src/main/xml.c:502
 #, c-format
 msgid "<br><center>Chapter %d</center><br>"
-msgstr ""
+msgstr "<br><center>အခန်းကြီး %d</center><br>"
 
 #: ../src/main/xml.c:505
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Глава"
+msgstr ""
+"%s\n"
+"\n"
+"အခန်းကြီး %d\n"
+"\n"
 
 #: ../src/main/xml.c:508
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Глава"
+msgstr ""
+"\n"
+"\n"
+"အခန်းကြီး %d\n"
+"\n"
 
 #: ../src/main/xml.c:517
 #, c-format
 msgid "%s%s: %s Chapter %d<br><br>"
-msgstr ""
+msgstr "%s%s: %s အခန်းကြီး %d<br><br>"
 
 #: ../src/main/xml.c:520
 #, c-format
@@ -2601,81 +2454,83 @@ msgid ""
 "%s: %s Chapter %d\n"
 "\n"
 msgstr ""
+"%s: %s အခန်းကြီး %d\n"
+"\n"
 
 #: ../src/main/xml.c:528
 #, c-format
 msgid "&nbsp;&nbsp;[%d]"
-msgstr ""
+msgstr "&nbsp;&nbsp;[%d]"
 
 #: ../src/main/xml.c:531
 #, c-format
 msgid " [%d]"
-msgstr ""
+msgstr " [%d]"
 
 #: ../src/main/xml.c:540
 #, c-format
 msgid "%s%s (%s %d:%d%s)</body></html>"
-msgstr ""
+msgstr "%s%s (%s %d:%d%s)</body></html>"
 
 #: ../src/main/xml.c:543
 #, c-format
 msgid "%s(%s %d:%d%s)%s </body></html>"
-msgstr ""
+msgstr "%s(%s %d:%d%s)%s </body></html>"
 
 #: ../src/main/xml.c:545
 #, c-format
 msgid "%s (%s %d:%d%s)"
-msgstr ""
+msgstr "%s (%s %d:%d%s)"
 
 #: ../src/main/xml.c:548
 #, c-format
 msgid "(%s %d:%d%s) %s"
-msgstr ""
+msgstr "(%s %d:%d%s) %s"
 
 #: ../src/main/xml.c:556
 #, c-format
 msgid " %s%s"
-msgstr ""
+msgstr " %s%s"
 
 #: ../src/main/xml.c:558 ../src/main/xml.c:562
 #, c-format
 msgid "%s(%s %d:%d-%d%s)"
-msgstr ""
+msgstr "%s(%s %d:%d-%d%s)"
 
 #: ../src/main/xml.c:560
 #, c-format
 msgid "(%s %d:%d-%d%s)<br>"
-msgstr ""
+msgstr "(%s %d:%d-%d%s)<br>"
 
 #: ../src/main/xml.c:565
 #, c-format
 msgid "(%s %d:%d-%d%s)\n"
-msgstr ""
+msgstr "(%s %d:%d-%d%s)\n"
 
 #: ../src/main/xml.c:614
 msgid "Old Testament"
-msgstr "Ветхий Завет"
+msgstr ""
 
 #: ../src/main/xml.c:616
 msgid "Gen - Mal"
-msgstr "Быт - Мал"
+msgstr "ကမ္ဘာ-မာလ"
 
 #: ../src/main/xml.c:622
 msgid "New Testament"
-msgstr "Новый Завет"
+msgstr ""
 
 #: ../src/main/xml.c:624
 msgid "Mat - Rev"
-msgstr "Мф - Откр"
+msgstr "မာတေး-ဗျာ"
 
 #: ../src/main/xml.c:633
 msgid "Sample Module List"
-msgstr "Простой Список Модулей"
+msgstr ""
 
 #: ../src/main/xml.c:1069 ../src/main/xml.c:1399
 #, c-format
 msgid "wrong type, root node != %s\n"
-msgstr "неверный тип, root node != %s\n"
+msgstr ""
 
 #: ../src/main/xml.c:1551
 #, c-format
@@ -2690,75 +2545,73 @@ msgstr ""
 
 #: ../ui/bookmarks.glade.h:1 ../ui/bookmarks.gtkbuilder.h:1
 msgid "Add Bookmark"
-msgstr "Добавить Закладку"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:14
 msgid "Bookmark Dialog"
-msgstr "Диалог Закладок"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
 msgid "Create new folder"
-msgstr "Создать новую закладку"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
 #: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
-msgstr "Новая Папка"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:5 ../ui/bookmarks.gtkbuilder.h:3
 msgid "New ..."
-msgstr "Новый ..."
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:6
 msgid "Cancel Bookmark"
-msgstr "Отменить Закладку"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:7
 msgid "Label:"
-msgstr "Вхождение:"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:8
 msgid "Label Entry"
-msgstr "Отметить Вхождение"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:9
 #: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:9
 msgid "Verse:"
-msgstr "Стих:"
+msgstr "လင်္ကာ-"
 
 #: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:10
 #: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:10
 msgid "Verse Entry"
-msgstr "Вхождение Стиха"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:11
 #: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:11
 msgid "Module:"
-msgstr "Модуль:"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:12
 #: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:12
 msgid "Module Entry"
-msgstr "Вхождение Модуля"
+msgstr ""
 
 #: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:13
 msgid "Bookmark Folder Treeview"
-msgstr "Bookmark Folder Treeview"
+msgstr ""
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:2
-#, fuzzy
 msgid "Test Link"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:3 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
 msgid "Verse"
-msgstr "Стих"
+msgstr ""
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:5
-#, fuzzy
 msgid "Link Text"
-msgstr "Простой Текст"
+msgstr ""
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:6
 msgid "Link directly"
@@ -2770,165 +2623,165 @@ msgstr ""
 
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
-msgstr "Выйти из программы"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:2
 msgid "Exit"
-msgstr "Выход"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:3
 msgid "Print this note"
-msgstr "Печатать эту запись"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:4
 msgid "Preview the note to be printed"
-msgstr "Просмотреть запись для печати"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
 msgid "HTML Format switch"
-msgstr "Переключатель формата HTML"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:6
 msgid "HTML mode"
-msgstr "HTML режим"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:7
 msgid "Delete the current note"
-msgstr "Удалить текущую заметку"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:8
 msgid "_Delete Personal Comment"
-msgstr "_Удалить Личный Комментарий"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:10
 msgid "Save the current note"
-msgstr "Сохранить текущую запись"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:11
 msgid "_Save (Personal Comment)"
-msgstr "_Сохранить (Личный Комментарий)"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 msgid "E_xit"
-msgstr "_Выход"
+msgstr ""
 
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
 msgid "For_mat"
-msgstr "Для _мат"
+msgstr ""
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Print this document"
-msgstr "Печатать документ"
+msgstr ""
 
 #: ../ui/editor_studypad.xml.h:4
 msgid "Preview the document to be printed"
-msgstr "Просмотреть документ для печати"
+msgstr ""
 
 #: ../ui/editor_studypad.xml.h:8
 msgid "Open a file in Studypad"
-msgstr "Открыть файл в StudyPad"
+msgstr ""
 
 #: ../ui/editor_studypad.xml.h:10
 msgid "Save the current file"
-msgstr "Сохранить текущий файл"
+msgstr ""
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Save the current file as"
-msgstr "Сохранить текущий файл как"
+msgstr ""
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Save AS"
-msgstr "Сохранить КАК"
+msgstr "အသစ် သိမ်းဆည်း"
 
 #: ../ui/editor_studypad.xml.h:14
 msgid "Add this file to your bookmarks"
-msgstr "Добавить этот файл в закладки"
+msgstr ""
 
 #: ../ui/editor_studypad.xml.h:16
 msgid "Create a new document"
-msgstr "Создать новый документ"
+msgstr ""
 
 #: ../ui/editor_studypad.xml.h:17
 msgid "New Document"
-msgstr "Новый Документ"
+msgstr "မှတ်တမ်းမှတ်ရာအသစ်"
 
 #: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
 #: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "Copy/Export Passage"
-msgstr "Копирование/Экспорт Отрывка"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:3
 msgid "Export Passage Cancel"
-msgstr "Отменить Экспорт Отрывка"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:4
 msgid "Export Passage OK"
-msgstr "Экспорт Отрывка Ок"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:6
 msgid "Version"
-msgstr "Версия"
+msgstr "ဗားရှင်း"
 
 #: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:7
 msgid ": "
-msgstr ": "
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:8
 msgid "Key"
-msgstr "Ключ"
+msgstr "-"
 
 #: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:9
 msgid "<b>Copy</b>"
-msgstr "<b>Копировать</b>"
+msgstr "<b>မိတ္တူကူးယူပါ</b>"
 
 #: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:10
 msgid "<b>Export</b>"
-msgstr "<b>Экспорт</b>"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Export complete book"
-msgstr "Экспортировать книгу целиком"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
 #: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 msgid "Book"
-msgstr "Книга"
+msgstr "စာအုပ်"
 
 #: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:13
 msgid "Book Radio Button"
-msgstr "Кнопка Выбора Книги"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Export complete chapter"
-msgstr "Экспортировать главу целиком"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:16
 msgid "Chapter Radio Button"
-msgstr "Кнопка Выбора Главы"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Export single verse"
-msgstr "Экспортировать один стих"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse Radio Button"
-msgstr "Кнопка Выбора Стиха"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:20
 msgid "Verse range"
-msgstr "Диапазон Стихов"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:21
 msgid "<b>Format</b>"
-msgstr "<b>Формат</b>"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text"
-msgstr "Простой Текст"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:23
 msgid "Plain Text Radio Button"
-msgstr "Кнопка Выбора Простого Текста"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML"
@@ -2936,7 +2789,7 @@ msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:25
 msgid "HTML Radio Button"
-msgstr "HTML Кнопка Выбора"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:25
 msgid ""
@@ -2945,79 +2798,69 @@ msgid ""
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:26
-#, fuzzy
 msgid "_Verse numbers in text"
-msgstr "Размер номеров стиха"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:28
-#, fuzzy
 msgid "Verse Number button"
-msgstr "Номер Стиха"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:30
 msgid "Indicates whether reference is placed first or last."
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:29
-#, fuzzy
 msgid "Reference last"
-msgstr "Метка Ссылки"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:31
-#, fuzzy
 msgid "Reference last button"
-msgstr "Метка Ссылки"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:33
 msgid "Indicates whether or not version name is included in reference."
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:32
-#, fuzzy
 msgid "Include Version"
-msgstr "Версия Sword"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:34
-#, fuzzy
 msgid "Version button"
-msgstr "Кнопка Выбора Стиха"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:34
 msgid "Save Export As"
-msgstr "Сохранить Экспорт Как"
+msgstr ""
 
 #: ../ui/export-dialog.gtkbuilder.h:27
 msgid "Indicates whether verse numbers should appear inline in the text."
 msgstr ""
 
 #: ../ui/export-dialog.gtkbuilder.h:32
-#, fuzzy
 msgid "Include version"
-msgstr "Версия Sword"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
-#, fuzzy
 msgid "About Studypad"
-msgstr "О_ткрыть StudyPad"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
-#, fuzzy
 msgid "Open about dialog"
-msgstr "Открыть в диалоге"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:125
 #: ../ui/prefs.gtkbuilder.h:125
 msgid "Bold"
-msgstr ""
+msgstr "စာလုံးမဲ"
 
 #: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
-#, fuzzy
 msgid "Make selection bold"
-msgstr "Прочесть Выделение"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
 msgid "Copy"
-msgstr "Копия"
+msgstr "မိတ္တူကူးယူပါ"
 
 #: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
 msgid "Copy selection to clipboard"
@@ -3028,9 +2871,8 @@ msgid "Cut"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
-#, fuzzy
 msgid "Cut selection"
-msgstr "Выбор Модуля"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
 msgid "Decrease indent"
@@ -3045,39 +2887,33 @@ msgid "Decrease paragraph indent"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
-#, fuzzy
 msgid "Delete selection"
-msgstr "Удалить выбранный диапазон"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
-#, fuzzy
 msgid "Remove selection"
-msgstr "Удалить выбранный пункт"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
 #: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
-msgstr "Удалить Пункт"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
-#, fuzzy
 msgid "Delete current item"
-msgstr "Удалить текущую заметку"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
-#, fuzzy
 msgid "Search current document"
-msgstr "Искать по всему модулю"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
-#, fuzzy
 msgid "Font"
-msgstr "Шрифты"
+msgstr "ဖောင့်"
 
 #: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
-#, fuzzy
 msgid "Change font"
-msgstr "Изменить шрифт для"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:22 ../ui/gtk_webedit.ui.h:22
 msgid "Increase indent"
@@ -3092,66 +2928,56 @@ msgid "Increase paragraph indent"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
-#, fuzzy
 msgid "Insert emoticon"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
 msgid "Emoticon"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
-#, fuzzy
 msgid "Insert an emoticon"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
 msgid "Insert image"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
-#, fuzzy
 msgid "Image"
-msgstr "Изображения"
+msgstr "ပုံရိပ်များ"
 
 #: ../ui/gtk2_webedit.ui.h:30 ../ui/gtk_webedit.ui.h:30
 msgid "Insert image at cursor"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:31 ../ui/gtk_webedit.ui.h:31
-#, fuzzy
 msgid "Insert link"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
-#, fuzzy
 msgid "Link"
-msgstr "Ссылки"
+msgstr "ကွင်းဆက်"
 
 #: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
-#, fuzzy
 msgid "Insert a link"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:34 ../ui/gtk_webedit.ui.h:34
-#, fuzzy
 msgid "Insert Outline"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:35 ../ui/gtk_webedit.ui.h:35
-#, fuzzy
 msgid "Outline"
-msgstr "Тематический"
+msgstr "ကောက်ကြောင်း"
 
 #: ../ui/gtk2_webedit.ui.h:36 ../ui/gtk_webedit.ui.h:36
-#, fuzzy
 msgid "Insert outline"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:37 ../ui/gtk_webedit.ui.h:37
-#, fuzzy
 msgid "Insert rule"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:38 ../ui/gtk_webedit.ui.h:38
 msgid "Rule"
@@ -3162,24 +2988,20 @@ msgid "Insert horizontal rule"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:40 ../ui/gtk_webedit.ui.h:40
-#, fuzzy
 msgid "Xiphos Link"
-msgstr "Xiphos:"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
-#, fuzzy
 msgid "Xiphos"
-msgstr "Xiphos:"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
-#, fuzzy
 msgid "Insert a link to a sword module"
-msgstr "Установить эти модули?"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:43 ../ui/gtk_webedit.ui.h:43
-#, fuzzy
 msgid "Insert table"
-msgstr "Вставить Связь"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
 msgid "Table"
@@ -3191,7 +3013,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
 msgid "Italic"
-msgstr ""
+msgstr "စာလုံးစောင်း"
 
 #: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
 msgid "Change selection to italic font"
@@ -3199,7 +3021,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
 msgid "Center"
-msgstr ""
+msgstr "အလည်"
 
 #: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
 msgid "Center justify paragraph"
@@ -3215,7 +3037,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
 msgid "Left"
-msgstr ""
+msgstr "ဘယ်ဘက်"
 
 #: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
 msgid "Left justify paragraph"
@@ -3223,73 +3045,63 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
 msgid "Right"
-msgstr ""
+msgstr "ညာဖက်"
 
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
-#, fuzzy
 msgid "Create new file"
-msgstr "Создать новую закладку"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
-#, fuzzy
 msgid "Open file"
-msgstr "Открыть Модуль"
+msgstr "ဖိုင် ဖွင့်ပါ"
 
 #: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
 msgid "Paste"
-msgstr ""
+msgstr "ပြန်ထည့်ပါ"
 
 #: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
 msgid "Paste clipboard at cursor."
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
-#, fuzzy
 msgid "Print Document"
-msgstr "Печатать документ"
+msgstr "မှတ်တမ်းမှတ်ရာ ပရင့် ထုတ်ပါ"
 
 #: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
-#, fuzzy
 msgid "Print"
-msgstr "Печать"
+msgstr "ပုံနှိပ်"
 
 #: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
-#, fuzzy
 msgid "Print the current document"
-msgstr "Печатать документ"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:65 ../ui/gtk_webedit.ui.h:65
-#, fuzzy
 msgid "Print Preview"
-msgstr "П_редпросмотр Печати"
+msgstr "အစမ်းကြည့်ခြင်း ပရင့်ထုတ်ပါ"
 
 #: ../ui/gtk2_webedit.ui.h:66 ../ui/gtk_webedit.ui.h:66
-#, fuzzy
 msgid "Preview"
-msgstr "Предпрос_мотр"
+msgstr "အစမ်းကြည့်ပါ"
 
 #: ../ui/gtk2_webedit.ui.h:67 ../ui/gtk_webedit.ui.h:67
-#, fuzzy
 msgid "Print preview of current document"
-msgstr "Печатать документ"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
-#, fuzzy
 msgid "Quit"
-msgstr "_Выход"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
-#, fuzzy
 msgid "Shut down editor"
-msgstr "Открыть в редакторе"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
 msgid "Redo"
-msgstr ""
+msgstr "အနီရောင်"
 
 #: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
 msgid "Redo last undo"
@@ -3301,27 +3113,23 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
 msgid "Replace"
-msgstr ""
+msgstr "အစားထိုးပါ"
 
 #: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
-#, fuzzy
 msgid "Search and replace"
-msgstr "Критерий Поиска"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
-#, fuzzy
 msgid "Save changes to file"
-msgstr "Сохранить изменения в документе"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
-#, fuzzy
 msgid "Save as"
-msgstr "Сохранить Как"
+msgstr "အနေဖြင့် သိမ်းဆည်းမှု"
 
 #: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
-#, fuzzy
 msgid "Save file as ..."
-msgstr "Сохранить _Как..."
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
 msgid "Strikethrough"
@@ -3336,87 +3144,82 @@ msgid "Underline"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
-#, fuzzy
 msgid "Underline selection"
-msgstr "Выбор Модуля"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
 msgid "Undo"
-msgstr ""
+msgstr "ပြန်​ဖြည်ပါ"
 
 #: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
 msgid "Undo last change"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:86
-#, fuzzy
 msgid "Editor"
-msgstr "Редактирование"
+msgstr "တည်းဖြတ်သူ"
 
 #: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:88
-#, fuzzy
 msgid "Recent files"
-msgstr "Сохранить текущий файл как"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:89
 #: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
 msgid "_Edit"
-msgstr "_Инструменты"
+msgstr "တည်းဖြတ်ပါ"
 
 #: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:90
 #: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "_Help"
-msgstr "_Помощь"
+msgstr "ကူညီပါ"
 
 #: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:91
 msgid "Normal"
-msgstr ""
+msgstr "သာမန်"
 
 #: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:92
 msgid "Header 1"
-msgstr ""
+msgstr "ခေါင်းစဉ် ၁"
 
 #: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:93
 msgid "Header 2"
-msgstr ""
+msgstr "ခေါင်းစဉ် ၂"
 
 #: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:94
 msgid "Header 3"
-msgstr ""
+msgstr "ခေါင်းစဉ် ၃"
 
 #: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:95
 msgid "Header 4"
-msgstr ""
+msgstr "ခေါင်းစဉ် ၄"
 
 #: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:96
 msgid "Header 5"
-msgstr ""
+msgstr "ခေါင်းစဉ် ၅"
 
 #: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:97
 msgid "Header 6"
-msgstr ""
+msgstr "ခေါင်းစဉ် ၆"
 
 #: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:98
 msgid "Address"
-msgstr ""
+msgstr "လိပ်စာ"
 
 #: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:99
 msgid "Preformatted"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:100
-#, fuzzy
 msgid "Bulleted List"
-msgstr "Удалить Список?"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:101
 msgid "Roman Numeral List"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:102
-#, fuzzy
 msgid "Numbered List"
-msgstr "Список Стихов"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:103
 msgid "Alphabetical List"
@@ -3436,12 +3239,11 @@ msgstr ""
 
 #: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
-msgstr "Отметка Стиха"
+msgstr ""
 
 #: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:13
-#, fuzzy
 msgid "Annotation Dialog"
-msgstr "Пользователькое Примечание"
+msgstr ""
 
 #: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:2
 msgid ""
@@ -3450,49 +3252,44 @@ msgid ""
 msgstr ""
 
 #: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
-#, fuzzy
 msgid "New Annotation"
-msgstr "Пользователькое Примечание"
+msgstr ""
 
 #: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:3
 msgid "Mark"
-msgstr "Отметить"
+msgstr ""
 
 #: ../ui/markverse.glade.h:10 ../ui/markverse.gtkbuilder.h:5
 msgid "Unmark"
-msgstr "Снять Отметку"
+msgstr ""
 
 #: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
-#, fuzzy
 msgid "Remove annotation."
-msgstr "Пользователькое Примечание"
+msgstr ""
 
 #: ../ui/markverse.glade.h:12 ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
 msgstr ""
 
 #: ../ui/markverse.glade.h:13 ../ui/markverse.gtkbuilder.h:8
-#, fuzzy
 msgid "Cancel Annotation"
-msgstr "Пользователькое Примечание"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
 msgid "Module Manager"
-msgstr "Менеджер Модулей"
+msgstr "@@@"
 
 #: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
-#, fuzzy
 msgid "_View Intro"
-msgstr "_Вид"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:3 ../ui/module-manager.gtkbuilder.h:3
 msgid "Open a brief introductory explanation of how the Module Manager works."
 msgstr ""
 
 #: ../ui/module-manager.glade.h:4 ../ui/module-manager.gtkbuilder.h:4
-#, fuzzy
 msgid "_Load Standard"
-msgstr "Загрузить Стандарт"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:5 ../ui/module-manager.gtkbuilder.h:5
 msgid ""
@@ -3507,33 +3304,28 @@ msgid ""
 msgstr ""
 
 #: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
-#, fuzzy
 msgid "_Install"
-msgstr "Установить"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:8 ../ui/module-manager.gtkbuilder.h:7
-#, fuzzy
 msgid "Install or update the selected modules"
-msgstr "Установить эти модули?"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:9 ../ui/module-manager.gtkbuilder.h:9
-#, fuzzy
 msgid "Remove the selected modules from your system"
-msgstr "Удалить выбранный модуль из списка"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:10 ../ui/module-manager.gtkbuilder.h:10
 msgid "_Archive"
-msgstr "Архивировать"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:11 ../ui/module-manager.gtkbuilder.h:11
-#, fuzzy
 msgid "Create a zip archive of the selected modules."
-msgstr "Вы уверены, что хотите удалить выбранный модуль?"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:12 ../ui/module-manager.gtkbuilder.h:12
-#, fuzzy
 msgid "_Index"
-msgstr "Индексировать"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
 msgid ""
@@ -3541,14 +3333,12 @@ msgid ""
 msgstr ""
 
 #: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
-#, fuzzy
 msgid "_Delete Index"
-msgstr "Удалить индекс"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
-#, fuzzy
 msgid "Delete the fast-search index of the selected modules."
-msgstr "Удалить базы индексов для быстрого поиска для этих модулей?"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
 msgid "Scan _Obsolete"
@@ -3560,30 +3350,28 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:19
 msgid "Continue"
-msgstr "Продолжить"
+msgstr ""
 
 #. do not translate <b> and </b> they are html formating
 #: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:21
 msgid "<b>Sword</b>"
-msgstr "<b>Sword</b>"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:22
 msgid "<b>Module Manager</b>"
-msgstr "<b>Менеджер Модулей</b>"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:23
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr ""
-"<b>ПРЕДУПРЕЖДЕНИЕ:</b> Используйте с осторожностью в странах\n"
-"преследующих за Слово Божие."
 
 #: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:24
 msgid "<b>Add and Remove Sources</b>"
-msgstr "<b>Добавить или Удалить Источники</b>"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:25
 msgid "Current local sources"
-msgstr "Текущий локальный источник:"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:26
 msgid ""
@@ -3597,7 +3385,7 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:28
 msgid "Current Remote Sources"
-msgstr "Текущий удаленный источник:"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:29
 msgid ""
@@ -3606,163 +3394,154 @@ msgid ""
 msgstr ""
 
 #: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:30
-#, fuzzy
 msgid "Remove a remote install source."
-msgstr "Удалить удаленный источник"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:31
 msgid "<b>Install Source</b>"
-msgstr "<b>Источник Установки</b>"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:32
 msgid "Local"
-msgstr "Локально"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:33
 msgid "Remote"
-msgstr "Удаленно"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:34
 msgid "<b>Install Destination</b>"
-msgstr "<b>Папка Установки</b>"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:35
 msgid "<i>Personal area, for your use only:</i>"
-msgstr "<i>Личная зона, только для вашего использования:</i>"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:36
 msgid "Home dir"
-msgstr "Домашняя папка"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:37
 msgid "<i>System area, for all users:</i>"
-msgstr "<i>Системная зона, для всех пользователей:</i>"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:38
 msgid "Sword sys dir"
-msgstr "Системная папка Sword"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:38 ../ui/module-manager.gtkbuilder.h:39
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
-"<b>Предупреждение:</b> Если вы живете в стране преследующей за Слово Божие и "
-"не хотите рисковать то, вы НЕ должны использовать возможность удаленной "
-"установки модулей! "
 
 #: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:40
 msgid "Local Install Folder"
-msgstr "Локальная Папку Установки"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
 msgid "Drop down history list"
-msgstr "Выпадающий список истории"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:2
 msgid "Choose book to display"
-msgstr "Выберите Книгу"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:3 ../ui/navbar_versekey.gtkbuilder.h:3
 msgid "Book Selector Button"
-msgstr "Кнопка Выбора Книги"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:4 ../ui/navbar_versekey.gtkbuilder.h:2
 msgid "<b>Revelation of John</b>"
-msgstr "<b>Откровение Иоанна Богослова</b>"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:5
-#, fuzzy
 msgid "Choose chapter to display"
-msgstr "Выберите Книгу"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:6 ../ui/navbar_versekey.gtkbuilder.h:5
 msgid "Toggle Chapter Button"
-msgstr "Переключить Кнопку Главы"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:7 ../ui/navbar_versekey.gtkbuilder.h:4
 msgid "1"
-msgstr "1"
+msgstr "၁"
 
 #: ../ui/navbar_versekey.glade.h:8
-#, fuzzy
 msgid "Choose Verse to display"
-msgstr "Выберите Книгу"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:9 ../ui/navbar_versekey.gtkbuilder.h:6
 msgid "Toggle Verse Button"
-msgstr "Переключить Кнопку Стиха"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
-msgstr "Введите ссылку на Стих в формате Книга 1:1 и нажмите Ввод"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
 msgid "Reference Entry"
-msgstr "Метка Ссылки"
+msgstr ""
 
 #: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:10
 msgid "Cover"
-msgstr "Обертка"
+msgstr ""
 
 #: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:11
 msgid "<b>Font Colors</b>"
-msgstr "<b>Цвета Шрифтов</b>"
+msgstr "<b>ဖောင့်အရောင်</b>"
 
 #: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:12
 msgid "Background"
-msgstr "Фон"
+msgstr "နောက်ခံ"
 
 #: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
-#, fuzzy
 msgid " "
-msgstr ": "
+msgstr " "
 
 #: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
 msgid "Foreground"
-msgstr "Передний План"
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
 msgid "Current Verse"
-msgstr "Текущий Стих"
+msgstr ""
 
 #: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
 msgid "Verse Number"
-msgstr "Номер Стиха"
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
 msgid "Links"
-msgstr "Ссылки"
+msgstr "ကွင်းဆက်များ"
 
 #: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
 msgid "Highlight Foreground"
-msgstr "Подсветить Передний План"
+msgstr ""
 
 #: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
 msgid "Highlight Background"
-msgstr "Подсветить Фон"
+msgstr ""
 
 #: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
-#, fuzzy
 msgid "Invert color pairs"
-msgstr "Вставить Закладку"
+msgstr ""
 
 #: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
 msgid "Normal Text"
 msgstr ""
 
 #: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
-#, fuzzy
 msgid "Highlight"
-msgstr "Подсветить Фон"
+msgstr ""
 
 #: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
 msgid "Font Colors"
-msgstr "Цвета Шрифтов"
+msgstr "ဖောင့်အရောင်"
 
 #: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
 msgid "<b>Font Sizes</b>"
-msgstr "<b>Размеры Шрифта</b>"
+msgstr "<b>ဖောင့်အရောင်</b>"
 
 #: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
 msgid "All displayed font sizes are relative to this choice"
@@ -3770,7 +3549,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:26
 msgid "Base font size"
-msgstr "Базовый размер шрифта"
+msgstr ""
 
 #: ../ui/prefs.glade.h:19
 msgid ""
@@ -3783,14 +3562,14 @@ msgid ""
 "+4\n"
 "+5"
 msgstr ""
-"-2\n"
-"-1\n"
-"+0\n"
-"+1\n"
-"+2\n"
-"+3\n"
-"+4\n"
-"+5"
+"-၂\n"
+"-၁\n"
+"+၀\n"
+"+၁\n"
+"+၂\n"
+"+၃\n"
+"+၄\n"
+"+၅"
 
 #: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
 msgid "Commonly -1, to make verse numbers less obtrusive"
@@ -3798,7 +3577,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
 msgid "Verse number size"
-msgstr "Размер номеров стиха"
+msgstr ""
 
 #: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
 msgid ""
@@ -3811,18 +3590,16 @@ msgid "Font preferences, per language"
 msgstr ""
 
 #: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
-#, fuzzy
 msgid "Language Font Combo"
-msgstr "Изменить Комбо Книги"
+msgstr ""
 
 #: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
 msgid "Font Misc"
-msgstr "Шрифт для Разного"
+msgstr ""
 
 #: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
-#, fuzzy
 msgid "<b>BibleSync</b>"
-msgstr "<b>Диапазон</b>"
+msgstr "<b>BibleSync</b>"
 
 #: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:34
 msgid ""
@@ -3837,9 +3614,8 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:36
-#, fuzzy
 msgid "<i>Mode:</i>"
-msgstr "<b>Модули</b>"
+msgstr ""
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:35
 msgid "Select the mode in which BibleSync should operate."
@@ -3854,9 +3630,8 @@ msgid "Disable BibleSync."
 msgstr ""
 
 #: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
-#, fuzzy
 msgid "BSP off radio button"
-msgstr "Кнопка Выбора Книги"
+msgstr ""
 
 #: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
 msgid "_Speaker"
@@ -3867,9 +3642,8 @@ msgid "Enable BibleSync as the speaker."
 msgstr ""
 
 #: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
-#, fuzzy
 msgid "BSP speaker radio button"
-msgstr "Переключатель Точной Фразы"
+msgstr ""
 
 #: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
 msgid "_Audience"
@@ -3880,23 +3654,20 @@ msgid "Enable BibleSync as a member of the audience."
 msgstr ""
 
 #: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
-#, fuzzy
 msgid "BSP audience radio button"
-msgstr "Кнопка Выбора Простого Текста"
+msgstr ""
 
 #: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
-#, fuzzy
 msgid "_Personal"
-msgstr "Личное"
+msgstr ""
 
 #: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
 msgid "Enable BibleSync for personal or team use."
 msgstr ""
 
 #: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
-#, fuzzy
 msgid "BSP personal radio button"
-msgstr "Переключатель Регулярных Выражений"
+msgstr ""
 
 #: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
 msgid "Private"
@@ -3909,46 +3680,40 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
-#, fuzzy
 msgid "BSP privacy button"
-msgstr "Кнопка Выбора Стиха"
+msgstr ""
 
 #: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:53
-#, fuzzy
 msgid "<i>Navigate:</i>"
-msgstr "Спасение"
+msgstr ""
 
 #: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:52
 msgid "Choose how to accept incoming navigation synchronization."
 msgstr ""
 
 #: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
-#, fuzzy
 msgid "_Direct"
-msgstr "Каталог"
+msgstr ""
 
 #: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
 msgstr ""
 
 #: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
-#, fuzzy
 msgid "BSP nav direct radio button"
-msgstr "Переключатель Одиночного модуля"
+msgstr ""
 
 #: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
-#, fuzzy
 msgid "_Verse list"
-msgstr "Список Стихов"
+msgstr ""
 
 #: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
 msgid "BibleSync navigation will use Xiphos' sidebar verse list."
 msgstr ""
 
 #: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
-#, fuzzy
 msgid "BSP nav verse list radio button"
-msgstr "Переключатель Списка Модулей"
+msgstr ""
 
 #: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
 msgid "_Keyboard only"
@@ -3961,14 +3726,12 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
-#, fuzzy
 msgid "BSP keyboard button"
-msgstr "Переключатель Регулярных Выражений"
+msgstr ""
 
 #: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:64
-#, fuzzy
 msgid "<i>Listen:</i>"
-msgstr "<b>Имя Списка</b>"
+msgstr ""
 
 #: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:63
 msgid "Xiphos will listen to Speakers according to choice here."
@@ -3983,9 +3746,8 @@ msgid "Choose the Speakers to be followed."
 msgstr ""
 
 #: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
-#, fuzzy
 msgid "BSP listen some radio button"
-msgstr "Кнопка Выбора Простого Текста"
+msgstr ""
 
 #: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
 msgid "All"
@@ -3996,27 +3758,24 @@ msgid "All Speakers will be followed."
 msgstr ""
 
 #: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
-#, fuzzy
 msgid "BSP listen all radio button"
-msgstr "Переключатель Регулярных Выражений"
+msgstr ""
 
 #: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
 msgid "None"
-msgstr ""
+msgstr "ဘာမျှမရှိ"
 
 #: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
 msgid "No Speakers will be followed."
 msgstr ""
 
 #: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
-#, fuzzy
 msgid "BSP listen none radio button"
-msgstr "Кнопка Выбора Простого Текста"
+msgstr ""
 
 #: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:75
-#, fuzzy
 msgid "<i>Special:</i>"
-msgstr "Специальные"
+msgstr ""
 
 #: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:74
 msgid ""
@@ -4026,23 +3785,20 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
-#, fuzzy
 msgid "Presence"
-msgstr "Настройки"
+msgstr ""
 
 #: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Presence announcements will be shown in dialogs."
 msgstr ""
 
 #: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
-#, fuzzy
 msgid "BSP presence button"
-msgstr "Кнопка Выбора Стиха"
+msgstr ""
 
 #: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
-#, fuzzy
 msgid "Mismatch"
-msgstr "совпадает"
+msgstr ""
 
 #: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
 msgid "Mismatches from your session will be shown in dialogs."
@@ -4076,13 +3832,12 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
-#, fuzzy
 msgid "BSP event group-as-tab button"
-msgstr "Переключатель Одиночного модуля"
+msgstr ""
 
 #: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "<b>General</b>"
-msgstr "<b>Общие</b>"
+msgstr ""
 
 #: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
 msgid ""
@@ -4092,19 +3847,19 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
 msgid "Special Locale (requires restart)"
-msgstr "Настройка языка (перезапуск)"
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
 msgid "Special Locale Combo"
-msgstr "Комбо Специальной Локали"
+msgstr ""
 
 #: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Show splash screen at start up"
-msgstr "Показывать стартовый экран при загрузке"
+msgstr ""
 
 #: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
 msgid "Show Daily Devotion at start up"
-msgstr "Показывать Стих Дня при загрузке"
+msgstr ""
 
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
 msgid ""
@@ -4114,7 +3869,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
 msgid "Use default Dictionary"
-msgstr "Использовать Словарь по-умолчанию"
+msgstr ""
 
 #: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
 msgid ""
@@ -4124,82 +3879,71 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
 msgid "Use default Dictionary Checkbox"
-msgstr "Флажок Использования Словаря по-умолчанию"
+msgstr ""
 
 #: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
 msgid "Scroll to Previous/Next Chapter"
-msgstr "Листать к Предыдущей/Следующие Главе"
+msgstr ""
 
 #: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
-"Использовать скрол-бар Текста Библии чтобы листать к предыдущей или "
-"следующей главе"
 
 #: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr "Флажок Листания к Предыдущей/Следующие Главе"
+msgstr ""
 
 #: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 msgid "Resize images"
-msgstr "Изменять Размер Изображений"
+msgstr ""
 
 #: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
-#, fuzzy
 msgid "Automatically resize image content to fit the pane"
 msgstr ""
-"Автоматически подгонять размер изображений в комментариях, книгах, и "
-"словарях к  размеру под-окна"
 
 #: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "Resize images checkbox"
-msgstr "Флажок Изменения Размера Изображений"
+msgstr ""
 
 #: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
 msgid "Highlight current verse"
-msgstr "Подсветить текущий стих"
+msgstr ""
 
 #: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
-#, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr "Применять высоко-контрастную цветовую схему для текущего стиха"
+msgstr ""
 
 #: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
 msgid "Highlight current verse check box"
-msgstr "Флажок подсветки текущего стиха"
+msgstr ""
 
 #: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
-#, fuzzy
 msgid "Highlight user annotations"
-msgstr "Пользователькое Примечание"
+msgstr ""
 
 #: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
-#, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
-msgstr "Применять высоко-контрастную цветовую схему для текущего стиха"
+msgstr ""
 
 #: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
-#, fuzzy
 msgid "Highlight user annotations check box"
-msgstr "Флажок подсветки текущего стиха"
+msgstr ""
 
 #: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
-#, fuzzy
 msgid "Cross-references in verse list"
-msgstr "Параллельные места"
+msgstr ""
 
 #: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 
 #: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
-#, fuzzy
 msgid "Xrefs in verse list check box"
-msgstr "Флажок Изменения Размера Изображений"
+msgstr ""
 
 #: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
 msgid "Enable Prayer Lists"
-msgstr "Включить Молитвенные Списки"
+msgstr ""
 
 #: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
 msgid "Make journals/prayer lists available"
@@ -4207,7 +3951,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
 msgid "Enable Prayer Lists Checkbox"
-msgstr "Флажок Включения Молитвенных Списков"
+msgstr ""
 
 #: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "Enable Statusbar"
@@ -4218,9 +3962,8 @@ msgid "Enable/Disable Statusbar."
 msgstr ""
 
 #: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
-#, fuzzy
 msgid "Enable Statusbar Checkbox"
-msgstr "Флажок Включения Молитвенных Списков"
+msgstr ""
 
 #: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 msgid "Parallel color alternation"
@@ -4231,28 +3974,24 @@ msgid "Parallel window can use alternating foreground/background."
 msgstr ""
 
 #: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
-#, fuzzy
 msgid "Enable Parallel Alternation Checkbox"
-msgstr "Флажок Включения Молитвенных Списков"
+msgstr ""
 
 #: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:124
-#, fuzzy
 msgid "Verse number"
-msgstr "Номер Стиха"
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:123
 msgid "Offset the verse number in several ways"
 msgstr ""
 
 #: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
-#, fuzzy
 msgid "Show verse number in bold text"
-msgstr "Показать _Номера Стихов"
+msgstr ""
 
 #: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
-#, fuzzy
 msgid "Verse number bold checkbox"
-msgstr "Размер номеров стиха"
+msgstr ""
 
 #: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "Brackets"
@@ -4263,187 +4002,179 @@ msgid "Show verse number with [surrounding brackets]"
 msgstr ""
 
 #: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
-#, fuzzy
 msgid "Verse number bracket checkbox"
-msgstr "Флажок Использования Стих на Строку"
+msgstr ""
 
 #: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
-#, fuzzy
 msgid "Superscript"
-msgstr "Описание"
+msgstr "အပေါ်ထပ်တင်ပါ"
 
 #: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
-#, fuzzy
 msgid "Show verse number as a superscript"
-msgstr "Показать _Номера Стихов"
+msgstr ""
 
 #: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
-#, fuzzy
 msgid "Verse number superscript checkbox"
-msgstr "Размер номеров стиха"
+msgstr ""
 
 #: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
-#, fuzzy
 msgid "StudyPad default directory"
-msgstr "Комбо директории StudyPad по-умолчанию"
+msgstr ""
 
 #: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "Select A Directory"
-msgstr "Выбрать Директорию"
+msgstr ""
 
 #: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
 msgid "StudyPad default directory combo"
-msgstr "Комбо директории StudyPad по-умолчанию"
+msgstr ""
 
 #: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "General Misc"
-msgstr "Общее Разное"
+msgstr ""
 
 #: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "<b>Main Window Modules</b>"
-msgstr "<b>Окно Модуля</b>"
+msgstr ""
 
 #: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 msgid "Biblical Text"
-msgstr "Библейский Текст"
+msgstr "သမ္မာကျမ်းစာစာသား"
 
 #: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 msgid "Change Biblical Text Combo"
-msgstr "Изменить Комбо Библейского Текста"
+msgstr ""
 
 #: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 msgid "Change Commentary Combo"
-msgstr "Изменить Комбо Комментария"
+msgstr ""
 
 #: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 msgid "Change Dictionary Combo"
-msgstr "Изменить Комбо Словаря"
+msgstr ""
 
 #: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 msgid "Change Book Combo"
-msgstr "Изменить Комбо Книги"
+msgstr ""
 
 #: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
-msgstr "<b>Модули</b>"
+msgstr "<b>မော်ကျူးများ</b>"
 
 #: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
-msgstr "Очистить все модули из списка"
+msgstr ""
 
 #: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
-msgstr "Кнопка Очистки Модулей из Списка"
+msgstr ""
 
 #: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
-msgstr "Удалить выбранный модуль из списка"
+msgstr ""
 
 #: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
-msgstr "Кнопка Удаления Выбранного Модуля из Списка"
+msgstr ""
 
 #: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
-#, fuzzy
 msgid "Open a dialog to select modules"
-msgstr "Открыть диалог выбора модулей, чтобы добавить из в список"
+msgstr ""
 
 #: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
-msgstr "Добавить Модули"
+msgstr ""
 
 #: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
-msgstr "Кнопка Открытия Диалога Выбора"
+msgstr ""
 
 #: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
 msgid "Modules Parallel"
-msgstr "Модули Параллельное"
+msgstr ""
 
 #: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
 msgid "<b>Special Purpose Modules</b>"
-msgstr "<b>Модули Специального Назначения</b>"
+msgstr ""
 
 #: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Daily Devotional"
-msgstr "Стих Дня"
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Daily Devotional Combo"
-msgstr "Комбо Стих Дня"
+msgstr ""
 
 #: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
 msgid "Hebrew Lexicon"
-msgstr "Еврейский Лексикон"
+msgstr ""
 
 #: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
 msgid "Hebrew Lexicon Combo"
-msgstr "Комбо Еврейского Лексикона"
+msgstr ""
 
 #: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
 msgid "Greek Lexicon"
-msgstr "Греческий Лексикон"
+msgstr ""
 
 #: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
 msgid "Greek Lexicon Combo"
-msgstr "Комбо Греческого Лексикона"
+msgstr ""
 
 #: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
 msgid "Default Dictionary"
-msgstr "Словарь По-умолчанию"
+msgstr "@@@"
 
 #: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
 msgid "Change Default Dictionary Combo"
-msgstr "Изменить Комбо Словаря По-умолчанию"
+msgstr ""
 
 #: ../ui/prefs.glade.h:165 ../ui/prefs.gtkbuilder.h:165
 msgid "Personal Notes"
-msgstr "Личные Заметки"
+msgstr ""
 
 #: ../ui/prefs.glade.h:166 ../ui/prefs.gtkbuilder.h:166
 msgid "Change Personal Notes Combo"
-msgstr "Изменить Комбо Личных Комментариев"
+msgstr ""
 
 #: ../ui/prefs.glade.h:167 ../ui/prefs.gtkbuilder.h:167
 msgid "Modules Misc"
-msgstr "Модули Разное"
+msgstr ""
 
 #: ../ui/prefs.gtkbuilder.h:1
 msgid "-2"
-msgstr ""
+msgstr "-၂"
 
 #: ../ui/prefs.gtkbuilder.h:2
-#, fuzzy
 msgid "-1"
-msgstr "1"
+msgstr "-၁"
 
 #: ../ui/prefs.gtkbuilder.h:4
-#, fuzzy
 msgid "+1"
-msgstr "1"
+msgstr "+၁"
 
 #: ../ui/prefs.gtkbuilder.h:5
 msgid "+2"
-msgstr ""
+msgstr "+၂"
 
 #: ../ui/prefs.gtkbuilder.h:6
 msgid "+3"
-msgstr ""
+msgstr "+၃"
 
 #: ../ui/prefs.gtkbuilder.h:7
 msgid "+4"
-msgstr ""
+msgstr "+၄"
 
 #: ../ui/prefs.gtkbuilder.h:8
 msgid "+5"
-msgstr ""
+msgstr "+၅"
 
 #: ../ui/prefs.gtkbuilder.h:118
 msgid "Enable/disable the Statusbar"
@@ -4451,7 +4182,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:1 ../ui/search-dialog.gtkbuilder.h:1
 msgid "Advanced Search"
-msgstr "Продвинутый Поиск"
+msgstr "အဆင့်မြင့်ရှာဖွေ"
 
 #: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
 msgid "_Lucene Search Syntax"
@@ -4464,9 +4195,8 @@ msgid ""
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
-#, fuzzy
 msgid "_Attribute Search"
-msgstr "Поиск Свойств"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:5 ../ui/search-dialog.gtkbuilder.h:5
 msgid "Open a brief explanation of attribute-based searches."
@@ -4474,111 +4204,111 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
 msgid "for "
-msgstr "для "
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
 msgid "Main Search Entry"
-msgstr "Пункт Основного Поиска"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:8 ../ui/search-dialog.gtkbuilder.h:9
 msgid "Start/stop searching"
-msgstr "Начать / Остановить поиск"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:9 ../ui/search-dialog.gtkbuilder.h:10
 msgid "Find Button"
-msgstr "Кнопка Найти"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:10 ../ui/search-dialog.gtkbuilder.h:11
 msgid "Search Criteria Treeview"
-msgstr "Деревовид Критерия Поиска"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:11 ../ui/search-dialog.gtkbuilder.h:12
 msgid "<b>Scope</b>"
-msgstr "<b>Диапазон</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:12 ../ui/search-dialog.gtkbuilder.h:14
 msgid "Search entire module"
-msgstr "Искать по всему модулю"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:13 ../ui/search-dialog.gtkbuilder.h:13
 msgid "Entire module"
-msgstr "Весь модуль"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:14 ../ui/search-dialog.gtkbuilder.h:15
 msgid "Entire module radiobutton"
-msgstr "Переключатель Всего модуля"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:15 ../ui/search-dialog.gtkbuilder.h:17
 msgid "Use the results of the last search as the scope of the search"
-msgstr "Использовать результаты последнего поиска как диапазон поиска"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:16 ../ui/search-dialog.gtkbuilder.h:16
 msgid "Current results"
-msgstr "Текущие результаты"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:17 ../ui/search-dialog.gtkbuilder.h:18
 msgid "Current results radiobutton"
-msgstr "Переключатель текущих результатов"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:18 ../ui/search-dialog.gtkbuilder.h:20
 msgid "Use a custom range for the scope of the search"
-msgstr "Использовать пользовательский диапазон для поиска"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:19 ../ui/search-dialog.gtkbuilder.h:19
 msgid "Custom verse range"
-msgstr "Диапазон Стихов"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:20 ../ui/search-dialog.gtkbuilder.h:21
 msgid "Custom verse range radiobutton"
-msgstr "Переключатель произвольного диапазона стихов"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
 msgid "Custom Range Selector Combo"
-msgstr "Комбо Выборщика Произвольного Диапазона"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
 msgid "Use a single module for the search"
-msgstr "Использовать для поиска всего один модуль"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:24 ../ui/search-dialog.gtkbuilder.h:24
 msgid "Single module"
-msgstr "Модуль"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:25 ../ui/search-dialog.gtkbuilder.h:26
 msgid "Single module radiobutton"
-msgstr "Переключатель Одиночного модуля"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:26 ../ui/search-dialog.gtkbuilder.h:28
 msgid "Use the current module list for the search"
-msgstr "Использовать для поиска текущий список модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:27 ../ui/search-dialog.gtkbuilder.h:27
 msgid "Module list"
-msgstr "Список Модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:28 ../ui/search-dialog.gtkbuilder.h:29
 msgid "Module list radiobutton"
-msgstr "Переключатель Списка Модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:29 ../ui/search-dialog.gtkbuilder.h:31
 msgid "Use a custom module list for the search"
-msgstr "Использовать для поиска настраиваемый список модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:30 ../ui/search-dialog.gtkbuilder.h:30
 msgid "Custom module list"
-msgstr "Произвольный Список"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:31 ../ui/search-dialog.gtkbuilder.h:32
 msgid "Custom module list radiobutton"
-msgstr "Переключатель произвольного списка модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Module List Combo"
-msgstr "Комбо Произвольного Списка Модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
 msgid "<b>Search Type</b>"
-msgstr "<b>Тип Поиска</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:34 ../ui/search-dialog.gtkbuilder.h:35
 msgid ""
@@ -4586,282 +4316,279 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
-"Быстрый поиск, основанный на заранее созданной базе индексов:\n"
-"Смотри функции обслуживания Менеджера Модулей"
 
 #: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr "Оптимизировано (\"Lucene\") кнопка"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:39 ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi word"
-msgstr "Свободная форма"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
 msgid "Multi word radiobutton"
-msgstr "Переключатель Несколько-слов"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
 msgid "Regular expression radiobutton"
-msgstr "Переключатель Регулярных Выражений"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:44 ../ui/search-dialog.gtkbuilder.h:44
 msgid "Exact phrase radiobutton"
-msgstr "Переключатель Точной Фразы"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
 msgid "Make selections on the Attribute Search tab"
-msgstr "Использовать выбранные аттрибуты с вкладки Поиска Свойств"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
 msgid "Attributes"
-msgstr "Свойства"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
 msgid "Attributes radiobutton"
-msgstr "Флажок Свойств"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:48 ../ui/search-dialog.gtkbuilder.h:48
 msgid "<b>Options</b>"
-msgstr "<b>Опции</b>"
+msgstr "<b>ရွေးပိုင်ခွင့်များ</b>"
 
 #: ../ui/search-dialog.glade.h:50 ../ui/search-dialog.gtkbuilder.h:50
 msgid "Match case checkbox"
-msgstr "Флажок Совпадения Регистра"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:51 ../ui/search-dialog.gtkbuilder.h:51
 msgid "Search  Criteria"
-msgstr "Критерий Поиска"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:52 ../ui/search-dialog.gtkbuilder.h:52
 msgid "Show in main window"
-msgstr "Показать в главном окне"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:53 ../ui/search-dialog.gtkbuilder.h:53
 msgid "Save search results as bookmarks"
-msgstr "Сохранить результаты поиска как закладки"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:54 ../ui/search-dialog.gtkbuilder.h:54
 msgid "Export current search results"
-msgstr "Экспортировать текщие результата поиска"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:55 ../ui/search-dialog.gtkbuilder.h:55
 msgid "Export"
-msgstr "Экспорт"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:56 ../ui/search-dialog.gtkbuilder.h:56
 msgid "Clear lists for new search"
-msgstr "Очистить список для нового поиска"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:57 ../ui/search-dialog.gtkbuilder.h:57
 msgid "<b>Found</b>"
-msgstr "<b>Найдено</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:58 ../ui/search-dialog.gtkbuilder.h:59
 msgid "Result Summary Window"
-msgstr "Окно Сводки Результатов"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:59 ../ui/search-dialog.gtkbuilder.h:58
 msgid "Result Summary Table"
-msgstr "Таблица Сводки Результатов"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:60 ../ui/search-dialog.gtkbuilder.h:60
 msgid "<b>Search Results</b>"
-msgstr "<b>Результаты Поиска</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:61 ../ui/search-dialog.gtkbuilder.h:61
 msgid "<b>Preview</b>"
-msgstr "<b>Предпросмотр</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:62 ../ui/search-dialog.gtkbuilder.h:62
 msgid "Results"
-msgstr "Результаты"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:63 ../ui/search-dialog.gtkbuilder.h:63
 msgid "Create new custom range"
-msgstr "Создать новый произвольный диапазон"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:64 ../ui/search-dialog.gtkbuilder.h:64
 msgid "New Range Button"
-msgstr "Кнопка Нового Диапазона"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:65 ../ui/search-dialog.gtkbuilder.h:65
 msgid "Save custom range"
-msgstr "Сохранить произвольный диапазон"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:66 ../ui/search-dialog.gtkbuilder.h:66
 msgid "Save Range Button"
-msgstr "Кнопка Сохранения Диапазона"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:67 ../ui/search-dialog.gtkbuilder.h:67
 msgid "Delete selected range"
-msgstr "Удалить выбранный диапазон"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:68 ../ui/search-dialog.gtkbuilder.h:68
 msgid "Delete Range Button"
-msgstr "Кнопка Удаления Диапазона"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:69 ../ui/search-dialog.gtkbuilder.h:69
 msgid "<b>Ranges</b>"
-msgstr "<b>Диапазоны</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:70 ../ui/search-dialog.gtkbuilder.h:70
 msgid "<b>Range Name</b>"
-msgstr "<b>Имя Диапазона</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:71 ../ui/search-dialog.gtkbuilder.h:71
 msgid "Range Name Entry"
-msgstr "Пункт Имени Диапазона"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:72 ../ui/search-dialog.gtkbuilder.h:72
 msgid "<b>Range Definition</b>"
-msgstr "<b>Определение</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:73 ../ui/search-dialog.gtkbuilder.h:73
 msgid "Range Definition Entry"
-msgstr "Пункт Определения Диапазона"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:74 ../ui/search-dialog.gtkbuilder.h:74
 msgid "e.g. Matt-John;Rev4"
-msgstr "например, Мат-Иоан;Откр4"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:75 ../ui/search-dialog.gtkbuilder.h:75
 msgid "Custom Range Preview"
-msgstr "Предпросмотр Произвольного Диапазона"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:76 ../ui/search-dialog.gtkbuilder.h:76
 msgid "Custom Verse Ranges"
-msgstr "Диапазоны Стихов"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:77 ../ui/search-dialog.gtkbuilder.h:77
 msgid "Create a new module list"
-msgstr "Создать новый список модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:78 ../ui/search-dialog.gtkbuilder.h:78
 msgid "New Custom Module List Button"
-msgstr "Кнопка Нового Произвольного Списка Модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:79 ../ui/search-dialog.gtkbuilder.h:79
 msgid "Save the module list"
-msgstr "Сохранить список модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:80 ../ui/search-dialog.gtkbuilder.h:80
 msgid "Save Custom Module List Button"
-msgstr "Кнопка Сохранения Произвольного Списка Модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:81 ../ui/search-dialog.gtkbuilder.h:81
 msgid "Delete the selected list"
-msgstr "Удалить выбранный список"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:82 ../ui/search-dialog.gtkbuilder.h:82
 msgid "Clear Custom Module List Button"
-msgstr "Очистить Произвольный Список Модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:83 ../ui/search-dialog.gtkbuilder.h:83
 msgid "<b>Module Lists</b>"
-msgstr "<b>Список Модулей</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:84 ../ui/search-dialog.gtkbuilder.h:84
 msgid "<b>List Name</b>"
-msgstr "<b>Имя Списка</b>"
+msgstr "<b>အမည်စာရင်း</b>"
 
 #: ../ui/search-dialog.glade.h:85 ../ui/search-dialog.gtkbuilder.h:85
 msgid "Custom Module List Name Entry"
-msgstr "Пункт Имени Произвольного Списка Модулей"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:90 ../ui/search-dialog.gtkbuilder.h:90
 msgid "Open a dialog to select modules to add to the list"
-msgstr "Открыть диалог выбора модулей, чтобы добавить из в список"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:93 ../ui/search-dialog.gtkbuilder.h:93
 msgid "Custom Module Lists"
-msgstr "Пользовательский Список"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:94 ../ui/search-dialog.gtkbuilder.h:94
 msgid "<b>Attribute</b>"
-msgstr "<b>Свойство</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:95 ../ui/search-dialog.gtkbuilder.h:96
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr "Искать Номера Стронга, подобно G4442 или H1121"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:96 ../ui/search-dialog.gtkbuilder.h:95
 msgid "Strongs Numbers"
-msgstr "Номера Стронга"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:97 ../ui/search-dialog.gtkbuilder.h:97
 msgid "Strongs Numbers radiobutton"
-msgstr "Переключатель Номеров Стронга"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:98 ../ui/search-dialog.gtkbuilder.h:99
 msgid "Search for Morphological tags"
-msgstr "Искать Морфологические Тэги"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:100 ../ui/search-dialog.gtkbuilder.h:100
 msgid "Morphological Tags radiobutton"
-msgstr "Переключатель Морфологических Тэгов"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:101 ../ui/search-dialog.gtkbuilder.h:102
 msgid "Search in footnotes"
-msgstr "Искать в сносках"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:103 ../ui/search-dialog.gtkbuilder.h:103
 msgid "Footnotes radiobutton"
-msgstr "Переключатель Сносок"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:104 ../ui/search-dialog.gtkbuilder.h:104
 msgid "<b>Results Display Options</b>"
-msgstr "<b>Опции Отображений Результатов</b>"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:105 ../ui/search-dialog.gtkbuilder.h:106
 msgid "In modules that have Strong's Numbers"
-msgstr "В модулях, имеющих Номера Стронга"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:106 ../ui/search-dialog.gtkbuilder.h:105
 msgid "Show Strong's Numbers"
-msgstr "Показывать Номера Стронга"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:107 ../ui/search-dialog.gtkbuilder.h:107
 msgid "Show Strong's Numbers checkbox"
-msgstr "Флажок Отображения Номеров Стронга"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:108 ../ui/search-dialog.gtkbuilder.h:109
 msgid "In modules that have Morphological Tags"
-msgstr "В модулях, имеющих Морфологические Тэги"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:109 ../ui/search-dialog.gtkbuilder.h:108
 msgid "Show Morphological Tags"
-msgstr "Показать Морфологические Тэги"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:110 ../ui/search-dialog.gtkbuilder.h:110
 msgid "Show Morphological Tags checkbox"
-msgstr "Флажок Отображения Морфологических Тэгов"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:111 ../ui/search-dialog.gtkbuilder.h:112
 msgid "In modules that have Footnotes"
-msgstr "В модулях, которые имеют Сноски"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:112 ../ui/search-dialog.gtkbuilder.h:111
 msgid "Show Footnotes"
-msgstr "Показать Сноски"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:113 ../ui/search-dialog.gtkbuilder.h:113
 msgid "Show Footnotes checkbox"
-msgstr "Флажок Отображения Сносок"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:114 ../ui/search-dialog.gtkbuilder.h:114
 msgid "Attribute Search"
-msgstr "Поиск Свойств"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 #: ../ui/selector-prefs.glade.h:1 ../ui/selector-prefs.gtkbuilder.h:1
 msgid "Module Selection"
-msgstr "Выбор Модуля"
+msgstr ""
 
 #: ../ui/search-dialog.gtkbuilder.h:6
-#, fuzzy
 msgid "<b>search module</b>"
-msgstr "<b>Тип Поиска</b>"
+msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "Export Bookmark Folder"
@@ -4873,11 +4600,11 @@ msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Xiphos bookmarks"
-msgstr ""
+msgstr "Xiphos မှတ်သားပါ"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Html"
-msgstr "HTML"
+msgstr "Html"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
@@ -4893,11 +4620,11 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:2 ../ui/xi-menus.gtkbuilder.h:2
 msgid "Open Study_pad"
-msgstr "О_ткрыть StudyPad"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:3 ../ui/xi-menus.gtkbuilder.h:3
 msgid "_Open Session"
-msgstr "_Открыть Сессию"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Open a saved tab settings collection"
@@ -4905,25 +4632,23 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:5 ../ui/xi-menus.gtkbuilder.h:4
 msgid "_Save Session"
-msgstr "_Сохранить Сессию"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Save this collection of tab settings"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:7 ../ui/xi-menus.gtkbuilder.h:5
-#, fuzzy
 msgid "_New Prayerlist/Journal"
-msgstr "Молитвенные Списки"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:8
-#, fuzzy
 msgid "Create a new journal or prayerlist from a template"
-msgstr "Создать новый молитвенный список"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:10 ../ui/xi-menus.gtkbuilder.h:7
 msgid "_Search"
-msgstr "_Поиск"
+msgstr "ရှာဖွေ"
 
 #: ../ui/xi-menus.glade.h:11
 msgid "Bring the simple sidebar search forward"
@@ -4931,7 +4656,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:12 ../ui/xi-menus.gtkbuilder.h:8
 msgid "_Advanced Search"
-msgstr "П_родвинутый Поиск"
+msgstr "အဆင့်မြင့်ရှာဖွေ"
 
 #: ../ui/xi-menus.glade.h:13
 msgid "Open the advanced search dialog, to run complex queries"
@@ -4939,19 +4664,19 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:14 ../ui/xi-menus.gtkbuilder.h:9
 msgid "_Preferences"
-msgstr "_Настройки"
+msgstr "ဦးစားပေးချက်များ"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Use module manager to install and remove Sword modules"
-msgstr "Использовать менеджер модулей для установки и удаления модулей Sword"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:16 ../ui/xi-menus.gtkbuilder.h:10
 msgid "_Module Manager"
-msgstr "_Менеджер Модулей"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
-msgstr "Предварительноый просмотр Daily Devotion"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Show today's entry from your selected daily devotional in the previewer"
@@ -4959,23 +4684,23 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
 msgid "_Bible"
-msgstr "_Библия"
+msgstr "သမ္မာကျမ်းစာ"
 
 #: ../ui/xi-menus.glade.h:21 ../ui/xi-menus.gtkbuilder.h:14
 msgid "_Preview"
-msgstr "Предпрос_мотр"
+msgstr "အစမ်းကြည့်ပါ"
 
 #: ../ui/xi-menus.glade.h:22 ../ui/xi-menus.gtkbuilder.h:15
 msgid "_Commentary/Book"
-msgstr "_Комментарий / Книга"
+msgstr "ရှင်းလင်းချက်မှတ်စု/စာအုပ်"
 
 #: ../ui/xi-menus.glade.h:23 ../ui/xi-menus.gtkbuilder.h:16
 msgid "Dictionar_y"
-msgstr "_Словарь"
+msgstr "အဘိဓာန်များ"
 
 #: ../ui/xi-menus.glade.h:24 ../ui/xi-menus.gtkbuilder.h:17
 msgid "L_ink Tabs"
-msgstr "С_вязать Вкладки"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Make all tabs' Bibles navigate together"
@@ -4983,7 +4708,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:26 ../ui/xi-menus.gtkbuilder.h:18
 msgid "_Read Aloud"
-msgstr "Прочитать Вслу_х"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:27
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
@@ -4991,7 +4716,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
 msgid "Show Verse _Numbers"
-msgstr "Показать _Номера Стихов"
+msgstr "@@@"
 
 #: ../ui/xi-menus.glade.h:29
 msgid "Display verse numbers in the text"
@@ -4999,25 +4724,23 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
 msgid "_Highlight Current Verse"
-msgstr "Подс_ветить Текущий Стих"
+msgstr "@@@"
 
 #: ../ui/xi-menus.glade.h:31
-#, fuzzy
 msgid "Apply a high-contrast highlight to the current verse"
-msgstr "Применять высоко-контрастную цветовую схему для текущего стиха"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
 msgid "_Show/Hide Attached Sidebar"
-msgstr "_Отображение Боковой Панели"
+msgstr "@@@"
 
 #: ../ui/xi-menus.glade.h:33
-#, fuzzy
 msgid "Remove the sidebar entirely from view"
-msgstr "Удалить выбранную папку"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "Show Parallel View in a _Tab"
-msgstr "Параллельный Просмотр во _Вкладке"
+msgstr "@@@"
 
 #: ../ui/xi-menus.glade.h:35
 msgid "Provide the full-chapter parallel Bible window as another tab"
@@ -5025,7 +4748,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Previe_wer in the Sidebar"
-msgstr "Предпросм_отр в Боковой Панели"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Select Previewer position between sidebar or beneath Bible"
@@ -5033,7 +4756,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:39 ../ui/xi-menus.gtkbuilder.h:25
 msgid "_Contents"
-msgstr "_Содержание"
+msgstr "မာတိကာများ"
 
 #: ../ui/xi-menus.glade.h:40
 msgid "Open the help viewer on the Xiphos manual"
@@ -5041,7 +4764,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Mailing List"
-msgstr "Список _Рассылки"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:42
 msgid "Open a browser on the users' mailing list webpage"
@@ -5049,7 +4772,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Live Chat"
-msgstr "_Живой Чат"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:44
 msgid "Open a browser on an interface to live IRC chat"
@@ -5057,7 +4780,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Report Bug"
-msgstr "_Доложить об Ошибке"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:46
 msgid "Open a browser on our bug tracker"
@@ -5065,7 +4788,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "About _Translation"
-msgstr "О _Переводе"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:48
 msgid "Learn about translating the Xiphos interface to other languages"
@@ -5073,16 +4796,15 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "_About The SWORD Project"
-msgstr "О П_роекту SWORD"
+msgstr "အကြောင်း The SWORD Project"
 
 #: ../ui/xi-menus.glade.h:50
 msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
-#, fuzzy
 msgid "About _BibleSync"
-msgstr "Библия"
+msgstr "အကြောင်း _BibleSync"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Learn about BibleSync, the shared navigation protocol"
@@ -5098,33 +4820,31 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
 msgid "About _Xiphos"
-msgstr "_О Xiphos"
+msgstr "အကြောင်း _Xiphos"
 
 #: ../ui/xi-menus.glade.h:56
-#, fuzzy
 msgid "Learn about Xiphos"
-msgstr "_О Xiphos"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Annotate Verse"
-msgstr "Комментировать Стих"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
 msgid "Open Module"
-msgstr "Открыть Модуль"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:64 ../ui/xi-menus-popup.gtkbuilder.h:41
 msgid "Note"
-msgstr "Заметка"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:42
 msgid "Open in editor"
-msgstr "Открыть в редакторе"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:67 ../ui/xi-menus-popup.gtkbuilder.h:44
-#, fuzzy
 msgid "Verse Per Line"
-msgstr "Стихов на С_троку"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:75 ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Footnote/Cross-ref Markers"
@@ -5136,76 +4856,75 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:81 ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Variants"
-msgstr "Варианты"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Image Content"
-msgstr "Содержимое Изображения"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Respect Font Faces"
-msgstr "Сохранять Начертания Шрифтов"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Commentary by Chapter"
-msgstr "Комментарии по Главам"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:68
-#, fuzzy
 msgid "Doublespace"
-msgstr "Двойной интервал для текста"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Lookup Selection"
-msgstr "Рассмотреть Выбор"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Use Current Dictionary"
-msgstr "Использовать Текущий Словарь"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Browse in BibleMap.org"
-msgstr "Просмотреть в BibleMap.org"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Unlock This Module"
-msgstr "Разблокировать Этот Модуль"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Display Book Heading"
-msgstr "Показывать Вступление к Книгам"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Display Chapter Heading"
-msgstr "Показывать Вступление к Главам"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Rename Pers.Comm."
-msgstr "Переименовать Личные Комментарии"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Dump Pers.Comm."
-msgstr "Слить Личный Комментарий"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Read Selection Aloud"
-msgstr "Прочесть Выделение"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid "Save these results as a single bookmark"
-msgstr "Сохранить эти результаты как одну закладку"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Save list as a single bookmark"
-msgstr "Сохранить лист как одну закладку"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:95
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr "Сохранить эти результаты как серию закладок в их собственной папке"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:94
 msgid "Save list as a series of bookmarks"
-msgstr "Сохранить лист как серию закладок"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:97
 msgid ""
@@ -5214,18 +4933,16 @@ msgid ""
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:96
-#, fuzzy
 msgid "Populate verse list"
-msgstr "Список Стихов"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:99
 msgid "Push the entire verse list contents directly into the history list."
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:98
-#, fuzzy
 msgid "Preload history from verse list"
-msgstr "Выпадающий список истории"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:101
 msgid ""
@@ -5239,560 +4956,190 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:102
 msgid "Export List"
-msgstr "Список экспорта"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
-msgstr "Открыть эту закладку в новой вкладке"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
-msgstr "Открыть в новой вкладке"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
-msgstr "Открыть эту закладку в новом диалоге"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
-msgstr "Открыть в диалоге"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
-msgstr "Добавить новую папку"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
-msgstr "Вставить новую закладку"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
-msgstr "Вставить Закладку"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
-msgstr "Редактировать пункт закладки"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
-msgstr "_Редактировать"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
-msgstr "Удалить пункт"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
-msgstr "Развернуть все группы Закладок"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
-msgstr "Развернуть Все"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
-msgstr "Свернуть все группы Закладок"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
-msgstr "Свернуть Все"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
-msgstr "Можно перемещать пункты из одной папки в другую"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
-msgstr "Позволять Изменение Порядка"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:20
-#, fuzzy
 msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr "Загрузить Закладки из Bibletime"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:19
-#, fuzzy
 msgid "Import Bookmarks"
-msgstr "Вставить Закладку"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
-msgstr "Удалить папку и сохранить ее"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
-msgstr "Папка для экспорта"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open selected module in a new tab"
-msgstr "Открыть выбранный модуль в новой вкладке"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:33
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
-"Открыть выбранный модуль в\n"
-"\tотдельном ['dialog'] окне"
 
 #: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid "Open in a separate window"
-msgstr "Открыть в отдельном окне"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new simple prayer list"
-msgstr "Создать простой молитвенный список"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Simple"
-msgstr "Простой"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new subject prayer list"
-msgstr "Создать новый предметный молитвенный список"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Subject"
-msgstr "Предмет"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Create a new monthly journal"
-msgstr "Создать новый месячный журнал"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Monthly"
-msgstr "Ежемесячно"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Create a new daily journal"
-msgstr "Создать новый дневной журнал"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Daily"
-msgstr "Ежедневно"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Create a new outlined topic"
-msgstr "Создать новую тему"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Outlined"
-msgstr "Тематический"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
-#, fuzzy
 msgid "Create a new book/chapter outline"
-msgstr "Создать новую тему"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
-#, fuzzy
 msgid "Book/Chapter"
-msgstr "Глава"
+msgstr "စာအုပ်/အခဏ်း"
 
 #: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Open module in editor or plain display window"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:90
-#, fuzzy
 msgid "Open in separate window"
-msgstr "Открыть в отдельном окне"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add a sub-item"
-msgstr "Добавить подпункт"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add Sub-Item"
-msgstr "Добавить Подпункт"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Add an item"
-msgstr "Добавить пункт"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:156 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add Item"
-msgstr "Добавьте материал"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Remove this item"
-msgstr "Удалить этот пункт"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:159 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Edit this item"
-msgstr "Изменить этот пункт"
+msgstr ""
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Xiphos Bible Guide"
-msgstr "Путеводитель по Библии Xiphos"
+msgstr ""
 
 #: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
-msgstr "Изучать Библию"
+msgstr ""
 
 #: ../xiphos.desktop.in.in.h:3
 msgid "Text;Bible;Study;"
 msgstr ""
-
-#~ msgid "_Attach/Detach Sidebar"
-#~ msgstr "Плавающая Боковая Панель"
-
-#, fuzzy
-#~ msgid "Operate the sidebar as a separate window"
-#~ msgstr "Открыть в отдельном окне"
-
-#, fuzzy
-#~ msgid "[no dump ready]"
-#~ msgstr "Весь модуль"
-
-#, fuzzy
-#~ msgid "Transmit failed.\n"
-#~ msgstr "%s провалилось"
-
-#~ msgid "Unlock "
-#~ msgstr "Разблокировать "
-
-#~ msgid "Preparing to print"
-#~ msgstr "Подготовка к печати"
-
-#~ msgid "Printing is not supported on this printer"
-#~ msgstr "Печать не поддерживается данным принтером"
-
-#~ msgid "Printer %s does not support PostScript printing."
-#~ msgstr "Принтер %s не поддерживает PostScript."
-
-#~ msgid "Printing"
-#~ msgstr "Печать"
-
-#~ msgid "Waiting to print"
-#~ msgstr "Ожидание печати"
-
-#~ msgid "An error occurred while printing"
-#~ msgstr "Во время печати произошел сбой"
-
-#~ msgid "It was not possible to print your document: %s"
-#~ msgstr "Не удалось распечатать документ: %s"
-
-#~ msgid ""
-#~ "Xiphos can not create  .xiphos:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Xiphos cannot continue."
-#~ msgstr ""
-#~ "Xiphos не может создать .xiphos:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Xiphos не может продолжить."
-
-#~ msgid "<b>Tabs</b>"
-#~ msgstr "<b>Вкладки</b>"
-
-#~ msgid "Use tabbed browsing"
-#~ msgstr "Использовать Просмотр по вкладкам"
-
-#~ msgid "Use tabbed browsing Checkbox"
-#~ msgstr "Флажок Использования Просмотра по вкладкам"
-
-#~ msgid "<b>Show</b>"
-#~ msgstr "<b>Показать</b>"
-
-#~ msgid "Bible Texts"
-#~ msgstr "Текст Библии"
-
-#~ msgid "Bible Texts Checkbox"
-#~ msgstr "Флажок Текста Библии"
-
-#~ msgid "Previewer Checkbox"
-#~ msgstr "Флажок Предпросмотра"
-
-#~ msgid "Commentaries Checkbox"
-#~ msgstr "Флажок Комментариев"
-
-#~ msgid "Dictionary/Lexicon"
-#~ msgstr "Словарь/Лексикон"
-
-#~ msgid "Dictionary/Lexicon Checkbox"
-#~ msgstr "Флажок Словаря/Лексикона"
-
-#~ msgid "Parallel View in a tab"
-#~ msgstr "Параллельный Вид во вкладке"
-
-#~ msgid "Tabs and Panes"
-#~ msgstr "Вкладки и Панели"
-
-#~ msgid "Scripture Cross-references"
-#~ msgstr "Параллельные места писания"
-
-#~ msgid "<b>StudyPad default directory</b>"
-#~ msgstr "<b>Пака для StudyPad по-умолчанию</b>"
-
-#~ msgid ""
-#~ "URL references using \"sword://\" (similar to web page\n"
-#~ "references) can be used by programs to look up\n"
-#~ "scripture references. Your system currently has no\n"
-#~ "program set to handle these references.\n"
-#~ "\n"
-#~ "Would you like Xiphos to set itself as the\n"
-#~ "program to handle these references?"
-#~ msgstr ""
-#~ "URL-ссылки типа \"sword://\" (похожие на ссылки на\n"
-#~ "веб-страницы) могут быть использованы программами\n"
-#~ "для получения мест писания. Ваша система на данный\n"
-#~ "момент не имеет программ для обработки этих ссылок.\n"
-#~ "\n"
-#~ "Вы хотите чтобы Xiphos обрабатывал эти ссылки?"
-
-#~ msgid ""
-#~ "Xiphos has successfully set itself\n"
-#~ "as the handler of sword:// and bible:// URLs.\n"
-#~ "\n"
-#~ "You may wish to run the program \"gconf-editor\"\n"
-#~ "to examine keys under /desktop/gnome/url-handlers,\n"
-#~ "if you need to change these."
-#~ msgstr ""
-#~ "Xiphos успешно установил себя как\n"
-#~ "обработчик ссылок типа: sword:// и bible://\n"
-#~ "\n"
-#~ "Вы можете запустить программу gconf-editor,\n"
-#~ "чтобы проверить или изменить ключи:\n"
-#~ "/desktop/gnome/url-handlers"
-
-#~ msgid ""
-#~ "Xiphos failed to complete handler init for key #%d:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Xiphos не удалось установить обработчик для ключа #%d:\n"
-#~ "%s"
-
-#~ msgid "Go to "
-#~ msgstr "Перейти "
-
-#~ msgid "Main"
-#~ msgstr "Основное"
-
-#~ msgid "Modules Main"
-#~ msgstr "Модули Главное"
-
-#~ msgid ""
-#~ "Without any Bible modules to display,\n"
-#~ "Xiphos cannot proceed,\n"
-#~ "and will now exit."
-#~ msgstr ""
-#~ "Xiphos не может работать без,\n"
-#~ "хотя бы, одного модуля Библии,\n"
-#~ "и заканчивает работу."
-
-#~ msgid "Choose to enable Prayer lists "
-#~ msgstr "Выберите чтобы показать Молитвенные Списки на Боковой Панели "
-
-#~ msgid "Cipher Key?"
-#~ msgstr "Шифровой Ключ?"
-
-#~ msgid "Change parallel 1"
-#~ msgstr "Изменить Параллель 1"
-
-#~ msgid "Change parallel 2"
-#~ msgstr "Изменить Параллель 2"
-
-#~ msgid "Change parallel 3"
-#~ msgstr "Изменить Параллель 3"
-
-#~ msgid "Change parallel 4"
-#~ msgstr "Изменить Параллель 4"
-
-#~ msgid "Change parallel 5"
-#~ msgstr "Изменить Параллель 5"
-
-#~ msgid "Sizes"
-#~ msgstr "Размеры"
-
-#~ msgid ""
-#~ "Welcome to Xiphos.\n"
-#~ "\n"
-#~ "There are no Bible modules installed. In order to initialize, Xiphos "
-#~ "needs you to install at least one Bible.\n"
-#~ "\n"
-#~ "With your permission, Xiphos will invoke the Module Manager so that you "
-#~ "may install from Crosswire:\n"
-#~ "1. Configure remote install.\n"
-#~ "2. Connect.\n"
-#~ "3. Select a Bible text of your language preference.\n"
-#~ "4. Click `install'.\n"
-#~ "Close the Module Manager when you are done.\n"
-#~ "\n"
-#~ "Warning: If you live in a persecuted country, use with care.\n"
-#~ "\n"
-#~ "May Xiphos invoke the Module Manager so that you may install a Bible?"
-#~ msgstr ""
-#~ "Добро пожаловать в Xiphos.\n"
-#~ "\n"
-#~ "Ни одной Библии не установлено. Для начала, Xiphos нужен хотябы один "
-#~ "модуль Библии.\n"
-#~ "\n"
-#~ "С вашего разрешения, Xiphos запустит Менеджер Модулей и вы сможете "
-#~ "установливать модули из репозитория Crosswire:\n"
-#~ "1. Настройте параметры Источников.\n"
-#~ "2. Подключитесь.\n"
-#~ "3. Выберите подходяций Библейский текст.\n"
-#~ "4. Нажмите `Установить'.\n"
-#~ "Закройте Менеджер Модуль когда вы закончите.\n"
-#~ "\n"
-#~ "Предупрежение: Используйте с осторожностью в странах преследующих за "
-#~ "Слово Божие.\n"
-#~ "\n"
-#~ "Можно ли запустить Менеджер Модулей, для того чтобы вы могли "
-#~ "устанавливать модули?"
-
-#~ msgid "<b>Parallel View</b>"
-#~ msgstr "<b>Параллельный Вид</b>"
-
-#~ msgid "Parallel 1"
-#~ msgstr "Параллель 1"
-
-#~ msgid "Parallel 1 Combo"
-#~ msgstr "Параллель 1 Комбо"
-
-#~ msgid "Parallel 2"
-#~ msgstr "Параллель 2"
-
-#~ msgid "Parallel 2 Combo"
-#~ msgstr "Параллель 2 Комбо"
-
-#~ msgid "Parallel 3"
-#~ msgstr "Параллель 3"
-
-#~ msgid "Parallel 3 Combo"
-#~ msgstr "Параллель 3 Комбо"
-
-#~ msgid "Parallel 4"
-#~ msgstr "Параллель 4"
-
-#~ msgid "Parallel 4 Combo"
-#~ msgstr "Параллель 4 Комбо"
-
-#~ msgid "Parallel 5"
-#~ msgstr "Параллель 5"
-
-#~ msgid "Parallel 5 Combo"
-#~ msgstr "Параллель 5 Комбо"
-
-#~ msgid "Use Verse Per Line"
-#~ msgstr "Стих на Строку"
-
-#~ msgid "Import Bibletime Bookmarks"
-#~ msgstr "Импортировать Закладки из Bibletime"
-
-#~ msgid "Restore Folder"
-#~ msgstr "Восстановить Папку"
-
-#~ msgid "Restore saved folder"
-#~ msgstr "Восстановить сохраненную папку"
-
-#~ msgid "About the SWORD Project"
-#~ msgstr "О Проекте SWORD"
-
-#~ msgid "Books can be downloaded from the SWORD Project"
-#~ msgstr "Модули могут быть загружены с сайта:"
-
-#~ msgid "Xiphos could not execute archiver"
-#~ msgstr "Xiphos не может выполнить архивацию"
-
-#~ msgid ""
-#~ " archival result:\n"
-#~ "\n"
-#~ msgstr ""
-#~ " результат архивации:\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Archive in "
-#~ msgstr ""
-#~ "\n"
-#~ "Архив в "
-
-#~ msgid "Text"
-#~ msgstr "Текст"
-
-#~ msgid "Text to render"
-#~ msgstr "Текст для обработки"
-
-#~ msgid "Pixbuf Object"
-#~ msgstr "Объект Pixbuf"
-
-#~ msgid "The pixbuf to render."
-#~ msgstr "Pixbuf для обработки."
-
-#~ msgid "Open in a new tab"
-#~ msgstr "Открыть в новой вкладке"
-
-#~ msgid "Open selected module in a separate ['dialog'] window"
-#~ msgstr "Открыть выбранный модуль в отдельном ['диалоговом'] окне"
-
-#~ msgid "View information about the selected dialog"
-#~ msgstr "Смотреть информацию о выбранном диалоге"
-
-#~ msgid "Daily Journal"
-#~ msgstr "Дневной журнал"
-
-#~ msgid "Outlined Topic"
-#~ msgstr "Выделенная Тема"
-
-#~ msgid "Open selected module in a dialog"
-#~ msgstr "Открыть выбранный модуль в диалоге"
-
-#~ msgid "Add Child"
-#~ msgstr "Добавить Дочерний элемент"
-
-#~ msgid "Add Sibling"
-#~ msgstr "Добавить Ребенка"
-
-#~ msgid "H_istory/<Separator>"
-#~ msgstr "И_стория/<Separator>"
-
-#~ msgid "H_istory/C_lear"
-#~ msgstr "И_стория/О_чистить"
-
-#~ msgid "Open the file in Studypad"
-#~ msgstr "Открыть файл в StudyPad"
-
-#~ msgid "Remove - Restore"
-#~ msgstr "Удалить - Восстановить"
-
-#~ msgid "Remove Folder"
-#~ msgstr "Удалить Папку"
-
-#~ msgid "Sources"
-#~ msgstr "Источники"
-
-#~ msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
-#~ msgstr "Xiphos переименовал .xiphos-2.0 в .xiphos"
-
-#~ msgid ""
-#~ "Xiphos can not rename  .xiphos-2.0 to .xiphos:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Xiphos cannot continue."
-#~ msgstr ""
-#~ "Xiphos не может переименовать .xiphos-2.0 в .xiphos:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Xiphos не может продолжать."
-
-#~ msgid "Move backwards through history"
-#~ msgstr "Двигаться назад по истории"
-
-#~ msgid "Move foward through history"
-#~ msgstr "Двигаться вперед по истории"
-
-#~ msgid "Select a Book of the Bible"
-#~ msgstr "Выберите Книгу Библии"
-
-#~ msgid "Change Chapter"
-#~ msgstr "Изменить Главу"
-
-#~ msgid "Dictionary/_Lexicon"
-#~ msgstr "Словарь/Лексикон"
-
-#~ msgid "_Bible Text"
-#~ msgstr "_Библейский Текст"
