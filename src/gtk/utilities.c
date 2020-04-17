@@ -39,6 +39,7 @@
 
 #include <gtk/gtk.h>
 #include <zip.h>
+#include <zlib.h>
 
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"

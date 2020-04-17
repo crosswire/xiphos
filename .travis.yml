@@ -46,6 +46,7 @@ requires:
     - intltool
     - libgsf
     - libxml2
+    - minizip
     - python
     - sword
     - webkit2gtk
@@ -92,6 +93,7 @@ requires:
     - libenchant-dev
     - libgail-3-dev
     - libgtk-3-dev
+    - libminizip-dev
     - libsoup2.4-dev
     - libsword-dev
     - libwebkit2gtk-4.0-dev
@@ -121,6 +123,7 @@ requires:
     - libuuid-devel
     - libxml2-devel
     - make
+    - minizip-devel
     - sword-devel
     - webkitgtk4-devel
     - yelp
@@ -141,6 +144,7 @@ requires:
     - libglade2-dev
     - libgsf-1-dev
     - libgtk-3-dev
+    - libminizip-dev
     - libsword-dev
     - libwebkit2gtk-4.0-dev
     - libxml2-dev
