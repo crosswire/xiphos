@@ -44,7 +44,6 @@ jobs:
         shell: bash
         run: |
           set -e
-          ls -lR
           tar xaf archive/xiphos-${{ steps.tag.outputs.tag }}.tar.xz --strip-components=1
           # Echo version into repo here!
       - name: test build
