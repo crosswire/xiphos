@@ -73,7 +73,7 @@ jobs:
       fail-fast: false
       matrix:
         ubuntu:
-          - "18.04"
+          #- "18.04"  # we require cmake 3.11, currently 18.04 has 3.10
           - "19.10"
     steps:
       - uses: olegtarasov/get-tag@v2
