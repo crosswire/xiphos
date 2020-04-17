@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Xiphos-1.0-0.9.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 23:35-0400\n"
-"PO-Revision-Date: 2010-03-15 22:44+0000\n"
-"Last-Translator: svilborg <Unknown>\n"
+"PO-Revision-Date: 2020-04-16 21:57+0200\n"
+"Last-Translator: Cyrille <lafricain79@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
-"Language: \n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-03-21 04:49+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -37,26 +37,24 @@ msgstr ""
 #: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
 #: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
-msgstr "Îòâîðè"
+msgstr "Отваряне"
 
 #: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
-#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636
-#: ../src/gtk/main_menu.c:773 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
-#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
+#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:773
+#: ../ui/bookmarks.gtkbuilder.h:5 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/gtk_webedit.ui.h:85 ../ui/markverse.gtkbuilder.h:7
+#: ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
-msgstr ""
+msgstr "_Откажи"
 
 #: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
 #: ../src/editor/slib-editor.c:715 ../src/gtk/main_menu.c:774
-#, fuzzy
 msgid "_Open"
-msgstr "Îòâîðè"
+msgstr "_Отваряне"
 
 #: ../src/editor/slib-editor.c:415
-#, fuzzy
 msgid "Save As"
-msgstr "Ñúõðàíè"
+msgstr "Записване като"
 
 #: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
 #: ../src/editor/webkit_editor.c:688
@@ -65,7 +63,7 @@ msgstr ""
 
 #: ../src/editor/slib-editor.c:494
 msgid "_Close"
-msgstr ""
+msgstr "_Затваряне"
 
 #: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
 msgid "Are you sure you want to delete the note for"
@@ -95,22 +93,20 @@ msgstr ""
 
 #: ../src/editor/slib-editor.c:704
 msgid "_Quit"
-msgstr ""
+msgstr "_Изход"
 
 #: ../src/editor/slib-editor.c:726 ../src/gtk/dialog.c:262
-#, fuzzy
 msgid "_Save"
-msgstr "Ñúõðàíè"
+msgstr "_Записване"
 
 #: ../src/editor/slib-editor.c:737
-#, fuzzy
 msgid "Save _As..."
-msgstr "Ñúõðàíè"
+msgstr "Записване _като"
 
 #: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
 #: ../ui/gtk_webedit.ui.h:56
 msgid "New"
-msgstr "íîâ"
+msgstr "Нов"
 
 #: ../src/editor/slib-editor.c:745
 msgid "Open new document"
@@ -119,7 +115,7 @@ msgstr ""
 #: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
 #: ../ui/gtk_webedit.ui.h:14
 msgid "Delete"
-msgstr ""
+msgstr "Изтриване"
 
 #: ../src/editor/slib-editor.c:751
 msgid "Delete current note"
@@ -130,7 +126,7 @@ msgstr ""
 #: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
 #: ../ui/xi-menus.gtkbuilder.h:1
 msgid "_File"
-msgstr ""
+msgstr "_Файл"
 
 #: ../src/editor/slib-editor.c:811
 msgid "HTML _Output"
@@ -153,7 +149,7 @@ msgstr ""
 #: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
 #: ../ui/gtk_webedit.ui.h:75
 msgid "Save"
-msgstr "Ñúõðàíè"
+msgstr "Записване"
 
 #: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
 #: ../ui/editor_link_dialog.gtkbuilder.h:1
@@ -178,7 +174,7 @@ msgstr ""
 #: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
 #: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
-msgstr "Ôàéë"
+msgstr "файл"
 
 #: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
 msgid "StudyPad"
@@ -200,7 +196,7 @@ msgstr ""
 #: ../src/gtk/about_modules.c:223 ../src/gtk/about_trans.c:168
 #: ../src/gtk/find_dialog.c:263
 msgid "Close"
-msgstr ""
+msgstr "Затваряне"
 
 #: ../src/gtk/about_modules.c:415
 msgid "<b>Module name:</b> "
@@ -253,7 +249,7 @@ msgstr ""
 #: ../src/gtk/about_modules.c:452 ../src/gtk/search_sidebar.c:295
 #: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 msgid "Commentary"
-msgstr "êîìåíòàð"
+msgstr "Коментари"
 
 #: ../src/gtk/about_modules.c:455 ../ui/prefs.glade.h:143
 #: ../ui/prefs.gtkbuilder.h:143
@@ -265,9 +261,8 @@ msgid "General Book"
 msgstr ""
 
 #: ../src/gtk/about_modules.c:463
-#, fuzzy
 msgid "Personal Commentary"
-msgstr "êîìåíòàð"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:466
 msgid "Journal"
@@ -298,19 +293,17 @@ msgid "<b>Features:</b>"
 msgstr ""
 
 #: ../src/gtk/about_modules.c:509
-#, fuzzy
 msgid "*&nbsp;Headings"
-msgstr "çàãëàâèÿ"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:517
 #, fuzzy
 msgid "*&nbsp;Footnotes"
-msgstr "Бележки под страница"
+msgstr "* Бележки под страница"
 
 #: ../src/gtk/about_modules.c:523
-#, fuzzy
 msgid "*&nbsp;Cross references"
-msgstr "Ïðåäïî÷èòàíèÿ"
+msgstr ""
 
 #: ../src/gtk/about_modules.c:530
 msgid "*&nbsp;Strong's numbers"
@@ -454,7 +447,7 @@ msgstr ""
 #: ../src/gtk/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
 #: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Bookmark"
-msgstr ""
+msgstr "Показалец"
 
 #: ../src/gtk/bookmark_dialog.c:165 ../src/gtk/bookmarks_menu.c:755
 #: ../src/gtk/bookmarks_treeview.c:139
@@ -468,17 +461,16 @@ msgstr ""
 #: ../src/gtk/bookmark_dialog.c:168 ../src/gtk/bookmarks_menu.c:758
 #: ../src/gtk/bookmarks_treeview.c:141
 msgid "Folder: "
-msgstr ""
+msgstr "Папка: "
 
 #: ../src/gtk/bookmarks_menu.c:200
-#, fuzzy
 msgid "Specify bookmarks file"
-msgstr "Ðåäàêòèðà èçáðàíàòà îòìåòêà"
+msgstr ""
 
 #: ../src/gtk/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit"
-msgstr ""
+msgstr "Редактиране"
 
 #: ../src/gtk/bookmarks_menu.c:364
 msgid "Folder name: "
@@ -511,7 +503,7 @@ msgstr ""
 # src/gs_viewtext_dlg.c
 #: ../src/gtk/bookmarks_menu.c:654
 msgid "Add"
-msgstr "Äîáàâè"
+msgstr "Добавяне"
 
 #: ../src/gtk/bookmarks_menu.c:660
 msgid "Label: "
@@ -598,11 +590,11 @@ msgstr ""
 #: ../src/gtk/find_dialog.c:334 ../ui/gtk2_webedit.ui.h:18
 #: ../ui/gtk_webedit.ui.h:18
 msgid "Find"
-msgstr "íàìåðè"
+msgstr "Търсене"
 
 #: ../src/gtk/find_dialog.c:197
 msgid "Enter Word or Phrase"
-msgstr "âúâåäåòå äóìà èëè ôðàçà"
+msgstr ""
 
 #: ../src/gtk/find_dialog.c:212
 msgid "Search backwards"
@@ -610,7 +602,7 @@ msgstr ""
 
 #: ../src/gtk/find_dialog.c:251 ../src/gtk/find_dialog.c:253
 msgid "Find Next"
-msgstr "íàìåðè ñëåäâàù"
+msgstr ""
 
 #: ../src/gtk/font_dialog.c:298
 msgid "Set Module Font"
@@ -663,18 +655,16 @@ msgid "BibleSync is not active."
 msgstr ""
 
 #: ../src/gtk/main_window.c:648
-#, fuzzy
 msgid "BibleSync Chat"
-msgstr "Ñèíõðîíèçèðàíå"
+msgstr ""
 
 #: ../src/gtk/main_window.c:649
 msgid "[say this]"
 msgstr ""
 
 #: ../src/gtk/main_window.c:650
-#, fuzzy
 msgid "Comment:"
-msgstr "êîìåíòàð"
+msgstr "Коментар:"
 
 #: ../src/gtk/main_window.c:690
 msgid "Xiphos: No windows."
@@ -1031,7 +1021,7 @@ msgstr ""
 #: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
 #: ../src/main/sidebar.cc:986
 msgid "Commentaries"
-msgstr "Êîìåíòàðè"
+msgstr ""
 
 #: ../src/gtk/mod_mgr.c:1544 ../src/gtk/utilities.c:587
 #: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
@@ -1258,12 +1248,12 @@ msgstr ""
 
 #: ../src/gtk/parallel_view.c:112
 msgid "Detach/Attach"
-msgstr "çàêà÷è/îòêà÷è"
+msgstr ""
 
 #: ../src/gtk/parallel_view.c:117 ../ui/xi-menus.glade.h:66
 #: ../ui/xi-menus-popup.gtkbuilder.h:43
 msgid "Module Options"
-msgstr "Îïöèè íà ìîäóëà"
+msgstr ""
 
 #: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:616
 #: ../src/gtk/sidebar.c:621 ../src/gtk/tabbed_browser.c:254
@@ -1288,9 +1278,8 @@ msgid ""
 msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:992
-#, fuzzy
 msgid "Mode selection failed.\n"
-msgstr "Ïðîâåðè ìàðêèðàíîòî"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:995
 #, c-format
@@ -1303,7 +1292,7 @@ msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:999 ../src/main/xml.c:96
 msgid "Personal"
-msgstr "ëè÷íè"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:1001
 msgid "Speaker"
@@ -1313,16 +1302,11 @@ msgstr ""
 msgid "Audience"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:1617
-#: ../src/gtk/preferences_dialog.c:1651
-#: ../src/gtk/preferences_dialog.c:1684
-#: ../src/gtk/preferences_dialog.c:1716
-#: ../src/gtk/preferences_dialog.c:1747
-#: ../src/gtk/preferences_dialog.c:1778
-#: ../src/gtk/preferences_dialog.c:1809
-#: ../src/gtk/preferences_dialog.c:1841
-#: ../src/gtk/preferences_dialog.c:1874
-#: ../src/gtk/preferences_dialog.c:1925
+#: ../src/gtk/preferences_dialog.c:1617 ../src/gtk/preferences_dialog.c:1651
+#: ../src/gtk/preferences_dialog.c:1684 ../src/gtk/preferences_dialog.c:1716
+#: ../src/gtk/preferences_dialog.c:1747 ../src/gtk/preferences_dialog.c:1778
+#: ../src/gtk/preferences_dialog.c:1809 ../src/gtk/preferences_dialog.c:1841
+#: ../src/gtk/preferences_dialog.c:1874 ../src/gtk/preferences_dialog.c:1925
 #: ../src/gtk/preferences_dialog.c:2385
 msgid "-- Select --"
 msgstr ""
@@ -1334,7 +1318,7 @@ msgstr ""
 #: ../src/gtk/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
-msgstr "Ïðåäïî÷èòàíèÿ"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:2036
 msgid "General"
@@ -1346,17 +1330,16 @@ msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:2042 ../ui/prefs.glade.h:88
 #: ../ui/prefs.gtkbuilder.h:88
-#, fuzzy
 msgid "BibleSync"
-msgstr "Ñèíõðîíèçèðàíå"
+msgstr ""
 
 #: ../src/gtk/preferences_dialog.c:2046
 msgid "Fonts"
-msgstr ""
+msgstr "Шрифтове"
 
 #: ../src/gtk/preferences_dialog.c:2049
 msgid "Color"
-msgstr ""
+msgstr "Цвят"
 
 #: ../src/gtk/preferences_dialog.c:2052
 msgid "Sizes and Faces"
@@ -1398,9 +1381,9 @@ msgid "found in "
 msgstr ""
 
 #: ../src/gtk/search_dialog.c:483
-#, fuzzy, c-format
+#, c-format
 msgid "New List %s"
-msgstr "çàïàçè ñïèñúêà"
+msgstr ""
 
 #: ../src/gtk/search_dialog.c:700
 msgid "The last module list may not be deleted"
@@ -1569,7 +1552,7 @@ msgstr ""
 
 #: ../src/gtk/search_sidebar.c:447 ../src/gtk/search_sidebar.c:479
 msgid "Lower"
-msgstr "äîëía"
+msgstr ""
 
 #: ../src/gtk/search_sidebar.c:459 ../src/gtk/search_sidebar.c:486
 msgid "Upper"
@@ -1584,9 +1567,8 @@ msgid "If no, it will open for display only."
 msgstr ""
 
 #: ../src/gtk/sidebar.c:945
-#, fuzzy
 msgid "Paste verse references"
-msgstr "Ïðåäïî÷èòàíèÿ"
+msgstr ""
 
 #: ../src/gtk/sidebar.c:947
 msgid "List:"
@@ -1594,7 +1576,7 @@ msgstr ""
 
 #: ../src/gtk/sidebar.c:1543 ../src/gtk/sidebar.c:1593
 msgid "Search"
-msgstr "Òúðñåíå"
+msgstr ""
 
 #: ../src/gtk/sidebar_dialog.c:174 ../src/gtk/sidebar_dialog.c:184
 msgid "Sidebar"
@@ -1891,7 +1873,7 @@ msgstr ""
 #: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:68
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Headings"
-msgstr "çàãëàâèÿ"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:481 ../src/main/parallel_view.cc:574
 #: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:64
@@ -1972,7 +1954,7 @@ msgstr ""
 
 #: ../src/main/prayerlists.cc:118
 msgid "Misc"
-msgstr "Ðàçíè"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:119
 msgid "<b>Miscellaneous</b><br/>"
@@ -2372,7 +2354,7 @@ msgstr ""
 #: ../src/main/url.cc:273
 #, c-format
 msgid "Show %s in main window"
-msgstr "ïîêàæè %s â ãëàâíèÿ ïðîçîðåö"
+msgstr ""
 
 #: ../src/main/xml.c:87 ../src/main/xml.c:468 ../src/main/xml.c:599
 #, c-format
@@ -2577,7 +2559,7 @@ msgstr ""
 
 #: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:7
 msgid "Label:"
-msgstr ""
+msgstr "Етикети:"
 
 #: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:8
 msgid "Label Entry"
@@ -2608,9 +2590,8 @@ msgid "Bookmark Folder Treeview"
 msgstr ""
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:2
-#, fuzzy
 msgid "Test Link"
-msgstr "âðúçêà..."
+msgstr ""
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:3 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
@@ -2618,9 +2599,8 @@ msgid "Verse"
 msgstr ""
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:5
-#, fuzzy
 msgid "Link Text"
-msgstr "âðúçêà..."
+msgstr ""
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:6
 msgid "Link directly"
@@ -2700,7 +2680,7 @@ msgstr ""
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Save AS"
-msgstr ""
+msgstr "Записване като"
 
 #: ../ui/editor_studypad.xml.h:14
 msgid "Add this file to your bookmarks"
@@ -2819,9 +2799,8 @@ msgid "Indicates whether reference is placed first or last."
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:29
-#, fuzzy
 msgid "Reference last"
-msgstr "Ïðåäïî÷èòàíèÿ"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:31
 msgid "Reference last button"
@@ -2852,9 +2831,8 @@ msgid "Include version"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
-#, fuzzy
 msgid "About Studypad"
-msgstr "òåòðàäêà"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
 msgid "Open about dialog"
@@ -2871,7 +2849,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
 msgid "Copy"
-msgstr "êîïèðàé"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
 msgid "Copy selection to clipboard"
@@ -2879,12 +2857,11 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
 msgid "Cut"
-msgstr "îòðåæè"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
-#, fuzzy
 msgid "Cut selection"
-msgstr "Ïðîâåðè ìàðêèðàíîòî"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
 msgid "Decrease indent"
@@ -2903,9 +2880,8 @@ msgid "Delete selection"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
-#, fuzzy
 msgid "Remove selection"
-msgstr "Ïðîâåðè ìàðêèðàíîòî"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
 #: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:11
@@ -2969,9 +2945,8 @@ msgid "Insert link"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
-#, fuzzy
 msgid "Link"
-msgstr "âðúçêà..."
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
 msgid "Insert a link"
@@ -3019,15 +2994,15 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
 msgid "Table"
-msgstr ""
+msgstr "Таблица"
 
 #: ../ui/gtk2_webedit.ui.h:45 ../ui/gtk_webedit.ui.h:45
 msgid "Insert a table"
-msgstr ""
+msgstr "Вмъкване Таблица"
 
 #: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
 msgid "Italic"
-msgstr ""
+msgstr "Курсив"
 
 #: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
 msgid "Change selection to italic font"
@@ -3035,7 +3010,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
 msgid "Center"
-msgstr ""
+msgstr "Центриране"
 
 #: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
 msgid "Center justify paragraph"
@@ -3051,7 +3026,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
 msgid "Left"
-msgstr ""
+msgstr "Ляво"
 
 #: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
 msgid "Left justify paragraph"
@@ -3070,13 +3045,12 @@ msgid "Create new file"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
-#, fuzzy
 msgid "Open file"
-msgstr "Îòâîðè"
+msgstr "Отваряне на файл"
 
 #: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
 msgid "Paste"
-msgstr "âìúêíè"
+msgstr "Поставяне"
 
 #: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
 msgid "Paste clipboard at cursor."
@@ -3088,7 +3062,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
 msgid "Print"
-msgstr "ïå÷àò"
+msgstr "Печат"
 
 #: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
 msgid "Print the current document"
@@ -3108,7 +3082,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
 msgid "Quit"
-msgstr ""
+msgstr "Изход"
 
 #: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
 msgid "Shut down editor"
@@ -3128,7 +3102,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
 msgid "Replace"
-msgstr "çàìåíè"
+msgstr "Замяна"
 
 #: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
 msgid "Search and replace"
@@ -3139,9 +3113,8 @@ msgid "Save changes to file"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
-#, fuzzy
 msgid "Save as"
-msgstr "Ñúõðàíè"
+msgstr "Записване като"
 
 #: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
 msgid "Save file as ..."
@@ -3157,7 +3130,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:81 ../ui/gtk_webedit.ui.h:81
 msgid "Underline"
-msgstr ""
+msgstr "Подчертан"
 
 #: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
 msgid "Underline selection"
@@ -3165,16 +3138,15 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
 msgid "Undo"
-msgstr "îòìåíè"
+msgstr "Отмяна"
 
 #: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
 msgid "Undo last change"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:86
-#, fuzzy
 msgid "Editor"
-msgstr "_ðåäàêòèðàé"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:88
 msgid "Recent files"
@@ -3183,40 +3155,40 @@ msgstr ""
 #: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:89
 #: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
 msgid "_Edit"
-msgstr "_ðåäàêòèðàé"
+msgstr "_Редактиране"
 
 #: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:90
 #: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "_Help"
-msgstr ""
+msgstr "_Помощ"
 
 #: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:91
 msgid "Normal"
-msgstr ""
+msgstr "Обикновен"
 
 #: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:92
 msgid "Header 1"
-msgstr ""
+msgstr "Горен колонтитул 1"
 
 #: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:93
 msgid "Header 2"
-msgstr ""
+msgstr "Горен колонтитул 2"
 
 #: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:94
 msgid "Header 3"
-msgstr ""
+msgstr "Горен колонтитул 3"
 
 #: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:95
 msgid "Header 4"
-msgstr ""
+msgstr "Горен колонтитул 4"
 
 #: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:96
 msgid "Header 5"
-msgstr ""
+msgstr "Горен колонтитул 5"
 
 #: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:97
 msgid "Header 6"
-msgstr ""
+msgstr "Горен колонтитул 6"
 
 #: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:98
 msgid "Address"
@@ -3281,9 +3253,8 @@ msgid "Unmark"
 msgstr ""
 
 #: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
-#, fuzzy
 msgid "Remove annotation."
-msgstr "Ïðîâåðè ìàðêèðàíîòî"
+msgstr ""
 
 #: ../ui/markverse.glade.h:12 ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
@@ -3351,9 +3322,8 @@ msgid ""
 msgstr ""
 
 #: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
-#, fuzzy
 msgid "_Delete Index"
-msgstr "èçòðèé áåëåæêà"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
 msgid "Delete the fast-search index of the selected modules."
@@ -3669,9 +3639,8 @@ msgid "BSP audience radio button"
 msgstr ""
 
 #: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
-#, fuzzy
 msgid "_Personal"
-msgstr "ëè÷íè"
+msgstr ""
 
 #: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
 msgid "Enable BibleSync for personal or team use."
@@ -3797,9 +3766,8 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
-#, fuzzy
 msgid "Presence"
-msgstr "Ïðåäïî÷èòàíèÿ"
+msgstr ""
 
 #: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Presence announcements will be shown in dialogs."
@@ -4127,7 +4095,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
 msgid "Hebrew Lexicon"
-msgstr "Åâðåéñêè ëåêñèêîí"
+msgstr ""
 
 #: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
 msgid "Hebrew Lexicon Combo"
@@ -4135,7 +4103,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
 msgid "Greek Lexicon"
-msgstr "Ãðúöêè ëåêñèêîí"
+msgstr ""
 
 #: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
 msgid "Greek Lexicon Combo"
@@ -4816,9 +4784,8 @@ msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
-#, fuzzy
 msgid "About _BibleSync"
-msgstr "Ñèíõðîíèçèðàíå"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Learn about BibleSync, the shared navigation protocol"
@@ -4890,7 +4857,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Lookup Selection"
-msgstr "Ïðîâåðè ìàðêèðàíîòî"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Use Current Dictionary"
@@ -4902,7 +4869,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Unlock This Module"
-msgstr "Îòêëþ÷è òîçè ìîäóë"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Display Book Heading"
@@ -4998,11 +4965,11 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
-msgstr ""
+msgstr "Вмъкване на показалец"
 
 #: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
-msgstr "Ðåäàêòèðà èçáðàíàòà îòìåòêà"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
@@ -5014,19 +4981,19 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
-msgstr "Expand all bookmarks groups"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
-msgstr "îòâîðè âñè÷êè"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
-msgstr "çàòâîðè âñè÷êè ãðóïè îòìåòêè"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
-msgstr "çàòâîðè âñè÷êè"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
@@ -5034,7 +5001,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
-msgstr "ðàçðåøè ïðåíàðåæäàíå"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
