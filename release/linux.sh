@@ -8,7 +8,7 @@ if [ $(command -v apt-get) ]; then
 	apt-get -y install appstream-util cmake g++ desktop-file-utils \
 		fp-utils gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev \
 		libenchant-dev libgail-3-dev libglade2-dev libgsf-1-dev libgtk-3-dev \
-		libsword-dev libwebkit2gtk-4.0-dev libxml2-dev libxml2-utils make \
+		libsword-dev libwebkitgtk-3.0-dev libxml2-dev libxml2-utils make \
 		python-dev swig uuid-dev uuid-runtime yelp-tools xzip libbiblesync-dev \
 		libsword-dev zip
 	CMAKE_OPTS="-DPACKAGE_RPM:BOOL=OFF -DWEBKIT1:BOOL=ON"
