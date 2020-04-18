@@ -166,6 +166,7 @@ static void on_dlgparallel_destroy(GObject *object, gpointer user_data)
 	main_update_parallel_page();
 
 	settings.display_parallel = 0;
+	widgets.html_parallel_dialog = NULL;
 	xml_set_value("Xiphos", "layout", "parallelopen", "0");
 }
 
