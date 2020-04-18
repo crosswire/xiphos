@@ -45,6 +45,12 @@
 
 #include <glib/gstdio.h>
 
+/*
+ * global initialization flag.
+ * initially false. when we are about to call gui_main(), we set it.
+ */
+gboolean initialized = FALSE;
+
 #ifdef WIN32
 
 #ifdef HAVE_DBUS
@@ -277,6 +283,8 @@ int main(int argc, char *argv[])
 	g_idle_add((GSourceFunc)gui_splash_done, NULL);
 
 	gui_recompute_shows(FALSE);
+
+	initialized = TRUE;
 
 	gui_main();
 	return 0;

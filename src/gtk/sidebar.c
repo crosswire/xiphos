@@ -76,6 +76,7 @@ GtkListStore *model_verselist;
 gboolean is_search_result;
 
 extern gboolean shift_key_pressed;
+extern gboolean initialized;
 
 static GtkWidget *create_menu_modules(void);
 void on_export_verselist_activate(GtkMenuItem *menuitem,
@@ -1389,6 +1390,16 @@ static gboolean paned_button_release_event(GtkWidget *widget,
 
 void gui_show_previewer_in_sidebar(gint choice)
 {
+	/*
+	 * don't show the previewer because of a state change of
+	 * its placement if it's not supposed to be shown at all.
+	 * exception: to get the world started properly, which is to
+	 * say, if we have not yet initialized everything, we must
+	 * go through this setup anyhow.
+	 */
+	if (initialized && !settings.showpreview)
+		return;
+
 	if (choice) {
 		gtk_widget_show(widgets.box_side_preview);
 		gtk_widget_show(widgets.box_side_preview);
