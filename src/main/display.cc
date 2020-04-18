@@ -104,15 +104,15 @@ a:link{ color:%s } %s %s -->\
 // ONE is when he wants one or the other, so we can use a single
 // specification which overlays both on top of one another.
 #define CSS_BLOCK_BOTH                                                                            \
-	" *        { line-height: 3.8em; }"                                                       \
+	" *        { line-height: 3.5em; }"                                                       \
 	" .word    { position: relative; top:  0.0em; left: 0; }"                                 \
-	" .strongs { position: absolute; top:  0.3em; left: 0; white-space: nowrap; z-index: 2 }" \
-	" .morph   { position: absolute; top:  1.2em; left: 0; white-space: nowrap; z-index: 1 }"
+	" .strongs { position: absolute; top:  0.2em; left: 0; white-space: nowrap; z-index: 2 }" \
+	" .morph   { position: absolute; top:  0.9em; left: 0; white-space: nowrap; z-index: 1 }"
 #define CSS_BLOCK_ONE                                                                  \
 	" *        { line-height: 2.7em; }"                                            \
 	" .word    { position: relative; top:  0.0em; left: 0; }"                      \
-	" .strongs { position: absolute; top:  0.8em; left: 0; white-space: nowrap; }" \
-	" .morph   { position: absolute; top:  0.8em; left: 0; white-space: nowrap; }"
+	" .strongs { position: absolute; top:  0.4em; left: 0; white-space: nowrap; }" \
+	" .morph   { position: absolute; top:  0.4em; left: 0; white-space: nowrap; }"
 
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
