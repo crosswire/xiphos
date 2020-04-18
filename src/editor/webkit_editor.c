@@ -330,7 +330,7 @@ action_delete_item_activate_cb(GtkWidget *widget, EDITOR *e)
 			webkit_web_view_load_string((WebKitWebView *)
 						    e->html_widget,
 						    text,
-						    "text/html", "utf_8",
+						    "application/xhtml+xml", "utf_8",
 						    "file://");
 		}
 		if (text)
@@ -975,7 +975,7 @@ static void _load_file(EDITOR *e, const gchar *filename)
 
 	XI_message(("web view load string [%s]", text));
 	webkit_web_view_load_string(WEBKIT_WEB_VIEW(e->html_widget),
-				    text, "text/html", "utf_8", "file://");
+				    text, "application/xhtml+xml", "utf_8", "file://");
 
 	g_free(text);
 	e->is_changed = FALSE;
@@ -1022,7 +1022,7 @@ void editor_load_book(EDITOR *e)
 		webkit_web_view_load_string((WebKitWebView *)
 					    e->html_widget,
 					    text,
-					    "text/html", "utf_8",
+					    "application/xhtml+xml", "utf_8",
 					    "file://");
 	}
 
@@ -1110,7 +1110,7 @@ editor_load_note(EDITOR *e, const gchar *module_name, const gchar *key)
 		webkit_web_view_load_string((WebKitWebView *)
 					    e->html_widget,
 					    text,
-					    "text/html", "utf_8",
+					    "application/xhtml+xml", "utf_8",
 					    "file://");
 	}
 

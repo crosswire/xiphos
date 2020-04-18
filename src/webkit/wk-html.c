@@ -361,7 +361,7 @@ void wk_html_close(WkHtml *html)
 void wk_html_render_data(WkHtml *html, const char *data, guint32 len)
 {
 	printf("in render_data, data is %s", data);
-	wk_html_open_stream(html, "text/html");
+	wk_html_open_stream(html, "application/xhtml+xml");
 	wk_html_write(html, data, len);
 	wk_html_close(html);
 }
