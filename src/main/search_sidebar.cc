@@ -214,7 +214,7 @@ void main_do_sidebar_search(gpointer user_data)
 		gchar *str;
 		backendSearch->clear_search_list();
 		str = g_strdup_printf("%s - %s",
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 				      gtk_combo_box_text_get_active_text((GtkComboBoxText *)
 									 ss.entryLower),
 				      gtk_combo_box_text_get_active_text((GtkComboBoxText *)
@@ -345,7 +345,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 			key->setTestament(1);
 			key->setBook(i + 1);
 			book = strdup((const char *)key->getBookName());
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 			gtk_combo_box_text_append_text((GtkComboBoxText *)ss.entryUpper, book);
 			gtk_combo_box_text_append_text((GtkComboBoxText *)ss.entryLower, book);
 #else
@@ -363,7 +363,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 			key->setTestament(2);
 			key->setBook(i + 1);
 			book = strdup((const char *)key->getBookName());
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 			gtk_combo_box_text_append_text((GtkComboBoxText *)ss.entryUpper, book);
 			gtk_combo_box_text_append_text((GtkComboBoxText *)ss.entryLower, book);
 #else

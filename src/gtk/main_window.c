@@ -485,7 +485,7 @@ static void on_notebook_bible_parallel_switch_page(GtkNotebook *notebook,
 {
 }
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 static void on_notebook_comm_book_switch_page(GtkNotebook *notebook,
 					      gpointer arg,
 					      gint page_num, GList **tl)

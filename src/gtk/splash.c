@@ -33,7 +33,7 @@
 #include "gui/splash.h"
 #include "gui/utilities.h"
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 /*****************************************************************************/
 /* FIXME: clean up below */
 
@@ -222,7 +222,7 @@ static void schedule_relayout(ESplash *splash)
 
 /* GtkObject methods.  */
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 static void impl_destroy(GObject *object)
 #else
 static void impl_destroy(GtkObject *object)
@@ -255,7 +255,7 @@ static void impl_destroy(GtkObject *object)
 
 static void class_init(ESplashClass *klass)
 {
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	GtkWidgetClass *object_class;
 	object_class = GTK_WIDGET_CLASS(klass);
 #else
@@ -307,7 +307,7 @@ gboolean
 expose_event_callback(GtkWidget *widget, GdkEventExpose *event,
 		      gpointer data)
 {
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	ESplashPrivate *priv = (ESplashPrivate *)data;
 	GtkWidget *canvas = widget;
 	GList *p;
@@ -659,4 +659,4 @@ void gui_splash_init(void)
 
 	g_object_unref(builder);
 }
-#endif /* !USE_GTK_3 */
+#endif
