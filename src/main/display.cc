@@ -1172,7 +1172,8 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	char oldAutoNorm = key->isAutoNormalize();
 	key->setAutoNormalize(0);
 
-	swbuf.append("<div class=\"introMaterial\">");
+	bool started_intro = false;
+
 	for (int i = 0; i < 2; ++i) {
 		// Get chapter 0 iff we're in chapter 1.
 		if ((i == 0) && (chapter != 1))
@@ -1181,47 +1182,26 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		key->setChapter(i * chapter);
 		key->setVerse(0);
 
-		// begin gosh this is gross.
-		// hunt down self-closing <div ... /> and stomp them with spaces.
-		// this is disgustingly special-case, caused by self-closing <div>
-		// being treated by webkit as unclosed, in turn causing
-		// .introMaterial modifier to take effect over the whole chapter.
-		// this is a temporary, stopgap measure until Sword stops generating
-		// self-closing <div>. then the previous simplicity just above the #else
-		// will be resumed. we are not properly parsing this; we are depending
-		// on the observed artifact that self-closing <div> occurs as a rather
-		// neat, compact unit, and notably that there won't be any ordinary
-		// <div>...</div> instances, nor will <div> try to nest.
+		buf = g_strdup_printf("%s", strongs_or_morph
+				      ? block_render(imodule.renderText().c_str())
+				      : imodule.renderText().c_str());
 
-		GString *divBuf = g_string_new(imodule.renderText().c_str());
-		if (divBuf->len == 0) {
-			g_string_free(divBuf, TRUE);
-			continue;
-		}
-		gchar *strBegin = divBuf->str, *strEnd, *strChase;	// analyzer indices.
-
-		while ((strBegin < (divBuf->str + divBuf->len)) &&
-		       (strBegin = strstr(strBegin, "<div "))) {	// open, then...
-			if (strEnd = strstr(strBegin, "/>")) {		// ...self-close. augh!
-				strEnd += 2;				// 1st char after.
-				for (strChase = strBegin; strChase < strEnd; ++strChase)
-					*strChase = ' ';		// stomp stomp stomp.
-				strBegin = strEnd;
+		if ((buf != NULL) && (strlen(buf) > 0))
+		{
+			if (!started_intro)
+			{
+				swbuf.append("<div class=\"introMaterial\">");
+				started_intro = true;
 			}
-			else
-				strBegin += 5;	// skip: next candidate.
+
+			swbuf.append(buf);
+			swbuf.append("<br />");
+			g_free(buf);
 		}
-
-		buf = g_strdup_printf("%s<br />",
-				      (strongs_or_morph ? block_render(divBuf->str) : divBuf->str));
-		g_string_free(divBuf, TRUE);
-
-    // end grossness
-
-		swbuf.append(buf);
-		g_free(buf);
 	}
-	swbuf.append("</div>");
+
+	if (started_intro)
+		swbuf.append("</div>");		// finish what we started.
 
 	key->setAutoNormalize(oldAutoNorm);
 
