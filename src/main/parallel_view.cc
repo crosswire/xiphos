@@ -51,7 +51,8 @@
 
 #include "gui/debug_glib_null.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } %s --></style></head>"
+// "%s" is for CSS init from getRenderHeader().
 
 extern GtkWidget *entrycbIntBook;
 extern GtkWidget *sbIntChapter;
@@ -593,6 +594,7 @@ void main_update_parallel_page(void)
 
 	tmpBuf = g_strdup_printf(HTML_START
 				 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+				 "", // null CSS headers
 				 settings.bible_bg_color,
 				 settings.bible_text_color, settings.link_color);
 	data = g_string_new(tmpBuf);
@@ -722,18 +724,15 @@ void main_update_parallel_page(void)
  *   void
  */
 
-static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_count, gint fraction)
+static void interpolate_parallel_display(SWModule *control,
+					 char     *control_name,
+					 SWBuf    &text,
+					 gchar    *key,
+					 gint     parallel_count,
+					 gint     fraction)
 {
-	// identify the module whose v11n will drive us.
-	// should be 1st parallel module.
-	// it would be really weird if that's missing, but be ready anyhow.
-	char *module_name = (settings.parallel_list
-			     ? settings.parallel_list[0]
-			     : settings.MainWindowModule);
-	// might have an abbrev. get the real.
-	const char *real_mod = main_get_name(module_name);
-	if (real_mod)
-		module_name = (gchar *)real_mod;
+	// we are guaranteed that control, the module whose v11n
+	// controls our verse limit and display choices, exists.
 
 	gchar *utf8str, *textColor, *tmpkey, tmpbuf[256];
 	const gchar *bgColor;
@@ -747,11 +746,8 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 		return;
 
 	// need #verses to process in this chapter.
-	SWModule *mod = backend->get_SWModule(module_name);
-	if (!mod)
-		return;
 
-	VerseKey *vkey = (VerseKey *)mod->createKey();
+	VerseKey *vkey = (VerseKey *)control->createKey();
 	int xverses;
 
 	vkey->setAutoNormalize(1);
@@ -791,17 +787,17 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 	// but we must validate a key in some vaguely consistent manner.
 	// arbitrarily, we have picked the 1st.
 	// it's consistent, but very possibly wrong for all but the 1st.
-	tmpkey = backend_p->get_valid_key(module_name, key);
+	tmpkey = backend_p->get_valid_key(control_name, key);
 
-	cur_book = backend_p->key_get_book(module_name, tmpkey);
-	cur_chapter = backend_p->key_get_chapter(module_name, tmpkey);
-	cur_verse = backend_p->key_get_verse(module_name, tmpkey);
+	cur_book = backend_p->key_get_book(control_name, tmpkey);
+	cur_chapter = backend_p->key_get_chapter(control_name, tmpkey);
+	cur_verse = backend_p->key_get_verse(control_name, tmpkey);
 	settings.intCurVerse = cur_verse;
 
 	for (verse = 1; verse <= xverses; ++verse) {
 		snprintf(tmpbuf, 255, "%s %d:%d", cur_book, cur_chapter, verse);
 		free(tmpkey);
-		tmpkey = backend_p->get_valid_key(settings.parallel_list[0], tmpbuf);
+		tmpkey = backend_p->get_valid_key(control_name, tmpbuf);
 
 		text += "<tr valign=\"top\">";
 
@@ -902,7 +898,7 @@ static void interpolate_parallel_display(SWBuf &text, gchar *key, gint parallel_
 void main_update_parallel_page_detached(void)
 {
 	SWBuf text("");
-	gchar buf[500];
+	gchar buf[5000];
 	gint modidx, parallel_count, fraction;
 
 	if (!widgets.html_parallel_dialog ||
@@ -919,8 +915,27 @@ void main_update_parallel_page_detached(void)
 	/* 2 => 50, 4 => 25, 5 => 20, 10 => 10, ... */
 	fraction = (parallel_count ? (100 / parallel_count) : 100);
 
-	snprintf(buf, 499, HTML_START
+	// identify the module whose v11n and CSS display defaults will drive us.
+	// should be 1st parallel module.
+	// it would be really weird if that's missing, but be ready anyhow.
+	char *control_name = (settings.parallel_list
+			     ? settings.parallel_list[0]
+			     : settings.MainWindowModule);
+	// might have an abbrev. get the real.
+	const char *real_mod = main_get_name(control_name);
+	if (real_mod)
+		control_name = (gchar *)real_mod;
+
+	SWModule *control = backend->get_SWModule(control_name);
+	if (!control)
+	{
+		gui_generic_warning(_("Failed to find 1st parallel module for display control."));
+		return;
+	}
+
+	snprintf(buf, 4999, HTML_START
 		 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
+		 control->getRenderHeader(),
 		 settings.bible_bg_color, settings.bible_text_color,
 		 settings.link_color);
 	text += buf;
@@ -937,7 +952,7 @@ void main_update_parallel_page_detached(void)
 	}
 
 	text += "</tr>";
-	interpolate_parallel_display(text, settings.cvparallel, parallel_count, fraction);
+	interpolate_parallel_display(control, control_name, text, settings.cvparallel, parallel_count, fraction);
 	text += "</table></body></html>";
 
 	snprintf(buf, 499, "%d", settings.intCurVerse);
