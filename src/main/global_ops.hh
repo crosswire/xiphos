@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * mod_global_ops.h - setup for SWORD global options in the gui
  *
- * Copyright (C) 2000-2018 Xiphos Developer Team
+ * Copyright (C) 2000-2020 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

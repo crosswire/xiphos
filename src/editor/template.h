@@ -4,7 +4,7 @@
  *
  *  ** this is used by settings only if studypad.spt does not exist **
  * 
- * Copyright (C) 2005-2018 Xiphos Developer Team
+ * Copyright (C) 2005-2020 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

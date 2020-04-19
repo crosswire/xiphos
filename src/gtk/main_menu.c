@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * main_menu.c - creation of and call backs for xiphos main menu
  *
- * Copyright (C) 2000-2018 Xiphos Developer Team
+ * Copyright (C) 2000-2020 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
