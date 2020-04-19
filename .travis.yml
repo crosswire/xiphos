@@ -4,6 +4,8 @@ language: bash
 os: linux
 services:
   - docker
+git:
+  depth: false
 
 addons:
   apt:
@@ -15,6 +17,7 @@ addons:
 before_install:
   - curl -Ls -o docker-build https://github.com/mate-desktop/mate-dev-scripts/raw/master/travis/docker-build
   - chmod +x docker-build
+  - git fetch --tags
 
 install:
   - sudo pip3 install --upgrade pip
@@ -82,6 +85,7 @@ requires:
     - g++
     - desktop-file-utils
     - fp-utils
+    - git
     - gsettings-desktop-schemas-dev
     - intltool
     - itstool
@@ -110,6 +114,7 @@ requires:
     - cmake
     - dbus-glib-devel
     - desktop-file-utils
+    - git
     - docbook-utils
     - gcc-c++
     - gtk3-devel
@@ -132,6 +137,7 @@ requires:
     - g++
     - desktop-file-utils
     - fp-utils
+    - git
     - gsettings-desktop-schemas-dev
     - intltool
     - itstool

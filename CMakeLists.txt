@@ -21,12 +21,8 @@
 cmake_minimum_required (VERSION 3.11 FATAL_ERROR)
 cmake_policy(VERSION 3.11)
 
-
-### set project name and version HERE ###
-project (xiphos
-  VERSION "4.1.0"
-  LANGUAGES C CXX)
-
+### set project name (version set later)
+project (xiphos C CXX)
 
 # set commonly used Xiphos variables:
 # Xiphos website
@@ -60,6 +56,22 @@ endif()
 # tell cmake where its modules can be found in our project directory
 list (APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 list (APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
+
+# parse the current version based on git tags, then cache a result on behalf
+# of source tarballs that don't have the repo .git metadata
+set(SOURCE_VERSION_CACHE "${PROJECT_SOURCE_DIR}/cmake/source_version.txt")
+if(EXISTS "${PROJECT_SOURCE_DIR}/.git")
+	include(GetGitRevisionDescription)
+	git_describe(GIT_VERSION --tags)
+	string(REGEX REPLACE "-([0-9]*).*" ".\\1" VERSION "${GIT_VERSION}")
+	file(WRITE ${SOURCE_VERSION_CACHE} "${VERSION}")
+else()
+	file(STRINGS ${SOURCE_VERSION_CACHE} VERSION)
+endif()
+
+# configure project name and version
+project (xiphos
+	VERSION "${VERSION}")
 
 # set install directory variables as defined by the GNU Coding Standards.
 # e.g. CMAKE_INSTALL_DATAROOTDIR; CMAKE_INSTALL_FULL_BINDIR;
