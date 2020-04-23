@@ -145,7 +145,7 @@ if (WIN32)
   # bin: Stable versions
   install(FILES
     ${SYS_ROOT_BIN}/libsword.dll
-    ${SYS_ROOT_BIN}/libgconf-2-4.dll
+    ${SYS_ROOT_BIN}/libminizip-1.dll
     ${SYS_ROOT_BIN}/libdbus-1-3.dll
     ${SYS_ROOT_BIN}/libdbus-glib-1-2.dll
     ${SYS_ROOT_BIN}/addld.exe

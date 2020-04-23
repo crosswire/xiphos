@@ -332,17 +332,17 @@ or for building a regular RPM package (recommended):
 Cross-Compiling Xiphos for Windows®
 ===================================
 
-__Warning: Cross-compiling for Windows® is still a work-in-progress.__
+These instructions describe cross-compilation for Windows® using Fedora MinGW cross-compilation support.
 
-These instructions describe cross-compilation for Windows® from Fedora 30 using its MinGW cross-compilation support as this is what developers use.
+These instructions work on Fedora 30, mainly due to the great support from Greg Hellings for providing mingw packages for Sword, CLucene and other required libraries.
 
-In general, the instructions work on the current version of Fedora, mainly due to the great support from Greg Hellings for providing mingw packages of Sword, CLucene and other required libraries.
-
-Compilation on other versions will require modifications. Not to mention other distributions.
+Compilation on Fedora 31+ versions will not work anymore as wekbitgtk has been deprecated.
 
 Specific requirements:
 ---------------------
-It is recommended to use Fedora-Toolbox, a Linux® container that isolates processes from the rest of the system.
+It is strongly advised to use Fedora-Toolbox, a Linux container that isolates processes from the rest of the system.
+
+**Note: If you're running Fedora 31 or newer, you'll need to pull a Fedora 30 container.**
 
     $ sudo dnf install fedora-toolbox
 
@@ -370,7 +370,7 @@ Create a build directory as a sibling of the xiphos and biblesync directories:
 
 ### 4. Create a toolbox container
 
-    $ toolbox create --container xiphos-win32
+    $ toolbox create --container xiphos-win32 --image fedora-toolbox:30
 
 ### 5. Enter toolbox
 
@@ -382,14 +382,14 @@ Create a build directory as a sibling of the xiphos and biblesync directories:
 
 ### 7. Install mingw32 dependencies
 
-    $ sudo dnf install mingw32-sword.noarch mingw32-GConf2.noarch mingw32-libgsf.noarch mingw32-libglade2.noarch mingw32-webkitgtk.noarch mingw32-gtk3.noarch mingw32-libtiff.noarch mingw32-libidn.noarch mingw32-gdb.noarch mingw32-nsis
+    $ sudo dnf install mingw32-sword.noarch mingw32-minizip.noarch mingw32-libgsf.noarch mingw32-libglade2.noarch mingw32-webkitgtk.noarch mingw32-gtk3.noarch mingw32-libtiff.noarch mingw32-libidn.noarch mingw32-gdb.noarch mingw32-nsis mingw32-dbus-glib
 
 ### 8. Build and install Biblesync with Mingw32
 Cross-compiling Biblesync using MinGW32. Check the instructions in the INSTALL
 file for doing that.
 
     $ source ../biblesync/win32.opts
-    $ mkdir build-bs32 && cd build-bs32
+    $ mkdir -p build-bs32 && cd build-bs32
 	$ cmake $WIN32_OPTS -DBUILD_SHARED_LIBS=TRUE ../../biblesync
     $ make && sudo make install
 	$ cd ..
@@ -432,7 +432,7 @@ Create a build directory as a sibling of the xiphos and biblesync directories:
 
 ### 4. Create a toolbox container
 
-    $ toolbox create --container xiphos-win64
+    $ toolbox create --container xiphos-win64 --image fedora-toolbox:30
 
 ### 5. Enter toolbox
 
@@ -444,7 +444,7 @@ Create a build directory as a sibling of the xiphos and biblesync directories:
 
 ### 7. Install mingw dependencies
 
-    $ sudo dnf install mingw64-sword.noarch mingw64-GConf2.noarch mingw64-libgsf.noarch mingw64-libglade2.noarch mingw64-webkitgtk.noarch mingw64-gtk3.noarch mingw64-libtiff.noarch mingw64-libidn.noarch mingw64-gdb.noarch mingw32-nsis
+    $ sudo dnf install mingw64-sword.noarch mingw64-minizip.noarch mingw64-libgsf.noarch mingw64-libglade2.noarch mingw64-webkitgtk.noarch mingw64-gtk3.noarch mingw64-libtiff.noarch mingw64-libidn.noarch mingw64-gdb.noarch mingw32-nsis mingw64-dbus-glib
 
 ### 8. Build and install Biblesync with Mingw
 Cross-compiling Biblesync using MinGW. Check the instructions in the INSTALL
@@ -470,3 +470,12 @@ The resulting EXE (64-bit Windows® installer file) will be found in your build 
 ### 11. Exit toolbox
 
     $ exit
+
+
+Build script for Windows®:
+---------------------------
+A script has been written for running automatically all the steps above.
+This script is named `xc-xiphos-win.sh`, you'll find it in the win32 folder.
+
+To avoid side effects, it is recommended to build 32-bit and 64-bit packages in
+separate build directories.
