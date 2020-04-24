@@ -26,8 +26,9 @@ Compile Xiphos from source
 
 Current issues
 --------------
-Due to a bug in yelp-tools, avoid to have a space in your path to the build directory.
-The build will fail quite miserably otherwise, unless you disable building EPUB files. (-DEPUB=OFF)
+Due to a bug in yelp-tools, avoid to have a space in your path to the build
+directory, otherwise, unless you disable building EPUB files. (-DEPUB=OFF),
+the build will fail quite miserably.
 
 
 Dependencies
@@ -340,13 +341,16 @@ Compilation on Fedora 31+ versions will not work anymore as wekbitgtk has been d
 
 Specific requirements:
 ---------------------
-It is strongly advised to use Fedora-Toolbox, a Linux container that isolates processes from the rest of the system.
 
-**Note: If you're running Fedora 31 or newer, you'll need to pull a Fedora 30 container.**
+### toolbox
+The toolbox utility, which uses containers, provides an environment where development tools and libraries can be installed and used, it makes it easy to use a containerized environment for everyday software development and debugging.
 
     $ sudo dnf install fedora-toolbox
 
 All dependencies, MinGW C and MinGW C++ Compilers, either 64-bit or 32-bit will be installed in the container, without affecting the base operating system.
+
+**Note: If you're running Fedora 31 or newer, you'll need to pull a Fedora 30 container.**
+
 
 Building for 32-bit Windows®:
 ----------------------------
@@ -474,8 +478,27 @@ The resulting EXE (64-bit Windows® installer file) will be found in your build 
 
 Build script for Windows®:
 ---------------------------
-A script has been written for running automatically all the steps above.
-This script is named `xc-xiphos-win.sh`, you'll find it in the win32 folder.
+A script named `xc-xiphos-win.sh` will run automatically all the steps above,
+here is how to use it:
 
-To avoid side effects, it is recommended to build 32-bit and 64-bit packages in
-separate build directories.
+#### 1. Install toolbox
+
+    $ sudo dnf install toolbox
+
+#### 2. In a same directory, download latest git of Biblesync and Xiphos
+
+    $ git clone https://github.com/karlkleinpaste/biblesync.git
+    $ git clone https://github.com/crosswire/xiphos.git
+
+#### 3. In this same directory, create a build directory and enter the build directory, 
+
+    $ mkdir -p build && cd build
+
+#### 4. Copy xc-xiphos-win.sh there
+
+    $ cp ../xiphos/win32/xc-xiphos-win.sh .
+
+#### 5. Run the script
+
+    $ ./xc-xiphos-win.sh
+
