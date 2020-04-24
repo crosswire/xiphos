@@ -34,36 +34,36 @@ unset BIBLESYNC_PATH
 while :; do
     case $1 in
         -h|-\?|--help)
-	    # Display a usage synopsis.
+            # Display a usage synopsis.
             show_help
             exit
             ;;
         -win32)
-	    # Target is win32
-	    WIN32=$((WIN32+1))
+            # Target is win32
+            WIN32=$((WIN32+1))
             ;;
-	-win64)
-	    # Target is win64
-	    WIN64=$((WIN64+1))
+        -win64)
+            # Target is win64
+            WIN64=$((WIN64+1))
             ;;
         -s=?*|--src=?*)
-	    # Path to source
+            # Path to source
             XIPHOS_PATH=${1#*=}
-	    X_SRC_NUM=$((X_SRC_NUM+1))
-	    [ "$X_SRC_NUM" -gt '1' ] && die 'ERROR parameter "--src" already exists.'
+            X_SRC_NUM=$((X_SRC_NUM+1))
+            [ "$X_SRC_NUM" -gt '1' ] && die 'ERROR parameter "--src" already exists.'
             ;;
         -s= |--src= )
-	    # Handle the case of an empty path
+            # Handle the case of an empty path
             die 'ERROR: "--src" requires a non-empty option argument.'
             ;;
         -b=?*|--bbs=?*)
-	    # Path to source
+            # Path to source
             BIBLESYNC_PATH=${1#*=}
-	    BBS_SRC_NUM=$((BBS_SRC_NUM+1))
-	    [ "$BBS_SRC_NUM" -gt '1' ] && die 'ERROR parameter "--bbt" already exists.'
+            BBS_SRC_NUM=$((BBS_SRC_NUM+1))
+            [ "$BBS_SRC_NUM" -gt '1' ] && die 'ERROR parameter "--bbt" already exists.'
             ;;
         -b= |--bbt= )
-	    # Handle the case of an empty path
+            # Handle the case of an empty path
             die 'ERROR: "--bbt" requires a non-empty option argument.'
             ;;
 
