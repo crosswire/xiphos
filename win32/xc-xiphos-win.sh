@@ -103,7 +103,7 @@ sudo dnf -y upgrade --refresh
 
 # Install build tools
 echo '** Installing build tools in the toolbox:'
-sudo dnf -y install cmake git fpc glib2-devel itstool libxslt make yelp-tools zip
+sudo dnf -y install cmake git fpc gettext glib2-devel itstool libxslt make yelp-tools zip
 
 
 # Install mingw dependencies
