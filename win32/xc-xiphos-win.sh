@@ -80,7 +80,7 @@ while :; do
     shift
 done
 # Set default values
-[ "$((WIN32+WIN64))" -lt '1' ] && WIN64='1' ; WIN32='1'
+[ "$((WIN32+WIN64))" -lt '1' ] && WIN64='1' && WIN32='1'
 [ "$BIBLESYNC_PATH" ] || BIBLESYNC_PATH='../biblesync'
 
 # Check paths
