@@ -1,17 +1,27 @@
+Currently we are stuck with GTK 2 on Windows, because of HTML display widget
+weirdness. All necesssary packages are currently available in cross-compile
+mode (from the mingw32/64 packages) on Fedora 30, with the exception of
+Biblesync. Since that's our own, and it's very small, we can get away with
+building that as a part of this process.
 
-Currently we're using gnome-vfs version 14 (no
-openssl)[http://ftp.gnome.org/pub/gnome/binaries/win32/gnome-vfs/2.14/gnome-vfs-2.14.2-no-openssl.zip]
-because that's the latest version that works on w2k
+The script "xc-xiphos-win.sh" in this directory will take care of doing the
+building for you. If you are running Fedora 30 on the current host, you should
+be able to go ahead and invoke the script in the appropriate manner. You will
+need password-less sudo access on the current machine for the script to execute,
+as it will update all packages, install all necessary dependencies, build BibleSync,
+and and then build Xihpos windows packages. Those binaries will end up inside
+the root of the xiphos/ source folder.
 
-Cannot change the verion of gconfd used or the associated dll's because images
-stop working in the menus (this is ridiculous). We need to get rid of the gconf
-dependency.
+Because you probably don't want to mess up your current local system to run
+the builds, invoking this script from either a VM or a Fedora 30 container is
+the best option. Try this command, or substitute your favorite container
+runtime command:
 
-The sword that I modified is at http://code.google.com/p/xiphos-sword/.
+mkdir win
+cd win
+git clone https://github.com/crosswire/xiphos.git
+git clone https://github.com/karlkleinpaste/biblesync.git
+docker run --rm -it -v .:/source fedora:30 /source/xihpos/win32/xc-xiphos-win.sh -win32 -win64 -b=/source/biblesync
 
-I am using tdragon's mingw distro along with msys 1.0.11. He has binaries for
-gcc/g++ 4.3.3. I got the SJLJ Unwinding versions. Site is
-http://www.tdragon.net/recentgcc.
-
-Currently I'm building icu, curl, imagemagick, clucene, and sword, in addition
-to xiphos.
+Similar behavior can be achieved through a Fedora 30 VM, or using podman, or
+similar.
