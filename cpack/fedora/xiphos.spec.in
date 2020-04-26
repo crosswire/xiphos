@@ -4,7 +4,8 @@ Release:        99%{?dist}
 Summary:        Bible study and research tool
 License:        GPLv2+
 URL:            @XIPHOS_WEBSITE@
-Source0:        https://github.com/crosswire/%{name}/archive/xiphos-%{version}.tar.gz
+Source0:        https://github.com/crosswire/%{name}/releases/download/%{version}/%{name}-%{version}.tar.gz
+
 Vendor:         @CPACK_PACKAGE_VENDOR@
 
 BuildRequires:  biblesync-devel >= 2.0.1-3
