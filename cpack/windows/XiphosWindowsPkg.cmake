@@ -90,7 +90,7 @@ file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_uninstall_commands.nsh
 # Modify PATH toggle. If this is set to “ON”, then an extra page will
 # appear in the installer that will allow the user to choose whether
 # the program directory should be added to the system PATH variable
- set (CPACK_NSIS_MODIFY_PATH "OFF")
+ set (CPACK_NSIS_MODIFY_PATH "ON")
 
 # The display name string that appears in the Windows Add/Remove
 # Program control pane
@@ -142,6 +142,10 @@ set (CPACK_NSIS_MENU_LINKS
 # create Start Menu shortcuts
 set (CPACK_PACKAGE_EXECUTABLES
   "xiphos" "Xiphos")
+
+# List of desktop links to create. Each desktop link requires a corresponding
+# start menu shortcut as created by CPACK_PACKAGE_EXECUTABLES
+set(CPACK_CREATE_DESKTOP_LINKS "xiphos" "Xiphos")
 
 # Installation directory on the target system. Added to
 # the default installation directory ${CPACK_NSIS_INSTALL_ROOT}
