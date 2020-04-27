@@ -138,7 +138,7 @@ fi
 function do_build {
     bits="${1}"
     mkdir -p win${bits} && cd win${bits}
-    cmake -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw${bits}.cmake -DGTK2=ON -DCONSOLE=OFF "../${XIPHOS_PATH}"
+    cmake -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw${bits}.cmake -DGTK2=ON -DCONSOLE=OFF "${XIPHOS_PATH}"
     make -j$(nproc)
     make mhelp-epub-{C,fa,fr,it} package
     cd ..
