@@ -78,6 +78,7 @@
   WriteRegStr ${SWURL_REG_ROOT} ${SWURL_REG_KEY_COMMAND} "" \
     '"$INSTDIR\bin\${APP_BINARY_NAME}" "%1"'
 
+
 #
 #
 ######################################

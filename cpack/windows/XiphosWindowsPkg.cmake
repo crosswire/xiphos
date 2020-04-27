@@ -90,7 +90,7 @@ file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_uninstall_commands.nsh
 # Modify PATH toggle. If this is set to “ON”, then an extra page will
 # appear in the installer that will allow the user to choose whether
 # the program directory should be added to the system PATH variable
- set (CPACK_NSIS_MODIFY_PATH "ON")
+set (CPACK_NSIS_MODIFY_PATH "OFF")
 
 # The display name string that appears in the Windows Add/Remove
 # Program control pane
@@ -113,13 +113,14 @@ set (CPACK_NSIS_URL_INFO_ABOUT "${XIPHOS_WEBSITE}")
 set (CPACK_NSIS_CONTACT "${XIPHOS_BUG_REPORT}")
 
 # Additional NSIS commands for creating start menu shortcuts.
-#set(CPACK_NSIS_CREATE_ICONS_EXTRA "")
+set(CPACK_NSIS_CREATE_ICONS_EXTRA
+  "CreateShortCut '$DESKTOP\\\\Xiphos.lnk' '$INSTDIR\\\\bin\\\\xiphos.exe'")
 # Placeholder for inserting a custom file
 #file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_create_icons_extra.nsh
 #  CPACK_NSIS_CREATE_ICONS_EXTRA)
 
 # Additional NSIS commands to uninstall start menu shortcuts.
-#set(CPACK_NSIS_DELETE_ICONS_EXTRA "")
+set(CPACK_NSIS_DELETE_ICONS_EXTRA "Delete $DESKTOP\\\\Xiphos.lnk")
 # Placeholder for inserting a custom file
 #file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_delete_icons_extra.nsh
 #  CPACK_NSIS_DELETE_ICONS_EXTRA)
