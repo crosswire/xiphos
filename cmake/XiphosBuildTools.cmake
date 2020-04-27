@@ -83,9 +83,10 @@ if (MSHELP)
   endif (WIN32)
 endif (MSHELP)
 
-# ePub help: yelp-build needs uuidgen
+# ePub help: yelp-build needs uuidgen, epub needs zip
 if (EPUB)
   xiphos_find_program (UUIDGEN uuidgen)
+  xiphos_find_program (ZIP zip)
 endif (EPUB)
 
 # Html to Pdf Help converter
