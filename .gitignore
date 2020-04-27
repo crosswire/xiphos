@@ -9,6 +9,7 @@ src/examples/ipc-interface.xml
 win*/binaries/
 win32/nsis/xiphos*.exe
 win32/po/messages.mo
+cmake/source_version.txt
 
 # Files involved in testing builds
 sword-*
