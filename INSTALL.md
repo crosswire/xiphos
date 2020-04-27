@@ -1,13 +1,27 @@
 Installation instructions
 ==========================
 
-GNU/Linux distributions:
------------------------
-For regular users, we strongly advise that you use your distribution's packages, they usually provide integration to your distribution and you will automatically get security updates.
+## Summary
+
+- Installation Instructions
+   - GNU/Linux packages
+   - Windows® install
+- Compile Xiphos from source
+- Build Xiphos on *Fedora*, *Red Hat* or *CentOS*
+- Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*
+- Make packages with CMake
+- Building for Windows®
+
+
+GNU/Linux packages:
+-------------------
+For regular users, we strongly advise that you use your distribution's packages,
+they usually provide integration to your distribution and you will automatically
+get security updates.
 
 On *Fedora*, *Red Hat* or *CentOS*:
 
-    $ sudo dnf install xiphos-gtk3
+    $ sudo dnf install xiphos
 
 On *Debian*, *Ubuntu*, or *Linux Mint*:
 
@@ -16,9 +30,10 @@ On *Debian*, *Ubuntu*, or *Linux Mint*:
 
 For others distributions, check your distribution's help for how to do this.
 
-Windows®:
--------
-Download the latest .exe file from: http://xiphos.org/download/ or https://github.com/crosswire/xiphos/releases
+Windows® install:
+-------------------
+Download the latest .exe file from: http://xiphos.org/download/ or
+https://github.com/crosswire/xiphos/releases
 
 
 Compile Xiphos from source
@@ -26,43 +41,38 @@ Compile Xiphos from source
 
 Current issues
 --------------
-Due to a bug in yelp-tools, avoid to have a space in your path to the build
-directory, otherwise, unless you disable building EPUB files. (-DEPUB=OFF),
-the build will fail quite miserably.
+Avoid to have a space in your path to the build or disable building EPUB files
+(-DEPUB=OFF), otherwise the build will fail.
 
 
 Dependencies
 ------------
 
-Before building Xiphos, please ensure that you have the platform
-specific dependencies installed:
+Before building Xiphos, please ensure that you have the platform specific
+dependencies installed:
 
-    gcc                    GCC, the GNU Compiler Collection
-    intltool               Set of tools to centralize translation
-    libxml2                XML C parser and toolkit
-    libgsf                 The G Structured File Library
-    gconfmm                C++ wrappers for GConf
-    libuuid                universally unique identifier library
-    sword >= 1.8.0         CrossWire Bible Society's Bible software
-    biblesync              Protocol to support Bible software shared co-navigation
+	chmcmd                 Creates a Compressed HTML help file (chm)
+    CMake                  Cross-platform make system
     Gtk+-2.0 or GTK+-3.0   The GIMP Toolkit
     WebKit1 or Webkit2     Port to Gtk+ of the WebKit rendering engine
-
-Optional Dependencies:
-
-    gtkhtml                Lightweight HTML rendering/editing engine
-    dbus-glib              API for use of D-Bus from GLib applications
-
-Recommended tools:
-
-    intltool               An internationalization tool
     appstream-util         Utility to validate AppStream metadata
+    biblesync              Protocol to support Bible software shared co-navigation
+    dbus-glib              API for use of D-Bus from GLib applications
     desktop-file-validate  Validates a desktop file
+    gcc                    GCC, the GNU Compiler Collection
+    gconfmm                C++ wrappers for GConf
+    gtkhtml                Lightweight HTML rendering/editing engine
+    intltool               An internationalization tool
+    intltool               Set of tools to centralize translation
     itstool                Translates XML documents with PO files
+    libgsf                 The G Structured File Library
+    libuuid                universally unique identifier library
+    libxml2                XML C parser and toolkit
+    make                   A GNU tool which simplifies the build process for users
+    minizip                Minizip contrib in zlib
+    sword >= 1.8.1         CrossWire Bible Society's Bible software
     xmllint                Validates an XML file against an XSD schema
     yelp-build             Creates HTML, EPUB, and other files from help files
-	chmcmd                 Creates a Compressed HTML help file (chm)
-
 
 Get source
 ----------
@@ -84,14 +94,12 @@ The current version of the buildsystem is capable of building and packaging
 Xiphos for the following platforms:
 
 - Linux (GNU Makefiles, Ninja)
+- Windows (Cross compiling on Fedora 30 only)
 
-Should work, but untested:
+Should work, but actually untested:
 
 - FreeBSD (GNU Makefiles)
 
-Work in progress:
-
-- Linux Cross compiling for Windows® (GNU Makefiles, Ninja)
 
 ### Out-of-source tree builds
 
@@ -117,14 +125,16 @@ as a sibling of the xiphos directory:
 
 ### Configure CMake options
 
-`CMAKE_INSTALL_PREFIX` Install directory. This variable defaults to `/usr/local` on UNIX and `c:/Program Files/${PROJECT_NAME}` on Windows®.
+`CMAKE_INSTALL_PREFIX` Install directory. This variable defaults to `/usr/local`
+on UNIX and `c:/Program Files/${PROJECT_NAME}` on Windows®.
 For example, for setting up install in `/usr`, add: `-DCMAKE_INSTALL_PREFIX=/usr`
 
 `CMAKE_BUILD_TYPE` defaults to `Release` (or to `Debug` if a .git dir exists)
 Possible values are empty, `Debug`, `Release`, `RelWithDebInfo`, `MinSizeRel`.
 For forcing to `Release`, add: `-DCMAKE_BUILD_TYPE=Release`
 
-`CMAKE_GENERATOR` A CMake Generator is responsible for writing the input files for a native build system:
+`CMAKE_GENERATOR` A CMake Generator is responsible for writing the input files
+for a native build system:
 - Makefiles for GNU Make: standard feature
 - Ninja files for Ninja: `-GNinja`
 
@@ -197,21 +207,13 @@ or:
 
 
 Build Xiphos on *Fedora*, *Red Hat* or *CentOS*:
-------------------------------------------------
+================================================
 
-### Specific requirements
-
-It is recommended to use Fedora-Toolbox, a Linux® container that isolates processes from the rest of the system.
-
-    $ sudo dnf install fedora-toolbox
-
-All dependencies will be installed in the container, without affecting the base operating system.
-
-### 1. Clone git
+## 1. Clone Xiphos git
 
     $ git https://github.com/crosswire/xiphos.git
 
-### 2. Create and enter the build directory
+## 2. Create and enter the build directory
 
 Create a build directory as a sibling of the xiphos directory:
 
@@ -220,45 +222,49 @@ Create a build directory as a sibling of the xiphos directory:
 	build xiphos
 	$ cd build
 
-### 3. Create a toolbox container
+## 3. Install dependencies
 
-    $ toolbox create --container xiphos
+    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk4-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel intltool libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools
 
-### 4. Enter toolbox
-
-	$ toolbox enter --container xiphos
-
-### 5. Install dependencies
-
-    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk4-devel libxml2-devel libgsf-devel gconfmm26-devel sword-devel libuuid-devel biblesync-devel intltool libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools
-
-### 6. Configure build
+## 4. Configure build
 
     $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON ../xiphos
 
-### 7. Build and install, run xiphos
+## 5. Build and install, run xiphos
 
     $ make -j$(nproc) && sudo make install
 	$ cd ~
 	$ xiphos
 
-### 8. Exit toolbox
-
-    $ exit
-
 
 Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
-----------------------------------------------------
+===================================================
 
-### 1. Install the required dependencies:
+## 1. Install GTKHtml
 
-    $ sudo apt-get install cmake cpp intltool libdbus-glib-1-dev libwebkitgtk-3.0-dev libxml2-dev libgsf-1-dev libgconfmm-2.6-dev libsword-dev uuid-dev libwebkitgtk-dev libglade2-dev intltool appstream-util desktop-file-utils itstool libxml2-utils yelp-tools fp-utils uuid-runtime
+    $ curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
+    $ tar xf gtkhtml-4.10.0.tar.xz
+    $ cd gtkhtml-4.10.0
+    $ ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib/gtkhtml4 --localstatedir=/var --disable-static
+    $ make -j2
+    $ make install
 
-### 2. Clone git
+## 2. Install Biblesync
+
+    $ curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
+    $ tar xf biblesync-1.2.0.tar.gz
+    $ cd biblesync-1.2.0
+    $ mkdir -p build
+    $ cd build
+    $ cmake -DBUILD_SHARED_LIBS=TRUE -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=/usr/lib ..
+    $ make -j2
+    $ make install
+
+## 3. Clone git
 
     $ git https://github.com/crosswire/xiphos.git
 
-### 3. Create and enter the build directory
+## 4. Create and enter the build directory
 
 Create a build directory as a sibling of the xiphos directory:
 
@@ -267,17 +273,21 @@ Create a build directory as a sibling of the xiphos directory:
 	build xiphos
 	$ cd build
 
-### 4. Configuration:
+## 5. Install the required dependencies:
+
+    $ sudo apt-get appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev libenchant-dev libgail-3-dev libglade2-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.0-dev libxml2-dev libxml2-utils make python-dev swig uuid-dev uuid-runtime yelp-tools xzip
+
+## 6. Configuration:
 
     $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWEBKIT1=ON ../xiphos
 
-### 5. Build and install
+## 7. Build and install
 
     $ make -j$(nproc) && make install
 
 
-Packaging Xiphos
-================
+Make packages with CMake
+========================
 Several targets are provided for creating packages.
 Commands are entered in the `build` directory.
 
@@ -315,7 +325,7 @@ well for building a regular RPM package.
 
 ### Requirements
 
-- `rpmbuild` is used to build both binary and source software packages
+- `rpmbuild` is required to build both binary and source software packages
 
 ### Commands
 
@@ -333,27 +343,30 @@ or for building a regular RPM package (recommended):
 Cross-Compiling Xiphos for Windows®
 ===================================
 
-These instructions describe cross-compilation for Windows® using Fedora MinGW cross-compilation support.
+These instructions describe cross-compilation for Windows® using Fedora MinGW
+cross-compilation support.
 
-These instructions work on Fedora 30, mainly due to the great support from Greg Hellings for providing mingw packages for Sword, CLucene and other required libraries.
-
-Compilation on Fedora 31+ versions will not work anymore as wekbitgtk has been deprecated.
+These instructions work on Fedora 30, compilation on Fedora 31+ versions will
+not work anymore as wekbitgtk has been deprecated.
 
 Specific requirements:
 ---------------------
 
-### toolbox
-The toolbox utility, which uses containers, provides an environment where development tools and libraries can be installed and used, it makes it easy to use a containerized environment for everyday software development and debugging.
+We recommend to use a container, which provides an environment where development
+tools and libraries can be installed and used, whithout cluttering your regular
+environment.
 
-    $ sudo dnf install fedora-toolbox
+All dependencies, MinGW C and MinGW C++ Compilers, either 64-bit or 32-bit are
+currently available in cross-compile mode (from the mingw32/64 packages) on
+Fedora 30, mainly due to the great support from Greg Hellings for providing
+mingw packages for Sword, CLucene and other required libraries.
 
-All dependencies, MinGW C and MinGW C++ Compilers, either 64-bit or 32-bit will be installed in the container, without affecting the base operating system.
+**Note: If you're running Fedora 31 or newer, you'll need to pull a Fedora 30
+container.**
 
-**Note: If you're running Fedora 31 or newer, you'll need to pull a Fedora 30 container.**
 
-
-Building for 32-bit Windows®:
-----------------------------
+Building for Windows®:
+---------------------
 
 ### 1. Clone Xiphos git
 
@@ -372,25 +385,25 @@ Create a build directory as a sibling of the xiphos and biblesync directories:
 	biblesync build-win32 xiphos
 	$ cd build-win32
 
-### 4. Create a toolbox container
-
-    $ toolbox create --container xiphos-win32 --image fedora-toolbox:30
-
-### 5. Enter toolbox
-
-	$ toolbox enter --container xiphos-win32
-
 ### 6. Install build tools
 
     $ sudo dnf install cmake fpc gettext glib2-devel itstool libxslt make yelp-tools
 
-### 7. Install mingw32 dependencies
+### 7. Install dependencies
+
+For Win32:
 
     $ sudo dnf install mingw32-sword.noarch mingw32-minizip.noarch mingw32-libgsf.noarch mingw32-libglade2.noarch mingw32-webkitgtk.noarch mingw32-gtk3.noarch mingw32-libtiff.noarch mingw32-libidn.noarch mingw32-gdb.noarch mingw32-nsis mingw32-dbus-glib
 
-### 8. Build and install Biblesync with Mingw32
-Cross-compiling Biblesync using MinGW32. Check the instructions in the INSTALL
+For Win64:
+
+    $ sudo dnf install mingw64-sword.noarch mingw64-minizip.noarch mingw64-libgsf.noarch mingw64-libglade2.noarch mingw64-webkitgtk.noarch mingw64-gtk3.noarch mingw64-libtiff.noarch mingw64-libidn.noarch mingw64-gdb.noarch mingw32-nsis mingw64-dbus-glib
+
+### 8. Build and install Biblesync with Mingw
+Cross-compiling Biblesync using MinGW. Check the instructions in the INSTALL.md
 file for doing that.
+
+For Win32:
 
     $ source ../biblesync/win32.opts
     $ mkdir -p build-bs32 && cd build-bs32
@@ -398,61 +411,7 @@ file for doing that.
     $ make && sudo make install
 	$ cd ..
 
-### 9. Configure
-You are now ready to build Xiphos for Windows®:
-
-    $ cmake -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw32.cmake -DGTK2=ON ../xiphos
-
-### 10. Build .EXE
-
-    $ make -j$(nproc) package
-
-The resulting EXE (32-bit Windows® installer file) will be found in your build directory.
-
-### 11. Exit toolbox
-
-    $ exit
-
-
-Building for 64-bit Windows®:
-----------------------------
-
-### 1. Clone Xiphos git
-
-    $ git https://github.com/crosswire/xiphos.git
-
-### 2. Clone Biblesync git
-
-    $ git clone https://github.com/karlkleinpaste/biblesync.git
-
-### 3. Create and enter the build directory
-
-Create a build directory as a sibling of the xiphos and biblesync directories:
-
-    $ mkdir build-win64
-    $ ls
-	biblesync build-win64 xiphos
-	$ cd build-win64
-
-### 4. Create a toolbox container
-
-    $ toolbox create --container xiphos-win64 --image fedora-toolbox:30
-
-### 5. Enter toolbox
-
-	$ toolbox enter --container xiphos-win64
-
-### 6. Install build tools
-
-    $ sudo dnf install cmake fpc gettext glib2-devel itstool libxslt make yelp-tools
-
-### 7. Install mingw dependencies
-
-    $ sudo dnf install mingw64-sword.noarch mingw64-minizip.noarch mingw64-libgsf.noarch mingw64-libglade2.noarch mingw64-webkitgtk.noarch mingw64-gtk3.noarch mingw64-libtiff.noarch mingw64-libidn.noarch mingw64-gdb.noarch mingw32-nsis mingw64-dbus-glib
-
-### 8. Build and install Biblesync with Mingw
-Cross-compiling Biblesync using MinGW. Check the instructions in the INSTALL
-file for doing that.
+For Win64:
 
     $ source ../biblesync/win64.opts
     $ mkdir build-bs64 && cd build-bs64
@@ -463,42 +422,24 @@ file for doing that.
 ### 9. Configure
 You are now ready to build Xiphos for Windows®:
 
+For Win32:
+
+    $ cmake -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw32.cmake -DGTK2=ON ../xiphos
+
+For Win64:
+
     $ cmake -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw64.cmake -DGTK2=ON ../xiphos
 
 ### 10. Build .EXE
 
     $ make -j$(nproc) package
 
-The resulting EXE (64-bit Windows® installer file) will be found in your build directory.
-
-### 11. Exit toolbox
-
-    $ exit
+The resulting EXE (Windows® installer file) will be found in your build directory.
 
 
 Build script for Windows®:
 ---------------------------
-A script named `xc-xiphos-win.sh` will run automatically all the steps above,
-here is how to use it:
+A script named `xc-xiphos-win.sh` in the win32 directory will run automatically
+all the steps above.
 
-#### 1. Install toolbox
-
-    $ sudo dnf install toolbox
-
-#### 2. In a same directory, download latest git of Biblesync and Xiphos
-
-    $ git clone https://github.com/karlkleinpaste/biblesync.git
-    $ git clone https://github.com/crosswire/xiphos.git
-
-#### 3. In this same directory, create a build directory and enter the build directory, 
-
-    $ mkdir -p build && cd build
-
-#### 4. Copy xc-xiphos-win.sh there
-
-    $ cp ../xiphos/win32/xc-xiphos-win.sh .
-
-#### 5. Run the script
-
-    $ ./xc-xiphos-win.sh
-
+See intructions in the file `win32/WindowsBuildNotes.txt`
