@@ -40,6 +40,7 @@ requires:
     - sudo
     - texinfo
     - which
+    - zip
 
   debian:
     - appstream-util
@@ -71,6 +72,7 @@ requires:
     - uuid-runtime
     - yelp-tools
     - xzip  # Needed to build gtkhtml from source
+    - zip
 
   fedora:
     - biblesync-devel
@@ -93,6 +95,7 @@ requires:
     - webkitgtk4-devel
     - yelp
     - yelp-tools
+    - zip
 
   ubuntu:
     - appstream-util
@@ -121,6 +124,7 @@ requires:
     - uuid-runtime
     - yelp-tools
     - xzip  # Needed to build gtkhtml from source
+    - zip
 
 variables:
   - CFLAGS="-Wall -Werror=format-security"
@@ -128,7 +132,9 @@ variables:
 before_scripts:
   - |
     START_DIR="$(pwd)"
+    WORK_DIR="/tmp"
     if [ "${DISTRO_NAME}" == "archlinux" ];then
+        cd "${WORK_DIR}"
         id -u aur_install &>/dev/null || useradd -r -m -U -G wheel -k /dev/null aur_install
         install -m600 /dev/stdin /etc/sudoers.d/70-wheel <<< '%wheel ALL=(ALL) ALL'
         install -m600 /dev/stdin /etc/sudoers.d/99-aur_install <<< 'Defaults:aur_install !authenticate'
@@ -142,7 +148,7 @@ before_scripts:
     fi
     if [ "${DISTRO_NAME}" == "debian" -o "${DISTRO_NAME}" == "ubuntu" ]; then
         # build gtkhtml4 from source
-        cd "${START_DIR}"
+        cd "${WORK_DIR}"
         curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
         tar xf gtkhtml-4.10.0.tar.xz
         cd gtkhtml-4.10.0
@@ -152,7 +158,7 @@ before_scripts:
     fi
     if [ "${DISTRO_NAME}" == "ubuntu" ];then
         # build biblesync from source
-        cd "${START_DIR}"
+        cd "${WORK_DIR}"
         curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
         tar xf biblesync-1.2.0.tar.gz
         cd biblesync-1.2.0
@@ -162,7 +168,7 @@ before_scripts:
         make -j$(nproc)
         make install
         # update sword from 1.7.3 to 1.8.1
-        cd "${START_DIR}"
+        cd "${WORK_DIR}"
         curl -Ls -o sword-1.8.1.tar.gz https://www.crosswire.org/ftpmirror/pub/sword/source/v1.8/sword-1.8.1.tar.gz
         curl -Ls -o sword-1.8.1-cmake.diff https://src.fedoraproject.org/rpms/sword/raw/master/f/sword-1.8.1-cmake.diff
         curl -Ls -o sword-1.8.1-icu61.diff https://src.fedoraproject.org/rpms/sword/raw/master/f/sword-1.8.1-icu61.diff
@@ -181,8 +187,14 @@ before_scripts:
 
 build_scripts:
   - |
-    mkdir -p build
-    cd build
+    set -ex
     export PKG_CONFIG_PATH=/usr/lib/pkgconfig
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON -DCMAKE_MAKE_PROGRAM=/usr/bin/make ..
-    make -j$(nproc)
+    cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON -DCMAKE_MAKE_PROGRAM=/usr/bin/make .
+    make -C build -j$(nproc)
+    make -C build mhelp package_source
+    echo "::set-output name=artifact::$(ls build/*.tar.gz)"
+    #if [ "${DISTRO_NAME}" == "fedora" ]; then
+    #    echo "::set-output name=artifact::$(ls *.rpm)"
+    #elif [ "${DISTRO_NAME}" == "ubuntu" ]; then
+    #    echo "::set-output name=artifact::$(ls *.deb)"
+    #fi

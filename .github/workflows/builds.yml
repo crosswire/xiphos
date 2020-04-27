@@ -65,9 +65,15 @@ jobs:
           python -m pip install -U pip
           pip install -U PyGithub setuptools PyYAML
       - name: execute build
+        id: build
         run: |
           set -ex
           curl -Ls -o docker-build https://github.com/mate-desktop/mate-dev-scripts/raw/master/travis/docker-build
           chmod +x docker-build
           python docker-build --name ${{ matrix.distro }} --config .ci-build.yml --install
           python docker-build --name ${{ matrix.distro }} -vvvv --config .ci-build.yml --build scripts
+      - name: upload source artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: packages
+          path: ${{ steps.build.outputs.artifact }}
