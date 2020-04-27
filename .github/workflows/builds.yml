@@ -77,3 +77,29 @@ jobs:
         with:
           name: packages
           path: ${{ steps.build.outputs.artifact }}
+
+  deploy:
+    needs:
+      - build_windows
+      - build_linux
+    if: contains(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: packages
+      - name: prepare for release
+        id: release
+        run: |
+          set -ex
+          cd packages
+          gunzip -k *.tar.gz
+          xz *.tar
+          echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
+      - name: create release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: packages/*
+          allowUpdates: true
+          name: Release ${{ steps.release.outputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
