@@ -10,6 +10,8 @@ win*/binaries/
 win32/nsis/xiphos*.exe
 win32/po/messages.mo
 cmake/source_version.txt
+xiphos*.exe
+xiphos*.tar*
 
 # Files involved in testing builds
 sword-*
