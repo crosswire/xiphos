@@ -133,7 +133,7 @@ variables:
 before_scripts:
   - |
     START_DIR="$(pwd)"
-    WORK_DIR="/tmp"
+    WORK_DIR="${TEMP}"
     if [ "${DISTRO_NAME}" == "archlinux" ];then
         cd "${WORK_DIR}"
         id -u aur_install &>/dev/null || useradd -r -m -U -G wheel -k /dev/null aur_install

@@ -72,6 +72,8 @@ jobs:
           chmod +x docker-build
           python docker-build --name ${{ matrix.distro }} --config .ci-build.yml --install
           python docker-build --name ${{ matrix.distro }} -vvvv --config .ci-build.yml --build scripts
+        env:
+          TEMP: ${{ runner.temp }}
       - name: upload source artifact
         uses: actions/upload-artifact@master
         if: steps.build.outputs.artifact
