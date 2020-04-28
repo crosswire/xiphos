@@ -15,6 +15,7 @@ requires:
     - python
     - sword
     - webkit2gtk
+    - zip
     # base-devel group (for AUR installs):
     - autoconf
     - automake
@@ -40,7 +41,6 @@ requires:
     - sudo
     - texinfo
     - which
-    - zip
 
   debian:
     - appstream-util
@@ -91,6 +91,7 @@ requires:
     - libxml2-devel
     - make
     - minizip-devel
+    - rpm-build
     - sword-devel
     - webkitgtk4-devel
     - yelp
@@ -192,9 +193,13 @@ build_scripts:
     cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON -DCMAKE_MAKE_PROGRAM=/usr/bin/make .
     make -C build -j$(nproc)
     make -C build mhelp package_source
-    echo "::set-output name=artifact::$(ls build/*.tar.gz)"
-    #if [ "${DISTRO_NAME}" == "fedora" ]; then
-    #    echo "::set-output name=artifact::$(ls *.rpm)"
-    #elif [ "${DISTRO_NAME}" == "ubuntu" ]; then
-    #    echo "::set-output name=artifact::$(ls *.deb)"
-    #fi
+    if [ "${DISTRO_NAME}" == "fedora" ]; then
+        (cd build && cpack -G RPM)
+        echo "::set-output name=artifact::$(ls build/*.rpm)"
+    elif [ "${DISTRO_NAME}" == "ubuntu" ]; then
+        (cd build && cpack -G DEB)
+        echo "::set-output name=artifact::$(ls build/*.deb)"
+    elif [ "${DISTRO_NAME}" == "archlinux" ]; then
+        (cd build && cpack -G TGZ)
+        echo "::set-output name=artifact::$(ls build/*.tar.gz)"
+    fi

@@ -74,6 +74,7 @@ jobs:
           python docker-build --name ${{ matrix.distro }} -vvvv --config .ci-build.yml --build scripts
       - name: upload source artifact
         uses: actions/upload-artifact@master
+        if: steps.build.outputs.artifact
         with:
           name: packages
           path: ${{ steps.build.outputs.artifact }}
