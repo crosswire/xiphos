@@ -11,12 +11,11 @@ XIPHOS_PATH="$(dirname "$(dirname "${SCRIPT}")")"
 # Usage info
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-win32|-win64] [-b|-bbs=BIBLETIME_SOURCE_PATH]
+Usage: ${0##*/} [-win32|-win64]
 Build Xiphos 32bit, 64bit or both 32/64bit windows executables (needs toolbox).
-Default values are: -win32 -win64 -bbs=../biblesync
+Default values are: -win32 -win64
 
     -h          display this help and exit
-    -b=BBS	use BBSS as Biblesync source path
     -win32      build for 32 bit binary for Windows
     -win64	build for 64 bit binary for windows
 
@@ -26,9 +25,8 @@ has sudo installed. Currently it depends on a Fedora 30 environment to do the bu
 and won't work for later versions of Fedora because of missing dependncies. For example:
 
 mkdir src && cd src
-git checkout https://github.com/karlkleinpaste/biblesync.git
 git checkout https://github.com/crosswire/xiphos.git
-docker run -it --rm -v "$(pwd):/source" fedora:30 /source/xiphos/win32/xc-xiphos-win.sh -win32 -b=/source/biblesync"
+docker run -it --rm -v "$(pwd):/source" fedora:30 /source/xiphos/win32/xc-xiphos-win.sh -win32"
 EOF
 }
 
@@ -42,8 +40,6 @@ die() {
 WIN32='0'
 WIN64='0'
 X_SRC_NUM='0'
-BBS_SRC_NUM='0'
-unset BIBLESYNC_PATH
 
 while :; do
     case $1 in
@@ -60,17 +56,6 @@ while :; do
             # Target is win64
             WIN64=$((WIN64+1))
             ;;
-        -b=?*|--bbs=?*)
-            # Path to source
-            BIBLESYNC_PATH=${1#*=}
-            BBS_SRC_NUM=$((BBS_SRC_NUM+1))
-            [ "$BBS_SRC_NUM" -gt '1' ] && die 'ERROR parameter "--bbt" already exists.'
-            ;;
-        -b= |--bbt= )
-            # Handle the case of an empty path
-            die 'ERROR: "--bbt" requires a non-empty option argument.'
-            ;;
-
         -?*)
             printf 'WARN: Unknown option (ignored): %s\n' "$1" >&2
             ;;
@@ -81,16 +66,13 @@ while :; do
 done
 # Set default values
 [ "$((WIN32+WIN64))" -lt '1' ] && WIN64='1' && WIN32='1'
-[ "$BIBLESYNC_PATH" ] || BIBLESYNC_PATH='../biblesync'
 
 # Check paths
 [ ! -d "$XIPHOS_PATH" ] && die "ERROR: Xiphos repository <$XIPHOS_PATH> not found."
-[ ! -d "$BIBLESYNC_PATH" ] && die "ERROR: Biblesync repository <$BIBLESYNC_PATH> not found."
 
 echo "Build for Windows 32-bit    = $([ "$WIN32" -gt 0 ] && echo 'Yes' || echo 'No')"
 echo "Build for Windows 64-bit    = $([ "$WIN64" -gt 0 ] && echo 'Yes' || echo 'No')"
 echo "Xiphos Source directory     = ${XIPHOS_PATH}"
-echo "Biblesync Source directory  = ${BIBLESYNC_PATH}"
 
 
 
@@ -119,19 +101,13 @@ fi
 
 # Build and install Biblesync with Mingw
 if [ "$WIN32" -gt '0' ]; then
-    echo '** Building Biblesync 32 bit:'
-    mkdir -p build-bs32 && cd build-bs32
-    cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr/i686-w64-mingw32/sys-root/mingw -DCMAKE_INSTALL_LIBDIR:PATH=/usr/i686-w64-mingw32/sys-root/mingw/lib -DINCLUDE_INSTALL_DIR:PATH=/usr/i686-w64-mingw32/sys-root/mingw/include -DLIB_INSTALL_DIR:PATH=/usr/i686-w64-mingw32/sys-root/mingw/lib -DSHARE_INSTALL_PREFIX:PATH=/usr/i686-w64-mingw32/sys-root/mingw/share -DCMAKE_SKIP_RPATH:BOOL=ON -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw32.cmake -DLIBBIBLESYNC_LIBRARY_TYPE=Shared -DCMAKE_BUILD_TYPE=Debug -DCROSS_COMPILE_MINGW32=TRUE -DBUILD_SHARED_LIBS=TRUE "../${BIBLESYNC_PATH}"
-    sudo make install
-    cd ..
+    echo '** Installing Biblesync 32 bit:'
+    sudo dnf -y install --enablerepo=updates-testing mingw32-biblesync
 fi
 
 if [ "$WIN64" -gt '0' ]; then
-    echo '** Building Biblesync-64 bit:'
-    mkdir -p build-bs64 && cd build-bs64
-    cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr/x86_64-w64-mingw32/sys-root/mingw -DCMAKE_INSTALL_LIBDIR:PATH=/usr/x86_64-w64-mingw32/sys-root/mingw/lib -DINCLUDE_INSTALL_DIR:PATH=/usr/x86_64-w64-mingw32/sys-root/mingw/include -DLIB_INSTALL_DIR:PATH=/usr/x86_64-w64-mingw32/sys-root/mingw/lib -DSHARE_INSTALL_PREFIX:PATH=/usr/x86_64-w64-mingw32/sys-root/mingw/share -DCMAKE_SKIP_RPATH:BOOL=ON -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw64.cmake -DLIBBIBLESYNC_LIBRARY_TYPE=Shared -DCMAKE_BUILD_TYPE=Debug -DCROSS_COMPILE_MINGW32=TRUE -DBUILD_SHARED_LIBS=TRUE "../${BIBLESYNC_PATH}"
-    sudo make install
-    cd ..
+    echo '** Installing Biblesync-64 bit:'
+    sudo dnf -y install --enablerepo=updates-testing mingw64-biblesync
 fi
 
 # Configure && build .EXE

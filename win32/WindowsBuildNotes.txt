@@ -1,14 +1,13 @@
 Currently we are stuck with GTK 2 on Windows, because of HTML display widget
 weirdness. All necesssary packages are currently available in cross-compile
-mode (from the mingw32/64 packages) on Fedora 30, with the exception of
-Biblesync. Since that's our own, and it's very small, we can get away with
-building that as a part of this process.
+mode (from the mingw32/64 packages) on Fedora 30. Since that's our own, and
+it's very small, we can get away with building that as a part of this process.
 
 The script "xc-xiphos-win.sh" in this directory will take care of doing the
 building for you. If you are running Fedora 30 on the current host, you should
 be able to go ahead and invoke the script in the appropriate manner. You will
 need password-less sudo access on the current machine for the script to execute,
-as it will update all packages, install all necessary dependencies, build BibleSync,
+as it will update all packages, install all necessary dependencies,
 and and then build Xihpos windows packages. Those binaries will end up inside
 the root of the xiphos/ source folder.
 
@@ -20,8 +19,7 @@ runtime command:
 mkdir win
 cd win
 git clone https://github.com/crosswire/xiphos.git
-git clone https://github.com/karlkleinpaste/biblesync.git
-docker run --rm -it -v .:/source fedora:30 /source/xihpos/win32/xc-xiphos-win.sh -win32 -win64 -b=/source/biblesync
+docker run --rm -it -v .:/source fedora:30 /source/xihpos/win32/xc-xiphos-win.sh -win32 -win64
 
 Similar behavior can be achieved through a Fedora 30 VM, or using podman, or
 similar.
