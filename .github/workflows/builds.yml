@@ -22,17 +22,12 @@ jobs:
       - name: fetch history
         run: |
           cd xiphos && git fetch origin +refs/tags/*:refs/tags/*
-      - name: checkout Biblesync
-        uses: actions/checkout@v2
-        with:
-          repository: karlkleinpaste/biblesync.git
-          path: biblesync
       - name: build windows targets
         shell: bash
         id: build
         run: |
           set -ex -o pipefail
-          docker run -i --rm -v "$(pwd):/source" fedora:30 /source/xiphos/win32/xc-xiphos-win.sh ${{ matrix.version }} -b=/source/biblesync
+          docker run -i --rm -v "$(pwd):/source" fedora:30 /source/xiphos/win32/xc-xiphos-win.sh ${{ matrix.version }}
           echo "::set-output name=artifact::$(ls xiphos/*.exe)"
       - name: upload artifact
         uses: actions/upload-artifact@master
