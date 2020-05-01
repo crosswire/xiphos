@@ -1,40 +1,3 @@
-# vim: set ts=2 sts=2 sw=2 expandtab :
-dist: bionic
-language: bash
-os: linux
-services:
-  - docker
-git:
-  depth: false
-
-addons:
-  apt:
-    packages:
-      - python3-github
-      - python3-pip
-      - python3-setuptools
-
-before_install:
-  - curl -Ls -o docker-build https://github.com/mate-desktop/mate-dev-scripts/raw/master/travis/docker-build
-  - chmod +x docker-build
-  - git fetch --tags
-
-install:
-  - sudo pip3 install --upgrade pip
-  - ./docker-build --name ${DISTRO} --config .travis.yml --install
-
-script:
-  - travis_retry ./docker-build --name ${DISTRO} -vvvv --config .travis.yml --build scripts
-
-env:
-  - DISTRO="archlinux:latest"
-  - DISTRO="debian:sid"
-  - DISTRO="fedora:latest"
-  - DISTRO="ubuntu:19.10"
-
-##########################################################
-# THE FOLLOWING LINES IS USED BY docker-build
-##########################################################
 requires:
   archlinux:
     - appstream-glib
@@ -52,6 +15,7 @@ requires:
     - python
     - sword
     - webkit2gtk
+    - zip
     # base-devel group (for AUR installs):
     - autoconf
     - automake
@@ -108,6 +72,7 @@ requires:
     - uuid-runtime
     - yelp-tools
     - xzip  # Needed to build gtkhtml from source
+    - zip
 
   fedora:
     - biblesync-devel
@@ -126,10 +91,12 @@ requires:
     - libxml2-devel
     - make
     - minizip-devel
+    - rpm-build
     - sword-devel
     - webkitgtk4-devel
     - yelp
     - yelp-tools
+    - zip
 
   ubuntu:
     - appstream-util
@@ -158,6 +125,7 @@ requires:
     - uuid-runtime
     - yelp-tools
     - xzip  # Needed to build gtkhtml from source
+    - zip
 
 variables:
   - CFLAGS="-Wall -Werror=format-security"
@@ -165,7 +133,9 @@ variables:
 before_scripts:
   - |
     START_DIR="$(pwd)"
+    WORK_DIR="${TEMP}"
     if [ "${DISTRO_NAME}" == "archlinux" ];then
+        cd "${WORK_DIR}"
         id -u aur_install &>/dev/null || useradd -r -m -U -G wheel -k /dev/null aur_install
         install -m600 /dev/stdin /etc/sudoers.d/70-wheel <<< '%wheel ALL=(ALL) ALL'
         install -m600 /dev/stdin /etc/sudoers.d/99-aur_install <<< 'Defaults:aur_install !authenticate'
@@ -179,27 +149,27 @@ before_scripts:
     fi
     if [ "${DISTRO_NAME}" == "debian" -o "${DISTRO_NAME}" == "ubuntu" ]; then
         # build gtkhtml4 from source
-        cd "${START_DIR}"
+        cd "${WORK_DIR}"
         curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
         tar xf gtkhtml-4.10.0.tar.xz
         cd gtkhtml-4.10.0
         ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib/gtkhtml4 --localstatedir=/var --disable-static
-        make -j2
+        make -j$(nproc)
         make install
     fi
     if [ "${DISTRO_NAME}" == "ubuntu" ];then
         # build biblesync from source
-        cd "${START_DIR}"
+        cd "${WORK_DIR}"
         curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
         tar xf biblesync-1.2.0.tar.gz
         cd biblesync-1.2.0
         mkdir -p build
         cd build
         cmake -DBUILD_SHARED_LIBS=TRUE -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=/usr/lib ..
-        make -j2
+        make -j$(nproc)
         make install
         # update sword from 1.7.3 to 1.8.1
-        cd "${START_DIR}"
+        cd "${WORK_DIR}"
         curl -Ls -o sword-1.8.1.tar.gz https://www.crosswire.org/ftpmirror/pub/sword/source/v1.8/sword-1.8.1.tar.gz
         curl -Ls -o sword-1.8.1-cmake.diff https://src.fedoraproject.org/rpms/sword/raw/master/f/sword-1.8.1-cmake.diff
         curl -Ls -o sword-1.8.1-icu61.diff https://src.fedoraproject.org/rpms/sword/raw/master/f/sword-1.8.1-icu61.diff
@@ -212,14 +182,24 @@ before_scripts:
         mkdir -p build
         cd build
         cmake -DLIBSWORD_LIBRARY_TYPE="Shared" -DSYSCONF_INSTALL_DIR='/etc' -DSWORD_BUILD_TESTS="Yes" -DSWORD_BINDINGS="Python" -DCMAKE_INSTALL_PREFIX=/usr -DLIB_INSTALL_DIR=/usr/lib/x86_64-linux-gnu ..
-        make -j2
+        make -j$(nproc)
         make install
     fi
 
 build_scripts:
   - |
-    mkdir -p build
-    cd build
+    set -ex
     export PKG_CONFIG_PATH=/usr/lib/pkgconfig
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON -DCMAKE_MAKE_PROGRAM=/usr/bin/make ..
-    make -j2
+    cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON -DCMAKE_MAKE_PROGRAM=/usr/bin/make .
+    make -C build -j$(nproc)
+    make -C build mhelp package_source
+    if [ "${DISTRO_NAME}" == "fedora" ]; then
+        (cd build && cpack -G RPM)
+        echo "::set-output name=artifact::$(ls build/*.rpm)"
+    elif [ "${DISTRO_NAME}" == "ubuntu" ]; then
+        (cd build && cpack -G DEB)
+        echo "::set-output name=artifact::$(ls build/*.deb)"
+    elif [ "${DISTRO_NAME}" == "archlinux" ]; then
+        (cd build && cpack -G TGZ)
+        echo "::set-output name=artifact::$(ls build/*.tar.gz)"
+    fi
