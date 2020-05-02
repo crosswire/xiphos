@@ -17,23 +17,22 @@ jobs:
       - name: checkout Xiphos
         uses: actions/checkout@v2
         with:
-          path: xiphos
           fetch-depth: 0
       - name: fetch history
         run: |
-          cd xiphos && git fetch origin +refs/tags/*:refs/tags/*
+          git fetch origin +refs/tags/*:refs/tags/*
       - name: build windows targets
         shell: bash
         id: build
         run: |
           set -ex -o pipefail
-          docker run -i --rm -v "$(pwd):/source" fedora:30 /source/xiphos/win32/xc-xiphos-win.sh ${{ matrix.version }}
-          echo "::set-output name=artifact::$(ls xiphos/*.exe)"
+          docker build -t xiphos win32
+          docker run -i --rm -v "$(pwd):/source" xiphos ${{ matrix.version }}
       - name: upload artifact
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v2
         with:
-          name: packages
-          path: ${{ steps.build.outputs.artifact }}
+          name: windows-installers
+          path: "*.exe"
 
   build_linux:
     runs-on: ubuntu-latest
@@ -69,12 +68,16 @@ jobs:
           python docker-build --name ${{ matrix.distro }} -vvvv --config .ci-build.yml --build scripts
         env:
           TEMP: ${{ runner.temp }}
-      - name: upload source artifact
-        uses: actions/upload-artifact@master
-        if: steps.build.outputs.artifact
+      - name: upload source tarball
+        uses: actions/upload-artifact@v2
         with:
-          name: packages
-          path: ${{ steps.build.outputs.artifact }}
+          name: source
+          path: build/*.tar.gz
+      - name: upload source zipfile
+        uses: actions/upload-artifact@v2
+        with:
+          name: source
+          path: build/*.tar.gz
 
   deploy:
     needs:
@@ -83,21 +86,22 @@ jobs:
     if: contains(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@master
-        with:
-          name: packages
+      - name: download all the artifacts
+        uses: actions/download-artifact@v2
       - name: prepare for release
         id: release
         run: |
           set -ex
-          cd packages
+          ls -R
+          cd source
           gunzip -k *.tar.gz
           xz *.tar
+          cd ..
           echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
       - name: create release
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.6.1
         with:
-          artifacts: packages/*
+          artifacts: source/*,windows-installers/*
           allowUpdates: true
           name: Release ${{ steps.release.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}

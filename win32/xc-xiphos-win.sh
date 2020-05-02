@@ -24,9 +24,10 @@ by running in a VM or in a container with your favorite container environment th
 has sudo installed. Currently it depends on a Fedora 30 environment to do the builds
 and won't work for later versions of Fedora because of missing dependncies. For example:
 
-mkdir src && cd src
 git checkout https://github.com/crosswire/xiphos.git
-docker run -it --rm -v "$(pwd):/source" fedora:30 /source/xiphos/win32/xc-xiphos-win.sh -win32"
+cd xiphos
+docker build -t xiphos win32
+docker run -it --rm -v "$(pwd):/source" xiphos -win32"
 EOF
 }
 
@@ -74,41 +75,7 @@ echo "Build for Windows 32-bit    = $([ "$WIN32" -gt 0 ] && echo 'Yes' || echo '
 echo "Build for Windows 64-bit    = $([ "$WIN64" -gt 0 ] && echo 'Yes' || echo 'No')"
 echo "Xiphos Source directory     = ${XIPHOS_PATH}"
 
-
-
 trap 'exit 1' ERR
-
-# Update packages
-echo '** Upgrading packages on the system:'
-sudo dnf -y upgrade --refresh
-
-
-# Install build tools
-echo '** Installing build tools in the toolbox:'
-sudo dnf -y install cmake git fpc gettext glib2-devel itstool libxslt make yelp-tools zip
-
-
-# Install mingw dependencies
-if [ "$WIN32" -gt '0' ]; then
-    echo '** Installing mingw32 dependencies:'
-    sudo dnf -y install mingw32-gettext mingw32-sword mingw32-minizip mingw32-libgsf mingw32-libglade2 mingw32-webkitgtk mingw32-gtk3 mingw32-libtiff mingw32-libidn mingw32-gdb mingw32-nsis mingw32-dbus-glib
-fi
-if [ "$WIN64" -gt '0' ]; then
-    echo '** Installing mingw64 dependencies:'
-    sudo dnf -y install mingw64-gettext mingw64-sword mingw64-minizip mingw64-libgsf mingw64-libglade2 mingw64-webkitgtk mingw64-gtk3 mingw64-libtiff mingw64-libidn mingw64-gdb mingw32-nsis mingw64-dbus-glib
-fi
-
-
-# Build and install Biblesync with Mingw
-if [ "$WIN32" -gt '0' ]; then
-    echo '** Installing Biblesync 32 bit:'
-    sudo dnf -y install --enablerepo=updates-testing mingw32-biblesync
-fi
-
-if [ "$WIN64" -gt '0' ]; then
-    echo '** Installing Biblesync-64 bit:'
-    sudo dnf -y install --enablerepo=updates-testing mingw64-biblesync
-fi
 
 # Configure && build .EXE
 function do_build {

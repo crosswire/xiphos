@@ -59,9 +59,9 @@ if (WIN32)
       DESTINATION ${CMAKE_INSTALL_BINDIR}
       COMPONENT binaries
       )
-  elseif (EXISTS ${CMAKE_FIND_ROOT_PATH}/lib/libbiblesync.dll)
+  elseif (EXISTS ${CMAKE_FIND_ROOT_PATH}/bin/libbiblesync.dll)
     install(FILES
-      ${SYS_ROOT_LIB}/libbiblesync.dll
+      ${SYS_ROOT_BIN}/libbiblesync.dll
       DESTINATION ${CMAKE_INSTALL_BINDIR}
       COMPONENT binaries
       )
@@ -196,7 +196,6 @@ if (WIN32)
     ${SYS_ROOT_BIN}/libpangowin32-1.0-0.dll
     ${SYS_ROOT_BIN}/libatk-1.0-0.dll
     ${SYS_ROOT_BIN}/libxml2-2.dll
-    ${SYS_ROOT_BIN}/libgsf-1-114.dll
     ${SYS_ROOT_BIN}/libbz2-1.dll
     ${SYS_ROOT_BIN}/libgthread-2.0-0.dll
     ${SYS_ROOT_BIN}/libgnurx-0.dll

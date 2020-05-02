@@ -19,7 +19,14 @@ runtime command:
 mkdir win
 cd win
 git clone https://github.com/crosswire/xiphos.git
-docker run --rm -it -v .:/source fedora:30 /source/xihpos/win32/xc-xiphos-win.sh -win32 -win64
+cd xiphos
+docker run --rm -it -v $(pwd):/source greg-hellings/xiphos
+
+If you don't want to use the greg-hellings/xiphos image or it is unavailable
+for some reason, you can build the image yourself locally, first, like this:
+
+docker build -t xiphos win32
+docker run --rm -it -v $(pwd):/source xiphos
 
 Similar behavior can be achieved through a Fedora 30 VM, or using podman, or
 similar.

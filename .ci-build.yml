@@ -133,7 +133,8 @@ variables:
 before_scripts:
   - |
     START_DIR="$(pwd)"
-    WORK_DIR="${TEMP}"
+    WORK_DIR="/dep_build"
+    mkdir -p "${WORK_DIR}"
     if [ "${DISTRO_NAME}" == "archlinux" ];then
         cd "${WORK_DIR}"
         id -u aur_install &>/dev/null || useradd -r -m -U -G wheel -k /dev/null aur_install
@@ -193,13 +194,3 @@ build_scripts:
     cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON -DCMAKE_MAKE_PROGRAM=/usr/bin/make .
     make -C build -j$(nproc)
     make -C build mhelp package_source
-    if [ "${DISTRO_NAME}" == "fedora" ]; then
-        (cd build && cpack -G RPM)
-        echo "::set-output name=artifact::$(ls build/*.rpm)"
-    elif [ "${DISTRO_NAME}" == "ubuntu" ]; then
-        (cd build && cpack -G DEB)
-        echo "::set-output name=artifact::$(ls build/*.deb)"
-    elif [ "${DISTRO_NAME}" == "archlinux" ]; then
-        (cd build && cpack -G TGZ)
-        echo "::set-output name=artifact::$(ls build/*.tar.gz)"
-    fi

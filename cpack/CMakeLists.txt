@@ -150,10 +150,13 @@ set (CPACK_SOURCE_IGNORE_FILES
   "/.bzrrules"
   "/.git/"
   "/.gitignore"
+  "/.github"
   "/.bzrignore/"
   "/.bzrrules/"
   "/.clang-format"
-  "/.travis.yml"
+  "/.ci-build.yml"
+  "/xiphos-${CPACK_PACKAGE_VERSION}-win32.exe"
+  "/xiphos-${CPACK_PACKAGE_VERSION}-win64.exe"
   )
 
 
