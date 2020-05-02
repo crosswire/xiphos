@@ -3,8 +3,83 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.2.0
+02 May 2020
+
+After a long dry spell, Xiphos is back with a new release.  This is a
+release of many bug fixes and much re-structuring, especially for how the
+build system operates, an important factor for those in development.  The
+older waf build system is gone, having been re-engineered from the ground
+up with cmake.
+
+User-visible changes regard crash-avoidance bugfixes and cosmetic matters:
+Corrected use of visuals in parallel window, corrected verse displays,
+status bar repair, corrected alternating fg/bg in parallel,
+improved/corrected spacing of Strong's and morphology with respect to
+mainline text, additions to the languages recognized in module displays,
+increased limits on book name length for exotic UTF-8 languages (encodings
+too long), and some new and updated interface translations.
+
+Closed items:
+- #795 Android app
+- #895 Small capitals for divine name not displayed in parallel view
+- #899 Windows 10 install fails: 4.1.0 32-bit installer
+- #903 Drop down menu does not fully display in Fedora 28
+- #910 Faulty interaction between previewer pane view settings
+- #914 doesn't compile on ubuntu 18.04
+- #915 segfault
+- #917 fails to run in Debian testing due to incorrect version of libsword
+- #919 Disabled status bar reappears when the program is launched
+- #924 Windows build cannot find glib-genmarshal
+- #926 Parallel Bible Tabs in Xiphos 4.0.7
+- #931 Xiphos on Fedora 29 Gnome Wayland
+- #932 Crosswire PPA is Gone
+- #933 download manager doesn't load any bibles
+- #934 Date in devotional windows is not translated
+- #937 ftp.xiphos.org unresponsive
+- #939 Features request: When clicking right on a word opens a windows
+       with all the word with the same Strong's number
+- #947 drop-down menu for books partly off screen
+- #949 Burmese locale not displayed
+- #951 Installing new versions of modules that already is installed,
+       instead of upgrade old, call some errors
+- #952 Preferences Menu Comes Up When Starting Xiphos
+- #953 Windows version crashes after opening
+- #955 Studypad does not open
+- #956 drop down menus for Bible books and chapter not working correctly
+- #957 Personal commentary not working
+- #958 STRDUP error Habakkuk 3:14 YLT
+- #970 arrows by book name confusing
+- #974 Background Color, Page and Window Aren't Working Properly
+- #977 zh-CN Book hebrew wrong
+- #978 User reports crash on first run
+- #980 New release expected for debian
+- #981 Xiphos is almost unusable on smaller screen devices, phones.
+- #985 Arb, cmn and ktu are translated in English in the list of modules
+- #990 Misleading proximity of Strong's tags to the next line
+- #991 Suggestion: Change the Unknown language branch to ! Unknown
+- #993 Bulgarian sword locale is not seen by xiphos
+- #995 Dropdown Menu only Shows OT books on Complete Bible, NT Bibles left out.
+- #996 tab content limit too short, causes crash
+- #998 Localized language names not displayed (Unknown language branch in MM)
+- #999 Trailing zeroes in a module version number?
+- #1000 language names are not language descriptors
+- #1001 Create release and post build artifacts on git tags
+- #1006 detached parallel widget ptr not NULLed on close, causes crash
+- #1008 Compilation/Package build failed on Ubuntu 18.04
+- #1011 copyright update
+- #1013 zip help dependency
+
+New recent items:
+- #1005 Fix the name of the module in the top of the parallel view
+- #1009 In Advance search, adding new module in the module list impossible
+- #1010 Add a new tab in the dictionary pane for daily devotional
+- #1014 Configurable packages in Linux
+- #1017 Please provide italics rendering for catchWord & rdg elements in OSIS footnotes
+________________________________________________________________
+
 Release 4.1.0
-19 Apr 2017
+19 Apr 2018
 
 There has been much bugfixing and a number of features and enhancements.
 Internal compatibility updates were made for the new Sword 1.8 release,
