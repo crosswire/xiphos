@@ -3,7 +3,7 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Release 4.2.0
+Release 4.2.1
 02 May 2020
 
 After a long dry spell, Xiphos is back with a new release.  This is a
@@ -19,6 +19,8 @@ improved/corrected spacing of Strong's and morphology with respect to
 mainline text, additions to the languages recognized in module displays,
 increased limits on book name length for exotic UTF-8 languages (encodings
 too long), and some new and updated interface translations.
+
+Nearly 50 old reports are closed.
 
 Closed items:
 - #795 Android app
@@ -69,6 +71,7 @@ Closed items:
 - #1008 Compilation/Package build failed on Ubuntu 18.04
 - #1011 copyright update
 - #1013 zip help dependency
+- #1017 Please provide italics rendering for catchWord & rdg elements in OSIS footnotes
 
 New recent items:
 - #1005 Fix the name of the module in the top of the parallel view
