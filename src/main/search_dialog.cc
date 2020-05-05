@@ -64,6 +64,7 @@ static void add_modlist(void);
 
 gboolean terminate_search; // also accessed from search_dialog.c.
 gboolean search_active;    // also accessed from search_dialog.c.
+gboolean search_clearing;  // also accessed from search_dialog.c.
 
 static GList *list_of_finds;
 static GList *list_for_bookmarking = NULL;
@@ -904,6 +905,18 @@ void main_finds_verselist_selection_changed(GtkTreeSelection *selection,
 	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
 		return;
 	gtk_tree_model_get(model, &selected, 0, &text, -1);
+
+	if (search_clearing)
+	{
+		// we get here as a side effect of clearing previous
+		// results, from gtk_list_store_clear(). in that case,
+		// all we do is dispose of old content and get back out.
+		// if we don't stop this, we waste copious amounts of
+		// time pointlessly formatting content being destroyed.
+		g_free(text);
+		return;
+	}
+
 	XI_message(("\ntext: %s", text));
 	//textlen = strlen(text);
 	module = text;
@@ -1300,6 +1313,9 @@ void main_do_dialog_search(void)
 	gchar msg[300];
 	RESULTS *results;
 
+	// bracket the clean up to optimize away excess verse formatting.
+	search_clearing = TRUE;
+
 	_clear_find_lists();
 	_clear_bookmarking_lists();
 
@@ -1312,6 +1328,9 @@ void main_do_dialog_search(void)
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
 	list_store2 = GTK_LIST_STORE(model2);
 	gtk_list_store_clear(list_store2);
+
+	search_clearing = FALSE;
+	// ok that's it. back to normal selection handling.
 
 	search_string =
 	    gtk_entry_get_text(GTK_ENTRY(search1.search_entry));
