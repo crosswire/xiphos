@@ -72,6 +72,9 @@ Closed items:
 - #1011 copyright update
 - #1013 zip help dependency
 - #1017 Please provide italics rendering for catchWord & rdg elements in OSIS footnotes
+- #1018 update RELEASE-NOTES for 4.2.0
+- #1019 apparent adv.search hang is really just grossly inefficient previous results disposal
+- #1021 Convince Github project is not written in Scheme
 
 New recent items:
 - #1005 Fix the name of the module in the top of the parallel view
