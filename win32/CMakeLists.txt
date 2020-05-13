@@ -263,17 +263,17 @@ if (WIN32)
     )
 
 
-  # install win32/extras files
+  # install win32 specific files
   install(FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/extras/bin/sword.conf
-    ${CMAKE_CURRENT_SOURCE_DIR}/extras/bin/utils.bat
+    ${CMAKE_CURRENT_SOURCE_DIR}/bin/sword.conf
+    ${CMAKE_CURRENT_SOURCE_DIR}/bin/utils.bat
     DESTINATION ${CMAKE_INSTALL_BINDIR}
     COMPONENT binaries
     )
   install(DIRECTORY
-    ${CMAKE_CURRENT_SOURCE_DIR}/extras/etc
-    ${CMAKE_CURRENT_SOURCE_DIR}/extras/festival
-    ${CMAKE_CURRENT_SOURCE_DIR}/extras/share
+    ${CMAKE_CURRENT_SOURCE_DIR}/etc
+    ${CMAKE_CURRENT_SOURCE_DIR}/festival
+    ${CMAKE_CURRENT_SOURCE_DIR}/share
     DESTINATION ${CMAKE_INSTALL_DATADIR}/..
     COMPONENT data
     )

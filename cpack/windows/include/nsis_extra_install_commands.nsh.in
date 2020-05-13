@@ -13,7 +13,7 @@
   StrCpy $FONT_DIR $FONTS
 
 
-  !define PATH_FONT "@PROJECT_SOURCE_DIR@/win32/fonts"
+  !define PATH_FONT "@PROJECT_SOURCE_DIR@/cpack/windows/fonts"
 
   ; Libertine font
   !insertmacro InstallTTFFont "${PATH_FONT}\LinLibertine_Re.ttf" \
