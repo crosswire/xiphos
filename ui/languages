@@ -3552,6 +3552,7 @@ kjf	Khalaj
 kjg	Khmu
 #Khakas
 kjh	Xaкac тiлi
+kjh-Cyrl	Xaкac тiлi
 kji	Zabana
 kjj	Khinalugh
 kjk	Highland Konjo
@@ -7670,6 +7671,7 @@ xag	Aghwan
 xai	Kaimbé
 #Kalmyk
 xal	Хальмг келн
+xal-Cyrl	Хальмг келн
 # remove leading / (consequent to eBible repo discoveries)
 xam	Xam
 xan	Xamtanga
