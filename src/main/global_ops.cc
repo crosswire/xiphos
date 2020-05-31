@@ -272,7 +272,8 @@ GLOBAL_OPS *main_new_globals(const gchar *mod_name)
 
 	// special case, xiphos-specific feature: commentary whole chapter.
 	ops->commentary_by_chapter =
-	    (module_options[mod_name]["Commentary by Chapter"] != "Off");
+	    ((backend->module_type(mod_name) == COMMENTARY_TYPE) &&
+	     (module_options[mod_name]["Commentary by Chapter"] != "Off"));
 
 	ops->doublespace =
 	    gui_of2tf(module_options[mod_name]["Doublespace"].c_str());
