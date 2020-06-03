@@ -19,16 +19,26 @@ For regular users, we strongly advise that you use your distribution's packages,
 they usually provide integration to your distribution and you will automatically
 get security updates.
 
-On *Fedora*, *Red Hat* or *CentOS*:
+### *Fedora*, *Red Hat* or *CentOS*:
 
     $ sudo dnf install xiphos
 
-On *Debian*, *Ubuntu*, or *Linux Mint*:
+### *Debian*, *Ubuntu*, or *Linux Mint*:
 
-    $ sudo apt-get update
-    $ sudo apt-get install xiphos
+Xiphos depends on libgtkhtml that is no longer available in Ubuntu.
 
-For others distributions, check your distribution's help for how to do this.
+You have the choice to either:
+
+- build Xiphos yourself (see Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint* below)
+- install packages from  ppa: https://launchpad.net/~pkgcrosswire/+archive/ubuntu/ppa
+- install the flatpak app (3rd party, may not be up to date)
+  https://www.flathub.org/apps/details/org.xiphos.Xiphos  
+  Note: If you want access to the normal home folders .sword and .xiphos, run:  
+  `# flatpak override --filesystem=home org.xiphos.Xiphos`
+
+### Other distributions
+
+Check your distribution's help for how to do this.
 
 Windows® install:
 -------------------
@@ -56,7 +66,7 @@ dependencies installed:
     Gtk+-2.0 or GTK+-3.0   The GIMP Toolkit
     WebKit1 or Webkit2     Port to Gtk+ of the WebKit rendering engine
     appstream-util         Utility to validate AppStream metadata
-    biblesync              Protocol to support Bible software shared co-navigation
+    biblesync>=1.2.0       Protocol to support Bible software shared co-navigation
     dbus-glib              API for use of D-Bus from GLib applications
     desktop-file-validate  Validates a desktop file
     gcc                    GCC, the GNU Compiler Collection
