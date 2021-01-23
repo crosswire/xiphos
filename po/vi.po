@@ -1,0 +1,6067 @@
+# Bản dịch Tiếng Việt
+# Copyright (C) 2021 The Xiphos Developement Team
+# This file is distributed under the same license as the PACKAGE package.
+#  Antoine Đỗ  <do.antoine@disroot.org>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Xiphos 4.0.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-27 23:35-0400\n"
+"PO-Revision-Date: 2021-01-23 20:11+0100\n"
+"Last-Translator:  Antoine Đỗ  <do.antoine@disroot.org>\n"
+"Language-Team: Vietnamese <0>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 3.38.0\n"
+
+#: ../src/backend/sword_main.cc:792
+msgid ""
+"Xiphos failure: \"can't happen\", display_mod: null\n"
+"Please report this. sword_main.cc:set_treekey\n"
+"What were you doing when this occurred?"
+msgstr ""
+"Lỗi Xiphos: \"can't happen\", display_mod: null\n"
+"Hãy báo cáo nó. Sword_main.cc:set_treekey\n"
+"Bạn đã làm gì khi nó xảy ra?"
+
+#: ../src/backend/sword_main.cc:1149
+msgid "Configuration not found"
+msgstr "Không tìm thấy cấu hình"
+
+#: ../src/editor/slib-editor.c:209
+#, c-format
+msgid "Page %d of %d"
+msgstr "Trang %d trên %d"
+
+#: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
+msgid "Open"
+msgstr "Mở"
+
+#: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
+#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:773
+#: ../ui/bookmarks.gtkbuilder.h:5 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/gtk_webedit.ui.h:85 ../ui/markverse.gtkbuilder.h:7
+#: ../ui/module-manager.gtkbuilder.h:18
+msgid "_Cancel"
+msgstr "_Hủy"
+
+#: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
+#: ../src/editor/slib-editor.c:715 ../src/gtk/main_menu.c:774
+msgid "_Open"
+msgstr "_Mở"
+
+#: ../src/editor/slib-editor.c:415
+msgid "Save As"
+msgstr "Lưu Thành"
+
+#: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
+#: ../src/editor/webkit_editor.c:688
+msgid "Untitled document"
+msgstr "Tài liệu không có tiêu đề"
+
+#: ../src/editor/slib-editor.c:494
+msgid "_Close"
+msgstr "_Đóng"
+
+#: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
+msgid "Are you sure you want to delete the note for"
+msgstr "Bạn có chắc chắn muốn xóa ghi chú"
+
+#: ../src/editor/slib-editor.c:659
+msgid "HTML Output"
+msgstr "HTML đầu ra"
+
+#: ../src/editor/slib-editor.c:665
+msgid "HTML Source"
+msgstr "Nguồn HTML"
+
+#: ../src/editor/slib-editor.c:671
+msgid "Plain Source"
+msgstr "Nguồn Văn bản"
+
+#: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
+#: ../ui/editor_studypad.xml.h:19
+msgid "_Print..."
+msgstr "_In..."
+
+#: ../src/editor/slib-editor.c:693 ../ui/editor_note.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+msgid "Print Pre_view"
+msgstr "_Xem trước khi In"
+
+#: ../src/editor/slib-editor.c:704
+msgid "_Quit"
+msgstr "_Thoát"
+
+#: ../src/editor/slib-editor.c:726 ../src/gtk/dialog.c:262
+msgid "_Save"
+msgstr "_Lưu"
+
+#: ../src/editor/slib-editor.c:737
+msgid "Save _As..."
+msgstr "_Lưu thành..."
+
+#: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
+msgid "New"
+msgstr "Mới"
+
+#: ../src/editor/slib-editor.c:745
+msgid "Open new document"
+msgstr "Mở một tài liệu mới"
+
+#: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
+msgid "Delete"
+msgstr "Xóa"
+
+#: ../src/editor/slib-editor.c:751
+msgid "Delete current note"
+msgstr "Xóa ghi chú hiện tại"
+
+#: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
+msgid "_File"
+msgstr "_Tập tin"
+
+#: ../src/editor/slib-editor.c:811
+msgid "HTML _Output"
+msgstr "_HTML đầu ra"
+
+#: ../src/editor/slib-editor.c:818
+msgid "_HTML Source"
+msgstr "Nguồn _HTML"
+
+#: ../src/editor/slib-editor.c:825
+msgid "_Plain Source"
+msgstr "Nguồn _Văn bản"
+
+#: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
+msgid "_View"
+msgstr "_Hiển thị"
+
+#: ../src/editor/slib-editor.c:841 ../ui/editor_note.xml.h:16
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
+msgid "Save"
+msgstr "Lưu"
+
+#: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
+#: ../ui/editor_link_dialog.gtkbuilder.h:1
+msgid "Insert Link"
+msgstr "Chèn Đường dẫn"
+
+#: ../src/editor/slib-editor.c:1208 ../src/editor/slib-editor.c:1249
+#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
+msgid "Save the changes to document"
+msgstr "Lưu các thay đổi vào tài liệu"
+
+#: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
+#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
+msgid "before closing?"
+msgstr "trước khi đóng?"
+
+#: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
+#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
+msgid "If you don't save, changes will be permanently lost."
+msgstr "Nếu bạn không lưu, các thay đổi sẽ bị mất vĩnh viễn."
+
+#: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
+#: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
+msgid "File"
+msgstr "Tập tin"
+
+#: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
+msgid "StudyPad"
+msgstr "Sổ ghi chép"
+
+#: ../src/editor/slib-editor.c:1315 ../src/editor/webkit_editor.c:1270
+msgid "Note Editor"
+msgstr "Biên tập Ghi chú"
+
+#: ../src/editor/slib-editor.c:1333 ../src/editor/webkit_editor.c:1287
+msgid "Prayer List/Journal Editor"
+msgstr "Danh sách Cầu nguyện / Biên tập Nhật ký"
+
+#: ../src/gtk/about_modules.c:142
+msgid "About Sword Module"
+msgstr "Thông tin về Sword Module"
+
+#. Don't use an icon with GTK3
+#: ../src/gtk/about_modules.c:223 ../src/gtk/about_trans.c:168
+#: ../src/gtk/find_dialog.c:263
+msgid "Close"
+msgstr "Đóng"
+
+#: ../src/gtk/about_modules.c:415
+msgid "<b>Module name:</b> "
+msgstr "<b>Tên mô-đun:</b>"
+
+#: ../src/gtk/about_modules.c:422
+msgid "<b>Module abbreviation:</b> "
+msgstr "<b>Tên viết tắt của mô-đun:</b>"
+
+#: ../src/gtk/about_modules.c:427
+msgid "<b>Version:</b> "
+msgstr "<b>Phiên bản:</b> "
+
+#: ../src/gtk/about_modules.c:430
+msgid "No version stamp found"
+msgstr "Không tìm thấy dấu phiên bản"
+
+#: ../src/gtk/about_modules.c:433
+msgid "<b>Type:</b> "
+msgstr "<b>Kiểu:</b> "
+
+#: ../src/gtk/about_modules.c:435
+msgid "Daily Devotion"
+msgstr "Lịch đọc Kinh thánh"
+
+#: ../src/gtk/about_modules.c:437 ../src/gtk/mod_mgr.c:1561
+#: ../src/gtk/utilities.c:612 ../src/main/sidebar.cc:1029
+#: ../src/main/sidebar.cc:1031
+msgid "Maps"
+msgstr "Bản đồ"
+
+#: ../src/gtk/about_modules.c:439 ../src/gtk/mod_mgr.c:1565
+#: ../src/gtk/utilities.c:618 ../src/main/sidebar.cc:1038
+#: ../src/main/sidebar.cc:1040
+msgid "Images"
+msgstr "Hình ảnh"
+
+#: ../src/gtk/about_modules.c:441
+msgid "Glossary"
+msgstr "Bảng chú giải"
+
+#: ../src/gtk/about_modules.c:445
+msgid "Cult"
+msgstr "Giáo phái"
+
+#: ../src/gtk/about_modules.c:449 ../src/gtk/search_sidebar.c:287
+msgid "Bible"
+msgstr "Kinh thánh"
+
+#: ../src/gtk/about_modules.c:452 ../src/gtk/search_sidebar.c:295
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
+msgid "Commentary"
+msgstr "Bình luận"
+
+#: ../src/gtk/about_modules.c:455 ../ui/prefs.glade.h:143
+#: ../ui/prefs.gtkbuilder.h:143
+msgid "Dictionary"
+msgstr "Từ điển"
+
+#: ../src/gtk/about_modules.c:458
+msgid "General Book"
+msgstr "Tổng quan sách"
+
+#: ../src/gtk/about_modules.c:463
+msgid "Personal Commentary"
+msgstr "Bình luận Cá nhân"
+
+#: ../src/gtk/about_modules.c:466
+msgid "Journal"
+msgstr "Nhật ký"
+
+#: ../src/gtk/about_modules.c:469
+msgid "Unknown type"
+msgstr "Kiểu không xác định"
+
+#: ../src/gtk/about_modules.c:475
+msgid "<b>Language:</b> "
+msgstr "<b>Ngôn ngữ:</b> "
+
+#: ../src/gtk/about_modules.c:478
+msgid "Not specified"
+msgstr "Không được chỉ định"
+
+#: ../src/gtk/about_modules.c:487
+msgid "<b>Installed size:</b> "
+msgstr "<b>Kích thước cài đặt:</b>"
+
+#: ../src/gtk/about_modules.c:495
+msgid "<b>Companion module(s):</b></br>"
+msgstr "<b>(Các) mô-đun đồng hành:</b></br>"
+
+#: ../src/gtk/about_modules.c:505
+msgid "<b>Features:</b>"
+msgstr "<b>Tùy chọn:</b>"
+
+#: ../src/gtk/about_modules.c:509
+msgid "*&nbsp;Headings"
+msgstr "*&nbsp;Tiêu đề"
+
+#: ../src/gtk/about_modules.c:517
+msgid "*&nbsp;Footnotes"
+msgstr "*&nbsp;Chú thích cuối trang"
+
+#: ../src/gtk/about_modules.c:523
+msgid "*&nbsp;Cross references"
+msgstr "*&nbsp;Tham khảo chéo"
+
+#: ../src/gtk/about_modules.c:530
+msgid "*&nbsp;Strong's numbers"
+msgstr "*&nbsp;Số Strong"
+
+#: ../src/gtk/about_modules.c:538
+msgid "*&nbsp;Morphological tags"
+msgstr "*&nbsp;Nhãn Hình thái"
+
+#: ../src/gtk/about_modules.c:544
+msgid "*&nbsp;Lemmas"
+msgstr "*&nbsp;Lemmas"
+
+#: ../src/gtk/about_modules.c:552
+msgid "*&nbsp;Words of Christ in red"
+msgstr "*&nbsp;Lời của Chúa Kitô màu đỏ"
+
+#: ../src/gtk/about_modules.c:557
+msgid "*&nbsp;Greek accents"
+msgstr "*&nbsp;Dấu trong tiếng Hy Lạp"
+
+#: ../src/gtk/about_modules.c:563
+msgid "*&nbsp;Hebrew Vowel Points"
+msgstr "*&nbsp;Dấu nguyên âm tiếng Do Thái"
+
+#: ../src/gtk/about_modules.c:569
+msgid "*&nbsp;Hebrew Cantillation"
+msgstr "*&nbsp;Dấu phát âm tiếng Do Thái"
+
+#: ../src/gtk/about_modules.c:575
+msgid "*&nbsp;Variant readings"
+msgstr "*&nbsp;Bài đọc biến thể"
+
+#: ../src/gtk/about_modules.c:582
+msgid "*&nbsp;Transliteration forms"
+msgstr "*&nbsp;Hình thức chuyển ngữ"
+
+#: ../src/gtk/about_modules.c:587
+msgid "*&nbsp;Enumerations"
+msgstr "*&nbsp;Bảng kê"
+
+#: ../src/gtk/about_modules.c:592
+msgid "*&nbsp;Glosses"
+msgstr "*&nbsp;Chú thích"
+
+#: ../src/gtk/about_modules.c:599
+msgid "*&nbsp;Morpheme Segmentation"
+msgstr "*&nbsp;Phân đoạn Hình thái"
+
+#: ../src/gtk/about_modules.c:606
+msgid "*&nbsp;<i>No features found</i>"
+msgstr "*&nbsp;<i>Không tìm thấy tính năng</i>"
+
+#: ../src/gtk/about_modules.c:616
+msgid "<b>Distribution license:</b>"
+msgstr "<b>Giấy phép phân phối:</b>"
+
+#: ../src/gtk/about_modules.c:629
+msgid "<b>Promotional:</b> "
+msgstr "<b>Promotional:</b> "
+
+#: ../src/gtk/about_sword.c:81
+msgid ""
+"The SWORD Project is an effort to create an ever-expanding software package "
+"for research and study of God and His Word. The SWORD Project framework "
+"allows easy use and study of Bible texts, commentaries, lexicons, "
+"dictionaries, and other books. Many frontends are built using this "
+"framework. An installed set of books may be shared among all frontends using "
+"the framework.\n"
+"\n"
+" Books can be downloaded from the SWORD Project."
+msgstr ""
+"Dự án SWORD nỗ lực tạo ra một gói phần mềm ngày càng mở rộng để nghiên cứu "
+"và tìm hiểu về Thiên Chúa và Lời của Ngài. Framework Dự án SWORD cho phép dễ "
+"dàng sử dụng và nghiên cứu các văn bản Kinh thánh, các bài bình luận, từ "
+"vựng, từ điển và các sách khác. Nhiều giao diện người dùng được xây dựng "
+"bằng cách sử dụng framework này. Một bộ sách đã cài đặt có thể được chia sẻ "
+"giữa tất cả các giao diện người dùng bằng cách sử dụng framework.\n"
+"\n"
+" Sách Thánh có thể được tải xuống từ Dự án SWORD."
+
+#: ../src/gtk/about_sword.c:100
+msgid "The SWORD Project"
+msgstr "Dự án SWORD"
+
+#: ../src/gtk/about_sword.c:130
+msgid ""
+"BibleSync is a network protocol providing the ability to share navigation "
+"within your Bible study program with cooperating programs on the local "
+"network.\n"
+"\n"
+"Enable BibleSync from Preferences:\n"
+"in personal mode, to share within a small group;\n"
+"or as either speaker or audience in a formal lecture setting.\n"
+"\n"
+"There are options for how BibleSync behaves in Xiphos:\n"
+"- To follow others' navigation directly or indirectly.\n"
+"- To send your navigation every time or only via keyboard.\n"
+"- To select speakers to whom Xiphos should listen.\n"
+"\n"
+"A simple chat capability provides brief messages to be shared as well.\n"
+"\n"
+"See the manual for details.\n"
+"(Preferences -> BibleSync Settings and Interface -> Keyboard Shortcuts.)"
+msgstr ""
+"BibleSync là một giao thức mạng cung cấp khả năng chia sẻ điều hướng trong "
+"chương trình học Kinh Thánh với các chương trình hợp tác trên mạng cục bộ.\n"
+"\n"
+"Bật BibleSync từ Tùy chọn:\n"
+"ở chế độ cá nhân, để chia sẻ trong một nhóm nhỏ;\n"
+"hoặc với tư cách là diễn giả hoặc thính giả trong một không gian bài giảng "
+"trang trọng.\n"
+"\n"
+"Có các tùy chọn về cách BibleSync hoạt động trong Xiphos:\n"
+"- Để theo dõi trực tiếp hoặc gián tiếp sự điều hướng của người khác.\n"
+"- Để gửi điều hướng của bạn mọi lúc hoặc chỉ qua bàn phím.\n"
+"- Để chọn người nói mà Xiphos nên nghe.\n"
+"\n"
+"Khả năng trò chuyện đơn giản cho phép chia sẻ các tin nhắn ngắn.\n"
+"\n"
+"Xem hướng dẫn sử dụng để biết chi tiết.\n"
+"(Tùy chọn -> Giao diện và Cài đặt BibleSync -> Phím tắt.)"
+
+#: ../src/gtk/about_sword.c:157
+msgid "BibleSync technical details"
+msgstr "Chi tiết kỹ thuật của BibleSync"
+
+#: ../src/gtk/about_trans.c:82
+msgid ""
+"Do you like using Xiphos to study the Bible? Would you like to see its user "
+"interface in your native language? You could translate Xiphos! \n"
+"\n"
+"We are always looking for contributions of new translations of Xiphos into "
+"other languages. If you are able to translate for us, please see the link "
+"below, contact us, and get involved with our efforts. Your help will be much "
+"appreciated!"
+msgstr ""
+"Có thể bạn thích sử dụng Xiphos để học Kinh thánh và bạn muốn thấy nó được "
+"hiển thị bằng ngôn ngữ mẹ đẻ của bạn? Bạn có thể tham gia dịch chương trình "
+"này!\n"
+"\n"
+"Mọi đóng góp cho bản dịch Xiphos đều được hoan nghênh. Nếu bạn muốn tham gia "
+"dịch thuật, hãy xem liên kết bên dưới. Đừng ngần ngại liên hệ với chúng tôi "
+"và tham gia cùng chúng tôi. Tất cả các đóng góp của bạn sẽ được đánh giá cao!"
+
+#: ../src/gtk/about_trans.c:96
+msgid "About Xiphos Translation"
+msgstr "Thông tin về Bản dịch Xiphos"
+
+#: ../src/gtk/about_trans.c:135
+msgid "See TRANSLATION-HOWTO in Xiphos source"
+msgstr "Xem CÁCH THỨC-BẢN DỊCH trong nguồn Xiphos"
+
+#: ../src/gtk/about_trans.c:141
+msgid "Xiphos development"
+msgstr "Trang phát triển Xiphos"
+
+#: ../src/gtk/about_xiphos.c:129
+msgid "Copyright © 2000-2020 Xiphos Development Team"
+msgstr "Bản quyền © 2000-2020 Nhóm phát triển Xiphos"
+
+#: ../src/gtk/about_xiphos.c:131
+msgid ""
+"\n"
+"Powered by The SWORD Project.\n"
+"We would like to thank Troy Griffitts and all the other folks who have given "
+"us The SWORD Project."
+msgstr ""
+"\n"
+"Được cung cấp bởi Dự án SWORD.\n"
+"Xin gửi lời cảm ơn tới Troy Griffitts và tất cả\n"
+"những người khác đã cho phép sử dụng Dự án SWORD."
+
+#. info->stock_icon = GTK_STOCK_OPEN;
+#: ../src/gtk/bookmark_dialog.c:163 ../src/gtk/bookmarks_menu.c:361
+#: ../src/gtk/bookmarks_menu.c:653 ../src/gtk/bookmarks_menu.c:753
+#: ../src/gtk/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
+#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:36
+msgid "Bookmark"
+msgstr "Dấu trang"
+
+#: ../src/gtk/bookmark_dialog.c:165 ../src/gtk/bookmarks_menu.c:755
+#: ../src/gtk/bookmarks_treeview.c:139
+msgid "Enter Folder Name"
+msgstr "Nhập Tên Thư mục"
+
+#: ../src/gtk/bookmark_dialog.c:167 ../src/gtk/bookmarks_menu.c:757
+msgid "Folder Name"
+msgstr "Tên Thư mục"
+
+#: ../src/gtk/bookmark_dialog.c:168 ../src/gtk/bookmarks_menu.c:758
+#: ../src/gtk/bookmarks_treeview.c:141
+msgid "Folder: "
+msgstr "Thư mục: "
+
+#: ../src/gtk/bookmarks_menu.c:200
+msgid "Specify bookmarks file"
+msgstr "Chỉ định tệp dấu trang"
+
+#: ../src/gtk/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
+#: ../ui/xi-menus-popup.gtkbuilder.h:29
+msgid "Edit"
+msgstr "Chỉnh sửa"
+
+#: ../src/gtk/bookmarks_menu.c:364
+msgid "Folder name: "
+msgstr "Tên thư mục:"
+
+#: ../src/gtk/bookmarks_menu.c:367
+msgid "Bookmark name: "
+msgstr "Tên dấu trang:"
+
+#: ../src/gtk/bookmarks_menu.c:370 ../src/gtk/bookmarks_menu.c:661
+msgid "Verse: "
+msgstr "Câu: "
+
+#: ../src/gtk/bookmarks_menu.c:371 ../src/gtk/bookmarks_menu.c:662
+msgid "Module: "
+msgstr "Mô-đun : "
+
+#: ../src/gtk/bookmarks_menu.c:493
+msgid "Remove the selected folder"
+msgstr "Xóa thư mục đã chọn"
+
+#: ../src/gtk/bookmarks_menu.c:494
+msgid "(and all its contents)?"
+msgstr "(và tất cả nội dung của nó)?"
+
+#: ../src/gtk/bookmarks_menu.c:498
+msgid "Remove the selected bookmark"
+msgstr "Xóa dấu trang đã chọn"
+
+#: ../src/gtk/bookmarks_menu.c:654
+msgid "Add"
+msgstr "Thêm"
+
+#: ../src/gtk/bookmarks_menu.c:660
+msgid "Label: "
+msgstr "Nhãn: "
+
+#: ../src/gtk/bookmarks_treeview.c:102 ../src/gtk/export_bookmarks.c:172
+#: ../src/gtk/export_bookmarks.c:229
+#, c-format
+msgid "Search result: %s"
+msgstr "Kết quả tìm kiếm: %s"
+
+#: ../src/gtk/bookmarks_treeview.c:747
+msgid ""
+"Opening a multi-reference bookmark in\n"
+"separate tabs is not supported."
+msgstr ""
+"Mở dấu trang đa tham chiếu trong\n"
+"các thẻ riêng biệt không được hỗ trợ."
+
+#: ../src/gtk/bookmarks_treeview.c:850 ../src/gtk/sidebar.c:1532
+#: ../src/gtk/sidebar.c:1584
+msgid "Bookmarks"
+msgstr "Dấu trang"
+
+#: ../src/gtk/cipher_key_dialog.c:63
+#, c-format
+msgid "Cipher key for module %s"
+msgstr "Khóa mã hóa cho mô-đun %s"
+
+#: ../src/gtk/cipher_key_dialog.c:64
+msgid "for:"
+msgstr "cho:"
+
+#: ../src/gtk/cipher_key_dialog.c:67
+msgid "Enter Key: "
+msgstr "Nhập khóa:"
+
+#: ../src/gtk/dialog.c:256
+msgid "_Ok"
+msgstr "_Đồng ý"
+
+#: ../src/gtk/dialog.c:259 ../src/gtk/dialog.c:633
+msgid "_Yes"
+msgstr "Đồng _ý"
+
+#: ../src/gtk/dialog.c:265 ../src/gtk/dialog.c:630
+msgid "_No"
+msgstr "_Không"
+
+#: ../src/gtk/dialog.c:289
+msgid "Close without Saving"
+msgstr "Đóng mà không lưu"
+
+#: ../src/gtk/dialog.c:639
+msgid "_OK"
+msgstr "_Đồng ý"
+
+#: ../src/gtk/dialog.c:724
+msgid "Xiphos:"
+msgstr "Xiphos :"
+
+#: ../src/gtk/dialog.c:854
+msgid "Close _without Saving"
+msgstr "Đóng mà _không lưu"
+
+#: ../src/gtk/export_bookmarks.c:175 ../src/gtk/export_bookmarks.c:232
+#: ../src/gtk/sidebar.c:1554 ../src/gtk/sidebar.c:1602
+#, c-format
+msgid "Verse List"
+msgstr "Danh sách Câu"
+
+#: ../src/gtk/export_bookmarks.c:659
+msgid "VerseList"
+msgstr "DanhSáchCâu"
+
+#: ../src/gtk/export_bookmarks.c:663
+msgid "SearchResults"
+msgstr "Kết quả Tìm kiếm"
+
+#: ../src/gtk/export_dialog.c:325 ../ui/export-dialog.glade.h:4
+#: ../ui/export-dialog.gtkbuilder.h:5
+msgid "Please check copyright before exporting!"
+msgstr "Vui lòng kiểm tra bản quyền trước khi xuất!"
+
+#: ../src/gtk/find_dialog.c:178 ../src/gtk/find_dialog.c:242
+#: ../src/gtk/find_dialog.c:334 ../ui/gtk2_webedit.ui.h:18
+#: ../ui/gtk_webedit.ui.h:18
+msgid "Find"
+msgstr "Tìm kiếm"
+
+#: ../src/gtk/find_dialog.c:197
+msgid "Enter Word or Phrase"
+msgstr "Nhập một Từ hoặc Cụm từ"
+
+#: ../src/gtk/find_dialog.c:212
+msgid "Search backwards"
+msgstr "Tìm kiếm ngược"
+
+#: ../src/gtk/find_dialog.c:251 ../src/gtk/find_dialog.c:253
+msgid "Find Next"
+msgstr "Tìm kiếm tiếp theo"
+
+#: ../src/gtk/font_dialog.c:298
+msgid "Set Module Font"
+msgstr "Đặt Phông chữ Mô-đun"
+
+#: ../src/gtk/font_dialog.c:332
+msgid "Change font for"
+msgstr "Thay đổi phông chữ của"
+
+#: ../src/gtk/font_dialog.c:336 ../ui/editor_link_dialog.gtkbuilder.h:4
+msgid "Module"
+msgstr "Mô-đun"
+
+#: ../src/gtk/font_dialog.c:340
+msgid "Current font: "
+msgstr "Phông chữ được sử dụng: "
+
+#: ../src/gtk/font_dialog.c:381 ../src/gtk/font_dialog.c:397
+#: ../ui/prefs.gtkbuilder.h:3
+msgid "+0"
+msgstr "+0"
+
+#: ../src/gtk/font_dialog.c:400
+msgid "Use the default font for this module"
+msgstr "Sử dụng phông chữ mặc định cho mô-đun này"
+
+#: ../src/gtk/gui.c:173
+msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
+msgstr "LỖI LẬP TRÌNH! Xiphos sẽ dừng do lỗi \"STRDUP\"."
+
+#: ../src/gtk/gui.c:174 ../src/gtk/gui.c:204
+msgid "Please report this error to the Xiphos team with:"
+msgstr "Vui lòng báo cáo lỗi này cho nhóm phát triển Xiphos với:"
+
+#: ../src/gtk/gui.c:203
+msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
+msgstr "LỖI LẬP TRÌNH! Xiphos sẽ dừng do lỗi « STRING »."
+
+#: ../src/gtk/main_menu.c:769
+msgid "Open Session"
+msgstr "Mở một Phiên"
+
+#: ../src/gtk/main_window.c:589
+#, c-format
+msgid "Module has no support for %s."
+msgstr "Mô-đun không hỗ trợ cho %s."
+
+#: ../src/gtk/main_window.c:640
+msgid "BibleSync is not active."
+msgstr "BibleSync không hoạt động."
+
+#: ../src/gtk/main_window.c:648
+msgid "BibleSync Chat"
+msgstr "Trò chuyện BibleSync"
+
+#: ../src/gtk/main_window.c:649
+msgid "[say this]"
+msgstr "[nói rằng]"
+
+#: ../src/gtk/main_window.c:650
+msgid "Comment:"
+msgstr "Bình luận:"
+
+#: ../src/gtk/main_window.c:690
+msgid "Xiphos: No windows."
+msgstr "Xiphos: Không có cửa sổ."
+
+#: ../src/gtk/main_window.c:746
+msgid "BibleSync: Current navigation sent."
+msgstr "BibleSync: Đã gửi điều hướng hiện tại."
+
+#: ../src/gtk/main_window.c:748
+msgid "BibleSync: Not speaking."
+msgstr "BibleSync: Không truyền."
+
+#: ../src/gtk/main_window.c:978
+msgid "Xiphos - Bible Study Software"
+msgstr "Xiphos - Phần mềm học kinh thánh"
+
+#: ../src/gtk/main_window.c:1042
+msgid "Open a new tab"
+msgstr "Mở một thẻ mới"
+
+#: ../src/gtk/main_window.c:1097 ../src/gtk/sidebar.c:616
+#: ../src/gtk/sidebar.c:621 ../src/main/sidebar.cc:655
+#: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
+#: ../src/main/sidebar.cc:977
+msgid "Standard View"
+msgstr "Chế độ xem Chuẩn"
+
+#: ../src/gtk/main_window.c:1137
+msgid "Commentary View"
+msgstr "Xem Bình luận"
+
+#: ../src/gtk/main_window.c:1145
+msgid "Book View"
+msgstr "Xem sách"
+
+#: ../src/gtk/main_window.c:1163
+msgid "Welcome to Xiphos"
+msgstr "Chào mừng đến với Xiphos"
+
+#: ../src/gtk/menu_popup.c:1296
+msgid ""
+"Renaming is not available in Windows.\n"
+"\n"
+"Xiphos is limited by Windows' filesystem,\n"
+"because it disallows the renaming of filename\n"
+"components of currently-open files,\n"
+"such as the contents of this commentary.\n"
+"Therefore, personal commentary renaming is\n"
+"not available in the Windows environment."
+msgstr ""
+"Không thể đổi tên nhận xét trong Windows\n"
+"\n"
+"Xiphos bị giới hạn bởi hệ thống tập tin của Windows,\n"
+"vì nó không cho phép đổi tên tên tập tin\n"
+"các thành phần của tập tin hiện đang mở,\n"
+"chẳng hạn như nội dung của bình luận này.\n"
+"Do đó, việc đổi tên bình luận cá nhân là\n"
+"không khả dụng trong môi trường Windows."
+
+#: ../src/gtk/menu_popup.c:1315
+msgid "Rename Commentary"
+msgstr "Đổi tên Bình luận"
+
+#: ../src/gtk/menu_popup.c:1318
+msgid "Choose Commentary Name"
+msgstr "Chọn Tên Bình luận"
+
+#: ../src/gtk/menu_popup.c:1320
+msgid "New Name"
+msgstr "Tên Mới :"
+
+#: ../src/gtk/menu_popup.c:1321 ../src/gtk/treekey-editor.c:138
+#: ../src/gtk/treekey-editor.c:195 ../src/gtk/treekey-editor.c:293
+#: ../src/main/prayerlists.cc:235
+msgid "Name: "
+msgstr "Tên: "
+
+#: ../src/gtk/menu_popup.c:1330 ../src/main/prayerlists.cc:248
+msgid "Module names must contain [A-Za-z0-9_] only."
+msgstr "Tên mô-đun chỉ có thể chứa chữ cái và số."
+
+#: ../src/gtk/menu_popup.c:1336 ../src/main/prayerlists.cc:254
+msgid "Xiphos already knows a module by that name."
+msgstr "Xiphos đã có một mô-đun với tên này."
+
+#: ../src/gtk/menu_popup.c:1378
+#, c-format
+msgid ""
+"Failed to create new configuration:\n"
+"%s"
+msgstr ""
+"Không thể tạo cấu hình mới\n"
+"%s"
+
+#: ../src/gtk/menu_popup.c:1387
+msgid ""
+"Configuration build error:\n"
+"\n"
+msgstr ""
+"Lỗi cấu hình\n"
+"\n"
+
+#: ../src/gtk/menu_popup.c:2036
+msgid "No module in this pane."
+msgstr "Không có mô-đun nào trong ngăn này."
+
+#. *****************************************************************************
+#. * defines
+#.
+#: ../src/gtk/mod_mgr.c:64
+msgid ""
+"<b>Overview of the Module Manager.</b>\n"
+"\n"
+"This is Xiphos' mechanism to get new and updated content.\n"
+"If you have never been here before, please take a moment to look it over.\n"
+"\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
+"\n"
+"<b>Module Sources: Choose</b> is for deciding from where modules should "
+"come, that is, from which repository Xiphos should obtain them, as well as "
+"where they should be placed on your system. Set <i>Install Source</i> and "
+"<i>Install Destination</i>, then click <i>Refresh</i>.\n"
+"\n"
+"<b>Modules: Install/Update</b> is for selecting and obtaining modules after "
+"choosing source and destination.\n"
+"\n"
+"<b>Modules: Maintenance</b> is for archive and index creation.\n"
+"\n"
+"See section 5 of our manual for Module Manager detail, or ask for help via "
+"Live Chat, or (if no one is responsive in chat) send mail to our users' "
+"mailing list.\n"
+msgstr ""
+"<b> Tổng quan về Trình quản lý mô-đun. </b>\n"
+"\n"
+"Đây là công cụ được Xiphos sử dụng để cài đặt và cập nhật các mô-đun của các "
+"văn bản Kinh thánh, các bài bình luận hoặc những thứ khác. Nếu bạn chưa sử "
+"dụng nó, hãy dành một chút thời gian để tìm hiểu.\n"
+"\n"
+"Các mô-đun đến từ các <u>kho lưu trữ</u> khác nhau. <b>Nguồn mô-đun: Thêm / "
+"Xóa</b> sẽ cho bạn biết những kho lưu trữ hiện hành.\n"
+"\n"
+"<b>Nguồn mô-đun: Chọn</b> là để quyết định xem mô-đun sẽ đến từ đâu, tức là "
+"từ kho lưu trữ nào mà Xiphos sẽ lấy chúng, cũng như nơi chúng nên được đặt "
+"trên hệ thống của bạn. Đặt <i>Nguồn cài đặt</i> và <i>Đích cài đặt</i>, sau "
+"đó nhấp vào <i>Làm mới</i>.\n"
+"\n"
+"<b>Mô-đun: Cài đặt / Cập nhật</b> là để chọn và lấy mô-đun sau khi chọn "
+"nguồn và đích.\n"
+"\n"
+"<b>Mô-đun: Bảo trì</b> là để lưu trữ và tạo chỉ mục.\n"
+"\n"
+"Xem phần 5 của sổ tay hướng dẫn để biết chi tiết về Trình quản lý mô-đun "
+"hoặc yêu cầu trợ giúp qua Trò chuyện trực tiếp hoặc (nếu không có ai phản "
+"hồi trong trò chuyện) gửi thư đến danh sách thư người dùng.\n"
+
+#: ../src/gtk/mod_mgr.c:67
+msgid ""
+"<b>Welcome to Xiphos.</b>\n"
+"\n"
+"There are no Bibles installed. In order to initialize, Xiphos needs at least "
+"one Bible module. To facilitate this, the Module Manager has been opened so "
+"that you may install one or more Bibles, either from a local module set "
+"(cdrom, flash drive) or over the network from CrossWire Bible Society. "
+"Please refer to these step-by-step instructions, and to the general module "
+"manager overview that has also been opened.\n"
+"\n"
+"<u>For local install:</u>\n"
+"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where "
+"modules can be found.\n"
+"  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n"
+"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select "
+"your folder from the pulldown.\n"
+"\n"
+"<u>For network install from CrossWire:</u>\n"
+"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select "
+"CrossWire from the pulldown.\n"
+"- Click the \"Refresh\" button at the bottom.\n"
+"\n"
+"<u>In either case:</u>\n"
+"- In <i>Modules: Install/Update</i>, select Bibles and other modules of your "
+"preference.\n"
+"- Click \"Install\".\n"
+"- Close the Module Manager when you are done.\n"
+"\n"
+"<u>Warning</u>: If you live in a persecuted country, use with care.\n"
+"\n"
+"Both this step-by-step instruction dialog and the general introduction "
+"dialog may be closed at any time."
+msgstr ""
+"<b>Chào mừng đến với Xiphos.</b>\n"
+"\n"
+"Không có phiên bản Kinh thánh nào được cài đặt. Để bắt đầu, Xiphos cần ít "
+"nhất một mô-đun Kinh thánh. Để dễ dàng cho việc này, trình quản lý Mô-đun đã "
+"được mở để bạn có thể cài đặt một hoặc nhiều phiên bản Kinh thánh, từ bộ mô-"
+"đun cục bộ (cdrom, ổ đĩa flash) hoặc qua mạng từ CrossWire Bible Society. "
+"Vui lòng tham khảo các bước thực hiện và tổng quan về trình quản lý mô-đun "
+"chung đã được mở ở chế độ nền trong màn hình chào mừng.\n"
+"\n"
+"<u>Đối với cài đặt cục bộ:</u>\n"
+"- Trong <i>Nguồn mô-đun: Thêm / Xóa</i>, thêm tên thư mục cục bộ mới nơi có "
+"thể tìm thấy mô-đun.\n"
+"  (Đây là nơi tồn tại các thư mục có tên <i> mods.d </i> và <i> mô-đun </"
+"i>.)\n"
+"- Trong <i>Nguồn mô-đun: Chọn</i>, nhấp vào nút \"Cục bộ\" và chọn thư mục "
+"của bạn từ trình đơn thả xuống.\n"
+"\n"
+"<u>Để cài đặt thông qua mạng từ CrossWire:</u>\n"
+"- Trong <i>Nguồn mô-đun: Chọn</i>, nhấp vào nút \"Từ xa\" và chọn CrossWire "
+"từ thanh kéo xuống.\n"
+"- Nhấp vào nút \"Làm mới\" ở dưới cùng.\n"
+"\n"
+"<u>Trong cả hai trường hợp:</u>\n"
+"- Trong <i>Mô-đun: Cài đặt / Cập nhật</i>, chọn Kinh thánh và các mô-đun "
+"khác bạn thích.\n"
+"- Nhấp vào \"Cài đặt\".\n"
+"- Đóng Trình quản lý mô-đun khi bạn hoàn thành.\n"
+"\n"
+"<u> Cảnh báo </u>: Nếu bạn sống ở một quốc gia bị bách hại, hãy cẩn thận khi "
+"sử dụng.\n"
+"\n"
+"Cả hộp thoại hướng dẫn từng bước này và hộp thoại giới thiệu chung đều có "
+"thể bị đóng bất kỳ lúc nào."
+
+#: ../src/gtk/mod_mgr.c:191
+msgid "Remove these modules?"
+msgstr "Xóa các mô-đun này?"
+
+#: ../src/gtk/mod_mgr.c:192
+msgid "Preparing to remove"
+msgstr "Đang chuẩn bị xóa"
+
+#: ../src/gtk/mod_mgr.c:193
+msgid "Removing"
+msgstr "Đang xoá"
+
+#: ../src/gtk/mod_mgr.c:194 ../ui/xi-menus.glade.h:158
+#: ../ui/xi-menus-popup.gtkbuilder.h:27
+msgid "Remove"
+msgstr "Xóa"
+
+#: ../src/gtk/mod_mgr.c:195
+msgid "Install these modules?"
+msgstr "Cài đặt các mô-đun này?"
+
+#: ../src/gtk/mod_mgr.c:196
+msgid "Preparing to install"
+msgstr "Chuẩn bị cài đặt"
+
+#: ../src/gtk/mod_mgr.c:197
+msgid "Installing"
+msgstr "Đang cài đặt"
+
+#: ../src/gtk/mod_mgr.c:198
+msgid "Install"
+msgstr "Cài đặt"
+
+#: ../src/gtk/mod_mgr.c:199
+msgid "Archive these modules?"
+msgstr "Lưu trữ các mô-đun này?"
+
+#: ../src/gtk/mod_mgr.c:200
+msgid "Preparing to archive"
+msgstr "Chuẩn bị lưu trữ"
+
+#: ../src/gtk/mod_mgr.c:201
+msgid "Archiving"
+msgstr "Lưu trữ"
+
+#: ../src/gtk/mod_mgr.c:202
+msgid "Archive"
+msgstr "Lưu trữ"
+
+#: ../src/gtk/mod_mgr.c:203
+msgid ""
+"Build fast-search index for these\n"
+"modules (may take minutes/module)?"
+msgstr ""
+"Xây dựng chỉ mục tìm kiếm nhanh cho những\n"
+"mô-đun (có thể mất vài phút mỗi mô-đun)?"
+
+#: ../src/gtk/mod_mgr.c:204
+msgid "Preparing to index"
+msgstr "Chuẩn bị lập chỉ mục"
+
+#: ../src/gtk/mod_mgr.c:205
+msgid "Indexing"
+msgstr "Tạo chỉ mục"
+
+#: ../src/gtk/mod_mgr.c:206
+msgid "Index"
+msgstr "Chỉ mục"
+
+#: ../src/gtk/mod_mgr.c:207
+msgid "Delete fast-search index for these modules?"
+msgstr "Xóa chỉ mục tìm kiếm nhanh cho các mô-đun này?"
+
+#: ../src/gtk/mod_mgr.c:208
+msgid "Preparing to delete index"
+msgstr "Chuẩn bị xóa chỉ mục"
+
+#: ../src/gtk/mod_mgr.c:209
+msgid "Deleting index"
+msgstr "Xóa chỉ mục"
+
+#: ../src/gtk/mod_mgr.c:210
+msgid "Deletion"
+msgstr "Xóa"
+
+#: ../src/gtk/mod_mgr.c:311
+msgid "The module has no About information."
+msgstr "Mô-đun này không chứa thông tin Giới thiệu."
+
+#: ../src/gtk/mod_mgr.c:533
+msgid "Module Name"
+msgstr "Tên Mô-đun"
+
+#: ../src/gtk/mod_mgr.c:562
+msgid "A checkmark means this module is already installed"
+msgstr "Đánh dấu có nghĩa là mô đun này đã được cài đặt"
+
+#: ../src/gtk/mod_mgr.c:589
+msgid "Click the box to work on this module"
+msgstr "Click chọn để làm việc với mô-đun này"
+
+#: ../src/gtk/mod_mgr.c:590
+msgid "Click the box to select this module for install/update"
+msgstr "Click chọn, để chọn mô-đun này, để cài đặt hoặc cập nhật"
+
+#: ../src/gtk/mod_mgr.c:608
+msgid "Installed"
+msgstr "Đã cài đặt"
+
+#: ../src/gtk/mod_mgr.c:625
+msgid ""
+"The index icon means you have built an optimized ('lucene') index for this "
+"module for fast searching (see the Maintenance pane for this function)"
+msgstr ""
+"Biểu tượng chỉ mục cho biết rằng chỉ mục được tối ưu hóa cho các truy vấn "
+"nhanh \"lucene\" đã được tạo (xem ngăn Bảo trì cho chức năng này)."
+
+#: ../src/gtk/mod_mgr.c:649
+msgid ""
+"The lock icon means this module is encrypted, and requires that you purchase "
+"an unlock key from the content owner"
+msgstr ""
+"Biểu tượng khóa có nghĩa là mô-đun này đã được mã hóa và yêu cầu bạn mua "
+"khóa mở khóa từ chủ sở hữu nội dung"
+
+#: ../src/gtk/mod_mgr.c:664 ../src/main/biblesync_glue.cc:640
+#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus-popup.gtkbuilder.h:35
+msgid "About"
+msgstr "Giới thiệu"
+
+#: ../src/gtk/mod_mgr.c:688
+msgid ""
+"The refresh icon means the Installed module is older than the newer "
+"Available module: You should update the module"
+msgstr ""
+"Biểu tượng Làm mới cho biết mô-đun đã cài đặt cũ hơn bản hiện hành. Mô-đun "
+"này cần được cập nhật"
+
+#: ../src/gtk/mod_mgr.c:700
+msgid "Available"
+msgstr "Có sẵn"
+
+#: ../src/gtk/mod_mgr.c:709
+msgid "Size"
+msgstr "Kích thước"
+
+#: ../src/gtk/mod_mgr.c:718
+msgid "Description"
+msgstr "Mô tả"
+
+#: ../src/gtk/mod_mgr.c:872
+#, c-format
+msgid ""
+"`mkdir %s' failed:\n"
+"%s."
+msgstr ""
+"`mkdir %s' không thành công:\n"
+"%s."
+
+#: ../src/gtk/mod_mgr.c:906
+msgid " archived in: \n"
+msgstr "được lưu trữ tại:\n"
+
+#: ../src/gtk/mod_mgr.c:988
+msgid "Journals and prayer lists cannot be indexed."
+msgstr "Không thể lập chỉ mục cho danh sách cầu nguyện và nhật ký."
+
+#: ../src/gtk/mod_mgr.c:1019
+#, c-format
+msgid "%s failed"
+msgstr "%s thất bại"
+
+#: ../src/gtk/mod_mgr.c:1022 ../src/gtk/mod_mgr.c:1788
+msgid "Finished"
+msgstr "Hoàn tất"
+
+#: ../src/gtk/mod_mgr.c:1195 ../src/gtk/mod_mgr.c:1197
+#: ../src/gtk/mod_mgr.c:1307 ../src/gtk/mod_mgr.c:1340
+#: ../src/gtk/mod_mgr.c:1342 ../src/gtk/utilities.c:432
+#: ../src/gtk/utilities.c:495 ../src/gtk/utilities.c:497
+#: ../src/gtk/utilities.c:1071 ../src/main/sidebar.cc:807
+#: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
+msgid "Unknown"
+msgstr "Không xác định"
+
+#: ../src/gtk/mod_mgr.c:1518
+#, c-format
+msgid ""
+"Repository:\n"
+"%s"
+msgstr ""
+"Kho lưu trữ:\n"
+"%s"
+
+#: ../src/gtk/mod_mgr.c:1531
+msgid ""
+"Categorized by\n"
+"Module Type"
+msgstr ""
+"Mô-đun đã phân loại\n"
+"theo kiểu "
+
+#: ../src/gtk/mod_mgr.c:1536 ../src/gtk/utilities.c:574
+#: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
+msgid "Biblical Texts"
+msgstr "Các văn bản kinh thánh"
+
+#: ../src/gtk/mod_mgr.c:1540 ../src/gtk/utilities.c:580
+#: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
+#: ../src/main/sidebar.cc:986
+msgid "Commentaries"
+msgstr "Các bình luận"
+
+#: ../src/gtk/mod_mgr.c:1544 ../src/gtk/utilities.c:587
+#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
+msgid "Dictionaries"
+msgstr "Từ điển"
+
+#: ../src/gtk/mod_mgr.c:1548 ../src/gtk/utilities.c:593
+#: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
+msgid "Glossaries"
+msgstr "Bảng chú giải thuật ngữ"
+
+#: ../src/gtk/mod_mgr.c:1552 ../src/gtk/utilities.c:600
+#: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
+msgid "Daily Devotionals"
+msgstr "Lịch đọc Kinh thánh"
+
+#: ../src/gtk/mod_mgr.c:1557 ../src/gtk/utilities.c:606
+#: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
+#: ../src/main/sidebar.cc:1022
+msgid "General Books"
+msgstr "Tổng quan Các Sách"
+
+#: ../src/gtk/mod_mgr.c:1569 ../src/gtk/utilities.c:624
+#: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
+msgid "Cult/Unorthodox"
+msgstr "Giáo phái / Không chính thống"
+
+#: ../src/gtk/mod_mgr.c:1578
+msgid ""
+"Categorized by\n"
+"Availability"
+msgstr ""
+"Mô-đun đã phân loại\n"
+"bởi Tính khả dụng"
+
+#: ../src/gtk/mod_mgr.c:1582
+msgid "Updates"
+msgstr "Cập nhật"
+
+#: ../src/gtk/mod_mgr.c:1587
+msgid "Uninstalled"
+msgstr "Chưa cài đặt"
+
+#: ../src/gtk/mod_mgr.c:1592 ../src/gtk/sidebar.c:632
+#: ../src/gtk/utilities.c:632 ../src/main/prayerlists.cc:233
+#: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
+msgid "Prayer List/Journal"
+msgstr "Danh sách Cầu nguyện / Nhật ký"
+
+#: ../src/gtk/mod_mgr.c:1771
+msgid "Refreshing from remote source"
+msgstr "Làm mới từ nguồn từ xa"
+
+#: ../src/gtk/mod_mgr.c:1783
+msgid "Remote source not found"
+msgstr "Không tìm thấy nguồn từ xa"
+
+#: ../src/gtk/mod_mgr.c:1854
+msgid "Configure"
+msgstr "Cấu hình"
+
+#: ../src/gtk/mod_mgr.c:1883
+msgid "Type"
+msgstr "Kiểu"
+
+#: ../src/gtk/mod_mgr.c:1890
+msgid "Caption"
+msgstr "Chú thích"
+
+#: ../src/gtk/mod_mgr.c:1897
+msgid "Source"
+msgstr "Nguồn"
+
+# src/gs_preferences_dlg.c
+#: ../src/gtk/mod_mgr.c:1904
+msgid "Directory"
+msgstr "Thư mục"
+
+#: ../src/gtk/mod_mgr.c:1912
+msgid "User"
+msgstr "Tên tài khoản"
+
+#: ../src/gtk/mod_mgr.c:1919
+msgid "Password"
+msgstr "Mật khẩu"
+
+#: ../src/gtk/mod_mgr.c:1926
+msgid "UID"
+msgstr "UID"
+
+#: ../src/gtk/mod_mgr.c:1941
+msgid "Module Sources"
+msgstr "Mô-đun nguồn"
+
+#: ../src/gtk/mod_mgr.c:1944
+msgid "Add/Remove"
+msgstr "Thêm / Xóa"
+
+#: ../src/gtk/mod_mgr.c:1947
+msgid "Choose"
+msgstr "Lựa chọn"
+
+#: ../src/gtk/mod_mgr.c:1950 ../src/gtk/preferences_dialog.c:2056
+#: ../src/gtk/sidebar.c:1564 ../src/gtk/sidebar.c:1610
+msgid "Modules"
+msgstr "Mô-đun"
+
+#: ../src/gtk/mod_mgr.c:1952
+msgid "Install/Update"
+msgstr "Cài đặt / Cập nhật"
+
+#: ../src/gtk/mod_mgr.c:1955
+msgid "Maintenance"
+msgstr "Bảo trì"
+
+#: ../src/gtk/mod_mgr.c:2171
+msgid "Please Refresh"
+msgstr "Vui lòng làm mới"
+
+#: ../src/gtk/mod_mgr.c:2172
+msgid "Your module list is not up to date!"
+msgstr "Danh sách các mô-đun không được cập nhật!"
+
+#. Zero Bibles is just not workable in Xiphos.
+#: ../src/gtk/mod_mgr.c:2489
+msgid ""
+"You have uninstalled your last Bible.\n"
+"Xiphos requires at least one."
+msgstr ""
+"Bạn đã gỡ cài đặt cuốn Kinh thánh cuối cùng.\n"
+"Xiphos yêu cầu có ít nhất một cuốn."
+
+#: ../src/gtk/mod_mgr.c:2495
+msgid ""
+"There are still no Bibles installed.\n"
+"Xiphos cannot continue without one."
+msgstr ""
+"Vẫn chưa có bản Kinh thánh nào được cài đặt.\n"
+"Xiphos không thể tiếp tục mà không có ít nhất một bản."
+
+#: ../src/gtk/mod_mgr.c:2620
+#, c-format
+msgid ""
+"%s obsoletes %s.\n"
+"Would you like to delete %s?\n"
+"Beware: This cannot be undone."
+msgstr ""
+"%s lỗi thời %s.\n"
+"Bạn có muốn xóa %s không?\n"
+"Lưu ý: Không thể hoàn tác thao tác này."
+
+#: ../src/gtk/mod_mgr.c:2686
+msgid "No obsolete modules were found."
+msgstr "Không tìm thấy mô-đun đã hết hạn."
+
+#: ../src/gtk/mod_mgr.c:2708
+msgid "Standard remote sources have been loaded."
+msgstr "Kho lưu trữ từ xa tiêu chuẩn đã được tải."
+
+#: ../src/gtk/mod_mgr.c:2717
+msgid "Could not load standard sources from CrossWire."
+msgstr "Không thể tải kho lưu trữ chuẩn từ CrossWire."
+
+#: ../src/gtk/mod_mgr.c:2868 ../src/gtk/mod_mgr.c:3124
+msgid "Remove the selected source"
+msgstr "Xóa kho lưu trữ đã chọn"
+
+#: ../src/gtk/mod_mgr.c:2934
+msgid "Enter a remote source"
+msgstr "Thêm kho lưu trữ từ xa"
+
+#: ../src/gtk/mod_mgr.c:2943
+msgid "Caption:"
+msgstr "Chú thích:"
+
+#: ../src/gtk/mod_mgr.c:2944
+msgid "Type:"
+msgstr "Kiểu:"
+
+#: ../src/gtk/mod_mgr.c:2945
+msgid "Host:"
+msgstr "Máy chủ:"
+
+# src/gs_preferences_dlg.c
+#: ../src/gtk/mod_mgr.c:2946
+msgid "Directory:"
+msgstr "Thư mục:"
+
+#: ../src/gtk/mod_mgr.c:2947
+msgid "User (optional):"
+msgstr "Tên người dùng (tùy chọn):"
+
+#: ../src/gtk/mod_mgr.c:2948
+msgid "Password (optional):"
+msgstr "Mật khẩu (tùy chọn):"
+
+#. this can happen at most once
+#: ../src/gtk/mod_mgr.c:2974
+msgid "A source by that name already exists."
+msgstr "Đã có một kho lưu trữ mang tên này."
+
+#: ../src/gtk/mod_mgr.c:3121
+msgid "Delete a remote source"
+msgstr "Xóa kho lưu trữ từ xa"
+
+#: ../src/gtk/mod_mgr.c:3640
+msgid "[no module]"
+msgstr "[Không có mô-đun]"
+
+#: ../src/gtk/navbar_book.c:360 ../src/gtk/navbar_book_dialog.c:304
+msgid "Go outward, to the section containing this one"
+msgstr "Quay lại mục chứa phần tử này"
+
+#: ../src/gtk/navbar_book.c:384 ../src/gtk/navbar_book_dialog.c:330
+msgid "Go to previous item"
+msgstr "Mục trước"
+
+#: ../src/gtk/navbar_book.c:407 ../src/gtk/navbar_book_dialog.c:354
+msgid "Go to next item"
+msgstr "Mục tiếp theo"
+
+#: ../src/gtk/navbar_book.c:431 ../src/gtk/navbar_book_dialog.c:378
+msgid "Go inward, to the first subsection"
+msgstr "Đi đến tiểu mục đầu tiên"
+
+#: ../src/gtk/navbar_versekey_dialog.c:910
+#: ../src/gtk/navbar_versekey_editor.c:939
+#: ../src/gtk/navbar_versekey_parallel.c:859
+msgid "Synchronize this window's scrolling with the main window"
+msgstr "Đồng bộ hóa việc cuộn cửa sổ này với cửa sổ chính"
+
+#: ../src/gtk/parallel_dialog.c:348 ../src/gtk/preferences_dialog.c:2063
+msgid "Parallel"
+msgstr "Chế độ xem song song"
+
+#: ../src/gtk/parallel_view.c:112
+msgid "Detach/Attach"
+msgstr "Tháo / Đính kèm"
+
+#: ../src/gtk/parallel_view.c:117 ../ui/xi-menus.glade.h:66
+#: ../ui/xi-menus-popup.gtkbuilder.h:43
+msgid "Module Options"
+msgstr "Tùy chọn Mô-đun"
+
+#: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:616
+#: ../src/gtk/sidebar.c:621 ../src/gtk/tabbed_browser.c:254
+#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
+#: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
+msgid "Parallel View"
+msgstr "Chế độ xem song song"
+
+#: ../src/gtk/preferences_dialog.c:866
+msgid "BibleSync session passphrase"
+msgstr "Mật khẩu của phiên BibleSync"
+
+#: ../src/gtk/preferences_dialog.c:868
+msgid "Phrase:"
+msgstr "Cụm từ:"
+
+#. mode selection failed? probably dead interface
+#: ../src/gtk/preferences_dialog.c:940
+msgid ""
+"Mode selection failed.\n"
+"Set \"Debug\" and try again to see why."
+msgstr ""
+"Lựa chọn chế độ thất bại.\n"
+"Bật \"Gỡ lỗi\" và thử lại để xem lý do."
+
+#: ../src/gtk/preferences_dialog.c:992
+msgid "Mode selection failed.\n"
+msgstr "Chế độ lựa chọn thất bại.\n"
+
+#: ../src/gtk/preferences_dialog.c:995
+#, c-format
+msgid "BibleSync: %s (passphrase \"%s\")."
+msgstr "BibleSync : %s (mật khẩu \"%s\")."
+
+#: ../src/gtk/preferences_dialog.c:997
+msgid "Disabled"
+msgstr "Đã hủy kích hoạt"
+
+#: ../src/gtk/preferences_dialog.c:999 ../src/main/xml.c:96
+msgid "Personal"
+msgstr "Ghi chú cá nhân"
+
+#: ../src/gtk/preferences_dialog.c:1001
+msgid "Speaker"
+msgstr "Diễn giả"
+
+#: ../src/gtk/preferences_dialog.c:1002
+msgid "Audience"
+msgstr "_Thính giả"
+
+#: ../src/gtk/preferences_dialog.c:1617 ../src/gtk/preferences_dialog.c:1651
+#: ../src/gtk/preferences_dialog.c:1684 ../src/gtk/preferences_dialog.c:1716
+#: ../src/gtk/preferences_dialog.c:1747 ../src/gtk/preferences_dialog.c:1778
+#: ../src/gtk/preferences_dialog.c:1809 ../src/gtk/preferences_dialog.c:1841
+#: ../src/gtk/preferences_dialog.c:1874 ../src/gtk/preferences_dialog.c:1925
+#: ../src/gtk/preferences_dialog.c:2385
+msgid "-- Select --"
+msgstr "-- Lựa chọn --"
+
+#: ../src/gtk/preferences_dialog.c:1888
+msgid "Locale will take effect after restart."
+msgstr "Ngôn ngữ sẽ có hiệu lực sau khi khởi động lại."
+
+#: ../src/gtk/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:9
+msgid "Preferences"
+msgstr "Tham khảo"
+
+#: ../src/gtk/preferences_dialog.c:2036
+msgid "General"
+msgstr "Tổng quan"
+
+#: ../src/gtk/preferences_dialog.c:2039
+msgid "Options"
+msgstr "Tùy chọn"
+
+#: ../src/gtk/preferences_dialog.c:2042 ../ui/prefs.glade.h:88
+#: ../ui/prefs.gtkbuilder.h:88
+msgid "BibleSync"
+msgstr "BibleSync"
+
+#: ../src/gtk/preferences_dialog.c:2046
+msgid "Fonts"
+msgstr "Phông chữ"
+
+#: ../src/gtk/preferences_dialog.c:2049
+msgid "Color"
+msgstr "Màu sắc"
+
+#: ../src/gtk/preferences_dialog.c:2052
+msgid "Sizes and Faces"
+msgstr "Kích thước và Ngoại hình"
+
+#: ../src/gtk/preferences_dialog.c:2066
+msgid "Special"
+msgstr "Đặc biệt"
+
+#: ../src/gtk/preferences_dialog.c:2766 ../src/gtk/search_dialog.c:519
+msgid "Clear List?"
+msgstr "Xóa danh sách?"
+
+#: ../src/gtk/preferences_dialog.c:2767 ../src/gtk/search_dialog.c:520
+msgid "Are you sure you want to clear the module list?"
+msgstr "Bạn có chắc chắn muốn xóa danh sách các mô-đun?"
+
+#: ../src/gtk/preferences_dialog.c:2818 ../src/main/search_dialog.cc:678
+msgid "Remove Module?"
+msgstr "Xóa Mô-đun?"
+
+#: ../src/gtk/preferences_dialog.c:2819 ../src/main/search_dialog.cc:679
+msgid "Are you sure you want to remove the selected module?"
+msgstr "Bạn có chắc chắn muốn xóa mô-đun đã chọn?"
+
+#: ../src/gtk/search_dialog.c:62 ../src/main/search_dialog.cc:52
+#: ../src/main/search_sidebar.cc:51
+msgid "Searching the "
+msgstr "Tìm kiếm ở"
+
+#: ../src/gtk/search_dialog.c:63 ../src/main/search_dialog.cc:53
+#: ../src/main/search_sidebar.cc:52
+msgid " Module"
+msgstr " Mô-đun"
+
+#: ../src/gtk/search_dialog.c:64 ../src/main/search_dialog.cc:54
+#: ../src/main/search_sidebar.cc:53
+msgid "found in "
+msgstr "tìm thấy trong "
+
+#: ../src/gtk/search_dialog.c:483
+#, c-format
+msgid "New List %s"
+msgstr "Danh sách Mới %s"
+
+#: ../src/gtk/search_dialog.c:700
+msgid "The last module list may not be deleted"
+msgstr "Danh sách mô-đun cuối cùng có thể không bị xóa"
+
+#: ../src/gtk/search_dialog.c:715
+msgid "Delete list?"
+msgstr "Xóa danh sách?"
+
+#: ../src/gtk/search_dialog.c:716
+msgid "Are you sure you want to delete:"
+msgstr "Bạn có chắc chắn muốn xóa:"
+
+#. *****************************************************************************
+#. * Name
+#. *   on_lucene_intro_clicked
+#. *
+#. * Synopsis
+#. *   #include "gui/search_dialog.h"
+#. *
+#. *   void on_lucene_intro_clicked(GtkToggleButton *button,
+#. *				  gpointer user_data)
+#. *
+#. * Description
+#. *
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gtk/search_dialog.c:845
+msgid ""
+"<b>Syntax overview for optimized \"lucene\" searches</b>\n"
+"Search for verses that contain...\n"
+"\n"
+"loved one\n"
+"\t \"loved\" or \"one\"\n"
+"\tThis is the same as searching for loved OR one\n"
+"\"loved one\"\n"
+"\tThe phrase \"loved one\"\n"
+"love*\n"
+"\tA word starting with \"love\"\n"
+"\t(love OR loves OR loved OR etc...)\n"
+"loved AND one\n"
+"\tThe word \"loved\" and the word \"one\"\n"
+"\t&amp;&amp; can be used in place of AND\n"
+"+loved one\n"
+"\tVerses that <b>must</b> contain \"loved\" and <b>may</b> contain \"one\"\n"
+"loved NOT one\n"
+"\t\"loved\" but not \"one\"\n"
+"(loved one) AND God\n"
+"\t\"loved\" or \"one\" and \"God\"\n"
+"lemma:G2316\n"
+"\tSearch for the Strong's Greek (\"G\") word number 2316.\n"
+"\tAlso, select Strong's display on the <i>Attribute Search</i> tab.\n"
+"\n"
+"For complete details, search the web for \"lucene search syntax\"."
+msgstr ""
+"<b> Tổng quan về cú pháp cho tìm kiếm \"lucene\" được tối ưu hóa </b>\n"
+"Tìm kiếm những câu thơ chứa...\n"
+"\n"
+"là tình yêu\n"
+"\t\"Là\" hoặc \"tình yêu\"\n"
+"\tMột truy vấn tương đương là: là HOẶC tình yêu\n"
+"\"là tình yêu\"\n"
+"\tCụm từ \"là tình yêu\"\n"
+"yêu*\n"
+"\tMột từ bắt đầu bằng \"tình yêu\"\n"
+"\t(tình yêu HOẶC tình yêu thương HOẶC tình yêu mến HOẶC vv ...)\n"
+"là VÀ tình yêu\n"
+"\tTừ \"là\" và từ \"tình yêu\"\n"
+"\t&amp; &amp; có thể được sử dụng thay cho AND\n"
+"là + tình yêu\n"
+"\tNhững câu <b>phải</b> chứa \"tình yêu\" và\n"
+"<b> có thể </b> chứa \"là\"\n"
+"là tình yêu của chúng ta\n"
+"\t\"tình yêu\" nhưng không chứa \"là\"\n"
+"(là tình yêu) VÀ Chúa\n"
+"\t\"Là\" hoặc \"tình yêu\" và \"Chúa\"\n"
+"đề mục: G2316\n"
+"\tTìm kiếm số Strong trong tiếng Hy Lạp (\"G\"), của từ số 2316.\n"
+"\tĐồng thời chọn hiển thị số Strong trong thẻ <i>Thuộc tính Tìm kiếm</i>\n"
+"\n"
+"Để biết thêm chi tiết, hãy tìm kiếm trên Internet: \"lucene search syntax\"."
+
+#. *****************************************************************************
+#. * Name
+#. *   on_attributes_intro_clicked
+#. *
+#. * Synopsis
+#. *   #include "gui/search_dialog.h"
+#. *
+#. *   void on_attributes_intro_clicked(GtkToggleButton *button,
+#. *				  gpointer user_data)
+#. *
+#. * Description
+#. *
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gtk/search_dialog.c:903
+msgid ""
+"<b>Attribute-based searches</b>\n"
+"Searches for content contained in markup outside the main text. Attributes "
+"are footnotes, Strong's numbers, and morphological symbols.\n"
+"\n"
+"Be aware that most such searches can now be done faster via optimized "
+"\"lucene\" searches using keyword qualifiers.\n"
+"\n"
+"To use attribute searches, you must select the appropriate button on the "
+"<i>Attribute Search</i> tab.\n"
+"* Footnote text is searched just like regular text.\n"
+"* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) "
+"and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
+"* Morphological tags are identified literally, e.g. N-ASF for \"noun, "
+"accusative singular feminine\" -- see the Robinson module for details."
+msgstr ""
+"<b>Tìm kiếm dựa trên thuộc tính</b>\n"
+"Tìm kiếm nội dung có trong đánh dấu bên ngoài văn bản chính. Các thuộc tính "
+"là chú thích cuối trang, số Strong và biểu tượng hình thái.\n"
+"\n"
+"Lưu ý rằng hầu hết các tìm kiếm này có thể được thực hiện nhanh hơn thông "
+"qua các tìm kiếm \"lucene\" được tối ưu hóa bằng cách sử dụng các bộ định "
+"lượng từ khóa.\n"
+"\n"
+"Để sử dụng tìm kiếm thuộc tính, bạn phải chọn nút thích hợp trên thẻ <i>Tìm "
+"kiếm thuộc tính</i>.\n"
+"* Văn bản chú thích được tìm kiếm giống như văn bản thông thường.\n"
+"* Các từ của Strong được chỉ định là chữ cái tiền tố H hoặc G (tiếng Do Thái "
+"hoặc tiếng Hy Lạp) và định danh từ số, ví dụ: G2316 để tìm \"θεός\" (\"Chúa"
+"\").\n"
+"* Các thẻ hình thái học được xác định theo nghĩa đen, ví dụ: N-ASF là \"danh "
+"từ, nữ tính số ít buộc tội\" - xem mô-đun Robinson để biết chi tiết."
+
+#: ../src/gtk/search_dialog.c:1202
+msgid "Module is neither Bible nor commentary"
+msgstr "Mô-đun này không phải là Kinh thánh hay bình luận"
+
+#: ../src/gtk/search_dialog.c:1220 ../src/gtk/sidebar.c:984
+msgid "BibleSync is not active for transmit."
+msgstr "BibleSync không hoạt động để truyền."
+
+#: ../src/gtk/search_sidebar.c:241
+msgid ""
+"This is an inclusive (\"AND\") search:\n"
+"Find matches showing all words."
+msgstr ""
+"Đây là tìm kiếm bao gồm (\"VÀ\"):\n"
+"Kết quả phù hợp bao gồm tất cả các từ."
+
+#: ../src/gtk/search_sidebar.c:253
+msgid "_Open Advanced Search"
+msgstr "_Mở Tìm kiếm Nâng cao"
+
+#: ../src/gtk/search_sidebar.c:258
+msgid "Open the separate Advanced Search dialog."
+msgstr "Mở hộp thoại Tìm kiếm nâng cao riêng biệt."
+
+#: ../src/gtk/search_sidebar.c:274
+msgid "Search Module"
+msgstr "Tìm kiếm Mô-đun"
+
+#: ../src/gtk/search_sidebar.c:311
+msgid "Search Type"
+msgstr "Loại Tìm kiếm"
+
+#: ../src/gtk/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
+#: ../ui/search-dialog.gtkbuilder.h:34
+msgid "Optimized (\"Lucene\")"
+msgstr "Tối ưu hóa « Lucene »"
+
+#: ../src/gtk/search_sidebar.c:333 ../src/main/search_dialog.cc:100
+#: ../ui/search-dialog.glade.h:41 ../ui/search-dialog.gtkbuilder.h:41
+msgid "Regular expression"
+msgstr "Biểu thức chính quy"
+
+#: ../src/gtk/search_sidebar.c:340 ../src/main/search_dialog.cc:102
+#: ../ui/search-dialog.glade.h:43 ../ui/search-dialog.gtkbuilder.h:43
+msgid "Exact phrase"
+msgstr "Cụm từ chính xác"
+
+#: ../src/gtk/search_sidebar.c:356
+msgid "Search Options"
+msgstr "Tùy chọn Tìm kiếm"
+
+#: ../src/gtk/search_sidebar.c:369 ../ui/search-dialog.glade.h:49
+#: ../ui/search-dialog.gtkbuilder.h:49
+msgid "Match case"
+msgstr "Phân biệt chữ hoa, chữ thường"
+
+#: ../src/gtk/search_sidebar.c:385
+msgid "Search Scope"
+msgstr "Phạm vi Tìm kiếm"
+
+#: ../src/gtk/search_sidebar.c:398
+msgid "No scope"
+msgstr "Không có phạm vi"
+
+#: ../src/gtk/search_sidebar.c:407
+msgid "Use bounds"
+msgstr "Với giới hạn"
+
+#: ../src/gtk/search_sidebar.c:415
+msgid "Last search"
+msgstr "Lần tìm kiếm cuối cùng"
+
+#: ../src/gtk/search_sidebar.c:432
+msgid "Bounds"
+msgstr "Giới hạn"
+
+#: ../src/gtk/search_sidebar.c:447 ../src/gtk/search_sidebar.c:479
+msgid "Lower"
+msgstr "Thấp"
+
+#: ../src/gtk/search_sidebar.c:459 ../src/gtk/search_sidebar.c:486
+msgid "Upper"
+msgstr "In hoa"
+
+#: ../src/gtk/sidebar.c:844
+msgid "Open module in editor?"
+msgstr "Mở mô-đun trong trình chỉnh sửa?"
+
+#: ../src/gtk/sidebar.c:845
+msgid "If no, it will open for display only."
+msgstr "Nếu câu trả lời là không, nó sẽ chỉ mở để đọc."
+
+#: ../src/gtk/sidebar.c:945
+msgid "Paste verse references"
+msgstr "Dán tài liệu tham khảo câu"
+
+#: ../src/gtk/sidebar.c:947
+msgid "List:"
+msgstr "Danh sách:"
+
+#: ../src/gtk/sidebar.c:1543 ../src/gtk/sidebar.c:1593
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#: ../src/gtk/sidebar_dialog.c:174 ../src/gtk/sidebar_dialog.c:184
+msgid "Sidebar"
+msgstr "Thanh bên"
+
+#: ../src/gtk/splash.c:403
+msgid "Powered by the SWORD Project"
+msgstr "Được cung cấp bởi Dự án SWORD"
+
+#: ../src/gtk/tabbed_browser.c:358
+msgid "Can't create tabs dir."
+msgstr "Không thể tạo thẻ thư mục."
+
+#: ../src/gtk/treekey-editor.c:136 ../src/gtk/treekey-editor.c:193
+#: ../src/gtk/treekey-editor.c:291
+msgid "Prayer List/Journal Item"
+msgstr "Danh sách Cầu nguyện / Mục nhật k"
+
+#: ../src/gtk/treekey-editor.c:137 ../src/gtk/treekey-editor.c:194
+#: ../src/gtk/treekey-editor.c:292
+msgid "New name"
+msgstr "Tên mới"
+
+#: ../src/gtk/treekey-editor.c:252
+msgid "Remove the selected item"
+msgstr "Xóa mục đã chọn"
+
+#: ../src/gtk/utilities.c:86
+msgid "January"
+msgstr "Tháng một"
+
+#: ../src/gtk/utilities.c:87
+msgid "February"
+msgstr "Tháng 2"
+
+#: ../src/gtk/utilities.c:88
+msgid "March"
+msgstr "Tháng ba"
+
+#: ../src/gtk/utilities.c:89
+msgid "April"
+msgstr "Tháng tư"
+
+#: ../src/gtk/utilities.c:90
+msgid "May"
+msgstr "Tháng năm"
+
+#: ../src/gtk/utilities.c:91
+msgid "June"
+msgstr "Tháng sáu"
+
+#: ../src/gtk/utilities.c:92
+msgid "July"
+msgstr "Tháng bảy"
+
+#: ../src/gtk/utilities.c:93
+msgid "August"
+msgstr "Tháng tám"
+
+#: ../src/gtk/utilities.c:94
+msgid "September"
+msgstr "Tháng chín"
+
+#: ../src/gtk/utilities.c:94
+msgid "October"
+msgstr "Tháng mười"
+
+#: ../src/gtk/utilities.c:94
+msgid "November"
+msgstr "Tháng mười một"
+
+#: ../src/gtk/utilities.c:94
+msgid "December"
+msgstr "Tháng mười hai"
+
+#: ../src/gtk/utilities.c:2075
+msgid ""
+"An image file's size could not be determined.\n"
+"Xiphos cannot resize images to fit window."
+msgstr ""
+"Không thể xác định kích thước của tệp hình ảnh.\n"
+"Xiphos không thể thay đổi kích thước hình ảnh để vừa với cửa sổ."
+
+#: ../src/main/biblesync_glue.cc:107
+msgid ""
+"Mismatched packet\n"
+"\n"
+msgstr ""
+"Gói không phù hợp:\n"
+"\n"
+
+#: ../src/main/biblesync_glue.cc:127
+msgid ""
+"Presence announcement:\n"
+"\n"
+msgstr ""
+"Thông báo về sự hiện diện:\n"
+"\n"
+
+#: ../src/main/biblesync_glue.cc:137
+msgid ""
+"Navigation packet:\n"
+"\n"
+msgstr ""
+"Gói trình duyệt:\n"
+"\n"
+
+#: ../src/main/biblesync_glue.cc:189
+msgid "Unknown module "
+msgstr "Mô-đun không xác định"
+
+#: ../src/main/biblesync_glue.cc:189
+msgid ""
+".\n"
+"Navigated indirectly using verse list."
+msgstr ""
+".\n"
+"Duyệt gián tiếp bằng cách sử dụng danh sách câu."
+
+# What is exactly?
+#: ../src/main/biblesync_glue.cc:271
+msgid ""
+"Chat packet:\n"
+"\n"
+msgstr ""
+"Gói trò chuyện:\n"
+"\n"
+
+#: ../src/main/biblesync_glue.cc:278
+msgid ""
+" says:\n"
+"\n"
+msgstr ""
+" nói :\n"
+"\n"
+
+#: ../src/main/biblesync_glue.cc:284
+msgid "ERROR: unknown BibleSync indicator: "
+msgstr "LỖI: chỉ báo BibleSync không xác định:"
+
+#: ../src/main/biblesync_glue.cc:287
+msgid "Other indications are:"
+msgstr "Các dấu hiệu khác là:"
+
+#: ../src/main/biblesync_glue.cc:590
+msgid "Check the box to listen to this Speaker"
+msgstr "Chọn hộp để nghe diễn giả này"
+
+#: ../src/main/biblesync_glue.cc:603
+msgid "Available Speakers"
+msgstr "Diễn giả Có sẵn"
+
+#: ../src/main/biblesync_glue.cc:612
+msgid "D/I"
+msgstr "D/I"
+
+#: ../src/main/biblesync_glue.cc:622
+msgid "Last navigation was Direct or Indirect"
+msgstr "Lần Duyệt cuối cùng Trực tiếp hoặc Gián tiếp"
+
+#: ../src/main/biblesync_glue.cc:631
+msgid "Last Navigation"
+msgstr "Lần Duyệt cuối cùng"
+
+#: ../src/main/biblesync_glue.cc:650
+msgid "UUID"
+msgstr "UUID"
+
+#: ../src/main/biblesync_glue.cc:670
+msgid "IP address: "
+msgstr "Địa chỉ IP:"
+
+#: ../src/main/biblesync_glue.cc:670
+msgid ""
+"\n"
+"Application: "
+msgstr ""
+"\n"
+"Ứng dụng: "
+
+#: ../src/main/biblesync_glue.cc:670
+msgid ""
+"\n"
+"Device: "
+msgstr ""
+"\n"
+"Thiết bị: "
+
+#: ../src/main/biblesync_glue.cc:670
+msgid ""
+"\n"
+"UUID: "
+msgstr ""
+"\n"
+"UUID : "
+
+#: ../src/main/display.cc:89
+msgid ""
+"<br/><br/><center><i>This module has no content at this point.</i></center>"
+msgstr ""
+"<br/><br/><center><i>Mo-đun không chứa nội dung thông tin này.</i></center>"
+
+#: ../src/main/display.cc:250
+#, c-format
+msgid ""
+"Improperly encoded personal annotation label:\n"
+"'%s'"
+msgstr ""
+"Tên chú thích cá nhân này được tạo không đúng cách:\n"
+"'%s'"
+
+#: ../src/main/display.cc:1117 ../src/main/display.cc:1159
+#: ../src/main/display.cc:1282 ../ui/export-dialog.glade.h:14
+#: ../ui/export-dialog.gtkbuilder.h:14
+msgid "Chapter"
+msgstr "Chương"
+
+#: ../src/main/main.c:129
+msgid "Xiphos does not understand more than one argument."
+msgstr "Xiphos không chấp nhận nhiều hơn một đối số."
+
+#: ../src/main/main.c:240
+msgid "Initiating HTML"
+msgstr "Khởi tạo HTML"
+
+#: ../src/main/main.c:245
+msgid "Building Interface"
+msgstr "Xây dựng Giao diện"
+
+#: ../src/main/main.c:248
+msgid "Starting Sword"
+msgstr "Khởi động Sword"
+
+#: ../src/main/main.c:251
+msgid "Loading Settings"
+msgstr "Đang tải Tùy chọn"
+
+#: ../src/main/main.c:254
+msgid "Displaying Xiphos"
+msgstr "Hiển thị Xiphos"
+
+#: ../src/main/module_dialogs.cc:186 ../src/main/previewer.cc:100
+msgid "Previewer"
+msgstr "Trình xem trước"
+
+#: ../src/main/module_dialogs.cc:240 ../src/main/module_dialogs.cc:344
+#: ../src/main/previewer.cc:188
+msgid "Footnote"
+msgstr "Chú thích cuối trang"
+
+#: ../src/main/module_dialogs.cc:246 ../src/main/module_dialogs.cc:349
+#: ../src/main/previewer.cc:198
+msgid "Cross Reference"
+msgstr "Tham chiếu chéo"
+
+#: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
+#: ../src/main/module_dialogs.cc:354 ../src/main/module_dialogs.cc:366
+#: ../src/main/previewer.cc:203 ../src/main/previewer.cc:223
+msgid "Strongs"
+msgstr "Strongs"
+
+#: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
+#: ../src/main/module_dialogs.cc:359 ../src/main/module_dialogs.cc:376
+#: ../src/main/previewer.cc:208 ../src/main/previewer.cc:229
+msgid "Morphology"
+msgstr "Nhãn hình thái"
+
+#: ../src/main/module_dialogs.cc:986 ../src/main/url.cc:515
+msgid "Back to "
+msgstr "Quay lại"
+
+#: ../src/main/parallel_view.cc:61
+msgid "Unknown parallel module: "
+msgstr "Mô-đun song song không xác định: "
+
+#: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:70
+#: ../ui/xi-menus-popup.gtkbuilder.h:47
+msgid "Strong's Numbers"
+msgstr "Số Strong"
+
+#: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:102
+#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:73
+#: ../ui/xi-menus-popup.gtkbuilder.h:50
+msgid "Footnotes"
+msgstr "Chú thích cuối trang"
+
+#: ../src/main/parallel_view.cc:418 ../ui/search-dialog.glade.h:99
+#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus-popup.gtkbuilder.h:49
+msgid "Morphological Tags"
+msgstr "Nhãn Hình thái"
+
+#: ../src/main/parallel_view.cc:427 ../ui/xi-menus.glade.h:78
+#: ../ui/xi-menus-popup.gtkbuilder.h:54
+msgid "Hebrew Vowel Points"
+msgstr "Dấu Nguyên âm tiếng Do Thái"
+
+#: ../src/main/parallel_view.cc:436 ../ui/xi-menus.glade.h:79
+#: ../ui/xi-menus-popup.gtkbuilder.h:55
+msgid "Hebrew Cantillation"
+msgstr "Dấu Phát âm tiếng Do Thái"
+
+#: ../src/main/parallel_view.cc:445 ../ui/xi-menus.glade.h:77
+#: ../ui/xi-menus-popup.gtkbuilder.h:53
+msgid "Greek Accents"
+msgstr "Dấu trong tiếng Hy Lạp"
+
+#: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:74
+#: ../ui/xi-menus-popup.gtkbuilder.h:51
+msgid "Cross-references"
+msgstr "Các tham chiếu chéo"
+
+#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:71
+#: ../ui/xi-menus-popup.gtkbuilder.h:48
+msgid "Lemmas"
+msgstr "Lemmas"
+
+#: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:68
+#: ../ui/xi-menus-popup.gtkbuilder.h:45
+msgid "Headings"
+msgstr "Đề mục"
+
+#: ../src/main/parallel_view.cc:481 ../src/main/parallel_view.cc:574
+#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:64
+msgid "Morpheme Segmentation"
+msgstr "Phân đoạn Hình thái"
+
+#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:69
+#: ../ui/xi-menus-popup.gtkbuilder.h:46
+msgid "Words of Christ in Red"
+msgstr "Hiển thị màu đỏ lời của Đức Kitô"
+
+#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:80
+#: ../ui/xi-menus-popup.gtkbuilder.h:56
+msgid "Transliteration"
+msgstr "Chuyển ngữ"
+
+#: ../src/main/parallel_view.cc:512
+msgid "Textual Variants"
+msgstr "Các biến thể văn bản"
+
+#: ../src/main/parallel_view.cc:520 ../ui/xi-menus.glade.h:82
+#: ../ui/xi-menus-popup.gtkbuilder.h:58
+msgid "Primary Reading"
+msgstr "Bài đọc chính"
+
+#: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus-popup.gtkbuilder.h:59
+msgid "Secondary Reading"
+msgstr "Bài đọc Phụ"
+
+#: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus-popup.gtkbuilder.h:60
+msgid "All Readings"
+msgstr "Tất cả các bài đọc"
+
+#: ../src/main/parallel_view.cc:547 ../ui/xi-menus.glade.h:85
+#: ../ui/xi-menus-popup.gtkbuilder.h:61
+msgid "Transliterated Forms"
+msgstr "Hình thức Chuyển ngữ"
+
+#: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus-popup.gtkbuilder.h:62
+msgid "Enumerations"
+msgstr "Bảng kê"
+
+#: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus-popup.gtkbuilder.h:63
+msgid "Glosses"
+msgstr "Chú thích"
+
+#: ../src/main/parallel_view.cc:758
+msgid "view context"
+msgstr "xem bối cảnh"
+
+#: ../src/main/prayerlists.cc:112
+msgid "Growth"
+msgstr "Tăng"
+
+#: ../src/main/prayerlists.cc:113
+msgid "<b>For Growth</b><br/>"
+msgstr "<b>Để phát triển</b><br/>"
+
+#: ../src/main/prayerlists.cc:114 ../src/main/prayerlists.cc:368
+msgid "Salvation"
+msgstr "Sự cứu rỗi"
+
+#: ../src/main/prayerlists.cc:115
+msgid "<b>For Salvation</b><br/>"
+msgstr "<b>Để được cứu rỗi</b><br/>"
+
+#: ../src/main/prayerlists.cc:116 ../src/main/prayerlists.cc:372
+msgid "Health"
+msgstr "Chữa lành"
+
+#: ../src/main/prayerlists.cc:117
+msgid "<b>For Health</b><br/>"
+msgstr "<b>Cho Sức khoẻ</b> <br/>"
+
+#: ../src/main/prayerlists.cc:118
+msgid "Misc"
+msgstr "Khác"
+
+#: ../src/main/prayerlists.cc:119
+msgid "<b>Miscellaneous</b><br/>"
+msgstr "<b>Khác</b><br/>"
+
+#: ../src/main/prayerlists.cc:127
+msgid "Point x"
+msgstr "Điểm x"
+
+#: ../src/main/prayerlists.cc:128
+msgid "<b>(x)</b><br/>"
+msgstr "<b>(x)</b><br/>"
+
+#: ../src/main/prayerlists.cc:129
+msgid "Point y"
+msgstr "Điểm y"
+
+#: ../src/main/prayerlists.cc:130
+msgid "<b>(y)</b><br/>"
+msgstr "<b>(y)</b><br/>"
+
+#: ../src/main/prayerlists.cc:131
+msgid "Point z"
+msgstr "Điểm z"
+
+#: ../src/main/prayerlists.cc:132
+msgid "<b>(z)</b><br/>"
+msgstr "<b>(z)</b><br/>"
+
+#: ../src/main/prayerlists.cc:140
+msgid "Minor Topic 1"
+msgstr "Chủ đề Nhỏ 1"
+
+#: ../src/main/prayerlists.cc:141
+msgid "<b>Subtopic 1</b><br/>"
+msgstr "<b>Phần 1</b><br/>"
+
+#: ../src/main/prayerlists.cc:143
+msgid "Minor Topic 2"
+msgstr "Chủ đề Nhỏ 2"
+
+#: ../src/main/prayerlists.cc:144
+msgid "<b>Subtopic 2</b><br/>"
+msgstr "<b>Phần 2</b><br/>"
+
+#: ../src/main/prayerlists.cc:146
+msgid "Minor Topic 3"
+msgstr "Chủ đề Nhỏ 3"
+
+#: ../src/main/prayerlists.cc:147
+msgid "<b>Subtopic 3</b><br/>"
+msgstr "<b>Phần 3</b><br/>"
+
+#: ../src/main/prayerlists.cc:149
+msgid "Minor Topic 4"
+msgstr "Chủ đề Nhỏ 4"
+
+#: ../src/main/prayerlists.cc:150
+msgid "<b>Subtopic 4</b><br/>"
+msgstr "<b>Phần 4</b><br/>"
+
+#: ../src/main/prayerlists.cc:234
+msgid "Name for new prayer list or journal"
+msgstr "Tên cho danh sách hoặc nhật ký cầu nguyện mới"
+
+#: ../src/main/prayerlists.cc:262
+msgid "Xiphos finds that prayer list already."
+msgstr "Danh sách cầu nguyện hoặc ghi chú đã tồn tại."
+
+#. this one matters.
+#: ../src/main/prayerlists.cc:274
+#, c-format
+msgid ""
+"Xiphos cannot create module's path:\n"
+"%s"
+msgstr ""
+"Xiphos không thể tạo đường dẫn của mô-đun:\n"
+"%s"
+
+#: ../src/main/prayerlists.cc:313
+msgid "A basic prayer list. \\par\\par Module created by Xiphos."
+msgstr "Danh sách cầu nguyện cơ bản. \\par\\par Mô đun được tạo bởi Xiphos."
+
+#: ../src/main/prayerlists.cc:314
+msgid "BasicPrayerList"
+msgstr "DanhsáchCầunguyệnCănbản"
+
+#: ../src/main/prayerlists.cc:328
+msgid "MyPrayerList"
+msgstr "DanhsáchCầunguyệnCủatôi"
+
+#: ../src/main/prayerlists.cc:329
+msgid ""
+"<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
+">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
+msgstr ""
+"<b>Người:</b> <br/>Người 1<br/>Người 2<br/>Người 3<br/><br/><b>Nhà thờ:</"
+"b><br/>băng ghế<br/>hoạt động<br/>Kinh Thánh cho người truyền giáo<br/><br/"
+"><br/>"
+
+#: ../src/main/prayerlists.cc:353
+msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
+msgstr ""
+"Danh sách cầu nguyện theo chủ đề. \\par\\par Mô đun được tạo bởi Xiphos."
+
+#: ../src/main/prayerlists.cc:354
+msgid "SubjectPrayerList"
+msgstr "DanhsáchCầunguyệntheoChủđề"
+
+#: ../src/main/prayerlists.cc:369
+msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
+msgstr "Người 1<br/> Người 2<br/> Người 3<br/> Người 4<br/>"
+
+#: ../src/main/prayerlists.cc:370
+msgid "Spiritual Growth"
+msgstr "Phát triển Tâm linh"
+
+#: ../src/main/prayerlists.cc:371
+msgid "Mike<br/>Steve<br/>"
+msgstr "Người 1<br/>Người 2<br/>Người 3<br/>"
+
+#: ../src/main/prayerlists.cc:373
+msgid "Sue<br/>John<br/>"
+msgstr "Người 1<br/>Người 2<br/>Người 3<br/>"
+
+#: ../src/main/prayerlists.cc:397
+msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
+msgstr ""
+"Danh sách cầu nguyện hàng tháng. \\par\\par Mô đun được tạo bởi Xiphos."
+
+#: ../src/main/prayerlists.cc:398
+msgid "MonthlyPrayerList"
+msgstr "DanhsáchCầunguyệnHàngtháng"
+
+#: ../src/main/prayerlists.cc:447
+msgid "A daily journal. \\par\\par Module created by Xiphos."
+msgstr "Nhật ký. \\par\\par Mô đun được tạo bởi Xiphos."
+
+#: ../src/main/prayerlists.cc:448
+msgid "DailyJournal"
+msgstr "GhichúHàngngày"
+
+#: ../src/main/prayerlists.cc:510
+msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
+msgstr ""
+"Chủ đề được lập dàn ý (ví dụ: bài giảng). \\par\\par Mô-đun được tạo bởi "
+"Xiphos."
+
+#: ../src/main/prayerlists.cc:511
+msgid "OutlinedTopic"
+msgstr "Đề cương"
+
+#: ../src/main/prayerlists.cc:525
+msgid "Major Topic A"
+msgstr "Chủ đề chính A"
+
+#: ../src/main/prayerlists.cc:526
+msgid "<b>Major Topic A</b><br/>"
+msgstr "<b>Chủ đề chính A</b><br/>"
+
+#: ../src/main/prayerlists.cc:528
+msgid "Major Topic B"
+msgstr "Chủ đề chính B"
+
+#: ../src/main/prayerlists.cc:529
+msgid "<b>Major Topic B</b><br/>"
+msgstr "<b>Chủ đề chính </b><br/>"
+
+#: ../src/main/prayerlists.cc:531
+msgid "Major Topic C"
+msgstr "Chủ đề chính C"
+
+#: ../src/main/prayerlists.cc:532
+msgid "<b>Major Topic C</b><br/>"
+msgstr "<b>Chủ đề chính </b><br/>"
+
+#: ../src/main/prayerlists.cc:557
+msgid ""
+"A journal sectioned by Bible book and chapter. \\par\\par Module created by "
+"Xiphos."
+msgstr ""
+"Một tạp chí được phân đoạn theo sách và chương của sách Kinh thánh. \\par"
+"\\par Mô-đun được tạo bởi Xiphos."
+
+#: ../src/main/prayerlists.cc:558
+msgid "BookChapter"
+msgstr "Chươngsách"
+
+#: ../src/main/previewer.cc:193
+msgid "User Annotation"
+msgstr "Chú thích của Người dùng"
+
+#: ../src/main/search_dialog.cc:104
+msgid "Multi-word"
+msgstr "Nhiều từ"
+
+#: ../src/main/search_dialog.cc:106
+msgid "Optimized (\"lucene\")"
+msgstr "Tối ưu hóa (« Lucene »)"
+
+#: ../src/main/search_dialog.cc:107
+msgid "Attribute"
+msgstr "Thuộc tính"
+
+#: ../src/main/search_dialog.cc:208
+#, c-format
+msgid "Search result %s: %s"
+msgstr "Kết quả tìm kiếm %s : %s"
+
+#: ../src/main/search_dialog.cc:424
+msgid "Delete Range?"
+msgstr "Xóa Phạm vi?"
+
+#: ../src/main/search_dialog.cc:425
+msgid "Are you sure you want to delete this range?"
+msgstr "Bạn có chắc chắn muốn xóa phạm vi này không?"
+
+#: ../src/main/search_dialog.cc:638 ../src/main/search_dialog.cc:1043
+#: ../src/main/search_dialog.cc:1046 ../src/main/search_dialog.cc:1066
+#: ../src/main/search_dialog.cc:1069
+msgid "Search: "
+msgstr "Tìm kiếm: "
+
+#: ../src/main/search_dialog.cc:1404
+#, c-format
+msgid ""
+"%s:\n"
+"No such module is installed.\n"
+"%s"
+msgstr ""
+"%s:\n"
+"Không có mô-đun nào như vậy được cài đặt.\n"
+"%s"
+
+#: ../src/main/search_dialog.cc:1406
+msgid "Please adjust the module list."
+msgstr "Vui lòng điều chỉnh (tạo lại) danh sách mô-đun."
+
+#: ../src/main/search_dialog.cc:1422
+#, c-format
+msgid "No fast-search index exists for %s.%s%s"
+msgstr "Không tồn tại chỉ mục tìm kiếm nhanh nào cho %s %s%s"
+
+#: ../src/main/search_dialog.cc:1424
+msgid ""
+"\n"
+"Search on this module is now `multi word'."
+msgstr ""
+"\n"
+"Các truy vấn trên mô-đun này hiện là 'cụm từ'."
+
+#: ../src/main/search_dialog.cc:1425
+msgid ""
+"\n"
+"See the Module Manager, Maintenance pane."
+msgstr ""
+"\n"
+"Xem Trình quản lý mô-đun, ngăn Bảo trì."
+
+#: ../src/main/search_dialog.cc:1486
+msgid "Search finished"
+msgstr "Tìm kiếm kết thúc"
+
+#: ../src/main/search_sidebar.cc:88
+msgid "matches"
+msgstr "kết quả phù hợp"
+
+#: ../src/main/search_sidebar.cc:203
+msgid "There is no commentary module."
+msgstr "Không có mô-đun bình luận."
+
+#: ../src/main/settings.c:106
+msgid "$HOME is not set!"
+msgstr "$HOME chưa được đặt!"
+
+#: ../src/main/settings.c:120
+#, c-format
+msgid "Xiphos can not create directory "
+msgstr "Xiphos không thể tạo thư mục."
+
+#: ../src/main/settings.c:134 ../src/main/settings.c:144
+#: ../src/main/settings.c:155
+msgid "can not create "
+msgstr "không thể tạo"
+
+#: ../src/main/settings.c:187
+msgid ""
+"Empty settings file -- backup recovery attempted.\n"
+"Some information may have been lost."
+msgstr ""
+"Tệp cài đặt trống -- đã thử khôi phục sao lưu.\n"
+"Một số thông tin có thể đã bị mất."
+
+#: ../src/main/settings.c:190
+msgid "Empty settings file -- no backup?!? Information lost!"
+msgstr "Tệp cài đặt trống -- không có bản sao lưu?!? Thông tin bị mất!"
+
+#: ../src/main/settings.c:217
+msgid ""
+"There are no Bibles installed.\n"
+"Evidently, you declined to install any.\n"
+"\n"
+"Without any Bible modules to display,\n"
+"Xiphos cannot proceed,\n"
+"and will now exit."
+msgstr ""
+"Không có Kinh thánh nào được cài đặt.\n"
+"Hoặc bạn đã từ chối cài đặt chúng.\n"
+"\n"
+"Không có bất kỳ mô-đun Kinh thánh nào để hiển thị,\n"
+"Xiphos không thể tiếp tục,\n"
+"và bây giờ sẽ thoát."
+
+#: ../src/main/settings.c:223
+msgid "Bible module installation complete."
+msgstr "Hoàn tất cài đặt mô-đun Kinh thánh."
+
+#: ../src/main/sidebar.cc:146
+msgid ""
+"Module error: Unusable xref encoding.\n"
+"Please report this, with module & verse"
+msgstr ""
+"Lỗi mô-đun: Tham chiếu chéo trả về không sử dụng được.\n"
+"Vui lòng báo cáo lỗi này cùng với tên của mô-đun."
+
+#: ../src/main/sidebar.cc:410
+msgid "verse"
+msgstr "câu"
+
+#: ../src/main/sidebar.cc:470
+msgid "chapter"
+msgstr "chương"
+
+#: ../src/main/sword.cc:658
+msgid ""
+"Xiphos's file for language\n"
+"abbreviations is missing."
+msgstr ""
+"Thiếu tệp các ngôn ngữ\n"
+"viết tắt."
+
+#: ../src/main/sword.cc:664
+msgid ""
+"Xiphos's language abbreviation\n"
+"file cannot be opened."
+msgstr ""
+"Không thể mở tập tin\n"
+"các ngôn ngữ viết tắt của Xiphos."
+
+#: ../src/main/sword.cc:676
+msgid ""
+"Xiphos cannot allocate space\n"
+"for language abbreviations."
+msgstr ""
+"Xiphos không thể phân bổ không gian\n"
+"cho các ngôn ngữ viết tắt."
+
+#: ../src/main/sword.cc:682
+msgid ""
+"Xiphos cannot read the\n"
+"language abbreviation file."
+msgstr ""
+"Xiphos không thể đọc\n"
+"tập tin viết tắt ngôn ngữ."
+
+#. either we were given a null sys_locale, or it didn't match anything.
+#: ../src/main/sword.cc:762
+#, c-format
+msgid ""
+"No matching locale found for `%s'.\n"
+"%s"
+msgstr ""
+"Không tìm thấy ngôn ngữ phù hợp cho `%s'.\n"
+"%s"
+
+#: ../src/main/sword.cc:764
+msgid "Book names and menus may not be translated."
+msgstr "Tên sách và menu có thể không được dịch."
+
+#: ../src/main/sword.cc:1119 ../src/main/sword.cc:1290
+#, c-format
+msgid ""
+"Module %s has companion modules:\n"
+"%s.\n"
+"Would you like to open these as well?%s"
+msgstr ""
+"Mô-đun %s có các mô-đun đồng hành:\n"
+"%s.\n"
+"Bạn có muốn mở chúng không? %s"
+
+#: ../src/main/sword.cc:1123 ../src/main/sword.cc:1294
+msgid ""
+"\n"
+"\n"
+"The first will open in the main window\n"
+"and others in separate windows."
+msgstr ""
+"\n"
+"\n"
+"Người đầu tiên sẽ mở trong cửa sổ chính\n"
+"và những người khác trong các cửa sổ riêng biệt."
+
+#: ../src/main/sword.cc:1421
+msgid "Daily devotional was requested, but there are none installed."
+msgstr ""
+"Đã yêu cầu lịch đọc Kinh thánh, nhưng không có mô-đun nào được cài đặt."
+
+#: ../src/main/sword.cc:1675
+msgid ""
+"<b>Locked Module.</b>\n"
+"\n"
+"<u>You are opening a module which requires a <i>key</i>.</u>\n"
+"\n"
+"The module is locked, meaning that the content is encrypted by its "
+"publisher, and you must enter its key in order for the content to become "
+"useful.  This key should have been received by you on the web page which "
+"confirmed your purchase, or perhaps sent via email after purchase.\n"
+"\n"
+"Please enter the key in the dialog."
+msgstr ""
+"<b> Mô-đun đã bị khóa.</b>\n"
+"\n"
+"<u> Mở mô-đun cần có <i>khoá</i>. </u> \n"
+"\n"
+"Mô-đun này bị khóa, có nghĩa là nội dung được mã hóa bởi nhà cung cấp, bạn "
+"cần phải nhập khóa để tạo nội dung sử dụng được. Khóa này có thể được cung "
+"cấp trên trang web khi mua khoá, hoặc có thể gửi qua email sau khi mua.\n"
+"\n"
+"Vui lòng nhập khóa vào hộp thoại."
+
+#: ../src/main/tab_history.c:302
+msgid "Clear History"
+msgstr "Xóa lịch sử"
+
+#: ../src/main/tab_history.c:308
+msgid "History ➛ Verse List"
+msgstr "Lịch sử ➛ Danh sách các câu"
+
+#: ../src/main/url.cc:106
+msgid "URL not found:"
+msgstr "Không tìm thấy URL:"
+
+#: ../src/main/url.cc:194
+#, c-format
+msgid "Xiphos could not execute %s"
+msgstr "Không thể chạy Xiphos %s"
+
+#: ../src/main/url.cc:202
+msgid "Viewer error:\n"
+msgstr "Lỗi xem trước:\n"
+
+#: ../src/main/url.cc:273
+#, c-format
+msgid "Show %s in main window"
+msgstr "Hiển thị %s trong cửa sổ chính"
+
+#: ../src/main/xml.c:87 ../src/main/xml.c:468 ../src/main/xml.c:599
+#, c-format
+msgid "Document not created successfully. \n"
+msgstr "Lỗi khi tạo tài liệu. \n"
+
+#: ../src/main/xml.c:99
+msgid "What must I do to be saved?"
+msgstr "Tôi phải làm gì để được cứu rỗi?"
+
+#: ../src/main/xml.c:100 ../src/main/xml.c:101
+msgid "Acts 16:31"
+msgstr "Cv 16:31"
+
+#: ../src/main/xml.c:102 ../src/main/xml.c:103
+msgid "Eph 2:8,9"
+msgstr "Ep 2: 8,9"
+
+#: ../src/main/xml.c:104 ../src/main/xml.c:105
+msgid "Romans 1:16"
+msgstr "Rô-ma 1:16"
+
+#: ../src/main/xml.c:107
+msgid "What is the Gospel?"
+msgstr "Tin Mừng là gì?"
+
+#: ../src/main/xml.c:108 ../src/main/xml.c:109
+msgid "1 Cor 15:1-4"
+msgstr "1 Cr 15:1-4"
+
+#: ../src/main/xml.c:263 ../src/main/xml.c:409 ../src/main/xml.c:1506
+#, c-format
+msgid "Document not parsed successfully. \n"
+msgstr "Lỗi khi đọc tài liệu. \n"
+
+#: ../src/main/xml.c:269 ../src/main/xml.c:415 ../src/main/xml.c:435
+#: ../src/main/xml.c:1063 ../src/main/xml.c:1393 ../src/main/xml.c:1589
+#, c-format
+msgid "empty document \n"
+msgstr "tài liệu trống \n"
+
+#: ../src/main/xml.c:275
+#, c-format
+msgid "wrong type, root node != SwordBookmarks\n"
+msgstr "lỗi kiểu, nút gốc!= SwordBookmarks\n"
+
+#: ../src/main/xml.c:421
+#, c-format
+msgid "wrong type, root node != Copy_Export\n"
+msgstr "lỗi kiểu, nút gốc! = Copy_Export\n"
+
+#: ../src/main/xml.c:498
+#, c-format
+msgid "%s<center>%s<br>Chapter %d</center><br>"
+msgstr "%s<center>%s<br>Chương %d</center><br>"
+
+#: ../src/main/xml.c:502
+#, c-format
+msgid "<br><center>Chapter %d</center><br>"
+msgstr "<br><center>Chương %d</center><br>"
+
+#: ../src/main/xml.c:505
+#, c-format
+msgid ""
+"%s\n"
+"\n"
+"Chapter %d\n"
+"\n"
+msgstr ""
+"%s\n"
+"\n"
+"Chương %d\n"
+"\n"
+
+#: ../src/main/xml.c:508
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Chapter %d\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Chương %d\n"
+"\n"
+
+#: ../src/main/xml.c:517
+#, c-format
+msgid "%s%s: %s Chapter %d<br><br>"
+msgstr "%s%s: %s Chương %d<br><br>"
+
+#: ../src/main/xml.c:520
+#, c-format
+msgid ""
+"%s: %s Chapter %d\n"
+"\n"
+msgstr ""
+"%s: %s Chương %d\n"
+"\n"
+
+#: ../src/main/xml.c:528
+#, c-format
+msgid "&nbsp;&nbsp;[%d]"
+msgstr "&nbsp;&nbsp;[%d]"
+
+#: ../src/main/xml.c:531
+#, c-format
+msgid " [%d]"
+msgstr " [%d]"
+
+#: ../src/main/xml.c:540
+#, c-format
+msgid "%s%s (%s %d:%d%s)</body></html>"
+msgstr "%s%s (%s %d:%d%s)</body></html>"
+
+#: ../src/main/xml.c:543
+#, c-format
+msgid "%s(%s %d:%d%s)%s </body></html>"
+msgstr "%s(%s %d:%d%s)%s </body></html>"
+
+#: ../src/main/xml.c:545
+#, c-format
+msgid "%s (%s %d:%d%s)"
+msgstr "%s (%s %d:%d%s)"
+
+#: ../src/main/xml.c:548
+#, c-format
+msgid "(%s %d:%d%s) %s"
+msgstr "(%s %d:%d%s) %s"
+
+#: ../src/main/xml.c:556
+#, c-format
+msgid " %s%s"
+msgstr " %s%s"
+
+#: ../src/main/xml.c:558 ../src/main/xml.c:562
+#, c-format
+msgid "%s(%s %d:%d-%d%s)"
+msgstr "%s(%s %d:%d-%d%s)"
+
+#: ../src/main/xml.c:560
+#, c-format
+msgid "(%s %d:%d-%d%s)<br>"
+msgstr "(%s %d:%d-%d%s)<br>"
+
+#: ../src/main/xml.c:565
+#, c-format
+msgid "(%s %d:%d-%d%s)\n"
+msgstr "(%s %d:%d-%d%s)\n"
+
+#: ../src/main/xml.c:614
+msgid "Old Testament"
+msgstr "Cựu Ước"
+
+#: ../src/main/xml.c:616
+msgid "Gen - Mal"
+msgstr "St - Mal"
+
+#: ../src/main/xml.c:622
+msgid "New Testament"
+msgstr "Tân Ước"
+
+#: ../src/main/xml.c:624
+msgid "Mat - Rev"
+msgstr "Mt - Kh"
+
+#: ../src/main/xml.c:633
+msgid "Sample Module List"
+msgstr "Ví dụ về Danh sách Mô-đun"
+
+#: ../src/main/xml.c:1069 ../src/main/xml.c:1399
+#, c-format
+msgid "wrong type, root node != %s\n"
+msgstr "lỗi kiểu, nút gốc!= %s\n"
+
+#: ../src/main/xml.c:1551
+#, c-format
+msgid ""
+"Save of settings failed! stat %d, size %d\n"
+"%s"
+msgstr ""
+"Không lưu được cấu hình! chỉ số %d, kích cỡ %d\n"
+"%s"
+
+#: ../src/main/xml.c:1553
+msgid "Attempting to revert to previous save."
+msgstr "Đang cổ gắng hoàn nguyên về bản sao lưu trước đó."
+
+#: ../ui/bookmarks.glade.h:1 ../ui/bookmarks.gtkbuilder.h:1
+msgid "Add Bookmark"
+msgstr "Thêm Dấu trang"
+
+#: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:14
+msgid "Bookmark Dialog"
+msgstr "Hộp thoại Dấu trang"
+
+#: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
+msgid "Create new folder"
+msgstr "Tạo một thư mục mới"
+
+#: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:5
+msgid "New Folder"
+msgstr "Thư mục Mới"
+
+#: ../ui/bookmarks.glade.h:5 ../ui/bookmarks.gtkbuilder.h:3
+msgid "New ..."
+msgstr "Mới ..."
+
+#: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:6
+msgid "Cancel Bookmark"
+msgstr "Hủy dấu trang"
+
+#: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:7
+msgid "Label:"
+msgstr "Nhãn:"
+
+#: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:8
+msgid "Label Entry"
+msgstr "Nhãn Mục nhập"
+
+#: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:9
+#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:9
+msgid "Verse:"
+msgstr "Câu:"
+
+#: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:10
+#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:10
+msgid "Verse Entry"
+msgstr "Mục nhập Câu"
+
+#: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:11
+#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:11
+msgid "Module:"
+msgstr "Mô-đun :"
+
+#: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:12
+#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:12
+msgid "Module Entry"
+msgstr "Đầu vào Mô-đun"
+
+#: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:13
+msgid "Bookmark Folder Treeview"
+msgstr "Cây thư mục Dấu trang"
+
+# T'es sûr de la traduction?
+#: ../ui/editor_link_dialog.gtkbuilder.h:2
+msgid "Test Link"
+msgstr "Kiểm tra liên kết"
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:3 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:17
+msgid "Verse"
+msgstr "Câu"
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:5
+msgid "Link Text"
+msgstr "Tên liên kết"
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:6
+msgid "Link directly"
+msgstr "Liên kết trực tiếp"
+
+#: ../ui/editor_link_dialog.gtkbuilder.h:7
+msgid "Link via verse list"
+msgstr "Liên kết qua một danh sách câu"
+
+#: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
+msgid "Exit the program"
+msgstr "Thoát khỏi ứng dụng"
+
+#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:2
+msgid "Exit"
+msgstr "Thoát"
+
+#: ../ui/editor_note.xml.h:3
+msgid "Print this note"
+msgstr "In ghi chú này"
+
+#: ../ui/editor_note.xml.h:4
+msgid "Preview the note to be printed"
+msgstr "Xem trước ghi chú sẽ in"
+
+#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
+msgid "HTML Format switch"
+msgstr "Chuyển đổi Định dạng HTML"
+
+#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:6
+msgid "HTML mode"
+msgstr "Chế độ HTML"
+
+#: ../ui/editor_note.xml.h:7
+msgid "Delete the current note"
+msgstr "Xóa ghi chú hiện tại"
+
+#: ../ui/editor_note.xml.h:8
+msgid "_Delete Personal Comment"
+msgstr "Xóa _Bình luận Cá nhân"
+
+#: ../ui/editor_note.xml.h:10
+msgid "Save the current note"
+msgstr "Lưu ghi chú hiện tại"
+
+#: ../ui/editor_note.xml.h:11
+msgid "_Save (Personal Comment)"
+msgstr "Lưu (Bình luận Cá nhân)"
+
+#: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
+msgid "E_xit"
+msgstr "_Thoát"
+
+#: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
+msgid "For_mat"
+msgstr "Định _dạng"
+
+#: ../ui/editor_studypad.xml.h:3
+msgid "Print this document"
+msgstr "In tài liệu này"
+
+#: ../ui/editor_studypad.xml.h:4
+msgid "Preview the document to be printed"
+msgstr "Xem trước tài liệu sẽ in"
+
+#: ../ui/editor_studypad.xml.h:8
+msgid "Open a file in Studypad"
+msgstr "Mở tệp trong Studypad"
+
+#: ../ui/editor_studypad.xml.h:10
+msgid "Save the current file"
+msgstr "Lưu tệp hiện tại"
+
+#: ../ui/editor_studypad.xml.h:12
+msgid "Save the current file as"
+msgstr "Lưu tệp hiện tại thành"
+
+#: ../ui/editor_studypad.xml.h:13
+msgid "Save AS"
+msgstr "Lưu THÀNH"
+
+#: ../ui/editor_studypad.xml.h:14
+msgid "Add this file to your bookmarks"
+msgstr "Ajouter ce fichier à vos signets"
+
+#: ../ui/editor_studypad.xml.h:16
+msgid "Create a new document"
+msgstr "Tạo một tài liệu mới"
+
+#: ../ui/editor_studypad.xml.h:17
+msgid "New Document"
+msgstr "Tài liệu Mới"
+
+#: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:38
+msgid "Copy/Export Passage"
+msgstr "Sao chép / Xuất đoạn văn"
+
+#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:3
+msgid "Export Passage Cancel"
+msgstr "Hủy bỏ Quá trình Xuất"
+
+#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:4
+msgid "Export Passage OK"
+msgstr "Tiếp tục xuất"
+
+#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:6
+msgid "Version"
+msgstr "Phiên bản"
+
+#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:7
+msgid ": "
+msgstr " : "
+
+#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:8
+msgid "Key"
+msgstr "Chìa khóa"
+
+#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:9
+msgid "<b>Copy</b>"
+msgstr "<b>Sao chép</b>"
+
+#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:10
+msgid "<b>Export</b>"
+msgstr "<b>Xuất</b>"
+
+#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:12
+msgid "Export complete book"
+msgstr "Xuất toàn bộ sách"
+
+#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
+msgid "Book"
+msgstr "Sách"
+
+#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:13
+msgid "Book Radio Button"
+msgstr "Nút chọn sách"
+
+#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:15
+msgid "Export complete chapter"
+msgstr "Xuất toàn bộ chương"
+
+#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:16
+msgid "Chapter Radio Button"
+msgstr "Nút chọn Chương"
+
+#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:18
+msgid "Export single verse"
+msgstr "Xuất một câu"
+
+#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:19
+msgid "Verse Radio Button"
+msgstr "Nút chọn Câu"
+
+#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:20
+msgid "Verse range"
+msgstr "Phạm vi câu"
+
+#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:21
+msgid "<b>Format</b>"
+msgstr "<b>Định dạng</b>"
+
+#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:22
+msgid "Plain Text"
+msgstr "Văn bản Thô"
+
+#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:23
+msgid "Plain Text Radio Button"
+msgstr "Nút chọn Văn bản Thô"
+
+#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:24
+msgid "HTML"
+msgstr "HTML"
+
+#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:25
+msgid "HTML Radio Button"
+msgstr "Nút chọn HTML"
+
+#: ../ui/export-dialog.glade.h:25
+msgid ""
+"Indicates whether verse numbers should appear inline in the text for more "
+"than 1 verse."
+msgstr ""
+"Cho biết số câu có nên xuất hiện trong văn bản nhiều hơn 1 câu hay không."
+
+#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:26
+msgid "_Verse numbers in text"
+msgstr "_Số câu trong văn bản"
+
+#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:28
+msgid "Verse Number button"
+msgstr "Nút Số câu"
+
+#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:30
+msgid "Indicates whether reference is placed first or last."
+msgstr "Cho biết tham chiếu được đặt ở đầu hay cuối văn bản."
+
+#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:29
+msgid "Reference last"
+msgstr "Tham chiếu được đặt ở cuối văn bản"
+
+#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:31
+msgid "Reference last button"
+msgstr "Nút tham khảo cuối cùng"
+
+#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:33
+msgid "Indicates whether or not version name is included in reference."
+msgstr "Cho biết tên phiên bản có được đưa vào tài liệu tham khảo hay không."
+
+#: ../ui/export-dialog.glade.h:32
+msgid "Include Version"
+msgstr "Bao gồm Phiên bản"
+
+#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:34
+msgid "Version button"
+msgstr "Nút phiên bản"
+
+#: ../ui/export-dialog.glade.h:34
+msgid "Save Export As"
+msgstr "Lưu / Xuất Dưới dạng"
+
+#: ../ui/export-dialog.gtkbuilder.h:27
+msgid "Indicates whether verse numbers should appear inline in the text."
+msgstr "Cho biết liệu số câu có xuất hiện trong văn bản hay không."
+
+#: ../ui/export-dialog.gtkbuilder.h:32
+msgid "Include version"
+msgstr "Tên của phiên bản"
+
+#: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
+msgid "About Studypad"
+msgstr "Thông tin về Tập tin ghi chú"
+
+#: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
+msgid "Open about dialog"
+msgstr "Mở hộp thoại về"
+
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:125
+#: ../ui/prefs.gtkbuilder.h:125
+msgid "Bold"
+msgstr "In đậm"
+
+#: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
+msgid "Make selection bold"
+msgstr "Tô đậm văn bản đã chọn"
+
+#: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
+msgid "Copy"
+msgstr "Sao chép"
+
+#: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
+msgid "Copy selection to clipboard"
+msgstr "Sao chép văn bản đã chọn vào bộ nhớ tạm"
+
+#: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
+msgid "Cut"
+msgstr "Cắt"
+
+#: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
+msgid "Cut selection"
+msgstr "Cắt văn bản đã chọn vào khay nhớ tạm"
+
+#: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
+msgid "Decrease indent"
+msgstr "Giảm thụt lề"
+
+#: ../ui/gtk2_webedit.ui.h:11 ../ui/gtk_webedit.ui.h:11
+msgid "Decrease"
+msgstr "Giảm"
+
+#: ../ui/gtk2_webedit.ui.h:12 ../ui/gtk_webedit.ui.h:12
+msgid "Decrease paragraph indent"
+msgstr "Giảm thụt lề đoạn văn"
+
+#: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
+msgid "Delete selection"
+msgstr "Xóa lựa chọn"
+
+#: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
+msgid "Remove selection"
+msgstr "Xóa lựa chọn"
+
+#: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:11
+msgid "Delete Item"
+msgstr "Xóa mục đã chọn"
+
+#: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
+msgid "Delete current item"
+msgstr "Xóa mục hiện tại"
+
+#: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
+msgid "Search current document"
+msgstr "Tìm kiếm trong tài liệu hiện tại"
+
+#: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
+msgid "Font"
+msgstr "Phông chữ"
+
+#: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
+msgid "Change font"
+msgstr "Thay đổi phông chữ"
+
+#: ../ui/gtk2_webedit.ui.h:22 ../ui/gtk_webedit.ui.h:22
+msgid "Increase indent"
+msgstr "Tăng thụt lề"
+
+#: ../ui/gtk2_webedit.ui.h:23 ../ui/gtk_webedit.ui.h:23
+msgid "Increase"
+msgstr "Tăng"
+
+#: ../ui/gtk2_webedit.ui.h:24 ../ui/gtk_webedit.ui.h:24
+msgid "Increase paragraph indent"
+msgstr "Tăng thụt lề đoạn văn"
+
+#: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
+msgid "Insert emoticon"
+msgstr "Chèn biểu tượng cảm xúc"
+
+#: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
+msgid "Emoticon"
+msgstr "Biểu tượng cảm xúc"
+
+#: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
+msgid "Insert an emoticon"
+msgstr "Chèn biểu tượng cảm xúc"
+
+#: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
+msgid "Insert image"
+msgstr "Chèn ảnh"
+
+#: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
+msgid "Image"
+msgstr "Hình ảnh"
+
+#: ../ui/gtk2_webedit.ui.h:30 ../ui/gtk_webedit.ui.h:30
+msgid "Insert image at cursor"
+msgstr "Chèn hình ảnh tại vị trí con trỏ"
+
+#: ../ui/gtk2_webedit.ui.h:31 ../ui/gtk_webedit.ui.h:31
+msgid "Insert link"
+msgstr "Chèn đường dẫn"
+
+#: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
+msgid "Link"
+msgstr "Liên kết"
+
+#: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
+msgid "Insert a link"
+msgstr "Chèn liên kết"
+
+#: ../ui/gtk2_webedit.ui.h:34 ../ui/gtk_webedit.ui.h:34
+msgid "Insert Outline"
+msgstr "Chèn Đề cương"
+
+#: ../ui/gtk2_webedit.ui.h:35 ../ui/gtk_webedit.ui.h:35
+msgid "Outline"
+msgstr "Chủ đề có cấu trúc"
+
+#: ../ui/gtk2_webedit.ui.h:36 ../ui/gtk_webedit.ui.h:36
+msgid "Insert outline"
+msgstr "Chèn đề cương"
+
+#: ../ui/gtk2_webedit.ui.h:37 ../ui/gtk_webedit.ui.h:37
+msgid "Insert rule"
+msgstr "Chèn quy tắc"
+
+#: ../ui/gtk2_webedit.ui.h:38 ../ui/gtk_webedit.ui.h:38
+msgid "Rule"
+msgstr "Quy tắc"
+
+#: ../ui/gtk2_webedit.ui.h:39 ../ui/gtk_webedit.ui.h:39
+msgid "Insert horizontal rule"
+msgstr "Chèn một đường ngang"
+
+#: ../ui/gtk2_webedit.ui.h:40 ../ui/gtk_webedit.ui.h:40
+msgid "Xiphos Link"
+msgstr "Liên kết Xiphos"
+
+#: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
+msgid "Xiphos"
+msgstr "Xiphos"
+
+#: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
+msgid "Insert a link to a sword module"
+msgstr "Chèn liên kết đến mô-đun Xiphos"
+
+#: ../ui/gtk2_webedit.ui.h:43 ../ui/gtk_webedit.ui.h:43
+msgid "Insert table"
+msgstr "Chèn bảng"
+
+#: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
+msgid "Table"
+msgstr "Bảng"
+
+#: ../ui/gtk2_webedit.ui.h:45 ../ui/gtk_webedit.ui.h:45
+msgid "Insert a table"
+msgstr "Chèn bảng"
+
+#: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
+msgid "Italic"
+msgstr "Chữ in nghiêng"
+
+#: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
+msgid "Change selection to italic font"
+msgstr "In nghiêng văn bản đã chọn"
+
+#: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
+msgid "Center"
+msgstr "Căn giữa"
+
+#: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
+msgid "Center justify paragraph"
+msgstr "Căn đều đoạn văn"
+
+#: ../ui/gtk2_webedit.ui.h:50 ../ui/gtk_webedit.ui.h:50
+msgid "Full"
+msgstr "Căn đều"
+
+#: ../ui/gtk2_webedit.ui.h:51 ../ui/gtk_webedit.ui.h:51
+msgid "full justify"
+msgstr "Căn đều đoạn văn"
+
+#: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
+msgid "Left"
+msgstr "Căn trái"
+
+#: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
+msgid "Left justify paragraph"
+msgstr "Căn trái đoạn văn"
+
+#: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
+msgid "Right"
+msgstr "Căn phải"
+
+#: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
+msgid "Right justify paragraph"
+msgstr "Căn phải đoạn văn"
+
+#: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
+msgid "Create new file"
+msgstr "Tạo một tệp mới"
+
+#: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
+msgid "Open file"
+msgstr "Mở tập tin"
+
+#: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
+msgid "Paste"
+msgstr "Dán"
+
+#: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
+msgid "Paste clipboard at cursor."
+msgstr "Dán nội dung của khay nhớ tạm vào vị trí con trỏ."
+
+#: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
+msgid "Print Document"
+msgstr "In tài liệu"
+
+#: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
+msgid "Print"
+msgstr "In"
+
+#: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
+msgid "Print the current document"
+msgstr "In tài liệu hiện tại"
+
+#: ../ui/gtk2_webedit.ui.h:65 ../ui/gtk_webedit.ui.h:65
+msgid "Print Preview"
+msgstr "Xem trước khi In"
+
+#: ../ui/gtk2_webedit.ui.h:66 ../ui/gtk_webedit.ui.h:66
+msgid "Preview"
+msgstr "Xem trước"
+
+#: ../ui/gtk2_webedit.ui.h:67 ../ui/gtk_webedit.ui.h:67
+msgid "Print preview of current document"
+msgstr "Bản xem trước khi in của tài liệu hiện tại"
+
+#: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
+msgid "Quit"
+msgstr "Thoát"
+
+#: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
+msgid "Shut down editor"
+msgstr "Đóng trình chỉnh sửa"
+
+#: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
+msgid "Redo"
+msgstr "Khôi phục"
+
+#: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
+msgid "Redo last undo"
+msgstr "Khôi phục lần hoàn tác cuối cùng"
+
+#: ../ui/gtk2_webedit.ui.h:72 ../ui/gtk_webedit.ui.h:72
+msgid "Find and replace"
+msgstr "Tìm kiếm và thay thế"
+
+#: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
+msgid "Replace"
+msgstr "Thay thế"
+
+#: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
+msgid "Search and replace"
+msgstr "Tìm và thay thế văn bản"
+
+#: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
+msgid "Save changes to file"
+msgstr "Lưu tệp hiện tại"
+
+#: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
+msgid "Save as"
+msgstr "Lưu thành"
+
+#: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
+msgid "Save file as ..."
+msgstr "Lưu thành..."
+
+#: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
+msgid "Strikethrough"
+msgstr "Gạch ngang"
+
+#: ../ui/gtk2_webedit.ui.h:80 ../ui/gtk_webedit.ui.h:80
+msgid "Strikethrough selection"
+msgstr "Gạch ngang văn bản đã chọn"
+
+#: ../ui/gtk2_webedit.ui.h:81 ../ui/gtk_webedit.ui.h:81
+msgid "Underline"
+msgstr "Gạch chân"
+
+#: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
+msgid "Underline selection"
+msgstr "Gạch chân văn bản đã chọn"
+
+#: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
+msgid "Undo"
+msgstr "Hoàn tác"
+
+#: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
+msgid "Undo last change"
+msgstr "Hoàn tác các thay đổi mới nhất"
+
+#: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:86
+msgid "Editor"
+msgstr "Biên tập"
+
+#: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:88
+msgid "Recent files"
+msgstr "Tài liệu _cuối cùng được sử dụng"
+
+#: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:89
+#: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
+msgid "_Edit"
+msgstr "_Chỉnh sửa"
+
+#: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:90
+#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
+msgid "_Help"
+msgstr "_Trợ giúp"
+
+#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:91
+msgid "Normal"
+msgstr "Văn bản chính"
+
+#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:92
+msgid "Header 1"
+msgstr "Tiêu đề 1"
+
+#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:93
+msgid "Header 2"
+msgstr "Tiêu đề 2"
+
+#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:94
+msgid "Header 3"
+msgstr "Tiêu đề 3"
+
+#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:95
+msgid "Header 4"
+msgstr "Tiêu đề 4"
+
+#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:96
+msgid "Header 5"
+msgstr "Tiêu đề 5"
+
+#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:97
+msgid "Header 6"
+msgstr "Tiêu đề 6"
+
+#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:98
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:99
+msgid "Preformatted"
+msgstr "Định dạng sẵn"
+
+#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:100
+msgid "Bulleted List"
+msgstr "Danh sách có Dấu đầu dòng"
+
+#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:101
+msgid "Roman Numeral List"
+msgstr "Danh sách Số la mã"
+
+#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:102
+msgid "Numbered List"
+msgstr "Danh sách được đánh số"
+
+#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:103
+msgid "Alphabetical List"
+msgstr "Danh sách theo thứ tự bảng chữ cái"
+
+#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:104
+msgid "Strike"
+msgstr "Gạch"
+
+#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:105
+msgid "Set font color of selected text."
+msgstr "Đặt màu phông chữ của văn bản đã chọn."
+
+#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:106
+msgid "Highlight selected text by setting background color."
+msgstr "Làm nổi bật văn bản đã chọn bằng cách đặt màu nền."
+
+#: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
+msgid "Mark/Unmark Verse"
+msgstr "Chú thích câu này"
+
+#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:13
+msgid "Annotation Dialog"
+msgstr "Hộp thoại chú thích"
+
+#: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:2
+msgid ""
+"Add annotation. The verse will display with highlight colors and a *u marker "
+"to show content."
+msgstr ""
+"Thêm chú thích. Câu này sẽ hiển thị với màu nổi bật và dấu * tại câu đánh "
+"dấu để làm nổi bật nội dung."
+
+#: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
+msgid "New Annotation"
+msgstr "Chú thích Mới"
+
+#: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:3
+msgid "Mark"
+msgstr "Chú thích"
+
+#: ../ui/markverse.glade.h:10 ../ui/markverse.gtkbuilder.h:5
+msgid "Unmark"
+msgstr "Bỏ đánh dấu"
+
+#: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
+msgid "Remove annotation."
+msgstr "Xóa chú thích."
+
+#: ../ui/markverse.glade.h:12 ../ui/xi-export-bookmarks.glade.h:7
+msgid "gtk-cancel"
+msgstr "gtk-cancel"
+
+#: ../ui/markverse.glade.h:13 ../ui/markverse.gtkbuilder.h:8
+msgid "Cancel Annotation"
+msgstr "Hủy chú thích"
+
+#: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
+msgid "Module Manager"
+msgstr "Trình quản lý Mô-đun"
+
+#: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
+msgid "_View Intro"
+msgstr "_Xem phần giới thiệu"
+
+#: ../ui/module-manager.glade.h:3 ../ui/module-manager.gtkbuilder.h:3
+msgid "Open a brief introductory explanation of how the Module Manager works."
+msgstr ""
+"Mở phần giải thích giới thiệu ngắn gọn về cách hoạt động của Trình quản lý "
+"mô-đun."
+
+#: ../ui/module-manager.glade.h:4 ../ui/module-manager.gtkbuilder.h:4
+msgid "_Load Standard"
+msgstr "_Tải Mặc định"
+
+#: ../ui/module-manager.glade.h:5 ../ui/module-manager.gtkbuilder.h:5
+msgid ""
+"Load and synchronize the standard set of known repositories, as maintained "
+"at crosswire.org, with your current remote sources."
+msgstr ""
+"Tải và đồng bộ hóa các kho lưu trữ đã biết, được bảo trì tại crosswire.org "
+"với các kho lưu trữ từ xa hiện tại của bạn."
+
+#: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
+msgid ""
+"Refresh Xiphos' knowledge of what modules are available at the selected "
+"remote repository"
+msgstr ""
+"Cập nhật danh sách các mô-đun của Xiphos có sẵn trong kho lưu trữ từ xa đã "
+"chọn"
+
+#: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
+msgid "_Install"
+msgstr "_Cài đặt"
+
+#: ../ui/module-manager.glade.h:8 ../ui/module-manager.gtkbuilder.h:7
+msgid "Install or update the selected modules"
+msgstr "Cài đặt hoặc cập nhật các mô-đun đã chọn"
+
+#: ../ui/module-manager.glade.h:9 ../ui/module-manager.gtkbuilder.h:9
+msgid "Remove the selected modules from your system"
+msgstr "Xóa các mô-đun đã chọn khỏi hệ thống của bạn"
+
+#: ../ui/module-manager.glade.h:10 ../ui/module-manager.gtkbuilder.h:10
+msgid "_Archive"
+msgstr "_Lưu trữ"
+
+#: ../ui/module-manager.glade.h:11 ../ui/module-manager.gtkbuilder.h:11
+msgid "Create a zip archive of the selected modules."
+msgstr "Tạo một kho lưu trữ zip của các mô-đun đã chọn."
+
+#: ../ui/module-manager.glade.h:12 ../ui/module-manager.gtkbuilder.h:12
+msgid "_Index"
+msgstr "_Chỉ mục"
+
+#: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
+msgid ""
+"Build an index of the selected modules, for optimized (\"lucene\") searching."
+msgstr ""
+"Tạo chỉ mục của các mô-đun đã chọn, để tối ưu hóa các tìm kiếm (\"lucene\")."
+
+#: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
+msgid "_Delete Index"
+msgstr "_XoáChỉmụcTìmkiếm"
+
+#: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
+msgid "Delete the fast-search index of the selected modules."
+msgstr "Xóa chỉ mục tìm kiếm nhanh của các mô-đun đã chọn."
+
+#: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
+msgid "Scan _Obsolete"
+msgstr "Quét Lỗi thời"
+
+#: ../ui/module-manager.glade.h:17 ../ui/module-manager.gtkbuilder.h:17
+msgid "Scan for obsolete modules and offer to delete them."
+msgstr "Kiểm tra các mô-đun và đề nghị loại bỏ các mô-đun lỗi thời."
+
+#: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:19
+msgid "Continue"
+msgstr "Tiếp tục"
+
+#. do not translate <b> and </b> they are html formating
+#: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:21
+msgid "<b>Sword</b>"
+msgstr "<b>Sword</b>"
+
+#: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:22
+msgid "<b>Module Manager</b>"
+msgstr "<b>Trình quản lý ô-đun</b>"
+
+#: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:23
+msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
+msgstr ""
+"<b>THẬN TRỌNG:</b> Thận trọng khi sử dụng tại các quốc gia có nguy cơ bị "
+"bách hại."
+
+#: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:24
+msgid "<b>Add and Remove Sources</b>"
+msgstr "<b>Thêm và Xoá Nguồn</b>"
+
+#: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:25
+msgid "Current local sources"
+msgstr "Nguồn  hiện tại"
+
+#: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:26
+msgid ""
+"Add a local folder as an install source, typically on a cdrom or flash "
+"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
+msgstr ""
+"Thêm thư mục cài đặt nguồn, thường trên cdrom hoặc ổ đĩa flash. Thư mục này "
+"chứa các thư mục con \"mods.d\" và \"module\"."
+
+#: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:27
+msgid "Remove one of your local folders as an install source."
+msgstr "Loại bỏ thư mục cục bộ như kho lưu trữ."
+
+#: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:28
+msgid "Current Remote Sources"
+msgstr "Nguồn từ xa Hiện tại"
+
+#: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:29
+msgid ""
+"Add a custom remote install source. You must know its hostname and the "
+"folder where its repository lives."
+msgstr ""
+"Thêm nguồn cài đặt từ xa tùy chỉnh. Bạn phải biết tên miền và thư mục lưu "
+"trữ."
+
+#: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:30
+msgid "Remove a remote install source."
+msgstr "Xóa kho lưu trữ từ xa."
+
+#: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:31
+msgid "<b>Install Source</b>"
+msgstr "<b>Nguồn cài đặt</b>"
+
+#: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:32
+msgid "Local"
+msgstr "Cục bộ"
+
+#: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:33
+msgid "Remote"
+msgstr "Từ xa"
+
+#: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:34
+msgid "<b>Install Destination</b>"
+msgstr "<b>Thư mục Cài đặt</b>"
+
+#: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:35
+msgid "<i>Personal area, for your use only:</i>"
+msgstr "<i>Không gian cá nhân, chỉ để bạn sử dụng</i>"
+
+#: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:36
+msgid "Home dir"
+msgstr "Thư mục cá nhân"
+
+#: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:37
+msgid "<i>System area, for all users:</i>"
+msgstr "<i>Không gian hệ thống, dành cho mọi người dùng:</i>"
+
+#: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:38
+msgid "Sword sys dir"
+msgstr "Thư mục hệ thống Sword"
+
+#: ../ui/module-manager.glade.h:38 ../ui/module-manager.gtkbuilder.h:39
+msgid ""
+"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
+"detection you should NOT use  the remote installation feature! "
+msgstr ""
+"<b>Cảnh báo:</b> Nếu bạn sống ở quốc gia có nguy cơ bị bách hại và bạn không "
+"muốn có nguy cơ bị phát hiện, bạn KHÔNG nên chọn một nguồn lưu trữ từ xa!"
+
+#: ../ui/module-manager.glade.h:39 ../ui/module-manager.gtkbuilder.h:40
+msgid "Local Install Folder"
+msgstr "Thư mục cài đặt cục bộ"
+
+#: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
+msgid "Drop down history list"
+msgstr "Lịch sử các câu"
+
+#: ../ui/navbar_versekey.glade.h:2
+msgid "Choose book to display"
+msgstr "Chọn sách hiển thị"
+
+#: ../ui/navbar_versekey.glade.h:3 ../ui/navbar_versekey.gtkbuilder.h:3
+msgid "Book Selector Button"
+msgstr "Nút chọn sách"
+
+#: ../ui/navbar_versekey.glade.h:4 ../ui/navbar_versekey.gtkbuilder.h:2
+msgid "<b>Revelation of John</b>"
+msgstr "<b>Sách Khải huyền</b>"
+
+#: ../ui/navbar_versekey.glade.h:5
+msgid "Choose chapter to display"
+msgstr "Chọn chương hiển thị"
+
+#: ../ui/navbar_versekey.glade.h:6 ../ui/navbar_versekey.gtkbuilder.h:5
+msgid "Toggle Chapter Button"
+msgstr "Nút chuyển đổi Chương"
+
+#: ../ui/navbar_versekey.glade.h:7 ../ui/navbar_versekey.gtkbuilder.h:4
+msgid "1"
+msgstr "1"
+
+#: ../ui/navbar_versekey.glade.h:8
+msgid "Choose Verse to display"
+msgstr "Chọn câu hiển thị"
+
+#: ../ui/navbar_versekey.glade.h:9 ../ui/navbar_versekey.gtkbuilder.h:6
+msgid "Toggle Verse Button"
+msgstr "Nút chuyển đổi Câu"
+
+#: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
+msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgstr ""
+"Nhập tài liệu tham khảo theo định dạng: Quyển 1:1 (ví dụ: Ga 3:16), sau đó "
+"xác thực bằng cách nhấn phím Enter"
+
+#: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
+msgid "Reference Entry"
+msgstr "Tham chiếu mục nhập"
+
+#: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:10
+msgid "Cover"
+msgstr "Bìa"
+
+#: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:11
+msgid "<b>Font Colors</b>"
+msgstr "<b>Màu phông chữ</b>"
+
+#: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:12
+msgid "Background"
+msgstr "Nền"
+
+#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
+msgid " "
+msgstr " "
+
+#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
+msgid "Foreground"
+msgstr "Tiền cảnh"
+
+#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
+msgid "Current Verse"
+msgstr "Câu hiện tại"
+
+#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
+msgid "Verse Number"
+msgstr "Số câu"
+
+#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
+msgid "Links"
+msgstr "Liên kết"
+
+#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
+msgid "Highlight Foreground"
+msgstr "Làm nổi bật tiền cảnh"
+
+#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
+msgid "Highlight Background"
+msgstr "Làm nổi bật Nền"
+
+#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
+msgid "Invert color pairs"
+msgstr "Đảo ngược các cặp màu"
+
+#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
+msgid "Normal Text"
+msgstr "Văn bản Bình thường"
+
+#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
+msgid "Highlight"
+msgstr "Làm nổi bật"
+
+#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
+msgid "Font Colors"
+msgstr "Màu chữ"
+
+#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
+msgid "<b>Font Sizes</b>"
+msgstr "<b>Kích thước phông chữ</b>"
+
+#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
+msgid "All displayed font sizes are relative to this choice"
+msgstr ""
+"Tất cả các kích thước phông chữ được hiển thị liên quan đến lựa chọn này"
+
+#: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:26
+msgid "Base font size"
+msgstr "Kích thước phông chữ cơ sở"
+
+#: ../ui/prefs.glade.h:19
+msgid ""
+"-2\n"
+"-1\n"
+"+0\n"
+"+1\n"
+"+2\n"
+"+3\n"
+"+4\n"
+"+5"
+msgstr ""
+"-2\n"
+"-1\n"
+"+0\n"
+"+1\n"
+"+2\n"
+"+3\n"
+"+4\n"
+"+5"
+
+#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
+msgid "Commonly -1, to make verse numbers less obtrusive"
+msgstr "Thường là -1, để làm cho số câu kín đáo hơn"
+
+#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
+msgid "Verse number size"
+msgstr "Kích thước số câu"
+
+#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
+msgid ""
+"Name and size choice for any module in a given language; still overridden by "
+"a specific choice on a particular module"
+msgstr ""
+"Chọn lựa chọn phông chữ cho bất kỳ mô-đun nào trong một ngôn ngữ nhất định; "
+"luôn có thể thay thế bằng một lựa chọn cụ thể trên một mô-đun cụ thể"
+
+#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
+msgid "Font preferences, per language"
+msgstr "Phông chữ ưu tiên, theo ngôn ngữ"
+
+#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
+msgid "Language Font Combo"
+msgstr "Tổng hợp Phông chữ Ngôn ngữ"
+
+#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
+msgid "Font Misc"
+msgstr "Phông chữ Tổng hợp"
+
+#: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
+msgid "<b>BibleSync</b>"
+msgstr "<b>ĐồngbộKinhthánh</b>"
+
+#: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:34
+msgid ""
+"Xiphos is the first Bible study program to provide an implementation of "
+"BibleSync, a synchronization protocol for Bible programs. If you work with "
+"multiple Bible programs, or if you work in a team, or if you have classroom "
+"activities using shared study, BibleSync can be a useful tool for you. "
+"BibleSync operates in 1 of 3 modes: Personal, to synchronize multiple Bible "
+"applications of your own, or in a working team; Speaker, to drive a lecture "
+"audience's Bible programs to follow along; Audience, to receive the "
+"speaker's navigation."
+msgstr ""
+"Xiphos là chương trình nghiên cứu Kinh thánh đầu tiên cung cấp triển khai "
+"BibleSync, một giao thức đồng bộ hóa cho các chương trình Kinh thánh. Nếu "
+"bạn làm việc với nhiều chương trình Kinh Thánh, hoặc nếu bạn làm việc theo "
+"nhóm, hoặc nếu bạn có các hoạt động trong lớp học bằng cách học chung, thì "
+"BibleSync có thể là một công cụ hữu ích cho bạn. BibleSync hoạt động theo 1 "
+"trong 3 chế độ: Cá nhân, để đồng bộ hóa nhiều ứng dụng Kinh thánh của riêng "
+"bạn hoặc trong một nhóm làm việc; Diễn giả, để thúc đẩy các chương trình "
+"Kinh thánh của thính giả theo dõi bài giảng; Khán giả, để nhận điều hướng "
+"của người nói."
+
+#: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:36
+msgid "<i>Mode:</i>"
+msgstr "<i>Kiểu:</i>"
+
+#: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:35
+msgid "Select the mode in which BibleSync should operate."
+msgstr "Chọn cách hoạt động của BibleSync."
+
+#: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
+msgid "_Off"
+msgstr "_Không hoạt động"
+
+# Ça devrait pas être Désactiver BibleSync?
+#: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
+msgid "Disable BibleSync."
+msgstr "BibleSync bị tắt."
+
+#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
+msgid "BSP off radio button"
+msgstr "Nút chọn BSP bị tắt"
+
+#: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
+msgid "_Speaker"
+msgstr "_Diễn giả"
+
+#: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
+msgid "Enable BibleSync as the speaker."
+msgstr "Biblesync được bật ở chế độ diển giả."
+
+#: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
+msgid "BSP speaker radio button"
+msgstr "Nút chọn BSP của diển giả"
+
+#: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
+msgid "_Audience"
+msgstr "__Thính giả"
+
+#: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
+msgid "Enable BibleSync as a member of the audience."
+msgstr "BibleSync được bật ở chế độ thành viên thính giả."
+
+#: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
+msgid "BSP audience radio button"
+msgstr "Nút chọn BSP thính giả"
+
+#: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
+msgid "_Personal"
+msgstr "_Cá nhân"
+
+#: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
+msgid "Enable BibleSync for personal or team use."
+msgstr "BibleSync được bật trong chế độ sử dụng cá nhân hoặc nhóm."
+
+#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
+msgid "BSP personal radio button"
+msgstr "Nút chọn BSP cá nhân"
+
+#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
+msgid "Private"
+msgstr "Riêng tư"
+
+#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
+msgid ""
+"When in Personal mode, only programs running on this machine will hear your "
+"navigation."
+msgstr ""
+"Ở chế độ Cá nhân, chỉ các chương trình chạy trên máy này mới nhận được điều "
+"hướng của bạn."
+
+#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
+msgid "BSP privacy button"
+msgstr "Nút BSP riêng"
+
+#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:53
+msgid "<i>Navigate:</i>"
+msgstr "<i>Điều hướng:</i>"
+
+#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:52
+msgid "Choose how to accept incoming navigation synchronization."
+msgstr "Chọn cách chấp nhận đồng bộ hóa điều hướng."
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
+msgid "_Direct"
+msgstr "_Trực tiếp"
+
+#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
+msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
+msgstr "Điều hướng BibleSync sẽ gửi trực tiếp đến Xiphos câu được chỉ định."
+
+#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
+msgid "BSP nav direct radio button"
+msgstr "Nút chọn BSP điều hướng trực tiếp"
+
+#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
+msgid "_Verse list"
+msgstr "Danh sách _câu"
+
+#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
+msgid "BibleSync navigation will use Xiphos' sidebar verse list."
+msgstr ""
+"Điều hướng BibleSync sẽ sử dụng danh sách câu vào danh sách các câu của "
+"Xiphos."
+
+#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
+msgid "BSP nav verse list radio button"
+msgstr "Nút chọn danh sách câu điều hướng BSP"
+
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
+msgid "_Keyboard only"
+msgstr "_Chỉ riêng bàn phím"
+
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
+msgid ""
+"When checked, do not transmit every time Xiphos navigates; instead, transmit "
+"only using keyboard shortcut (Ctrl-Shift-Alt-N)."
+msgstr ""
+"Khi được chọn, không truyền đi mỗi khi Xiphos sử dụng; thay vào đó, chỉ "
+"truyền bằng phím tắt (Ctrl-Shift-Alt-N)."
+
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+msgid "BSP keyboard button"
+msgstr "Nút bàn phím BSP"
+
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:64
+msgid "<i>Listen:</i>"
+msgstr "<i>Nghe:</i>"
+
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:63
+msgid "Xiphos will listen to Speakers according to choice here."
+msgstr "Xiphos sẽ lắng nghe các diễn giả tại đây khi họ được chọn."
+
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
+msgid "Selective"
+msgstr "Chọn lọc"
+
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
+msgid "Choose the Speakers to be followed."
+msgstr "Lựa chọn có chọn lọc danh sách các diễn giả để theo dõi."
+
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
+msgid "BSP listen some radio button"
+msgstr "Nút chọn nghe BSP"
+
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
+msgid "All"
+msgstr "Tất cả"
+
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
+msgid "All Speakers will be followed."
+msgstr "Tất cả các Diễn giả sẽ được theo dõi."
+
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
+msgid "BSP listen all radio button"
+msgstr "Nút chọn BSP nghe tất cả"
+
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
+msgid "None"
+msgstr "Không có"
+
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
+msgid "No Speakers will be followed."
+msgstr "Không có Diễn giả nào được theo dõi."
+
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+msgid "BSP listen none radio button"
+msgstr "Nút chọn BSP không nghe"
+
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:75
+msgid "<i>Special:</i>"
+msgstr "<i>Đặc biệt:</i>"
+
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:74
+msgid ""
+"Additional traces can be presented during BibleSync operation by enabling "
+"presence, mismatch, and debug. Beware enabling these, they can be very "
+"chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
+msgstr ""
+"Des informations supplémentaires peuvent être affichées pendant le "
+"fonctionnement de BibleSync en activant ces options. Attention ces "
+"informations peuvent être très denses."
+
+#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
+msgid "Presence"
+msgstr "Hiện diện"
+
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
+msgid "Presence announcements will be shown in dialogs."
+msgstr "Thông báo về sự hiện diện sẽ được hiển thị trong hộp thoại."
+
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
+msgid "BSP presence button"
+msgstr "Nút BSP hiện diện"
+
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
+msgid "Mismatch"
+msgstr "Không phù hợp"
+
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
+msgid "Mismatches from your session will be shown in dialogs."
+msgstr ""
+"Các kết quả không trùng hợp từ phiên của bạn sẽ được hiển thị trong hộp "
+"thoại."
+
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
+msgid "BSP mismatch button"
+msgstr "Nút BSP không phù hợp"
+
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
+msgid "Debug"
+msgstr "Gỡ lỗi"
+
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
+msgid "Packet tracing."
+msgstr "Truy tìm gói tin mạng."
+
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
+msgid "BSP event debug button"
+msgstr "Nút gỡ lỗi sự kiện BSP"
+
+#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:85
+msgid "_Group as tab"
+msgstr "_Nhóm dưới dạng thẻ"
+
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
+msgid ""
+"Interpret the protocol's group number parameter as Xiphos' tab number. "
+"Disabling this may be necessary if some Speakers' use of group number is not "
+"appropriate as a tab number."
+msgstr ""
+"Chuyển số nhóm giao thức BibleSync thành số thẻ Xiphos. Tùy chọn này có thể "
+"phải bị hủy kích hoạt nếu số nhóm được sử dụng không phù hợp số người tham "
+"gia."
+
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
+msgid "BSP event group-as-tab button"
+msgstr "Nút để nhóm các sự kiện BSP thành các thẻ"
+
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
+msgid "<b>General</b>"
+msgstr "<b>Chung</b>"
+
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
+msgid ""
+"Select a particular language for interface display, other than your usual "
+"setting"
+msgstr "Chọn ngôn ngữ khác với cấu hình thông thường để hiển thị giao diện"
+
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
+msgid "Special Locale (requires restart)"
+msgstr "Ngôn ngữ Giao diện (yêu cầu khởi động lại)"
+
+#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
+msgid "Special Locale Combo"
+msgstr "Hộp kết hợp Ngôn ngữ đặc biệt"
+
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
+msgid "Show splash screen at start up"
+msgstr "Hiển thị màn hình chính khi khởi động"
+
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
+msgid "Show Daily Devotion at start up"
+msgstr "Hiển thị Lịch đọc Kinh thánh Hàng ngày khi khởi động"
+
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
+msgid ""
+"If you have set a preferred daily devotion module, its entry for today will "
+"be shown at startup."
+msgstr ""
+"Lịch kinh thánh hàng ngày sẽ được hiển thị khi khởi động, nếu mô-đun này đã "
+"được chọn trước."
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
+msgid "Use default Dictionary"
+msgstr "Sử dụng Từ điển mặc định"
+
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
+msgid ""
+"Make double-click of a word always use default dictionary instead of "
+"dictionary currently displayed"
+msgstr ""
+"Nhấp đúp vào một từ sẽ kích hoạt từ điển mặc định thay vì từ điển hiện tại"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
+msgid "Use default Dictionary Checkbox"
+msgstr "Hộp chọn Từ điển mặc định"
+
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
+msgid "Scroll to Previous/Next Chapter"
+msgstr "Di chuyển đến Chương trước / Tiếp theo"
+
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
+msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
+msgstr ""
+"Sử dụng thanh cuộn Văn bản Kinh thánh để cuộn đến chương trước hoặc chương "
+"tiếp theo"
+
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
+msgid "Scroll to Previous/Next Chapter Checkbox"
+msgstr "Di chuyển đến Hộp chọn Chương Trước / Tiếp theo"
+
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
+msgid "Resize images"
+msgstr "Thay đổi kích thước hình ảnh"
+
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
+msgid "Automatically resize image content to fit the pane"
+msgstr ""
+"Tự động thay đổi kích thước nội dung hình ảnh để phù hợp với kích thước cửa "
+"sổ"
+
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
+msgid "Resize images checkbox"
+msgstr "Hộp chọn để thay đổi kích thước hình ảnh"
+
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
+msgid "Highlight current verse"
+msgstr "Làm nổi bật câu hiện tại"
+
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
+msgid "Apply high-contrast highlight to current verse - see color pickers"
+msgstr "Áp dụng độ tương phản cao cho câu câu được tô đậm - Xem bảng chọn màu"
+
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
+msgid "Highlight current verse check box"
+msgstr "Hộp chọn làm nổi bật câu hiện tại"
+
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
+msgid "Highlight user annotations"
+msgstr "Làm nổi bật các chú thích cá nhân"
+
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
+msgid "Use inverted highlight on user-annotated verses"
+msgstr "Sử dụng đánh dấu ngược trên các câu do người dùng chú thích"
+
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
+msgid "Highlight user annotations check box"
+msgstr "Làm nổi bật hộp kiểm chú thích của người dùng"
+
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
+msgid "Cross-references in verse list"
+msgstr "Hiển thị các tham chiếu chéo trong danh sách câu"
+
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
+msgid "Use the verse list for Bible cross-references instead of the previewer"
+msgstr ""
+"Sử dụng danh sách câu để tham khảo chéo Kinh thánh thay vì trình xem trước"
+
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
+msgid "Xrefs in verse list check box"
+msgstr "Xrefs trong danh sách câu check box"
+
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
+msgid "Enable Prayer Lists"
+msgstr "Kích hoạt Danh sách Cầu nguyện"
+
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
+msgid "Make journals/prayer lists available"
+msgstr "Kích hoạt danh sách cầu nguyện / nhật ký"
+
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
+msgid "Enable Prayer Lists Checkbox"
+msgstr "Kích hoạt hộp Danh sách Cầu nguyện"
+
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
+msgid "Enable Statusbar"
+msgstr "Hiển thị thanh trạng thái"
+
+#: ../ui/prefs.glade.h:118
+msgid "Enable/Disable Statusbar."
+msgstr "Hiển thị / Ẩn Thanh trạng thái."
+
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
+msgid "Enable Statusbar Checkbox"
+msgstr "Kích hoạt Hộp chọn của Thanh trạng thái"
+
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
+msgid "Parallel color alternation"
+msgstr "Các màu xen kẽ trong chế độ xem song song"
+
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
+msgid "Parallel window can use alternating foreground/background."
+msgstr "Cửa sổ màu song song có thể sử dụng xen kẽ tiền cảnh / hậu cảnh ."
+
+#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
+msgid "Enable Parallel Alternation Checkbox"
+msgstr "Kích hoạt hộp kiểm các màu cụ thể ở chế độ xem song song"
+
+#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:124
+msgid "Verse number"
+msgstr "Hiển thị số câu"
+
+#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:123
+msgid "Offset the verse number in several ways"
+msgstr "Thay đổi cách hiển thị số câu"
+
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
+msgid "Show verse number in bold text"
+msgstr "Hiển thị số câu bằng văn bản in đậm"
+
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
+msgid "Verse number bold checkbox"
+msgstr "Hộp chọn số câu in đậm"
+
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
+msgid "Brackets"
+msgstr "Dấu ngoặc"
+
+#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
+msgid "Show verse number with [surrounding brackets]"
+msgstr "Hiển thị số câu được bao quanh bởi [dấu ngoặc vuông]"
+
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
+msgid "Verse number bracket checkbox"
+msgstr "Hộp chọn số câu trong dấu ngoặc đơn"
+
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
+msgid "Superscript"
+msgstr "Chỉ số trên"
+
+#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
+msgid "Show verse number as a superscript"
+msgstr "Hiển thị số câu dưới dạng chỉ số trên"
+
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
+msgid "Verse number superscript checkbox"
+msgstr "Hộp chọn chỉ số trên số câu"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
+msgid "StudyPad default directory"
+msgstr "Thư mục mặc định của Sổ ghi chép"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
+msgid "Select A Directory"
+msgstr "Chọn Một thư mục"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
+msgid "StudyPad default directory combo"
+msgstr "Tổ hợp thư mục mặc định của Sổ ghi chép"
+
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
+msgid "General Misc"
+msgstr "Sách Khác"
+
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
+msgid "<b>Main Window Modules</b>"
+msgstr "<b> Mô-đun Cửa sổ chính </b>"
+
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
+msgid "Biblical Text"
+msgstr "Văn bản kinh thánh"
+
+#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
+msgid "Change Biblical Text Combo"
+msgstr "Thay đổi tổ hợp văn bản Kinh thánh"
+
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
+msgid "Change Commentary Combo"
+msgstr "Thay đổi nhận xét Kết hợp"
+
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
+msgid "Change Dictionary Combo"
+msgstr "Thay đổi Từ điển Kết hợp"
+
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
+msgid "Change Book Combo"
+msgstr "Đổi Sách Kết hợp"
+
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
+#: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
+msgid "<b>Modules</b>"
+msgstr "<b>Mô-đun</b>"
+
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
+#: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
+msgid "Clear all modules from the list"
+msgstr "Xóa tất cả các mô-đun khỏi danh sách"
+
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
+#: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
+msgid "Clear Modules from List Button"
+msgstr "Xóa tất cả các mô-đun khỏi Nút danh sách"
+
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
+#: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
+msgid "Remove the selected module from the list"
+msgstr "Xóa mô-đun đã chọn khỏi danh sách"
+
+#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
+#: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
+msgid "Delete Selected Module From List Button"
+msgstr "Nút Xóa mô-đun đã chọn khỏi danh sách"
+
+#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
+msgid "Open a dialog to select modules"
+msgstr "Mở hộp thoại chọn mô-đun"
+
+#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
+#: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
+msgid "Add Modules"
+msgstr "Thêm mô-đun"
+
+#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
+#: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
+msgid "Open Selection Dialog Button"
+msgstr "Mở nút hộp thoại lựa chọn"
+
+#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
+msgid "Modules Parallel"
+msgstr "Mô-đun song song"
+
+#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
+msgid "<b>Special Purpose Modules</b>"
+msgstr "<b>Mô-đun Mục đích Đặc biệt</b>"
+
+#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
+msgid "Daily Devotional"
+msgstr "Lịch đọc Kinh thánh"
+
+#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
+msgid "Daily Devotional Combo"
+msgstr "Hộp kết hợp Thay đổi lịch Kinh thánh"
+
+#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
+msgid "Hebrew Lexicon"
+msgstr "Từ vựng tiếng Do Thái"
+
+#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
+msgid "Hebrew Lexicon Combo"
+msgstr "Hộp kết hợp tiếng Do Thái Lexicon"
+
+#: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
+msgid "Greek Lexicon"
+msgstr "Từ vựng tiếng Hy Lạp"
+
+#: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
+msgid "Greek Lexicon Combo"
+msgstr "Hộp kết hợp Từ vựng tiếng Hy Lạp"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
+msgid "Default Dictionary"
+msgstr "Từ điển Mặc định"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
+msgid "Change Default Dictionary Combo"
+msgstr "Thay đổi Từ điển Mặc định Kết hợp"
+
+#: ../ui/prefs.glade.h:165 ../ui/prefs.gtkbuilder.h:165
+msgid "Personal Notes"
+msgstr "Ghi chú cá nhân"
+
+#: ../ui/prefs.glade.h:166 ../ui/prefs.gtkbuilder.h:166
+msgid "Change Personal Notes Combo"
+msgstr "Thay đổi Ghi chú Cá nhân Kết hợp "
+
+#: ../ui/prefs.glade.h:167 ../ui/prefs.gtkbuilder.h:167
+msgid "Modules Misc"
+msgstr "Mô-đun khác"
+
+#: ../ui/prefs.gtkbuilder.h:1
+msgid "-2"
+msgstr "-2"
+
+#: ../ui/prefs.gtkbuilder.h:2
+msgid "-1"
+msgstr "-1"
+
+#: ../ui/prefs.gtkbuilder.h:4
+msgid "+1"
+msgstr "+1"
+
+#: ../ui/prefs.gtkbuilder.h:5
+msgid "+2"
+msgstr "+2"
+
+#: ../ui/prefs.gtkbuilder.h:6
+msgid "+3"
+msgstr "+3"
+
+#: ../ui/prefs.gtkbuilder.h:7
+msgid "+4"
+msgstr "+4"
+
+#: ../ui/prefs.gtkbuilder.h:8
+msgid "+5"
+msgstr "+5"
+
+#: ../ui/prefs.gtkbuilder.h:118
+msgid "Enable/disable the Statusbar"
+msgstr "Hiển thị / Ẩn Thanh trạng thái ở cuối cửa sổ chính"
+
+#: ../ui/search-dialog.glade.h:1 ../ui/search-dialog.gtkbuilder.h:1
+msgid "Advanced Search"
+msgstr "Tìm kiếm nâng cao"
+
+#: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
+msgid "_Lucene Search Syntax"
+msgstr "Cú pháp tìm kiếm \"_Lucene\""
+
+#: ../ui/search-dialog.glade.h:3 ../ui/search-dialog.gtkbuilder.h:3
+msgid ""
+"Open a brief explanation of the syntax used for optimized \"lucene\" "
+"searches."
+msgstr ""
+"Mở phần giải thích ngắn gọn về cú pháp được sử dụng trong các tìm kiếm được "
+"tối ưu hóa \"lucene\"."
+
+#: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
+msgid "_Attribute Search"
+msgstr "_Tìm kiếm theo thuộc tính"
+
+#: ../ui/search-dialog.glade.h:5 ../ui/search-dialog.gtkbuilder.h:5
+msgid "Open a brief explanation of attribute-based searches."
+msgstr "Mở phần giải thích ngắn gọn về các tìm kiếm dựa trên thuộc tính."
+
+# T'es sûr de la traduction? Evidement on voit pas trop le contexte
+#: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
+msgid "for "
+msgstr "cho "
+
+#: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
+msgid "Main Search Entry"
+msgstr "Mục nhập Tìm kiếm Chính"
+
+#: ../ui/search-dialog.glade.h:8 ../ui/search-dialog.gtkbuilder.h:9
+msgid "Start/stop searching"
+msgstr "Bắt đầu / ngừng tìm kiếm"
+
+#: ../ui/search-dialog.glade.h:9 ../ui/search-dialog.gtkbuilder.h:10
+msgid "Find Button"
+msgstr "Nút Tìm kiếm"
+
+#: ../ui/search-dialog.glade.h:10 ../ui/search-dialog.gtkbuilder.h:11
+msgid "Search Criteria Treeview"
+msgstr "Chế độ xem Sơ đồ Tiêu chí Tìm kiếm"
+
+#: ../ui/search-dialog.glade.h:11 ../ui/search-dialog.gtkbuilder.h:12
+msgid "<b>Scope</b>"
+msgstr "<b>Phạm vi</b>"
+
+#: ../ui/search-dialog.glade.h:12 ../ui/search-dialog.gtkbuilder.h:14
+msgid "Search entire module"
+msgstr "Tìm kiếm toàn bộ mô-đun"
+
+#: ../ui/search-dialog.glade.h:13 ../ui/search-dialog.gtkbuilder.h:13
+msgid "Entire module"
+msgstr "Toàn bộ mô-đun"
+
+#: ../ui/search-dialog.glade.h:14 ../ui/search-dialog.gtkbuilder.h:15
+msgid "Entire module radiobutton"
+msgstr "Nút chọn toàn bộ mô-đun"
+
+#: ../ui/search-dialog.glade.h:15 ../ui/search-dialog.gtkbuilder.h:17
+msgid "Use the results of the last search as the scope of the search"
+msgstr "Sử dụng kết quả của lần tìm kiếm cuối cùng làm phạm vi tìm kiếm"
+
+#: ../ui/search-dialog.glade.h:16 ../ui/search-dialog.gtkbuilder.h:16
+msgid "Current results"
+msgstr "Kết quả hiện tại"
+
+#: ../ui/search-dialog.glade.h:17 ../ui/search-dialog.gtkbuilder.h:18
+msgid "Current results radiobutton"
+msgstr "Nút chọn kết quả hiện tại"
+
+#: ../ui/search-dialog.glade.h:18 ../ui/search-dialog.gtkbuilder.h:20
+msgid "Use a custom range for the scope of the search"
+msgstr "Sử dụng phạm vi tùy chỉnh cho phạm vi tìm kiếm"
+
+#: ../ui/search-dialog.glade.h:19 ../ui/search-dialog.gtkbuilder.h:19
+msgid "Custom verse range"
+msgstr "Phạm vi câu tùy chỉnh"
+
+#: ../ui/search-dialog.glade.h:20 ../ui/search-dialog.gtkbuilder.h:21
+msgid "Custom verse range radiobutton"
+msgstr "Nút chọn phạm vi câu"
+
+#: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
+msgid "Custom Range Selector Combo"
+msgstr "Bộ chọn Phạm vi Tùy chỉnh"
+
+#: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
+msgid "Use a single module for the search"
+msgstr "Tìm kiếm trong một mô-đun duy nhất"
+
+#: ../ui/search-dialog.glade.h:24 ../ui/search-dialog.gtkbuilder.h:24
+msgid "Single module"
+msgstr "Mô-đun đơn"
+
+#: ../ui/search-dialog.glade.h:25 ../ui/search-dialog.gtkbuilder.h:26
+msgid "Single module radiobutton"
+msgstr "Nút chọn Mô-đun đơn"
+
+#: ../ui/search-dialog.glade.h:26 ../ui/search-dialog.gtkbuilder.h:28
+msgid "Use the current module list for the search"
+msgstr "Sử dụng danh sách mô-đun hiện tại để tìm kiếm"
+
+#: ../ui/search-dialog.glade.h:27 ../ui/search-dialog.gtkbuilder.h:27
+msgid "Module list"
+msgstr "Danh sách mô-đun"
+
+#: ../ui/search-dialog.glade.h:28 ../ui/search-dialog.gtkbuilder.h:29
+msgid "Module list radiobutton"
+msgstr "Nút chọn danh sách mô-đun"
+
+#: ../ui/search-dialog.glade.h:29 ../ui/search-dialog.gtkbuilder.h:31
+msgid "Use a custom module list for the search"
+msgstr "Sử dụng danh sách mô-đun tùy chỉnh để tìm kiếm"
+
+#: ../ui/search-dialog.glade.h:30 ../ui/search-dialog.gtkbuilder.h:30
+msgid "Custom module list"
+msgstr "Danh sách mô-đun tùy chỉnh"
+
+#: ../ui/search-dialog.glade.h:31 ../ui/search-dialog.gtkbuilder.h:32
+msgid "Custom module list radiobutton"
+msgstr "Nút chọn danh sách các mô-đun"
+
+#: ../ui/search-dialog.glade.h:32
+msgid "Custom Module List Combo"
+msgstr "Tổ hợp Danh sách Mô-đun Tùy chỉnh"
+
+#: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
+msgid "<b>Search Type</b>"
+msgstr "<b>Kiểu tìm kiếm</b>"
+
+#: ../ui/search-dialog.glade.h:34 ../ui/search-dialog.gtkbuilder.h:35
+msgid ""
+"Fast, featureful, index-based search\n"
+"Indexes must have been built beforehand:\n"
+"See Module Manager's maintenance functions"
+msgstr ""
+"Tìm kiếm được tối ưu hóa dựa trên các chỉ mục,\n"
+"các chỉ mục phải được tạo trước đó.\n"
+"Xem thẻ \"Quản lý\" của Trình quản lý mô-đun."
+
+#: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
+msgid "Optimized (\"Lucene\") radiobutton"
+msgstr "Nút chọn tối ưu hóa (« Lucene »)"
+
+#: ../ui/search-dialog.glade.h:39 ../ui/search-dialog.gtkbuilder.h:39
+msgid "Multi word"
+msgstr "Nhiều từ"
+
+#: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
+msgid "Multi word radiobutton"
+msgstr "Nút chọn nhiều từ"
+
+#: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
+msgid "Regular expression radiobutton"
+msgstr "Nút chọn biểu thức chính quy"
+
+#: ../ui/search-dialog.glade.h:44 ../ui/search-dialog.gtkbuilder.h:44
+msgid "Exact phrase radiobutton"
+msgstr "Nút chọn cụm từ chính xác"
+
+#: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
+msgid "Make selections on the Attribute Search tab"
+msgstr "Thực hiện các lựa chọn trong thẻ tìm kiếm \"Thuộc tính\""
+
+#: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
+msgid "Attributes"
+msgstr "Các thuộc tính"
+
+#: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
+msgid "Attributes radiobutton"
+msgstr "Nút chọn các thuộc tính"
+
+#: ../ui/search-dialog.glade.h:48 ../ui/search-dialog.gtkbuilder.h:48
+msgid "<b>Options</b>"
+msgstr "<b>Tùy chọn truy vấn</b>"
+
+#: ../ui/search-dialog.glade.h:50 ../ui/search-dialog.gtkbuilder.h:50
+msgid "Match case checkbox"
+msgstr "Hộp chọn Phân biệt chữ hoa, chữ thường"
+
+#: ../ui/search-dialog.glade.h:51 ../ui/search-dialog.gtkbuilder.h:51
+msgid "Search  Criteria"
+msgstr "Tiêu chí Tìm kiếm"
+
+#: ../ui/search-dialog.glade.h:52 ../ui/search-dialog.gtkbuilder.h:52
+msgid "Show in main window"
+msgstr "Hiển thị kết quả trong cửa sổ chính"
+
+#: ../ui/search-dialog.glade.h:53 ../ui/search-dialog.gtkbuilder.h:53
+msgid "Save search results as bookmarks"
+msgstr "Lưu kết quả tìm kiếm dưới dạng dấu trang"
+
+#: ../ui/search-dialog.glade.h:54 ../ui/search-dialog.gtkbuilder.h:54
+msgid "Export current search results"
+msgstr "Xuất kết quả truy vấn"
+
+#: ../ui/search-dialog.glade.h:55 ../ui/search-dialog.gtkbuilder.h:55
+msgid "Export"
+msgstr "Xuất ra"
+
+#: ../ui/search-dialog.glade.h:56 ../ui/search-dialog.gtkbuilder.h:56
+msgid "Clear lists for new search"
+msgstr "Xóa tất cả kết quả"
+
+#: ../ui/search-dialog.glade.h:57 ../ui/search-dialog.gtkbuilder.h:57
+msgid "<b>Found</b>"
+msgstr "<b>Tìm thấy</b>"
+
+# Notes :
+# Ajouter une note
+#
+# Chemins :
+# ../ui/search-dialog.glade.h:58
+# ../ui/search-dialog.gtkbuilder.h:59
+#: ../ui/search-dialog.glade.h:58 ../ui/search-dialog.gtkbuilder.h:59
+msgid "Result Summary Window"
+msgstr "Cửa sổ Tóm tắt Kết quả"
+
+#: ../ui/search-dialog.glade.h:59 ../ui/search-dialog.gtkbuilder.h:58
+msgid "Result Summary Table"
+msgstr "Bảng Tổng hợp Kết quả"
+
+#: ../ui/search-dialog.glade.h:60 ../ui/search-dialog.gtkbuilder.h:60
+msgid "<b>Search Results</b>"
+msgstr "<b>Kết quả Tìm kiếm</b>"
+
+#: ../ui/search-dialog.glade.h:61 ../ui/search-dialog.gtkbuilder.h:61
+msgid "<b>Preview</b>"
+msgstr "<b>Xem trước</b>"
+
+#: ../ui/search-dialog.glade.h:62 ../ui/search-dialog.gtkbuilder.h:62
+msgid "Results"
+msgstr "Các kết quả"
+
+#: ../ui/search-dialog.glade.h:63 ../ui/search-dialog.gtkbuilder.h:63
+msgid "Create new custom range"
+msgstr "Tạo một loạt các câu mới"
+
+#: ../ui/search-dialog.glade.h:64 ../ui/search-dialog.gtkbuilder.h:64
+msgid "New Range Button"
+msgstr "Nút Phạm vi Tùy chỉnh Mới"
+
+#: ../ui/search-dialog.glade.h:65 ../ui/search-dialog.gtkbuilder.h:65
+msgid "Save custom range"
+msgstr "Ghi lại phạm vi của các câu"
+
+#: ../ui/search-dialog.glade.h:66 ../ui/search-dialog.gtkbuilder.h:66
+msgid "Save Range Button"
+msgstr "Nút Lưu Phạm vi Tùy chỉnh"
+
+#: ../ui/search-dialog.glade.h:67 ../ui/search-dialog.gtkbuilder.h:67
+msgid "Delete selected range"
+msgstr "Xóa phạm vi đã chọn"
+
+#: ../ui/search-dialog.glade.h:68 ../ui/search-dialog.gtkbuilder.h:68
+msgid "Delete Range Button"
+msgstr "Nút Xóa phạm vi"
+
+#: ../ui/search-dialog.glade.h:69 ../ui/search-dialog.gtkbuilder.h:69
+msgid "<b>Ranges</b>"
+msgstr "<b>Phạm vi</b>"
+
+#: ../ui/search-dialog.glade.h:70 ../ui/search-dialog.gtkbuilder.h:70
+msgid "<b>Range Name</b>"
+msgstr "<b>Phạm vi tên</b>"
+
+#: ../ui/search-dialog.glade.h:71 ../ui/search-dialog.gtkbuilder.h:71
+msgid "Range Name Entry"
+msgstr "Tên Phạm vi Mục nhập"
+
+#: ../ui/search-dialog.glade.h:72 ../ui/search-dialog.gtkbuilder.h:72
+msgid "<b>Range Definition</b>"
+msgstr "<b>Phạm vi Định nghĩa</b>"
+
+#: ../ui/search-dialog.glade.h:73 ../ui/search-dialog.gtkbuilder.h:73
+msgid "Range Definition Entry"
+msgstr "Định nghĩa Phạm vi Mục nhập"
+
+#: ../ui/search-dialog.glade.h:74 ../ui/search-dialog.gtkbuilder.h:74
+msgid "e.g. Matt-John;Rev4"
+msgstr "vd Matthêu-Gioan; Kh 4"
+
+#: ../ui/search-dialog.glade.h:75 ../ui/search-dialog.gtkbuilder.h:75
+msgid "Custom Range Preview"
+msgstr "Phạm vi Tuỳ chỉnh Xem trước"
+
+#: ../ui/search-dialog.glade.h:76 ../ui/search-dialog.gtkbuilder.h:76
+msgid "Custom Verse Ranges"
+msgstr "Phạm vi Câu Tùy chỉnh"
+
+#: ../ui/search-dialog.glade.h:77 ../ui/search-dialog.gtkbuilder.h:77
+msgid "Create a new module list"
+msgstr "Tạo danh sách mô-đun mới"
+
+#: ../ui/search-dialog.glade.h:78 ../ui/search-dialog.gtkbuilder.h:78
+msgid "New Custom Module List Button"
+msgstr "Nút Danh sách Mô-đun Tùy chỉnh Mới"
+
+#: ../ui/search-dialog.glade.h:79 ../ui/search-dialog.gtkbuilder.h:79
+msgid "Save the module list"
+msgstr "Lưu danh sách các mô-đun"
+
+#: ../ui/search-dialog.glade.h:80 ../ui/search-dialog.gtkbuilder.h:80
+msgid "Save Custom Module List Button"
+msgstr "Nút Lưu Danh sách Mô-đun Tùy chỉnh"
+
+#: ../ui/search-dialog.glade.h:81 ../ui/search-dialog.gtkbuilder.h:81
+msgid "Delete the selected list"
+msgstr "Xóa danh sách đã chọn"
+
+#: ../ui/search-dialog.glade.h:82 ../ui/search-dialog.gtkbuilder.h:82
+msgid "Clear Custom Module List Button"
+msgstr "Xóa Nút Danh sách Mô-đun"
+
+#: ../ui/search-dialog.glade.h:83 ../ui/search-dialog.gtkbuilder.h:83
+msgid "<b>Module Lists</b>"
+msgstr "<b>Danh sách Mô-đun</b>"
+
+#: ../ui/search-dialog.glade.h:84 ../ui/search-dialog.gtkbuilder.h:84
+msgid "<b>List Name</b>"
+msgstr "<b>Danh sách Tên</b>"
+
+#: ../ui/search-dialog.glade.h:85 ../ui/search-dialog.gtkbuilder.h:85
+msgid "Custom Module List Name Entry"
+msgstr "Mục nhập Danh sách Tên Mô-đun Tùy chỉnh"
+
+#: ../ui/search-dialog.glade.h:90 ../ui/search-dialog.gtkbuilder.h:90
+msgid "Open a dialog to select modules to add to the list"
+msgstr "Mở hộp thoại chọn mô-đun để thêm vào danh sách"
+
+#: ../ui/search-dialog.glade.h:93 ../ui/search-dialog.gtkbuilder.h:93
+msgid "Custom Module Lists"
+msgstr "Danh sách Mô-đun Tùy chỉnh"
+
+#: ../ui/search-dialog.glade.h:94 ../ui/search-dialog.gtkbuilder.h:94
+msgid "<b>Attribute</b>"
+msgstr "<b>Thuộc tính</b>"
+
+#: ../ui/search-dialog.glade.h:95 ../ui/search-dialog.gtkbuilder.h:96
+msgid "Search for Strongs Numbers like G4442 or H1121"
+msgstr "Tìm kiếm các số Strongs như G4442 hoặc H1121"
+
+#: ../ui/search-dialog.glade.h:96 ../ui/search-dialog.gtkbuilder.h:95
+msgid "Strongs Numbers"
+msgstr "Số Strong"
+
+#: ../ui/search-dialog.glade.h:97 ../ui/search-dialog.gtkbuilder.h:97
+msgid "Strongs Numbers radiobutton"
+msgstr "Nút chọn số Strong"
+
+#: ../ui/search-dialog.glade.h:98 ../ui/search-dialog.gtkbuilder.h:99
+msgid "Search for Morphological tags"
+msgstr "Tìm kiếm các nhãn Hình thái"
+
+#: ../ui/search-dialog.glade.h:100 ../ui/search-dialog.gtkbuilder.h:100
+msgid "Morphological Tags radiobutton"
+msgstr "Nút chọn Nhãn hình thái"
+
+#: ../ui/search-dialog.glade.h:101 ../ui/search-dialog.gtkbuilder.h:102
+msgid "Search in footnotes"
+msgstr "Tìm chú thích"
+
+#: ../ui/search-dialog.glade.h:103 ../ui/search-dialog.gtkbuilder.h:103
+msgid "Footnotes radiobutton"
+msgstr "Nút chọn chú thích cuối trang"
+
+#: ../ui/search-dialog.glade.h:104 ../ui/search-dialog.gtkbuilder.h:104
+msgid "<b>Results Display Options</b>"
+msgstr "<b>Tùy chọn hiển thị kết quả</b>"
+
+#: ../ui/search-dialog.glade.h:105 ../ui/search-dialog.gtkbuilder.h:106
+msgid "In modules that have Strong's Numbers"
+msgstr "Đối với các mô-đun bao gồm các Số Strong"
+
+#: ../ui/search-dialog.glade.h:106 ../ui/search-dialog.gtkbuilder.h:105
+msgid "Show Strong's Numbers"
+msgstr "Hiển thị số Strong"
+
+#: ../ui/search-dialog.glade.h:107 ../ui/search-dialog.gtkbuilder.h:107
+msgid "Show Strong's Numbers checkbox"
+msgstr "Hiển thị hộp chọn số Strong"
+
+#: ../ui/search-dialog.glade.h:108 ../ui/search-dialog.gtkbuilder.h:109
+msgid "In modules that have Morphological Tags"
+msgstr "Đối với các mô-đun bao gồm Nhãn Tình thái"
+
+#: ../ui/search-dialog.glade.h:109 ../ui/search-dialog.gtkbuilder.h:108
+msgid "Show Morphological Tags"
+msgstr "Hiển thị nhãn hình thái"
+
+#: ../ui/search-dialog.glade.h:110 ../ui/search-dialog.gtkbuilder.h:110
+msgid "Show Morphological Tags checkbox"
+msgstr "Hiển thị hộp chọn Nhãn hình thái"
+
+#: ../ui/search-dialog.glade.h:111 ../ui/search-dialog.gtkbuilder.h:112
+msgid "In modules that have Footnotes"
+msgstr "Đối với các mô-đun có Chú thích cuối trang"
+
+#: ../ui/search-dialog.glade.h:112 ../ui/search-dialog.gtkbuilder.h:111
+msgid "Show Footnotes"
+msgstr "Hiển thị chú thích cuối trang"
+
+#: ../ui/search-dialog.glade.h:113 ../ui/search-dialog.gtkbuilder.h:113
+msgid "Show Footnotes checkbox"
+msgstr "Hiển thị hộp chọn Chú thích cuối trang"
+
+#: ../ui/search-dialog.glade.h:114 ../ui/search-dialog.gtkbuilder.h:114
+msgid "Attribute Search"
+msgstr "Tìm kiếm theo thuộc tính"
+
+#: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
+#: ../ui/selector-prefs.glade.h:1 ../ui/selector-prefs.gtkbuilder.h:1
+msgid "Module Selection"
+msgstr "Lựa chọn Mô-đun"
+
+#: ../ui/search-dialog.gtkbuilder.h:6
+msgid "<b>search module</b>"
+msgstr "<b>mô-đun tìm kiếm</b>"
+
+#: ../ui/xi-export-bookmarks.glade.h:1
+msgid "Export Bookmark Folder"
+msgstr "Xuất Thư mục Dấu trang"
+
+#: ../ui/xi-export-bookmarks.glade.h:2
+msgid "<b>Export to:</b>"
+msgstr "<b>Xuất ra:</b>"
+
+#: ../ui/xi-export-bookmarks.glade.h:3
+msgid "Xiphos bookmarks"
+msgstr "Dấu trang Xiphos"
+
+#: ../ui/xi-export-bookmarks.glade.h:4
+msgid "Html"
+msgstr "Html"
+
+#: ../ui/xi-export-bookmarks.glade.h:5
+msgid "Plain text"
+msgstr "Văn bản thô"
+
+#: ../ui/xi-export-bookmarks.glade.h:6
+msgid "Include Bible text"
+msgstr "Bao gồm văn bản Kinh thánh"
+
+#: ../ui/xi-export-bookmarks.glade.h:8
+msgid "gtk-ok"
+msgstr "gtk-ok"
+
+#: ../ui/xi-menus.glade.h:2 ../ui/xi-menus.gtkbuilder.h:2
+msgid "Open Study_pad"
+msgstr "Mở Study_pad"
+
+#: ../ui/xi-menus.glade.h:3 ../ui/xi-menus.gtkbuilder.h:3
+msgid "_Open Session"
+msgstr "_Mở một Phiên"
+
+#: ../ui/xi-menus.glade.h:4
+msgid "Open a saved tab settings collection"
+msgstr "Mở bộ sưu tập cài đặt các thẻ đã lưu"
+
+#: ../ui/xi-menus.glade.h:5 ../ui/xi-menus.gtkbuilder.h:4
+msgid "_Save Session"
+msgstr "Lưu Phiên"
+
+#: ../ui/xi-menus.glade.h:6
+msgid "Save this collection of tab settings"
+msgstr "Lưu bộ sưu tập cài đặt thẻ này"
+
+#: ../ui/xi-menus.glade.h:7 ../ui/xi-menus.gtkbuilder.h:5
+msgid "_New Prayerlist/Journal"
+msgstr "Danh sách / _Nhật ký Cầu nguyện Mới"
+
+#: ../ui/xi-menus.glade.h:8
+msgid "Create a new journal or prayerlist from a template"
+msgstr "Tạo nhật ký hoặc danh sách cầu nguyện mới từ một mẫu"
+
+#: ../ui/xi-menus.glade.h:10 ../ui/xi-menus.gtkbuilder.h:7
+msgid "_Search"
+msgstr "Tìm _kiếm"
+
+#: ../ui/xi-menus.glade.h:11
+msgid "Bring the simple sidebar search forward"
+msgstr "Hiển thị tùy chọn tìm kiếm ngăn bên"
+
+#: ../ui/xi-menus.glade.h:12 ../ui/xi-menus.gtkbuilder.h:8
+msgid "_Advanced Search"
+msgstr "_Tìm kiếm âng cao"
+
+#: ../ui/xi-menus.glade.h:13
+msgid "Open the advanced search dialog, to run complex queries"
+msgstr "Mở hộp thoại tìm kiếm nâng cao để chạy các truy vấn phức tạp"
+
+#: ../ui/xi-menus.glade.h:14 ../ui/xi-menus.gtkbuilder.h:9
+msgid "_Preferences"
+msgstr "_Tham khảo"
+
+#: ../ui/xi-menus.glade.h:15
+msgid "Use module manager to install and remove Sword modules"
+msgstr "Sử dụng trình quản lý mô-đun để cài đặt và gỡ bỏ mô-đun Sword"
+
+#: ../ui/xi-menus.glade.h:16 ../ui/xi-menus.gtkbuilder.h:10
+msgid "_Module Manager"
+msgstr "Trình quản lý _Mô-đun"
+
+#: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
+msgid "Preview _Daily Devotion"
+msgstr "Lịch đọc _Kinh Thánh"
+
+#: ../ui/xi-menus.glade.h:19
+msgid "Show today's entry from your selected daily devotional in the previewer"
+msgstr ""
+"Hiển thị văn bản ngày hôm nay từ lịch đọc Kinh thánh trong ngăn xem trước"
+
+#: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
+msgid "_Bible"
+msgstr "_Kinh thánh"
+
+#: ../ui/xi-menus.glade.h:21 ../ui/xi-menus.gtkbuilder.h:14
+msgid "_Preview"
+msgstr "_Xem trước"
+
+#: ../ui/xi-menus.glade.h:22 ../ui/xi-menus.gtkbuilder.h:15
+msgid "_Commentary/Book"
+msgstr "_Bình luận / Sách"
+
+#: ../ui/xi-menus.glade.h:23 ../ui/xi-menus.gtkbuilder.h:16
+msgid "Dictionar_y"
+msgstr "_Từ điển"
+
+#: ../ui/xi-menus.glade.h:24 ../ui/xi-menus.gtkbuilder.h:17
+msgid "L_ink Tabs"
+msgstr "_Liên kết các thẻ"
+
+#: ../ui/xi-menus.glade.h:25
+msgid "Make all tabs' Bibles navigate together"
+msgstr "Điều hướng đồng thời tất cả các tab văn bản trong Kinh thánh"
+
+#: ../ui/xi-menus.glade.h:26 ../ui/xi-menus.gtkbuilder.h:18
+msgid "_Read Aloud"
+msgstr "_Đọc lớn tiếng"
+
+#: ../ui/xi-menus.glade.h:27
+msgid "Turn on text-to-speech reading of Bible verses as they are selected"
+msgstr ""
+"Bật tính năng đọc chuyển văn bản thành giọng nói của các câu Kinh Thánh khi "
+"chúng được chọn"
+
+#: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
+msgid "Show Verse _Numbers"
+msgstr "Hiển thị _ Số Câu"
+
+#: ../ui/xi-menus.glade.h:29
+msgid "Display verse numbers in the text"
+msgstr "Hiển thị số câu trong văn bản"
+
+#: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
+msgid "_Highlight Current Verse"
+msgstr "_Làm nổi bật Câu Hiện tại"
+
+#: ../ui/xi-menus.glade.h:31
+msgid "Apply a high-contrast highlight to the current verse"
+msgstr "Áp dụng độ tương phản cao cho câu câu được tô đậm"
+
+#: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
+msgid "_Show/Hide Attached Sidebar"
+msgstr "_Hiển thị / Ẩn Thanh bên Đính kèm"
+
+#: ../ui/xi-menus.glade.h:33
+msgid "Remove the sidebar entirely from view"
+msgstr "Loại bỏ hoàn toàn ngăn bên khỏi cửa sổ chính"
+
+#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
+msgid "Show Parallel View in a _Tab"
+msgstr "Chế độ Xem song song kiểu _Thẻ"
+
+#: ../ui/xi-menus.glade.h:35
+msgid "Provide the full-chapter parallel Bible window as another tab"
+msgstr "Hiển thị song song toàn bộ chương Kinh thánh trong thẻ mới"
+
+#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
+msgid "Show Previe_wer in the Sidebar"
+msgstr "Hiển thị Trình xem trước trong Thanh bên"
+
+#: ../ui/xi-menus.glade.h:37
+msgid "Select Previewer position between sidebar or beneath Bible"
+msgstr ""
+"Chọn vị trí Trình xem trước trong ngăn bên hoặc bên dưới văn bản Kinh thánh"
+
+#: ../ui/xi-menus.glade.h:39 ../ui/xi-menus.gtkbuilder.h:25
+msgid "_Contents"
+msgstr "Tóm _lược"
+
+#: ../ui/xi-menus.glade.h:40
+msgid "Open the help viewer on the Xiphos manual"
+msgstr "Mở sổ tay trợ giúp trên trình hướng dẫn sử dụng Xiphos"
+
+#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
+msgid "_Mailing List"
+msgstr "Danh sách _Gửi thư"
+
+#: ../ui/xi-menus.glade.h:42
+msgid "Open a browser on the users' mailing list webpage"
+msgstr "Mở trình duyệt trên trang web danh sách gửi thư của người dùng"
+
+#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
+msgid "_Live Chat"
+msgstr "Trò chuyện _trực tiếp"
+
+#: ../ui/xi-menus.glade.h:44
+msgid "Open a browser on an interface to live IRC chat"
+msgstr "Mở trình giao diện để trò chuyện trực tiếp qua IRC"
+
+#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
+msgid "_Report Bug"
+msgstr "_Báo cáo lỗi"
+
+#: ../ui/xi-menus.glade.h:46
+msgid "Open a browser on our bug tracker"
+msgstr "Mở trình duyệt trên trình theo dõi lỗi"
+
+#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
+msgid "About _Translation"
+msgstr "Thông tin về _Bản dịch"
+
+#: ../ui/xi-menus.glade.h:48
+msgid "Learn about translating the Xiphos interface to other languages"
+msgstr "Tìm hiểu thêm về dịch giao diện Xiphos sang các ngôn ngữ khác"
+
+#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
+msgid "_About The SWORD Project"
+msgstr "Thông tin về Projet SWORD"
+
+#: ../ui/xi-menus.glade.h:50
+msgid "Learn about The Sword Project, of which Xiphos is one application"
+msgstr "Tìm hiểu thêm về Project Sword, trong đó Xiphos là một ứng dụng"
+
+#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
+msgid "About _BibleSync"
+msgstr "Thông tin về _BibleSync"
+
+#: ../ui/xi-menus.glade.h:52
+msgid "Learn about BibleSync, the shared navigation protocol"
+msgstr "Tìm hiểu về BibleSync, giao thức chia sẻ điều hướng"
+
+#: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
+msgid "_View Xiphos Releases"
+msgstr "_Xem bản phát hành Xiphos"
+
+#: ../ui/xi-menus.glade.h:54
+msgid "Visit the releases web page. Is your Xiphos current?"
+msgstr ""
+"Truy cập trang phiên bản phát hành Xiphos. Phiên bản của bạn có được cập "
+"nhật?"
+
+#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
+msgid "About _Xiphos"
+msgstr "Thông tin về _Xiphos"
+
+#: ../ui/xi-menus.glade.h:56
+msgid "Learn about Xiphos"
+msgstr "Tìm hiểu thêm về Xiphos"
+
+#: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:37
+msgid "Annotate Verse"
+msgstr "Chú thích câu"
+
+#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
+msgid "Open Module"
+msgstr "Mở Mô-đun"
+
+#: ../ui/xi-menus.glade.h:64 ../ui/xi-menus-popup.gtkbuilder.h:41
+msgid "Note"
+msgstr "Ghi chú"
+
+#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:42
+msgid "Open in editor"
+msgstr "Mở trong trình chỉnh sửa"
+
+#: ../ui/xi-menus.glade.h:67 ../ui/xi-menus-popup.gtkbuilder.h:44
+msgid "Verse Per Line"
+msgstr "Câu Theo Dòng"
+
+#: ../ui/xi-menus.glade.h:75 ../ui/xi-menus-popup.gtkbuilder.h:52
+msgid "Footnote/Cross-ref Markers"
+msgstr "Chú thích cuối trang / Dấu tham chiếu chéo"
+
+#: ../ui/xi-menus.glade.h:76
+msgid "Show non-anonymous markers e.g. \"*n23\""
+msgstr "Hiển thị các dấu không ẩn danh như « *n23 »"
+
+#: ../ui/xi-menus.glade.h:81 ../ui/xi-menus-popup.gtkbuilder.h:57
+msgid "Variants"
+msgstr "Các biến thể"
+
+#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
+msgid "Image Content"
+msgstr "Nội dung Hình ảnh"
+
+#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:66
+msgid "Respect Font Faces"
+msgstr "Tôn trọng Mặt Phông chữ"
+
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:67
+msgid "Commentary by Chapter"
+msgstr "Bình luận theo Chương"
+
+#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:68
+msgid "Doublespace"
+msgstr "Nhân đôi khoảng cách dòng"
+
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
+msgid "Lookup Selection"
+msgstr "Định nghĩa từ đã chọn"
+
+# src/gs_preferences_dlg.c
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
+msgid "Use Current Dictionary"
+msgstr "Sử dụng Từ điển Hiện tại"
+
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
+msgid "Browse in BibleMap.org"
+msgstr "Xem bản đồ trên BibleMap.org"
+
+#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
+msgid "Unlock This Module"
+msgstr "Mở khóa mô-đun này"
+
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
+msgid "Display Book Heading"
+msgstr "Hiển thị Tiêu đề Sách"
+
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
+msgid "Display Chapter Heading"
+msgstr "Hiển thị Tiêu đề Chương"
+
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
+msgid "Rename Pers.Comm."
+msgstr "Đổi tên Bình luận Cá nhân"
+
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:76
+msgid "Dump Pers.Comm."
+msgstr "Rời khỏi Ghi chú Cá nhân."
+
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:77
+msgid "Read Selection Aloud"
+msgstr "Đọc to Lựa chọn"
+
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:93
+msgid "Save these results as a single bookmark"
+msgstr "Lưu các kết quả này dưới một dấu trang duy nhất"
+
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:92
+msgid "Save list as a single bookmark"
+msgstr "Lưu danh sách dưới dạng một dấu trang duy nhất"
+
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:95
+msgid "Save these results as a series of bookmarks in their own folder"
+msgstr ""
+"Lưu các kết quả này dưới dạng một loạt dấu trang trong thư mục riêng của "
+"chúng"
+
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:94
+msgid "Save list as a series of bookmarks"
+msgstr "Lưu danh sách dưới dạng một loạt dấu trang"
+
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:97
+msgid ""
+"Provide a dialog in which to paste a line of verse references, to fill the "
+"verse list."
+msgstr ""
+"Cung cấp một hộp thoại để dán một dòng tham chiếu câu, để điền vào danh sách "
+"câu."
+
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:96
+msgid "Populate verse list"
+msgstr "Điền danh sách câu"
+
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:99
+msgid "Push the entire verse list contents directly into the history list."
+msgstr "Đặt toàn bộ nội dung của danh sách câu vào danh sách lịch sử xem."
+
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:98
+msgid "Preload history from verse list"
+msgstr "Tải trước lịch sử từ danh sách câu"
+
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:101
+msgid ""
+"Send this verse list via BibleSync to others, if you are in Personal or "
+"Speaker mode."
+msgstr ""
+"Gửi danh sách câu này qua BibleSync cho người khác, nếu bạn đang ở chế độ Cá "
+"nhân hoặc Diễn giả."
+
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:100
+msgid "Send list via BibleSync"
+msgstr "Gửi danh sách qua BibleSync"
+
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:102
+msgid "Export List"
+msgstr "Xuất danh sách"
+
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:2
+msgid "Open this bookmark in a new tab"
+msgstr "Mở dấu trang này trong một thẻ mới"
+
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:1
+msgid "Open in new tab"
+msgstr "Mở trong một thẻ mới"
+
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:4
+msgid "Open this bookmark in a dialog"
+msgstr "Mở dấu trang này trong hộp thoại mới"
+
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:3
+msgid "Open in a dialog"
+msgstr "Mở trong cửa sổ"
+
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:6
+msgid "Add new folder to selected folder"
+msgstr "Thêm một thư mục mới vào thư mục đã chọn"
+
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:8
+msgid "Insert new bookmark here"
+msgstr "Chèn dấu trang mới tại đây"
+
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:7
+msgid "Insert Bookmark"
+msgstr "Chèn Dấu trang"
+
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:10
+msgid "Edit bookmark item"
+msgstr "Chỉnh sửa dấu trang"
+
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:9
+msgid "_Edit Item"
+msgstr "_Chỉnh sửa mục"
+
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:12
+msgid "Delete item"
+msgstr "Xóa mục đã chọn"
+
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:14
+msgid "Expand all Bookmarks groups"
+msgstr "Mở rộng tất cả các nhóm Dấu trang"
+
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:13
+msgid "Expand All"
+msgstr "Mở rộng Tất cả"
+
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:16
+msgid "Collapse all Bookmarks groups"
+msgstr "Thu gọn tất cả các nhóm dấu trang"
+
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:15
+msgid "Collapse All"
+msgstr "Thu gọn tất cả"
+
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:17
+msgid "Allow items to be moved from one folder to another"
+msgstr "Cho phép di chuyển các mục từ thư mục này sang thư mục khác"
+
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:18
+msgid "Allow Reordering"
+msgstr "Cho phép sắp xếp lại"
+
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:20
+msgid "Load other bookmarks file (default: from BibleTime)"
+msgstr "Nhập tệp dấu trang (mặc định: từ BibleTime)"
+
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:19
+msgid "Import Bookmarks"
+msgstr "Nhập dấu trang"
+
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:22
+msgid "Remove folder and save it"
+msgstr "Xóa thư mục và lưu nó"
+
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:21
+msgid "Export Folder"
+msgstr "Xuất thư mục"
+
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:31
+msgid "Open selected module in a new tab"
+msgstr "Mở mô-đun đã chọn trong một thẻ mới"
+
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:33
+msgid ""
+"Open selected module in a\n"
+"\tseparate ['dialog'] window"
+msgstr ""
+"Mở mô-đun đã chọn trong\n"
+"cửa sổ ['hộp thoại'] mới"
+
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:32
+msgid "Open in a separate window"
+msgstr "Mở trong cửa sổ riêng"
+
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:79
+msgid "Create a new simple prayer list"
+msgstr "Tạo một danh sách cầu nguyện đơn giản mới"
+
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:78
+msgid "Simple"
+msgstr "Danh sách đơn"
+
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:81
+msgid "Create a new subject prayer list"
+msgstr "Tạo một danh sách cầu nguyện mới được sắp xếp theo chủ đề"
+
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:80
+msgid "Subject"
+msgstr "Danh sách sắp xếp theo chủ đề"
+
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:83
+msgid "Create a new monthly journal"
+msgstr "Tạo một nhật ký hàng tháng mới"
+
+#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:82
+msgid "Monthly"
+msgstr "Hàng tháng"
+
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:85
+msgid "Create a new daily journal"
+msgstr "Tạo nhật ký mới"
+
+#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:84
+msgid "Daily"
+msgstr "Hàng ngày"
+
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:87
+msgid "Create a new outlined topic"
+msgstr "Tạo một chủ đề có cấu trúc phân cấp mới"
+
+#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:86
+msgid "Outlined"
+msgstr "Chủ đề có cấu trúc"
+
+#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
+msgid "Create a new book/chapter outline"
+msgstr "Tạo một khung mới được sắp xếp theo Sách / Chương Kinh thánh"
+
+#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
+msgid "Book/Chapter"
+msgstr "Sách / Chương"
+
+#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:91
+msgid "Open module in editor or plain display window"
+msgstr "Mở mô-đun trong trình chỉnh sửa hoặc đọc trong một cửa sổ riêng"
+
+#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:90
+msgid "Open in separate window"
+msgstr "Mở trong cửa sổ riêng"
+
+#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:24
+msgid "Add a sub-item"
+msgstr "Thêm một mục phụ"
+
+#: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:23
+msgid "Add Sub-Item"
+msgstr "Ajouter un sous-élément"
+
+#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:26
+msgid "Add an item"
+msgstr "Thêm mục"
+
+#: ../ui/xi-menus.glade.h:156 ../ui/xi-menus-popup.gtkbuilder.h:25
+msgid "Add Item"
+msgstr "Thêm mục"
+
+#: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:28
+msgid "Remove this item"
+msgstr "Xóa mục này"
+
+#: ../ui/xi-menus.glade.h:159 ../ui/xi-menus-popup.gtkbuilder.h:30
+msgid "Edit this item"
+msgstr "Chỉnh sửa mục này"
+
+#: ../xiphos.desktop.in.in.h:1
+msgid "Xiphos Bible Guide"
+msgstr "Hướng dẫn Kinh thánh Xiphos"
+
+#: ../xiphos.desktop.in.in.h:2
+msgid "Study the Bible"
+msgstr "Học Kinh thánh"
+
+#: ../xiphos.desktop.in.in.h:3
+msgid "Text;Bible;Study;"
+msgstr "Văn bản; Kinh thánh; Nghiên cứu;"
+
+#~ msgid "_Attach/Detach Sidebar"
+#~ msgstr "Attacher/Détacher le volet latéral"
+
+#~ msgid "Operate the sidebar as a separate window"
+#~ msgstr "Positionne le volet latéral dans une fenêtre séparée"
+
+#~ msgid "yes"
+#~ msgstr "Oui"
+
+#~ msgid "no"
+#~ msgstr "Non"
+
+#~ msgid "network setup errors."
+#~ msgstr "erreurs de configuration du réseau."
+
+#~ msgid " client socket"
+#~ msgstr "socket client"
+
+#~ msgid " server socket"
+#~ msgstr "socket serveur"
+
+#~ msgid "bad magic"
+#~ msgstr "mauvaise clé"
+
+#~ msgid "bad protocol version"
+#~ msgstr "mauvaise version du protocole"
+
+#~ msgid "bad msg type"
+#~ msgstr "mauvais type de message"
+
+#~ msgid "bad packet count"
+#~ msgstr "mauvais nombre de paquets"
+
+#~ msgid "bad packet index"
+#~ msgstr "mauvais indice de paquets"
+
+#~ msgid "bad body format"
+#~ msgstr "mauvais format du corps"
+
+#~ msgid "missing required header "
+#~ msgstr "entête requis manquant"
+
+#~ msgid "UUID spoofed: wrong ipaddr."
+#~ msgstr "UUID usurpé: mauvaise addresse IP."
+
+#~ msgid "Ignoring echo."
+#~ msgstr "Écho ignoré."
+
+#~ msgid "Domain not 'BIBLE-VERSE': "
+#~ msgstr "Le domaine n'est pas 'BIBLE-VERSE' : "
+
+#~ msgid "Invalid group: "
+#~ msgstr "Groupe invalide : "
+
+#~ msgid " present at "
+#~ msgstr " présent à "
+
+#~ msgid " using "
+#~ msgstr " utilisant "
+
+#~ msgid "[no dump ready]"
+#~ msgstr "[Pas de vidage prêt]"
+
+#~ msgid "select < 0"
+#~ msgstr "select < 0"
+
+#~ msgid "recvfrom < 0"
+#~ msgstr "recvfrom < 0"
+
+#~ msgid "Transmit failed.\n"
+#~ msgstr "Échec de la transmission.\n"
+
+#~ msgid ""
+#~ "Unable to multicast; BibleSync is now disabled. If your network "
+#~ "connection changed while this program was active, it may be sufficient to "
+#~ "re-enable."
+#~ msgstr ""
+#~ "Multidiffusion impossible. BibleSync est à présent déactivé. Si votre "
+#~ "connection réseau a changé pendant que ce programme était actif, il peut "
+#~ "être suffisant de la réactiver."
+
+#~ msgid "Unlock "
+#~ msgstr "Entrez la clé de déverrouillage "
+
+#~ msgid "Preparing to print"
+#~ msgstr "Préparation de l'impression"
+
+#~ msgid "Printing is not supported on this printer"
+#~ msgstr "L'impression n'est pas supportée par ce périphérique."
+
+#~ msgid "Printer %s does not support PostScript printing."
+#~ msgstr "L'imprimante %s n'accepte pas les impressions de type PostScript."
+
+#~ msgid "Printing"
+#~ msgstr "Impression"
+
+#~ msgid "Waiting to print"
+#~ msgstr "En attente de l'impression"
+
+#~ msgid "An error occurred while printing"
+#~ msgstr "Une erreur s'est produite pendant l'impression"
+
+#~ msgid "It was not possible to print your document: %s"
+#~ msgstr "Le document %s n'a pas pu être imprimé"
+
+#~ msgid ""
+#~ "Xiphos can not create  .xiphos:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Xiphos cannot continue."
+#~ msgstr ""
+#~ "Xiphos n'a pas pu créer ~/.xiphos:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Xiphos ne peut s'exécuter normalement."
+
+#~ msgid "toolbutton1"
+#~ msgstr "toolbutton1"
+
+#~ msgid "toolbutton10"
+#~ msgstr "toolbutton10"
+
+#~ msgid "toolbutton3"
+#~ msgstr "toolbutton3"
+
+#~ msgid "toolbutton2"
+#~ msgstr "toolbutton2"
+
+#~ msgid "toolbutton4"
+#~ msgstr "toolbutton4"
+
+#~ msgid "toolbutton6"
+#~ msgstr "toolbutton6"
+
+#~ msgid "toolbutton7"
+#~ msgstr "toolbutton7"
+
+#~ msgid "toolbutton11"
+#~ msgstr "toolbutton11"
+
+#~ msgid "toolbutton12"
+#~ msgstr "toolbutton12"
+
+#~ msgid "toolbutton9"
+#~ msgstr "toolbutton9"
+
+#~ msgid "Mode"
+#~ msgstr "Mode"
+
+#~ msgid "Listen"
+#~ msgstr "Écouter"
+
+#~ msgid "<b>Tabs</b>"
+#~ msgstr "<b>Onglets</b>"
+
+#~ msgid "Use tabbed browsing"
+#~ msgstr "Utiliser les onglets"
+
+#~ msgid ""
+#~ "Single selection of Bible+commentary+book+dictionary, or many sets of "
+#~ "such selections in a tabbed interface"
+#~ msgstr ""
+#~ "Fenêtre unique d'une Bible + commentaire + livre + dictionnaire, ou de "
+#~ "nombreux ensembles de telles sélections dans une interface à onglets"
+
+#~ msgid "Use tabbed browsing Checkbox"
+#~ msgstr "Case à cocher Utiliser les onglets"
+
+#~ msgid "<b>Show</b>"
+#~ msgstr "<b>Volets</b>"
+
+#~ msgid "Bible Texts"
+#~ msgstr "Texte biblique"
+
+#~ msgid "Bible Texts Checkbox"
+#~ msgstr "Case à cocher Textes bibliques"
+
+#~ msgid "Previewer Checkbox"
+#~ msgstr "Case à cocher Volet Aperçu"
+
+#~ msgid "Commentaries Checkbox"
+#~ msgstr "Case à cocher Commentaires"
+
+#~ msgid "Dictionary/Lexicon"
+#~ msgstr "Dictionnaire/Lexique"
+
+#~ msgid "Dictionary/Lexicon Checkbox"
+#~ msgstr "Case à cocher Dictionnaire/Lexique"
+
+#~ msgid "Parallel View in a tab"
+#~ msgstr "Vue parallèle dans un onglet"
+
+#~ msgid "Tabs and Panes"
+#~ msgstr "Onglets et volets"
+
+#~ msgid "Scripture Cross-references"
+#~ msgstr "Références croisées de l'Écriture"
+
+# src/gs_preferences_dlg.c
+#~ msgid "<b>StudyPad default directory</b>"
+#~ msgstr "<b>Répertoire par défaut du bloc-notes</b>"
+
+#~ msgid ""
+#~ "URL references using \"sword://\" (similar to web page\n"
+#~ "references) can be used by programs to look up\n"
+#~ "scripture references. Your system currently has no\n"
+#~ "program set to handle these references.\n"
+#~ "\n"
+#~ "Would you like Xiphos to set itself as the\n"
+#~ "program to handle these references?"
+#~ msgstr ""
+#~ "Des adresses URL de type « sword:// » (similaires aux\n"
+#~ "pages web) peuvent être utilisées par d'autres applications\n"
+#~ "pour retrouver une référence biblique. Votre système n'a\n"
+#~ "pas de programme configuré pour traiter ces adresses.\n"
+#~ "\n"
+#~ "Voulez-vous que Xiphos soit paramétré comme\n"
+#~ "l'application gérant ces adresses URL?"
+
+#~ msgid ""
+#~ "Xiphos has successfully set itself\n"
+#~ "as the handler of sword:// and bible:// URLs.\n"
+#~ "\n"
+#~ "You may wish to run the program \"gconf-editor\"\n"
+#~ "to examine keys under /desktop/gnome/url-handlers,\n"
+#~ "if you need to change these."
+#~ msgstr ""
+#~ "Xiphos a été déclaré comme gestionnaire \n"
+#~ "par défaut des URL de type sword:// et bible://\n"
+#~ "\n"
+#~ "Le programme \"gconf-editor\" permet de modifier \n"
+#~ "les clés sous : /desktop/gnome/url-handlers,\n"
+#~ "si vous éprouvez le besoin de les changer."
+
+#~ msgid ""
+#~ "Xiphos failed to complete handler init for key #%d:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Xiphos n'a pas pu initialiser la clé #%d:\n"
+#~ "%s"
+
+#~ msgid "Go to "
+#~ msgstr "Aller à "
+
+#~ msgid "Main"
+#~ msgstr "Base"
+
+#~ msgid "Modules Main"
+#~ msgstr "Base"
+
+#~ msgid "Choose to enable Prayer lists "
+#~ msgstr "Active les listes de prières "
+
+#~ msgid ""
+#~ "Without any Bible modules to display,\n"
+#~ "Xiphos cannot proceed,\n"
+#~ "and will now exit."
+#~ msgstr ""
+#~ "Sans aucun texte biblique,\n"
+#~ "Xiphos ne peut fonctionner\n"
+#~ "et va maintenant se terminer."
+
+#~ msgid "Import Bibletime Bookmarks"
+#~ msgstr "Importer les signets de Bibletime"
+
+#~ msgid "Cipher Key?"
+#~ msgstr "Clé de déverrouillage ?"
+
+#~ msgid "Change parallel 1"
+#~ msgstr "Changer parallèle 1"
+
+#~ msgid "Change parallel 2"
+#~ msgstr "Changer parallèle 2"
+
+#~ msgid "Change parallel 3"
+#~ msgstr "Changer parallèle 3"
+
+#~ msgid "Change parallel 4"
+#~ msgstr "Changer parallèle 4"
+
+#~ msgid "Change parallel 5"
+#~ msgstr "Changer parallèle 5"
+
+#~ msgid "Sizes"
+#~ msgstr "Tailles"
+
+#~ msgid ""
+#~ "Welcome to Xiphos.\n"
+#~ "\n"
+#~ "There are no Bible modules installed. In order to initialize, Xiphos "
+#~ "needs you to install at least one Bible.\n"
+#~ "\n"
+#~ "With your permission, Xiphos will invoke the Module Manager so that you "
+#~ "may install from Crosswire:\n"
+#~ "1. Configure remote install.\n"
+#~ "2. Connect.\n"
+#~ "3. Select a Bible text of your language preference.\n"
+#~ "4. Click `install'.\n"
+#~ "Close the Module Manager when you are done.\n"
+#~ "\n"
+#~ "Warning: If you live in a persecuted country, use with care.\n"
+#~ "\n"
+#~ "May Xiphos invoke the Module Manager so that you may install a Bible?"
+#~ msgstr ""
+#~ "Bienvenue dans Xiphos.\n"
+#~ "\n"
+#~ "Aucun module de texte biblique n'est installé. Xiphos a besoin d'au moins "
+#~ "un module de ce type pour fonctionner.\n"
+#~ "\n"
+#~ "Avec votre permission, Xiphos va lancer le gestionnaire de modules pour "
+#~ "télécharger des modules depuis le site de Crosswire, les opérations à "
+#~ "effectuer sont :\n"
+#~ "1. Configuration du dépôt distant\n"
+#~ "2. Connexion\n"
+#~ "3. Choix d'un texte biblique dans la langue désirée\n"
+#~ "4. Validation par le bouton \"Installer'\n"
+#~ "\n"
+#~ "Attention : Prudence dans les pays de persécution.\n"
+#~ "\n"
+#~ "Autorisez-vous Xiphos à lancer le gestionnaire de modules pour "
+#~ "télécharger un texte biblique ?"
+
+#~ msgid "<b>Parallel View</b>"
+#~ msgstr "<b>Vue parallèle</b>"
+
+#~ msgid "Parallel 1"
+#~ msgstr "Bible parallèle n°1"
+
+#~ msgid "Parallel 1 Combo"
+#~ msgstr "Boite combinée Bible parallèle n°1"
+
+#~ msgid "Parallel 2"
+#~ msgstr "Bible parallèle n°2"
+
+#~ msgid "Parallel 2 Combo"
+#~ msgstr "Boite combinée Bible parallèle n°2"
+
+#~ msgid "Parallel 3"
+#~ msgstr "Bible parallèle n°3"
+
+#~ msgid "Parallel 3 Combo"
+#~ msgstr "Boite combinée Bible parallèle n°3"
+
+#~ msgid "Parallel 4"
+#~ msgstr "Bible parallèle n°4"
+
+#~ msgid "Parallel 4 Combo"
+#~ msgstr "Boite combinée Bible parallèle n°4"
+
+#~ msgid "Parallel 5"
+#~ msgstr "Bible parallèle n°5"
+
+#~ msgid "Parallel 5 Combo"
+#~ msgstr "Boite combinée Bible parallèle n°5"
+
+#~ msgid "Use Verse Per Line"
+#~ msgstr "Affichage d'un verset par ligne"
+
+#~ msgid "Restore Folder"
+#~ msgstr "Restaurer le dossier"
+
+#~ msgid "Restore saved folder"
+#~ msgstr "Restaure un dossier sauvegardé"
+
+#~ msgid "About the SWORD Project"
+#~ msgstr "À propos du Projet SWORD"
+
+#~ msgid "Books can be downloaded from the SWORD Project"
+#~ msgstr ""
+#~ "Plus d'informations en ligne sur le site du Projet SWORD (en anglais) :"
+
+#~ msgid "Open the file in Studypad"
+#~ msgstr "Ouvre le fichier dans le bloc-notes"
+
+#~ msgid "Open in a new tab"
+#~ msgstr "Ouvrir dans un nouvel onglet"
+
+#~ msgid "View information about the selected dialog"
+#~ msgstr "Information à propos du module sélectionné"
+
+#~ msgid "Daily Journal"
+#~ msgstr "Journal quotidien"
+
+#~ msgid "Outlined Topic"
+#~ msgstr "Note structurée"
+
+#~ msgid "Open selected module in a dialog"
+#~ msgstr "Ouvrir le module sélectionné dans une nouvelle fenêtre"
+
+#~ msgid "Add Child"
+#~ msgstr "Ajouter un sous-sujet"
+
+#~ msgid "Add Sibling"
+#~ msgstr "Ajouter un élément"
+
+#~ msgid "H_istory/<Separator>"
+#~ msgstr "H_istorique/<Separator>"
+
+#~ msgid "H_istory/C_lear"
+#~ msgstr "H_istorique/_Effacer"
+
+#~ msgid "Text"
+#~ msgstr "Texte"
+
+#~ msgid "Text to render"
+#~ msgstr "Texte à reproduire"
+
+#~ msgid "Pixbuf Object"
+#~ msgstr "Objet pixbuf"
+
+#~ msgid "The pixbuf to render."
+#~ msgstr "Le pixbuf à restituer"
+
+#~ msgid "Xiphos could not execute archiver"
+#~ msgstr "Xiphos n'a pas pu démarrer l'archivage"
+
+#~ msgid ""
+#~ " archival result:\n"
+#~ "\n"
+#~ msgstr ""
+#~ " résultat de l'archivage\n"
+#~ "\n"
+
+#~ msgid "Remove - Restore"
+#~ msgstr "Charger - Sauver"
+
+#~ msgid "Remove Folder"
+#~ msgstr "Supprimer le dossier"
+
+#~ msgid "Sources"
+#~ msgstr "Dépôts"
+
+#~ msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
+#~ msgstr "Le répertoire ~/.xiphos-2.0 a été renommé en ~/.xiphos"
+
+#~ msgid ""
+#~ "Xiphos can not rename  .xiphos-2.0 to .xiphos:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Xiphos cannot continue."
+#~ msgstr ""
+#~ "Xiphos n'a pas pu renommer ~/.xiphos-2.0 en ~/.xiphos\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Xiphos ne peut s'exécuter normalement."
+
+#~ msgid "Move backwards through history"
+#~ msgstr "Verset précédent dans l'historique"
+
+#~ msgid "Move foward through history"
+#~ msgstr "Verset suivant dans l'historique"
+
+#~ msgid "Select a Book of the Bible"
+#~ msgstr "Change de livre"
+
+#~ msgid "Change Chapter"
+#~ msgstr "Change de chapitre"
+
+#~ msgid "Dictionary/_Lexicon"
+#~ msgstr "Dictionnaire/Lexique"
+
+#~ msgid "_Bible Text"
+#~ msgstr "Texte _biblique"
+
+#~ msgid "Open StudyPad File"
+#~ msgstr "Ouvrir"
+
+#~ msgid "Save StudyPad File"
+#~ msgstr "Enregistre le fichier du bloc-notes"
+
+#~ msgid "item1"
+#~ msgstr "Élément1"
+
+#~ msgid "item2"
+#~ msgstr "Élement2"
+
+#~ msgid "_Module Options"
+#~ msgstr "Options du module"
+
+#~ msgid "Sync with main"
+#~ msgstr "Synchroniser avec la fenêtre principale"
+
+#~ msgid "Stay in sync"
+#~ msgstr "Synchronisé"
+
+#~ msgid "Failed to print the document"
+#~ msgstr "Le document n'a pas pu être imprimé"
+
+#~ msgid "_Modules"
+#~ msgstr "_Modules"
+
+#~ msgid "_Bookmarks"
+#~ msgstr "_Signets"
+
+#~ msgid "Verse _List"
+#~ msgstr "Liste de _versets"
+
+#~ msgid "%s not found"
+#~ msgstr "%s non trouvé"
+
+#~ msgid "has been modified. Do you wish to save it?"
+#~ msgstr "a été modifié. Voulez-vous l'enregistrer ?"
+
+#~ msgid "not loaded"
+#~ msgstr "non chargé"
+
+#~ msgid "Open the StudyPad editor"
+#~ msgstr "Ouvre le bloc-notes"
+
+#~ msgid "Save the current session to a file"
+#~ msgstr "Enregistre la session actuelle dans un fichier"
+
+#~ msgid "_Copy"
+#~ msgstr "Copier"
+
+#~ msgid "Copy highlighted text from main window"
+#~ msgstr ""
+#~ "Copie le texte biblique mis en surbrillance dans la fenêtre principale"
+
+#~ msgid "Search using the shortcut bar"
+#~ msgstr "Utilise la recherche simple du volet latéral"
+
+#~ msgid "Advanced search using the search dialog"
+#~ msgstr "Utilise la fenêtre de recherche avancée"
+
+#~ msgid "C_lear"
+#~ msgstr "_Effacer l'historique"
+
+#~ msgid "Show the Daily Devotion for today"
+#~ msgstr "Affiche le calendrier biblique d'aujourd'hui"
+
+#~ msgid "Show or hide Bible texts window"
+#~ msgstr "Affiche/cache le volet des textes bibliques"
+
+#~ msgid "Show or hide Preview window"
+#~ msgstr "Affiche/cache le volet aperçu"
+
+#~ msgid "Show or hide commentaries"
+#~ msgstr "Affiche/cache le volet des commentaires"
+
+#~ msgid "Show or hide - dictionaries and lexicons"
+#~ msgstr "Affiche/cache le volet des dictionnaires"
+
+#~ msgid "Chat with other users and developers"
+#~ msgstr "Chatter avec d'autres utilisateurs et les développeurs"
+
+#~ msgid "Report bug to SourceForge"
+#~ msgstr "Signaler un bogue sur Sourceforge"
+
+#~ msgid "More information about the SWORD Project"
+#~ msgstr "Plus d'information à propos du Projet SWORD"
+
+#~ msgid "Hi_story"
+#~ msgstr "H_istorique"
+
+#~ msgid "1 Cor 15:1"
+#~ msgstr "1 Cor 15:1"
+
+#~ msgid "Name for new prayer list"
+#~ msgstr "Nom de la nouvelle liste de prières"
+
+#~ msgid "can not create path\n"
+#~ msgstr "impossible de créer path\n"
+
+#~ msgid "Prayer list already exist\n"
+#~ msgstr "La liste de prières existe déjà\n"
+
+#~ msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
+#~ msgstr "\\par\\par Liste simple\\par\\par Module crée par Xiphos"
+
+#~ msgid "-3"
+#~ msgstr "-3"
