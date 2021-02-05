@@ -358,7 +358,7 @@ msgstr "*&nbsp;Vocalisations en hébreu"
 
 #: ../src/gtk/about_modules.c:575
 msgid "*&nbsp;Variant readings"
-msgstr "*&nbsp;Varianti"
+msgstr "*&nbsp;Variantes de lecture"
 
 #: ../src/gtk/about_modules.c:582
 msgid "*&nbsp;Transliteration forms"
