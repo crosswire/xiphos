@@ -173,7 +173,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_alert), 5);
 	gtk_window_set_title(GTK_WINDOW(dialog_alert), " ");
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_alert), FALSE);
 #endif
 
@@ -336,7 +336,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 			     (info->title ? info->title : " "));
 	gtk_window_set_modal(GTK_WINDOW(dialog_request), TRUE);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_request), FALSE);
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_request), FALSE);
 #endif
 	dialog_vbox3 =

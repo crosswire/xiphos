@@ -353,7 +353,6 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_widget_set_size_request(font_button, 240, -1);
 	gtk_font_button_set_show_size((GtkFontButton *)font_button,
 				      FALSE);
-#ifdef USE_GTK_3
 	combo_size = gtk_combo_box_text_new_with_entry();
 	gtk_widget_show(combo_size);
 	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
@@ -379,23 +378,6 @@ static GtkWidget *create_dialog_mod_font()
 	combo_entry_size = gtk_bin_get_child(GTK_BIN(combo_size));
 	gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_size))),
 			   _("+0"));
-#else
-	combo_size = gtk_combo_box_entry_new_text();
-	gtk_widget_show(combo_size);
-	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
-			   0);
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "+5");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "+4");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "+3");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "+2");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "+1");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "+0");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "-1");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "-2");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "-3");
-	combo_entry_size = (GTK_WIDGET(GTK_BIN(combo_size)->child));
-	gtk_entry_set_text(GTK_ENTRY(GTK_BIN(combo_size)->child), _("+0"));
-#endif
 	checkbutton_no_font =
 	    gtk_check_button_new_with_label(_("Use the default font for this module"));
 	gtk_widget_show(checkbutton_no_font);
@@ -414,7 +396,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_widget_show(dialog_action_area21);
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_action_area21), 10);
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	hbuttonbox1 = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 #else
 	hbuttonbox1 = gtk_hbutton_box_new();

@@ -1718,12 +1718,8 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 	}
 
 	item = UI_GET_ITEM(gxml, "doublespace");
-#ifdef USE_GTK_3
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 				       ops->doublespace);
-#else
-	GTK_CHECK_MENU_ITEM(item)->active = ops->doublespace;
-#endif
 
 	item = UI_GET_ITEM(gxml, "xrefnotenumbers");
 

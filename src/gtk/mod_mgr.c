@@ -353,7 +353,7 @@ static gboolean query_tooltip(GtkWidget *widget,
 static void create_pixbufs(void)
 {
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 #if GTK_CHECK_VERSION(3, 10, 0)
 	GtkIconTheme *icon_theme = gtk_icon_theme_get_default();
 
@@ -1499,13 +1499,8 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 	if (install) {
 		/* note the repository that is active */
 		if ((local == FALSE) && (remote_source == NULL)) {
-#ifdef USE_GTK_3
 			remote_source =
 			    g_strdup(gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo_entry2)));
-#else
-			remote_source =
-			    g_strdup(gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo_entry2)));
-#endif
 		}
 		gchar *repository_identifier =
 		    g_strdup_printf(_("Repository:\n%s"),
@@ -1753,13 +1748,8 @@ static void response_refresh(void)
 	working = TRUE;
 
 	if (remote_source == NULL)
-#ifdef USE_GTK_3
 		remote_source =
 		    g_strdup(gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo_entry2)));
-#else
-		remote_source =
-		    g_strdup(gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo_entry2)));
-#endif
 	buf =
 	    g_strdup_printf("%s: %s", _("Refreshing from remote source"),
 			    remote_source);
@@ -2110,7 +2100,7 @@ void clear_and_hide_progress_bar(void)
  *   void
  */
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 void
 on_notebook1_switch_page(GtkNotebook *notebook,
 			 gpointer arg, guint page_num, gpointer user_data)
@@ -2121,7 +2111,7 @@ on_notebook1_switch_page(GtkNotebook *notebook,
 			 guint page_num, gpointer user_data)
 #endif
 {
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	GdkCursor *cursor;
 	GdkDisplay *display;
 	GdkWindow *window;
@@ -2134,7 +2124,7 @@ on_notebook1_switch_page(GtkNotebook *notebook,
 	total = g_timer_new();
 #endif
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	// FIXME: for gtk 3
 	cursor = gdk_cursor_new(GDK_WATCH);
 	display = gdk_display_get_default();
@@ -2191,7 +2181,7 @@ on_notebook1_switch_page(GtkNotebook *notebook,
 		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
 		break;
 	}
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 10, 0)
 	// FIXME: for gtk 3
 	gdk_window_set_cursor(window, NULL);
 #endif
@@ -2227,13 +2217,8 @@ on_radiobutton2_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 		gtk_widget_show(button_refresh);
 		if (remote_source)
 			g_free(remote_source);
-#ifdef USE_GTK_3
 		remote_source =
 		    g_strdup(gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo_entry2)));
-#else
-		remote_source =
-		    g_strdup(gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo_entry2)));
-#endif
 		xml_set_value("Xiphos", "modmgr", "mod_mgr_source", "1");
 
 	} else {
@@ -3271,21 +3256,13 @@ static void set_combobox(GtkComboBox *combo)
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
-#ifdef USE_GTK_3
 	gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(combo), 0);
-#else
-	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
-#endif
 }
 
 static void setup_dialog_action_area(GtkDialog *dialog)
 {
 	GtkWidget *dialog_action_area1 =
-#if GTK_CHECK_VERSION(3, 12, 0)
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog));
-#else
-	    gtk_dialog_get_action_area(GTK_DIALOG(dialog));
-#endif
 
 	gtk_widget_show(dialog_action_area1);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
@@ -3450,7 +3427,7 @@ static GtkWidget *create_module_manager_dialog(gboolean first_run)
 
 	/* progress bars */
 	progressbar_refresh = UI_GET_ITEM(gxml, "progressbar1");
-#ifdef USE_GTKBUILDER
+#if GTK_CHECK_VERSION(3, 0, 0)
 	gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(progressbar_refresh), TRUE);
 #endif
 

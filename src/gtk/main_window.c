@@ -485,7 +485,7 @@ static void on_notebook_bible_parallel_switch_page(GtkNotebook *notebook,
 {
 }
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 static void on_notebook_comm_book_switch_page(GtkNotebook *notebook,
 					      gpointer arg,
 					      gint page_num, GList **tl)
@@ -1139,7 +1139,7 @@ void create_mainwindow(void)
 	// Statusbar
 	widgets.appbar = gtk_statusbar_new();
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(widgets.appbar), TRUE);
 #endif
 	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE, 0);
