@@ -1399,7 +1399,7 @@ static void _setup_combobox(GtkComboBox *combo)
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(combo), 0);
 #else
 	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
