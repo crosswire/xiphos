@@ -313,6 +313,7 @@ static gint show_morph(const char *module_name,
 	if (!strcmp(stype, "Greek") ||
 	    strstr(stype, "x-Robinson") ||
 	    strstr(stype, "robinson") ||
+	    strstr(stype, "packard") ||
 	    strstr(stype, "Robinson")) {
 		if (backend->get_key_testament(module_name,
 					       settings.currentverse) == 2) {
@@ -323,6 +324,13 @@ static gint show_morph(const char *module_name,
 				modbuf = "Packard";
 		}
 	}
+
+	if (strstr(stype, "oshm") ){
+		if (backend->is_module("OSHM")) {
+			modbuf="OSHM";
+		}
+	}
+
 	//XI_message(("modbuf = %s", modbuf));
 	if (clicked) {
 		main_display_dictionary(modbuf, (gchar *)svalue);
