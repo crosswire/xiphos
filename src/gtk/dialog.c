@@ -253,7 +253,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG *info)
 #if GTK_CHECK_VERSION(3, 10, 0)
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      _("_Ok"), GTK_RESPONSE_OK);
+				      _("_OK"), GTK_RESPONSE_OK);
 	if (info->yes)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      _("_Yes"), GTK_RESPONSE_YES);

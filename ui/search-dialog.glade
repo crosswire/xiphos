@@ -130,7 +130,7 @@
 		  <child>
 		    <widget class="GtkLabel" id="label6">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">for </property>
+		      <property name="label" translatable="yes">For: </property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -685,7 +685,7 @@ See Module Manager's maintenance functions</property>
 					<widget class="GtkRadioButton" id="radiobutton9">
 					  <property name="visible">True</property>
 					  <property name="can_focus">True</property>
-					  <property name="label" translatable="yes">Multi word</property>
+					  <property name="label" translatable="yes">Multi-word</property>
 					  <property name="use_underline">True</property>
 					  <property name="relief">GTK_RELIEF_NORMAL</property>
 					  <property name="focus_on_click">True</property>
@@ -694,7 +694,7 @@ See Module Manager's maintenance functions</property>
 					  <property name="draw_indicator">True</property>
 					  <property name="group">radiobutton16</property>
 					  <accessibility>
-					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Multi word radiobutton</atkproperty>
+					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Multi-word radiobutton</atkproperty>
 					  </accessibility>
 					</widget>
 					<packing>
