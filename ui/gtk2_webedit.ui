@@ -221,9 +221,9 @@
     <signal name="activate" handler="action_save_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_save_as">
-    <property name="label" translatable="yes">Save as</property>
-    <property name="short_label" translatable="yes">Save as</property>
-    <property name="tooltip" translatable="yes">Save file as ...</property>
+    <property name="label" translatable="yes">Save As</property>
+    <property name="short_label" translatable="yes">Save As</property>
+    <property name="tooltip" translatable="yes">Save File As...</property>
     <property name="stock_id">gtk-save-as</property>
     <signal name="activate" handler="action_save_as_activate_cb" swapped="no"/>
   </object>

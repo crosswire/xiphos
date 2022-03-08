@@ -104,7 +104,7 @@ gboolean main_export_current_adv_search(GString *str, gboolean html, gboolean wi
 		      : (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_words))
 			 ? _("Multi-word")
 			 : (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_optimized))
-			    ? _("Optimized (\"lucene\")")
+			    ? _("Optimized (\"Lucene\")")
 			    : _("Attribute"))))), 99);
 
 

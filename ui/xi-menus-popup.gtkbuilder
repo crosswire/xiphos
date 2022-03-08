@@ -878,7 +878,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="open_in_a_dialog2">
-        <property name="label" translatable="yes">Open in separate window</property>
+        <property name="label" translatable="yes">Open in a separate window</property>
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>

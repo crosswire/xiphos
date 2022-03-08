@@ -86,7 +86,7 @@
                     </child>
                     <child>
                       <object class="GtkRadioButton" id="radiobutton_plain_text">
-                        <property name="label" translatable="yes">Plain text</property>
+                        <property name="label" translatable="yes">Plain Text</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>

@@ -2035,7 +2035,7 @@
     <widget class="GtkImageMenuItem" id="open_in_a_dialog">
       <property name="visible">True</property>
       <property name="tooltip" translatable="yes">Open module in editor or plain display window</property>
-      <property name="label" translatable="yes">Open in separate window</property>
+      <property name="label" translatable="yes">Open in a separate window</property>
       <property name="use_underline">True</property>
       <signal name="activate" handler="on_open_in_dialog_activate" last_modification_time="Tue, 07 Apr 2009 23:37:07 GMT"/>
 
