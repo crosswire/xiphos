@@ -3206,15 +3206,15 @@ msgstr "Incrementar sangría de párrafo"
 
 #: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
 msgid "Insert emoticon"
-msgstr "Insertar emoticono"
+msgstr "Insertar emoji"
 
 #: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
 msgid "Emoticon"
-msgstr "Emoticono"
+msgstr "Emoji"
 
 #: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
 msgid "Insert an emoticon"
-msgstr "Insertar un emoticono"
+msgstr "Insertar un emoji"
 
 #: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
 msgid "Insert image"
