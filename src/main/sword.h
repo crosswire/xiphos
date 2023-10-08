@@ -22,12 +22,12 @@
 #ifndef _SWORD_H__
 #define _SWORD_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "main/configs.h"
 
 /*** these defs need to be seen by gui and backend ***/
