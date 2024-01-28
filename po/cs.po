@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 23:35-0400\n"
-"PO-Revision-Date: 2014-12-26 20:52+0000\n"
-"Last-Translator: Martin Zibricky <mzibr.public@gmail.com>\n"
+"PO-Revision-Date: 2024-01-28 23:46+0100\n"
+"Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/xiphos/language/"
 "cs/)\n"
 "Language: cs\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -45,10 +46,10 @@ msgid "Open"
 msgstr "Otevřít"
 
 #: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
-#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636
-#: ../src/gtk/main_menu.c:773 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
-#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
+#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:773
+#: ../ui/bookmarks.gtkbuilder.h:5 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/gtk_webedit.ui.h:85 ../ui/markverse.gtkbuilder.h:7
+#: ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
 msgstr ""
 
@@ -256,9 +257,8 @@ msgid "Images"
 msgstr "Obrázky"
 
 #: ../src/gtk/about_modules.c:441
-#, fuzzy
 msgid "Glossary"
-msgstr "Slovníky"
+msgstr "Slovník pojmů"
 
 #: ../src/gtk/about_modules.c:445
 msgid "Cult"
@@ -1173,7 +1173,7 @@ msgstr "Slovníky"
 #: ../src/gtk/mod_mgr.c:1548 ../src/gtk/utilities.c:593
 #: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
 msgid "Glossaries"
-msgstr "Slovníky"
+msgstr "Slovníky pojmů"
 
 #: ../src/gtk/mod_mgr.c:1552 ../src/gtk/utilities.c:600
 #: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
@@ -1453,16 +1453,11 @@ msgstr "Řečník"
 msgid "Audience"
 msgstr "Posluchači"
 
-#: ../src/gtk/preferences_dialog.c:1617
-#: ../src/gtk/preferences_dialog.c:1651
-#: ../src/gtk/preferences_dialog.c:1684
-#: ../src/gtk/preferences_dialog.c:1716
-#: ../src/gtk/preferences_dialog.c:1747
-#: ../src/gtk/preferences_dialog.c:1778
-#: ../src/gtk/preferences_dialog.c:1809
-#: ../src/gtk/preferences_dialog.c:1841
-#: ../src/gtk/preferences_dialog.c:1874
-#: ../src/gtk/preferences_dialog.c:1925
+#: ../src/gtk/preferences_dialog.c:1617 ../src/gtk/preferences_dialog.c:1651
+#: ../src/gtk/preferences_dialog.c:1684 ../src/gtk/preferences_dialog.c:1716
+#: ../src/gtk/preferences_dialog.c:1747 ../src/gtk/preferences_dialog.c:1778
+#: ../src/gtk/preferences_dialog.c:1809 ../src/gtk/preferences_dialog.c:1841
+#: ../src/gtk/preferences_dialog.c:1874 ../src/gtk/preferences_dialog.c:1925
 #: ../src/gtk/preferences_dialog.c:2385
 msgid "-- Select --"
 msgstr "-- Vybrat --"
@@ -2487,7 +2482,7 @@ msgstr ""
 "Nejsou k dispozici žádné Bible.\n"
 "Zjevně bylo odmítnuto nějaké přidat.\n"
 "\n"
-"Bez modulu s Biblí nemůže Xiphospokračovat ve své činnosti.\n"
+"Bez modulu s Biblí nemůže Xiphos pokračovat ve své činnosti.\n"
 "Proto se teď ukončí."
 
 #: ../src/main/settings.c:223
@@ -2500,8 +2495,7 @@ msgid ""
 "Please report this, with module & verse"
 msgstr ""
 "Chyba modulu: Nepoužitelné xref kódování.\n"
-"Prosím nahlašte to, se jménem a verzí modulu\n"
-"Please report this, with module & verse"
+"Prosím nahlašte to, se jménem modulu a veršem"
 
 #: ../src/main/sidebar.cc:410
 msgid "verse"
