@@ -464,8 +464,8 @@ msgstr "Разработка Xiphos"
 
 #: ../src/gtk/about_xiphos.c:129
 #, fuzzy
-msgid "Copyright © 2000-2020 Xiphos Development Team"
-msgstr "Копирайт 2000-2020 The Xiphos Development Team"
+msgid "Copyright © 2000-2024 Xiphos Development Team"
+msgstr "Копирайт 2000-2024 The Xiphos Development Team"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""

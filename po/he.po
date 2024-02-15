@@ -475,8 +475,8 @@ msgstr "פיתוח Xiphos"
 
 #: ../src/gtk/about_xiphos.c:129
 #, fuzzy
-msgid "Copyright © 2000-2020 Xiphos Development Team"
-msgstr "זכויות היוצרים (2000-2020) שמורות לצוות הפיתוח של Xiphos"
+msgid "Copyright © 2000-2024 Xiphos Development Team"
+msgstr "זכויות היוצרים (2000-2024) שמורות לצוות הפיתוח של Xiphos"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""

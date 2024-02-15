@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * bookmarks_menu.c - gui for bookmarks using menu
  *
- * Copyright (C) 2003-2020 Xiphos Developer Team
+ * Copyright (C) 2003-2024 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

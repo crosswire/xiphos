@@ -477,8 +477,8 @@ msgid "Xiphos development"
 msgstr "Xiphos kūrimas"
 
 #: ../src/gtk/about_xiphos.c:129
-msgid "Copyright © 2000-2020 Xiphos Development Team"
-msgstr "Autorinės Teisės © 2000-2020 Xiphos Kūrėjų Komanda"
+msgid "Copyright © 2000-2024 Xiphos Development Team"
+msgstr "Autorinės Teisės © 2000-2024 Xiphos Kūrėjų Komanda"
 
 #: ../src/gtk/about_xiphos.c:131
 #, fuzzy

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * about_xiphos.c - Xiphos about dialog
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2024 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -126,7 +126,7 @@ GtkWidget *gui_create_about_xiphos(void)
 
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(about1), versionbuild);
 	gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(about1),
-				       _("Copyright © 2000-2020 Xiphos Development Team"));
+				       _("Copyright © 2000-2024 Xiphos Development Team"));
 	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(about1),
 				      _("\nPowered by The SWORD Project.\nWe would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(about1),

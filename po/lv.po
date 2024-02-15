@@ -446,7 +446,7 @@ msgid "Xiphos development"
 msgstr ""
 
 #: ../src/gtk/about_xiphos.c:129
-msgid "Copyright © 2000-2020 Xiphos Development Team"
+msgid "Copyright © 2000-2024 Xiphos Development Team"
 msgstr ""
 
 #: ../src/gtk/about_xiphos.c:131

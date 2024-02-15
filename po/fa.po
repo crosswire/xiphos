@@ -478,8 +478,8 @@ msgid "Xiphos development"
 msgstr "بسط و گسترش زیفوس"
 
 #: ../src/gtk/about_xiphos.c:129
-msgid "Copyright © 2000-2020 Xiphos Development Team"
-msgstr "حق چاپ برای تیم گسترش زیفوس محفوظ می‏باشد 2000-2020"
+msgid "Copyright © 2000-2024 Xiphos Development Team"
+msgstr "حق چاپ برای تیم گسترش زیفوس محفوظ می‏باشد 2000-2024"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""

@@ -462,8 +462,8 @@ msgid "Xiphos development"
 msgstr "Xiphos udvikling"
 
 #: ../src/gtk/about_xiphos.c:129
-msgid "Copyright © 2000-2020 Xiphos Development Team"
-msgstr "Ophavsret © 2000-2020 Xiphos Udvilkerteam"
+msgid "Copyright © 2000-2024 Xiphos Development Team"
+msgstr "Ophavsret © 2000-2024 Xiphos Udvilkerteam"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""

@@ -477,8 +477,8 @@ msgstr "Xiphos fejlesztés"
 
 #: ../src/gtk/about_xiphos.c:129
 #, fuzzy
-msgid "Copyright © 2000-2020 Xiphos Development Team"
-msgstr "Minden jog fenntartva 2000-2020 A Xiphos Fejlesztői csapat"
+msgid "Copyright © 2000-2024 Xiphos Development Team"
+msgstr "Minden jog fenntartva 2000-2024 A Xiphos Fejlesztői csapat"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""

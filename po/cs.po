@@ -488,8 +488,8 @@ msgid "Xiphos development"
 msgstr "Vývoj aplikace Xiphos"
 
 #: ../src/gtk/about_xiphos.c:129
-msgid "Copyright © 2000-2020 Xiphos Development Team"
-msgstr "Copyright © 2000-2020 Xiphos Vývojový tým"
+msgid "Copyright © 2000-2024 Xiphos Development Team"
+msgstr "Copyright © 2000-2024 Xiphos Vývojový tým"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""
