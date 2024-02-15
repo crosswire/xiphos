@@ -222,7 +222,7 @@ on_live_chat_activate(GtkMenuItem *menuitem, gpointer user_data)
 		*s = '_';
 
 	url =
-	    g_strdup_printf("http://webchat.freenode.net/?nick=%s|%c%s&channels=xiphos&prompt=1",
+	    g_strdup_printf("https://web.libera.chat/?nick=%s|%c%s?#xiphos",
 			    user, platform, version);
 	xiphos_open_default(url);
 	g_free(url);
