@@ -119,6 +119,18 @@ int main(int argc, char *argv[])
 	double d;
 #endif
 
+	// ---------------------------------------------------------
+	// **** LOUD OBNOXIOUS COMMENT TO GET ATTENTION ****
+	// **** This a sick hack to get around a WK regression.
+	// **** https://bugs.webkit.org/show_bug.cgi?id=228268
+	// **** If WK ever gets this fixed, this should be removed.
+	/*
+	 * set env.var that causes WK not to screw with nvidia badly.
+	 */
+	setenv("WEBKIT_DISABLE_COMPOSITING_MODE", "1", 1);
+	// **** end of LOUD OBNOXIOUS COMMENT TO GET ATTENTION ****
+	// ---------------------------------------------------------
+
 //      g_thread_init(NULL);
 #if !GLIB_CHECK_VERSION(2, 35, 0)
 	g_type_init(); // g_type_init has been deprecated since version 2.36
