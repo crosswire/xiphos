@@ -544,17 +544,10 @@ static void create_pixbufs(void)
 	    pixbuf_finder("epiphany-bookmark-page.png", 0, NULL);
 
 	if (!bm_pixbufs->pixbuf_helpdoc)
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 		bm_pixbufs->pixbuf_helpdoc =
-#if GTK_CHECK_VERSION(3, 10, 0)
 		    GDK_PIXBUF(gtk_image_new_from_icon_name("gtk-dnd",
 							    GTK_ICON_SIZE_BUTTON));
-#else
-		    gtk_widget_render_icon_pixbuf(widgets.app,
-						  GTK_STOCK_DND,
-						  GTK_ICON_SIZE_MENU);
-#endif
-
 #else
 		bm_pixbufs->pixbuf_helpdoc = gtk_widget_render_icon(widgets.app,
 								    GTK_STOCK_DND,

@@ -35,7 +35,7 @@ void gui_open_mod_mgr(void);
 void gui_open_mod_mgr_initial_run(void);
 void clear_and_hide_progress_bar(void);
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 void
 on_notebook1_switch_page(GtkNotebook *notebook,
 			 gpointer arg,
