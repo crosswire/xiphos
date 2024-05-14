@@ -1837,7 +1837,8 @@ void main_flush_widgets_content(void)
 	GString *blank_html_content = g_string_new(NULL);
 	g_string_printf(blank_html_content,
 			"<html><head></head><body bgcolor=\"%s\" text=\"%s\"> </body></html>",
-			settings.bible_bg_color, settings.bible_text_color);
+			(settings.bible_bg_color   ? settings.bible_bg_color   : "0x000000"), 
+			(settings.bible_text_color ? settings.bible_text_color : "0xFFFFFF"));
 
 	if (gtk_widget_get_realized(GTK_WIDGET(widgets.html_text)))
 		HtmlOutput(blank_html_content->str, widgets.html_text, NULL, NULL);
