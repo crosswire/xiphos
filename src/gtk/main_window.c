@@ -67,6 +67,7 @@
 /* we must define the categories of #definitions we need. */
 #define XK_MISCELLANY
 #define XK_LATIN1
+#define XK_XKB_KEYS
 #include <X11/keysymdef.h>
 
 WIDGETS widgets;
@@ -795,6 +796,22 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			on_notebook_main_new_tab_clicked(NULL, NULL);
 		else if (state == GDK_MOD1_MASK) // Alt-T transliteration
 			kbd_toggle_option(true, "Transliteration");
+		break;
+
+	case XK_Tab:
+		if (state == GDK_CONTROL_MASK) // Ctrl-Tab  next tab
+			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
+				gtk_notebook_next_page(GTK_NOTEBOOK(widgets.notebook_main));
+				return TRUE; // Need to prevent Tab from navigating between widgets here
+			}
+		break;
+
+	case XK_ISO_Left_Tab:
+		if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) // Ctrl-Shift-Tab  previous tab
+			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
+				gtk_notebook_prev_page(GTK_NOTEBOOK(widgets.notebook_main));
+				return TRUE; // Need to prevent Shift-Tab from navigating between widgets here
+			}
 		break;
 
 	case XK_z:
