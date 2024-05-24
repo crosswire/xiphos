@@ -299,6 +299,9 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
 				 tbinf->page_widget, tab_widget);
 
+	gtk_notebook_set_tab_reorderable(GTK_NOTEBOOK(widgets.notebook_main),
+					 tbinf->page_widget, TRUE);
+
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					 tbinf->page_widget, str->str);
 
