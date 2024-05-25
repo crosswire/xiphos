@@ -194,13 +194,9 @@ void set_current_tab(PASSAGE_TAB_INFO *pt)
 	if (stop_refresh)
 		return;
 
-	if (!closing_tab && ot != NULL && ot->button_close != NULL) {
-		gtk_widget_set_sensitive(ot->button_close, FALSE);
-	}
 	cur_passage_tab = pt;
 	if (pt != NULL && pt->button_close != NULL) {
 		//main_update_tab_history_menu((PASSAGE_TAB_INFO*)pt);
-		gtk_widget_set_sensitive(pt->button_close, TRUE);
 
 		/* adopt panel shows from passage tab memory. */
 		settings.showtexts = pt->showtexts;
@@ -885,7 +881,6 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	gtk_widget_size_request(tbinf->button_close, &r);
 #endif
 
-	gtk_widget_set_sensitive(tbinf->button_close, FALSE);
 	gtk_widget_show(tbinf->button_close);
 	tbinf->tab_label = GTK_LABEL(gtk_label_new(label_text));
 	gtk_widget_show(GTK_WIDGET(tbinf->tab_label));
