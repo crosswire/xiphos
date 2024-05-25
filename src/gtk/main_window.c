@@ -844,6 +844,14 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 		}
 		break;
 
+	case XK_w:
+		if (state == GDK_CONTROL_MASK) { // Ctrl-W  close current tab
+			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
+				gint pagenum = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
+				gui_close_passage_tab(pagenum);
+			}
+		}
+		break;
 
 	case XK_z:
 	case XK_Z:
