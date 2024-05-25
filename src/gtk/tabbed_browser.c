@@ -794,6 +794,49 @@ void gui_load_tabs(const gchar *filename)
 
 /******************************************************************************
  * Name
+ *  on_notebook_main_tab_clicked
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void on_notebook_main_tab_clicked(GtkWidget *self,
+				       GdkEventButton *event,
+				       gpointer user_data)
+ *
+ * Description
+ *   Handle click events for tabs
+ *
+ * Return value
+ *   void
+ */
+static gboolean on_notebook_main_tab_clicked(GtkWidget *self,
+					     GdkEventButton *event,
+					     gpointer user_data)
+{
+	GtkWidget *notebook = widgets.notebook_main;
+	PASSAGE_TAB_INFO *pt = user_data;
+	const gchar *label_text = gtk_label_get_text(pt->tab_label);
+
+	switch (event->type) {
+		case GDK_BUTTON_PRESS: {
+			if (event->button == 2) { // Middle-Click
+				GtkWidget *page = pt->page_widget;
+				gint pagenum = gtk_notebook_page_num(GTK_NOTEBOOK(notebook), page);
+				gui_close_passage_tab(pagenum);
+				return TRUE;
+			}
+			break;
+		}
+
+		default:
+			return FALSE;
+	}
+
+	return FALSE;
+}
+
+/******************************************************************************
+ * Name
  *  on_notebook_main_close_page
  *
  * Synopsis
@@ -882,6 +925,10 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 #endif
 
 	gtk_widget_show(tbinf->button_close);
+
+	tbinf->tab_label_eventbox = GTK_EVENT_BOX(gtk_event_box_new());
+	gtk_widget_show(GTK_WIDGET(tbinf->tab_label_eventbox));
+
 	tbinf->tab_label = GTK_LABEL(gtk_label_new(label_text));
 	gtk_widget_show(GTK_WIDGET(tbinf->tab_label));
 
@@ -904,15 +951,22 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 #endif
 
 	UI_HBOX(box, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label),
+	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label_eventbox),
 			   TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(box), tbinf->button_close, FALSE, FALSE,
 			   0);
+
+	gtk_container_add(GTK_CONTAINER(tbinf->tab_label_eventbox),
+			  GTK_WIDGET(tbinf->tab_label));
+	gtk_widget_set_events(GTK_WIDGET(tbinf->tab_label_eventbox), GDK_BUTTON_PRESS_MASK);
 
 	gtk_widget_show(box);
 
 	g_signal_connect(G_OBJECT(tbinf->button_close), "clicked",
 			 G_CALLBACK(on_notebook_main_close_page), tbinf);
+
+	g_signal_connect(G_OBJECT(tbinf->tab_label_eventbox), "button-press-event",
+			 G_CALLBACK(on_notebook_main_tab_clicked), tbinf);
 
 	return box;
 }

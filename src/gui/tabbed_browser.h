@@ -32,6 +32,7 @@ struct _passage_tab_info
 {
 	GtkWidget *page_widget;
 	GtkLabel *tab_label;
+	GtkEventBox *tab_label_eventbox;
 	GtkWidget *button_close;
 	GtkWidget *editor;
 	GtkWidget *paratab;
