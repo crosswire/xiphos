@@ -800,8 +800,8 @@ void gui_load_tabs(const gchar *filename)
  *   #include "tabbed_browser.h"
  *
  *   void on_notebook_main_tab_clicked(GtkWidget *self,
-				       GdkEventButton *event,
-				       gpointer user_data)
+ *				       GdkEventButton *event,
+ *				       gpointer user_data)
  *
  * Description
  *   Handle click events for tabs
