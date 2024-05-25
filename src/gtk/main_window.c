@@ -815,12 +815,12 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 		break;
 
 	case XK_Page_Up:
-		if (state == GDK_CONTROL_MASK) {
+		if (state == GDK_CONTROL_MASK) { // Ctrl-PgUp  previous tab
 			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
 				gtk_notebook_prev_page(GTK_NOTEBOOK(widgets.notebook_main));
 				return TRUE; // Prevent from navigating standard/parallel view
 			}
-		} else if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) {
+		} else if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) { // Ctrl-Shift-PgUp  reorder tab to left
 			gint current_tab_idx = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
 			GtkWidget *current_tab = gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_main), current_tab_idx);
 			if (current_tab_idx != 0) {
@@ -830,11 +830,11 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 		break;
 
 	case XK_Page_Down:
-		if (state == GDK_CONTROL_MASK) {
+		if (state == GDK_CONTROL_MASK) { // Ctrl-PgDown  next tab
 			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL)
 				gtk_notebook_next_page(GTK_NOTEBOOK(widgets.notebook_main));
 			return TRUE; // Prevent from navigating standard/parallel view
-		} else if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) {
+		} else if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) { // Ctrl-Shift-PgDown  reorder tab to right
 			gint current_tab_idx = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
 			gint n_tabs = gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main));
 			GtkWidget *current_tab = gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_main), current_tab_idx);
