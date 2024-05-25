@@ -67,6 +67,7 @@ void set_current_tab(PASSAGE_TAB_INFO *pt);
 gboolean stop_refresh = FALSE;
 gboolean change_tabs_no_redisplay = FALSE;
 gboolean closing_tab = FALSE;
+gboolean tab_reorder_out_of_sync = FALSE;
 
 GList *passage_list;
 
@@ -923,6 +924,66 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 
 /******************************************************************************
  * Name
+ *  gui_notebook_main_page_reordered
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_notebook_main_page_reordered(GtkNotebook *notebook,
+ *					   GtkNotebookPage *page,
+ *					   guint page_num, GList **tl)
+ *
+ * Description
+ *   updates passage_list with changed tab order
+ *
+ * Return value
+ *   void
+ */
+void gui_notebook_main_page_reordered(GtkNotebook *notebook,
+				      gpointer page,
+				      guint page_num,
+				      GList **tl)
+{
+	if (tab_reorder_out_of_sync) {
+		return;
+	}
+
+	// Get index of passage_list entry that matches `page`
+	GList *passage_list = *tl;
+	PASSAGE_TAB_INFO *pt = passage_list->data;
+	gint old_index = -1;
+	gint idx = 0;
+	for (GList *cur = passage_list; cur != NULL; cur = cur->next) {
+		pt = cur->data;
+		GtkWidget *pw = pt->page_widget;
+		if (pw == page) {
+			old_index = idx;
+			break;
+		}
+
+		idx++;
+	}
+
+	if (old_index == -1) {
+		// Page not found (this theoretically shouldn't be possible)
+		g_warning("Couldn't find reordered page in passage_list!\
+`widgets.notebook_main` and `passage_list` might be out of sync! Refusing to\
+persist further tab rearrangements.\n");
+		tab_reorder_out_of_sync = true;
+		return;
+	}
+
+	// Swap pointers inside of passage_list to match swap
+	// performed by notebook.
+	GList *old_pt = g_list_nth(passage_list, old_index);
+	GList *new_pt = g_list_nth(passage_list, page_num);
+	gpointer tmp = old_pt->data;
+	old_pt->data = new_pt->data;
+	new_pt->data = tmp;
+}
+
+/******************************************************************************
+ * Name
  *  gui_notebook_main_switch_page
  *
  * Synopsis
@@ -1593,6 +1654,11 @@ void gui_notebook_main_setup(int tabs, const char *tabsfile)
 	g_signal_connect(G_OBJECT(widgets.notebook_main),
 			 "switch-page",
 			 G_CALLBACK(gui_notebook_main_switch_page),
+			 &passage_list);
+
+	g_signal_connect(G_OBJECT(widgets.notebook_main),
+			 "page-reordered",
+			 G_CALLBACK(gui_notebook_main_page_reordered),
 			 &passage_list);
 
 	g_signal_connect(G_OBJECT(widgets.button_new_tab), "clicked",
