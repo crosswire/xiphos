@@ -848,7 +848,7 @@ static gboolean on_notebook_main_tab_clicked(GtkWidget *self,
  *
  *
  * Return value
- *   void
+ *   gpointer
  */
 
 static void on_notebook_main_close_page(GtkButton *button,
