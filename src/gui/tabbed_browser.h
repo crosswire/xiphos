@@ -104,6 +104,10 @@ void gui_recompute_shows(gboolean flush);
 void gui_recompute_view_menu_choices(void);
 void setup_book_editor_tab(PASSAGE_TAB_INFO *pt);
 GString *pick_tab_label(PASSAGE_TAB_INFO *pt);
+void gui_notebook_main_page_reordered(GtkNotebook *notebook,
+				      gpointer page,
+				      guint page_num,
+				      GList **tl);
 #ifdef USE_GTK_3
 void gui_notebook_main_switch_page(GtkNotebook *notebook,
 				   gpointer arg1, gint page_num,
