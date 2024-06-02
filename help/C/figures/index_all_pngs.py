@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #Copyright (c) 2009 Simon Meers
 
@@ -84,5 +84,5 @@ if y_or_n():
 	p = Popen("gimp -ib -", shell=True, stdin=t)
 	p.communicate() #wait for completion
 else:
-	print "Conversion aborted."
+	print("Conversion aborted.")
 
