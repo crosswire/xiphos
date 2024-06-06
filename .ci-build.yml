@@ -66,7 +66,7 @@ requires:
     - libxml2-dev
     - libxml2-utils
     - make
-    - python-dev
+    - python-dev-is-python3
     - swig
     - uuid-dev
     - uuid-runtime
