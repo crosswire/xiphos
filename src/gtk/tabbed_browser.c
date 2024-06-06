@@ -67,7 +67,6 @@ void set_current_tab(PASSAGE_TAB_INFO *pt);
 gboolean stop_refresh = FALSE;
 gboolean change_tabs_no_redisplay = FALSE;
 gboolean closing_tab = FALSE;
-gboolean tab_reorder_out_of_sync = FALSE;
 
 GList *passage_list;
 
@@ -993,7 +992,8 @@ void gui_notebook_main_page_reordered(GtkNotebook *notebook,
 				      guint page_num,
 				      GList **tl)
 {
-	if (tab_reorder_out_of_sync) {
+	static gboolean tab_order_out_of_sync = FALSE;
+	if (tab_order_out_of_sync) {
 		return;
 	}
 
@@ -1018,7 +1018,7 @@ void gui_notebook_main_page_reordered(GtkNotebook *notebook,
 		g_warning("Couldn't find reordered page in passage_list!\
 `widgets.notebook_main` and `passage_list` might be out of sync! Refusing to\
 persist further tab rearrangements.\n");
-		tab_reorder_out_of_sync = true;
+		tab_order_out_of_sync = true;
 		return;
 	}
 
