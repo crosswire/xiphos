@@ -997,6 +997,8 @@ void gui_notebook_main_page_reordered(GtkNotebook *notebook,
 		return;
 	}
 
+	guint new_index = page_num;
+
 	// Get index of passage_list entry that matches `page`
 	GList *passage_list = *tl;
 	PASSAGE_TAB_INFO *pt = passage_list->data;
@@ -1024,11 +1026,26 @@ persist further tab rearrangements.\n");
 
 	// Swap pointers inside of passage_list to match swap
 	// performed by notebook.
-	GList *old_pt = g_list_nth(passage_list, old_index);
-	GList *new_pt = g_list_nth(passage_list, page_num);
-	gpointer tmp = old_pt->data;
-	old_pt->data = new_pt->data;
-	new_pt->data = tmp;
+	if (old_index == new_index) { return; }
+
+	bool shifting_right = false;
+	if (new_index > old_index) {
+		shifting_right = true;
+	}
+
+	GList *sibling = NULL;
+	if (new_index < g_list_length(passage_list) - 1) {
+		sibling = g_list_nth(passage_list, new_index);
+		if (shifting_right) {
+			sibling = sibling->next;
+		}
+	}
+
+	GList *link = g_list_nth(passage_list, old_index);
+	passage_list = g_list_remove_link(passage_list, link);
+	passage_list = g_list_insert_before_link(passage_list, sibling, link);
+
+	*tl = passage_list;
 }
 
 /******************************************************************************
