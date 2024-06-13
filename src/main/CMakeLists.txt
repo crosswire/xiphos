@@ -74,3 +74,14 @@ target_link_libraries(main
   PkgConfig::Sword
   PkgConfig::Biblesync
   )
+
+IF (DBUS)
+  target_include_directories (main
+    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
+    PkgConfig::DBus
+    )
+  target_link_libraries(main
+    PRIVATE
+    PkgConfig::DBus
+    )
+ENDIF (DBUS)
