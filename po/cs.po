@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 23:35-0400\n"
-"PO-Revision-Date: 2024-01-28 23:46+0100\n"
+"PO-Revision-Date: 2024-06-19 14:10+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/xiphos/language/"
 "cs/)\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -37,7 +37,7 @@ msgstr "Konfigurace nebyla nenalezena"
 #: ../src/editor/slib-editor.c:209
 #, c-format
 msgid "Page %d of %d"
-msgstr ""
+msgstr "Stránka %d z %d"
 
 #: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
 #: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
@@ -51,18 +51,16 @@ msgstr "Otevřít"
 #: ../ui/gtk_webedit.ui.h:85 ../ui/markverse.gtkbuilder.h:7
 #: ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
-msgstr ""
+msgstr "_Zrušit"
 
 #: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
 #: ../src/editor/slib-editor.c:715 ../src/gtk/main_menu.c:774
-#, fuzzy
 msgid "_Open"
-msgstr "Otevřít"
+msgstr "_Otevřít"
 
 #: ../src/editor/slib-editor.c:415
-#, fuzzy
 msgid "Save As"
-msgstr "Uložit jako..."
+msgstr "Uložit jako"
 
 #: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
 #: ../src/editor/webkit_editor.c:688
@@ -71,7 +69,7 @@ msgstr "Nepojmenovaný dokument"
 
 #: ../src/editor/slib-editor.c:494
 msgid "_Close"
-msgstr ""
+msgstr "_Zavřít"
 
 #: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
 msgid "Are you sure you want to delete the note for"
@@ -79,17 +77,15 @@ msgstr "Jste si jist, že chcete odstranit poznámku k"
 
 #: ../src/editor/slib-editor.c:659
 msgid "HTML Output"
-msgstr ""
+msgstr "HTML výstup"
 
 #: ../src/editor/slib-editor.c:665
-#, fuzzy
 msgid "HTML Source"
-msgstr "Zdroj"
+msgstr "HTML zdroj"
 
 #: ../src/editor/slib-editor.c:671
-#, fuzzy
 msgid "Plain Source"
-msgstr "Zdroj"
+msgstr "Obyčejný zdroj"
 
 #: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
 #: ../ui/editor_studypad.xml.h:19
@@ -102,19 +98,16 @@ msgid "Print Pre_view"
 msgstr "Ná_hled tisku"
 
 #: ../src/editor/slib-editor.c:704
-#, fuzzy
 msgid "_Quit"
-msgstr "Ukončit"
+msgstr "_Ukončit"
 
 #: ../src/editor/slib-editor.c:726 ../src/gtk/dialog.c:262
-#, fuzzy
 msgid "_Save"
-msgstr "Uložit"
+msgstr "_Uložit"
 
 #: ../src/editor/slib-editor.c:737
-#, fuzzy
 msgid "Save _As..."
-msgstr "Uložit jako..."
+msgstr "_Uložit jako…"
 
 #: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
 #: ../ui/gtk_webedit.ui.h:56
@@ -122,9 +115,8 @@ msgid "New"
 msgstr "Nový"
 
 #: ../src/editor/slib-editor.c:745
-#, fuzzy
 msgid "Open new document"
-msgstr "Vytvořit nový dokument"
+msgstr "Otevřít nový dokument"
 
 #: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
 #: ../ui/gtk_webedit.ui.h:14
@@ -132,9 +124,8 @@ msgid "Delete"
 msgstr "Smazat"
 
 #: ../src/editor/slib-editor.c:751
-#, fuzzy
 msgid "Delete current note"
-msgstr "Odstranit aktuálni poznámku"
+msgstr "Odstranit aktuální poznámku"
 
 #: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
@@ -145,17 +136,15 @@ msgstr "_Soubor"
 
 #: ../src/editor/slib-editor.c:811
 msgid "HTML _Output"
-msgstr ""
+msgstr "HTML _výstup"
 
 #: ../src/editor/slib-editor.c:818
-#, fuzzy
 msgid "_HTML Source"
-msgstr "Zdroj"
+msgstr "_HTML zdroj"
 
 #: ../src/editor/slib-editor.c:825
-#, fuzzy
 msgid "_Plain Source"
-msgstr "Zdroj"
+msgstr "_Obyčejný zdroj"
 
 #: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
 #: ../ui/xi-menus.gtkbuilder.h:11
@@ -213,34 +202,29 @@ msgstr "O modulu"
 #: ../src/gtk/about_modules.c:223 ../src/gtk/about_trans.c:168
 #: ../src/gtk/find_dialog.c:263
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 #: ../src/gtk/about_modules.c:415
-#, fuzzy
 msgid "<b>Module name:</b> "
-msgstr "<b>Správce modulů</b>"
+msgstr "<b>Název modulu:</b> "
 
 #: ../src/gtk/about_modules.c:422
-#, fuzzy
 msgid "<b>Module abbreviation:</b> "
-msgstr "<b>Seznam modulů</b>"
+msgstr "<b>Zkratka modulu:</b> "
 
 #: ../src/gtk/about_modules.c:427
-#, fuzzy
 msgid "<b>Version:</b> "
-msgstr "<b>Možnosti</b>"
+msgstr "<b>Verze:</b> "
 
 #: ../src/gtk/about_modules.c:430
 msgid "No version stamp found"
-msgstr ""
+msgstr "Nenalezeno žádné razítko verze"
 
 #: ../src/gtk/about_modules.c:433
-#, fuzzy
 msgid "<b>Type:</b> "
-msgstr "<b>Rozsah</b>"
+msgstr "<b>Typ:</b> "
 
 #: ../src/gtk/about_modules.c:435
-#, fuzzy
 msgid "Daily Devotion"
 msgstr "Čtení na každý den"
 
@@ -262,7 +246,7 @@ msgstr "Slovník pojmů"
 
 #: ../src/gtk/about_modules.c:445
 msgid "Cult"
-msgstr ""
+msgstr "Kult"
 
 #: ../src/gtk/about_modules.c:449 ../src/gtk/search_sidebar.c:287
 msgid "Bible"
@@ -279,135 +263,112 @@ msgid "Dictionary"
 msgstr "Slovník"
 
 #: ../src/gtk/about_modules.c:458
-#, fuzzy
 msgid "General Book"
-msgstr "Knihy obecně"
+msgstr "Kniha obecně"
 
 #: ../src/gtk/about_modules.c:463
-#, fuzzy
 msgid "Personal Commentary"
-msgstr "Přejmenovat komentář"
+msgstr "Osobní komentář"
 
 #: ../src/gtk/about_modules.c:466
-#, fuzzy
 msgid "Journal"
-msgstr "Denik"
+msgstr "Deník"
 
 #: ../src/gtk/about_modules.c:469
-#, fuzzy
 msgid "Unknown type"
-msgstr "Neznámý"
+msgstr "Neznámý typ"
 
 #: ../src/gtk/about_modules.c:475
-#, fuzzy
 msgid "<b>Language:</b> "
-msgstr "<b>Rozsah</b>"
+msgstr "<b>Jazyk:</b> "
 
 #: ../src/gtk/about_modules.c:478
 msgid "Not specified"
-msgstr ""
+msgstr "Nespecifikováno"
 
 #: ../src/gtk/about_modules.c:487
-#, fuzzy
 msgid "<b>Installed size:</b> "
-msgstr "<b>Přidat zdroj</b>"
+msgstr "<b>Instalovaná velikost:</b> "
 
 #: ../src/gtk/about_modules.c:495
-#, fuzzy
 msgid "<b>Companion module(s):</b></br>"
-msgstr "<b>Hlavní okno modulů</b>"
+msgstr "<b>Doprovodné moduly:</b></br>"
 
 #: ../src/gtk/about_modules.c:505
-#, fuzzy
 msgid "<b>Features:</b>"
-msgstr "<b>Formát</b>"
+msgstr "<b>Vlastnosti:</b>"
 
 #: ../src/gtk/about_modules.c:509
-#, fuzzy
 msgid "*&nbsp;Headings"
-msgstr "Nadpisy"
+msgstr "*&nbsp;Nadpisy"
 
 #: ../src/gtk/about_modules.c:517
-#, fuzzy
 msgid "*&nbsp;Footnotes"
-msgstr "Poznámky pod čarou"
+msgstr "*&nbsp;Poznámky pod čarou"
 
 #: ../src/gtk/about_modules.c:523
-#, fuzzy
 msgid "*&nbsp;Cross references"
-msgstr "Křížové odkazy"
+msgstr "*&nbsp;Křížové odkazy"
 
 #: ../src/gtk/about_modules.c:530
-#, fuzzy
 msgid "*&nbsp;Strong's numbers"
-msgstr "Strongova čísla"
+msgstr "*&nbsp;Strongova čísla"
 
 #: ../src/gtk/about_modules.c:538
-#, fuzzy
 msgid "*&nbsp;Morphological tags"
-msgstr "Morfologické značky"
+msgstr "*&nbsp;Morfologické značky"
 
 #: ../src/gtk/about_modules.c:544
-#, fuzzy
 msgid "*&nbsp;Lemmas"
-msgstr "Lemmata"
+msgstr "*&nbsp;Lemmata"
 
 #: ../src/gtk/about_modules.c:552
-#, fuzzy
 msgid "*&nbsp;Words of Christ in red"
-msgstr "Ježíšova slova v červené barvě"
+msgstr "*&nbsp;Ježíšova slova v červené barvě"
 
 #: ../src/gtk/about_modules.c:557
-#, fuzzy
 msgid "*&nbsp;Greek accents"
-msgstr "Řecké přízvuky"
+msgstr "*&nbsp;Řecké přízvuky"
 
 #: ../src/gtk/about_modules.c:563
-#, fuzzy
 msgid "*&nbsp;Hebrew Vowel Points"
-msgstr "Punktuace hebrejských samohlásek"
+msgstr "*&nbsp;Punktuace hebrejských samohlásek"
 
 #: ../src/gtk/about_modules.c:569
-#, fuzzy
 msgid "*&nbsp;Hebrew Cantillation"
-msgstr "Hebrejská vokalizace"
+msgstr "*&nbsp;Hebrejská vokalizace"
 
 #: ../src/gtk/about_modules.c:575
 msgid "*&nbsp;Variant readings"
-msgstr ""
+msgstr "*&nbsp;Čtení variant"
 
 #: ../src/gtk/about_modules.c:582
-#, fuzzy
 msgid "*&nbsp;Transliteration forms"
-msgstr "Transkripce formulářů"
+msgstr "*&nbsp;Transkripce formulářů"
 
 #: ../src/gtk/about_modules.c:587
-#, fuzzy
 msgid "*&nbsp;Enumerations"
-msgstr "Vyjmenování"
+msgstr "*&nbsp;Vyjmenování"
 
 #: ../src/gtk/about_modules.c:592
 msgid "*&nbsp;Glosses"
-msgstr ""
+msgstr "*&nbsp;Glosy"
 
 #: ../src/gtk/about_modules.c:599
-#, fuzzy
 msgid "*&nbsp;Morpheme Segmentation"
-msgstr "Členění morfémů"
+msgstr "*&nbsp;Členění morfémů"
 
 #: ../src/gtk/about_modules.c:606
 msgid "*&nbsp;<i>No features found</i>"
-msgstr ""
+msgstr "*&nbsp;<i>Nenalezeny žádné vlastnosti</i>"
 
 #: ../src/gtk/about_modules.c:616
-#, fuzzy
 msgid "<b>Distribution license:</b>"
-msgstr "<b>Parametr</b>"
+msgstr "<b>Distribuční licence:</b>"
 
 #: ../src/gtk/about_modules.c:629
-#, fuzzy
 msgid "<b>Promotional:</b> "
-msgstr "<b>Možnosti</b>"
+msgstr "<b>Propagační:</b> "
 
 #: ../src/gtk/about_sword.c:81
 msgid ""
@@ -455,10 +416,9 @@ msgstr ""
 
 #: ../src/gtk/about_sword.c:157
 msgid "BibleSync technical details"
-msgstr ""
+msgstr "Technické detaily BibleSync"
 
 #: ../src/gtk/about_trans.c:82
-#, fuzzy
 msgid ""
 "Do you like using Xiphos to study the Bible? Would you like to see its user "
 "interface in your native language? You could translate Xiphos! \n"
@@ -468,12 +428,12 @@ msgid ""
 "below, contact us, and get involved with our efforts. Your help will be much "
 "appreciated!"
 msgstr ""
-"Používáte rád(a) Xiphos při studiu Bible? Chtěl(a) byste vidět Xiphos ve "
-"svém rodném jazyce? Můžete vytvořit překlad aplikace Xiphos! \n"
+"Rádi používáte Xiphos ke studiu Bible? Chtěli byste vidět jeho uživatelské "
+"rozhraní ve vašem rodném jazyce? Xiphos můžete přeložit!\n"
 "\n"
-"Rádi uvítáme překlady aplikace Xiphos do dalších jazyků. Pokud jste schopen "
-"(schopna) vytvořit překlad, podívejte se na odkaz níže, kontaktujte nás a "
-"připojte se k našemu úsilí."
+"Neustále hledáme příspěvky nových překladů projektu Xiphos do jiných jazyků. "
+"Pokud jste schopni pro nás překládat, podívejte se na níže uvedený odkaz, "
+"kontaktujte nás a zapojte se do našeho úsilí. Vaše pomoc bude velmi oceněna!"
 
 #: ../src/gtk/about_trans.c:96
 msgid "About Xiphos Translation"
@@ -603,15 +563,15 @@ msgstr "Vložit klíč: "
 
 #: ../src/gtk/dialog.c:256
 msgid "_Ok"
-msgstr ""
+msgstr "_Budiž"
 
 #: ../src/gtk/dialog.c:259 ../src/gtk/dialog.c:633
 msgid "_Yes"
-msgstr ""
+msgstr "_Ano"
 
 #: ../src/gtk/dialog.c:265 ../src/gtk/dialog.c:630
 msgid "_No"
-msgstr ""
+msgstr "_Ne"
 
 #: ../src/gtk/dialog.c:289
 msgid "Close without Saving"
@@ -619,7 +579,7 @@ msgstr "Zavřít bez uložení"
 
 #: ../src/gtk/dialog.c:639
 msgid "_OK"
-msgstr ""
+msgstr "_Budiž"
 
 #: ../src/gtk/dialog.c:724
 msgid "Xiphos:"
@@ -704,9 +664,8 @@ msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "CHYBA! Aplikace Xiphos havarovala chybou typu \"STRING\"."
 
 #: ../src/gtk/main_menu.c:769
-#, fuzzy
 msgid "Open Session"
-msgstr "_Otevřít sezení"
+msgstr "Otevřít sezení"
 
 #: ../src/gtk/main_window.c:589
 #, c-format
@@ -714,23 +673,20 @@ msgid "Module has no support for %s."
 msgstr "Modul nepodporuje %s."
 
 #: ../src/gtk/main_window.c:640
-#, fuzzy
 msgid "BibleSync is not active."
-msgstr "BibleSync není aktivní pro přenos."
+msgstr "BibleSync není aktivní."
 
 #: ../src/gtk/main_window.c:648
-#, fuzzy
 msgid "BibleSync Chat"
-msgstr "BibleSync"
+msgstr "BibleSync Chat"
 
 #: ../src/gtk/main_window.c:649
 msgid "[say this]"
-msgstr ""
+msgstr "[říci tohle]"
 
 #: ../src/gtk/main_window.c:650
-#, fuzzy
 msgid "Comment:"
-msgstr "Komentář"
+msgstr "Komentář:"
 
 #: ../src/gtk/main_window.c:690
 msgid "Xiphos: No windows."
@@ -1311,10 +1267,13 @@ msgid ""
 "Would you like to delete %s?\n"
 "Beware: This cannot be undone."
 msgstr ""
+"%s nahrazuje %s.\n"
+"Chcete smazat %s?\n"
+"Pozor: Toto nelze vrátit zpět."
 
 #: ../src/gtk/mod_mgr.c:2686
 msgid "No obsolete modules were found."
-msgstr ""
+msgstr "Nebyly nalezeny žádné zastaralé moduly."
 
 #: ../src/gtk/mod_mgr.c:2708
 msgid "Standard remote sources have been loaded."
@@ -1894,12 +1853,11 @@ msgstr ""
 "Nepřímá navigace použitím seznamu veršů."
 
 #: ../src/main/biblesync_glue.cc:271
-#, fuzzy
 msgid ""
 "Chat packet:\n"
 "\n"
 msgstr ""
-"Navigační paket:\n"
+"Komunikační paket:\n"
 "\n"
 
 #: ../src/main/biblesync_glue.cc:278
@@ -1907,6 +1865,8 @@ msgid ""
 " says:\n"
 "\n"
 msgstr ""
+" říká:\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:284
 msgid "ERROR: unknown BibleSync indicator: "
@@ -1980,8 +1940,6 @@ msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
-"Improperly encoded personal annotation label:\n"
-"'%s'"
 
 #: ../src/main/display.cc:1117 ../src/main/display.cc:1159
 #: ../src/main/display.cc:1282 ../ui/export-dialog.glade.h:14
@@ -2140,9 +2098,8 @@ msgstr "Vyjmenování"
 
 #: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:87
 #: ../ui/xi-menus-popup.gtkbuilder.h:63
-#, fuzzy
 msgid "Glosses"
-msgstr "Slovníky"
+msgstr "Glosy"
 
 #: ../src/main/parallel_view.cc:758
 msgid "view context"
@@ -2354,28 +2311,24 @@ msgid ""
 msgstr "Navržené (např. kázání). \\par\\par Modul vytvořil Xiphos."
 
 #: ../src/main/prayerlists.cc:558
-#, fuzzy
 msgid "BookChapter"
 msgstr "Kapitola"
 
 #: ../src/main/previewer.cc:193
 msgid "User Annotation"
-msgstr "Komentáře uživatele"
+msgstr "Anotace uživatele"
 
 #: ../src/main/search_dialog.cc:104
-#, fuzzy
 msgid "Multi-word"
 msgstr "Více slov"
 
 #: ../src/main/search_dialog.cc:106
-#, fuzzy
 msgid "Optimized (\"lucene\")"
-msgstr "Optimalizované (\"Lucene\")"
+msgstr "Optimalizované (\"lucene\")"
 
 #: ../src/main/search_dialog.cc:107
-#, fuzzy
 msgid "Attribute"
-msgstr "Vlastnosti"
+msgstr "Vlastnost"
 
 #: ../src/main/search_dialog.cc:208
 #, c-format
@@ -2920,7 +2873,7 @@ msgstr "HTML režim"
 
 #: ../ui/editor_note.xml.h:7
 msgid "Delete the current note"
-msgstr "Odstranit aktuálni poznámku"
+msgstr "Odstranit aktuální poznámku"
 
 #: ../ui/editor_note.xml.h:8
 msgid "_Delete Personal Comment"
@@ -3501,7 +3454,6 @@ msgid "Alphabetical List"
 msgstr "Abecední seznam"
 
 #: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:104
-#, fuzzy
 msgid "Strike"
 msgstr "Přeškrtnuté"
 
@@ -3518,20 +3470,20 @@ msgid "Mark/Unmark Verse"
 msgstr "Označit/Odznačit verš"
 
 #: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:13
-#, fuzzy
 msgid "Annotation Dialog"
-msgstr "Komentáře uživatele"
+msgstr "Dialog anotace"
 
 #: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:2
 msgid ""
 "Add annotation. The verse will display with highlight colors and a *u marker "
 "to show content."
 msgstr ""
+"Přidat anotaci. Verš se zobrazí s barvami zvýraznění a značkou *u pro "
+"zobrazení obsahu."
 
 #: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:4
-#, fuzzy
 msgid "New Annotation"
-msgstr "Komentáře uživatele"
+msgstr "Nová anotace"
 
 #: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:3
 msgid "Mark"
@@ -3542,18 +3494,16 @@ msgid "Unmark"
 msgstr "Zrušit označení"
 
 #: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:6
-#, fuzzy
 msgid "Remove annotation."
-msgstr "Komentáře uživatele"
+msgstr "Odebrat anotaci."
 
 #: ../ui/markverse.glade.h:12 ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
 msgstr "gtk-zrušit"
 
 #: ../ui/markverse.glade.h:13 ../ui/markverse.gtkbuilder.h:8
-#, fuzzy
 msgid "Cancel Annotation"
-msgstr "Komentáře uživatele"
+msgstr "Zrušit anotaci"
 
 #: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
 msgid "Module Manager"
@@ -3627,11 +3577,11 @@ msgstr "Smazat u vybraných modulů index pro rychlé vyhledávání."
 
 #: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
 msgid "Scan _Obsolete"
-msgstr ""
+msgstr "Vyhledat _zastaralé"
 
 #: ../ui/module-manager.glade.h:17 ../ui/module-manager.gtkbuilder.h:17
 msgid "Scan for obsolete modules and offer to delete them."
-msgstr ""
+msgstr "Vyhledat zastaralé moduly a nabídnout jejich odstranění."
 
 #: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:19
 msgid "Continue"
@@ -4022,7 +3972,7 @@ msgstr "BSP přepínač nav. seznam veršů"
 
 #: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
 msgid "_Keyboard only"
-msgstr ""
+msgstr "Pouze _klávesnice"
 
 #: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
 msgid ""
@@ -4031,9 +3981,8 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
-#, fuzzy
 msgid "BSP keyboard button"
-msgstr "BSP přepínač osobní"
+msgstr "BSP tlačítko klávesnice"
 
 #: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:64
 msgid "<i>Listen:</i>"
@@ -4276,16 +4225,15 @@ msgstr "Zaškrtávací pole Zapnout Modlitební seznamy"
 
 #: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "Enable Statusbar"
-msgstr ""
+msgstr "Povolit stavový řádek"
 
 #: ../ui/prefs.glade.h:118
 msgid "Enable/Disable Statusbar."
-msgstr ""
+msgstr "Povolit/zakázat stavový řádek."
 
 #: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
-#, fuzzy
 msgid "Enable Statusbar Checkbox"
-msgstr "Zaškrtávací pole Zapnout Modlitební seznamy"
+msgstr "Povolit zaškrtávací pole stavového řádku"
 
 #: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 msgid "Parallel color alternation"
@@ -4500,9 +4448,8 @@ msgid "+5"
 msgstr "+5"
 
 #: ../ui/prefs.gtkbuilder.h:118
-#, fuzzy
 msgid "Enable/disable the Statusbar"
-msgstr "Povolit BibleSync jako řečník."
+msgstr "Povolit/zakázat stavový řádek"
 
 #: ../ui/search-dialog.glade.h:1 ../ui/search-dialog.gtkbuilder.h:1
 msgid "Advanced Search"
@@ -4672,7 +4619,7 @@ msgstr "Vytvořit výběry nad vlastnostmi karty Hledat"
 
 #: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
 msgid "Attributes"
-msgstr "Vlastnosti"
+msgstr "Parametry"
 
 #: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
 msgid "Attributes radiobutton"
@@ -5101,7 +5048,7 @@ msgstr "Otevřít prohlížeč na stránce e-mailové konference pro uživatele"
 
 #: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Live Chat"
-msgstr "Online komunikace"
+msgstr "On_line komunikace"
 
 #: ../ui/xi-menus.glade.h:44
 msgid "Open a browser on an interface to live IRC chat"
@@ -5132,21 +5079,20 @@ msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr "Více informací o projektu Sword, z kterého aplikace Xiphos vychází"
 
 #: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
-#, fuzzy
 msgid "About _BibleSync"
-msgstr "BibleSync"
+msgstr "O _BibleSync"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Learn about BibleSync, the shared navigation protocol"
-msgstr ""
+msgstr "Přečtěte si o BibleSync, protokolu sdílené navigace"
 
 #: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "_View Xiphos Releases"
-msgstr ""
+msgstr "_Zobrazit vydání Xiphos"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Visit the releases web page. Is your Xiphos current?"
-msgstr ""
+msgstr "Navštivte webovou stránku vydání. Je váš Xiphos aktuální?"
 
 #: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
 msgid "About _Xiphos"
@@ -5429,14 +5375,12 @@ msgid "Outlined"
 msgstr "Souhrnný"
 
 #: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
-#, fuzzy
 msgid "Create a new book/chapter outline"
-msgstr "Vytvoří nové souhrnné téma"
+msgstr "Vytvořit novou osnovu knihy/kapitoly"
 
 #: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
-#, fuzzy
 msgid "Book/Chapter"
-msgstr "Kapitola"
+msgstr "Kniha/kapitola"
 
 #: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Open module in editor or plain display window"
@@ -5480,7 +5424,7 @@ msgstr "Studium Bible"
 
 #: ../xiphos.desktop.in.in.h:3
 msgid "Text;Bible;Study;"
-msgstr ""
+msgstr "Text;Bible;Studium;"
 
 #~ msgid "_Attach/Detach Sidebar"
 #~ msgstr "_Ukotvit/Uvolnit postranní lištu"
