@@ -5,6 +5,7 @@
  <metadata_license>CC0-1.0</metadata_license>
  <project_license>GPL-2.0+</project_license>
  <name>Xiphos</name>
+ <developer_name>The Xiphos Developer Team</developer_name>
  <summary>Bible Study Guide</summary>
  <launchable type="desktop-id">xiphos.desktop</launchable>
  <description>
@@ -58,7 +59,6 @@
   </screenshot>
  </screenshots>
  <url type="homepage">https://github.com/crosswire/xiphos/</url>
- <updatecontact>xiphos-devel@crosswire.org</updatecontact>
- <project_group>GNOME</project_group>
+ <update_contact>xiphos-devel@crosswire.org</update_contact>
  <translation type="gettext">Xiphos</translation>
 </component>
