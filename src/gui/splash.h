@@ -1,7 +1,7 @@
 #ifndef _GUI_SPLASH_H_
 #define _GUI_SPLASH_H_
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 
 #define E_MAKE_TYPE(l, str, t, ci, i, parent)                                                                                                                                                                            \
 	GType l##_get_type(void)                                                                                                                                                                                         \
@@ -26,6 +26,6 @@ gboolean gui_splash_done(void);
 void gui_splash_step(gchar *text, gdouble progress, gint step);
 void gui_splash_init(void);
 
-#endif /* !USE_GTK_3  */
+#endif /* !GTK_CHECK_VERSION(3, 0, 0) */
 
 #endif /* !_GUI_SPLASH_H_ */
