@@ -838,7 +838,7 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 				 const gchar *label_text)
 {
 	GtkWidget *box;
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 //	GdkRGBA color;
 #else
 	GdkColor color;
@@ -858,7 +858,7 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
 #endif
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	gtk_rc_parse_string("style \"tab-button-style\"\n"
 			    "{\n"
 			    "    GtkWidget::focus-padding = 0\n"
@@ -876,7 +876,7 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
 #endif
 
-#ifndef USE_GTK_3
+#if !GTK_CHECK_VERSION(3, 0, 0)
 	GtkRequisition r;
 	gtk_widget_size_request(tbinf->button_close, &r);
 #endif
@@ -886,7 +886,7 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	tbinf->tab_label = GTK_LABEL(gtk_label_new(label_text));
 	gtk_widget_show(GTK_WIDGET(tbinf->tab_label));
 
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 #else
 	color.red = 0;
 	color.green = 0;
@@ -935,7 +935,7 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
  * Return value
  *   void
  */
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 void gui_notebook_main_switch_page(GtkNotebook *notebook,
 				   gpointer arg,
 				   gint page_num, GList **tl)

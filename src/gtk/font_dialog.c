@@ -353,7 +353,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_widget_set_size_request(font_button, 240, -1);
 	gtk_font_button_set_show_size((GtkFontButton *)font_button,
 				      FALSE);
-#ifdef USE_GTK_3
+#if GTK_CHECK_VERSION(3, 0, 0)
 	combo_size = gtk_combo_box_text_new_with_entry();
 	gtk_widget_show(combo_size);
 	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
