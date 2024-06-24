@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 23:35-0400\n"
-"PO-Revision-Date: 2024-06-19 14:10+0200\n"
+"PO-Revision-Date: 2024-06-23 23:24+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/xiphos/language/"
 "cs/)\n"
@@ -99,7 +99,7 @@ msgstr "Ná_hled tisku"
 
 #: ../src/editor/slib-editor.c:704
 msgid "_Quit"
-msgstr "_Ukončit"
+msgstr "U_končit"
 
 #: ../src/editor/slib-editor.c:726 ../src/gtk/dialog.c:262
 msgid "_Save"
@@ -107,7 +107,7 @@ msgstr "_Uložit"
 
 #: ../src/editor/slib-editor.c:737
 msgid "Save _As..."
-msgstr "_Uložit jako…"
+msgstr "Uložit j_ako…"
 
 #: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
 #: ../ui/gtk_webedit.ui.h:56
@@ -2788,7 +2788,7 @@ msgstr "Nová složka"
 
 #: ../ui/bookmarks.glade.h:5 ../ui/bookmarks.gtkbuilder.h:3
 msgid "New ..."
-msgstr "Nový..."
+msgstr "Nový …"
 
 #: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:6
 msgid "Cancel Bookmark"
@@ -2917,7 +2917,7 @@ msgstr "Uložit aktuální soubor jako"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Save AS"
-msgstr "Uložit jako..."
+msgstr "Uložit JAKO"
 
 #: ../ui/editor_studypad.xml.h:14
 msgid "Add this file to your bookmarks"
