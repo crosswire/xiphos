@@ -62,7 +62,7 @@ requires:
     - libminizip-dev
     - libsoup2.4-dev
     - libsword-dev
-    - libwebkit2gtk-4.0-dev
+    - libwebkit2gtk-4.1-dev
     - libxml2-dev
     - libxml2-utils
     - make
@@ -115,7 +115,7 @@ requires:
     - libgtk-3-dev
     - libminizip-dev
     - libsword-dev
-    - libwebkit2gtk-4.0-dev
+    - libwebkit2gtk-4.1-dev
     - libxml2-dev
     - libxml2-utils
     - make
