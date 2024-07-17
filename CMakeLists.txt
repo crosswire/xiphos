@@ -57,17 +57,9 @@ endif()
 list (APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 list (APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
-# parse the current version based on git tags, then cache a result on behalf
-# of source tarballs that don't have the repo .git metadata
+# get version number from file
 set(SOURCE_VERSION_CACHE "${PROJECT_SOURCE_DIR}/cmake/source_version.txt")
-if(EXISTS "${PROJECT_SOURCE_DIR}/.git")
-	include(GetGitRevisionDescription)
-	git_describe(GIT_VERSION --tags)
-	string(REGEX REPLACE "-([0-9]*).*" ".\\1" VERSION "${GIT_VERSION}")
-	file(WRITE ${SOURCE_VERSION_CACHE} "${VERSION}")
-else()
-	file(STRINGS ${SOURCE_VERSION_CACHE} VERSION)
-endif()
+file(STRINGS ${SOURCE_VERSION_CACHE} VERSION)
 
 # configure project name and version
 project (xiphos
