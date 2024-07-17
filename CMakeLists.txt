@@ -59,6 +59,7 @@ list (APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 # get version number from file
 set(SOURCE_VERSION_CACHE "${PROJECT_SOURCE_DIR}/cmake/source_version.txt")
+file(WRITE ${SOURCE_VERSION_CACHE} "0.0.1")
 file(STRINGS ${SOURCE_VERSION_CACHE} VERSION)
 
 # configure project name and version
