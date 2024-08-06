@@ -1555,7 +1555,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Select a particular language for interface display, other than your usual setting</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Special Locale (requires restart)</property>
+                                <property name="label" translatable="yes">Locale (requires restart)</property>
                                 <property name="use_markup">True</property>
                               </object>
                               <packing>
@@ -1570,7 +1570,7 @@
                                 <property name="can_focus">False</property>
                                 <child internal-child="accessible">
                                   <object class="AtkObject" id="combobox16-atkobject">
-                                    <property name="AtkObject::accessible-name" translatable="yes">Special Locale Combo</property>
+                                    <property name="AtkObject::accessible-name" translatable="yes">Locale Combo</property>
                                   </object>
                                 </child>
                               </object>

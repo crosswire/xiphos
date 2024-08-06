@@ -1393,7 +1393,7 @@
                                 <property name="visible">True</property>
                                 <property name="tooltip-text" translatable="yes">Select a particular language for interface display, other than your usual setting</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Special Locale (requires restart)</property>
+                                <property name="label" translatable="yes">Locale (requires restart)</property>
                                 <property name="use_markup">True</property>
                               </object>
                               <packing>
@@ -1409,7 +1409,7 @@
                                 </accessibility>
                                 <child internal-child="accessible">
                                   <object class="AtkObject" id="a11y-combobox161">
-                                    <property name="AtkObject::accessible-name" translatable="yes">Special Locale Combo</property>
+                                    <property name="AtkObject::accessible-name" translatable="yes">Locale Combo</property>
                                   </object>
                                 </child>
                               </object>

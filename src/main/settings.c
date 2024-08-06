@@ -254,7 +254,10 @@ int settings_init(int argc, char **argv, int new_configs,
 	settings.bs_passphrase = g_strdup("BibleSync");
 
 	/* if the user had forced a locale, we must set it now. */
-	if (settings.special_locale && strcmp(settings.special_locale, NONE)) {
+	if (settings.special_locale &&
+	    strcmp(settings.special_locale, NONE) &&
+	    /* stay compatible w/use of literal */
+	    strcmp(settings.special_locale, "None")) {
 		g_setenv("LANG", settings.special_locale, TRUE);
 		gchar *test = setlocale(LC_ALL, settings.special_locale);
 		if (test == NULL) {

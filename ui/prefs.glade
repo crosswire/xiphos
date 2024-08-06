@@ -1301,7 +1301,7 @@
                                 <property name="visible">True</property>
                                 <property name="tooltip" translatable="yes">Select a particular language for interface display, other than your usual setting</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Special Locale (requires restart)</property>
+                                <property name="label" translatable="yes">Locale (requires restart)</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
@@ -1313,7 +1313,7 @@
                               <widget class="GtkComboBox" id="combobox16">
                                 <property name="visible">True</property>
                                 <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Special Locale Combo</atkproperty>
+                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Locale Combo</atkproperty>
                                 </accessibility>
                               </widget>
                               <packing>
