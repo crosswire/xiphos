@@ -86,6 +86,7 @@ requires:
     - intltool
     - itstool
     - libappstream-glib-devel
+    - libsoup3
     - libuuid-devel
     - libxml2-devel
     - make
