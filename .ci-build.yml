@@ -6,6 +6,7 @@ requires:
     - docbook-utils
     - enchant
     - git
+    - glib2-devel
     - gnome-common
     - gtk3
     - gtkmm
