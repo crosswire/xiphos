@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#ifdef USE_WEBKIT_EDITOR
+#ifndef USE_WEBKIT_EDITOR
 
 /* X keyboard #definitions, to handle shortcuts */
 /* we must define the categories of #definitions we need. */
@@ -32,7 +32,7 @@
 #include <X11/keysymdef.h>
 
 #include <gtk/gtk.h>
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
 
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"

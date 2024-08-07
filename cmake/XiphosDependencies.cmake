@@ -128,7 +128,7 @@ else (GTK2)
     # Gtk+-3.0 + Webkit1 + GtkHtml-editor
     pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET
       "gtk+-3.0"
-      "webkitgtk-3.0"
+      "webkit2gtk-4.1"
       )
   endif()
   if (NOT WEBKIT1 AND GTKHTML)

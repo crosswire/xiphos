@@ -250,16 +250,7 @@ Create a build directory as a sibling of the xiphos directory:
 Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 ===================================================
 
-## 1. Install GTKHtml
-
-    $ curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
-    $ tar xf gtkhtml-4.10.0.tar.xz
-    $ cd gtkhtml-4.10.0
-    $ ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib/gtkhtml4 --localstatedir=/var --disable-static
-    $ make -j2
-    $ make install
-
-## 2. Install Biblesync
+## 1. Install Biblesync
 
     $ curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
     $ tar xf biblesync-1.2.0.tar.gz
@@ -270,11 +261,11 @@ Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
     $ make -j2
     $ make install
 
-## 3. Clone git
+## 2. Clone git
 
     $ git https://github.com/crosswire/xiphos.git
 
-## 4. Create and enter the build directory
+## 3. Create and enter the build directory
 
 Create a build directory as a sibling of the xiphos directory:
 
@@ -283,15 +274,15 @@ Create a build directory as a sibling of the xiphos directory:
 	build xiphos
 	$ cd build
 
-## 5. Install the required dependencies:
+## 4. Install the required dependencies:
 
-    $ sudo apt-get install appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev libenchant-dev libgail-3-dev libglade2-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python-dev-is-python3 swig uuid-dev uuid-runtime yelp-tools xzip
+    $ sudo apt-get install appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev libgail-3-dev libglade2-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python-dev-is-python3 swig uuid-dev uuid-runtime yelp-tools xzip
 
-## 6. Configuration:
+## 5. Configuration:
 
-    $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWEBKIT1=ON ../xiphos
+    $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWEBKIT1=ON -DUSE_WEBKIT2=ON ../xiphos
 
-## 7. Build and install
+## 6. Build and install
 
     $ make -j$(nproc) && make install
 
