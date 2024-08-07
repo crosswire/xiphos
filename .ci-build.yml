@@ -1,6 +1,7 @@
 requires:
   archlinux:
     - appstream-glib
+    - biblesync
     - cmake
     - dbus-glib
     - docbook-utils
