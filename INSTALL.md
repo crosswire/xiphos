@@ -250,22 +250,11 @@ Create a build directory as a sibling of the xiphos directory:
 Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 ===================================================
 
-## 1. Install Biblesync
-
-    $ curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
-    $ tar xf biblesync-1.2.0.tar.gz
-    $ cd biblesync-1.2.0
-    $ mkdir -p build
-    $ cd build
-    $ cmake -DBUILD_SHARED_LIBS=TRUE -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=/usr/lib ..
-    $ make -j2
-    $ make install
-
-## 2. Clone git
+## 1. Clone git
 
     $ git https://github.com/crosswire/xiphos.git
 
-## 3. Create and enter the build directory
+## 2. Create and enter the build directory
 
 Create a build directory as a sibling of the xiphos directory:
 
@@ -274,15 +263,15 @@ Create a build directory as a sibling of the xiphos directory:
 	build xiphos
 	$ cd build
 
-## 4. Install the required dependencies:
+## 3. Install the required dependencies:
 
     $ sudo apt-get install appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev libgail-3-dev libglade2-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python-dev-is-python3 swig uuid-dev uuid-runtime yelp-tools xzip
 
-## 5. Configuration:
+## 4. Configuration:
 
     $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWEBKIT1=ON -DUSE_WEBKIT2=ON ../xiphos
 
-## 6. Build and install
+## 5. Build and install
 
     $ make -j$(nproc) && make install
 

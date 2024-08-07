@@ -107,6 +107,7 @@ requires:
     - gsettings-desktop-schemas-dev
     - intltool
     - itstool
+    - libbiblesync-dev
     - libdbus-glib-1-dev
     - libgail-3-dev
     - libglade2-dev
@@ -145,34 +146,6 @@ before_scripts:
         }
         aur_install biblesync
         aur_install gtkhtml4
-    fi
-    if [ "${DISTRO_NAME}" == "ubuntu" ];then
-        # build biblesync from source
-        cd "${WORK_DIR}"
-        curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
-        tar xf biblesync-1.2.0.tar.gz
-        cd biblesync-1.2.0
-        mkdir -p build
-        cd build
-        cmake -DBUILD_SHARED_LIBS=TRUE -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=/usr/lib ..
-        make -j$(nproc)
-        make install
-        # update sword from 1.7.3 to 1.8.1
-        cd "${WORK_DIR}"
-        curl -Ls -o sword-1.8.1.tar.gz https://www.crosswire.org/ftpmirror/pub/sword/source/v1.8/sword-1.8.1.tar.gz
-        curl -Ls -o sword-1.8.1-cmake.diff https://src.fedoraproject.org/rpms/sword/raw/master/f/sword-1.8.1-cmake.diff
-        curl -Ls -o sword-1.8.1-icu61.diff https://src.fedoraproject.org/rpms/sword/raw/master/f/sword-1.8.1-icu61.diff
-        curl -Ls -o sword-1.8.1-swig.diff https://src.fedoraproject.org/rpms/sword/raw/master/f/sword-1.8.1-swig.diff
-        tar xf sword-1.8.1.tar.gz
-        cd sword-1.8.1
-        patch -p1 -i ../sword-1.8.1-cmake.diff
-        patch -p1 -i ../sword-1.8.1-icu61.diff
-        patch -p1 -i ../sword-1.8.1-swig.diff
-        mkdir -p build
-        cd build
-        cmake -DLIBSWORD_LIBRARY_TYPE="Shared" -DSYSCONF_INSTALL_DIR='/etc' -DSWORD_BUILD_TESTS="Yes" -DSWORD_BINDINGS="Python" -DCMAKE_INSTALL_PREFIX=/usr -DLIB_INSTALL_DIR=/usr/lib/x86_64-linux-gnu ..
-        make -j$(nproc)
-        make install
     fi
 
 build_scripts:
