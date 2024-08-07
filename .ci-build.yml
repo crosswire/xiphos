@@ -16,7 +16,7 @@ requires:
     - minizip
     - python
     - sword
-    - webkit2gtk
+    - webkit2gtk-4.1
     - zip
     # base-devel group (for AUR installs):
     - autoconf
