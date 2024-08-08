@@ -460,6 +460,16 @@
               </object>
             </child>
             <child>
+              <object class="GtkCheckMenuItem" id="italic_headings">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Italic Headings</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_italic_headings_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
               <object class="GtkCheckMenuItem" id="words_of_christ_in_red">
                 <property name="visible">False</property>
                 <property name="can_focus">False</property>
@@ -641,6 +651,16 @@
                 <property name="label" translatable="yes">Glosses</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_glosses_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="morphseg">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Morpheme Segmentation</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_morphseg_activate" swapped="no"/>
               </object>
             </child>
             <child>

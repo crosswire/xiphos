@@ -51,8 +51,15 @@
 
 #include "gui/debug_glib_null.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } %s --></style></head>"
-// "%s" is for CSS init from getRenderHeader().
+#define HTML_START \
+	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\
+<style type=\"text/css\"><!--\
+A { text-decoration:none } \
+*[dir=rtl] { text-align: right; }\
+h3 { font-style: %s }\
+%s -->\
+</style></head>"
+// last "%s" is for CSS init from getRenderHeader().
 
 extern GtkWidget *entrycbIntBook;
 extern GtkWidget *sbIntChapter;
@@ -175,90 +182,95 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem *menuitem,
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Footnotes")) {
+	else if (!strcmp(option, "Footnotes")) {
 		settings.parallel_footnotes = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Morphological Tags")) {
+	else if (!strcmp(option, "Morphological Tags")) {
 		settings.parallel_morphs = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Hebrew Vowel Points")) {
+	else if (!strcmp(option, "Hebrew Vowel Points")) {
 		settings.parallel_hebrewpoints = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Hebrew Cantillation")) {
+	else if (!strcmp(option, "Hebrew Cantillation")) {
 		settings.parallel_cantillationmarks = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Greek Accents")) {
+	else if (!strcmp(option, "Greek Accents")) {
 		settings.parallel_greekaccents = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Cross-references")) {
+	else if (!strcmp(option, "Cross-references")) {
 		settings.parallel_crossref = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Transliteration")) {
+	else if (!strcmp(option, "Transliteration")) {
 		settings.parallel_transliteration = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Words of Christ in Red")) {
+	else if (!strcmp(option, "Words of Christ in Red")) {
 		settings.parallel_red_words = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Morpheme Segmentation")) {
+	else if (!strcmp(option, "Morpheme Segmentation")) {
 		settings.parallel_segmentation = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Headings")) {
+	else if (!strcmp(option, "Headings")) {
 		settings.parallel_headings = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Lemmas")) {
+	else if (!strcmp(option, "Italic Headings")) {
+		settings.parallel_italic_headings = choice;
+		set_global_option(option, choice);
+	}
+
+	else if (!strcmp(option, "Lemmas")) {
 		settings.parallel_lemmas = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Primary Reading")) {
+	else if (!strcmp(option, "Primary Reading")) {
 		settings.parallel_variants_primary = choice;
 		set_global_textual_reading(option, choice);
 	}
-	if (!strcmp(option, "Secondary Reading")) {
+	else if (!strcmp(option, "Secondary Reading")) {
 		settings.parallel_variants_secondary = choice;
 		set_global_textual_reading(option, choice);
 	}
-	if (!strcmp(option, "All Readings")) {
+	else if (!strcmp(option, "All Readings")) {
 		settings.parallel_variants_all = choice;
 		set_global_textual_reading(option, choice);
 	}
 
-	if (!strcmp(option, "Transliterated Forms")) {
+	else if (!strcmp(option, "Transliterated Forms")) {
 		settings.parallel_xlit = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Enumerations")) {
+	else if (!strcmp(option, "Enumerations")) {
 		settings.parallel_enumerated = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Glosses")) {
+	else if (!strcmp(option, "Glosses")) {
 		settings.parallel_glosses = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Morpheme Segmentation")) {
+	else if (!strcmp(option, "Morpheme Segmentation")) {
 		settings.parallel_morphseg = choice;
 		set_global_option(option, choice);
 	}
@@ -418,6 +430,17 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	g_signal_connect(G_OBJECT(item), "activate",
 			 G_CALLBACK(main_set_parallel_module_global_options),
 			 (char *)"Headings");
+
+	if (settings.parallel_headings) {
+		item = gtk_check_menu_item_new_with_label(_("Italic Headings"));
+		gtk_widget_show(item);
+		gtk_container_add(GTK_CONTAINER(menu), item);
+
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), settings.parallel_italic_headings);
+		g_signal_connect(G_OBJECT(item), "activate",
+				 G_CALLBACK(main_set_parallel_module_global_options),
+				 (char *)"Italic Headings");
+	}
 
 	item = gtk_check_menu_item_new_with_label(_("Morpheme Segmentation"));
 	gtk_widget_hide(item);
@@ -594,6 +617,7 @@ void main_update_parallel_page(void)
 
 	tmpBuf = g_strdup_printf(HTML_START
 				 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+				 (settings.parallel_italic_headings ? "italic" : "bold"),
 				 "", // null CSS headers
 				 settings.bible_bg_color,
 				 settings.bible_text_color, settings.link_color);
@@ -935,6 +959,7 @@ void main_update_parallel_page_detached(void)
 
 	snprintf(buf, 4999, HTML_START
 		 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
+		 (settings.parallel_italic_headings ? "italic" : "bold"),
 		 control->getRenderHeader(),
 		 settings.bible_bg_color, settings.bible_text_color,
 		 settings.link_color);

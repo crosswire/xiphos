@@ -40,6 +40,7 @@ struct _global_ops
 	gboolean hebrewpoints;
 	gboolean hebrewcant;
 	gboolean headings;
+	gboolean italic_headings;
 	gboolean variants_primary;
 	gboolean variants_secondary;
 	gboolean variants_all;

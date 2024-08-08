@@ -85,6 +85,8 @@ void on_hebrew_cantillation_activate(GtkCheckMenuItem *menuitem,
 				     gpointer user_data);
 void on_headings_activate(GtkCheckMenuItem *menuitem,
 			  gpointer user_data);
+void on_italic_headings_activate(GtkCheckMenuItem *menuitem,
+				 gpointer user_data);
 void on_transliteration_activate(GtkCheckMenuItem *menuitem,
 				 gpointer user_data);
 void on_commentary_by_chapter_activate(GtkCheckMenuItem *menuitem,

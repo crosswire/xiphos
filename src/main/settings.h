@@ -76,6 +76,7 @@ struct _settings
 	    strongs,			 /* toogle button and check menu state */
 	    parallel_strongs,		 /* check menu state parallel mods */
 	    parallel_headings,		 /* check menu state parallel mods */
+	    parallel_italic_headings,    /* check menu state parallel mods */
 	    parallel_crossref,		 /* check menu state parallel mods */
 	    parallel_lemmas,		 /* check menu state parallel mods */
 	    parallel_morphs,		 /* check menu state parallel mods */
