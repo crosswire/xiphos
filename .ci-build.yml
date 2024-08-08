@@ -88,7 +88,7 @@ requires:
     - intltool
     - itstool
     - libappstream-glib-devel
-    - libsoup3
+    - libsoup3-devel
     - libuuid-devel
     - libxml2-devel
     - make
@@ -96,6 +96,7 @@ requires:
     - rpm-build
     - sword-devel
     - webkitgtk4-devel
+    - webkit2gtk4.1-devel
     - yelp
     - yelp-tools
     - zip

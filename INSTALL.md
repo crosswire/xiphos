@@ -234,7 +234,7 @@ Create a build directory as a sibling of the xiphos directory:
 
 ## 3. Install dependencies
 
-    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk4-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel intltool libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools
+    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk4-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel intltool libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools libsoup3-devel webkit2gtk4.1-devel
 
 ## 4. Configure build
 
