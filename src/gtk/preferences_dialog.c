@@ -2024,6 +2024,35 @@ on_dialog_prefs_response(GtkDialog *dialog,
 	main_update_parallel_page();
 }
 
+/******************************************************************************
+ * Name
+ *   on_dialog_prefs_close
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *   void on_dialog_prefs_close(GtkDialog * dialog, gpointer user_data)
+ *
+ * Description
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_dialog_prefs_close(GtkDialog *dialog, gpointer user_data)
+{
+	settings.display_prefs = 0;
+	xml_set_value("Xiphos", "layout", "prefsopen", "0");
+
+	xml_save_settings_doc(settings.fnconfigure);
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+
+	dialog_prefs = NULL;
+	speaker_window = NULL;
+	speaker_list = NULL;
+	main_update_parallel_page();
+}
+
 static GtkTreeModel *create_model(void)
 {
 	GtkTreeStore *model;
@@ -2938,6 +2967,8 @@ static void create_preferences_dialog(void)
 			  settings.prefs_width, settings.prefs_height);
 	g_signal_connect(dialog_prefs, "response",
 			 G_CALLBACK(on_dialog_prefs_response), NULL);
+	g_signal_connect(dialog_prefs, "close",
+			 G_CALLBACK(on_dialog_prefs_close), NULL);
 
 	/* color pickers */
 	color_picker.text_background = UI_GET_ITEM(gxml, "colorbutton1");
