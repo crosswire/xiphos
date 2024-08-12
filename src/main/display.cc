@@ -289,8 +289,12 @@ ClearImages(gchar *text)
 }
 
 //
-// utility function to blank `<font face="..." />' content from text.
+// utility function to blank font names `<font face="..." />' in text.
 //
+
+#define	CLEAR_FONT_NAME		"<font face=\""
+#define	CLEAR_FONT_NAME_LENGTH	12
+
 void
 ClearFontFaces(gchar *text)
 {
@@ -298,17 +302,14 @@ ClearFontFaces(gchar *text)
 
 	// huge assumption: no nested <font> specs: <font face="">
 	// is never followed by another <font anything> before </font>.
-	for (s = strstr(text, "<font face=\"Galax"); s; s = strstr(s, "<font face=\"Galax")) {
+	for (s = strstr(text, CLEAR_FONT_NAME); s; s = strstr(s, CLEAR_FONT_NAME)) {
 		gchar *t;
-		if ((t = strchr(s + 15, '>'))) {
-			while (s <= t)
-				*(s++) = ' ';
-			s = strstr(s, "</font>");
-			t = s + 6;
-			while (s <= t)
-				*(s++) = ' ';
+		s += CLEAR_FONT_NAME_LENGTH;
+		if ((t = strchr(s, '"'))) {
+			while (s < t)
+				*(s++) = '.';
 		} else {
-			XI_message(("ClearFontFaces: no font end: %s\n", s));
+			XI_message(("ClearFontFaces: no closing double quote: %s\n", s));
 			return;
 		}
 	}
@@ -674,7 +675,7 @@ CleanupContent(GString *text,
 	if (ops->respect_font_faces == 0)
 		ClearFontFaces((gchar *)text->str);
 	else if ((ops->respect_font_faces == -1) && // "unknown"
-		 (strcasestr(text->str, "<font face=\"Galax") != NULL)) {
+		 (strcasestr(text->str, "<font face=\"") != NULL)) {
 		ops->respect_font_faces = 1; // now known.
 		main_save_module_options(name, "Respect Font Faces", 1);
 	}
