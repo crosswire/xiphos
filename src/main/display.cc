@@ -100,6 +100,8 @@ h3 { font-style: %s } --> \
 </style>%s</head><body>"
 // 7 interpolable strings: bg/txt/link colors, block, renderHeader, italic heading, external css.
 
+#define	ITALIC_SELECTOR	(ops->italic_headings ? "italic" : "bold" )
+
 // CSS style blocks to control blocked strongs+morph output
 // BOTH is when the user wants to see both types of markup.
 // ONE is when he wants one or the other, so we can use a single
@@ -978,7 +980,7 @@ GTKEntryDisp::display(SWModule &imodule)
 						 ? DOUBLE_SPACE
 						 : ""))),
 			      imodule.getRenderHeader(),
-			      (ops->italic_headings ? "italic" : "bold" ),
+			      ITALIC_SELECTOR,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
@@ -1341,7 +1343,7 @@ GTKChapDisp::display(SWModule &imodule)
 						 ? DOUBLE_SPACE
 						 : ""))),
 			      imodule.getRenderHeader(),
-			      (ops->italic_headings ? "italic" : "bold" ),
+			      ITALIC_SELECTOR,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
@@ -1617,7 +1619,7 @@ DialogEntryDisp::display(SWModule &imodule)
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
-			      (ops->italic_headings ? "italic" : "bold" ),
+			      ITALIC_SELECTOR,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
@@ -1751,7 +1753,7 @@ DialogChapDisp::display(SWModule &imodule)
 						 ? DOUBLE_SPACE
 						 : ""))),
 			      imodule.getRenderHeader(),
-			      (ops->italic_headings ? "italic" : "bold" ),
+			      ITALIC_SELECTOR,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
@@ -1953,7 +1955,7 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
-			      (ops->italic_headings ? "italic" : "bold" ),
+			      ITALIC_SELECTOR,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
@@ -2002,7 +2004,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
-			      (ops->italic_headings ? "italic" : "bold" ),
+			      ITALIC_SELECTOR,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
