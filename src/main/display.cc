@@ -677,7 +677,7 @@ CleanupContent(GString *text,
 	if (ops->respect_font_faces == 0)
 		ClearFontFaces((gchar *)text->str);
 	else if ((ops->respect_font_faces == -1) && // "unknown"
-		 (strcasestr(text->str, "<font face=\"") != NULL)) {
+		 (strcasestr(text->str, CLEAR_FONT_NAME) != NULL)) {
 		ops->respect_font_faces = 1; // now known.
 		main_save_module_options(name, "Respect Font Faces", 1);
 	}
