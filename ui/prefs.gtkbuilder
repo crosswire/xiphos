@@ -66,6 +66,26 @@
       </row>
     </data>
   </object>
+  <object class="GtkListStore" id="model3">
+    <columns>
+      <!-- column-name gchararray -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">2</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">3</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">4</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkDialog" id="dialog_prefs">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -757,6 +777,34 @@
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkLabel" id="labelbsp5">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="no"> </property>
+                        <property name="use_markup">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="labelbsp6">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="no"> </property>
+                        <property name="use_markup">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkBox" id="hbox31">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -794,9 +842,85 @@
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
+                        <property name="expand">False</property>
                         <property name="fill">False</property>
-                        <property name="position">3</property>
+                        <property name="position">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="columncountbox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="border_width">8</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <object class="GtkLabel" id="columncountlabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="tooltip_text" translatable="yes">Number of columns in which to display text; can be set per module in font dialog</property>
+                            <property name="xalign">0.07</property>
+                            <property name="label" translatable="yes">Default display columns</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="columncountvaluebox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="border_width">8</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <object class="GtkComboBox" id="columncountvalue">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="model">model3</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="renderer3"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkCheckButton" id="justifybutton">
+                                <property name="label" translatable="yes">Justify margins</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="tooltip_text" translatable="yes">When unset, leave a ragged margin.</property>
+                                <property name="use_underline">True</property>
+                                <property name="xalign">0.5</property>
+                                <property name="active">True</property>
+                                <property name="draw_indicator">True</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">6</property>
                       </packing>
                     </child>
                   </object>

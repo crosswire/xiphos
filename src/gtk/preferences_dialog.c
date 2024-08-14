@@ -76,6 +76,7 @@ struct _preferences_combo
 	GtkWidget *verse_number_size;
 	GtkWidget *special_locale;
 	GtkWidget *font_prefs;
+	GtkWidget *display_columns;
 };
 
 typedef struct _preferences_color_pickers COLOR_PICKERS;
@@ -113,6 +114,7 @@ struct _preferences_check_buttons
 	GtkWidget *prayerlist;
 	GtkWidget *statusbar;
 	GtkWidget *alternation;
+	GtkWidget *justify_margins;
 
 	GtkWidget *show_in_viewer;
 	GtkWidget *show_in_dictionary;
@@ -1187,6 +1189,31 @@ on_checkbutton8_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 
 /******************************************************************************
  * Name
+ *   on_justifybutton_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_justifybutton_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_justifybutton_toggled(GtkToggleButton *togglebutton, gpointer user_data)
+{
+	xml_set_value("Xiphos", "misc", "justifymargins",
+		      (gtk_toggle_button_get_active(togglebutton) ? "1" : "0"));
+	settings.justify_margins = gtk_toggle_button_get_active(togglebutton);
+	char *url = g_strdup_printf("sword:///%s", settings.currentverse);
+	main_url_handler(url, TRUE);
+	g_free(url);
+}
+
+/******************************************************************************
+ * Name
  *   on_checkbutton_scroll_toggled
  *
  * Synopsis
@@ -1537,8 +1564,42 @@ void on_combobox1_changed(GtkComboBox *combobox, gpointer user_data)
 	settings.verse_num_font_size =
 	    atoi(settings.verse_num_font_size_str);
 	url =
-	    g_strdup_printf("sword://%s/%s", settings.MainWindowModule,
-			    settings.currentverse);
+	    g_strdup_printf("sword:///%s", settings.currentverse);
+	main_url_handler(url, TRUE);
+	g_free(url);
+	g_free(buf);
+}
+
+/******************************************************************************
+ * Name
+ *   on_columncountvalue_changed
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_columncountvalue_changed(GtkComboBox *combobox, gpointer user_data)
+ *
+ * Description
+ *   display columns has changed
+ *
+ * Return value
+ *   void
+ */
+
+void on_columncountvalue_changed(GtkComboBox *combobox, gpointer user_data)
+{
+	gchar *buf = NULL;
+	gchar *url = NULL;
+	GtkTreeIter iter;
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
+	if (!buf)
+		return;
+	xml_set_value("Xiphos", "misc", "displaycolumns", buf);
+	settings.display_columns = atoi(buf);
+	url =
+	    g_strdup_printf("sword:///%s", settings.currentverse);
 	main_url_handler(url, TRUE);
 	g_free(url);
 	g_free(buf);
@@ -2236,6 +2297,8 @@ static void setup_check_buttons(void)
 				     settings.statusbar);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check_button.alternation),
 				     settings.alternation);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check_button.justify_margins),
+				     settings.justify_margins);
 
 	/* v-- BibleSync --v */
 	/* toggles */
@@ -2318,6 +2381,8 @@ static void setup_check_buttons(void)
 	g_signal_connect(check_button.alternation, "toggled",
 			 G_CALLBACK(on_checkbutton_alternation_toggled),
 			 NULL);
+	g_signal_connect(check_button.justify_margins, "toggled",
+			 G_CALLBACK(on_justifybutton_toggled), NULL);
 
 	/* v-- BibleSync --v */
 	g_signal_connect(check_button.bs_debug, "toggled",
@@ -2990,6 +3055,7 @@ static void create_preferences_dialog(void)
 	check_button.show_devotion          = UI_GET_ITEM(gxml, "checkbutton7");
 	check_button.show_splash_screen     = UI_GET_ITEM(gxml, "checkbutton8");
 	check_button.use_chapter_scroll     = UI_GET_ITEM(gxml, "checkbutton_scroll");
+	check_button.justify_margins        = UI_GET_ITEM(gxml, "justifybutton");
 
 	check_button.use_imageresize = UI_GET_ITEM(gxml, "checkbutton_imageresize");
 #ifdef WIN32
@@ -3074,6 +3140,13 @@ static void create_preferences_dialog(void)
 				 index);
 	g_signal_connect(combo.base_font_size, "changed",
 			 G_CALLBACK(on_basecombobox1_changed), NULL);
+
+	/* display columns */
+	combo.display_columns = UI_GET_ITEM(gxml, "columncountvalue");
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo.display_columns),
+				 settings.display_columns - 1);
+	g_signal_connect(combo.display_columns, "changed",
+			 G_CALLBACK(on_columncountvalue_changed), NULL);
 
 	/* module combos */
 	combo.default_dictionary_module = UI_GET_ITEM(gxml, "combobox5");

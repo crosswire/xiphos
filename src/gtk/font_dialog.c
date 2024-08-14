@@ -36,6 +36,7 @@
 
 static GtkWidget *dlg;
 static GtkWidget *combo_entry_size;
+static GtkWidget *combo_entry_columns;
 static GtkWidget *font_button;
 static GtkWidget *checkbutton_no_font;
 static GtkWidget *label_mod;
@@ -119,12 +120,14 @@ static void ok_clicked(GtkButton *button, gpointer data)
 		new_gdk_font = "none";
 	}
 
-	mf->new_font_size =
-	    gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
+	mf->new_font_size = gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
+
+	mf->columns = gtk_entry_get_text(GTK_ENTRY(combo_entry_columns));
 
 	save_conf_file_item(file, mf->mod_name, "Font", mf->new_font);
-	save_conf_file_item(file, mf->mod_name, "Fontsize",
-			    mf->new_font_size);
+	save_conf_file_item(file, mf->mod_name, "Fontsize", mf->new_font_size);
+	save_conf_file_item(file, mf->mod_name, "Columns",
+			    (strcmp(mf->columns, "default") ? mf->columns : "-1"));
 
 	//evidently new_gdk_font is never set on Windows
 	XI_message(("\nFont: %s\nFontsize: %s\n",
@@ -282,13 +285,16 @@ static GtkWidget *create_dialog_mod_font()
 	GtkWidget *dialog_vbox21;
 	GtkWidget *hbox_picker;
 	GtkWidget *combo_size;
+	GtkWidget *combo_count;
 	GtkWidget *vbox56;
 	GtkWidget *hbox67;
 	GtkWidget *pixmap6;
 	GtkWidget *vbox57;
 	GtkWidget *label206;
+	GtkWidget *labelcolumns;
 	GtkWidget *dialog_action_area21;
 	GtkWidget *hbuttonbox1;
+	GtkWidget *hboxcolumns;
 	GtkWidget *button_cancel;
 
 	dialog_mod_font = gtk_dialog_new();
@@ -298,7 +304,7 @@ static GtkWidget *create_dialog_mod_font()
 			     _("Set Module Font"));
 	//GTK_WINDOW(dialog_mod_font)->type = GTK_WINDOW_TOPLEVEL;  //FIXME:
 	gtk_window_set_default_size(GTK_WINDOW(dialog_mod_font), 301, 164);
-	gtk_window_set_resizable(GTK_WINDOW(dialog_mod_font), TRUE);
+	gtk_window_set_resizable(GTK_WINDOW(dialog_mod_font), FALSE);
 
 	dialog_vbox21 =
 	    gtk_dialog_get_content_area(GTK_DIALOG(dialog_mod_font));
@@ -356,34 +362,22 @@ static GtkWidget *create_dialog_mod_font()
 #ifdef USE_GTK_3
 	combo_size = gtk_combo_box_text_new_with_entry();
 	gtk_widget_show(combo_size);
-	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
-			   0);
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size),
-				       "+5");
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size),
-				       "+4");
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size),
-				       "+3");
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size),
-				       "+2");
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size),
-				       "+1");
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size),
-				       "+0");
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size),
-				       "-1");
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size),
-				       "-2");
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size),
-				       "-3");
+	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE, 0);
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size), "+5");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size), "+4");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size), "+3");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size), "+2");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size), "+1");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size), "+0");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size), "-1");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size), "-2");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_size), "-3");
 	combo_entry_size = gtk_bin_get_child(GTK_BIN(combo_size));
-	gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_size))),
-			   _("+0"));
+	gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_size))), _("+0"));
 #else
 	combo_size = gtk_combo_box_entry_new_text();
 	gtk_widget_show(combo_size);
-	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
-			   0);
+	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE, 0);
 	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "+5");
 	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "+4");
 	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_size), "+3");
@@ -396,12 +390,44 @@ static GtkWidget *create_dialog_mod_font()
 	combo_entry_size = (GTK_WIDGET(GTK_BIN(combo_size)->child));
 	gtk_entry_set_text(GTK_ENTRY(GTK_BIN(combo_size)->child), _("+0"));
 #endif
+	UI_HBOX(hboxcolumns, FALSE, 0);
+	gtk_widget_show(hboxcolumns);
+	gtk_box_pack_start(GTK_BOX(vbox56), hboxcolumns, FALSE, FALSE, 0);
+
+	labelcolumns = gtk_label_new(_("Display columns"));
+	gtk_widget_show(labelcolumns);
+	gtk_box_pack_start(GTK_BOX(hboxcolumns), labelcolumns, FALSE, FALSE, 0);
+
+#ifdef USE_GTK_3
+	combo_count = gtk_combo_box_text_new_with_entry();
+	gtk_widget_set_size_request(combo_count, 240, -1);
+	gtk_widget_show(combo_count);
+	gtk_box_pack_start(GTK_BOX(hboxcolumns), combo_count, FALSE, TRUE, 150);
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), "1");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), "2");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), "3");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), "4");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), "default");
+	combo_entry_columns = gtk_bin_get_child(GTK_BIN(combo_count));
+	gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_count))), _("default"));
+#else
+	combo_count = gtk_combo_box_entry_new_text();
+	gtk_widget_show(combo_count);
+	gtk_box_pack_start(GTK_BOX(hboxcolumns), combo_count, FALSE, TRUE, 150);
+	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), "1");
+	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), "2");
+	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), "3");
+	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), "4");
+	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), "default");
+	combo_entry_columns = (GTK_WIDGET(GTK_BIN(combo_count)->child));
+	gtk_entry_set_text(GTK_ENTRY(GTK_BIN(combo_count)->child), _("default"));
+#endif
+
 	checkbutton_no_font =
 	    gtk_check_button_new_with_label(_("Use the default font for this module"));
 	gtk_widget_show(checkbutton_no_font);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_no_font), mf->no_font);
-	gtk_box_pack_start(GTK_BOX(vbox56), checkbutton_no_font, FALSE,
-			   FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox56), checkbutton_no_font, FALSE, FALSE, 0);
 
 	dialog_action_area21 =
 #if GTK_CHECK_VERSION(3, 12, 0)
@@ -457,6 +483,8 @@ static GtkWidget *create_dialog_mod_font()
 			 G_CALLBACK(cancel_clicked), mf);
 	g_signal_connect(G_OBJECT(combo_size), "changed",
 			 G_CALLBACK(size_changed), NULL);
+	g_signal_connect(G_OBJECT(combo_count), "changed",
+			 G_CALLBACK(size_changed), NULL); /* dual use */
 
 	return dialog_mod_font;
 }

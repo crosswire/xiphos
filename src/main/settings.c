@@ -1077,6 +1077,22 @@ void load_settings_structure(void)
 		settings.alternation = 1;
 	}
 
+	if ((buf = xml_get_value("misc", "displaycolumns"))) {
+		settings.display_columns = atoi(buf);
+		if ((settings.display_columns < 1) ||(settings.display_columns > 4))
+			settings.display_columns = 1;
+	} else {
+		xml_add_new_item_to_section("misc", "displaycolumns", "1");
+		settings.display_columns = 1;
+	}
+
+	if ((buf = xml_get_value("misc", "justifymargins"))) {
+		settings.justify_margins = atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc", "justifymargins", "0");
+		settings.justify_margins = 0;
+	}
+
 #if 1
 	settings.browsing = 1; /* unconditional - no longer toggle-able. */
 #else

@@ -749,6 +749,15 @@ MOD_FONT *get_font(const gchar *mod_name)
 
 	mf->old_font = get_conf_file_item(file, mod_name, "Font");
 	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
+	mf->columns = get_conf_file_item(file, mod_name, "Columns");
+	if (mf->columns) {
+		mf->columns_value = atoi(mf->columns);
+		if ((mf->columns_value != -1) &&	/* -1 => use default */
+		    ((mf->columns_value < 1) ||
+		     (mf->columns_value > 4)))
+			mf->columns_value = 1;
+	} else
+		mf->columns_value = -1;	/* "not used" */
 
 	/* 1st try: module pref */
 	if ((mf->old_font == NULL) || !strcmp(mf->old_font, "none")) {

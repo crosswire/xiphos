@@ -59,7 +59,9 @@ struct _settings
 	    *font_color,						    /*  */
 	    *highlight_fg,						    /* special fg color for highlight */
 	    *highlight_bg,						    /* special bg color for highlight */
-	    *verse_num_font_size_str, *base_font_size_str, *special_locale; /* prefs dialog: pick abnormal locale */
+	    *verse_num_font_size_str, *base_font_size_str,
+	    *special_locale,						    /* prefs dialog: pick abnormal locale */
+	    *display_columns_str;
 	/* --requires restart-- */
 
 	int
@@ -216,6 +218,9 @@ struct _settings
 
 	/* if true parallel tab is showing */
 	int paratab_showing;
+
+	/* from prefs -> font sizes */
+	int display_columns, justify_margins;
 
 	/* if set, this is used for an anchor jump if possible */
 	char *special_anchor;

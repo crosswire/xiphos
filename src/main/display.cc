@@ -93,14 +93,17 @@ const gchar *no_content =
 <style type=\"text/css\"><!-- \
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right; } \
-body { background-color:%s; color:%s; } \
+body { background-color:%s; color:%s; -webkit-column-count: %d ; margin-top: 0.1cm ; %s } \
+td { %s } \
 .introMaterial { font-style: italic; } \
 a:link{ color:%s } %s %s \
 h3 { font-style: %s } --> \
-</style>%s</head><body>"
-// 7 interpolable strings: bg/txt/link colors, block, renderHeader, italic heading, external css.
+%s %s</style></head><body>"
+// 11 interpolable values: bg/txt/link colors, columns, justify (2x, body+td),
+// block, renderHeader, italic heading, mod.columns, external css.
 
-#define	ITALIC_SELECTOR	(ops->italic_headings ? "italic" : "bold" )
+#define	JUSTIFY_SELECT	(settings.justify_margins ? " text-align: justify ;" : "")
+#define	ITALIC_SELECT	(ops->italic_headings ? "italic" : "bold" )
 
 // CSS style blocks to control blocked strongs+morph output
 // BOTH is when the user wants to see both types of markup.
@@ -945,7 +948,7 @@ GTKEntryDisp::display(SWModule &imodule)
 		gtk_widget_realize(gtkText);
 
 	const char *abbreviation = main_get_abbreviation(imodule.getName());
-	gchar *buf;
+	gchar *buf, *mod_column_count = NULL;
 	mf = get_font(imodule.getName());
 	swbuf = "";
 	footnote = xref = 0;
@@ -965,12 +968,17 @@ GTKEntryDisp::display(SWModule &imodule)
 		set_morph_order(imodule);
 	set_render_numbers(imodule, ops);
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START // //bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "[<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "<font color=\"%s\">*%s*</font></a>]<br/>",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (strongs_and_morph // both
 				   ? CSS_BLOCK_BOTH
@@ -980,7 +988,8 @@ GTKEntryDisp::display(SWModule &imodule)
 						 ? DOUBLE_SPACE
 						 : ""))),
 			      imodule.getRenderHeader(),
-			      ITALIC_SELECTOR,
+			      ITALIC_SELECT,
+			      (mod_column_count ? mod_column_count : ""),
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
@@ -990,6 +999,8 @@ GTKEntryDisp::display(SWModule &imodule)
 			      (abbreviation ? abbreviation : imodule.getName()));
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
@@ -1289,7 +1300,7 @@ GTKChapDisp::display(SWModule &imodule)
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
-	gchar *buf;
+	gchar *buf, *mod_column_count = NULL;
 	GString *rework; // for image size analysis rework.
 	const char *ModuleName = imodule.getName();
 	ops = main_new_globals(ModuleName);
@@ -1329,10 +1340,15 @@ GTKChapDisp::display(SWModule &imodule)
 	swbuf = "";
 	footnote = xref = 0;
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START // "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      // strongs & morph specs win over dblspc.
 			      (strongs_and_morph // both
@@ -1343,12 +1359,15 @@ GTKChapDisp::display(SWModule &imodule)
 						 ? DOUBLE_SPACE
 						 : ""))),
 			      imodule.getRenderHeader(),
-			      ITALIC_SELECTOR,
+			      ITALIC_SELECT,
+			      (mod_column_count ? mod_column_count : ""),
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
@@ -1600,7 +1619,7 @@ char
 DialogEntryDisp::display(SWModule &imodule)
 {
 	swbuf = "";
-	char *buf;
+	char *buf, *mod_column_count = NULL;
 	mf = get_font(imodule.getName());
 	ops = main_new_globals(imodule.getName());
 	main_set_global_options(ops);
@@ -1609,6 +1628,9 @@ DialogEntryDisp::display(SWModule &imodule)
 
 	imodule.getRawEntry(); // snap to entry
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
@@ -1616,10 +1638,13 @@ DialogEntryDisp::display(SWModule &imodule)
 			      "[*%s*]</a></font><br/>",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
-			      ITALIC_SELECTOR,
+			      (mod_column_count ? mod_column_count : ""),
+			      ITALIC_SELECT,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
@@ -1629,6 +1654,8 @@ DialogEntryDisp::display(SWModule &imodule)
 			      imodule.getName());
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	if (!valid_scripture_key) {
 		swbuf.append(no_content);
@@ -1701,7 +1728,7 @@ DialogChapDisp::display(SWModule &imodule)
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
-	gchar *buf;
+	gchar *buf, *mod_column_count = NULL;
 	GString *rework; // for image size analysis rework.
 
 	const char *ModuleName = imodule.getName();
@@ -1740,10 +1767,16 @@ DialogChapDisp::display(SWModule &imodule)
 
 	swbuf = "";
 	footnote = xref = 0;
+
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (strongs_and_morph
 				   ? CSS_BLOCK_BOTH
@@ -1753,12 +1786,15 @@ DialogChapDisp::display(SWModule &imodule)
 						 ? DOUBLE_SPACE
 						 : ""))),
 			      imodule.getRenderHeader(),
-			      ITALIC_SELECTOR,
+			      (mod_column_count ? mod_column_count : ""),
+			      ITALIC_SELECT,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
@@ -1925,7 +1961,7 @@ char
 GTKPrintEntryDisp::display(SWModule &imodule)
 {
 	gchar *keytext = NULL;
-	gchar *buf;
+	gchar *buf, *mod_column_count = NULL;
 	SWBuf swbuf = "";
 	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.getName());
@@ -1945,6 +1981,9 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 	else
 		keytext = strdup((char *)imodule.getKeyText());
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
@@ -1952,10 +1991,13 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 			      "[*%s*]</a></font>[%s]<br/>",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
-			      ITALIC_SELECTOR,
+			      (mod_column_count ? mod_column_count : ""),
+			      ITALIC_SELECT,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
@@ -1966,6 +2008,8 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 			      (gchar *)keytext);
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.append(imodule.renderText());
 	swbuf.append("</font></body></html>");
@@ -1987,7 +2031,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
-	gchar *buf;
+	gchar *buf, *mod_column_count = NULL;
 	gchar heading[32];
 	SWBuf swbuf;
 
@@ -1997,19 +2041,27 @@ GTKPrintChapDisp::display(SWModule &imodule)
 
 	swbuf = "";
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
-			      ITALIC_SELECTOR,
+			      (mod_column_count ? mod_column_count : ""),
+			      ITALIC_SELECT,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
