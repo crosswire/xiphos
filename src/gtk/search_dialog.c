@@ -1234,13 +1234,7 @@ GtkWidget *create_results_menu_advsearch(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#if GTK_CHECK_VERSION(3, 14, 0)
-	glade_file =
-	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
-#else
-	glade_file =
-	    gui_general_user_file("xi-menus-popup_old.gtkbuilder", FALSE);
-#endif
+	glade_file = gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
 	GladeXML *gxml;
 	glade_file = gui_general_user_file("xi-menus.glade", FALSE);
