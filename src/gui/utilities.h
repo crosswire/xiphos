@@ -163,11 +163,7 @@ void language_init(void);
 /* visually simplify some code that needs to pick out UI details */
 #ifdef USE_GTKBUILDER
 #define UI_GET_ITEM(ui, label) GTK_WIDGET(gtk_builder_get_object(ui, label))
-#if GTK_CHECK_VERSION(3, 14, 0)
 #define UI_SUFFIX ".gtkbuilder"
-#else
-#define UI_SUFFIX "_old.gtkbuilder"
-#endif
 #else
 #define UI_GET_ITEM(ui, label) glade_xml_get_widget(ui, label)
 #define UI_SUFFIX ".glade"
