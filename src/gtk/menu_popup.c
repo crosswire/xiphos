@@ -1769,7 +1769,9 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 
 	item = UI_GET_ITEM(gxml, "italic_headings");
 
-	if (ops->headings) {
+	if (ops->headings &&
+	    (main_check_for_global_option((gchar *)mod_name, "ThMLHeadings") ||
+	     main_check_for_global_option((gchar *)mod_name, "OSISHeadings"))) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 					       ops->italic_headings);
