@@ -98,7 +98,7 @@ td { %s } \
 .introMaterial { font-style: italic; } \
 a:link{ color:%s } %s %s \
 h3 { font-style: %s } --> \
-%s %s</style></head><body>"
+%s</style> %s </head><body>"
 // 11 interpolable values: bg/txt/link colors, columns, justify (2x, body+td),
 // block, renderHeader, italic heading, mod.columns, external css.
 
