@@ -56,12 +56,8 @@
 /******************************************************************************
  * defines
  */
-#ifndef WIN32
 #define XI_DIR		"xiphos"	/* modern choice, within ~/.config */
 #define OLD_XI_DIR	".xiphos"	/* for compatibility movement */
-#else
-#define XI_DIR		".xiphos"	/* kept the same for Windows users */
-#endif
 
 /******************************************************************************
  * globals
@@ -116,26 +112,30 @@ int settings_init(int argc, char **argv, int new_configs,
 
 	/* set gSwordDir to $home + .xiphos */
 	settings.gSwordDir =
-		g_build_filename(settings.homedir, ".config", XI_DIR, NULL);
-
+		g_build_filename(settings.homedir,
 #ifndef WIN32
+				 ".config",
+#endif
+				 XI_DIR, NULL);
+
 	/* --------------------------------------------------------------- */
-	/* for Linux, convert from old presence in ~, move into ~/.config. */
+	/* convert old presence in ~, move into ~/.config (linux), no dot. */
 
 	old_gSwordDir = g_build_filename(settings.homedir, OLD_XI_DIR, NULL);
 
 	if ((g_access(old_gSwordDir,      F_OK) == 0) &&
 	    (g_access(settings.gSwordDir, F_OK) != 0)) {
 		/* ~/.xiphos exists, but not ~/.config/xiphos: move. */
-		if (rename(old_gSwordDir, settings.gSwordDir) == 0) {
+		if (g_rename(old_gSwordDir, settings.gSwordDir) == 0) {
 			g_free(old_gSwordDir);
 		} else {
 			g_free(settings.gSwordDir);
 			settings.gSwordDir = old_gSwordDir;
 		}
 	}
+	else
+		g_free(old_gSwordDir);
 	/* --------------------------------------------------------------- */
-#endif
 
 	/* if gSwordDir does not exist, create it. */
 	if (g_access(settings.gSwordDir, F_OK) == -1) {
