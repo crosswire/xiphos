@@ -122,6 +122,8 @@ h3 { font-style: %s } --> \
 
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
+#define CURRENT_COLUMNS	(((mf->columns_value > 0) && (mf->columns_value < 5)) ? mf->columns_value : settings.display_columns)
+
 using namespace sword;
 using namespace std;
 
@@ -792,7 +794,7 @@ set_render_numbers(SWModule &imodule, GLOBAL_OPS *ops)
 // display of commentary by chapter.
 //
 char
-GTKEntryDisp::displayByChapter(SWModule &imodule)
+GTKEntryDisp::displayByChapter(SWModule &imodule, int columns)
 {
 	imodule.setSkipConsecutiveLinks(true);
 
@@ -902,7 +904,7 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 			g_free(buf);
 		}
 		swbuf.append(settings.imageresize
-				 ? AnalyzeForImageSize(rework->str,
+				 ? AnalyzeForImageSize(rework->str, columns,
 						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				 : rework->str /* left as-is */);
 		if (settings.showversenum)
@@ -1024,7 +1026,7 @@ GTKEntryDisp::display(SWModule &imodule)
 	// (this option can be enabled only in commentaries.)
 	//
 	if (ops->commentary_by_chapter)
-		return displayByChapter(imodule);
+		return displayByChapter(imodule, CURRENT_COLUMNS);
 
 	// we will use the module cache for regular commentaries,
 	// which navigate/change a lot, whereas pers.comms, lexdicts,
@@ -1090,7 +1092,7 @@ GTKEntryDisp::display(SWModule &imodule)
 	}
 
 	swbuf.append(settings.imageresize
-			 ? AnalyzeForImageSize(rework->str,
+			 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 					       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 			 : rework->str /* left as-is */);
 
@@ -1406,7 +1408,7 @@ GTKChapDisp::display(SWModule &imodule)
 
 		if (cache_flags & ModuleCache::Headings) {
 			swbuf.append(settings.imageresize
-					 ? AnalyzeForImageSize(cVerse.GetHeader(),
+					 ? AnalyzeForImageSize(cVerse.GetHeader(), CURRENT_COLUMNS,
 							       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 					 : cVerse.GetHeader() /* left as-is */);
 		} else
@@ -1484,7 +1486,7 @@ GTKChapDisp::display(SWModule &imodule)
 		}
 
 		swbuf.append(settings.imageresize
-				 ? AnalyzeForImageSize(rework->str,
+				 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				 : rework->str /* left as-is */);
 
@@ -1541,7 +1543,7 @@ GTKChapDisp::display(SWModule &imodule)
 // display of commentary by chapter.
 //
 char
-DialogEntryDisp::displayByChapter(SWModule &imodule)
+DialogEntryDisp::displayByChapter(SWModule &imodule, int columns)
 {
 	imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *) imodule;
@@ -1597,7 +1599,7 @@ DialogEntryDisp::displayByChapter(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 		swbuf.append(settings.imageresize
-				 ? AnalyzeForImageSize(rework->str,
+				 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				 : rework->str /* left as-is */);
 	}
@@ -1673,7 +1675,7 @@ DialogEntryDisp::display(SWModule &imodule)
 	// instead heading off to show a whole chapter
 	//
 	if (ops->commentary_by_chapter)
-		return displayByChapter(imodule);
+		return displayByChapter(imodule, CURRENT_COLUMNS);
 
 	if (be->module_type(imodule.getName()) == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *) imodule;
@@ -1705,7 +1707,7 @@ DialogEntryDisp::display(SWModule &imodule)
 	}
 
 	swbuf.append(settings.imageresize
-			 ? AnalyzeForImageSize(rework->str,
+			 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 					       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 			 : rework->str /* left as-is */);
 
@@ -1838,7 +1840,7 @@ DialogChapDisp::display(SWModule &imodule)
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(settings.imageresize
-					 ? AnalyzeForImageSize(cVerse.GetHeader(),
+					 ? AnalyzeForImageSize(cVerse.GetHeader(), CURRENT_COLUMNS,
 							       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 					 : cVerse.GetHeader() /* left as-is */);
 		else
@@ -1906,7 +1908,7 @@ DialogChapDisp::display(SWModule &imodule)
 		}
 
 		swbuf.append(settings.imageresize
-				 ? AnalyzeForImageSize(rework->str,
+				 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				 : rework->str /* left as-is */);
 

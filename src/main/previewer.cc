@@ -196,7 +196,7 @@ void main_information_viewer(const gchar *mod_name,
 
 	str = g_string_append(str, "</font></body></html>");
 
-	HtmlOutput((char *)AnalyzeForImageSize(str->str,
+	HtmlOutput((char *)AnalyzeForImageSize(str->str, 1,
 					       GDK_WINDOW(gtk_widget_get_window(previewer_html_widget))),
 		   previewer_html_widget, mf, NULL);
 	free_font(mf);
@@ -431,7 +431,7 @@ void main_entry_display(gpointer data, gchar *mod_name,
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
-	HtmlOutput((char *)AnalyzeForImageSize(str->str,
+	HtmlOutput((char *)AnalyzeForImageSize(str->str, 1,
 					       GDK_WINDOW(gtk_widget_get_window(html_widget))),
 		   html_widget, mf, NULL);
 	free_font(mf);

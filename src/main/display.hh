@@ -53,7 +53,8 @@ class GTKEntryDisp : public SWDisplay
 	{
 	}
 	virtual char display(SWModule &imodule);
-	virtual char displayByChapter(SWModule &imodule);
+	virtual char displayByChapter(SWModule &imodule,
+				      int columns);
 
       protected:
 	GtkWidget *gtkText;
@@ -100,7 +101,8 @@ class DialogEntryDisp : public SWDisplay
 	{
 	}
 	virtual char display(SWModule &imodule);
-	virtual char displayByChapter(SWModule &imodule);
+	virtual char displayByChapter(SWModule &imodule,
+				      int columns);
 
       protected:
 	GtkWidget *gtkText;

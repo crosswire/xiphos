@@ -123,6 +123,7 @@ const char *strcasestr(const char *haystack, const char *needle);
 #endif
 int ImageDimensions(const char *path, int *x, int *y);
 const char *AnalyzeForImageSize(const char *origtext,
+				int columns,
 				GdkWindow *window);
 
 #ifdef WIN32

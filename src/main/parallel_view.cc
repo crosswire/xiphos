@@ -725,7 +725,7 @@ void main_update_parallel_page(void)
 
 	g_string_append(data, "</table></body></html>");
 	HtmlOutput((char *)(settings.imageresize
-				? AnalyzeForImageSize(data->str,
+				? AnalyzeForImageSize(data->str, 1,
 						      GDK_WINDOW(gtk_widget_get_window(widgets.html_parallel)))
 				: data->str),
 		   widgets.html_parallel, NULL, NULL);
@@ -983,7 +983,7 @@ void main_update_parallel_page_detached(void)
 	snprintf(buf, 499, "%d", settings.intCurVerse);
 
 	HtmlOutput((char *)(settings.imageresize
-				? AnalyzeForImageSize((char *)text.c_str(),
+				? AnalyzeForImageSize((char *)text.c_str(), parallel_count*2/3,
 						      GDK_WINDOW(gtk_widget_get_window(widgets.html_parallel_dialog)))
 				: (char *)text.c_str()),
 		   widgets.html_parallel_dialog, NULL, buf);
