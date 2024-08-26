@@ -67,6 +67,7 @@
 /* we must define the categories of #definitions we need. */
 #define XK_MISCELLANY
 #define XK_LATIN1
+#define XK_XKB_KEYS
 #include <X11/keysymdef.h>
 
 WIDGETS widgets;
@@ -795,6 +796,52 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			on_notebook_main_new_tab_clicked(NULL, NULL);
 		else if (state == GDK_MOD1_MASK) // Alt-T transliteration
 			kbd_toggle_option(true, "Transliteration");
+		break;
+
+	case XK_Tab:
+		if (state == GDK_CONTROL_MASK) // Ctrl-Tab  next tab
+			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
+				gtk_notebook_next_page(GTK_NOTEBOOK(widgets.notebook_main));
+				return TRUE; // Need to prevent Tab from navigating between widgets here
+			}
+		break;
+
+	case XK_ISO_Left_Tab:
+		if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) // Ctrl-Shift-Tab  previous tab
+			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
+				gtk_notebook_prev_page(GTK_NOTEBOOK(widgets.notebook_main));
+				return TRUE; // Need to prevent Shift-Tab from navigating between widgets here
+			}
+		break;
+
+	case XK_Page_Up:
+		if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) { // Ctrl-Shift-PgUp  reorder tab to left
+			gint current_tab_idx = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
+			GtkWidget *current_tab = gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_main), current_tab_idx);
+			if (current_tab_idx != 0) {
+				gtk_notebook_reorder_child(GTK_NOTEBOOK(widgets.notebook_main), current_tab, current_tab_idx - 1);
+			}
+		}
+		break;
+
+	case XK_Page_Down:
+		if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) { // Ctrl-Shift-PgDown  reorder tab to right
+			gint current_tab_idx = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
+			gint n_tabs = gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main));
+			GtkWidget *current_tab = gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_main), current_tab_idx);
+			if (current_tab_idx < n_tabs - 1) {
+				gtk_notebook_reorder_child(GTK_NOTEBOOK(widgets.notebook_main), current_tab, current_tab_idx + 1);
+			}
+		}
+		break;
+
+	case XK_w:
+		if (state == GDK_CONTROL_MASK) { // Ctrl-W  close current tab
+			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
+				gint pagenum = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
+				gui_close_passage_tab(pagenum);
+			}
+		}
 		break;
 
 	case XK_z:

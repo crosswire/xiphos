@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 	/*
 	 * set env.var that causes WK not to screw with nvidia badly.
 	 */
-	setenv("WEBKIT_DISABLE_COMPOSITING_MODE", "1", 1);
+	g_setenv("WEBKIT_DISABLE_COMPOSITING_MODE", "1", TRUE);
 	// **** end of LOUD OBNOXIOUS COMMENT TO GET ATTENTION ****
 	// ---------------------------------------------------------
 

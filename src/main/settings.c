@@ -56,7 +56,8 @@
 /******************************************************************************
  * defines
  */
-#define XI_DIR ".xiphos"
+#define XI_DIR		"xiphos"	/* modern choice, within ~/.config */
+#define OLD_XI_DIR	".xiphos"	/* for compatibility movement */
 
 /******************************************************************************
  * globals
@@ -95,6 +96,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	char *env;
 	struct stat buf;
 	gboolean buf_says_empty = FALSE;
+	char *old_gSwordDir;
 
 	settings.first_run = FALSE;
 	/* set program title */
@@ -110,7 +112,30 @@ int settings_init(int argc, char **argv, int new_configs,
 
 	/* set gSwordDir to $home + .xiphos */
 	settings.gSwordDir =
-	    g_build_filename(settings.homedir, XI_DIR, NULL);
+		g_build_filename(settings.homedir,
+#ifndef WIN32
+				 ".config",
+#endif
+				 XI_DIR, NULL);
+
+	/* --------------------------------------------------------------- */
+	/* convert old presence in ~, move into ~/.config (linux), no dot. */
+
+	old_gSwordDir = g_build_filename(settings.homedir, OLD_XI_DIR, NULL);
+
+	if ((g_access(old_gSwordDir,      F_OK) == 0) &&
+	    (g_access(settings.gSwordDir, F_OK) != 0)) {
+		/* ~/.xiphos exists, but not ~/.config/xiphos: move. */
+		if (g_rename(old_gSwordDir, settings.gSwordDir) == 0) {
+			g_free(old_gSwordDir);
+		} else {
+			g_free(settings.gSwordDir);
+			settings.gSwordDir = old_gSwordDir;
+		}
+	}
+	else
+		g_free(old_gSwordDir);
+	/* --------------------------------------------------------------- */
 
 	/* if gSwordDir does not exist, create it. */
 	if (g_access(settings.gSwordDir, F_OK) == -1) {
@@ -147,8 +172,7 @@ int settings_init(int argc, char **argv, int new_configs,
 	g_free(sword_dir);
 	/* if .sword/modules does not exist create it */
 	sword_dir =
-	    g_strdup_printf("%s/%s", settings.homedir,
-			    DOTSWORD "/modules");
+	    g_strdup_printf("%s/%s", settings.homedir, DOTSWORD "/modules");
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
@@ -254,7 +278,10 @@ int settings_init(int argc, char **argv, int new_configs,
 	settings.bs_passphrase = g_strdup("BibleSync");
 
 	/* if the user had forced a locale, we must set it now. */
-	if (settings.special_locale && strcmp(settings.special_locale, NONE)) {
+	if (settings.special_locale &&
+	    strcmp(settings.special_locale, NONE) &&
+	    /* stay compatible w/use of literal */
+	    strcmp(settings.special_locale, "None")) {
 		g_setenv("LANG", settings.special_locale, TRUE);
 		gchar *test = setlocale(LC_ALL, settings.special_locale);
 		if (test == NULL) {
@@ -264,8 +291,7 @@ int settings_init(int argc, char **argv, int new_configs,
 		}
 		if (test != NULL) {
 			g_setenv("LC_ALL", test, TRUE);
-			XI_message(("set locale to %s",
-				    settings.special_locale));
+			XI_message(("set locale to %s", settings.special_locale));
 		}
 	}
 
@@ -376,8 +402,7 @@ void load_settings_structure(void)
 			char *oldparallel = xml_get_value("modules", intN);
 			if (oldparallel && *oldparallel) {
 				newhold =
-				    g_strconcat(parallels, oldparallel,
-						",", NULL);
+				    g_strconcat(parallels, oldparallel,	",", NULL);
 				g_free(parallels);
 				parallels = newhold;
 				g_free(oldparallel);
@@ -388,8 +413,7 @@ void load_settings_structure(void)
 		/* trim off the last comma */
 		if (*parallels) {
 			*(parallels + strlen(parallels) - 1) = '\0';
-			xml_set_new_element("modules", "parallels",
-					    parallels);
+			xml_set_new_element("modules", "parallels", parallels);
 		}
 	}
 	if (parallels && *parallels)
@@ -407,21 +431,18 @@ void load_settings_structure(void)
 	settings.lex_hebrew = xml_get_value("lexicons", "hebrew");
 	if (!settings.lex_greek) {
 		settings.lex_greek = g_strdup("StrongsGreek");
-		xml_set_value("Xiphos", "lexicons", "greek",
-			      settings.lex_greek);
+		xml_set_value("Xiphos", "lexicons", "greek", settings.lex_greek);
 	}
 	if (!settings.lex_hebrew) {
 		settings.lex_hebrew = g_strdup("StrongsHebrew");
-		xml_set_value("Xiphos", "lexicons", "hebrew",
-			      settings.lex_hebrew);
+		xml_set_value("Xiphos", "lexicons", "hebrew", settings.lex_hebrew);
 	}
 
 	settings.DefaultDict =
 	    xml_get_value("lexicons", "defaultdictionary");
 	if (!settings.DefaultDict) {
 		settings.DefaultDict = g_strdup("WebstersDict");
-		xml_set_value("Xiphos", "lexicons", "defaultdictionary",
-			      settings.DefaultDict);
+		xml_set_value("Xiphos", "lexicons", "defaultdictionary", settings.DefaultDict);
 	}
 	settings.useDefaultDict =
 	    atoi((buf = xml_get_value("lexicons", "usedefaultdict"))
@@ -442,31 +463,25 @@ void load_settings_structure(void)
 		settings.mod_mgr_source = atoi(buf);
 	else {
 		xml_add_new_section_to_settings_doc("modmgr");
-		xml_add_new_item_to_section("modmgr", "mod_mgr_source",
-					    "1");
+		xml_add_new_item_to_section("modmgr", "mod_mgr_source", "1");
 		settings.mod_mgr_source = 1;
 	}
 	if ((buf = xml_get_value("modmgr", "mod_mgr_destination")))
 		settings.mod_mgr_destination = atoi(buf);
 	else {
-		xml_add_new_item_to_section("modmgr",
-					    "mod_mgr_destination", "0");
+		xml_add_new_item_to_section("modmgr", "mod_mgr_destination", "0");
 		settings.mod_mgr_destination = 0;
 	}
 	if ((buf = xml_get_value("modmgr", "mod_mgr_local_source_index")))
 		settings.mod_mgr_local_source_index = atoi(buf);
 	else {
-		xml_add_new_item_to_section("modmgr",
-					    "mod_mgr_local_source_index",
-					    "0");
+		xml_add_new_item_to_section("modmgr", "mod_mgr_local_source_index", "0");
 		settings.mod_mgr_local_source_index = 0;
 	}
 	if ((buf = xml_get_value("modmgr", "mod_mgr_remote_source_index")))
 		settings.mod_mgr_remote_source_index = atoi(buf);
 	else {
-		xml_add_new_item_to_section("modmgr",
-					    "mod_mgr_remote_source_index",
-					    "0");
+		xml_add_new_item_to_section("modmgr", "mod_mgr_remote_source_index", "0");
 		settings.mod_mgr_remote_source_index = 0;
 	}
 
@@ -503,8 +518,7 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "vltoppaneheight")))
 		settings.verselist_toppane_height = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "vltoppaneheight",
-					    "210");
+		xml_add_new_item_to_section("layout", "vltoppaneheight", "210");
 		settings.verselist_toppane_height = 210;
 	}
 	if ((buf = xml_get_value("layout", "sidebar_notebook_height")))
@@ -512,16 +526,12 @@ void load_settings_structure(void)
 	else {
 		if ((buf = xml_get_value("layout", "sidebar_notebook_hight"))) { /* backward compatible */
 			settings.sidebar_notebook_height = atoi(buf);
-			xml_remove_node("layout", "sidebar_notebook_hight",
-					0);
+			xml_remove_node("layout", "sidebar_notebook_hight", 0);
 		} else
 			settings.sidebar_notebook_height = 250;
 		buf =
-		    g_strdup_printf("%d",
-				    settings.sidebar_notebook_height);
-		xml_add_new_item_to_section("layout",
-					    "sidebar_notebook_height",
-					    buf);
+		    g_strdup_printf("%d",settings.sidebar_notebook_height);
+		xml_add_new_item_to_section("layout", "sidebar_notebook_height", buf);
 		g_free(buf);
 	}
 
@@ -543,8 +553,7 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "advsearchopen")))
 		settings.display_advsearch = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "advsearchopen",
-					    "0");
+		xml_add_new_item_to_section("layout", "advsearchopen", "0");
 		settings.display_advsearch = 0;
 	}
 
@@ -581,60 +590,52 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "parallel_height")))
 		settings.parallel_height = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "parallel_height",
-					    "361");
+		xml_add_new_item_to_section("layout", "parallel_height", "361");
 		settings.parallel_height = 361;
 	}
 	if ((buf = xml_get_value("layout", "parallel_width")))
 		settings.parallel_width = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "parallel_width",
-					    "657");
+		xml_add_new_item_to_section("layout", "parallel_width", "657");
 		settings.parallel_width = 657;
 	}
 
 	if ((buf = xml_get_value("layout", "modmgr_height")))
 		settings.modmgr_height = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "modmgr_height",
-					    "450");
+		xml_add_new_item_to_section("layout", "modmgr_height", "450");
 		settings.modmgr_height = 450;
 	}
 	if ((buf = xml_get_value("layout", "modmgr_width")))
 		settings.modmgr_width = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "modmgr_width",
-					    "710");
+		xml_add_new_item_to_section("layout", "modmgr_width", "710");
 		settings.modmgr_width = 710;
 	}
 
 	if ((buf = xml_get_value("layout", "advsearch_height")))
 		settings.advsearch_height = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "advsearch_height",
-					    "465");
+		xml_add_new_item_to_section("layout", "advsearch_height", "465");
 		settings.advsearch_height = 465;
 	}
 	if ((buf = xml_get_value("layout", "advsearch_width")))
 		settings.advsearch_width = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "advsearch_width",
-					    "665");
+		xml_add_new_item_to_section("layout", "advsearch_width", "665");
 		settings.advsearch_width = 665;
 	}
 
 	if ((buf = xml_get_value("layout", "prefs_height")))
 		settings.prefs_height = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "prefs_height",
-					    "300");
+		xml_add_new_item_to_section("layout", "prefs_height", "300");
 		settings.prefs_height = 300;
 	}
 	if ((buf = xml_get_value("layout", "prefs_width")))
 		settings.prefs_width = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "prefs_width",
-					    "590");
+		xml_add_new_item_to_section("layout", "prefs_width", "590");
 		settings.prefs_width = 590;
 	}
 
@@ -739,8 +740,7 @@ void load_settings_structure(void)
 		} else
 			settings.commpane_height = 240;
 		buf = g_strdup_printf("%d", settings.commpane_height);
-		xml_add_new_item_to_section("layout", "commentaryheight",
-					    buf);
+		xml_add_new_item_to_section("layout", "commentaryheight", buf);
 		g_free(buf);
 	}
 
@@ -759,13 +759,11 @@ void load_settings_structure(void)
 		    atoi(settings.base_font_size_str);
 	} else {
 #ifndef WIN32
-		xml_add_new_item_to_section("fontsize", "basefontsize",
-					    "+0");
+		xml_add_new_item_to_section("fontsize", "basefontsize", "+0");
 		settings.base_font_size_str = g_strdup("+0");
 		settings.base_font_size = 0;
 #else
-		xml_add_new_item_to_section("fontsize", "basefontsize",
-					    "+1");
+		xml_add_new_item_to_section("fontsize", "basefontsize", "+1");
 		settings.base_font_size_str = g_strdup("+1");
 		settings.base_font_size = 1;
 #endif /* WIN32 */
@@ -785,15 +783,13 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("HTMLcolors", "highlight_fg")))
 		settings.highlight_fg = g_strdup(buf);
 	else {
-		xml_add_new_item_to_section("HTMLcolors", "highlight_fg",
-					    "#FFFF00");
+		xml_add_new_item_to_section("HTMLcolors", "highlight_fg", "#FFFF00");
 		settings.highlight_fg = g_strdup("#FFFF00");
 	}
 	if ((buf = xml_get_value("HTMLcolors", "highlight_bg")))
 		settings.highlight_bg = g_strdup(buf);
 	else {
-		xml_add_new_item_to_section("HTMLcolors", "highlight_bg",
-					    "#060680");
+		xml_add_new_item_to_section("HTMLcolors", "highlight_bg", "#060680");
 		settings.highlight_bg = g_strdup("#060680");
 	}
 
@@ -801,32 +797,28 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("parallel", "Strong_s_Numbers")))
 		settings.parallel_strongs = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Strong_s_Numbers",
-					    "0");
+		xml_add_new_item_to_section("parallel", "Strong_s_Numbers", "0");
 		settings.parallel_strongs = 0;
 	}
 
 	if ((buf = xml_get_value("parallel", "Morphological_Tags")))
 		settings.parallel_morphs = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel",
-					    "Morphological_Tags", "0");
+		xml_add_new_item_to_section("parallel", "Morphological_Tags", "0");
 		settings.parallel_morphs = 0;
 	}
 
 	if ((buf = xml_get_value("parallel", "Hebrew_Vowel_Points")))
 		settings.parallel_hebrewpoints = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel",
-					    "Hebrew_Vowel_Points", "1");
+		xml_add_new_item_to_section("parallel", "Hebrew_Vowel_Points", "1");
 		settings.parallel_hebrewpoints = 1;
 	}
 
 	if ((buf = xml_get_value("parallel", "Hebrew_Cantillation")))
 		settings.parallel_cantillationmarks = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel",
-					    "Hebrew_Cantillation", "0");
+		xml_add_new_item_to_section("parallel", "Hebrew_Cantillation", "0");
 		settings.parallel_cantillationmarks = 0;
 	}
 
@@ -840,32 +832,28 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("parallel", "Cross-references")))
 		settings.parallel_crossref = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Cross-references",
-					    "1");
+		xml_add_new_item_to_section("parallel", "Cross-references", "1");
 		settings.parallel_crossref = 1;
 	}
 
 	if ((buf = xml_get_value("parallel", "Transliteration")))
 		settings.parallel_transliteration = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Transliteration",
-					    "0");
+		xml_add_new_item_to_section("parallel", "Transliteration", "0");
 		settings.parallel_transliteration = 0;
 	}
 
 	if ((buf = xml_get_value("parallel", "Words_of_Christ_in_Red")))
 		settings.parallel_red_words = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel",
-					    "Words_of_Christ_in_Red", "1");
+		xml_add_new_item_to_section("parallel", "Words_of_Christ_in_Red", "1");
 		settings.parallel_red_words = 1;
 	}
 
 	if ((buf = xml_get_value("parallel", "Morpheme_Segmentation")))
 		settings.parallel_segmentation = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel",
-					    "Morpheme_Segmentation", "0");
+		xml_add_new_item_to_section("parallel", "Morpheme_Segmentation", "0");
 		settings.parallel_segmentation = 0;
 	}
 
@@ -874,6 +862,13 @@ void load_settings_structure(void)
 	else {
 		xml_add_new_item_to_section("parallel", "Headings", "1");
 		settings.parallel_headings = 1;
+	}
+
+	if ((buf = xml_get_value("parallel", "Italic_Headings")))
+		settings.parallel_italic_headings = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Italic_Headings", "0");
+		settings.parallel_italic_headings = 0;
 	}
 
 	if ((buf = xml_get_value("parallel", "Lemmas")))
@@ -886,48 +881,42 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("parallel", "Primary_Reading")))
 		settings.parallel_variants_primary = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Primary_Reading",
-					    "1");
+		xml_add_new_item_to_section("parallel", "Primary_Reading", "1");
 		settings.parallel_variants_primary = 1;
 	}
 
 	if ((buf = xml_get_value("parallel", "Secondary_Reading")))
 		settings.parallel_variants_secondary = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel",
-					    "Secondary_Reading", "0");
+		xml_add_new_item_to_section("parallel", "Secondary_Reading", "0");
 		settings.parallel_variants_secondary = 0;
 	}
 
 	if ((buf = xml_get_value("parallel", "All_Readings")))
 		settings.parallel_variants_all = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "All_Readings",
-					    "0");
+		xml_add_new_item_to_section("parallel", "All_Readings", "0");
 		settings.parallel_variants_all = 0;
 	}
 
 	if ((buf = xml_get_value("parallel", "Greek_Accents")))
 		settings.parallel_greekaccents = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Greek_Accents",
-					    "1");
+		xml_add_new_item_to_section("parallel", "Greek_Accents", "1");
 		settings.parallel_greekaccents = 1;
 	}
 
 	if ((buf = xml_get_value("parallel", "Transliterated_Forms")))
 		settings.parallel_xlit = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel",
-					    "Transliterated_Forms", "0");
+		xml_add_new_item_to_section("parallel", "Transliterated_Forms", "0");
 		settings.parallel_xlit = 0;
 	}
 
 	if ((buf = xml_get_value("parallel", "Enumerations")))
 		settings.parallel_enumerated = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Enumerations",
-					    "0");
+		xml_add_new_item_to_section("parallel", "Enumerations", "0");
 		settings.parallel_enumerated = 0;
 	}
 
@@ -941,8 +930,7 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("parallel", "Morpheme_Segmentation")))
 		settings.parallel_morphseg = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel",
-					    "Morpheme_Segmentation", "0");
+		xml_add_new_item_to_section("parallel", "Morpheme_Segmentation", "0");
 		settings.parallel_morphseg = 0;
 	}
 
@@ -966,8 +954,7 @@ void load_settings_structure(void)
 		settings.show_previewer_in_sidebar =
 		    atol(xml_get_value("misc", "show_side_preview"));
 	else {
-		xml_add_new_item_to_section("misc", "show_side_preview",
-					    "1");
+		xml_add_new_item_to_section("misc", "show_side_preview", "1");
 		settings.show_previewer_in_sidebar = 1;
 	}
 
@@ -1021,16 +1008,14 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("misc", "verse_num_bracket")))
 		settings.verse_num_bracket = atoi(buf);
 	else {
-		xml_add_new_item_to_section("misc", "verse_num_bracket",
-					    "0");
+		xml_add_new_item_to_section("misc", "verse_num_bracket", "0");
 		settings.verse_num_bracket = 0;
 	}
 
 	if ((buf = xml_get_value("misc", "verse_num_superscript")))
 		settings.verse_num_superscript = atoi(buf);
 	else {
-		xml_add_new_item_to_section("misc",
-					    "verse_num_superscript", "0");
+		xml_add_new_item_to_section("misc", "verse_num_superscript", "0");
 		settings.verse_num_superscript = 0;
 	}
 
@@ -1044,16 +1029,14 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("misc", "annotatehighlight")))
 		settings.annotate_highlight = atoi(buf);
 	else {
-		xml_add_new_item_to_section("misc", "annotatehighlight",
-					    "1");
+		xml_add_new_item_to_section("misc", "annotatehighlight", "1");
 		settings.annotate_highlight = 1;
 	}
 
 	if ((buf = xml_get_value("misc", "xrefsinverselist")))
 		settings.xrefs_in_verse_list = atoi(buf);
 	else {
-		xml_add_new_item_to_section("misc", "xrefsinverselist",
-					    "1");
+		xml_add_new_item_to_section("misc", "xrefsinverselist", "1");
 		settings.xrefs_in_verse_list = 1;
 	}
 
@@ -1078,8 +1061,7 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("editor", "spell_language")))
 		settings.spell_language = g_strdup(buf);
 	else {
-		xml_add_new_item_to_section("editor", "spell_language",
-					    "unknown");
+		xml_add_new_item_to_section("editor", "spell_language", "unknown");
 		settings.spell_language = "unknown";
 	}
 
@@ -1118,6 +1100,22 @@ void load_settings_structure(void)
 	} else {
 		xml_add_new_item_to_section("misc", "alternation", "1");
 		settings.alternation = 1;
+	}
+
+	if ((buf = xml_get_value("misc", "displaycolumns"))) {
+		settings.display_columns = atoi(buf);
+		if ((settings.display_columns < 1) ||(settings.display_columns > 4))
+			settings.display_columns = 1;
+	} else {
+		xml_add_new_item_to_section("misc", "displaycolumns", "1");
+		settings.display_columns = 1;
+	}
+
+	if ((buf = xml_get_value("misc", "justifymargins"))) {
+		settings.justify_margins = atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc", "justifymargins", "0");
+		settings.justify_margins = 0;
 	}
 
 #if 1

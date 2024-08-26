@@ -36,6 +36,8 @@ struct _mod_font
 	int old_font_size_value;
 	const char *new_font_size;
 	int no_font;
+	const char *columns;
+	int columns_value;
 };
 
 char *get_conf_file_item(const char *file, const char *mod_name,

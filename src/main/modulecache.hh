@@ -72,7 +72,8 @@ static const int Xlit = (1 << 16);
 static const int Enumerated = (1 << 17);
 static const int Glosses = (1 << 18);
 static const int MorphSegmentation = (1 << 19);
-// 20-23 yet to be assigned.
+static const int ItalicHeadings = (1 << 20);
+// 21-23 yet to be assigned.
 
 // options known only within Xiphos.
 static const int CommentaryChapter = (1 << 24);

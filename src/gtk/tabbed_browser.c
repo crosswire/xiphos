@@ -193,13 +193,9 @@ void set_current_tab(PASSAGE_TAB_INFO *pt)
 	if (stop_refresh)
 		return;
 
-	if (!closing_tab && ot != NULL && ot->button_close != NULL) {
-		gtk_widget_set_sensitive(ot->button_close, FALSE);
-	}
 	cur_passage_tab = pt;
 	if (pt != NULL && pt->button_close != NULL) {
 		//main_update_tab_history_menu((PASSAGE_TAB_INFO*)pt);
-		gtk_widget_set_sensitive(pt->button_close, TRUE);
 
 		/* adopt panel shows from passage tab memory. */
 		settings.showtexts = pt->showtexts;
@@ -298,6 +294,9 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 	   tbinf->showparallel ? 1 : -1); */
 	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
 				 tbinf->page_widget, tab_widget);
+
+	gtk_notebook_set_tab_reorderable(GTK_NOTEBOOK(widgets.notebook_main),
+					 tbinf->page_widget, TRUE);
 
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					 tbinf->page_widget, str->str);
@@ -794,6 +793,49 @@ void gui_load_tabs(const gchar *filename)
 
 /******************************************************************************
  * Name
+ *  on_notebook_main_tab_clicked
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void on_notebook_main_tab_clicked(GtkWidget *self,
+ *				       GdkEventButton *event,
+ *				       gpointer user_data)
+ *
+ * Description
+ *   Handle click events for tabs
+ *
+ * Return value
+ *   void
+ */
+static gboolean on_notebook_main_tab_clicked(GtkWidget *self,
+					     GdkEventButton *event,
+					     gpointer user_data)
+{
+	GtkWidget *notebook = widgets.notebook_main;
+	PASSAGE_TAB_INFO *pt = user_data;
+	const gchar *label_text = gtk_label_get_text(pt->tab_label);
+
+	switch (event->type) {
+		case GDK_BUTTON_PRESS: {
+			if (event->button == 2) { // Middle-Click
+				GtkWidget *page = pt->page_widget;
+				gint pagenum = gtk_notebook_page_num(GTK_NOTEBOOK(notebook), page);
+				gui_close_passage_tab(pagenum);
+				return TRUE;
+			}
+			break;
+		}
+
+		default:
+			return FALSE;
+	}
+
+	return FALSE;
+}
+
+/******************************************************************************
+ * Name
  *  on_notebook_main_close_page
  *
  * Synopsis
@@ -805,7 +847,7 @@ void gui_load_tabs(const gchar *filename)
  *
  *
  * Return value
- *   void
+ *   gpointer
  */
 
 static void on_notebook_main_close_page(GtkButton *button,
@@ -881,8 +923,11 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 	gtk_widget_size_request(tbinf->button_close, &r);
 #endif
 
-	gtk_widget_set_sensitive(tbinf->button_close, FALSE);
 	gtk_widget_show(tbinf->button_close);
+
+	tbinf->tab_label_eventbox = GTK_EVENT_BOX(gtk_event_box_new());
+	gtk_widget_show(GTK_WIDGET(tbinf->tab_label_eventbox));
+
 	tbinf->tab_label = GTK_LABEL(gtk_label_new(label_text));
 	gtk_widget_show(GTK_WIDGET(tbinf->tab_label));
 
@@ -905,17 +950,102 @@ static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 #endif
 
 	UI_HBOX(box, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label),
+	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label_eventbox),
 			   TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(box), tbinf->button_close, FALSE, FALSE,
 			   0);
+
+	gtk_container_add(GTK_CONTAINER(tbinf->tab_label_eventbox),
+			  GTK_WIDGET(tbinf->tab_label));
+	gtk_widget_set_events(GTK_WIDGET(tbinf->tab_label_eventbox), GDK_BUTTON_PRESS_MASK);
 
 	gtk_widget_show(box);
 
 	g_signal_connect(G_OBJECT(tbinf->button_close), "clicked",
 			 G_CALLBACK(on_notebook_main_close_page), tbinf);
 
+	g_signal_connect(G_OBJECT(tbinf->tab_label_eventbox), "button-press-event",
+			 G_CALLBACK(on_notebook_main_tab_clicked), tbinf);
+
 	return box;
+}
+
+/******************************************************************************
+ * Name
+ *  gui_notebook_main_page_reordered
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_notebook_main_page_reordered(GtkNotebook *notebook,
+ *					   GtkNotebookPage *page,
+ *					   guint page_num, GList **tl)
+ *
+ * Description
+ *   updates passage_list with changed tab order
+ *
+ * Return value
+ *   void
+ */
+void gui_notebook_main_page_reordered(GtkNotebook *notebook,
+				      gpointer page,
+				      guint page_num,
+				      GList **tl)
+{
+	static gboolean tab_order_out_of_sync = FALSE;
+	if (tab_order_out_of_sync) {
+		return;
+	}
+
+	guint new_index = page_num;
+
+	// Get index of passage_list entry that matches `page`
+	GList *passage_list = *tl;
+	PASSAGE_TAB_INFO *pt = passage_list->data;
+	gint old_index = -1;
+	gint idx = 0;
+	for (GList *cur = passage_list; cur != NULL; cur = cur->next) {
+		pt = cur->data;
+		GtkWidget *pw = pt->page_widget;
+		if (pw == page) {
+			old_index = idx;
+			break;
+		}
+
+		idx++;
+	}
+
+	if (old_index == -1) {
+		// Page not found (this theoretically shouldn't be possible)
+		g_warning("Couldn't find reordered page in passage_list!\
+`widgets.notebook_main` and `passage_list` might be out of sync! Refusing to\
+persist further tab rearrangements.\n");
+		tab_order_out_of_sync = true;
+		return;
+	}
+
+	// Swap pointers inside of passage_list to match swap
+	// performed by notebook.
+	if (old_index == new_index) { return; }
+
+	bool shifting_right = false;
+	if (new_index > old_index) {
+		shifting_right = true;
+	}
+
+	GList *sibling = NULL;
+	if (new_index < g_list_length(passage_list) - 1) {
+		sibling = g_list_nth(passage_list, new_index);
+		if (shifting_right) {
+			sibling = sibling->next;
+		}
+	}
+
+	GList *link = g_list_nth(passage_list, old_index);
+	passage_list = g_list_remove_link(passage_list, link);
+	passage_list = g_list_insert_before_link(passage_list, sibling, link);
+
+	*tl = passage_list;
 }
 
 /******************************************************************************
@@ -1590,6 +1720,11 @@ void gui_notebook_main_setup(int tabs, const char *tabsfile)
 	g_signal_connect(G_OBJECT(widgets.notebook_main),
 			 "switch-page",
 			 G_CALLBACK(gui_notebook_main_switch_page),
+			 &passage_list);
+
+	g_signal_connect(G_OBJECT(widgets.notebook_main),
+			 "page-reordered",
+			 G_CALLBACK(gui_notebook_main_page_reordered),
 			 &passage_list);
 
 	g_signal_connect(G_OBJECT(widgets.button_new_tab), "clicked",

@@ -749,6 +749,15 @@ MOD_FONT *get_font(const gchar *mod_name)
 
 	mf->old_font = get_conf_file_item(file, mod_name, "Font");
 	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
+	mf->columns = get_conf_file_item(file, mod_name, "Columns");
+	if (mf->columns) {
+		mf->columns_value = atoi(mf->columns);
+		if ((mf->columns_value != -1) &&	/* -1 => use default */
+		    ((mf->columns_value < 1) ||
+		     (mf->columns_value > 4)))
+			mf->columns_value = 1;
+	} else
+		mf->columns_value = -1;	/* "not used" */
 
 	/* 1st try: module pref */
 	if ((mf->old_font == NULL) || !strcmp(mf->old_font, "none")) {
@@ -1897,7 +1906,7 @@ int ImageDimensions(const char *path, int *x, int *y)
 const char *strcasestr(const char *haystack, const char *needle);
 #endif
 
-const char *AnalyzeForImageSize(const char *origtext, GdkWindow *window)
+const char *AnalyzeForImageSize(const char *origtext, int columns, GdkWindow *window)
 {
 	static GString *resized;
 	static gint resized_init = FALSE;
@@ -1935,6 +1944,14 @@ const char *AnalyzeForImageSize(const char *origtext, GdkWindow *window)
 			gdk_drawable_get_size(window, &window_x,
 					      &window_y);
 #endif
+
+			/* in a world of multi-column output, */
+			/* we must constrain by column width. */
+			if (columns != 1) {
+				window_x /= columns;
+				window_x = (int)((float)window_x * 0.85);
+			}
+
 			if ((window_x > 200) || (window_y > 200)) {
 				window_x -= 23;
 				window_y -= 23;
