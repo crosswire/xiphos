@@ -1207,9 +1207,30 @@ on_justifybutton_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 	xml_set_value("Xiphos", "misc", "justifymargins",
 		      (gtk_toggle_button_get_active(togglebutton) ? "1" : "0"));
 	settings.justify_margins = gtk_toggle_button_get_active(togglebutton);
+
 	char *url = g_strdup_printf("sword:///%s", settings.currentverse);
 	main_url_handler(url, TRUE);
 	g_free(url);
+
+	if (settings.DictWindowModule && settings.dictkey) {
+		url = g_strdup_printf("sword://%s/%s", settings.DictWindowModule, settings.dictkey);
+		main_url_handler(url, TRUE);
+		g_free(url);
+	}
+
+	if (settings.book_mod) {
+		gboolean temp_comm_showing = settings.comm_showing;	// don't wrongly put book forward
+
+		url = g_strdup_printf("sword://%s/%d", settings.book_mod, settings.book_offset);
+		main_url_handler(url, TRUE);
+		g_free(url);
+
+		if (temp_comm_showing) {
+			// re-assert comm visibility.
+			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book), 0);
+			settings.comm_showing = 1;
+		}
+	}
 }
 
 /******************************************************************************
@@ -1598,11 +1619,31 @@ void on_columncountvalue_changed(GtkComboBox *combobox, gpointer user_data)
 		return;
 	xml_set_value("Xiphos", "misc", "displaycolumns", buf);
 	settings.display_columns = atoi(buf);
-	url =
-	    g_strdup_printf("sword:///%s", settings.currentverse);
+
+	url = g_strdup_printf("sword:///%s", settings.currentverse);
 	main_url_handler(url, TRUE);
 	g_free(url);
 	g_free(buf);
+
+	if (settings.DictWindowModule && settings.dictkey) {
+		url = g_strdup_printf("sword://%s/%s", settings.DictWindowModule, settings.dictkey);
+		main_url_handler(url, TRUE);
+		g_free(url);
+	}
+
+	if (settings.book_mod) {
+		gboolean temp_comm_showing = settings.comm_showing;	// don't wrongly put book forward
+
+		url = g_strdup_printf("sword://%s/%d", settings.book_mod, settings.book_offset);
+		main_url_handler(url, TRUE);
+		g_free(url);
+
+		if (temp_comm_showing) {
+			// re-assert comm visibility.
+			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book), 0);
+			settings.comm_showing = 1;
+		}
+	}
 }
 
 /******************************************************************************
