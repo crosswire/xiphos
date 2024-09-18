@@ -38,7 +38,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <gtk/gtk.h>
-#include <zip.h>
+#include <minizip/zip.h>
 #include <zlib.h>
 
 #include "gui/utilities.h"

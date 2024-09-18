@@ -1360,12 +1360,20 @@ void main_do_dialog_search(void)
 	// we will inadvertently return e.g. 140 plus 1401 and 1404.
 	if (search_type == -3) {
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_strongs))) {
-			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
+			search_params |=
+#if __GNUC__ <= 11
+					SWModule::
+#endif
+						SEARCHFLAG_MATCHWHOLEENTRY;
 			attribute_search_string = g_strdup_printf(
 			    "Word//Lemma./%s",
 			    search_string);
 		} else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_morphs))) {
-			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
+			search_params |=
+#if __GNUC__ <= 11
+					SWModule::
+#endif
+						SEARCHFLAG_MATCHWHOLEENTRY;
 			attribute_search_string = g_strdup_printf(
 			    "Word//Morph/%s",
 			    search_string);

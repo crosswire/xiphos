@@ -372,7 +372,7 @@ char *BackEnd::get_strip_text_from_string(const char *module_name, const char *s
 	SWModule *mod = get_SWModule(module_name);
 
 	if (mod) {
-		return strdup((char *)mod->stripText(string));
+		return strdup(mod->stripText(string));
 	}
 	return NULL;
 }
@@ -382,7 +382,7 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key)
 
 	if (mod) {
 		mod->setKey(key);
-		return strdup((char *)mod->stripText());
+		return strdup(mod->stripText());
 	}
 	return NULL;
 }

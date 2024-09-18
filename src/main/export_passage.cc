@@ -220,7 +220,7 @@ static void _export_book(EXPORT_DATA data, int type)
 					       (settings.versestyle ? "<br>" : ""));
 		else
 			g_string_append_printf(str, " %s%s",
-					       (char *)mod->stripText(),
+					       mod->stripText(),
 					       (settings.versestyle ? "\n" : ""));
 
 		++myverse;
@@ -280,7 +280,7 @@ static void _export_chapter(EXPORT_DATA data, int type)
 					       (settings.versestyle ? "<br>" : ""));
 		else
 			g_string_append_printf(str, " %s%s",
-					       (char *)mod->stripText(),
+					       mod->stripText(),
 					       (settings.versestyle ? "\n" : ""));
 	}
 	if (type == HTML)
@@ -327,7 +327,7 @@ static void _export_verse(EXPORT_DATA data, int type)
 	else if (data.reference_last)
 		g_string_append_printf(str,
 				       data.plain_verselayout_single_verse_ref_last,
-				       (char *)mod->stripText(),
+				       mod->stripText(),
 				       book,
 				       key->getChapter(),
 				       key->getVerse(),
@@ -339,7 +339,7 @@ static void _export_verse(EXPORT_DATA data, int type)
 				       key->getChapter(),
 				       key->getVerse(),
 				       (data.version ? modstr : ""),
-				       (char *)mod->stripText());
+				       mod->stripText());
 
 	if (data.filename)
 		_save(data, str->str, str->len);
@@ -409,7 +409,7 @@ static void _export_verse_range(EXPORT_DATA data, int type)
 					       (settings.versestyle ? "<br>" : " "));
 		else
 			g_string_append_printf(str, data.verse_range_verse,
-					       (char *)mod->stripText(),
+					       mod->stripText(),
 					       (settings.versestyle ? "\n" : " "));
 	}
 	// back up one verse.

@@ -59,6 +59,8 @@
 
 #include "gui/debug_glib_null.h"
 
+#include <stdbool.h>
+
 static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 				 const gchar *label_text);
 void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf);
