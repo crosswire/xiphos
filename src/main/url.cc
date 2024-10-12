@@ -153,7 +153,7 @@ static gint show_studypad(const gchar *filename, gboolean clicked)
  */
 
 const char *display_progs[] = {
-    "/usr/bin/gvfs-open",
+    "/usr/bin/xdg-open",
     "/usr/bin/gnome-open",
     "/usr/bin/display",
     NULL};
