@@ -481,8 +481,8 @@ msgstr "Xiphos razvoj"
 
 #: ../src/gtk/about_xiphos.c:129
 #, fuzzy
-msgid "Copyright © 2000-2024 Xiphos Development Team"
-msgstr "Avtorske pravice © 2000-2024 Xiphos razvojna skupina"
+msgid "Copyright © 2000-2025 Xiphos Development Team"
+msgstr "Avtorske pravice © 2000-2025 Xiphos razvojna skupina"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""

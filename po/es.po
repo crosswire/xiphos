@@ -478,8 +478,8 @@ msgid "Xiphos development"
 msgstr "Desarrollo de Xiphos"
 
 #: ../src/gtk/about_xiphos.c:129
-msgid "Copyright © 2000-2024 Xiphos Development Team"
-msgstr "Copyright 2000-2024 El Equipo de Desarrollo de Xiphos"
+msgid "Copyright © 2000-2025 Xiphos Development Team"
+msgstr "Copyright 2000-2025 El Equipo de Desarrollo de Xiphos"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""

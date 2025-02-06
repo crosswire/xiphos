@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * export_bookmarks.c -
  *
- * Copyright (C) 2003-2024 Xiphos Developer Team
+ * Copyright (C) 2003-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

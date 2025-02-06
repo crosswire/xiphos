@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * font_dialog.c - dialog to set module font
  *
- * Copyright (C) 2000-2024 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

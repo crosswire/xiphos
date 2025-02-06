@@ -1,6 +1,6 @@
 # translation of sk.po to Slovak
 # Slovak translation for Xiphos
-# Copyright (C) 2000-2024 Zdenko Podobný
+# Copyright (C) 2000-2025 Zdenko Podobný
 #
 # Zdenko Podobný <zdpo@mailbox.sk>, 2001.
 # Zdenko Podobny <zdposter@gmail.com>, 2009, 2014, 2015.
@@ -448,8 +448,8 @@ msgid "Xiphos development"
 msgstr "Xiphos vývoj"
 
 #: ../src/gtk/about_xiphos.c:129
-msgid "Copyright © 2000-2024 Xiphos Development Team"
-msgstr "Copyright © 2000-2024 Xiphos vývojový Tím"
+msgid "Copyright © 2000-2025 Xiphos Development Team"
+msgstr "Copyright © 2000-2025 Xiphos vývojový Tím"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""

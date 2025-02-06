@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * tab_history.c - add, remove and navigate history
  *
- * Copyright (C) 2005-2024 Xiphos Developer Team
+ * Copyright (C) 2005-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

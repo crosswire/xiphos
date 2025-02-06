@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * display_info.h - display information (ie strongs) in a dialog
  *
- * Copyright (C) 2000-2024 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

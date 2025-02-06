@@ -471,8 +471,8 @@ msgstr "Xiphoksen kehittäminen"
 
 #: ../src/gtk/about_xiphos.c:129
 #, fuzzy
-msgid "Copyright © 2000-2024 Xiphos Development Team"
-msgstr "Copyright 2000-2024 Xiphoksen kehitystiimi"
+msgid "Copyright © 2000-2025 Xiphos Development Team"
+msgstr "Copyright 2000-2025 Xiphoksen kehitystiimi"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""

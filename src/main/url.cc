@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * url.cc - support functions
  *
- * Copyright (C) 2004-2024 Xiphos Developer Team
+ * Copyright (C) 2004-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

@@ -465,8 +465,8 @@ msgid "Xiphos development"
 msgstr "Trang phát triển Xiphos"
 
 #: ../src/gtk/about_xiphos.c:129
-msgid "Copyright © 2000-2024 Xiphos Development Team"
-msgstr "Bản quyền © 2000-2024 Nhóm phát triển Xiphos"
+msgid "Copyright © 2000-2025 Xiphos Development Team"
+msgstr "Bản quyền © 2000-2025 Nhóm phát triển Xiphos"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""
