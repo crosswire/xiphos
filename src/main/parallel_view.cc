@@ -53,13 +53,23 @@
 
 #define HTML_START \
 	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\
-<style type=\"text/css\"><!--\
+<style type=\"text/css\">\
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right; }\
 h3 { font-style: %s }\
-%s -->\
+%s %s\
 </style></head>"
-// last "%s" is for CSS init from getRenderHeader().
+// last 2 "%s" are for CSS init from getRenderHeader() and sticky modnames.
+
+// how to build a table whose top row of modname labels doesn't scroll. based on:
+// http://geeksforgeeks.org/how-to-create-a-table-with-fixed-header-and-scrollable-body/
+#define	STICKY_MODNAMES \
+"<style> \
+.table-container { overflow-y: auto; width: 100%; } \
+table { width: 100%; border-collapse: collapse; } \
+thead th { position: sticky; top: 0; z-index: 1; } \
+th { text-align: center; } \
+</style>"
 
 extern GtkWidget *entrycbIntBook;
 extern GtkWidget *sbIntChapter;
@@ -619,6 +629,7 @@ void main_update_parallel_page(void)
 				 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
 				 (settings.parallel_italic_headings ? "italic" : "bold"),
 				 "", // null CSS headers
+				 "", // null CSS headers
 				 settings.bible_bg_color,
 				 settings.bible_text_color, settings.link_color);
 	data = g_string_new(tmpBuf);
@@ -958,9 +969,14 @@ void main_update_parallel_page_detached(void)
 	}
 
 	snprintf(buf, 4999, HTML_START
-		 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
+		 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+		 "  <div class=\"table-container\">"
+		 "    <table>"
+		 "      <thead>"
+		 "        <tr>",
 		 (settings.parallel_italic_headings ? "italic" : "bold"),
 		 control->getRenderHeader(),
+		 STICKY_MODNAMES,
 		 settings.bible_bg_color, settings.bible_text_color,
 		 settings.link_color);
 	text += buf;
@@ -968,7 +984,7 @@ void main_update_parallel_page_detached(void)
 	for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
 		const char *abbreviation = main_get_abbreviation(settings.parallel_list[modidx]);
 		snprintf(buf, 499,
-			 "<td valign=\"top\" width=\"%d%%\" bgcolor=\"#c0c0c0\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></td>",
+			 "<th width=\"%d%%\" bgcolor=\"#c0c0c0\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></th>",
 			 fraction,
 			 settings.bible_verse_num_color,
 			 settings.verse_num_font_size + settings.base_font_size,
@@ -976,9 +992,9 @@ void main_update_parallel_page_detached(void)
 		text += buf;
 	}
 
-	text += "</tr>";
+	text += "</tr> </thead> <tbody>";
 	interpolate_parallel_display(control, control_name, text, settings.cvparallel, parallel_count, fraction);
-	text += "</table></body></html>";
+	text += "</tbody> </table> </div> </body> </html>";
 
 	snprintf(buf, 499, "%d", settings.intCurVerse);
 
