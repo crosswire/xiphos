@@ -280,11 +280,6 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem *menuitem,
 		set_global_option(option, choice);
 	}
 
-	else if (!strcmp(option, "Morpheme Segmentation")) {
-		settings.parallel_morphseg = choice;
-		set_global_option(option, choice);
-	}
-
 	/* display change */
 	if (settings.dockedInt) {
 		main_update_parallel_page();
@@ -545,7 +540,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), settings.parallel_morphseg);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), settings.parallel_segmentation);
 	g_signal_connect(G_OBJECT(item), "activate",
 			 G_CALLBACK(main_set_parallel_module_global_options),
 			 (char *)"Morpheme Segmentation");
