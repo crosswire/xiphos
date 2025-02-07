@@ -57,9 +57,9 @@
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right; }\
 h3 { font-style: %s }\
-%s %s\
+%s %s %s \
 </style></head>"
-// last 2 "%s" are for CSS init from getRenderHeader() and sticky modnames.
+// last 3 "%s" are for CSS init from getRenderHeader() sticky modnames, and margin justify.
 
 // how to build a table whose top row of modname labels doesn't scroll. based on:
 // http://geeksforgeeks.org/how-to-create-a-table-with-fixed-header-and-scrollable-body/
@@ -69,6 +69,7 @@ h3 { font-style: %s }\
 table { width: 100%; border-collapse: collapse; } \
 thead th { position: sticky; top: 0; z-index: 1; } \
 th { text-align: center; } \
+td { padding: 5px; } \
 </style>"
 
 extern GtkWidget *entrycbIntBook;
@@ -625,6 +626,7 @@ void main_update_parallel_page(void)
 				 (settings.parallel_italic_headings ? "italic" : "bold"),
 				 "", // null CSS headers
 				 "", // null CSS headers
+				 "", // null CSS headers
 				 settings.bible_bg_color,
 				 settings.bible_text_color, settings.link_color);
 	data = g_string_new(tmpBuf);
@@ -972,6 +974,7 @@ void main_update_parallel_page_detached(void)
 		 (settings.parallel_italic_headings ? "italic" : "bold"),
 		 control->getRenderHeader(),
 		 STICKY_MODNAMES,
+		 (settings.justify_margins ? "<style> td { text-align: justify; } </style>" : ""),
 		 settings.bible_bg_color, settings.bible_text_color,
 		 settings.link_color);
 	text += buf;
