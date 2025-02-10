@@ -69,7 +69,6 @@ h3 { font-style: %s }\
 table { width: 100%; border-collapse: collapse; } \
 thead th { position: sticky; top: 0; z-index: 1; } \
 th { text-align: center; } \
-td { padding: 5px; } \
 </style>"
 
 extern GtkWidget *entrycbIntBook;
@@ -859,14 +858,14 @@ static void interpolate_parallel_display(SWModule *control,
 				gchar *num = main_format_number(verse);
 				snprintf(str, 499,
 					 "<td width=\"%d%%\" bgcolor=\"%s\">"
+					 "%s"
 					 "<a href=\"passagestudy.jsp?action=showParallel&"
 					 "type=verse&value=%s\" name=\"%d\">"
 					 "<font color=\"%s\" size=\"%+d\">%s. </font></a>"
 					 "<font face=\"%s\" size=\"%+d\" color=\"%s\">",
-					 fraction,
-					 bgColor,
-					 newurl,
-					 verse,
+					 fraction, bgColor,
+					 ((verse == cur_verse) ? "<hr>" : ""),
+					 newurl, verse,
 					 settings.bible_verse_num_color,
 					 settings.verse_num_font_size + settings.base_font_size,
 					 num,
@@ -974,7 +973,7 @@ void main_update_parallel_page_detached(void)
 		 (settings.parallel_italic_headings ? "italic" : "bold"),
 		 control->getRenderHeader(),
 		 STICKY_MODNAMES,
-		 (settings.justify_margins ? "<style> td { text-align: justify; } </style>" : ""),
+		 (settings.justify_margins ? "<style> td { text-align: justify; padding: 5px; } </style>" : ""),
 		 settings.bible_bg_color, settings.bible_text_color,
 		 settings.link_color);
 	text += buf;
