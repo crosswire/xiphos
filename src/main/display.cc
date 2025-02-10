@@ -1304,6 +1304,7 @@ GTKChapDisp::display(SWModule &imodule)
 	int curBook = key->getBook();
 	gchar *buf, *mod_column_count = NULL;
 	GString *rework; // for image size analysis rework.
+	gboolean paragraph_end_pending;
 	const char *ModuleName = imodule.getName();
 	ops = main_new_globals(ModuleName);
 	cache_flags = ConstructFlags(ops);
@@ -1423,6 +1424,8 @@ GTKChapDisp::display(SWModule &imodule)
 		} else
 			rework = g_string_new(cVerse.GetText());
 
+		paragraph_end_pending = FALSE;
+
 		// special contrasty highlighting
 		marked_element *e;
 		if (((e = marked_cache_check(key->getVerse())) &&
@@ -1439,6 +1442,21 @@ GTKChapDisp::display(SWModule &imodule)
 			    mf->old_font_size_value);
 			swbuf.append(buf);
 			g_free(buf);
+
+			// ugly ... ugly ... ugly.
+			// some modules have verses that end in a paragraph marker, "<p/>".
+			// this mis-interacts with verse highlight, causing breakage of font
+			// closure, so that the entire rest of the chapter gets inadvertently
+			// background-highlighted.
+			// solution is ... be still, my wretching stomach ...
+			// notice when an element ends this way, eliminate it, and then
+			// re-introduce it if necessary, after font closure.
+			if ((rework->len > 4) &&
+			    !strcasecmp(rework->str + rework->len-4, "<p/>"))
+			{
+				paragraph_end_pending = TRUE;
+				g_string_erase(rework, rework->len-4, 4);	// remove last 4 chars.
+			}
 		}
 
 		gchar *num = main_format_number(key->getVerse());
@@ -1473,7 +1491,8 @@ GTKChapDisp::display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if ((key->getVerse() == curVerse) || (e && settings.annotate_highlight)) {
+		if (((key->getVerse() == curVerse) && settings.versehighlight) ||
+		    (e && settings.annotate_highlight)) {
 			buf = g_strdup_printf("<font color=\"%s\">",
 					      ((settings.versehighlight ||
 						(e && settings.annotate_highlight))
@@ -1508,6 +1527,9 @@ GTKChapDisp::display(SWModule &imodule)
 		if (((key->getVerse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
 			swbuf.append("</font></span>");
+
+		if (paragraph_end_pending)
+			swbuf.append("<p/>");
 	}
 
 	getVerseAfter(imodule);
