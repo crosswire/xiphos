@@ -864,7 +864,7 @@ static void interpolate_parallel_display(SWModule *control,
 					 "<font color=\"%s\" size=\"%+d\">%s. </font></a>"
 					 "<font face=\"%s\" size=\"%+d\" color=\"%s\">",
 					 fraction, bgColor,
-					 ((verse == cur_verse) ? "<hr>" : ""),
+					 (((verse != 1) && (verse == cur_verse)) ? "<hr>" : ""),
 					 newurl, verse,
 					 settings.bible_verse_num_color,
 					 settings.verse_num_font_size + settings.base_font_size,
