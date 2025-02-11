@@ -1491,7 +1491,7 @@ GTKChapDisp::display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if (((key->getVerse() == curVerse) && settings.versehighlight) ||
+		if ((key->getVerse() == curVerse) ||
 		    (e && settings.annotate_highlight)) {
 			buf = g_strdup_printf("<font color=\"%s\">",
 					      ((settings.versehighlight ||
