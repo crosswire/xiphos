@@ -858,14 +858,15 @@ static void interpolate_parallel_display(SWModule *control,
 				gchar *num = main_format_number(verse);
 				snprintf(str, 499,
 					 "<td width=\"%d%%\" bgcolor=\"%s\">"
-					 "%s"
+					 "<a name=\"%d\">%s</a>"
 					 "<a href=\"passagestudy.jsp?action=showParallel&"
-					 "type=verse&value=%s\" name=\"%d\">"
+					 "type=verse&value=%s\">"
 					 "<font color=\"%s\" size=\"%+d\">%s. </font></a>"
 					 "<font face=\"%s\" size=\"%+d\" color=\"%s\">",
 					 fraction, bgColor,
+					 verse,
 					 (((verse != 1) && (verse == cur_verse)) ? "<hr>" : ""),
-					 newurl, verse,
+					 newurl,
 					 settings.bible_verse_num_color,
 					 settings.verse_num_font_size + settings.base_font_size,
 					 num,
