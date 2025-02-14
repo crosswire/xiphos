@@ -76,8 +76,8 @@ jobs:
       - name: upload source zipfile
         uses: actions/upload-artifact@v4
         with:
-          name: source
-          path: build/*.tar.gz
+          name: source-zip
+          path: build/*.zip
 
   deploy:
     needs:
