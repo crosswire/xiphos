@@ -56,13 +56,13 @@ requires:
     - libbiblesync-dev
     - libdbus-glib-1-dev
     - libglade2-dev
-    - libenchant-dev
+    - libenchant-2-dev
     - libgail-3-dev
     - libgtk-3-dev
     - libminizip-dev
     - libsoup2.4-dev
     - libsword-dev
-    - libwebkit2gtk-4.0-dev
+    - libwebkit2gtk-4.1-dev
     - libxml2-dev
     - libxml2-utils
     - make
@@ -109,17 +109,17 @@ requires:
     - intltool
     - itstool
     - libdbus-glib-1-dev
-    - libenchant-dev
+    - libenchant-2-dev
     - libgail-3-dev
     - libglade2-dev
     - libgtk-3-dev
     - libminizip-dev
     - libsword-dev
-    - libwebkit2gtk-4.0-dev
+    - libwebkit2gtk-4.1-dev
     - libxml2-dev
     - libxml2-utils
     - make
-    - python-dev
+    - python3-dev
     - swig
     - uuid-dev
     - uuid-runtime
