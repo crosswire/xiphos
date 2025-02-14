@@ -9,7 +9,7 @@ src/examples/ipc-interface.xml
 win*/binaries/
 win32/nsis/xiphos*.exe
 win32/po/messages.mo
-cmake/source_version.txt
+#cmake/source_version.txt
 xiphos*.exe
 xiphos*.tar*
 
