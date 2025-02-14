@@ -16,7 +16,7 @@ requires:
     - minizip
     - python
     - sword
-    - webkit2gtk
+    - webkit2gtk-4.1
     - zip
     # base-devel group (for AUR installs):
     - autoconf
@@ -64,7 +64,7 @@ requires:
     - libminizip-dev
     - libsoup-3.0-dev
     - libsword-dev
-    - libwebkit2gtk-4.0-dev
+    - libwebkit2gtk-4.1-dev
     - libxml2-dev
     - libxml2-utils
     - make
@@ -150,7 +150,7 @@ before_scripts:
           su -l aur_install -c "./aur_install $1"
         }
         aur_install biblesync
-        aur_install gtkhtml4
+        aur_install gtkhtml
     fi
 
 build_scripts:
