@@ -148,16 +148,6 @@ before_scripts:
         aur_install biblesync
         aur_install gtkhtml4
     fi
-    if [ "${DISTRO_NAME}" == "debian" -o "${DISTRO_NAME}" == "ubuntu" ]; then
-        # build gtkhtml4 from source
-        cd "${WORK_DIR}"
-        curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
-        tar xf gtkhtml-4.10.0.tar.xz
-        cd gtkhtml-4.10.0
-        ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib/gtkhtml4 --localstatedir=/var --disable-static
-        make -j$(nproc)
-        make install
-    fi
     if [ "${DISTRO_NAME}" == "ubuntu" ];then
         # build biblesync from source
         cd "${WORK_DIR}"
