@@ -15,7 +15,7 @@ jobs:
           - "-win64"
     steps:
       - name: checkout Xiphos
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: fetch history
@@ -29,7 +29,7 @@ jobs:
           docker build -t xiphos win32
           docker run -i --rm -v "$(pwd):/source" xiphos ${{ matrix.version }}
       - name: upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: windows-installers
           path: "*.exe"
@@ -46,13 +46,13 @@ jobs:
           - ubuntu:latest
     steps:
       - name: checkout xiphos
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: fetch tags
         run: git fetch --tags
       - name: install python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v5
       - name: install python packages
         run: |
           set -ex
@@ -69,15 +69,15 @@ jobs:
         env:
           TEMP: ${{ runner.temp }}
       - name: upload source tarball
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: source
           path: build/*.tar.gz
       - name: upload source zipfile
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: source
-          path: build/*.tar.gz
+          name: source-zip
+          path: build/*.zip
 
   deploy:
     needs:
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: download all the artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
       - name: prepare for release
         id: release
         run: |

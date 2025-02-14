@@ -61,10 +61,23 @@ list (APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 # of source tarballs that don't have the repo .git metadata
 set(SOURCE_VERSION_CACHE "${PROJECT_SOURCE_DIR}/cmake/source_version.txt")
 if(EXISTS "${PROJECT_SOURCE_DIR}/.git")
-	include(GetGitRevisionDescription)
-	git_describe(GIT_VERSION --tags)
-	string(REGEX REPLACE "-([0-9]*).*" ".\\1" VERSION "${GIT_VERSION}")
+	find_package(Git)
+	execute_process(
+		COMMAND ${GIT_EXECUTABLE} describe --tag
+		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+		OUTPUT_VARIABLE GIT_DESCRIBE_VERSION
+		RESULT_VARIABLE GIT_EXIT_CODE
+		OUTPUT_STRIP_TRAILING_WHITESPACE
+	)
+	if(NOT GIT_DESCRIBE_ERROR_CODE)
+		set(VERSION ${GIT_DESCRIBE_VERSION})
+	else()
+		set(VERSION "v0-error")
+		message(WARNING "Failed to read git version. Seting version to v0")
+	endif()
+	string(REGEX REPLACE "^(([0-9]+\\.?)+)-([0-9]+)-.*$" "\\1.\\3" VERSION "${VERSION}")
 	file(WRITE ${SOURCE_VERSION_CACHE} "${VERSION}")
+	message(STATUS "Setting version to ${VERSION}")
 else()
 	file(STRINGS ${SOURCE_VERSION_CACHE} VERSION)
 endif()
