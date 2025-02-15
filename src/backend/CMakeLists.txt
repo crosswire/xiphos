@@ -35,6 +35,7 @@ target_include_directories(backend
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
 
   )
@@ -46,5 +47,6 @@ target_link_libraries(backend
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   )

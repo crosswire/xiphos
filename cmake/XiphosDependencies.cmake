@@ -76,6 +76,12 @@ else()
     )
 endif()
 
+# We prefer libsoup-3.0, but we can build against libsoup-2.4
+pkg_check_modules(Soup IMPORTED_TARGET "libsoup-3.0")
+if(NOT Soup_FOUND)
+    pkg_check_modules(Soup REQUIRED IMPORTED_TARGET "libsoup-2.4")
+endif()
+
 # Gnome dependencies
 pkg_check_modules(Gnome REQUIRED IMPORTED_TARGET
   "atk"
@@ -84,7 +90,6 @@ pkg_check_modules(Gnome REQUIRED IMPORTED_TARGET
   "gdk-pixbuf-2.0"
   "gio-2.0"
   "gobject-2.0"
-  "libsoup-3.0"
   "pango"
   "minizip"
   "zlib"
