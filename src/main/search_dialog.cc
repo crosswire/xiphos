@@ -69,6 +69,19 @@ gboolean search_clearing;  // also accessed from search_dialog.c.
 static GList *list_of_finds;
 static GList *list_for_bookmarking = NULL;
 
+#ifndef SEARCHFLAG_MATCHWHOLEENTRY
+/*
+ * what the heck. compatibility? kinda sorta?
+ * in official 1.9.0, this flag is a #define. BUT...
+ * in sword svn 3895, WHICH STILL CALLS ITSELF 1.9.0,
+ * it's a class element in SWModule, a const int.
+ * that's kind of a big interface change within
+ * a dot-dot release, isn't it?
+ * this is self-defense against the change.
+ */
+# define SEARCHFLAG_MATCHWHOLEENTRY 4096
+#endif
+
 /******************************************************************************
  * Name
  *   main_export_current_adv_search
@@ -1360,20 +1373,12 @@ void main_do_dialog_search(void)
 	// we will inadvertently return e.g. 140 plus 1401 and 1404.
 	if (search_type == -3) {
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_strongs))) {
-			search_params |=
-#if __GNUC__ <= 11
-					SWModule::
-#endif
-						SEARCHFLAG_MATCHWHOLEENTRY;
+			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
 			attribute_search_string = g_strdup_printf(
 			    "Word//Lemma./%s",
 			    search_string);
 		} else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_morphs))) {
-			search_params |=
-#if __GNUC__ <= 11
-					SWModule::
-#endif
-						SEARCHFLAG_MATCHWHOLEENTRY;
+			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
 			attribute_search_string = g_strdup_printf(
 			    "Word//Morph/%s",
 			    search_string);
