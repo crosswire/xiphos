@@ -21,6 +21,9 @@
 
 #include <config.h>
 
+#if defined(INCLUDE_EDITOR) && (INCLUDE_EDITOR == 1)
+/* platforms lacking gtkhmtl-editor will have the editor disabled. */
+
 #ifdef USE_WEBKIT_EDITOR
 
 #include <sys/types.h>
@@ -1430,3 +1433,25 @@ void editor_maybe_save_all(void)
 }
 
 #endif /* USE_WEBKIT_EDITOR */
+
+#else  /* INCLUDE_EDITOR */
+
+/* stubs for disabled editor */
+
+#include <glib.h>
+#include <glib/gi18n.h>
+#include "editor/webkit_editor.h"
+
+gint editor_create_new(const gchar *filename, const gchar *key, gint editor_type) {}
+
+void editor_maybe_save_all(void) {}
+
+void editor_load_note(EDITOR *e, const gchar *module_name, const gchar *key) {}
+
+void editor_sync_with_main(void) {}
+
+void editor_save_book(EDITOR *e) {}
+
+void editor_load_book(EDITOR *e) {}
+
+#endif /* INCLUDE_EDITOR */
