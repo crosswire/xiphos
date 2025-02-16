@@ -31,7 +31,7 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: windows-installers
+          name: windows-installers-${{ matrix.version }}
           path: "*.exe"
 
   build_linux:
@@ -101,7 +101,7 @@ jobs:
       - name: create release
         uses: ncipollo/release-action@v1.6.1
         with:
-          artifacts: source/*,windows-installers/*
+          artifacts: source/*,windows-installers-win32/*,windows-installers-win64/*
           allowUpdates: true
           name: Release ${{ steps.release.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
