@@ -62,6 +62,7 @@ target_include_directories(webkit
   PkgConfig::Gtk
   PkgConfig::Gnome
   PkgConfig::Soup
+  PkgConfig::WK
   )
 
 # specify libraries or flags to use when linking
@@ -72,4 +73,5 @@ target_link_libraries(webkit
   PkgConfig::Gtk
   PkgConfig::Gnome
   PkgConfig::Soup
+  PkgConfig::WK
   )

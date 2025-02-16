@@ -47,6 +47,7 @@ target_include_directories(editor
   PkgConfig::Gnome
   PkgConfig::Soup
   PkgConfig::Sword
+  PkgConfig::WK
   )
 
 # specify libraries or flags to use when linking
@@ -58,6 +59,7 @@ target_link_libraries(editor
   PkgConfig::Gnome
   PkgConfig::Soup
   PkgConfig::Sword
+  PkgConfig::WK
   )
 
 if (WIN32)

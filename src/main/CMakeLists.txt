@@ -62,6 +62,7 @@ target_include_directories(main
   PkgConfig::Gnome
   PkgConfig::Soup
   PkgConfig::Sword
+  PkgConfig::WK
   PkgConfig::Biblesync
   )
 
@@ -74,5 +75,6 @@ target_link_libraries(main
   PkgConfig::Gnome
   PkgConfig::Soup
   PkgConfig::Sword
+  PkgConfig::WK
   PkgConfig::Biblesync
   )

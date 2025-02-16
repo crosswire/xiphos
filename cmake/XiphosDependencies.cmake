@@ -140,10 +140,13 @@ else (GTK2)
     # Gtk+-3.0 + Webkit2 + WebKit-editor
     pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET
       "gtk+-3.0"
-      "webkit2gtk-4.1"
       "gtkhtml-editor-4.0"
       "libgtkhtml-4.0"
       )
+    pkg_check_modules(WK IMPORTED_TARGET "webkit2gtk-4.1")
+    if(NOT WK_FOUND)
+      pkg_check_modules(WK REQUIRED IMPORTED_TARGET "webkit2gtk-4.0")
+    endif()
   endif()
   if (NOT WEBKIT1 AND NOT GTKHTML)
     # This configuration does not build, as the Webkit-editor
@@ -151,10 +154,11 @@ else (GTK2)
     # looking for its headers
     message(FATAL "Webkit Editor is not supported with webkit2")
     # Gtk+-3.0 + Webkit2 + GtkHtml-editor
-     pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET
-      "gtk+-3.0"
-      "webkit2gtk-4.1"
-      )
+    pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET "gtk+-3.0")
+    pkg_check_modules(WK IMPORTED_TARGET "webkit2gtk-4.1")
+    if(NOT WK_FOUND)
+      pkg_check_modules(WK REQUIRED IMPORTED_TARGET "webkit2gtk-4.0")
+    endif()
   endif()
 endif (GTK2)
 
