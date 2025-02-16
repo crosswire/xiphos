@@ -316,7 +316,7 @@ jobs:
           cd ..
           echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
       - name: create release
-        uses: ncipollo/release-action@v1.6.1
+        uses: ncipollo/release-action@v1.15.0
         with:
           artifacts: source/*,windows-installers-win32/*,windows-installers-win64/*
           allowUpdates: true
