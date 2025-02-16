@@ -5,7 +5,7 @@ on:
   pull_request: {}
 
 jobs:
-  build_windows:
+  windows:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -34,55 +34,272 @@ jobs:
           name: windows-installers-${{ matrix.version }}
           path: "*.exe"
 
-  build_linux:
+  arch_gtk3_wk2_libsoup2:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        distro:
-          - archlinux:latest
-          - fedora:latest
-          - debian:latest
-          - ubuntu:latest
+    container:
+      image: archlinux:latest
     steps:
       - name: checkout xiphos
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: fetch tags
-        run: git fetch --tags
-      - name: install python
-        uses: actions/setup-python@v5
-      - name: install python packages
+      - name: install dependencies
         run: |
-          set -ex
-          python -m pip install -U pip
-          pip install -U PyGithub setuptools PyYAML
-      - name: execute build
-        id: build
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm \
+            appstream-glib \
+            biblesync \
+            binutils \
+            cmake \
+            dbus-glib \
+            docbook-utils \
+            enchant \
+            gcc \
+            git \
+            glib2-devel \
+            gnome-common \
+            gtk3 \
+            gtkmm \
+            intltool \
+            libsoup \
+            libxml2 \
+            make \
+            minizip \
+            pkg-config \
+            python \
+            sword \
+            webkit2gtk \
+            zip
+      - name: build xiphos
         run: |
-          set -ex
-          curl -Ls -o docker-build https://github.com/mate-desktop/mate-dev-scripts/raw/master/travis/docker-build
-          chmod +x docker-build
-          python docker-build --name ${{ matrix.distro }} --config .ci-build.yml --install
-          python docker-build --name ${{ matrix.distro }} -vvvv --config .ci-build.yml --build scripts
-        env:
-          TEMP: ${{ runner.temp }}
-      - name: upload source tarball
-        uses: actions/upload-artifact@v4
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          make -C build -j$(nproc)
+          make -C build mhelp package_source
+
+  arch_gtk3_wk2_libsoup3:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    steps:
+      - name: checkout xiphos
+        uses: actions/checkout@v4
         with:
-          name: source
-          path: build/*.tar.gz
-      - name: upload source zipfile
-        uses: actions/upload-artifact@v4
+          fetch-depth: 0
+      - name: install dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm \
+            appstream-glib \
+            biblesync \
+            binutils \
+            cmake \
+            dbus-glib \
+            docbook-utils \
+            enchant \
+            gcc \
+            git \
+            glib2-devel \
+            gnome-common \
+            gtk3 \
+            gtkmm \
+            intltool \
+            libsoup3 \
+            libxml2 \
+            make \
+            minizip \
+            pkg-config \
+            python \
+            sword \
+            webkit2gtk-4.1 \
+            zip
+      - name: build xiphos
+        run: |
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          make -C build -j$(nproc)
+          make -C build mhelp package_source
+
+  fedora_gtk3_wk2_gtkhtml_libsoup3:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+    steps:
+      - name: checkout xiphos
+        uses: actions/checkout@v4
         with:
-          name: source-zip
-          path: build/*.zip
+          fetch-depth: 0
+      - name: install dependencies
+        run: |
+          dnf install -y \
+            biblesync-devel \
+            cmake \
+            dbus-glib-devel \
+            desktop-file-utils \
+            git \
+            docbook-utils \
+            gcc-c++ \
+            gtk3-devel \
+            gtkhtml3-devel \
+            intltool \
+            itstool \
+            libappstream-glib-devel \
+            libsoup3-devel \
+            libuuid-devel \
+            libxml2-devel \
+            make \
+            minizip-devel \
+            rpm-build \
+            sword-devel \
+            webkit2gtk4.1-devel \
+            yelp \
+            yelp-tools \
+            zip
+      - name: build xiphos
+        run: |
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML:BOOL=ON -DCMAKE_MAKE_PROGRAM=make .
+          make -C build -j$(nproc)
+          make -C build mhelp package_source
+
+  fedora_gtk3_wk2_gtkhtml_libsoup2:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+    steps:
+      - name: checkout xiphos
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: install dependencies
+        run: |
+          dnf install -y \
+            biblesync-devel \
+            cmake \
+            dbus-glib-devel \
+            desktop-file-utils \
+            git \
+            docbook-utils \
+            gcc-c++ \
+            gtk3-devel \
+            gtkhtml3-devel \
+            intltool \
+            itstool \
+            libappstream-glib-devel \
+            libsoup-devel \
+            libuuid-devel \
+            libxml2-devel \
+            make \
+            minizip-devel \
+            rpm-build \
+            sword-devel \
+            webkit2gtk4.0-devel \
+            yelp \
+            yelp-tools \
+            zip
+      - name: build xiphos
+        run: |
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML:BOOL=ON -DCMAKE_MAKE_PROGRAM=make .
+          make -C build -j$(nproc)
+          make -C build mhelp package_source
+
+  debian_gtk3_wk2_libsoup3:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:latest
+    steps:
+      - name: checkout xiphos
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: install dependencies
+        run: |
+          apt-get update
+          apt-get install -y \
+            appstream-util \
+            cmake \
+            docbook-utils \
+            g++ \
+            desktop-file-utils \
+            fp-utils \
+            gsettings-desktop-schemas-dev \
+            intltool \
+            itstool \
+            libbiblesync-dev \
+            libdbus-glib-1-dev \
+            libglade2-dev \
+            libenchant-2-dev \
+            libgail-3-dev \
+            libgtk-3-dev \
+            libminizip-dev \
+            libsoup-3.0-dev \
+            libsword-dev \
+            libwebkit2gtk-4.1-dev \
+            libxml2-dev \
+            libxml2-utils \
+            make \
+            python-dev-is-python3 \
+            uuid-dev \
+            uuid-runtime \
+            yelp-tools \
+            zip
+      - name: build xiphos
+        run: |
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          make -C build -j$(nproc)
+          make -C build mhelp package_source
+
+  ubuntu_gtk3_wk2_libsoup3:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:latest
+    steps:
+      - name: checkout xiphos
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: install dependencies
+        run: |
+          apt-get update
+          apt-get install -y \
+            appstream-util \
+            cmake \
+            g++ \
+            desktop-file-utils \
+            fp-utils \
+            gsettings-desktop-schemas-dev \
+            intltool \
+            itstool \
+            libbiblesync-dev \
+            libdbus-glib-1-dev \
+            libenchant-2-dev \
+            libgail-3-dev \
+            libglade2-dev \
+            libgtk-3-dev \
+            libminizip-dev \
+            libsword-dev \
+            libwebkit2gtk-4.1-dev \
+            libxml2-dev \
+            libxml2-utils \
+            make \
+            python3-dev \
+            swig \
+            uuid-dev \
+            uuid-runtime \
+            yelp-tools \
+            zip
+      - name: build xiphos
+        run: |
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          make -C build -j$(nproc)
+          make -C build mhelp package_source
 
   deploy:
     needs:
-      - build_windows
-      - build_linux
+      - windows
+      - arch_gtk3_wk2_libsoup2
+      - arch_gtk3_wk2_libsoup3
+      - debian_gtk3_wk2_libsoup3
+      - fedora_gtk3_wk2_gtkhtml_libsoup3
+      - fedora_gtk3_wk2_gtkhtml_libsoup2
+      - ubuntu_gtk3_wk2_libsoup3
     if: contains(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
