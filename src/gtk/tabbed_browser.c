@@ -1045,7 +1045,14 @@ persist further tab rearrangements.\n");
 
 	GList *link = g_list_nth(passage_list, old_index);
 	passage_list = g_list_remove_link(passage_list, link);
-	passage_list = g_list_insert_before_link(passage_list, sibling, link);
+
+	/*
+	 * old: passage_list = g_list_insert_before_link(passage_list, sibling, link);
+	 * for Windows, using too-old gtk, this had to be replaced with these 3 lines.
+	 */
+	passage_list = g_list_insert_before(passage_list, sibling, link->data);
+	link->data = NULL;
+	g_list_free(link);
 
 	*tl = passage_list;
 }
