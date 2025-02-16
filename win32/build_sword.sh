@@ -34,6 +34,7 @@ function build_sword {
         --host=${arch}-w64-mingw32 \
         --target=${arch}-w64-mingw32 \
         --build=${arch}-linux-gnu \
+        --program-prefix= \
         --prefix=/usr/${arch}-w64-mingw32/sys-root/mingw \
         --exec-prefix=/usr/${arch}-w64-mingw32/sys-root/mingw \
         --bindir=/usr/${arch}-w64-mingw32/sys-root/mingw/bin \
@@ -51,6 +52,8 @@ function build_sword {
         --with-icu=/usr/${arch}-w64-mingw32/sys-root/mingw || cat config.log
     make -j10
     make install
+    ln -s "/usr/${arch}-w64-mingw32/sys-root/mingw/bin/libsword*.dll" "/usr/${arch}-w64-mingw32/sys-root/mingw/bin/libsword.dll"
+    mv "utilities/.libs/addld.exe" "/usr/${arch}-w64-mingw32/sys-root/mingw/bin/addld.exe"
     cd ..
 }
 
