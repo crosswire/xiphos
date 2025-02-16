@@ -45,6 +45,7 @@ target_include_directories(editor
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   )
 
@@ -55,6 +56,7 @@ target_link_libraries(editor
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   )
 

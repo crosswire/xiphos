@@ -193,6 +193,7 @@ target_include_directories(xiphos
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   PkgConfig::Biblesync
   )
@@ -204,6 +205,7 @@ target_link_libraries(xiphos
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   PkgConfig::Biblesync
   Xiphos::Main
