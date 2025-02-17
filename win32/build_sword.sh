@@ -52,7 +52,6 @@ function build_sword {
         --with-icu=/usr/${arch}-w64-mingw32/sys-root/mingw || cat config.log
     make -j10
     make install
-    ln -s "/usr/${arch}-w64-mingw32/sys-root/mingw/bin/libsword*.dll" "/usr/${arch}-w64-mingw32/sys-root/mingw/bin/libsword.dll"
     mv "utilities/.libs/addld.exe" "/usr/${arch}-w64-mingw32/sys-root/mingw/bin/addld.exe"
     cd ..
 }
