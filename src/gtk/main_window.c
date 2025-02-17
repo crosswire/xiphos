@@ -778,7 +778,9 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 
 	case XK_s:
 	case XK_S:
-		if (state == GDK_MOD1_MASK) // Alt-S strong's
+		if (state == GDK_CONTROL_MASK) // Ctrl-S toggle sidebar
+			on_sidebar_showhide_activate((GtkMenuItem *)NULL, (gpointer)NULL);
+		else if (state == GDK_MOD1_MASK) // Alt-S strong's
 		{
 			kbd_toggle_option(((main_check_for_global_option(sM, "GBFStrongs")) ||
 					   (main_check_for_global_option(sM, "ThMLStrongs")) ||
