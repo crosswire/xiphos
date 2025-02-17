@@ -613,7 +613,7 @@ void new_range(GtkButton *button, gpointer user_data)
 	list_store = GTK_LIST_STORE(model);
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.list_range_name));
 
-	text[0] = "[New Range]";
+	text[0] = _("[New Range]");
 	text[1] = "";
 
 	gtk_list_store_append(list_store, &iter);

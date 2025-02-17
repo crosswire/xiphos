@@ -130,7 +130,7 @@
       <em>b..t</em> matches <em>b</em>oo<em>t</em>,
       <em>b</em>oa<em>t</em> and <em>b</em>ea<em>t
       foot.tool </em>matches <em>foot</em>s<em>tool </em>and
-      <em>foot tool</em></p>
+      <em>foot tool</em>.</p>
     </section>
 
 
@@ -279,7 +279,7 @@
 	<item>
 	  <p>\b if use outside [ ] means word boundary. If used inside [ ] means
 	  backspace. <em>\brighteous\b</em> matches <em>righteous</em> but not
-	  un<em>righteous</em> or <em>righteous</em>ness</p>
+	  un<em>righteous</em> or <em>righteous</em>ness.</p>
 	</item>
 	<item>
 	  <p>\B means non-word boundary.  <em>\Brighteous\B</em> matches
@@ -294,10 +294,10 @@
 	  <p>\D means non-digit, same as [^0-9].</p>
 	</item>
 	<item>
-	  <p>\s means space. </p>
+	  <p>\s means space.</p>
 	</item>
 	<item>
-	  <p>\S means not a space. </p>
+	  <p>\S means not a space.</p>
 	</item>
 	<item>
 	  <p>\w means alphanumeric; same as [a-zA-Z0-9_].</p>
