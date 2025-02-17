@@ -25,6 +25,13 @@
 
 #ifdef USE_WEBKIT_EDITOR
 
+/*
+ * currently stubbed in webkit_editor.c.
+ * see comment there.
+ */
+
+#else
+
 /* X keyboard #definitions, to handle shortcuts */
 /* we must define the categories of #definitions we need. */
 #define XK_MISCELLANY
