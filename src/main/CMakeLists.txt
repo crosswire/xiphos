@@ -62,7 +62,6 @@ target_include_directories(main
   PkgConfig::Gnome
   PkgConfig::Soup
   PkgConfig::Sword
-  PkgConfig::WK
   PkgConfig::Biblesync
   )
 
@@ -75,6 +74,16 @@ target_link_libraries(main
   PkgConfig::Gnome
   PkgConfig::Soup
   PkgConfig::Sword
-  PkgConfig::WK
   PkgConfig::Biblesync
   )
+
+if(WK_FOUND)
+  target_compile_definitions(main
+    PRIVATE
+    PkgConfig::WK
+    )
+  target_link_libraries(main
+    PRIVATE
+    PkgConfig::WK
+    )
+endif()

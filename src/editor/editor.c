@@ -23,6 +23,9 @@
 #include <config.h>
 #endif
 
+#if defined(INCLUDE_EDITOR) && (INCLUDE_EDITOR == 1)
+/* platforms lacking gtkhmtl-editor will have the editor disabled. */
+
 #ifdef USE_WEBKIT_EDITOR
 
 /* X keyboard #definitions, to handle shortcuts */
@@ -1161,3 +1164,5 @@ void create_editor_window(GtkWidget *scrollwindow, EDITOR *e)
 }
 
 #endif /* USE_WEBKIT_EDITOR */
+
+#endif /* INCLUDE_EDITOR */
