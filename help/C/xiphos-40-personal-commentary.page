@@ -130,8 +130,8 @@
   <note style="tip">
     <p>The created commentary page will be attached to an individual verse only.
     To write commentary pages from within <app>Xiphos</app>, attached to longer
-    stretches of text use the <gui>Link..</gui> function to link several pages
-    together</p>
+    stretches of text use the <gui>Link</gui> function to link several pages
+    together.</p>
   </note>
 
 
