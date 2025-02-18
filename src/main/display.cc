@@ -1754,7 +1754,7 @@ DialogChapDisp::display(SWModule &imodule)
 	int curBook = key->getBook();
 	gchar *buf, *mod_column_count = NULL;
 	GString *rework; // for image size analysis rework.
-
+	gboolean paragraph_end_pending;
 	const char *ModuleName = imodule.getName();
 	ops = main_new_globals(ModuleName);
 	cache_flags = ConstructFlags(ops);
@@ -1868,6 +1868,8 @@ DialogChapDisp::display(SWModule &imodule)
 		else
 			cVerse.InvalidateHeader();
 
+		paragraph_end_pending = FALSE;
+
 		// special contrasty highlighting
 		marked_element *e;
 		if (((e = marked_cache_check(key->getVerse())) &&
@@ -1882,6 +1884,16 @@ DialogChapDisp::display(SWModule &imodule)
 			    ((mf->old_font) ? mf->old_font : ""),
 			    mf->old_font_size_value);
 			swbuf.append(buf);
+
+			/*
+			 * see comment above in GTKChapDisplay::display for this.
+			 */
+			if ((rework->len > 4) &&
+			    !strcasecmp(rework->str + rework->len-4, "<p/>"))
+			{
+				paragraph_end_pending = TRUE;
+				g_string_erase(rework, rework->len-4, 4);	// remove last 4 chars.
+			}
 			g_free(buf);
 		}
 
@@ -1917,7 +1929,8 @@ DialogChapDisp::display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if ((key->getVerse() == curVerse) || (e && settings.annotate_highlight)) {
+		if ((key->getVerse() == curVerse) ||
+		    (e && settings.annotate_highlight)) {
 			buf = g_strdup_printf("<font color=\"%s\">",
 					      ((settings.versehighlight ||
 						(e && settings.annotate_highlight))
@@ -1952,6 +1965,9 @@ DialogChapDisp::display(SWModule &imodule)
 		if (((key->getVerse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
 			swbuf.append("</font></span>");
+
+		if (paragraph_end_pending)
+			swbuf.append("<p/>");
 	}
 
 	// Reset the Bible location before GTK gets access:
