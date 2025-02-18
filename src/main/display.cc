@@ -89,7 +89,7 @@ const gchar *no_content =
     N_("<br/><br/><center><i>This module has no content at this point.</i></center>");
 
 #define HTML_START \
-	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"> \
+	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /> \
 <style type=\"text/css\"><!-- \
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right; } \
