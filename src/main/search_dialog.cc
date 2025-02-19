@@ -52,7 +52,7 @@
 #define SEARCHING _("Searching the ")
 #define SMODULE _(" Module")
 #define FINDS _("found in ")
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></STYLE></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /><STYLE type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></STYLE></head>"
 
 static BackEnd *backendSearch = NULL;
 
