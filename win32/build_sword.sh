@@ -28,6 +28,8 @@ function build_sword {
     export LDFLAGS="-L/usr/${arch}-w64-mingw32/sys-root/mingw/lib"
     export PATH="/usr/${arch}-w64-mingw32/sys-root/mingw/bin:${PATH}"
     export PKG_CONFIG_PATH="/usr/${arch}-w64-mingw32/sys-root/mingw/lib/pkgconfig"
+    export CLUCENE2_CFLAGS="-I/usr/${arch}-w64-mingw32/sys-root/mingw/include"
+    export CLUCENE2_LIBS="-L/usr/${arch}-w64-mwing32/sys-root/mingw/lib -lclucene-core -lclucene-shared"
     ../sword-1.9.0/configure \
         --enable-shared \
         --disable-static \
