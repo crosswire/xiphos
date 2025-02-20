@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 14:29-0500\n"
+"POT-Creation-Date: 2025-02-20 09:16-0500\n"
 "PO-Revision-Date: 2010-05-17 03:32+0000\n"
 "Last-Translator: Kunio Nakamaru <n_e_o_m@hotmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -705,30 +705,30 @@ msgstr ""
 msgid "BibleSync: Not speaking."
 msgstr ""
 
-#: ../src/gtk/main_window.c:1011
+#: ../src/gtk/main_window.c:1013
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - 聖書学習ソフトウェア"
 
-#: ../src/gtk/main_window.c:1075
+#: ../src/gtk/main_window.c:1077
 msgid "Open a new tab"
 msgstr "新しいタブを開く"
 
-#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "基本ビュー"
 
-#: ../src/gtk/main_window.c:1170
+#: ../src/gtk/main_window.c:1172
 msgid "Commentary View"
 msgstr "注解書ビュー"
 
-#: ../src/gtk/main_window.c:1178
+#: ../src/gtk/main_window.c:1180
 msgid "Book View"
 msgstr "ブックビュー"
 
-#: ../src/gtk/main_window.c:1193
+#: ../src/gtk/main_window.c:1195
 msgid "Welcome to Xiphos"
 msgstr ""
 
@@ -1410,6 +1410,11 @@ msgstr ""
 #, c-format
 msgid "New List %s"
 msgstr ""
+
+#: ../src/gtk/search_dialog.c:616
+#, fuzzy
+msgid "[New Range]"
+msgstr "新しい名前"
 
 #: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"

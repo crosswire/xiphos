@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 14:29-0500\n"
+"POT-Creation-Date: 2025-02-20 09:16-0500\n"
 "PO-Revision-Date: 2024-06-23 23:24+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/xiphos/language/"
@@ -706,30 +706,30 @@ msgstr "BibleSync: Současná navigace poslána."
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: Žádné mluvení."
 
-#: ../src/gtk/main_window.c:1011
+#: ../src/gtk/main_window.c:1013
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - software pro studium Bible"
 
-#: ../src/gtk/main_window.c:1075
+#: ../src/gtk/main_window.c:1077
 msgid "Open a new tab"
 msgstr "Otevřít novou kartu"
 
-#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "Standardní pohled"
 
-#: ../src/gtk/main_window.c:1170
+#: ../src/gtk/main_window.c:1172
 msgid "Commentary View"
 msgstr "Komentář/Výklad"
 
-#: ../src/gtk/main_window.c:1178
+#: ../src/gtk/main_window.c:1180
 msgid "Book View"
 msgstr "Kniha"
 
-#: ../src/gtk/main_window.c:1193
+#: ../src/gtk/main_window.c:1195
 msgid "Welcome to Xiphos"
 msgstr "Vítá vás Xiphos"
 
@@ -1496,6 +1496,11 @@ msgstr "nalezeno v "
 #, c-format
 msgid "New List %s"
 msgstr "Nový seznam %s"
+
+#: ../src/gtk/search_dialog.c:616
+#, fuzzy
+msgid "[New Range]"
+msgstr "Tlačítko Nový Rozsah"
 
 #: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"

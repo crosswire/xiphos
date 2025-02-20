@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 14:29-0500\n"
+"POT-Creation-Date: 2025-02-20 09:16-0500\n"
 "PO-Revision-Date: 2014-12-19 12:06+0100\n"
 "Last-Translator: Eicke Godehardt <sf@godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
@@ -746,30 +746,30 @@ msgstr "BibleSync: Aktuelle Navigation gesendet."
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: Spricht nicht."
 
-#: ../src/gtk/main_window.c:1011
+#: ../src/gtk/main_window.c:1013
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Software zum Bibelstudium"
 
-#: ../src/gtk/main_window.c:1075
+#: ../src/gtk/main_window.c:1077
 msgid "Open a new tab"
 msgstr "Neuen Reiter öffnen"
 
-#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "Standardansicht"
 
-#: ../src/gtk/main_window.c:1170
+#: ../src/gtk/main_window.c:1172
 msgid "Commentary View"
 msgstr "Kommentaransicht"
 
-#: ../src/gtk/main_window.c:1178
+#: ../src/gtk/main_window.c:1180
 msgid "Book View"
 msgstr "Buchansicht"
 
-#: ../src/gtk/main_window.c:1193
+#: ../src/gtk/main_window.c:1195
 msgid "Welcome to Xiphos"
 msgstr "Willkommen bei Xiphos"
 
@@ -1539,6 +1539,11 @@ msgstr "gefunden in "
 #, c-format
 msgid "New List %s"
 msgstr "Neue Liste %s"
+
+#: ../src/gtk/search_dialog.c:616
+#, fuzzy
+msgid "[New Range]"
+msgstr "Neuer Bereich Knopf"
 
 #: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"

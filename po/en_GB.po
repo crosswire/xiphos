@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 14:29-0500\n"
+"POT-Creation-Date: 2025-02-20 09:16-0500\n"
 "PO-Revision-Date: 2014-12-21 09:46-0500\n"
 "Last-Translator: Thomas Abthorpe <thomas@goodking.ca>\n"
 "Language-Team: British English <xiphos-devel@crosswire.org>\n"
@@ -739,30 +739,30 @@ msgstr "BibleSync: Current navigation sent."
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: Not speaking."
 
-#: ../src/gtk/main_window.c:1011
+#: ../src/gtk/main_window.c:1013
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Bible Study Software"
 
-#: ../src/gtk/main_window.c:1075
+#: ../src/gtk/main_window.c:1077
 msgid "Open a new tab"
 msgstr "Open a new tab"
 
-#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "Standard View"
 
-#: ../src/gtk/main_window.c:1170
+#: ../src/gtk/main_window.c:1172
 msgid "Commentary View"
 msgstr "Commentary View"
 
-#: ../src/gtk/main_window.c:1178
+#: ../src/gtk/main_window.c:1180
 msgid "Book View"
 msgstr "Book View"
 
-#: ../src/gtk/main_window.c:1193
+#: ../src/gtk/main_window.c:1195
 msgid "Welcome to Xiphos"
 msgstr "Welcome to Xiphos"
 
@@ -1525,6 +1525,11 @@ msgstr "found in "
 #, c-format
 msgid "New List %s"
 msgstr "New List %s"
+
+#: ../src/gtk/search_dialog.c:616
+#, fuzzy
+msgid "[New Range]"
+msgstr "New Range Button"
 
 #: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"

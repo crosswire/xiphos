@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-16 22:34+0100\n"
+"POT-Creation-Date: 2025-02-20 09:16-0500\n"
 "PO-Revision-Date: 2025-02-17 14:32+0100\n"
 "Last-Translator: Cyrille <lafricain79@gmail.com>\n"
 "Language-Team: none\n"
@@ -688,7 +688,6 @@ msgid "+0"
 msgstr "+0"
 
 #: ../src/gtk/font_dialog.c:397
-
 msgid "Display columns"
 msgstr "Afficher les colonnes"
 
@@ -750,15 +749,15 @@ msgstr "BibleSync : La navigation courante a été envoyée."
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync : Ne transmet pas."
 
-#: ../src/gtk/main_window.c:1011
+#: ../src/gtk/main_window.c:1013
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Logiciel d’étude biblique"
 
-#: ../src/gtk/main_window.c:1075
+#: ../src/gtk/main_window.c:1077
 msgid "Open a new tab"
 msgstr "Ouvre un nouvel onglet"
 
-#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
@@ -766,16 +765,16 @@ msgid "Standard View"
 msgstr "Affichage standard"
 
 # Je traduis seulement commentaire pour des raisons d'affichage. Mais cela donne très bien.
-#: ../src/gtk/main_window.c:1170
+#: ../src/gtk/main_window.c:1172
 msgid "Commentary View"
 msgstr "Commentaire"
 
 # Je traduis juste livre car sinon la ligne est trop grand mais cela donne très bien dans l'affichage.
-#: ../src/gtk/main_window.c:1178
+#: ../src/gtk/main_window.c:1180
 msgid "Book View"
 msgstr "Livre"
 
-#: ../src/gtk/main_window.c:1193
+#: ../src/gtk/main_window.c:1195
 msgid "Welcome to Xiphos"
 msgstr "Bienvenue dans Xiphos"
 
@@ -2118,7 +2117,6 @@ msgstr "Titres"
 
 #: ../src/main/parallel_view.cc:440 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
-
 msgid "Italic Headings"
 msgstr "Titres en italique"
 
@@ -3921,7 +3919,6 @@ msgid ""
 "Number of columns in which to display text; can be set per module in font "
 "dialog"
 msgstr ""
-
 "Nombre de colonnes dans lesquelles afficher le texte ; peut être défini par "
 "module dans la boîte de dialogue des polices"
 
@@ -4221,7 +4218,6 @@ msgstr ""
 "l’affichage de l’interface"
 
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:99
-
 msgid "Locale (requires restart)"
 msgstr "Langue de l’interface (Nécessite un redémarrage)"
 

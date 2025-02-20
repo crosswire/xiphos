@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 14:29-0500\n"
+"POT-Creation-Date: 2025-02-20 09:16-0500\n"
 "PO-Revision-Date: 2015-07-15 20:56+0900\n"
 "Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
 "Language-Team: Seong-ho Cho <shcho@gnome.org>\n"
@@ -720,30 +720,30 @@ msgstr "BibleSync: 현재 내비게이션을 보냈습니다."
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: 스피커로 출력하지 않습니다."
 
-#: ../src/gtk/main_window.c:1011
+#: ../src/gtk/main_window.c:1013
 msgid "Xiphos - Bible Study Software"
 msgstr "xiphos - 성경 공부 프로그램"
 
-#: ../src/gtk/main_window.c:1075
+#: ../src/gtk/main_window.c:1077
 msgid "Open a new tab"
 msgstr "새 탭 열기"
 
-#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "표준 보기"
 
-#: ../src/gtk/main_window.c:1170
+#: ../src/gtk/main_window.c:1172
 msgid "Commentary View"
 msgstr "해설 보기"
 
-#: ../src/gtk/main_window.c:1178
+#: ../src/gtk/main_window.c:1180
 msgid "Book View"
 msgstr "책 보기"
 
-#: ../src/gtk/main_window.c:1193
+#: ../src/gtk/main_window.c:1195
 msgid "Welcome to Xiphos"
 msgstr "xiphos를 사용하시는 여러분 반갑습니다"
 
@@ -1507,6 +1507,11 @@ msgstr "다음에서 찾음 "
 #, c-format
 msgid "New List %s"
 msgstr "새 목록 %s"
+
+#: ../src/gtk/search_dialog.c:616
+#, fuzzy
+msgid "[New Range]"
+msgstr "범위를 새로 정의하는 단추입니다"
 
 #: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"

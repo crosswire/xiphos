@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 14:29-0500\n"
+"POT-Creation-Date: 2025-02-20 09:16-0500\n"
 "PO-Revision-Date: 2010-03-15 12:44+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Xiphos Translation Team\n"
@@ -737,30 +737,30 @@ msgstr ""
 msgid "BibleSync: Not speaking."
 msgstr ""
 
-#: ../src/gtk/main_window.c:1011
+#: ../src/gtk/main_window.c:1013
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - תוכנה לחקר כתבי הקודש"
 
-#: ../src/gtk/main_window.c:1075
+#: ../src/gtk/main_window.c:1077
 msgid "Open a new tab"
 msgstr "פתח לשונית חדשה"
 
-#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "תצוגה רגילה"
 
-#: ../src/gtk/main_window.c:1170
+#: ../src/gtk/main_window.c:1172
 msgid "Commentary View"
 msgstr "תצוגת פירוש"
 
-#: ../src/gtk/main_window.c:1178
+#: ../src/gtk/main_window.c:1180
 msgid "Book View"
 msgstr "תצוגת ספר"
 
-#: ../src/gtk/main_window.c:1193
+#: ../src/gtk/main_window.c:1195
 msgid "Welcome to Xiphos"
 msgstr "ברוכים הבאים ל-Xiphos"
 
@@ -1474,6 +1474,11 @@ msgstr "נמצא בתוך "
 #, fuzzy, c-format
 msgid "New List %s"
 msgstr "שמור רשימה"
+
+#: ../src/gtk/search_dialog.c:616
+#, fuzzy
+msgid "[New Range]"
+msgstr "כפתור טווח חדש"
 
 #: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"

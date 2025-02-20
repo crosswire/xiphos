@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 14:29-0500\n"
+"POT-Creation-Date: 2025-02-20 09:16-0500\n"
 "PO-Revision-Date: 2021-01-23 20:11+0100\n"
 "Last-Translator:  Antoine Đỗ  <do.antoine@disroot.org>\n"
 "Language-Team: Vietnamese <0>\n"
@@ -724,30 +724,30 @@ msgstr "BibleSync: Đã gửi điều hướng hiện tại."
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: Không truyền."
 
-#: ../src/gtk/main_window.c:1011
+#: ../src/gtk/main_window.c:1013
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Phần mềm học kinh thánh"
 
-#: ../src/gtk/main_window.c:1075
+#: ../src/gtk/main_window.c:1077
 msgid "Open a new tab"
 msgstr "Mở một thẻ mới"
 
-#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "Chế độ xem Chuẩn"
 
-#: ../src/gtk/main_window.c:1170
+#: ../src/gtk/main_window.c:1172
 msgid "Commentary View"
 msgstr "Xem Bình luận"
 
-#: ../src/gtk/main_window.c:1178
+#: ../src/gtk/main_window.c:1180
 msgid "Book View"
 msgstr "Xem sách"
 
-#: ../src/gtk/main_window.c:1193
+#: ../src/gtk/main_window.c:1195
 msgid "Welcome to Xiphos"
 msgstr "Chào mừng đến với Xiphos"
 
@@ -1520,6 +1520,11 @@ msgstr "tìm thấy trong "
 #, c-format
 msgid "New List %s"
 msgstr "Danh sách Mới %s"
+
+#: ../src/gtk/search_dialog.c:616
+#, fuzzy
+msgid "[New Range]"
+msgstr "Nút Phạm vi Tùy chỉnh Mới"
 
 #: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"
