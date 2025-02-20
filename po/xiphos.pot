@@ -9,6 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-17 14:29-0500\n"
+
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1381,6 +1382,10 @@ msgstr ""
 #: ../src/gtk/search_dialog.c:483
 #, c-format
 msgid "New List %s"
+msgstr ""
+
+#: ../src/gtk/search_dialog.c:616
+msgid "[New Range]"
 msgstr ""
 
 #: ../src/gtk/search_dialog.c:707
