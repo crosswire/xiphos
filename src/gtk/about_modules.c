@@ -342,7 +342,7 @@ gui_core_display_about_dialog(const gchar *desc,
 	static const char *html_end = "</font></body></html>";
 	MOD_FONT *mf = get_font(modname);
 	g_string_printf(html_start,
-			"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body bgcolor=\"%s\" text=\"%s\"><font face=\"%s\" size=\"%+d\">",
+			"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><body bgcolor=\"%s\" text=\"%s\"><font face=\"%s\" size=\"%+d\">",
 			settings.bible_bg_color,
 			settings.bible_text_color,
 			((mf->old_font) ? mf->old_font : ""),

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-27 23:35-0400\n"
+"POT-Creation-Date: 2025-02-17 14:29-0500\n"
 "PO-Revision-Date: 2010-09-15 13:02+0000\n"
 "Last-Translator: Dmitrijs Ledkovs <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -31,163 +31,159 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "Konfiguráció nem található"
 
-#: ../src/editor/slib-editor.c:209
-#, c-format
-msgid "Page %d of %d"
-msgstr "%d/%d oldal"
-
-#: ../src/editor/slib-editor.c:368 ../src/editor/webkit_editor.c:605
+#: ../src/editor/slib-editor.c:198 ../src/editor/webkit_editor.c:625
 #: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
 #: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Megnyit"
 
-#: ../src/editor/slib-editor.c:371 ../src/editor/slib-editor.c:418
-#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636
-#: ../src/gtk/main_menu.c:773 ../ui/bookmarks.gtkbuilder.h:5
-#: ../ui/export-dialog.gtkbuilder.h:2 ../ui/gtk_webedit.ui.h:85
-#: ../ui/markverse.gtkbuilder.h:7 ../ui/module-manager.gtkbuilder.h:18
+#: ../src/editor/slib-editor.c:201 ../src/editor/slib-editor.c:241
+#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:773
+#: ../ui/bookmarks.gtkbuilder.h:5 ../ui/export-dialog.gtkbuilder.h:2
+#: ../ui/gtk_webedit.ui.h:85 ../ui/markverse.gtkbuilder.h:7
+#: ../ui/module-manager.gtkbuilder.h:18
 msgid "_Cancel"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:372 ../src/editor/slib-editor.c:419
-#: ../src/editor/slib-editor.c:715 ../src/gtk/main_menu.c:774
+#: ../src/editor/slib-editor.c:202 ../src/editor/slib-editor.c:242
+#: ../src/editor/slib-editor.c:538 ../src/gtk/main_menu.c:774
 msgid "_Open"
 msgstr "_Megnyitás"
 
-#: ../src/editor/slib-editor.c:415
+#: ../src/editor/slib-editor.c:238 ../ui/gtk2_webedit.ui.h:77
+#: ../ui/gtk_webedit.ui.h:77
 msgid "Save As"
 msgstr "Mentés másként"
 
-#: ../src/editor/slib-editor.c:439 ../src/editor/slib-editor.c:598
-#: ../src/editor/webkit_editor.c:688
+#: ../src/editor/slib-editor.c:262 ../src/editor/slib-editor.c:421
+#: ../src/editor/webkit_editor.c:708
 msgid "Untitled document"
 msgstr "Névtelen dokumentum"
 
-#: ../src/editor/slib-editor.c:494
+#: ../src/editor/slib-editor.c:317
 msgid "_Close"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:617 ../src/editor/webkit_editor.c:311
+#: ../src/editor/slib-editor.c:440 ../src/editor/webkit_editor.c:331
 msgid "Are you sure you want to delete the note for"
 msgstr "Biztos benne, hogy törölni akarja a megjegyzést"
 
-#: ../src/editor/slib-editor.c:659
+#: ../src/editor/slib-editor.c:482
 msgid "HTML Output"
 msgstr "HTML-kimenet"
 
-#: ../src/editor/slib-editor.c:665
+#: ../src/editor/slib-editor.c:488
 msgid "HTML Source"
 msgstr "HTML-forrás"
 
-#: ../src/editor/slib-editor.c:671
+#: ../src/editor/slib-editor.c:494
 msgid "Plain Source"
 msgstr "Egyszerű forrás"
 
-#: ../src/editor/slib-editor.c:682 ../ui/editor_note.xml.h:13
+#: ../src/editor/slib-editor.c:505 ../ui/editor_note.xml.h:13
 #: ../ui/editor_studypad.xml.h:19
 msgid "_Print..."
 msgstr "N_yomtat..."
 
-#: ../src/editor/slib-editor.c:693 ../ui/editor_note.xml.h:12
+#: ../src/editor/slib-editor.c:516 ../ui/editor_note.xml.h:12
 #: ../ui/editor_studypad.xml.h:18
 msgid "Print Pre_view"
 msgstr "Nyomtatási ké_p"
 
-#: ../src/editor/slib-editor.c:704
+#: ../src/editor/slib-editor.c:527
 msgid "_Quit"
 msgstr "_Kilép"
 
-#: ../src/editor/slib-editor.c:726 ../src/gtk/dialog.c:262
+#: ../src/editor/slib-editor.c:549 ../src/gtk/dialog.c:262
 msgid "_Save"
 msgstr "Menté_s"
 
-#: ../src/editor/slib-editor.c:737
+#: ../src/editor/slib-editor.c:560
 msgid "Save _As..."
 msgstr "Men_tés másként…"
 
-#: ../src/editor/slib-editor.c:743 ../ui/gtk2_webedit.ui.h:56
+#: ../src/editor/slib-editor.c:566 ../ui/gtk2_webedit.ui.h:56
 #: ../ui/gtk_webedit.ui.h:56
 msgid "New"
 msgstr "Új"
 
-#: ../src/editor/slib-editor.c:745
+#: ../src/editor/slib-editor.c:568
 msgid "Open new document"
 msgstr "Új dokumentum megnyitása"
 
-#: ../src/editor/slib-editor.c:749 ../ui/gtk2_webedit.ui.h:14
+#: ../src/editor/slib-editor.c:572 ../ui/gtk2_webedit.ui.h:14
 #: ../ui/gtk_webedit.ui.h:14
 msgid "Delete"
 msgstr "Törlés"
 
-#: ../src/editor/slib-editor.c:751
+#: ../src/editor/slib-editor.c:574
 msgid "Delete current note"
 msgstr "Aktuális jegyzet törlése"
 
-#: ../src/editor/slib-editor.c:756 ../ui/editor_note.xml.h:9
+#: ../src/editor/slib-editor.c:579 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
 #: ../ui/gtk_webedit.ui.h:87 ../ui/xi-menus.glade.h:1
 #: ../ui/xi-menus.gtkbuilder.h:1
 msgid "_File"
 msgstr "_Fájl"
 
-#: ../src/editor/slib-editor.c:811
+#: ../src/editor/slib-editor.c:634
 msgid "HTML _Output"
 msgstr "HTML-_kimenet"
 
-#: ../src/editor/slib-editor.c:818
+#: ../src/editor/slib-editor.c:641
 msgid "_HTML Source"
 msgstr "HTML-_forrás"
 
-#: ../src/editor/slib-editor.c:825
+#: ../src/editor/slib-editor.c:648
 msgid "_Plain Source"
 msgstr "_Egyszerű forrás"
 
-#: ../src/editor/slib-editor.c:832 ../ui/xi-menus.glade.h:17
+#: ../src/editor/slib-editor.c:655 ../ui/xi-menus.glade.h:17
 #: ../ui/xi-menus.gtkbuilder.h:11
 msgid "_View"
 msgstr "Né_zet"
 
-#: ../src/editor/slib-editor.c:841 ../ui/editor_note.xml.h:16
+#: ../src/editor/slib-editor.c:664 ../ui/editor_note.xml.h:16
 #: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
 #: ../ui/gtk_webedit.ui.h:75
 msgid "Save"
 msgstr "Ment"
 
-#: ../src/editor/slib-editor.c:850 ../src/editor/slib-editor.c:857
+#: ../src/editor/slib-editor.c:673 ../src/editor/slib-editor.c:680
 #: ../ui/editor_link_dialog.gtkbuilder.h:1
 msgid "Insert Link"
 msgstr "Hivatkozás beszúrása"
 
-#: ../src/editor/slib-editor.c:1208 ../src/editor/slib-editor.c:1249
-#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
+#: ../src/editor/slib-editor.c:1031 ../src/editor/slib-editor.c:1072
+#: ../src/editor/webkit_editor.c:1193 ../src/editor/webkit_editor.c:1233
 msgid "Save the changes to document"
 msgstr "Változások dokumentumba mentése"
 
-#: ../src/editor/slib-editor.c:1209 ../src/editor/slib-editor.c:1250
-#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
+#: ../src/editor/slib-editor.c:1032 ../src/editor/slib-editor.c:1073
+#: ../src/editor/webkit_editor.c:1194 ../src/editor/webkit_editor.c:1234
 msgid "before closing?"
 msgstr "bezárás előtt?"
 
-#: ../src/editor/slib-editor.c:1214 ../src/editor/slib-editor.c:1255
-#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
+#: ../src/editor/slib-editor.c:1037 ../src/editor/slib-editor.c:1078
+#: ../src/editor/webkit_editor.c:1198 ../src/editor/webkit_editor.c:1238
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Ha nem ment, akkor a változtatások véglegesen elvesznek."
 
-#: ../src/editor/slib-editor.c:1248 ../src/editor/webkit_editor.c:1212
+#: ../src/editor/slib-editor.c:1071 ../src/editor/webkit_editor.c:1232
 #: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Fájl"
 
-#: ../src/editor/slib-editor.c:1300 ../src/editor/webkit_editor.c:1255
+#: ../src/editor/slib-editor.c:1123 ../src/editor/webkit_editor.c:1275
 msgid "StudyPad"
 msgstr "TanulóTömb"
 
-#: ../src/editor/slib-editor.c:1315 ../src/editor/webkit_editor.c:1270
+#: ../src/editor/slib-editor.c:1138 ../src/editor/webkit_editor.c:1290
 msgid "Note Editor"
 msgstr "Jegyzet szerkesztő"
 
-#: ../src/editor/slib-editor.c:1333 ../src/editor/webkit_editor.c:1287
+#: ../src/editor/slib-editor.c:1156 ../src/editor/webkit_editor.c:1307
 msgid "Prayer List/Journal Editor"
 msgstr "Imalista szerkesztő"
 
@@ -230,14 +226,14 @@ msgstr "<b>Tartomány</b>"
 msgid "Daily Devotion"
 msgstr "Napi áhítat"
 
-#: ../src/gtk/about_modules.c:437 ../src/gtk/mod_mgr.c:1561
-#: ../src/gtk/utilities.c:612 ../src/main/sidebar.cc:1029
+#: ../src/gtk/about_modules.c:437 ../src/gtk/mod_mgr.c:1554
+#: ../src/gtk/utilities.c:609 ../src/main/sidebar.cc:1029
 #: ../src/main/sidebar.cc:1031
 msgid "Maps"
 msgstr "Térképek"
 
-#: ../src/gtk/about_modules.c:439 ../src/gtk/mod_mgr.c:1565
-#: ../src/gtk/utilities.c:618 ../src/main/sidebar.cc:1038
+#: ../src/gtk/about_modules.c:439 ../src/gtk/mod_mgr.c:1558
+#: ../src/gtk/utilities.c:615 ../src/main/sidebar.cc:1038
 #: ../src/main/sidebar.cc:1040
 msgid "Images"
 msgstr "Képek"
@@ -255,12 +251,12 @@ msgid "Bible"
 msgstr "Biblia"
 
 #: ../src/gtk/about_modules.c:452 ../src/gtk/search_sidebar.c:295
-#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:149
 msgid "Commentary"
 msgstr "Magyarázat"
 
-#: ../src/gtk/about_modules.c:455 ../ui/prefs.glade.h:143
-#: ../ui/prefs.gtkbuilder.h:143
+#: ../src/gtk/about_modules.c:455 ../ui/prefs.glade.h:147
+#: ../ui/prefs.gtkbuilder.h:151
 msgid "Dictionary"
 msgstr "Szótár"
 
@@ -571,8 +567,8 @@ msgid ""
 "separate tabs is not supported."
 msgstr ""
 
-#: ../src/gtk/bookmarks_treeview.c:850 ../src/gtk/sidebar.c:1532
-#: ../src/gtk/sidebar.c:1584
+#: ../src/gtk/bookmarks_treeview.c:850 ../src/gtk/sidebar.c:1480
+#: ../src/gtk/sidebar.c:1532
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
@@ -589,8 +585,8 @@ msgstr "amit keres:"
 msgid "Enter Key: "
 msgstr "Adja meg a kulcsot: "
 
-#: ../src/gtk/dialog.c:256
-msgid "_Ok"
+#: ../src/gtk/dialog.c:256 ../src/gtk/dialog.c:639
+msgid "_OK"
 msgstr ""
 
 #: ../src/gtk/dialog.c:259 ../src/gtk/dialog.c:633
@@ -605,10 +601,6 @@ msgstr ""
 msgid "Close without Saving"
 msgstr "Bezár mentés nélkül"
 
-#: ../src/gtk/dialog.c:639
-msgid "_OK"
-msgstr ""
-
 #: ../src/gtk/dialog.c:724
 msgid "Xiphos:"
 msgstr "Xiphos:"
@@ -617,8 +609,12 @@ msgstr "Xiphos:"
 msgid "Close _without Saving"
 msgstr "Bezár mentés _nélkül"
 
+#: ../src/gtk/dictlex.c:374
+msgid "Do sidebar search for this Strong's number"
+msgstr ""
+
 #: ../src/gtk/export_bookmarks.c:175 ../src/gtk/export_bookmarks.c:232
-#: ../src/gtk/sidebar.c:1554 ../src/gtk/sidebar.c:1602
+#: ../src/gtk/sidebar.c:1502 ../src/gtk/sidebar.c:1550
 #, c-format
 msgid "Verse List"
 msgstr "Vers lista"
@@ -654,112 +650,122 @@ msgstr "Keresés visszafelé"
 msgid "Find Next"
 msgstr "Következő találat"
 
-#: ../src/gtk/font_dialog.c:298
+#: ../src/gtk/font_dialog.c:304
 msgid "Set Module Font"
 msgstr "Modul betűkészlet beállítása"
 
-#: ../src/gtk/font_dialog.c:332
+#: ../src/gtk/font_dialog.c:338
 msgid "Change font for"
 msgstr "Betűkészlet megváltoztatása"
 
-#: ../src/gtk/font_dialog.c:336 ../ui/editor_link_dialog.gtkbuilder.h:4
+#: ../src/gtk/font_dialog.c:342 ../ui/editor_link_dialog.gtkbuilder.h:4
 msgid "Module"
 msgstr "Modul"
 
-#: ../src/gtk/font_dialog.c:340
+#: ../src/gtk/font_dialog.c:346
 msgid "Current font: "
 msgstr "Aktuális betűkészlet: "
 
-#: ../src/gtk/font_dialog.c:381 ../src/gtk/font_dialog.c:397
+#: ../src/gtk/font_dialog.c:376 ../src/gtk/font_dialog.c:391
 #: ../ui/prefs.gtkbuilder.h:3
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gtk/font_dialog.c:400
+#: ../src/gtk/font_dialog.c:397
+#, fuzzy
+msgid "Display columns"
+msgstr "Xiphos megjelenítése"
+
+#: ../src/gtk/font_dialog.c:427
 msgid "Use the default font for this module"
 msgstr "Az alap betűkészlet használata ehhez a modulhoz"
 
-#: ../src/gtk/gui.c:173
+#: ../src/gtk/gui.c:107
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
 msgstr "HIBA! Xiphos összeomlani készül egy \"STRDUP\" hibának köszönhetően."
 
-#: ../src/gtk/gui.c:174 ../src/gtk/gui.c:204
+#: ../src/gtk/gui.c:108 ../src/gtk/gui.c:138
 msgid "Please report this error to the Xiphos team with:"
 msgstr "Kérem jelentse ezt a hibát a Xiphos csapatnak:"
 
-#: ../src/gtk/gui.c:203
+#: ../src/gtk/gui.c:137
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "HIBA! Xiphos is about to crash due to a \"STRING\" error."
+
+#: ../src/gtk/main_menu.c:653
+#, fuzzy
+msgid "Save Session"
+msgstr "Munkamenet menté_se"
 
 #: ../src/gtk/main_menu.c:769
 #, fuzzy
 msgid "Open Session"
 msgstr "Munkamenet _megnyitása"
 
-#: ../src/gtk/main_window.c:589
+#: ../src/gtk/main_window.c:576
 #, fuzzy, c-format
 msgid "Module has no support for %s."
 msgstr "Olyan modulokban, amelyek tartalmaznak Strong féle számozást"
 
-#: ../src/gtk/main_window.c:640
+#: ../src/gtk/main_window.c:627
 msgid "BibleSync is not active."
 msgstr ""
 
-#: ../src/gtk/main_window.c:648
+#: ../src/gtk/main_window.c:635
 #, fuzzy
 msgid "BibleSync Chat"
 msgstr "Biblia"
 
-#: ../src/gtk/main_window.c:649
+#: ../src/gtk/main_window.c:636
 msgid "[say this]"
 msgstr ""
 
-#: ../src/gtk/main_window.c:650
+#: ../src/gtk/main_window.c:637
 #, fuzzy
 msgid "Comment:"
 msgstr "Magyarázat"
 
-#: ../src/gtk/main_window.c:690
+#: ../src/gtk/main_window.c:677
 #, fuzzy
 msgid "Xiphos: No windows."
 msgstr "Xiphos:"
 
-#: ../src/gtk/main_window.c:746
+#: ../src/gtk/main_window.c:733
 msgid "BibleSync: Current navigation sent."
 msgstr ""
 
-#: ../src/gtk/main_window.c:748
+#: ../src/gtk/main_window.c:735
 msgid "BibleSync: Not speaking."
 msgstr ""
 
-#: ../src/gtk/main_window.c:978
+#: ../src/gtk/main_window.c:1011
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Biblia tanulmányozó alkalmazás"
 
-#: ../src/gtk/main_window.c:1042
+#: ../src/gtk/main_window.c:1075
 msgid "Open a new tab"
 msgstr "Új fül megnyitása"
 
-#: ../src/gtk/main_window.c:1097 ../src/gtk/sidebar.c:616
-#: ../src/gtk/sidebar.c:621 ../src/main/sidebar.cc:655
+#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "Normál nézet"
 
-#: ../src/gtk/main_window.c:1137
+#: ../src/gtk/main_window.c:1170
 msgid "Commentary View"
 msgstr "Magyarázó nézet"
 
-#: ../src/gtk/main_window.c:1145
+#: ../src/gtk/main_window.c:1178
 msgid "Book View"
 msgstr "Könyv nézet"
 
-#: ../src/gtk/main_window.c:1163
+#: ../src/gtk/main_window.c:1193
 msgid "Welcome to Xiphos"
 msgstr "Üdvözli Önt a Xiphos"
 
-#: ../src/gtk/menu_popup.c:1296
+#: ../src/gtk/menu_popup.c:1319
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -778,33 +784,33 @@ msgstr ""
 "Éppen ezért személyes megjegyzések átnevezése Windows\n"
 "környezetben nem lehetséges."
 
-#: ../src/gtk/menu_popup.c:1315
+#: ../src/gtk/menu_popup.c:1338
 msgid "Rename Commentary"
 msgstr "Kommentár átnevezése"
 
-#: ../src/gtk/menu_popup.c:1318
+#: ../src/gtk/menu_popup.c:1341
 msgid "Choose Commentary Name"
 msgstr "Válasszon egy kommentár nevet"
 
-#: ../src/gtk/menu_popup.c:1320
+#: ../src/gtk/menu_popup.c:1343
 msgid "New Name"
 msgstr "Új név"
 
-#: ../src/gtk/menu_popup.c:1321 ../src/gtk/treekey-editor.c:138
+#: ../src/gtk/menu_popup.c:1344 ../src/gtk/treekey-editor.c:138
 #: ../src/gtk/treekey-editor.c:195 ../src/gtk/treekey-editor.c:293
 #: ../src/main/prayerlists.cc:235
 msgid "Name: "
 msgstr "Név: "
 
-#: ../src/gtk/menu_popup.c:1330 ../src/main/prayerlists.cc:248
+#: ../src/gtk/menu_popup.c:1353 ../src/main/prayerlists.cc:248
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Modul nevek csak [A-Za-z0-9_]-t tartalmazhatnak."
 
-#: ../src/gtk/menu_popup.c:1336 ../src/main/prayerlists.cc:254
+#: ../src/gtk/menu_popup.c:1359 ../src/main/prayerlists.cc:254
 msgid "Xiphos already knows a module by that name."
 msgstr "Xiphos már tud azonos nevű modulról."
 
-#: ../src/gtk/menu_popup.c:1378
+#: ../src/gtk/menu_popup.c:1401
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -813,7 +819,7 @@ msgstr ""
 "Nem sikerült új konfigurációt létrehozni:\n"
 "%s"
 
-#: ../src/gtk/menu_popup.c:1387
+#: ../src/gtk/menu_popup.c:1410
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -822,7 +828,7 @@ msgstr ""
 "%s\n"
 "\n"
 
-#: ../src/gtk/menu_popup.c:2036
+#: ../src/gtk/menu_popup.c:2067
 msgid "No module in this pane."
 msgstr ""
 
@@ -1112,29 +1118,25 @@ msgstr ""
 msgid " archived in: \n"
 msgstr " archiválva: \n"
 
-#: ../src/gtk/mod_mgr.c:988
-msgid "Journals and prayer lists cannot be indexed."
-msgstr "Naplót és imalistát nem lehet indexelni."
-
-#: ../src/gtk/mod_mgr.c:1019
+#: ../src/gtk/mod_mgr.c:1012
 #, c-format
 msgid "%s failed"
 msgstr "%s sikertelen"
 
-#: ../src/gtk/mod_mgr.c:1022 ../src/gtk/mod_mgr.c:1788
+#: ../src/gtk/mod_mgr.c:1015 ../src/gtk/mod_mgr.c:1781
 msgid "Finished"
 msgstr "Befejezve"
 
-#: ../src/gtk/mod_mgr.c:1195 ../src/gtk/mod_mgr.c:1197
-#: ../src/gtk/mod_mgr.c:1307 ../src/gtk/mod_mgr.c:1340
-#: ../src/gtk/mod_mgr.c:1342 ../src/gtk/utilities.c:432
-#: ../src/gtk/utilities.c:495 ../src/gtk/utilities.c:497
-#: ../src/gtk/utilities.c:1071 ../src/main/sidebar.cc:807
+#: ../src/gtk/mod_mgr.c:1188 ../src/gtk/mod_mgr.c:1190
+#: ../src/gtk/mod_mgr.c:1300 ../src/gtk/mod_mgr.c:1333
+#: ../src/gtk/mod_mgr.c:1335 ../src/gtk/utilities.c:429
+#: ../src/gtk/utilities.c:492 ../src/gtk/utilities.c:494
+#: ../src/gtk/utilities.c:985 ../src/main/sidebar.cc:807
 #: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../src/gtk/mod_mgr.c:1518
+#: ../src/gtk/mod_mgr.c:1511
 #, c-format
 msgid ""
 "Repository:\n"
@@ -1143,7 +1145,7 @@ msgstr ""
 "Tárhely:\n"
 "%s"
 
-#: ../src/gtk/mod_mgr.c:1531
+#: ../src/gtk/mod_mgr.c:1524
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -1151,44 +1153,44 @@ msgstr ""
 "Modulok típusai\n"
 "szerint kategorizálva"
 
-#: ../src/gtk/mod_mgr.c:1536 ../src/gtk/utilities.c:574
+#: ../src/gtk/mod_mgr.c:1529 ../src/gtk/utilities.c:571
 #: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
 msgid "Biblical Texts"
 msgstr "Bibliai szövegek"
 
-#: ../src/gtk/mod_mgr.c:1540 ../src/gtk/utilities.c:580
+#: ../src/gtk/mod_mgr.c:1533 ../src/gtk/utilities.c:577
 #: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
 #: ../src/main/sidebar.cc:986
 msgid "Commentaries"
 msgstr "Magyarázatok"
 
-#: ../src/gtk/mod_mgr.c:1544 ../src/gtk/utilities.c:587
+#: ../src/gtk/mod_mgr.c:1537 ../src/gtk/utilities.c:584
 #: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
 msgid "Dictionaries"
 msgstr "Szótárak"
 
-#: ../src/gtk/mod_mgr.c:1548 ../src/gtk/utilities.c:593
+#: ../src/gtk/mod_mgr.c:1541 ../src/gtk/utilities.c:590
 #: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
 msgid "Glossaries"
 msgstr ""
 
-#: ../src/gtk/mod_mgr.c:1552 ../src/gtk/utilities.c:600
+#: ../src/gtk/mod_mgr.c:1545 ../src/gtk/utilities.c:597
 #: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
 msgid "Daily Devotionals"
 msgstr "Napi áhitatok"
 
-#: ../src/gtk/mod_mgr.c:1557 ../src/gtk/utilities.c:606
+#: ../src/gtk/mod_mgr.c:1550 ../src/gtk/utilities.c:603
 #: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
 #: ../src/main/sidebar.cc:1022
 msgid "General Books"
 msgstr "Általános könyvek"
 
-#: ../src/gtk/mod_mgr.c:1569 ../src/gtk/utilities.c:624
+#: ../src/gtk/mod_mgr.c:1562 ../src/gtk/utilities.c:621
 #: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
 msgid "Cult/Unorthodox"
 msgstr ""
 
-#: ../src/gtk/mod_mgr.c:1578
+#: ../src/gtk/mod_mgr.c:1571
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -1196,95 +1198,95 @@ msgstr ""
 "Kategorizálva\n"
 "elérhetőség alapján"
 
-#: ../src/gtk/mod_mgr.c:1582
+#: ../src/gtk/mod_mgr.c:1575
 msgid "Updates"
 msgstr "Frissítések"
 
-#: ../src/gtk/mod_mgr.c:1587
+#: ../src/gtk/mod_mgr.c:1580
 msgid "Uninstalled"
 msgstr "Eltávolítva"
 
-#: ../src/gtk/mod_mgr.c:1592 ../src/gtk/sidebar.c:632
-#: ../src/gtk/utilities.c:632 ../src/main/prayerlists.cc:233
+#: ../src/gtk/mod_mgr.c:1585 ../src/gtk/sidebar.c:594
+#: ../src/gtk/utilities.c:629 ../src/main/prayerlists.cc:233
 #: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
 msgid "Prayer List/Journal"
 msgstr "Imalista/Napló"
 
-#: ../src/gtk/mod_mgr.c:1771
+#: ../src/gtk/mod_mgr.c:1764
 msgid "Refreshing from remote source"
 msgstr "Frissítés távoli forrásból"
 
-#: ../src/gtk/mod_mgr.c:1783
+#: ../src/gtk/mod_mgr.c:1776
 msgid "Remote source not found"
 msgstr "Távoli forrás nem található"
 
-#: ../src/gtk/mod_mgr.c:1854
+#: ../src/gtk/mod_mgr.c:1847
 msgid "Configure"
 msgstr "Konfigurál"
 
-#: ../src/gtk/mod_mgr.c:1883
+#: ../src/gtk/mod_mgr.c:1876
 msgid "Type"
 msgstr "Típus"
 
-#: ../src/gtk/mod_mgr.c:1890
+#: ../src/gtk/mod_mgr.c:1883
 msgid "Caption"
 msgstr "Fejezet"
 
-#: ../src/gtk/mod_mgr.c:1897
+#: ../src/gtk/mod_mgr.c:1890
 msgid "Source"
 msgstr "Forrás"
 
-#: ../src/gtk/mod_mgr.c:1904
+#: ../src/gtk/mod_mgr.c:1897
 msgid "Directory"
 msgstr "Könyvtár"
 
-#: ../src/gtk/mod_mgr.c:1912
+#: ../src/gtk/mod_mgr.c:1905
 msgid "User"
 msgstr "Felhasználó"
 
-#: ../src/gtk/mod_mgr.c:1919
+#: ../src/gtk/mod_mgr.c:1912
 msgid "Password"
 msgstr "Jelszó"
 
-#: ../src/gtk/mod_mgr.c:1926
+#: ../src/gtk/mod_mgr.c:1919
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gtk/mod_mgr.c:1941
+#: ../src/gtk/mod_mgr.c:1934
 msgid "Module Sources"
 msgstr "Modul források"
 
-#: ../src/gtk/mod_mgr.c:1944
+#: ../src/gtk/mod_mgr.c:1937
 msgid "Add/Remove"
 msgstr "Hozzáad/eltávolít"
 
-#: ../src/gtk/mod_mgr.c:1947
+#: ../src/gtk/mod_mgr.c:1940
 msgid "Choose"
 msgstr "Kiválaszt"
 
-#: ../src/gtk/mod_mgr.c:1950 ../src/gtk/preferences_dialog.c:2056
-#: ../src/gtk/sidebar.c:1564 ../src/gtk/sidebar.c:1610
+#: ../src/gtk/mod_mgr.c:1943 ../src/gtk/preferences_dialog.c:2187
+#: ../src/gtk/sidebar.c:1512 ../src/gtk/sidebar.c:1558
 msgid "Modules"
 msgstr "Modulok"
 
-#: ../src/gtk/mod_mgr.c:1952
+#: ../src/gtk/mod_mgr.c:1945
 msgid "Install/Update"
 msgstr "Telepít/Frissít"
 
-#: ../src/gtk/mod_mgr.c:1955
+#: ../src/gtk/mod_mgr.c:1948
 msgid "Maintenance"
 msgstr "Karbantartás"
 
-#: ../src/gtk/mod_mgr.c:2171
+#: ../src/gtk/mod_mgr.c:2164
 msgid "Please Refresh"
 msgstr "Kérem frissítsen"
 
-#: ../src/gtk/mod_mgr.c:2172
+#: ../src/gtk/mod_mgr.c:2165
 msgid "Your module list is not up to date!"
 msgstr "A modul-lista napra kész!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gtk/mod_mgr.c:2489
+#: ../src/gtk/mod_mgr.c:2482
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -1292,7 +1294,7 @@ msgstr ""
 "Eltávolította az utolsó Bibliát.\n"
 "Xiphosnak minimum egyre szüksége van."
 
-#: ../src/gtk/mod_mgr.c:2495
+#: ../src/gtk/mod_mgr.c:2488
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -1300,7 +1302,7 @@ msgstr ""
 "Még nincsenek Bibliák telepítve.\n"
 "Xiphos nem futhat egy nélkül sem."
 
-#: ../src/gtk/mod_mgr.c:2620
+#: ../src/gtk/mod_mgr.c:2613
 #, c-format
 msgid ""
 "%s obsoletes %s.\n"
@@ -1308,60 +1310,60 @@ msgid ""
 "Beware: This cannot be undone."
 msgstr ""
 
-#: ../src/gtk/mod_mgr.c:2686
+#: ../src/gtk/mod_mgr.c:2679
 msgid "No obsolete modules were found."
 msgstr ""
 
-#: ../src/gtk/mod_mgr.c:2708
+#: ../src/gtk/mod_mgr.c:2701
 msgid "Standard remote sources have been loaded."
 msgstr "Alap távoli forrás betöltve."
 
-#: ../src/gtk/mod_mgr.c:2717
+#: ../src/gtk/mod_mgr.c:2710
 msgid "Could not load standard sources from CrossWire."
 msgstr "Alap források betöltése nem sikerült a CrossWire oldaláról."
 
-#: ../src/gtk/mod_mgr.c:2868 ../src/gtk/mod_mgr.c:3124
+#: ../src/gtk/mod_mgr.c:2861 ../src/gtk/mod_mgr.c:3117
 msgid "Remove the selected source"
 msgstr "A kiválasztott forrás eltávolítása"
 
-#: ../src/gtk/mod_mgr.c:2934
+#: ../src/gtk/mod_mgr.c:2927
 msgid "Enter a remote source"
 msgstr "Távoli forrás megadása"
 
-#: ../src/gtk/mod_mgr.c:2943
+#: ../src/gtk/mod_mgr.c:2936
 msgid "Caption:"
 msgstr "Fejezet:"
 
-#: ../src/gtk/mod_mgr.c:2944
+#: ../src/gtk/mod_mgr.c:2937
 msgid "Type:"
 msgstr "Típus:"
 
-#: ../src/gtk/mod_mgr.c:2945
+#: ../src/gtk/mod_mgr.c:2938
 msgid "Host:"
 msgstr "Kiszolgáló:"
 
-#: ../src/gtk/mod_mgr.c:2946
+#: ../src/gtk/mod_mgr.c:2939
 msgid "Directory:"
 msgstr "Könyvtár:"
 
-#: ../src/gtk/mod_mgr.c:2947
+#: ../src/gtk/mod_mgr.c:2940
 msgid "User (optional):"
 msgstr "Felhasználó (opcionális):"
 
-#: ../src/gtk/mod_mgr.c:2948
+#: ../src/gtk/mod_mgr.c:2941
 msgid "Password (optional):"
 msgstr "Jelszó (opcionális):"
 
 #. this can happen at most once
-#: ../src/gtk/mod_mgr.c:2974
+#: ../src/gtk/mod_mgr.c:2967
 msgid "A source by that name already exists."
 msgstr "Forrás ilyen névvel már létezik."
 
-#: ../src/gtk/mod_mgr.c:3121
+#: ../src/gtk/mod_mgr.c:3114
 msgid "Delete a remote source"
 msgstr "Távoli forrás törlése"
 
-#: ../src/gtk/mod_mgr.c:3640
+#: ../src/gtk/mod_mgr.c:3633
 #, fuzzy
 msgid "[no module]"
 msgstr "Egész modul"
@@ -1388,7 +1390,7 @@ msgstr "Ugrás belülre az első alfejezethez"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Ennek az ablaknak a görgetését szinkronizálja a fő ablakkal"
 
-#: ../src/gtk/parallel_dialog.c:348 ../src/gtk/preferences_dialog.c:2063
+#: ../src/gtk/parallel_dialog.c:326 ../src/gtk/preferences_dialog.c:2194
 msgid "Parallel"
 msgstr "Párhuzamos"
 
@@ -1401,120 +1403,115 @@ msgstr "Leválaszt/hozzácsatol"
 msgid "Module Options"
 msgstr "Modul beállítások"
 
-#: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:616
-#: ../src/gtk/sidebar.c:621 ../src/gtk/tabbed_browser.c:254
+#: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:578
+#: ../src/gtk/sidebar.c:583 ../src/gtk/tabbed_browser.c:240
 #: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
 msgid "Parallel View"
 msgstr "Párhuzamos nézet"
 
-#: ../src/gtk/preferences_dialog.c:866
+#: ../src/gtk/preferences_dialog.c:868
 msgid "BibleSync session passphrase"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:868
+#: ../src/gtk/preferences_dialog.c:870
 msgid "Phrase:"
 msgstr ""
 
 #. mode selection failed? probably dead interface
-#: ../src/gtk/preferences_dialog.c:940
+#: ../src/gtk/preferences_dialog.c:942
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:992
+#: ../src/gtk/preferences_dialog.c:994
 #, fuzzy
 msgid "Mode selection failed.\n"
 msgstr "Kiválasztás hangos felolvasása"
 
-#: ../src/gtk/preferences_dialog.c:995
+#: ../src/gtk/preferences_dialog.c:997
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:997
+#: ../src/gtk/preferences_dialog.c:999
 msgid "Disabled"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:999 ../src/main/xml.c:96
+#: ../src/gtk/preferences_dialog.c:1001 ../src/main/xml.c:96
 msgid "Personal"
 msgstr "Személyes"
 
-#: ../src/gtk/preferences_dialog.c:1001
+#: ../src/gtk/preferences_dialog.c:1003
 msgid "Speaker"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:1002
+#: ../src/gtk/preferences_dialog.c:1004
 msgid "Audience"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:1617
-#: ../src/gtk/preferences_dialog.c:1651
-#: ../src/gtk/preferences_dialog.c:1684
-#: ../src/gtk/preferences_dialog.c:1716
-#: ../src/gtk/preferences_dialog.c:1747
-#: ../src/gtk/preferences_dialog.c:1778
-#: ../src/gtk/preferences_dialog.c:1809
-#: ../src/gtk/preferences_dialog.c:1841
-#: ../src/gtk/preferences_dialog.c:1874
-#: ../src/gtk/preferences_dialog.c:1925
-#: ../src/gtk/preferences_dialog.c:2385
+#: ../src/gtk/preferences_dialog.c:1719 ../src/gtk/preferences_dialog.c:1753
+#: ../src/gtk/preferences_dialog.c:1786 ../src/gtk/preferences_dialog.c:1818
+#: ../src/gtk/preferences_dialog.c:1849 ../src/gtk/preferences_dialog.c:1880
+#: ../src/gtk/preferences_dialog.c:1911 ../src/gtk/preferences_dialog.c:1943
+#: ../src/gtk/preferences_dialog.c:1976 ../src/gtk/preferences_dialog.c:2027
+#: ../src/gtk/preferences_dialog.c:2520
 msgid "-- Select --"
 msgstr "-- Kiválaszt --"
 
-#: ../src/gtk/preferences_dialog.c:1888
+#: ../src/gtk/preferences_dialog.c:1990
 msgid "Locale will take effect after restart."
 msgstr "A módosítás az alkalmazás újraindítása után lép érvénybe"
 
-#: ../src/gtk/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
-#: ../ui/prefs.gtkbuilder.h:9
+#: ../src/gtk/preferences_dialog.c:2060 ../ui/prefs.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:13
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: ../src/gtk/preferences_dialog.c:2036
+#: ../src/gtk/preferences_dialog.c:2167
 msgid "General"
 msgstr "Általános"
 
-#: ../src/gtk/preferences_dialog.c:2039
+#: ../src/gtk/preferences_dialog.c:2170
 msgid "Options"
 msgstr "Opciók"
 
-#: ../src/gtk/preferences_dialog.c:2042 ../ui/prefs.glade.h:88
-#: ../ui/prefs.gtkbuilder.h:88
+#: ../src/gtk/preferences_dialog.c:2173 ../ui/prefs.glade.h:92
+#: ../ui/prefs.gtkbuilder.h:96
 #, fuzzy
 msgid "BibleSync"
 msgstr "Biblia"
 
-#: ../src/gtk/preferences_dialog.c:2046
+#: ../src/gtk/preferences_dialog.c:2177
 msgid "Fonts"
 msgstr "Betűkészlet"
 
-#: ../src/gtk/preferences_dialog.c:2049
+#: ../src/gtk/preferences_dialog.c:2180
 msgid "Color"
 msgstr "Szín"
 
-#: ../src/gtk/preferences_dialog.c:2052
+#: ../src/gtk/preferences_dialog.c:2183
 msgid "Sizes and Faces"
 msgstr "Méret és típus"
 
-#: ../src/gtk/preferences_dialog.c:2066
+#: ../src/gtk/preferences_dialog.c:2197
 msgid "Special"
 msgstr "Speciális"
 
-#: ../src/gtk/preferences_dialog.c:2766 ../src/gtk/search_dialog.c:519
+#: ../src/gtk/preferences_dialog.c:2901 ../src/gtk/search_dialog.c:519
 msgid "Clear List?"
 msgstr "Lista törlése?"
 
-#: ../src/gtk/preferences_dialog.c:2767 ../src/gtk/search_dialog.c:520
+#: ../src/gtk/preferences_dialog.c:2902 ../src/gtk/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr "Biztos benne, hogy törli a modul-listát?"
 
-#: ../src/gtk/preferences_dialog.c:2818 ../src/main/search_dialog.cc:678
+#: ../src/gtk/preferences_dialog.c:2953 ../src/main/search_dialog.cc:692
 msgid "Remove Module?"
 msgstr "Modul eltávolítása?"
 
-#: ../src/gtk/preferences_dialog.c:2819 ../src/main/search_dialog.cc:679
+#: ../src/gtk/preferences_dialog.c:2954 ../src/main/search_dialog.cc:693
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Biztos benne, hogy el akarja távolítani a kiválasztott modult?"
 
@@ -1538,15 +1535,11 @@ msgstr "megtalálva itt: "
 msgid "New List %s"
 msgstr "Új lista %s"
 
-#: ../src/gtk/search_dialog.c:700
-msgid "The last module list may not be deleted"
-msgstr "Az utolsó modul-lista nem törölhető"
-
-#: ../src/gtk/search_dialog.c:715
+#: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"
 msgstr "Lista törlése?"
 
-#: ../src/gtk/search_dialog.c:716
+#: ../src/gtk/search_dialog.c:708
 msgid "Are you sure you want to delete:"
 msgstr "Biztos benne, hogy törölni kívánja:"
 
@@ -1566,7 +1559,7 @@ msgstr "Biztos benne, hogy törölni kívánja:"
 #. * Return value
 #. *   void
 #.
-#: ../src/gtk/search_dialog.c:845
+#: ../src/gtk/search_dialog.c:837
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1611,7 +1604,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gtk/search_dialog.c:903
+#: ../src/gtk/search_dialog.c:895
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1629,11 +1622,11 @@ msgid ""
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 
-#: ../src/gtk/search_dialog.c:1202
+#: ../src/gtk/search_dialog.c:1194
 msgid "Module is neither Bible nor commentary"
 msgstr ""
 
-#: ../src/gtk/search_dialog.c:1220 ../src/gtk/sidebar.c:984
+#: ../src/gtk/search_dialog.c:1212 ../src/gtk/sidebar.c:946
 msgid "BibleSync is not active for transmit."
 msgstr ""
 
@@ -1651,8 +1644,9 @@ msgid "_Open Advanced Search"
 msgstr "Össz_etett keresés"
 
 #: ../src/gtk/search_sidebar.c:258
-msgid "Open the separate Advanced Search dialog."
-msgstr ""
+#, fuzzy
+msgid "Open the separate Advanced Search dialog"
+msgstr "Össz_etett keresés"
 
 #: ../src/gtk/search_sidebar.c:274
 msgid "Search Module"
@@ -1662,17 +1656,17 @@ msgstr "Modul keresése"
 msgid "Search Type"
 msgstr "Keresés típusa"
 
-#: ../src/gtk/search_sidebar.c:324 ../ui/search-dialog.glade.h:37
-#: ../ui/search-dialog.gtkbuilder.h:34
+#: ../src/gtk/search_sidebar.c:324 ../src/main/search_dialog.cc:120
+#: ../ui/search-dialog.glade.h:37 ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
 msgstr "Optimizált (\"Lucene\")"
 
-#: ../src/gtk/search_sidebar.c:333 ../src/main/search_dialog.cc:100
+#: ../src/gtk/search_sidebar.c:333 ../src/main/search_dialog.cc:114
 #: ../ui/search-dialog.glade.h:41 ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "Reguláris kifejezés"
 
-#: ../src/gtk/search_sidebar.c:340 ../src/main/search_dialog.cc:102
+#: ../src/gtk/search_sidebar.c:340 ../src/main/search_dialog.cc:116
 #: ../ui/search-dialog.glade.h:43 ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "Pontos kifejezés"
@@ -1714,25 +1708,25 @@ msgstr "Alsó"
 msgid "Upper"
 msgstr "Felső"
 
-#: ../src/gtk/sidebar.c:844
+#: ../src/gtk/sidebar.c:806
 #, fuzzy
 msgid "Open module in editor?"
 msgstr "Megnyitás szövefszerkesztőben"
 
-#: ../src/gtk/sidebar.c:845
+#: ../src/gtk/sidebar.c:807
 msgid "If no, it will open for display only."
 msgstr ""
 
-#: ../src/gtk/sidebar.c:945
+#: ../src/gtk/sidebar.c:907
 #, fuzzy
 msgid "Paste verse references"
 msgstr "Beállítások"
 
-#: ../src/gtk/sidebar.c:947
+#: ../src/gtk/sidebar.c:909
 msgid "List:"
 msgstr ""
 
-#: ../src/gtk/sidebar.c:1543 ../src/gtk/sidebar.c:1593
+#: ../src/gtk/sidebar.c:1491 ../src/gtk/sidebar.c:1541
 msgid "Search"
 msgstr "Keresés"
 
@@ -1744,7 +1738,7 @@ msgstr "Oldalpanel"
 msgid "Powered by the SWORD Project"
 msgstr "Támogatja a SWORD projekt"
 
-#: ../src/gtk/tabbed_browser.c:358
+#: ../src/gtk/tabbed_browser.c:347
 msgid "Can't create tabs dir."
 msgstr "A lap-könyvtárat nem sikerült létrehozni."
 
@@ -1762,55 +1756,55 @@ msgstr "Új név"
 msgid "Remove the selected item"
 msgstr "Kiválasztott elem törlése"
 
-#: ../src/gtk/utilities.c:86
+#: ../src/gtk/utilities.c:80
 msgid "January"
 msgstr "január"
 
-#: ../src/gtk/utilities.c:87
+#: ../src/gtk/utilities.c:81
 msgid "February"
 msgstr "február"
 
-#: ../src/gtk/utilities.c:88
+#: ../src/gtk/utilities.c:82
 msgid "March"
 msgstr "március"
 
-#: ../src/gtk/utilities.c:89
+#: ../src/gtk/utilities.c:83
 msgid "April"
 msgstr "április"
 
-#: ../src/gtk/utilities.c:90
+#: ../src/gtk/utilities.c:84
 msgid "May"
 msgstr "május"
 
-#: ../src/gtk/utilities.c:91
+#: ../src/gtk/utilities.c:85
 msgid "June"
 msgstr "június"
 
-#: ../src/gtk/utilities.c:92
+#: ../src/gtk/utilities.c:86
 msgid "July"
 msgstr "július"
 
-#: ../src/gtk/utilities.c:93
+#: ../src/gtk/utilities.c:87
 msgid "August"
 msgstr "augusztus"
 
-#: ../src/gtk/utilities.c:94
+#: ../src/gtk/utilities.c:88
 msgid "September"
 msgstr "szeptember"
 
-#: ../src/gtk/utilities.c:94
+#: ../src/gtk/utilities.c:89
 msgid "October"
 msgstr "október"
 
-#: ../src/gtk/utilities.c:94
+#: ../src/gtk/utilities.c:90
 msgid "November"
 msgstr "november"
 
-#: ../src/gtk/utilities.c:94
+#: ../src/gtk/utilities.c:91
 msgid "December"
 msgstr "december"
 
-#: ../src/gtk/utilities.c:2075
+#: ../src/gtk/utilities.c:2021
 #, fuzzy
 msgid ""
 "An image file's size could not be determined.\n"
@@ -1922,7 +1916,7 @@ msgid ""
 "<br/><br/><center><i>This module has no content at this point.</i></center>"
 msgstr ""
 
-#: ../src/main/display.cc:250
+#: ../src/main/display.cc:258
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
@@ -1931,171 +1925,181 @@ msgstr ""
 "Helytelenül kódolt személyes megjegyzés cimke:\n"
 "'%s'"
 
-#: ../src/main/display.cc:1117 ../src/main/display.cc:1159
-#: ../src/main/display.cc:1282 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1132 ../src/main/display.cc:1174
+#: ../src/main/display.cc:1254 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr "Fejezet"
 
-#: ../src/main/main.c:129
+#: ../src/main/main.c:147
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos nem tud egy argumentumnál többet értelmezni"
 
-#: ../src/main/main.c:240
+#: ../src/main/main.c:258
 #, fuzzy
 msgid "Initiating HTML"
 msgstr "Gecko inicializálása"
 
-#: ../src/main/main.c:245
+#: ../src/main/main.c:263
 msgid "Building Interface"
 msgstr "Interfész felépítése"
 
-#: ../src/main/main.c:248
+#: ../src/main/main.c:266
 msgid "Starting Sword"
 msgstr "Sword indítása"
 
-#: ../src/main/main.c:251
+#: ../src/main/main.c:269
 msgid "Loading Settings"
 msgstr "Beállítások betöltése"
 
-#: ../src/main/main.c:254
+#: ../src/main/main.c:272
 msgid "Displaying Xiphos"
 msgstr "Xiphos megjelenítése"
 
-#: ../src/main/module_dialogs.cc:186 ../src/main/previewer.cc:100
+#: ../src/main/module_dialogs.cc:186 ../src/main/previewer.cc:90
 msgid "Previewer"
 msgstr "Előnézeti ablak"
 
 #: ../src/main/module_dialogs.cc:240 ../src/main/module_dialogs.cc:344
-#: ../src/main/previewer.cc:188
+#: ../src/main/previewer.cc:149
 msgid "Footnote"
 msgstr "Lábjegyzet"
 
 #: ../src/main/module_dialogs.cc:246 ../src/main/module_dialogs.cc:349
-#: ../src/main/previewer.cc:198
+#: ../src/main/previewer.cc:159
 msgid "Cross Reference"
 msgstr "Utalás"
 
 #: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
 #: ../src/main/module_dialogs.cc:354 ../src/main/module_dialogs.cc:366
-#: ../src/main/previewer.cc:203 ../src/main/previewer.cc:223
+#: ../src/main/previewer.cc:164 ../src/main/previewer.cc:184
 msgid "Strongs"
 msgstr "Strong"
 
 #: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
 #: ../src/main/module_dialogs.cc:359 ../src/main/module_dialogs.cc:376
-#: ../src/main/previewer.cc:208 ../src/main/previewer.cc:229
+#: ../src/main/previewer.cc:169 ../src/main/previewer.cc:190
 msgid "Morphology"
 msgstr "Nyelvtan"
 
-#: ../src/main/module_dialogs.cc:986 ../src/main/url.cc:515
+#: ../src/main/module_dialogs.cc:986 ../src/main/url.cc:516
 msgid "Back to "
 msgstr "Vissza ide: "
 
-#: ../src/main/parallel_view.cc:61
+#: ../src/main/parallel_view.cc:79
 msgid "Unknown parallel module: "
 msgstr ""
 
-#: ../src/main/parallel_view.cc:400 ../ui/xi-menus.glade.h:70
-#: ../ui/xi-menus-popup.gtkbuilder.h:47
+#: ../src/main/parallel_view.cc:358 ../ui/xi-menus.glade.h:71
+#: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Strong's Numbers"
 msgstr "Strong féle számozás"
 
-#: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:102
-#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:73
-#: ../ui/xi-menus-popup.gtkbuilder.h:50
+#: ../src/main/parallel_view.cc:367 ../ui/search-dialog.glade.h:102
+#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:74
+#: ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnotes"
 msgstr "Lábjegyzetek"
 
-#: ../src/main/parallel_view.cc:418 ../ui/search-dialog.glade.h:99
-#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:72
-#: ../ui/xi-menus-popup.gtkbuilder.h:49
+#: ../src/main/parallel_view.cc:376 ../ui/search-dialog.glade.h:99
+#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:73
+#: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Morphological Tags"
 msgstr "Nyelvtani elemek"
 
-#: ../src/main/parallel_view.cc:427 ../ui/xi-menus.glade.h:78
-#: ../ui/xi-menus-popup.gtkbuilder.h:54
+#: ../src/main/parallel_view.cc:385 ../ui/xi-menus.glade.h:79
+#: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Hebrew Vowel Points"
 msgstr "Héber punktálás"
 
-#: ../src/main/parallel_view.cc:436 ../ui/xi-menus.glade.h:79
-#: ../ui/xi-menus-popup.gtkbuilder.h:55
+#: ../src/main/parallel_view.cc:394 ../ui/xi-menus.glade.h:80
+#: ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Hebrew Cantillation"
 msgstr "Héber recitáció"
 
-#: ../src/main/parallel_view.cc:445 ../ui/xi-menus.glade.h:77
-#: ../ui/xi-menus-popup.gtkbuilder.h:53
+#: ../src/main/parallel_view.cc:403 ../ui/xi-menus.glade.h:78
+#: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Greek Accents"
 msgstr "Görög ékezetek"
 
-#: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:74
-#: ../ui/xi-menus-popup.gtkbuilder.h:51
+#: ../src/main/parallel_view.cc:412 ../ui/xi-menus.glade.h:75
+#: ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Cross-references"
 msgstr "Utalások"
 
-#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:71
-#: ../ui/xi-menus-popup.gtkbuilder.h:48
+#: ../src/main/parallel_view.cc:421 ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Lemmas"
 msgstr "Segédletek"
 
-#: ../src/main/parallel_view.cc:472 ../ui/xi-menus.glade.h:68
+#: ../src/main/parallel_view.cc:430 ../ui/xi-menus.glade.h:68
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Headings"
 msgstr "Fejlécek"
 
-#: ../src/main/parallel_view.cc:481 ../src/main/parallel_view.cc:574
-#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:64
+#: ../src/main/parallel_view.cc:440 ../ui/xi-menus.glade.h:69
+#: ../ui/xi-menus-popup.gtkbuilder.h:46
+#, fuzzy
+msgid "Italic Headings"
+msgstr "Fejlécek"
+
+#: ../src/main/parallel_view.cc:450 ../src/main/parallel_view.cc:539
+#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Morpheme Segmentation"
 msgstr "Morféma részekre osztása"
 
-#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:69
-#: ../ui/xi-menus-popup.gtkbuilder.h:46
+#: ../src/main/parallel_view.cc:459 ../ui/xi-menus.glade.h:70
+#: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Words of Christ in Red"
 msgstr "Jézus szavai pirossal"
 
-#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:80
-#: ../ui/xi-menus-popup.gtkbuilder.h:56
+#: ../src/main/parallel_view.cc:468 ../ui/xi-menus.glade.h:81
+#: ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Transliteration"
 msgstr "Átirat"
 
-#: ../src/main/parallel_view.cc:512
+#: ../src/main/parallel_view.cc:477
 msgid "Textual Variants"
 msgstr "Szövegvariánsok"
 
-#: ../src/main/parallel_view.cc:520 ../ui/xi-menus.glade.h:82
-#: ../ui/xi-menus-popup.gtkbuilder.h:58
+#: ../src/main/parallel_view.cc:485 ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "Primary Reading"
 msgstr "Elsődleges olvasat"
 
-#: ../src/main/parallel_view.cc:529 ../ui/xi-menus.glade.h:83
-#: ../ui/xi-menus-popup.gtkbuilder.h:59
+#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "Secondary Reading"
 msgstr "Másodlagos olvasat"
 
-#: ../src/main/parallel_view.cc:538 ../ui/xi-menus.glade.h:84
-#: ../ui/xi-menus-popup.gtkbuilder.h:60
+#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:85
+#: ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "All Readings"
 msgstr "Az összes olvasat"
 
-#: ../src/main/parallel_view.cc:547 ../ui/xi-menus.glade.h:85
-#: ../ui/xi-menus-popup.gtkbuilder.h:61
+#: ../src/main/parallel_view.cc:512 ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus-popup.gtkbuilder.h:62
 #, fuzzy
 msgid "Transliterated Forms"
 msgstr "Átirat"
 
-#: ../src/main/parallel_view.cc:556 ../ui/xi-menus.glade.h:86
-#: ../ui/xi-menus-popup.gtkbuilder.h:62
+#: ../src/main/parallel_view.cc:521 ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus-popup.gtkbuilder.h:63
 msgid "Enumerations"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:565 ../ui/xi-menus.glade.h:87
-#: ../ui/xi-menus-popup.gtkbuilder.h:63
+#: ../src/main/parallel_view.cc:530 ../ui/xi-menus.glade.h:88
+#: ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Glosses"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:758
+#: ../src/main/parallel_view.cc:727
 msgid "view context"
 msgstr "tartalom megjelenítése"
+
+#: ../src/main/parallel_view.cc:964
+msgid "Failed to find 1st parallel module for display control."
+msgstr ""
 
 #: ../src/main/prayerlists.cc:112
 msgid "Growth"
@@ -2327,45 +2331,41 @@ msgstr ""
 msgid "BookChapter"
 msgstr "Fejezet"
 
-#: ../src/main/previewer.cc:193
+#: ../src/main/previewer.cc:154
 msgid "User Annotation"
 msgstr "Felhasználói jegyzetek"
 
-#: ../src/main/search_dialog.cc:104
+#: ../src/main/search_dialog.cc:118 ../ui/search-dialog.glade.h:39
+#: ../ui/search-dialog.gtkbuilder.h:39
 #, fuzzy
 msgid "Multi-word"
 msgstr "Több szavas"
 
-#: ../src/main/search_dialog.cc:106
-#, fuzzy
-msgid "Optimized (\"lucene\")"
-msgstr "Optimizált (\"Lucene\")"
-
-#: ../src/main/search_dialog.cc:107
+#: ../src/main/search_dialog.cc:121
 #, fuzzy
 msgid "Attribute"
 msgstr "Attribútumok"
 
-#: ../src/main/search_dialog.cc:208
+#: ../src/main/search_dialog.cc:222
 #, c-format
 msgid "Search result %s: %s"
 msgstr "A %s keresés eredménye: %s"
 
-#: ../src/main/search_dialog.cc:424
+#: ../src/main/search_dialog.cc:438
 msgid "Delete Range?"
 msgstr "Tartomány törlése?"
 
-#: ../src/main/search_dialog.cc:425
+#: ../src/main/search_dialog.cc:439
 msgid "Are you sure you want to delete this range?"
 msgstr "Biztosan töröli ezt a tartományt?"
 
-#: ../src/main/search_dialog.cc:638 ../src/main/search_dialog.cc:1043
-#: ../src/main/search_dialog.cc:1046 ../src/main/search_dialog.cc:1066
-#: ../src/main/search_dialog.cc:1069
+#: ../src/main/search_dialog.cc:652 ../src/main/search_dialog.cc:1069
+#: ../src/main/search_dialog.cc:1072 ../src/main/search_dialog.cc:1092
+#: ../src/main/search_dialog.cc:1095
 msgid "Search: "
 msgstr "Keresés: "
 
-#: ../src/main/search_dialog.cc:1404
+#: ../src/main/search_dialog.cc:1436
 #, c-format
 msgid ""
 "%s:\n"
@@ -2376,16 +2376,16 @@ msgstr ""
 "Nincs ilyen modul telepítve.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1406
+#: ../src/main/search_dialog.cc:1438
 msgid "Please adjust the module list."
 msgstr "Kérem állítsa be a modul-listát."
 
-#: ../src/main/search_dialog.cc:1422
+#: ../src/main/search_dialog.cc:1454
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Ehhez nem létezik gyors kereső-index: %s.%s%s"
 
-#: ../src/main/search_dialog.cc:1424
+#: ../src/main/search_dialog.cc:1456
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -2393,7 +2393,7 @@ msgstr ""
 "\n"
 "Keresés módja ezen a modulon most már 'több szavas'."
 
-#: ../src/main/search_dialog.cc:1425
+#: ../src/main/search_dialog.cc:1457
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -2401,7 +2401,7 @@ msgstr ""
 "\n"
 "Lásd modulkezelő, karbantartó panel."
 
-#: ../src/main/search_dialog.cc:1486
+#: ../src/main/search_dialog.cc:1518
 msgid "Search finished"
 msgstr "Keresés befejezve"
 
@@ -2413,23 +2413,23 @@ msgstr "találatok"
 msgid "There is no commentary module."
 msgstr ""
 
-#: ../src/main/settings.c:106
+#: ../src/main/settings.c:108
 msgid "$HOME is not set!"
 msgstr "$HOME nincs megadva!"
 
-#: ../src/main/settings.c:120
+#: ../src/main/settings.c:145
 #, fuzzy, c-format
 msgid "Xiphos can not create directory "
 msgstr ""
 "Xiphos nem tudja létrehozni a modul elérési útvonalát:\n"
 "%s"
 
-#: ../src/main/settings.c:134 ../src/main/settings.c:144
-#: ../src/main/settings.c:155
+#: ../src/main/settings.c:159 ../src/main/settings.c:169
+#: ../src/main/settings.c:179
 msgid "can not create "
 msgstr "nem tudja létrehozni "
 
-#: ../src/main/settings.c:187
+#: ../src/main/settings.c:211
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
@@ -2437,12 +2437,12 @@ msgstr ""
 "A beállítások fájl üres -- az alkalmazás megkísérli a visszaállítást.\n"
 "Számos adat elveszhetett."
 
-#: ../src/main/settings.c:190
+#: ../src/main/settings.c:214
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 "A beállítások fájl üres -- nincs biztonsági másolat?!? Ez bizony adatvesztés!"
 
-#: ../src/main/settings.c:217
+#: ../src/main/settings.c:241
 #, fuzzy
 msgid ""
 "There are no Bibles installed.\n"
@@ -2459,7 +2459,7 @@ msgstr ""
 "Xiphos nem futtatható,\n"
 "ezért az alkalmazás leáll."
 
-#: ../src/main/settings.c:223
+#: ../src/main/settings.c:247
 msgid "Bible module installation complete."
 msgstr "Bibliai modul telepítése befejeződött."
 
@@ -2477,7 +2477,7 @@ msgstr "vers"
 msgid "chapter"
 msgstr "fejezet"
 
-#: ../src/main/sword.cc:658
+#: ../src/main/sword.cc:634
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -2485,7 +2485,7 @@ msgstr ""
 "Xiphos nyelvi rövidítéseket\n"
 "tartalmazó fájlja nem található."
 
-#: ../src/main/sword.cc:664
+#: ../src/main/sword.cc:640
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -2493,7 +2493,7 @@ msgstr ""
 "Xiphos nem tudja megnyitni\n"
 "a nyelvi rövidítéseket tartalmazó fájlt."
 
-#: ../src/main/sword.cc:676
+#: ../src/main/sword.cc:652
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -2501,7 +2501,7 @@ msgstr ""
 "Xiphos nem tud helyet foglalni\n"
 "a nyelvi rövidítéseknek."
 
-#: ../src/main/sword.cc:682
+#: ../src/main/sword.cc:658
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -2510,19 +2510,19 @@ msgstr ""
 "tartalmazó fájlt."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:762
+#: ../src/main/sword.cc:738
 #, fuzzy, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr "A keresett nyelvterület nem található"
 
-#: ../src/main/sword.cc:764
+#: ../src/main/sword.cc:740
 #, fuzzy
 msgid "Book names and menus may not be translated."
 msgstr "Könyvnevek és menük valószínüleg nincsenek lefordítva"
 
-#: ../src/main/sword.cc:1119 ../src/main/sword.cc:1290
+#: ../src/main/sword.cc:1095 ../src/main/sword.cc:1273
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2530,7 +2530,7 @@ msgid ""
 "Would you like to open these as well?%s"
 msgstr ""
 
-#: ../src/main/sword.cc:1123 ../src/main/sword.cc:1294
+#: ../src/main/sword.cc:1099 ../src/main/sword.cc:1277
 msgid ""
 "\n"
 "\n"
@@ -2538,11 +2538,11 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1421
+#: ../src/main/sword.cc:1404
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Napi áhítat megnyitása sikertelen, mivel egy sincs telepítve."
 
-#: ../src/main/sword.cc:1675
+#: ../src/main/sword.cc:1623
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2594,7 +2594,7 @@ msgstr "Megjenítő hiba:\n"
 msgid "Show %s in main window"
 msgstr "%s megjelenítése a főablakban"
 
-#: ../src/main/xml.c:87 ../src/main/xml.c:468 ../src/main/xml.c:599
+#: ../src/main/xml.c:87 ../src/main/xml.c:443 ../src/main/xml.c:574
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Dokumentum létrehozása nem volt sikeres. \n"
@@ -2623,38 +2623,38 @@ msgstr "Mi az Evangélium?"
 msgid "1 Cor 15:1-4"
 msgstr "1 Korintus 15:1-4"
 
-#: ../src/main/xml.c:263 ../src/main/xml.c:409 ../src/main/xml.c:1506
+#: ../src/main/xml.c:238 ../src/main/xml.c:384 ../src/main/xml.c:1504
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Dokumentum feldolgozása sikertelen! \n"
 
-#: ../src/main/xml.c:269 ../src/main/xml.c:415 ../src/main/xml.c:435
-#: ../src/main/xml.c:1063 ../src/main/xml.c:1393 ../src/main/xml.c:1589
+#: ../src/main/xml.c:244 ../src/main/xml.c:390 ../src/main/xml.c:410
+#: ../src/main/xml.c:1061 ../src/main/xml.c:1391 ../src/main/xml.c:1587
 #, c-format
 msgid "empty document \n"
 msgstr "üres dokumentum \n"
 
-#: ../src/main/xml.c:275
+#: ../src/main/xml.c:250
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "wrong type, root node != SwordBookmarks\n"
 
-#: ../src/main/xml.c:421
+#: ../src/main/xml.c:396
 #, fuzzy, c-format
 msgid "wrong type, root node != Copy_Export\n"
 msgstr "wrong type, root node != %s\n"
 
-#: ../src/main/xml.c:498
+#: ../src/main/xml.c:473
 #, c-format
 msgid "%s<center>%s<br>Chapter %d</center><br>"
 msgstr ""
 
-#: ../src/main/xml.c:502
+#: ../src/main/xml.c:477
 #, c-format
 msgid "<br><center>Chapter %d</center><br>"
 msgstr ""
 
-#: ../src/main/xml.c:505
+#: ../src/main/xml.c:480
 #, fuzzy, c-format
 msgid ""
 "%s\n"
@@ -2663,7 +2663,7 @@ msgid ""
 "\n"
 msgstr "Fejezet"
 
-#: ../src/main/xml.c:508
+#: ../src/main/xml.c:483
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -2672,94 +2672,94 @@ msgid ""
 "\n"
 msgstr "Fejezet"
 
-#: ../src/main/xml.c:517
+#: ../src/main/xml.c:492
 #, c-format
 msgid "%s%s: %s Chapter %d<br><br>"
 msgstr ""
 
-#: ../src/main/xml.c:520
+#: ../src/main/xml.c:495
 #, c-format
 msgid ""
 "%s: %s Chapter %d\n"
 "\n"
 msgstr ""
 
-#: ../src/main/xml.c:528
+#: ../src/main/xml.c:503
 #, c-format
 msgid "&nbsp;&nbsp;[%d]"
 msgstr ""
 
-#: ../src/main/xml.c:531
+#: ../src/main/xml.c:506
 #, c-format
 msgid " [%d]"
 msgstr ""
 
-#: ../src/main/xml.c:540
+#: ../src/main/xml.c:515
 #, c-format
 msgid "%s%s (%s %d:%d%s)</body></html>"
 msgstr ""
 
-#: ../src/main/xml.c:543
+#: ../src/main/xml.c:518
 #, c-format
 msgid "%s(%s %d:%d%s)%s </body></html>"
 msgstr ""
 
-#: ../src/main/xml.c:545
+#: ../src/main/xml.c:520
 #, c-format
 msgid "%s (%s %d:%d%s)"
 msgstr ""
 
-#: ../src/main/xml.c:548
+#: ../src/main/xml.c:523
 #, c-format
 msgid "(%s %d:%d%s) %s"
 msgstr ""
 
-#: ../src/main/xml.c:556
+#: ../src/main/xml.c:531
 #, c-format
 msgid " %s%s"
 msgstr ""
 
-#: ../src/main/xml.c:558 ../src/main/xml.c:562
+#: ../src/main/xml.c:533 ../src/main/xml.c:537
 #, c-format
 msgid "%s(%s %d:%d-%d%s)"
 msgstr ""
 
-#: ../src/main/xml.c:560
+#: ../src/main/xml.c:535
 #, c-format
 msgid "(%s %d:%d-%d%s)<br>"
 msgstr ""
 
-#: ../src/main/xml.c:565
+#: ../src/main/xml.c:540
 #, c-format
 msgid "(%s %d:%d-%d%s)\n"
 msgstr ""
 
-#: ../src/main/xml.c:614
+#: ../src/main/xml.c:589
 msgid "Old Testament"
 msgstr "Ószövetség"
 
-#: ../src/main/xml.c:616
+#: ../src/main/xml.c:591
 msgid "Gen - Mal"
 msgstr "Gen - Mal"
 
-#: ../src/main/xml.c:622
+#: ../src/main/xml.c:597
 msgid "New Testament"
 msgstr "Újszövetség"
 
-#: ../src/main/xml.c:624
+#: ../src/main/xml.c:599
 msgid "Mat - Rev"
 msgstr "Mt - Jel"
 
-#: ../src/main/xml.c:633
+#: ../src/main/xml.c:608
 msgid "Sample Module List"
 msgstr "Minta modul lista"
 
-#: ../src/main/xml.c:1069 ../src/main/xml.c:1399
+#: ../src/main/xml.c:1067 ../src/main/xml.c:1397
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "wrong type, root node != %s\n"
 
-#: ../src/main/xml.c:1551
+#: ../src/main/xml.c:1549
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
@@ -2768,7 +2768,7 @@ msgstr ""
 "Beállítások mentése nem sikerült! stat %d, size %d\n"
 "%s"
 
-#: ../src/main/xml.c:1553
+#: ../src/main/xml.c:1551
 msgid "Attempting to revert to previous save."
 msgstr "Az alkalmazás megkísérli a korábbi mentést visszaállítani."
 
@@ -2785,7 +2785,7 @@ msgid "Create new folder"
 msgstr "Új mappa létrehozása"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
-#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:5
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Új mappa"
 
@@ -2921,7 +2921,8 @@ msgid "Save the current file as"
 msgstr "Aktuális fájl mentése másként"
 
 #: ../ui/editor_studypad.xml.h:13
-msgid "Save AS"
+#, fuzzy
+msgid "Save As…"
 msgstr "Mentés másként"
 
 #: ../ui/editor_studypad.xml.h:14
@@ -2974,7 +2975,7 @@ msgid "Export complete book"
 msgstr "A teljes könyv exportálása"
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:11
-#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:153
 msgid "Book"
 msgstr "Könyv"
 
@@ -3007,6 +3008,7 @@ msgid "<b>Format</b>"
 msgstr "<b>Formátum</b>"
 
 #: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:22
+#: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain Text"
 msgstr "Egyszerű szöveg"
 
@@ -3089,8 +3091,8 @@ msgstr "_Tanulótömb megnyitása"
 msgid "Open about dialog"
 msgstr "Megnyitás dialógusablakban"
 
-#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:125
-#: ../ui/prefs.gtkbuilder.h:125
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:129
+#: ../ui/prefs.gtkbuilder.h:133
 msgid "Bold"
 msgstr ""
 
@@ -3139,7 +3141,7 @@ msgid "Remove selection"
 msgstr "Kiválasztott elem törlése"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
-#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:11
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
 msgstr "Elem törlése"
 
@@ -3398,14 +3400,9 @@ msgstr "Keresési kritérium"
 msgid "Save changes to file"
 msgstr "Változások dokumentumba mentése"
 
-#: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
-#, fuzzy
-msgid "Save as"
-msgstr "Mentés másként"
-
 #: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
 #, fuzzy
-msgid "Save file as ..."
+msgid "Save File As..."
 msgstr "Men_tés másként…"
 
 #: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
@@ -3767,6 +3764,7 @@ msgid "Toggle Chapter Button"
 msgstr "Toggle Chapter Button"
 
 #: ../ui/navbar_versekey.glade.h:7 ../ui/navbar_versekey.gtkbuilder.h:4
+#: ../ui/prefs.gtkbuilder.h:9
 msgid "1"
 msgstr "1"
 
@@ -3780,81 +3778,81 @@ msgid "Toggle Verse Button"
 msgstr "Toggle Verse Button"
 
 #: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
-msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgid "Enter a Verse reference in Book 1:1 (or 1.1) format and press Return"
 msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
 msgid "Reference Entry"
 msgstr "Reference Entry"
 
-#: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:10
+#: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:14
 msgid "Cover"
 msgstr "Borító"
 
-#: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:11
+#: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:15
 msgid "<b>Font Colors</b>"
 msgstr "<b>Betűszín</b>"
 
-#: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:12
+#: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:16
 msgid "Background"
 msgstr "Háttér"
 
-#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
+#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:17
 #, fuzzy
 msgid " "
 msgstr ": "
 
-#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
+#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:18
 msgid "Foreground"
 msgstr "Előtér"
 
-#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
+#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:19
 msgid "Current Verse"
 msgstr "Aktuális vers"
 
-#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
+#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:20
 msgid "Verse Number"
 msgstr "Vers számozás"
 
-#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
+#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:21
 msgid "Links"
 msgstr "Linkek"
 
-#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
+#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:22
 msgid "Highlight Foreground"
 msgstr "Kiemelés előtere"
 
-#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
+#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:23
 msgid "Highlight Background"
 msgstr "Kiemelés háttere"
 
-#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
+#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:24
 #, fuzzy
 msgid "Invert color pairs"
 msgstr "Könyvjelző beillesztése"
 
-#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
+#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:25
 msgid "Normal Text"
 msgstr ""
 
-#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
+#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:26
 #, fuzzy
 msgid "Highlight"
 msgstr "Kiemelés háttere"
 
-#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
+#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:27
 msgid "Font Colors"
 msgstr "Betűszín"
 
-#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
+#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:28
 msgid "<b>Font Sizes</b>"
 msgstr "<b>Betűméret</b>"
 
-#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
+#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:29
 msgid "All displayed font sizes are relative to this choice"
 msgstr ""
 
-#: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:26
+#: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:30
 msgid "Base font size"
 msgstr "Alap betűméret"
 
@@ -3878,38 +3876,56 @@ msgstr ""
 "+4\n"
 "+5"
 
-#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
+#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:31
 msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr ""
 
-#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
+#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:32
 msgid "Verse number size"
 msgstr "Vers számozás mérete"
 
-#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
+#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:33
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
 msgstr ""
 
-#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
+#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:34
 msgid "Font preferences, per language"
 msgstr "Nyelvenkénti betűtípus"
 
-#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
+#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:35
 msgid "Language Font Combo"
 msgstr "Language Font Combo"
 
-#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
+#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:36
+msgid ""
+"Number of columns in which to display text; can be set per module in font "
+"dialog"
+msgstr ""
+
+#: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:37
+msgid "Default display columns"
+msgstr ""
+
+#: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:38
+msgid "Justify margins"
+msgstr ""
+
+#: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:39
+msgid "When unset, leave a ragged margin."
+msgstr ""
+
+#: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:40
 msgid "Font Misc"
 msgstr "Betűkészlet egyéb"
 
-#: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
+#: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:41
 #, fuzzy
 msgid "<b>BibleSync</b>"
 msgstr "<b>Tartomány</b>"
 
-#: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:34
+#: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:42
 msgid ""
 "Xiphos is the first Bible study program to provide an implementation of "
 "BibleSync, a synchronization protocol for Bible programs. If you work with "
@@ -3921,575 +3937,577 @@ msgid ""
 "speaker's navigation."
 msgstr ""
 
-#: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:36
+#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:44
 #, fuzzy
 msgid "<i>Mode:</i>"
 msgstr "<b>Modulok</b>"
 
-#: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:35
+#: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:43
 msgid "Select the mode in which BibleSync should operate."
 msgstr ""
 
-#: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
+#: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:45
 msgid "_Off"
 msgstr ""
 
-#: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
+#: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:46
 msgid "Disable BibleSync."
 msgstr ""
 
-#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
+#: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:47
 #, fuzzy
 msgid "BSP off radio button"
 msgstr "Book Radio Button"
 
-#: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
+#: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:48
 msgid "_Speaker"
 msgstr ""
 
-#: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
+#: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:49
 msgid "Enable BibleSync as the speaker."
 msgstr ""
 
-#: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
+#: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:50
 #, fuzzy
 msgid "BSP speaker radio button"
 msgstr "Exact phrase radiobutton"
 
-#: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
+#: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:51
 msgid "_Audience"
 msgstr ""
 
-#: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
+#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:52
 msgid "Enable BibleSync as a member of the audience."
 msgstr ""
 
-#: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
+#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:53
 #, fuzzy
 msgid "BSP audience radio button"
 msgstr "Plain Text Radio Button"
 
-#: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
+#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:54
 #, fuzzy
 msgid "_Personal"
 msgstr "Személyes"
 
-#: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
+#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:55
 msgid "Enable BibleSync for personal or team use."
 msgstr ""
 
-#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
+#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:56
 #, fuzzy
 msgid "BSP personal radio button"
 msgstr "Regular expression radiobutton"
 
-#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
+#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:57
 msgid "Private"
 msgstr ""
 
-#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
+#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:58
 msgid ""
 "When in Personal mode, only programs running on this machine will hear your "
 "navigation."
 msgstr ""
 
-#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
+#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:59
 #, fuzzy
 msgid "BSP privacy button"
 msgstr "Verse Radio Button"
 
-#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:53
+#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:61
 #, fuzzy
 msgid "<i>Navigate:</i>"
 msgstr "Üdvösség"
 
-#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:52
+#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:60
 msgid "Choose how to accept incoming navigation synchronization."
 msgstr ""
 
-#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
+#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:62
 #, fuzzy
 msgid "_Direct"
 msgstr "Könyvtár"
 
-#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
+#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:63
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
 msgstr ""
 
-#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:64
 #, fuzzy
 msgid "BSP nav direct radio button"
 msgstr "Single module radiobutton"
 
-#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:65
 #, fuzzy
 msgid "_Verse list"
 msgstr "Vers lista"
 
-#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:66
 msgid "BibleSync navigation will use Xiphos' sidebar verse list."
 msgstr ""
 
-#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:67
 #, fuzzy
 msgid "BSP nav verse list radio button"
 msgstr "Module list radiobutton"
 
-#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:68
 msgid "_Keyboard only"
 msgstr ""
 
-#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:69
 msgid ""
 "When checked, do not transmit every time Xiphos navigates; instead, transmit "
 "only using keyboard shortcut (Ctrl-Shift-Alt-N)."
 msgstr ""
 
-#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:70
 #, fuzzy
 msgid "BSP keyboard button"
 msgstr "Regular expression radiobutton"
 
-#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:64
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:72
 #, fuzzy
 msgid "<i>Listen:</i>"
 msgstr "<b>Lista neve</b>"
 
-#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:63
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:71
 msgid "Xiphos will listen to Speakers according to choice here."
 msgstr ""
 
-#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:73
 msgid "Selective"
 msgstr ""
 
-#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:74
 msgid "Choose the Speakers to be followed."
 msgstr ""
 
-#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:75
 #, fuzzy
 msgid "BSP listen some radio button"
 msgstr "Plain Text Radio Button"
 
-#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:76
 msgid "All"
 msgstr ""
 
-#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:77
 msgid "All Speakers will be followed."
 msgstr ""
 
-#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:78
 #, fuzzy
 msgid "BSP listen all radio button"
 msgstr "Regular expression radiobutton"
 
-#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:79
 msgid "None"
 msgstr ""
 
-#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
+#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:80
 msgid "No Speakers will be followed."
 msgstr ""
 
-#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:81
 #, fuzzy
 msgid "BSP listen none radio button"
 msgstr "Plain Text Radio Button"
 
-#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:75
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:83
 #, fuzzy
 msgid "<i>Special:</i>"
 msgstr "Speciális"
 
-#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:74
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:82
 msgid ""
 "Additional traces can be presented during BibleSync operation by enabling "
 "presence, mismatch, and debug. Beware enabling these, they can be very "
 "chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
 msgstr ""
 
-#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:84
 #, fuzzy
 msgid "Presence"
 msgstr "Beállítások"
 
-#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:85
 msgid "Presence announcements will be shown in dialogs."
 msgstr ""
 
-#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:86
 #, fuzzy
 msgid "BSP presence button"
 msgstr "Verse Radio Button"
 
-#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:87
 #, fuzzy
 msgid "Mismatch"
 msgstr "találatok"
 
-#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:88
 msgid "Mismatches from your session will be shown in dialogs."
 msgstr ""
 
-#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
+#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:89
 msgid "BSP mismatch button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:90
 msgid "Debug"
 msgstr ""
 
-#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:91
 msgid "Packet tracing."
 msgstr ""
 
-#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
+#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:92
 msgid "BSP event debug button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:85
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:93
 msgid "_Group as tab"
 msgstr ""
 
-#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:94
 msgid ""
 "Interpret the protocol's group number parameter as Xiphos' tab number. "
 "Disabling this may be necessary if some Speakers' use of group number is not "
 "appropriate as a tab number."
 msgstr ""
 
-#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:95
 #, fuzzy
 msgid "BSP event group-as-tab button"
 msgstr "Single module radiobutton"
 
-#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:97
 msgid "<b>General</b>"
 msgstr "<b>Általános beállítások</b>"
 
-#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:98
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr ""
 
-#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
-msgid "Special Locale (requires restart)"
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:99
+#, fuzzy
+msgid "Locale (requires restart)"
 msgstr "Speciális nyelvterület (újraindítást igényel)"
 
-#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
-msgid "Special Locale Combo"
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:100
+#, fuzzy
+msgid "Locale Combo"
 msgstr "Special Locale Combo"
 
-#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:101
 msgid "Show splash screen at start up"
 msgstr "Indítóképernyő megjelenítése indításkor"
 
-#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:102
 msgid "Show Daily Devotion at start up"
 msgstr "Napi áhítat megjelenítése indításkor"
 
-#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:103
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
 msgstr ""
 
-#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:104
 msgid "Use default Dictionary"
 msgstr "Alap szótár használata"
 
-#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:105
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
 msgstr ""
 
-#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:106
 msgid "Use default Dictionary Checkbox"
 msgstr "Use default Dictionary Checkbox"
 
-#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:107
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Görgetés a következő/előző fejezethez"
 
-#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:108
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 "Használja a bibliai szöveg görgetősávját, hogy a szöveget az előző vagy a "
 "következő fejezethez görgesse"
 
-#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:109
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Scroll to Previous/Next Chapter Checkbox"
 
-#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:110
 msgid "Resize images"
 msgstr "Kép átméretezése"
 
-#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:111
 msgid "Automatically resize image content to fit the pane"
 msgstr "Képi tartalom autómatikus átméretezése, hogy illeszkedjen az ablakba"
 
-#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:112
 msgid "Resize images checkbox"
 msgstr "Resize images checkbox"
 
-#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:113
 msgid "Highlight current verse"
 msgstr "Aktuális vers kiemelése"
 
-#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:114
 #, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr "Nagy kontrasztú kiemelés alkalmazása az aktuális versre"
 
-#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:115
 msgid "Highlight current verse check box"
 msgstr "Highlight current verse check box"
 
-#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:116
 msgid "Highlight user annotations"
 msgstr "Felhasználói jegyzet kiemelése"
 
-#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:117
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "Invertált kiemelés használata a felhasználó által megjelült versekhez"
 
-#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:118
 msgid "Highlight user annotations check box"
 msgstr "Highlight user annotations check box"
 
-#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:119
 #, fuzzy
 msgid "Cross-references in verse list"
 msgstr "Utalások"
 
-#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:120
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 
-#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:121
 #, fuzzy
 msgid "Xrefs in verse list check box"
 msgstr "Resize images checkbox"
 
-#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
+#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:122
 msgid "Enable Prayer Lists"
 msgstr "Imalista engedélyezése"
 
-#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:123
 msgid "Make journals/prayer lists available"
 msgstr ""
 
-#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:124
 msgid "Enable Prayer Lists Checkbox"
 msgstr "Enable Prayer Lists Checkbox"
 
-#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:125
 msgid "Enable Statusbar"
 msgstr ""
 
-#: ../ui/prefs.glade.h:118
+#: ../ui/prefs.glade.h:122
 msgid "Enable/Disable Statusbar."
 msgstr ""
 
-#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
+#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:127
 #, fuzzy
 msgid "Enable Statusbar Checkbox"
 msgstr "Enable Prayer Lists Checkbox"
 
-#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
+#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:128
 msgid "Parallel color alternation"
 msgstr ""
 
-#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
+#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:129
 msgid "Parallel window can use alternating foreground/background."
 msgstr ""
 
-#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:130
 #, fuzzy
 msgid "Enable Parallel Alternation Checkbox"
 msgstr "Enable Prayer Lists Checkbox"
 
-#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:124
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:132
 #, fuzzy
 msgid "Verse number"
 msgstr "Vers számozás"
 
-#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:123
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:131
 msgid "Offset the verse number in several ways"
 msgstr ""
 
-#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:134
 #, fuzzy
 msgid "Show verse number in bold text"
 msgstr "Versszámozás megjelenítése"
 
-#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:135
 #, fuzzy
 msgid "Verse number bold checkbox"
 msgstr "Vers számozás mérete"
 
-#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
+#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:136
 msgid "Brackets"
 msgstr ""
 
-#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:137
 msgid "Show verse number with [surrounding brackets]"
 msgstr ""
 
-#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:138
 #, fuzzy
 msgid "Verse number bracket checkbox"
 msgstr "Resize images checkbox"
 
-#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:139
 #, fuzzy
 msgid "Superscript"
 msgstr "Leírás"
 
-#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:140
 #, fuzzy
 msgid "Show verse number as a superscript"
 msgstr "Versszámozás megjelenítése"
 
-#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:141
 #, fuzzy
 msgid "Verse number superscript checkbox"
 msgstr "Vers számozás mérete"
 
-#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:142
 #, fuzzy
 msgid "StudyPad default directory"
 msgstr "StudyPad default directory combo"
 
-#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:143
 msgid "Select A Directory"
 msgstr "Könyvtár kiválasztása"
 
-#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
+#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:144
 msgid "StudyPad default directory combo"
 msgstr "StudyPad default directory combo"
 
-#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:145
 msgid "General Misc"
 msgstr "Általános egyéb"
 
-#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:146
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>Modulok főablak</b>"
 
-#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
+#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:147
 msgid "Biblical Text"
 msgstr "Bibliai szöveg"
 
-#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:148
 msgid "Change Biblical Text Combo"
 msgstr "Change Biblical Text Combo"
 
-#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:150
 msgid "Change Commentary Combo"
 msgstr "Change Commentary Combo"
 
-#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:152
 msgid "Change Dictionary Combo"
 msgstr "Change Dictionary Combo"
 
-#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:154
 msgid "Change Book Combo"
 msgstr "Change Book Combo"
 
-#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
+#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:155
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>Modulok</b>"
 
-#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
+#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:156
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "Az összes modul eltávolítása a listáról"
 
-#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
+#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:157
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "Clear Modules from List Button"
 
-#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
+#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:158
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "A kiválasztott modul eltávolítása a listából"
 
-#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
+#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:159
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "Delete Selected Module From List Button"
 
-#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
+#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:160
 msgid "Open a dialog to select modules"
 msgstr "Dialógus ablak megjelenítése a modulok kiválasztásához"
 
-#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
+#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:161
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "Modul hozzáadása"
 
-#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
+#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:162
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "Open Selection Dialog Button"
 
-#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
+#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:163
 msgid "Modules Parallel"
 msgstr "Modulok párhuzamos"
 
-#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
+#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:164
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>Különleges célú modulok</b>"
 
-#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
+#: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:165
 msgid "Daily Devotional"
 msgstr "Napi áhítat"
 
-#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
+#: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:166
 msgid "Daily Devotional Combo"
 msgstr "Daily Devotional Combo"
 
-#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
+#: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:167
 msgid "Hebrew Lexicon"
 msgstr "Héber lexikon"
 
-#: ../ui/prefs.glade.h:160 ../ui/prefs.gtkbuilder.h:160
+#: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:168
 msgid "Hebrew Lexicon Combo"
 msgstr "Hebrew Lexicon Combo"
 
-#: ../ui/prefs.glade.h:161 ../ui/prefs.gtkbuilder.h:161
+#: ../ui/prefs.glade.h:165 ../ui/prefs.gtkbuilder.h:169
 msgid "Greek Lexicon"
 msgstr "Görög lexikon"
 
-#: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:162
+#: ../ui/prefs.glade.h:166 ../ui/prefs.gtkbuilder.h:170
 msgid "Greek Lexicon Combo"
 msgstr "Greek Lexicon Combo"
 
-#: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:163
+#: ../ui/prefs.glade.h:167 ../ui/prefs.gtkbuilder.h:171
 msgid "Default Dictionary"
 msgstr "Alap szótár"
 
-#: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:164
+#: ../ui/prefs.glade.h:168 ../ui/prefs.gtkbuilder.h:172
 msgid "Change Default Dictionary Combo"
 msgstr "Change Default Dictionary Combo"
 
-#: ../ui/prefs.glade.h:165 ../ui/prefs.gtkbuilder.h:165
+#: ../ui/prefs.glade.h:169 ../ui/prefs.gtkbuilder.h:173
 msgid "Personal Notes"
 msgstr "Személyes jegyzetek"
 
-#: ../ui/prefs.glade.h:166 ../ui/prefs.gtkbuilder.h:166
+#: ../ui/prefs.glade.h:170 ../ui/prefs.gtkbuilder.h:174
 msgid "Change Personal Notes Combo"
 msgstr "Change Personal Notes Combo"
 
-#: ../ui/prefs.glade.h:167 ../ui/prefs.gtkbuilder.h:167
+#: ../ui/prefs.glade.h:171 ../ui/prefs.gtkbuilder.h:175
 msgid "Modules Misc"
 msgstr "Modulok egyéb"
 
@@ -4523,7 +4541,19 @@ msgstr ""
 msgid "+5"
 msgstr ""
 
-#: ../ui/prefs.gtkbuilder.h:118
+#: ../ui/prefs.gtkbuilder.h:10
+msgid "2"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:11
+msgid "3"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:12
+msgid "4"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:126
 msgid "Enable/disable the Statusbar"
 msgstr ""
 
@@ -4555,8 +4585,8 @@ msgid "Open a brief explanation of attribute-based searches."
 msgstr "A modulkezelő működéséről szóló rövid bevezető magyarázat megnyitása."
 
 #: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
-msgid "for "
-msgstr "amit keres: "
+msgid "For: "
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
 msgid "Main Search Entry"
@@ -4676,12 +4706,9 @@ msgstr ""
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "Optimized (\"Lucene\") radiobutton"
 
-#: ../ui/search-dialog.glade.h:39 ../ui/search-dialog.gtkbuilder.h:39
-msgid "Multi word"
-msgstr "Több szavas"
-
 #: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
-msgid "Multi word radiobutton"
+#, fuzzy
+msgid "Multi-word radiobutton"
 msgstr "Multi word radiobutton"
 
 #: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
@@ -4964,10 +4991,6 @@ msgstr "Xiphos könyvjelzők"
 msgid "Html"
 msgstr "Html"
 
-#: ../ui/xi-export-bookmarks.glade.h:5
-msgid "Plain text"
-msgstr "Egyszerű szöveg"
-
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Include Bible text"
 msgstr "Bibliai szöveggel"
@@ -5210,205 +5233,205 @@ msgstr "Megnyitás szövefszerkesztőben"
 msgid "Verse Per Line"
 msgstr "Versek soronként"
 
-#: ../ui/xi-menus.glade.h:75 ../ui/xi-menus-popup.gtkbuilder.h:52
+#: ../ui/xi-menus.glade.h:76 ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Footnote/Cross-ref Markers"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:76
+#: ../ui/xi-menus.glade.h:77
 msgid "Show non-anonymous markers e.g. \"*n23\""
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:81 ../ui/xi-menus-popup.gtkbuilder.h:57
+#: ../ui/xi-menus.glade.h:82 ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Variants"
 msgstr "Variánsok"
 
-#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
+#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Image Content"
 msgstr "Kép tartalom"
 
-#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:66
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Respect Font Faces"
 msgstr "Betűkészlet figyelembe vétele"
 
-#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:67
+#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:68
 msgid "Commentary by Chapter"
 msgstr "Fejezetenkénti kommentár"
 
-#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:68
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Doublespace"
 msgstr "Kétszeres sorköz"
 
-#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Lookup Selection"
 msgstr "Kiválasztás keresése"
 
-#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Use Current Dictionary"
 msgstr "Aktuális szótár kasználata"
 
-#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
+#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Browse in BibleMap.org"
 msgstr "BibleMap.org böngészése"
 
-#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Unlock This Module"
 msgstr "Modul feloldása"
 
-#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Display Book Heading"
 msgstr "Könyv fejlécének megjelenítése"
 
-#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Display Chapter Heading"
 msgstr "Fejezet fejlécének megjelenítése"
 
-#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Rename Pers.Comm."
 msgstr "Személyes megjegyzés átnevezése"
 
-#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:76
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Dump Pers.Comm."
 msgstr "Személyes megjegyzések kiiratása"
 
-#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:77
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Read Selection Aloud"
 msgstr "Kiválasztás hangos felolvasása"
 
-#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:93
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid "Save these results as a single bookmark"
 msgstr "Ezen eredmények elmentése könyvjelzőként"
 
-#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:92
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Save list as a single bookmark"
 msgstr "Lista elmentése könyvjelzőként"
 
-#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:95
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:95
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr "Ezen eredmények elmentése könyvjelzőkként a mappájukba"
 
-#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:94
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:94
 msgid "Save list as a series of bookmarks"
 msgstr "Lista elmentése könyvjelzőkként"
 
-#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:97
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:97
 msgid ""
 "Provide a dialog in which to paste a line of verse references, to fill the "
 "verse list."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:96
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:96
 #, fuzzy
 msgid "Populate verse list"
 msgstr "Vers lista"
 
-#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:99
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:99
 msgid "Push the entire verse list contents directly into the history list."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:98
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:98
 #, fuzzy
 msgid "Preload history from verse list"
 msgstr "Felugró esemény-lista"
 
-#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:101
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:101
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:100
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:100
 msgid "Send list via BibleSync"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:102
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:102
 msgid "Export List"
 msgstr "Lista exportálása"
 
-#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:2
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "Könyvjelző megjelenítése új lapon"
 
-#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "Megjelenítés új lapon"
 
-#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "Könyvjelző megnyitása új dialógus ablakban"
 
-#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:3
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "Megnyitás dialógusablakban"
 
-#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:6
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "Új mappa hozzáadása a kijelölt mappához"
 
-#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "Új könyvjelző beszúrása ide"
 
-#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:7
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Könyvjelző beillesztése"
 
-#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:10
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "Könyvjelzői elem szerkesztése"
 
-#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:9
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "_Elem szerkesztése"
 
-#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:12
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Elem törlése"
 
-#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:14
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "Az összes könyvjelző-csoport kibontása"
 
-#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:13
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Mindent kibont"
 
-#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:16
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "Minden könyvjelző-csoport összezárása"
 
-#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:15
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Mindent összezár"
 
-#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:17
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "Elemek egyik mappából a másik mappába mozgatásának engedélyezése"
 
-#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:18
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "Átrendezés engedélyezése"
 
-#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:20
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Más könyvjelző fájl betöltése (alap beállítás.: BibleTime programból)"
 
-#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:19
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:19
 msgid "Import Bookmarks"
 msgstr "Könyvjelzők importálása"
 
-#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:22
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr "Mappa eltávolítása és mentése"
 
-#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:21
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr "Mappa exportálása"
 
-#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open selected module in a new tab"
 msgstr "Kiválasztott modul megnyitása új lapon"
 
-#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:33
+#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:33
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
@@ -5416,68 +5439,63 @@ msgstr ""
 "Kiválasztott modul megjelenítése\n"
 "\tkülön ['dialog'] ablakban"
 
-#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:32
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid "Open in a separate window"
 msgstr "Megnyitás külön ablakban"
 
-#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:79
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Create a new simple prayer list"
 msgstr "Egy új egyszerű imalista létrehozása"
 
-#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:78
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Simple"
 msgstr "Egyszerű"
 
-#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:81
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Create a new subject prayer list"
 msgstr "Egy új téma alapú imalista létrehozása"
 
-#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:80
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Subject"
 msgstr "Tárgy"
 
-#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:83
+#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Create a new monthly journal"
 msgstr "Havi napló létrehozása"
 
-#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:82
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Monthly"
 msgstr "Havi"
 
-#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:85
+#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Create a new daily journal"
 msgstr "Napi napló létrehozása"
 
-#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:84
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Daily"
 msgstr "napi"
 
-#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:87
+#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Create a new outlined topic"
 msgstr "Egy új vázlatos téma létrehozása"
 
-#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:86
+#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Outlined"
 msgstr "Vázlatos"
 
-#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:89
+#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:90
 #, fuzzy
 msgid "Create a new book/chapter outline"
 msgstr "Egy új vázlatos téma létrehozása"
 
-#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:88
+#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:89
 #, fuzzy
 msgid "Book/Chapter"
 msgstr "Fejezet"
 
-#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:91
+#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Open module in editor or plain display window"
 msgstr ""
-
-#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:90
-#, fuzzy
-msgid "Open in separate window"
-msgstr "Megnyitás külön ablakban"
 
 #: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add a sub-item"
@@ -5503,17 +5521,45 @@ msgstr "Elem eltávolítása"
 msgid "Edit this item"
 msgstr "Elem szerkesztése"
 
-#: ../xiphos.desktop.in.in.h:1
-msgid "Xiphos Bible Guide"
-msgstr "Xiphos bibliaútmutató"
+#, c-format
+#~ msgid "Page %d of %d"
+#~ msgstr "%d/%d oldal"
 
-#: ../xiphos.desktop.in.in.h:2
-msgid "Study the Bible"
-msgstr "A Biblia tanulmányozása"
+#~ msgid "Journals and prayer lists cannot be indexed."
+#~ msgstr "Naplót és imalistát nem lehet indexelni."
 
-#: ../xiphos.desktop.in.in.h:3
-msgid "Text;Bible;Study;"
-msgstr ""
+#~ msgid "The last module list may not be deleted"
+#~ msgstr "Az utolsó modul-lista nem törölhető"
+
+#, fuzzy
+#~ msgid "Optimized (\"lucene\")"
+#~ msgstr "Optimizált (\"Lucene\")"
+
+#~ msgid "Save AS"
+#~ msgstr "Mentés másként"
+
+#, fuzzy
+#~ msgid "Save as"
+#~ msgstr "Mentés másként"
+
+#~ msgid "for "
+#~ msgstr "amit keres: "
+
+#~ msgid "Multi word"
+#~ msgstr "Több szavas"
+
+#~ msgid "Plain text"
+#~ msgstr "Egyszerű szöveg"
+
+#, fuzzy
+#~ msgid "Open in separate window"
+#~ msgstr "Megnyitás külön ablakban"
+
+#~ msgid "Xiphos Bible Guide"
+#~ msgstr "Xiphos bibliaútmutató"
+
+#~ msgid "Study the Bible"
+#~ msgstr "A Biblia tanulmányozása"
 
 #~ msgid "_Attach/Detach Sidebar"
 #~ msgstr "_Oldalpanel le/felcsatolása"

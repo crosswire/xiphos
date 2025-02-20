@@ -276,6 +276,12 @@
 	  <p><keyseq><key>Alt</key><key>Z</key></keyseq></p>
 	</td>
       </tr>
+      <tr>
+	<td><p>Toggle visibility of the side panel.</p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>S</key></keyseq></p>
+	</td>
+      </tr>
     </tbody>
   </table>
 

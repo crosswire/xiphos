@@ -51,7 +51,7 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "Configuration non trouvée"
 
-#: ../src/editor/slib-editor.c:198 ../src/editor/webkit_editor.c:605
+#: ../src/editor/slib-editor.c:198 ../src/editor/webkit_editor.c:625
 #: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
 #: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
@@ -76,7 +76,7 @@ msgid "Save As"
 msgstr "Enregistrer sous"
 
 #: ../src/editor/slib-editor.c:262 ../src/editor/slib-editor.c:421
-#: ../src/editor/webkit_editor.c:688
+#: ../src/editor/webkit_editor.c:708
 msgid "Untitled document"
 msgstr "Sans titre"
 
@@ -84,7 +84,7 @@ msgstr "Sans titre"
 msgid "_Close"
 msgstr "_Fermer"
 
-#: ../src/editor/slib-editor.c:440 ../src/editor/webkit_editor.c:311
+#: ../src/editor/slib-editor.c:440 ../src/editor/webkit_editor.c:331
 msgid "Are you sure you want to delete the note for"
 msgstr "Êtes-vous certain de vouloir supprimer le commentaire de"
 
@@ -176,35 +176,35 @@ msgid "Insert Link"
 msgstr "Insérer un lien"
 
 #: ../src/editor/slib-editor.c:1031 ../src/editor/slib-editor.c:1072
-#: ../src/editor/webkit_editor.c:1173 ../src/editor/webkit_editor.c:1213
+#: ../src/editor/webkit_editor.c:1193 ../src/editor/webkit_editor.c:1233
 msgid "Save the changes to document"
 msgstr "Voulez-vous enregistrer les modifications apportées au document"
 
 #: ../src/editor/slib-editor.c:1032 ../src/editor/slib-editor.c:1073
-#: ../src/editor/webkit_editor.c:1174 ../src/editor/webkit_editor.c:1214
+#: ../src/editor/webkit_editor.c:1194 ../src/editor/webkit_editor.c:1234
 msgid "before closing?"
 msgstr "avant de fermer ?"
 
 #: ../src/editor/slib-editor.c:1037 ../src/editor/slib-editor.c:1078
-#: ../src/editor/webkit_editor.c:1178 ../src/editor/webkit_editor.c:1218
+#: ../src/editor/webkit_editor.c:1198 ../src/editor/webkit_editor.c:1238
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 "Si vous n’enregistrez pas, les modifications seront définitivement perdues."
 
-#: ../src/editor/slib-editor.c:1071 ../src/editor/webkit_editor.c:1212
+#: ../src/editor/slib-editor.c:1071 ../src/editor/webkit_editor.c:1232
 #: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Fichier"
 
-#: ../src/editor/slib-editor.c:1123 ../src/editor/webkit_editor.c:1255
+#: ../src/editor/slib-editor.c:1123 ../src/editor/webkit_editor.c:1275
 msgid "StudyPad"
 msgstr "Bloc-notes"
 
-#: ../src/editor/slib-editor.c:1138 ../src/editor/webkit_editor.c:1270
+#: ../src/editor/slib-editor.c:1138 ../src/editor/webkit_editor.c:1290
 msgid "Note Editor"
 msgstr "Éditeur de note"
 
-#: ../src/editor/slib-editor.c:1156 ../src/editor/webkit_editor.c:1287
+#: ../src/editor/slib-editor.c:1156 ../src/editor/webkit_editor.c:1307
 msgid "Prayer List/Journal Editor"
 msgstr "Éditeur de liste de prières ou de journal"
 
@@ -688,6 +688,7 @@ msgid "+0"
 msgstr "+0"
 
 #: ../src/gtk/font_dialog.c:397
+
 msgid "Display columns"
 msgstr "Afficher les colonnes"
 
@@ -2117,6 +2118,7 @@ msgstr "Titres"
 
 #: ../src/main/parallel_view.cc:440 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
+
 msgid "Italic Headings"
 msgstr "Titres en italique"
 
@@ -3919,6 +3921,7 @@ msgid ""
 "Number of columns in which to display text; can be set per module in font "
 "dialog"
 msgstr ""
+
 "Nombre de colonnes dans lesquelles afficher le texte ; peut être défini par "
 "module dans la boîte de dialogue des polices"
 
@@ -4218,6 +4221,7 @@ msgstr ""
 "l’affichage de l’interface"
 
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:99
+
 msgid "Locale (requires restart)"
 msgstr "Langue de l’interface (Nécessite un redémarrage)"
 
