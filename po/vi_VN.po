@@ -1,14 +1,14 @@
 # Bản dịch Tiếng Việt
 # Copyright (C) 2021 The Xiphos Developement Team
 # This file is distributed under the same license as the PACKAGE package.
-#  Antoine Đỗ  <do.antoine@disroot.org>, 2021.
+#  Antoine Đỗ  <do.antoine@disroot.org>, 2021-2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 14:29-0500\n"
-"PO-Revision-Date: 2021-01-23 20:11+0100\n"
+"POT-Creation-Date: 2025-02-20 09:16-0500\n"
+"PO-Revision-Date: 2025-02-21 14:19+0100\n"
 "Last-Translator:  Antoine Đỗ  <do.antoine@disroot.org>\n"
 "Language-Team: Vietnamese <0>\n"
 "Language: vi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"X-Generator: Gtranslator 47.1\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -25,7 +25,7 @@ msgid ""
 "What were you doing when this occurred?"
 msgstr ""
 "Lỗi Xiphos: \"can't happen\", display_mod: null\n"
-"Hãy báo cáo nó. Sword_main.cc:set_treekey\n"
+"Vui lòng báo cáo điều này. Sword_main.cc:set_treekey\n"
 "Bạn đã làm gì khi nó xảy ra?"
 
 #: ../src/backend/sword_main.cc:1149
@@ -601,7 +601,7 @@ msgstr "Đóng mà _không lưu"
 
 #: ../src/gtk/dictlex.c:374
 msgid "Do sidebar search for this Strong's number"
-msgstr ""
+msgstr "Hộp tìm kiếm bên cho số Strong này"
 
 #: ../src/gtk/export_bookmarks.c:175 ../src/gtk/export_bookmarks.c:232
 #: ../src/gtk/sidebar.c:1502 ../src/gtk/sidebar.c:1550
@@ -662,9 +662,8 @@ msgid "+0"
 msgstr "+0"
 
 #: ../src/gtk/font_dialog.c:397
-#, fuzzy
 msgid "Display columns"
-msgstr "Hiển thị Xiphos"
+msgstr "Hiển thị cột"
 
 #: ../src/gtk/font_dialog.c:427
 msgid "Use the default font for this module"
@@ -683,7 +682,6 @@ msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "LỖI LẬP TRÌNH! Xiphos sẽ dừng do lỗi « STRING »."
 
 #: ../src/gtk/main_menu.c:653
-#, fuzzy
 msgid "Save Session"
 msgstr "Lưu Phiên"
 
@@ -724,30 +722,30 @@ msgstr "BibleSync: Đã gửi điều hướng hiện tại."
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync: Không truyền."
 
-#: ../src/gtk/main_window.c:1011
+#: ../src/gtk/main_window.c:1013
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Phần mềm học kinh thánh"
 
-#: ../src/gtk/main_window.c:1075
+#: ../src/gtk/main_window.c:1077
 msgid "Open a new tab"
 msgstr "Mở một thẻ mới"
 
-#: ../src/gtk/main_window.c:1130 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Standard View"
 msgstr "Chế độ xem Chuẩn"
 
-#: ../src/gtk/main_window.c:1170
+#: ../src/gtk/main_window.c:1172
 msgid "Commentary View"
 msgstr "Xem Bình luận"
 
-#: ../src/gtk/main_window.c:1178
+#: ../src/gtk/main_window.c:1180
 msgid "Book View"
 msgstr "Xem sách"
 
-#: ../src/gtk/main_window.c:1193
+#: ../src/gtk/main_window.c:1195
 msgid "Welcome to Xiphos"
 msgstr "Chào mừng đến với Xiphos"
 
@@ -1521,6 +1519,10 @@ msgstr "tìm thấy trong "
 msgid "New List %s"
 msgstr "Danh sách Mới %s"
 
+#: ../src/gtk/search_dialog.c:616
+msgid "[New Range]"
+msgstr "[Phạm vi mới]"
+
 #: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"
 msgstr "Xóa danh sách?"
@@ -1645,8 +1647,8 @@ msgstr ""
 "kiếm thuộc tính</i>.\n"
 "* Văn bản chú thích được tìm kiếm giống như văn bản thông thường.\n"
 "* Các từ của Strong được chỉ định là chữ cái tiền tố H hoặc G (tiếng Do Thái "
-"hoặc tiếng Hy Lạp) và định danh từ số, ví dụ: G2316 để tìm "
-"\"θεός\" (\"Chúa\").\n"
+"hoặc tiếng Hy Lạp) và định danh từ số, ví dụ: G2316 để tìm \"θεός\" "
+"(\"Chúa\").\n"
 "* Các thẻ hình thái học được xác định theo nghĩa đen, ví dụ: N-ASF là \"danh "
 "từ, nữ tính số ít buộc tội\" - xem mô-đun Robinson để biết chi tiết."
 
@@ -1671,9 +1673,8 @@ msgid "_Open Advanced Search"
 msgstr "_Mở Tìm kiếm Nâng cao"
 
 #: ../src/gtk/search_sidebar.c:258
-#, fuzzy
 msgid "Open the separate Advanced Search dialog"
-msgstr "Mở hộp thoại Tìm kiếm nâng cao riêng biệt."
+msgstr "Mở hộp thoại Tìm kiếm nâng cao riêng"
 
 #: ../src/gtk/search_sidebar.c:274
 msgid "Search Module"
@@ -2078,9 +2079,8 @@ msgstr "Đề mục"
 
 #: ../src/main/parallel_view.cc:440 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
-#, fuzzy
 msgid "Italic Headings"
-msgstr "Đề mục"
+msgstr "Đề mục Chữ in nghiêng"
 
 #: ../src/main/parallel_view.cc:450 ../src/main/parallel_view.cc:539
 #: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
@@ -2136,9 +2136,8 @@ msgid "view context"
 msgstr "xem bối cảnh"
 
 #: ../src/main/parallel_view.cc:964
-#, fuzzy
 msgid "Failed to find 1st parallel module for display control."
-msgstr "Nếu câu trả lời là không, nó sẽ chỉ mở để đọc."
+msgstr "Không tìm thấy mô-đun song song đầu tiên cho điều khiển hiển thị."
 
 #: ../src/main/prayerlists.cc:112
 msgid "Growth"
@@ -2956,9 +2955,8 @@ msgid "Save the current file as"
 msgstr "Lưu tệp hiện tại thành"
 
 #: ../ui/editor_studypad.xml.h:13
-#, fuzzy
 msgid "Save As…"
-msgstr "Lưu Thành"
+msgstr "Lưu Thành…"
 
 #: ../ui/editor_studypad.xml.h:14
 msgid "Add this file to your bookmarks"
@@ -3393,9 +3391,8 @@ msgid "Save changes to file"
 msgstr "Lưu tệp hiện tại"
 
 #: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
-#, fuzzy
 msgid "Save File As..."
-msgstr "Lưu thành..."
+msgstr "Lưu tệp tin thành..."
 
 #: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
 msgid "Strikethrough"
@@ -3760,11 +3757,8 @@ msgid "Toggle Verse Button"
 msgstr "Nút chuyển đổi Câu"
 
 #: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
-#, fuzzy
 msgid "Enter a Verse reference in Book 1:1 (or 1.1) format and press Return"
-msgstr ""
-"Nhập tài liệu tham khảo theo định dạng: Quyển 1:1 (ví dụ: Ga 3:16), sau đó "
-"xác thực bằng cách nhấn phím Enter"
+msgstr "Nhập câu tham chiếu theo định dạng Sách 1:1 (hoặc 1.1) và nhấn Enter."
 
 #: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
 msgid "Reference Entry"
@@ -3888,18 +3882,20 @@ msgid ""
 "Number of columns in which to display text; can be set per module in font "
 "dialog"
 msgstr ""
+"Số cột để hiển thị văn bản; có thể được thiết lập cho từng mô-đun trong hộp "
+"thoại phông chữ"
 
 #: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:37
 msgid "Default display columns"
-msgstr ""
+msgstr "Cột hiển thị mặc định"
 
 #: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:38
 msgid "Justify margins"
-msgstr ""
+msgstr "Căn chỉnh đều lề"
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:39
 msgid "When unset, leave a ragged margin."
-msgstr ""
+msgstr "Khi không thiết đặt, để tuỳ lề không đều."
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:40
 msgid "Font Misc"
@@ -3907,7 +3903,7 @@ msgstr "Phông chữ Tổng hợp"
 
 #: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:41
 msgid "<b>BibleSync</b>"
-msgstr "<b>ĐồngbộKinhthánh</b>"
+msgstr "<b>BibleSync</b>"
 
 #: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:42
 msgid ""
@@ -4179,14 +4175,12 @@ msgid ""
 msgstr "Chọn ngôn ngữ khác với cấu hình thông thường để hiển thị giao diện"
 
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:99
-#, fuzzy
 msgid "Locale (requires restart)"
-msgstr "Ngôn ngữ Giao diện (yêu cầu khởi động lại)"
+msgstr "Ngôn ngữ (yêu cầu khởi động lại)"
 
 #: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:100
-#, fuzzy
 msgid "Locale Combo"
-msgstr "Hộp kết hợp Ngôn ngữ đặc biệt"
+msgstr "Kết hợp ngôn ngữ"
 
 #: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:101
 msgid "Show splash screen at start up"
@@ -4527,19 +4521,16 @@ msgid "+5"
 msgstr "+5"
 
 #: ../ui/prefs.gtkbuilder.h:10
-#, fuzzy
 msgid "2"
-msgstr "-2"
+msgstr "2"
 
 #: ../ui/prefs.gtkbuilder.h:11
-#, fuzzy
 msgid "3"
-msgstr "+3"
+msgstr "3"
 
 #: ../ui/prefs.gtkbuilder.h:12
-#, fuzzy
 msgid "4"
-msgstr "+4"
+msgstr "4"
 
 #: ../ui/prefs.gtkbuilder.h:126
 msgid "Enable/disable the Statusbar"
@@ -4571,7 +4562,7 @@ msgstr "Mở phần giải thích ngắn gọn về các tìm kiếm dựa trên
 
 #: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
 msgid "For: "
-msgstr ""
+msgstr "Cho:"
 
 #: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
 msgid "Main Search Entry"
