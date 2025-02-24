@@ -221,7 +221,7 @@ Build Xiphos on *Fedora*, *Red Hat* or *CentOS*:
 
 ## 1. Clone Xiphos git
 
-    $ git https://github.com/crosswire/xiphos.git
+    $ git clone https://github.com/crosswire/xiphos.git
 
 ## 2. Create and enter the build directory
 
@@ -252,7 +252,7 @@ Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 
 ## 1. Clone git
 
-    $ git https://github.com/crosswire/xiphos.git
+    $ git clone https://github.com/crosswire/xiphos.git
 
 ## 2. Install the required dependencies:
 
@@ -261,6 +261,12 @@ Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 ## 3. Build and install:
 
     $ cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+    $ cd build
+    $ make -j$(nproc) && sudo make install
+
+## 4. Run Xiphos
+
+    $ xiphos
 
 
 Make packages with CMake
