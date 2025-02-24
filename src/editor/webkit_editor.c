@@ -33,6 +33,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include "editor/webkit_editor.h"
+#include "gui/dialog.h"
 
 gint editor_create_new(const gchar *filename, const gchar *key, gint editor_type)
 {
