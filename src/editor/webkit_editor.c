@@ -37,7 +37,7 @@
 
 gint editor_create_new(const gchar *filename, const gchar *key, gint editor_type)
 {
-	gui_generic_warning(_("The Studypad is disabled on this platform due to missing dependencies. We hope to re-enable it in a future release."));
+	gui_generic_warning(_("The editor is disabled on this platform due to missing dependencies.\nWe hope to re-enable it in a future release."));
 }
 void editor_maybe_save_all(void) {}
 void editor_load_note(EDITOR *e, const gchar *module_name, const gchar *key) {}
