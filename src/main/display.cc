@@ -1080,8 +1080,9 @@ GTKEntryDisp::display(SWModule &imodule)
 					else
 						day = (char *)"XX";
 					int idx_month = atoi(month) - 1;
+					pretty = gettext(month_names[idx_month]);
 					pretty = g_strdup_printf("<b>%s %s</b><br/>",
-								 gettext(month_names[idx_month]),
+								 (pretty ? pretty : "--"),
 								 day);
 					swbuf.append(pretty);
 					g_free(pretty);
