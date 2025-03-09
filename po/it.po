@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 09:16-0500\n"
-"PO-Revision-Date: 2019-04-11 16:05+0200\n"
-"Last-Translator: L'Africain\n"
+"POT-Creation-Date: 2025-02-21 14:44+0100\n"
+"PO-Revision-Date: 2025-03-06 21:51+0100\n"
+"Last-Translator: Cyrille <lafricain79@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2018-02-19 07:00+0000\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -604,7 +604,7 @@ msgstr "Chiudi _senza salvare"
 
 #: ../src/gtk/dictlex.c:374
 msgid "Do sidebar search for this Strong's number"
-msgstr ""
+msgstr "Cercare il numero di questo Strong nella barra laterale"
 
 #: ../src/gtk/export_bookmarks.c:175 ../src/gtk/export_bookmarks.c:232
 #: ../src/gtk/sidebar.c:1502 ../src/gtk/sidebar.c:1550
@@ -665,9 +665,8 @@ msgid "+0"
 msgstr "+0"
 
 #: ../src/gtk/font_dialog.c:397
-#, fuzzy
 msgid "Display columns"
-msgstr "Visualizzazione di Xiphos"
+msgstr "Visualizza le colonne"
 
 #: ../src/gtk/font_dialog.c:427
 msgid "Use the default font for this module"
@@ -686,7 +685,6 @@ msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "ERRORE! Xiphos sta per bloccarsi a causa di un errore «STRING»."
 
 #: ../src/gtk/main_menu.c:653
-#, fuzzy
 msgid "Save Session"
 msgstr "_Salva sessione"
 
@@ -1025,7 +1023,7 @@ msgstr "Eliminazione"
 
 #: ../src/gtk/mod_mgr.c:311
 msgid "The module has no About information."
-msgstr "Il modulo non ha informazioni su."
+msgstr "Il modulo non ha Informazioni su."
 
 #: ../src/gtk/mod_mgr.c:533
 msgid "Module Name"
@@ -1527,9 +1525,8 @@ msgid "New List %s"
 msgstr "Nuovo elenco %s"
 
 #: ../src/gtk/search_dialog.c:616
-#, fuzzy
 msgid "[New Range]"
-msgstr "Pulsante Nuova gamma"
+msgstr "[Nuova gamma]"
 
 #: ../src/gtk/search_dialog.c:707
 msgid "Delete list?"
@@ -1685,9 +1682,8 @@ msgid "_Open Advanced Search"
 msgstr "_Apri ricerca avanzata"
 
 #: ../src/gtk/search_sidebar.c:258
-#, fuzzy
 msgid "Open the separate Advanced Search dialog"
-msgstr "Apri la finestra di dialogo separata Ricerca avanzata."
+msgstr "Apri la finestra di dialogo separata Ricerca avanzata"
 
 #: ../src/gtk/search_sidebar.c:274
 msgid "Search Module"
@@ -2092,9 +2088,8 @@ msgstr "Intestazioni"
 
 #: ../src/main/parallel_view.cc:440 ../ui/xi-menus.glade.h:69
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
-#, fuzzy
 msgid "Italic Headings"
-msgstr "Intestazioni"
+msgstr "Titoli in corsivo"
 
 #: ../src/main/parallel_view.cc:450 ../src/main/parallel_view.cc:539
 #: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
@@ -2150,9 +2145,9 @@ msgid "view context"
 msgstr "vedi il contesto"
 
 #: ../src/main/parallel_view.cc:964
-#, fuzzy
 msgid "Failed to find 1st parallel module for display control."
-msgstr "Se no, si aprirà solo per la visualizzazione."
+msgstr ""
+"Impossibile trovare il primo modulo parallelo per il controllo del display."
 
 #: ../src/main/prayerlists.cc:112
 msgid "Growth"
@@ -2629,7 +2624,7 @@ msgstr "Errore del anteprima:\n"
 #: ../src/main/url.cc:273
 #, c-format
 msgid "Show %s in main window"
-msgstr "Mostra % s nella finestra principale"
+msgstr "Mostra %s nella finestra principale"
 
 #: ../src/main/xml.c:87 ../src/main/xml.c:443 ../src/main/xml.c:574
 #, c-format
@@ -2878,7 +2873,7 @@ msgstr "Albero della cartella deiSegnalibri"
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:2
 msgid "Test Link"
-msgstr ""
+msgstr "Collegamento di prova"
 
 #: ../ui/editor_link_dialog.gtkbuilder.h:3 ../ui/export-dialog.glade.h:17
 #: ../ui/export-dialog.gtkbuilder.h:17
@@ -2966,9 +2961,8 @@ msgid "Save the current file as"
 msgstr "Salva il file corrente come"
 
 #: ../ui/editor_studypad.xml.h:13
-#, fuzzy
 msgid "Save As…"
-msgstr "Salva come"
+msgstr "Salva come…"
 
 #: ../ui/editor_studypad.xml.h:14
 msgid "Add this file to your bookmarks"
@@ -3404,7 +3398,6 @@ msgid "Save changes to file"
 msgstr "Salvare le modifiche al documento"
 
 #: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
-#, fuzzy
 msgid "Save File As..."
 msgstr "Salva come..."
 
@@ -3770,7 +3763,6 @@ msgid "Toggle Verse Button"
 msgstr "Pulsante Attiva/disattiva il versetto"
 
 #: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
-#, fuzzy
 msgid "Enter a Verse reference in Book 1:1 (or 1.1) format and press Return"
 msgstr ""
 "Inserisci un riferimento di versetto nel formato Libro 1:1 (o 1.1) e premi "
@@ -3891,25 +3883,27 @@ msgstr "Preferenze dei caratteri, per lingua"
 
 #: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:35
 msgid "Language Font Combo"
-msgstr ""
+msgstr "Scatola combinata di caratteri della lingua"
 
 #: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:36
 msgid ""
 "Number of columns in which to display text; can be set per module in font "
 "dialog"
 msgstr ""
+"Numero di colonne in cui visualizzare il testo; può essere impostato per "
+"modulo nella finestra di dialogo dei caratteri"
 
 #: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:37
 msgid "Default display columns"
-msgstr ""
+msgstr "Colonne di visualizzazione predefinite"
 
 #: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:38
 msgid "Justify margins"
-msgstr ""
+msgstr "Giustificare i margini"
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:39
 msgid "When unset, leave a ragged margin."
-msgstr ""
+msgstr "Quando non è impostato, lascia un margine irregolare."
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:40
 msgid "Font Misc"
@@ -4193,12 +4187,10 @@ msgstr ""
 "diversa dalle tue normali impostazioni"
 
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:99
-#, fuzzy
 msgid "Locale (requires restart)"
 msgstr "Lingua dell'interfaccia (Richiede un riavvio)"
 
 #: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:100
-#, fuzzy
 msgid "Locale Combo"
 msgstr "Scatola combinata lingua dell'interfaccia"
 
@@ -4390,7 +4382,7 @@ msgstr "Seleziona una cartella"
 
 #: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:144
 msgid "StudyPad default directory combo"
-msgstr ""
+msgstr "Scatola combinata Cartelle predefinite di Blocchetto"
 
 #: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:145
 msgid "General Misc"
@@ -4406,19 +4398,19 @@ msgstr "Testo biblico"
 
 #: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:148
 msgid "Change Biblical Text Combo"
-msgstr ""
+msgstr "Scatola combinata Cambiare il testo biblico"
 
 #: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:150
 msgid "Change Commentary Combo"
-msgstr ""
+msgstr "Scatola combinata Modifica Commento"
 
 #: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:152
 msgid "Change Dictionary Combo"
-msgstr ""
+msgstr "Scatola combinata Cambiare dizionario"
 
 #: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:154
 msgid "Change Book Combo"
-msgstr ""
+msgstr "Scatola combinata Cambiare libro"
 
 #: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:155
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
@@ -4473,7 +4465,7 @@ msgstr "Calendario biblico"
 
 #: ../ui/prefs.glade.h:162 ../ui/prefs.gtkbuilder.h:166
 msgid "Daily Devotional Combo"
-msgstr ""
+msgstr "Scatola combinata Calendario biblico"
 
 #: ../ui/prefs.glade.h:163 ../ui/prefs.gtkbuilder.h:167
 msgid "Hebrew Lexicon"
@@ -4481,7 +4473,7 @@ msgstr "Lessico ebreo"
 
 #: ../ui/prefs.glade.h:164 ../ui/prefs.gtkbuilder.h:168
 msgid "Hebrew Lexicon Combo"
-msgstr ""
+msgstr "Scatola combinata Lessico ebraico"
 
 #: ../ui/prefs.glade.h:165 ../ui/prefs.gtkbuilder.h:169
 msgid "Greek Lexicon"
@@ -4489,7 +4481,7 @@ msgstr "Lessico greco"
 
 #: ../ui/prefs.glade.h:166 ../ui/prefs.gtkbuilder.h:170
 msgid "Greek Lexicon Combo"
-msgstr ""
+msgstr "Scatola combinata Lessico greco"
 
 #: ../ui/prefs.glade.h:167 ../ui/prefs.gtkbuilder.h:171
 msgid "Default Dictionary"
@@ -4497,7 +4489,7 @@ msgstr "Dizionario predefinito"
 
 #: ../ui/prefs.glade.h:168 ../ui/prefs.gtkbuilder.h:172
 msgid "Change Default Dictionary Combo"
-msgstr ""
+msgstr "Scatola combinata Cambiare il dizionario predefinito"
 
 #: ../ui/prefs.glade.h:169 ../ui/prefs.gtkbuilder.h:173
 msgid "Personal Notes"
@@ -4505,7 +4497,7 @@ msgstr "Note personali"
 
 #: ../ui/prefs.glade.h:170 ../ui/prefs.gtkbuilder.h:174
 msgid "Change Personal Notes Combo"
-msgstr ""
+msgstr "Scatola combinata Modificare le note personali"
 
 #: ../ui/prefs.glade.h:171 ../ui/prefs.gtkbuilder.h:175
 msgid "Modules Misc"
@@ -4540,19 +4532,16 @@ msgid "+5"
 msgstr "+5"
 
 #: ../ui/prefs.gtkbuilder.h:10
-#, fuzzy
 msgid "2"
-msgstr "-2"
+msgstr "2"
 
 #: ../ui/prefs.gtkbuilder.h:11
-#, fuzzy
 msgid "3"
-msgstr "+3"
+msgstr "3"
 
 #: ../ui/prefs.gtkbuilder.h:12
-#, fuzzy
 msgid "4"
-msgstr "+4"
+msgstr "4"
 
 #: ../ui/prefs.gtkbuilder.h:126
 msgid "Enable/disable the Statusbar"
@@ -4584,7 +4573,7 @@ msgstr "Apri una breve spiegazione delle ricerche basate sui caratteristiche."
 
 #: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
 msgid "For: "
-msgstr ""
+msgstr "Per: "
 
 #: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
 msgid "Main Search Entry"
@@ -4644,7 +4633,7 @@ msgstr "Pulsante radio gamma di versetti personalizzata"
 
 #: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
 msgid "Custom Range Selector Combo"
-msgstr ""
+msgstr "Scatola combinata Selettore di gamma personalizzato"
 
 #: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
 msgid "Use a single module for the search"
@@ -4684,7 +4673,7 @@ msgstr "Pulsante radio Elenco di moduli personalizzato"
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Module List Combo"
-msgstr ""
+msgstr "Scatola combinata Elenco di moduli personalizzati"
 
 #: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
 msgid "<b>Search Type</b>"
@@ -4705,7 +4694,6 @@ msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "Pulsante radio Ottimizzato («Lucene»)"
 
 #: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
-#, fuzzy
 msgid "Multi-word radiobutton"
 msgstr "Pulsante radio Più parole"
 
