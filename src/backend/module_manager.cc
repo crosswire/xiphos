@@ -181,6 +181,9 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 				mod_info->abbreviation = g_strdup(mod_info->abbreviation);
 				main_add_abbreviation(mod_info->name, mod_info->abbreviation);
 			}
+			// if we couldn't add, we mustn't retain a handle on it or else bad free.
+			else if (mod_info->abbreviation)
+				mod_info->abbreviation = NULL;
 
 			mod_info->language =
 			    main_get_language_map(module->getLanguage());
