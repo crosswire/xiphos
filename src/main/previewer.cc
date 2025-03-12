@@ -170,7 +170,7 @@ void main_information_viewer(const gchar *mod_name,
 			str = g_string_append(str, tmp_str->str);
 		}
 	} else {
-		const char *abbreviation = main_get_abbreviation(mod_name);
+		const char *abbreviation = main_name_to_abbrev(mod_name);
 		g_string_printf(tmp_str,
 				"<font color=\"grey\">%s: %s</font><hr/>",
 				(abbreviation ? abbreviation : mod_name),
@@ -396,7 +396,7 @@ void main_entry_display(gpointer data, gchar *mod_name,
 
 	/* show key in html widget  */
 	if (show_key) {
-		const char *abbreviation = main_get_abbreviation(mod_name);
+		const char *abbreviation = main_name_to_abbrev(mod_name);
 		if ((settings.displaySearchResults)) {
 			g_string_printf(tmp_str,
 					"<a href=\"sword://%s/%s\">"

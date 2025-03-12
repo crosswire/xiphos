@@ -230,11 +230,10 @@ GString *pick_tab_label(PASSAGE_TAB_INFO *pt)
 {
 	GString *str = g_string_new(NULL);
 
-	const char *abbrev_text = main_get_abbreviation(pt->text_mod);
-	const char *abbrev_comm =
-	    main_get_abbreviation(pt->commentary_mod);
-	const char *abbrev_dict = main_get_abbreviation(pt->dictlex_mod);
-	const char *abbrev_book = main_get_abbreviation(pt->book_mod);
+	const char *abbrev_text = main_name_to_abbrev(pt->text_mod);
+	const char *abbrev_comm = main_name_to_abbrev(pt->commentary_mod);
+	const char *abbrev_dict = main_name_to_abbrev(pt->dictlex_mod);
+	const char *abbrev_book = main_name_to_abbrev(pt->book_mod);
 
 	if (pt->showparallel) {
 		g_string_printf(str, "%s", _("Parallel View"));

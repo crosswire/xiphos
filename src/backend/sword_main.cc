@@ -179,6 +179,8 @@ void BackEnd::init_lists(MOD_LISTS *mods)
 {
 	ModMap::iterator it;
 
+	main_clear_abbreviations();
+
 	for (it = main_mgr->Modules.begin();
 	     it != main_mgr->Modules.end();
 	     ++it) {
@@ -187,7 +189,8 @@ void BackEnd::init_lists(MOD_LISTS *mods)
 		const char *modname = m->getName();
 		const char *abbreviation = m->getConfigEntry("Abbreviation");
 
-		if (abbreviation) {
+		// abbrev collisions disallowed: no dups of any .conf's [Name].
+		if (abbreviation && !main_is_module((char *)abbreviation)) {
 			main_add_abbreviation(modname, abbreviation);
 		}
 

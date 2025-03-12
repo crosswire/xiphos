@@ -782,7 +782,7 @@ static gboolean button_release_event(GtkWidget *widget,
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected) && key != NULL) {
 			// might have an abbrev.  get the real.
-			const gchar *real_mod = main_get_name(module);
+			const gchar *real_mod = main_abbrev_to_name(module);
 			gchar *url = NULL;
 
 			if (!strcmp(module, "studypad"))

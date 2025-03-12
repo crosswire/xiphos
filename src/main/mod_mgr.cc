@@ -271,6 +271,8 @@ GList *mod_mgr_list_local_modules(const char *dir,
 
 	backend_init_module_mgr(dir, augment, augment);
 
+	main_clear_abbreviations();
+
 	backend_module_mgr_list_local_modules_init(!augment);
 	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
 		if (version.compare(mod_info->min_version) < 0) {

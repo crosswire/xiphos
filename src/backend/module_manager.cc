@@ -176,7 +176,8 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->name = g_strdup(name);
 
 			mod_info->abbreviation = (char *)module->getConfigEntry("Abbreviation");
-			if (mod_info->abbreviation) {
+			// abbrev collisions disallowed: no dups of any .conf's [Name].
+			if (mod_info->abbreviation && !main_is_module((char *)mod_info->abbreviation)) {
 				mod_info->abbreviation = g_strdup(mod_info->abbreviation);
 				main_add_abbreviation(mod_info->name, mod_info->abbreviation);
 			}

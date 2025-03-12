@@ -949,7 +949,7 @@ GTKEntryDisp::display(SWModule &imodule)
 	if (!gtk_widget_get_realized(GTK_WIDGET(gtkText)))
 		gtk_widget_realize(gtkText);
 
-	const char *abbreviation = main_get_abbreviation(imodule.getName());
+	const char *abbreviation = main_name_to_abbrev(imodule.getName());
 	gchar *buf, *mod_column_count = NULL;
 	mf = get_font(imodule.getName());
 	swbuf = "";
