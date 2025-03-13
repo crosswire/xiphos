@@ -1145,7 +1145,7 @@ void create_editor_window(GtkWidget *scrollwindow, EDITOR *e)
 		webkit_web_view_load_string((WebKitWebView *)
 					    e->html_widget,
 					    text,
-					    "application/xhtml+xml", "utf_8",
+					    "text/html", "utf_8",
 					    "file://");
 	}
 	if (text)
