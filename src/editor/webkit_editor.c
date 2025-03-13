@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#ifdef USE_WEBKIT_EDITOR
+#if defined(USE_WEBKIT_EDITOR) && defined(USE_WEBKIT2)
 
 /* stubs for disabled editor */
 
@@ -45,7 +45,7 @@ void editor_sync_with_main(void) {}
 void editor_save_book(EDITOR *e) {}
 void editor_load_book(EDITOR *e) {}
 
-#else  /* !USE_WEBKIT_EDITOR */
+#else  /* !USE_WEBKIT_EDITOR || !USE_WEBKIT2 */
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -1453,4 +1453,4 @@ void editor_maybe_save_all(void)
 	}
 }
 
-#endif /* USE_WEBKIT_EDITOR */
+#endif /* defined(USE_WEBKIT_EDITOR) && defined(USE_WEBKIT2) */

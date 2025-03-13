@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#ifdef USE_WEBKIT_EDITOR
+#if defined(USE_WEBKIT_EDITOR) && defined(USE_WEBKIT2)
 
 /*
  * currently stubbed in webkit_editor.c.
