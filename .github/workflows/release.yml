@@ -1,0 +1,126 @@
+name: Release a build
+
+"on":
+  push:
+    tags:
+      - '*'
+
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: olegtarasov/get-tag@v2
+        id: tag
+      - name: create source tarball
+        shell: bash
+        run: |
+          set -ex
+          git archive --prefix=xiphos-${{ steps.tag.outputs.tag }}/ -o xiphos-${{ steps.tag.outputs.tag }}.tar HEAD
+          xz -9 xiphos-${{ steps.tag.outputs.tag }}.tar
+      - name: stash tarball
+        uses: actions/upload-artifact@master
+        with:
+          name: archive
+          path: xiphos-${{ steps.tag.outputs.tag }}.tar.xz
+
+  build_rpm:
+    needs: source
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        fedora:
+          - "31"
+          - "30"
+    steps:
+      - uses: olegtarasov/get-tag@v2
+        id: tag
+      - name: fetch source tarball
+        uses: actions/download-artifact@master
+        with:
+          name: archive
+      - name: prepare build environment
+        shell: bash
+        run: |
+          set -e
+          tar xaf archive/xiphos-${{ steps.tag.outputs.tag }}.tar.xz --strip-components=1
+          # Echo version into repo here!
+      - name: test build
+        shell: bash
+        run: release/build.sh fedora:${{ matrix.fedora }}
+        #- name: stash tarball
+        #uses: actions/upload-artifact@master
+        #with:
+        #name: src
+        #path: build/xiphos-${{ steps.tag.outputs.tag }}.tar.gz
+        #- name: stash zipfile
+        #uses: actions/upload-artifact@master
+        #with:
+        #name: src
+        #path: build/xiphos-${{ steps.tag.outputs.tag }}.zip
+      - name: stash rpm
+        uses: actions/upload-artifact@master
+        with:
+          name: bin
+          path: build/xiphos-${{ steps.tag.outputs.tag }}-1.fc${{ matrix.fedora }}.x86_64.rpm
+
+  build_deb:
+    needs: source
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ubuntu:
+          #- "18.04"  # we require cmake 3.11, currently 18.04 has 3.10
+          - "19.10"
+    steps:
+      - uses: olegtarasov/get-tag@v2
+        id: tag
+      - name: fetch source tarball
+        uses: actions/download-artifact@master
+        with:
+          name: archive
+      - name: prepare build environment
+        shell: bash
+        run: |
+          set -e
+          tar xaf archive/xiphos-${{ steps.tag.outputs.tag }}.tar.xz --strip-components=1
+          # Echo version into repo here!
+      - name: test build
+        shell: bash
+        run: release/build.sh ubuntu:${{ matrix.ubuntu }}
+      - name: stash deb
+        uses: actions/upload-artifact@master
+        with:
+          name: bin
+          path: build/xiphos_${{ steps.tag.outputs.tag }}-1_amd.deb
+      - name: stash data deb
+        uses: actions/upload-artifact@master
+        with:
+          name: bin
+          path: build/xiphos-data_${{ steps.tag.outputs.tag }}-1_all.deb
+
+  release:
+    needs:
+      - build_rpm
+      - build_deb
+    runs-on: ubuntu-latest
+    steps:
+      - uses: olegtarasov/get-tag@v2
+        id: tag
+      - name: fetch artifacts
+        uses: actions/download-artifact@master
+        with:
+          name: archive
+      - name: fetch artifacts
+        uses: actions/download-artifact@master
+        with:
+          name: bin
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "archive/*.tar.xz, bin/*.rpm., bin/*.deb"
+          allowUpdates: true
+          name: Release ${{ steps.tag.outputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
