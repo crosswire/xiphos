@@ -728,14 +728,6 @@ void redisplay_to_realign()
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
-	if (settings.DictWindowModule && *settings.DictWindowModule /* not empty */
-	    && settings.dictkey) {
-		url = g_strdup_printf("sword://%s/%s",
-				      settings.DictWindowModule,
-				      settings.dictkey);
-		main_url_handler(url, TRUE);
-		g_free(url);
-	}
 
 	settings.comm_showing = save_comm_show;
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
