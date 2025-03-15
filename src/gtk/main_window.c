@@ -726,6 +726,11 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			access_on_down_eventbox_button_release_event(CHAPTER_BUTTON);
 		else if (state == GDK_SHIFT_MASK) // N book
 			access_on_down_eventbox_button_release_event(BOOK_BUTTON);
+		else if (state == GDK_MOD1_MASK) // Alt-N footnote toggle
+			kbd_toggle_option((main_check_for_global_option(sM, "GBFFootnotes") ||
+					   main_check_for_global_option(sM, "ThMLFootnotes") ||
+					   main_check_for_global_option(sM, "OSISFootnotes")),
+					  "Footnotes");
 		else if (state == (GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_SHIFT_MASK)) {
 			// BSP transient navigate
 			if (biblesync_active_xmit_allowed()) {
@@ -800,6 +805,12 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			kbd_toggle_option(true, "Transliteration");
 		break;
 
+	case XK_x:
+	case XK_X:
+		if (state == GDK_MOD1_MASK) // Alt-X xref toggle
+			kbd_toggle_option((main_check_for_global_option(sM, "ThMLScripref") ||
+					   main_check_for_global_option(sM, "OSISScripref")),
+					  "Cross-references");
 	case XK_Tab:
 		if (state == GDK_CONTROL_MASK) // Ctrl-Tab  next tab
 			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
