@@ -3,6 +3,103 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.3.0
+16 March 2025
+
+- Multi-column display. Default: Prefs -> Sizes/Faces; also in module font ops.
+  For very wide windows on big monitors, following long horizontal rendering
+  can become hard on the eyes. Select 1 to 4 columns.
+- Margin justification, also in Prefs -> Sizes/Faces (app-wide choice only).
+- Stopped .conf "Abbreviation=XYZ" collision with real module [XYZ].
+- Provided a module option to display headings in italic.
+- Huge updates to github workflows.
+  All the credit goes to Greg Hellings.
+- Handle tabs more like browsers, notably tab re-ordering with mouse drag.
+  Many thanks to Nicholas Walkewicz.
+- New Vietnamese interface translation
+  Many thanks to Antoine Đỗ/Giải Ngố.
+- Some other translations have had recent updates.
+  More updates are welcome and solicited for any other languages.
+- Full parallel: Fixed the context menu (morph.seg.).
+- Full parallel: Created a location-fixed top header line for module names.
+  The header no longer scrolls away with verse 1.
+- Build without the editor for platforms no longer supporting gtkhtml.
+- Moved .xiphos to .config/xiphos in accordance with desktop standards.
+  This happens silently for existing users' configurations.
+  Similar Windows, just remove the dot, AppData/Roaming/xiphos.
+- Replaced the Live Chat link (Help menu) to aim at libera.chat.
+- Repaired module display for inconvenient paragraph-end markers under
+  highlight, both general current verse and user annotation.
+- Worked around a WebKit regression that prevented content display for
+  machines with nvidia GPUs (yes, really).
+- Replaced old program choice for external image display with modern element.
+- Provided backward-compatible build support for RHEL9 and other platforms.
+- Fixed the Respect Font Faces module option.
+- Locale renaming: Prefs -> Options, now "System Default."
+- Provided for ESC to close Preferences.
+- Provided keyboard shortcut (Ctrl-S) to toggle sidebar visibility.
+- Provided keyboard shortcuts (Alt-X, Alt-N) to toggle Xrefs, Footnotes.
+- Fixed several string NULL crash bugs.
+- Additions to the languages file for module trees.
+- Resolved build compatibility among several Linux platforms.
+- Moved the appdata file to /usr/share/metainfo, per recent standard.
+- Fixed lack of trailing '/' in <meta> elements.
+- Manual updates to reflect Ctrl-S for sidebar visible toggle and
+  to explain fundamental navigation limitations in full parallel.
+- Windows: Module deletion-induced crash fixed via Sword 1.9.
+- Windows: With Sword 1.9, we no longer depend on patched Sword to handle
+  NTFS' UTF-16 interaction.
+
+Specific issues resolved on github:
+
+#1221 add kbd shortcuts for Xref & Notes
+#1218 strdup crash error
+#1205 Abbreviation key (collision) in module configuration files
+#1200 release prep (mostly translation updates)
+#1196 provide a means to build without the editor
+#1193 sword 1.9.0, official vs svn 3895, SEARCHFLAG_MATCHWHOLEENTRY
+#1190 another try at broken workflows
+#1189 update glib version from patch
+#1188 the "doap" file is prehistoric
+#1187 fix paragraph ends in some modules to avoid mis-highlight
+#1186 parallel morph seg is a bit braindamaged
+#1185 full parallel display needs a non-scrolling modname list
+#1176 eom or eog for displaying maps, photos and the like
+#1174 RHEL compatibility
+#1171 in Linux, move ~/.xiphos to ~/.config/xiphos (also Windows)
+#1170 provide UI for multi-column and justified margin support
+#1169 "respect font faces" should be more general and more careful
+#1166 provide for italic headings
+#1165 Rename "Special Locale" to just "Locale"; "None" -> "System Default"
+#1154 Escape key doesn't properly close the Options dialog
+#1152 Feature Request: Keyboard shortcut for sidebar
+#1147 Handle tabs more like browsers do
+#1146 Xiphos STRING bug
+#1144 language updates
+#1143 update live chat from freenode to libera
+#1142 webkit workaround needed
+#1132 Install appdata files to /usr/share/metainfo
+#1127 Xiphos crashes in Windows 11 when Module Manager deletes a module
+#1126 Left edge of Xiphos cut off, can't see first few letters at left side.
+#1125 No text display
+#1124 Feature Request: Don't Copy Footnote and Cross-Reference Markers
+#1099 Personal commentary doesn't work - opening and ending tag mismatch
+#1088 Impossible to move in the module when using the parallel tab
+#1085 Can only open Preferences (Edit Menu at Top) once per session
+#1083 Unable to build, "error: template with C linkage"
+#1073 Add new vi.po
+#1065 Impossible to refresh sources or index/install modules
+#1059 Particular displaying of the bible text does not work (reference, intro..)
+#1053 xiphos cannot find image display program
+#1037 Only the .tar.xz release file has cmake/source_version.txt
+#1036 "commentary by chapter" default should be on
+#1033 Very tight morphological label in OSHB
+#1029 Cannot find sword 1.8.1, but I compiled and installed it
+#1028 Module manager - Maintenance - Scan Obsolete
+#1026 Consider removing/renaming win32/suse
+#1025 Remove icu_patch
+________________________________________________________________
+
 Release 4.2.1
 02 May 2020
 
