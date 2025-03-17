@@ -315,6 +315,11 @@ GList *mod_mgr_remote_list_modules(const char *source_name)
 	MOD_MGR *mod_info;
 	SWVersion version = SWVersion::currentVersion;
 
+	// because we must be able to ask main_is_module(),
+	// we must ensure that the backend is alive already.
+	if (!backend)
+		main_init_backend();
+
 	backend_module_mgr_remote_list_modules_init(source_name);
 	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
 		if (version.compare(mod_info->min_version) < 0) {
