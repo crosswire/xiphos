@@ -3,8 +3,8 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Release 4.3.0
-16 March 2025
+Release 4.3.1
+17 March 2025
 
 - Multi-column display. Default: Prefs -> Sizes/Faces; also in module font ops.
   For very wide windows on big monitors, following long horizontal rendering
@@ -98,6 +98,12 @@ Specific issues resolved on github:
 #1028 Module manager - Maintenance - Scan Obsolete
 #1026 Consider removing/renaming win32/suse
 #1025 Remove icu_patch
+________________________________________________________________
+
+Release 4.3.0
+16 March 2025
+
+Retracted due to 1st-time user mod.mgr crash.
 ________________________________________________________________
 
 Release 4.2.1
