@@ -783,10 +783,6 @@ char *set_sword_locale(const char *sys_locale)
 
 void main_init_backend(void)
 {
-	// was this done before?
-	if (backend)
-		return;
-
 	StringMgr::setSystemStringMgr(new GS_StringMgr());
 
 	const char *lang = getenv("LANG");
