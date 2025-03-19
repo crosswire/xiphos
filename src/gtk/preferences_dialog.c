@@ -3028,6 +3028,8 @@ static void create_preferences_dialog(void)
 			 G_CALLBACK(on_dialog_prefs_response), NULL);
 	g_signal_connect(dialog_prefs, "close",
 			 G_CALLBACK(on_dialog_prefs_close), NULL);
+	g_signal_connect(dialog_prefs, "destroy",
+			 G_CALLBACK(on_dialog_prefs_close), NULL);
 
 	/* color pickers */
 	color_picker.text_background = UI_GET_ITEM(gxml, "colorbutton1");
