@@ -1207,30 +1207,7 @@ on_justifybutton_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 	xml_set_value("Xiphos", "misc", "justifymargins",
 		      (gtk_toggle_button_get_active(togglebutton) ? "1" : "0"));
 	settings.justify_margins = gtk_toggle_button_get_active(togglebutton);
-
-	char *url = g_strdup_printf("sword:///%s", settings.currentverse);
-	main_url_handler(url, TRUE);
-	g_free(url);
-
-	if (settings.DictWindowModule && settings.dictkey) {
-		url = g_strdup_printf("sword://%s/%s", settings.DictWindowModule, settings.dictkey);
-		main_url_handler(url, TRUE);
-		g_free(url);
-	}
-
-	if (settings.book_mod) {
-		gboolean temp_comm_showing = settings.comm_showing;	// don't wrongly put book forward
-
-		url = g_strdup_printf("sword://%s/%d", settings.book_mod, settings.book_offset);
-		main_url_handler(url, TRUE);
-		g_free(url);
-
-		if (temp_comm_showing) {
-			// re-assert comm visibility.
-			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book), 0);
-			settings.comm_showing = 1;
-		}
-	}
+	redisplay_to_realign();
 }
 
 /******************************************************************************
@@ -1619,31 +1596,8 @@ void on_columncountvalue_changed(GtkComboBox *combobox, gpointer user_data)
 		return;
 	xml_set_value("Xiphos", "misc", "displaycolumns", buf);
 	settings.display_columns = atoi(buf);
-
-	url = g_strdup_printf("sword:///%s", settings.currentverse);
-	main_url_handler(url, TRUE);
-	g_free(url);
 	g_free(buf);
-
-	if (settings.DictWindowModule && settings.dictkey) {
-		url = g_strdup_printf("sword://%s/%s", settings.DictWindowModule, settings.dictkey);
-		main_url_handler(url, TRUE);
-		g_free(url);
-	}
-
-	if (settings.book_mod) {
-		gboolean temp_comm_showing = settings.comm_showing;	// don't wrongly put book forward
-
-		url = g_strdup_printf("sword://%s/%d", settings.book_mod, settings.book_offset);
-		main_url_handler(url, TRUE);
-		g_free(url);
-
-		if (temp_comm_showing) {
-			// re-assert comm visibility.
-			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book), 0);
-			settings.comm_showing = 1;
-		}
-	}
+	redisplay_to_realign();
 }
 
 /******************************************************************************
@@ -2730,16 +2684,15 @@ static void ps_setup_listview()
 	if (settings.parallel_list) {
 		for (i = 0; settings.parallel_list[i]; ++i) {
 			const char *abbreviation =
-			    main_get_abbreviation(settings.parallel_list
-						      [i]);
+			    main_name_to_abbrev(settings.parallel_list[i]);
 			gtk_list_store_append(list_store, &iter);
 			gtk_list_store_set(list_store, &iter,
-					   0, main_get_module_description(settings.parallel_list[i]),
+					   0,
+					   main_get_module_description(settings.parallel_list[i]),
 					   1,
 					   (abbreviation
-						? abbreviation
-						: (gchar *)
-						  settings.parallel_list[i]),
+					    ? abbreviation
+					    : (gchar *)settings.parallel_list[i]),
 					   -1);
 		}
 	}
@@ -2836,7 +2789,7 @@ static void on_mod_sel_add_clicked(GtkWidget *button, gchar *user_data)
 		g_free(parallels);
 		return;
 	}
-	abbreviation = main_get_abbreviation(module_selected);
+	abbreviation = main_name_to_abbrev(module_selected);
 
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview));
@@ -3074,6 +3027,8 @@ static void create_preferences_dialog(void)
 	g_signal_connect(dialog_prefs, "response",
 			 G_CALLBACK(on_dialog_prefs_response), NULL);
 	g_signal_connect(dialog_prefs, "close",
+			 G_CALLBACK(on_dialog_prefs_close), NULL);
+	g_signal_connect(dialog_prefs, "destroy",
 			 G_CALLBACK(on_dialog_prefs_close), NULL);
 
 	/* color pickers */

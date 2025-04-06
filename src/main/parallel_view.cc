@@ -637,7 +637,7 @@ void main_update_parallel_page(void)
 		     (mod_name = settings.parallel_list[modidx]);
 		     modidx++) {
 			const gchar *rowcolor, *textcolor;
-			const char *real_mod = main_get_name(mod_name);
+			const char *real_mod = main_abbrev_to_name(mod_name);
 			if (real_mod)
 				mod_name = (gchar *)real_mod;
 
@@ -679,7 +679,7 @@ void main_update_parallel_page(void)
 							    mf->old_font_size_value, mf->old_font);
 			free_font(mf);
 
-			const char *abbreviation = main_get_abbreviation(mod_name);
+			const char *abbreviation = main_name_to_abbrev(mod_name);
 			tmpBuf = g_strdup_printf(
 			    "<tr bgcolor=\"%s\"><td>%s<b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\">[%s]</font></a></b><br/>",
 			    rowcolor,
@@ -795,7 +795,7 @@ static void interpolate_parallel_display(SWModule *control,
 	for (modidx = 0; modidx < parallel_count; ++modidx) {
 		gchar *mod = settings.parallel_list[modidx];
 		// might have an abbrev. get the real.
-		const char *real_mod = main_get_name(mod);
+		const char *real_mod = main_abbrev_to_name(mod);
 		if (real_mod)
 			mod = (gchar *)real_mod;
 
@@ -840,7 +840,7 @@ static void interpolate_parallel_display(SWModule *control,
 		for (modidx = 0; modidx < parallel_count; modidx++) {
 			gchar *mod = settings.parallel_list[modidx];
 			// might have an abbrev. get the real.
-			const char *real_mod = main_get_name(mod);
+			const char *real_mod = main_abbrev_to_name(mod);
 			if (real_mod)
 				mod = (gchar *)real_mod;
 
@@ -954,7 +954,7 @@ void main_update_parallel_page_detached(void)
 			     ? settings.parallel_list[0]
 			     : settings.MainWindowModule);
 	// might have an abbrev. get the real.
-	const char *real_mod = main_get_name(control_name);
+	const char *real_mod = main_abbrev_to_name(control_name);
 	if (real_mod)
 		control_name = (gchar *)real_mod;
 
@@ -980,7 +980,7 @@ void main_update_parallel_page_detached(void)
 	text += buf;
 
 	for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
-		const char *abbreviation = main_get_abbreviation(settings.parallel_list[modidx]);
+		const char *abbreviation = main_name_to_abbrev(settings.parallel_list[modidx]);
 		snprintf(buf, 499,
 			 "<th width=\"%d%%\" bgcolor=\"#c0c0c0\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></th>",
 			 fraction,

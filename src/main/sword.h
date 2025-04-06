@@ -68,8 +68,9 @@ extern gboolean companion_activity;
 
 void main_add_abbreviation(const char *name,
 			   const char *abbreviation);
-const char *main_get_abbreviation(const char *name);
-const char *main_get_name(const char *abbreviation);
+void main_clear_abbreviations(void);
+const char *main_name_to_abbrev(const char *name);
+const char *main_abbrev_to_name(const char *abbreviation);
 
 void main_book_heading(char *mod_name);
 void main_chapter_heading(char *mod_name);

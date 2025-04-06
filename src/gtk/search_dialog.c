@@ -1355,6 +1355,7 @@ static void _add_two_text_columns(GtkTreeView *treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
+	GtkAllocation allocation;
 
 	renderer = gtk_cell_renderer_text_new();
 
@@ -1362,6 +1363,12 @@ static void _add_two_text_columns(GtkTreeView *treeview)
 							  renderer,
 							  "text", 0, NULL);
 	gtk_tree_view_append_column(treeview, column);
+	gtk_widget_get_allocation(GTK_WIDGET(treeview), &allocation);
+	g_object_set(renderer, "wrap-mode", PANGO_WRAP_WORD, NULL);
+	g_object_set(renderer, "wrap-width", 2*allocation.width, NULL);
+	// using ↑↑↑ 2x width ↑↑↑ because it works and looks kinda right.
+	// we don't understand why allocation appears to be half size.
+
 	renderer = gtk_cell_renderer_text_new();
 
 	column = gtk_tree_view_column_new_with_attributes("Module",

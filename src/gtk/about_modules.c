@@ -406,7 +406,7 @@ void gui_display_about_module_dialog(gchar *modname)
 	feature = main_get_mod_config_entry(modname, "Feature");
 	langtoken = main_get_mod_config_entry(modname, "Lang");
 	language = main_get_module_language(modname);
-	abbreviation = main_get_abbreviation(modname);
+	abbreviation = main_name_to_abbrev(modname);
 
 	info = g_string_append(info,
 			       "<center><table border=\"0\" cellpadding=\"5\" cellspacing=\"0\">");

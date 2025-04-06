@@ -139,7 +139,7 @@ biblesync_navigate(char cmd, string speaker_uuid,
 		}
 
 		is_module = backend->is_module(bible.c_str());
-		real_name = main_get_name(bible.c_str());
+		real_name = main_abbrev_to_name(bible.c_str());
 
 		// if the offered name isn't known,
 		// maybe it's an abbreviation for something we do know.
@@ -829,7 +829,7 @@ const char *biblesync_get_passphrase()
 void biblesync_transmit_verse_list(char *modname, char *vlist)
 {
 	// see comment below in biblesync_prep_and_xmit() on abbreviation use.
-	const char *abbreviation = main_get_abbreviation(modname);
+	const char *abbreviation = main_name_to_abbrev(modname);
 
 	biblesync->Transmit((abbreviation
 				 ? (string)abbreviation
@@ -894,7 +894,7 @@ void biblesync_prep_and_xmit(const char *mod_name, const char *key)
 
 		// ** this key is not to be freed. **
 		char *osis_key = (char *)main_get_osisref_from_key(mod_name, key);
-		const char *abbreviation = main_get_abbreviation(mod_name);
+		const char *abbreviation = main_name_to_abbrev(mod_name);
 
 		// => longstanding behavioral premise of the Internet:
 		// - be conservative in what you xmit.

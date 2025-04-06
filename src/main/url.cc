@@ -670,7 +670,7 @@ static gint show_in_previewer(const gchar *url)
 	work_buf = g_strsplit(url, "/", 4);
 
 	// might be an abbrev.  get the real.
-	const char *real_mod = main_get_name(work_buf[MODULE]);
+	const char *real_mod = main_abbrev_to_name(work_buf[MODULE]);
 
 	mybuf = main_get_rendered_text((real_mod ? real_mod : work_buf[MODULE]),
 				       work_buf[KEY]);
@@ -736,7 +736,7 @@ gint sword_uri(const gchar *url, gboolean clicked)
 				*slash = '\0'; // limit to name end.
 
 			// might be an abbrev.  get the real.
-			const char *real_mod = main_get_name(name);
+			const char *real_mod = main_abbrev_to_name(name);
 
 			int mod_type = backend->module_type(real_mod ? real_mod : name);
 
@@ -775,7 +775,7 @@ gint sword_uri(const gchar *url, gboolean clicked)
 		   ? work_buf[MODULE]
 		   : settings.MainWindowModule);
 
-	const char *real_mod = main_get_name(mod);
+	const char *real_mod = main_abbrev_to_name(mod);
 	if (real_mod)
 		mod = (gchar *)real_mod;
 	

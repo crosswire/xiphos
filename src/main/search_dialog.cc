@@ -1419,7 +1419,7 @@ void main_do_dialog_search(void)
 
 	while (search_mods != NULL) {
 		module = (gchar *)search_mods->data;
-		const char *real_mod = main_get_name(module);
+		const char *real_mod = main_abbrev_to_name(module);
 		if (real_mod) {
 			g_free(module);
 			module = g_strdup((gchar *)real_mod);

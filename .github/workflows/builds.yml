@@ -1,6 +1,6 @@
 name: builds
 
-on:
+"on":
   push: {}
   pull_request: {}
 
@@ -31,7 +31,7 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: windows-installers-${{ matrix.version }}
+          name: windows-installers${{ matrix.version }}
           path: "*.exe"
 
   arch_gtk3_wk2_libsoup2:
@@ -303,22 +303,29 @@ jobs:
     if: contains(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
+      - name: checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-tags: true
       - name: download all the artifacts
         uses: actions/download-artifact@v4
       - name: prepare for release
         id: release
         run: |
           set -ex
-          ls -R
-          cd source
-          gunzip -k *.tar.gz
-          xz *.tar
-          cd ..
-          echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
+          mkdir source
+          tag="${GITHUB_REF#refs/tags/}"
+          git archive -o "source/xiphos-${tag}.tar" --prefix "xiphos-${tag}/" "${tag}"
+          xz "source/xiphos-${tag}.tar"
+          echo "tag=${tag}" >> $GITHUB_OUTPUT
+          pwd
       - name: create release
-        uses: ncipollo/release-action@v1.6.1
+        uses: ncipollo/release-action@v1.15.0
         with:
-          artifacts: source/*,windows-installers-win32/*,windows-installers-win64/*
+          artifacts: >
+            source/*,
+            windows-installers-win32/*,
+            windows-installers-win64/*
           allowUpdates: true
           name: Release ${{ steps.release.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}

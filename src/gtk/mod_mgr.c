@@ -2593,9 +2593,9 @@ void delete_obsolete(char *module, int *counter)
 		/* targeting coordinates acquired. */
 		char *mod_display_name, *obs_display_name, *question;
 		const char *mod_abbrev =
-		    main_get_abbreviation((const char *)module);
+		    main_name_to_abbrev((const char *)module);
 		const char *obs_abbrev =
-		    main_get_abbreviation((const char *)obsolete);
+		    main_name_to_abbrev((const char *)obsolete);
 
 		if (mod_abbrev)
 			mod_display_name =
