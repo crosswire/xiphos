@@ -408,6 +408,16 @@ msgstr "Basculer l’affichage des « Paroles de Christ en rouge »."
 
 #. (itstool) path: td/p
 #: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:192
+msgid "Toggle cross-references display."
+msgstr "Basculer l’affichage des références croisées."
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:198
+msgid "Toggle footnotes display."
+msgstr "Basculer l’affichage des notes."
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:204
 msgid "Toggle transliteration."
 msgstr "Basculer l’affichage des nombres de Strong."
 

@@ -398,6 +398,16 @@ msgstr "Alterna la visualizzazione delle “parole rosse di Cristo”."
 
 #. (itstool) path: td/p
 #: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:192
+msgid "Toggle cross-references display."
+msgstr "Alterna la visualizzazione delle referenze."
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:198
+msgid "Toggle footnotes display."
+msgstr "Alterna la visualizzazione delle note."
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:192
 msgid "Toggle transliteration."
 msgstr "Attiva/disattiva la traslitterazione."
 
