@@ -3,6 +3,15 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.3.2
+10 April 2025
+
+- Restored transliteration in Windows build.
+- Corrected a GTK signal error.
+- Updated FR + IT manuals for recent key sequence additions.
+- Much better fix to replace previous 1st time user mod.mgr flaw.
+________________________________________________________________
+
 Release 4.3.1
 17 March 2025
 
