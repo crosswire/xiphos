@@ -118,7 +118,7 @@ jobs:
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
-  fedora_gtk3_wk2_gtkhtml_libsoup3:
+  fedora_gtk3_wk2_libsoup3:
     runs-on: ubuntu-latest
     container:
       image: fedora:latest
@@ -138,7 +138,6 @@ jobs:
             docbook-utils \
             gcc-c++ \
             gtk3-devel \
-            gtkhtml3-devel \
             intltool \
             itstool \
             libappstream-glib-devel \
@@ -155,11 +154,11 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML:BOOL=ON -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
-  fedora_gtk3_wk2_gtkhtml_libsoup2:
+  fedora_gtk3_wk2_libsoup2:
     runs-on: ubuntu-latest
     container:
       image: fedora:latest
@@ -179,7 +178,6 @@ jobs:
             docbook-utils \
             gcc-c++ \
             gtk3-devel \
-            gtkhtml3-devel \
             intltool \
             itstool \
             libappstream-glib-devel \
@@ -196,7 +194,7 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML:BOOL=ON -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
@@ -297,8 +295,8 @@ jobs:
       - arch_gtk3_wk2_libsoup2
       - arch_gtk3_wk2_libsoup3
       - debian_gtk3_wk2_libsoup3
-      - fedora_gtk3_wk2_gtkhtml_libsoup3
-      - fedora_gtk3_wk2_gtkhtml_libsoup2
+      - fedora_gtk3_wk2_libsoup3
+      - fedora_gtk3_wk2_libsoup2
       - ubuntu_gtk3_wk2_libsoup3
     if: contains(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
