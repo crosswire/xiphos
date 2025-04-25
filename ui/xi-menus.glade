@@ -384,6 +384,17 @@
 		  </child>
 
 		  <child>
+		    <widget class="GtkCheckMenuItem" id="highlight_annotated_verses">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Highlight _Annotated Verses</property>
+		      <property name="use_underline">True</property>
+		      <property name="active">False</property>
+		      <property name="tooltip" translatable="yes">Apply inverse highlight to annotated verses</property>
+		      <signal name="activate" handler="on_annotate_highlight_activate" last_modification_time="Sat, 07 Mar 2009 01:19:13 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
 		    <widget class="GtkSeparatorMenuItem" id="separator4">
 		      <property name="visible">True</property>
 		    </widget>

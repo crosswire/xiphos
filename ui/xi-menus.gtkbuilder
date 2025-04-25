@@ -248,6 +248,15 @@
               </object>
             </child>
             <child>
+              <object class="GtkCheckMenuItem" id="highlight_annotated_verses">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Highlight _Annotated Verses</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_annotate_highlight_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
               <object class="GtkSeparatorMenuItem" id="separator1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
