@@ -2090,4 +2090,28 @@ char *inhale_text_from_file(const char *filename)
 	return blob;
 }
 
+/******************************************************************************
+ * Name
+ *   gui_format_this
+ *
+ * Synopsis
+ *   #include "about_modules.h"
+ *
+ *   void gui_format_this(GString *str, const char *format, ...)
+ *
+ * Description
+ *   intermediate function to get at g_string_append_vprintf
+ *
+ * Return value
+ *   void
+ */
+
+void gui_format_this(GString *str, const char *format, ...)
+{
+	va_list args;
+	va_start(args, format);
+	g_string_append_vprintf(str, format, args);
+	va_end(args);
+}
+
 /******   end of file   ******/
