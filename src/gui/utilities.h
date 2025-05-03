@@ -188,5 +188,6 @@ void language_init(void);
 #endif
 /* for daily devotional */ extern int month_day_counts[];
 extern char *(month_names[]);
+void gui_format_this(GString *str, const char *format, ...);
 
 #endif /* GS_UTILITIES_H */
