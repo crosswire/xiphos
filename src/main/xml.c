@@ -875,7 +875,7 @@ int xml_create_settings_file(char *path)
 			(const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,
 			(const xmlChar *)"justifymargins",
-			(const xmlChar *)"0");
+			(const xmlChar *)"1");
 
 	section_node =
 	    xmlNewChild(root_node, NULL, (const xmlChar *)"modules",
