@@ -1441,8 +1441,10 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 	GtkTreeIter update;
 	GtkTreeIter uninstalled;
 	GtkTreeIter prayerlist;
+	GtkTreeIter unindexed;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
+	gboolean first_unindexed = FALSE;
 
 	if (install) {
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_source))) {
@@ -1667,6 +1669,25 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 		} else {
 			XI_warning(("mod `%s' unknown type `%s'",
 				    info->name, info->type));
+		}
+
+		// unindexed modules.
+		if (!install && !main_optimal_search(info->name)) {
+			if (!first_unindexed) {
+				first_unindexed++;
+				/* add Unindexed folder */
+				gtk_tree_store_append(store, &unindexed, NULL);
+				gtk_tree_store_set(store, &unindexed, 0,
+						   _("Unindexed Modules"), -1);
+			}
+
+			add_language_folder(GTK_TREE_MODEL(store), unindexed,
+					    info->language);
+			add_module_to_language_folder(treeview,
+						      GTK_TREE_MODEL(store),
+						      unindexed,
+						      info,
+						      install);
 		}
 
 		g_free(info->name);
