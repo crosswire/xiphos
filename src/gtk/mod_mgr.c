@@ -162,7 +162,6 @@ static gboolean local;
 static const gchar *source;
 static const gchar *destination;
 static gboolean have_configs;
-static gboolean have_changes;
 static gint current_page;
 static GdkPixbuf *INSTALLED;
 static GdkPixbuf *FASTICON;
@@ -1005,7 +1004,10 @@ static void remove_install_modules(GList *modules, int activity)
 		tmp = g_list_next(tmp);
 	}
 	current_mod = NULL;
-	have_changes = TRUE;
+	if (!first_time_user) {
+		main_update_module_lists();
+		main_load_module_tree(sidebar.module_list);
+	}
 	g_list_free(modules);
 
 	if (result) {
@@ -1428,23 +1430,36 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 	GtkTreeIter repository_name;
 	GtkTreeIter category_type;
 	GtkTreeIter category_avail;
+
 	GtkTreeIter text;
+	gboolean need_text = 0;
 	GtkTreeIter commentary;
+	gboolean need_commentary = 0;
 	GtkTreeIter dictionary;
+	gboolean need_dictionary = 0;
 	GtkTreeIter devotional;
+	gboolean need_devotional = 0;
 	GtkTreeIter book;
+	gboolean need_book = 0;
 	GtkTreeIter map;
+	gboolean need_map = 0;
 	GtkTreeIter image;
+	gboolean need_image = 0;
 	GtkTreeIter cult;
+	gboolean need_cult = 0;
 	GtkTreeIter glossary;
+	gboolean need_glossary = 0;
+	GtkTreeIter prayerlist;
+	gboolean need_prayerlist = 0;
+
 	GtkTreeIter separator;
 	GtkTreeIter update;
 	GtkTreeIter uninstalled;
-	GtkTreeIter prayerlist;
 	GtkTreeIter unindexed;
+	gboolean first_unindexed = FALSE;
+
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
-	gboolean first_unindexed = FALSE;
 
 	if (install) {
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_source))) {
@@ -1491,6 +1506,37 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 		// true -> we must have all modules available, incl. ~/.sword content.
 	}
 
+	// find which folders are needed.
+	tmp2 = tmp;
+	while (tmp2) {
+		MOD_MGR *info = (MOD_MGR *)tmp2->data;
+		if (info->is_cult)
+			need_cult++;
+		else if (info->type[0] == 'B')
+			need_text++;
+		else if (info->type[0] == 'C')
+			need_commentary++;
+		else if (info->is_maps)
+			need_map++;
+		else if (info->is_images)
+			need_image++;
+		else if (info->is_devotional)
+			need_devotional++;
+		else if (info->is_glossary)
+			need_glossary++;
+		else if (info->type[0] == 'L')
+			need_dictionary++;
+		else if (info->is_prayerlist)
+			need_prayerlist++;
+		else if (info->type[0] == 'G')
+			need_book++;
+		else {
+			XI_warning(("mod `%s' unknown type `%s'",
+				    info->name, info->type));
+		}
+		tmp2 = g_list_next(tmp2);
+	}
+
 	gtk_tree_view_set_model(treeview, NULL);
 	store = GTK_TREE_STORE(create_model());
 	gtk_tree_store_clear(store);
@@ -1526,42 +1572,61 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 				   _("Categorized by\nModule Type"), -1);
 	}
 
+	/* add only those folders actually represented. */
+
 	/*  add Biblical Texts folder */
-	gtk_tree_store_append(store, &text, NULL);
-	gtk_tree_store_set(store, &text, 0, _("Biblical Texts"), -1);
+	if (need_text) {
+		gtk_tree_store_append(store, &text, NULL);
+		gtk_tree_store_set(store, &text, 0, _("Biblical Texts"), -1);
+	}
 
 	/*  add Commentaries folder */
-	gtk_tree_store_append(store, &commentary, NULL);
-	gtk_tree_store_set(store, &commentary, 0, _("Commentaries"), -1);
+	if (need_commentary) {
+		gtk_tree_store_append(store, &commentary, NULL);
+		gtk_tree_store_set(store, &commentary, 0, _("Commentaries"), -1);
+	}
 
 	/*  add Dictionaries folder */
-	gtk_tree_store_append(store, &dictionary, NULL);
-	gtk_tree_store_set(store, &dictionary, 0, _("Dictionaries"), -1);
+	if (need_dictionary) {
+		gtk_tree_store_append(store, &dictionary, NULL);
+		gtk_tree_store_set(store, &dictionary, 0, _("Dictionaries"), -1);
+	}
 
 	/*  add Glossaries folder */
-	gtk_tree_store_append(store, &glossary, NULL);
-	gtk_tree_store_set(store, &glossary, 0, _("Glossaries"), -1);
+	if (need_glossary) {
+		gtk_tree_store_append(store, &glossary, NULL);
+		gtk_tree_store_set(store, &glossary, 0, _("Glossaries"), -1);
+	}
 
 	/*  add Devotionals folder */
-	gtk_tree_store_append(store, &devotional, NULL);
-	gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"),
-			   -1);
+	if (need_devotional) {
+		gtk_tree_store_append(store, &devotional, NULL);
+		gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"), -1);
+	}
 
 	/*  add Books folder */
-	gtk_tree_store_append(store, &book, NULL);
-	gtk_tree_store_set(store, &book, 0, _("General Books"), -1);
+	if (need_book) {
+		gtk_tree_store_append(store, &book, NULL);
+		gtk_tree_store_set(store, &book, 0, _("General Books"), -1);
+	}
 
 	/*  add Maps folder */
-	gtk_tree_store_append(store, &map, NULL);
-	gtk_tree_store_set(store, &map, 0, _("Maps"), -1);
+	if (need_map) {
+		gtk_tree_store_append(store, &map, NULL);
+		gtk_tree_store_set(store, &map, 0, _("Maps"), -1);
+	}
 
 	/*  add Images folder */
-	gtk_tree_store_append(store, &image, NULL);
-	gtk_tree_store_set(store, &image, 0, _("Images"), -1);
+	if (need_image) {
+		gtk_tree_store_append(store, &image, NULL);
+		gtk_tree_store_set(store, &image, 0, _("Images"), -1);
+	}
 
 	/*  add Cult folder */
-	gtk_tree_store_append(store, &cult, NULL);
-	gtk_tree_store_set(store, &cult, 0, _("Cult/Unorthodox"), -1);
+	if (need_cult) {
+		gtk_tree_store_append(store, &cult, NULL);
+		gtk_tree_store_set(store, &cult, 0, _("Cult/Unorthodox"), -1);
+	}
 
 	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &separator, NULL);
@@ -1581,7 +1646,8 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 		gtk_tree_store_set(store, &uninstalled, 0,
 				   _("Uninstalled"), -1);
 	} else {
-		if (settings.prayerlist) {
+		/* add Journal/PrayerList folder */
+		if (settings.prayerlist && need_prayerlist) {
 			gtk_tree_store_append(store, &prayerlist, NULL);
 			gtk_tree_store_set(store, &prayerlist, 0,
 					   _("Prayer List/Journal"), -1);
@@ -1649,15 +1715,10 @@ static void load_module_tree(GtkTreeView *treeview, gboolean install)
 						      GTK_TREE_MODEL(store), dictionary,
 						      info, install);
 		} else if (info->type[0] == 'G') {
-			gchar *gstype;
-			if (first_time_user ||
-			    ((gstype =
-				  main_get_mod_config_entry(info->name,
-							    "GSType")) == NULL) ||
-			    strcmp(gstype, "PrayerList")) {
+			if (first_time_user || !info->is_prayerlist) {
 				add_module_to_language_folder(treeview, GTK_TREE_MODEL(store), book,
 							      info, install);
-			} else if (settings.prayerlist) {
+			} else if (settings.prayerlist && need_prayerlist) {
 				add_language_folder(GTK_TREE_MODEL(store), prayerlist,
 						    info->language);
 				add_module_to_language_folder(treeview,
@@ -2467,10 +2528,6 @@ static void on_dialog_destroy(GObject *object, gpointer user_data)
 
 	mod_mgr_shut_down();
 	sync_windows();
-	if (have_changes && !first_time_user) {
-		main_update_module_lists();
-		main_load_module_tree(sidebar.module_list);
-	}
 
 	/* little bits of nonsense left behind by the engine. */
 	str = g_strdup_printf("%s/dirlist", settings.homedir);
@@ -3364,7 +3421,6 @@ static void setup_ui_labels()
 {
 	gchar *str;
 
-	have_changes = FALSE;
 	str = g_strdup_printf("%s/%s", settings.homedir,
 			      DOTSWORD "/InstallMgr/InstallMgr.conf");
 	if (!mod_mgr_check_for_file(str)) {
