@@ -49,6 +49,7 @@ struct _mm
 	int is_images;
 	int is_glossary;
 	int is_cult;
+	int is_prayerlist;
 	int locked;
 	char *installsize;
 	char *about;

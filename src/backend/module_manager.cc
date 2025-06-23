@@ -227,6 +227,9 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			    (category &&
 			     !strcmp(category, "Cults / Unorthodox / Questionable Material"));
 
+			char *prayerlist = (char *)module->getConfigEntry("GSType");
+			mod_info->is_prayerlist = (prayerlist && !strcmp(prayerlist, "PrayerList"));
+
 			mod_info->old_version =
 			    backend_mod_mgr_get_config_entry(name, "Version");
 			mod_info->installed =
