@@ -319,7 +319,7 @@ jobs:
           echo "tag=${tag}" >> $GITHUB_OUTPUT
           pwd
       - name: create release
-        uses: ncipollo/release-action@v1.15.0
+        uses: ncipollo/release-action@v1.18.0
         with:
           artifacts: >
             source/*,
