@@ -83,7 +83,7 @@ SWBuf unknown_parallel = _("Unknown parallel module: ");
  */
 
 BackEnd *backend_p;
-extern gchar *no_content;
+extern const gchar *no_content;
 
 static const gchar *tf2of(int true_false)
 {
