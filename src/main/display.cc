@@ -1108,6 +1108,68 @@ GTKEntryDisp::display(SWModule &imodule)
 	return 0;
 }
 
+GString *
+GTKChapDisp::intro_material(sword::VerseKey *key,
+			    SWModule &imodule,
+			    int chapter,
+			    int curVerse,
+			    int curBook,
+			    int curTest)
+{
+	GString *intro = g_string_new(NULL);
+	gchar *buf;
+
+	imodule++;
+
+	//
+	// displayable content at 0:0 and n:0.
+	//
+	char oldAutoNorm = key->isAutoNormalize();
+	key->setAutoNormalize(0);
+
+	bool started_intro = false;
+
+	for (int i = 0; i < 2; ++i) {
+		// Get chapter 0 iff we're in chapter 1.
+		if ((i == 0) && (chapter != 1))
+			continue;
+
+		key->setChapter(i * chapter);
+		key->setVerse(0);
+
+		buf = g_strdup_printf("%s", strongs_or_morph
+				      ? block_render(imodule.renderText().c_str())
+				      : imodule.renderText().c_str());
+
+		if ((buf != NULL) && (strlen(buf) > 0))
+		{
+			if (!started_intro)
+			{
+				g_string_append(intro, "<div class=\"introMaterial\">");
+				started_intro = true;
+			}
+
+			g_string_append(intro, buf);
+			g_string_append(intro, "<br />");
+			g_free(buf);
+		}
+	}
+
+	if (started_intro)
+		g_string_append(intro, "</div>");		// finish what we started.
+
+	imodule--;
+
+	key->setAutoNormalize(oldAutoNorm);
+
+	key->setTestament(curTest);
+	key->setBook(curBook);
+	key->setChapter(chapter);
+	key->setVerse(curVerse);
+
+	return intro;
+}
+
 void
 GTKChapDisp::getVerseBefore(SWModule &imodule)
 {
@@ -1120,21 +1182,33 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	int curBook = key->getBook();
 	int curTest = key->getTestament();
 
+	GString *intro;
+
 	key->setVerse(1);
 	imodule--;
 
 	if (imodule.popError()) {
-		num = main_format_number(chapter);
 		buf = g_strdup_printf("<a name=\"TOP\"></a><div style=\"text-align: center\">"
-				      "<p><b><font size=\"%+d\">%s</font></b></p>"
-				      "<b>%s %s</b></div>",
+				      "<p><b><font size=\"%+d\">%s</font></b></p></div>",
 				      1 + mf->old_font_size_value,
-				      imodule.getDescription(),
-				      _("Chapter"),
-				      num);
+				      imodule.getDescription());
+		swbuf.append(buf);
+		g_free(buf);
+
+		if (ops->headings) {
+			intro = GTKChapDisp::intro_material(key, imodule,
+							    chapter, curVerse, curBook, curTest);
+			swbuf.append(intro->str);
+			g_string_free(intro, TRUE);
+		}
+
+		num = main_format_number(chapter);
+		buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
+				      _("Chapter"), num);
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
+
 	} else {
 
 		if (strongs_and_morph)
@@ -1162,17 +1236,28 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		num = main_format_number(chapter);
 		buf = g_strdup_printf(
-		    "<font color=\"%s\">%s</font>%s%s<br/><a name=\"TOP\"></a><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+		    "<font color=\"%s\">%s</font>%s%s<br/><a name=\"TOP\"></a><hr/>",
 		    settings.bible_text_color,
 		    (strongs_or_morph
 			 ? block_render(imodule.renderText().c_str())
 			 : imodule.renderText().c_str()),
 		    (settings.showversenum ? "</a>" : ""),
 		    // extra break when excess strongs/morph space.
-		    (strongs_or_morph ? "<br/>" : ""),
-		    _("Chapter"), num);
+		    (strongs_or_morph ? "<br/>" : ""));
+		swbuf.append(buf);
+		g_free(buf);
+
+		if (ops->headings) {
+			intro = GTKChapDisp::intro_material(key, imodule,
+							    chapter, curVerse, curBook, curTest);
+			swbuf.append(intro->str);
+			g_string_free(intro, TRUE);
+		}
+
+		num = main_format_number(chapter);
+		buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
+				      _("Chapter"), num);
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1181,53 +1266,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	}
 
 	imodule++;
-
-	if (!ops->headings)
-		return;
-
-	//
-	// Display content at 0:0 and n:0.
-	//
-	char oldAutoNorm = key->isAutoNormalize();
-	key->setAutoNormalize(0);
-
-	bool started_intro = false;
-
-	for (int i = 0; i < 2; ++i) {
-		// Get chapter 0 iff we're in chapter 1.
-		if ((i == 0) && (chapter != 1))
-			continue;
-
-		key->setChapter(i * chapter);
-		key->setVerse(0);
-
-		buf = g_strdup_printf("%s", strongs_or_morph
-				      ? block_render(imodule.renderText().c_str())
-				      : imodule.renderText().c_str());
-
-		if ((buf != NULL) && (strlen(buf) > 0))
-		{
-			if (!started_intro)
-			{
-				swbuf.append("<div class=\"introMaterial\">");
-				started_intro = true;
-			}
-
-			swbuf.append(buf);
-			swbuf.append("<br />");
-			g_free(buf);
-		}
-	}
-
-	if (started_intro)
-		swbuf.append("</div>");		// finish what we started.
-
-	key->setAutoNormalize(oldAutoNorm);
-
-	key->setTestament(curTest);
-	key->setBook(curBook);
-	key->setChapter(chapter);
-	key->setVerse(curVerse);
 }
 
 void
