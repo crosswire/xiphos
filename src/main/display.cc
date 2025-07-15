@@ -1149,7 +1149,11 @@ GTKChapDisp::intro_material(sword::VerseKey *key,
 				started_intro = true;
 			}
 
-			g_string_append(intro, buf);
+			g_string_append(intro,
+					(settings.imageresize
+					 ? AnalyzeForImageSize(buf, CURRENT_COLUMNS,
+							       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+					 : buf));
 			g_string_append(intro, "<br />");
 			g_free(buf);
 		}
