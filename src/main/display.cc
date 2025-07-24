@@ -1119,8 +1119,6 @@ GTKChapDisp::intro_material(sword::VerseKey *key,
 	GString *intro = g_string_new(NULL);
 	gchar *buf;
 
-	imodule++;
-
 	//
 	// displayable content at 0:0 and n:0.
 	//
@@ -1162,8 +1160,6 @@ GTKChapDisp::intro_material(sword::VerseKey *key,
 	if (started_intro)
 		g_string_append(intro, "</div>");		// finish what we started.
 
-	imodule--;
-
 	key->setAutoNormalize(oldAutoNorm);
 
 	key->setTestament(curTest);
@@ -1192,6 +1188,8 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	imodule--;
 
 	if (imodule.popError()) {
+		imodule++;	// restore position because we're at beginning
+
 		buf = g_strdup_printf("<a name=\"TOP\"></a><div style=\"text-align: center\">"
 				      "<p><b><font size=\"%+d\">%s</font></b></p></div>",
 				      1 + mf->old_font_size_value,
@@ -1252,6 +1250,8 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
+		imodule++;	// restore position after getting "before" verse
+
 		if (ops->headings) {
 			intro = GTKChapDisp::intro_material(key, imodule,
 							    chapter, curVerse, curBook, curTest);
@@ -1268,8 +1268,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		swbuf.append("</div>");
 	}
-
-	imodule++;
 }
 
 void
