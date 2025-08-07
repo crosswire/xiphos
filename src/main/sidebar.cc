@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sidebar.cc - sidebar interface to sword
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -883,7 +883,7 @@ static void add_module_to_language_folder(GtkTreeModel *model,
 	while (valid) {
 		/* Walk through the list, reading each row */
 		gchar *str_data;
-		const gchar *abbreviation = main_get_abbreviation(module_name);
+		const gchar *abbreviation = main_name_to_abbrev(module_name);
 
 		gtk_tree_model_get(model, &iter_iter, COL_CAPTION, &str_data, -1);
 		if (!strcmp(language, str_data)) {
@@ -930,19 +930,64 @@ static void add_module_to_language_folder(GtkTreeModel *model,
 void main_load_module_tree(GtkWidget *tree)
 {
 	GtkTreeStore *store;
+
 	GtkTreeIter text;
+	gboolean need_text = 0;
 	GtkTreeIter commentary;
+	gboolean need_commentary = 0;
 	GtkTreeIter dictionary;
+	gboolean need_dictionary = 0;
 	GtkTreeIter glossary;
+	gboolean need_glossary = 0;
 	GtkTreeIter devotional;
+	gboolean need_devotional = 0;
 	GtkTreeIter book;
+	gboolean need_book = 0;
 	GtkTreeIter map;
+	gboolean need_map = 0;
 	GtkTreeIter image;
+	gboolean need_image = 0;
 	GtkTreeIter cult;
+	gboolean need_cult = 0;
 	GtkTreeIter prayerlist;
+	gboolean need_prayerlist = 0;
+
 	GtkTreeIter child_iter;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
+
+	tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
+
+	// find which folders are needed.
+	tmp2 = tmp;
+	while (tmp2) {
+		MOD_MGR *info = (MOD_MGR *)tmp2->data;
+		if (info->is_cult)
+			need_cult++;
+		else if (info->type[0] == 'B')
+			need_text++;
+		else if (info->type[0] == 'C')
+			need_commentary++;
+		else if (info->is_maps)
+			need_map++;
+		else if (info->is_images)
+			need_image++;
+		else if (info->is_devotional)
+			need_devotional++;
+		else if (info->is_glossary)
+			need_glossary++;
+		else if (info->type[0] == 'L')
+			need_dictionary++;
+		else if (info->is_prayerlist)
+			need_prayerlist++;
+		else if (info->type[0] == 'G')
+			need_book++;
+		else {
+			XI_warning(("mod `%s' unknown type `%s'",
+				    info->name, info->type));
+		}
+		tmp2 = g_list_next(tmp2);
+	}
 
 	store = gtk_tree_store_new(N_COLUMNS,
 				   GDK_TYPE_PIXBUF,
@@ -977,79 +1022,95 @@ void main_load_module_tree(GtkWidget *tree)
 			   COL_OFFSET, _("Standard View"), -1);
 
 	/*  Commentaries folders */
-	gtk_tree_store_append(store, &commentary, NULL);
-	gtk_tree_store_set(store, &commentary,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, _("Commentaries"),
-			   COL_MODULE, NULL,
-			   COL_OFFSET, _("Commentaries"), -1);
+	if (need_commentary) {
+		gtk_tree_store_append(store, &commentary, NULL);
+		gtk_tree_store_set(store, &commentary,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, _("Commentaries"),
+				   COL_MODULE, NULL,
+				   COL_OFFSET, _("Commentaries"), -1);
+	}
 
 	/*  Dictionaries folders */
-	gtk_tree_store_append(store, &dictionary, NULL);
-	gtk_tree_store_set(store, &dictionary,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, _("Dictionaries"),
-			   COL_MODULE, NULL,
-			   COL_OFFSET, _("Dictionaries"), -1);
+	if (need_dictionary) {
+		gtk_tree_store_append(store, &dictionary, NULL);
+		gtk_tree_store_set(store, &dictionary,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, _("Dictionaries"),
+				   COL_MODULE, NULL,
+				   COL_OFFSET, _("Dictionaries"), -1);
+	}
 
 	/*  Glossaries folders */
-	gtk_tree_store_append(store, &glossary, NULL);
-	gtk_tree_store_set(store, &glossary,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, _("Glossaries"),
-			   COL_MODULE, NULL,
-			   COL_OFFSET, _("Glossaries"), -1);
+	if (need_glossary) {
+		gtk_tree_store_append(store, &glossary, NULL);
+		gtk_tree_store_set(store, &glossary,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, _("Glossaries"),
+				   COL_MODULE, NULL,
+				   COL_OFFSET, _("Glossaries"), -1);
+	}
 
 	/*  Devotionals folders */
-	gtk_tree_store_append(store, &devotional, NULL);
-	gtk_tree_store_set(store, &devotional,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, _("Daily Devotionals"),
-			   COL_MODULE, NULL,
-			   COL_OFFSET, _("Daily Devotionals"), -1);
+	if (need_devotional) {
+		gtk_tree_store_append(store, &devotional, NULL);
+		gtk_tree_store_set(store, &devotional,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, _("Daily Devotionals"),
+				   COL_MODULE, NULL,
+				   COL_OFFSET, _("Daily Devotionals"), -1);
+	}
 
 	/*  General Books folders */
-	gtk_tree_store_append(store, &book, NULL);
-	gtk_tree_store_set(store, &book,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, _("General Books"),
-			   COL_MODULE, NULL,
-			   COL_OFFSET, _("General Books"), -1);
+	if (need_book) {
+		gtk_tree_store_append(store, &book, NULL);
+		gtk_tree_store_set(store, &book,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, _("General Books"),
+				   COL_MODULE, NULL,
+				   COL_OFFSET, _("General Books"), -1);
+	}
 
 	/*  Maps folders */
-	gtk_tree_store_append(store, &map, NULL);
-	gtk_tree_store_set(store, &map,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, _("Maps"),
-			   COL_MODULE, NULL,
-			   COL_OFFSET, _("Maps"), -1);
+	if (need_map) {
+		gtk_tree_store_append(store, &map, NULL);
+		gtk_tree_store_set(store, &map,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, _("Maps"),
+				   COL_MODULE, NULL,
+				   COL_OFFSET, _("Maps"), -1);
+	}
 
 	/*  Images folders */
-	gtk_tree_store_append(store, &image, NULL);
-	gtk_tree_store_set(store, &image,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, _("Images"),
-			   COL_MODULE, NULL,
-			   COL_OFFSET, _("Images"), -1);
+	if (need_image) {
+		gtk_tree_store_append(store, &image, NULL);
+		gtk_tree_store_set(store, &image,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, _("Images"),
+				   COL_MODULE, NULL,
+				   COL_OFFSET, _("Images"), -1);
+	}
 
 	/*  Cult/Unorthodox/Questionable folders */
-	gtk_tree_store_append(store, &cult, NULL);
-	gtk_tree_store_set(store, &cult,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, _("Cult/Unorthodox"),
-			   COL_MODULE, NULL,
-			   COL_OFFSET, _("Cult/Unorthodox"), -1);
+	if (need_cult) {
+		gtk_tree_store_append(store, &cult, NULL);
+		gtk_tree_store_set(store, &cult,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, _("Cult/Unorthodox"),
+				   COL_MODULE, NULL,
+				   COL_OFFSET, _("Cult/Unorthodox"), -1);
+	}
 
 	/*  Prayer lists folder */
-	if (settings.prayerlist) {
+	if (settings.prayerlist && need_prayerlist) {
 		gtk_tree_store_append(store, &prayerlist, NULL);
 		gtk_tree_store_set(store, &prayerlist,
 				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
@@ -1058,8 +1119,6 @@ void main_load_module_tree(GtkWidget *tree)
 				   COL_MODULE, NULL,
 				   COL_OFFSET, _("Prayer List/Journal"), -1);
 	}
-
-	tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
 
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
@@ -1113,12 +1172,9 @@ void main_load_module_tree(GtkWidget *tree)
 						      dictionary, info->language,
 						      info->name, info->description);
 		} else if (info->type[0] == 'G') {
-			gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
-			if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
-				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      book, info->language,
-							      info->name, info->description);
-			}
+			add_module_to_language_folder(GTK_TREE_MODEL(store),
+						      book, info->language,
+						      info->name, info->description);
 		} else {
 			XI_warning(("mod `%s' unknown type `%s'",
 				    info->name, info->type));
@@ -1135,7 +1191,7 @@ void main_load_module_tree(GtkWidget *tree)
 	g_list_free(tmp);
 
 	/* prayer list folders */
-	if (settings.prayerlist) {
+	if (settings.prayerlist && need_prayerlist) {
 		tmp = get_list(PRAYER_LIST);
 		while (tmp != NULL) {
 			add_module_to_prayerlist_folder(GTK_TREE_MODEL(store),

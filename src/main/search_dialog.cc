@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * search_dialog.cc - glue  (: very sticky :)
  *
- * Copyright (C) 2004-2020 Xiphos Developer Team
+ * Copyright (C) 2004-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@
 #define SEARCHING _("Searching the ")
 #define SMODULE _(" Module")
 #define FINDS _("found in ")
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></STYLE></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /><STYLE type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></STYLE></head>"
 
 static BackEnd *backendSearch = NULL;
 
@@ -68,6 +68,18 @@ gboolean search_clearing;  // also accessed from search_dialog.c.
 
 static GList *list_of_finds;
 static GList *list_for_bookmarking = NULL;
+
+#ifndef SEARCHFLAG_MATCHWHOLEENTRY
+/*
+ * in official 1.9.0, this flag is a #define. but
+ * in sword svn 3895, which still calls itself 1.9.0,
+ * it's a class element in SWModule, a const int.
+ * this is self-defense against the change.
+ */
+# define SpecialSearchFlag SWModule::SEARCHFLAG_MATCHWHOLEENTRY
+#else
+# define SpecialSearchFlag SEARCHFLAG_MATCHWHOLEENTRY
+#endif
 
 /******************************************************************************
  * Name
@@ -104,7 +116,7 @@ gboolean main_export_current_adv_search(GString *str, gboolean html, gboolean wi
 		      : (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_words))
 			 ? _("Multi-word")
 			 : (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_optimized))
-			    ? _("Optimized (\"lucene\")")
+			    ? _("Optimized (\"Lucene\")")
 			    : _("Attribute"))))), 99);
 
 
@@ -1360,12 +1372,12 @@ void main_do_dialog_search(void)
 	// we will inadvertently return e.g. 140 plus 1401 and 1404.
 	if (search_type == -3) {
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_strongs))) {
-			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
+			search_params |= SpecialSearchFlag;
 			attribute_search_string = g_strdup_printf(
 			    "Word//Lemma./%s",
 			    search_string);
 		} else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(search1.rb_morphs))) {
-			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
+			search_params |= SpecialSearchFlag;
 			attribute_search_string = g_strdup_printf(
 			    "Word//Morph/%s",
 			    search_string);
@@ -1407,7 +1419,7 @@ void main_do_dialog_search(void)
 
 	while (search_mods != NULL) {
 		module = (gchar *)search_mods->data;
-		const char *real_mod = main_get_name(module);
+		const char *real_mod = main_abbrev_to_name(module);
 		if (real_mod) {
 			g_free(module);
 			module = g_strdup((gchar *)real_mod);

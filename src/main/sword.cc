@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sword.cc - glue
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -125,12 +125,34 @@ void main_add_abbreviation(const char *name, const char *abbreviation)
 
 /******************************************************************************
  * Name
- *   main_get_abbreviation
+ *   main_clear_abbreviations
  *
  * Synopsis
  *   #include "main/sword.h"
  *
- *   const char * main_get_abbreviation(const char *name)
+ *   void main_clear_abbreviations(void)
+ *
+ * Description
+ *   wipes abbrevs clean.
+ *
+ * Return value
+ *   void
+ */
+
+void main_clear_abbreviations(void)
+{
+	abbrev_name2abbrev.clear();
+	abbrev_abbrev2name.clear();
+}
+
+/******************************************************************************
+ * Name
+ *   main_name_to_abbrev
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   const char * main_name_to_abbrev(const char *name)
  *
  * Description
  *   gets abbreviation from real module, if available.
@@ -139,7 +161,7 @@ void main_add_abbreviation(const char *name, const char *abbreviation)
  *   const char *
  */
 
-const char *main_get_abbreviation(const char *name)
+const char *main_name_to_abbrev(const char *name)
 {
 	if (name == NULL)
 		return NULL;
@@ -152,12 +174,12 @@ const char *main_get_abbreviation(const char *name)
 
 /******************************************************************************
  * Name
- *   main_get_name
+ *   main_abbrev_to_name
  *
  * Synopsis
  *   #include "main/sword.h"
  *
- *   const char * main_get_name(const char *abbreviation)
+ *   const char * main_abbrev_to_name(const char *abbreviation)
  *
  * Description
  *   gets real module name from abbreviation, if available.
@@ -166,7 +188,7 @@ const char *main_get_abbreviation(const char *name)
  *   const char *
  */
 
-const char *main_get_name(const char *abbreviation)
+const char *main_abbrev_to_name(const char *abbreviation)
 {
 	if (abbreviation == NULL)
 		return NULL;
@@ -1837,7 +1859,8 @@ void main_flush_widgets_content(void)
 	GString *blank_html_content = g_string_new(NULL);
 	g_string_printf(blank_html_content,
 			"<html><head></head><body bgcolor=\"%s\" text=\"%s\"> </body></html>",
-			settings.bible_bg_color, settings.bible_text_color);
+			(settings.bible_bg_color   ? settings.bible_bg_color   : "0xFFFFFF"), 
+			(settings.bible_text_color ? settings.bible_text_color : "0x000000"));
 
 	if (gtk_widget_get_realized(GTK_WIDGET(widgets.html_text)))
 		HtmlOutput(blank_html_content->str, widgets.html_text, NULL, NULL);

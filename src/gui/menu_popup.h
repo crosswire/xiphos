@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * menu_popup.h - creation of (and call backs) for xiphos popup menus
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -85,6 +85,8 @@ void on_hebrew_cantillation_activate(GtkCheckMenuItem *menuitem,
 				     gpointer user_data);
 void on_headings_activate(GtkCheckMenuItem *menuitem,
 			  gpointer user_data);
+void on_italic_headings_activate(GtkCheckMenuItem *menuitem,
+				 gpointer user_data);
 void on_transliteration_activate(GtkCheckMenuItem *menuitem,
 				 gpointer user_data);
 void on_commentary_by_chapter_activate(GtkCheckMenuItem *menuitem,

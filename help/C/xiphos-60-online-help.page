@@ -53,14 +53,16 @@
     <title>Live Chat</title>
 
     <p>Another way to get help is with online chat.
-    <app>Xiphos</app> has an IRC channel on freenode, #xiphos. If you don't know
-    what that means, it's ok. Just click
-    <link href="http://webchat.freenode.net/?randomnick=1&amp;channels=xiphos&amp;prompt=1">this link</link> (it will open your web browser),
-    type a nickname or accept the default, and click "Click to join chatroom".
-    This will take you to a chatroom where the developers and other users are
+    <app>Xiphos</app> has an IRC channel on libera.chat, #xiphos. If you don't know
+    what that means, it's ok. Pull down the Help menu in <app>Xiphos</app>
+    and use the Live Chat selection. It will open a browser window connected to
+    the #xiphos channel. The chat name it gives you includes the version of
+    <app>Xiphos</app> you're using. Accept that default or type a nickname, and
+    join the chat. This is a chatroom where the developers and other users are
     available to help you with issues you may be having. Although many times
     someone will answer your question immediately, sometimes you may have to
     wait a few minutes or longer.</p>
+
   </section>
 
 </page>

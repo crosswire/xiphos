@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * bookmarks_treeview.c - gui for bookmarks using treeview
  *
- * Copyright (C) 2003-2020 Xiphos Developer Team
+ * Copyright (C) 2003-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -782,7 +782,7 @@ static gboolean button_release_event(GtkWidget *widget,
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected) && key != NULL) {
 			// might have an abbrev.  get the real.
-			const gchar *real_mod = main_get_name(module);
+			const gchar *real_mod = main_abbrev_to_name(module);
 			gchar *url = NULL;
 
 			if (!strcmp(module, "studypad"))

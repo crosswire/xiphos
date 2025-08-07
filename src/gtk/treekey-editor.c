@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * treekey-editor.c - functions to manage a treeview of keys
  *
- * Copyright (C) 2007-2020 Xiphos Developer Team
+ * Copyright (C) 2007-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -318,13 +318,7 @@ GtkWidget *create_edit_tree_menu(EDITOR *editor)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#if GTK_CHECK_VERSION(3, 14, 0)
-	glade_file =
-	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
-#else
-	glade_file =
-	    gui_general_user_file("xi-menus-popup_old.gtkbuilder", FALSE);
-#endif
+	glade_file = gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
 	GladeXML *gxml;
 	glade_file = gui_general_user_file("xi-menus.glade", FALSE);

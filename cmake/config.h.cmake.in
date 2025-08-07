@@ -65,3 +65,5 @@
 
 
 #endif
+
+#define GLIB_VERSION_MIN_REQUIRED (GLIB_VERSION_2_26)

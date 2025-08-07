@@ -579,6 +579,32 @@
                       </packing>
                     </child>
                     <child>
+                      <widget class="GtkLabel" id="labelbsp5">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="no"> </property>
+                        <property name="use_markup">True</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="labelbsp6">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="no"> </property>
+                        <property name="use_markup">True</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
                       <widget class="GtkHBox" id="hbox31">
                         <property name="visible">True</property>
                         <property name="homogeneous">True</property>
@@ -586,7 +612,7 @@
                           <widget class="GtkLabel" id="label41">
                             <property name="visible">True</property>
                             <property name="tooltip" translatable="yes">Name and size choice for any module in a given language; still overridden by a specific choice on a particular module</property>
-                            <property name="xalign">0.2</property>
+                            <property name="xalign">0.14</property>
                             <property name="label" translatable="yes">Font preferences, per language</property>
                             <property name="use_markup">True</property>
                           </widget>
@@ -608,8 +634,77 @@
                         </child>
                       </widget>
                       <packing>
+                        <property name="expand">False</property>
                         <property name="fill">False</property>
-                        <property name="position">3</property>
+                        <property name="position">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkHBox" id="columncountbox">
+                        <property name="visible">True</property>
+                        <property name="border_width">8</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <widget class="GtkLabel" id="columncountlabel">
+                            <property name="visible">True</property>
+                            <property name="tooltip" translatable="yes">Number of columns in which to display text; can be set per module in font dialog</property>
+                            <property name="xalign">0.1</property>
+                            <property name="label" translatable="yes">Default display columns</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="faill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkHBox" id="columncountvaluebox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="border_width">8</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <widget class="GtkComboBox" id="columncountvalue">
+                                <property name="visible">True</property>
+                                <property name="items" translatable="no">1
+2
+3
+4</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkCheckButton" id="justifybutton">
+                                <property name="label" translatable="yes">Justify margins</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="tooltip" translatable="yes">When unset, leave a ragged margin.</property>
+                                <property name="use_underline">True</property>
+                                <property name="active">True</property>
+                                <property name="draw_indicator">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">6</property>
                       </packing>
                     </child>
                   </widget>
@@ -632,12 +727,10 @@
                   <widget class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
                     <property name="border_width">6</property>
-
                     <child>
                       <widget class="GtkHBox" id="box-BSP-header">
                         <property name="visible">True</property>
                         <property name="homogeneous">True</property>
-
                         <child>
                           <widget class="GtkLabel" id="label17">
                             <property name="visible">True</property>
@@ -691,7 +784,6 @@
                             <property name="position">3</property>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkImage" id="image-biblesync">
                             <property name="visible">True</property>
@@ -1301,7 +1393,7 @@
                                 <property name="visible">True</property>
                                 <property name="tooltip" translatable="yes">Select a particular language for interface display, other than your usual setting</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Special Locale (requires restart)</property>
+                                <property name="label" translatable="yes">Locale (requires restart)</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
@@ -1313,7 +1405,7 @@
                               <widget class="GtkComboBox" id="combobox16">
                                 <property name="visible">True</property>
                                 <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Special Locale Combo</atkproperty>
+                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Locale Combo</atkproperty>
                                 </accessibility>
                               </widget>
                               <packing>

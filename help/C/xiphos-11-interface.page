@@ -188,6 +188,16 @@
       return to its normal single text view, and the new Parallel View window
       will show the complete chapter, showing the same translations.</p>
       <media style="image" mime="image/png" src="figures/interface_parallel-separate.png" />
+
+      <p>Be aware that Bibles have different versification schemes. That is,
+      most obviously some Bibles have only Old or New Testament. Beyond that, there
+      are historically varying ways of dividing the Bible into chapters and verses.
+      Within the parallel view, the first Bible controls what versification is
+      in use for all Bibles displayed. This means that if the 1st Bible is
+      limited to the Old Testament, none of the other Bibles in parallel views will
+      be able to navigate outisde the OT. There are other subtler differences, such
+      as KJV versification versus NRSV versification, where 3 John has a 15th
+      verse and Revelation 12 has an 18th verse.</p>
     </section>
 
     <section id="xiphos-bible-open-separate">
@@ -448,7 +458,7 @@
     </section>
 
     <section id="xiphos-commentary-headings">
-      <title>Commentary Headings.</title>
+      <title>Commentary Headings</title>
       <p>Many commentaries have additional headings which enable introductory
       information about the book and chapter currently being displayed in the
       <gui>Bible Text pane</gui>. In order to view them:</p>

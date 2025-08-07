@@ -193,6 +193,7 @@ target_include_directories(xiphos
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   PkgConfig::Biblesync
   )
@@ -204,6 +205,7 @@ target_link_libraries(xiphos
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   PkgConfig::Biblesync
   Xiphos::Main
@@ -213,6 +215,16 @@ target_link_libraries(xiphos
   Xiphos::Xiphos_html
   )
 
+if(WK_FOUND)
+  target_compile_definitions(xiphos
+    PRIVATE
+    PkgConfig::WK
+    )
+  target_link_libraries(xiphos
+    PRIVATE
+    PkgConfig::WK
+    )
+endif()
 
 if(GTK2 AND Unix-print_FOUND)
   # add gtk+-unix-print-2.0

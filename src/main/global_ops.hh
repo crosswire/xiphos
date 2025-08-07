@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * mod_global_ops.h - setup for SWORD global options in the gui
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,6 +40,7 @@ struct _global_ops
 	gboolean hebrewpoints;
 	gboolean hebrewcant;
 	gboolean headings;
+	gboolean italic_headings;
 	gboolean variants_primary;
 	gboolean variants_secondary;
 	gboolean variants_all;

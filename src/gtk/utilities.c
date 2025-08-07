@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * utilities.c - support functions
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <gtk/gtk.h>
-#include <zip.h>
+#include <minizip/zip.h>
 #include <zlib.h>
 
 #include "gui/utilities.h"
@@ -502,7 +502,7 @@ static void add_module_to_language_folder(GtkTreeModel *model,
 		if (!strcmp(language, str_data)) {
 			gchar *content;
 			const gchar *abbreviation =
-			    main_get_abbreviation(module_name);
+			    main_name_to_abbrev(module_name);
 
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
@@ -749,6 +749,15 @@ MOD_FONT *get_font(const gchar *mod_name)
 
 	mf->old_font = get_conf_file_item(file, mod_name, "Font");
 	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
+	mf->columns = get_conf_file_item(file, mod_name, "Columns");
+	if (mf->columns) {
+		mf->columns_value = atoi(mf->columns);
+		if ((mf->columns_value != -1) &&	/* -1 => use default */
+		    ((mf->columns_value < 1) ||
+		     (mf->columns_value > 4)))
+			mf->columns_value = 1;
+	} else
+		mf->columns_value = -1;	/* "not used" */
 
 	/* 1st try: module pref */
 	if ((mf->old_font == NULL) || !strcmp(mf->old_font, "none")) {
@@ -1897,7 +1906,7 @@ int ImageDimensions(const char *path, int *x, int *y)
 const char *strcasestr(const char *haystack, const char *needle);
 #endif
 
-const char *AnalyzeForImageSize(const char *origtext, GdkWindow *window)
+const char *AnalyzeForImageSize(const char *origtext, int columns, GdkWindow *window)
 {
 	static GString *resized;
 	static gint resized_init = FALSE;
@@ -1935,6 +1944,14 @@ const char *AnalyzeForImageSize(const char *origtext, GdkWindow *window)
 			gdk_drawable_get_size(window, &window_x,
 					      &window_y);
 #endif
+
+			/* in a world of multi-column output, */
+			/* we must constrain by column width. */
+			if (columns != 1) {
+				window_x /= columns;
+				window_x = (int)((float)window_x * 0.85);
+			}
+
 			if ((window_x > 200) || (window_y > 200)) {
 				window_x -= 23;
 				window_y -= 23;
@@ -2071,6 +2088,30 @@ char *inhale_text_from_file(const char *filename)
 
 	fclose(handle);
 	return blob;
+}
+
+/******************************************************************************
+ * Name
+ *   gui_format_this
+ *
+ * Synopsis
+ *   #include "about_modules.h"
+ *
+ *   void gui_format_this(GString *str, const char *format, ...)
+ *
+ * Description
+ *   intermediate function to get at g_string_append_vprintf
+ *
+ * Return value
+ *   void
+ */
+
+void gui_format_this(GString *str, const char *format, ...)
+{
+	va_list args;
+	va_start(args, format);
+	g_string_append_vprintf(str, format, args);
+	va_end(args);
 }
 
 /******   end of file   ******/

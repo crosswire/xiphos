@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * export_passage.cc -
  *
- * Copyright (C) 2008-2020 Xiphos Developer Team
+ * Copyright (C) 2008-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@
 #include "main/sword.h"
 #include "main/global_ops.hh"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } .transChangeSupplied { font-style: italic; } --></style></head><body>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } .transChangeSupplied { font-style: italic; } --></style></head><body>"
 
 enum {
 	TARGET_HTML,
@@ -220,7 +220,7 @@ static void _export_book(EXPORT_DATA data, int type)
 					       (settings.versestyle ? "<br>" : ""));
 		else
 			g_string_append_printf(str, " %s%s",
-					       (char *)mod->stripText(),
+					       mod->stripText(),
 					       (settings.versestyle ? "\n" : ""));
 
 		++myverse;
@@ -280,7 +280,7 @@ static void _export_chapter(EXPORT_DATA data, int type)
 					       (settings.versestyle ? "<br>" : ""));
 		else
 			g_string_append_printf(str, " %s%s",
-					       (char *)mod->stripText(),
+					       mod->stripText(),
 					       (settings.versestyle ? "\n" : ""));
 	}
 	if (type == HTML)
@@ -327,7 +327,7 @@ static void _export_verse(EXPORT_DATA data, int type)
 	else if (data.reference_last)
 		g_string_append_printf(str,
 				       data.plain_verselayout_single_verse_ref_last,
-				       (char *)mod->stripText(),
+				       mod->stripText(),
 				       book,
 				       key->getChapter(),
 				       key->getVerse(),
@@ -339,7 +339,7 @@ static void _export_verse(EXPORT_DATA data, int type)
 				       key->getChapter(),
 				       key->getVerse(),
 				       (data.version ? modstr : ""),
-				       (char *)mod->stripText());
+				       mod->stripText());
 
 	if (data.filename)
 		_save(data, str->str, str->len);
@@ -409,7 +409,7 @@ static void _export_verse_range(EXPORT_DATA data, int type)
 					       (settings.versestyle ? "<br>" : " "));
 		else
 			g_string_append_printf(str, data.verse_range_verse,
-					       (char *)mod->stripText(),
+					       mod->stripText(),
 					       (settings.versestyle ? "\n" : " "));
 	}
 	// back up one verse.

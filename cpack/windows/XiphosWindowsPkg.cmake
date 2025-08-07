@@ -32,16 +32,16 @@ set(CPACK_MONOLITHIC_INSTALL ON)
 
 # The name of a *.ico file used as the main icon for the generated
 # install program
-set (CPACK_NSIS_MUI_ICON "${PROJECT_SOURCE_DIR}/win32/nsis/pixmaps/icon-install.ico")
+set (CPACK_NSIS_MUI_ICON "${PROJECT_SOURCE_DIR}/cpack/windows/pixmaps/icon-install.ico")
 
 # The name of a *.ico file used as the main icon for the generated
 # uninstall program
-set (CPACK_NSIS_MUI_UNIICON "${PROJECT_SOURCE_DIR}/win32/nsis/pixmaps/icon-uninstall.ico")
+set (CPACK_NSIS_MUI_UNIICON "${PROJECT_SOURCE_DIR}/cpack/windows/pixmaps/icon-uninstall.ico")
 
 # CPACK_NSIS_INSTALLER_MUI_ICON_CODE is undocumented, but code is inserted for
 # setting up MUI_ICON and MUI_UNICON.
 # We use it for adding the font installer macro.
-configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_installer_mui_icon_code.nsh.in
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/windows/include/nsis_installer_mui_icon_code.nsh.in
   ${CMAKE_CURRENT_BINARY_DIR}/nsis_installer_mui_icon_code.nsh
   @ONLY
   NEWLINE_STYLE WIN32
@@ -51,11 +51,11 @@ file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_installer_mui_icon_code.nsh
 
 # The filename of a bitmap to use as the NSIS MUI_WELCOMEFINISHPAGE_BITMAP
 set (CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP
-  "${PROJECT_SOURCE_DIR}/win32/nsis/pixmaps/wizard.bmp")
+  "${PROJECT_SOURCE_DIR}/cpack/windows/pixmaps/wizard.bmp")
 
 # The filename of a bitmap to use as the NSIS MUI_UNWELCOMEFINISHPAGE_BITMAP
 set (CPACK_NSIS_MUI_UNWELCOMEFINISHPAGE_BITMAP
-  "${PROJECT_SOURCE_DIR}/win32/nsis/pixmaps/wizard-uninstall.bmp")
+  "${PROJECT_SOURCE_DIR}/cpack/windows/pixmaps/wizard-uninstall.bmp")
 
 # Extra NSIS commands that will be added to the beginning of the
 # install Section
@@ -66,7 +66,7 @@ set (CPACK_NSIS_MUI_UNWELCOMEFINISHPAGE_BITMAP
 
 # Extra NSIS commands that will be added to the end of the install Section
 # We use it for installing extra fonts and make Xiphos handle sword:// urls
-configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_extra_install_commands.nsh.in
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/windows/include/nsis_extra_install_commands.nsh.in
   ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_install_commands.nsh
   @ONLY
   NEWLINE_STYLE WIN32
@@ -76,7 +76,7 @@ file(READ ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_install_commands.nsh
 
 # Extra NSIS commands that will be added to the uninstall Section
 # We use it for disabling Xiphos to handle sword:// urls
-configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/windows/nsis_extra_uninstall_commands.nsh.in
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/windows/include/nsis_extra_uninstall_commands.nsh.in
   ${CMAKE_CURRENT_BINARY_DIR}/nsis_extra_uninstall_commands.nsh
   @ONLY
   NEWLINE_STYLE WIN32

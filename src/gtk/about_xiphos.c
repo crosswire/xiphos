@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * about_xiphos.c - Xiphos about dialog
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +46,8 @@ static const gchar *authors[] = {
     "Martin Zibricky",
     "Dmitrijs Ledkovs",
     "Christopher Bayliss",
+    "Greg Hellings",
+    "Nicholas Walkewicz",
     NULL};
 
 static const gchar *documenters[] = {
@@ -58,7 +60,7 @@ static const gchar *documenters[] = {
     NULL};
 
 static gchar *translators =
-    "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat\nMartin Zibricky\nAri Constancio\nGertjan Francke\nEicke Godehardt\nAndy Piper\nThomas Abthorpe\nEeli Kaikkonen";
+    "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nCyrille Mattiuzzo\nZdenko Podobný\nPavlo Bohmat\nMartin Zibricky\nAri Constancio\nGertjan Francke\nEicke Godehardt\nAndy Piper\nThomas Abthorpe\nEeli Kaikkonen\nAntoine Đỗ\nGiải Ngố";
 
 /******************************************************************************
  * Name
@@ -126,7 +128,7 @@ GtkWidget *gui_create_about_xiphos(void)
 
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(about1), versionbuild);
 	gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(about1),
-				       _("Copyright © 2000-2020 Xiphos Development Team"));
+				       _("Copyright © 2000-2025 Xiphos Development Team"));
 	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(about1),
 				      _("\nPowered by The SWORD Project.\nWe would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(about1),

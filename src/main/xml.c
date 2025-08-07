@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * xml.c -
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -642,7 +642,7 @@ int xml_create_settings_file(char *path)
 	    xmlNewChild(root_node, NULL, (const xmlChar *)"fontsize",
 			NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versenum",
-			(const xmlChar *)"+0");
+			(const xmlChar *)"-1");
 	xmlNewTextChild(section_node, NULL,
 			(const xmlChar *)"basefontsize",
 			(const xmlChar *)"+0");
@@ -810,22 +810,29 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL,
 			(const xmlChar *)"dailydevotional",
 			(const xmlChar *)"0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"splash",
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"splash",
 			(const xmlChar *)"1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"usedefault",
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"usedefault",
 			(const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,
 			(const xmlChar *)"formatpercom",
 			(const xmlChar *)"1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showcomms",
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"showcomms",
 			(const xmlChar *)"1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showdicts",
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"showdicts",
 			(const xmlChar *)"1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showtexts",
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"showtexts",
 			(const xmlChar *)"1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versestyle",
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"versestyle",
 			(const xmlChar *)"1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"pinnedtabs",
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"pinnedtabs",
 			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
 			(const xmlChar *)"showversenum",
@@ -842,7 +849,8 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL,
 			(const xmlChar *)"verse_num_superscript",
 			(const xmlChar *)"0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"readaloud",
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"readaloud",
 			(const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL,
 			(const xmlChar *)"versehighlight",
@@ -852,6 +860,21 @@ int xml_create_settings_file(char *path)
 			(const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,
 			(const xmlChar *)"xrefsinverselist",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"prayerlist",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"statusbar",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"alternation",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"displaycolumns",
+			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"justifymargins",
 			(const xmlChar *)"1");
 
 	section_node =

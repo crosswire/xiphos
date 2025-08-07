@@ -51,7 +51,7 @@ language.
 For a list of language codes, see:
 https://www.gnu.org/software/gettext/manual/html_node/Usual-Language-Codes.html
 
-Then, in in your build directory, run:
+Then, in your build directory, run:
 
     $ make mhelp
 

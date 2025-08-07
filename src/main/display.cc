@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * display.cc -
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -89,15 +89,21 @@ const gchar *no_content =
     N_("<br/><br/><center><i>This module has no content at this point.</i></center>");
 
 #define HTML_START \
-	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"> \
+	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /> \
 <style type=\"text/css\"><!-- \
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right; } \
-body { background-color:%s; color:%s; } \
+body { background-color:%s; color:%s; -webkit-column-count: %d ; margin-top: 0.1cm ; %s } \
+td { %s } \
 .introMaterial { font-style: italic; } \
-a:link{ color:%s } %s %s -->\
-</style>%s</head><body>"
-// 6 interpolable strings: bg/txt/link colors, block, renderHeader, external css.
+a:link{ color:%s } %s %s \
+h3 { font-style: %s } --> \
+%s</style> %s </head><body>"
+// 11 interpolable values: bg/txt/link colors, columns, justify (2x, body+td),
+// block, renderHeader, italic heading, mod.columns, external css.
+
+#define	JUSTIFY_SELECT	(settings.justify_margins ? " text-align: justify ;" : "")
+#define	ITALIC_SELECT	(ops->italic_headings ? "italic" : "bold" )
 
 // CSS style blocks to control blocked strongs+morph output
 // BOTH is when the user wants to see both types of markup.
@@ -115,6 +121,8 @@ a:link{ color:%s } %s %s -->\
 	" .morph   { position: absolute; top:  0.4em; left: 0; white-space: nowrap; }"
 
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
+
+#define CURRENT_COLUMNS	(((mf->columns_value > 0) && (mf->columns_value < 5)) ? mf->columns_value : settings.display_columns)
 
 using namespace sword;
 using namespace std;
@@ -288,8 +296,12 @@ ClearImages(gchar *text)
 }
 
 //
-// utility function to blank `<font face="..." />' content from text.
+// utility function to blank font names `<font face="..." />' in text.
 //
+
+#define	CLEAR_FONT_NAME		"<font face=\""
+#define	CLEAR_FONT_NAME_LENGTH	12
+
 void
 ClearFontFaces(gchar *text)
 {
@@ -297,17 +309,14 @@ ClearFontFaces(gchar *text)
 
 	// huge assumption: no nested <font> specs: <font face="">
 	// is never followed by another <font anything> before </font>.
-	for (s = strstr(text, "<font face=\"Galax"); s; s = strstr(s, "<font face=\"Galax")) {
+	for (s = strstr(text, CLEAR_FONT_NAME); s; s = strstr(s, CLEAR_FONT_NAME)) {
 		gchar *t;
-		if ((t = strchr(s + 15, '>'))) {
-			while (s <= t)
-				*(s++) = ' ';
-			s = strstr(s, "</font>");
-			t = s + 6;
-			while (s <= t)
-				*(s++) = ' ';
+		s += CLEAR_FONT_NAME_LENGTH;
+		if ((t = strchr(s, '"'))) {
+			while (s < t)
+				*(s++) = '.';
 		} else {
-			XI_message(("ClearFontFaces: no font end: %s\n", s));
+			XI_message(("ClearFontFaces: no closing double quote: %s\n", s));
 			return;
 		}
 	}
@@ -673,7 +682,7 @@ CleanupContent(GString *text,
 	if (ops->respect_font_faces == 0)
 		ClearFontFaces((gchar *)text->str);
 	else if ((ops->respect_font_faces == -1) && // "unknown"
-		 (strcasestr(text->str, "<font face=\"Galax") != NULL)) {
+		 (strcasestr(text->str, CLEAR_FONT_NAME) != NULL)) {
 		ops->respect_font_faces = 1; // now known.
 		main_save_module_options(name, "Respect Font Faces", 1);
 	}
@@ -785,7 +794,7 @@ set_render_numbers(SWModule &imodule, GLOBAL_OPS *ops)
 // display of commentary by chapter.
 //
 char
-GTKEntryDisp::displayByChapter(SWModule &imodule)
+GTKEntryDisp::displayByChapter(SWModule &imodule, int columns)
 {
 	imodule.setSkipConsecutiveLinks(true);
 
@@ -895,7 +904,7 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 			g_free(buf);
 		}
 		swbuf.append(settings.imageresize
-				 ? AnalyzeForImageSize(rework->str,
+				 ? AnalyzeForImageSize(rework->str, columns,
 						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				 : rework->str /* left as-is */);
 		if (settings.showversenum)
@@ -940,8 +949,8 @@ GTKEntryDisp::display(SWModule &imodule)
 	if (!gtk_widget_get_realized(GTK_WIDGET(gtkText)))
 		gtk_widget_realize(gtkText);
 
-	const char *abbreviation = main_get_abbreviation(imodule.getName());
-	gchar *buf;
+	const char *abbreviation = main_name_to_abbrev(imodule.getName());
+	gchar *buf, *mod_column_count = NULL;
 	mf = get_font(imodule.getName());
 	swbuf = "";
 	footnote = xref = 0;
@@ -961,12 +970,17 @@ GTKEntryDisp::display(SWModule &imodule)
 		set_morph_order(imodule);
 	set_render_numbers(imodule, ops);
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START // //bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "[<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "<font color=\"%s\">*%s*</font></a>]<br/>",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (strongs_and_morph // both
 				   ? CSS_BLOCK_BOTH
@@ -976,6 +990,8 @@ GTKEntryDisp::display(SWModule &imodule)
 						 ? DOUBLE_SPACE
 						 : ""))),
 			      imodule.getRenderHeader(),
+			      ITALIC_SELECT,
+			      (mod_column_count ? mod_column_count : ""),
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
@@ -985,6 +1001,8 @@ GTKEntryDisp::display(SWModule &imodule)
 			      (abbreviation ? abbreviation : imodule.getName()));
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
@@ -1008,7 +1026,7 @@ GTKEntryDisp::display(SWModule &imodule)
 	// (this option can be enabled only in commentaries.)
 	//
 	if (ops->commentary_by_chapter)
-		return displayByChapter(imodule);
+		return displayByChapter(imodule, CURRENT_COLUMNS);
 
 	// we will use the module cache for regular commentaries,
 	// which navigate/change a lot, whereas pers.comms, lexdicts,
@@ -1062,8 +1080,9 @@ GTKEntryDisp::display(SWModule &imodule)
 					else
 						day = (char *)"XX";
 					int idx_month = atoi(month) - 1;
+					pretty = gettext(month_names[idx_month]);
 					pretty = g_strdup_printf("<b>%s %s</b><br/>",
-								 gettext(month_names[idx_month]),
+								 (pretty ? pretty : "--"),
 								 day);
 					swbuf.append(pretty);
 					g_free(pretty);
@@ -1074,7 +1093,7 @@ GTKEntryDisp::display(SWModule &imodule)
 	}
 
 	swbuf.append(settings.imageresize
-			 ? AnalyzeForImageSize(rework->str,
+			 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 					       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 			 : rework->str /* left as-is */);
 
@@ -1089,6 +1108,68 @@ GTKEntryDisp::display(SWModule &imodule)
 	return 0;
 }
 
+GString *
+GTKChapDisp::intro_material(sword::VerseKey *key,
+			    SWModule &imodule,
+			    int chapter,
+			    int curVerse,
+			    int curBook,
+			    int curTest)
+{
+	GString *intro = g_string_new(NULL);
+	gchar *buf;
+
+	//
+	// displayable content at 0:0 and n:0.
+	//
+	char oldAutoNorm = key->isAutoNormalize();
+	key->setAutoNormalize(0);
+
+	bool started_intro = false;
+
+	for (int i = 0; i < 2; ++i) {
+		// Get chapter 0 iff we're in chapter 1.
+		if ((i == 0) && (chapter != 1))
+			continue;
+
+		key->setChapter(i * chapter);
+		key->setVerse(0);
+
+		buf = g_strdup_printf("%s", strongs_or_morph
+				      ? block_render(imodule.renderText().c_str())
+				      : imodule.renderText().c_str());
+
+		if ((buf != NULL) && (strlen(buf) > 0))
+		{
+			if (!started_intro)
+			{
+				g_string_append(intro, "<div class=\"introMaterial\">");
+				started_intro = true;
+			}
+
+			g_string_append(intro,
+					(settings.imageresize
+					 ? AnalyzeForImageSize(buf, CURRENT_COLUMNS,
+							       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+					 : buf));
+			g_string_append(intro, "<br />");
+			g_free(buf);
+		}
+	}
+
+	if (started_intro)
+		g_string_append(intro, "</div>");		// finish what we started.
+
+	key->setAutoNormalize(oldAutoNorm);
+
+	key->setTestament(curTest);
+	key->setBook(curBook);
+	key->setChapter(chapter);
+	key->setVerse(curVerse);
+
+	return intro;
+}
+
 void
 GTKChapDisp::getVerseBefore(SWModule &imodule)
 {
@@ -1101,21 +1182,35 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	int curBook = key->getBook();
 	int curTest = key->getTestament();
 
+	GString *intro;
+
 	key->setVerse(1);
 	imodule--;
 
 	if (imodule.popError()) {
-		num = main_format_number(chapter);
+		imodule++;	// restore position because we're at beginning
+
 		buf = g_strdup_printf("<a name=\"TOP\"></a><div style=\"text-align: center\">"
-				      "<p><b><font size=\"%+d\">%s</font></b></p>"
-				      "<b>%s %s</b></div>",
+				      "<p><b><font size=\"%+d\">%s</font></b></p></div>",
 				      1 + mf->old_font_size_value,
-				      imodule.getDescription(),
-				      _("Chapter"),
-				      num);
+				      imodule.getDescription());
+		swbuf.append(buf);
+		g_free(buf);
+
+		if (ops->headings) {
+			intro = GTKChapDisp::intro_material(key, imodule,
+							    chapter, curVerse, curBook, curTest);
+			swbuf.append(intro->str);
+			g_string_free(intro, TRUE);
+		}
+
+		num = main_format_number(chapter);
+		buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
+				      _("Chapter"), num);
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
+
 	} else {
 
 		if (strongs_and_morph)
@@ -1143,72 +1238,36 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		num = main_format_number(chapter);
 		buf = g_strdup_printf(
-		    "<font color=\"%s\">%s</font>%s%s<br/><a name=\"TOP\"></a><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+		    "<font color=\"%s\">%s</font>%s%s<br/><a name=\"TOP\"></a><hr/>",
 		    settings.bible_text_color,
 		    (strongs_or_morph
 			 ? block_render(imodule.renderText().c_str())
 			 : imodule.renderText().c_str()),
 		    (settings.showversenum ? "</a>" : ""),
 		    // extra break when excess strongs/morph space.
-		    (strongs_or_morph ? "<br/>" : ""),
-		    _("Chapter"), num);
+		    (strongs_or_morph ? "<br/>" : ""));
+		swbuf.append(buf);
+		g_free(buf);
+
+		imodule++;	// restore position after getting "before" verse
+
+		if (ops->headings) {
+			intro = GTKChapDisp::intro_material(key, imodule,
+							    chapter, curVerse, curBook, curTest);
+			swbuf.append(intro->str);
+			g_string_free(intro, TRUE);
+		}
+
+		num = main_format_number(chapter);
+		buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
+				      _("Chapter"), num);
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
 
 		swbuf.append("</div>");
 	}
-
-	imodule++;
-
-	if (!ops->headings)
-		return;
-
-	//
-	// Display content at 0:0 and n:0.
-	//
-	char oldAutoNorm = key->isAutoNormalize();
-	key->setAutoNormalize(0);
-
-	bool started_intro = false;
-
-	for (int i = 0; i < 2; ++i) {
-		// Get chapter 0 iff we're in chapter 1.
-		if ((i == 0) && (chapter != 1))
-			continue;
-
-		key->setChapter(i * chapter);
-		key->setVerse(0);
-
-		buf = g_strdup_printf("%s", strongs_or_morph
-				      ? block_render(imodule.renderText().c_str())
-				      : imodule.renderText().c_str());
-
-		if ((buf != NULL) && (strlen(buf) > 0))
-		{
-			if (!started_intro)
-			{
-				swbuf.append("<div class=\"introMaterial\">");
-				started_intro = true;
-			}
-
-			swbuf.append(buf);
-			swbuf.append("<br />");
-			g_free(buf);
-		}
-	}
-
-	if (started_intro)
-		swbuf.append("</div>");		// finish what we started.
-
-	key->setAutoNormalize(oldAutoNorm);
-
-	key->setTestament(curTest);
-	key->setBook(curBook);
-	key->setChapter(chapter);
-	key->setVerse(curVerse);
 }
 
 void
@@ -1284,8 +1343,9 @@ GTKChapDisp::display(SWModule &imodule)
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
-	gchar *buf;
+	gchar *buf, *mod_column_count = NULL;
 	GString *rework; // for image size analysis rework.
+	gboolean paragraph_end_pending;
 	const char *ModuleName = imodule.getName();
 	ops = main_new_globals(ModuleName);
 	cache_flags = ConstructFlags(ops);
@@ -1324,10 +1384,15 @@ GTKChapDisp::display(SWModule &imodule)
 	swbuf = "";
 	footnote = xref = 0;
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START // "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      // strongs & morph specs win over dblspc.
 			      (strongs_and_morph // both
@@ -1338,11 +1403,15 @@ GTKChapDisp::display(SWModule &imodule)
 						 ? DOUBLE_SPACE
 						 : ""))),
 			      imodule.getRenderHeader(),
+			      ITALIC_SELECT,
+			      (mod_column_count ? mod_column_count : ""),
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
@@ -1381,7 +1450,7 @@ GTKChapDisp::display(SWModule &imodule)
 
 		if (cache_flags & ModuleCache::Headings) {
 			swbuf.append(settings.imageresize
-					 ? AnalyzeForImageSize(cVerse.GetHeader(),
+					 ? AnalyzeForImageSize(cVerse.GetHeader(), CURRENT_COLUMNS,
 							       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 					 : cVerse.GetHeader() /* left as-is */);
 		} else
@@ -1395,6 +1464,8 @@ GTKChapDisp::display(SWModule &imodule)
 			cVerse.SetText(rework->str, cache_flags);
 		} else
 			rework = g_string_new(cVerse.GetText());
+
+		paragraph_end_pending = FALSE;
 
 		// special contrasty highlighting
 		marked_element *e;
@@ -1412,6 +1483,21 @@ GTKChapDisp::display(SWModule &imodule)
 			    mf->old_font_size_value);
 			swbuf.append(buf);
 			g_free(buf);
+
+			// ugly ... ugly ... ugly.
+			// some modules have verses that end in a paragraph marker, "<p/>".
+			// this mis-interacts with verse highlight, causing breakage of font
+			// closure, so that the entire rest of the chapter gets inadvertently
+			// background-highlighted.
+			// solution is ... be still, my wretching stomach ...
+			// notice when an element ends this way, eliminate it, and then
+			// re-introduce it if necessary, after font closure.
+			if ((rework->len > 4) &&
+			    !strcasecmp(rework->str + rework->len-4, "<p/>"))
+			{
+				paragraph_end_pending = TRUE;
+				g_string_erase(rework, rework->len-4, 4);	// remove last 4 chars.
+			}
 		}
 
 		gchar *num = main_format_number(key->getVerse());
@@ -1446,7 +1532,8 @@ GTKChapDisp::display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if ((key->getVerse() == curVerse) || (e && settings.annotate_highlight)) {
+		if ((key->getVerse() == curVerse) ||
+		    (e && settings.annotate_highlight)) {
 			buf = g_strdup_printf("<font color=\"%s\">",
 					      ((settings.versehighlight ||
 						(e && settings.annotate_highlight))
@@ -1459,7 +1546,7 @@ GTKChapDisp::display(SWModule &imodule)
 		}
 
 		swbuf.append(settings.imageresize
-				 ? AnalyzeForImageSize(rework->str,
+				 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				 : rework->str /* left as-is */);
 
@@ -1481,6 +1568,9 @@ GTKChapDisp::display(SWModule &imodule)
 		if (((key->getVerse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
 			swbuf.append("</font></span>");
+
+		if (paragraph_end_pending)
+			swbuf.append("<p/>");
 	}
 
 	getVerseAfter(imodule);
@@ -1516,7 +1606,7 @@ GTKChapDisp::display(SWModule &imodule)
 // display of commentary by chapter.
 //
 char
-DialogEntryDisp::displayByChapter(SWModule &imodule)
+DialogEntryDisp::displayByChapter(SWModule &imodule, int columns)
 {
 	imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *) imodule;
@@ -1572,7 +1662,7 @@ DialogEntryDisp::displayByChapter(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 		swbuf.append(settings.imageresize
-				 ? AnalyzeForImageSize(rework->str,
+				 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				 : rework->str /* left as-is */);
 	}
@@ -1594,7 +1684,7 @@ char
 DialogEntryDisp::display(SWModule &imodule)
 {
 	swbuf = "";
-	char *buf;
+	char *buf, *mod_column_count = NULL;
 	mf = get_font(imodule.getName());
 	ops = main_new_globals(imodule.getName());
 	main_set_global_options(ops);
@@ -1603,6 +1693,9 @@ DialogEntryDisp::display(SWModule &imodule)
 
 	imodule.getRawEntry(); // snap to entry
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
@@ -1610,9 +1703,13 @@ DialogEntryDisp::display(SWModule &imodule)
 			      "[*%s*]</a></font><br/>",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
+			      (mod_column_count ? mod_column_count : ""),
+			      ITALIC_SELECT,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
@@ -1622,6 +1719,8 @@ DialogEntryDisp::display(SWModule &imodule)
 			      imodule.getName());
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	if (!valid_scripture_key) {
 		swbuf.append(no_content);
@@ -1639,7 +1738,7 @@ DialogEntryDisp::display(SWModule &imodule)
 	// instead heading off to show a whole chapter
 	//
 	if (ops->commentary_by_chapter)
-		return displayByChapter(imodule);
+		return displayByChapter(imodule, CURRENT_COLUMNS);
 
 	if (be->module_type(imodule.getName()) == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *) imodule;
@@ -1671,7 +1770,7 @@ DialogEntryDisp::display(SWModule &imodule)
 	}
 
 	swbuf.append(settings.imageresize
-			 ? AnalyzeForImageSize(rework->str,
+			 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 					       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 			 : rework->str /* left as-is */);
 
@@ -1694,9 +1793,9 @@ DialogChapDisp::display(SWModule &imodule)
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
-	gchar *buf;
+	gchar *buf, *mod_column_count = NULL;
 	GString *rework; // for image size analysis rework.
-
+	gboolean paragraph_end_pending;
 	const char *ModuleName = imodule.getName();
 	ops = main_new_globals(ModuleName);
 	cache_flags = ConstructFlags(ops);
@@ -1733,10 +1832,16 @@ DialogChapDisp::display(SWModule &imodule)
 
 	swbuf = "";
 	footnote = xref = 0;
+
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (strongs_and_morph
 				   ? CSS_BLOCK_BOTH
@@ -1746,11 +1851,15 @@ DialogChapDisp::display(SWModule &imodule)
 						 ? DOUBLE_SPACE
 						 : ""))),
 			      imodule.getRenderHeader(),
+			      (mod_column_count ? mod_column_count : ""),
+			      ITALIC_SELECT,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
@@ -1794,11 +1903,13 @@ DialogChapDisp::display(SWModule &imodule)
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(settings.imageresize
-					 ? AnalyzeForImageSize(cVerse.GetHeader(),
+					 ? AnalyzeForImageSize(cVerse.GetHeader(), CURRENT_COLUMNS,
 							       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 					 : cVerse.GetHeader() /* left as-is */);
 		else
 			cVerse.InvalidateHeader();
+
+		paragraph_end_pending = FALSE;
 
 		// special contrasty highlighting
 		marked_element *e;
@@ -1814,6 +1925,16 @@ DialogChapDisp::display(SWModule &imodule)
 			    ((mf->old_font) ? mf->old_font : ""),
 			    mf->old_font_size_value);
 			swbuf.append(buf);
+
+			/*
+			 * see comment above in GTKChapDisplay::display for this.
+			 */
+			if ((rework->len > 4) &&
+			    !strcasecmp(rework->str + rework->len-4, "<p/>"))
+			{
+				paragraph_end_pending = TRUE;
+				g_string_erase(rework, rework->len-4, 4);	// remove last 4 chars.
+			}
 			g_free(buf);
 		}
 
@@ -1849,7 +1970,8 @@ DialogChapDisp::display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if ((key->getVerse() == curVerse) || (e && settings.annotate_highlight)) {
+		if ((key->getVerse() == curVerse) ||
+		    (e && settings.annotate_highlight)) {
 			buf = g_strdup_printf("<font color=\"%s\">",
 					      ((settings.versehighlight ||
 						(e && settings.annotate_highlight))
@@ -1862,7 +1984,7 @@ DialogChapDisp::display(SWModule &imodule)
 		}
 
 		swbuf.append(settings.imageresize
-				 ? AnalyzeForImageSize(rework->str,
+				 ? AnalyzeForImageSize(rework->str, CURRENT_COLUMNS,
 						       GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				 : rework->str /* left as-is */);
 
@@ -1884,6 +2006,9 @@ DialogChapDisp::display(SWModule &imodule)
 		if (((key->getVerse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
 			swbuf.append("</font></span>");
+
+		if (paragraph_end_pending)
+			swbuf.append("<p/>");
 	}
 
 	// Reset the Bible location before GTK gets access:
@@ -1917,7 +2042,7 @@ char
 GTKPrintEntryDisp::display(SWModule &imodule)
 {
 	gchar *keytext = NULL;
-	gchar *buf;
+	gchar *buf, *mod_column_count = NULL;
 	SWBuf swbuf = "";
 	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.getName());
@@ -1937,6 +2062,9 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 	else
 		keytext = strdup((char *)imodule.getKeyText());
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
@@ -1944,9 +2072,13 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 			      "[*%s*]</a></font>[%s]<br/>",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
+			      (mod_column_count ? mod_column_count : ""),
+			      ITALIC_SELECT,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
@@ -1957,6 +2089,8 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 			      (gchar *)keytext);
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.append(imodule.renderText());
 	swbuf.append("</font></body></html>");
@@ -1978,7 +2112,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();
 	int curBook = key->getBook();
-	gchar *buf;
+	gchar *buf, *mod_column_count = NULL;
 	gchar heading[32];
 	SWBuf swbuf;
 
@@ -1988,18 +2122,27 @@ GTKPrintChapDisp::display(SWModule &imodule)
 
 	swbuf = "";
 
+	if (mf->columns_value != -1)
+		mod_column_count = g_strdup_printf(" body { -webkit-column-count: %d } ", mf->columns_value);
+
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">",
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
+			      settings.display_columns,
+			      JUSTIFY_SELECT, JUSTIFY_SELECT,
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
+			      (mod_column_count ? mod_column_count : ""),
+			      ITALIC_SELECT,
 			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
+	if (mod_column_count)	/* not empty => we created it, so free it. */
+		g_free(mod_column_count);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)

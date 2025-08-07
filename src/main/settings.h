@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * settings.h - structure definitions
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,7 +59,8 @@ struct _settings
 	    *font_color,						    /*  */
 	    *highlight_fg,						    /* special fg color for highlight */
 	    *highlight_bg,						    /* special bg color for highlight */
-	    *verse_num_font_size_str, *base_font_size_str, *special_locale; /* prefs dialog: pick abnormal locale */
+	    *verse_num_font_size_str, *base_font_size_str,
+	    *special_locale;						    /* prefs dialog: pick abnormal locale */
 	/* --requires restart-- */
 
 	int
@@ -76,6 +77,7 @@ struct _settings
 	    strongs,			 /* toogle button and check menu state */
 	    parallel_strongs,		 /* check menu state parallel mods */
 	    parallel_headings,		 /* check menu state parallel mods */
+	    parallel_italic_headings,    /* check menu state parallel mods */
 	    parallel_crossref,		 /* check menu state parallel mods */
 	    parallel_lemmas,		 /* check menu state parallel mods */
 	    parallel_morphs,		 /* check menu state parallel mods */
@@ -92,7 +94,6 @@ struct _settings
 	    parallel_xlit,		 /* check menu state parallel mods */
 	    parallel_enumerated,	 /* check menu state parallel mods */
 	    parallel_glosses,		 /* check menu state parallel mods */
-	    parallel_morphseg,		 /* check menu state parallel mods */
 	    versestyle,			 /* verse if true, paragraph if not */
 	    linkedtabs,			 /* tabs linked together, move in concert */
 	    showversenum,		 /* display verse numbers in text (default on) */
@@ -215,6 +216,9 @@ struct _settings
 
 	/* if true parallel tab is showing */
 	int paratab_showing;
+
+	/* from prefs -> font sizes */
+	int display_columns, justify_margins;
 
 	/* if set, this is used for an anchor jump if possible */
 	char *special_anchor;

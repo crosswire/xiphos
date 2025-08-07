@@ -76,6 +76,12 @@ else()
     )
 endif()
 
+# We prefer libsoup-3.0, but we can build against libsoup-2.4
+pkg_check_modules(Soup IMPORTED_TARGET "libsoup-3.0")
+if(NOT Soup_FOUND)
+    pkg_check_modules(Soup REQUIRED IMPORTED_TARGET "libsoup-2.4")
+endif()
+
 # Gnome dependencies
 pkg_check_modules(Gnome REQUIRED IMPORTED_TARGET
   "atk"
@@ -84,7 +90,6 @@ pkg_check_modules(Gnome REQUIRED IMPORTED_TARGET
   "gdk-pixbuf-2.0"
   "gio-2.0"
   "gobject-2.0"
-  "libsoup-2.4"
   "pango"
   "minizip"
   "zlib"
@@ -135,17 +140,25 @@ else (GTK2)
     # Gtk+-3.0 + Webkit2 + WebKit-editor
     pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET
       "gtk+-3.0"
-      "webkit2gtk-4.0"
       "gtkhtml-editor-4.0"
       "libgtkhtml-4.0"
       )
+    pkg_check_modules(WK IMPORTED_TARGET "webkit2gtk-4.1")
+    if(NOT WK_FOUND)
+      pkg_check_modules(WK REQUIRED IMPORTED_TARGET "webkit2gtk-4.0")
+    endif()
   endif()
   if (NOT WEBKIT1 AND NOT GTKHTML)
+    # This configuration does not build, as the Webkit-editor
+    # code makes use of webkit1 APIs, not webkit2, and thus fails
+    # looking for its headers
+    message(FATAL "Webkit Editor is not supported with webkit2")
     # Gtk+-3.0 + Webkit2 + GtkHtml-editor
-     pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET
-      "gtk+-3.0"
-      "webkit2gtk-4.0"
-      )
+    pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET "gtk+-3.0")
+    pkg_check_modules(WK IMPORTED_TARGET "webkit2gtk-4.1")
+    if(NOT WK_FOUND)
+      pkg_check_modules(WK REQUIRED IMPORTED_TARGET "webkit2gtk-4.0")
+    endif()
   endif()
 endif (GTK2)
 

@@ -96,7 +96,7 @@ if (UNIX)
     )
   # install file
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.appdata.xml
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/appdata
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo
     COMPONENT data
     )
 

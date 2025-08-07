@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * main_menu.c - creation of and call backs for xiphos main menu
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -222,7 +222,7 @@ on_live_chat_activate(GtkMenuItem *menuitem, gpointer user_data)
 		*s = '_';
 
 	url =
-	    g_strdup_printf("http://webchat.freenode.net/?nick=%s|%c%s&channels=xiphos&prompt=1",
+	    g_strdup_printf("https://web.libera.chat/?nick=%s|%c%s?#xiphos",
 			    user, platform, version);
 	xiphos_open_default(url);
 	g_free(url);
@@ -496,6 +496,30 @@ on_versehighlight_activate(GtkCheckMenuItem *menuitem, gpointer user_data)
 
 /******************************************************************************
  * Name
+ *  on_annotate_highlight_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_annotate_highlight_activate(GtkMenuItem *menuitem, gpointer user_data)
+ *
+ * Description
+ *   toggle annotated verse highlight.
+ *
+ * Return value
+ *   void
+ */
+G_MODULE_EXPORT void
+on_annotate_highlight_activate(GtkCheckMenuItem *menuitem, gpointer user_data)
+{
+	settings.annotate_highlight = gtk_check_menu_item_get_active(menuitem);
+	xml_set_value("Xiphos", "misc", "annotatehighlight",
+		      (settings.annotate_highlight ? "1" : "0"));
+	main_display_bible(NULL, settings.currentverse);
+}
+
+/******************************************************************************
+ * Name
  *  gui_parallel_tab_activate
  *
  * Synopsis
@@ -504,7 +528,7 @@ on_versehighlight_activate(GtkCheckMenuItem *menuitem, gpointer user_data)
  *   void gui_parallel_tab_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
- *   toggle special current verse highlight.
+ *   open tab for full parallel view
  *
  * Return value
  *   void
@@ -971,6 +995,8 @@ GtkWidget *gui_create_main_menu(void)
 	    UI_GET_ITEM(gxml, "show_verse_numbers");
 	widgets.versehighlight_item =
 	    UI_GET_ITEM(gxml, "highlight_current_verse");
+	widgets.annotate_highlight_item =
+	    UI_GET_ITEM(gxml, "highlight_annotated_verses");
 	widgets.parallel_tab_item =
 	    UI_GET_ITEM(gxml, "show_parallel_view_in_a_tab");
 	widgets.side_preview_item =
@@ -1000,6 +1026,9 @@ GtkWidget *gui_create_main_menu(void)
 				       settings.showversenum);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.versehighlight_item),
 				       settings.versehighlight);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.annotate_highlight_item),
+				       settings.annotate_highlight);
+
 /* connect signals and data */
 #ifdef USE_GTKBUILDER
 	gtk_builder_connect_signals(gxml, NULL);

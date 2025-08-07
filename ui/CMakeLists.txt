@@ -22,29 +22,17 @@ if (NOT GTK2)
   # Gtk3 only stuff
   install (FILES
     bookmarks.gtkbuilder
-    bookmarks_old.gtkbuilder
     editor_link_dialog.gtkbuilder
-    editor_link_dialog_old.gtkbuilder
     export-dialog.gtkbuilder
-    export-dialog_old.gtkbuilder
     markverse.gtkbuilder
-    markverse_old.gtkbuilder
     module-manager.gtkbuilder
-    module-manager_old.gtkbuilder
     navbar_versekey.gtkbuilder
-    navbar_versekey_old.gtkbuilder
     prefs.gtkbuilder
-    prefs_old.gtkbuilder
     search-dialog.gtkbuilder
-    search-dialog_old.gtkbuilder
     selector-prefs.gtkbuilder
-    selector-prefs_old.gtkbuilder
     xi-menus.gtkbuilder
-    xi-menus_old.gtkbuilder
     xi-menus-popup.gtkbuilder
-    xi-menus-popup_old.gtkbuilder
     xi-splash.gtkbuilder
-    xi-splash_old.gtkbuilder
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}
     COMPONENT data
     )

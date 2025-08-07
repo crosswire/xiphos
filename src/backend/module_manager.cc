@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * module_manager.cc
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -176,10 +176,16 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->name = g_strdup(name);
 
 			mod_info->abbreviation = (char *)module->getConfigEntry("Abbreviation");
-			if (mod_info->abbreviation) {
+			// abbrev collisions disallowed: no dups of any .conf's [Name].
+			if (mod_info->abbreviation &&
+			    backend &&
+			    !main_is_module((char *)mod_info->abbreviation)) {
 				mod_info->abbreviation = g_strdup(mod_info->abbreviation);
 				main_add_abbreviation(mod_info->name, mod_info->abbreviation);
 			}
+			// if we couldn't add, we mustn't retain a handle on it or else bad free.
+			else if (mod_info->abbreviation)
+				mod_info->abbreviation = NULL;
 
 			mod_info->language =
 			    main_get_language_map(module->getLanguage());
@@ -220,6 +226,9 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->is_cult =
 			    (category &&
 			     !strcmp(category, "Cults / Unorthodox / Questionable Material"));
+
+			char *prayerlist = (char *)module->getConfigEntry("GSType");
+			mod_info->is_prayerlist = (prayerlist && !strcmp(prayerlist, "PrayerList"));
 
 			mod_info->old_version =
 			    backend_mod_mgr_get_config_entry(name, "Version");
@@ -554,13 +563,13 @@ void backend_init_module_mgr_config(void)
 
 	SWConfig config(confPath.c_str());
 
-	InstallSource is("FTP");
+	InstallSource is("HTTPS");
 	is.caption = "CrossWire";
-	is.source = "ftp.crosswire.org";
-	is.directory = "/pub/sword/raw";
+	is.source = "www.crosswire.org";
+	is.directory = "/ftpmirror/pub/sword/raw";
 
 	config["General"]["PassiveFTP"] = "true";
-	config["Sources"]["FTPSource"] = is.getConfEnt();
+	config["Sources"]["HTTPSSource"] = is.getConfEnt();
 	config.save();
 
 	InstallSource is_local("DIR");

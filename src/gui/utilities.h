@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * utilities.h - support functions
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -123,6 +123,7 @@ const char *strcasestr(const char *haystack, const char *needle);
 #endif
 int ImageDimensions(const char *path, int *x, int *y);
 const char *AnalyzeForImageSize(const char *origtext,
+				int columns,
 				GdkWindow *window);
 
 #ifdef WIN32
@@ -163,11 +164,7 @@ void language_init(void);
 /* visually simplify some code that needs to pick out UI details */
 #ifdef USE_GTKBUILDER
 #define UI_GET_ITEM(ui, label) GTK_WIDGET(gtk_builder_get_object(ui, label))
-#if GTK_CHECK_VERSION(3, 14, 0)
 #define UI_SUFFIX ".gtkbuilder"
-#else
-#define UI_SUFFIX "_old.gtkbuilder"
-#endif
 #else
 #define UI_GET_ITEM(ui, label) glade_xml_get_widget(ui, label)
 #define UI_SUFFIX ".glade"
@@ -191,5 +188,6 @@ void language_init(void);
 #endif
 /* for daily devotional */ extern int month_day_counts[];
 extern char *(month_names[]);
+void gui_format_this(GString *str, const char *format, ...);
 
 #endif /* GS_UTILITIES_H */

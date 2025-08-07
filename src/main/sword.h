@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sword.h - glue
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,12 +22,12 @@
 #ifndef _SWORD_H__
 #define _SWORD_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "main/configs.h"
 
 /*** these defs need to be seen by gui and backend ***/
@@ -68,8 +68,9 @@ extern gboolean companion_activity;
 
 void main_add_abbreviation(const char *name,
 			   const char *abbreviation);
-const char *main_get_abbreviation(const char *name);
-const char *main_get_name(const char *abbreviation);
+void main_clear_abbreviations(void);
+const char *main_name_to_abbrev(const char *name);
+const char *main_abbrev_to_name(const char *abbreviation);
 
 void main_book_heading(char *mod_name);
 void main_chapter_heading(char *mod_name);

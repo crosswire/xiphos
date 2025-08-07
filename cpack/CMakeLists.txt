@@ -68,7 +68,7 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
 set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CMAKE_BINARY_DIR})
 
 # A branding image that will be displayed by GUI installers.
-set(CPACK_PACKAGE_ICON ${PROJECT_SOURCE_DIR}/win32/nsis/pixmaps/header.bmp)
+set(CPACK_PACKAGE_ICON ${PROJECT_SOURCE_DIR}/cpack/windows/pixmaps/header.bmp)
 
 # CPack-time project CPack configuration file. This file included at cpack time,
 # once per generator after CPack has set CPACK_GENERATOR to the actual generator

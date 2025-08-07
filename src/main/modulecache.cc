@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * modulecache.cc -
  *
- * Copyright (C) 2007-2020 Xiphos Developer Team
+ * Copyright (C) 2007-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,6 +62,7 @@ ConstructFlags(GLOBAL_OPS *ops)
 	flags |= (ops->enumerated ? Enumerated : 0);
 	flags |= (ops->glosses ? Glosses : 0);
 	flags |= (ops->morphseg ? MorphSegmentation : 0);
+	flags |= (ops->italic_headings ? ItalicHeadings : 0);
 
 	flags |= (ops->commentary_by_chapter ? CommentaryChapter : 0);
 	flags |= (ops->doublespace ? Doublespace : 0);

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sword_main.cc -
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -179,6 +179,8 @@ void BackEnd::init_lists(MOD_LISTS *mods)
 {
 	ModMap::iterator it;
 
+	main_clear_abbreviations();
+
 	for (it = main_mgr->Modules.begin();
 	     it != main_mgr->Modules.end();
 	     ++it) {
@@ -187,7 +189,8 @@ void BackEnd::init_lists(MOD_LISTS *mods)
 		const char *modname = m->getName();
 		const char *abbreviation = m->getConfigEntry("Abbreviation");
 
-		if (abbreviation) {
+		// abbrev collisions disallowed: no dups of any .conf's [Name].
+		if (abbreviation && !main_is_module((char *)abbreviation)) {
 			main_add_abbreviation(modname, abbreviation);
 		}
 
@@ -372,7 +375,7 @@ char *BackEnd::get_strip_text_from_string(const char *module_name, const char *s
 	SWModule *mod = get_SWModule(module_name);
 
 	if (mod) {
-		return strdup((char *)mod->stripText(string));
+		return strdup(mod->stripText(string));
 	}
 	return NULL;
 }
@@ -382,7 +385,7 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key)
 
 	if (mod) {
 		mod->setKey(key);
-		return strdup((char *)mod->stripText());
+		return strdup(mod->stripText());
 	}
 	return NULL;
 }

@@ -19,16 +19,26 @@ For regular users, we strongly advise that you use your distribution's packages,
 they usually provide integration to your distribution and you will automatically
 get security updates.
 
-On *Fedora*, *Red Hat* or *CentOS*:
+### *Fedora*, *Red Hat* or *CentOS*:
 
     $ sudo dnf install xiphos
 
-On *Debian*, *Ubuntu*, or *Linux Mint*:
+### *Debian*, *Ubuntu*, or *Linux Mint*:
 
-    $ sudo apt-get update
-    $ sudo apt-get install xiphos
+Xiphos depends on libgtkhtml that is no longer available in Ubuntu.
 
-For others distributions, check your distribution's help for how to do this.
+You have the choice to either:
+
+- build Xiphos yourself (see Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint* below)
+- install packages from  ppa: https://launchpad.net/~pkgcrosswire/+archive/ubuntu/ppa
+- install the flatpak app (3rd party, may not be up to date)
+  https://www.flathub.org/apps/details/org.xiphos.Xiphos  
+  Note: If you want access to the normal home folders .sword and .xiphos, run:  
+  `# flatpak override --filesystem=home org.xiphos.Xiphos`
+
+### Other distributions
+
+Check your distribution's help for how to do this.
 
 Windows® install:
 -------------------
@@ -56,7 +66,7 @@ dependencies installed:
     Gtk+-2.0 or GTK+-3.0   The GIMP Toolkit
     WebKit1 or Webkit2     Port to Gtk+ of the WebKit rendering engine
     appstream-util         Utility to validate AppStream metadata
-    biblesync              Protocol to support Bible software shared co-navigation
+    biblesync>=1.2.0       Protocol to support Bible software shared co-navigation
     dbus-glib              API for use of D-Bus from GLib applications
     desktop-file-validate  Validates a desktop file
     gcc                    GCC, the GNU Compiler Collection
@@ -211,7 +221,7 @@ Build Xiphos on *Fedora*, *Red Hat* or *CentOS*:
 
 ## 1. Clone Xiphos git
 
-    $ git https://github.com/crosswire/xiphos.git
+    $ git clone https://github.com/crosswire/xiphos.git
 
 ## 2. Create and enter the build directory
 
@@ -240,50 +250,23 @@ Create a build directory as a sibling of the xiphos directory:
 Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 ===================================================
 
-## 1. Install GTKHtml
+## 1. Clone git
 
-    $ curl -Ls -o gtkhtml-4.10.0.tar.xz https://download.gnome.org/sources/gtkhtml/4.10/gtkhtml-4.10.0.tar.xz
-    $ tar xf gtkhtml-4.10.0.tar.xz
-    $ cd gtkhtml-4.10.0
-    $ ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib/gtkhtml4 --localstatedir=/var --disable-static
-    $ make -j2
-    $ make install
+    $ git clone https://github.com/crosswire/xiphos.git
 
-## 2. Install Biblesync
+## 2. Install the required dependencies:
 
-    $ curl -Ls -o biblesync-1.2.0.tar.gz https://github.com/karlkleinpaste/biblesync/archive/1.2.0.tar.gz
-    $ tar xf biblesync-1.2.0.tar.gz
-    $ cd biblesync-1.2.0
-    $ mkdir -p build
+    $ sudo apt-get install appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libbiblesync-dev libdbus-glib-1-dev libenchant-2-dev libgail-3-dev libglade2-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python3-dev swig uuid-dev uuid-runtime yelp-tools xzip
+
+## 3. Build and install:
+
+    $ cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
     $ cd build
-    $ cmake -DBUILD_SHARED_LIBS=TRUE -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=/usr/lib ..
-    $ make -j2
-    $ make install
+    $ make -j$(nproc) && sudo make install
 
-## 3. Clone git
+## 4. Run Xiphos
 
-    $ git https://github.com/crosswire/xiphos.git
-
-## 4. Create and enter the build directory
-
-Create a build directory as a sibling of the xiphos directory:
-
-    $ mkdir build
-    $ ls
-	build xiphos
-	$ cd build
-
-## 5. Install the required dependencies:
-
-    $ sudo apt-get appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libdbus-glib-1-dev libenchant-dev libgail-3-dev libglade2-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.0-dev libxml2-dev libxml2-utils make python-dev swig uuid-dev uuid-runtime yelp-tools xzip
-
-## 6. Configuration:
-
-    $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWEBKIT1=ON ../xiphos
-
-## 7. Build and install
-
-    $ make -j$(nproc) && make install
+    $ xiphos
 
 
 Make packages with CMake

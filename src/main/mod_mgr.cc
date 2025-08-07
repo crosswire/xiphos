@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * mod_mgr.cc
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -270,6 +270,8 @@ GList *mod_mgr_list_local_modules(const char *dir,
 	SWVersion version = SWVersion::currentVersion;
 
 	backend_init_module_mgr(dir, augment, augment);
+
+	main_clear_abbreviations();
 
 	backend_module_mgr_list_local_modules_init(!augment);
 	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {

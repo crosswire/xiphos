@@ -35,8 +35,8 @@ target_include_directories(backend
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
-
   )
 
 # specify libraries or flags to use when linking
@@ -46,5 +46,17 @@ target_link_libraries(backend
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   )
+
+if(WK_FOUND)
+  target_compile_definitions(backend
+    PRIVATE
+    PkgConfig::WK
+    )
+  target_link_libraries(backend
+    PRIVATE
+    PkgConfig::WK
+    )
+endif()

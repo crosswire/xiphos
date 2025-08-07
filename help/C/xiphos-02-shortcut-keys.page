@@ -189,6 +189,18 @@
 	</td>
       </tr>
       <tr>
+	<td><p>Toggle cross-references display.</p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>X</key></keyseq></p>
+	</td>
+      </tr>
+      <tr>
+	<td><p>Toggle footnotes display.</p></td>
+	<td its:translate="no">
+	  <p><keyseq><key>Alt</key><key>N</key></keyseq></p>
+	</td>
+      </tr>
+      <tr>
 	<td><p>Toggle transliteration.</p></td>
 	<td its:translate="no">
 	  <p><keyseq><key>Alt</key><key>T</key></keyseq></p>
@@ -274,6 +286,12 @@
 	<td><p>Open editor on the personal commentary named Personal.</p></td>
     	<td its:translate="no">
 	  <p><keyseq><key>Alt</key><key>Z</key></keyseq></p>
+	</td>
+      </tr>
+      <tr>
+	<td><p>Toggle visibility of the side panel.</p></td>
+    	<td its:translate="no">
+	  <p><keyseq><key>Ctrl</key><key>S</key></keyseq></p>
 	</td>
       </tr>
     </tbody>

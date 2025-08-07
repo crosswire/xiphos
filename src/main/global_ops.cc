@@ -3,7 +3,7 @@
  * mod_global_ops.c - setup for SWORD global options and
  *                    a few of our own in the gui
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -151,6 +151,7 @@ void main_set_global_options(GLOBAL_OPS *ops)
 	// always turn on headings in the engine (and later cache them).
 	// whether we display them or not is another matter (display.cc).
 	_set_global_option("Headings", 1);
+	_set_global_option("Italic Headings", ops->italic_headings);
 
 	_set_global_option("Words of Christ in Red", ops->words_in_red);
 	_set_global_option("Transliterated Forms", ops->xlit);
@@ -204,6 +205,8 @@ GLOBAL_OPS *main_new_globals(const gchar *mod_name)
 	    gui_of2tf(module_options[mod_name]["Lemmas"].c_str());
 	ops->transliteration =
 	    gui_of2tf(module_options[mod_name]["Transliteration"].c_str());
+	ops->italic_headings =
+	    gui_of2tf(module_options[mod_name]["Italic Headings"].c_str());
 	ops->xlit =
 	    gui_of2tf(module_options[mod_name]["Transliterated Forms"].c_str());
 	ops->enumerated =
@@ -270,8 +273,10 @@ GLOBAL_OPS *main_new_globals(const gchar *mod_name)
 		? -1 // "unknown"; otherwise, it's like the others.
 		: gui_of2tf(module_options[mod_name]["Respect Font Faces"].c_str());
 
+	// special case, xiphos-specific feature: commentary whole chapter.
 	ops->commentary_by_chapter =
-	    gui_of2tf(module_options[mod_name]["Commentary by Chapter"].c_str());
+	    ((backend->module_type(mod_name) == COMMENTARY_TYPE) &&
+	     (module_options[mod_name]["Commentary by Chapter"] != "Off"));
 
 	ops->doublespace =
 	    gui_of2tf(module_options[mod_name]["Doublespace"].c_str());

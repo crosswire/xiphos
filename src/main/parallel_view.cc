@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * parallel_view.cc - support for displaying multiple modules
  *
- * Copyright (C) 2004-2020 Xiphos Developer Team
+ * Copyright (C) 2004-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,8 +51,25 @@
 
 #include "gui/debug_glib_null.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } %s --></style></head>"
-// "%s" is for CSS init from getRenderHeader().
+#define HTML_START \
+	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />\
+<style type=\"text/css\">\
+A { text-decoration:none } \
+*[dir=rtl] { text-align: right; }\
+h3 { font-style: %s }\
+%s %s %s \
+</style></head>"
+// last 3 "%s" are for CSS init from getRenderHeader() sticky modnames, and margin justify.
+
+// how to build a table whose top row of modname labels doesn't scroll. based on:
+// http://geeksforgeeks.org/how-to-create-a-table-with-fixed-header-and-scrollable-body/
+#define	STICKY_MODNAMES \
+"<style> \
+.table-container { overflow-y: auto; width: 100%; } \
+table { width: 100%; border-collapse: collapse; } \
+thead th { position: sticky; top: 0; z-index: 1; } \
+th { text-align: center; } \
+</style>"
 
 extern GtkWidget *entrycbIntBook;
 extern GtkWidget *sbIntChapter;
@@ -66,7 +83,7 @@ SWBuf unknown_parallel = _("Unknown parallel module: ");
  */
 
 BackEnd *backend_p;
-extern gchar *no_content;
+extern const gchar *no_content;
 
 static const gchar *tf2of(int true_false)
 {
@@ -175,91 +192,91 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem *menuitem,
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Footnotes")) {
+	else if (!strcmp(option, "Footnotes")) {
 		settings.parallel_footnotes = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Morphological Tags")) {
+	else if (!strcmp(option, "Morphological Tags")) {
 		settings.parallel_morphs = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Hebrew Vowel Points")) {
+	else if (!strcmp(option, "Hebrew Vowel Points")) {
 		settings.parallel_hebrewpoints = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Hebrew Cantillation")) {
+	else if (!strcmp(option, "Hebrew Cantillation")) {
 		settings.parallel_cantillationmarks = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Greek Accents")) {
+	else if (!strcmp(option, "Greek Accents")) {
 		settings.parallel_greekaccents = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Cross-references")) {
+	else if (!strcmp(option, "Cross-references")) {
 		settings.parallel_crossref = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Transliteration")) {
+	else if (!strcmp(option, "Transliteration")) {
 		settings.parallel_transliteration = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Words of Christ in Red")) {
+	else if (!strcmp(option, "Words of Christ in Red")) {
 		settings.parallel_red_words = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Morpheme Segmentation")) {
+	else if (!strcmp(option, "Morpheme Segmentation")) {
 		settings.parallel_segmentation = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Headings")) {
+	else if (!strcmp(option, "Headings")) {
 		settings.parallel_headings = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Lemmas")) {
+	else if (!strcmp(option, "Italic Headings")) {
+		settings.parallel_italic_headings = choice;
+		set_global_option(option, choice);
+	}
+
+	else if (!strcmp(option, "Lemmas")) {
 		settings.parallel_lemmas = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Primary Reading")) {
+	else if (!strcmp(option, "Primary Reading")) {
 		settings.parallel_variants_primary = choice;
 		set_global_textual_reading(option, choice);
 	}
-	if (!strcmp(option, "Secondary Reading")) {
+	else if (!strcmp(option, "Secondary Reading")) {
 		settings.parallel_variants_secondary = choice;
 		set_global_textual_reading(option, choice);
 	}
-	if (!strcmp(option, "All Readings")) {
+	else if (!strcmp(option, "All Readings")) {
 		settings.parallel_variants_all = choice;
 		set_global_textual_reading(option, choice);
 	}
 
-	if (!strcmp(option, "Transliterated Forms")) {
+	else if (!strcmp(option, "Transliterated Forms")) {
 		settings.parallel_xlit = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Enumerations")) {
+	else if (!strcmp(option, "Enumerations")) {
 		settings.parallel_enumerated = choice;
 		set_global_option(option, choice);
 	}
 
-	if (!strcmp(option, "Glosses")) {
+	else if (!strcmp(option, "Glosses")) {
 		settings.parallel_glosses = choice;
-		set_global_option(option, choice);
-	}
-
-	if (!strcmp(option, "Morpheme Segmentation")) {
-		settings.parallel_morphseg = choice;
 		set_global_option(option, choice);
 	}
 
@@ -419,6 +436,17 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 			 G_CALLBACK(main_set_parallel_module_global_options),
 			 (char *)"Headings");
 
+	if (settings.parallel_headings) {
+		item = gtk_check_menu_item_new_with_label(_("Italic Headings"));
+		gtk_widget_show(item);
+		gtk_container_add(GTK_CONTAINER(menu), item);
+
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), settings.parallel_italic_headings);
+		g_signal_connect(G_OBJECT(item), "activate",
+				 G_CALLBACK(main_set_parallel_module_global_options),
+				 (char *)"Italic Headings");
+	}
+
 	item = gtk_check_menu_item_new_with_label(_("Morpheme Segmentation"));
 	gtk_widget_hide(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
@@ -512,7 +540,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), settings.parallel_morphseg);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), settings.parallel_segmentation);
 	g_signal_connect(G_OBJECT(item), "activate",
 			 G_CALLBACK(main_set_parallel_module_global_options),
 			 (char *)"Morpheme Segmentation");
@@ -594,6 +622,9 @@ void main_update_parallel_page(void)
 
 	tmpBuf = g_strdup_printf(HTML_START
 				 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+				 (settings.parallel_italic_headings ? "italic" : "bold"),
+				 "", // null CSS headers
+				 "", // null CSS headers
 				 "", // null CSS headers
 				 settings.bible_bg_color,
 				 settings.bible_text_color, settings.link_color);
@@ -606,7 +637,7 @@ void main_update_parallel_page(void)
 		     (mod_name = settings.parallel_list[modidx]);
 		     modidx++) {
 			const gchar *rowcolor, *textcolor;
-			const char *real_mod = main_get_name(mod_name);
+			const char *real_mod = main_abbrev_to_name(mod_name);
 			if (real_mod)
 				mod_name = (gchar *)real_mod;
 
@@ -648,7 +679,7 @@ void main_update_parallel_page(void)
 							    mf->old_font_size_value, mf->old_font);
 			free_font(mf);
 
-			const char *abbreviation = main_get_abbreviation(mod_name);
+			const char *abbreviation = main_name_to_abbrev(mod_name);
 			tmpBuf = g_strdup_printf(
 			    "<tr bgcolor=\"%s\"><td>%s<b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\">[%s]</font></a></b><br/>",
 			    rowcolor,
@@ -701,7 +732,7 @@ void main_update_parallel_page(void)
 
 	g_string_append(data, "</table></body></html>");
 	HtmlOutput((char *)(settings.imageresize
-				? AnalyzeForImageSize(data->str,
+				? AnalyzeForImageSize(data->str, 1,
 						      GDK_WINDOW(gtk_widget_get_window(widgets.html_parallel)))
 				: data->str),
 		   widgets.html_parallel, NULL, NULL);
@@ -764,7 +795,7 @@ static void interpolate_parallel_display(SWModule *control,
 	for (modidx = 0; modidx < parallel_count; ++modidx) {
 		gchar *mod = settings.parallel_list[modidx];
 		// might have an abbrev. get the real.
-		const char *real_mod = main_get_name(mod);
+		const char *real_mod = main_abbrev_to_name(mod);
 		if (real_mod)
 			mod = (gchar *)real_mod;
 
@@ -809,7 +840,7 @@ static void interpolate_parallel_display(SWModule *control,
 		for (modidx = 0; modidx < parallel_count; modidx++) {
 			gchar *mod = settings.parallel_list[modidx];
 			// might have an abbrev. get the real.
-			const char *real_mod = main_get_name(mod);
+			const char *real_mod = main_abbrev_to_name(mod);
 			if (real_mod)
 				mod = (gchar *)real_mod;
 
@@ -827,14 +858,15 @@ static void interpolate_parallel_display(SWModule *control,
 				gchar *num = main_format_number(verse);
 				snprintf(str, 499,
 					 "<td width=\"%d%%\" bgcolor=\"%s\">"
+					 "<a name=\"%d\">%s</a>"
 					 "<a href=\"passagestudy.jsp?action=showParallel&"
-					 "type=verse&value=%s\" name=\"%d\">"
+					 "type=verse&value=%s\">"
 					 "<font color=\"%s\" size=\"%+d\">%s. </font></a>"
 					 "<font face=\"%s\" size=\"%+d\" color=\"%s\">",
-					 fraction,
-					 bgColor,
-					 newurl,
+					 fraction, bgColor,
 					 verse,
+					 ((verse == cur_verse) ? "<hr><hr>" : ""),
+					 newurl,
 					 settings.bible_verse_num_color,
 					 settings.verse_num_font_size + settings.base_font_size,
 					 num,
@@ -922,7 +954,7 @@ void main_update_parallel_page_detached(void)
 			     ? settings.parallel_list[0]
 			     : settings.MainWindowModule);
 	// might have an abbrev. get the real.
-	const char *real_mod = main_get_name(control_name);
+	const char *real_mod = main_abbrev_to_name(control_name);
 	if (real_mod)
 		control_name = (gchar *)real_mod;
 
@@ -934,16 +966,23 @@ void main_update_parallel_page_detached(void)
 	}
 
 	snprintf(buf, 4999, HTML_START
-		 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
+		 "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+		 "  <div class=\"table-container\">"
+		 "    <table>"
+		 "      <thead>"
+		 "        <tr>",
+		 (settings.parallel_italic_headings ? "italic" : "bold"),
 		 control->getRenderHeader(),
+		 STICKY_MODNAMES,
+		 (settings.justify_margins ? "<style> td { text-align: justify; padding: 5px; } </style>" : ""),
 		 settings.bible_bg_color, settings.bible_text_color,
 		 settings.link_color);
 	text += buf;
 
 	for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
-		const char *abbreviation = main_get_abbreviation(settings.parallel_list[modidx]);
+		const char *abbreviation = main_name_to_abbrev(settings.parallel_list[modidx]);
 		snprintf(buf, 499,
-			 "<td valign=\"top\" width=\"%d%%\" bgcolor=\"#c0c0c0\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></td>",
+			 "<th width=\"%d%%\" bgcolor=\"#c0c0c0\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></th>",
 			 fraction,
 			 settings.bible_verse_num_color,
 			 settings.verse_num_font_size + settings.base_font_size,
@@ -951,14 +990,14 @@ void main_update_parallel_page_detached(void)
 		text += buf;
 	}
 
-	text += "</tr>";
+	text += "</tr> </thead> <tbody>";
 	interpolate_parallel_display(control, control_name, text, settings.cvparallel, parallel_count, fraction);
-	text += "</table></body></html>";
+	text += "</tbody> </table> </div> </body> </html>";
 
 	snprintf(buf, 499, "%d", settings.intCurVerse);
 
 	HtmlOutput((char *)(settings.imageresize
-				? AnalyzeForImageSize((char *)text.c_str(),
+				? AnalyzeForImageSize((char *)text.c_str(), parallel_count*2/3,
 						      GDK_WINDOW(gtk_widget_get_window(widgets.html_parallel_dialog)))
 				: (char *)text.c_str()),
 		   widgets.html_parallel_dialog, NULL, buf);

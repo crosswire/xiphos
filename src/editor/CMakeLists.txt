@@ -45,6 +45,7 @@ target_include_directories(editor
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   )
 
@@ -55,8 +56,20 @@ target_link_libraries(editor
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   )
+
+if(WK_FOUND)
+  target_compile_definitions(editor
+    PRIVATE
+    PkgConfig::WK
+    )
+  target_link_libraries(editor
+    PRIVATE
+    PkgConfig::WK
+    )
+endif()
 
 if (WIN32)
   # add X11/keysymdefs.h

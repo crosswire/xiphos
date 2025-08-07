@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * tabbed_browser.h - functions to facilitate tabbed browsing of different passages at once
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@ struct _passage_tab_info
 {
 	GtkWidget *page_widget;
 	GtkLabel *tab_label;
+	GtkEventBox *tab_label_eventbox;
 	GtkWidget *button_close;
 	GtkWidget *editor;
 	GtkWidget *paratab;
@@ -103,6 +104,10 @@ void gui_recompute_shows(gboolean flush);
 void gui_recompute_view_menu_choices(void);
 void setup_book_editor_tab(PASSAGE_TAB_INFO *pt);
 GString *pick_tab_label(PASSAGE_TAB_INFO *pt);
+void gui_notebook_main_page_reordered(GtkNotebook *notebook,
+				      gpointer page,
+				      guint page_num,
+				      GList **tl);
 #ifdef USE_GTK_3
 void gui_notebook_main_switch_page(GtkNotebook *notebook,
 				   gpointer arg1, gint page_num,

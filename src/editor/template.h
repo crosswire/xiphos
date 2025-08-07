@@ -4,7 +4,7 @@
  *
  *  ** this is used by settings only if studypad.spt does not exist **
  * 
- * Copyright (C) 2005-2020 Xiphos Developer Team
+ * Copyright (C) 2005-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,11 +26,11 @@
 <html>\n\
 <head>\n\
 <title>studypad template</title>\n\
-<meta name=\"generator\" content=\"Studypad\">\n\
-<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\n\
-<meta http-equiv=\"content-type\" content=\"application/xhtml+xml; charset=UTF-8\">\n\
-<meta http-equiv=\"content-style-type\" content=\"text/css\">\n\
-<meta http-equiv=\"expires\" content=\"0\">\n\
+<meta name=\"generator\" content=\"Studypad\" />\n\
+<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n\
+<meta http-equiv=\"content-type\" content=\"application/xhtml+xml; charset=UTF-8\" />\n\
+<meta http-equiv=\"content-style-type\" content=\"text/css\" />\n\
+<meta http-equiv=\"expires\" content=\"0\" />\n\
 <style content=\"text/css\">\n\
  a { text-decoration:none; } \n\
  span.M1 { \n\

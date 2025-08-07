@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * main.c - In the beginning... ;o)
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -118,6 +118,18 @@ int main(int argc, char *argv[])
 	GTimer *total;
 	double d;
 #endif
+
+	// ---------------------------------------------------------
+	// **** LOUD OBNOXIOUS COMMENT TO GET ATTENTION ****
+	// **** This a sick hack to get around a WK regression.
+	// **** https://bugs.webkit.org/show_bug.cgi?id=228268
+	// **** If WK ever gets this fixed, this should be removed.
+	/*
+	 * set env.var that causes WK not to screw with nvidia badly.
+	 */
+	g_setenv("WEBKIT_DISABLE_COMPOSITING_MODE", "1", TRUE);
+	// **** end of LOUD OBNOXIOUS COMMENT TO GET ATTENTION ****
+	// ---------------------------------------------------------
 
 //      g_thread_init(NULL);
 #if !GLIB_CHECK_VERSION(2, 35, 0)

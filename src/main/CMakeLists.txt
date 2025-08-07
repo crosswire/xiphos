@@ -60,6 +60,7 @@ target_include_directories(main
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   PkgConfig::Biblesync
   )
@@ -71,6 +72,7 @@ target_link_libraries(main
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   PkgConfig::Sword
   PkgConfig::Biblesync
   )
@@ -85,3 +87,14 @@ IF (DBUS)
     PkgConfig::DBus
     )
 ENDIF (DBUS)
+
+if(WK_FOUND)
+  target_compile_definitions(main
+    PRIVATE
+    PkgConfig::WK
+    )
+  target_link_libraries(main
+    PRIVATE
+    PkgConfig::WK
+    )
+endif()

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * previewer.cc -
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ extern "C" {
 
 #include "gui/debug_glib_null.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />\
 <style type=\"text/css\"><!-- \
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right;} \
@@ -170,7 +170,7 @@ void main_information_viewer(const gchar *mod_name,
 			str = g_string_append(str, tmp_str->str);
 		}
 	} else {
-		const char *abbreviation = main_get_abbreviation(mod_name);
+		const char *abbreviation = main_name_to_abbrev(mod_name);
 		g_string_printf(tmp_str,
 				"<font color=\"grey\">%s: %s</font><hr/>",
 				(abbreviation ? abbreviation : mod_name),
@@ -196,7 +196,7 @@ void main_information_viewer(const gchar *mod_name,
 
 	str = g_string_append(str, "</font></body></html>");
 
-	HtmlOutput((char *)AnalyzeForImageSize(str->str,
+	HtmlOutput((char *)AnalyzeForImageSize(str->str, 1,
 					       GDK_WINDOW(gtk_widget_get_window(previewer_html_widget))),
 		   previewer_html_widget, mf, NULL);
 	free_font(mf);
@@ -396,7 +396,7 @@ void main_entry_display(gpointer data, gchar *mod_name,
 
 	/* show key in html widget  */
 	if (show_key) {
-		const char *abbreviation = main_get_abbreviation(mod_name);
+		const char *abbreviation = main_name_to_abbrev(mod_name);
 		if ((settings.displaySearchResults)) {
 			g_string_printf(tmp_str,
 					"<a href=\"sword://%s/%s\">"
@@ -431,7 +431,7 @@ void main_entry_display(gpointer data, gchar *mod_name,
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
-	HtmlOutput((char *)AnalyzeForImageSize(str->str,
+	HtmlOutput((char *)AnalyzeForImageSize(str->str, 1,
 					       GDK_WINDOW(gtk_widget_get_window(html_widget))),
 		   html_widget, mf, NULL);
 	free_font(mf);

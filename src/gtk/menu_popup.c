@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * menu_popup.c - main window panes and dialogs popup menus
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -802,6 +802,29 @@ G_MODULE_EXPORT void on_headings_activate(GtkCheckMenuItem *menuitem,
  *
  */
 
+G_MODULE_EXPORT void on_italic_headings_activate(GtkCheckMenuItem *
+						 menuitem,
+						 gpointer user_data)
+{
+	_global_option_main_pane((GtkMenuItem *)menuitem, "Italic Headings"); /* string not seen by user */
+}
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
 G_MODULE_EXPORT void on_transliteration_activate(GtkCheckMenuItem *
 						     menuitem,
 						 gpointer user_data)
@@ -1568,8 +1591,8 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 	item = UI_GET_ITEM(gxml, "morphological_tags");
 
 	if (main_check_for_global_option((gchar *)mod_name, "GBFMorph") ||
-	    main_check_for_global_option((gchar *)mod_name, "ThMLMorph") || main_check_for_global_option((gchar *)mod_name,
-													 "OSISMorph")) {
+	    main_check_for_global_option((gchar *)mod_name, "ThMLMorph") ||
+	    main_check_for_global_option((gchar *)mod_name, "OSISMorph")) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 					       ops->morphs);
@@ -1577,10 +1600,9 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 
 	item = UI_GET_ITEM(gxml, "footnotes");
 
-	if (main_check_for_global_option((gchar *)mod_name, "GBFFootnotes") || main_check_for_global_option((gchar *)mod_name,
-													    "ThMLFootnotes") ||
-	    main_check_for_global_option((gchar *)mod_name,
-					 "OSISFootnotes")) {
+	if (main_check_for_global_option((gchar *)mod_name, "GBFFootnotes") ||
+	    main_check_for_global_option((gchar *)mod_name, "ThMLFootnotes") ||
+	    main_check_for_global_option((gchar *)mod_name, "OSISFootnotes")) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 					       ops->footnotes);
@@ -1596,8 +1618,8 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 
 	item = UI_GET_ITEM(gxml, "lemmas");
 
-	if (main_check_for_global_option((gchar *)mod_name, "ThMLLemma") || main_check_for_global_option((gchar *)mod_name,
-													 "OSISLemma")) {
+	if (main_check_for_global_option((gchar *)mod_name, "ThMLLemma") ||
+	    main_check_for_global_option((gchar *)mod_name, "OSISLemma")) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 					       ops->lemmas);
@@ -1605,8 +1627,8 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 
 	item = UI_GET_ITEM(gxml, "cross-references");
 
-	if (main_check_for_global_option((gchar *)mod_name, "ThMLScripref") || main_check_for_global_option((gchar *)mod_name,
-													    "OSISScripref")) {
+	if (main_check_for_global_option((gchar *)mod_name, "ThMLScripref") ||
+	    main_check_for_global_option((gchar *)mod_name, "OSISScripref")) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 					       ops->scripturerefs);
@@ -1630,12 +1652,16 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 
 	item = UI_GET_ITEM(gxml, "headings");
 
-	if (main_check_for_global_option((gchar *)mod_name, "ThMLHeadings") || main_check_for_global_option((gchar *)mod_name,
-													    "OSISHeadings")) {
+	if (main_check_for_global_option((gchar *)mod_name, "ThMLHeadings") ||
+	    main_check_for_global_option((gchar *)mod_name, "OSISHeadings")) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 					       ops->headings);
 	}
+
+	item = UI_GET_ITEM(gxml, "italic_headings");
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
+				       ops->italic_headings);
 
 	item = UI_GET_ITEM(gxml, "transliteration");
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
@@ -1643,8 +1669,8 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 
 	item = UI_GET_ITEM(gxml, "variants");
 
-	if (main_check_for_global_option((gchar *)mod_name, "ThMLVariants") || main_check_for_global_option((gchar *)mod_name,
-													    "OSISVariants")) {
+	if (main_check_for_global_option((gchar *)mod_name, "ThMLVariants") ||
+	    main_check_for_global_option((gchar *)mod_name, "OSISVariants")) {
 		gtk_widget_show(item);
 
 		item = UI_GET_ITEM(gxml, "primary_reading");
@@ -1678,8 +1704,8 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 
 	item = UI_GET_ITEM(gxml, "glosses");
 
-	if (main_check_for_global_option((gchar *)mod_name, "OSISGlosses") || main_check_for_global_option((gchar *)mod_name,
-													   "OSISRuby")) {
+	if (main_check_for_global_option((gchar *)mod_name, "OSISGlosses") ||
+	    main_check_for_global_option((gchar *)mod_name, "OSISRuby")) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 					       ops->glosses);
@@ -1728,16 +1754,27 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 	item = UI_GET_ITEM(gxml, "xrefnotenumbers");
 
 	if ((ops->scripturerefs &&
-	     (main_check_for_global_option((gchar *)mod_name, "ThMLScripref") || main_check_for_global_option((gchar *)mod_name,
-													      "OSISScripref"))) ||
+	     (main_check_for_global_option((gchar *)mod_name, "ThMLScripref") ||
+	      main_check_for_global_option((gchar *)mod_name, "OSISScripref"))) ||
 	    (ops->footnotes &&
-	     (main_check_for_global_option((gchar *)mod_name, "ThMLFootnotes") || main_check_for_global_option((gchar *)mod_name,
-													       "OSISFootnotes") ||
-	      main_check_for_global_option((gchar *)mod_name,
-					   "GBFFootnotes")))) {
+	     (main_check_for_global_option((gchar *)mod_name, "ThMLFootnotes") ||
+	      main_check_for_global_option((gchar *)mod_name, "OSISFootnotes") ||
+	      main_check_for_global_option((gchar *)mod_name, "GBFFootnotes")))) {
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 					       ops->xrefnotenumbers);
+	} else {
+		gtk_widget_hide(item);
+	}
+
+	item = UI_GET_ITEM(gxml, "italic_headings");
+
+	if (ops->headings &&
+	    (main_check_for_global_option((gchar *)mod_name, "ThMLHeadings") ||
+	     main_check_for_global_option((gchar *)mod_name, "OSISHeadings"))) {
+		gtk_widget_show(item);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
+					       ops->italic_headings);
 	} else {
 		gtk_widget_hide(item);
 	}
@@ -1854,13 +1891,7 @@ static GtkWidget *_create_popup_menu(XiphosHtml *html, const gchar *mod_name,
 		return NULL;
 
 #ifdef USE_GTKBUILDER
-#if GTK_CHECK_VERSION(3, 14, 0)
-	glade_file =
-	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
-#else
-	glade_file =
-	    gui_general_user_file("xi-menus-popup_old.gtkbuilder", FALSE);
-#endif
+	glade_file = gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
 	glade_file = gui_general_user_file("xi-menus.glade", FALSE);
 #endif

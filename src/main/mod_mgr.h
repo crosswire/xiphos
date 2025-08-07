@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * mod_mgr.h
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -49,6 +49,7 @@ struct _mm
 	int is_images;
 	int is_glossary;
 	int is_cult;
+	int is_prayerlist;
 	int locked;
 	char *installsize;
 	char *about;

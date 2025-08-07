@@ -510,6 +510,7 @@ abn	Abua
 abo	Abon
 abp	Abenlen Ayta
 abq	Abaza
+abq-Cyrl	Abaza
 abr	Abron
 abs	Ambonese Malay
 abt	Ambulas
@@ -2167,6 +2168,7 @@ dnd	Daonda
 dne	Ndendeule
 #Dungan
 dng	Хуэйзў йүян
+dng-Cyrl	Хуэйзў йүян
 dni	Lower Grand Valley Dani
 dnk	Dengka
 dnn	Dzùùngoo
@@ -3108,6 +3110,7 @@ ina	Interlingua (International Auxiliary Language Association)
 inb	Inga
 ind	Indonesian
 ing	Degexit'an
+ing-Cyrl	Degexit'an
 inh	Ingush
 inj	Jungle Inga
 inl	Indonesian Sign Language
@@ -3552,6 +3555,7 @@ kjf	Khalaj
 kjg	Khmu
 #Khakas
 kjh	Xaкac тiлi
+kjh-Cyrl	Xaкac тiлi
 kji	Zabana
 kjj	Khinalugh
 kjk	Highland Konjo
@@ -3755,6 +3759,7 @@ kqz	Korana
 kra	Kumhali
 krb	Karkin
 krc	Karachay-Balkar
+krc-Cyrl	Karachay-Balkar
 krd	Kairui-Midiki
 kre	Panará
 krf	Koro (Vanuatu)
@@ -4016,6 +4021,7 @@ lba	Lui
 lbb	Label
 lbc	Lakkia
 lbe	Lak
+lbe-Cyrl	Lak
 lbf	Tinani
 lbg	Laopang
 lbi	La'bi
@@ -5589,6 +5595,7 @@ osi	Osing
 oso	Ososo
 osp	Old Spanish
 oss	Ossetian
+oss-Cyrl	Ossetian
 ost	Osatu
 osu	Southern One
 osx	Old Saxon
@@ -6614,6 +6621,7 @@ stt	Budeh Stieng
 stu	Samtao
 stv	Silt'e
 stw	Satawalese
+sty	Siberian Tatar
 sua	Sulka
 sub	Suku
 suc	Western Subanon
@@ -7220,6 +7228,7 @@ tyt	Tày Tac
 tyu	Kua
 #Tuvinian
 tyv	Тыва дыл
+tyv-Cyrl	Тыва дыл
 tyx	Teke-Tyee
 tyz	Tày
 tza	Tanzanian Sign Language
@@ -7670,6 +7679,7 @@ xag	Aghwan
 xai	Kaimbé
 #Kalmyk
 xal	Хальмг келн
+xal-Cyrl	Хальмг келн
 # remove leading / (consequent to eBible repo discoveries)
 xam	Xam
 xan	Xamtanga

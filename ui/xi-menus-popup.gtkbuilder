@@ -459,6 +459,15 @@
               </object>
             </child>
             <child>
+              <object class="GtkCheckMenuItem" id="italic_headings">
+                <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Italic Headings</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_italic_headings_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
               <object class="GtkCheckMenuItem" id="words_of_christ_in_red">
                 <property name="use_action_appearance">False</property>
                 <property name="can_focus">False</property>
@@ -878,7 +887,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="open_in_a_dialog2">
-        <property name="label" translatable="yes">Open in separate window</property>
+        <property name="label" translatable="yes">Open in a separate window</property>
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>

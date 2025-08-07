@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * main_window.c - main window gui
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -67,6 +67,7 @@
 /* we must define the categories of #definitions we need. */
 #define XK_MISCELLANY
 #define XK_LATIN1
+#define XK_XKB_KEYS
 #include <X11/keysymdef.h>
 
 WIDGETS widgets;
@@ -725,6 +726,11 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			access_on_down_eventbox_button_release_event(CHAPTER_BUTTON);
 		else if (state == GDK_SHIFT_MASK) // N book
 			access_on_down_eventbox_button_release_event(BOOK_BUTTON);
+		else if (state == GDK_MOD1_MASK) // Alt-N footnote toggle
+			kbd_toggle_option((main_check_for_global_option(sM, "GBFFootnotes") ||
+					   main_check_for_global_option(sM, "ThMLFootnotes") ||
+					   main_check_for_global_option(sM, "OSISFootnotes")),
+					  "Footnotes");
 		else if (state == (GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_SHIFT_MASK)) {
 			// BSP transient navigate
 			if (biblesync_active_xmit_allowed()) {
@@ -777,7 +783,9 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 
 	case XK_s:
 	case XK_S:
-		if (state == GDK_MOD1_MASK) // Alt-S strong's
+		if (state == GDK_CONTROL_MASK) // Ctrl-S toggle sidebar
+			on_sidebar_showhide_activate((GtkMenuItem *)NULL, (gpointer)NULL);
+		else if (state == GDK_MOD1_MASK) // Alt-S strong's
 		{
 			kbd_toggle_option(((main_check_for_global_option(sM, "GBFStrongs")) ||
 					   (main_check_for_global_option(sM, "ThMLStrongs")) ||
@@ -795,6 +803,58 @@ static gboolean on_vbox1_key_press_event(GtkWidget *widget, GdkEventKey *event,
 			on_notebook_main_new_tab_clicked(NULL, NULL);
 		else if (state == GDK_MOD1_MASK) // Alt-T transliteration
 			kbd_toggle_option(true, "Transliteration");
+		break;
+
+	case XK_x:
+	case XK_X:
+		if (state == GDK_MOD1_MASK) // Alt-X xref toggle
+			kbd_toggle_option((main_check_for_global_option(sM, "ThMLScripref") ||
+					   main_check_for_global_option(sM, "OSISScripref")),
+					  "Cross-references");
+	case XK_Tab:
+		if (state == GDK_CONTROL_MASK) // Ctrl-Tab  next tab
+			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
+				gtk_notebook_next_page(GTK_NOTEBOOK(widgets.notebook_main));
+				return TRUE; // Need to prevent Tab from navigating between widgets here
+			}
+		break;
+
+	case XK_ISO_Left_Tab:
+		if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) // Ctrl-Shift-Tab  previous tab
+			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
+				gtk_notebook_prev_page(GTK_NOTEBOOK(widgets.notebook_main));
+				return TRUE; // Need to prevent Shift-Tab from navigating between widgets here
+			}
+		break;
+
+	case XK_Page_Up:
+		if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) { // Ctrl-Shift-PgUp  reorder tab to left
+			gint current_tab_idx = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
+			GtkWidget *current_tab = gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_main), current_tab_idx);
+			if (current_tab_idx != 0) {
+				gtk_notebook_reorder_child(GTK_NOTEBOOK(widgets.notebook_main), current_tab, current_tab_idx - 1);
+			}
+		}
+		break;
+
+	case XK_Page_Down:
+		if (state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) { // Ctrl-Shift-PgDown  reorder tab to right
+			gint current_tab_idx = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
+			gint n_tabs = gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main));
+			GtkWidget *current_tab = gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_main), current_tab_idx);
+			if (current_tab_idx < n_tabs - 1) {
+				gtk_notebook_reorder_child(GTK_NOTEBOOK(widgets.notebook_main), current_tab, current_tab_idx + 1);
+			}
+		}
+		break;
+
+	case XK_w:
+		if (state == GDK_CONTROL_MASK) { // Ctrl-W  close current tab
+			if (GTK_NOTEBOOK(widgets.notebook_main) != NULL) {
+				gint pagenum = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
+				gui_close_passage_tab(pagenum);
+			}
+		}
 		break;
 
 	case XK_z:

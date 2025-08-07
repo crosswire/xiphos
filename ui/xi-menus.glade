@@ -384,6 +384,17 @@
 		  </child>
 
 		  <child>
+		    <widget class="GtkCheckMenuItem" id="highlight_annotated_verses">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Highlight _Annotated Verses</property>
+		      <property name="use_underline">True</property>
+		      <property name="active">False</property>
+		      <property name="tooltip" translatable="yes">Apply inverse highlight to annotated verses</property>
+		      <signal name="activate" handler="on_annotate_highlight_activate" last_modification_time="Sat, 07 Mar 2009 01:19:13 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
 		    <widget class="GtkSeparatorMenuItem" id="separator4">
 		      <property name="visible">True</property>
 		    </widget>
@@ -959,6 +970,16 @@
 	      <property name="use_underline">True</property>
 	      <property name="active">False</property>
 	      <signal name="activate" handler="on_headings_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkCheckMenuItem" id="italic_headings">
+	      <property name="visible">False</property>
+	      <property name="label" translatable="yes">Italic Headings</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_italic_headings_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
 	    </widget>
 	  </child>
 
@@ -2035,7 +2056,7 @@
     <widget class="GtkImageMenuItem" id="open_in_a_dialog">
       <property name="visible">True</property>
       <property name="tooltip" translatable="yes">Open module in editor or plain display window</property>
-      <property name="label" translatable="yes">Open in separate window</property>
+      <property name="label" translatable="yes">Open in a separate window</property>
       <property name="use_underline">True</property>
       <signal name="activate" handler="on_open_in_dialog_activate" last_modification_time="Tue, 07 Apr 2009 23:37:07 GMT"/>
 

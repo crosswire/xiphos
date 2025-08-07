@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * url.cc - support functions
  *
- * Copyright (C) 2004-2020 Xiphos Developer Team
+ * Copyright (C) 2004-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -153,7 +153,7 @@ static gint show_studypad(const gchar *filename, gboolean clicked)
  */
 
 const char *display_progs[] = {
-    "/usr/bin/gvfs-open",
+    "/usr/bin/xdg-open",
     "/usr/bin/gnome-open",
     "/usr/bin/display",
     NULL};
@@ -313,6 +313,7 @@ static gint show_morph(const char *module_name,
 	if (!strcmp(stype, "Greek") ||
 	    strstr(stype, "x-Robinson") ||
 	    strstr(stype, "robinson") ||
+	    strstr(stype, "packard") ||
 	    strstr(stype, "Robinson")) {
 		if (backend->get_key_testament(module_name,
 					       settings.currentverse) == 2) {
@@ -323,6 +324,13 @@ static gint show_morph(const char *module_name,
 				modbuf = "Packard";
 		}
 	}
+
+	if (strstr(stype, "oshm") ){
+		if (backend->is_module("OSHM")) {
+			modbuf="OSHM";
+		}
+	}
+
 	//XI_message(("modbuf = %s", modbuf));
 	if (clicked) {
 		main_display_dictionary(modbuf, (gchar *)svalue);
@@ -662,7 +670,7 @@ static gint show_in_previewer(const gchar *url)
 	work_buf = g_strsplit(url, "/", 4);
 
 	// might be an abbrev.  get the real.
-	const char *real_mod = main_get_name(work_buf[MODULE]);
+	const char *real_mod = main_abbrev_to_name(work_buf[MODULE]);
 
 	mybuf = main_get_rendered_text((real_mod ? real_mod : work_buf[MODULE]),
 				       work_buf[KEY]);
@@ -728,7 +736,7 @@ gint sword_uri(const gchar *url, gboolean clicked)
 				*slash = '\0'; // limit to name end.
 
 			// might be an abbrev.  get the real.
-			const char *real_mod = main_get_name(name);
+			const char *real_mod = main_abbrev_to_name(name);
 
 			int mod_type = backend->module_type(real_mod ? real_mod : name);
 
@@ -767,7 +775,7 @@ gint sword_uri(const gchar *url, gboolean clicked)
 		   ? work_buf[MODULE]
 		   : settings.MainWindowModule);
 
-	const char *real_mod = main_get_name(mod);
+	const char *real_mod = main_abbrev_to_name(mod);
 	if (real_mod)
 		mod = (gchar *)real_mod;
 	

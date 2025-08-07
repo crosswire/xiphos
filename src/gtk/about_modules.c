@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * about_modules.c - Sword modules about dialog
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -342,7 +342,7 @@ gui_core_display_about_dialog(const gchar *desc,
 	static const char *html_end = "</font></body></html>";
 	MOD_FONT *mf = get_font(modname);
 	g_string_printf(html_start,
-			"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body bgcolor=\"%s\" text=\"%s\"><font face=\"%s\" size=\"%+d\">",
+			"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><body bgcolor=\"%s\" text=\"%s\"><font face=\"%s\" size=\"%+d\">",
 			settings.bible_bg_color,
 			settings.bible_text_color,
 			((mf->old_font) ? mf->old_font : ""),
@@ -387,26 +387,47 @@ gui_core_display_about_dialog(const gchar *desc,
 
 void gui_display_about_module_dialog(gchar *modname)
 {
-	const gchar *desc;
-	gchar *about;
-	const gchar *version, *language, *abbreviation,
-	    *size, *promo, *dist, *langtoken, *companion,
+	gchar *desc = NULL, *about = NULL, *promo = NULL;
+	const gchar *language, *abbreviation;
+	gchar *version, *size, *dist, *langtoken, *companion,
 	    *category, *feature;
 	int feature_count = 0;
 	GString *info = g_string_new("");
 
-	desc = main_get_mod_config_entry(modname, "Description");
-	about = main_get_mod_config_entry(modname, "About");
+	// attempt to get locale-specific bits.
+	GString *query = g_string_new("");
+	if (sword_locale) {
+		gui_format_this(query, "Description_%2.2s", sword_locale);
+		desc = main_get_mod_config_entry(modname, query->str);
+		g_string_erase(query, 0, -1);
+
+		gui_format_this(query, "About_%2.2s", sword_locale);
+		about = main_get_mod_config_entry(modname, query->str);
+		g_string_erase(query, 0, -1);
+
+		gui_format_this(query, "ShortPromo_%2.2s", sword_locale);
+		promo = main_get_mod_config_entry(modname, query->str);
+		g_string_erase(query, 0, -1);
+	}
+	g_string_free(query, TRUE);
+
+	// if there weren't locale-specific bits, get the generics.
+	if (!desc)
+		desc = main_get_mod_config_entry(modname, "Description");
+	if (!about)
+		about = main_get_mod_config_entry(modname, "About");
+	if (!promo)
+		promo = main_get_mod_config_entry(modname, "ShortPromo");
+
 	version = main_get_mod_config_entry(modname, "Version");
 	size = main_get_mod_config_entry(modname, "InstallSize");
-	promo = main_get_mod_config_entry(modname, "ShortPromo");
 	dist = main_get_mod_config_entry(modname, "DistributionLicense");
 	companion = main_get_mod_config_entry(modname, "Companion");
 	category = main_get_mod_config_entry(modname, "Category");
 	feature = main_get_mod_config_entry(modname, "Feature");
 	langtoken = main_get_mod_config_entry(modname, "Lang");
 	language = main_get_module_language(modname);
-	abbreviation = main_get_abbreviation(modname);
+	abbreviation = main_name_to_abbrev(modname);
 
 	info = g_string_append(info,
 			       "<center><table border=\"0\" cellpadding=\"5\" cellspacing=\"0\">");
@@ -645,4 +666,5 @@ void gui_display_about_module_dialog(gchar *modname)
 	info = g_string_append(info, about);
 
 	gui_core_display_about_dialog(desc, info->str, modname);
+	g_string_free(info, TRUE);
 }

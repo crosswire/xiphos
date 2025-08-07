@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * display.hh -
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,7 +53,8 @@ class GTKEntryDisp : public SWDisplay
 	{
 	}
 	virtual char display(SWModule &imodule);
-	virtual char displayByChapter(SWModule &imodule);
+	virtual char displayByChapter(SWModule &imodule,
+				      int columns);
 
       protected:
 	GtkWidget *gtkText;
@@ -76,6 +77,12 @@ class GTKChapDisp : public GTKEntryDisp
 	{
 	}
 	virtual char display(SWModule &imodule);
+	virtual GString *intro_material(sword::VerseKey *key,
+					SWModule &imodule,
+					int chapter,
+					int curVerse,
+					int curBook,
+					int curTest);
 	virtual void getVerseBefore(SWModule &imodule);
 	virtual void getVerseAfter(SWModule &imodule);
 
@@ -100,7 +107,8 @@ class DialogEntryDisp : public SWDisplay
 	{
 	}
 	virtual char display(SWModule &imodule);
-	virtual char displayByChapter(SWModule &imodule);
+	virtual char displayByChapter(SWModule &imodule,
+				      int columns);
 
       protected:
 	GtkWidget *gtkText;

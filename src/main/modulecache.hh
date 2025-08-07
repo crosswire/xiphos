@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * modulecache.hh -
  *
- * Copyright (C) 2007-2020 Xiphos Developer Team
+ * Copyright (C) 2007-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,7 +72,8 @@ static const int Xlit = (1 << 16);
 static const int Enumerated = (1 << 17);
 static const int Glosses = (1 << 18);
 static const int MorphSegmentation = (1 << 19);
-// 20-23 yet to be assigned.
+static const int ItalicHeadings = (1 << 20);
+// 21-23 yet to be assigned.
 
 // options known only within Xiphos.
 static const int CommentaryChapter = (1 << 24);

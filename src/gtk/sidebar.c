@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sidebar.c - create and maintain the new sidebar bar
  *
- * Copyright (C) 2000-2020 Xiphos Developer Team
+ * Copyright (C) 2000-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -991,13 +991,7 @@ GtkWidget *create_results_menu(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#if GTK_CHECK_VERSION(3, 14, 0)
-	glade_file =
-	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
-#else
-	glade_file =
-	    gui_general_user_file("xi-menus-popup_old.gtkbuilder", FALSE);
-#endif
+	glade_file = gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
 	GladeXML *gxml;
 	glade_file = gui_general_user_file("xi-menus.glade", FALSE);
@@ -1049,13 +1043,7 @@ static GtkWidget *create_menu_modules(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#if GTK_CHECK_VERSION(3, 14, 0)
-	glade_file =
-	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
-#else
-	glade_file =
-	    gui_general_user_file("xi-menus-popup_old.gtkbuilder", FALSE);
-#endif
+	glade_file = gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
 	GladeXML *gxml;
 	glade_file = gui_general_user_file("xi-menus.glade", FALSE);
@@ -1131,13 +1119,7 @@ GtkWidget *create_menu_prayerlist(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#if GTK_CHECK_VERSION(3, 14, 0)
-	glade_file =
-	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
-#else
-	glade_file =
-	    gui_general_user_file("xi-menus-popup_old.gtkbuilder", FALSE);
-#endif
+	glade_file = gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
 	GladeXML *gxml;
 	glade_file = gui_general_user_file("xi-menus.glade", FALSE);
@@ -1177,13 +1159,7 @@ GtkWidget *create_menu_prayerlist_mod(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-#if GTK_CHECK_VERSION(3, 14, 0)
-	glade_file =
-	    gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
-#else
-	glade_file =
-	    gui_general_user_file("xi-menus-popup_old.gtkbuilder", FALSE);
-#endif
+	glade_file = gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
 #else
 	GladeXML *gxml;
 	glade_file = gui_general_user_file("xi-menus.glade", FALSE);

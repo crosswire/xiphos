@@ -9,14 +9,14 @@
 #
 
  ; Re-create already defined settings but discarded by using this code
- !define MUI_ICON "@PROJECT_SOURCE_DIR@/win32/nsis/pixmaps/icon-install.ico"
- !define MUI_UNICON "@PROJECT_SOURCE_DIR@/win32/nsis/pixmaps/icon-uninstall.ico"
+ !define MUI_ICON "@PROJECT_SOURCE_DIR@/cpack/windows/pixmaps/icon-install.ico"
+ !define MUI_UNICON "@PROJECT_SOURCE_DIR@/cpack/windows/pixmaps/icon-uninstall.ico"
 
 
  ; Add our own settings:
 
  ; RTL header image
- !define MUI_UI_HEADERIMAGE_RTL "@PROJECT_SOURCE_DIR@/win32/nsis/pixmaps/header-r.bmp"
+ !define MUI_UI_HEADERIMAGE_RTL "@PROJECT_SOURCE_DIR@/cpack/windows/pixmaps/header-r.bmp"
 
 
  ; Sword settings
@@ -30,7 +30,7 @@
 
 
  ; Include Macro for registering fonts
- !include "@PROJECT_SOURCE_DIR@/win32/nsis/include/fontreg.nsh"
+ !include "@PROJECT_SOURCE_DIR@/cpack/windows/include/fontreg.nsh"
 
 #
 #

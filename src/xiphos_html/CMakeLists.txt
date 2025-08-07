@@ -59,6 +59,7 @@ target_include_directories(xiphos_html
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   )
 
 # specify libraries or flags to use when linking
@@ -68,4 +69,16 @@ target_link_libraries(xiphos_html
   PkgConfig::Core
   PkgConfig::Gtk
   PkgConfig::Gnome
+  PkgConfig::Soup
   )
+
+if(WK_FOUND)
+  target_compile_definitions(xiphos_html
+    PRIVATE
+    PkgConfig::WK
+    )
+  target_link_libraries(xiphos_html
+    PRIVATE
+    PkgConfig::WK
+    )
+endif()
