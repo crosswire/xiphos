@@ -105,6 +105,8 @@ void on_image_content_activate(GtkCheckMenuItem *menuitem,
 			       gpointer user_data);
 void on_respect_font_faces_activate(GtkCheckMenuItem *menuitem,
 				    gpointer user_data);
+void on_chapter_N_activate(GtkCheckMenuItem *menuitem,
+				    gpointer user_data);
 void on_unlock_this_module_activate(GtkMenuItem *menuitem,
 				    gpointer user_data);
 void on_display_book_heading_activate(GtkMenuItem *menuitem,

@@ -1204,12 +1204,14 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 			g_string_free(intro, TRUE);
 		}
 
-		num = main_format_number(chapter);
-		buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
-				      _("Chapter"), num);
-		g_free(num);
-		swbuf.append(buf);
-		g_free(buf);
+		if (ops->display_chapter_N) {
+			num = main_format_number(chapter);
+			buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
+					      _("Chapter"), num);
+			g_free(num);
+			swbuf.append(buf);
+			g_free(buf);
+		}
 
 	} else {
 
@@ -1259,12 +1261,14 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 			g_string_free(intro, TRUE);
 		}
 
-		num = main_format_number(chapter);
-		buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
-				      _("Chapter"), num);
-		g_free(num);
-		swbuf.append(buf);
-		g_free(buf);
+		if (ops->display_chapter_N) {
+			num = main_format_number(chapter);
+			buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
+					      _("Chapter"), num);
+			g_free(num);
+			swbuf.append(buf);
+			g_free(buf);
+		}
 
 		swbuf.append("</div>");
 	}
@@ -1290,12 +1294,14 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		char *num = main_format_number(key->getChapter());
 
 		buf = g_strdup_printf(
-		    "%s<hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
-		    (strongs_or_morph ? "<br/><br/>" : ""),
-		    _("Chapter"), num);
+			(ops->display_chapter_N
+			 ? "%s<hr/><div style=\"text-align: center\"><b>%s %s</b></div>"
+			 : "%s<hr/>" ),
+			(strongs_or_morph ? "<br/><br/>" : ""),
+			_("Chapter"), num);
+		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
-		g_free(num);
 
 		swbuf.appendFormatted("<div dir=%s>",
 				      ((is_rtol && !ops->transliteration)

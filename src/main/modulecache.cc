@@ -67,6 +67,7 @@ ConstructFlags(GLOBAL_OPS *ops)
 	flags |= (ops->commentary_by_chapter ? CommentaryChapter : 0);
 	flags |= (ops->doublespace ? Doublespace : 0);
 	flags |= (ops->xrefnotenumbers ? XrefNoteNumbers : 0);
+	flags |= (ops->display_chapter_N ? DisplayChapterN : 0);
 
 	return flags;
 }

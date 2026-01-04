@@ -1168,6 +1168,29 @@ G_MODULE_EXPORT void on_respect_font_faces_activate(GtkCheckMenuItem *
  *
  */
 
+G_MODULE_EXPORT void on_chapter_N_activate(GtkCheckMenuItem *
+							menuitem,
+						    gpointer user_data)
+{
+	_global_option_main_pane((GtkMenuItem *)menuitem, "Display Chapter N"); /* string not seen by user */
+}
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
 G_MODULE_EXPORT void on_unlock_this_module_activate(GtkMenuItem *menuitem,
 						    gpointer user_data)
 {
@@ -1733,6 +1756,14 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 		gtk_widget_show(item);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
 					       ops->respect_font_faces);
+	}
+
+	item = UI_GET_ITEM(gxml, "chapter_N");
+
+	if (ops->display_chapter_N != -1) {
+		gtk_widget_show(item);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item),
+					       ops->display_chapter_N);
 	}
 
 	item = UI_GET_ITEM(gxml, "commentary_by_chapter");

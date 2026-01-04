@@ -273,6 +273,11 @@ GLOBAL_OPS *main_new_globals(const gchar *mod_name)
 		? -1 // "unknown"; otherwise, it's like the others.
 		: gui_of2tf(module_options[mod_name]["Respect Font Faces"].c_str());
 
+	ops->display_chapter_N =
+	    (*(module_options[mod_name]["Display Chapter N"].c_str()) == '\0')
+		? 1 // unspecified means "on"
+		: gui_of2tf(module_options[mod_name]["Display Chapter N"].c_str());
+
 	// special case, xiphos-specific feature: commentary whole chapter.
 	ops->commentary_by_chapter =
 	    ((backend->module_type(mod_name) == COMMENTARY_TYPE) &&

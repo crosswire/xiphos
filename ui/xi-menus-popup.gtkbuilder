@@ -666,6 +666,15 @@
               </object>
             </child>
             <child>
+              <object class="GtkCheckMenuItem" id="chapter_N">
+                <property name="use_action_appearance">False</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Display chapter numbers</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_chapter_N_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
               <object class="GtkCheckMenuItem" id="commentary_by_chapter">
                 <property name="use_action_appearance">False</property>
                 <property name="can_focus">False</property>
