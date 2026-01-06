@@ -59,7 +59,6 @@ jobs:
             glib2-devel \
             gnome-common \
             gtk3 \
-            gtkmm \
             intltool \
             libsoup \
             libxml2 \
@@ -101,7 +100,6 @@ jobs:
             glib2-devel \
             gnome-common \
             gtk3 \
-            gtkmm \
             intltool \
             libsoup3 \
             libxml2 \
@@ -158,46 +156,6 @@ jobs:
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
-  fedora_gtk3_wk2_libsoup2:
-    runs-on: ubuntu-latest
-    container:
-      image: fedora:latest
-    steps:
-      - name: checkout xiphos
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: install dependencies
-        run: |
-          dnf install -y \
-            biblesync-devel \
-            cmake \
-            dbus-glib-devel \
-            desktop-file-utils \
-            git \
-            docbook-utils \
-            gcc-c++ \
-            gtk3-devel \
-            intltool \
-            itstool \
-            libappstream-glib-devel \
-            libsoup-devel \
-            libuuid-devel \
-            libxml2-devel \
-            make \
-            minizip-devel \
-            rpm-build \
-            sword-devel \
-            webkit2gtk4.0-devel \
-            yelp \
-            yelp-tools \
-            zip
-      - name: build xiphos
-        run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
-          make -C build -j$(nproc)
-          make -C build mhelp package_source
-
   debian_gtk3_wk2_libsoup3:
     runs-on: ubuntu-latest
     container:
@@ -222,7 +180,6 @@ jobs:
             itstool \
             libbiblesync-dev \
             libdbus-glib-1-dev \
-            libglade2-dev \
             libenchant-2-dev \
             libgail-3-dev \
             libgtk-3-dev \
@@ -269,7 +226,6 @@ jobs:
             libdbus-glib-1-dev \
             libenchant-2-dev \
             libgail-3-dev \
-            libglade2-dev \
             libgtk-3-dev \
             libminizip-dev \
             libsword-dev \
