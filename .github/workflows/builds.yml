@@ -252,7 +252,6 @@ jobs:
       - arch_gtk3_wk2_libsoup3
       - debian_gtk3_wk2_libsoup3
       - fedora_gtk3_wk2_libsoup3
-      - fedora_gtk3_wk2_libsoup2
       - ubuntu_gtk3_wk2_libsoup3
     if: contains(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
