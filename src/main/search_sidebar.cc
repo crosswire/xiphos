@@ -253,6 +253,11 @@ void main_do_sidebar_search(gpointer user_data)
 					g_string_append_c(new_search, '+');
 			}
 		}
+
+		// append an arbitrary space to search string end:
+		// workaround for sword search failure of single +TERM.
+		g_string_append_c(new_search, ' ');
+
 		search_string = new_search->str;
 	}
 
