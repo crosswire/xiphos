@@ -61,4 +61,10 @@
  <url type="homepage">https://github.com/crosswire/xiphos/</url>
  <update_contact>xiphos-devel@crosswire.org</update_contact>
  <translation type="gettext">Xiphos</translation>
+ <content_rating type="oars-1.1" />
+ <releases>
+   <release version="4.3.2" date="2025-04-10">
+     <url type="details">https://xiphos.org/development/release-notes.html</url>
+   </release>
+ </releases>
 </component>
