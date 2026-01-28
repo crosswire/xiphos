@@ -3694,7 +3694,7 @@ msgstr "<b>Installatiedoelmap</b>"
 
 #: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:35
 msgid "<i>Personal area, for your use only:</i>"
-msgstr "<i>Persoonlijk map, alleen voor eigen gebruik:</li>"
+msgstr "<i>Persoonlijk map, alleen voor eigen gebruik:</i>"
 
 #: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:36
 msgid "Home dir"
