@@ -1198,6 +1198,16 @@
 	  </child>
 
 	  <child>
+	    <widget class="GtkCheckMenuItem" id="chapter_N">
+	      <property name="visible">False</property>
+	      <property name="label" translatable="yes">Display chapter numbers</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_chapter_N_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
 	    <widget class="GtkCheckMenuItem" id="commentary_by_chapter">
 	      <property name="visible">False</property>
 	      <property name="label" translatable="yes">Commentary by Chapter</property>

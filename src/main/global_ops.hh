@@ -57,6 +57,7 @@ struct _global_ops
 
 	gint image_content;
 	gint respect_font_faces;
+	gint display_chapter_N;
 };
 
 void _set_global_textual(const char *option, const char *choice);

@@ -237,6 +237,8 @@ GLOBAL_OPS *main_new_globals(const gchar *mod_name)
 	    (module_options[mod_name]["Cross-references"] != "Off");
 	ops->xrefnotenumbers =
 	    (module_options[mod_name]["XrefNoteNumbers"] != "Off");
+	ops->display_chapter_N =
+	    (module_options[mod_name]["Display Chapter N"] != "Off");
 
 	// more special case default on: heb/grk support.
 	ops->greekaccents =

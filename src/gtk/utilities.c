@@ -38,8 +38,8 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <gtk/gtk.h>
-#include <minizip/zip.h>
 #include <zlib.h>
+#include <minizip/zip.h>
 
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"

@@ -77,6 +77,12 @@ class GTKChapDisp : public GTKEntryDisp
 	{
 	}
 	virtual char display(SWModule &imodule);
+	virtual GString *intro_material(sword::VerseKey *key,
+					SWModule &imodule,
+					int chapter,
+					int curVerse,
+					int curBook,
+					int curTest);
 	virtual void getVerseBefore(SWModule &imodule);
 	virtual void getVerseAfter(SWModule &imodule);
 

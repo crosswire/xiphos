@@ -79,6 +79,7 @@ static const int ItalicHeadings = (1 << 20);
 static const int CommentaryChapter = (1 << 24);
 static const int Doublespace = (1 << 25);
 static const int XrefNoteNumbers = (1 << 26);
+static const int DisplayChapterN = (1 << 27);
 
 class CacheVerse
 {
