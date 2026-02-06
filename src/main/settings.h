@@ -41,6 +41,9 @@ struct _settings
 	    *DefaultDict,	 /* module for default dict */
 	    *lex_greek,		  /* module for greek lexicon - strongs or thayers */
 	    *lex_hebrew,	  /* module for hebrew lexicon - strongs or BDB */
+	    *morph_heb_lex, /* module for hebrew lexicon - Morph */
+	    *morph_greek_lex_nt, /* module for greek NT lexicon - Morph */
+	    *morph_greek_lex_ot, /* module for greek OT lexicon - Morph */
 	    *currentverse,	/* where we are right now */
 	    *cvparallel,	  /* current verse for detached parallel */
 	    *dictkey,		  /* dictionary key to use at program startup */

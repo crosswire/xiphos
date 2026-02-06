@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-21 14:44+0100\n"
-"PO-Revision-Date: 2025-02-17 14:32+0100\n"
+"POT-Creation-Date: 2026-02-06 22:18+0100\n"
+"PO-Revision-Date: 2026-02-06 22:22+0100\n"
 "Last-Translator: Cyrille <lafricain79@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -37,7 +37,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: ../src/backend/sword_main.cc:792
+#: ../src/backend/sword_main.cc:795
 msgid ""
 "Xiphos failure: \"can't happen\", display_mod: null\n"
 "Please report this. sword_main.cc:set_treekey\n"
@@ -47,18 +47,18 @@ msgstr ""
 "Merci de le signaler. sword_main.cc:set_treekey\n"
 "Que faisiez-vous lorsque c’est arrivé ?"
 
-#: ../src/backend/sword_main.cc:1149
+#: ../src/backend/sword_main.cc:1152
 msgid "Configuration not found"
 msgstr "Configuration non trouvée"
 
-#: ../src/editor/slib-editor.c:198 ../src/editor/webkit_editor.c:625
+#: ../src/editor/slib-editor.c:198 ../src/editor/webkit_editor.c:629
 #: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
 #: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Ouvrir"
 
 #: ../src/editor/slib-editor.c:201 ../src/editor/slib-editor.c:241
-#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:773
+#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:797
 #: ../ui/bookmarks.gtkbuilder.h:5 ../ui/export-dialog.gtkbuilder.h:2
 #: ../ui/gtk_webedit.ui.h:85 ../ui/markverse.gtkbuilder.h:7
 #: ../ui/module-manager.gtkbuilder.h:18
@@ -66,7 +66,7 @@ msgid "_Cancel"
 msgstr "_Annuler"
 
 #: ../src/editor/slib-editor.c:202 ../src/editor/slib-editor.c:242
-#: ../src/editor/slib-editor.c:538 ../src/gtk/main_menu.c:774
+#: ../src/editor/slib-editor.c:538 ../src/gtk/main_menu.c:798
 msgid "_Open"
 msgstr "_Ouvrir"
 
@@ -76,7 +76,7 @@ msgid "Save As"
 msgstr "Enregistrer sous"
 
 #: ../src/editor/slib-editor.c:262 ../src/editor/slib-editor.c:421
-#: ../src/editor/webkit_editor.c:708
+#: ../src/editor/webkit_editor.c:712
 msgid "Untitled document"
 msgstr "Sans titre"
 
@@ -84,7 +84,7 @@ msgstr "Sans titre"
 msgid "_Close"
 msgstr "_Fermer"
 
-#: ../src/editor/slib-editor.c:440 ../src/editor/webkit_editor.c:331
+#: ../src/editor/slib-editor.c:440 ../src/editor/webkit_editor.c:335
 msgid "Are you sure you want to delete the note for"
 msgstr "Êtes-vous certain de vouloir supprimer le commentaire de"
 
@@ -176,37 +176,43 @@ msgid "Insert Link"
 msgstr "Insérer un lien"
 
 #: ../src/editor/slib-editor.c:1031 ../src/editor/slib-editor.c:1072
-#: ../src/editor/webkit_editor.c:1193 ../src/editor/webkit_editor.c:1233
+#: ../src/editor/webkit_editor.c:1197 ../src/editor/webkit_editor.c:1237
 msgid "Save the changes to document"
 msgstr "Voulez-vous enregistrer les modifications apportées au document"
 
 #: ../src/editor/slib-editor.c:1032 ../src/editor/slib-editor.c:1073
-#: ../src/editor/webkit_editor.c:1194 ../src/editor/webkit_editor.c:1234
+#: ../src/editor/webkit_editor.c:1198 ../src/editor/webkit_editor.c:1238
 msgid "before closing?"
 msgstr "avant de fermer ?"
 
 #: ../src/editor/slib-editor.c:1037 ../src/editor/slib-editor.c:1078
-#: ../src/editor/webkit_editor.c:1198 ../src/editor/webkit_editor.c:1238
+#: ../src/editor/webkit_editor.c:1202 ../src/editor/webkit_editor.c:1242
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 "Si vous n’enregistrez pas, les modifications seront définitivement perdues."
 
-#: ../src/editor/slib-editor.c:1071 ../src/editor/webkit_editor.c:1232
-#: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:39
+#: ../src/editor/slib-editor.c:1071 ../src/editor/webkit_editor.c:1236
+#: ../ui/xi-menus.glade.h:63 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "File"
 msgstr "Fichier"
 
-#: ../src/editor/slib-editor.c:1123 ../src/editor/webkit_editor.c:1275
+#: ../src/editor/slib-editor.c:1123 ../src/editor/webkit_editor.c:1279
 msgid "StudyPad"
 msgstr "Bloc-notes"
 
-#: ../src/editor/slib-editor.c:1138 ../src/editor/webkit_editor.c:1290
+#: ../src/editor/slib-editor.c:1138 ../src/editor/webkit_editor.c:1294
 msgid "Note Editor"
 msgstr "Éditeur de note"
 
-#: ../src/editor/slib-editor.c:1156 ../src/editor/webkit_editor.c:1307
+#: ../src/editor/slib-editor.c:1156 ../src/editor/webkit_editor.c:1311
 msgid "Prayer List/Journal Editor"
 msgstr "Éditeur de liste de prières ou de journal"
+
+#: ../src/editor/webkit_editor.c:40
+msgid ""
+"The editor is disabled on this platform due to missing dependencies.\n"
+"We hope to re-enable it in a future release."
+msgstr ""
 
 #: ../src/gtk/about_modules.c:142
 msgid "About Sword Module"
@@ -218,169 +224,169 @@ msgstr "À propos de ce module SWORD"
 msgid "Close"
 msgstr "Fermer"
 
-#: ../src/gtk/about_modules.c:415
+#: ../src/gtk/about_modules.c:436
 msgid "<b>Module name:</b> "
 msgstr "<b>Nom du module :</b> "
 
-#: ../src/gtk/about_modules.c:422
+#: ../src/gtk/about_modules.c:443
 msgid "<b>Module abbreviation:</b> "
 msgstr "<b>Abréviation :</b> "
 
-#: ../src/gtk/about_modules.c:427
+#: ../src/gtk/about_modules.c:448
 msgid "<b>Version:</b> "
 msgstr "<b>Version :</b> "
 
-#: ../src/gtk/about_modules.c:430
+#: ../src/gtk/about_modules.c:451
 msgid "No version stamp found"
 msgstr "Pas d’indication trouvée"
 
-#: ../src/gtk/about_modules.c:433
+#: ../src/gtk/about_modules.c:454
 msgid "<b>Type:</b> "
 msgstr "<b>Type :</b> "
 
-#: ../src/gtk/about_modules.c:435
+#: ../src/gtk/about_modules.c:456
 msgid "Daily Devotion"
 msgstr "Lectures du jour"
 
-#: ../src/gtk/about_modules.c:437 ../src/gtk/mod_mgr.c:1554
-#: ../src/gtk/utilities.c:609 ../src/main/sidebar.cc:1029
-#: ../src/main/sidebar.cc:1031
+#: ../src/gtk/about_modules.c:458 ../src/gtk/mod_mgr.c:1616
+#: ../src/gtk/utilities.c:609 ../src/main/sidebar.cc:1085
+#: ../src/main/sidebar.cc:1087
 msgid "Maps"
 msgstr "Cartes"
 
-#: ../src/gtk/about_modules.c:439 ../src/gtk/mod_mgr.c:1558
-#: ../src/gtk/utilities.c:615 ../src/main/sidebar.cc:1038
-#: ../src/main/sidebar.cc:1040
+#: ../src/gtk/about_modules.c:460 ../src/gtk/mod_mgr.c:1622
+#: ../src/gtk/utilities.c:615 ../src/main/sidebar.cc:1096
+#: ../src/main/sidebar.cc:1098
 msgid "Images"
 msgstr "Images"
 
-#: ../src/gtk/about_modules.c:441
+#: ../src/gtk/about_modules.c:462
 msgid "Glossary"
 msgstr "Glossaire"
 
-#: ../src/gtk/about_modules.c:445
+#: ../src/gtk/about_modules.c:466
 msgid "Cult"
 msgstr "Culte"
 
-#: ../src/gtk/about_modules.c:449 ../src/gtk/search_sidebar.c:287
+#: ../src/gtk/about_modules.c:470 ../src/gtk/search_sidebar.c:287
 msgid "Bible"
 msgstr "Bible"
 
-#: ../src/gtk/about_modules.c:452 ../src/gtk/search_sidebar.c:295
+#: ../src/gtk/about_modules.c:473 ../src/gtk/search_sidebar.c:295
 #: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:149
 msgid "Commentary"
 msgstr "Commentaire"
 
-#: ../src/gtk/about_modules.c:455 ../ui/prefs.glade.h:147
+#: ../src/gtk/about_modules.c:476 ../ui/prefs.glade.h:147
 #: ../ui/prefs.gtkbuilder.h:151
 msgid "Dictionary"
 msgstr "Dictionnaire"
 
-#: ../src/gtk/about_modules.c:458
+#: ../src/gtk/about_modules.c:479
 msgid "General Book"
 msgstr "Livre général"
 
-#: ../src/gtk/about_modules.c:463
+#: ../src/gtk/about_modules.c:484
 msgid "Personal Commentary"
 msgstr "Commentaire personnel"
 
-#: ../src/gtk/about_modules.c:466
+#: ../src/gtk/about_modules.c:487
 msgid "Journal"
 msgstr "Journal"
 
-#: ../src/gtk/about_modules.c:469
+#: ../src/gtk/about_modules.c:490
 msgid "Unknown type"
 msgstr "Type inconnu"
 
-#: ../src/gtk/about_modules.c:475
+#: ../src/gtk/about_modules.c:496
 msgid "<b>Language:</b> "
 msgstr "<b>Langue :</b> "
 
-#: ../src/gtk/about_modules.c:478
+#: ../src/gtk/about_modules.c:499
 msgid "Not specified"
 msgstr "Non spécifiée"
 
-#: ../src/gtk/about_modules.c:487
+#: ../src/gtk/about_modules.c:508
 msgid "<b>Installed size:</b> "
 msgstr "<b>Taille :</b> "
 
-#: ../src/gtk/about_modules.c:495
+#: ../src/gtk/about_modules.c:516
 msgid "<b>Companion module(s):</b></br>"
 msgstr "<b>Modules compagnons :</b></br>"
 
-#: ../src/gtk/about_modules.c:505
+#: ../src/gtk/about_modules.c:526
 msgid "<b>Features:</b>"
 msgstr "<b>Options :</b>"
 
-#: ../src/gtk/about_modules.c:509
+#: ../src/gtk/about_modules.c:530
 msgid "*&nbsp;Headings"
 msgstr "*&nbsp;Titres"
 
-#: ../src/gtk/about_modules.c:517
+#: ../src/gtk/about_modules.c:538
 msgid "*&nbsp;Footnotes"
 msgstr "*&nbsp;Notes de bas de page"
 
-#: ../src/gtk/about_modules.c:523
+#: ../src/gtk/about_modules.c:544
 msgid "*&nbsp;Cross references"
 msgstr "*&nbsp;Références croisées"
 
-#: ../src/gtk/about_modules.c:530
+#: ../src/gtk/about_modules.c:551
 msgid "*&nbsp;Strong's numbers"
 msgstr "*&nbsp;Nombres de Strong"
 
-#: ../src/gtk/about_modules.c:538
+#: ../src/gtk/about_modules.c:559
 msgid "*&nbsp;Morphological tags"
 msgstr "*&nbsp;Étiquettes morphologiques"
 
-#: ../src/gtk/about_modules.c:544
+#: ../src/gtk/about_modules.c:565
 msgid "*&nbsp;Lemmas"
 msgstr "*&nbsp;Lemmes"
 
-#: ../src/gtk/about_modules.c:552
+#: ../src/gtk/about_modules.c:573
 msgid "*&nbsp;Words of Christ in red"
 msgstr "*&nbsp;Paroles du Christ en rouge"
 
-#: ../src/gtk/about_modules.c:557
+#: ../src/gtk/about_modules.c:578
 msgid "*&nbsp;Greek accents"
 msgstr "*&nbsp;Accents grecs"
 
-#: ../src/gtk/about_modules.c:563
+#: ../src/gtk/about_modules.c:584
 msgid "*&nbsp;Hebrew Vowel Points"
 msgstr "*&nbsp;Ponctuation des voyelles en hébreu"
 
-#: ../src/gtk/about_modules.c:569
+#: ../src/gtk/about_modules.c:590
 msgid "*&nbsp;Hebrew Cantillation"
 msgstr "*&nbsp;Vocalisations en hébreu"
 
-#: ../src/gtk/about_modules.c:575
+#: ../src/gtk/about_modules.c:596
 msgid "*&nbsp;Variant readings"
 msgstr "*&nbsp;Variantes de lecture"
 
-#: ../src/gtk/about_modules.c:582
+#: ../src/gtk/about_modules.c:603
 msgid "*&nbsp;Transliteration forms"
 msgstr "*&nbsp;Translittération"
 
-#: ../src/gtk/about_modules.c:587
+#: ../src/gtk/about_modules.c:608
 msgid "*&nbsp;Enumerations"
 msgstr "*&nbsp;Énumérations"
 
-#: ../src/gtk/about_modules.c:592
+#: ../src/gtk/about_modules.c:613
 msgid "*&nbsp;Glosses"
 msgstr "*&nbsp;Annotations"
 
-#: ../src/gtk/about_modules.c:599
+#: ../src/gtk/about_modules.c:620
 msgid "*&nbsp;Morpheme Segmentation"
 msgstr "*&nbsp;Segmentation de morphème"
 
-#: ../src/gtk/about_modules.c:606
+#: ../src/gtk/about_modules.c:627
 msgid "*&nbsp;<i>No features found</i>"
 msgstr "*&nbsp;<i>Aucune option</i>"
 
-#: ../src/gtk/about_modules.c:616
+#: ../src/gtk/about_modules.c:637
 msgid "<b>Distribution license:</b>"
 msgstr "<b>Licence de distribution :</b>"
 
-#: ../src/gtk/about_modules.c:629
+#: ../src/gtk/about_modules.c:650
 msgid "<b>Promotional:</b> "
 msgstr "<b>Promotion :</b> "
 
@@ -485,11 +491,11 @@ msgstr "Voir le TRANSLATION-HOWTO dans les sources de Xiphos"
 msgid "Xiphos development"
 msgstr "SIte de développement de Xiphos"
 
-#: ../src/gtk/about_xiphos.c:129
+#: ../src/gtk/about_xiphos.c:131
 msgid "Copyright © 2000-2025 Xiphos Development Team"
 msgstr "Copyright © 2000-2025 Équipe de développement Xiphos"
 
-#: ../src/gtk/about_xiphos.c:131
+#: ../src/gtk/about_xiphos.c:133
 msgid ""
 "\n"
 "Powered by The SWORD Project.\n"
@@ -505,7 +511,7 @@ msgstr ""
 #: ../src/gtk/bookmark_dialog.c:163 ../src/gtk/bookmarks_menu.c:361
 #: ../src/gtk/bookmarks_menu.c:653 ../src/gtk/bookmarks_menu.c:753
 #: ../src/gtk/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
-#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:36
+#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Bookmark"
 msgstr "Signet"
 
@@ -527,7 +533,7 @@ msgstr "Dossier : "
 msgid "Specify bookmarks file"
 msgstr "Spécifie le fichier des signets"
 
-#: ../src/gtk/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:63
+#: ../src/gtk/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:65
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit"
 msgstr "Édition"
@@ -708,11 +714,11 @@ msgstr ""
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "BUG ! Xiphos va s’arrêter sur une erreur « STRING »."
 
-#: ../src/gtk/main_menu.c:653
+#: ../src/gtk/main_menu.c:677
 msgid "Save Session"
 msgstr "Sauvegarder la session"
 
-#: ../src/gtk/main_menu.c:769
+#: ../src/gtk/main_menu.c:793
 msgid "Open Session"
 msgstr "Ouvrir une session"
 
@@ -741,44 +747,44 @@ msgstr "Commentaire :"
 msgid "Xiphos: No windows."
 msgstr "Xiphos : Pas de fenêtres."
 
-#: ../src/gtk/main_window.c:733
+#: ../src/gtk/main_window.c:738
 msgid "BibleSync: Current navigation sent."
 msgstr "BibleSync : La navigation courante a été envoyée."
 
-#: ../src/gtk/main_window.c:735
+#: ../src/gtk/main_window.c:740
 msgid "BibleSync: Not speaking."
 msgstr "BibleSync : Ne transmet pas."
 
-#: ../src/gtk/main_window.c:1013
+#: ../src/gtk/main_window.c:1024
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Logiciel d’étude biblique"
 
-#: ../src/gtk/main_window.c:1077
+#: ../src/gtk/main_window.c:1088
 msgid "Open a new tab"
 msgstr "Ouvre un nouvel onglet"
 
-#: ../src/gtk/main_window.c:1132 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1143 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
-#: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
-#: ../src/main/sidebar.cc:977
+#: ../src/main/sidebar.cc:1020 ../src/main/sidebar.cc:1021
+#: ../src/main/sidebar.cc:1022
 msgid "Standard View"
 msgstr "Affichage standard"
 
 # Je traduis seulement commentaire pour des raisons d'affichage. Mais cela donne très bien.
-#: ../src/gtk/main_window.c:1172
+#: ../src/gtk/main_window.c:1183
 msgid "Commentary View"
 msgstr "Commentaire"
 
 # Je traduis juste livre car sinon la ligne est trop grand mais cela donne très bien dans l'affichage.
-#: ../src/gtk/main_window.c:1180
+#: ../src/gtk/main_window.c:1191
 msgid "Book View"
 msgstr "Livre"
 
-#: ../src/gtk/main_window.c:1195
+#: ../src/gtk/main_window.c:1206
 msgid "Welcome to Xiphos"
 msgstr "Bienvenue dans Xiphos"
 
-#: ../src/gtk/menu_popup.c:1319
+#: ../src/gtk/menu_popup.c:1342
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -796,34 +802,34 @@ msgstr ""
 "Windows ne permet pas de renommer des fichiers en cours d’utilisation\n"
 "ce qui est le cas des commentaires personnels."
 
-#: ../src/gtk/menu_popup.c:1338
+#: ../src/gtk/menu_popup.c:1361
 msgid "Rename Commentary"
 msgstr "Renommer le commentaire"
 
-#: ../src/gtk/menu_popup.c:1341
+#: ../src/gtk/menu_popup.c:1364
 msgid "Choose Commentary Name"
 msgstr "Nom du commentaire"
 
-#: ../src/gtk/menu_popup.c:1343
+#: ../src/gtk/menu_popup.c:1366
 msgid "New Name"
 msgstr "Nouveau nom :"
 
-#: ../src/gtk/menu_popup.c:1344 ../src/gtk/treekey-editor.c:138
+#: ../src/gtk/menu_popup.c:1367 ../src/gtk/treekey-editor.c:138
 #: ../src/gtk/treekey-editor.c:195 ../src/gtk/treekey-editor.c:293
 #: ../src/main/prayerlists.cc:235
 msgid "Name: "
 msgstr "Nom : "
 
-#: ../src/gtk/menu_popup.c:1353 ../src/main/prayerlists.cc:248
+#: ../src/gtk/menu_popup.c:1376 ../src/main/prayerlists.cc:248
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr ""
 "Les noms de modules ne peuvent contenir que des lettres et des chiffres."
 
-#: ../src/gtk/menu_popup.c:1359 ../src/main/prayerlists.cc:254
+#: ../src/gtk/menu_popup.c:1382 ../src/main/prayerlists.cc:254
 msgid "Xiphos already knows a module by that name."
 msgstr "Il existe déjà un module de ce nom."
 
-#: ../src/gtk/menu_popup.c:1401
+#: ../src/gtk/menu_popup.c:1424
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -832,7 +838,7 @@ msgstr ""
 "Impossible de créer une nouvelle configuration\n"
 "%s"
 
-#: ../src/gtk/menu_popup.c:1410
+#: ../src/gtk/menu_popup.c:1433
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -840,7 +846,7 @@ msgstr ""
 "Erreur de configuration\n"
 "\n"
 
-#: ../src/gtk/menu_popup.c:2067
+#: ../src/gtk/menu_popup.c:2099
 msgid "No module in this pane."
 msgstr "Pas de module dans ce volet."
 
@@ -961,56 +967,56 @@ msgstr ""
 "<u>Attention</u> : La plus extrême prudence est requise dans les pays ou des "
 "faits de persécution ont été recensés."
 
-#: ../src/gtk/mod_mgr.c:191
+#: ../src/gtk/mod_mgr.c:190
 msgid "Remove these modules?"
 msgstr "Supprimer ces modules ?"
 
-#: ../src/gtk/mod_mgr.c:192
+#: ../src/gtk/mod_mgr.c:191
 msgid "Preparing to remove"
 msgstr "Préparation à la suppression"
 
-#: ../src/gtk/mod_mgr.c:193
+#: ../src/gtk/mod_mgr.c:192
 msgid "Removing"
 msgstr "Suppression de"
 
-#: ../src/gtk/mod_mgr.c:194 ../ui/xi-menus.glade.h:158
+#: ../src/gtk/mod_mgr.c:193 ../ui/xi-menus.glade.h:161
 #: ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove"
 msgstr "Enlever"
 
-#: ../src/gtk/mod_mgr.c:195
+#: ../src/gtk/mod_mgr.c:194
 msgid "Install these modules?"
 msgstr "Installer ces modules ?"
 
-#: ../src/gtk/mod_mgr.c:196
+#: ../src/gtk/mod_mgr.c:195
 msgid "Preparing to install"
 msgstr "Préparation à l’installation"
 
-#: ../src/gtk/mod_mgr.c:197
+#: ../src/gtk/mod_mgr.c:196
 msgid "Installing"
 msgstr "Installation de"
 
-#: ../src/gtk/mod_mgr.c:198
+#: ../src/gtk/mod_mgr.c:197
 msgid "Install"
 msgstr "Installer"
 
-#: ../src/gtk/mod_mgr.c:199
+#: ../src/gtk/mod_mgr.c:198
 msgid "Archive these modules?"
 msgstr "Archiver ces modules ?"
 
-#: ../src/gtk/mod_mgr.c:200
+#: ../src/gtk/mod_mgr.c:199
 msgid "Preparing to archive"
 msgstr "Préparation à l’archivage"
 
-#: ../src/gtk/mod_mgr.c:201
+#: ../src/gtk/mod_mgr.c:200
 msgid "Archiving"
 msgstr "Archivage de"
 
-#: ../src/gtk/mod_mgr.c:202
+#: ../src/gtk/mod_mgr.c:201
 msgid "Archive"
 msgstr "Archiver"
 
-#: ../src/gtk/mod_mgr.c:203
+#: ../src/gtk/mod_mgr.c:202
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
@@ -1018,60 +1024,60 @@ msgstr ""
 "Construire un index de recherche optimisée pour les modules suivants (dure "
 "un certain temps) ?"
 
-#: ../src/gtk/mod_mgr.c:204
+#: ../src/gtk/mod_mgr.c:203
 msgid "Preparing to index"
 msgstr "Préparation à l’indexation"
 
-#: ../src/gtk/mod_mgr.c:205
+#: ../src/gtk/mod_mgr.c:204
 msgid "Indexing"
 msgstr "Indexation de"
 
-#: ../src/gtk/mod_mgr.c:206
+#: ../src/gtk/mod_mgr.c:205
 msgid "Index"
 msgstr "Indexer"
 
-#: ../src/gtk/mod_mgr.c:207
+#: ../src/gtk/mod_mgr.c:206
 msgid "Delete fast-search index for these modules?"
 msgstr "Supprimer l’index de recherche optimisée pour les modules suivants ?"
 
-#: ../src/gtk/mod_mgr.c:208
+#: ../src/gtk/mod_mgr.c:207
 msgid "Preparing to delete index"
 msgstr "Préparation à la suppression d’index"
 
-#: ../src/gtk/mod_mgr.c:209
+#: ../src/gtk/mod_mgr.c:208
 msgid "Deleting index"
 msgstr "Suppression de l’index à"
 
-#: ../src/gtk/mod_mgr.c:210
+#: ../src/gtk/mod_mgr.c:209
 msgid "Deletion"
 msgstr "Suppression"
 
-#: ../src/gtk/mod_mgr.c:311
+#: ../src/gtk/mod_mgr.c:310
 msgid "The module has no About information."
 msgstr "Ce module ne contient pas d’information À propos."
 
-#: ../src/gtk/mod_mgr.c:533
+#: ../src/gtk/mod_mgr.c:532
 msgid "Module Name"
 msgstr "Nom du module"
 
-#: ../src/gtk/mod_mgr.c:562
+#: ../src/gtk/mod_mgr.c:561
 msgid "A checkmark means this module is already installed"
 msgstr "Une coche indique un module déjà installé"
 
-#: ../src/gtk/mod_mgr.c:589
+#: ../src/gtk/mod_mgr.c:588
 msgid "Click the box to work on this module"
 msgstr "Cocher la case pour travailler avec ce module"
 
-#: ../src/gtk/mod_mgr.c:590
+#: ../src/gtk/mod_mgr.c:589
 msgid "Click the box to select this module for install/update"
 msgstr ""
 "Cocher la case pour sélectionner ce module à installer ou à mettre à jour"
 
-#: ../src/gtk/mod_mgr.c:608
+#: ../src/gtk/mod_mgr.c:607
 msgid "Installed"
 msgstr "Installé"
 
-#: ../src/gtk/mod_mgr.c:625
+#: ../src/gtk/mod_mgr.c:624
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
@@ -1079,7 +1085,7 @@ msgstr ""
 "L’icône index indique qu’un index optimisé pour des requêtes rapides « "
 "lucène » a été construit à l’aide du bouton indexer."
 
-#: ../src/gtk/mod_mgr.c:649
+#: ../src/gtk/mod_mgr.c:648
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
@@ -1087,13 +1093,13 @@ msgstr ""
 "L’icône protection indique un module encrypté et nécessite l’achat d’une clé "
 "de déverrouillage auprès de l’éditeur du document"
 
-#: ../src/gtk/mod_mgr.c:664 ../src/main/biblesync_glue.cc:640
-#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:57
+#: ../src/gtk/mod_mgr.c:663 ../src/main/biblesync_glue.cc:640
+#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:59
 #: ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
 msgstr "À propos"
 
-#: ../src/gtk/mod_mgr.c:688
+#: ../src/gtk/mod_mgr.c:687
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
@@ -1101,19 +1107,19 @@ msgstr ""
 "L’icône Rafraîchir indique un module installé plus vieux que le nouveau "
 "disponible. Le module est à mettre à jour"
 
-#: ../src/gtk/mod_mgr.c:700
+#: ../src/gtk/mod_mgr.c:699
 msgid "Available"
 msgstr "Dispo"
 
-#: ../src/gtk/mod_mgr.c:709
+#: ../src/gtk/mod_mgr.c:708
 msgid "Size"
 msgstr "Taille"
 
-#: ../src/gtk/mod_mgr.c:718
+#: ../src/gtk/mod_mgr.c:717
 msgid "Description"
 msgstr "Description"
 
-#: ../src/gtk/mod_mgr.c:872
+#: ../src/gtk/mod_mgr.c:871
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -1122,29 +1128,29 @@ msgstr ""
 "Impossible de créer le répertoire %s\n"
 "%s."
 
-#: ../src/gtk/mod_mgr.c:906
+#: ../src/gtk/mod_mgr.c:905
 msgid " archived in: \n"
 msgstr " archivé dans : \n"
 
-#: ../src/gtk/mod_mgr.c:1012
+#: ../src/gtk/mod_mgr.c:1014
 #, c-format
 msgid "%s failed"
 msgstr "%s a échoué"
 
-#: ../src/gtk/mod_mgr.c:1015 ../src/gtk/mod_mgr.c:1781
+#: ../src/gtk/mod_mgr.c:1017 ../src/gtk/mod_mgr.c:1863
 msgid "Finished"
 msgstr "Terminé"
 
-#: ../src/gtk/mod_mgr.c:1188 ../src/gtk/mod_mgr.c:1190
-#: ../src/gtk/mod_mgr.c:1300 ../src/gtk/mod_mgr.c:1333
-#: ../src/gtk/mod_mgr.c:1335 ../src/gtk/utilities.c:429
+#: ../src/gtk/mod_mgr.c:1190 ../src/gtk/mod_mgr.c:1192
+#: ../src/gtk/mod_mgr.c:1302 ../src/gtk/mod_mgr.c:1335
+#: ../src/gtk/mod_mgr.c:1337 ../src/gtk/utilities.c:429
 #: ../src/gtk/utilities.c:492 ../src/gtk/utilities.c:494
 #: ../src/gtk/utilities.c:985 ../src/main/sidebar.cc:807
 #: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../src/gtk/mod_mgr.c:1511
+#: ../src/gtk/mod_mgr.c:1559
 #, c-format
 msgid ""
 "Repository:\n"
@@ -1153,7 +1159,7 @@ msgstr ""
 "Dépôt :\n"
 "%s"
 
-#: ../src/gtk/mod_mgr.c:1524
+#: ../src/gtk/mod_mgr.c:1572
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -1161,44 +1167,44 @@ msgstr ""
 "Modules classés\n"
 "par type"
 
-#: ../src/gtk/mod_mgr.c:1529 ../src/gtk/utilities.c:571
-#: ../src/main/sidebar.cc:959 ../src/main/sidebar.cc:961
+#: ../src/gtk/mod_mgr.c:1580 ../src/gtk/utilities.c:571
+#: ../src/main/sidebar.cc:1004 ../src/main/sidebar.cc:1006
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
-#: ../src/gtk/mod_mgr.c:1533 ../src/gtk/utilities.c:577
-#: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:984
-#: ../src/main/sidebar.cc:986
+#: ../src/gtk/mod_mgr.c:1586 ../src/gtk/utilities.c:577
+#: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:1030
+#: ../src/main/sidebar.cc:1032
 msgid "Commentaries"
 msgstr "Commentaires"
 
-#: ../src/gtk/mod_mgr.c:1537 ../src/gtk/utilities.c:584
-#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
+#: ../src/gtk/mod_mgr.c:1592 ../src/gtk/utilities.c:584
+#: ../src/main/sidebar.cc:1041 ../src/main/sidebar.cc:1043
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
-#: ../src/gtk/mod_mgr.c:1541 ../src/gtk/utilities.c:590
-#: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1004
+#: ../src/gtk/mod_mgr.c:1598 ../src/gtk/utilities.c:590
+#: ../src/main/sidebar.cc:1052 ../src/main/sidebar.cc:1054
 msgid "Glossaries"
 msgstr "Glossaires"
 
-#: ../src/gtk/mod_mgr.c:1545 ../src/gtk/utilities.c:597
-#: ../src/main/sidebar.cc:1011 ../src/main/sidebar.cc:1013
+#: ../src/gtk/mod_mgr.c:1604 ../src/gtk/utilities.c:597
+#: ../src/main/sidebar.cc:1063 ../src/main/sidebar.cc:1065
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
-#: ../src/gtk/mod_mgr.c:1550 ../src/gtk/utilities.c:603
-#: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1020
-#: ../src/main/sidebar.cc:1022
+#: ../src/gtk/mod_mgr.c:1610 ../src/gtk/utilities.c:603
+#: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1074
+#: ../src/main/sidebar.cc:1076
 msgid "General Books"
 msgstr "Livres généraux"
 
-#: ../src/gtk/mod_mgr.c:1562 ../src/gtk/utilities.c:621
-#: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
+#: ../src/gtk/mod_mgr.c:1628 ../src/gtk/utilities.c:621
+#: ../src/main/sidebar.cc:1107 ../src/main/sidebar.cc:1109
 msgid "Cult/Unorthodox"
 msgstr "Hétérodoxie"
 
-#: ../src/gtk/mod_mgr.c:1571
+#: ../src/gtk/mod_mgr.c:1638
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -1206,96 +1212,100 @@ msgstr ""
 "Modules classés\n"
 "par disponibilité"
 
-#: ../src/gtk/mod_mgr.c:1575
+#: ../src/gtk/mod_mgr.c:1642
 msgid "Updates"
 msgstr "Mise à jour disponible"
 
-#: ../src/gtk/mod_mgr.c:1580
+#: ../src/gtk/mod_mgr.c:1647
 msgid "Uninstalled"
 msgstr "Non installé"
 
-#: ../src/gtk/mod_mgr.c:1585 ../src/gtk/sidebar.c:594
+#: ../src/gtk/mod_mgr.c:1653 ../src/gtk/sidebar.c:594
 #: ../src/gtk/utilities.c:629 ../src/main/prayerlists.cc:233
-#: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
+#: ../src/main/sidebar.cc:1118 ../src/main/sidebar.cc:1120
 msgid "Prayer List/Journal"
 msgstr "Liste de prières / Journal"
 
-#: ../src/gtk/mod_mgr.c:1764
+#: ../src/gtk/mod_mgr.c:1742
+msgid "Unindexed Modules"
+msgstr "Modules désindexés"
+
+#: ../src/gtk/mod_mgr.c:1846
 msgid "Refreshing from remote source"
 msgstr "Rafraîchissement en cours"
 
-#: ../src/gtk/mod_mgr.c:1776
+#: ../src/gtk/mod_mgr.c:1858
 msgid "Remote source not found"
 msgstr "Serveur non trouvé"
 
-#: ../src/gtk/mod_mgr.c:1847
+#: ../src/gtk/mod_mgr.c:1929
 msgid "Configure"
 msgstr "Configurer"
 
-#: ../src/gtk/mod_mgr.c:1876
+#: ../src/gtk/mod_mgr.c:1958
 msgid "Type"
 msgstr "Type"
 
-#: ../src/gtk/mod_mgr.c:1883
+#: ../src/gtk/mod_mgr.c:1965
 msgid "Caption"
 msgstr "Libellé"
 
-#: ../src/gtk/mod_mgr.c:1890
+#: ../src/gtk/mod_mgr.c:1972
 msgid "Source"
 msgstr "Source"
 
 # src/gs_preferences_dlg.c
-#: ../src/gtk/mod_mgr.c:1897
+#: ../src/gtk/mod_mgr.c:1979
 msgid "Directory"
 msgstr "Répertoire"
 
-#: ../src/gtk/mod_mgr.c:1905
+#: ../src/gtk/mod_mgr.c:1987
 msgid "User"
 msgstr "Identifiant"
 
-#: ../src/gtk/mod_mgr.c:1912
+#: ../src/gtk/mod_mgr.c:1994
 msgid "Password"
 msgstr "Mot de passe"
 
-#: ../src/gtk/mod_mgr.c:1919
+#: ../src/gtk/mod_mgr.c:2001
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gtk/mod_mgr.c:1934
+#: ../src/gtk/mod_mgr.c:2016
 msgid "Module Sources"
 msgstr "Dépôts"
 
-#: ../src/gtk/mod_mgr.c:1937
+#: ../src/gtk/mod_mgr.c:2019
 msgid "Add/Remove"
 msgstr "Ajouter/Supprimer"
 
-#: ../src/gtk/mod_mgr.c:1940
+#: ../src/gtk/mod_mgr.c:2022
 msgid "Choose"
 msgstr "Sélection"
 
-#: ../src/gtk/mod_mgr.c:1943 ../src/gtk/preferences_dialog.c:2187
+#: ../src/gtk/mod_mgr.c:2025 ../src/gtk/preferences_dialog.c:2240
 #: ../src/gtk/sidebar.c:1512 ../src/gtk/sidebar.c:1558
 msgid "Modules"
 msgstr "Modules"
 
-#: ../src/gtk/mod_mgr.c:1945
+#: ../src/gtk/mod_mgr.c:2027
 msgid "Install/Update"
 msgstr "Installer/Maj"
 
-#: ../src/gtk/mod_mgr.c:1948
+#: ../src/gtk/mod_mgr.c:2030
 msgid "Maintenance"
 msgstr "Maintenance"
 
-#: ../src/gtk/mod_mgr.c:2164
+#: ../src/gtk/mod_mgr.c:2246
 msgid "Please Refresh"
 msgstr "Rafraîchir"
 
-#: ../src/gtk/mod_mgr.c:2165
+#: ../src/gtk/mod_mgr.c:2247
 msgid "Your module list is not up to date!"
 msgstr "La liste des modules n’est pas à jour !"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gtk/mod_mgr.c:2482
+#: ../src/gtk/mod_mgr.c:2560
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -1303,7 +1313,7 @@ msgstr ""
 "Vous avez désinstallé votre dernière Bible.\n"
 "Xiphos requiert au minimum une."
 
-#: ../src/gtk/mod_mgr.c:2488
+#: ../src/gtk/mod_mgr.c:2566
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -1311,7 +1321,7 @@ msgstr ""
 "Toujours aucune Bible installée.\n"
 "Xiphos ne peut pas continuer sans."
 
-#: ../src/gtk/mod_mgr.c:2613
+#: ../src/gtk/mod_mgr.c:2691
 #, c-format
 msgid ""
 "%s obsoletes %s.\n"
@@ -1322,63 +1332,63 @@ msgstr ""
 "Effacer %s ?\n"
 "Attention : pas de retour en arrière possible."
 
-#: ../src/gtk/mod_mgr.c:2679
+#: ../src/gtk/mod_mgr.c:2757
 msgid "No obsolete modules were found."
 msgstr "Aucun module périmé trouvé."
 
-#: ../src/gtk/mod_mgr.c:2701
+#: ../src/gtk/mod_mgr.c:2779
 msgid "Standard remote sources have been loaded."
 msgstr ""
 "Les dépôts distants standards\n"
 "ont été chargés."
 
-#: ../src/gtk/mod_mgr.c:2710
+#: ../src/gtk/mod_mgr.c:2788
 msgid "Could not load standard sources from CrossWire."
 msgstr "Impossible de charger les dépôts standards depuis CrossWire."
 
-#: ../src/gtk/mod_mgr.c:2861 ../src/gtk/mod_mgr.c:3117
+#: ../src/gtk/mod_mgr.c:2939 ../src/gtk/mod_mgr.c:3195
 msgid "Remove the selected source"
 msgstr "Supprime le dépôt sélectionné"
 
-#: ../src/gtk/mod_mgr.c:2927
+#: ../src/gtk/mod_mgr.c:3005
 msgid "Enter a remote source"
 msgstr "Ajouter un dépôt distant"
 
-#: ../src/gtk/mod_mgr.c:2936
+#: ../src/gtk/mod_mgr.c:3014
 msgid "Caption:"
 msgstr "Libellé :"
 
-#: ../src/gtk/mod_mgr.c:2937
+#: ../src/gtk/mod_mgr.c:3015
 msgid "Type:"
 msgstr "Type :"
 
-#: ../src/gtk/mod_mgr.c:2938
+#: ../src/gtk/mod_mgr.c:3016
 msgid "Host:"
 msgstr "Serveur :"
 
 # src/gs_preferences_dlg.c
-#: ../src/gtk/mod_mgr.c:2939
+#: ../src/gtk/mod_mgr.c:3017
 msgid "Directory:"
 msgstr "Répertoire :"
 
-#: ../src/gtk/mod_mgr.c:2940
+#: ../src/gtk/mod_mgr.c:3018
 msgid "User (optional):"
 msgstr "Identifiant (optionnel) :"
 
-#: ../src/gtk/mod_mgr.c:2941
+#: ../src/gtk/mod_mgr.c:3019
 msgid "Password (optional):"
 msgstr "Password (optional):(optionnel) :"
 
 #. this can happen at most once
-#: ../src/gtk/mod_mgr.c:2967
+#: ../src/gtk/mod_mgr.c:3045
 msgid "A source by that name already exists."
 msgstr "Un dépôt du même nom existe déjà."
 
-#: ../src/gtk/mod_mgr.c:3114
+#: ../src/gtk/mod_mgr.c:3192
 msgid "Delete a remote source"
 msgstr "Supprimer un dépôt distant"
 
-#: ../src/gtk/mod_mgr.c:3633
+#: ../src/gtk/mod_mgr.c:3710
 msgid "[no module]"
 msgstr "[Pas de module]"
 
@@ -1404,7 +1414,7 @@ msgstr "Aller à la première sous-section"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Synchronise le défilement de cette fenêtre avec la fenêtre principale"
 
-#: ../src/gtk/parallel_dialog.c:326 ../src/gtk/preferences_dialog.c:2194
+#: ../src/gtk/parallel_dialog.c:326 ../src/gtk/preferences_dialog.c:2247
 msgid "Parallel"
 msgstr "Vue parallèle"
 
@@ -1412,28 +1422,28 @@ msgstr "Vue parallèle"
 msgid "Detach/Attach"
 msgstr "Détacher/Attacher"
 
-#: ../src/gtk/parallel_view.c:117 ../ui/xi-menus.glade.h:66
+#: ../src/gtk/parallel_view.c:117 ../ui/xi-menus.glade.h:68
 #: ../ui/xi-menus-popup.gtkbuilder.h:43
 msgid "Module Options"
 msgstr "Options du module"
 
 #: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:578
-#: ../src/gtk/sidebar.c:583 ../src/gtk/tabbed_browser.c:240
-#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:967
-#: ../src/main/sidebar.cc:968 ../src/main/sidebar.cc:969
+#: ../src/gtk/sidebar.c:583 ../src/gtk/tabbed_browser.c:239
+#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:1012
+#: ../src/main/sidebar.cc:1013 ../src/main/sidebar.cc:1014
 msgid "Parallel View"
 msgstr "Affichage parallèle"
 
-#: ../src/gtk/preferences_dialog.c:868
+#: ../src/gtk/preferences_dialog.c:871
 msgid "BibleSync session passphrase"
 msgstr "BibleSync mot de passe de session"
 
-#: ../src/gtk/preferences_dialog.c:870
+#: ../src/gtk/preferences_dialog.c:873
 msgid "Phrase:"
 msgstr "Phrase :"
 
 #. mode selection failed? probably dead interface
-#: ../src/gtk/preferences_dialog.c:942
+#: ../src/gtk/preferences_dialog.c:945
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
@@ -1441,91 +1451,92 @@ msgstr ""
 "La sélection de mode a échoué.\n"
 "Activer le débogage et réessayer pour voir pourquoi."
 
-#: ../src/gtk/preferences_dialog.c:994
+#: ../src/gtk/preferences_dialog.c:997
 msgid "Mode selection failed.\n"
 msgstr "La sélection du mode a échoué.\n"
 
-#: ../src/gtk/preferences_dialog.c:997
+#: ../src/gtk/preferences_dialog.c:1000
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr "BibleSync : %s (mot de passe \"%s\")."
 
-#: ../src/gtk/preferences_dialog.c:999
+#: ../src/gtk/preferences_dialog.c:1002
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: ../src/gtk/preferences_dialog.c:1001 ../src/main/xml.c:96
+#: ../src/gtk/preferences_dialog.c:1004 ../src/main/xml.c:96
 msgid "Personal"
 msgstr "Notes personnelles"
 
-#: ../src/gtk/preferences_dialog.c:1003
+#: ../src/gtk/preferences_dialog.c:1006
 msgid "Speaker"
 msgstr "Intervenant"
 
-#: ../src/gtk/preferences_dialog.c:1004
+#: ../src/gtk/preferences_dialog.c:1007
 msgid "Audience"
 msgstr "Audience"
 
-#: ../src/gtk/preferences_dialog.c:1719 ../src/gtk/preferences_dialog.c:1753
-#: ../src/gtk/preferences_dialog.c:1786 ../src/gtk/preferences_dialog.c:1818
-#: ../src/gtk/preferences_dialog.c:1849 ../src/gtk/preferences_dialog.c:1880
-#: ../src/gtk/preferences_dialog.c:1911 ../src/gtk/preferences_dialog.c:1943
-#: ../src/gtk/preferences_dialog.c:1976 ../src/gtk/preferences_dialog.c:2027
-#: ../src/gtk/preferences_dialog.c:2520
+#: ../src/gtk/preferences_dialog.c:1676 ../src/gtk/preferences_dialog.c:1710
+#: ../src/gtk/preferences_dialog.c:1743 ../src/gtk/preferences_dialog.c:1775
+#: ../src/gtk/preferences_dialog.c:1806 ../src/gtk/preferences_dialog.c:1837
+#: ../src/gtk/preferences_dialog.c:1868 ../src/gtk/preferences_dialog.c:1898
+#: ../src/gtk/preferences_dialog.c:1930 ../src/gtk/preferences_dialog.c:1962
+#: ../src/gtk/preferences_dialog.c:1996 ../src/gtk/preferences_dialog.c:2029
+#: ../src/gtk/preferences_dialog.c:2080 ../src/gtk/preferences_dialog.c:2573
 msgid "-- Select --"
 msgstr "[ Aucun ]"
 
-#: ../src/gtk/preferences_dialog.c:1990
+#: ../src/gtk/preferences_dialog.c:2043
 msgid "Locale will take effect after restart."
 msgstr "La langue prendra effet après redémarrage."
 
-#: ../src/gtk/preferences_dialog.c:2060 ../ui/prefs.glade.h:1
+#: ../src/gtk/preferences_dialog.c:2113 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:13
 msgid "Preferences"
 msgstr "Préférences"
 
-#: ../src/gtk/preferences_dialog.c:2167
+#: ../src/gtk/preferences_dialog.c:2220
 msgid "General"
 msgstr "Général"
 
-#: ../src/gtk/preferences_dialog.c:2170
+#: ../src/gtk/preferences_dialog.c:2223
 msgid "Options"
 msgstr "Options"
 
-#: ../src/gtk/preferences_dialog.c:2173 ../ui/prefs.glade.h:92
+#: ../src/gtk/preferences_dialog.c:2226 ../ui/prefs.glade.h:92
 #: ../ui/prefs.gtkbuilder.h:96
 msgid "BibleSync"
 msgstr "BibleSync"
 
-#: ../src/gtk/preferences_dialog.c:2177
+#: ../src/gtk/preferences_dialog.c:2230
 msgid "Fonts"
 msgstr "Polices"
 
-#: ../src/gtk/preferences_dialog.c:2180
+#: ../src/gtk/preferences_dialog.c:2233
 msgid "Color"
 msgstr "Couleurs"
 
-#: ../src/gtk/preferences_dialog.c:2183
+#: ../src/gtk/preferences_dialog.c:2236
 msgid "Sizes and Faces"
 msgstr "Tailles et apparence"
 
-#: ../src/gtk/preferences_dialog.c:2197
+#: ../src/gtk/preferences_dialog.c:2250
 msgid "Special"
 msgstr "Spécial"
 
-#: ../src/gtk/preferences_dialog.c:2901 ../src/gtk/search_dialog.c:519
+#: ../src/gtk/preferences_dialog.c:2969 ../src/gtk/search_dialog.c:519
 msgid "Clear List?"
 msgstr "Effacer la liste ?"
 
-#: ../src/gtk/preferences_dialog.c:2902 ../src/gtk/search_dialog.c:520
+#: ../src/gtk/preferences_dialog.c:2970 ../src/gtk/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr "Êtes-vous certain d’effacer la liste des modules ?"
 
-#: ../src/gtk/preferences_dialog.c:2953 ../src/main/search_dialog.cc:692
+#: ../src/gtk/preferences_dialog.c:3021 ../src/main/search_dialog.cc:691
 msgid "Remove Module?"
 msgstr "Enlever les modules ?"
 
-#: ../src/gtk/preferences_dialog.c:2954 ../src/main/search_dialog.cc:693
+#: ../src/gtk/preferences_dialog.c:3022 ../src/main/search_dialog.cc:692
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Êtes-vous certain de vouloir supprimer le module sélectionné ?"
 
@@ -1721,17 +1732,17 @@ msgstr "Module"
 msgid "Search Type"
 msgstr "Type de requête"
 
-#: ../src/gtk/search_sidebar.c:324 ../src/main/search_dialog.cc:120
+#: ../src/gtk/search_sidebar.c:324 ../src/main/search_dialog.cc:119
 #: ../ui/search-dialog.glade.h:37 ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
 msgstr "Optimisée « Lucene »"
 
-#: ../src/gtk/search_sidebar.c:333 ../src/main/search_dialog.cc:114
+#: ../src/gtk/search_sidebar.c:333 ../src/main/search_dialog.cc:113
 #: ../ui/search-dialog.glade.h:41 ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "Expression rationnelle"
 
-#: ../src/gtk/search_sidebar.c:340 ../src/main/search_dialog.cc:116
+#: ../src/gtk/search_sidebar.c:340 ../src/main/search_dialog.cc:115
 #: ../ui/search-dialog.glade.h:43 ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "Phrase exacte"
@@ -1801,7 +1812,7 @@ msgstr "Barre latérale"
 msgid "Powered by the SWORD Project"
 msgstr "Xiphos utilise les logiciels du Projet SWORD"
 
-#: ../src/gtk/tabbed_browser.c:347
+#: ../src/gtk/tabbed_browser.c:346
 msgid "Can't create tabs dir."
 msgstr "Impossible de créer le répertoire tabs."
 
@@ -2004,8 +2015,8 @@ msgstr ""
 "Ce nom d’annotation personnelle est improprement formé :\n"
 "’%s’"
 
-#: ../src/main/display.cc:1132 ../src/main/display.cc:1174
-#: ../src/main/display.cc:1254 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1210 ../src/main/display.cc:1267
+#: ../src/main/display.cc:1301 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr "Chapitre"
@@ -2060,7 +2071,7 @@ msgstr "Strongs"
 msgid "Morphology"
 msgstr "Étiquette morphologique"
 
-#: ../src/main/module_dialogs.cc:986 ../src/main/url.cc:516
+#: ../src/main/module_dialogs.cc:986 ../src/main/url.cc:519
 msgid "Back to "
 msgstr "Revenir à "
 
@@ -2068,69 +2079,69 @@ msgstr "Revenir à "
 msgid "Unknown parallel module: "
 msgstr "Module parallèle inconnu : "
 
-#: ../src/main/parallel_view.cc:358 ../ui/xi-menus.glade.h:71
+#: ../src/main/parallel_view.cc:358 ../ui/xi-menus.glade.h:73
 #: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Strong's Numbers"
 msgstr "Nombres de Strong"
 
 #: ../src/main/parallel_view.cc:367 ../ui/search-dialog.glade.h:102
-#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:74
+#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:76
 #: ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnotes"
 msgstr "Notes de bas de page"
 
 #: ../src/main/parallel_view.cc:376 ../ui/search-dialog.glade.h:99
-#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:73
+#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:75
 #: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Morphological Tags"
 msgstr "Étiquettes morphologiques"
 
-#: ../src/main/parallel_view.cc:385 ../ui/xi-menus.glade.h:79
+#: ../src/main/parallel_view.cc:385 ../ui/xi-menus.glade.h:81
 #: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Hebrew Vowel Points"
 msgstr "Ponctuation des voyelles en hébreu"
 
-#: ../src/main/parallel_view.cc:394 ../ui/xi-menus.glade.h:80
+#: ../src/main/parallel_view.cc:394 ../ui/xi-menus.glade.h:82
 #: ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Hebrew Cantillation"
 msgstr "Vocalisations en hébreu"
 
-#: ../src/main/parallel_view.cc:403 ../ui/xi-menus.glade.h:78
+#: ../src/main/parallel_view.cc:403 ../ui/xi-menus.glade.h:80
 #: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Greek Accents"
 msgstr "Accents grecs"
 
-#: ../src/main/parallel_view.cc:412 ../ui/xi-menus.glade.h:75
+#: ../src/main/parallel_view.cc:412 ../ui/xi-menus.glade.h:77
 #: ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Cross-references"
 msgstr "Références croisées"
 
-#: ../src/main/parallel_view.cc:421 ../ui/xi-menus.glade.h:72
+#: ../src/main/parallel_view.cc:421 ../ui/xi-menus.glade.h:74
 #: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Lemmas"
 msgstr "Lemmes"
 
-#: ../src/main/parallel_view.cc:430 ../ui/xi-menus.glade.h:68
+#: ../src/main/parallel_view.cc:430 ../ui/xi-menus.glade.h:70
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Headings"
 msgstr "Titres"
 
-#: ../src/main/parallel_view.cc:440 ../ui/xi-menus.glade.h:69
+#: ../src/main/parallel_view.cc:440 ../ui/xi-menus.glade.h:71
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Italic Headings"
 msgstr "Titres en italique"
 
 #: ../src/main/parallel_view.cc:450 ../src/main/parallel_view.cc:539
-#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:65
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Morpheme Segmentation"
 msgstr "Segmentation de morphème"
 
-#: ../src/main/parallel_view.cc:459 ../ui/xi-menus.glade.h:70
+#: ../src/main/parallel_view.cc:459 ../ui/xi-menus.glade.h:72
 #: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Words of Christ in Red"
 msgstr "Paroles de Christ en rouge"
 
-#: ../src/main/parallel_view.cc:468 ../ui/xi-menus.glade.h:81
+#: ../src/main/parallel_view.cc:468 ../ui/xi-menus.glade.h:83
 #: ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Transliteration"
 msgstr "Translittération"
@@ -2139,32 +2150,32 @@ msgstr "Translittération"
 msgid "Textual Variants"
 msgstr "Variantes du texte"
 
-#: ../src/main/parallel_view.cc:485 ../ui/xi-menus.glade.h:83
+#: ../src/main/parallel_view.cc:485 ../ui/xi-menus.glade.h:85
 #: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "Primary Reading"
 msgstr "Lectures principales"
 
-#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:84
+#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:86
 #: ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "Secondary Reading"
 msgstr "Lectures secondaires"
 
-#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:85
+#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:87
 #: ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "All Readings"
 msgstr "Toutes les lectures"
 
-#: ../src/main/parallel_view.cc:512 ../ui/xi-menus.glade.h:86
+#: ../src/main/parallel_view.cc:512 ../ui/xi-menus.glade.h:88
 #: ../ui/xi-menus-popup.gtkbuilder.h:62
 msgid "Transliterated Forms"
 msgstr "Formes translittérées"
 
-#: ../src/main/parallel_view.cc:521 ../ui/xi-menus.glade.h:87
+#: ../src/main/parallel_view.cc:521 ../ui/xi-menus.glade.h:89
 #: ../ui/xi-menus-popup.gtkbuilder.h:63
 msgid "Enumerations"
 msgstr "Énumérations"
 
-#: ../src/main/parallel_view.cc:530 ../ui/xi-menus.glade.h:88
+#: ../src/main/parallel_view.cc:530 ../ui/xi-menus.glade.h:90
 #: ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Glosses"
 msgstr "Annotations"
@@ -2393,35 +2404,35 @@ msgstr "LivreChapitre"
 msgid "User Annotation"
 msgstr "Annotation par l’utilisateur"
 
-#: ../src/main/search_dialog.cc:118 ../ui/search-dialog.glade.h:39
+#: ../src/main/search_dialog.cc:117 ../ui/search-dialog.glade.h:39
 #: ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi-word"
 msgstr "Mots multiples"
 
-#: ../src/main/search_dialog.cc:121
+#: ../src/main/search_dialog.cc:120
 msgid "Attribute"
 msgstr "Attribut"
 
-#: ../src/main/search_dialog.cc:222
+#: ../src/main/search_dialog.cc:221
 #, c-format
 msgid "Search result %s: %s"
 msgstr "Résultat de la requête %s : %s"
 
-#: ../src/main/search_dialog.cc:438
+#: ../src/main/search_dialog.cc:437
 msgid "Delete Range?"
 msgstr "Supprimer la plage ?"
 
-#: ../src/main/search_dialog.cc:439
+#: ../src/main/search_dialog.cc:438
 msgid "Are you sure you want to delete this range?"
 msgstr "Êtes-vous certain de supprimer cette plage ?"
 
-#: ../src/main/search_dialog.cc:652 ../src/main/search_dialog.cc:1069
-#: ../src/main/search_dialog.cc:1072 ../src/main/search_dialog.cc:1092
-#: ../src/main/search_dialog.cc:1095
+#: ../src/main/search_dialog.cc:651 ../src/main/search_dialog.cc:1068
+#: ../src/main/search_dialog.cc:1071 ../src/main/search_dialog.cc:1091
+#: ../src/main/search_dialog.cc:1094
 msgid "Search: "
 msgstr "Dans : "
 
-#: ../src/main/search_dialog.cc:1436
+#: ../src/main/search_dialog.cc:1435
 #, c-format
 msgid ""
 "%s:\n"
@@ -2432,16 +2443,16 @@ msgstr ""
 "Module non installé.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1438
+#: ../src/main/search_dialog.cc:1437
 msgid "Please adjust the module list."
 msgstr "La liste de modules est à régénérer."
 
-#: ../src/main/search_dialog.cc:1454
+#: ../src/main/search_dialog.cc:1453
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Aucun index de recherche optimisée n’existe pour %s %s%s"
 
-#: ../src/main/search_dialog.cc:1456
+#: ../src/main/search_dialog.cc:1455
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -2449,7 +2460,7 @@ msgstr ""
 "\n"
 "Les requêtes sur ce module sont maintenant ’multi-mots’."
 
-#: ../src/main/search_dialog.cc:1457
+#: ../src/main/search_dialog.cc:1456
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -2457,7 +2468,7 @@ msgstr ""
 "\n"
 "Voir le Gestionnaire de modules, volet Maintenance."
 
-#: ../src/main/search_dialog.cc:1518
+#: ../src/main/search_dialog.cc:1517
 msgid "Search finished"
 msgstr "Recherche terminée"
 
@@ -2530,7 +2541,7 @@ msgstr "verset"
 msgid "chapter"
 msgstr "chapitre"
 
-#: ../src/main/sword.cc:634
+#: ../src/main/sword.cc:656
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -2538,7 +2549,7 @@ msgstr ""
 "Le fichier d’abréviation\n"
 "des langues est absent."
 
-#: ../src/main/sword.cc:640
+#: ../src/main/sword.cc:662
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -2546,7 +2557,7 @@ msgstr ""
 "Ouverture impossible du fichier\n"
 "d’abréviation des langues."
 
-#: ../src/main/sword.cc:652
+#: ../src/main/sword.cc:674
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -2554,7 +2565,7 @@ msgstr ""
 "Impossible d’allouer l’espace suffisant\n"
 "aux abréviations de langues."
 
-#: ../src/main/sword.cc:658
+#: ../src/main/sword.cc:680
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -2563,7 +2574,7 @@ msgstr ""
 "d’abréviation des langues."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:738
+#: ../src/main/sword.cc:760
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
@@ -2572,11 +2583,11 @@ msgstr ""
 "Pas de locale correspondante pour `%s’.\n"
 "%s"
 
-#: ../src/main/sword.cc:740
+#: ../src/main/sword.cc:762
 msgid "Book names and menus may not be translated."
 msgstr "Les noms de livres et les menus ne seront peut-être pas traduits."
 
-#: ../src/main/sword.cc:1095 ../src/main/sword.cc:1273
+#: ../src/main/sword.cc:1117 ../src/main/sword.cc:1295
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2587,7 +2598,7 @@ msgstr ""
 "%s.\n"
 "Voulez-vous les ouvrir également ?%s"
 
-#: ../src/main/sword.cc:1099 ../src/main/sword.cc:1277
+#: ../src/main/sword.cc:1121 ../src/main/sword.cc:1299
 msgid ""
 "\n"
 "\n"
@@ -2599,13 +2610,13 @@ msgstr ""
 "Le premier va s’ouvrir dans la fenêtre principale\n"
 "et les autres dans des fenêtres séparées."
 
-#: ../src/main/sword.cc:1404
+#: ../src/main/sword.cc:1426
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 "Un calendrier biblique a été demandé, mais aucun module de ce type n’est "
 "installé."
 
-#: ../src/main/sword.cc:1623
+#: ../src/main/sword.cc:1645
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2856,7 +2867,7 @@ msgid "Create new folder"
 msgstr "Crée un nouveau dossier"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
-#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:5
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Nouveau dossier"
 
@@ -3007,7 +3018,7 @@ msgid "New Document"
 msgstr "Nouveau document"
 
 #: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
-#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:38
+#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "Copy/Export Passage"
 msgstr "Copier/exporter le passage"
 
@@ -3199,7 +3210,7 @@ msgid "Remove selection"
 msgstr "Enlève la sélection"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
-#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:11
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
 msgstr "Supprimer l’élément"
 
@@ -3469,7 +3480,7 @@ msgid "_Edit"
 msgstr "É_dition"
 
 #: ../ui/gtk2_webedit.ui.h:89 ../ui/gtk_webedit.ui.h:90
-#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:40 ../ui/xi-menus.gtkbuilder.h:25
 msgid "_Help"
 msgstr "_Aide"
 
@@ -4519,25 +4530,49 @@ msgstr "Lexique grec"
 msgid "Greek Lexicon Combo"
 msgstr "Boite combinée Lexique grec"
 
-# src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:167 ../ui/prefs.gtkbuilder.h:171
+msgid "Hebrew Morphology Lexicon"
+msgstr "Lexique morphologique hébreu"
+
+#: ../ui/prefs.glade.h:168 ../ui/prefs.gtkbuilder.h:172
+msgid "Hebrew Morphology Lexicon Combo"
+msgstr "Boite combinée du lexique morphologique hebreu"
+
+#: ../ui/prefs.glade.h:169 ../ui/prefs.gtkbuilder.h:173
+msgid "OT Greek Morphology Lexicon"
+msgstr "Lexique morphologique grec pour l’AT"
+
+#: ../ui/prefs.glade.h:170 ../ui/prefs.gtkbuilder.h:174
+msgid "OT Greek Morphology Lexicon Combo"
+msgstr "Boite combinée du lexique morphologique grec pour l’AT"
+
+#: ../ui/prefs.glade.h:171 ../ui/prefs.gtkbuilder.h:175
+msgid "NT Greek Morphology Lexicon"
+msgstr "Lexique morphologique grec pour le NT"
+
+#: ../ui/prefs.glade.h:172 ../ui/prefs.gtkbuilder.h:176
+msgid "NT Greek Morphology Lexicon Combo"
+msgstr "Boite combinée du lexique morphologique grec pour le NT"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:173 ../ui/prefs.gtkbuilder.h:177
 msgid "Default Dictionary"
 msgstr "Dictionnaire par défaut"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:168 ../ui/prefs.gtkbuilder.h:172
+#: ../ui/prefs.glade.h:174 ../ui/prefs.gtkbuilder.h:178
 msgid "Change Default Dictionary Combo"
 msgstr "Boite combinée Changement de dictionnaire"
 
-#: ../ui/prefs.glade.h:169 ../ui/prefs.gtkbuilder.h:173
+#: ../ui/prefs.glade.h:175 ../ui/prefs.gtkbuilder.h:179
 msgid "Personal Notes"
 msgstr "Notes personnelles"
 
-#: ../ui/prefs.glade.h:170 ../ui/prefs.gtkbuilder.h:174
+#: ../ui/prefs.glade.h:176 ../ui/prefs.gtkbuilder.h:180
 msgid "Change Personal Notes Combo"
 msgstr "Boite combinée Changement de notes personnelles"
 
-#: ../ui/prefs.glade.h:171 ../ui/prefs.gtkbuilder.h:175
+#: ../ui/prefs.glade.h:177 ../ui/prefs.gtkbuilder.h:181
 msgid "Modules Misc"
 msgstr "Divers modules"
 
@@ -5142,207 +5177,219 @@ msgid "Apply a high-contrast highlight to the current verse"
 msgstr "Applique un contraste élevé au verset en cours"
 
 #: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
+msgid "Highlight _Annotated Verses"
+msgstr "Versets _annotés surlignés"
+
+#: ../ui/xi-menus.glade.h:33
+msgid "Apply inverse highlight to annotated verses"
+msgstr "Appliquer un surlignement inversé aux versets annotés"
+
+#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "_Show/Hide Attached Sidebar"
 msgstr "Afficher/Cacher le v_olet latéral"
 
-#: ../ui/xi-menus.glade.h:33
+#: ../ui/xi-menus.glade.h:35
 msgid "Remove the sidebar entirely from view"
 msgstr "Retire entièrement le volet latéral de la fenêtre principale"
 
-#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
+#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Parallel View in a _Tab"
 msgstr "Affichage parallèle dans un ongle_t"
 
-#: ../ui/xi-menus.glade.h:35
+#: ../ui/xi-menus.glade.h:37
 msgid "Provide the full-chapter parallel Bible window as another tab"
 msgstr "Affiche la vue parallèle entre textes bibliques dans un nouvel onglet"
 
-#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "Show Previe_wer in the Sidebar"
 msgstr "Aperçu dans le volet _latéral"
 
-#: ../ui/xi-menus.glade.h:37
+#: ../ui/xi-menus.glade.h:39
 msgid "Select Previewer position between sidebar or beneath Bible"
 msgstr ""
 "Positionne le volet Aperçu dans le volet latéral ou sous le texte biblique"
 
-#: ../ui/xi-menus.glade.h:39 ../ui/xi-menus.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Contents"
 msgstr "Som_maire"
 
-#: ../ui/xi-menus.glade.h:40
+#: ../ui/xi-menus.glade.h:42
 msgid "Open the help viewer on the Xiphos manual"
 msgstr "Ouvre le manuel d’aide de Xiphos"
 
-#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
+#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Mailing List"
 msgstr "_Liste de diffusion"
 
-#: ../ui/xi-menus.glade.h:42
+#: ../ui/xi-menus.glade.h:44
 msgid "Open a browser on the users' mailing list webpage"
 msgstr ""
 "Ouvre un navigateur sur la page Web de la liste de diffusion des utilisateurs"
 
-#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
+#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Live Chat"
 msgstr "Chat en _ligne"
 
-#: ../ui/xi-menus.glade.h:44
+#: ../ui/xi-menus.glade.h:46
 msgid "Open a browser on an interface to live IRC chat"
 msgstr "Ouvrir un navigateur sur une interface web de Chat IRC"
 
-#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
+#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "_Report Bug"
 msgstr "_Signaler un bogue"
 
-#: ../ui/xi-menus.glade.h:46
+#: ../ui/xi-menus.glade.h:48
 msgid "Open a browser on our bug tracker"
 msgstr "Ouvre un navigateur sur le bug tracker"
 
-#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
+#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "About _Translation"
 msgstr "À propos de la _traduction"
 
-#: ../ui/xi-menus.glade.h:48
+#: ../ui/xi-menus.glade.h:50
 msgid "Learn about translating the Xiphos interface to other languages"
 msgstr "En savoir plus pour traduire l’interface Xiphos en d’autres langues"
 
-#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
 msgid "_About The SWORD Project"
 msgstr "_À propos du projet SWORD"
 
-#: ../ui/xi-menus.glade.h:50
+#: ../ui/xi-menus.glade.h:52
 msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr "En savoir plus sur le Projet Sword, dont Xiphos est une application"
 
-#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "About _BibleSync"
 msgstr "À propos de _BibleSync"
 
-#: ../ui/xi-menus.glade.h:52
+#: ../ui/xi-menus.glade.h:54
 msgid "Learn about BibleSync, the shared navigation protocol"
 msgstr "En apprendre au sujet de BibleSync, le protocole de navigation partagé"
 
-#: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
+#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
 msgid "_View Xiphos Releases"
 msgstr "_Voir les versions de Xiphos"
 
-#: ../ui/xi-menus.glade.h:54
+#: ../ui/xi-menus.glade.h:56
 msgid "Visit the releases web page. Is your Xiphos current?"
 msgstr ""
 "Visiter la page Web des révisions de Xiphos. Votre version est-elle à jour ?"
 
-#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus.gtkbuilder.h:33
+#: ../ui/xi-menus.glade.h:57 ../ui/xi-menus.gtkbuilder.h:34
 msgid "About _Xiphos"
 msgstr "À propos de _Xiphos"
 
-#: ../ui/xi-menus.glade.h:56
+#: ../ui/xi-menus.glade.h:58
 msgid "Learn about Xiphos"
 msgstr "En savoir plus sur Xiphos"
 
-#: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:37
+#: ../ui/xi-menus.glade.h:61 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Annotate Verse"
 msgstr "Annoter ce verset"
 
-#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
+#: ../ui/xi-menus.glade.h:64 ../ui/xi-menus-popup.gtkbuilder.h:40
 msgid "Open Module"
 msgstr "Ouvrir le module"
 
-#: ../ui/xi-menus.glade.h:64 ../ui/xi-menus-popup.gtkbuilder.h:41
+#: ../ui/xi-menus.glade.h:66 ../ui/xi-menus-popup.gtkbuilder.h:41
 msgid "Note"
 msgstr "Note"
 
-#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:42
+#: ../ui/xi-menus.glade.h:67 ../ui/xi-menus-popup.gtkbuilder.h:42
 msgid "Open in editor"
 msgstr "Modifier le commentaire"
 
-#: ../ui/xi-menus.glade.h:67 ../ui/xi-menus-popup.gtkbuilder.h:44
+#: ../ui/xi-menus.glade.h:69 ../ui/xi-menus-popup.gtkbuilder.h:44
 msgid "Verse Per Line"
 msgstr "Verset par ligne"
 
-#: ../ui/xi-menus.glade.h:76 ../ui/xi-menus-popup.gtkbuilder.h:53
+#: ../ui/xi-menus.glade.h:78 ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Footnote/Cross-ref Markers"
 msgstr "Marques des notes de bas de page et des références croisées"
 
-#: ../ui/xi-menus.glade.h:77
+#: ../ui/xi-menus.glade.h:79
 msgid "Show non-anonymous markers e.g. \"*n23\""
 msgstr "Afficher les marques non-anonymes comme « *n23 »"
 
-#: ../ui/xi-menus.glade.h:82 ../ui/xi-menus-popup.gtkbuilder.h:58
+#: ../ui/xi-menus.glade.h:84 ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Variants"
 msgstr "Variantes"
 
-#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:66
+#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Image Content"
 msgstr "Afficher les images"
 
-#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:67
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Respect Font Faces"
 msgstr "Respect des polices"
 
-#: ../ui/xi-menus.glade.h:92 ../ui/xi-menus-popup.gtkbuilder.h:68
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:68
+msgid "Display chapter numbers"
+msgstr "Afficher les numéros de chapitres"
+
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Commentary by Chapter"
 msgstr "Commentaire par chapitre"
 
-#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
+#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Doublespace"
 msgstr "Double espace"
 
-#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Lookup Selection"
 msgstr "Définition du mot sélectionné"
 
 # src/gs_preferences_dlg.c
-#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Use Current Dictionary"
 msgstr "Utiliser le dictionnaire en cours"
 
-#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:72
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Browse in BibleMap.org"
 msgstr "Consulter la carte sur BibleMap.org"
 
-#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:73
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Unlock This Module"
 msgstr "Déverrouiller ce module"
 
-#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:74
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Display Book Heading"
 msgstr "Affiche l’entête du livre"
 
-#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:75
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Display Chapter Heading"
 msgstr "Affiche l’entête du chapitre"
 
-#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:76
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Rename Pers.Comm."
 msgstr "Renommer le com. perso."
 
-#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:77
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Dump Pers.Comm."
 msgstr "Quitter le Com. Perso."
 
-#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:78
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Read Selection Aloud"
 msgstr "Synthèse vocale du texte sélectionné"
 
-#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:93
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:94
 msgid "Save these results as a single bookmark"
 msgstr "Enregistre ces résultats sous un seul signet"
 
-#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:92
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid "Save list as a single bookmark"
 msgstr "Enregistrer la liste sous un seul signet"
 
-#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:95
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:96
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr ""
 "Enregistre ces résultats sous une série de signets dans leur propre dossier"
 
-#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:94
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:95
 msgid "Save list as a series of bookmarks"
 msgstr "Enregistrer la liste dans une série de signets"
 
-#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:97
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:98
 msgid ""
 "Provide a dialog in which to paste a line of verse references, to fill the "
 "verse list."
@@ -5350,21 +5397,21 @@ msgstr ""
 "Remplit la liste de versets au moyen d’une boîte de dialogue dans laquelle "
 "sera collée une ligne de références de versets."
 
-#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:96
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:97
 msgid "Populate verse list"
 msgstr "Remplir la liste de versets"
 
-#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:99
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:100
 msgid "Push the entire verse list contents directly into the history list."
 msgstr ""
 "Place le contenu entier de la liste de versets dans l’historique de "
 "consultation."
 
-#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:98
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:99
 msgid "Preload history from verse list"
 msgstr "Charger la liste de versets dans l’historique"
 
-#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:101
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:102
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
@@ -5372,99 +5419,99 @@ msgstr ""
 "Envoie cette liste de versets via BibleSync si vous êtes en mode Personnel "
 "ou Intervenant."
 
-#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:100
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:101
 msgid "Send list via BibleSync"
 msgstr "Envoyer la liste via BibleSync"
 
-#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:102
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:103
 msgid "Export List"
 msgstr "Exporter la liste"
 
-#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:2
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "Ouvre ce signet dans un nouvel onglet"
 
-#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "Ouvrir dans un nouvel onglet"
 
-#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "Ouvre le signet dans une nouvelle fenêtre"
 
-#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:3
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "Ouvrir dans une fenêtre"
 
-#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:6
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "Ajoute un nouveau dossier au dossier sélectionné"
 
-#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "Insère un nouveau signet dans le dossier sélectionné"
 
-#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:7
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Insérer un signet"
 
-#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:10
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "Édite ce signet"
 
-#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:9
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "_Éditer l’élément"
 
-#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:12
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Supprime l’élément sélectionné"
 
-#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:14
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "Développe tous les groupes de signets"
 
-#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:13
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Développer tout"
 
-#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:16
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "Réduit tous les groupes de signets"
 
-#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:15
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Réduire tout"
 
-#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:17
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "Active/désactive le déplacement des éléments"
 
-#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:18
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "Déplacer les signets"
 
-#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:20
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Importe un fichier de signets (par défaut: de BibleTime)"
 
-#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:19
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:19
 msgid "Import Bookmarks"
 msgstr "Importer les signets"
 
-#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:22
+#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr "Supprimer le dossier et le sauvegarder"
 
-#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:21
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr "Exporter le dossier"
 
-#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open selected module in a new tab"
 msgstr "Ouvrir le module sélectionné dans un nouvel onglet"
 
-#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:33
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:33
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
@@ -5472,83 +5519,83 @@ msgstr ""
 "Ouvrir le module sélectionné dans une\n"
 "nouvelle fenêtre"
 
-#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:32
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid "Open in a separate window"
 msgstr "Ouvrir dans une fenêtre séparée"
 
-#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:80
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new simple prayer list"
 msgstr "Crée une nouvelle liste simple de prières"
 
-#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:79
+#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Simple"
 msgstr "Liste simple"
 
-#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:82
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Create a new subject prayer list"
 msgstr "Crée une nouvelle liste de prières organisée par sujets"
 
-#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:81
+#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Subject"
 msgstr "Liste ordonnée par sujet"
 
-#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:84
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Create a new monthly journal"
 msgstr "Crée un nouveau journal mensuel"
 
-#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:83
+#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Monthly"
 msgstr "Mensuel"
 
-#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:86
+#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Create a new daily journal"
 msgstr "Crée un nouveau journal quotidien"
 
-#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:85
+#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Daily"
 msgstr "Quotidien"
 
-#: ../ui/xi-menus.glade.h:148 ../ui/xi-menus-popup.gtkbuilder.h:88
+#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:89
 msgid "Create a new outlined topic"
 msgstr "Crée un nouveau thème structuré hiérarchiquement"
 
-#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:87
+#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Outlined"
 msgstr "Thème structuré"
 
-#: ../ui/xi-menus.glade.h:150 ../ui/xi-menus-popup.gtkbuilder.h:90
+#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Create a new book/chapter outline"
 msgstr "Crée un nouvelle trame organisée par Livre/Chapitre de la Bible"
 
-#: ../ui/xi-menus.glade.h:151 ../ui/xi-menus-popup.gtkbuilder.h:89
+#: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Book/Chapter"
 msgstr "Trame Livre/Chapitre"
 
-#: ../ui/xi-menus.glade.h:152 ../ui/xi-menus-popup.gtkbuilder.h:91
+#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Open module in editor or plain display window"
 msgstr "Ouvre le module dans l’éditeur ou en lecture dans une fenêtre séparée"
 
-#: ../ui/xi-menus.glade.h:153 ../ui/xi-menus-popup.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:156 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add a sub-item"
 msgstr "Ajoute un sous-élément"
 
-#: ../ui/xi-menus.glade.h:154 ../ui/xi-menus-popup.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add Sub-Item"
 msgstr "Ajouter un sous-élément"
 
-#: ../ui/xi-menus.glade.h:155 ../ui/xi-menus-popup.gtkbuilder.h:26
+#: ../ui/xi-menus.glade.h:158 ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Add an item"
 msgstr "Ajouter un élément"
 
-#: ../ui/xi-menus.glade.h:156 ../ui/xi-menus-popup.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:159 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add Item"
 msgstr "Ajouter un élément"
 
-#: ../ui/xi-menus.glade.h:157 ../ui/xi-menus-popup.gtkbuilder.h:28
+#: ../ui/xi-menus.glade.h:160 ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Remove this item"
 msgstr "Supprimer cet élément :"
 
-#: ../ui/xi-menus.glade.h:159 ../ui/xi-menus-popup.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:162 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Edit this item"
 msgstr "Éditer cet élément"
 
