@@ -36,11 +36,6 @@ xiphos_find_program (GLIB_GENMARSHAL glib-genmarshal)
 xiphos_find_program (XMLLINT xmllint)
 xiphos_find_program (XSLTPROC xsltproc)
 
-# dbus tools
-if (DBUS)
-  xiphos_find_program (DBUS_BINDING_TOOL dbus-binding-tool)
-endif (DBUS)
-
 # i18n tools
 if (I18N)
   # we need itstool for translating Help

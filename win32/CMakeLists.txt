@@ -146,8 +146,6 @@ if (WIN32)
   install(FILES
     ${SYS_ROOT_BIN}/libsword-1-9-0.dll
     ${SYS_ROOT_BIN}/libminizip-1.dll
-    ${SYS_ROOT_BIN}/libdbus-1-3.dll
-    ${SYS_ROOT_BIN}/libdbus-glib-1-2.dll
     ${SYS_ROOT_BIN}/addld.exe
     ${SYS_ROOT_BIN}/emptyvss.exe
     ${SYS_ROOT_BIN}/imp2gbs.exe

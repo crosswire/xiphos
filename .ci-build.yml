@@ -3,7 +3,6 @@ requires:
     - appstream-glib
     - biblesync
     - cmake
-    - dbus-glib
     - docbook-utils
     - enchant
     - git
@@ -56,7 +55,6 @@ requires:
     - intltool
     - itstool
     - libbiblesync-dev
-    - libdbus-glib-1-dev
     - libglade2-dev
     - libenchant-2-dev
     - libgail-3-dev
@@ -79,7 +77,6 @@ requires:
   fedora:
     - biblesync-devel
     - cmake
-    - dbus-glib-devel
     - desktop-file-utils
     - git
     - docbook-utils
@@ -112,7 +109,6 @@ requires:
     - intltool
     - itstool
     - libbiblesync-dev
-    - libdbus-glib-1-dev
     - libenchant-2-dev
     - libgail-3-dev
     - libglade2-dev

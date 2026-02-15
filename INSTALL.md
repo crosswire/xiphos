@@ -67,7 +67,6 @@ dependencies installed:
     WebKit1 or Webkit2     Port to Gtk+ of the WebKit rendering engine
     appstream-util         Utility to validate AppStream metadata
     biblesync>=1.2.0       Protocol to support Bible software shared co-navigation
-    dbus-glib              API for use of D-Bus from GLib applications
     desktop-file-validate  Validates a desktop file
     gcc                    GCC, the GNU Compiler Collection
     gconfmm                C++ wrappers for GConf
@@ -234,7 +233,7 @@ Create a build directory as a sibling of the xiphos directory:
 
 ## 3. Install dependencies
 
-    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk4-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel intltool libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools
+    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel gtkhtml3-devel webkitgtk4-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel intltool libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools
 
 ## 4. Configure build
 
@@ -256,7 +255,7 @@ Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 
 ## 2. Install the required dependencies:
 
-    $ sudo apt-get install appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libbiblesync-dev libdbus-glib-1-dev libenchant-2-dev libgail-3-dev libglade2-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python3-dev swig uuid-dev uuid-runtime yelp-tools xzip
+    $ sudo apt-get install appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libbiblesync-dev libenchant-2-dev libgail-3-dev libglade2-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python3-dev swig uuid-dev uuid-runtime yelp-tools xzip
 
 ## 3. Build and install:
 
@@ -376,11 +375,11 @@ Create a build directory as a sibling of the xiphos and biblesync directories:
 
 For Win32:
 
-    $ sudo dnf install mingw32-sword.noarch mingw32-minizip.noarch mingw32-libgsf.noarch mingw32-libglade2.noarch mingw32-webkitgtk.noarch mingw32-gtk3.noarch mingw32-libtiff.noarch mingw32-libidn.noarch mingw32-gdb.noarch mingw32-nsis mingw32-dbus-glib
+    $ sudo dnf install mingw32-sword.noarch mingw32-minizip.noarch mingw32-libgsf.noarch mingw32-libglade2.noarch mingw32-webkitgtk.noarch mingw32-gtk3.noarch mingw32-libtiff.noarch mingw32-libidn.noarch mingw32-gdb.noarch mingw32-nsis
 
 For Win64:
 
-    $ sudo dnf install mingw64-sword.noarch mingw64-minizip.noarch mingw64-libgsf.noarch mingw64-libglade2.noarch mingw64-webkitgtk.noarch mingw64-gtk3.noarch mingw64-libtiff.noarch mingw64-libidn.noarch mingw64-gdb.noarch mingw32-nsis mingw64-dbus-glib
+    $ sudo dnf install mingw64-sword.noarch mingw64-minizip.noarch mingw64-libgsf.noarch mingw64-libglade2.noarch mingw64-webkitgtk.noarch mingw64-gtk3.noarch mingw64-libtiff.noarch mingw64-libidn.noarch mingw64-gdb.noarch mingw32-nsis
 
 ### 8. Build and install Biblesync with Mingw
 Cross-compiling Biblesync using MinGW. Check the instructions in the INSTALL.md

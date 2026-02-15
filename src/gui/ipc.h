@@ -23,7 +23,7 @@
 #define __XIPHOS_IPC_H__
 
 #include <glib.h>
-#include <dbus/dbus-glib.h>
+#include <gio/gio.h>
 
 G_BEGIN_DECLS
 #define IPC_TYPE_OBJECT (ipc_object_get_type())

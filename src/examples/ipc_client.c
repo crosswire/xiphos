@@ -22,93 +22,116 @@
  OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include <dbus/dbus-glib.h>
+#include <gio/gio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "ipc-gdbus.h"
 
-#include "ipc-client-stub.h"
+static XiphosRemote *remote_object = NULL;
 
-//this function will be called every time the user does a sidebar search
-static gboolean
-search_performed_signal_handler(DBusGProxy *proxy,
-				char *results, gpointer user_data)
+/* this function will be called every time the user does a sidebar search */
+static void
+search_performed_signal_handler(XiphosRemote *proxy,
+				const gchar *search_term,
+				gint hits,
+				gpointer user_data)
 {
-	char *ref;
+	GError *error = NULL;
+	gchar *ref = NULL;
 
-	printf("number hits: %s\n", results);
+	printf("Search: %s, number hits: %d\n", search_term, hits);
 
-	//method generated automatically in ipc-client-stub.h
-	//this method can be called anywhere in your program
-	org_xiphos_remote_get_next_search_reference(proxy, &ref, NULL);
+	/* get search results using type-safe generated method */
+	xiphos_remote_call_get_next_search_reference_sync(remote_object,
+							  &ref,
+							  NULL,
+							  &error);
+	if (error) {
+		g_printerr("Error calling getNextSearchReference: %s\n", error->message);
+		g_error_free(error);
+		return;
+	}
 
 	while (strcmp(ref, "XIPHOS_SEARCH_END")) {
 		printf("ref: %s\n", ref);
-		org_xiphos_remote_get_next_search_reference(proxy, &ref,
-							    NULL);
+		g_free(ref);
+		ref = NULL;
+
+		xiphos_remote_call_get_next_search_reference_sync(remote_object,
+								  &ref,
+								  NULL,
+								  &error);
+		if (error) {
+			g_printerr("Error getting next reference: %s\n", error->message);
+			g_error_free(error);
+			break;
+		}
 	}
 
-	return FALSE;
+	g_free(ref);
 }
 
-//this function will be called every time Xiphos navigates
-static gboolean
-navigation_performed_signal_handler(DBusGProxy *proxy,
-				    char *reference, gpointer user_data)
+/* this function will be called every time Xiphos navigates */
+static void
+navigation_performed_signal_handler(XiphosRemote *proxy,
+				    const gchar *reference,
+				    gpointer user_data)
 {
+	GError *error = NULL;
+	gchar *ref = NULL;
+
 	printf("new reference is: %s\n", reference);
 	printf("now calling remote method just to be sure\n");
 
-	char *ref;
+	/* verify by calling the remote method using type-safe generated function */
+	xiphos_remote_call_get_current_reference_sync(remote_object,
+						      &ref,
+						      NULL,
+						      &error);
+	if (error) {
+		g_printerr("Error calling getCurrentReference: %s\n", error->message);
+		g_error_free(error);
+		return;
+	}
 
-	//method generated automatically in ipc-client-stub.h
-	//can be called anywhere in your program
-	org_xiphos_remote_get_current_reference(proxy, &ref, NULL);
-
-	//of course, this doesn't actually *check* to see if they're the same :)
+	/* of course, this doesn't actually *check* to see if they're the same :) */
 	printf("yep! Xiphos says the new reference is %s\n", ref);
 
-	return FALSE;
+	g_free(ref);
 }
 
 int main(int argc, char **argv)
 {
-	DBusGConnection *bus;
-	DBusGProxy *remote_object;
 	GError *error = NULL;
 	GMainLoop *mainloop;
 
-//not necessary if using from a gtk/gnome program
-#if !GLIB_CHECK_VERSION(2, 35, 0)
-	g_type_init();
-#endif
-
 	mainloop = g_main_loop_new(NULL, FALSE);
 
-	//get the "session" dbus
-	bus = dbus_g_bus_get(DBUS_BUS_SESSION, &error);
+	/* create proxy using gdbus-codegen generated code */
+	remote_object = xiphos_remote_proxy_new_for_bus_sync(
+	    G_BUS_TYPE_SESSION,
+	    G_DBUS_PROXY_FLAGS_NONE,
+	    "org.xiphos.remote",
+	    "/org/xiphos/remote/ipc",
+	    NULL, /* GCancellable */
+	    &error);
 
-	//conect to xiphos
-	remote_object = dbus_g_proxy_new_for_name(bus,
-						  "org.xiphos.remote",
-						  "/org/xiphos/remote/ipc",
-						  "org.xiphos.remote");
+	if (error) {
+		g_printerr("Failed to create proxy: %s\n", error->message);
+		g_error_free(error);
+		return 1;
+	}
 
-	//add and connect to the searchPerformedSignal
-	dbus_g_proxy_add_signal(remote_object, "searchPerformedSignal",
-				G_TYPE_STRING, G_TYPE_INVALID);
-	dbus_g_proxy_connect_signal(remote_object, "searchPerformedSignal",
-				    G_CALLBACK(search_performed_signal_handler),
-				    NULL, NULL);
-
-	//add and connect to the navigationSignal
-	dbus_g_proxy_add_signal(remote_object, "navigationSignal",
-				G_TYPE_STRING, G_TYPE_INVALID);
-	dbus_g_proxy_connect_signal(remote_object, "navigationSignal",
-				    G_CALLBACK(navigation_performed_signal_handler),
-				    NULL, NULL);
+	/* connect to signals using type-safe generated signal handlers */
+	g_signal_connect(remote_object, "search-performed-signal",
+			 G_CALLBACK(search_performed_signal_handler), NULL);
+	g_signal_connect(remote_object, "navigation-signal",
+			 G_CALLBACK(navigation_performed_signal_handler), NULL);
 
 	g_main_loop_run(mainloop);
+
+	g_object_unref(remote_object);
 
 	exit(0);
 }

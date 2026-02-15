@@ -10,7 +10,6 @@ Vendor:         @CPACK_PACKAGE_VENDOR@
 
 BuildRequires:  biblesync-devel >= 2.0.1-3
 BuildRequires:  desktop-file-utils
-BuildRequires:  dbus-glib-devel
 BuildRequires:  GConf2-devel
 BuildRequires:  gettext
 BuildRequires:  desktop-file-utils

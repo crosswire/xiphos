@@ -163,13 +163,6 @@ else (GTK2)
 endif (GTK2)
 
 
-# D-Bus dependencies
-IF (DBUS)
-  pkg_check_modules(DBus REQUIRED IMPORTED_TARGET
-    "dbus-glib-1"
-    )
-ENDIF()
-
 # find threads
 set(CMAKE_THREAD_PREFER_PTHREAD ON)
 set(THREADS_PREFER_PTHREAD_FLAG ON)

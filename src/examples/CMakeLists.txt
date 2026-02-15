@@ -22,31 +22,36 @@
 if (HAVE_DBUS)
   message (STATUS "Configuring xiphos-nav target")
 
-  # we first need to generate ipc-interface.h
-  add_custom_command (OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/ipc-interface.h
-    # process ipc-interface.xml to generate ipc-interface.h
-    COMMAND ${DBUS_BINDING_TOOL}
-    --mode=glib-client
-    --output=${CMAKE_CURRENT_BINARY_DIR}/ipc-interface.h
-    --prefix=ipc_object ${CMAKE_CURRENT_SOURCE_DIR}/../gtk/ipc-interface.xml
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMENT "Generating src/example/ipc-interface.h"
+  # Generate client-side D-Bus bindings using gdbus-codegen
+  add_custom_command (
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/ipc-gdbus.h
+    ${CMAKE_CURRENT_BINARY_DIR}/ipc-gdbus.c
+
+    COMMAND gdbus-codegen
+    --interface-prefix org.xiphos.
+    --generate-c-code ipc-gdbus
+    --c-namespace Xiphos
+    ${CMAKE_CURRENT_SOURCE_DIR}/../gtk/ipc-interface.xml
+    MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/../gtk/ipc-interface.xml
+
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Generating D-Bus client bindings for examples"
     )
 
   add_executable (
     xiphos-nav
     xiphos-nav.c
-    ${CMAKE_CURRENT_BINARY_DIR}/ipc-interface.h
+    ${CMAKE_CURRENT_BINARY_DIR}/ipc-gdbus.c
     )
 
 
   # specify include directories to use when compiling
   target_include_directories (xiphos-nav
     PRIVATE
-    ${CMAKE_CURRENT_BINARY_DIR} # for ipc-interface.h
+    ${CMAKE_CURRENT_BINARY_DIR}
     Threads::Threads
     PkgConfig::Core
-    PkgConfig::DBus
+    PkgConfig::Gnome
     )
 
   # specify libraries or flags to use when linking
@@ -54,7 +59,7 @@ if (HAVE_DBUS)
     PRIVATE
     Threads::Threads
     PkgConfig::Core
-    PkgConfig::DBus
+    PkgConfig::Gnome
     )
 
 

@@ -68,7 +68,7 @@ This build produced by Xiphos development; not from official Fedora repo.")
 
 # RPM spec requires field
 set(CPACK_RPM_PACKAGE_REQUIRES
-  "sword, biblesync, dbus-glib, libglade2, gtk3, webkitgtk4, gtkhtml3, yelp")
+  "sword, biblesync, libglade2, gtk3, webkitgtk4, gtkhtml3, yelp")
 
 # RPM spec obsoletes field.
 set(CPACK_RPM_PACKAGE_OBSOLETES "xiphos-gtk2, xiphos-gtk3, xiphos-common")

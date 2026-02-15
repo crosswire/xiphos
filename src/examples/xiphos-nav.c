@@ -19,41 +19,47 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#include <dbus/dbus-glib.h>
+#include <gio/gio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-#include "ipc-interface.h"
+#include "ipc-gdbus.h"
 
 int main(int argc, char **argv)
 {
-	DBusGConnection *bus;
-	DBusGProxy *remote_object;
 	GError *error = NULL;
+	XiphosRemote *proxy;
 
-/* not necessary if using from a gtk/gnome program */
-#if !GLIB_CHECK_VERSION(2, 35, 0)
-	g_type_init();
-#endif
-	/* get the "session" dbus */
-	bus = dbus_g_bus_get(DBUS_BUS_SESSION, &error);
+	/* create proxy using gdbus-codegen generated code */
+	proxy = xiphos_remote_proxy_new_for_bus_sync(
+	    G_BUS_TYPE_SESSION,
+	    G_DBUS_PROXY_FLAGS_NONE,
+	    "org.xiphos.remote",
+	    "/org/xiphos/remote/ipc",
+	    NULL, /* GCancellable */
+	    &error);
 
-	/* connect to Xiphos */
-	remote_object = dbus_g_proxy_new_for_name(bus,
-						  "org.xiphos.remote",
-						  "/org/xiphos/remote/ipc",
-						  "org.xiphos.remote");
+	if (error) {
+		g_printerr("Failed to create proxy: %s\n", error->message);
+		g_error_free(error);
+		return 1;
+	}
 
 	/* attempt to set reference in running instance of Xiphos */
-	org_xiphos_remote_set_current_reference(remote_object, argv[1],
-						&error);
+	xiphos_remote_call_set_current_reference_sync(proxy,
+						      argv[1],
+						      NULL, /* cancellable */
+						      &error);
 
 	/* if error, then Xiphos is not running, so we just start it and pass
 	   it the arguments given to this program */
-	if (error)
+	if (error) {
+		g_error_free(error);
 		execvp("xiphos", argv);
+	}
 
-	return 1;
+	g_object_unref(proxy);
+
+	return 0;
 }

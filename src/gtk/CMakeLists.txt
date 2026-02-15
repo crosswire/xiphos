@@ -138,11 +138,13 @@ add_executable (xiphos
   )
 
 if (DBUS)
-  # need to generate 3 files: marshal.c marshal.h ipc-interface.h
+  # need to generate 4 files using gdbus-codegen:
+  # marshal.c, marshal.h, ipc-gdbus.c, ipc-gdbus.h
   add_custom_command (
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/marshal.h
     ${CMAKE_CURRENT_BINARY_DIR}/marshal.c
-    ${CMAKE_CURRENT_BINARY_DIR}/ipc-interface.h
+    ${CMAKE_CURRENT_BINARY_DIR}/ipc-gdbus.h
+    ${CMAKE_CURRENT_BINARY_DIR}/ipc-gdbus.c
 
     # process marshal.list to generate marshal.h
     COMMAND ${GLIB_GENMARSHAL}
@@ -151,22 +153,23 @@ if (DBUS)
     --header > ${CMAKE_CURRENT_BINARY_DIR}/marshal.h
     MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/marshal.list
 
-    # process marshal.list to generate marschal.c
+    # process marshal.list to generate marshal.c
     COMMAND ${GLIB_GENMARSHAL}
     ${CMAKE_CURRENT_SOURCE_DIR}/marshal.list
     --prefix=ipc_marshal
     --body > ${CMAKE_CURRENT_BINARY_DIR}/marshal.c
     MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/marshal.list
 
-    # process ipc-interface.xml to generate ipc-interface.h
-    COMMAND ${DBUS_BINDING_TOOL}
-    --mode=glib-server
-    --output=${CMAKE_CURRENT_BINARY_DIR}/ipc-interface.h
-    --prefix=ipc_object ${CMAKE_CURRENT_SOURCE_DIR}/ipc-interface.xml
+    # process ipc-interface.xml with gdbus-codegen to generate GDBus bindings
+    COMMAND gdbus-codegen
+    --interface-prefix org.xiphos.
+    --generate-c-code ipc-gdbus
+    --c-namespace Xiphos
+    ${CMAKE_CURRENT_SOURCE_DIR}/ipc-interface.xml
     MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/ipc-interface.xml
 
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMENT "Generating src/gtk files"
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Generating src/gtk D-Bus bindings"
     )
 
   # add files to the sources
@@ -174,14 +177,10 @@ if (DBUS)
     PRIVATE
     ipc.c
     ${CMAKE_CURRENT_BINARY_DIR}/marshal.c
+    ${CMAKE_CURRENT_BINARY_DIR}/ipc-gdbus.c
     )
   target_include_directories (xiphos
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
-    PkgConfig::DBus
-    )
-  target_link_libraries(xiphos
-    PRIVATE
-    PkgConfig::DBus
     )
 endif (DBUS)
 

@@ -468,7 +468,6 @@ On Debian/Ubuntu, install the Build-Essential package:
 You need to install the following dependencies:
 
     biblesync			Protocol to support Bible software shared co-navigation
-    dbus-glib		    API for use of D-Bus from GLib applications
     gconfmm		        C++ wrappers for GConf
     gtk+-3.0            The GIMP Toolkit
     gtkhtml	            Lightweight HTML rendering/editing engine
@@ -480,13 +479,13 @@ You need to install the following dependencies:
 
 On RHEL/CentOS/Fedora, run:
 
-    dnf install intltool gtk3-devel dbus-glib-devel gtkhtml3-devel
+    dnf install intltool gtk3-devel gtkhtml3-devel
 	webkitgtk4-devel libxml2-devel libgsf-devel gconfmm26-devel sword-devel
 	libuuid-devel biblesync-devel
 
 On Debian/Ubuntu:
 
-    apt install intltool libdbus-glib-1-dev libwebkitgtk-3.0-dev
+    apt install intltool libwebkitgtk-3.0-dev
 	libxml2-dev libgsf-1-dev libgconfmm-2.6-dev libsword-dev uuid-dev
     libwebkitgtk-dev libglade2-dev
 
