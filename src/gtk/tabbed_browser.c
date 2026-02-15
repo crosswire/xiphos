@@ -1467,8 +1467,8 @@ void gui_open_parallel_view_in_new_tab(void)
 	notebook_main_add_page(pt);
 	pt->paratab = gui_create_parallel_tab();
 	gui_parallel_tab_sync((gchar *)settings.currentverse);
-	/*gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
-	   0); */
+	gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
+			   0);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
 				      gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main),
 							    pt->page_widget));

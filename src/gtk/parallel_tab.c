@@ -227,8 +227,8 @@ GtkWidget *_create_parallel_tab(void)
 	g_signal_connect(G_OBJECT(parallel_vbox), "destroy",
 			 G_CALLBACK(on_parallel_tab_destroy), NULL);
 	gtk_widget_show(parallel_vbox);
-	gtk_box_pack_start(GTK_BOX(widgets.page), parallel_vbox, TRUE,
-			   TRUE, 0);
+	/* Don't pack into widgets.page here - let the caller manage placement
+	 * to avoid "widget already has a parent" GTK errors when switching tabs */
 	toolbar29 = create_nav_toolbar();
 	gtk_widget_show(toolbar29);
 	gtk_box_pack_start(GTK_BOX(parallel_vbox), toolbar29, FALSE, FALSE,
