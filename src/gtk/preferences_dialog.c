@@ -1889,19 +1889,20 @@ void on_combobox14_changed(GtkComboBox *combobox, gpointer user_data)
 
 void on_combobox18_changed(GtkComboBox *combobox, gpointer user_data)
 {
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+    gchar *buf = NULL;
+    GtkTreeIter iter;
+    GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
-	if (gtk_combo_box_get_active_iter(combobox, &iter)) {
-		gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-		if (!buf || !strcmp(buf, _("-- Select --"))) /* see fill_combobox */
-			return;
-	xml_set_value("Xiphos", "lexicons", "hebrew_morph", buf);
-	if (settings.morph_heb_lex) g_free(settings.morph_heb_lex);
-		settings.morph_heb_lex = g_strdup(buf);
-	g_free(buf);
-	}
+    if (gtk_combo_box_get_active_iter(combobox, &iter)) {
+        gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
+        if (!buf || !strcmp(buf, _("-- Select --")))
+            return;
+        xml_set_value("Xiphos", "lexicons", "hebrew_morph", buf);
+        if (settings.morph_heb_lex) g_free(settings.morph_heb_lex);
+        settings.morph_heb_lex = g_strdup(buf);
+        xml_save_settings_doc(settings.fnconfigure);
+        g_free(buf);
+    }
 }
 /******************************************************************************
  * Name
@@ -1921,19 +1922,20 @@ void on_combobox18_changed(GtkComboBox *combobox, gpointer user_data)
 
 void on_combobox20_changed(GtkComboBox *combobox, gpointer user_data)
 {
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+    gchar *buf = NULL;
+    GtkTreeIter iter;
+    GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
-	if (gtk_combo_box_get_active_iter(combobox, &iter)) {
-		gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-		if (!buf || !strcmp(buf, _("-- Select --"))) /* see fill_combobox */
-			return;
-	xml_set_value("Xiphos", "lexicons", "greek_morph_ot", buf);
-	if (settings.morph_greek_lex_ot) g_free(settings.morph_greek_lex_ot);
-		settings.morph_greek_lex_ot = g_strdup(buf);
-	g_free(buf);
-	}
+    if (gtk_combo_box_get_active_iter(combobox, &iter)) {
+        gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
+        if (!buf || !strcmp(buf, _("-- Select --")))
+            return;
+        xml_set_value("Xiphos", "lexicons", "greek_morph_ot", buf);
+        if (settings.morph_greek_lex_ot) g_free(settings.morph_greek_lex_ot);
+        settings.morph_greek_lex_ot = g_strdup(buf);
+        xml_save_settings_doc(settings.fnconfigure);
+        g_free(buf);
+    }
 }
 /******************************************************************************
  * Name
@@ -1953,19 +1955,20 @@ void on_combobox20_changed(GtkComboBox *combobox, gpointer user_data)
 
 void on_combobox19_changed(GtkComboBox *combobox, gpointer user_data)
 {
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+    gchar *buf = NULL;
+    GtkTreeIter iter;
+    GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
-	if (gtk_combo_box_get_active_iter(combobox, &iter)) {
-		gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-		if (!buf || !strcmp(buf, _("-- Select --"))) /* see fill_combobox */
-			return;
-		xml_set_value("Xiphos", "lexicons", "greek_morph_nt", buf);
-		if (settings.morph_greek_lex_nt) g_free(settings.morph_greek_lex_nt);
-		settings.morph_greek_lex_nt = g_strdup(buf);
-		g_free(buf);
-	}
+    if (gtk_combo_box_get_active_iter(combobox, &iter)) {
+        gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
+        if (!buf || !strcmp(buf, _("-- Select --")))
+            return;
+        xml_set_value("Xiphos", "lexicons", "greek_morph_nt", buf);
+        if (settings.morph_greek_lex_nt) g_free(settings.morph_greek_lex_nt);
+        settings.morph_greek_lex_nt = g_strdup(buf);
+        xml_save_settings_doc(settings.fnconfigure);
+        g_free(buf);
+    }
 }
 
 /******************************************************************************

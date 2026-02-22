@@ -454,29 +454,32 @@ void load_settings_structure(void)
 	settings.morph_greek_lex_nt = xml_get_value("lexicons", "greek_morph_nt");
 	settings.morph_heb_lex = xml_get_value("lexicons", "hebrew_morph");
 
-	if (!settings.morph_greek_lex_ot || strlen(settings.morph_greek_lex_ot) == 0) {
-		if (settings.morph_greek_lex_ot) g_free(settings.morph_greek_lex_ot);
-		settings.morph_greek_lex_ot = g_strdup("Packard");
-		xml_set_value("Xiphos", "lexicons", "greek_morph_ot", settings.morph_greek_lex_ot);
-	} else {
-		settings.morph_greek_lex_ot = g_strdup(settings.morph_greek_lex_ot);
-	}
+if (!settings.morph_greek_lex_ot || strlen(settings.morph_greek_lex_ot) == 0) {
+    if (settings.morph_greek_lex_ot) g_free(settings.morph_greek_lex_ot);
+    settings.morph_greek_lex_ot = g_strdup("Packard");
+    xml_add_new_item_to_section("lexicons", "greek_morph_ot",
+                                settings.morph_greek_lex_ot);  /* ← was xml_set_value */
+} else {
+    settings.morph_greek_lex_ot = g_strdup(settings.morph_greek_lex_ot);
+}
 
-	if (!settings.morph_greek_lex_nt || strlen(settings.morph_greek_lex_nt) == 0) {
-		if (settings.morph_greek_lex_nt) g_free(settings.morph_greek_lex_nt);
-		settings.morph_greek_lex_nt = g_strdup("Robinson");
-		xml_set_value("Xiphos", "lexicons", "greek_morph_nt", settings.morph_greek_lex_nt);
-	} else {
-		settings.morph_greek_lex_nt = g_strdup(settings.morph_greek_lex_nt);
-	}
+if (!settings.morph_greek_lex_nt || strlen(settings.morph_greek_lex_nt) == 0) {
+    if (settings.morph_greek_lex_nt) g_free(settings.morph_greek_lex_nt);
+    settings.morph_greek_lex_nt = g_strdup("Robinson");
+    xml_add_new_item_to_section("lexicons", "greek_morph_nt",
+                                settings.morph_greek_lex_nt);  /* ← was xml_set_value */
+} else {
+    settings.morph_greek_lex_nt = g_strdup(settings.morph_greek_lex_nt);
+}
 
-	if (!settings.morph_heb_lex || strlen(settings.morph_heb_lex) == 0) {
-		if (settings.morph_heb_lex) g_free(settings.morph_heb_lex);
-		settings.morph_heb_lex = g_strdup("OSHM");
-		xml_set_value("Xiphos", "lexicons", "hebrew_morph", settings.morph_heb_lex);
-	} else {
-		settings.morph_heb_lex = g_strdup(settings.morph_heb_lex);
-	}
+if (!settings.morph_heb_lex || strlen(settings.morph_heb_lex) == 0) {
+    if (settings.morph_heb_lex) g_free(settings.morph_heb_lex);
+    settings.morph_heb_lex = g_strdup("OSHM");
+    xml_add_new_item_to_section("lexicons", "hebrew_morph",
+                                settings.morph_heb_lex);       /* ← was xml_set_value */
+} else {
+    settings.morph_heb_lex = g_strdup(settings.morph_heb_lex);
+}
 
 
 	/* unusual locale setting */
