@@ -1218,6 +1218,8 @@ void main_display_dictionary(const char *mod_name,
 		xml_set_value("Xiphos", "modules", "dict", mod_name);
 		gui_reassign_strdup(&settings.DictWindowModule, (gchar *)mod_name);
 	}
+	
+	gui_notebook_dict_goto_dict();
 
 	// old_key is uppercase
 	key = g_utf8_strup(key, -1);
@@ -1455,20 +1457,25 @@ void main_display_devotional(GtkWidget *target_widget)
 
 	text = backend->get_render_text(settings.devotionalmod, buf);
 	if (text) {
-		if (target_widget != NULL && backend->devotDisplay) {
-			/* affichage dans l'onglet devotional avec CSS */
-			backend->devotDisplay->display(*backend->display_mod);
-		} else {
-			GtkWidget *dest = settings.show_previewer_in_sidebar
-					? sidebar.html_viewer_widget
-					: widgets.html_previewer_text;
-			main_entry_display(dest, settings.devotionalmod, text, prettybuf, TRUE);
-		}
-		g_free(text);
-		if (widgets.entry_devotional)
-			gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), buf);
-	}
-	g_free(prettybuf);
+    if (target_widget != NULL) {
+        SWDisplay *saved = backend->dictDisplay;
+        backend->dictDisplay = new GTKEntryDisp(target_widget, backend);
+        backend->set_module_key(settings.devotionalmod, buf);
+        backend->dictDisplay->display(*backend->display_mod);
+        delete backend->dictDisplay;
+        backend->dictDisplay = saved;
+    } else {
+        GtkWidget *dest = settings.show_previewer_in_sidebar
+                ? sidebar.html_viewer_widget
+                : widgets.html_previewer_text;
+        main_entry_display(dest, settings.devotionalmod,
+                           text, prettybuf, TRUE);
+    }
+    g_free(text);
+    if (widgets.entry_devotional)
+        gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), buf);
+}
+g_free(prettybuf);
 }
 
 void main_setup_displays(void)
@@ -1477,7 +1484,6 @@ void main_setup_displays(void)
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm, backend);
 	backend->bookDisplay = new GTKEntryDisp(widgets.html_book, backend);
 	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict, backend);
-	backend->devotDisplay = new GTKEntryDisp(widgets.html_devotional, backend);
 }
 
 const char *main_get_module_language(const char *module_name)

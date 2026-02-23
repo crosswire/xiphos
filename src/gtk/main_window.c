@@ -76,6 +76,7 @@ extern gboolean shift_key_pressed;
 
 static GtkWidget *nav_toolbar;
 static int main_window_created = FALSE;
+static gboolean switching_dict_tab = FALSE;
 
 /******************************************************************************
  * Name
@@ -959,6 +960,7 @@ static void on_notebook_dict_devot_switch_page(GtkNotebook *notebook,
                                                gint page_num, GList **tl)
 #endif
 {
+    if (switching_dict_tab) return;
     if (page_num == 1) {
         if (settings.devotionalmod && *settings.devotionalmod) {
             main_display_devotional(widgets.html_devotional);
@@ -1300,4 +1302,17 @@ box_devot = gui_create_devotional_pane();
 void gui_show_main_window(void)
 {
 	gtk_widget_show(widgets.app);
+}
+
+/******************************************************************************
+ * Name
+ *   gui_notebook_dict_goto_dict
+ *
+ */
+void gui_notebook_dict_goto_dict(void)
+{
+    switching_dict_tab = TRUE;
+    gtk_notebook_set_current_page(
+        GTK_NOTEBOOK(widgets.notebook_dict_devot), 0);
+    switching_dict_tab = FALSE;
 }
