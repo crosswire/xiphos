@@ -1192,21 +1192,28 @@ void main_display_dictionary(const char *mod_name,
 	if (strcmp(settings.DictWindowModule, mod_name)) {
 		// new dict -- is it actually a devotional?
 		time_t curtime;
-
 		if (feature && !strcmp(feature, "DailyDevotion")) {
-			if ((strlen(key) != 5) || // blunt tests.
+			if ((strlen(key) != 5) ||
 			    (key[0] < '0') || (key[0] > '9') ||
 			    (key[1] < '0') || (key[1] > '9') ||
 			    (key[2] != '.') ||
 			    (key[3] < '0') || (key[3] > '9') ||
-			    (key[4] < '0') || (key[4] > '9')) { // not MM.DD
+			    (key[4] < '0') || (key[4] > '9')) {
 				struct tm *loctime;
-
 				curtime = time(NULL);
 				loctime = localtime(&curtime);
 				strftime(buf, 10, "%m.%d", loctime);
 				key = buf;
 			}
+			/* ← rediriger vers l'onglet devotional */
+			gui_reassign_strdup(&settings.devotionalmod, (gchar *)mod_name);
+			xml_set_value("Xiphos", "modules", "devotional", mod_name);
+			if (widgets.entry_devotional)
+				gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), key);
+			gtk_notebook_set_current_page(
+				GTK_NOTEBOOK(widgets.notebook_dict_devot), 1);
+			main_display_devotional(widgets.html_devotional);
+			return;   /* ← ne pas continuer vers html_dict */
 		}
 		xml_set_value("Xiphos", "modules", "dict", mod_name);
 		gui_reassign_strdup(&settings.DictWindowModule, (gchar *)mod_name);
@@ -1395,7 +1402,7 @@ void main_display_bible(const char *mod_name,
  * Synopsis
  *   #include "main/sword.h"
  *
- *   void main_display_devotional(void)
+ *   void main_display_devotional(GtkWidget *target_widget)
  *
  * Description
  *
@@ -1404,7 +1411,7 @@ void main_display_bible(const char *mod_name,
  *   void
  */
 
-void main_display_devotional(void)
+void main_display_devotional(GtkWidget *target_widget)
 {
 	gchar buf[10];
 	gchar *prettybuf;
@@ -1430,20 +1437,36 @@ void main_display_devotional(void)
 	/*
 	 * Get the current time, converted to local time.
 	 */
-	curtime = time(NULL);
-	loctime = localtime(&curtime);
-	strftime(buf, 10, "%m.%d", loctime);
-	prettybuf = g_strdup_printf("<b>%s %d</b>",
-				    gettext(month_names[loctime->tm_mon]),
-				    loctime->tm_mday);
+	if (widgets.entry_devotional &&
+		strlen(gtk_entry_get_text(GTK_ENTRY(widgets.entry_devotional))) == 5) {
+		strncpy(buf, gtk_entry_get_text(GTK_ENTRY(widgets.entry_devotional)), 10);
+		int month = atoi(buf);   /* MM */
+		int day   = atoi(buf+3); /* DD */
+		prettybuf = g_strdup_printf("<b>%s %d</b>",
+									gettext(month_names[month - 1]), day);
+	} else {
+		curtime = time(NULL);
+		loctime = localtime(&curtime);
+		strftime(buf, 10, "%m.%d", loctime);
+		prettybuf = g_strdup_printf("<b>%s %d</b>",
+									gettext(month_names[loctime->tm_mon]),
+									loctime->tm_mday);
+	}
 
 	text = backend->get_render_text(settings.devotionalmod, buf);
 	if (text) {
-		main_entry_display(settings.show_previewer_in_sidebar
-				       ? sidebar.html_viewer_widget
-				       : widgets.html_previewer_text,
-				   settings.devotionalmod, text, prettybuf, TRUE);
+		if (target_widget != NULL && backend->devotDisplay) {
+			/* affichage dans l'onglet devotional avec CSS */
+			backend->devotDisplay->display(*backend->display_mod);
+		} else {
+			GtkWidget *dest = settings.show_previewer_in_sidebar
+					? sidebar.html_viewer_widget
+					: widgets.html_previewer_text;
+			main_entry_display(dest, settings.devotionalmod, text, prettybuf, TRUE);
+		}
 		g_free(text);
+		if (widgets.entry_devotional)
+			gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), buf);
 	}
 	g_free(prettybuf);
 }
@@ -1454,6 +1477,7 @@ void main_setup_displays(void)
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm, backend);
 	backend->bookDisplay = new GTKEntryDisp(widgets.html_book, backend);
 	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict, backend);
+	backend->devotDisplay = new GTKEntryDisp(widgets.html_devotional, backend);
 }
 
 const char *main_get_module_language(const char *module_name)
@@ -1910,4 +1934,30 @@ const char *
 main_get_osisref_from_key(const char *module, const char *key)
 {
 	return backend->get_osisref_from_key(module, key);
+}
+
+/******************************************************************************
+ * Name
+ * main_devotional_button_clicked
+ */ 
+
+void main_devotional_button_clicked(gint direction)
+{
+    gchar *key = NULL;
+
+    if (!settings.devotionalmod) return;
+    if (!widgets.entry_devotional) return;
+
+    backend->set_module_key(settings.devotionalmod,
+                            gtk_entry_get_text(GTK_ENTRY(widgets.entry_devotional)));
+    if (direction == 0)
+        (*backend->display_mod)--;
+    else
+        (*backend->display_mod)++;
+
+    key = g_strdup((char *)backend->display_mod->getKeyText());
+    gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), key);
+    g_free(key);
+
+    main_display_devotional(widgets.html_devotional);
 }

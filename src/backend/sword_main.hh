@@ -53,6 +53,7 @@ class BackEnd
 	SWDisplay *commDisplay;
 	SWDisplay *bookDisplay;
 	SWDisplay *dictDisplay;
+	SWDisplay *devotDisplay;
 	SWDisplay *textDisplay;
 	SWDisplay *RTOLDisplay;
 	SWDisplay *entryDisplay;

@@ -462,4 +462,102 @@ GtkWidget *gui_create_dictionary_pane(void)
 	return box_dict;
 }
 
+/*callbacks for devotional nav */
+void devot_key_entry_changed(GtkEntry *entry, gpointer data)
+{
+    gchar *buf = (gchar *)gtk_entry_get_text(entry);
+    if (strlen(buf) < 4)   /* MM.DD = 5 chars minimum */
+        return;
+    main_display_devotional(widgets.html_devotional);
+}
+
+void button_devot_back_clicked(GtkButton *button, gpointer user_data)
+{
+    if (!settings.devotionalmod) return;
+    main_devotional_button_clicked(0);
+}
+
+void button_devot_forward_clicked(GtkButton *button, gpointer user_data)
+{
+    if (!settings.devotionalmod) return;
+    main_devotional_button_clicked(1);
+}
+
+GtkWidget *gui_create_devotional_pane(void)
+{
+	GtkWidget *box_devot;
+	GtkWidget *hbox;
+	GtkWidget *button_prev, *button_next;
+	GtkWidget *image_prev, *image_next;
+#ifndef USE_WEBKIT2
+	GtkWidget *scrolledwindow;
+#endif
+
+	UI_VBOX(box_devot, FALSE, 0);
+	gtk_widget_show(box_devot);
+	gtk_container_set_border_width(GTK_CONTAINER(box_devot), 1);
+
+	UI_HBOX(hbox, FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(box_devot), hbox, FALSE, FALSE, 0);
+
+	widgets.entry_devotional = gtk_entry_new();
+	gtk_widget_show(widgets.entry_devotional);
+	gtk_entry_set_max_length(GTK_ENTRY(widgets.entry_devotional), 5);
+	gtk_entry_set_width_chars(GTK_ENTRY(widgets.entry_devotional), 6);
+	gtk_widget_set_tooltip_text(widgets.entry_devotional, _("Date MM.DD"));
+	gtk_box_pack_start(GTK_BOX(hbox), widgets.entry_devotional, FALSE, FALSE, 0);
+
+	button_prev = gtk_button_new();
+	gtk_widget_show(button_prev);
+	gtk_box_pack_start(GTK_BOX(hbox), button_prev, FALSE, FALSE, 0);
+	gtk_button_set_relief(GTK_BUTTON(button_prev), GTK_RELIEF_NONE);
+	image_prev =
+#if GTK_CHECK_VERSION(3, 10, 0)
+	    gtk_image_new_from_icon_name("go-up-symbolic", GTK_ICON_SIZE_BUTTON);
+#else
+	    gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
+#endif
+	gtk_widget_show(image_prev);
+	gtk_container_add(GTK_CONTAINER(button_prev), image_prev);
+
+	button_next = gtk_button_new();
+	gtk_widget_show(button_next);
+	gtk_box_pack_start(GTK_BOX(hbox), button_next, FALSE, FALSE, 0);
+	gtk_button_set_relief(GTK_BUTTON(button_next), GTK_RELIEF_NONE);
+	image_next =
+#if GTK_CHECK_VERSION(3, 10, 0)
+	    gtk_image_new_from_icon_name("go-down-symbolic", GTK_ICON_SIZE_BUTTON);
+#else
+	    gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
+#endif
+	gtk_widget_show(image_next);
+	gtk_container_add(GTK_CONTAINER(button_next), image_next);
+
+#ifndef USE_WEBKIT2
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(box_devot), scrolledwindow, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
+	                                    settings.shadow_type);
+#endif
+
+	widgets.html_devotional =
+	    GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, VIEWER_TYPE));
+	gtk_widget_show(widgets.html_devotional);
+#ifdef USE_WEBKIT2
+	gtk_box_pack_start(GTK_BOX(box_devot), widgets.html_devotional, TRUE, TRUE, 0);
+#else
+	gtk_container_add(GTK_CONTAINER(scrolledwindow), widgets.html_devotional);
+#endif
+
+	g_signal_connect(G_OBJECT(widgets.entry_devotional), "activate",
+	                 G_CALLBACK(devot_key_entry_changed), NULL);
+	g_signal_connect((gpointer)button_prev, "clicked",
+	                 G_CALLBACK(button_devot_back_clicked), NULL);
+	g_signal_connect((gpointer)button_next, "clicked",
+	                 G_CALLBACK(button_devot_forward_clicked), NULL);
+
+	return box_devot;
+}
 //******  end of file  ******/

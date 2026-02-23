@@ -102,7 +102,7 @@ void main_display_commentary(const char *mod_name,
 void main_display_dictionary(const char *mod_name,
 			     const char *key);
 void main_display_bible(const char *mod_name, const char *key);
-void main_display_devotional(void);
+void main_display_devotional(GtkWidget *target_widget);
 void main_setup_displays(void);
 void main_dictionary_entry_changed(char *mod_name);
 void main_dictionary_button_clicked(gint direction);
@@ -141,6 +141,7 @@ const char *main_get_osisref_from_key(const char *module,
 const char *main_get_language_map(const char *language);
 char **main_get_module_language_list(void);
 void main_init_language_map(void);
+void main_devotional_button_clicked(gint direction);
 
 #ifdef __cplusplus
 }

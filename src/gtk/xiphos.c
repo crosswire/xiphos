@@ -239,9 +239,10 @@ void frontend_display(const char *tabs)
 		on_attach_detach_sidebar_activate(NULL, 0);
 	}
 
-	if (settings.showdevotional)
-		main_display_devotional();
-	else
+	if (settings.showdevotional) {
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_dict_devot), 1);
+		main_display_devotional(widgets.html_devotional);
+	} else
 		main_init_previewer();
 	gtk_widget_grab_focus(sidebar.module_list);
 

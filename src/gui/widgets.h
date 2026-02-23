@@ -52,6 +52,7 @@ struct _app_widgets
 	    *notebook_percomm,			 /* notebook - personal comments */
 	    *notebook_sidebar,			 /* notebook - sidebar */
 	    *notebook_comm_book, *notebook_main, /* main notebook to have multiple passages open at once */
+	    *notebook_dict_devot,   /* notebook Dict/Devotional */
 	    *vbox_text,				 /* vbox for bible + simple parallel */
 	    *box_dict, *vbox_previewer, *parallel_tab,
 	    /* dock/undock stuff */
@@ -71,6 +72,7 @@ struct _app_widgets
 	    *html_comm,			     /* html commentary widget */
 	    *html_percomm,		     /* html personal commentary widget */
 	    *html_dict,			     /* html dictionary widget */
+	    *html_devotional,		 /* html devotional widget */
 	    *html_book,			     /* gbs html widget */
 	    *html_studypad,		     /* studypad html widget */
 	    *html_previewer,		     /* to display information (ie strongs) at
@@ -84,6 +86,7 @@ struct _app_widgets
 	    *label_comm, *label_dict,
 	    /* comboboxentry widgets */
 	    *comboboxentry_dict,
+	    *entry_devotional,
 	    /* popup menu submenu widgets */
 	    *add_bookmark_submenu,
 	    /* popup menu item widgets */
