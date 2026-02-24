@@ -49,6 +49,7 @@
 #include "main/xml.h"
 
 #include "gui/debug_glib_null.h"
+#include <time.h>
 
 /******************************************************************************
  * externs
@@ -528,6 +529,69 @@ void button_devot_forward_clicked(GtkButton *button, gpointer user_data)
     main_devotional_button_clicked(1);
 }
 
+/* Convert MM.DD with local time ex: "25 février" */
+static gchar *devot_date_to_local(const gchar *mmdd)
+{
+    if (!mmdd || strlen(mmdd) != 5) return g_strdup("--");
+    int month = atoi(mmdd);        /* MM */
+    int day   = atoi(mmdd + 3);    /* DD */
+    if (month < 1 || month > 12 || day < 1 || day > 31)
+        return g_strdup("--");
+
+    /* local format via strftime */
+    struct tm t = {0};
+    t.tm_mon  = month - 1;
+    t.tm_mday = day;
+    t.tm_year = 2000 - 1900;
+    mktime(&t);
+
+    gchar buf[64];
+    strftime(buf, sizeof(buf), "%e %B", &t);  /* "25 février" in fr, "Feb 25" in en */
+    return g_strdup(g_strstrip(buf));
+}
+
+/* Callback */
+static void on_calendar_day_selected(GtkCalendar *calendar, gpointer user_data)
+{
+    guint year, month, day;
+    gtk_calendar_get_date(calendar, &year, &month, &day);
+    month += 1; /* GtkCalendar : 0-11 */
+
+    gchar mmdd[6];
+    g_snprintf(mmdd, sizeof(mmdd), "%02d.%02d", month, day);
+
+    if (widgets.entry_devotional)
+        gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), mmdd);
+
+    /* update button label */
+    gchar *local = devot_date_to_local(mmdd);
+    gtk_button_set_label(GTK_BUTTON(widgets.button_devotional_date), local);
+    g_free(local);
+
+    /* close the popover */
+    gtk_popover_popdown(GTK_POPOVER(widgets.popover_devotional));
+
+    /* afficher le devotional */
+    main_display_devotional(widgets.html_devotional);
+}
+
+/* Callback : clic sur le bouton date → ouvre/ferme le popover */
+static void on_button_devotional_date_clicked(GtkButton *button, gpointer user_data)
+{
+    /* synchroniser le calendrier avec la date courante */
+    const gchar *mmdd = gtk_entry_get_text(GTK_ENTRY(widgets.entry_devotional));
+    if (mmdd && strlen(mmdd) == 5) {
+        int month = atoi(mmdd) - 1;  /* GtkCalendar : 0-11 */
+        int day   = atoi(mmdd + 3);
+        GDateTime *now = g_date_time_new_now_local();
+        gtk_calendar_select_month(GTK_CALENDAR(widgets.calendar_devotional),
+                                  month, g_date_time_get_year(now));
+        gtk_calendar_select_day(GTK_CALENDAR(widgets.calendar_devotional), day);
+        g_date_time_unref(now);
+    }
+    gtk_popover_popup(GTK_POPOVER(widgets.popover_devotional));
+}
+
 GtkWidget *gui_create_devotional_pane(void)
 {
 	GtkWidget *box_devot;
@@ -546,13 +610,31 @@ GtkWidget *gui_create_devotional_pane(void)
 	gtk_widget_show(hbox);
 	gtk_box_pack_start(GTK_BOX(box_devot), hbox, FALSE, FALSE, 0);
 
+	/* champ interne MM.DD — caché, utilisé par sword.cc */
 	widgets.entry_devotional = gtk_entry_new();
-	gtk_widget_show(widgets.entry_devotional);
 	gtk_entry_set_max_length(GTK_ENTRY(widgets.entry_devotional), 5);
-	gtk_entry_set_width_chars(GTK_ENTRY(widgets.entry_devotional), 6);
-	gtk_widget_set_tooltip_text(widgets.entry_devotional, _("Date MM.DD"));
-	gtk_box_pack_start(GTK_BOX(hbox), widgets.entry_devotional, FALSE, FALSE, 0);
+	/* NE PAS gtk_widget_show — resté caché */
 
+	/* bouton affichant la date en format local */
+	widgets.button_devotional_date = gtk_button_new_with_label("--");
+	gtk_widget_show(widgets.button_devotional_date);
+	gtk_widget_set_tooltip_text(widgets.button_devotional_date,
+	                            _("Click to choose a date"));
+	gtk_box_pack_start(GTK_BOX(hbox), widgets.button_devotional_date,
+	                   FALSE, FALSE, 0);
+
+	/* GtkPopover attaché au bouton */
+	widgets.popover_devotional = gtk_popover_new(widgets.button_devotional_date);
+	gtk_popover_set_position(GTK_POPOVER(widgets.popover_devotional),
+	                         GTK_POS_BOTTOM);
+
+	/* GtkCalendar dans le popover */
+	widgets.calendar_devotional = gtk_calendar_new();
+	gtk_widget_show(widgets.calendar_devotional);
+	gtk_container_add(GTK_CONTAINER(widgets.popover_devotional),
+	                  widgets.calendar_devotional);
+
+	/* bouton précédent */
 	button_prev = gtk_button_new();
 	gtk_widget_show(button_prev);
 	gtk_box_pack_start(GTK_BOX(hbox), button_prev, FALSE, FALSE, 0);
@@ -566,6 +648,7 @@ GtkWidget *gui_create_devotional_pane(void)
 	gtk_widget_show(image_prev);
 	gtk_container_add(GTK_CONTAINER(button_prev), image_prev);
 
+	/* bouton suivant */
 	button_next = gtk_button_new();
 	gtk_widget_show(button_next);
 	gtk_box_pack_start(GTK_BOX(hbox), button_next, FALSE, FALSE, 0);
@@ -596,16 +679,17 @@ GtkWidget *gui_create_devotional_pane(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), widgets.html_devotional);
 #endif
 
+	/* signaux */
+	g_signal_connect(G_OBJECT(widgets.button_devotional_date), "clicked",
+	                 G_CALLBACK(on_button_devotional_date_clicked), NULL);
+	g_signal_connect(G_OBJECT(widgets.calendar_devotional), "day-selected-double-click",
+	                 G_CALLBACK(on_calendar_day_selected), NULL);
 	g_signal_connect(G_OBJECT(widgets.entry_devotional), "activate",
 	                 G_CALLBACK(devot_key_entry_changed), NULL);
 	g_signal_connect((gpointer)button_prev, "clicked",
 	                 G_CALLBACK(button_devot_back_clicked), NULL);
 	g_signal_connect((gpointer)button_next, "clicked",
 	                 G_CALLBACK(button_devot_forward_clicked), NULL);
-	g_signal_connect((gpointer)widgets.button_dict_back, "clicked",
-                     G_CALLBACK(button_dict_back_clicked), NULL);
-	g_signal_connect((gpointer)widgets.button_dict_forward, "clicked",
-                     G_CALLBACK(button_dict_forward_clicked), NULL);
 
 	return box_devot;
 }

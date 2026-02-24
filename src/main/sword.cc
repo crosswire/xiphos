@@ -39,6 +39,7 @@ extern "C" {
 
 #include <ctype.h>
 #include <time.h>
+#include <langinfo.h>
 
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
@@ -1417,6 +1418,29 @@ void main_display_bible(const char *mod_name,
 
 /******************************************************************************
  * Name
+ * format_devot_date_local
+ */ 
+ 
+static gchar *format_devot_date_local(const gchar *mmdd)
+{
+	if (!mmdd || strlen(mmdd) != 5) return g_strdup("--");
+	struct tm t = {0};
+	t.tm_mon  = atoi(mmdd) - 1;
+	t.tm_mday = atoi(mmdd + 3);
+	t.tm_year = 2000 - 1900;
+	mktime(&t);
+	gchar buf[64];
+	const char *fmt = nl_langinfo(D_FMT);
+    if (strstr(fmt, "%m") && strstr(fmt, "%d") &&
+        strstr(fmt, "%m") < strstr(fmt, "%d"))
+        strftime(buf, sizeof(buf), "%B %e", &t);  /* mois jour — style US */
+    else
+        strftime(buf, sizeof(buf), "%e %B", &t);  /* jour mois — style EU */
+    return g_strdup(g_strstrip(buf));
+}
+
+/******************************************************************************
+ * Name
  *   main_display_devotional
  *
  * Synopsis
@@ -1457,44 +1481,51 @@ void main_display_devotional(GtkWidget *target_widget)
 	/*
 	 * Get the current time, converted to local time.
 	 */
+	curtime = time(NULL);
+	loctime = localtime(&curtime);
+	strftime(buf, 10, "%m.%d", loctime);   /* date par défaut = aujourd'hui */
+
 	if (widgets.entry_devotional &&
 		strlen(gtk_entry_get_text(GTK_ENTRY(widgets.entry_devotional))) == 5) {
+		/* utiliser la date saisie/sélectionnée */
 		strncpy(buf, gtk_entry_get_text(GTK_ENTRY(widgets.entry_devotional)), 10);
-		int month = atoi(buf);   /* MM */
-		int day   = atoi(buf+3); /* DD */
+		int month = atoi(buf);
+		int day   = atoi(buf+3);
 		prettybuf = g_strdup_printf("<b>%s %d</b>",
-									gettext(month_names[month - 1]), day);
+					    gettext(month_names[month - 1]), day);
 	} else {
-		curtime = time(NULL);
-		loctime = localtime(&curtime);
-		strftime(buf, 10, "%m.%d", loctime);
 		prettybuf = g_strdup_printf("<b>%s %d</b>",
-									gettext(month_names[loctime->tm_mon]),
-									loctime->tm_mday);
+					    gettext(month_names[loctime->tm_mon]),
+					    loctime->tm_mday);
 	}
 
 	text = backend->get_render_text(settings.devotionalmod, buf);
 	if (text) {
-    if (target_widget != NULL) {
-        SWDisplay *saved = backend->dictDisplay;
-        backend->dictDisplay = new GTKEntryDisp(target_widget, backend);
-        backend->set_module_key(settings.devotionalmod, buf);
-        backend->dictDisplay->display(*backend->display_mod);
-        delete backend->dictDisplay;
-        backend->dictDisplay = saved;
-    } else {
-        GtkWidget *dest = settings.show_previewer_in_sidebar
-                ? sidebar.html_viewer_widget
-                : widgets.html_previewer_text;
-        main_entry_display(dest, settings.devotionalmod,
-                           text, prettybuf, TRUE);
-    }
-    g_free(text);
-    if (widgets.entry_devotional)
-        gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), buf);
-}
-g_free(prettybuf);
-}
+		if (target_widget != NULL) {
+			SWDisplay *saved = backend->dictDisplay;
+			backend->dictDisplay = new GTKEntryDisp(target_widget, backend);
+			backend->set_module_key(settings.devotionalmod, buf);
+			backend->dictDisplay->display(*backend->display_mod);
+			delete backend->dictDisplay;
+			backend->dictDisplay = saved;
+		} else {
+			GtkWidget *dest = settings.show_previewer_in_sidebar
+					? sidebar.html_viewer_widget
+					: widgets.html_previewer_text;
+			main_entry_display(dest, settings.devotionalmod,
+					   text, prettybuf, TRUE);
+		}
+		g_free(text);
+		if (widgets.entry_devotional)
+			gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), buf);
+		if (widgets.button_devotional_date) {
+		gchar *local = format_devot_date_local(buf);
+		gtk_button_set_label(GTK_BUTTON(widgets.button_devotional_date), local);
+		g_free(local);
+		}
+	}
+	g_free(prettybuf);
+}  
 
 void main_setup_displays(void)
 {
@@ -1981,6 +2012,11 @@ void main_devotional_button_clicked(gint direction)
 
     key = g_strdup((char *)backend->display_mod->getKeyText());
     gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), key);
+    if (widgets.button_devotional_date) {
+		gchar *local = format_devot_date_local(key);
+		gtk_button_set_label(GTK_BUTTON(widgets.button_devotional_date), local);
+		g_free(local);
+	}
     g_free(key);
 
     main_display_devotional(widgets.html_devotional);
@@ -2056,18 +2092,15 @@ void main_dict_history_forward(void)
 {
     if (!dict_history_forward) return;
 
-    /* déplacer la dernière entrée forward vers back */
     GList *last = g_list_last(dict_history_forward);
     DictHistoryEntry *e = (DictHistoryEntry *)last->data;
     dict_history_forward = g_list_delete_link(dict_history_forward, last);
     dict_history_back = g_list_append(dict_history_back, e);
 
-    /* afficher */
     dict_history_navigating = TRUE;
     main_display_dictionary(e->mod_name, e->key);
     dict_history_navigating = FALSE;
 
-    /* mettre à jour boutons */
     gtk_widget_set_sensitive(widgets.button_dict_back,
         g_list_length(dict_history_back) > 1);
     gtk_widget_set_sensitive(widgets.button_dict_forward,

@@ -87,6 +87,9 @@ struct _app_widgets
 	    /* comboboxentry widgets */
 	    *comboboxentry_dict,
 	    *entry_devotional,
+	    *button_devotional_date,
+	    *popover_devotional,
+	    *calendar_devotional,
 	    /* popup menu submenu widgets */
 	    *add_bookmark_submenu,
 	    /* popup menu item widgets */
