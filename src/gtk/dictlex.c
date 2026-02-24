@@ -344,6 +344,9 @@ GtkWidget *gui_create_dictionary_pane(void)
 	GtkWidget *image2;
 	GtkWidget *arrow1;
 	GtkWidget *dict_drop_down;
+	GtkWidget *img_back;
+	GtkWidget *img_forward;
+	
 #ifndef USE_WEBKIT2
 	GtkWidget *scrolledwindow;
 #endif
@@ -388,6 +391,37 @@ GtkWidget *gui_create_dictionary_pane(void)
 #endif
 	gtk_widget_show(arrow1);
 	gtk_container_add(GTK_CONTAINER(dict_drop_down), arrow1);
+
+	/* history button back/forward */
+	widgets.button_dict_back = gtk_button_new();
+	gtk_widget_show(widgets.button_dict_back);
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.button_dict_back, FALSE, FALSE, 0);
+	gtk_button_set_relief(GTK_BUTTON(widgets.button_dict_back), GTK_RELIEF_NONE);
+	gtk_widget_set_sensitive(widgets.button_dict_back, FALSE);
+	gtk_widget_set_tooltip_text(widgets.button_dict_back, _("Go back in history"));
+	img_back =
+#if GTK_CHECK_VERSION(3, 10, 0)
+	    gtk_image_new_from_icon_name("go-previous-symbolic", GTK_ICON_SIZE_BUTTON);
+#else
+	    gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_BUTTON);
+#endif
+	gtk_widget_show(img_back);
+	gtk_container_add(GTK_CONTAINER(widgets.button_dict_back), img_back);
+
+	widgets.button_dict_forward = gtk_button_new();
+	gtk_widget_show(widgets.button_dict_forward);
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.button_dict_forward, FALSE, FALSE, 0);
+	gtk_button_set_relief(GTK_BUTTON(widgets.button_dict_forward), GTK_RELIEF_NONE);
+	gtk_widget_set_sensitive(widgets.button_dict_forward, FALSE);
+	gtk_widget_set_tooltip_text(widgets.button_dict_forward, _("Go forward in history"));
+	img_forward =
+#if GTK_CHECK_VERSION(3, 10, 0)
+	    gtk_image_new_from_icon_name("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
+#else
+	    gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_BUTTON);
+#endif
+	gtk_widget_show(img_forward);
+	gtk_container_add(GTK_CONTAINER(widgets.button_dict_forward), img_forward);
 
 	button10 = gtk_button_new();
 	gtk_widget_show(button10);
@@ -460,6 +494,17 @@ GtkWidget *gui_create_dictionary_pane(void)
 			 G_CALLBACK(dict_find_all_strongs), NULL);
 
 	return box_dict;
+}
+/*callbacks for dict history nav */
+
+void button_dict_back_clicked(GtkButton *button, gpointer user_data)
+{
+    main_dict_history_back();
+}
+
+void button_dict_forward_clicked(GtkButton *button, gpointer user_data)
+{
+    main_dict_history_forward();
 }
 
 /*callbacks for devotional nav */
@@ -557,7 +602,12 @@ GtkWidget *gui_create_devotional_pane(void)
 	                 G_CALLBACK(button_devot_back_clicked), NULL);
 	g_signal_connect((gpointer)button_next, "clicked",
 	                 G_CALLBACK(button_devot_forward_clicked), NULL);
+	g_signal_connect((gpointer)widgets.button_dict_back, "clicked",
+                     G_CALLBACK(button_dict_back_clicked), NULL);
+	g_signal_connect((gpointer)widgets.button_dict_forward, "clicked",
+                     G_CALLBACK(button_dict_forward_clicked), NULL);
 
 	return box_devot;
 }
+
 //******  end of file  ******/

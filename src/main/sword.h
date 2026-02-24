@@ -106,6 +106,9 @@ void main_display_devotional(GtkWidget *target_widget);
 void main_setup_displays(void);
 void main_dictionary_entry_changed(char *mod_name);
 void main_dictionary_button_clicked(gint direction);
+void main_dict_history_add(const gchar *mod_name, const gchar *key);
+void main_dict_history_back(void);
+void main_dict_history_forward(void);
 const char *main_get_module_language(const char *module_name);
 int main_check_for_option(const char *mod_name, const char *key,
 			  const char *option);
