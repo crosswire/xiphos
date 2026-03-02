@@ -39,8 +39,9 @@ extern "C" {
 
 #include <ctype.h>
 #include <time.h>
+#ifndef _WIN32
 #include <langinfo.h>
-
+#endif
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
@@ -1430,13 +1431,26 @@ static gchar *format_devot_date_local(const gchar *mmdd)
 	t.tm_year = 2000 - 1900;
 	mktime(&t);
 	gchar buf[64];
+	gboolean month_first = FALSE;
+
+#ifndef _WIN32
+	// Code for Linux/POSIX
 	const char *fmt = nl_langinfo(D_FMT);
-    if (strstr(fmt, "%m") && strstr(fmt, "%d") &&
-        strstr(fmt, "%m") < strstr(fmt, "%d"))
-        strftime(buf, sizeof(buf), "%B %e", &t);  /* mois jour — style US */
-    else
-        strftime(buf, sizeof(buf), "%e %B", &t);  /* jour mois — style EU */
-    return g_strdup(g_strstrip(buf));
+	if (fmt && strstr(fmt, "%m") && strstr(fmt, "%d") &&
+		strstr(fmt, "%m") < strstr(fmt, "%d")) {
+		month_first = TRUE;
+	}
+#else
+	// Code for Windows (MinGW)
+	month_first = FALSE; 
+#endif
+
+	if (month_first)
+		strftime(buf, sizeof(buf), "%B %e", &t);  /* month day — US style (ex: January 1) */
+	else
+		strftime(buf, sizeof(buf), "%e %B", &t);  /* day month — EU style (ex: 1 January) */
+
+	return g_strdup(g_strstrip(buf));
 }
 
 /******************************************************************************
