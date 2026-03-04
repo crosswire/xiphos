@@ -1027,13 +1027,39 @@ static gint show_morph(DIALOG_DATA *d, const gchar *type,
 		       const gchar *value, gboolean clicked)
 {
 	gchar *modbuf = NULL;
-
 	BackEnd *be = (BackEnd *)d->backend;
 
-	if (!strcmp(type, "Greek") || strstr(type, "x-Robinson") || strstr(type, "robinson")) {
-		if (be->is_module("Robinson"))
-			modbuf = (char *)"Robinson";
+	// 1. For Greek
+	if (!strcmp(type, "Greek") || strstr(type, "x-Robinson") || strstr(type, "robinson") || strstr(type, "packard")) {
+		// Which testament (1 = AT, 2 = NT)
+		int testament = be->get_key_testament(d->mod_name, d->key);
+		if (testament == 2) {
+			// --- If New Testament ---
+			if (settings.morph_greek_lex_nt && be->is_module(settings.morph_greek_lex_nt)) {
+				modbuf = settings.morph_greek_lex_nt;
+			} else if (be->is_module("Robinson")) {
+				modbuf = (char *)"Robinson";
+			}
+		} else {
+			// --- If old Testament (Septuagint) ---
+			if (settings.morph_greek_lex_ot && be->is_module(settings.morph_greek_lex_ot)) {
+				modbuf = settings.morph_greek_lex_ot;
+			} else if (be->is_module("Packard")) {
+				modbuf = (char *)"Packard";
+			}
+		}
 	}
+	// 2. For Hebrew
+	else if (!strcmp(type, "Hebrew") || strstr(type, "x-HebMorph")) {
+		// Check if user has chosen a heb morph dic.
+		if (settings.morph_heb_lex && be->is_module(settings.morph_heb_lex)) {
+			modbuf = settings.morph_heb_lex;
+		}
+	}
+
+	if (!modbuf)
+		return 0;
+
 	if (clicked) {
 		static GtkWidget *dlg;
 
@@ -1043,25 +1069,24 @@ static gint show_morph(DIALOG_DATA *d, const gchar *type,
 			gtk_widget_show(dlg);
 
 		gui_display_mod_and_key(modbuf, value);
-		gtk_window_set_title(GTK_WINDOW(dialog_display_info),
-				     modbuf);
+
+		gtk_window_set_title(GTK_WINDOW(dialog_display_info), modbuf);
 	} else {
 		gchar *mybuf = main_get_rendered_text(modbuf, (gchar *)value);
 		if (mybuf) {
 			main_dialog_information_viewer(modbuf,
-						       mybuf,
-						       value,
-						       "showMorph",
-						       type,
-						       NULL,
-						       NULL,
-						       d);
+						    mybuf,
+						    value,
+						    "showMorph",
+						    type,
+						    NULL,
+						    NULL,
+						    d);
 			g_free(mybuf);
 		}
 	}
 	return 1;
 }
-
 /******************************************************************************
  * Name
  *   show_strongs

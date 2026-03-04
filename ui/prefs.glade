@@ -2173,9 +2173,98 @@
                                 <property name="position">1</property>
                               </packing>
                             </child>
+
+                        <child>
+                          <widget class="GtkHBox" id="hbox32">
+                            <property name="visible">True</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <widget class="GtkLabel" id="label43">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Hebrew Morphology Lexicon</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkComboBox" id="combobox18">
+                                <property name="visible">True</property>
+                                <accessibility>
+                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Hebrew Morphology Lexicon Combo</atkproperty>
+                                </accessibility>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
                           </widget>
                           <packing>
-                            <property name="position">2</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkHBox" id="hbox34">
+                            <property name="visible">True</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <widget class="GtkLabel" id="label45">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">OT Greek Morphology Lexicon</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkComboBox" id="combobox20">
+                                <property name="visible">True</property>
+                                <accessibility>
+                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">OT Greek Morphology Lexicon Combo</atkproperty>
+                                </accessibility>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            </widget>
+                          <packing>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                            <child>
+                          <widget class="GtkHBox" id="hbox33">
+                            <property name="visible">True</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <widget class="GtkLabel" id="label44">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">NT Greek Morphology Lexicon</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkComboBox" id="combobox19">
+                                <property name="visible">True</property>
+                                <accessibility>
+                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">NT Greek Morphology Lexicon Combo</atkproperty>
+                                </accessibility>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="position">5</property>
                           </packing>
                         </child>
                         <child>
@@ -2206,7 +2295,7 @@
                             </child>
                           </widget>
                           <packing>
-                            <property name="position">3</property>
+                            <property name="position">6</property>
                           </packing>
                         </child>
                         <child>
@@ -2243,7 +2332,7 @@
                       </widget>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="position">1</property>
+                        <property name="position">7</property>
                       </packing>
                     </child>
                   </widget>

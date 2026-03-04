@@ -86,6 +86,12 @@ void on_combobox16_changed(GtkComboBox *combobox,
 			   gpointer user_data);
 void on_combobox17_changed(GtkComboBox *combobox,
 			   gpointer user_data);
+void on_combobox18_changed(GtkComboBox *combobox,
+			   gpointer user_data);
+void on_combobox19_changed(GtkComboBox *combobox,
+			   gpointer user_data);
+void on_combobox20_changed(GtkComboBox *combobox,
+			   gpointer user_data);
 void on_columncountvalue_changed(GtkComboBox *combobox,
 				 gpointer user_data);
 

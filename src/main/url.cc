@@ -315,19 +315,22 @@ static gint show_morph(const char *module_name,
 	    strstr(stype, "robinson") ||
 	    strstr(stype, "packard") ||
 	    strstr(stype, "Robinson")) {
-		if (backend->get_key_testament(module_name,
-					       settings.currentverse) == 2) {
-			if (backend->is_module("Robinson"))
-				modbuf = "Robinson";
-		} else {
-			if (backend->is_module("Packard"))
-				modbuf = "Packard";
+		int testament = backend->get_key_testament(module_name, settings.currentverse);
+		if (testament == 2) {
+            modbuf = settings.morph_greek_lex_nt; // Utilise votre variable NT
+        } else {
+            modbuf = settings.morph_greek_lex_ot; // Utilise votre variable OT
+        }
+        
+        // Sécurité si les réglages sont vides
+        if (!modbuf || !backend->is_module(modbuf)) {
+            modbuf = (testament == 2) ? "Robinson" : "Packard";
 		}
 	}
 
 	if (strstr(stype, "oshm") ){
 		if (backend->is_module("OSHM")) {
-			modbuf="OSHM";
+			modbuf=settings.morph_heb_lex;
 		}
 	}
 
