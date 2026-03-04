@@ -127,6 +127,7 @@ h3 { font-style: %s } --> \
 using namespace sword;
 using namespace std;
 
+
 //
 // user annotation cache filling.
 //
@@ -859,6 +860,16 @@ GTKEntryDisp::displayByChapter(SWModule &imodule, int columns)
 			else
 				rework = g_string_new(cVerse.GetText());
 		}
+
+		if (!cVerse.HeaderIsValid())
+			CacheHeader(cVerse, imodule, ops, backend);
+		if (cache_flags & ModuleCache::Headings) {
+			swbuf.append(settings.imageresize
+					 ? AnalyzeForImageSize(cVerse.GetHeader(), CURRENT_COLUMNS,
+							       GDK_WINDOW(gtk_widget_get_window(gtkText)))
+					 : cVerse.GetHeader() /* left as-is */);
+		} else
+			cVerse.InvalidateHeader();
 
 		// add an anchor for where in the chapter we are.
 		// (commentaries can have big sections on 1 verse [<hr>],
