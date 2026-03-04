@@ -347,7 +347,8 @@ on_about_translation_activate(GtkMenuItem *menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_daily_devotion_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	main_display_devotional();
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_dict_devot), 1);
+    main_display_devotional(widgets.html_devotional);
 }
 
 /******************************************************************************

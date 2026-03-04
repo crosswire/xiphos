@@ -39,7 +39,9 @@ extern "C" {
 
 #include <ctype.h>
 #include <time.h>
-
+#ifndef _WIN32
+#include <langinfo.h>
+#endif
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
@@ -97,6 +99,23 @@ extern gboolean valid_scripture_key;
 // these track together.  when one changes, so does the other.
 static std::map<string, string> abbrev_name2abbrev, abbrev_abbrev2name;
 typedef std::map<string, string>::iterator abbrev_iter;
+/* dic history nav */
+static GList *dict_history_back    = NULL;
+static GList *dict_history_forward = NULL;
+static gboolean dict_history_navigating = FALSE;
+
+typedef struct {
+    gchar *mod_name;
+    gchar *key;
+} DictHistoryEntry;
+
+static void dict_history_entry_free(gpointer data)
+{
+    DictHistoryEntry *e = (DictHistoryEntry *)data;
+    g_free(e->mod_name);
+    g_free(e->key);
+    g_free(e);
+}
 
 /******************************************************************************
  * Name
@@ -892,6 +911,7 @@ void main_dictionary_entry_changed(char *mod_name)
 	backend->display_mod->display();
 
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+	main_dict_history_add(mod_name, key);
 	g_free(key);
 }
 
@@ -1192,25 +1212,34 @@ void main_display_dictionary(const char *mod_name,
 	if (strcmp(settings.DictWindowModule, mod_name)) {
 		// new dict -- is it actually a devotional?
 		time_t curtime;
-
 		if (feature && !strcmp(feature, "DailyDevotion")) {
-			if ((strlen(key) != 5) || // blunt tests.
+			if ((strlen(key) != 5) ||
 			    (key[0] < '0') || (key[0] > '9') ||
 			    (key[1] < '0') || (key[1] > '9') ||
 			    (key[2] != '.') ||
 			    (key[3] < '0') || (key[3] > '9') ||
-			    (key[4] < '0') || (key[4] > '9')) { // not MM.DD
+			    (key[4] < '0') || (key[4] > '9')) {
 				struct tm *loctime;
-
 				curtime = time(NULL);
 				loctime = localtime(&curtime);
 				strftime(buf, 10, "%m.%d", loctime);
 				key = buf;
 			}
+			/* ← rediriger vers l'onglet devotional */
+			gui_reassign_strdup(&settings.devotionalmod, (gchar *)mod_name);
+			xml_set_value("Xiphos", "modules", "devotional", mod_name);
+			if (widgets.entry_devotional)
+				gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), key);
+			gtk_notebook_set_current_page(
+				GTK_NOTEBOOK(widgets.notebook_dict_devot), 1);
+			main_display_devotional(widgets.html_devotional);
+			return;   /* ← ne pas continuer vers html_dict */
 		}
 		xml_set_value("Xiphos", "modules", "dict", mod_name);
 		gui_reassign_strdup(&settings.DictWindowModule, (gchar *)mod_name);
 	}
+	
+	gui_notebook_dict_goto_dict();
 
 	// old_key is uppercase
 	key = g_utf8_strup(key, -1);
@@ -1390,12 +1419,48 @@ void main_display_bible(const char *mod_name,
 
 /******************************************************************************
  * Name
+ * format_devot_date_local
+ */ 
+ 
+static gchar *format_devot_date_local(const gchar *mmdd)
+{
+	if (!mmdd || strlen(mmdd) != 5) return g_strdup("--");
+	struct tm t = {0};
+	t.tm_mon  = atoi(mmdd) - 1;
+	t.tm_mday = atoi(mmdd + 3);
+	t.tm_year = 2000 - 1900;
+	mktime(&t);
+	gchar buf[64];
+	gboolean month_first = FALSE;
+
+#ifndef _WIN32
+	// Code for Linux/POSIX
+	const char *fmt = nl_langinfo(D_FMT);
+	if (fmt && strstr(fmt, "%m") && strstr(fmt, "%d") &&
+		strstr(fmt, "%m") < strstr(fmt, "%d")) {
+		month_first = TRUE;
+	}
+#else
+	// Code for Windows (MinGW)
+	month_first = FALSE; 
+#endif
+
+	if (month_first)
+		strftime(buf, sizeof(buf), "%B %e", &t);  /* month day — US style (ex: January 1) */
+	else
+		strftime(buf, sizeof(buf), "%e %B", &t);  /* day month — EU style (ex: 1 January) */
+
+	return g_strdup(g_strstrip(buf));
+}
+
+/******************************************************************************
+ * Name
  *   main_display_devotional
  *
  * Synopsis
  *   #include "main/sword.h"
  *
- *   void main_display_devotional(void)
+ *   void main_display_devotional(GtkWidget *target_widget)
  *
  * Description
  *
@@ -1404,7 +1469,7 @@ void main_display_bible(const char *mod_name,
  *   void
  */
 
-void main_display_devotional(void)
+void main_display_devotional(GtkWidget *target_widget)
 {
 	gchar buf[10];
 	gchar *prettybuf;
@@ -1432,21 +1497,49 @@ void main_display_devotional(void)
 	 */
 	curtime = time(NULL);
 	loctime = localtime(&curtime);
-	strftime(buf, 10, "%m.%d", loctime);
-	prettybuf = g_strdup_printf("<b>%s %d</b>",
-				    gettext(month_names[loctime->tm_mon]),
-				    loctime->tm_mday);
+	strftime(buf, 10, "%m.%d", loctime);   /* date par défaut = aujourd'hui */
+
+	if (widgets.entry_devotional &&
+		strlen(gtk_entry_get_text(GTK_ENTRY(widgets.entry_devotional))) == 5) {
+		/* utiliser la date saisie/sélectionnée */
+		strncpy(buf, gtk_entry_get_text(GTK_ENTRY(widgets.entry_devotional)), 10);
+		int month = atoi(buf);
+		int day   = atoi(buf+3);
+		prettybuf = g_strdup_printf("<b>%s %d</b>",
+					    gettext(month_names[month - 1]), day);
+	} else {
+		prettybuf = g_strdup_printf("<b>%s %d</b>",
+					    gettext(month_names[loctime->tm_mon]),
+					    loctime->tm_mday);
+	}
 
 	text = backend->get_render_text(settings.devotionalmod, buf);
 	if (text) {
-		main_entry_display(settings.show_previewer_in_sidebar
-				       ? sidebar.html_viewer_widget
-				       : widgets.html_previewer_text,
-				   settings.devotionalmod, text, prettybuf, TRUE);
+		if (target_widget != NULL) {
+			SWDisplay *saved = backend->dictDisplay;
+			backend->dictDisplay = new GTKEntryDisp(target_widget, backend);
+			backend->set_module_key(settings.devotionalmod, buf);
+			backend->dictDisplay->display(*backend->display_mod);
+			delete backend->dictDisplay;
+			backend->dictDisplay = saved;
+		} else {
+			GtkWidget *dest = settings.show_previewer_in_sidebar
+					? sidebar.html_viewer_widget
+					: widgets.html_previewer_text;
+			main_entry_display(dest, settings.devotionalmod,
+					   text, prettybuf, TRUE);
+		}
 		g_free(text);
+		if (widgets.entry_devotional)
+			gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), buf);
+		if (widgets.button_devotional_date) {
+		gchar *local = format_devot_date_local(buf);
+		gtk_button_set_label(GTK_BUTTON(widgets.button_devotional_date), local);
+		g_free(local);
+		}
 	}
 	g_free(prettybuf);
-}
+}  
 
 void main_setup_displays(void)
 {
@@ -1910,4 +2003,120 @@ const char *
 main_get_osisref_from_key(const char *module, const char *key)
 {
 	return backend->get_osisref_from_key(module, key);
+}
+
+/******************************************************************************
+ * Name
+ * main_devotional_button_clicked
+ */ 
+
+void main_devotional_button_clicked(gint direction)
+{
+    gchar *key = NULL;
+
+    if (!settings.devotionalmod) return;
+    if (!widgets.entry_devotional) return;
+
+    backend->set_module_key(settings.devotionalmod,
+                            gtk_entry_get_text(GTK_ENTRY(widgets.entry_devotional)));
+    if (direction == 0)
+        (*backend->display_mod)--;
+    else
+        (*backend->display_mod)++;
+
+    key = g_strdup((char *)backend->display_mod->getKeyText());
+    gtk_entry_set_text(GTK_ENTRY(widgets.entry_devotional), key);
+    if (widgets.button_devotional_date) {
+		gchar *local = format_devot_date_local(key);
+		gtk_button_set_label(GTK_BUTTON(widgets.button_devotional_date), local);
+		g_free(local);
+	}
+    g_free(key);
+
+    main_display_devotional(widgets.html_devotional);
+}
+
+/******************************************************************************
+ * Name
+ * main_dict_history_add
+ */
+
+void main_dict_history_add(const gchar *mod_name, const gchar *key)
+{
+    if (dict_history_navigating) return;  /* ne pas enregistrer pendant navigation */
+
+    /* vider le forward quand on consulte une nouvelle entrée */
+    g_list_free_full(dict_history_forward, dict_history_entry_free);
+    dict_history_forward = NULL;
+
+    /* ajouter l'entrée courante dans back */
+    DictHistoryEntry *e = g_new0(DictHistoryEntry, 1);
+    e->mod_name = g_strdup(mod_name);
+    e->key      = g_strdup(key);
+    dict_history_back = g_list_append(dict_history_back, e);
+
+    /* limiter l'historique à 50 entrées */
+    while (g_list_length(dict_history_back) > 50) {
+        dict_history_entry_free(dict_history_back->data);
+        dict_history_back = g_list_delete_link(dict_history_back,
+                                               dict_history_back);
+    }
+
+    /* mettre à jour l'état des boutons */
+    gtk_widget_set_sensitive(widgets.button_dict_back,
+        g_list_length(dict_history_back) > 1);
+    gtk_widget_set_sensitive(widgets.button_dict_forward,
+        dict_history_forward != NULL);
+}
+
+
+/******************************************************************************
+ * Name
+ * main_dict_history_back
+ */
+ 
+void main_dict_history_back(void)
+{
+    if (!dict_history_back || g_list_length(dict_history_back) < 2) return;
+
+    /* déplacer l'entrée courante (dernière) vers forward */
+    GList *last = g_list_last(dict_history_back);
+    dict_history_forward = g_list_append(dict_history_forward, last->data);
+    dict_history_back = g_list_delete_link(dict_history_back, last);
+
+    /* afficher l'entrée précédente */
+    DictHistoryEntry *e = (DictHistoryEntry *)g_list_last(dict_history_back)->data;
+    dict_history_navigating = TRUE;
+    main_display_dictionary(e->mod_name, e->key);
+    dict_history_navigating = FALSE;
+
+    /* mettre à jour boutons */
+    gtk_widget_set_sensitive(widgets.button_dict_back,
+        g_list_length(dict_history_back) > 1);
+    gtk_widget_set_sensitive(widgets.button_dict_forward,
+        dict_history_forward != NULL);
+}
+
+/******************************************************************************
+ * Name
+ * main_dict_history_forward
+ */
+
+void main_dict_history_forward(void)
+{
+    if (!dict_history_forward) return;
+
+    GList *last = g_list_last(dict_history_forward);
+    DictHistoryEntry *e = (DictHistoryEntry *)last->data;
+    dict_history_forward = g_list_delete_link(dict_history_forward, last);
+    dict_history_back = g_list_append(dict_history_back, e);
+
+    dict_history_navigating = TRUE;
+    main_display_dictionary(e->mod_name, e->key);
+    dict_history_navigating = FALSE;
+
+    gtk_widget_set_sensitive(widgets.button_dict_back,
+        g_list_length(dict_history_back) > 1);
+    gtk_widget_set_sensitive(widgets.button_dict_forward,
+        dict_history_forward != NULL);
 }

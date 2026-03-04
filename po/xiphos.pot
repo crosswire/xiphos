@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-06 22:18+0100\n"
+"POT-Creation-Date: 2026-02-24 22:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgid "Open"
 msgstr ""
 
 #: ../src/editor/slib-editor.c:201 ../src/editor/slib-editor.c:241
-#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:797
+#: ../src/gtk/dialog.c:268 ../src/gtk/dialog.c:636 ../src/gtk/main_menu.c:798
 #: ../ui/bookmarks.gtkbuilder.h:5 ../ui/export-dialog.gtkbuilder.h:2
 #: ../ui/gtk_webedit.ui.h:85 ../ui/markverse.gtkbuilder.h:7
 #: ../ui/module-manager.gtkbuilder.h:18
@@ -43,7 +43,7 @@ msgid "_Cancel"
 msgstr ""
 
 #: ../src/editor/slib-editor.c:202 ../src/editor/slib-editor.c:242
-#: ../src/editor/slib-editor.c:538 ../src/gtk/main_menu.c:798
+#: ../src/editor/slib-editor.c:538 ../src/gtk/main_menu.c:799
 msgid "_Open"
 msgstr ""
 
@@ -253,8 +253,8 @@ msgstr ""
 msgid "Commentary"
 msgstr ""
 
-#: ../src/gtk/about_modules.c:476 ../ui/prefs.glade.h:147
-#: ../ui/prefs.gtkbuilder.h:151
+#: ../src/gtk/about_modules.c:476 ../src/gtk/main_window.c:1228
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:151
 msgid "Dictionary"
 msgstr ""
 
@@ -563,8 +563,20 @@ msgstr ""
 msgid "Close _without Saving"
 msgstr ""
 
-#: ../src/gtk/dictlex.c:374
+#: ../src/gtk/dictlex.c:378
 msgid "Do sidebar search for this Strong's number"
+msgstr ""
+
+#: ../src/gtk/dictlex.c:402
+msgid "Go back in history"
+msgstr ""
+
+#: ../src/gtk/dictlex.c:417
+msgid "Go forward in history"
+msgstr ""
+
+#: ../src/gtk/dictlex.c:622
+msgid "Click to choose a date"
 msgstr ""
 
 #: ../src/gtk/export_bookmarks.c:175 ../src/gtk/export_bookmarks.c:232
@@ -645,71 +657,75 @@ msgstr ""
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr ""
 
-#: ../src/gtk/main_menu.c:677
+#: ../src/gtk/main_menu.c:678
 msgid "Save Session"
 msgstr ""
 
-#: ../src/gtk/main_menu.c:793
+#: ../src/gtk/main_menu.c:794
 msgid "Open Session"
 msgstr ""
 
-#: ../src/gtk/main_window.c:576
+#: ../src/gtk/main_window.c:577
 #, c-format
 msgid "Module has no support for %s."
 msgstr ""
 
-#: ../src/gtk/main_window.c:627
+#: ../src/gtk/main_window.c:628
 msgid "BibleSync is not active."
 msgstr ""
 
-#: ../src/gtk/main_window.c:635
+#: ../src/gtk/main_window.c:636
 msgid "BibleSync Chat"
 msgstr ""
 
-#: ../src/gtk/main_window.c:636
+#: ../src/gtk/main_window.c:637
 msgid "[say this]"
 msgstr ""
 
-#: ../src/gtk/main_window.c:637
+#: ../src/gtk/main_window.c:638
 msgid "Comment:"
 msgstr ""
 
-#: ../src/gtk/main_window.c:677
+#: ../src/gtk/main_window.c:678
 msgid "Xiphos: No windows."
 msgstr ""
 
-#: ../src/gtk/main_window.c:738
+#: ../src/gtk/main_window.c:739
 msgid "BibleSync: Current navigation sent."
 msgstr ""
 
-#: ../src/gtk/main_window.c:740
+#: ../src/gtk/main_window.c:741
 msgid "BibleSync: Not speaking."
 msgstr ""
 
-#: ../src/gtk/main_window.c:1024
+#: ../src/gtk/main_window.c:1045
 msgid "Xiphos - Bible Study Software"
 msgstr ""
 
-#: ../src/gtk/main_window.c:1088
+#: ../src/gtk/main_window.c:1109
 msgid "Open a new tab"
 msgstr ""
 
-#: ../src/gtk/main_window.c:1143 ../src/gtk/sidebar.c:578
+#: ../src/gtk/main_window.c:1164 ../src/gtk/sidebar.c:578
 #: ../src/gtk/sidebar.c:583 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:1020 ../src/main/sidebar.cc:1021
 #: ../src/main/sidebar.cc:1022
 msgid "Standard View"
 msgstr ""
 
-#: ../src/gtk/main_window.c:1183
+#: ../src/gtk/main_window.c:1204
 msgid "Commentary View"
 msgstr ""
 
-#: ../src/gtk/main_window.c:1191
+#: ../src/gtk/main_window.c:1212
 msgid "Book View"
 msgstr ""
 
-#: ../src/gtk/main_window.c:1206
+#: ../src/gtk/main_window.c:1237
+msgid "Devotional"
+msgstr ""
+
+#: ../src/gtk/main_window.c:1251
 msgid "Welcome to Xiphos"
 msgstr ""
 
@@ -1129,7 +1145,7 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-#: ../src/gtk/mod_mgr.c:2025 ../src/gtk/preferences_dialog.c:2240
+#: ../src/gtk/mod_mgr.c:2025 ../src/gtk/preferences_dialog.c:2243
 #: ../src/gtk/sidebar.c:1512 ../src/gtk/sidebar.c:1558
 msgid "Modules"
 msgstr ""
@@ -1250,7 +1266,7 @@ msgstr ""
 msgid "Synchronize this window's scrolling with the main window"
 msgstr ""
 
-#: ../src/gtk/parallel_dialog.c:326 ../src/gtk/preferences_dialog.c:2247
+#: ../src/gtk/parallel_dialog.c:326 ../src/gtk/preferences_dialog.c:2250
 msgid "Parallel"
 msgstr ""
 
@@ -1314,63 +1330,63 @@ msgstr ""
 #: ../src/gtk/preferences_dialog.c:1743 ../src/gtk/preferences_dialog.c:1775
 #: ../src/gtk/preferences_dialog.c:1806 ../src/gtk/preferences_dialog.c:1837
 #: ../src/gtk/preferences_dialog.c:1868 ../src/gtk/preferences_dialog.c:1898
-#: ../src/gtk/preferences_dialog.c:1930 ../src/gtk/preferences_dialog.c:1962
-#: ../src/gtk/preferences_dialog.c:1996 ../src/gtk/preferences_dialog.c:2029
-#: ../src/gtk/preferences_dialog.c:2080 ../src/gtk/preferences_dialog.c:2573
+#: ../src/gtk/preferences_dialog.c:1931 ../src/gtk/preferences_dialog.c:1964
+#: ../src/gtk/preferences_dialog.c:1999 ../src/gtk/preferences_dialog.c:2032
+#: ../src/gtk/preferences_dialog.c:2083 ../src/gtk/preferences_dialog.c:2576
 msgid "-- Select --"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2043
+#: ../src/gtk/preferences_dialog.c:2046
 msgid "Locale will take effect after restart."
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2113 ../ui/prefs.glade.h:1
+#: ../src/gtk/preferences_dialog.c:2116 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:13
 msgid "Preferences"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2220
+#: ../src/gtk/preferences_dialog.c:2223
 msgid "General"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2223
+#: ../src/gtk/preferences_dialog.c:2226
 msgid "Options"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2226 ../ui/prefs.glade.h:92
+#: ../src/gtk/preferences_dialog.c:2229 ../ui/prefs.glade.h:92
 #: ../ui/prefs.gtkbuilder.h:96
 msgid "BibleSync"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2230
+#: ../src/gtk/preferences_dialog.c:2233
 msgid "Fonts"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2233
+#: ../src/gtk/preferences_dialog.c:2236
 msgid "Color"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2236
+#: ../src/gtk/preferences_dialog.c:2239
 msgid "Sizes and Faces"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2250
+#: ../src/gtk/preferences_dialog.c:2253
 msgid "Special"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2969 ../src/gtk/search_dialog.c:519
+#: ../src/gtk/preferences_dialog.c:2972 ../src/gtk/search_dialog.c:519
 msgid "Clear List?"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2970 ../src/gtk/search_dialog.c:520
+#: ../src/gtk/preferences_dialog.c:2973 ../src/gtk/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:3021 ../src/main/search_dialog.cc:691
+#: ../src/gtk/preferences_dialog.c:3024 ../src/main/search_dialog.cc:691
 msgid "Remove Module?"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:3022 ../src/main/search_dialog.cc:692
+#: ../src/gtk/preferences_dialog.c:3025 ../src/main/search_dialog.cc:692
 msgid "Are you sure you want to remove the selected module?"
 msgstr ""
 
@@ -2275,43 +2291,43 @@ msgstr ""
 msgid "chapter"
 msgstr ""
 
-#: ../src/main/sword.cc:656
+#: ../src/main/sword.cc:674
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
 
-#: ../src/main/sword.cc:662
+#: ../src/main/sword.cc:680
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
 
-#: ../src/main/sword.cc:674
+#: ../src/main/sword.cc:692
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
 
-#: ../src/main/sword.cc:680
+#: ../src/main/sword.cc:698
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:760
+#: ../src/main/sword.cc:778
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr ""
 
-#: ../src/main/sword.cc:762
+#: ../src/main/sword.cc:780
 msgid "Book names and menus may not be translated."
 msgstr ""
 
-#: ../src/main/sword.cc:1117 ../src/main/sword.cc:1295
+#: ../src/main/sword.cc:1136 ../src/main/sword.cc:1323
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2319,7 +2335,7 @@ msgid ""
 "Would you like to open these as well?%s"
 msgstr ""
 
-#: ../src/main/sword.cc:1121 ../src/main/sword.cc:1299
+#: ../src/main/sword.cc:1140 ../src/main/sword.cc:1327
 msgid ""
 "\n"
 "\n"
@@ -2327,11 +2343,11 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1426
+#: ../src/main/sword.cc:1477
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
-#: ../src/main/sword.cc:1645
+#: ../src/main/sword.cc:1724
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
