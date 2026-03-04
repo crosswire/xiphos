@@ -1208,13 +1208,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		if (ops->headings) {
-			intro = GTKChapDisp::intro_material(key, imodule,
-							    chapter, curVerse, curBook, curTest);
-			swbuf.append(intro->str);
-			g_string_free(intro, TRUE);
-		}
-
 		if (ops->display_chapter_N) {
 			num = main_format_number(chapter);
 			buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
@@ -1222,6 +1215,13 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 			g_free(num);
 			swbuf.append(buf);
 			g_free(buf);
+		}
+
+		if (ops->headings) {
+			intro = GTKChapDisp::intro_material(key, imodule,
+							    chapter, curVerse, curBook, curTest);
+			swbuf.append(intro->str);
+			g_string_free(intro, TRUE);
 		}
 
 	} else {
@@ -1265,13 +1265,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		imodule++;	// restore position after getting "before" verse
 
-		if (ops->headings) {
-			intro = GTKChapDisp::intro_material(key, imodule,
-							    chapter, curVerse, curBook, curTest);
-			swbuf.append(intro->str);
-			g_string_free(intro, TRUE);
-		}
-
 		if (ops->display_chapter_N) {
 			num = main_format_number(chapter);
 			buf = g_strdup_printf("<div style=\"text-align: center\"><b>%s %s</b></div>",
@@ -1279,6 +1272,13 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 			g_free(num);
 			swbuf.append(buf);
 			g_free(buf);
+		}
+
+		if (ops->headings) {
+			intro = GTKChapDisp::intro_material(key, imodule,
+							    chapter, curVerse, curBook, curTest);
+			swbuf.append(intro->str);
+			g_string_free(intro, TRUE);
 		}
 
 		swbuf.append("</div>");
