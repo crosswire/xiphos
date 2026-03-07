@@ -2180,6 +2180,10 @@ on_dialog_prefs_response(GtkDialog *dialog,
 		speaker_list = NULL;
 	}
 	main_update_parallel_page();
+	if (!settings.dockedInt && settings.parallel_list && settings.parallel_list[0]) {
+		gui_navbar_parallel_set_module(settings.parallel_list[0]);
+		settings.cvparallel = settings.currentverse;
+	}
 }
 
 /******************************************************************************
@@ -2209,6 +2213,11 @@ on_dialog_prefs_close(GtkDialog *dialog, gpointer user_data)
 	speaker_window = NULL;
 	speaker_list = NULL;
 	main_update_parallel_page();
+	if (!settings.dockedInt && settings.parallel_list && settings.parallel_list[0]) {
+		gui_navbar_parallel_set_module(settings.parallel_list[0]);
+		settings.cvparallel = settings.currentverse;
+		main_update_parallel_page_detached();
+	}
 }
 
 static GtkTreeModel *create_model(void)
@@ -3036,6 +3045,14 @@ void ps_button_cut(GtkButton *button, gpointer user_data)
 		if (settings.parallel_list)
 			g_strfreev(settings.parallel_list);
 		settings.parallel_list = g_strsplit(mod_list, ",", -1);
+		/* convert abbreviations back to full names */
+		for (int i = 0; settings.parallel_list[i]; ++i) {
+			const char *real = main_abbrev_to_name(settings.parallel_list[i]);
+			if (real) {
+				g_free(settings.parallel_list[i]);
+				settings.parallel_list[i] = g_strdup(real);
+			}
+		}
 		xml_set_value("Xiphos", "modules", "parallels", mod_list);
 		g_free(mod_list);
 	}
