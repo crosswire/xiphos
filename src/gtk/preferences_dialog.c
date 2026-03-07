@@ -43,6 +43,7 @@
 #include "gui/commentary.h"
 #include "gui/dictlex.h"
 #include "gui/parallel_view.h"
+#include "gui/navbar_versekey_parallel.h"
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
 #include "gui/sidebar.h"
