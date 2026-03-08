@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-24 22:16+0100\n"
-"PO-Revision-Date: 2026-02-24 22:22+0100\n"
+"PO-Revision-Date: 2026-03-08 14:10+0100\n"
 "Last-Translator: Cyrille <lafricain79@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -1435,7 +1435,7 @@ msgstr "Synchronise le défilement de cette fenêtre avec la fenêtre principale
 
 #: ../src/gtk/parallel_dialog.c:326 ../src/gtk/preferences_dialog.c:2250
 msgid "Parallel"
-msgstr "Vue parallèle"
+msgstr "Affichage parallèle"
 
 #: ../src/gtk/parallel_view.c:112
 msgid "Detach/Attach"
@@ -1549,7 +1549,7 @@ msgstr "Effacer la liste ?"
 
 #: ../src/gtk/preferences_dialog.c:2973 ../src/gtk/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
-msgstr "Êtes-vous certain d’effacer la liste des modules ?"
+msgstr "Êtes-vous certain de vouloir effacer la liste des modules ?"
 
 #: ../src/gtk/preferences_dialog.c:3024 ../src/main/search_dialog.cc:691
 msgid "Remove Module?"
@@ -4383,17 +4383,18 @@ msgstr "Active la boîte à cocher de la barre de statut"
 
 #: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:128
 msgid "Parallel color alternation"
-msgstr "Couleurs spécifiques dans la vue parallèle"
+msgstr "Couleurs spécifiques dans l’Affichage parallèle"
 
 #: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:129
 msgid "Parallel window can use alternating foreground/background."
 msgstr ""
 "Des couleurs spécifiques d’avant-plan et d’arrière-plan seront appliquées à "
-"la vue parallèle."
+"l’Affichage parallèle."
 
 #: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:130
 msgid "Enable Parallel Alternation Checkbox"
-msgstr "Active la case à cocher des couleurs spécifiques dans la vue parallèle"
+msgstr ""
+"Active la case à cocher des couleurs spécifiques dans l’Affichage parallèle"
 
 #: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:132
 msgid "Verse number"
@@ -5217,7 +5218,8 @@ msgstr "Affichage parallèle dans un ongle_t"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr "Affiche la vue parallèle entre textes bibliques dans un nouvel onglet"
+msgstr ""
+"Active l’affichage parallèle entre textes bibliques dans un nouvel onglet"
 
 #: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "Show Previe_wer in the Sidebar"
