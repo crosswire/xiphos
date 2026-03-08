@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 22:16+0100\n"
+"POT-Creation-Date: 2026-03-08 17:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -575,7 +575,7 @@ msgstr ""
 msgid "Go forward in history"
 msgstr ""
 
-#: ../src/gtk/dictlex.c:622
+#: ../src/gtk/dictlex.c:623
 msgid "Click to choose a date"
 msgstr ""
 
@@ -641,8 +641,20 @@ msgstr ""
 msgid "Display columns"
 msgstr ""
 
+#: ../src/gtk/font_dialog.c:410 ../src/gtk/font_dialog.c:421
+msgid "default"
+msgstr ""
+
 #: ../src/gtk/font_dialog.c:427
 msgid "Use the default font for this module"
+msgstr ""
+
+#: ../src/gtk/font_dialog.c:456
+msgid "Cancel"
+msgstr ""
+
+#: ../src/gtk/font_dialog.c:465
+msgid "OK"
 msgstr ""
 
 #: ../src/gtk/gui.c:107
@@ -1145,7 +1157,7 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-#: ../src/gtk/mod_mgr.c:2025 ../src/gtk/preferences_dialog.c:2243
+#: ../src/gtk/mod_mgr.c:2025 ../src/gtk/preferences_dialog.c:2254
 #: ../src/gtk/sidebar.c:1512 ../src/gtk/sidebar.c:1558
 msgid "Modules"
 msgstr ""
@@ -1266,7 +1278,7 @@ msgstr ""
 msgid "Synchronize this window's scrolling with the main window"
 msgstr ""
 
-#: ../src/gtk/parallel_dialog.c:326 ../src/gtk/preferences_dialog.c:2250
+#: ../src/gtk/parallel_dialog.c:326 ../src/gtk/preferences_dialog.c:2261
 msgid "Parallel"
 msgstr ""
 
@@ -1286,107 +1298,112 @@ msgstr ""
 msgid "Parallel View"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:871
+#: ../src/gtk/preferences_dialog.c:872
 msgid "BibleSync session passphrase"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:873
+#: ../src/gtk/preferences_dialog.c:874
 msgid "Phrase:"
 msgstr ""
 
 #. mode selection failed? probably dead interface
-#: ../src/gtk/preferences_dialog.c:945
+#: ../src/gtk/preferences_dialog.c:946
 msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:997
+#: ../src/gtk/preferences_dialog.c:998
 msgid "Mode selection failed.\n"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:1000
+#: ../src/gtk/preferences_dialog.c:1001
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:1002
+#: ../src/gtk/preferences_dialog.c:1003
 msgid "Disabled"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:1004 ../src/main/xml.c:96
+#: ../src/gtk/preferences_dialog.c:1005 ../src/main/xml.c:96
 msgid "Personal"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:1006
+#: ../src/gtk/preferences_dialog.c:1007
 msgid "Speaker"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:1007
+#: ../src/gtk/preferences_dialog.c:1008
 msgid "Audience"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:1676 ../src/gtk/preferences_dialog.c:1710
-#: ../src/gtk/preferences_dialog.c:1743 ../src/gtk/preferences_dialog.c:1775
-#: ../src/gtk/preferences_dialog.c:1806 ../src/gtk/preferences_dialog.c:1837
-#: ../src/gtk/preferences_dialog.c:1868 ../src/gtk/preferences_dialog.c:1898
-#: ../src/gtk/preferences_dialog.c:1931 ../src/gtk/preferences_dialog.c:1964
-#: ../src/gtk/preferences_dialog.c:1999 ../src/gtk/preferences_dialog.c:2032
-#: ../src/gtk/preferences_dialog.c:2083 ../src/gtk/preferences_dialog.c:2576
+#: ../src/gtk/preferences_dialog.c:1677 ../src/gtk/preferences_dialog.c:1711
+#: ../src/gtk/preferences_dialog.c:1744 ../src/gtk/preferences_dialog.c:1776
+#: ../src/gtk/preferences_dialog.c:1807 ../src/gtk/preferences_dialog.c:1838
+#: ../src/gtk/preferences_dialog.c:1869 ../src/gtk/preferences_dialog.c:1899
+#: ../src/gtk/preferences_dialog.c:1932 ../src/gtk/preferences_dialog.c:1965
+#: ../src/gtk/preferences_dialog.c:2000 ../src/gtk/preferences_dialog.c:2033
+#: ../src/gtk/preferences_dialog.c:2084 ../src/gtk/preferences_dialog.c:2587
 msgid "-- Select --"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2046
+#: ../src/gtk/preferences_dialog.c:2047
 msgid "Locale will take effect after restart."
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2116 ../ui/prefs.glade.h:1
+#: ../src/gtk/preferences_dialog.c:2090
+#, c-format
+msgid "language: %s"
+msgstr ""
+
+#: ../src/gtk/preferences_dialog.c:2118 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:13
 msgid "Preferences"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2223
+#: ../src/gtk/preferences_dialog.c:2234
 msgid "General"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2226
+#: ../src/gtk/preferences_dialog.c:2237
 msgid "Options"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2229 ../ui/prefs.glade.h:92
+#: ../src/gtk/preferences_dialog.c:2240 ../ui/prefs.glade.h:92
 #: ../ui/prefs.gtkbuilder.h:96
 msgid "BibleSync"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2233
+#: ../src/gtk/preferences_dialog.c:2244
 msgid "Fonts"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2236
+#: ../src/gtk/preferences_dialog.c:2247
 msgid "Color"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2239
+#: ../src/gtk/preferences_dialog.c:2250
 msgid "Sizes and Faces"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2253
+#: ../src/gtk/preferences_dialog.c:2264
 msgid "Special"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2972 ../src/gtk/search_dialog.c:519
+#: ../src/gtk/preferences_dialog.c:3039 ../src/gtk/search_dialog.c:519
 msgid "Clear List?"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2973 ../src/gtk/search_dialog.c:520
+#: ../src/gtk/preferences_dialog.c:3040 ../src/gtk/search_dialog.c:520
 msgid "Are you sure you want to clear the module list?"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:3024 ../src/main/search_dialog.cc:691
+#: ../src/gtk/preferences_dialog.c:3091 ../src/main/search_dialog.cc:691
 msgid "Remove Module?"
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:3025 ../src/main/search_dialog.cc:692
+#: ../src/gtk/preferences_dialog.c:3092 ../src/main/search_dialog.cc:692
 msgid "Are you sure you want to remove the selected module?"
 msgstr ""
 
@@ -1677,6 +1694,10 @@ msgstr ""
 msgid "December"
 msgstr ""
 
+#: ../src/gtk/utilities.c:795
+msgid "none"
+msgstr ""
+
 #: ../src/gtk/utilities.c:2021
 msgid ""
 "An image file's size could not be determined.\n"
@@ -1782,15 +1803,15 @@ msgid ""
 "<br/><br/><center><i>This module has no content at this point.</i></center>"
 msgstr ""
 
-#: ../src/main/display.cc:258
+#: ../src/main/display.cc:259
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
 
-#: ../src/main/display.cc:1210 ../src/main/display.cc:1267
-#: ../src/main/display.cc:1301 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1214 ../src/main/display.cc:1271
+#: ../src/main/display.cc:1312 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr ""
@@ -1853,112 +1874,112 @@ msgstr ""
 msgid "Unknown parallel module: "
 msgstr ""
 
-#: ../src/main/parallel_view.cc:358 ../ui/xi-menus.glade.h:73
+#: ../src/main/parallel_view.cc:361 ../ui/xi-menus.glade.h:73
 #: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Strong's Numbers"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:367 ../ui/search-dialog.glade.h:102
+#: ../src/main/parallel_view.cc:370 ../ui/search-dialog.glade.h:102
 #: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:76
 #: ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnotes"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:376 ../ui/search-dialog.glade.h:99
+#: ../src/main/parallel_view.cc:379 ../ui/search-dialog.glade.h:99
 #: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:75
 #: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Morphological Tags"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:385 ../ui/xi-menus.glade.h:81
+#: ../src/main/parallel_view.cc:388 ../ui/xi-menus.glade.h:81
 #: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Hebrew Vowel Points"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:394 ../ui/xi-menus.glade.h:82
+#: ../src/main/parallel_view.cc:397 ../ui/xi-menus.glade.h:82
 #: ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Hebrew Cantillation"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:403 ../ui/xi-menus.glade.h:80
+#: ../src/main/parallel_view.cc:406 ../ui/xi-menus.glade.h:80
 #: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Greek Accents"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:412 ../ui/xi-menus.glade.h:77
+#: ../src/main/parallel_view.cc:415 ../ui/xi-menus.glade.h:77
 #: ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Cross-references"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:421 ../ui/xi-menus.glade.h:74
+#: ../src/main/parallel_view.cc:424 ../ui/xi-menus.glade.h:74
 #: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Lemmas"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:430 ../ui/xi-menus.glade.h:70
+#: ../src/main/parallel_view.cc:433 ../ui/xi-menus.glade.h:70
 #: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Headings"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:440 ../ui/xi-menus.glade.h:71
+#: ../src/main/parallel_view.cc:443 ../ui/xi-menus.glade.h:71
 #: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Italic Headings"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:450 ../src/main/parallel_view.cc:539
+#: ../src/main/parallel_view.cc:453 ../src/main/parallel_view.cc:542
 #: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Morpheme Segmentation"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:459 ../ui/xi-menus.glade.h:72
+#: ../src/main/parallel_view.cc:462 ../ui/xi-menus.glade.h:72
 #: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Words of Christ in Red"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:468 ../ui/xi-menus.glade.h:83
+#: ../src/main/parallel_view.cc:471 ../ui/xi-menus.glade.h:83
 #: ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Transliteration"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:477
+#: ../src/main/parallel_view.cc:480
 msgid "Textual Variants"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:485 ../ui/xi-menus.glade.h:85
+#: ../src/main/parallel_view.cc:488 ../ui/xi-menus.glade.h:85
 #: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "Primary Reading"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:86
+#: ../src/main/parallel_view.cc:497 ../ui/xi-menus.glade.h:86
 #: ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "Secondary Reading"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:87
+#: ../src/main/parallel_view.cc:506 ../ui/xi-menus.glade.h:87
 #: ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "All Readings"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:512 ../ui/xi-menus.glade.h:88
+#: ../src/main/parallel_view.cc:515 ../ui/xi-menus.glade.h:88
 #: ../ui/xi-menus-popup.gtkbuilder.h:62
 msgid "Transliterated Forms"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:521 ../ui/xi-menus.glade.h:89
+#: ../src/main/parallel_view.cc:524 ../ui/xi-menus.glade.h:89
 #: ../ui/xi-menus-popup.gtkbuilder.h:63
 msgid "Enumerations"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:530 ../ui/xi-menus.glade.h:90
+#: ../src/main/parallel_view.cc:533 ../ui/xi-menus.glade.h:90
 #: ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Glosses"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:727
+#: ../src/main/parallel_view.cc:736
 msgid "view context"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:964
+#: ../src/main/parallel_view.cc:979
 msgid "Failed to find 1st parallel module for display control."
 msgstr ""
 
@@ -2291,43 +2312,43 @@ msgstr ""
 msgid "chapter"
 msgstr ""
 
-#: ../src/main/sword.cc:674
+#: ../src/main/sword.cc:675
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
 
-#: ../src/main/sword.cc:680
+#: ../src/main/sword.cc:681
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
 
-#: ../src/main/sword.cc:692
+#: ../src/main/sword.cc:693
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
 
-#: ../src/main/sword.cc:698
+#: ../src/main/sword.cc:699
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:778
+#: ../src/main/sword.cc:779
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr ""
 
-#: ../src/main/sword.cc:780
+#: ../src/main/sword.cc:781
 msgid "Book names and menus may not be translated."
 msgstr ""
 
-#: ../src/main/sword.cc:1136 ../src/main/sword.cc:1323
+#: ../src/main/sword.cc:1137 ../src/main/sword.cc:1324
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2335,7 +2356,7 @@ msgid ""
 "Would you like to open these as well?%s"
 msgstr ""
 
-#: ../src/main/sword.cc:1140 ../src/main/sword.cc:1327
+#: ../src/main/sword.cc:1141 ../src/main/sword.cc:1328
 msgid ""
 "\n"
 "\n"
@@ -2343,11 +2364,11 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1477
+#: ../src/main/sword.cc:1491
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
-#: ../src/main/sword.cc:1724
+#: ../src/main/sword.cc:1738
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
