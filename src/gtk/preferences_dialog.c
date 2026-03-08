@@ -2866,6 +2866,8 @@ static void modules_lists_changed(GtkTreeSelection *selection,
 	}
 }
 
+static void on_mod_sel_add_clicked(GtkWidget *button, gchar *user_data);
+
 /******************************************************************************
  * Name
  *
@@ -2902,6 +2904,8 @@ static void ps_setup_treeview(GtkWidget *treeview)
 			       GINT_TO_POINTER(0));
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(modules_lists_changed), treeview);
+	g_signal_connect(G_OBJECT(treeview), "row-activated",
+			 G_CALLBACK(on_mod_sel_add_clicked), NULL);
 }
 
 static void on_mod_sel_add_clicked(GtkWidget *button, gchar *user_data)
@@ -2960,6 +2964,58 @@ static void on_mod_sel_add_clicked(GtkWidget *button, gchar *user_data)
 static void on_mod_sel_close_clicked(void)
 {
 	gtk_widget_destroy(GTK_WIDGET(parallel_select.mod_sel_dialog));
+}
+
+/******************************************************************************
+ * Name
+ *   on_parallel_reordered
+ *
+ * Description
+ *   called after drag-and-drop reorder of parallel versions list.
+ *   saves the new order to settings and XML config, then refreshes
+ *   the parallel view.
+ *
+ * Return value
+ *   void
+ */
+static void on_parallel_reordered(GtkTreeModel *model,
+                                   GtkTreePath *path,
+                                   gpointer data)
+{
+	GList *items, *l;
+	GString *parallels;
+	int count;
+
+	/* laisser GTK finir l'opération drag-and-drop avant de lire le modèle */
+	if (gtk_tree_model_iter_n_children(model, NULL) == 0)
+		return;
+
+	items = get_current_list(GTK_TREE_VIEW(parallel_select.listview));
+	if (!items)
+		return;
+
+	/* reconstruire settings.parallel_list depuis la GList */
+	if (settings.parallel_list)
+		g_strfreev(settings.parallel_list);
+	count = g_list_length(items);
+	settings.parallel_list = g_new(gchar *, count + 1);
+	for (l = items, count = 0; l; l = l->next, ++count) {
+		const char *real = main_abbrev_to_name((const char *)l->data);
+		settings.parallel_list[count] = g_strdup(real ? real : (const char *)l->data);
+	}
+	settings.parallel_list[count] = NULL;
+
+	/* reconstruire la chaîne CSV pour XML */
+	parallels = g_string_new("");
+	for (int i = 0; settings.parallel_list[i]; ++i) {
+		if (i > 0)
+			g_string_append_c(parallels, ',');
+		g_string_append(parallels, settings.parallel_list[i]);
+	}
+	xml_set_value("Xiphos", "modules", "parallels", parallels->str);
+	g_string_free(parallels, TRUE);
+
+	g_list_free_full(items, g_free);
 }
 
 /******************************************************************************
@@ -3348,6 +3404,12 @@ static void create_preferences_dialog(void)
 			 G_CALLBACK(ps_button_add), NULL);
 
 	ps_setup_listview();
+
+	/* enable drag-and-drop reordering of parallel versions */
+	gtk_tree_view_set_reorderable(GTK_TREE_VIEW(parallel_select.listview), TRUE);
+	g_signal_connect(gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview)),
+			 "row-deleted",
+			 G_CALLBACK(on_parallel_reordered), NULL);
 
 	/* geometry notifications */
 	g_signal_connect((gpointer)dialog_prefs,
