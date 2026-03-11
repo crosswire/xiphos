@@ -255,7 +255,7 @@ Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 
 ## 2. Install the required dependencies:
 
-    $ sudo apt-get install appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libbiblesync-dev libenchant-2-dev libgail-3-dev libglade2-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python3-dev swig uuid-dev uuid-runtime yelp-tools xzip
+    $ sudo apt-get install appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libbiblesync-dev libenchant-2-dev libgail-3-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python3-dev swig uuid-dev uuid-runtime yelp-tools xzip
 
 ## 3. Build and install:
 
