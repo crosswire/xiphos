@@ -23,5 +23,6 @@
 #define ___NAVBAR_VERSEKEY_PARALLEL_H_
 
 GtkWidget *gui_navbar_versekey_parallel_new(void);
+void gui_navbar_parallel_set_module(const gchar *module_name);
 
 #endif

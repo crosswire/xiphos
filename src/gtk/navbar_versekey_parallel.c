@@ -923,3 +923,16 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 				     settings.linkedtabs);
 	return navbar_parallel.navbar;
 }
+
+/******************************************************************************
+ * Name
+ * gui_navbar_parallel_set_module
+ *
+ */
+
+
+void gui_navbar_parallel_set_module(const gchar *module_name)
+{
+	if (module_name)
+		navbar_parallel.module_name = g_string_assign(navbar_parallel.module_name, module_name);
+}

@@ -59,7 +59,7 @@ extern gboolean sync_on;
  * static
  */
 static GtkWidget *parallel_vbox;
-NAVBAR_VERSEKEY navbar_parallel;
+extern NAVBAR_VERSEKEY navbar_parallel;
 
 static void sync_with_main(const gchar *key);
 
