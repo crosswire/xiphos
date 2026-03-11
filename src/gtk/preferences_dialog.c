@@ -2087,7 +2087,7 @@ void on_combobox17_changed(GtkComboBox *combobox, gpointer user_data)
 	buf = strrchr(buf, '(') + 1;
 	*strchr(buf, ')') = '\0';
 
-	mod_name = g_strdup_printf(_("language: %s"), buf);
+	mod_name = g_strdup_printf("Language:%s", buf);
 	gui_set_module_font(mod_name);
 	redisplay_to_realign();
 	g_free(mod_name);

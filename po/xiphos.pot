@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-08 17:02+0100\n"
+"POT-Creation-Date: 2026-03-11 22:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1352,11 +1352,6 @@ msgstr ""
 msgid "Locale will take effect after restart."
 msgstr ""
 
-#: ../src/gtk/preferences_dialog.c:2090
-#, c-format
-msgid "language: %s"
-msgstr ""
-
 #: ../src/gtk/preferences_dialog.c:2118 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:13
 msgid "Preferences"
@@ -1692,10 +1687,6 @@ msgstr ""
 
 #: ../src/gtk/utilities.c:91
 msgid "December"
-msgstr ""
-
-#: ../src/gtk/utilities.c:795
-msgid "none"
 msgstr ""
 
 #: ../src/gtk/utilities.c:2021
