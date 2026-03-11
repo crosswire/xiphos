@@ -599,7 +599,7 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 		if (mod && (main_get_mod_type(mod) == PRAYERLIST_TYPE)) {
 			buf_module = mod;
 #if GTK_CHECK_VERSION(3, 22, 0)
-			gtk_menu_popup_at_pointer(GTK_MENU(sidebar.menu_prayerlist_mod), NULL);
+			gtk_menu_popup_at_pointer(GTK_MENU(sidebar.menu_prayerlist_mod), (GdkEvent *)event);
 #else
 			gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist_mod), NULL,
 				       NULL, NULL, NULL, 0,
@@ -1191,7 +1191,11 @@ G_MODULE_EXPORT void gui_menu_prayerlist_popup(GtkMenuItem *menuitem,
 					       gpointer user_data)
 {
 #if GTK_CHECK_VERSION(3, 22, 0)
-	gtk_menu_popup_at_pointer(GTK_MENU(sidebar.menu_prayerlist), NULL);
+	gtk_menu_popup_at_widget(GTK_MENU(sidebar.menu_prayerlist),
+				 GTK_WIDGET(menuitem),
+				 GDK_GRAVITY_SOUTH_WEST,
+				 GDK_GRAVITY_NORTH_WEST,
+				 NULL);
 #else
 	gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist),
 		       NULL, NULL, NULL, NULL,

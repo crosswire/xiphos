@@ -34,6 +34,20 @@ extern "C" {
 
 #include "main/navbar_versekey.h"
 
+struct _tool_items
+{
+	GtkToggleToolButton *bold;
+	GtkToggleToolButton *italic;
+	GtkToggleToolButton *underline;
+	GtkToggleToolButton *strike;
+	GtkColorButton *color;
+	GtkToolButton *newdoc;
+	GtkToolButton *open;
+	GtkToolButton *deletedoc;
+	GtkComboBoxText *cb;
+};
+typedef struct _tool_items TOOL_ITEMS;
+
 typedef struct _editor EDITOR;
 struct _editor
 {
@@ -43,6 +57,10 @@ struct _editor
 	GtkWidget *sync_button;
 	GtkWidget *html_widget;
 	GtkWidget *statusbar;
+	GtkWidget *text_widget;  // For GtkTextView
+	GtkWidget *navbar_box;   // For navbar
+	GtkWidget *box;          // For main vbox
+	TOOL_ITEMS toolitems;
 
 	NAVBAR_VERSEKEY navbar;
 

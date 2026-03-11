@@ -33,9 +33,17 @@ set (SHARE_DIR "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}")
 # textdomain
 set (GETTEXT_PACKAGE "${PROJECT_NAME}")
 
-# webkit editor
-if (NOT GTKHTML)
+# editor selection:
+# GTKTVEDITOR overrides everything else
+# otherwise fall back to original logic (webkit unless GTKHTML forced)
+if (GTKTVEDITOR)
+  set (USE_GTKTVeditor ON)
+  message (STATUS "Editor: GtkTextView")
+elseif (NOT GTKHTML)
   set (USE_WEBKIT_EDITOR ON)
+  message (STATUS "Editor: WebKit")
+else ()
+  message (STATUS "Editor: gtkhtml")
 endif ()
 
 # Gtk
