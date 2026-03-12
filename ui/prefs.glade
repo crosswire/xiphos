@@ -2173,6 +2173,11 @@
                                 <property name="position">1</property>
                               </packing>
                             </child>
+                          </widget>
+                          <packing>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
 
                         <child>
                           <widget class="GtkHBox" id="hbox32">
