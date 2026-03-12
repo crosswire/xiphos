@@ -3113,6 +3113,8 @@ void ps_button_cut(GtkButton *button, gpointer user_data)
 		}
 		xml_set_value("Xiphos", "modules", "parallels", mod_list);
 		g_free(mod_list);
+		if (settings.parallel_list && settings.parallel_list[0])
+			gui_navbar_parallel_set_module(settings.parallel_list[0]);
 	}
 	g_free(str);
 }
