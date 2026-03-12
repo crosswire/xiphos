@@ -2236,12 +2236,12 @@
                                 <property name="position">1</property>
                               </packing>
                             </child>
-                            </widget>
+                          </widget>
                           <packing>
                             <property name="position">4</property>
                           </packing>
                         </child>
-                            <child>
+                        <child>
                           <widget class="GtkHBox" id="hbox33">
                             <property name="visible">True</property>
                             <property name="homogeneous">True</property>
@@ -2331,7 +2331,7 @@
                             </child>
                           </widget>
                           <packing>
-                            <property name="position">4</property>
+                            <property name="position">7</property>
                           </packing>
                         </child>
                       </widget>
