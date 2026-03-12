@@ -2631,6 +2631,131 @@
                             <property name="position">2</property>
                           </packing>
                         </child>
+                        
+                        <child>
+                          <object class="GtkBox" id="hbox32">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="label43">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Hebrew Morphology Lexicon</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="combobox18">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="combobox18-atkobject">
+                                    <property name="AtkObject::accessible-name" translatable="yes">Hebrew Morphology Lexicon Combo</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+<child>
+                          <object class="GtkBox" id="hbox34">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="label45">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">OT Greek Morphology Lexicon</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="combobox20">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="combobox20-atkobject">
+                                    <property name="AtkObject::accessible-name" translatable="yes">OT Greek Morphology Lexicon Combo</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                        </object>
+                        <packing>
+                          <property name="expand">True</property>
+                          <property name="fill">True</property>
+                          <property name="position">4</property>
+                        </packing>
+                      </child>
+                        <child>
+                          <object class="GtkBox" id="hbox33">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="label44">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">NT Greek Morphology Lexicon</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="combobox19">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="combobox19-atkobject">
+                                    <property name="AtkObject::accessible-name" translatable="yes">NT Greek Morphology Lexicon Combo</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">5</property>
+                          </packing>
+                        </child>
+                        
                         <child>
                           <object class="GtkBox" id="hbox16">
                             <property name="visible">True</property>
@@ -2669,7 +2794,7 @@
                           <packing>
                             <property name="expand">True</property>
                             <property name="fill">True</property>
-                            <property name="position">3</property>
+                            <property name="position">6</property>
                           </packing>
                         </child>
                         <child>
@@ -2710,7 +2835,7 @@
                           <packing>
                             <property name="expand">True</property>
                             <property name="fill">True</property>
-                            <property name="position">4</property>
+                            <property name="position">7</property>
                           </packing>
                         </child>
                       </object>

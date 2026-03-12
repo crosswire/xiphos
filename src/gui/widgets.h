@@ -52,6 +52,7 @@ struct _app_widgets
 	    *notebook_percomm,			 /* notebook - personal comments */
 	    *notebook_sidebar,			 /* notebook - sidebar */
 	    *notebook_comm_book, *notebook_main, /* main notebook to have multiple passages open at once */
+	    *notebook_dict_devot,   /* notebook Dict/Devotional */
 	    *vbox_text,				 /* vbox for bible + simple parallel */
 	    *box_dict, *vbox_previewer, *parallel_tab,
 	    /* dock/undock stuff */
@@ -71,6 +72,7 @@ struct _app_widgets
 	    *html_comm,			     /* html commentary widget */
 	    *html_percomm,		     /* html personal commentary widget */
 	    *html_dict,			     /* html dictionary widget */
+	    *html_devotional,		 /* html devotional widget */
 	    *html_book,			     /* gbs html widget */
 	    *html_studypad,		     /* studypad html widget */
 	    *html_previewer,		     /* to display information (ie strongs) at
@@ -84,10 +86,15 @@ struct _app_widgets
 	    *label_comm, *label_dict,
 	    /* comboboxentry widgets */
 	    *comboboxentry_dict,
+	    *entry_devotional,
+	    *button_devotional_date,
+	    *popover_devotional,
+	    *calendar_devotional,
 	    /* popup menu submenu widgets */
 	    *add_bookmark_submenu,
 	    /* popup menu item widgets */
 	    *viewtexts_item, *viewpreview_item, *parallel_tab_item, *side_preview_item, *viewcomms_item, *viewdicts_item, *linkedtabs_item, *showversenum_item, *readaloud_item, *versehighlight_item, *annotate_highlight_item, *xrefs_in_verse_list_item, *new_journal_item, *button_dict_book, *button_new_tab, /* creates a new passage tab */
+	    *button_dict_back, *button_dict_forward,  /* ← Create history nav button */
 	    *hboxtb;																																				   /* container for browsing notebook and button */
 };
 extern WIDGETS widgets;

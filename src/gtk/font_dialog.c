@@ -407,7 +407,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), "2");
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), "3");
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), "4");
-	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), "default");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_count), _("default"));
 	combo_entry_columns = gtk_bin_get_child(GTK_BIN(combo_count));
 	gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_count))), "");
 #else
@@ -418,7 +418,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), "2");
 	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), "3");
 	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), "4");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), "default");
+	gtk_combo_box_append_text(GTK_COMBO_BOX(combo_count), _("default"));
 	combo_entry_columns = (GTK_WIDGET(GTK_BIN(combo_count)->child));
 	gtk_entry_set_text(GTK_ENTRY(GTK_BIN(combo_count)->child), "");
 #endif
@@ -453,7 +453,7 @@ static GtkWidget *create_dialog_mod_font()
 
 	button_cancel =
 #if GTK_CHECK_VERSION(3, 10, 0)
-	    gtk_button_new_with_label("Cancel");
+	    gtk_button_new_with_label(_("Cancel"));
 #else
 	    gtk_button_new_from_stock(GTK_STOCK_CANCEL);
 #endif
@@ -462,7 +462,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_widget_set_can_default(button_cancel, 1);
 	button_ok =
 #if GTK_CHECK_VERSION(3, 10, 0)
-	    gtk_button_new_with_label("OK");
+	    gtk_button_new_with_label(_("OK"));
 #else
 	    gtk_button_new_from_stock(GTK_STOCK_OK);
 #endif

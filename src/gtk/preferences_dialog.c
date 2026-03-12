@@ -72,6 +72,9 @@ struct _preferences_combo
 	GtkWidget *devotion_module;
 	GtkWidget *greek_lex__module;
 	GtkWidget *hebrew_lex__module;
+	GtkWidget *morph_greek_lex_nt__module;
+	GtkWidget *morph_greek_lex_ot__module;
+	GtkWidget *morph_heb_lex__module;
 	GtkWidget *combo_entry_sp_dir;
 	GtkWidget *base_font_size;
 	GtkWidget *verse_number_size;
@@ -1869,6 +1872,105 @@ void on_combobox14_changed(GtkComboBox *combobox, gpointer user_data)
 	settings.lex_greek = xml_get_value("lexicons", "greek");
 	g_free(buf);
 }
+/******************************************************************************
+ * Name
+ *   on_combobox18_changed
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_combobox18_changed(GtkEditable * editable, gpointer user_data)
+ *
+ * Description
+ *   combobox18 (Hebrew lex morph module),
+ *   has changed - update settings
+ *
+ * Return value
+ *  void
+ */
+
+void on_combobox18_changed(GtkComboBox *combobox, gpointer user_data)
+{
+    gchar *buf = NULL;
+    GtkTreeIter iter;
+    GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+
+    if (gtk_combo_box_get_active_iter(combobox, &iter)) {
+        gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
+        if (!buf || !strcmp(buf, _("-- Select --")))
+            return;
+        xml_set_value("Xiphos", "lexicons", "hebrew_morph", buf);
+        if (settings.morph_heb_lex) g_free(settings.morph_heb_lex);
+        settings.morph_heb_lex = g_strdup(buf);
+        xml_save_settings_doc(settings.fnconfigure);
+        g_free(buf);
+    }
+}
+/******************************************************************************
+ * Name
+ *   on_combobox20_changed
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_combobox20_changed(GtkEditable * editable, gpointer user_data)
+ *
+ * Description
+ *   combobox20 (Greek lex morph ot module),
+ *   has changed - update settings
+ *
+ * Return value
+ *  void
+ */
+
+void on_combobox20_changed(GtkComboBox *combobox, gpointer user_data)
+{
+    gchar *buf = NULL;
+    GtkTreeIter iter;
+    GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+
+    if (gtk_combo_box_get_active_iter(combobox, &iter)) {
+        gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
+        if (!buf || !strcmp(buf, _("-- Select --")))
+            return;
+        xml_set_value("Xiphos", "lexicons", "greek_morph_ot", buf);
+        if (settings.morph_greek_lex_ot) g_free(settings.morph_greek_lex_ot);
+        settings.morph_greek_lex_ot = g_strdup(buf);
+        xml_save_settings_doc(settings.fnconfigure);
+        g_free(buf);
+    }
+}
+/******************************************************************************
+ * Name
+ *   on_combobox19_changed
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_combobox19_changed(GtkEditable * editable, gpointer user_data)
+ *
+ * Description
+ *   combobox19 (Greek lex morph nt module),
+ *   has changed - update settings
+ *
+ * Return value
+ *  void
+ */
+
+void on_combobox19_changed(GtkComboBox *combobox, gpointer user_data)
+{
+    gchar *buf = NULL;
+    GtkTreeIter iter;
+    GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+
+    if (gtk_combo_box_get_active_iter(combobox, &iter)) {
+        gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
+        if (!buf || !strcmp(buf, _("-- Select --")))
+            return;
+        xml_set_value("Xiphos", "lexicons", "greek_morph_nt", buf);
+        if (settings.morph_greek_lex_nt) g_free(settings.morph_greek_lex_nt);
+        settings.morph_greek_lex_nt = g_strdup(buf);
+        xml_save_settings_doc(settings.fnconfigure);
+        g_free(buf);
+    }
+}
 
 /******************************************************************************
  * Name
@@ -1989,6 +2091,7 @@ void on_combobox17_changed(GtkComboBox *combobox, gpointer user_data)
 	gui_set_module_font(mod_name);
 	redisplay_to_realign();
 	g_free(mod_name);
+	gtk_combo_box_set_active(combobox, 0); /* reset to "-- Select --" */
 }
 
 /******************************************************************************
@@ -2536,6 +2639,16 @@ static void setup_module_comboboxes(void)
 		      GTK_COMBO_BOX(combo.greek_lex__module),
 		      settings.lex_greek, dict_match_feature, "GreekDef");
 	fill_combobox(get_list(DICT_LIST),
+		      GTK_COMBO_BOX(combo.morph_heb_lex__module),
+		      settings.morph_heb_lex, dict_match_feature,
+		      "HebrewParse");
+	fill_combobox(get_list(DICT_LIST),
+		      GTK_COMBO_BOX(combo.morph_greek_lex_ot__module),
+		      settings.morph_greek_lex_ot, dict_match_feature, "GreekParse");
+	fill_combobox(get_list(DICT_LIST),
+		      GTK_COMBO_BOX(combo.morph_greek_lex_nt__module),
+		      settings.morph_greek_lex_nt, dict_match_feature, "GreekParse");
+	fill_combobox(get_list(DICT_LIST),
 		      GTK_COMBO_BOX(combo.default_dictionary_module),
 		      settings.DefaultDict, dict_no_image_map_dd, NULL);
 	fill_combobox(get_list(PERCOMM_LIST),
@@ -2551,6 +2664,12 @@ static void setup_module_comboboxes(void)
 			 G_CALLBACK(on_combobox13_changed), NULL);
 	g_signal_connect(combo.greek_lex__module, "changed",
 			 G_CALLBACK(on_combobox14_changed), NULL);
+	g_signal_connect(combo.morph_heb_lex__module, "changed",
+			 G_CALLBACK(on_combobox18_changed), NULL);
+	g_signal_connect(combo.morph_greek_lex_nt__module, "changed",
+			 G_CALLBACK(on_combobox19_changed), NULL);
+	g_signal_connect(combo.morph_greek_lex_ot__module, "changed",
+			 G_CALLBACK(on_combobox20_changed), NULL);
 	g_signal_connect(combo.default_dictionary_module, "changed",
 			 G_CALLBACK(on_combobox5_changed), NULL);
 	g_signal_connect(combo.percomm_module, "changed",
@@ -3224,6 +3343,10 @@ static void create_preferences_dialog(void)
 	combo.devotion_module = UI_GET_ITEM(gxml, "combobox12");
 	combo.hebrew_lex__module = UI_GET_ITEM(gxml, "combobox13");
 	combo.greek_lex__module = UI_GET_ITEM(gxml, "combobox14");
+	combo.morph_heb_lex__module = UI_GET_ITEM(gxml, "combobox18");
+	combo.morph_greek_lex_nt__module = UI_GET_ITEM(gxml, "combobox19");
+	combo.morph_greek_lex_ot__module = UI_GET_ITEM(gxml, "combobox20");
+
 	setup_module_comboboxes();
 
 	combo.special_locale = UI_GET_ITEM(gxml, "combobox16");

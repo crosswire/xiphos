@@ -68,6 +68,7 @@ void gui_change_window_title(char *module_name);
 void create_mainwindow(void);
 void gui_show_main_window(void);
 void final_pane_sizes(void);
+void gui_notebook_dict_goto_dict(void);
 
 #ifdef __cplusplus
 }

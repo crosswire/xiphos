@@ -76,6 +76,7 @@ extern gboolean shift_key_pressed;
 
 static GtkWidget *nav_toolbar;
 static int main_window_created = FALSE;
+static gboolean switching_dict_tab = FALSE;
 
 /******************************************************************************
  * Name
@@ -207,11 +208,11 @@ void gui_show_hide_dicts(gboolean choice)
 	gui_set_tab_label(settings.currentverse, TRUE);
 	if (choice == FALSE) {
 		if (main_window_created)
-			gtk_widget_hide(widgets.box_dict);
+			gtk_widget_hide(widgets.notebook_dict_devot);
 		xml_set_value("Xiphos", "misc", "showdicts", "0");
 	} else {
 		if (main_window_created)
-			gtk_widget_show(widgets.box_dict);
+			gtk_widget_show(widgets.notebook_dict_devot);
 		xml_set_value("Xiphos", "misc", "showdicts", "1");
 	}
 	if (main_window_created)
@@ -949,6 +950,24 @@ static gboolean on_vbox1_key_release_event(GtkWidget *widget,
 	return FALSE;
 }
 
+#ifdef USE_GTK_3
+static void on_notebook_dict_devot_switch_page(GtkNotebook *notebook,
+                                               gpointer arg,
+                                               gint page_num, GList **tl)
+#else
+static void on_notebook_dict_devot_switch_page(GtkNotebook *notebook,
+                                               GtkNotebookPage *page,
+                                               gint page_num, GList **tl)
+#endif
+{
+    if (switching_dict_tab) return;
+    if (page_num == 1) {
+        if (settings.devotionalmod && *settings.devotionalmod) {
+            main_display_devotional(widgets.html_devotional);
+        }
+    }
+}
+
 /******************************************************************************
  * Name
  *   create_mainwindow
@@ -977,6 +996,7 @@ void create_mainwindow(void)
 	GtkWidget *scrolledwindow;
 #endif
 	GtkWidget *box_book;
+	GtkWidget *box_devot;
 	GdkPixbuf *pixbuf;
 	/*
 	   GTK_SHADOW_NONE
@@ -991,6 +1011,7 @@ void create_mainwindow(void)
 	XI_print(("%s\n\n", "Building Xiphos interface"));
 
 	widgets.studypad_dialog = NULL;
+	widgets.entry_devotional = NULL;
 
 	/* A rough scektch of the main window (widgets.app) and it's children
 	 *                widgets.app
@@ -1192,9 +1213,33 @@ void create_mainwindow(void)
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm_book), gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_comm_book), 1), label);
 
-	// Dict/lex
+	// Dict/Devotional notebook
+	widgets.notebook_dict_devot = gtk_notebook_new();
+	gtk_widget_show(widgets.notebook_dict_devot);
+	gtk_paned_pack2(GTK_PANED(widgets.vpaned2), widgets.notebook_dict_devot, TRUE, TRUE);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.notebook_dict_devot), 1);
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(widgets.notebook_dict_devot), GTK_POS_BOTTOM);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_dict_devot), TRUE);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_dict_devot), FALSE);
+
+	// Tab 0 : Dictionary
 	widgets.box_dict = gui_create_dictionary_pane();
-	gtk_paned_pack2(GTK_PANED(widgets.vpaned2), widgets.box_dict, TRUE, TRUE);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_dict_devot), widgets.box_dict);
+	label = gtk_label_new(_("Dictionary"));
+	gtk_widget_show(label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_dict_devot),
+                           gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_dict_devot), 0),
+                           label);
+
+	// Tab 1 : Devotional
+box_devot = gui_create_devotional_pane();
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_dict_devot), box_devot);
+	label = gtk_label_new(_("Devotional"));
+	gtk_widget_show(label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_dict_devot),
+	    gtk_notebook_get_nth_page(GTK_NOTEBOOK(widgets.notebook_dict_devot), 1),
+	    label);
+
 
 	// Statusbar
 	widgets.appbar = gtk_statusbar_new();
@@ -1224,6 +1269,8 @@ void create_mainwindow(void)
 	g_signal_connect((gpointer)vbox_gs, "key_release_event", G_CALLBACK(on_vbox1_key_release_event), NULL);
 
 	g_signal_connect(G_OBJECT(widgets.notebook_comm_book), "switch_page", G_CALLBACK(on_notebook_comm_book_switch_page), NULL);
+	
+	g_signal_connect(G_OBJECT(widgets.notebook_dict_devot), "switch_page", G_CALLBACK(on_notebook_dict_devot_switch_page), NULL);
 
 	g_signal_connect(G_OBJECT(widgets.app), "delete_event", G_CALLBACK(delete_event), NULL);
 
@@ -1255,4 +1302,17 @@ void create_mainwindow(void)
 void gui_show_main_window(void)
 {
 	gtk_widget_show(widgets.app);
+}
+
+/******************************************************************************
+ * Name
+ *   gui_notebook_dict_goto_dict
+ *
+ */
+void gui_notebook_dict_goto_dict(void)
+{
+    switching_dict_tab = TRUE;
+    gtk_notebook_set_current_page(
+        GTK_NOTEBOOK(widgets.notebook_dict_devot), 0);
+    switching_dict_tab = FALSE;
 }
