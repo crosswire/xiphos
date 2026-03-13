@@ -911,7 +911,6 @@ void main_dictionary_entry_changed(char *mod_name)
 	backend->display_mod->display();
 
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
-	main_dict_history_add(mod_name, key);
 	g_free(key);
 }
 
@@ -1250,6 +1249,7 @@ void main_display_dictionary(const char *mod_name,
 		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 		gtk_widget_activate(widgets.entry_dict);
 	}
+	main_dict_history_add(mod_name, key);
 
 	//if (settings.browsing)
 	gui_update_tab_struct(NULL,
@@ -2043,8 +2043,14 @@ void main_devotional_button_clicked(gint direction)
 
 void main_dict_history_add(const gchar *mod_name, const gchar *key)
 {
-    if (dict_history_navigating) return;  /* ne pas enregistrer pendant navigation */
-
+	if (dict_history_navigating) return;  /* do not record during navigation */
+	/* do not add if identical to last entry */
+	if (dict_history_back) {
+		DictHistoryEntry *last = (DictHistoryEntry *)g_list_last(dict_history_back)->data;
+		if (!strcmp(last->key, key) && !strcmp(last->mod_name, mod_name))
+			return;
+	}
+    
     /* vider le forward quand on consulte une nouvelle entrée */
     g_list_free_full(dict_history_forward, dict_history_entry_free);
     dict_history_forward = NULL;
