@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * link_dialog.f - dialog for inserting a link
+ * link_dialog.h - dialog for inserting a link
  *
  * Copyright (C) 2005-2025 Xiphos Developer Team
  *
@@ -32,6 +32,8 @@ extern "C" {
 #ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
+#elif defined(USE_GTKTVeditor)
+#include "editor/gtktextview_editor.h"
 #else
 #include "editor/slib-editor.h"
 #endif
@@ -40,8 +42,7 @@ void editor_link_dialog(EDITOR *e);
 void entry_verse_changed_cb(GObject *object, EDITOR *e);
 void button_ok_clicked_cb(GObject *object, EDITOR *e);
 void button_test_clicked_cb(GObject *object, gpointer user_data);
-void button_cancel_clicked_cb(GObject *object,
-			      gpointer user_data);
+void button_cancel_clicked_cb(GObject *object, gpointer user_data);
 
 #ifdef __cplusplus
 }

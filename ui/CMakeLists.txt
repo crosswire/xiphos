@@ -16,7 +16,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 #
-
 # install ui files
 if (NOT GTK2)
   # Gtk3 only stuff
@@ -33,6 +32,7 @@ if (NOT GTK2)
     xi-menus.gtkbuilder
     xi-menus-popup.gtkbuilder
     xi-splash.gtkbuilder
+    gtk_webedit.ui
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}
     COMPONENT data
     )
@@ -56,7 +56,6 @@ else  (NOT GTK2)
     COMPONENT data
     )
 endif (NOT GTK2)
-
 # common stuff
 install (FILES
   editor_note.xml
@@ -87,4 +86,3 @@ install (FILES
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}
   COMPONENT data
   )
-

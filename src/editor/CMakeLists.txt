@@ -29,6 +29,15 @@ if (USE_WEBKIT_EDITOR)
     editor.c
     webkit_editor.c
     )
+elseif (USE_GTKTVeditor)
+  target_sources(editor
+    PRIVATE
+    gtktextview_editor.c
+    )
+  target_compile_definitions(editor
+    PRIVATE
+    USE_GTKTVeditor
+    )
 else ()
   target_sources(editor
     PRIVATE

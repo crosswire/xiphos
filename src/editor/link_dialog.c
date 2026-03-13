@@ -29,6 +29,8 @@
 #ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
+#elif defined(USE_GTKTVeditor)
+#include "editor/gtktextview_editor.h"
 #else
 #include <editor/gtkhtml-editor.h>
 #include <gtkhtml/gtkhtml-stream.h>
@@ -42,6 +44,7 @@
 
 #include "gui/utilities.h"
 #include "gui/debug_glib_null.h"
+
 /************* begin link dialog ****************/
 static GtkWidget *window;
 static GtkWidget *entry_module;
@@ -90,9 +93,49 @@ G_MODULE_EXPORT void button_ok_clicked_cb(GObject *object, EDITOR *e)
 
 #ifdef USE_WEBKIT_EDITOR
 	editor_insert_html(str->str, e);
+#elif defined(USE_GTKTVeditor)
+{
+	GtkTextBuffer *buffer =
+		gtk_text_view_get_buffer(GTK_TEXT_VIEW(e->text_widget));
+	GtkTextIter cursor;
+	gtk_text_buffer_get_iter_at_mark(buffer, &cursor,
+					 gtk_text_buffer_get_insert(buffer));
+
+	/* construire l'URI directement depuis les champs */
+	gchar *uri = NULL;
+	if ((gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(linkage_verse_list))) &&
+	    ((type == -1) || (type == TEXT_TYPE) || (type == COMMENTARY_TYPE)))
+		uri = g_strdup_printf("passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s",
+				      encoded_mod ? encoded_mod : "",
+				      encoded_verse ? encoded_verse : "");
+	else
+		uri = g_strdup_printf("sword://%s/%s",
+				      encoded_mod ? encoded_mod : "",
+				      encoded_verse ? encoded_verse : "");
+
+	gchar *tag_name = g_strdup_printf("sword_link_%s", uri);
+	GtkTextTagTable *table = gtk_text_buffer_get_tag_table(buffer);
+	GtkTextTag *tag = gtk_text_tag_table_lookup(table, tag_name);
+	if (!tag) {
+		tag = gtk_text_buffer_create_tag(buffer, tag_name,
+						 "foreground", "#0000EE",
+						 "underline", PANGO_UNDERLINE_SINGLE,
+						 NULL);
+		g_object_set_data_full(G_OBJECT(tag), "uri",
+				       g_strdup(uri), g_free);
+		g_signal_connect(tag, "event",
+				 G_CALLBACK(_on_event), e);
+	}
+	gtk_text_buffer_insert_with_tags(buffer, &cursor,
+					 text_str ? text_str : uri, -1, tag, NULL);
+	g_free(tag_name);
+	g_free(uri);
+}
+
 #else
 	gtkhtml_editor_insert_html(GTKHTML_EDITOR(e->window), str->str);
 #endif
+
 	g_string_free(str, TRUE);
 	g_free((gchar *)encoded_mod);
 	g_free((gchar *)encoded_verse);
@@ -140,9 +183,11 @@ void editor_link_dialog(EDITOR *e)
 	gchar *gbuilder_file;
 
 #ifndef USE_WEBKIT_EDITOR
+#ifndef USE_GTKTVeditor
 	GtkHTML *html = gtkhtml_editor_get_html(GTKHTML_EDITOR(e->window));
 	if (html->pointer_url) /* are we in a link */
 		return;	/* if so don't do anything */
+#endif
 #endif
 
 	gbuilder_file =

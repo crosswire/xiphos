@@ -36,6 +36,9 @@
 // Use Webkit Editor
 #cmakedefine USE_WEBKIT_EDITOR 1
 
+// Use GtkTextView Editor
+#cmakedefine USE_GTKTVeditor 1
+
 // Use Gtk3
 #cmakedefine USE_GTK_3 1
 

@@ -32,8 +32,8 @@ You have the choice to either:
 - build Xiphos yourself (see Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint* below)
 - install packages from  ppa: https://launchpad.net/~pkgcrosswire/+archive/ubuntu/ppa
 - install the flatpak app (3rd party, may not be up to date)
-  https://www.flathub.org/apps/details/org.xiphos.Xiphos  
-  Note: If you want access to the normal home folders .sword and .xiphos, run:  
+  https://www.flathub.org/apps/details/org.xiphos.Xiphos
+  Note: If you want access to the normal home folders .sword and .xiphos, run:
   `# flatpak override --filesystem=home org.xiphos.Xiphos`
 
 ### Other distributions
@@ -295,6 +295,7 @@ usable on the build system.
 ### Commands
 
     $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWEBKIT1=ON ../xiphos
+	$ cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON ../xiphos
     $ make -j$(nproc)
 	$ cpack -G DEB
 
