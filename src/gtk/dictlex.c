@@ -50,7 +50,8 @@
 
 #include "gui/debug_glib_null.h"
 #include <time.h>
-
+void button_dict_back_clicked(GtkButton *button, gpointer user_data);
+void button_dict_forward_clicked(GtkButton *button, gpointer user_data);
 /******************************************************************************
  * externs
  */
@@ -486,6 +487,10 @@ GtkWidget *gui_create_dictionary_pane(void)
 	g_signal_connect(G_OBJECT(widgets.entry_dict), "activate",
 			 G_CALLBACK(dict_key_entry_changed), NULL);
 
+	g_signal_connect((gpointer)widgets.button_dict_back, "clicked",
+			G_CALLBACK(button_dict_back_clicked), NULL);
+	g_signal_connect((gpointer)widgets.button_dict_forward, "clicked",
+			G_CALLBACK(button_dict_forward_clicked), NULL);
 	g_signal_connect((gpointer)button10, "clicked",
 			 G_CALLBACK(button_back_clicked), NULL);
 	g_signal_connect((gpointer)button11, "clicked",
