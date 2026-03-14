@@ -70,7 +70,7 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
@@ -110,7 +110,7 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
@@ -149,7 +149,7 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
@@ -193,7 +193,7 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
@@ -236,7 +236,7 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 

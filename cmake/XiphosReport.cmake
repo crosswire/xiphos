@@ -92,8 +92,3 @@ endif()
 if( NOT WIN32 AND NOT (CMAKE_SYSTEM_NAME STREQUAL Linux))
   message(AUTHOR_WARNING "Unknown plateform, assuming ${CMAKE_SYSTEM_NAME} is UNIX like platform")
 endif()
-
-# warn about Webkit2 editor not yet implemented
-if (NOT WEBKIT1 AND NOT GTKHTML)
-  message (AUTHOR_WARNING "Webkit2 and the WebKit2-editor were both selected ON, but integration of the Webkit2 editor is a work in progress. This can lead to fatal errors and build failures.")
-endif ()
