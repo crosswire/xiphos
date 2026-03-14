@@ -462,6 +462,8 @@ _load_text_into_buffer(EDITOR *e, const gchar *text)
 	GtkTextBuffer *buffer = _get_buffer(e);
 	GtkTextIter iter;
 	gtk_text_buffer_get_start_iter(buffer, &iter);
+	gtk_text_buffer_set_text(buffer, "", -1);
+	gtk_text_buffer_get_start_iter(buffer, &iter);
 
 /* wrap in html/body for libxml2 parser */
 gchar *wrapped = g_strdup_printf("<html><body>%s</body></html>", text);
@@ -1228,6 +1230,7 @@ create_editor_window(GtkWidget *scrollwindow, EDITOR *e)
 	    gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
 
 	e->text_widget = textview;
+	e->html_widget = textview;
 
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview), TRUE);
 	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview), GTK_WRAP_WORD_CHAR);
@@ -1504,7 +1507,7 @@ _create_new(const gchar *filename, const gchar *key, gint editor_type)
 		editor_new(_("Prayer List/Journal Editor"), editor);
 
 		GtkWidget *box;
-		UI_VBOX(box, FALSE, 0);
+		UI_VBOX(box, TRUE, 0);
 		gtk_widget_show(box);
 		GtkWidget *hpaned1 = UI_HPANE();
 		gtk_widget_show(hpaned1);
@@ -1526,7 +1529,7 @@ _create_new(const gchar *filename, const gchar *key, gint editor_type)
 		gtk_paned_set_position(GTK_PANED(hpaned1), 125);
 		gtk_tree_view_expand_all((GtkTreeView *)editor->treeview);
 
-		gtk_container_add(GTK_CONTAINER(editor->box), box);
+		gtk_widget_reparent(editor->box, box);
 		gtk_container_add(GTK_CONTAINER(editor->window), hpaned1);
 
 		editor_load_book(editor);
