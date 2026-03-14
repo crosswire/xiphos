@@ -244,6 +244,52 @@
       </object>
     </child>
   </object>
+  <object class="GtkMenu" id="menu_percomm_mod">
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkImageMenuItem" id="open_in_new_tab_percomm">
+        <property name="label" translatable="yes">Open in new tab</property>
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_open_in_tab_activate2" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="open_in_a_dialog_percomm">
+        <property name="label" translatable="yes">Open in a separate window</property>
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_open_in_dialog_activate" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="edit_percomm">
+        <property name="label" translatable="yes">Edit</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Open this personal commentary in the editor</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="on_edit_percomm_activate" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="about_percomm">
+        <property name="label" translatable="yes">About</property>
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_about2_activate" swapped="no"/>
+      </object>
+    </child>
+  </object>
   <object class="GtkMenu" id="menu_popup">
     <property name="can_focus">False</property>
     <child>
@@ -904,6 +950,16 @@
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_open_in_dialog_activate" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="edit_prayerlist">
+        <property name="label" translatable="yes">Edit</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Open this prayer list in the editor</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="on_edit_activate" swapped="no"/>
       </object>
     </child>
     <child>
