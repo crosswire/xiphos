@@ -79,6 +79,7 @@ extern gboolean shift_key_pressed;
 extern gboolean initialized;
 
 static GtkWidget *create_menu_modules(void);
+static GtkWidget *create_menu_percomm_mod(void);
 void on_export_verselist_activate(GtkMenuItem *menuitem,
 				  gpointer user_data);
 
@@ -580,10 +581,22 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 		break;
 
 	case 3:
-		if (mod && (g_utf8_collate(mod, _("Parallel View"))) && (g_utf8_collate(mod, _("Standard View"))) //) {
-		    && (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
+		if (mod && (main_get_mod_type(mod) == PERCOM_TYPE)) {
 			buf_module = mod;
-			create_menu_modules();
+			GtkWidget *percomm_menu = create_menu_percomm_mod();
+		#if GTK_CHECK_VERSION(3, 22, 0)
+			gtk_menu_popup_at_pointer(GTK_MENU(percomm_menu), (GdkEvent *)event);
+	#else
+		gtk_menu_popup(GTK_MENU(percomm_menu), NULL, NULL, NULL, NULL, 0, gtk_get_current_event_time());
+	#endif
+		g_free(caption);
+		return FALSE;
+	}
+
+		if (mod && (g_utf8_collate(mod, _("Parallel View"))) && (g_utf8_collate(mod, _("Standard View"))) //) {
+    && (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
+		buf_module = mod;
+		create_menu_modules();
 			/*gtk_menu_popup(GTK_MENU(sidebar.menu_modules),
 			   NULL, NULL, NULL, NULL,
 			   0, gtk_get_current_event_time()); */
@@ -1150,7 +1163,50 @@ GtkWidget *create_menu_prayerlist(void)
 
 void on_edit_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	editor_create_new(buf_module, NULL, BOOK_EDITOR);
+		editor_create_new(buf_module, "0", BOOK_EDITOR);
+}
+
+G_MODULE_EXPORT void
+on_edit_percomm_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	editor_create_new(buf_module,
+			  (gchar *)settings.currentverse,
+			  NOTE_EDITOR);
+	g_free(buf_module);
+	buf_module = NULL;
+}
+
+static GtkWidget *
+create_menu_percomm_mod(void)
+{
+	GtkWidget *menu;
+	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+	glade_file = gui_general_user_file("xi-menus-popup.gtkbuilder", FALSE);
+#else
+	GladeXML *gxml;
+	glade_file = gui_general_user_file("xi-menus.glade", FALSE);
+#endif
+	g_return_val_if_fail((glade_file != NULL), NULL);
+
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new();
+	gtk_builder_add_from_file(gxml, glade_file, NULL);
+#else
+	gxml = glade_xml_new(glade_file, "menu_percomm_mod", NULL);
+#endif
+	g_free(glade_file);
+	g_return_val_if_fail((gxml != NULL), NULL);
+
+	menu = UI_GET_ITEM(gxml, "menu_percomm_mod");
+#ifdef USE_GTKBUILDER
+	gtk_builder_connect_signals(gxml, NULL);
+#else
+	glade_xml_signal_autoconnect_full(gxml,
+		(GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+#endif
+	return menu;
 }
 
 GtkWidget *create_menu_prayerlist_mod(void)
