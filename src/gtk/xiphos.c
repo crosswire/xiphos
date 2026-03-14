@@ -98,7 +98,9 @@ void frontend_init(void)
 	 *  setup sidebar
 	 */
 	gui_create_sidebar(widgets.epaned);
-
+	/* attach prayerlist submenu to File menu item, now that sidebar is ready */
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(widgets.new_journal_item),
+				  sidebar.menu_prayerlist);
 	/*
 	 *  parallel stuff
 	 */
