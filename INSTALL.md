@@ -259,7 +259,7 @@ Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 
 ## 3. Build and install:
 
-    $ cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+    $ cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
     $ cd build
     $ make -j$(nproc) && sudo make install
 
