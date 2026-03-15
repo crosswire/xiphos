@@ -24,6 +24,7 @@
 #endif
 
 #include <glib.h>
+#include <treekeyidx.h>
 
 #include <osisxhtml.h>
 #include <thmlxhtml.h>
@@ -954,6 +955,42 @@ GTKEntryDisp::displayByChapter(SWModule &imodule, int columns)
 //
 // general display of entries: commentary, genbook, lexdict
 //
+static void
+_render_display_level(SWModule &imodule, unsigned long offset,
+                      int max_level, int cur_level, SWBuf &combined)
+{
+	TreeKeyIdx *treekey = (TreeKeyIdx *)imodule.getKey();
+	treekey->setOffset(offset);
+	imodule.getRawEntry(); // snap to entry
+
+	const char *raw = imodule.getRawEntry();
+	if (raw && *raw) {
+		if (combined.length() > 0)
+			combined += "<br/><hr/>";
+		combined += imodule.renderText().c_str();
+	}
+
+	if (cur_level < max_level && treekey->hasChildren()) {
+		treekey->firstChild();
+		unsigned long child_offset = treekey->getOffset();
+		bool has_next = true;
+		while (has_next) {
+			_render_display_level(imodule, child_offset,
+					      max_level, cur_level + 1,
+					      combined);
+			// reposition after recursion
+			treekey->setOffset(child_offset);
+			imodule.getRawEntry();
+			has_next = treekey->nextSibling() && !treekey->popError();
+			if (has_next)
+				child_offset = treekey->getOffset();
+		}
+		// restore to current node
+		treekey->setOffset(offset);
+		imodule.getRawEntry();
+	}
+}
+
 char
 GTKEntryDisp::display(SWModule &imodule)
 {
@@ -1075,28 +1112,31 @@ GTKEntryDisp::display(SWModule &imodule)
 		    (modtype == PRAYERLIST_TYPE))
 			rework = g_string_new(strongs_or_morph
 						  ? block_render(imodule.getRawEntry())
-						  : imodule.getRawEntry());
+: imodule.getRawEntry());
 		else {
-			rework = g_string_new(strongs_or_morph
-						  ? block_render(imodule.renderText().c_str())
-						  : imodule.renderText().c_str());
-			if (modtype == DICTIONARY_TYPE) {
-				char *f = (char *)imodule.getConfigEntry("Feature");
-				if (f && !strcmp(f, "DailyDevotion")) {
-					char *pretty;
-					char *month = backend->get_module_key();
-					char *day = strchr(month, '.');
-					if (day)
-						*(day++) = '\0';
-					else
-						day = (char *)"XX";
-					int idx_month = atoi(month) - 1;
-					pretty = gettext(month_names[idx_month]);
-					pretty = g_strdup_printf("<b>%s %s</b><br/>",
-								 (pretty ? pretty : "--"),
-								 day);
-					swbuf.append(pretty);
-					g_free(pretty);
+			// respect DisplayLevel for genbooks (BOOK_TYPE):
+			const char *dl_str = imodule.getConfigEntry("DisplayLevel");
+			int display_level = dl_str ? atoi(dl_str) : 1;
+			if (display_level <= 1) {
+				rework = g_string_new(strongs_or_morph
+							  ? block_render(imodule.renderText().c_str())
+							  : imodule.renderText().c_str());
+			} else {
+				SWMgr *mgr = backend->get_mgr();
+				SWModule *mod = mgr->Modules[imodule.getName()];
+				TreeKeyIdx *treekey = dynamic_cast<TreeKeyIdx *>(mod->getKey());
+				if (!treekey) {
+					rework = g_string_new(imodule.renderText().c_str());
+				} else {
+					TreeKeyIdx saved = *treekey;
+					SWBuf combined = "";
+					_render_display_level(*mod, saved.getOffset(),
+							      display_level, 1, combined);
+					treekey->setOffset(saved.getOffset());
+					mod->getRawEntry();
+					rework = g_string_new(strongs_or_morph
+								  ? block_render(combined.c_str())
+								  : combined.c_str());
 				}
 			}
 		}
