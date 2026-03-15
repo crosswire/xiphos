@@ -726,7 +726,7 @@ CacheHeader(ModuleCache::CacheVerse &cVerse,
 	    GLOBAL_OPS *ops, BackEnd *be)
 {
 	int x = 0;
-	gchar heading[8];
+	gchar heading[32];
 	const gchar *preverse;
 	SWBuf preverse2;
 	GString *text = g_string_new("");
