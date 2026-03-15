@@ -112,13 +112,19 @@ h3 { font-style: %s } --> \
 #define CSS_BLOCK_BOTH                                                                            \
 	" *        { line-height: 3.5em; }"                                                       \
 	" .word    { position: relative; top:  0.0em; left: 0; }"                                 \
-	" .strongs { position: absolute; top:  0.2em; left: 0; white-space: nowrap; z-index: 2 }" \
-	" .morph   { position: absolute; top:  0.9em; left: 0; white-space: nowrap; z-index: 1 }"
+	" .strongs { position: absolute; top:  0.4em; left: 0; white-space: nowrap; z-index: 2 }" \
+	" .morph   { position: absolute; top:  0.9em; left: 0; white-space: nowrap; z-index: 1 }" \
+	" *[dir=rtl] .word { padding-left: 0.8em; }"                               \
+	" *[dir=rtl] .strongs { top: 0.4em; left: auto; right: 0; }"                             \
+	" *[dir=rtl] .morph { left: auto; right: 0; }"
 #define CSS_BLOCK_ONE                                                                  \
 	" *        { line-height: 2.7em; }"                                            \
 	" .word    { position: relative; top:  0.0em; left: 0; }"                      \
 	" .strongs { position: absolute; top:  0.4em; left: 0; white-space: nowrap; }" \
-	" .morph   { position: absolute; top:  0.4em; left: 0; white-space: nowrap; }"
+	" .morph   { position: absolute; top:  0.4em; left: 0; white-space: nowrap; }" \
+	" *[dir=rtl] .word { padding-left: 0.8em; }"                               \
+	" *[dir=rtl] .strongs { left: auto; right: 0; }"                               \
+	" *[dir=rtl] .morph { left: auto; right: 0; }"
 
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
@@ -481,6 +487,32 @@ block_dump(SWBuf &rendered,
 	if (*strongs)
 		g_free((char *)*strongs);
 	*strongs = NULL;
+
+/* truncate long Hebrew morph codes: remove pronominal suffix segment */
+	if (*morph) {
+		char *anchor_start = (char *)g_strrstr(*morph, "\">") + 2;
+		char *anchor_end = (char *)strstr(anchor_start, "</a>");
+		if (anchor_start && anchor_end) {
+			/* count slashes */
+			char *first_slash = strchr(anchor_start, '/');
+			if (first_slash && first_slash < anchor_end) {
+				char *second_slash = strchr(first_slash + 1, '/');
+				if (second_slash && second_slash < anchor_end) {
+					/* 2 segments: hr/ncmsc/sp2mp → truncate at second slash */
+					memmove(second_slash, anchor_end,
+						strlen(anchor_end) + 1);
+				} else {
+					/* 1 segment: check if suffix is pronominal (sp/sd) */
+					char *seg = first_slash + 1;
+					if ((seg[0] == 's' && (seg[1] == 'p' || seg[1] == 'd'))
+					    || (seg[0] == 'S' && (seg[1] == 'p' || seg[1] == 'd'))) {
+						memmove(first_slash, anchor_end,
+							strlen(anchor_end) + 1);
+					}
+				}
+			}
+		}
+	}
 
 	rendered += "<span class=\"morph\"><sup>";
 	rendered += (*morph ? *morph : "&nbsp;");
