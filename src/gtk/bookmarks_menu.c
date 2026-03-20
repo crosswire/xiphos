@@ -50,8 +50,8 @@
 #include "gui/widgets.h"
 
 #include "main/settings.h"
-#include "main/sidebar.h"
 #include "main/sword.h"
+#include "main/sidebar.h"
 #include "main/xml.h"
 #include "main/module_dialogs.h"
 #include "main/url.hh"
@@ -90,12 +90,12 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter *iter,
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
-	//      xmlAttrPtr root_attr;
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
 	gchar *mod_desc = NULL;
 	gchar *description = NULL;
+	gchar *color = NULL;
 
 	if (!bookmarks_changed)
 		return;
@@ -104,7 +104,6 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter *iter,
 
 	if (root_doc != NULL) {
 		root_node = xmlNewNode(NULL, (const xmlChar *)"SwordBookmarks");
-		//root_attr =
 		xmlNewProp(root_node, (const xmlChar *)"syntaxVersion",
 			   (const xmlChar *)"1");
 		xmlDocSetRootElement(root_doc, root_node);
@@ -112,24 +111,31 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter *iter,
 
 	do {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
-				   2, &caption,
-				   3, &key,
-				   4, &module,
-				   5, &mod_desc, 6, &description, -1);
+				   COL_CAPTION, &caption,
+				   COL_KEY, &key,
+				   COL_MODULE, &module,
+				   COL_MODULE_DESC, &mod_desc,
+				   COL_DESCRIPTION, &description,
+				   COL_COLOR, &color,
+				   -1);
 		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), iter)) {
-			cur_node =
-			    xml_add_folder_to_parent(root_node, caption);
+			/* folder node — write color attribute when present */
+			cur_node = xml_add_folder_to_parent_colored(root_node,
+								    caption,
+								    color);
 			utilities_parse_treeview(cur_node, iter,
 						 GTK_TREE_MODEL(model));
-		} else
+		} else {
 			xml_add_bookmark_to_parent(root_node,
 						   description,
 						   key, module, mod_desc);
+		}
 		g_free(caption);
 		g_free(key);
 		g_free(module);
 		g_free(mod_desc);
 		g_free(description);
+		g_free(color);
 	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), iter));
 
 	xmlSaveFormatFile(filename, root_doc, 1);
@@ -167,7 +173,9 @@ static void add_item_to_tree(GtkTreeIter *iter, GtkTreeIter *parent,
 			   COL_KEY, data->key,
 			   COL_MODULE, data->module,
 			   COL_MODULE_DESC, data->module_desc,
-			   COL_DESCRIPTION, data->description, -1);
+			   COL_DESCRIPTION, data->description,
+			   COL_COLOR, data->color,
+			   -1);
 }
 
 /******************************************************************************
@@ -333,99 +341,132 @@ G_MODULE_EXPORT void on_dialog_activate(GtkMenuItem *menuitem,
 G_MODULE_EXPORT void on_edit_item_activate(GtkMenuItem *menuitem,
 					   gpointer user_data)
 {
-	GS_DIALOG *info;
-	gint test;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
-	//      GtkTreeIter iter;
-	gchar *caption = NULL;
-	gchar *key = NULL;
-	gchar *module = NULL;
-	gchar *mod_desc = NULL;
-	gchar *description = NULL;
-	gboolean is_leaf;
-	GString *str;
-
-	str = g_string_new(NULL);
-	g_string_printf(str, "<span weight=\"bold\">%s</span>", _("Edit"));
+	gchar *caption = NULL, *key = NULL, *module = NULL;
+	gchar *mod_desc = NULL, *description = NULL, *current_color = NULL;
 
 	selection = gtk_tree_view_get_selection(bookmark_tree);
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-			   2, &caption,
-			   3, &key,
-			   4, &module, 5, &mod_desc, 6, &description, -1);
+			   COL_CAPTION, &caption, COL_KEY, &key,
+			   COL_MODULE, &module, COL_MODULE_DESC, &mod_desc,
+			   COL_DESCRIPTION, &description,
+			   COL_COLOR, &current_color, -1);
 
-	info = gui_new_dialog();
-	info->title = _("Bookmark");
-	info->label_top = str->str;
 	if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
-		info->label1 = _("Folder name: ");
-		is_leaf = FALSE;
-	} else {
-		info->label1 = _("Bookmark name: ");
-		info->text2 = g_strdup(key);
-		info->text3 = g_strdup(module);
-		info->label2 = _("Verse: ");
-		info->label3 = _("Module: ");
-		is_leaf = TRUE;
-	}
-
-	info->text1 = g_strdup(caption);
-	info->ok = TRUE;
-	info->cancel = TRUE;
-
-	test = gui_gs_dialog(info);
-	if (test == GS_OK) {
-		BOOKMARK_DATA *data = g_new(BOOKMARK_DATA, 1);
-		data->caption = info->text1;
-		data->key = NULL;
-		data->module = NULL;
-		data->module_desc = NULL;
-		data->description = NULL;
-		if (is_leaf) {
-			data->opened = bm_pixbufs->pixbuf_helpdoc;
-			data->closed = NULL;
-			data->key = info->text2;
-			data->module = info->text3;
-			data->module_desc =
-			    g_strdup(main_get_module_description(info->text3));
-			if ((strlen(description) > 1) || (strcmp(caption, info->text1))) {
-				data->description = info->text1;
-			} else
-				data->description = NULL;
-			data->is_leaf = TRUE;
-		} else {
-			data->opened = bm_pixbufs->pixbuf_opened;
-			data->closed = bm_pixbufs->pixbuf_closed;
-			data->is_leaf = FALSE;
+		/* --- Folder: use the dedicated folder dialog --- */
+		gchar *glade_file = gui_general_user_file("folder" UI_SUFFIX, TRUE);
+		if (!glade_file) goto cleanup;
+#ifdef USE_GTKBUILDER
+		GtkBuilder *gxml = gtk_builder_new();
+		gtk_builder_add_from_file(gxml, glade_file, NULL);
+#else
+		GladeXML *gxml = glade_xml_new(glade_file, NULL, NULL);
+#endif
+		GtkWidget *dialog  = GTK_WIDGET(UI_GET_ITEM(gxml, "dialog_folder"));
+		GtkWidget *entry   = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_entry_name"));
+#ifdef USE_GTKBUILDER
+		GtkWidget *colorbtn = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_color_button"));
+		GtkWidget *clearbtn = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_clear_color"));
+		if (!dialog || !entry || !colorbtn || !clearbtn) {
+			g_object_unref(gxml); goto cleanup;
 		}
-
-		gtk_tree_store_set(GTK_TREE_STORE(model), &selected,
-				   COL_OPEN_PIXBUF, data->opened,
-				   COL_CLOSED_PIXBUF, data->closed,
-				   COL_CAPTION, data->caption,
-				   COL_KEY, data->key,
-				   COL_MODULE, data->module,
-				   COL_MODULE_DESC, data->module_desc,
-				   COL_DESCRIPTION, data->description, -1);
-		bookmarks_changed = TRUE;
-		gui_save_bookmarks(NULL, NULL);
-		g_free(data);
+#else
+		if (!dialog || !entry) goto cleanup;
+#endif
+		gtk_window_set_title(GTK_WINDOW(dialog), _("Edit Tag"));
+		gtk_entry_set_text(GTK_ENTRY(entry), caption ? caption : "");
+#if defined(USE_GTKBUILDER) && GTK_CHECK_VERSION(3, 4, 0)
+		if (current_color && *current_color) {
+			GdkRGBA rgba;
+			if (gdk_rgba_parse(&rgba, current_color))
+				gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(colorbtn), &rgba);
+		}
+#endif
+#ifdef USE_GTKBUILDER
+		g_signal_connect_swapped(clearbtn, "clicked",
+			G_CALLBACK(gtk_widget_set_sensitive), colorbtn);
+#endif
+		if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
+			const gchar *name = gtk_entry_get_text(GTK_ENTRY(entry));
+			gchar *new_color = NULL;
+#ifdef USE_GTKBUILDER
+		if (gtk_widget_is_sensitive(colorbtn)) {
+#if GTK_CHECK_VERSION(3, 4, 0)
+				GdkRGBA rgba;
+				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(colorbtn), &rgba);
+				if (rgba.red < 0.99 || rgba.green < 0.99 || rgba.blue < 0.99)
+					new_color = g_strdup_printf("#%02X%02X%02X",
+						(guint)(rgba.red * 255),
+						(guint)(rgba.green * 255),
+						(guint)(rgba.blue * 255));
+#endif
+			}
+#endif
+			gchar *new_caption = g_strdelimit(g_strdup(name), "/|><.'`\"", ' ');
+			bookmarks_changed = TRUE;
+			gtk_tree_store_set(GTK_TREE_STORE(model), &selected,
+					   COL_CAPTION, new_caption,
+					   COL_COLOR, new_color, -1);
+			gui_save_bookmarks(NULL, NULL);
+			main_display_bible(NULL, settings.currentverse);
+			g_free(new_caption);
+			g_free(new_color);
+		}
+		gtk_widget_destroy(dialog);
+#ifdef USE_GTKBUILDER
+		g_object_unref(gxml);
+#endif
+	} else {
+		/* --- Leaf bookmark: generic dialog --- */
+		GS_DIALOG *info = gui_new_dialog();
+		GString *str = g_string_new(NULL);
+		g_string_printf(str, "<span weight=\"bold\">%s</span>", _("Edit"));
+		info->title     = _("Bookmark");
+		info->label_top = str->str;
+		info->label1    = _("Bookmark name: ");
+		info->text1     = g_strdup(caption);
+		info->text2     = g_strdup(key);
+		info->text3     = g_strdup(module);
+		info->label2    = _("Verse: ");
+		info->label3    = _("Module: ");
+		info->ok        = TRUE;
+		info->cancel    = TRUE;
+		if (gui_gs_dialog(info) == GS_OK) {
+			BOOKMARK_DATA *data = g_new0(BOOKMARK_DATA, 1);
+			data->caption     = info->text1;
+			data->key         = info->text2;
+			data->module      = info->text3;
+			data->module_desc = g_strdup(main_get_module_description(info->text3));
+			data->description = ((description && strlen(description) > 1) ||
+					    (caption && strcmp(caption, info->text1)))
+					   ? info->text1 : NULL;
+			data->is_leaf     = TRUE;
+			data->opened      = bm_pixbufs->pixbuf_helpdoc;
+			gtk_tree_store_set(GTK_TREE_STORE(model), &selected,
+					   COL_OPEN_PIXBUF,   data->opened,
+					   COL_CLOSED_PIXBUF, data->closed,
+					   COL_CAPTION,       data->caption,
+					   COL_KEY,           data->key,
+					   COL_MODULE,        data->module,
+					   COL_MODULE_DESC,   data->module_desc,
+					   COL_DESCRIPTION,   data->description, -1);
+			bookmarks_changed = TRUE;
+			gui_save_bookmarks(NULL, NULL);
+			g_free(data->module_desc);
+			g_free(data);
+		}
+		g_free(info->text1);
+		if (info->text2) g_free(info->text2);
+		if (info->text3) g_free(info->text3);
+		g_free(info);
+		g_string_free(str, TRUE);
 	}
-	g_free(info->text1); // we used g_strdup()
-	if (info->text2)
-		g_free(info->text2);
-	if (info->text3)
-		g_free(info->text3);
-	g_free(info);
-	g_free(caption);
-	g_free(key);
-	g_free(module);
-	g_free(mod_desc);
-	g_free(description);
-	g_string_free(str, TRUE);
+cleanup:
+	g_free(caption); g_free(key); g_free(module);
+	g_free(mod_desc); g_free(description); g_free(current_color);
 }
 
 //dialog_export_bookmarks_response_cb
@@ -674,6 +715,7 @@ void on_add_bookmark_activate(GtkMenuItem *menuitem, gpointer user_data)
 			data->description = NULL;
 		else
 			data->description = info->text1;
+		data->color = NULL;  /* bookmark leaves never have a color */
 		data->is_leaf = TRUE;
 		data->opened = bm_pixbufs->pixbuf_helpdoc;
 		data->closed = NULL;
@@ -734,53 +776,75 @@ G_MODULE_EXPORT void on_new_folder_activate(GtkMenuItem *menuitem,
 {
 	GtkTreeIter selected;
 	GtkTreeIter iter;
-	//      gchar *caption = NULL;
-	//      gchar *key = NULL;
-	//      gchar *module = NULL;
-	char *t;
-	gint test;
-	GS_DIALOG *info;
 	BOOKMARK_DATA *data;
-	GString *str;
 
 	if (!gtk_tree_selection_get_selected(current_selection, NULL, &selected))
 		return;
 
-	t = "/|><.'`\"";
-	str = g_string_new("");
-	info = gui_new_dialog();
-	//info->stock_icon = GTK_STOCK_OPEN;
-	info->title = _("Bookmark");
-	g_string_printf(str, "<span weight=\"bold\">%s</span>",
-			_("Enter Folder Name"));
-	info->label_top = str->str;
-	info->text1 = g_strdup(_("Folder Name"));
-	info->label1 = _("Folder: ");
-	info->ok = TRUE;
-	info->cancel = TRUE;
+	gchar *glade_file = gui_general_user_file("folder" UI_SUFFIX, TRUE);
+	g_return_if_fail(glade_file != NULL);
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml = gtk_builder_new();
+	gtk_builder_add_from_file(gxml, glade_file, NULL);
+#else
+	GladeXML *gxml = glade_xml_new(glade_file, NULL, NULL);
+#endif
+	g_free(glade_file);
 
-	data = g_new(BOOKMARK_DATA, 1);
-	/*** open dialog to get name for new folder ***/
-	test = gui_gs_dialog(info);
-	if (test == GS_OK) {
-		char *buf = g_strdelimit(info->text1, t, ' ');
-		data->caption = g_strdup(buf);
-		data->key = NULL;
-		data->module = NULL;
-		data->module_desc = NULL;
-		data->description = NULL;
+	GtkWidget *dialog     = GTK_WIDGET(UI_GET_ITEM(gxml, "dialog_folder"));
+	GtkWidget *entry      = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_entry_name"));
+#ifdef USE_GTKBUILDER
+	GtkWidget *colorbtn   = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_color_button"));
+	GtkWidget *clearbtn   = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_clear_color"));
+	if (!dialog || !entry || !colorbtn || !clearbtn) {
+		g_printerr("ERROR: dialog_folder widgets not found\n");
+		g_object_unref(gxml);
+		return;
+	}
+#else
+	if (!dialog || !entry) {
+		return;
+	}
+#endif
+
+	gtk_window_set_title(GTK_WINDOW(dialog), _("New Folder"));
+	gtk_entry_set_text(GTK_ENTRY(entry), "");
+
+#ifdef USE_GTKBUILDER
+	g_signal_connect_swapped(clearbtn, "clicked",
+		G_CALLBACK(gtk_widget_set_sensitive), colorbtn);
+#endif
+
+	gint response = gtk_dialog_run(GTK_DIALOG(dialog));
+	if (response == GTK_RESPONSE_OK) {
+		const gchar *name = gtk_entry_get_text(GTK_ENTRY(entry));
+		gchar *color = NULL;
+#if defined(USE_GTKBUILDER) && GTK_CHECK_VERSION(3, 4, 0)
+		if (gtk_widget_is_sensitive(colorbtn)) {
+			GdkRGBA rgba;
+			gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(colorbtn), &rgba);
+			if (rgba.red < 0.99 || rgba.green < 0.99 || rgba.blue < 0.99)
+				color = g_strdup_printf("#%02X%02X%02X",
+					(guint)(rgba.red   * 255),
+					(guint)(rgba.green * 255),
+					(guint)(rgba.blue  * 255));
+		}
+#endif
+		data = g_new0(BOOKMARK_DATA, 1);
+		data->caption = g_strdelimit(g_strdup(name), "/|><.'`\"", ' ');
+		data->color   = color;
 		data->is_leaf = FALSE;
-		data->opened = bm_pixbufs->pixbuf_opened;
-		data->closed = bm_pixbufs->pixbuf_closed;
-		add_item_to_tree(&iter, &selected, data);
+		data->opened  = bm_pixbufs->pixbuf_opened;
+		data->closed  = bm_pixbufs->pixbuf_closed;
 		bookmarks_changed = TRUE;
+		add_item_to_tree(&iter, &selected, data);
 		gui_save_bookmarks(NULL, NULL);
 		g_free(data->caption);
+		g_free(data->color);
+		g_free(data);
 	}
-	g_free(data);
-	g_free(info->text1);
-	g_free(info);
-	g_string_free(str, TRUE);
+	gtk_widget_destroy(dialog);
+	g_object_unref(gxml);
 }
 
 /******************************************************************************
@@ -842,6 +906,53 @@ G_MODULE_EXPORT void on_open_in_tab_activate(GtkMenuItem *menuitem,
  *   void
  */
 
+#if GTK_CHECK_VERSION(3, 4, 0)
+G_MODULE_EXPORT void on_set_tag_color_activate(GtkMenuItem *menuitem,
+                                               gpointer user_data)
+{
+	GtkTreeIter selected;
+	gchar *color = NULL;
+	GtkTreeSelection *selection = gtk_tree_view_get_selection(bookmark_tree);
+
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return;
+
+	/* Only folders get a color */
+	if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected))
+		return;
+
+	GtkWidget *dialog = gtk_color_chooser_dialog_new(
+		_("Choose folder color"), GTK_WINDOW(widgets.app));
+
+	/* Pre-load existing color if any */
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
+			   COL_COLOR, &color, -1);
+	if (color && *color) {
+		GdkRGBA rgba;
+		if (gdk_rgba_parse(&rgba, color))
+			gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(dialog), &rgba);
+	}
+	g_free(color);
+
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
+		GdkRGBA rgba;
+		gchar *hex;
+		gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(dialog), &rgba);
+		hex = g_strdup_printf("#%02X%02X%02X",
+			(guint)(rgba.red   * 255),
+			(guint)(rgba.green * 255),
+			(guint)(rgba.blue  * 255));
+		bookmarks_changed = TRUE;
+		gtk_tree_store_set(GTK_TREE_STORE(model), &selected,
+				   COL_COLOR, hex, -1);
+		g_free(hex);
+		gui_save_bookmarks(NULL, NULL);
+		main_display_bible(NULL, settings.currentverse);
+	}
+	gtk_widget_destroy(dialog);
+}
+#endif
+
 void gui_create_bookmark_menu(void)
 {
 	gchar *glade_file;
@@ -872,7 +983,8 @@ void gui_create_bookmark_menu(void)
 	menu.delete = UI_GET_ITEM(gxml, "delete_item");
 	menu.reorder = UI_GET_ITEM(gxml, "allow_reordering");
 	menu.bibletime = UI_GET_ITEM(gxml, "import_bibletime_bookmarks1");
-	menu.remove = UI_GET_ITEM(gxml, "remove_folder");
+	menu.remove      = UI_GET_ITEM(gxml, "remove_folder");
+	menu.set_color   = UI_GET_ITEM(gxml, "set_tag_color");
 
 	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);

@@ -81,7 +81,8 @@ trap 'exit 1' ERR
 function do_build {
     bits="${1}"
     mkdir -p win${bits} && cd win${bits}
-    cmake -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw${bits}.cmake -DGTK2=ON -DCONSOLE=OFF "${XIPHOS_PATH}"
+    if [ "${bits}" = "32" ]; then GTK_OPT="-DGTK2=ON"; else GTK_OPT=""; fi
+    cmake -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw${bits}.cmake ${GTK_OPT} -DGTKTVEDITOR=ON -DCONSOLE=OFF "${XIPHOS_PATH}"
     make VERBOSE=1
     make mhelp-epub-{C,fa,fr,it} package
     cd ..
