@@ -251,6 +251,28 @@ int main(int argc, char *argv[])
 	 */
 	settings_init(argc, argv, newconfigs, newbookmarks);
 
+	/* Phase 2: backup bookmarks.xml once on first run after upgrade.
+	 * The backup is skipped if it already exists. */
+	{
+		gchar *bm   = g_strdup_printf("%s/bookmarks/bookmarks.xml",
+		                               settings.gSwordDir);
+		gchar *bmbak = g_strdup_printf("%s/bookmarks/bookmarks.xml.bak",
+		                               settings.gSwordDir);
+		if (g_file_test(bm, G_FILE_TEST_EXISTS) &&
+		    !g_file_test(bmbak, G_FILE_TEST_EXISTS)) {
+			GError *err = NULL;
+			GFile *src_f = g_file_new_for_path(bm);
+			GFile *dst_f = g_file_new_for_path(bmbak);
+			g_file_copy(src_f, dst_f,
+			            G_FILE_COPY_NONE, NULL, NULL, NULL, &err);
+			if (err) g_error_free(err);
+			g_object_unref(src_f);
+			g_object_unref(dst_f);
+		}
+		g_free(bm);
+		g_free(bmbak);
+	}
+
 	gui_init(argc, argv);
 
 	gui_splash_init();

@@ -33,6 +33,7 @@
 #include "gui/bookmarks_treeview.h"
 #include "gui/dialog.h"
 #include "gui/utilities.h"
+#include "gui/widgets.h"
 
 #include "main/display.hh"
 #include "main/sword.h"
@@ -54,7 +55,7 @@ static GtkWidget *entry_module;
 static GtkWidget *textview;
 static GtkTextBuffer *textbuffer;
 static gchar *note;
-
+static gchar *global_module_name = NULL;
 GtkWidget *bookmark_dialog;
 GtkWidget *mark_verse_dialog;
 
@@ -89,40 +90,51 @@ void on_buffer_changed(GtkTextBuffer *textbuffer, gpointer user_data)
 
 static void add_bookmark_button(void)
 {
-	GtkTreeIter selected;
-	GtkTreeIter iter;
-	BOOKMARK_DATA *data;
-	GtkTreeSelection *selection;
+    GtkTreeIter selected;
+    GtkTreeIter iter;
+    BOOKMARK_DATA *data;
+    GtkTreeSelection *selection;
+    const gchar *module_from_entry;
+    const gchar *module_to_use;
 
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
-	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
-		return;
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+    if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+        return;
 
-	data = g_new(BOOKMARK_DATA, 1);
-	data->caption = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY(entry_label)));
-	data->key = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY(entry_key)));
-	data->module = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY(entry_module)));
+    data = g_new(BOOKMARK_DATA, 1);
+    data->caption = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY(entry_label)));
+    data->key = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY(entry_key)));
+    
 
-	if (!strcmp(data->module, "studypad"))
-		data->module_desc = "studypad";
-	else
-		data->module_desc =
-		    g_strdup(main_get_module_description(data->module));
+    module_from_entry = gtk_entry_get_text(GTK_ENTRY(entry_module));
+    if (module_from_entry && strlen(module_from_entry) > 0) {
+        module_to_use = module_from_entry;
+    } else if (global_module_name && strlen(global_module_name) > 0) {
+        module_to_use = global_module_name;
+    } else {
+        module_to_use = "";
+    }
+    
+    data->module = g_strdup(module_to_use);
 
-	data->description = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY(entry_label)));
+    if (data->module && strlen(data->module) > 0) {
+        if (!strcmp(data->module, "studypad"))
+            data->module_desc = g_strdup("studypad");
+        else
+            data->module_desc = g_strdup(main_get_module_description(data->module));
+    } else {
+        data->module_desc = g_strdup("");
+    }
 
-	data->is_leaf = TRUE;
-	data->opened = bm_pixbufs->pixbuf_helpdoc;
-	data->closed = NULL;
-	gui_add_item_to_tree(&iter, &selected, data);
-	bookmarks_changed = TRUE;
-	gui_save_bookmarks(NULL, NULL);
-
-	g_free(data->caption);
-	g_free(data->key);
-	g_free(data->module);
-	g_free(data->description);
-	g_free(data);
+    data->description = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY(entry_label)));
+    data->is_leaf = TRUE;
+    data->opened = bm_pixbufs->pixbuf_helpdoc;
+    data->closed = NULL;
+    
+    gui_add_item_to_tree(&iter, &selected, data);
+    bookmarks_changed = TRUE;
+    gui_save_bookmarks(NULL, NULL);
+    
 }
 
 /******************************************************************************
@@ -147,56 +159,100 @@ static void add_folder_button(void)
 	GtkTreeIter iter;
 	BOOKMARK_DATA *data;
 	GtkTreeSelection *selection;
-	char *t;
-	gint test;
-	GS_DIALOG *info;
-	GString *str;
 
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
 
-	t = "|";
-	str = g_string_new("");
-	info = gui_new_dialog();
-	//info->stock_icon = GTK_STOCK_OPEN;
-	info->title = _("Bookmark");
-	g_string_printf(str, "<span weight=\"bold\">%s</span>",
-			_("Enter Folder Name"));
-	info->label_top = str->str;
-	info->text1 = g_strdup(_("Folder Name"));
-	info->label1 = _("Folder: ");
-	info->ok = TRUE;
-	info->cancel = TRUE;
+	gchar *glade_file = gui_general_user_file("folder" UI_SUFFIX, TRUE);
+	if (!glade_file) return;
 
-	data = g_new(BOOKMARK_DATA, 1);
-	/*** open dialog to get name for new folder ***/
-	test = gui_gs_dialog(info);
-	if (test == GS_OK) {
-		char *buf = g_strdelimit(info->text1, t, ' ');
-		data->caption = g_strdup(buf);
-		data->key = NULL;
-		data->module = NULL;
-		data->module_desc = NULL;
-		data->description = NULL;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml = gtk_builder_new();
+	gtk_builder_add_from_file(gxml, glade_file, NULL);
+#else
+	GladeXML *gxml = glade_xml_new(glade_file, NULL, NULL);
+#endif
+	g_free(glade_file);
+
+	GtkWidget *entry  = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_entry_name"));
+	GtkWidget *dialog = GTK_WIDGET(UI_GET_ITEM(gxml, "dialog_folder"));
+	GtkWidget *colorbtn = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_color_button"));
+	GtkWidget *clearbtn = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_clear_color"));
+
+#ifdef USE_GTKBUILDER
+	if (!dialog || !entry || !colorbtn || !clearbtn) {
+		g_object_unref(gxml);
+		return;
+	}
+#else
+	if (!dialog || !entry || !colorbtn || !clearbtn) return;
+	
+	/* Détruire les boutons inactifs de Glade et ajouter les vrais boutons GTK2 */
+	GtkWidget *btn_ok = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_ok"));
+	GtkWidget *btn_cancel = GTK_WIDGET(UI_GET_ITEM(gxml, "folder_cancel"));
+	if (btn_ok) gtk_widget_destroy(btn_ok);
+	if (btn_cancel) gtk_widget_destroy(btn_cancel);
+	
+	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_OK, GTK_RESPONSE_OK);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+#endif
+
+	gtk_window_set_title(GTK_WINDOW(dialog), _("New Tag"));
+	gtk_entry_set_text(GTK_ENTRY(entry), "");
+	
+	/* Cette ligne est commune, on la sort du #ifdef */
+	g_signal_connect_swapped(clearbtn, "clicked",
+		G_CALLBACK(gtk_widget_set_sensitive), colorbtn);
+
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
+		const gchar *name = gtk_entry_get_text(GTK_ENTRY(entry));
+		gchar *color = NULL;
+
+		if (gtk_widget_is_sensitive(colorbtn)) {
+#if defined(USE_GTKBUILDER) && GTK_CHECK_VERSION(3, 4, 0)
+			GdkRGBA rgba;
+			gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(colorbtn), &rgba);
+			if (rgba.red < 0.99 || rgba.green < 0.99 || rgba.blue < 0.99)
+				color = g_strdup_printf("#%02X%02X%02X",
+					(guint)(rgba.red   * 255),
+					(guint)(rgba.green * 255),
+					(guint)(rgba.blue  * 255));
+#else
+			/* API de récupération de couleur pour GTK2 */
+			GdkColor gdk_color;
+			gtk_color_button_get_color(GTK_COLOR_BUTTON(colorbtn), &gdk_color);
+			if (gdk_color.red < 65000 || gdk_color.green < 65000 || gdk_color.blue < 65000)
+				color = g_strdup_printf("#%02X%02X%02X",
+					gdk_color.red >> 8,
+					gdk_color.green >> 8,
+					gdk_color.blue >> 8);
+#endif
+		}
+
+		data = g_new0(BOOKMARK_DATA, 1);
+		data->caption = g_strdelimit(g_strdup(name), "/|><.'`\"", ' ');
+		data->color   = color;
 		data->is_leaf = FALSE;
-		data->opened = bm_pixbufs->pixbuf_opened;
-		data->closed = bm_pixbufs->pixbuf_closed;
+		data->opened  = bm_pixbufs->pixbuf_opened;
+		data->closed  = bm_pixbufs->pixbuf_closed;
 		gui_add_item_to_tree(&iter, &selected, data);
 		bookmarks_changed = TRUE;
 		gui_save_bookmarks(NULL, NULL);
-		g_free(data->caption);
-		GtkTreePath *path =
-		    gtk_tree_model_get_path(GTK_TREE_MODEL(model), &iter);
-		gtk_tree_view_expand_to_path(GTK_TREE_VIEW(treeview),
-					     path);
+		
+		GtkTreePath *path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), &iter);
+		gtk_tree_view_expand_to_path(GTK_TREE_VIEW(treeview), path);
 		gtk_tree_selection_select_path(selection, path);
 		gtk_tree_path_free(path);
+		g_free(data->caption);
+		g_free(data->color);
+		g_free(data);
 	}
-	g_free(data);
-	g_free(info->text1);
-	g_free(info);
-	g_string_free(str, TRUE);
+	gtk_widget_destroy(dialog);
+#ifdef USE_GTKBUILDER
+	g_object_unref(gxml);
+#endif
 }
 
 /******************************************************************************
@@ -218,19 +274,6 @@ static void add_folder_button(void)
 void on_dialog_response(GtkDialog *dialog,
 			gint response_id, gpointer user_data)
 {
-	switch (response_id) {
-	case GTK_RESPONSE_CANCEL: /*  cancel button pressed  */
-	case GTK_RESPONSE_NONE:   /*  dialog destroyed  */
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-		break;
-	case GTK_RESPONSE_OK: /*  add button pressed  */
-		add_bookmark_button();
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-		break;
-	case GTK_RESPONSE_ACCEPT: /*  add folder pressed  */
-		add_folder_button();
-		break;
-	}
 }
 
 /******************************************************************************
@@ -249,8 +292,8 @@ void on_dialog_response(GtkDialog *dialog,
 
 void on_dialog_enter(void)
 {
-	on_dialog_response(GTK_DIALOG(bookmark_dialog),
-			   GTK_RESPONSE_OK, NULL);
+	if (bookmark_dialog)
+		gtk_dialog_response(GTK_DIALOG(bookmark_dialog), GTK_RESPONSE_OK);
 }
 
 /******************************************************************************
@@ -441,8 +484,6 @@ static GtkWidget *_create_bookmark_dialog(gchar *label,
 
 	/* lookup the root widget */
 	bookmark_dialog = UI_GET_ITEM(gxml, "dialog");
-	g_signal_connect(bookmark_dialog, "response",
-			 G_CALLBACK(on_dialog_response), NULL);
 
 	/* treeview */
 	treeview = UI_GET_ITEM(gxml, "treeview");
@@ -577,11 +618,27 @@ static GtkWidget *_create_mark_verse_dialog(gchar *module, gchar *key)
 
 void gui_bookmark_dialog(gchar *label, gchar *module_name, gchar *key)
 {
+	global_module_name = module_name;
 	GtkWidget *dialog =
 	    _create_bookmark_dialog(label, module_name, key);
 	if (!dialog)
 		return;
-	gtk_dialog_run(GTK_DIALOG(dialog));
+	gint response;
+	while (TRUE) {
+		response = gtk_dialog_run(GTK_DIALOG(dialog));
+		if (response == GTK_RESPONSE_ACCEPT) {
+			/* New folder — keep dialog open */
+			add_folder_button();
+		} else if (response == GTK_RESPONSE_OK) {
+			/* Add bookmark — close dialog */
+			add_bookmark_button();
+			break;
+		} else {
+			/* Cancel or destroy */
+			break;
+		}
+	}
+	gtk_widget_destroy(dialog);
 }
 
 /******************************************************************************

@@ -28,6 +28,7 @@
 #include <libxml/parser.h>
 
 #include <math.h>
+#include <cairo.h>
 #include <ctype.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -203,6 +204,7 @@ void gui_verselist_to_bookmarks(GList *verses, gint save_as_single)
 static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA *data)
 {
 	xmlChar *folder;
+	gchar *color;
 
 	folder = xmlGetProp(cur, (const xmlChar *)"caption");
 	data->caption = g_strdup((char *)folder);
@@ -213,6 +215,12 @@ static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA *data)
 	data->is_leaf = FALSE;
 	data->opened = bm_pixbufs->pixbuf_opened;
 	data->closed = bm_pixbufs->pixbuf_closed;
+
+	/* color is optional — NULL when the folder has no tag color assigned */
+	color = xml_get_folder_color(cur);
+	data->color = color ? g_strdup(color) : NULL;
+	if (color)
+		xmlFree((xmlChar *)color);
 }
 
 /******************************************************************************
@@ -261,6 +269,7 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA *data)
 	data->description = g_strdup((char *)description);
 	data->module_desc = g_strdup((char *)mod_desc);
 	data->is_leaf = TRUE;
+	data->color = NULL;  /* leaves (bookmarks) never carry a color */
 }
 
 /******************************************************************************
@@ -291,6 +300,8 @@ static void free_bookmark_data(BOOKMARK_DATA *data)
 		g_free(data->module_desc);
 	if (data->description)
 		g_free(data->description);
+	if (data->color)
+		g_free(data->color);
 }
 
 /******************************************************************************
@@ -322,7 +333,9 @@ void gui_add_item_to_tree(GtkTreeIter *iter, GtkTreeIter *parent,
 			   COL_KEY, data->key,
 			   COL_MODULE, data->module,
 			   COL_MODULE_DESC, data->module_desc,
-			   COL_DESCRIPTION, data->description, -1);
+			   COL_DESCRIPTION, data->description,
+			   COL_COLOR, data->color,
+			   -1);
 }
 
 /******************************************************************************
@@ -578,6 +591,94 @@ static void create_pixbufs(void)
  *   void
  */
 
+/* Creates a round color swatch pixbuf using Cairo (14x14 px) */
+#ifdef USE_GTK_3
+static GdkPixbuf *make_color_dot(const gchar *hex_color)
+{
+	const gint SIZE = 14;
+	cairo_surface_t *surface;
+	cairo_t *cr;
+	GdkPixbuf *pixbuf;
+	GdkRGBA rgba;
+
+	if (!hex_color || !*hex_color)
+		return NULL;
+	if (!gdk_rgba_parse(&rgba, hex_color))
+		return NULL;
+
+	surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, SIZE, SIZE);
+	cr = cairo_create(surface);
+
+	/* transparent background */
+	cairo_set_source_rgba(cr, 0, 0, 0, 0);
+	cairo_paint(cr);
+
+	/* filled circle */
+	cairo_set_source_rgba(cr, rgba.red, rgba.green, rgba.blue, 1.0);
+	cairo_arc(cr, SIZE/2.0, SIZE/2.0, SIZE/2.0 - 1, 0, 2 * G_PI);
+	cairo_fill_preserve(cr);
+
+	/* thin dark border */
+	cairo_set_source_rgba(cr, 0, 0, 0, 0.35);
+	cairo_set_line_width(cr, 1.0);
+	cairo_stroke(cr);
+
+	cairo_destroy(cr);
+	pixbuf = gdk_pixbuf_get_from_surface(surface, 0, 0, SIZE, SIZE);
+	cairo_surface_destroy(surface);
+	return pixbuf;
+}
+
+/* Cell data function: generates the color dot pixbuf on the fly */
+static void color_dot_cell_func(GtkTreeViewColumn *col,
+                                GtkCellRenderer   *renderer,
+                                GtkTreeModel      *tree_model,
+                                GtkTreeIter       *iter,
+                                gpointer           data)
+{
+	gchar *color = NULL;
+	GdkPixbuf *dot = NULL;
+	gtk_tree_model_get(tree_model, iter, COL_COLOR, &color, -1);
+	dot = make_color_dot(color);
+	g_object_set(renderer, "pixbuf", dot, NULL);
+	if (dot) g_object_unref(dot);
+	g_free(color);
+}
+#endif
+
+#ifndef USE_GTK_3
+static void color_dot_cell_func_gtk2(GtkTreeViewColumn *tree_column,
+                                     GtkCellRenderer *cell,
+                                     GtkTreeModel *tree_model,
+                                     GtkTreeIter *iter,
+                                     gpointer data)
+{
+        gchar *color_str = NULL;
+        gtk_tree_model_get(tree_model, iter, COL_COLOR, &color_str, -1);
+        if (color_str && *color_str) {
+                GdkColor color;
+                if (gdk_color_parse(color_str, &color)) {
+                        /* Crée un petit carré de couleur de 12x12 pixels */
+                        GdkPixbuf *pixbuf = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, 12, 12);
+                        if (pixbuf) {
+                                guint32 r = color.red >> 8;
+                                guint32 g = color.green >> 8;
+                                guint32 b = color.blue >> 8;
+                                guint32 pixel = (r << 24) | (g << 16) | (b << 8) | 0xFF;
+                                gdk_pixbuf_fill(pixbuf, pixel);
+                                g_object_set(cell, "pixbuf", pixbuf, NULL);
+                                g_object_unref(pixbuf);
+                        }
+                } else {
+                        g_object_set(cell, "pixbuf", NULL, NULL);
+                }
+        } else {
+                g_object_set(cell, "pixbuf", NULL, NULL);
+        }
+        g_free(color_str);
+}
+#endif
+
 void gui_add_columns(GtkTreeView *tree)
 {
 	GtkTreeViewColumn *column;
@@ -592,6 +693,24 @@ void gui_add_columns(GtkTreeView *tree)
 					    "pixbuf-expander-open", COL_OPEN_PIXBUF,
 					    "pixbuf-expander-closed", COL_CLOSED_PIXBUF, NULL);
 
+
+#ifdef USE_GTK_3
+        /* Color dot renderer — round swatch drawn with Cairo */
+        renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
+        gtk_tree_view_column_pack_start(column, renderer, FALSE);
+        gtk_tree_view_column_set_cell_data_func(column, renderer,
+                                                color_dot_cell_func,
+                                                NULL, NULL);
+#else
+        /* GTK2 Windows — colored square drawn via pixbuf */
+        renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
+        gtk_tree_view_column_pack_start(column, renderer, FALSE);
+        gtk_tree_view_column_set_cell_data_func(column, renderer,
+                                                color_dot_cell_func_gtk2,
+                                                NULL, NULL);
+#endif
+
+	/* Caption renderer */
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
@@ -653,12 +772,14 @@ static GtkTreeModel *create_model(void)
 {
 	/* create tree store */
 	model = gtk_tree_store_new(N_COLUMNS,
-				   GDK_TYPE_PIXBUF,
-				   GDK_TYPE_PIXBUF,
-				   G_TYPE_STRING,
-				   G_TYPE_STRING,
-				   G_TYPE_STRING,
-				   G_TYPE_STRING, G_TYPE_STRING);
+				   GDK_TYPE_PIXBUF,  /* COL_OPEN_PIXBUF  */
+				   GDK_TYPE_PIXBUF,  /* COL_CLOSED_PIXBUF */
+				   G_TYPE_STRING,    /* COL_CAPTION      */
+				   G_TYPE_STRING,    /* COL_KEY          */
+				   G_TYPE_STRING,    /* COL_MODULE       */
+				   G_TYPE_STRING,    /* COL_MODULE_DESC  */
+				   G_TYPE_STRING,    /* COL_DESCRIPTION  */
+				   G_TYPE_STRING);   /* COL_COLOR        */
 	return GTK_TREE_MODEL(model);
 }
 
@@ -680,6 +801,13 @@ static GtkTreeModel *create_model(void)
  *   void
  */
 
+static void lambda_open_url(GtkMenuItem *item, gpointer data)
+{
+	const gchar *url = (const gchar *)g_object_get_data(G_OBJECT(item), "url");
+	if (url)
+		main_url_handler(url, TRUE);
+}
+
 static gboolean button_release_event(GtkWidget *widget,
 				     GdkEventButton *event, gpointer data)
 {
@@ -690,6 +818,7 @@ static gboolean button_release_event(GtkWidget *widget,
 	gchar *key = NULL;
 	gchar *module = NULL;
 	gchar *mod_desc = NULL;
+	gchar *range_start = NULL;
 	gchar *description = NULL;
 	button_one = FALSE;
 
@@ -781,34 +910,131 @@ static gboolean button_release_event(GtkWidget *widget,
 	}
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected) && key != NULL) {
-			// might have an abbrev.  get the real.
 			const gchar *real_mod = main_abbrev_to_name(module);
-			gchar *url = NULL;
+			/* multi if contains ";", "-" (range) or comma between verse numbers */
+			gboolean multi = (strchr(key, ';') != NULL);
+			gboolean is_range = FALSE;
+			if (strchr(key, '-')) {
+				/* verse range: navigate to first verse directly */
+				const gchar *colon = strchr(key, ':');
+				const gchar *dash  = strchr(key, '-');
+				if (colon && dash && dash > colon) {
+					is_range = TRUE;
+					range_start = g_strndup(key, dash - key);
+				}
+			}
+			if (!multi && strchr(key, ',')) {
+				/* check if comma separates verses: "Eph 2:8,9" */
+				const gchar *colon = strchr(key, ':');
+				const gchar *comma = strchr(key, ',');
+				if (colon && comma && comma > colon)
+					multi = TRUE;
+			}
 
-			if (!strcmp(module, "studypad"))
-				url =
-				    g_strdup_printf("passagestudy.jsp?action=showStudypad&"
-						    "type=9&value=%s&module=%s",
-						    main_url_encode(key),
-						    main_url_encode((real_mod
-								     ? real_mod
-								     : module)));
-
-			else if (button_one)
-				url =
-				    g_strdup_printf("passagestudy.jsp?action=showBookmark&"
-						    "type=%s&value=%s&module=%s",
-						    "currentTab",
-						    main_url_encode(key),
-						    main_url_encode((real_mod
-								     ? real_mod
-								     : module)));
-			if (url) {
+			if (is_range && button_one && range_start) {
+				/* navigate directly to first verse of range */
+				gchar *url = g_strdup_printf(
+					"passagestudy.jsp?action=showBookmark&"
+					"type=%s&value=%s&module=%s",
+					"currentTab",
+					main_url_encode(range_start),
+					main_url_encode((real_mod ? real_mod : module)));
 				main_url_handler(url, TRUE);
 				g_free(url);
+				g_free(range_start);
+				range_start = NULL;
+			} else if (multi && button_one) {
+				/* split on ";" first, then expand "book ch:v1,v2" */
+				GList *refs = NULL;
+				gchar **semis = g_strsplit(key, ";", -1);
+				gchar *last_book = NULL;
+				for (gint si = 0; semis[si]; si++) {
+					gchar *part = g_strstrip(semis[si]);
+					if (!*part) continue;
+					gchar *full_part;
+					/* if no space in part but has colon, prepend last book */
+					if (last_book && strchr(part, ':') && !strchr(part, ' '))
+						full_part = g_strdup_printf("%s %s", last_book, part);
+					else {
+						full_part = g_strdup(part);
+						/* extract book name: before last space before colon */
+						const gchar *col = strchr(full_part, ':');
+						if (col) {
+							const gchar *sp = col;
+							while (sp > full_part && *sp != ' ') sp--;
+							if (sp > full_part) {
+								g_free(last_book);
+								last_book = g_strndup(full_part, sp - full_part);
+							}
+						}
+					}
+					/* handle comma-separated verses */
+					const gchar *colon = strchr(full_part, ':');
+					const gchar *comma = strchr(full_part, ',');
+					if (colon && comma && comma > colon) {
+						gchar *prefix = g_strndup(full_part, colon - full_part + 1);
+						gchar **vnums = g_strsplit(colon + 1, ",", -1);
+						for (gint vi = 0; vnums[vi]; vi++) {
+							gchar *vn = g_strstrip(vnums[vi]);
+							if (*vn)
+								refs = g_list_append(refs,
+									g_strdup_printf("%s%s", prefix, vn));
+						}
+						g_strfreev(vnums);
+						g_free(prefix);
+					} else {
+						refs = g_list_append(refs, g_strdup(full_part));
+					}
+					g_free(full_part);
+				}
+				g_free(last_book);
+				g_strfreev(semis);
+				GtkWidget *popup = gtk_menu_new();
+				for (GList *l = refs; l; l = l->next) {
+					gchar *ref = (gchar *)l->data;
+					GtkWidget *item = gtk_menu_item_new_with_label(ref);
+					gchar *url = g_strdup_printf(
+						"passagestudy.jsp?action=showBookmark&"
+						"type=%s&value=%s&module=%s",
+						"currentTab",
+						main_url_encode(ref),
+						main_url_encode((real_mod ? real_mod : module)));
+					g_object_set_data_full(G_OBJECT(item), "url", url, g_free);
+					g_signal_connect(item, "activate",
+						G_CALLBACK(lambda_open_url), NULL);
+					gtk_menu_shell_append(GTK_MENU_SHELL(popup), item);
+				}
+				g_list_free_full(refs, g_free);
+				gtk_widget_show_all(popup);
+#if GTK_CHECK_VERSION(3, 22, 0)
+				gtk_menu_popup_at_pointer(GTK_MENU(popup), NULL);
+#else
+				gtk_menu_popup(GTK_MENU(popup), NULL, NULL, NULL, NULL, 1,
+					      gtk_get_current_event_time());
+#endif
+			} else {
+				gchar *url = NULL;
+				if (!strcmp(module, "studypad"))
+					url = g_strdup_printf(
+						"passagestudy.jsp?action=showStudypad&"
+						"type=9&value=%s&module=%s",
+						main_url_encode(key),
+						main_url_encode((real_mod ? real_mod : module)));
+				else if (button_one)
+					url = g_strdup_printf(
+						"passagestudy.jsp?action=showBookmark&"
+						"type=%s&value=%s&module=%s",
+						"currentTab",
+						main_url_encode(key),
+						main_url_encode((real_mod ? real_mod : module)));
+				if (url) {
+					main_url_handler(url, TRUE);
+					g_free(url);
+				}
 			}
 		}
 		g_free(caption);
+		g_free(range_start);
 		g_free(key);
 		g_free(module);
 	}
@@ -830,6 +1056,87 @@ static gboolean button_release_event(GtkWidget *widget,
  * Return value
  *   GtkWidget*
  */
+
+/**
+ * bookmark_get_tag_color_for_key:
+ * @osiskey: a verse key string, e.g. "Gen 1:1"
+ *
+ * Walks the bookmark GtkTreeStore and returns the color of the
+ * first tag-group folder that contains a bookmark matching @osiskey.
+ * Returns NULL if none found.  Caller must g_free() the result.
+ */
+static void debug_dump_recursive(GtkTreeIter *parent, int depth)
+{
+	GtkTreeIter child;
+	if (!gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child, parent))
+		return;
+	do {
+		gchar *caption = NULL, *color = NULL;
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
+				   COL_CAPTION, &caption, COL_COLOR, &color, -1);
+		debug_dump_recursive(&child, depth + 1);
+		g_free(caption); g_free(color);
+	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+}
+
+void bookmark_debug_dump_colors(void)
+{
+	GtkTreeIter root;
+	if (!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &root)) {
+	}
+	debug_dump_recursive(&root, 0);
+}
+
+
+gchar *bookmark_get_tag_color_for_key(const gchar *osiskey)
+{
+	GtkTreeIter folder, child;
+	gchar *color = NULL;
+
+	if (!osiskey || !model)
+		return NULL;
+
+	/* iterate top-level folders */
+	if (!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &folder))
+		return NULL;
+
+	do {
+		gchar *folder_color = NULL;
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &folder,
+				   COL_COLOR, &folder_color, -1);
+		if (!folder_color || !*folder_color) {
+			g_free(folder_color);
+			continue;
+		}
+		/* scan children of this colored folder */
+		if (gtk_tree_model_iter_children(GTK_TREE_MODEL(model),
+						 &child, &folder)) {
+			do {
+				gchar *key = NULL;
+				gtk_tree_model_get(GTK_TREE_MODEL(model),
+						   &child,
+						   COL_KEY, &key, -1);
+				/* compare case-insensitively;
+				 * also try stripping trailing spaces */
+				gchar *k = key ? g_strstrip(g_strdup(key)) : NULL;
+				gchar *q = osiskey ? g_strstrip(g_strdup(osiskey)) : NULL;
+				gboolean match = (k && q && !g_ascii_strcasecmp(k, q));
+				g_free(k); g_free(q);
+				if (match) {
+					color = g_strdup(folder_color);
+					g_free(key);
+					g_free(folder_color);
+					return color;
+				}
+				g_free(key);
+			} while (gtk_tree_model_iter_next(
+					GTK_TREE_MODEL(model), &child));
+		}
+		g_free(folder_color);
+	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &folder));
+
+	return NULL;
+}
 
 GtkWidget *gui_create_bookmark_tree(void)
 {
@@ -858,6 +1165,7 @@ GtkWidget *gui_create_bookmark_tree(void)
 			       GINT_TO_POINTER(0));
 	use_dialog = FALSE;
 	bookmark_tree = GTK_TREE_VIEW(tree);
+	gtk_tree_view_set_reorderable(bookmark_tree, TRUE);
 
 	g_signal_connect(model, "row-changed",
 			 G_CALLBACK(row_changed), NULL);

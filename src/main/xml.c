@@ -24,6 +24,7 @@
 #endif
 
 #include <unistd.h>
+#include <locale.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <libxml/parser.h>
@@ -139,6 +140,62 @@ xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar *caption)
 			 (const xmlChar *)"caption",
 			 (const xmlChar *)caption);
 	return cur_node;
+}
+
+/******************************************************************************
+ * Name
+ *  xml_add_folder_to_parent_colored
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   xmlNodePtr xml_add_folder_to_parent_colored(xmlNodePtr parent,
+ *                                               gchar *caption,
+ *                                               const gchar *color)
+ *
+ * Description
+ *   Like xml_add_folder_to_parent() but also writes the optional "color"
+ *   attribute (e.g. "#378ADD") used by tag groups.  Pass NULL or "" to
+ *   omit the attribute (behaves identically to the plain variant).
+ *
+ * Return value
+ *   xmlNodePtr - the new Folder node
+ */
+
+xmlNodePtr xml_add_folder_to_parent_colored(xmlNodePtr parent,
+					    gchar *caption,
+					    const gchar *color)
+{
+	xmlNodePtr cur_node = xml_add_folder_to_parent(parent, caption);
+
+	if (color && *color)
+		(void)xmlNewProp(cur_node,
+				 (const xmlChar *)"color",
+				 (const xmlChar *)color);
+	return cur_node;
+}
+
+/******************************************************************************
+ * Name
+ *  xml_get_folder_color
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   gchar *xml_get_folder_color(xmlNodePtr node)
+ *
+ * Description
+ *   Returns the "color" attribute of a Folder node, or NULL when absent.
+ *   The caller must free the returned string with xmlFree() (it is an
+ *   xmlChar * cast to gchar *).
+ *
+ * Return value
+ *   gchar * (xmlChar * underneath) — caller must xmlFree(), or NULL
+ */
+
+gchar *xml_get_folder_color(xmlNodePtr node)
+{
+	return (gchar *)xmlGetProp(node, (const xmlChar *)"color");
 }
 
 /******************************************************************************
