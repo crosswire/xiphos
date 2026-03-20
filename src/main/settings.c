@@ -182,9 +182,10 @@ int settings_init(int argc, char **argv, int new_configs,
 	g_free(sword_dir);
 
 	/* moved here from crud locations in backend. */
-	main_init_language_map();
 
 	language_init();
+	main_init_language_map();
+	gui_init(argc, argv);
 
 	init_bookmarks(new_bookmarks);
 

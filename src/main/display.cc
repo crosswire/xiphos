@@ -52,6 +52,7 @@
 #include "main/xml.h"
 
 #include "gui/utilities.h"
+#include "gui/bookmarks_treeview.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
 
@@ -1422,6 +1423,157 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 	}
 }
 
+/* Returns white or black depending on background luminance */
+static const char *text_color_for_bg(const gchar *hex_color)
+{
+	if (!hex_color || hex_color[0] != '#' || strlen(hex_color) < 7)
+		return "#000000";
+	int r = 0, g = 0, b = 0;
+	sscanf(hex_color + 1, "%02x%02x%02x", &r, &g, &b);
+	/* relative luminance (ITU-R BT.709) */
+	double lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+	return (lum < 128.0) ? "#FFFFFF" : "#000000";
+}
+
+/* Returns the tag color for a given VerseKey by comparing OSIS refs.
+ * Walks the GtkTreeStore directly from C++. */
+static gchar *get_tag_color_for_versekey(VerseKey *vk)
+{
+	extern GtkTreeStore *model;
+	if (!model || !vk) return NULL;
+
+	gchar *osisref = g_strdup_printf("%s.%d.%d",
+		vk->getOSISBookName(),
+		vk->getChapter(),
+		vk->getVerse());
+
+	GtkTreeIter root;
+	if (!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &root)) {
+		g_free(osisref); return NULL;
+	}
+
+	GQueue *stack = g_queue_new();
+	GQueue *colors = g_queue_new();
+	GtkTreeIter child;
+	if (gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child, &root)) {
+		do {
+			GtkTreeIter *copy = g_new(GtkTreeIter, 1);
+			*copy = child;
+			g_queue_push_tail(stack, copy);
+			g_queue_push_tail(colors, NULL);
+		} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+	}
+
+	gchar *result = NULL;
+	while (!g_queue_is_empty(stack) && !result) {
+		GtkTreeIter *iter = (GtkTreeIter *)g_queue_pop_head(stack);
+		gchar *inherited = (gchar *)g_queue_pop_head(colors);
+		gchar *node_color = NULL, *node_key = NULL;
+		gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
+				   COL_COLOR, &node_color,
+				   COL_KEY,   &node_key, -1);
+		const gchar *effective = (node_color && *node_color)
+			? node_color : inherited;
+		if (node_key) {
+			/* handle multi-reference keys with ranges, semicolons, commas */
+			gchar **parts = g_strsplit(node_key, ";", -1);
+			gchar *last_book_chap = NULL;
+			for (gint pi = 0; parts[pi] && !result; pi++) {
+				gchar *part = g_strstrip(parts[pi]);
+				if (!*part) continue;
+				/* resolve partial ref: "16:36" -> "Acts 16:36" */
+				gchar *full_part;
+				if (last_book_chap && !strchr(part, ' ') && strchr(part, ':'))
+					full_part = g_strdup_printf("%s %s", last_book_chap, part);
+				else
+					full_part = g_strdup(part);
+				/* check for verse range: "1 Cor 15:1-4" */
+				const gchar *col = strchr(full_part, ':');
+				const gchar *dash = col ? strchr(col, '-') : NULL;
+				if (col && dash) {
+					/* range: check if curVerse is between start and end */
+					gchar *range_ref = g_strndup(full_part, dash - full_part);
+					VerseKey vk_start;
+					vk_start.setLocale(vk->getLocale());
+					vk_start.setText(range_ref);
+					g_free(range_ref);
+					int verse_end = atoi(dash + 1);
+					/* compare numerically */
+					gboolean same_book = !strcmp(vk->getOSISBookName(),
+						vk_start.getOSISBookName());
+					if (same_book &&
+					    vk->getChapter() == vk_start.getChapter() &&
+					    vk->getVerse() >= vk_start.getVerse() &&
+					    vk->getVerse() <= verse_end &&
+					    effective)
+						result = g_strdup(effective);
+				} else {
+					/* handle comma-separated verses */
+					gchar **verses = g_strsplit(full_part, ",", -1);
+					gchar *book_chapter = NULL;
+					for (gint vi = 0; verses[vi] && !result; vi++) {
+						gchar *v = g_strstrip(verses[vi]);
+						gchar *full_ref;
+						if (strchr(v, ' ') || strchr(v, '.') || !book_chapter)
+							full_ref = g_strdup(v);
+						else
+							full_ref = g_strdup_printf("%s:%s", book_chapter, v);
+						VerseKey vk2;
+						vk2.setLocale(vk->getLocale());
+						vk2.setText(full_ref);
+						gchar *ref2 = g_strdup_printf("%s.%d.%d",
+							vk2.getOSISBookName(),
+							vk2.getChapter(),
+							vk2.getVerse());
+						if (!g_ascii_strcasecmp(osisref, ref2) && effective)
+							result = g_strdup(effective);
+						if (!book_chapter && strchr(full_ref, ':')) {
+							gchar *colon = strrchr(full_ref, ':');
+							book_chapter = g_strndup(full_ref, colon - full_ref);
+						}
+						g_free(ref2);
+						g_free(full_ref);
+					}
+					g_strfreev(verses);
+					g_free(book_chapter);
+				}
+				/* update last_book_chap for partial ref resolution */
+				if (col) {
+					const gchar *sp = col;
+					while (sp > full_part && *sp != ' ') sp--;
+					if (sp > full_part) {
+						g_free(last_book_chap);
+						last_book_chap = g_strndup(full_part, sp - full_part);
+					}
+				}
+				g_free(full_part);
+			}
+			g_free(last_book_chap);
+			g_strfreev(parts);
+			g_free(node_key);
+		} else {
+			if (gtk_tree_model_iter_children(GTK_TREE_MODEL(model),
+							 &child, iter)) {
+				do {
+					GtkTreeIter *copy = g_new(GtkTreeIter, 1);
+					*copy = child;
+					g_queue_push_tail(stack, copy);
+					g_queue_push_tail(colors,
+						effective ? g_strdup(effective) : NULL);
+				} while (gtk_tree_model_iter_next(
+						GTK_TREE_MODEL(model), &child));
+			}
+		}
+		g_free(node_color);
+		g_free(inherited);
+		g_free(iter);
+	}
+	g_queue_free_full(stack, g_free);
+	g_queue_free_full(colors, g_free);
+	g_free(osisref);
+	return result;
+}
+
 char
 GTKChapDisp::display(SWModule &imodule)
 {
@@ -1558,10 +1710,23 @@ GTKChapDisp::display(SWModule &imodule)
 
 		// special contrasty highlighting
 		marked_element *e;
+		gchar *tag_color = get_tag_color_for_versekey(key);
+		/* tag-group color highlight */
+		if (tag_color) {
+			const char *fg = text_color_for_bg(tag_color);
+			buf = g_strdup_printf(
+			    "<span style=\"background-color: %s; "
+			    "color: %s; "
+			    "border-left: 3px solid %s; padding-left: 2px\">",
+			    tag_color, fg, tag_color);
+			swbuf.append(buf);
+			g_free(buf);
+		}
+
 		if (((e = marked_cache_check(key->getVerse())) &&
 		     settings.annotate_highlight) ||
 		    ((key->getVerse() == curVerse) &&
-		     settings.versehighlight)) {
+		     settings.versehighlight && !tag_color)) {
 			buf = g_strdup_printf(
 			    "<span style=\"background-color: %s\">"
 			    "<font face=\"%s\" size=\"%+d\">",
@@ -1642,6 +1807,13 @@ GTKChapDisp::display(SWModule &imodule)
 		if (key->getVerse() == curVerse) {
 			swbuf.append("</font>");
 			ReadAloud(curVerse, rework->str);
+		}
+
+		/* close tag-group color span */
+		if (tag_color) {
+			swbuf.append("</span>");
+			g_free(tag_color);
+			tag_color = NULL;
 		}
 
 		if (settings.versestyle) {
