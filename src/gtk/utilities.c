@@ -55,6 +55,7 @@
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
+#include "gui/bookmarks_treeview.h"
 
 #ifdef WIN32
 #undef DATADIR
@@ -141,32 +142,34 @@ void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter *tree_parent,
 	gchar *module = NULL;
 	gchar *mod_desc = NULL;
 	gchar *description = NULL;
-
+	gchar *color = NULL;
 	gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child,
 				     tree_parent);
-
 	do {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
-				   2, &caption,
-				   3, &key,
-				   4, &module,
-				   5, &mod_desc, 6, &description, -1);
+				   COL_CAPTION, &caption,
+				   COL_KEY, &key,
+				   COL_MODULE, &module,
+				   COL_MODULE_DESC, &mod_desc,
+				   COL_DESCRIPTION, &description,
+				   COL_COLOR, &color,
+				   -1);
 		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
 						  &child)) {
-			cur_node = xml_add_folder_to_parent(parent,
-							    caption);
+			cur_node = xml_add_folder_to_parent_colored(parent,
+								    caption,
+								    color);
 			utilities_parse_treeview(cur_node, &child, model);
-
 		} else
 			xml_add_bookmark_to_parent(parent,
 						   description,
 						   key, module, mod_desc);
-
 		g_free(caption);
 		g_free(key);
 		g_free(module);
 		g_free(mod_desc);
 		g_free(description);
+		g_free(color);
 	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
 }
 

@@ -41,6 +41,7 @@ struct _bookmark_menu
 	GtkWidget *bibletime;
 	GtkWidget *rr_submenu;
 	GtkWidget *remove;
+	GtkWidget *set_color;
 };
 typedef struct _bookmark_menu BOOKMARK_MENU;
 extern BOOKMARK_MENU menu;
@@ -75,6 +76,9 @@ void on_insert_bookmark_activate(GtkMenuItem *menuitem,
 				 gpointer user_data);
 void on_new_folder_activate(GtkMenuItem *menuitem,
 			    gpointer user_data);
+#if GTK_CHECK_VERSION(3, 4, 0)
+void on_set_tag_color_activate(GtkMenuItem *menuitem, gpointer user_data);
+#endif
 void on_open_in_tab_activate(GtkMenuItem *menuitem,
 			     gpointer user_data);
 
