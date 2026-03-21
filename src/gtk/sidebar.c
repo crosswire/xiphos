@@ -62,8 +62,10 @@
 #include "main/xml.h"
 #include "main/module_dialogs.h"
 #include "main/biblesync_glue.h"
+#include "gui/parallel_dialog.h"
 
 #include "gui/debug_glib_null.h"
+void gui_parallel_tab_activate(GtkCheckMenuItem *menuitem, gpointer user_data);
 
 SIDEBAR sidebar;
 static GtkWidget *button_bookmarks;
@@ -581,6 +583,25 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 		break;
 
 	case 3:
+		if (mod && !g_utf8_collate(mod, _("Parallel View"))) {
+			GtkWidget *par_menu    = gtk_menu_new();
+			GtkWidget *item_detach = gtk_menu_item_new_with_label(_("Open in Detached Window"));
+			GtkWidget *item_tab    = gtk_check_menu_item_new_with_label(_("Open in New Tab"));
+			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item_tab), settings.showparatab);
+			gtk_menu_shell_append(GTK_MENU_SHELL(par_menu), item_detach);
+			gtk_menu_shell_append(GTK_MENU_SHELL(par_menu), item_tab);
+			gtk_widget_show_all(par_menu);
+			g_signal_connect(item_detach, "activate", G_CALLBACK(gui_undock_parallel_page), NULL);
+			g_signal_connect(item_tab, "toggled", G_CALLBACK(gui_parallel_tab_activate), NULL);
+			#if GTK_CHECK_VERSION(3, 22, 0)
+			gtk_menu_popup_at_pointer(GTK_MENU(par_menu), (GdkEvent *)event);
+			#else
+			gtk_menu_popup(GTK_MENU(par_menu), NULL, NULL, NULL, NULL, 0, gtk_get_current_event_time());
+			#endif
+			g_free(mod);
+			g_free(caption);
+			return FALSE;
+		}
 		if (mod && (main_get_mod_type(mod) == PERCOM_TYPE)) {
 			buf_module = mod;
 			GtkWidget *percomm_menu = create_menu_percomm_mod();

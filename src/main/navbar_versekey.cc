@@ -569,7 +569,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 					      gpointer dialog,
 					      gpointer editor)
 {
-	gint i, x;
+	gint i, x, col, row;
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;
 	GtkWidget *item;
@@ -597,7 +597,9 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 		gchar *num = main_format_number(i);
 		item = gtk_menu_item_new_with_label(num);
 		gtk_widget_show(item);
-		gtk_menu_shell_append(menu_shell, item);
+		col = (i - 1) % 10;
+		row = (i - 1) / 10;
+		gtk_menu_attach(GTK_MENU(menu), item, col, col + 1, row, row + 1);
 		g_signal_connect(G_OBJECT(item), "activate",
 				 G_CALLBACK(on_verse_menu_select),
 				 GINT_TO_POINTER(i));
@@ -634,7 +636,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 						gpointer dialog,
 						gpointer editor)
 {
-	gint i, x;
+	gint i, x, col, row;
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;
 	GtkWidget *item;
@@ -662,7 +664,9 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 		gchar *num = main_format_number(i);
 		item = gtk_menu_item_new_with_label(num);
 		gtk_widget_show(item);
-		gtk_menu_shell_append(menu_shell, item);
+		col = (i - 1) % 10;
+		row = (i - 1) / 10;
+		gtk_menu_attach(GTK_MENU(menu), item, col, col + 1, row, row + 1);
 		g_signal_connect(G_OBJECT(item), "activate",
 				 G_CALLBACK(on_chapter_menu_select),
 				 GINT_TO_POINTER(i));
@@ -732,7 +736,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 			book = strdup((const char *)key->getBookName());
 			item = gtk_menu_item_new_with_label(book);
 			gtk_widget_show(item);
-			gtk_menu_shell_append(menu_shell, item);
+			gtk_menu_attach(GTK_MENU(menu), item, 0, 1, i, i + 1);
 			g_signal_connect(G_OBJECT(item), "activate",
 					 G_CALLBACK(on_ot_book_menu_select),
 					 GINT_TO_POINTER(i));
@@ -746,17 +750,17 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name->str, 2)) {
+		int nt_col = backend->module_has_testament(navbar.module_name->str, 1) ? 1 : 0;
 		while (i < key->BMAX[1]) {
 			key->setTestament(2);
 			key->setBook(i + 1);
 			book = strdup((const char *)key->getBookName());
 			item = gtk_menu_item_new_with_label(book);
 			gtk_widget_show(item);
-			gtk_menu_shell_append(menu_shell, item);
+			gtk_menu_attach(GTK_MENU(menu), item, nt_col, nt_col + 1, i, i + 1);
 			g_signal_connect(G_OBJECT(item), "activate",
 					 G_CALLBACK(on_nt_book_menu_select),
 					 GINT_TO_POINTER(i));
-
 			if (!strcmp(book, current_book))
 				select_item = item;
 			++i;
