@@ -1863,7 +1863,7 @@ char *main_get_raw_text(char *module_name, char *key)
  *   int
  */
 
-int main_get_mod_type(char *mod_name)
+int main_get_mod_type(const char *mod_name)
 {
 
 	return backend->module_type(mod_name);
