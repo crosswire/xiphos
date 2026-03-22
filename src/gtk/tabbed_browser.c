@@ -60,6 +60,7 @@
 #include "gui/debug_glib_null.h"
 
 #include <stdbool.h>
+void gui_parallel_tab_activate(GtkCheckMenuItem *menuitem, gpointer user_data);
 
 static GtkWidget *tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 				 const gchar *label_text);
@@ -1466,12 +1467,18 @@ void gui_open_parallel_view_in_new_tab(void)
 	gui_recompute_view_menu_choices();
 	notebook_main_add_page(pt);
 	pt->paratab = gui_create_parallel_tab();
-	gui_parallel_tab_sync((gchar *)settings.currentverse);
 	gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
 			   0);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
 				      gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main),
 							    pt->page_widget));
+	gui_parallel_tab_sync((gchar *)settings.currentverse);
+	settings.showparatab = TRUE;
+	if (widgets.parallel_tab_item) {
+		g_signal_handlers_block_by_func(widgets.parallel_tab_item, (gpointer)gui_parallel_tab_activate, NULL);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.parallel_tab_item), TRUE);
+		g_signal_handlers_unblock_by_func(widgets.parallel_tab_item, (gpointer)gui_parallel_tab_activate, NULL);
+	}
 }
 
 /******************************************************************************
