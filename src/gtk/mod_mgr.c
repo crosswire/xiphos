@@ -32,6 +32,7 @@
 #include <time.h>
 
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 #ifndef USE_GTKBUILDER
 #include <glade/glade-xml.h>
 #endif
@@ -1406,6 +1407,36 @@ on_modules_list_button_release(GtkWidget *widget,
 		gtk_tree_view_expand_row(GTK_TREE_VIEW(data), path, FALSE);
 	gtk_tree_path_free(path);
 	return FALSE;
+}
+
+static gboolean
+on_modules_list_key_press(GtkWidget *widget,
+                          GdkEventKey *event, gpointer data)
+{
+    GtkTreeSelection *selection;
+    GtkTreeModel *model;
+    GtkTreeIter selected;
+    GtkTreePath *path;
+
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
+    if (!gtk_tree_selection_get_selected(selection, &model, &selected))
+        return FALSE;
+    if (!gtk_tree_model_iter_has_child(model, &selected))
+        return FALSE;
+
+    path = gtk_tree_model_get_path(model, &selected);
+
+    if (event->keyval == GDK_KEY_Right) {
+        gtk_tree_view_expand_row(GTK_TREE_VIEW(widget), path, FALSE);
+    } else if (event->keyval == GDK_KEY_Left) {
+        gtk_tree_view_collapse_row(GTK_TREE_VIEW(widget), path);
+    } else {
+        gtk_tree_path_free(path);
+        return FALSE;
+    }
+
+    gtk_tree_path_free(path);
+    return TRUE;
 }
 
 /******************************************************************************
@@ -3552,6 +3583,12 @@ static GtkWidget *create_module_manager_dialog(gboolean first_run)
 	gtk_widget_set_has_tooltip(treeview2, TRUE);
 	g_signal_connect((gpointer)treeview2,
 			 "query-tooltip", G_CALLBACK(query_tooltip), NULL);
+	g_signal_connect((gpointer)treeview,
+			"key-press-event",
+			G_CALLBACK(on_modules_list_key_press), NULL);
+	g_signal_connect((gpointer)treeview2,
+			"key-press-event",
+			G_CALLBACK(on_modules_list_key_press), NULL);
 
 	/* notebook */
 	notebook1 = UI_GET_ITEM(gxml, "notebook1");

@@ -154,26 +154,47 @@ void gui_verselist_to_bookmarks(GList *verses, gint save_as_single)
 				   bm_pixbufs->pixbuf_opened,
 				   COL_CLOSED_PIXBUF,
 				   bm_pixbufs->pixbuf_closed,
-				   COL_CAPTION, info->text1,
+				   COL_CAPTION, g_strdup(info->text1),
 				   COL_KEY, NULL, COL_MODULE, NULL, -1);
 		//              set_results_position((char) 1); // TOP
 		GString *str = g_string_new(" ");
 		while (verses) {
+			BOOKMARK_DATA *data;
+			
 			list_item = (RESULTS *)verses->data;
 			module_name = list_item->module;
 			gchar *tmpbuf = list_item->key;
 			g_string_printf(str, "%s, %s", tmpbuf,
 					module_name);
 			XI_message(("bookmark: %s", str->str));
+			
+			data = g_new(BOOKMARK_DATA, 1);
+			data->caption = g_strdup(str->str);
+			data->key = g_strdup(tmpbuf);
+			data->module = g_strdup(module_name);
+			if (!strcmp(data->module, "studypad"))
+				data->module_desc = g_strdup("studypad");
+			else
+				data->module_desc = g_strdup(main_get_module_description(data->module));
+			data->description = g_strdup("");
+			data->is_leaf = TRUE;
+			data->opened = bm_pixbufs->pixbuf_helpdoc;
+			data->closed = NULL;
+			data->color = NULL;
+			
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &iter, &parent);
 			gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
-					   COL_OPEN_PIXBUF,
-					   bm_pixbufs->pixbuf_helpdoc,
-					   COL_CLOSED_PIXBUF, NULL,
-					   COL_CAPTION, str->str,
-					   COL_KEY, tmpbuf,
-					   COL_MODULE, module_name, -1);
+					   COL_OPEN_PIXBUF, data->opened,
+					   COL_CLOSED_PIXBUF, data->closed,
+					   COL_CAPTION, data->caption,
+					   COL_KEY, data->key,
+					   COL_MODULE, data->module,
+					   COL_MODULE_DESC, data->module_desc,
+					   COL_DESCRIPTION, data->description,
+					   COL_COLOR, data->color,
+					   -1);
+			
 			verses = g_list_next(verses);
 		}
 		g_string_free(str, TRUE);
@@ -290,18 +311,6 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA *data)
 
 static void free_bookmark_data(BOOKMARK_DATA *data)
 {
-	if (data->caption)
-		g_free(data->caption);
-	if (data->key)
-		g_free(data->key);
-	if (data->module)
-		g_free(data->module);
-	if (data->module_desc)
-		g_free(data->module_desc);
-	if (data->description)
-		g_free(data->description);
-	if (data->color)
-		g_free(data->color);
 }
 
 /******************************************************************************
@@ -357,26 +366,22 @@ void gui_add_item_to_tree(GtkTreeIter *iter, GtkTreeIter *parent,
 
 static void add_node(xmlNodePtr cur, GtkTreeIter *parent)
 {
-	GtkTreeIter iter;
-	BOOKMARK_DATA data, *p = NULL;
-	xmlNodePtr work = NULL;
+    GtkTreeIter iter;
+    BOOKMARK_DATA *p = NULL;
+    xmlNodePtr work = NULL;
 
-	p = &data;
-	if (cur == NULL)
-		return;
-
-	for (work = cur->xmlChildrenNode; work; work = work->next) {
-		if (!xmlStrcmp(work->name, (const xmlChar *)"Bookmark")) {
-			get_xml_bookmark_data(work, p);
-			gui_add_item_to_tree(&iter, parent, p);
-			free_bookmark_data(p);
-		} else if (!xmlStrcmp(work->name, (const xmlChar *)"Folder")) {
-			get_xml_folder_data(work, p);
-			gui_add_item_to_tree(&iter, parent, p);
-			free_bookmark_data(p);
-			add_node(work, &iter);
-		}
-	}
+    for (work = cur->xmlChildrenNode; work; work = work->next) {
+        if (!xmlStrcmp(work->name, (const xmlChar *)"Bookmark")) {
+            p = g_new(BOOKMARK_DATA, 1);
+            get_xml_bookmark_data(work, p);
+            gui_add_item_to_tree(&iter, parent, p);
+        } else if (!xmlStrcmp(work->name, (const xmlChar *)"Folder")) {
+            p = g_new(BOOKMARK_DATA, 1);
+            get_xml_folder_data(work, p);
+            gui_add_item_to_tree(&iter, parent, p);
+            add_node(work, &iter);
+        }
+    }
 }
 
 /******************************************************************************
@@ -395,40 +400,35 @@ static void add_node(xmlNodePtr cur, GtkTreeIter *parent)
  *   void
  */
 
-void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar *file,
-			 GtkTreeIter *parent)
+void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar *file, GtkTreeIter *parent)
 {
-	xmlNodePtr cur = NULL;
-	BOOKMARK_DATA data, *p = NULL;
-	GtkTreeIter iter;
-	GtkTreePath *path;
+    xmlNodePtr cur = NULL;
+    BOOKMARK_DATA *p = NULL;
+    GtkTreeIter iter;
+    GtkTreePath *path;
 
-	p = &data;
-	cur = xml_load_bookmark_file(file);
-	//cur = cur->xmlChildrenNode;
-	while (cur != NULL) {
-		if (!xmlStrcmp(cur->name, (const xmlChar *)"Bookmark")) {
-			get_xml_bookmark_data(cur, p);
-			gui_add_item_to_tree(&iter, parent, p);
-			free_bookmark_data(p);
-		} else {
-			get_xml_folder_data(cur, p);
-			if (p->caption) {
-				gui_add_item_to_tree(&iter, parent, p);
-			}
-			free_bookmark_data(p);
-			add_node(cur, &iter);
-		}
-
-		if (cur->next)
-			cur = cur->next;
-		else
-			break;
-	}
-	xml_free_bookmark_doc();
-	path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), parent);
-	gtk_tree_view_expand_to_path(tree, path);
-	gtk_tree_path_free(path);
+    cur = xml_load_bookmark_file(file);
+    
+    while (cur != NULL) {
+        if (!xmlStrcmp(cur->name, (const xmlChar *)"Bookmark")) {
+            p = g_new(BOOKMARK_DATA, 1);
+            get_xml_bookmark_data(cur, p);
+            gui_add_item_to_tree(&iter, parent, p);
+        } else {
+            p = g_new(BOOKMARK_DATA, 1);
+            get_xml_folder_data(cur, p);
+            if (p->caption) {
+                gui_add_item_to_tree(&iter, parent, p);
+            }
+            add_node(cur, &iter);
+        }
+        cur = cur->next;
+    }
+    
+    xml_free_bookmark_doc();
+    path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), parent);
+    gtk_tree_view_expand_to_path(tree, path);
+    gtk_tree_path_free(path);
 }
 
 /******************************************************************************

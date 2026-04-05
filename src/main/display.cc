@@ -24,6 +24,7 @@
 #endif
 
 #include <glib.h>
+#include <treekeyidx.h>
 
 #include <osisxhtml.h>
 #include <thmlxhtml.h>
@@ -113,13 +114,19 @@ h3 { font-style: %s } --> \
 #define CSS_BLOCK_BOTH                                                                            \
 	" *        { line-height: 3.5em; }"                                                       \
 	" .word    { position: relative; top:  0.0em; left: 0; }"                                 \
-	" .strongs { position: absolute; top:  0.2em; left: 0; white-space: nowrap; z-index: 2 }" \
-	" .morph   { position: absolute; top:  0.9em; left: 0; white-space: nowrap; z-index: 1 }"
+	" .strongs { position: absolute; top:  0.4em; left: 0; white-space: nowrap; z-index: 2 }" \
+	" .morph   { position: absolute; top:  0.9em; left: 0; white-space: nowrap; z-index: 1 }" \
+	" *[dir=rtl] .word { padding-left: 0.8em; }"                               \
+	" *[dir=rtl] .strongs { top: 0.4em; left: auto; right: 0; }"                             \
+	" *[dir=rtl] .morph { left: auto; right: 0; }"
 #define CSS_BLOCK_ONE                                                                  \
 	" *        { line-height: 2.7em; }"                                            \
 	" .word    { position: relative; top:  0.0em; left: 0; }"                      \
 	" .strongs { position: absolute; top:  0.4em; left: 0; white-space: nowrap; }" \
-	" .morph   { position: absolute; top:  0.4em; left: 0; white-space: nowrap; }"
+	" .morph   { position: absolute; top:  0.4em; left: 0; white-space: nowrap; }" \
+	" *[dir=rtl] .word { padding-left: 0.8em; }"                               \
+	" *[dir=rtl] .strongs { left: auto; right: 0; }"                               \
+	" *[dir=rtl] .morph { left: auto; right: 0; }"
 
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
@@ -483,6 +490,32 @@ block_dump(SWBuf &rendered,
 		g_free((char *)*strongs);
 	*strongs = NULL;
 
+/* truncate long Hebrew morph codes: remove pronominal suffix segment */
+	if (*morph) {
+		char *anchor_start = (char *)g_strrstr(*morph, "\">") + 2;
+		char *anchor_end = (char *)strstr(anchor_start, "</a>");
+		if (anchor_start && anchor_end) {
+			/* count slashes */
+			char *first_slash = strchr(anchor_start, '/');
+			if (first_slash && first_slash < anchor_end) {
+				char *second_slash = strchr(first_slash + 1, '/');
+				if (second_slash && second_slash < anchor_end) {
+					/* 2 segments: hr/ncmsc/sp2mp → truncate at second slash */
+					memmove(second_slash, anchor_end,
+						strlen(anchor_end) + 1);
+				} else {
+					/* 1 segment: check if suffix is pronominal (sp/sd) */
+					char *seg = first_slash + 1;
+					if ((seg[0] == 's' && (seg[1] == 'p' || seg[1] == 'd'))
+					    || (seg[0] == 'S' && (seg[1] == 'p' || seg[1] == 'd'))) {
+						memmove(first_slash, anchor_end,
+							strlen(anchor_end) + 1);
+					}
+				}
+			}
+		}
+	}
+
 	rendered += "<span class=\"morph\"><sup>";
 	rendered += (*morph ? *morph : "&nbsp;");
 	rendered += "</sup></span>";
@@ -726,7 +759,7 @@ CacheHeader(ModuleCache::CacheVerse &cVerse,
 	    GLOBAL_OPS *ops, BackEnd *be)
 {
 	int x = 0;
-	gchar heading[8];
+	gchar heading[32];
 	const gchar *preverse;
 	SWBuf preverse2;
 	GString *text = g_string_new("");
@@ -955,6 +988,42 @@ GTKEntryDisp::displayByChapter(SWModule &imodule, int columns)
 //
 // general display of entries: commentary, genbook, lexdict
 //
+static void
+_render_display_level(SWModule &imodule, unsigned long offset,
+                      int max_level, int cur_level, SWBuf &combined)
+{
+	TreeKeyIdx *treekey = (TreeKeyIdx *)imodule.getKey();
+	treekey->setOffset(offset);
+	imodule.getRawEntry(); // snap to entry
+
+	const char *raw = imodule.getRawEntry();
+	if (raw && *raw) {
+		if (combined.length() > 0)
+			combined += "<br/><hr/>";
+		combined += imodule.renderText().c_str();
+	}
+
+	if (cur_level < max_level && treekey->hasChildren()) {
+		treekey->firstChild();
+		unsigned long child_offset = treekey->getOffset();
+		bool has_next = true;
+		while (has_next) {
+			_render_display_level(imodule, child_offset,
+					      max_level, cur_level + 1,
+					      combined);
+			// reposition after recursion
+			treekey->setOffset(child_offset);
+			imodule.getRawEntry();
+			has_next = treekey->nextSibling() && !treekey->popError();
+			if (has_next)
+				child_offset = treekey->getOffset();
+		}
+		// restore to current node
+		treekey->setOffset(offset);
+		imodule.getRawEntry();
+	}
+}
+
 char
 GTKEntryDisp::display(SWModule &imodule)
 {
@@ -1076,28 +1145,31 @@ GTKEntryDisp::display(SWModule &imodule)
 		    (modtype == PRAYERLIST_TYPE))
 			rework = g_string_new(strongs_or_morph
 						  ? block_render(imodule.getRawEntry())
-						  : imodule.getRawEntry());
+: imodule.getRawEntry());
 		else {
-			rework = g_string_new(strongs_or_morph
-						  ? block_render(imodule.renderText().c_str())
-						  : imodule.renderText().c_str());
-			if (modtype == DICTIONARY_TYPE) {
-				char *f = (char *)imodule.getConfigEntry("Feature");
-				if (f && !strcmp(f, "DailyDevotion")) {
-					char *pretty;
-					char *month = backend->get_module_key();
-					char *day = strchr(month, '.');
-					if (day)
-						*(day++) = '\0';
-					else
-						day = (char *)"XX";
-					int idx_month = atoi(month) - 1;
-					pretty = gettext(month_names[idx_month]);
-					pretty = g_strdup_printf("<b>%s %s</b><br/>",
-								 (pretty ? pretty : "--"),
-								 day);
-					swbuf.append(pretty);
-					g_free(pretty);
+			// respect DisplayLevel for genbooks (BOOK_TYPE):
+			const char *dl_str = imodule.getConfigEntry("DisplayLevel");
+			int display_level = dl_str ? atoi(dl_str) : 1;
+			if (display_level <= 1) {
+				rework = g_string_new(strongs_or_morph
+							  ? block_render(imodule.renderText().c_str())
+							  : imodule.renderText().c_str());
+			} else {
+				SWMgr *mgr = backend->get_mgr();
+				SWModule *mod = mgr->Modules[imodule.getName()];
+				TreeKeyIdx *treekey = dynamic_cast<TreeKeyIdx *>(mod->getKey());
+				if (!treekey) {
+					rework = g_string_new(imodule.renderText().c_str());
+				} else {
+					TreeKeyIdx saved = *treekey;
+					SWBuf combined = "";
+					_render_display_level(*mod, saved.getOffset(),
+							      display_level, 1, combined);
+					treekey->setOffset(saved.getOffset());
+					mod->getRawEntry();
+					rework = g_string_new(strongs_or_morph
+								  ? block_render(combined.c_str())
+								  : combined.c_str());
 				}
 			}
 		}

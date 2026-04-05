@@ -62,8 +62,10 @@
 #include "main/xml.h"
 #include "main/module_dialogs.h"
 #include "main/biblesync_glue.h"
+#include "gui/parallel_dialog.h"
 
 #include "gui/debug_glib_null.h"
+void gui_parallel_tab_activate(GtkCheckMenuItem *menuitem, gpointer user_data);
 
 SIDEBAR sidebar;
 static GtkWidget *button_bookmarks;
@@ -543,44 +545,72 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 					       GdkEventButton *event,
 					       gpointer user_data)
 {
-	GtkTreeSelection *selection;
-	GtkTreeIter selected;
+GtkTreeIter selected;
 	GtkTreeModel *model;
 	gchar *mod = NULL;
 	gchar *caption = NULL;
+	GtkTreePath *path = NULL;
+	GtkTreeViewColumn *column = NULL;
+	gint cell_x, cell_y;
+	gboolean on_expander = FALSE;
 
-	selection =
-	    gtk_tree_view_get_selection(GTK_TREE_VIEW(sidebar.module_list));
-
-	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
+	if (!gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(sidebar.module_list),
+					   (gint)event->x, (gint)event->y,
+					   &path, &column, &cell_x, &cell_y))
 		return FALSE;
 
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.module_list));
+	if (!gtk_tree_model_get_iter(model, &selected, path)) {
+		gtk_tree_path_free(path);
+		return FALSE;
+	}
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 2, &caption,
 			   3, &mod, -1);
 
-	//uncomment the following two lines if you want to see how it looks without
-	//triangls or plus symbols
-	//gtk_tree_view_set_show_expanders(sidebar.module_list, FALSE);
-	//gtk_tree_view_set_level_indentation(sidebar.module_list, 12);
-	GtkTreePath *path = gtk_tree_model_get_path(model, &selected);
-	if (gtk_tree_view_row_expanded(GTK_TREE_VIEW(sidebar.module_list), path))
-		gtk_tree_view_collapse_row(GTK_TREE_VIEW(sidebar.module_list), path);
-	else
-		gtk_tree_view_expand_row(GTK_TREE_VIEW(sidebar.module_list), path,
-					 FALSE);
-	gtk_tree_path_free(path);
+gint depth = gtk_tree_path_get_depth(path);
+	gint expander_size;
+	gtk_widget_style_get(GTK_WIDGET(sidebar.module_list),
+	                     "expander-size", &expander_size, NULL);
+	gint expander_zone = depth * (expander_size + 4);
+	if ((gint)event->x < expander_zone)
+		on_expander = TRUE;
 
+	if (!on_expander) {
+		if (gtk_tree_view_row_expanded(GTK_TREE_VIEW(sidebar.module_list), path))
+			gtk_tree_view_collapse_row(GTK_TREE_VIEW(sidebar.module_list), path);
+		else
+			gtk_tree_view_expand_row(GTK_TREE_VIEW(sidebar.module_list), path, FALSE);
+	}
+	gtk_tree_path_free(path);
+	
 	switch (event->button) {
 	case 1:
 		main_mod_treeview_button_one(model, selected);
 		break;
-
 	case 2:
 		if (mod && (g_utf8_collate(mod, _("Parallel View"))) && (g_utf8_collate(mod, _("Standard View"))))
 			gui_open_module_in_new_tab(mod);
 		break;
-
 	case 3:
+		if (mod && !g_utf8_collate(mod, _("Parallel View"))) {
+			GtkWidget *par_menu    = gtk_menu_new();
+			GtkWidget *item_detach = gtk_menu_item_new_with_label(_("Open in Detached Window"));
+			GtkWidget *item_tab    = gtk_check_menu_item_new_with_label(_("Open in New Tab"));
+			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item_tab), settings.showparatab);
+			gtk_menu_shell_append(GTK_MENU_SHELL(par_menu), item_detach);
+			gtk_menu_shell_append(GTK_MENU_SHELL(par_menu), item_tab);
+			gtk_widget_show_all(par_menu);
+			g_signal_connect(item_detach, "activate", G_CALLBACK(gui_undock_parallel_page), NULL);
+			g_signal_connect(item_tab, "toggled", G_CALLBACK(gui_parallel_tab_activate), NULL);
+			#if GTK_CHECK_VERSION(3, 22, 0)
+			gtk_menu_popup_at_pointer(GTK_MENU(par_menu), (GdkEvent *)event);
+			#else
+			gtk_menu_popup(GTK_MENU(par_menu), NULL, NULL, NULL, NULL, 0, gtk_get_current_event_time());
+			#endif
+			g_free(mod);
+			g_free(caption);
+			return FALSE;
+		}
 		if (mod && (main_get_mod_type(mod) == PERCOM_TYPE)) {
 			buf_module = mod;
 			GtkWidget *percomm_menu = create_menu_percomm_mod();
@@ -593,8 +623,8 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 		return FALSE;
 	}
 
-		if (mod && (g_utf8_collate(mod, _("Parallel View"))) && (g_utf8_collate(mod, _("Standard View"))) //) {
-    && (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
+		if (mod && (g_utf8_collate(mod, _("Parallel View"))) && (g_utf8_collate(mod, _("Standard View")))
+			&& (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
 		buf_module = mod;
 		create_menu_modules();
 			/*gtk_menu_popup(GTK_MENU(sidebar.menu_modules),

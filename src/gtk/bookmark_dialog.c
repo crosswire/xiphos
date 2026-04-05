@@ -245,9 +245,6 @@ static void add_folder_button(void)
 		gtk_tree_view_expand_to_path(GTK_TREE_VIEW(treeview), path);
 		gtk_tree_selection_select_path(selection, path);
 		gtk_tree_path_free(path);
-		g_free(data->caption);
-		g_free(data->color);
-		g_free(data);
 	}
 	gtk_widget_destroy(dialog);
 #ifdef USE_GTKBUILDER
@@ -618,27 +615,37 @@ static GtkWidget *_create_mark_verse_dialog(gchar *module, gchar *key)
 
 void gui_bookmark_dialog(gchar *label, gchar *module_name, gchar *key)
 {
-	global_module_name = module_name;
-	GtkWidget *dialog =
-	    _create_bookmark_dialog(label, module_name, key);
-	if (!dialog)
-		return;
-	gint response;
-	while (TRUE) {
-		response = gtk_dialog_run(GTK_DIALOG(dialog));
-		if (response == GTK_RESPONSE_ACCEPT) {
-			/* New folder — keep dialog open */
-			add_folder_button();
-		} else if (response == GTK_RESPONSE_OK) {
-			/* Add bookmark — close dialog */
-			add_bookmark_button();
-			break;
-		} else {
-			/* Cancel or destroy */
-			break;
-		}
-	}
-	gtk_widget_destroy(dialog);
+    GtkWidget *dialog;
+    gint response;
+
+    if (global_module_name != NULL) {
+        g_free(global_module_name);
+        global_module_name = NULL;
+    }
+	
+    if (module_name != NULL) {
+        global_module_name = g_strdup(module_name);
+    }
+    
+    dialog = _create_bookmark_dialog(label, module_name, key);
+    if (!dialog)
+        return;
+        
+    while (TRUE) {
+        response = gtk_dialog_run(GTK_DIALOG(dialog));
+        if (response == GTK_RESPONSE_ACCEPT) {
+            /* New folder — keep dialog open */
+            add_folder_button();
+        } else if (response == GTK_RESPONSE_OK) {
+            /* Add bookmark — close dialog */
+            add_bookmark_button();
+            break;
+        } else {
+            /* Cancel or destroy */
+            break;
+        }
+    }
+    gtk_widget_destroy(dialog);
 }
 
 /******************************************************************************

@@ -130,12 +130,12 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter *iter,
 						   description,
 						   key, module, mod_desc);
 		}
-		g_free(caption);
-		g_free(key);
-		g_free(module);
-		g_free(mod_desc);
-		g_free(description);
-		g_free(color);
+// 		g_free(caption);
+// 		g_free(key);
+// 		g_free(module);
+// 		g_free(mod_desc);
+// 		g_free(description);
+// 		g_free(color);
 	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), iter));
 
 	xmlSaveFormatFile(filename, root_doc, 1);
@@ -304,8 +304,8 @@ G_MODULE_EXPORT void on_dialog_activate(GtkMenuItem *menuitem,
 		if (module && (main_get_mod_type(module) == PERCOM_TYPE)) {
 			editor_create_new(module, key, TRUE);
 			use_dialog = FALSE;
-			g_free(module);
-			g_free(key);
+// 			g_free(module);
+// 			g_free(key);
 			return;
 		}
 
@@ -318,8 +318,8 @@ G_MODULE_EXPORT void on_dialog_activate(GtkMenuItem *menuitem,
 		g_free(url);
 	}
 	use_dialog = FALSE;
-	g_free(module);
-	g_free(key);
+// 	g_free(module);
+// 	g_free(key);
 }
 
 /******************************************************************************
@@ -435,8 +435,8 @@ if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
 					   COL_COLOR, new_color, -1);
 			gui_save_bookmarks(NULL, NULL);
 			main_display_bible(NULL, settings.currentverse);
-			g_free(new_caption);
-			g_free(new_color);
+// 			g_free(new_caption);
+// 			g_free(new_color);
 		}
 		gtk_widget_destroy(dialog);
 #ifdef USE_GTKBUILDER
@@ -459,13 +459,13 @@ if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
 		info->cancel    = TRUE;
 		if (gui_gs_dialog(info) == GS_OK) {
 			BOOKMARK_DATA *data = g_new0(BOOKMARK_DATA, 1);
-			data->caption     = info->text1;
-			data->key         = info->text2;
-			data->module      = info->text3;
+			data->caption     = g_strdup(info->text1);
+			data->key         = g_strdup(info->text2);
+			data->module      = g_strdup(info->text3);
 			data->module_desc = g_strdup(main_get_module_description(info->text3));
 			data->description = ((description && strlen(description) > 1) ||
 					    (caption && strcmp(caption, info->text1)))
-					   ? info->text1 : NULL;
+					   ? g_strdup(info->text1) : NULL;
 			data->is_leaf     = TRUE;
 			data->opened      = bm_pixbufs->pixbuf_helpdoc;
 			gtk_tree_store_set(GTK_TREE_STORE(model), &selected,
@@ -478,22 +478,20 @@ if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
 					   COL_DESCRIPTION,   data->description, -1);
 			bookmarks_changed = TRUE;
 			gui_save_bookmarks(NULL, NULL);
-			g_free(data->module_desc);
-			g_free(data);
 		}
-		g_free(info->text1);
-		if (info->text2) g_free(info->text2);
-		if (info->text3) g_free(info->text3);
-		g_free(info);
-		g_string_free(str, TRUE);
+// 		g_free(info->text1);
+// 		if (info->text2) g_free(info->text2);
+// 		if (info->text3) g_free(info->text3);
+// 		g_free(info);
+// 		g_string_free(str, TRUE);
 	}
 cleanup:
-	g_free(caption); g_free(key); g_free(module);
-	g_free(mod_desc); g_free(description); g_free(current_color);
+// 	g_free(caption); g_free(key); g_free(module);
+// 	g_free(mod_desc); g_free(description); g_free(current_color);
+(void)0; 
 }
 
-//dialog_export_bookmarks_response_cb
-//dialog_export_bookmarks_close_cb
+
 /******************************************************************************
  * Name
  *   on_remove_folder_activate
@@ -572,10 +570,10 @@ G_MODULE_EXPORT void on_delete_item_activate(GtkMenuItem *menuitem,
 		bookmarks_changed = TRUE;
 		gui_save_bookmarks(NULL, NULL);
 	}
-	g_free(caption);
-	g_free(key);
-	g_free(module);
-	g_free(str);
+// 	g_free(caption);
+// 	g_free(key);
+// 	g_free(module);
+// 	g_free(str);
 }
 
 /******************************************************************************
@@ -729,15 +727,15 @@ void on_add_bookmark_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
-		data->caption = info->text1;
-		data->key = info->text2;
-		data->module = info->text3;
+		data->caption = g_strdup(info->text1);
+		data->key = g_strdup(info->text2);
+		data->module = g_strdup(info->text3);
 		data->module_desc =
 		    g_strdup(main_get_module_description(info->text3));
 		if (!strcmp(data->caption, buf))
 			data->description = NULL;
 		else
-			data->description = info->text1;
+			data->description = g_strdup(info->text1);
 		data->color = NULL;  /* bookmark leaves never have a color */
 		data->is_leaf = TRUE;
 		data->opened = bm_pixbufs->pixbuf_helpdoc;
@@ -746,12 +744,11 @@ void on_add_bookmark_activate(GtkMenuItem *menuitem, gpointer user_data)
 		bookmarks_changed = TRUE;
 		gui_save_bookmarks(NULL, NULL);
 	}
-	g_free(info->text1); /* we used g_strdup() */
-	g_free(info->text2);
-	g_free(info->text3);
-	g_free(info);
-	g_free(data);
-	g_string_free(str, TRUE);
+// 	g_free(info->text1); /* we used g_strdup() */
+// 	g_free(info->text2);
+// 	g_free(info->text3);
+// 	g_free(info);
+// 	g_string_free(str, TRUE);
 }
 
 /******************************************************************************
@@ -878,9 +875,6 @@ G_MODULE_EXPORT void on_new_folder_activate(GtkMenuItem *menuitem,
 		bookmarks_changed = TRUE;
 		add_item_to_tree(&iter, &selected, data);
 		gui_save_bookmarks(NULL, NULL);
-		g_free(data->caption);
-		g_free(data->color);
-		g_free(data);
 	}
 	gtk_widget_destroy(dialog);
 #ifdef USE_GTKBUILDER
@@ -925,9 +919,9 @@ G_MODULE_EXPORT void on_open_in_tab_activate(GtkMenuItem *menuitem,
 			      main_url_encode(key),
 			      main_url_encode(module));
 	main_url_handler(url, TRUE);
-	g_free(key);
-	g_free(module);
-	g_free(url);
+// 	g_free(key);
+// 	g_free(module);
+// 	g_free(url);
 }
 
 /******************************************************************************
@@ -973,7 +967,7 @@ G_MODULE_EXPORT void on_set_tag_color_activate(GtkMenuItem *menuitem,
 		if (gdk_rgba_parse(&rgba, color))
 			gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(dialog), &rgba);
 	}
-	g_free(color);
+// 	g_free(color);
 
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
 		GdkRGBA rgba;
@@ -986,7 +980,7 @@ G_MODULE_EXPORT void on_set_tag_color_activate(GtkMenuItem *menuitem,
 		bookmarks_changed = TRUE;
 		gtk_tree_store_set(GTK_TREE_STORE(model), &selected,
 				   COL_COLOR, hex, -1);
-		g_free(hex);
+// 		g_free(hex);
 		gui_save_bookmarks(NULL, NULL);
 		main_display_bible(NULL, settings.currentverse);
 	}
