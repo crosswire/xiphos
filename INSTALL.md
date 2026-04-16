@@ -233,7 +233,10 @@ Create a build directory as a sibling of the xiphos directory:
 
 ## 3. Install dependencies
 
-    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel gtkhtml3-devel webkitgtk4-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel intltool libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools
+    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel webkit2gtk4.1-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools libsoup3-devel
+> **Note:** `gtkhtml3-devel` was retired in Fedora 41+.
+> The **notes editor** feature will not be available unless `gtkhtml3-devel` is installed.
+
 
 ## 4. Configure build
 
