@@ -40,7 +40,7 @@ The first steps would be to make yourself familiar with the Xiphos build
 process, so go read the INSTALL file.
 
 If you are looking for things to do, the best place to find out is to jump into
-the #xiphos channel of irc.freenode.net
+the #xiphos channel of irc.libera.chat
 
 If you make changes to C or C++ files, please make sure they are cleaned up to
 follow our style of coding. The best way to make sure of it is to run this:
