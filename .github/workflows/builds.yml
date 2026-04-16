@@ -34,46 +34,6 @@ jobs:
           name: windows-installers${{ matrix.version }}
           path: "*.exe"
 
-  arch_gtk3_wk2_libsoup2:
-    runs-on: ubuntu-latest
-    container:
-      image: archlinux:latest
-    steps:
-      - name: checkout xiphos
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: install dependencies
-        run: |
-          pacman -Syu --noconfirm
-          pacman -S --noconfirm \
-            appstream-glib \
-            biblesync \
-            binutils \
-            cmake \
-            docbook-utils \
-            enchant \
-            gcc \
-            git \
-            glib2-devel \
-            gnome-common \
-            gtk3 \
-            intltool \
-            libsoup \
-            libxml2 \
-            make \
-            minizip \
-            pkg-config \
-            python \
-            sword \
-            webkit2gtk \
-            zip
-      - name: build xiphos
-        run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
-          make -C build -j$(nproc)
-          make -C build mhelp package_source
-
   arch_gtk3_wk2_libsoup3:
     runs-on: ubuntu-latest
     container:
@@ -243,7 +203,6 @@ jobs:
   deploy:
     needs:
       - windows
-      - arch_gtk3_wk2_libsoup2
       - arch_gtk3_wk2_libsoup3
       - debian_gtk3_wk2_libsoup3
       - fedora_gtk3_wk2_libsoup3
