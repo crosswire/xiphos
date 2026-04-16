@@ -121,7 +121,7 @@ if (GTK2)
     )
 else (GTK2)
   if (WEBKIT1 AND GTKHTML)
-    # Gtk+-3.0 + Webkit1 + WebKit-editor
+    # Gtk+-3.0 + Webkit1 + GtkHtml-editor
     pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET
       "gtk+-3.0"
       "webkitgtk-3.0"
@@ -130,14 +130,14 @@ else (GTK2)
       )
   endif()
   if (WEBKIT1 AND NOT GTKHTML)
-    # Gtk+-3.0 + Webkit1 + GtkHtml-editor
+    # Gtk+-3.0 + Webkit1 + WebKit1-editor
     pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET
       "gtk+-3.0"
       "webkitgtk-3.0"
       )
   endif()
   if (NOT WEBKIT1 AND GTKHTML)
-    # Gtk+-3.0 + Webkit2 + WebKit-editor
+    # Gtk+-3.0 + Webkit2 + GtkHtml-editor
     pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET
       "gtk+-3.0"
       "gtkhtml-editor-4.0"
@@ -149,11 +149,15 @@ else (GTK2)
     endif()
   endif()
   if (NOT WEBKIT1 AND NOT GTKHTML)
-    # This configuration does not build, as the Webkit-editor
-    # code makes use of webkit1 APIs, not webkit2, and thus fails
-    # looking for its headers
-    message(FATAL "Webkit Editor is not supported with webkit2")
-    # Gtk+-3.0 + Webkit2 + GtkHtml-editor
+    # Gtk+-3.0 + WebKit2, no editor support
+
+    # Note: The editor currently requires webkit1 or gtkhtml APIs which are not 
+    # available in this configuration. Xiphos will build and run normally but the
+    # notes/journal editor will be unavailable, as the editor has not been updated 
+    # to handle webkit2 APIs.
+
+    message(WARNING "Building without editor support - webkit1 or gtkhtml required for editor functionality")
+
     pkg_check_modules(Gtk REQUIRED IMPORTED_TARGET "gtk+-3.0")
     pkg_check_modules(WK IMPORTED_TARGET "webkit2gtk-4.1")
     if(NOT WK_FOUND)
