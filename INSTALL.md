@@ -240,7 +240,7 @@ Create a build directory as a sibling of the xiphos directory:
 
 ## 4. Configure build
 
-    $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKHTML=ON ../xiphos
+    $ cmake -DCMAKE_INSTALL_PREFIX=/usr ../xiphos
 
 ## 5. Build and install, run xiphos
 
