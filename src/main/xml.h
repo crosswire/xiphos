@@ -32,6 +32,10 @@ void xml_add_new_section_to_settings_doc(char *section);
 void xml_new_bookmark_file(void);
 xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent,
 				    gchar *caption);
+xmlNodePtr xml_add_folder_to_parent_colored(xmlNodePtr parent,
+					    gchar *caption,
+					    const gchar *color);
+gchar *xml_get_folder_color(xmlNodePtr node);
 void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar *caption,
 				gchar *key, gchar *module,
 				const gchar *mod_desc);

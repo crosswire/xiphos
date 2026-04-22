@@ -21,6 +21,7 @@ if (NOT GTK2)
   # Gtk3 only stuff
   install (FILES
     bookmarks.gtkbuilder
+    folder.gtkbuilder
     editor_link_dialog.gtkbuilder
     export-dialog.gtkbuilder
     markverse.gtkbuilder
@@ -40,6 +41,7 @@ else  (NOT GTK2)
   # Gtk2 only stuff
   install (FILES
     bookmarks.glade
+    folder.glade
     editor_link_dialog.glade
     export-dialog.glade
     markverse.glade

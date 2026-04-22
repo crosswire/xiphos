@@ -27,6 +27,7 @@ extern "C" {
 #endif
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
+
 enum {
 	COL_OPEN_PIXBUF,
 	COL_CLOSED_PIXBUF,
@@ -35,6 +36,8 @@ enum {
 	COL_MODULE,
 	COL_MODULE_DESC,
 	COL_DESCRIPTION,
+	COL_COLOR,      /* hex color string for tag groups, e.g. "#378ADD"
+			 * NULL or "" means no color assigned (plain bookmark folder) */
 	N_COLUMNS
 };
 
@@ -53,6 +56,7 @@ struct _bookmark_data
 	gchar *module;
 	gchar *module_desc;
 	gchar *description;
+	gchar *color;   /* hex color string for folders/tag groups, NULL for leaves */
 	gboolean is_leaf;
 	GdkPixbuf *opened;
 	GdkPixbuf *closed;
@@ -69,6 +73,8 @@ void gui_add_item_to_tree(GtkTreeIter *iter, GtkTreeIter *parent,
 void gui_verselist_to_bookmarks(GList *verses,
 				gint save_as_single);
 GtkWidget *gui_create_bookmark_tree(void);
+void bookmark_debug_dump_colors(void);
+gchar *bookmark_get_tag_color_for_key(const gchar *osiskey);
 void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar *file,
 			 GtkTreeIter *parent);
 GtkWidget *gui_create_dialog_add_bookmark(gchar *label,
