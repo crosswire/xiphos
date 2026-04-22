@@ -234,13 +234,12 @@ Create a build directory as a sibling of the xiphos directory:
 ## 3. Install dependencies
 
     $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel webkit2gtk4.1-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools libsoup3-devel
-> **Note:** `gtkhtml3-devel` was retired in Fedora 41+.
-> The **notes editor** feature will not be available unless `gtkhtml3-devel` is installed.
+> **Note:** `gtkhtml3-devel` was retired in Fedora 41+ and must be installed manually to enable the cmake flag `-DGTKHTML`.
 
 
 ## 4. Configure build
 
-    $ cmake -DCMAKE_INSTALL_PREFIX=/usr ../xiphos
+    $ cmake -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON ../xiphos
 
 ## 5. Build and install, run xiphos
 
