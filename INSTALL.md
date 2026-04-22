@@ -173,6 +173,7 @@ List of options:
 Option   | Functionality                                  | Default
 -------- | ---------------------------------------------- | -------
 GTK2     | Force UI build with Gtk2 instead of Gtk3.      | OFF
+GTKTVEDITOR | Force GTK TextView editor, overriding `GTKHTML` and `WEBKIT1`. | OFF
 GTKHTML  | Force gtkhtml editor instead of webkit editor. | OFF
 WEBKIT1  | Force webkit1 instead of webkit2.              | OFF
 DBUS     | Use the Xiphos dbus API.                       | ON
