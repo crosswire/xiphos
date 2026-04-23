@@ -353,7 +353,7 @@
 		  <child>
 		    <widget class="GtkCheckMenuItem" id="read_aloud">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Read Aloud</property>
+		      <property name="label" translatable="yes">_Read Aloud (CTRL+R)</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
 		      <property name="tooltip" translatable="yes">Turn on text-to-speech reading of Bible verses as they are selected</property>

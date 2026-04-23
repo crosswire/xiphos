@@ -80,6 +80,7 @@
 
 #include "gui/debug_glib_null.h"
 
+void StopReading(void);
 /*
  * month names and lengths, for use in constructing journals and devotional references.
  */
@@ -1661,26 +1662,54 @@ gboolean FestivalSpeak(gchar *text, int length, int tts_socket)
     return SystemSpeak(text, length, tts_socket);
 }
 
+//
+// Stop current TTS playback
+//
+void StopReading(void)
+{
+#ifdef __linux__
+    if (tts_handle) {
+        spd_cancel((SPDConnection*)tts_handle);
+    }
+#elif defined(_WIN32)
+    if (tts_handle) {
+        ((ISpVoice*)tts_handle)->Speak(NULL, SPF_PURGEBEFORE, NULL);
+    }
+#endif
+}
+
 void ReadAloud(unsigned int verse, const char *suppliedtext)
 {
-	static int use_counter = -2;
+    static int use_counter = 0;
+    static gboolean startup_complete = FALSE;
 
-	if (settings.readaloud || (verse == 0)) {
-		gchar *s, *t;
+    // avoid speaking the first *2* times at startup only
+    if (!startup_complete && verse) {
+        use_counter++;
+        if (use_counter < 2) {
+            return;
+        }
+        startup_complete = TRUE;
+    }
 
-		if (verse > 0) {
-			// avoid speaking the first *2* times at startup
-			if (++use_counter < 1)
-				return;
-		}
+    if (settings.readaloud || (verse == 0)) {  
+        gchar *s, *t;
 
-		GString *text = g_string_new(NULL);
-		if ((settings.showversenum) && (verse != 0))
-			g_string_printf(text, "%d. ...  %s", verse,
-					suppliedtext);
-		// use of ". ..." is to induce proper pauses.
-		else
-			g_string_printf(text, "%s", suppliedtext);
+        GString *text = g_string_new(NULL);
+		if ((settings.showversenum) && (verse != 0)) {
+    if (suppliedtext != NULL) {
+        g_string_printf(text, "%d. ...  %s", verse, suppliedtext);
+    } else {
+        g_string_assign(text, "");
+        g_string_append_printf(text, "%d. ...  (texte non disponible)", verse);
+    }
+} else {
+    if (suppliedtext != NULL) {
+        g_string_printf(text, "%s", suppliedtext);
+    } else {
+        g_string_assign(text, "(texte non disponible)");
+    }
+}
 		XI_message(("ReadAloud: dirty: %s\n", text->str));
 
 		// clean: no <span> surrounding strongs/morph.
