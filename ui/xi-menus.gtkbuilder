@@ -224,7 +224,7 @@
               <object class="GtkCheckMenuItem" id="read_aloud">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Read Aloud</property>
+                <property name="label" translatable="yes">_Read Aloud (CTRL+R)</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_read_aloud_activate" swapped="no"/>
               </object>
