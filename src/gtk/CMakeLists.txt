@@ -212,7 +212,6 @@ target_link_libraries(xiphos
   Xiphos::Editor
   Xiphos::Webkit
   Xiphos::Xiphos_html
-  -lspeechd
   )
 
 if(WK_FOUND)
@@ -249,6 +248,12 @@ if (WIN32)
     PRIVATE
     xiphos-winres.rc
     )
+else()
+  # only Linux builds link against speech lib.
+  target_link_libraries(xiphos
+    PRIVATE
+    -lspeechd
+  )
 endif ()
 
 

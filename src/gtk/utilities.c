@@ -68,9 +68,11 @@
 #endif /* !WIN32 */
 #include <errno.h>
 #ifdef WIN32
+# if 0
 // System TTS on Windows
 #include <sapi.h>
 #include <sphelper.h>
+# endif
 #else
 // System TTS on Linux
 #ifdef __linux__
@@ -1587,10 +1589,12 @@ static void InitSystemTTS(void)
     if (!tts_handle)
         g_warning("Speech Dispatcher not available.");
 #elif defined(_WIN32)
+# if 0
     ISpVoice* pVoice = NULL;
     CoInitialize(NULL);
     if (SUCCEEDED(CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_ALL, IID_ISpVoice, (void**)&pVoice)))
         tts_handle = pVoice;
+# endif
 #endif
 }
 
@@ -1602,11 +1606,13 @@ void StopSystemTTS(void)
         tts_handle = NULL;
     }
 #elif defined(_WIN32)
+# if 0
     if (tts_handle) {
         ((ISpVoice*)tts_handle)->Release();
         CoUninitialize();
         tts_handle = NULL;
     }
+# endif
 #endif
 }
 
@@ -1629,6 +1635,7 @@ gboolean SystemSpeak(gchar *text, int length, int unused_param)
     g_free(null_terminated);
     return TRUE;
 #elif defined(_WIN32)
+# if 0
     ISpVoice* pVoice = (ISpVoice*)tts_handle;
     wchar_t* wtext = g_utf8_to_utf16(text, length, NULL, NULL, NULL);
     if (wtext) {
@@ -1637,6 +1644,7 @@ gboolean SystemSpeak(gchar *text, int length, int unused_param)
         return SUCCEEDED(hr);
     }
     return FALSE;
+# endif
 #endif
 }
 
@@ -1651,7 +1659,9 @@ void StopFestival(int *tts_socket)
     StopSystemTTS();
     if (tts_socket && *tts_socket != INVALID_SOCKET) {
 #ifdef WIN32
+# if 0
         closesocket(*tts_socket);
+# endif
 #else
         shutdown(*tts_socket, SHUT_RDWR);
         close(*tts_socket);
@@ -1675,9 +1685,11 @@ void StopReading(void)
         spd_cancel((SPDConnection*)tts_handle);
     }
 #elif defined(_WIN32)
+# if 0
     if (tts_handle) {
         ((ISpVoice*)tts_handle)->Speak(NULL, SPF_PURGEBEFORE, NULL);
     }
+# endif
 #endif
 }
 
