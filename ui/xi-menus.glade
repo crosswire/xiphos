@@ -278,7 +278,7 @@
 		<widget class="GtkMenu" id="menuitem6_menu">
 
 		  <child>
-		    <widget class="GtkMenuItem" id="daily_devotion">
+		    <widget class="GtkCheckMenuItem" id="daily_devotion">
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Preview _Daily Devotion</property>
 		      <property name="use_underline">True</property>

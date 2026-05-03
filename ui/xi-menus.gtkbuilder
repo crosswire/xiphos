@@ -155,7 +155,7 @@
           <object class="GtkMenu" id="menuitem6_menu">
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkMenuItem" id="daily_devotion">
+              <object class="GtkCheckMenuItem" id="daily_devotion">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Preview _Daily Devotion</property>

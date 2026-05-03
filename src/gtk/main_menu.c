@@ -347,8 +347,14 @@ on_about_translation_activate(GtkMenuItem *menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_daily_devotion_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_dict_devot), 1);
-    main_display_devotional(widgets.html_devotional);
+	settings.showdevotional =
+	    gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(menuitem));
+	xml_set_value("Xiphos", "misc", "dailydevotional",
+	              settings.showdevotional ? "1" : "0");
+	if (settings.showdevotional) {
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_dict_devot), 1);
+		main_display_devotional(widgets.html_devotional);
+	}
 }
 
 /******************************************************************************
@@ -1002,6 +1008,7 @@ GtkWidget *gui_create_main_menu(void)
 	    UI_GET_ITEM(gxml, "show_parallel_view_in_a_tab");
 	widgets.side_preview_item =
 	    UI_GET_ITEM(gxml, "show_previewer_in_sidebar");
+	widgets.daily_devotion_item = UI_GET_ITEM(gxml, "daily_devotion");
 	widgets.new_journal_item = UI_GET_ITEM(gxml, "newjournal");
 
 	/* map tab's show state into view menu. */
@@ -1017,7 +1024,9 @@ GtkWidget *gui_create_main_menu(void)
 				       settings.showparatab);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.side_preview_item),
 				       settings.show_previewer_in_sidebar);
-
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.daily_devotion_item),
+				       settings.showdevotional);
+				       
 	/* update other status toys */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(widgets.linkedtabs_item),
 				       settings.linkedtabs);
