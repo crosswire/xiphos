@@ -1,6 +1,6 @@
 requires:
   archlinux:
-    - appstream-glib
+    - appstream
     - biblesync
     - cmake
     - docbook-utils
@@ -44,7 +44,7 @@ requires:
     - which
 
   debian:
-    - appstream-util
+    - appstream
     - cmake
     - docbook-utils
     - g++
@@ -75,6 +75,7 @@ requires:
     - zip
 
   fedora:
+    - appstream
     - biblesync-devel
     - cmake
     - desktop-file-utils
@@ -85,7 +86,6 @@ requires:
     - gtkhtml3-devel
     - intltool
     - itstool
-    - libappstream-glib-devel
     - libsoup3-devel
     - libuuid-devel
     - libxml2-devel
@@ -99,7 +99,7 @@ requires:
     - zip
 
   ubuntu:
-    - appstream-util
+    - appstream
     - cmake
     - g++
     - desktop-file-utils

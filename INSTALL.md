@@ -65,7 +65,7 @@ dependencies installed:
     CMake                  Cross-platform make system
     Gtk+-2.0 or GTK+-3.0   The GIMP Toolkit
     WebKit1 or Webkit2     Port to Gtk+ of the WebKit rendering engine
-    appstream-util         Utility to validate AppStream metadata
+    appstreamcli           Utility to validate AppStream metadata
     biblesync>=1.2.0       Protocol to support Bible software shared co-navigation
     desktop-file-validate  Validates a desktop file
     gcc                    GCC, the GNU Compiler Collection
@@ -234,7 +234,7 @@ Create a build directory as a sibling of the xiphos directory:
 
 ## 3. Install dependencies
 
-    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel webkit2gtk4.1-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel libappstream-glib-devel desktop-file-utils itstool yelp yelp-tools libsoup3-devel
+    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel webkit2gtk4.1-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel appstream desktop-file-utils itstool yelp yelp-tools libsoup3-devel
 > **Note:** `gtkhtml3-devel` was retired in Fedora 41+ and must be installed manually to enable the cmake flag `-DGTKHTML`.
 
 
@@ -258,7 +258,7 @@ Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 
 ## 2. Install the required dependencies:
 
-    $ sudo apt-get install appstream-util cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libbiblesync-dev libenchant-2-dev libgail-3-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python3-dev swig uuid-dev uuid-runtime yelp-tools xzip
+    $ sudo apt-get install appstream cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libbiblesync-dev libenchant-2-dev libgail-3-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python3-dev swig uuid-dev uuid-runtime yelp-tools xzip
 
 ## 3. Build and install:
 

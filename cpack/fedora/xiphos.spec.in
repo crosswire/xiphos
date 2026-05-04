@@ -24,7 +24,7 @@ BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  itstool
-BuildRequires:  libappstream-glib-devel
+BuildRequires:  appstream
 BuildRequires:  yelp-tools
 BuildRequires:  util-linux
 Requires:       yelp

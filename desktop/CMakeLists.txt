@@ -90,7 +90,7 @@ if (UNIX)
   # add translations and validate xiphos.appdata.xml
   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.appdata.xml
     COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} --xml --template "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.appdata.xml" -d "${PROJECT_SOURCE_DIR}/po" -o "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.appdata.xml"
-    COMMAND ${APPSTREAM_UTIL} validate-relax --nonet ${PROJECT_NAME}.appdata.xml > validate.timestamp
+    COMMAND ${APPSTREAMCLI} validate --no-net ${PROJECT_NAME}.appdata.xml > validate.timestamp
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     COMMENT "Configuring the AppData metadata file"
     )

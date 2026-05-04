@@ -47,7 +47,7 @@ jobs:
         run: |
           pacman -Syu --noconfirm
           pacman -S --noconfirm \
-            appstream-glib \
+            appstream \
             biblesync \
             binutils \
             cmake \
@@ -87,6 +87,7 @@ jobs:
       - name: install dependencies
         run: |
           dnf install -y \
+            appstream \
             biblesync-devel \
             cmake \
             desktop-file-utils \
@@ -96,7 +97,6 @@ jobs:
             gtk3-devel \
             intltool \
             itstool \
-            libappstream-glib-devel \
             libsoup3-devel \
             libuuid-devel \
             libxml2-devel \
@@ -128,7 +128,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y \
-            appstream-util \
+            appstream \
             cmake \
             docbook-utils \
             g++ \
@@ -173,7 +173,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y \
-            appstream-util \
+            appstream \
             cmake \
             g++ \
             desktop-file-utils \

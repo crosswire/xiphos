@@ -48,7 +48,7 @@ if (UNIX)
   # checking xiphos.desktop
   xiphos_find_program (DESKTOP_FILE_VALIDATE desktop-file-validate)
   # checking xiphos.appdata.xml
-  xiphos_find_program (APPSTREAM_UTIL appstream-util)
+  xiphos_find_program (APPSTREAMCLI appstreamcli)
 endif (UNIX)
 
 

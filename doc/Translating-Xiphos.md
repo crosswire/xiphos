@@ -492,7 +492,7 @@ On Debian/Ubuntu:
 You'll also need to install the following utilities:
 
     intltool
-    appstream-util
+    appstreamcli
     desktop-file-validate
     itstool
     xmllint
