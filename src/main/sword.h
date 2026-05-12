@@ -53,6 +53,7 @@ extern "C" {
 #ifdef WIN32
 // System TTS on Windows
 // moving C++ functions to this generic space.
+#include <windows.h>
 #include <sapi.h>
 #include <sphelper.h>
 #endif
@@ -157,7 +158,6 @@ void main_devotional_button_clicked(gint direction);
 // System TTS for Windows
 // Moved here from src/gtk/utilities.c.
 
-#include <windows.h>
 extern void* tts_handle;
 void WindowsInitSystemTTS(void);
 void WindowsStopSystemTTS(void);
