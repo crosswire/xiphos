@@ -1618,7 +1618,7 @@ gboolean SystemSpeak(gchar *text, int length, int unused_param)
     g_free(null_terminated);
     return TRUE;
 #elif defined(_WIN32)
-    return WindowsSystemSpeak(gchar *text, int length);
+    return WindowsSystemSpeak(text, length);
 #endif
 }
 
