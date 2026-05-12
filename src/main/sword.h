@@ -50,14 +50,6 @@ extern "C" {
 #define DIALOG_SEARCH_PREVIEW_TYPE 11
 #define PRAYERLIST_TYPE 12
 
-#ifdef WIN32
-// System TTS on Windows
-// moving C++ functions to this generic space.
-#include <windows.h>
-#include <sapi.h>
-#include <sphelper.h>
-#endif
-
 /* these strings are not seen by users */
 /* they are returned by Sword in module->Type() */
 #define TEXT_MODS "Biblical Texts"

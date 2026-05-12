@@ -2134,6 +2134,11 @@ void main_dict_history_forward(void)
 // System TTS on Windows
 // moved C++ functions here from src/gtk/utilities.c.
 
+#include <windows.h>
+#include <strsafe.h>
+#include <sapi.h>
+#include <sphelper.h>
+
 void WindowsInitSystemTTS(void)
 {
     ISpVoice* pVoice = NULL;
