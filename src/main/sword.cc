@@ -2160,7 +2160,7 @@ void WindowsStopSystemTTS(void)
 gboolean WindowsSystemSpeak(gchar *text, int length)
 {
     ISpVoice* pVoice = (ISpVoice*)tts_handle;
-    wchar_t* wtext = g_utf8_to_utf16(text, length, NULL, NULL, NULL);
+    wchar_t* wtext = reinterpret_cast<wchar_t*>g_utf8_to_utf16(text, length, NULL, NULL, NULL);
     if (wtext) {
         HRESULT hr = pVoice->Speak(wtext, SPF_DEFAULT, NULL);
         g_free(wtext);
