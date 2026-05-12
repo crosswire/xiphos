@@ -2126,3 +2126,51 @@ void main_dict_history_forward(void)
     gtk_widget_set_sensitive(widgets.button_dict_forward,
         dict_history_forward != NULL);
 }
+
+/* **************************************************************** */
+
+#ifdef WIN32
+
+// System TTS on Windows
+// moved C++ functions here from src/gtk/utilities.c.
+
+void WindowsInitSystemTTS(void)
+{
+    ISpVoice* pVoice = NULL;
+    CoInitialize(NULL);
+    if (SUCCEEDED(CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_ALL, IID_ISpVoice, (void**)&pVoice)))
+        tts_handle = pVoice;
+}
+
+void WindowsStopSystemTTS(void)
+{
+    if (tts_handle) {
+        ((ISpVoice*)tts_handle)->Release();
+        CoUninitialize();
+        tts_handle = NULL;
+    }
+}
+
+gboolean WindowsSystemSpeak(gchar *text, int length)
+{
+    ISpVoice* pVoice = (ISpVoice*)tts_handle;
+    wchar_t* wtext = g_utf8_to_utf16(text, length, NULL, NULL, NULL);
+    if (wtext) {
+        HRESULT hr = pVoice->Speak(wtext, SPF_DEFAULT, NULL);
+        g_free(wtext);
+        return SUCCEEDED(hr);
+    }
+    return FALSE;	// utf16 conversion failed
+}
+
+//
+// Stop current TTS playback
+//
+void WindowsStopReading(void)
+{
+    if (tts_handle) {
+        ((ISpVoice*)tts_handle)->Speak(NULL, SPF_PURGEBEFORE, NULL);
+    }
+}
+
+#endif // WIN32

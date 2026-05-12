@@ -50,6 +50,13 @@ extern "C" {
 #define DIALOG_SEARCH_PREVIEW_TYPE 11
 #define PRAYERLIST_TYPE 12
 
+#ifdef WIN32
+// System TTS on Windows
+// moving C++ functions to this generic space.
+#include <sapi.h>
+#include <sphelper.h>
+#endif
+
 /* these strings are not seen by users */
 /* they are returned by Sword in module->Type() */
 #define TEXT_MODS "Biblical Texts"
@@ -145,6 +152,18 @@ const char *main_get_language_map(const char *language);
 char **main_get_module_language_list(void);
 void main_init_language_map(void);
 void main_devotional_button_clicked(gint direction);
+
+#ifdef WIN32
+// System TTS for Windows
+// Moved here from src/gtk/utilities.c.
+
+extern void* tts_handle;
+void WindowsInitSystemTTS(void);
+void WindowsStopSystemTTS(void);
+gboolean WindowsSystemSpeak(gchar *text, int length);
+void WindowsStopReading(void);
+
+#endif
 
 #ifdef __cplusplus
 }

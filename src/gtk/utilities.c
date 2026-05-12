@@ -67,11 +67,8 @@
 #endif /* !WIN32 */
 #include <errno.h>
 #ifdef WIN32
-# if 0
 // System TTS on Windows
-#include <sapi.h>
-#include <sphelper.h>
-# endif
+// gatewayed into src/main/sword.cc.
 #else
 // System TTS on Linux
 #ifdef __linux__
@@ -1577,21 +1574,16 @@ gboolean xiphos_create_archive (gchar *conf_name, gchar *datapath,
 // System Text-to-Speech using OS native APIs
 // ============================================================
 
-static void* tts_handle = NULL;
+void* tts_handle = NULL;
 
-static void InitSystemTTS(void)
+void InitSystemTTS(void)
 {
 #ifdef __linux__
     tts_handle = spd_open("xiphos", NULL, NULL, SPD_MODE_SINGLE);
     if (!tts_handle)
         g_warning("Speech Dispatcher not available.");
 #elif defined(_WIN32)
-# if 0
-    ISpVoice* pVoice = NULL;
-    CoInitialize(NULL);
-    if (SUCCEEDED(CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_ALL, IID_ISpVoice, (void**)&pVoice)))
-        tts_handle = pVoice;
-# endif
+    WindowsInitSystemTTS();
 #endif
 }
 
@@ -1603,13 +1595,7 @@ void StopSystemTTS(void)
         tts_handle = NULL;
     }
 #elif defined(_WIN32)
-# if 0
-    if (tts_handle) {
-        ((ISpVoice*)tts_handle)->Release();
-        CoUninitialize();
-        tts_handle = NULL;
-    }
-# endif
+    WindowsStopSystemTTS();
 #endif
 }
 
@@ -1632,16 +1618,7 @@ gboolean SystemSpeak(gchar *text, int length, int unused_param)
     g_free(null_terminated);
     return TRUE;
 #elif defined(_WIN32)
-# if 0
-    ISpVoice* pVoice = (ISpVoice*)tts_handle;
-    wchar_t* wtext = g_utf8_to_utf16(text, length, NULL, NULL, NULL);
-    if (wtext) {
-        HRESULT hr = pVoice->Speak(wtext, SPF_DEFAULT, NULL);
-        g_free(wtext);
-        return SUCCEEDED(hr);
-    }
-    return FALSE;
-# endif
+    return WindowsSystemSpeak(gchar *text, int length);
 #endif
 }
 
@@ -1656,9 +1633,7 @@ void StopFestival(int *tts_socket)
     StopSystemTTS();
     if (tts_socket && *tts_socket != INVALID_SOCKET) {
 #ifdef WIN32
-# if 0
         closesocket(*tts_socket);
-# endif
 #else
         shutdown(*tts_socket, SHUT_RDWR);
         close(*tts_socket);
@@ -1682,11 +1657,7 @@ void StopReading(void)
         spd_cancel((SPDConnection*)tts_handle);
     }
 #elif defined(_WIN32)
-# if 0
-    if (tts_handle) {
-        ((ISpVoice*)tts_handle)->Speak(NULL, SPF_PURGEBEFORE, NULL);
-    }
-# endif
+    WindowsStopReading();
 #endif
 }
 
