@@ -2135,6 +2135,7 @@ void main_dict_history_forward(void)
 // moved C++ functions here from src/gtk/utilities.c.
 
 #include <windows.h>
+#include <tchar.h>
 #include <strsafe.h>
 #include <sapi.h>
 #include <sphelper.h>
@@ -2174,7 +2175,7 @@ gboolean WindowsSystemSpeak(gchar *text, int length)
 void WindowsStopReading(void)
 {
     if (tts_handle) {
-        ((ISpVoice*)tts_handle)->Speak(NULL, SPF_PURGEBEFORE, NULL);
+        ((ISpVoice*)tts_handle)->Speak(NULL, SPF_PURGEBEFORESPEAK, NULL);
     }
 }
 
