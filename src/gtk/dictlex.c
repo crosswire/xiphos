@@ -621,28 +621,36 @@ GtkWidget *gui_create_devotional_pane(void)
 
 	widgets.entry_devotional = gtk_entry_new();
 	gtk_entry_set_max_length(GTK_ENTRY(widgets.entry_devotional), 5);
-
+#ifdef _WIN32
+	/* Windows: GtkCalendar is broken — show the MM.DD text entry instead */
+	gtk_entry_set_width_chars(GTK_ENTRY(widgets.entry_devotional), 6);
+	gtk_widget_set_tooltip_text(widgets.entry_devotional, _("Date MM.DD"));
+	gtk_widget_show(widgets.entry_devotional);
+	gtk_box_pack_start(GTK_BOX(hbox), widgets.entry_devotional, FALSE, FALSE, 0);
+	widgets.button_devotional_date = NULL;
+	widgets.popover_devotional     = NULL;
+	widgets.calendar_devotional    = NULL;
+#else
 	widgets.button_devotional_date = gtk_button_new_with_label("--");
 	gtk_widget_show(widgets.button_devotional_date);
 	gtk_widget_set_tooltip_text(widgets.button_devotional_date,
 								_("Click to choose a date"));
 	gtk_box_pack_start(GTK_BOX(hbox), widgets.button_devotional_date,
 					   FALSE, FALSE, 0);
-
 	/* GtkPopover stick to the button */
 #if GTK_CHECK_VERSION(3, 12, 0)
 	widgets.popover_devotional = gtk_popover_new(widgets.button_devotional_date);
 	gtk_popover_set_position(GTK_POPOVER(widgets.popover_devotional),
                              GTK_POS_BOTTOM);
 #endif
-
 	/* GtkCalendar in the popover */
 	widgets.calendar_devotional = gtk_calendar_new();
 	gtk_widget_show(widgets.calendar_devotional);
-	#if GTK_CHECK_VERSION(3, 12, 0)
-    gtk_container_add(GTK_CONTAINER(widgets.popover_devotional),
+#if GTK_CHECK_VERSION(3, 12, 0)
+	gtk_container_add(GTK_CONTAINER(widgets.popover_devotional),
                       widgets.calendar_devotional);
 #endif
+#endif /* _WIN32 */
 
 	/* prev button */
 	button_prev = gtk_button_new();
@@ -690,10 +698,12 @@ GtkWidget *gui_create_devotional_pane(void)
 #endif
 
 	/* signaux */
+#ifndef _WIN32
 	g_signal_connect(G_OBJECT(widgets.button_devotional_date), "clicked",
 					 G_CALLBACK(on_button_devotional_date_clicked), NULL);
 	g_signal_connect(G_OBJECT(widgets.calendar_devotional), "day-selected-double-click",
 					 G_CALLBACK(on_calendar_day_selected), NULL);
+#endif 
 	g_signal_connect(G_OBJECT(widgets.entry_devotional), "activate",
 					 G_CALLBACK(devot_key_entry_changed), NULL);
 	g_signal_connect((gpointer)button_prev, "clicked",
