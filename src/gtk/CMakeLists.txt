@@ -248,6 +248,10 @@ if (WIN32)
     PRIVATE
     xiphos-winres.rc
     )
+  target_link_libraries(xiphos
+    PRIVATE
+    -lsapi
+  )
 else()
   # only Linux builds link against speech lib.
   target_link_libraries(xiphos
