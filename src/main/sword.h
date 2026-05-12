@@ -157,6 +157,7 @@ void main_devotional_button_clicked(gint direction);
 // System TTS for Windows
 // Moved here from src/gtk/utilities.c.
 
+#include <windows.h>
 extern void* tts_handle;
 void WindowsInitSystemTTS(void);
 void WindowsStopSystemTTS(void);
