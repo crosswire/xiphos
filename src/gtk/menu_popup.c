@@ -1354,7 +1354,6 @@ G_MODULE_EXPORT void on_rename_perscomm_activate(GtkMenuItem *menuitem,
 	const char *conf_old;
 	char *conf_new;
 	char *sworddir, *modsdir;
-	FILE *result;
 
 	// get a new name for the module.
 	info = gui_new_dialog();
@@ -1415,28 +1414,74 @@ G_MODULE_EXPORT void on_rename_perscomm_activate(GtkMenuItem *menuitem,
 		goto out2;
 	}
 	// manufacture new .conf from old.
-	g_string_printf(workstr,
-			"( cd \"%s\" && sed -e '/^\\[/s|^.*$|[%s]|' -e '/^DataPath=/s|rawfiles/.*$|rawfiles/%s/|' < \"%s\" > \"%s.conf\" ) 2>&1",
-			modsdir, info->text1, conf_new, conf_old,
-			conf_new);
-	if ((result = popen(workstr->str, "r")) == NULL) {
-		g_string_printf(workstr,
+	gchar *conf_path_old = g_strdup_printf("%s/%s", modsdir, conf_old);
+	gchar *conf_path_new = g_strdup_printf("%s/%s.conf", modsdir, conf_new);
+	gchar *sed_old_sec = g_strdup_printf("[%s]", info->text1);
+	gchar *sed_old_path = g_strdup_printf("rawfiles/%s/", conf_new);
+	gchar *sed_expr = g_strdup_printf(
+			"/^\\[/s|^.*$|%s|;/^DataPath=/s|rawfiles/.*$|%s|",
+			sed_old_sec, sed_old_path);
+	gchar *argv[] = {
+		(gchar *)"sed", (gchar *)"-e", sed_expr, conf_path_old, NULL
+	};
+	GError *spawn_error = NULL;
+	gint exit_status = 0;
+	gchar *spawn_stdout = NULL;
+	gchar *spawn_stderr = NULL;
+	gboolean spawn_ok = g_spawn_sync(modsdir, argv, NULL,
+					 G_SPAWN_SEARCH_PATH,
+					 NULL, NULL, &spawn_stdout, &spawn_stderr, &exit_status, &spawn_error);
+	if (!spawn_ok) {
+		gchar *msg = g_strdup_printf(
 				_("Failed to create new configuration:\n%s"),
-				strerror(errno));
-		gui_generic_warning_modal(workstr->str);
+				spawn_error ? spawn_error->message : "unknown error");
+		gui_generic_warning_modal(msg);
+		g_free(msg);
+		if (spawn_error) g_error_free(spawn_error);
+		g_free(conf_path_old);
+		g_free(conf_path_new);
+		g_free(sed_old_sec);
+		g_free(sed_old_path);
+		g_free(sed_expr);
+		g_free(spawn_stdout);
+		g_free(spawn_stderr);
 		goto out2;
-	} else {
-		gchar output[258];
-		if (fgets(output, 256, result) != NULL) {
-			g_string_truncate(workstr, 0);
-			g_string_append(workstr,
-					_("Configuration build error:\n\n"));
-			g_string_append(workstr, output);
-			gui_generic_warning_modal(workstr->str);
-			goto out2; // necessary?  advisable?
-		}
-		pclose(result);
 	}
+	if (exit_status != 0) {
+		gchar *msg = g_strdup_printf(
+				_("Configuration build error:\n\n%s"),
+				spawn_stderr ? spawn_stderr : "(no error output)");
+		gui_generic_warning_modal(msg);
+		g_free(msg);
+		g_free(conf_path_old);
+		g_free(conf_path_new);
+		g_free(sed_old_sec);
+		g_free(sed_old_path);
+		g_free(sed_expr);
+		g_free(spawn_stdout);
+		g_free(spawn_stderr);
+		goto out2;
+	}
+	// Write sed output to the new .conf file.
+	if (!g_file_set_contents(conf_path_new, spawn_stdout ? spawn_stdout : "",
+				 spawn_stdout ? strlen(spawn_stdout) : 0, NULL)) {
+		gui_generic_warning_modal("Failed to write new configuration file.");
+		g_free(conf_path_old);
+		g_free(conf_path_new);
+		g_free(sed_old_sec);
+		g_free(sed_old_path);
+		g_free(sed_expr);
+		g_free(spawn_stdout);
+		g_free(spawn_stderr);
+		goto out2;
+	}
+	g_free(conf_path_old);
+	g_free(conf_path_new);
+	g_free(sed_old_sec);
+	g_free(sed_old_path);
+	g_free(sed_expr);
+	g_free(spawn_stdout);
+	g_free(spawn_stderr);
 
 	// unlink old conf.
 	g_string_printf(workstr, "%s/%s", modsdir, conf_old);
