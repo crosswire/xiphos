@@ -172,8 +172,6 @@ static gint show_separate_image(const gchar *filename, gboolean clicked)
 			gui_generic_warning((char *)"Could not display that image");
 		}
 #else
-		FILE *result;
-		GString *cmd = g_string_new(NULL);
 		int i;
 
 		for (i = 0; display_progs[i]; i++) {
@@ -186,26 +184,18 @@ static gint show_separate_image(const gchar *filename, gboolean clicked)
 		}
 
 		XI_print(("file = %s\n", filename));
-		g_string_printf(cmd, "%s \"%s\" < /dev/null > /dev/null 2>&1 &",
-				display_progs[i], filename);
-
-		if ((result = popen(cmd->str, "r")) == NULL) {
-			g_string_printf(cmd,
-					_("Xiphos could not execute %s"),
-					display_progs[i]);
-			gui_generic_warning(cmd->str);
-		} else {
-			gchar output[258];
-			if (fgets(output, 256, result) != NULL) {
-				g_string_truncate(cmd, 0);
-				g_string_append(cmd,
-						_("Viewer error:\n"));
-				g_string_append(cmd, output);
-				gui_generic_warning(cmd->str);
-			}
-			pclose(result);
+		gchar *argv[] = {(gchar *)display_progs[i], (gchar *)filename, NULL};
+		GError *error = NULL;
+		if (!g_spawn_async(NULL, argv, NULL,
+				   (GSpawnFlags)(G_SPAWN_SEARCH_PATH | G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL),
+				   NULL, NULL, NULL, &error)) {
+			gchar *msg = g_strdup_printf(
+					_("Xiphos could not execute %s: %s"),
+					display_progs[i], error->message);
+			gui_generic_warning(msg);
+			g_free(msg);
+			g_error_free(error);
 		}
-		g_string_free(cmd, TRUE);
 #endif
 	} else {
 		gui_set_statusbar(filename);
