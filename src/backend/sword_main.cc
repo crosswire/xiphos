@@ -792,9 +792,8 @@ unsigned long BackEnd::treekey_set_key(char *key)
 void BackEnd::set_treekey(unsigned long offset)
 {
 	if (!display_mod) {
-		gui_generic_warning(_("Xiphos failure: \"can't happen\", display_mod: null"
-				      "\nPlease report this. sword_main.cc:set_treekey"
-				      "\nWhat were you doing when this occurred?"));
+		gui_generic_warning(_("There is no module associated here."
+				      "\nSelect a module from general books."));
 		return;
 	}
 	if (tree_key)
