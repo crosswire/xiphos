@@ -308,6 +308,31 @@ G_MODULE_EXPORT void on_crossref_popup_activate(GtkMenuItem *menuitem,
     xml_set_value("Xiphos", "misc", "crossref_popup",
                   settings.crossref_popup ? "1" : "0");
 }
+/******************************************************************************
+ * Name
+ *   on_tag_colorize_activate
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_menu.h"
+ *
+ *   void on_tag_colorize_activate(GtkMenuItem *menuitem,
+ *                                 gpointer user_data)
+ *
+ * Description
+ *   toggle verse colorization by bookmark folder color
+ *
+ * Return value
+ *   void
+ */
+G_MODULE_EXPORT void on_tag_colorize_activate(GtkMenuItem *menuitem,
+                                              gpointer user_data)
+{
+    settings.tag_colorize =
+        gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(menuitem));
+    xml_set_value("Xiphos", "misc", "tag_colorize",
+                  settings.tag_colorize ? "1" : "0");
+    main_display_bible(NULL, settings.currentverse);
+}
 
 /******************************************************************************
  * Name
@@ -1071,6 +1096,10 @@ void gui_create_bookmark_menu(void)
 	gtk_check_menu_item_set_active(
 	GTK_CHECK_MENU_ITEM(menu.crossref_popup),
 	settings.crossref_popup);
+	menu.tag_colorize = UI_GET_ITEM(gxml, "tag_colorize");
+	gtk_check_menu_item_set_active(
+	GTK_CHECK_MENU_ITEM(menu.tag_colorize),
+	settings.tag_colorize);
 
 	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);

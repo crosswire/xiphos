@@ -75,6 +75,7 @@ void gui_verselist_to_bookmarks(GList *verses,
 GtkWidget *gui_create_bookmark_tree(void);
 void bookmark_debug_dump_colors(void);
 gchar *bookmark_get_tag_color_for_key(const gchar *osiskey);
+gchar *bookmark_get_tag_info_for_key(const gchar *versekey_text);
 void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar *file,
 			 GtkTreeIter *parent);
 GtkWidget *gui_create_dialog_add_bookmark(gchar *label,

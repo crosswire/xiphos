@@ -1065,6 +1065,12 @@ if (!settings.morph_heb_lex || strlen(settings.morph_heb_lex) == 0) {
 		xml_add_new_item_to_section("misc", "crossref_popup", "0");
 		settings.crossref_popup = 0;
 	}
+	if ((buf = xml_get_value("misc", "tag_colorize")))
+		settings.tag_colorize = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "tag_colorize", "1");
+		settings.tag_colorize = 1;
+	}
 
 	if ((buf = xml_get_value("misc", "xrefsinverselist")))
 		settings.xrefs_in_verse_list = atoi(buf);
