@@ -103,6 +103,7 @@ struct _settings
 	    readaloud,			 /* pass text through "festival -server" */
 	    versehighlight,		 /* do special fg/bg for current verse */
 	    annotate_highlight,		 /* do special bg/fg for user annotations */
+	    crossref_popup,		 /* open cross-references in a popup menu */
 					 /* saved startup displays */
 	    display_parallel,		 /* detached parallel */
 	    display_modmgr,		 /* mod.mgr */

@@ -42,6 +42,7 @@ struct _bookmark_menu
 	GtkWidget *rr_submenu;
 	GtkWidget *remove;
 	GtkWidget *set_color;
+	GtkWidget *crossref_popup;
 };
 typedef struct _bookmark_menu BOOKMARK_MENU;
 extern BOOKMARK_MENU menu;
@@ -58,6 +59,10 @@ void bibletime_bookmarks_activate(GtkMenuItem *menuitem,
 				  gpointer user_data);
 void on_allow_reordering_activate(GtkMenuItem *menuitem,
 				  gpointer user_data);
+void on_allow_reordering_activate(GtkMenuItem *menuitem,
+				  gpointer user_data);
+void on_crossref_popup_activate(GtkMenuItem *menuitem,
+				gpointer user_data);
 void on_dialog_activate(GtkMenuItem *menuitem,
 			gpointer user_data);
 void on_edit_item_activate(GtkMenuItem *menuitem,
