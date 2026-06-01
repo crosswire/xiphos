@@ -925,11 +925,31 @@ GList *BackEnd::parse_verse_list(const char *module_name, const char *list, char
 	key->setText(current_key);
 	vs = key->parseVerseList(list, *key, TRUE);
 
-	if (!vs.getCount())
+	int count = vs.getCount();
+	if (!count)
 		return retlist;
-	while (!vs.popError()) {
-		retlist = g_list_append(retlist, strdup((char *)vs.getText()));
-		vs++;
+	/* Use indexed access rather than popError()-driven iteration:
+	 * popError() on the ListKey stops the whole walk as soon as ANY
+	 * single element fails to resolve, silently dropping every
+	 * element after it, even when they are perfectly valid. Indexed
+	 * access lets us simply skip a bad element and keep going.
+	 *
+	 * But each INDIVIDUAL element also carries its own error state:
+	 * when a fragment of the input list doesn't parse as a valid
+	 * verse reference at all (e.g. a dictionary/Strong's-number key
+	 * or some other non-scriptural bookmark text accidentally fed
+	 * in here), Sword does not simply omit it -- it silently falls
+	 * back to some arbitrary boundary position (observed: the very
+	 * last verse of the Bible) and reports that as a "resolved"
+	 * element without necessarily failing the whole ListKey. Left
+	 * unchecked, that spurious element then looks like a genuine
+	 * match for whatever verse it landed on. Skip any element whose
+	 * own popError() is set, since it does not represent a real
+	 * reference from the input. */
+	for (int i = 0; i < count; i++) {
+		SWKey *elem = vs.getElement(i);
+		if (elem && !elem->popError())
+			retlist = g_list_append(retlist, strdup((char *)elem->getText()));
 	}
 	return retlist;
 }

@@ -52,6 +52,7 @@
 #include "main/xml.h"
 
 #include "gui/utilities.h"
+#include "gui/bookmarks_treeview.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
 
@@ -96,6 +97,7 @@ body { background-color:%s; color:%s; -webkit-column-count: %d ; margin-top: 0.1
 td { %s } \
 .introMaterial { font-style: italic; } \
 a:link{ color:%s } %s %s \
+.tagcolor a:link{ color:inherit !important } \
 h3 { font-style: %s } --> \
 %s</style> %s </head><body>"
 // 11 interpolable values: bg/txt/link colors, columns, justify (2x, body+td),
@@ -1335,6 +1337,207 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 	buf = NULL;
 }
 
+/* Returns white or black depending on background luminance */
+static const char *text_color_for_bg(const gchar *hex_color)
+{
+	if (!hex_color || hex_color[0] != '#' || strlen(hex_color) < 7)
+		return "#000000";
+	int r = 0, g = 0, b = 0;
+	sscanf(hex_color + 1, "%02x%02x%02x", &r, &g, &b);
+	/* relative luminance (ITU-R BT.709) */
+	double lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+	return (lum < 128.0) ? "#FFFFFF" : "#000000";
+}
+
+/* Tag-color lookup cache: built once per GTKChapDisp::display() call
+ * (i.e. once per book in render_whole_books mode, not once per
+ * verse). The previous approach called parse_verse_list() from
+ * inside the per-verse render loop, once per bookmark, for every
+ * single verse rendered. Since parse_verse_list() repositions the
+ * SAME SWModule key object that the render loop is simultaneously
+ * using for content, doing that dozens of times per chapter left
+ * residual/corrupted key state which could cause bookmarks to appear
+ * to match verses they don't reference at all (reported: stray
+ * highlights in Genesis 1 despite no bookmarks there). Building the
+ * map once, up front, with the key fully restored afterwards, and
+ * then doing a plain hash-table lookup per verse during rendering,
+ * avoids touching the key at all while the chapter is being drawn. */
+static GHashTable *tag_color_map = NULL;
+
+static void free_tag_color_map(void)
+{
+	if (tag_color_map) {
+		g_hash_table_destroy(tag_color_map);
+		tag_color_map = NULL;
+	}
+}
+
+static void build_tag_color_map(VerseKey *vk)
+{
+	free_tag_color_map();
+	tag_color_map = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+
+	extern GtkTreeStore *model;
+	if (!settings.tag_colorize || !model || !vk)
+		return;
+
+	GtkTreeIter root;
+	if (!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &root))
+		return;
+
+	/* Resolve everything against a saved copy of the key's text, and
+	 * restore it when done, so the live render position is never
+	 * left disturbed once building the map is finished. */
+	gchar *saved_pos = g_strdup((const char *)vk->getText());
+
+	GQueue *stack = g_queue_new();
+	GQueue *colors = g_queue_new();
+	GtkTreeIter child;
+	if (gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child, &root)) {
+		do {
+			GtkTreeIter *copy = g_new(GtkTreeIter, 1);
+			*copy = child;
+			g_queue_push_tail(stack, copy);
+			g_queue_push_tail(colors, NULL);
+		} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+	}
+
+	while (!g_queue_is_empty(stack)) {
+		GtkTreeIter *iter = (GtkTreeIter *)g_queue_pop_head(stack);
+		gchar *inherited = (gchar *)g_queue_pop_head(colors);
+		gchar *node_color = NULL, *node_key = NULL, *node_module = NULL;
+		gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
+				   COL_COLOR,  &node_color,
+				   COL_KEY,    &node_key,
+				   COL_MODULE, &node_module, -1);
+		const gchar *effective = (node_color && *node_color)
+			? node_color : inherited;
+		if (node_key) {
+			/* Let Sword resolve the (possibly multi-reference, possibly
+			 * partial) bookmark key into individual, fully-qualified
+			 * verses -- same mechanism used for the verse-list popup.
+			 * Only do this for bookmarks that actually target Bible
+			 * text (an empty module means "applies to all Bible
+			 * modules", the long-standing convention here) or a
+			 * commentary (also verse-keyed). Bookmarks pointing at a
+			 * dictionary or genbook module (e.g. Josephus section
+			 * numbers, Strong's numbers) have keys that are NOT verse
+			 * references at all; feeding them to Sword's verse-list
+			 * parser doesn't fail cleanly -- it silently reinterprets
+			 * the bare number/text as some arbitrary chapter:verse,
+			 * producing spurious highlighted verses elsewhere in the
+			 * Bible (reported: stray highlights in Genesis 1). */
+			gboolean is_scripture_key = TRUE;
+			if (node_module && *node_module) {
+				int mtype = backend->module_type(node_module);
+				if ((mtype != TEXT_TYPE) && (mtype != COMMENTARY_TYPE))
+					is_scripture_key = FALSE;
+			}
+			if (effective && is_scripture_key) {
+				GList *verses = backend->parse_verse_list(
+					settings.MainWindowModule, node_key,
+					(char *)settings.currentverse);
+				for (GList *l = verses; l; l = l->next) {
+					VerseKey vk2;
+					vk2.setLocale(vk->getLocale());
+					vk2.setText((const char *)l->data);
+					gchar *ref2 = g_strdup_printf("%s.%d.%d",
+						vk2.getOSISBookName(),
+						vk2.getChapter(),
+						vk2.getVerse());
+					/* first color wins for a given verse,
+					 * matching the previous traversal-order
+					 * semantics. */
+					if (!g_hash_table_contains(tag_color_map, ref2))
+						g_hash_table_insert(tag_color_map,
+							ref2, g_strdup(effective));
+					else
+						g_free(ref2);
+
+					/* Sword's verse-list parser resolves a hyphenated
+					 * shorthand range like "15:1-4" to only its START
+					 * verse, silently dropping the rest. Detect that
+					 * shorthand form in the raw key text (":<verse>-
+					 * <digits>" with nothing but a separator or
+					 * end-of-string after the digits -- i.e. not a
+					 * second, fully qualified reference like
+					 * "15:3-1 Cor 15:4", which Sword already handles
+					 * correctly on its own) and manually add the
+					 * remaining verses of the range. */
+					gchar *prefix = g_strdup_printf(":%d-", vk2.getVerse());
+					const gchar *hit = strstr(node_key, prefix);
+					g_free(prefix);
+					if (hit) {
+						const gchar *colon_pos = strchr(hit, ':');
+						const gchar *dash_pos = strchr(hit, '-');
+						if (colon_pos && dash_pos && (dash_pos > colon_pos)) {
+							const gchar *after_dash = dash_pos + 1;
+							gchar *endptr = NULL;
+							long end_verse = strtol(after_dash, &endptr, 10);
+							if (endptr != after_dash && end_verse > vk2.getVerse()) {
+								const gchar *q = endptr;
+								while (*q == ' ')
+									++q;
+								if (!*q || *q == ';' || *q == ',') {
+									for (long v = vk2.getVerse() + 1; v <= end_verse; ++v) {
+										gchar *ref3 = g_strdup_printf("%s.%d.%ld",
+											vk2.getOSISBookName(), vk2.getChapter(), v);
+										if (!g_hash_table_contains(tag_color_map, ref3))
+											g_hash_table_insert(tag_color_map,
+												ref3, g_strdup(effective));
+										else
+											g_free(ref3);
+									}
+								}
+							}
+						}
+					}
+				}
+				for (GList *l = verses; l; l = l->next)
+					g_free(l->data);
+				g_list_free(verses);
+			}
+			g_free(node_key);
+		} else {
+			if (gtk_tree_model_iter_children(GTK_TREE_MODEL(model),
+							 &child, iter)) {
+				do {
+					GtkTreeIter *copy = g_new(GtkTreeIter, 1);
+					*copy = child;
+					g_queue_push_tail(stack, copy);
+					g_queue_push_tail(colors,
+						effective ? g_strdup(effective) : NULL);
+				} while (gtk_tree_model_iter_next(
+						GTK_TREE_MODEL(model), &child));
+			}
+		}
+		g_free(node_color);
+		g_free(node_module);
+		g_free(inherited);
+		g_free(iter);
+	}
+	g_queue_free_full(stack, g_free);
+	g_queue_free_full(colors, g_free);
+
+	vk->setText(saved_pos);
+	g_free(saved_pos);
+}
+
+/* Cheap per-verse lookup against the map built by build_tag_color_map().
+ * Does NOT touch the module's key/position at all. */
+static gchar *get_tag_color_for_versekey(VerseKey *vk)
+{
+	if (!settings.tag_colorize || !tag_color_map || !vk)
+		return NULL;
+	gchar *osisref = g_strdup_printf("%s.%d.%d",
+		vk->getOSISBookName(),
+		vk->getChapter(),
+		vk->getVerse());
+	gchar *color = (gchar *)g_hash_table_lookup(tag_color_map, osisref);
+	g_free(osisref);
+	return color ? g_strdup(color) : NULL;
+}
+
 // part of the deep ugliness below, for extracting bad paragraph endings.
 // this is empirically observed in some marginally broken module content.
 struct paragraph_endings
@@ -1406,6 +1609,18 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 		if (*rework->str == '\0')
 			continue;		// no verse content there.
 
+		// tag-group (bookmark folder) color highlight -- wraps the
+		// verse number, user-note reference, and verse text below.
+		gchar *tag_color = get_tag_color_for_versekey(key);
+		if (tag_color) {
+			const char *tc_fg = text_color_for_bg(tag_color);
+			swbuf.appendFormatted(
+			    "<span class=\"tagcolor\" style=\"background-color: %s; "
+			    "color: %s; "
+			    "border-left: 3px solid %s; padding-left: 2px\">",
+			    tag_color, tc_fg, tag_color);
+		}
+
 		// generate the verse number with color and decoration.
 		gchar *num = main_format_number(key->getVerse());
 		swbuf.appendFormatted((settings.showversenum
@@ -1440,11 +1655,16 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 		color_chosen_bg = NULL;
 
 		// but then decide on the special cases for this verse.
+		// (current-verse highlighting is suppressed when a bookmark
+		// tag color is active, so it can't override the contrast
+		// color already applied to the tag background; annotation
+		// highlighting still takes precedence and coexists with it,
+		// per review feedback.)
 		if (settings.annotate_highlight && e) {
 			color_choices   = COLOR_BOTH;
 			color_chosen_fg = settings.highlight_bg;
 			color_chosen_bg = settings.highlight_fg;
-		} else if ((curChapter == thisChapter) && (curVerse == k)) {
+		} else if ((curChapter == thisChapter) && (curVerse == k) && !tag_color) {
 			if (settings.versehighlight) {
 				color_choices   = COLOR_BOTH;
 				color_chosen_fg = settings.highlight_fg;
@@ -1502,6 +1722,13 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 
 		if (color_choices == COLOR_BOTH)
 			swbuf.append("</span>");
+
+		// close tag-group color span
+		if (tag_color) {
+			swbuf.append("</span>");
+			g_free(tag_color);
+			tag_color = NULL;
+		}
 
 		if (paragraph_end_pending)
 			swbuf.append(para_type);
@@ -1645,6 +1872,12 @@ GTKChapDisp::display(SWModule &imodule)
 		ops = NULL;
 		return 0;
 	}
+
+	/* Build the tag-color lookup table once, up front, covering the
+	 * whole book (whole-book mode) or the whole chapter (chapter
+	 * mode) about to be rendered -- see build_tag_color_map() for why
+	 * this must not be done per-verse inside the render loop. */
+	build_tag_color_map(key);
 
 	if (settings.render_whole_books) {
 #ifdef CHATTY
