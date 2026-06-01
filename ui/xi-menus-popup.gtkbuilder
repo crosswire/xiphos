@@ -124,6 +124,16 @@
       </object>
     </child>
     <child>
+      <object class="GtkCheckMenuItem" id="crossref_popup">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Open cross-references in a popup menu</property>
+        <property name="label" translatable="yes">Popup menu for cross-references</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="on_crossref_popup_activate" swapped="no"/>
+      </object>
+    </child>
+    <child>
       <object class="GtkSeparatorMenuItem" id="separator15">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
