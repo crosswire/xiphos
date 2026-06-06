@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-21 22:16+0100\n"
-"PO-Revision-Date: 2026-03-21 22:20+0100\n"
+"POT-Creation-Date: 2026-04-05 16:37+0200\n"
+"PO-Revision-Date: 2026-04-05 16:43+0200\n"
 "Last-Translator: Cyrille <lafricain79@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -252,13 +252,13 @@ msgid "Daily Devotion"
 msgstr "Lectures du jour"
 
 #: ../src/gtk/about_modules.c:458 ../src/gtk/mod_mgr.c:1616
-#: ../src/gtk/utilities.c:609 ../src/main/sidebar.cc:1085
+#: ../src/gtk/utilities.c:612 ../src/main/sidebar.cc:1085
 #: ../src/main/sidebar.cc:1087
 msgid "Maps"
 msgstr "Cartes"
 
 #: ../src/gtk/about_modules.c:460 ../src/gtk/mod_mgr.c:1622
-#: ../src/gtk/utilities.c:615 ../src/main/sidebar.cc:1096
+#: ../src/gtk/utilities.c:618 ../src/main/sidebar.cc:1096
 #: ../src/main/sidebar.cc:1098
 msgid "Images"
 msgstr "Images"
@@ -510,80 +510,86 @@ msgstr ""
 "Tous nos remerciements vont à Troy Griffitts et toutes\n"
 "les autres personnes qui font vivre le Projet SWORD."
 
-#. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gtk/bookmark_dialog.c:163 ../src/gtk/bookmarks_menu.c:361
-#: ../src/gtk/bookmarks_menu.c:653 ../src/gtk/bookmarks_menu.c:753
-#: ../src/gtk/bookmarks_treeview.c:138 ../ui/editor_studypad.xml.h:15
-#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:37
-msgid "Bookmark"
-msgstr "Signet"
+#: ../src/gtk/bookmark_dialog.c:186
+msgid "New Tag"
+msgstr "Nouvelle étiquette :"
 
-#: ../src/gtk/bookmark_dialog.c:165 ../src/gtk/bookmarks_menu.c:755
-#: ../src/gtk/bookmarks_treeview.c:139
-msgid "Enter Folder Name"
-msgstr "Saisir le nom du dossier"
-
-#: ../src/gtk/bookmark_dialog.c:167 ../src/gtk/bookmarks_menu.c:757
-msgid "Folder Name"
-msgstr "Nom du dossier"
-
-#: ../src/gtk/bookmark_dialog.c:168 ../src/gtk/bookmarks_menu.c:758
-#: ../src/gtk/bookmarks_treeview.c:141
-msgid "Folder: "
-msgstr "Dossier : "
-
-#: ../src/gtk/bookmarks_menu.c:200
+#: ../src/gtk/bookmarks_menu.c:208
 msgid "Specify bookmarks file"
 msgstr "Spécifie le fichier des signets"
 
-#: ../src/gtk/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:65
+#: ../src/gtk/bookmarks_menu.c:389
+msgid "Edit Tag"
+msgstr "Éditer l’étiquette"
+
+#: ../src/gtk/bookmarks_menu.c:449 ../ui/xi-menus.glade.h:65
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit"
 msgstr "Édition"
 
-#: ../src/gtk/bookmarks_menu.c:364
-msgid "Folder name: "
-msgstr "Nom du dossier : "
+#: ../src/gtk/bookmarks_menu.c:450 ../src/gtk/bookmarks_menu.c:717
+#: ../src/gtk/bookmarks_treeview.c:139 ../ui/editor_studypad.xml.h:15
+#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:37
+msgid "Bookmark"
+msgstr "Signet"
 
-#: ../src/gtk/bookmarks_menu.c:367
+#: ../src/gtk/bookmarks_menu.c:452
 msgid "Bookmark name: "
 msgstr "Nom du signet : "
 
-#: ../src/gtk/bookmarks_menu.c:370 ../src/gtk/bookmarks_menu.c:661
+#: ../src/gtk/bookmarks_menu.c:456 ../src/gtk/bookmarks_menu.c:725
 msgid "Verse: "
 msgstr "Verset : "
 
-#: ../src/gtk/bookmarks_menu.c:371 ../src/gtk/bookmarks_menu.c:662
+#: ../src/gtk/bookmarks_menu.c:457 ../src/gtk/bookmarks_menu.c:726
 msgid "Module: "
 msgstr "Module : "
 
-#: ../src/gtk/bookmarks_menu.c:493
+#: ../src/gtk/bookmarks_menu.c:557
 msgid "Remove the selected folder"
 msgstr "Supprimer le dossier sélectionné"
 
-#: ../src/gtk/bookmarks_menu.c:494
+#: ../src/gtk/bookmarks_menu.c:558
 msgid "(and all its contents)?"
 msgstr "(et tout son contenu) ?"
 
-#: ../src/gtk/bookmarks_menu.c:498
+#: ../src/gtk/bookmarks_menu.c:562
 msgid "Remove the selected bookmark"
 msgstr "Supprimer le signet sélectionné"
 
-#: ../src/gtk/bookmarks_menu.c:654
+#: ../src/gtk/bookmarks_menu.c:718
 msgid "Add"
 msgstr "Ajouter"
 
-#: ../src/gtk/bookmarks_menu.c:660
+#: ../src/gtk/bookmarks_menu.c:724
 msgid "Label: "
 msgstr "Étiquette : "
 
-#: ../src/gtk/bookmarks_treeview.c:102 ../src/gtk/export_bookmarks.c:172
+#: ../src/gtk/bookmarks_menu.c:841 ../ui/bookmarks.glade.h:4
+#: ../ui/bookmarks.gtkbuilder.h:4 ../ui/xi-menus.glade.h:122
+#: ../ui/xi-menus-popup.gtkbuilder.h:5
+msgid "New Folder"
+msgstr "Nouveau dossier"
+
+#: ../src/gtk/bookmarks_menu.c:966
+msgid "Choose folder color"
+msgstr "Choisir une couleur de dossier"
+
+#: ../src/gtk/bookmarks_treeview.c:103 ../src/gtk/export_bookmarks.c:172
 #: ../src/gtk/export_bookmarks.c:229
 #, c-format
 msgid "Search result: %s"
 msgstr "Résultat de la requête : %s"
 
-#: ../src/gtk/bookmarks_treeview.c:747
+#: ../src/gtk/bookmarks_treeview.c:140
+msgid "Enter Folder Name"
+msgstr "Saisir le nom du dossier"
+
+#: ../src/gtk/bookmarks_treeview.c:142
+msgid "Folder: "
+msgstr "Dossier : "
+
+#: ../src/gtk/bookmarks_treeview.c:876
 msgid ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
@@ -591,8 +597,8 @@ msgstr ""
 "L’ouverture d’un signet avec de multiples références dans\n"
 "un onglet séparé n’est pas supporté."
 
-#: ../src/gtk/bookmarks_treeview.c:850 ../src/gtk/sidebar.c:1561
-#: ../src/gtk/sidebar.c:1613
+#: ../src/gtk/bookmarks_treeview.c:1157 ../src/gtk/sidebar.c:1540
+#: ../src/gtk/sidebar.c:1592
 msgid "Bookmarks"
 msgstr "Signets"
 
@@ -651,7 +657,7 @@ msgid "Click to choose a date"
 msgstr "Cliquer pour choisir une date"
 
 #: ../src/gtk/export_bookmarks.c:175 ../src/gtk/export_bookmarks.c:232
-#: ../src/gtk/sidebar.c:1583 ../src/gtk/sidebar.c:1631
+#: ../src/gtk/sidebar.c:1562 ../src/gtk/sidebar.c:1610
 #, c-format
 msgid "Verse List"
 msgstr "_Versets"
@@ -790,8 +796,8 @@ msgstr "Xiphos - Logiciel d’étude biblique"
 msgid "Open a new tab"
 msgstr "Ouvre un nouvel onglet"
 
-#: ../src/gtk/main_window.c:1164 ../src/gtk/sidebar.c:581
-#: ../src/gtk/sidebar.c:617 ../src/main/sidebar.cc:655
+#: ../src/gtk/main_window.c:1164 ../src/gtk/sidebar.c:579
+#: ../src/gtk/sidebar.c:596 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:1020 ../src/main/sidebar.cc:1021
 #: ../src/main/sidebar.cc:1022
 msgid "Standard View"
@@ -1174,9 +1180,9 @@ msgstr "Terminé"
 
 #: ../src/gtk/mod_mgr.c:1190 ../src/gtk/mod_mgr.c:1192
 #: ../src/gtk/mod_mgr.c:1302 ../src/gtk/mod_mgr.c:1335
-#: ../src/gtk/mod_mgr.c:1337 ../src/gtk/utilities.c:429
-#: ../src/gtk/utilities.c:492 ../src/gtk/utilities.c:494
-#: ../src/gtk/utilities.c:985 ../src/main/sidebar.cc:807
+#: ../src/gtk/mod_mgr.c:1337 ../src/gtk/utilities.c:432
+#: ../src/gtk/utilities.c:495 ../src/gtk/utilities.c:497
+#: ../src/gtk/utilities.c:988 ../src/main/sidebar.cc:807
 #: ../src/main/sidebar.cc:878 ../src/main/sidebar.cc:880
 msgid "Unknown"
 msgstr "Inconnu"
@@ -1198,39 +1204,39 @@ msgstr ""
 "Modules classés\n"
 "par type"
 
-#: ../src/gtk/mod_mgr.c:1580 ../src/gtk/utilities.c:571
+#: ../src/gtk/mod_mgr.c:1580 ../src/gtk/utilities.c:574
 #: ../src/main/sidebar.cc:1004 ../src/main/sidebar.cc:1006
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
-#: ../src/gtk/mod_mgr.c:1586 ../src/gtk/utilities.c:577
+#: ../src/gtk/mod_mgr.c:1586 ../src/gtk/utilities.c:580
 #: ../src/main/sidebar.cc:666 ../src/main/sidebar.cc:1030
 #: ../src/main/sidebar.cc:1032
 msgid "Commentaries"
 msgstr "Commentaires"
 
-#: ../src/gtk/mod_mgr.c:1592 ../src/gtk/utilities.c:584
+#: ../src/gtk/mod_mgr.c:1592 ../src/gtk/utilities.c:587
 #: ../src/main/sidebar.cc:1041 ../src/main/sidebar.cc:1043
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
-#: ../src/gtk/mod_mgr.c:1598 ../src/gtk/utilities.c:590
+#: ../src/gtk/mod_mgr.c:1598 ../src/gtk/utilities.c:593
 #: ../src/main/sidebar.cc:1052 ../src/main/sidebar.cc:1054
 msgid "Glossaries"
 msgstr "Glossaires"
 
-#: ../src/gtk/mod_mgr.c:1604 ../src/gtk/utilities.c:597
+#: ../src/gtk/mod_mgr.c:1604 ../src/gtk/utilities.c:600
 #: ../src/main/sidebar.cc:1063 ../src/main/sidebar.cc:1065
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
-#: ../src/gtk/mod_mgr.c:1610 ../src/gtk/utilities.c:603
+#: ../src/gtk/mod_mgr.c:1610 ../src/gtk/utilities.c:606
 #: ../src/main/sidebar.cc:674 ../src/main/sidebar.cc:1074
 #: ../src/main/sidebar.cc:1076
 msgid "General Books"
 msgstr "Livres généraux"
 
-#: ../src/gtk/mod_mgr.c:1628 ../src/gtk/utilities.c:621
+#: ../src/gtk/mod_mgr.c:1628 ../src/gtk/utilities.c:624
 #: ../src/main/sidebar.cc:1107 ../src/main/sidebar.cc:1109
 msgid "Cult/Unorthodox"
 msgstr "Hétérodoxie"
@@ -1251,8 +1257,8 @@ msgstr "Mise à jour disponible"
 msgid "Uninstalled"
 msgstr "Non installé"
 
-#: ../src/gtk/mod_mgr.c:1653 ../src/gtk/sidebar.c:628
-#: ../src/gtk/utilities.c:629 ../src/main/prayerlists.cc:233
+#: ../src/gtk/mod_mgr.c:1653 ../src/gtk/sidebar.c:607
+#: ../src/gtk/utilities.c:632 ../src/main/prayerlists.cc:233
 #: ../src/main/sidebar.cc:1118 ../src/main/sidebar.cc:1120
 msgid "Prayer List/Journal"
 msgstr "Liste de prières / Journal"
@@ -1315,7 +1321,7 @@ msgid "Choose"
 msgstr "Sélection"
 
 #: ../src/gtk/mod_mgr.c:2025 ../src/gtk/preferences_dialog.c:2254
-#: ../src/gtk/sidebar.c:1593 ../src/gtk/sidebar.c:1639
+#: ../src/gtk/sidebar.c:1572 ../src/gtk/sidebar.c:1618
 msgid "Modules"
 msgstr "Modules"
 
@@ -1458,11 +1464,10 @@ msgstr "Détacher/Attacher"
 msgid "Module Options"
 msgstr "Options du module"
 
-#: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:581
-#: ../src/gtk/sidebar.c:586 ../src/gtk/sidebar.c:617
-#: ../src/gtk/tabbed_browser.c:240 ../src/main/sidebar.cc:638
-#: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1013
-#: ../src/main/sidebar.cc:1014
+#: ../src/gtk/parallel_view.c:216 ../src/gtk/sidebar.c:579
+#: ../src/gtk/sidebar.c:596 ../src/gtk/tabbed_browser.c:239
+#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:1012
+#: ../src/main/sidebar.cc:1013 ../src/main/sidebar.cc:1014
 msgid "Parallel View"
 msgstr "Affichage parallèle"
 
@@ -1496,7 +1501,7 @@ msgstr "BibleSync : %s (mot de passe \"%s\")."
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: ../src/gtk/preferences_dialog.c:1005 ../src/main/xml.c:96
+#: ../src/gtk/preferences_dialog.c:1005 ../src/main/xml.c:97
 msgid "Personal"
 msgstr "Notes personnelles"
 
@@ -1736,7 +1741,7 @@ msgstr ""
 msgid "Module is neither Bible nor commentary"
 msgstr "Le module n’est ni une Bible ni un commentaire"
 
-#: ../src/gtk/search_dialog.c:1212 ../src/gtk/sidebar.c:980
+#: ../src/gtk/search_dialog.c:1212 ../src/gtk/sidebar.c:959
 msgid "BibleSync is not active for transmit."
 msgstr "BibleSync n’est pas actif pour émission."
 
@@ -1816,31 +1821,23 @@ msgstr "Basse"
 msgid "Upper"
 msgstr "Haute"
 
-#: ../src/gtk/sidebar.c:588
-msgid "Open in Detached Window"
-msgstr "Ouvrir dans une fenêtre séparée"
-
-#: ../src/gtk/sidebar.c:589
-msgid "Open in New Tab"
-msgstr "Ouvrir dans un nouvel onglet"
-
-#: ../src/gtk/sidebar.c:840
+#: ../src/gtk/sidebar.c:819
 msgid "Open module in editor?"
 msgstr "Ouvrir le module dans l’éditeur ?"
 
-#: ../src/gtk/sidebar.c:841
+#: ../src/gtk/sidebar.c:820
 msgid "If no, it will open for display only."
 msgstr "Si la réponse est négative, il sera ouvert en lecture seulement."
 
-#: ../src/gtk/sidebar.c:941
+#: ../src/gtk/sidebar.c:920
 msgid "Paste verse references"
 msgstr "Coller les références de verset"
 
-#: ../src/gtk/sidebar.c:943
+#: ../src/gtk/sidebar.c:922
 msgid "List:"
 msgstr "Liste :"
 
-#: ../src/gtk/sidebar.c:1572 ../src/gtk/sidebar.c:1622
+#: ../src/gtk/sidebar.c:1551 ../src/gtk/sidebar.c:1601
 msgid "Search"
 msgstr "Rechercher"
 
@@ -1852,7 +1849,7 @@ msgstr "Barre latérale"
 msgid "Powered by the SWORD Project"
 msgstr "Xiphos utilise les logiciels du Projet SWORD"
 
-#: ../src/gtk/tabbed_browser.c:347
+#: ../src/gtk/tabbed_browser.c:346
 msgid "Can't create tabs dir."
 msgstr "Impossible de créer le répertoire tabs."
 
@@ -1870,55 +1867,55 @@ msgstr "Nouveau nom"
 msgid "Remove the selected item"
 msgstr "Supprimer l’élément sélectionné"
 
-#: ../src/gtk/utilities.c:80
+#: ../src/gtk/utilities.c:81
 msgid "January"
 msgstr "Janvier"
 
-#: ../src/gtk/utilities.c:81
+#: ../src/gtk/utilities.c:82
 msgid "February"
 msgstr "Février"
 
-#: ../src/gtk/utilities.c:82
+#: ../src/gtk/utilities.c:83
 msgid "March"
 msgstr "Mars"
 
-#: ../src/gtk/utilities.c:83
+#: ../src/gtk/utilities.c:84
 msgid "April"
 msgstr "Avril"
 
-#: ../src/gtk/utilities.c:84
+#: ../src/gtk/utilities.c:85
 msgid "May"
 msgstr "Mai"
 
-#: ../src/gtk/utilities.c:85
+#: ../src/gtk/utilities.c:86
 msgid "June"
 msgstr "Juin"
 
-#: ../src/gtk/utilities.c:86
+#: ../src/gtk/utilities.c:87
 msgid "July"
 msgstr "Juillet"
 
-#: ../src/gtk/utilities.c:87
+#: ../src/gtk/utilities.c:88
 msgid "August"
 msgstr "Août"
 
-#: ../src/gtk/utilities.c:88
+#: ../src/gtk/utilities.c:89
 msgid "September"
 msgstr "Septembre"
 
-#: ../src/gtk/utilities.c:89
+#: ../src/gtk/utilities.c:90
 msgid "October"
 msgstr "Octobre"
 
-#: ../src/gtk/utilities.c:90
+#: ../src/gtk/utilities.c:91
 msgid "November"
 msgstr "Novembre"
 
-#: ../src/gtk/utilities.c:91
+#: ../src/gtk/utilities.c:92
 msgid "December"
 msgstr "Décembre"
 
-#: ../src/gtk/utilities.c:2021
+#: ../src/gtk/utilities.c:2024
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -2046,7 +2043,7 @@ msgstr ""
 "<br/><br/><center><i>Ce module n’a aucun contenu à cette référence.</i></"
 "center>"
 
-#: ../src/main/display.cc:266
+#: ../src/main/display.cc:260
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
@@ -2055,8 +2052,8 @@ msgstr ""
 "Ce nom d’annotation personnelle est improprement formé :\n"
 "’%s’"
 
-#: ../src/main/display.cc:1286 ../src/main/display.cc:1343
-#: ../src/main/display.cc:1384 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1215 ../src/main/display.cc:1272
+#: ../src/main/display.cc:1313 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:14
 msgid "Chapter"
 msgstr "Chapitre"
@@ -2065,23 +2062,23 @@ msgstr "Chapitre"
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos n’accepte pas plus d’un argument."
 
-#: ../src/main/main.c:258
+#: ../src/main/main.c:280
 msgid "Initiating HTML"
 msgstr "Initialisation HTML"
 
-#: ../src/main/main.c:263
+#: ../src/main/main.c:285
 msgid "Building Interface"
 msgstr "Construction de l’interface"
 
-#: ../src/main/main.c:266
+#: ../src/main/main.c:288
 msgid "Starting Sword"
 msgstr "Démarrage de Sword"
 
-#: ../src/main/main.c:269
+#: ../src/main/main.c:291
 msgid "Loading Settings"
 msgstr "Chargement des préférences"
 
-#: ../src/main/main.c:272
+#: ../src/main/main.c:294
 msgid "Displaying Xiphos"
 msgstr "Affichage de Xiphos"
 
@@ -2534,7 +2531,7 @@ msgstr "Impossible de créer le dossier "
 msgid "can not create "
 msgstr "impossible de créer "
 
-#: ../src/main/settings.c:211
+#: ../src/main/settings.c:212
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
@@ -2542,12 +2539,12 @@ msgstr ""
 "Fichier de configuration vide -- Essai de restauration.\n"
 "Des informations ont pu être perdues."
 
-#: ../src/main/settings.c:214
+#: ../src/main/settings.c:215
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 "Fichier de configuration vide -- pas de sauvegarde ?!? Informations perdues !"
 
-#: ../src/main/settings.c:241
+#: ../src/main/settings.c:242
 msgid ""
 "There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -2561,7 +2558,7 @@ msgstr ""
 "Xiphos ne peut fonctionner sans une Bible à présenter,\n"
 "et va maintenant se terminer."
 
-#: ../src/main/settings.c:247
+#: ../src/main/settings.c:248
 msgid "Bible module installation complete."
 msgstr "L’installation des modules est terminée."
 
@@ -2706,67 +2703,67 @@ msgstr "Erreur d’aperçu :\n"
 msgid "Show %s in main window"
 msgstr "Affiche %s dans la fenêtre principale"
 
-#: ../src/main/xml.c:87 ../src/main/xml.c:443 ../src/main/xml.c:574
+#: ../src/main/xml.c:88 ../src/main/xml.c:500 ../src/main/xml.c:631
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Erreur de création du document. \n"
 
-#: ../src/main/xml.c:99
+#: ../src/main/xml.c:100
 msgid "What must I do to be saved?"
 msgstr "Comment être sauvé ?"
 
-#: ../src/main/xml.c:100 ../src/main/xml.c:101
+#: ../src/main/xml.c:101 ../src/main/xml.c:102
 msgid "Acts 16:31"
 msgstr "Act 16:31"
 
-#: ../src/main/xml.c:102 ../src/main/xml.c:103
+#: ../src/main/xml.c:103 ../src/main/xml.c:104
 msgid "Eph 2:8,9"
 msgstr "Éph 2:8,9"
 
-#: ../src/main/xml.c:104 ../src/main/xml.c:105
+#: ../src/main/xml.c:105 ../src/main/xml.c:106
 msgid "Romans 1:16"
 msgstr "Romains 1:16"
 
-#: ../src/main/xml.c:107
+#: ../src/main/xml.c:108
 msgid "What is the Gospel?"
 msgstr "Qu’est-ce que l’Évangile ?"
 
-#: ../src/main/xml.c:108 ../src/main/xml.c:109
+#: ../src/main/xml.c:109 ../src/main/xml.c:110
 msgid "1 Cor 15:1-4"
 msgstr "1 Cor 15:1-4"
 
-#: ../src/main/xml.c:238 ../src/main/xml.c:384 ../src/main/xml.c:1504
+#: ../src/main/xml.c:295 ../src/main/xml.c:441 ../src/main/xml.c:1561
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Erreur de lecture du document. \n"
 
-#: ../src/main/xml.c:244 ../src/main/xml.c:390 ../src/main/xml.c:410
-#: ../src/main/xml.c:1061 ../src/main/xml.c:1391 ../src/main/xml.c:1587
+#: ../src/main/xml.c:301 ../src/main/xml.c:447 ../src/main/xml.c:467
+#: ../src/main/xml.c:1118 ../src/main/xml.c:1448 ../src/main/xml.c:1644
 #, c-format
 msgid "empty document \n"
 msgstr "document vide \n"
 
-#: ../src/main/xml.c:250
+#: ../src/main/xml.c:307
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "erreur de type, root node != SwordBookmarks\n"
 
-#: ../src/main/xml.c:396
+#: ../src/main/xml.c:453
 #, c-format
 msgid "wrong type, root node != Copy_Export\n"
 msgstr "erreur de type, root node !=Copy_Export\n"
 
-#: ../src/main/xml.c:473
+#: ../src/main/xml.c:530
 #, c-format
 msgid "%s<center>%s<br>Chapter %d</center><br>"
 msgstr "%s<center>%s<br>Chapitre %d</center><br>"
 
-#: ../src/main/xml.c:477
+#: ../src/main/xml.c:534
 #, c-format
 msgid "<br><center>Chapter %d</center><br>"
 msgstr "<br><center>Chapitre %d</center><br>"
 
-#: ../src/main/xml.c:480
+#: ../src/main/xml.c:537
 #, c-format
 msgid ""
 "%s\n"
@@ -2779,7 +2776,7 @@ msgstr ""
 "Chapitre %d\n"
 "\n"
 
-#: ../src/main/xml.c:483
+#: ../src/main/xml.c:540
 #, c-format
 msgid ""
 "\n"
@@ -2792,12 +2789,12 @@ msgstr ""
 "Chapitre %d\n"
 "\n"
 
-#: ../src/main/xml.c:492
+#: ../src/main/xml.c:549
 #, c-format
 msgid "%s%s: %s Chapter %d<br><br>"
 msgstr "%s%s: %s Chapitre %d<br><br>"
 
-#: ../src/main/xml.c:495
+#: ../src/main/xml.c:552
 #, c-format
 msgid ""
 "%s: %s Chapter %d\n"
@@ -2806,82 +2803,82 @@ msgstr ""
 "%s: %s Chapitre %d\n"
 "\n"
 
-#: ../src/main/xml.c:503
+#: ../src/main/xml.c:560
 #, c-format
 msgid "&nbsp;&nbsp;[%d]"
 msgstr "&nbsp;&nbsp;[%d]"
 
-#: ../src/main/xml.c:506
+#: ../src/main/xml.c:563
 #, c-format
 msgid " [%d]"
 msgstr " [%d]"
 
-#: ../src/main/xml.c:515
+#: ../src/main/xml.c:572
 #, c-format
 msgid "%s%s (%s %d:%d%s)</body></html>"
 msgstr "%s%s (%s %d:%d%s)</body></html>"
 
-#: ../src/main/xml.c:518
+#: ../src/main/xml.c:575
 #, c-format
 msgid "%s(%s %d:%d%s)%s </body></html>"
 msgstr "%s(%s %d:%d%s)%s </body></html>"
 
-#: ../src/main/xml.c:520
+#: ../src/main/xml.c:577
 #, c-format
 msgid "%s (%s %d:%d%s)"
 msgstr "%s (%s %d:%d%s)"
 
-#: ../src/main/xml.c:523
+#: ../src/main/xml.c:580
 #, c-format
 msgid "(%s %d:%d%s) %s"
 msgstr "(%s %d:%d%s) %s"
 
-#: ../src/main/xml.c:531
+#: ../src/main/xml.c:588
 #, c-format
 msgid " %s%s"
 msgstr " %s%s"
 
-#: ../src/main/xml.c:533 ../src/main/xml.c:537
+#: ../src/main/xml.c:590 ../src/main/xml.c:594
 #, c-format
 msgid "%s(%s %d:%d-%d%s)"
 msgstr "%s(%s %d:%d-%d%s)"
 
-#: ../src/main/xml.c:535
+#: ../src/main/xml.c:592
 #, c-format
 msgid "(%s %d:%d-%d%s)<br>"
 msgstr "(%s %d:%d-%d%s)<br>"
 
-#: ../src/main/xml.c:540
+#: ../src/main/xml.c:597
 #, c-format
 msgid "(%s %d:%d-%d%s)\n"
 msgstr "(%s %d:%d-%d%s)\n"
 
-#: ../src/main/xml.c:589
+#: ../src/main/xml.c:646
 msgid "Old Testament"
 msgstr "Ancien Testament"
 
-#: ../src/main/xml.c:591
+#: ../src/main/xml.c:648
 msgid "Gen - Mal"
 msgstr "Ge - Mal"
 
-#: ../src/main/xml.c:597
+#: ../src/main/xml.c:654
 msgid "New Testament"
 msgstr "Nouveau Testament"
 
-#: ../src/main/xml.c:599
+#: ../src/main/xml.c:656
 msgid "Mat - Rev"
 msgstr "Mt - Ap"
 
-#: ../src/main/xml.c:608
+#: ../src/main/xml.c:665
 msgid "Sample Module List"
 msgstr "Exemple de liste de modules"
 
-#: ../src/main/xml.c:1067 ../src/main/xml.c:1397
+#: ../src/main/xml.c:1124 ../src/main/xml.c:1454
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "erreur de type, root node != %s\n"
 
-#: ../src/main/xml.c:1549
+#: ../src/main/xml.c:1606
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
@@ -2890,7 +2887,7 @@ msgstr ""
 "La sauvegarde de la configuration a échouée ! stat %d, taille %d\n"
 "%s"
 
-#: ../src/main/xml.c:1551
+#: ../src/main/xml.c:1608
 msgid "Attempting to revert to previous save."
 msgstr "Tentative de retour à la sauvegarde précédente."
 
@@ -2905,11 +2902,6 @@ msgstr "Fenêtre de dialogue des signets"
 #: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
 msgid "Create new folder"
 msgstr "Crée un nouveau dossier"
-
-#: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
-#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:5
-msgid "New Folder"
-msgstr "Nouveau dossier"
 
 #: ../ui/bookmarks.glade.h:5 ../ui/bookmarks.gtkbuilder.h:3
 msgid "New ..."
@@ -2950,6 +2942,30 @@ msgstr "Entrée Module"
 #: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:13
 msgid "Bookmark Folder Treeview"
 msgstr "Arborescence Dossier des signets"
+
+#: ../ui/folder.gtkbuilder.h:1
+msgid "Folder"
+msgstr "Dossier :"
+
+#: ../ui/folder.gtkbuilder.h:2
+msgid "Name:"
+msgstr "Nom :"
+
+#: ../ui/folder.gtkbuilder.h:3
+msgid "Tag color:"
+msgstr "Couleur d’étiquette :"
+
+#: ../ui/folder.gtkbuilder.h:4
+msgid "Choose a highlight color for this tag group"
+msgstr "Choisir une couleur de surlignement pour ce groupe d’étiquette"
+
+#: ../ui/folder.gtkbuilder.h:5
+msgid "No color"
+msgstr "Pas de couleur"
+
+#: ../ui/folder.gtkbuilder.h:6
+msgid "Remove tag color from this folder"
+msgstr "Supprimer la couleur de l’étiquette de ce dossier"
 
 # T'es sûr de la traduction?
 #: ../ui/editor_link_dialog.gtkbuilder.h:2
@@ -5652,6 +5668,18 @@ msgstr "Supprimer cet élément :"
 #: ../ui/xi-menus.glade.h:165 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Edit this item"
 msgstr "Éditer cet élément"
+
+#~ msgid "Folder Name"
+#~ msgstr "Nom du dossier"
+
+#~ msgid "Folder name: "
+#~ msgstr "Nom du dossier : "
+
+#~ msgid "Open in Detached Window"
+#~ msgstr "Ouvrir dans une fenêtre séparée"
+
+#~ msgid "Open in New Tab"
+#~ msgstr "Ouvrir dans un nouvel onglet"
 
 #, c-format
 #~ msgid "language: %s"
