@@ -3,6 +3,37 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 4.4.0
+08 June 2026
+
+- The editor has returned in Linux builds.
+- 2-dimensional BCV selectors: Lists no longer scroll off the bottom of the screen.
+- Fix daily devotional preview, restore ability to manually enter a date in new devotional tab in windows.
+- Fix shell command safety, replace popen() with g_spawn().
+- Provide better feedback in genbook pane nav menu when no module yet present.
+- Update system TTS (Windows).
+- Hotkeys in mod.mgr install/update.
+- Implement DisplayLevel respect in genbooks.
+- Properly attach new prayer list menu to File menu.
+- Differentiated morphology dictionaries in settings.
+- New tab for daily devotional, alternating w/dictionary (as for commentary/genbook).
+- History buttons in dictionary pane.
+- Reset language selector after use in font selection.
+- Drag-n-drop in Preferences parallel selections.
+- Subtletize harsh black/white in parallel alternation using grey.
+- Update dbus-glib with GDBus.
+- Assorted type conflicts and other build fixes.
+- Work around Sword search bug, append arbitrary space to sidebar search.
+- Module option menu item to toggle display of "Chapter N" in main display: Some modules provide their own.
+- Re-arrange intro material handling so it appears above Chapter N indicators.
+- Hide unused module categories in sidebar mod.list + mod.mgr install/maintenance.
+- Change default verse num size to -1.
+- Margin justification now defaults on, for more professional appearance.
+- Add unindexed module category in mod.mgr maintenance, for obviousness of mods needing to be indexed.
+- Sensitize the About Module dialog for locale.
+- Add annotation highlight toggle to the main window View menu.
+________________________________________________________________
+
 Release 4.3.2
 10 April 2025
 
