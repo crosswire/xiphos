@@ -107,21 +107,21 @@ void gui_verselist_to_bookmarks(GList *verses, gint save_as_single)
 			if (main_is_Bible_key(list_item->module, list_item->key)) {
 				if (first_entry) {
 					module_name =
-						g_strdup(list_item->module);
+					    g_strdup(list_item->module);
 					first_entry = FALSE;
 				} else {
 					verse_string =
-						g_string_append(verse_string,
-								"; ");
+					    g_string_append(verse_string,
+							    "; ");
 				}
 				verse_string =
-					g_string_append(verse_string,
-							list_item->key);
+				    g_string_append(verse_string,
+						    list_item->key);
 			}
 			verses = g_list_next(verses);
 		}
 		gui_bookmark_dialog(name->str, module_name,
-					verse_string->str);
+				    verse_string->str);
 		g_string_free(name, TRUE);
 		g_string_free(verse_string, TRUE);
 		g_free(module_name);
@@ -148,7 +148,7 @@ void gui_verselist_to_bookmarks(GList *verses, gint save_as_single)
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
 		gtk_tree_store_append(GTK_TREE_STORE(model), &parent,
-					  &iter);
+				      &iter);
 		gtk_tree_store_set(GTK_TREE_STORE(model), &parent,
 				   COL_OPEN_PIXBUF,
 				   bm_pixbufs->pixbuf_opened,
@@ -183,7 +183,7 @@ void gui_verselist_to_bookmarks(GList *verses, gint save_as_single)
 			data->color = NULL;
 			
 			gtk_tree_store_append(GTK_TREE_STORE(model),
-						  &iter, &parent);
+					      &iter, &parent);
 			gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 					   COL_OPEN_PIXBUF, data->opened,
 					   COL_CLOSED_PIXBUF, data->closed,
@@ -366,22 +366,22 @@ void gui_add_item_to_tree(GtkTreeIter *iter, GtkTreeIter *parent,
 
 static void add_node(xmlNodePtr cur, GtkTreeIter *parent)
 {
-	GtkTreeIter iter;
-	BOOKMARK_DATA *p = NULL;
-	xmlNodePtr work = NULL;
+    GtkTreeIter iter;
+    BOOKMARK_DATA *p = NULL;
+    xmlNodePtr work = NULL;
 
-	for (work = cur->xmlChildrenNode; work; work = work->next) {
-		if (!xmlStrcmp(work->name, (const xmlChar *)"Bookmark")) {
-			p = g_new(BOOKMARK_DATA, 1);
-			get_xml_bookmark_data(work, p);
-			gui_add_item_to_tree(&iter, parent, p);
-		} else if (!xmlStrcmp(work->name, (const xmlChar *)"Folder")) {
-			p = g_new(BOOKMARK_DATA, 1);
-			get_xml_folder_data(work, p);
-			gui_add_item_to_tree(&iter, parent, p);
-			add_node(work, &iter);
-		}
-	}
+    for (work = cur->xmlChildrenNode; work; work = work->next) {
+        if (!xmlStrcmp(work->name, (const xmlChar *)"Bookmark")) {
+            p = g_new(BOOKMARK_DATA, 1);
+            get_xml_bookmark_data(work, p);
+            gui_add_item_to_tree(&iter, parent, p);
+        } else if (!xmlStrcmp(work->name, (const xmlChar *)"Folder")) {
+            p = g_new(BOOKMARK_DATA, 1);
+            get_xml_folder_data(work, p);
+            gui_add_item_to_tree(&iter, parent, p);
+            add_node(work, &iter);
+        }
+    }
 }
 
 /******************************************************************************
@@ -402,33 +402,33 @@ static void add_node(xmlNodePtr cur, GtkTreeIter *parent)
 
 void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar *file, GtkTreeIter *parent)
 {
-	xmlNodePtr cur = NULL;
-	BOOKMARK_DATA *p = NULL;
-	GtkTreeIter iter;
-	GtkTreePath *path;
+    xmlNodePtr cur = NULL;
+    BOOKMARK_DATA *p = NULL;
+    GtkTreeIter iter;
+    GtkTreePath *path;
 
-	cur = xml_load_bookmark_file(file);
-	
-	while (cur != NULL) {
-		if (!xmlStrcmp(cur->name, (const xmlChar *)"Bookmark")) {
-			p = g_new(BOOKMARK_DATA, 1);
-			get_xml_bookmark_data(cur, p);
-			gui_add_item_to_tree(&iter, parent, p);
-		} else {
-			p = g_new(BOOKMARK_DATA, 1);
-			get_xml_folder_data(cur, p);
-			if (p->caption) {
-				gui_add_item_to_tree(&iter, parent, p);
-			}
-			add_node(cur, &iter);
-		}
-		cur = cur->next;
-	}
-	
-	xml_free_bookmark_doc();
-	path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), parent);
-	gtk_tree_view_expand_to_path(tree, path);
-	gtk_tree_path_free(path);
+    cur = xml_load_bookmark_file(file);
+    
+    while (cur != NULL) {
+        if (!xmlStrcmp(cur->name, (const xmlChar *)"Bookmark")) {
+            p = g_new(BOOKMARK_DATA, 1);
+            get_xml_bookmark_data(cur, p);
+            gui_add_item_to_tree(&iter, parent, p);
+        } else {
+            p = g_new(BOOKMARK_DATA, 1);
+            get_xml_folder_data(cur, p);
+            if (p->caption) {
+                gui_add_item_to_tree(&iter, parent, p);
+            }
+            add_node(cur, &iter);
+        }
+        cur = cur->next;
+    }
+    
+    xml_free_bookmark_doc();
+    path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), parent);
+    gtk_tree_view_expand_to_path(tree, path);
+    gtk_tree_path_free(path);
 }
 
 /******************************************************************************
@@ -526,7 +526,7 @@ static void row_deleted(GtkTreeModel *treemodel, GtkTreePath *arg1,
 static void create_pixbufs(void)
 {
 	GtkTextDirection dir =
-		gtk_widget_get_direction(GTK_WIDGET(widgets.app));
+	    gtk_widget_get_direction(GTK_WIDGET(widgets.app));
 
 	bm_pixbufs = g_new0(BookMarksPixbufs, 1);
 
@@ -538,7 +538,7 @@ static void create_pixbufs(void)
 		 */
 
 		bm_pixbufs->pixbuf_opened =
-			pixbuf_finder("book_open.png", 16, NULL);
+		    pixbuf_finder("book_open.png", 16, NULL);
 	} else {
 		/* leave this for if we make custom reversable icons
 		   if (!bm_pixbufs->pixbuf_closed)
@@ -547,31 +547,31 @@ static void create_pixbufs(void)
 		 */
 
 		bm_pixbufs->pixbuf_opened =
-			pixbuf_finder("book_open_rtol.png", 16, NULL);
+		    pixbuf_finder("book_open_rtol.png", 16, NULL);
 	}
 
 	bm_pixbufs->pixbuf_closed =
-		pixbuf_finder("epiphany-bookmarks.png", 0, NULL);
+	    pixbuf_finder("epiphany-bookmarks.png", 0, NULL);
 
 	bm_pixbufs->pixbuf_helpdoc =
-		pixbuf_finder("epiphany-bookmark-page.png", 0, NULL);
+	    pixbuf_finder("epiphany-bookmark-page.png", 0, NULL);
 
 	if (!bm_pixbufs->pixbuf_helpdoc)
 #ifdef USE_GTK_3
 		bm_pixbufs->pixbuf_helpdoc =
 #if GTK_CHECK_VERSION(3, 10, 0)
-			GDK_PIXBUF(gtk_image_new_from_icon_name("gtk-dnd",
-								GTK_ICON_SIZE_BUTTON));
+		    GDK_PIXBUF(gtk_image_new_from_icon_name("gtk-dnd",
+							    GTK_ICON_SIZE_BUTTON));
 #else
-			gtk_widget_render_icon_pixbuf(widgets.app,
+		    gtk_widget_render_icon_pixbuf(widgets.app,
 						  GTK_STOCK_DND,
 						  GTK_ICON_SIZE_MENU);
 #endif
 
 #else
 		bm_pixbufs->pixbuf_helpdoc = gtk_widget_render_icon(widgets.app,
-									GTK_STOCK_DND,
-									GTK_ICON_SIZE_MENU, NULL);
+								    GTK_STOCK_DND,
+								    GTK_ICON_SIZE_MENU, NULL);
 #endif
 }
 
@@ -631,10 +631,10 @@ static GdkPixbuf *make_color_dot(const gchar *hex_color)
 
 /* Cell data function: generates the color dot pixbuf on the fly */
 static void color_dot_cell_func(GtkTreeViewColumn *col,
-								GtkCellRenderer   *renderer,
-								GtkTreeModel      *tree_model,
-								GtkTreeIter       *iter,
-								gpointer           data)
+                                GtkCellRenderer   *renderer,
+                                GtkTreeModel      *tree_model,
+                                GtkTreeIter       *iter,
+                                gpointer           data)
 {
 	gchar *color = NULL;
 	GdkPixbuf *dot = NULL;
@@ -648,34 +648,34 @@ static void color_dot_cell_func(GtkTreeViewColumn *col,
 
 #ifndef USE_GTK_3
 static void color_dot_cell_func_gtk2(GtkTreeViewColumn *tree_column,
-									 GtkCellRenderer *cell,
-									 GtkTreeModel *tree_model,
-									 GtkTreeIter *iter,
-									 gpointer data)
+                                     GtkCellRenderer *cell,
+                                     GtkTreeModel *tree_model,
+                                     GtkTreeIter *iter,
+                                     gpointer data)
 {
-		gchar *color_str = NULL;
-		gtk_tree_model_get(tree_model, iter, COL_COLOR, &color_str, -1);
-		if (color_str && *color_str) {
-				GdkColor color;
-				if (gdk_color_parse(color_str, &color)) {
-						/* Crée un petit carré de couleur de 12x12 pixels */
-						GdkPixbuf *pixbuf = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, 12, 12);
-						if (pixbuf) {
-								guint32 r = color.red >> 8;
-								guint32 g = color.green >> 8;
-								guint32 b = color.blue >> 8;
-								guint32 pixel = (r << 24) | (g << 16) | (b << 8) | 0xFF;
-								gdk_pixbuf_fill(pixbuf, pixel);
-								g_object_set(cell, "pixbuf", pixbuf, NULL);
-								g_object_unref(pixbuf);
-						}
-				} else {
-						g_object_set(cell, "pixbuf", NULL, NULL);
-				}
-		} else {
-				g_object_set(cell, "pixbuf", NULL, NULL);
-		}
-		g_free(color_str);
+        gchar *color_str = NULL;
+        gtk_tree_model_get(tree_model, iter, COL_COLOR, &color_str, -1);
+        if (color_str && *color_str) {
+                GdkColor color;
+                if (gdk_color_parse(color_str, &color)) {
+                        /* Crée un petit carré de couleur de 12x12 pixels */
+                        GdkPixbuf *pixbuf = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, 12, 12);
+                        if (pixbuf) {
+                                guint32 r = color.red >> 8;
+                                guint32 g = color.green >> 8;
+                                guint32 b = color.blue >> 8;
+                                guint32 pixel = (r << 24) | (g << 16) | (b << 8) | 0xFF;
+                                gdk_pixbuf_fill(pixbuf, pixel);
+                                g_object_set(cell, "pixbuf", pixbuf, NULL);
+                                g_object_unref(pixbuf);
+                        }
+                } else {
+                        g_object_set(cell, "pixbuf", NULL, NULL);
+                }
+        } else {
+                g_object_set(cell, "pixbuf", NULL, NULL);
+        }
+        g_free(color_str);
 }
 #endif
 
@@ -689,32 +689,32 @@ void gui_add_columns(GtkTreeView *tree)
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_pack_start(column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes(column, renderer,
-						"pixbuf", COL_OPEN_PIXBUF,
-						"pixbuf-expander-open", COL_OPEN_PIXBUF,
-						"pixbuf-expander-closed", COL_CLOSED_PIXBUF, NULL);
+					    "pixbuf", COL_OPEN_PIXBUF,
+					    "pixbuf-expander-open", COL_OPEN_PIXBUF,
+					    "pixbuf-expander-closed", COL_CLOSED_PIXBUF, NULL);
 
 
 #ifdef USE_GTK_3
-		/* Color dot renderer — round swatch drawn with Cairo */
-		renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
-		gtk_tree_view_column_pack_start(column, renderer, FALSE);
-		gtk_tree_view_column_set_cell_data_func(column, renderer,
-												color_dot_cell_func,
-												NULL, NULL);
+        /* Color dot renderer — round swatch drawn with Cairo */
+        renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
+        gtk_tree_view_column_pack_start(column, renderer, FALSE);
+        gtk_tree_view_column_set_cell_data_func(column, renderer,
+                                                color_dot_cell_func,
+                                                NULL, NULL);
 #else
-		/* GTK2 Windows — colored square drawn via pixbuf */
-		renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
-		gtk_tree_view_column_pack_start(column, renderer, FALSE);
-		gtk_tree_view_column_set_cell_data_func(column, renderer,
-												color_dot_cell_func_gtk2,
-												NULL, NULL);
+        /* GTK2 Windows — colored square drawn via pixbuf */
+        renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
+        gtk_tree_view_column_pack_start(column, renderer, FALSE);
+        gtk_tree_view_column_set_cell_data_func(column, renderer,
+                                                color_dot_cell_func_gtk2,
+                                                NULL, NULL);
 #endif
 
 	/* Caption renderer */
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
-						"text", COL_CAPTION, NULL);
+					    "text", COL_CAPTION, NULL);
 	gtk_tree_view_append_column(tree, column);
 	gtk_tree_view_column_set_sort_column_id(column, COL_CAPTION);
 
@@ -722,7 +722,7 @@ void gui_add_columns(GtkTreeView *tree)
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
-						"text", COL_KEY, NULL);
+					    "text", COL_KEY, NULL);
 	gtk_tree_view_append_column(tree, column);
 	gtk_tree_view_column_set_visible(column, FALSE);
 
@@ -730,7 +730,7 @@ void gui_add_columns(GtkTreeView *tree)
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
-						"text", COL_MODULE, NULL);
+					    "text", COL_MODULE, NULL);
 	gtk_tree_view_append_column(tree, column);
 	gtk_tree_view_column_set_visible(column, FALSE);
 
@@ -738,7 +738,7 @@ void gui_add_columns(GtkTreeView *tree)
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
-						"text", COL_MODULE_DESC, NULL);
+					    "text", COL_MODULE_DESC, NULL);
 	gtk_tree_view_append_column(tree, column);
 	gtk_tree_view_column_set_visible(column, FALSE);
 
@@ -746,7 +746,7 @@ void gui_add_columns(GtkTreeView *tree)
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
-						"text", COL_DESCRIPTION, NULL);
+					    "text", COL_DESCRIPTION, NULL);
 	gtk_tree_view_append_column(tree, column);
 	gtk_tree_view_column_set_visible(column, FALSE);
 }
@@ -791,7 +791,7 @@ static GtkTreeModel *create_model(void)
  *   #include "gui/bookmarks_treeview.h"
  *
  *   gboolean button_release_event(GtkWidget * widget,
-				GdkEventButton * event, gpointer user_data)
+			    GdkEventButton * event, gpointer user_data)
  *
  * Description
  *   catch button 3 and select the row the pointer is over
@@ -802,7 +802,7 @@ static GtkTreeModel *create_model(void)
  */
 
 static gboolean button_release_event(GtkWidget *widget,
-					 GdkEventButton *event, gpointer data)
+				     GdkEventButton *event, gpointer data)
 {
 	GtkTreeSelection *selection = NULL;
 	GtkTreeIter selected;
@@ -833,8 +833,8 @@ static gboolean button_release_event(GtkWidget *widget,
 		} else {
 			/* click on treeview folder to expand or collapse it */
 			GtkTreePath *path =
-				gtk_tree_model_get_path(GTK_TREE_MODEL(model),
-							&selected);
+			    gtk_tree_model_get_path(GTK_TREE_MODEL(model),
+						    &selected);
 			if (gtk_tree_view_row_expanded(bookmark_tree, path))
 				gtk_tree_view_collapse_row(bookmark_tree,
 							   path);
@@ -867,7 +867,7 @@ static gboolean button_release_event(GtkWidget *widget,
 		break;
 	case 2:
 		gui_generic_warning(_("Opening a multi-reference bookmark in\n"
-					  "separate tabs is not supported."));
+				      "separate tabs is not supported."));
 		break;
 	case 3:
 		g_free(caption);
@@ -877,8 +877,8 @@ static gboolean button_release_event(GtkWidget *widget,
 		gtk_menu_popup_at_pointer(GTK_MENU(menu.menu), NULL);
 #else
 		gtk_menu_popup(GTK_MENU(menu.menu),
-				   NULL, NULL, NULL, NULL,
-				   event->button, event->time);
+			       NULL, NULL, NULL, NULL,
+			       event->button, event->time);
 #endif
 
 		if (!settings.browsing)
@@ -909,22 +909,22 @@ static gboolean button_release_event(GtkWidget *widget,
 
 			if (!strcmp(module, "studypad"))
 				url =
-					g_strdup_printf("passagestudy.jsp?action=showStudypad&"
-							"type=9&value=%s&module=%s",
-							main_url_encode(key),
-							main_url_encode((real_mod
-									 ? real_mod
-									 : module)));
+				    g_strdup_printf("passagestudy.jsp?action=showStudypad&"
+						    "type=9&value=%s&module=%s",
+						    main_url_encode(key),
+						    main_url_encode((real_mod
+								     ? real_mod
+								     : module)));
 
 			else if (button_one)
 				url =
-					g_strdup_printf("passagestudy.jsp?action=showBookmark&"
-							"type=%s&value=%s&module=%s",
-							"currentTab",
-							main_url_encode(key),
-							main_url_encode((real_mod
-									 ? real_mod
-									 : module)));
+				    g_strdup_printf("passagestudy.jsp?action=showBookmark&"
+						    "type=%s&value=%s&module=%s",
+						    "currentTab",
+						    main_url_encode(key),
+						    main_url_encode((real_mod
+								     ? real_mod
+								     : module)));
 			if (url) {
 				main_url_handler(url, TRUE);
 				g_free(url);
@@ -1056,9 +1056,9 @@ GtkWidget *gui_create_bookmark_tree(void)
 	load_xml_bookmarks(GTK_TREE_VIEW(tree), &iter);
 
 	g_signal_connect_after(G_OBJECT(tree),
-				   "button_release_event",
-				   G_CALLBACK(button_release_event),
-				   GINT_TO_POINTER(0));
+			       "button_release_event",
+			       G_CALLBACK(button_release_event),
+			       GINT_TO_POINTER(0));
 	use_dialog = FALSE;
 	bookmark_tree = GTK_TREE_VIEW(tree);
 	gtk_tree_view_set_reorderable(bookmark_tree, TRUE);
