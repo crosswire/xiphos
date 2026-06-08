@@ -801,6 +801,13 @@ static GtkTreeModel *create_model(void)
  *   void
  */
 
+static void lambda_open_url(GtkMenuItem *item, gpointer data)
+{
+	const gchar *url = (const gchar *)g_object_get_data(G_OBJECT(item), "url");
+	if (url)
+		main_url_handler(url, TRUE);
+}
+
 static gboolean button_release_event(GtkWidget *widget,
 				     GdkEventButton *event, gpointer data)
 {
@@ -903,34 +910,146 @@ static gboolean button_release_event(GtkWidget *widget,
 	}
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected) && key != NULL) {
-			// might have an abbrev.  get the real.
 			const gchar *real_mod = main_abbrev_to_name(module);
-			gchar *url = NULL;
+			/* multi if contains ";", "-" (range) or comma between verse numbers */
+			gboolean multi = (strchr(key, ';') != NULL);
+			gboolean is_range = FALSE;
+			if (!multi && strchr(key, '-')) {
+				/* verse range: navigate to first verse directly */
+				const gchar *colon = strchr(key, ':');
+				const gchar *dash  = strchr(key, '-');
+				if (colon && dash && dash > colon) {
+					is_range = TRUE;
+					range_start = g_strndup(key, dash - key);
+				}
+			}
+			if (!multi && strchr(key, ',')) {
+				/* check if comma separates verses: "Eph 2:8,9" */
+				const gchar *colon = strchr(key, ':');
+				const gchar *comma = strchr(key, ',');
+				if (colon && comma && comma > colon)
+					multi = TRUE;
+			}
 
-			if (!strcmp(module, "studypad"))
-				url =
-				    g_strdup_printf("passagestudy.jsp?action=showStudypad&"
-						    "type=9&value=%s&module=%s",
-						    main_url_encode(key),
-						    main_url_encode((real_mod
-								     ? real_mod
-								     : module)));
-
-			else if (button_one)
-				url =
-				    g_strdup_printf("passagestudy.jsp?action=showBookmark&"
-						    "type=%s&value=%s&module=%s",
-						    "currentTab",
-						    main_url_encode(key),
-						    main_url_encode((real_mod
-								     ? real_mod
-								     : module)));
-			if (url) {
+			if (is_range && button_one && range_start) {
+				/* navigate directly to first verse of range */
+				gchar *url = g_strdup_printf(
+					"passagestudy.jsp?action=showBookmark&"
+					"type=%s&value=%s&module=%s",
+					"currentTab",
+					main_url_encode(range_start),
+					main_url_encode((real_mod ? real_mod : module)));
 				main_url_handler(url, TRUE);
 				g_free(url);
+				g_free(range_start);
+				range_start = NULL;
+			} else if (multi && button_one && settings.crossref_popup) {
+				/* split on ";" first, then expand "book ch:v1,v2" */
+				GList *refs = NULL;
+				gchar **semis = g_strsplit(key, ";", -1);
+				gchar *last_book = NULL;
+				for (gint si = 0; semis[si]; si++) {
+					gchar *part = g_strstrip(semis[si]);
+					if (!*part) continue;
+					gchar *full_part;
+					/* if no space in part but has colon, prepend last book */
+					if (last_book && strchr(part, ':') && !strchr(part, ' '))
+						full_part = g_strdup_printf("%s %s", last_book, part);
+					else {
+						full_part = g_strdup(part);
+						/* extract book name: before last space before colon */
+						const gchar *col = strchr(full_part, ':');
+						if (col) {
+							const gchar *sp = col;
+							while (sp > full_part && *sp != ' ') sp--;
+							if (sp > full_part) {
+								g_free(last_book);
+								last_book = g_strndup(full_part, sp - full_part);
+							}
+						}
+					}
+					/* handle comma-separated verses */
+					const gchar *colon = strchr(full_part, ':');
+					const gchar *comma = strchr(full_part, ',');
+					if (colon && comma && comma > colon) {
+						gchar *prefix = g_strndup(full_part, colon - full_part + 1);
+						gchar **vnums = g_strsplit(colon + 1, ",", -1);
+						for (gint vi = 0; vnums[vi]; vi++) {
+							gchar *vn = g_strstrip(vnums[vi]);
+							if (*vn)
+								refs = g_list_append(refs,
+									g_strdup_printf("%s%s", prefix, vn));
+						}
+						g_strfreev(vnums);
+						g_free(prefix);
+					} else {
+						refs = g_list_append(refs, g_strdup(full_part));
+					}
+					g_free(full_part);
+				}
+				g_free(last_book);
+				g_strfreev(semis);
+				GtkWidget *popup = gtk_menu_new();
+				for (GList *l = refs; l; l = l->next) {
+					gchar *ref = (gchar *)l->data;
+					GtkWidget *item = gtk_menu_item_new_with_label(ref);
+					const gchar *dash = strchr(ref, '-');
+					const gchar *colon = strchr(ref, ':');
+					gchar *nav_ref = (dash && colon && dash > colon)
+						? g_strndup(ref, dash - ref)
+						: g_strdup(ref);
+					gchar *url = g_strdup_printf(
+						"passagestudy.jsp?action=showBookmark&"
+						"type=%s&value=%s&module=%s",
+						"currentTab",
+						main_url_encode(nav_ref),
+						main_url_encode((real_mod ? real_mod : module)));
+					g_free(nav_ref);
+					g_object_set_data_full(G_OBJECT(item), "url", url, g_free);
+					g_signal_connect(item, "activate",
+						G_CALLBACK(lambda_open_url), NULL);
+					gtk_menu_shell_append(GTK_MENU_SHELL(popup), item);
+				}
+				g_list_free_full(refs, g_free);
+				gtk_widget_show_all(popup);
+#if GTK_CHECK_VERSION(3, 22, 0)
+				gtk_menu_popup_at_pointer(GTK_MENU(popup), NULL);
+#else
+				gtk_menu_popup(GTK_MENU(popup), NULL, NULL, NULL, NULL, 1,
+					      gtk_get_current_event_time());
+#endif
+			} else if (multi && button_one && !settings.crossref_popup) {
+				gchar *url = g_strdup_printf(
+					"passagestudy.jsp?action=showBookmark&"
+					"type=%s&value=%s&module=%s",
+					"currentTab",
+					main_url_encode(key),
+					main_url_encode((real_mod ? real_mod : module)));
+				main_url_handler(url, TRUE);
+				g_free(url);
+			} else {
+				gchar *url = NULL;
+				if (!strcmp(module, "studypad"))
+					url = g_strdup_printf(
+						"passagestudy.jsp?action=showStudypad&"
+						"type=9&value=%s&module=%s",
+						main_url_encode(key),
+						main_url_encode((real_mod ? real_mod : module)));
+				else if (button_one)
+					url = g_strdup_printf(
+						"passagestudy.jsp?action=showBookmark&"
+						"type=%s&value=%s&module=%s",
+						"currentTab",
+						main_url_encode(key),
+						main_url_encode((real_mod ? real_mod : module)));
+				if (url) {
+					main_url_handler(url, TRUE);
+					g_free(url);
+				}
 			}
 		}
 		g_free(caption);
+		g_free(range_start);
 		g_free(key);
 		g_free(module);
 	}

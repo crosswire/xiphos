@@ -276,6 +276,31 @@ G_MODULE_EXPORT void on_allow_reordering_activate(GtkMenuItem *menuitem,
 
 /******************************************************************************
  * Name
+ *   on_crossref_popup_activate
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_menu.h"
+ *
+ *   void on_crossref_popup_activate(GtkMenuItem *menuitem,
+ *                                   gpointer user_data)
+ *
+ * Description
+ *   toggle popup menu for cross-references
+ *
+ * Return value
+ *   void
+ */
+G_MODULE_EXPORT void on_crossref_popup_activate(GtkMenuItem *menuitem,
+                                                gpointer user_data)
+{
+    settings.crossref_popup =
+        gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(menuitem));
+    xml_set_value("Xiphos", "misc", "crossref_popup",
+                  settings.crossref_popup ? "1" : "0");
+}
+
+/******************************************************************************
+ * Name
  *   on_dialog_activate
  *
  * Synopsis
@@ -1025,6 +1050,10 @@ void gui_create_bookmark_menu(void)
 	menu.bibletime = UI_GET_ITEM(gxml, "import_bibletime_bookmarks1");
 	menu.remove      = UI_GET_ITEM(gxml, "remove_folder");
 	menu.set_color   = UI_GET_ITEM(gxml, "set_tag_color");
+	menu.crossref_popup = UI_GET_ITEM(gxml, "crossref_popup");
+	gtk_check_menu_item_set_active(
+	GTK_CHECK_MENU_ITEM(menu.crossref_popup),
+	settings.crossref_popup);
 
 	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
