@@ -34,48 +34,6 @@ jobs:
           name: windows-installers${{ matrix.version }}
           path: "*.exe"
 
-  arch_gtk3_wk2_libsoup2:
-    runs-on: ubuntu-latest
-    container:
-      image: archlinux:latest
-    steps:
-      - name: checkout xiphos
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: install dependencies
-        run: |
-          pacman -Syu --noconfirm
-          pacman -S --noconfirm \
-            appstream-glib \
-            biblesync \
-            binutils \
-            cmake \
-            dbus-glib \
-            docbook-utils \
-            enchant \
-            gcc \
-            git \
-            glib2-devel \
-            gnome-common \
-            gtk3 \
-            gtkmm \
-            intltool \
-            libsoup \
-            libxml2 \
-            make \
-            minizip \
-            pkg-config \
-            python \
-            sword \
-            webkit2gtk \
-            zip
-      - name: build xiphos
-        run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
-          make -C build -j$(nproc)
-          make -C build mhelp package_source
-
   arch_gtk3_wk2_libsoup3:
     runs-on: ubuntu-latest
     container:
@@ -89,11 +47,10 @@ jobs:
         run: |
           pacman -Syu --noconfirm
           pacman -S --noconfirm \
-            appstream-glib \
+            appstream \
             biblesync \
             binutils \
             cmake \
-            dbus-glib \
             docbook-utils \
             enchant \
             gcc \
@@ -101,7 +58,6 @@ jobs:
             glib2-devel \
             gnome-common \
             gtk3 \
-            gtkmm \
             intltool \
             libsoup3 \
             libxml2 \
@@ -109,12 +65,13 @@ jobs:
             minizip \
             pkg-config \
             python \
+            speech-dispatcher \
             sword \
             webkit2gtk-4.1 \
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
@@ -130,9 +87,9 @@ jobs:
       - name: install dependencies
         run: |
           dnf install -y \
+            appstream \
             biblesync-devel \
             cmake \
-            dbus-glib-devel \
             desktop-file-utils \
             git \
             docbook-utils \
@@ -140,13 +97,13 @@ jobs:
             gtk3-devel \
             intltool \
             itstool \
-            libappstream-glib-devel \
             libsoup3-devel \
             libuuid-devel \
             libxml2-devel \
             make \
             minizip-devel \
             rpm-build \
+            speech-dispatcher-devel \
             sword-devel \
             webkit2gtk4.1-devel \
             yelp \
@@ -154,47 +111,7 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
-          make -C build -j$(nproc)
-          make -C build mhelp package_source
-
-  fedora_gtk3_wk2_libsoup2:
-    runs-on: ubuntu-latest
-    container:
-      image: fedora:latest
-    steps:
-      - name: checkout xiphos
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: install dependencies
-        run: |
-          dnf install -y \
-            biblesync-devel \
-            cmake \
-            dbus-glib-devel \
-            desktop-file-utils \
-            git \
-            docbook-utils \
-            gcc-c++ \
-            gtk3-devel \
-            intltool \
-            itstool \
-            libappstream-glib-devel \
-            libsoup-devel \
-            libuuid-devel \
-            libxml2-devel \
-            make \
-            minizip-devel \
-            rpm-build \
-            sword-devel \
-            webkit2gtk4.0-devel \
-            yelp \
-            yelp-tools \
-            zip
-      - name: build xiphos
-        run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
@@ -211,7 +128,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y \
-            appstream-util \
+            appstream \
             cmake \
             docbook-utils \
             g++ \
@@ -221,13 +138,12 @@ jobs:
             intltool \
             itstool \
             libbiblesync-dev \
-            libdbus-glib-1-dev \
-            libglade2-dev \
             libenchant-2-dev \
             libgail-3-dev \
             libgtk-3-dev \
             libminizip-dev \
             libsoup-3.0-dev \
+            libspeechd-dev \
             libsword-dev \
             libwebkit2gtk-4.1-dev \
             libxml2-dev \
@@ -240,7 +156,7 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
@@ -257,7 +173,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y \
-            appstream-util \
+            appstream \
             cmake \
             g++ \
             desktop-file-utils \
@@ -266,12 +182,11 @@ jobs:
             intltool \
             itstool \
             libbiblesync-dev \
-            libdbus-glib-1-dev \
             libenchant-2-dev \
             libgail-3-dev \
-            libglade2-dev \
             libgtk-3-dev \
             libminizip-dev \
+            libspeechd-dev \
             libsword-dev \
             libwebkit2gtk-4.1-dev \
             libxml2-dev \
@@ -285,18 +200,16 @@ jobs:
             zip
       - name: build xiphos
         run: |
-          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAKE_PROGRAM=make .
+          cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DGTKTVEDITOR=ON -DCMAKE_MAKE_PROGRAM=make .
           make -C build -j$(nproc)
           make -C build mhelp package_source
 
   deploy:
     needs:
       - windows
-      - arch_gtk3_wk2_libsoup2
       - arch_gtk3_wk2_libsoup3
       - debian_gtk3_wk2_libsoup3
       - fedora_gtk3_wk2_libsoup3
-      - fedora_gtk3_wk2_libsoup2
       - ubuntu_gtk3_wk2_libsoup3
     if: contains(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
