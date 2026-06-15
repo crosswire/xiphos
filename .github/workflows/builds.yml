@@ -220,7 +220,7 @@ jobs:
           fetch-tags: true
           ref: ${{ github.ref }}
       - name: download all the artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
       - name: prepare for release
         id: release
         run: |
