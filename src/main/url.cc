@@ -890,6 +890,10 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 		GString *tmpstr = g_string_new(NULL);
 
 		place = (char *)strchr(url, '?'); // url's beginning, as-is.
+		if (!place) {
+			g_string_free(tmpstr, TRUE);
+			return 0;
+		}
 		strncpy(tmpbuf, url, (++place) - url);
 		tmpbuf[place - url] = '\0';
 		tmpstr = g_string_append(tmpstr, tmpbuf);
