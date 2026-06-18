@@ -346,10 +346,18 @@ void editor_execute_script(gchar *script, EDITOR *e)
 
 void editor_insert_html(const gchar *html, EDITOR *e)
 {
-	gchar *str = g_strdup_printf("document.execCommand('insertHTML', null, \'%s\');", html);
+	/* The HTML is embedded into a JavaScript string literal that is then
+	   executed.  g_strescape() escapes backslashes and double quotes (and
+	   control characters), so embed the result inside a *double*-quoted JS
+	   string.  Note: g_strescape() does NOT escape single quotes, so the
+	   string literal below must not be single-quoted, or a single quote in
+	   the input would break out and allow script injection. */
+	gchar *escaped = g_strescape(html, NULL);
+	gchar *str = g_strdup_printf("document.execCommand('insertHTML', null, \"%s\");", escaped);
 	XI_message(("script: %s", str));
 	editor_execute_script(str, e);
 	g_free(str);
+	g_free(escaped);
 }
 
 /*
