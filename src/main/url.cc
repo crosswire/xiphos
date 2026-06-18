@@ -986,14 +986,28 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 		}
 
 		else if (!strcmp(action, "showStudypad")) {
-			show_studypad(svalue, clicked);
+			if (svalue && !strstr(svalue, "..") &&
+			    !g_path_is_absolute(svalue) &&
+			    strchr(svalue, G_DIR_SEPARATOR) == NULL) {
+				show_studypad(svalue, clicked);
+			}
 		}
 
 		else if (!strcmp(action, "showImage")) {
-			show_separate_image((!strncmp(svalue, "file:", 5)
+			const gchar *img_path = (!strncmp(svalue, "file:", 5)
 						 ? svalue + 5
-						 : svalue),
-					    clicked);
+						 : svalue);
+			gboolean is_image = (g_str_has_suffix(img_path, ".png") ||
+					     g_str_has_suffix(img_path, ".jpg") ||
+					     g_str_has_suffix(img_path, ".jpeg") ||
+					     g_str_has_suffix(img_path, ".gif") ||
+					     g_str_has_suffix(img_path, ".bmp") ||
+					     g_str_has_suffix(img_path, ".svg") ||
+					     g_str_has_suffix(img_path, ".tiff") ||
+					     g_str_has_suffix(img_path, ".webp"));
+			if (is_image) {
+				show_separate_image(img_path, clicked);
+			}
 		}
 
 		if (action)
