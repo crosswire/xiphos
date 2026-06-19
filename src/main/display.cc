@@ -139,18 +139,20 @@ using namespace std;
 // user annotation cache filling.
 //
 
-#define NUM_REPLACE 4
+#define NUM_REPLACE 6
 
 struct replace
 {
 	gchar c;
 	gchar *s;
 } replacement[NUM_REPLACE] = {
-      // < and > must be first.
+      // & must be first to avoid double-encoding
+      {'&', (gchar *)"&amp;"},
       {'<', (gchar *)"&lt;"},
       {'>', (gchar *)"&gt;"},
       {'\n', (gchar *)"<br />"},
       {'"', (gchar *)"&quot;"},
+      {'\'', (gchar *)"&apos;"},
 };
 
 // a macro to substitute the visually ugly presentation below.
