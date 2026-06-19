@@ -206,12 +206,34 @@ gboolean ipc_object_set_current_reference(IpcObject *obj,
 					  gchar *reference,
 					  GError **error)
 {
-	//easy route
+	/*
+	 * Security: this method is reachable by any peer on the D-Bus session
+	 * bus (the name is owned with G_BUS_NAME_OWNER_FLAGS_NONE), so the
+	 * reference is untrusted input.  main_url_handler() is called with
+	 * clicked=TRUE, which is required for navigation to actually happen,
+	 * but with clicked=TRUE it also honours actions that touch the local
+	 * filesystem or launch external programs:
+	 *   - "showStudypad" loads an arbitrary file into the StudyPad editor,
+	 *   - "showImage" hands a path to an external viewer (xdg-open, ...),
+	 *   - any URL that matches none of the known schemes falls through to
+	 *     xiphos_open_default(), opening an arbitrary URI/file.
+	 * Restrict remote callers to navigation references only: the URL must
+	 * use one of the known navigation schemes/markers and must not request
+	 * a local-file action.  Reject everything else (fail closed).
+	 */
+	if (!reference ||
+	    (!g_strstr_len(reference, -1, "sword://") &&
+	     !g_strstr_len(reference, -1, "bible://") &&
+	     !g_strstr_len(reference, -1, "passagestudy.jsp") &&
+	     !g_strstr_len(reference, -1, "xiphos.url")) ||
+	    g_strstr_len(reference, -1, "showStudypad") ||
+	    g_strstr_len(reference, -1, "showImage")) {
+		g_warning("ipc: rejected non-navigation reference: %s",
+			  reference ? reference : "(null)");
+		return FALSE;
+	}
+
 	main_url_handler((const gchar *)reference, TRUE);
-	//it should be done like this, probably
-	/* g_signal_emit(obj,
-	   "navigate-requested",
-	   reference); */
 
 	return TRUE;
 }
