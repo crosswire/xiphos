@@ -84,6 +84,18 @@
       <row>
         <col id="0" translatable="yes">4</col>
       </row>
+      <row>
+        <col id="0" translatable="yes">5</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">6</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">7</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">8</col>
+      </row>
     </data>
   </object>
   <object class="GtkDialog" id="dialog_prefs">

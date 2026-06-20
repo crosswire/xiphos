@@ -1130,7 +1130,7 @@ if (!settings.morph_heb_lex || strlen(settings.morph_heb_lex) == 0) {
 
 	if ((buf = xml_get_value("misc", "displaycolumns"))) {
 		settings.display_columns = atoi(buf);
-		if ((settings.display_columns < 1) ||(settings.display_columns > 4))
+		if ((settings.display_columns < 1) || (settings.display_columns > 8))
 			settings.display_columns = 1;
 	} else {
 		xml_add_new_item_to_section("misc", "displaycolumns", "1");

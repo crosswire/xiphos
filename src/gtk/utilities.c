@@ -763,7 +763,7 @@ MOD_FONT *get_font(const gchar *mod_name)
 		mf->columns_value = atoi(mf->columns);
 		if ((mf->columns_value != -1) &&	/* -1 => use default */
 		    ((mf->columns_value < 1) ||
-		     (mf->columns_value > 4)))
+		     (mf->columns_value > 8)))
 			mf->columns_value = 1;
 	} else
 		mf->columns_value = -1;	/* "not used" */
