@@ -669,7 +669,11 @@
                                 <property name="items" translatable="no">1
 2
 3
-4</property>
+4
+5
+6
+7
+8</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>

@@ -818,6 +818,7 @@ apy	Apalaí
 apz	Safeyoka
 aqc	Archi
 aqg	Arigidi
+aqk	Aninka
 aqm	Atohwaim
 aqn	Northern Alta
 aqp	Atakapa
@@ -1729,6 +1730,7 @@ cdz	Koda
 cea	Lower Chehalis
 #ceb	Cebuano				// dup
 ceg	Chamacoco
+cek	Asang Khongca
 cen	Cen
 ces	Czech
 cet	Centúúm
@@ -1952,6 +1954,7 @@ ctc	Chetco
 ctd	Tedim Chin
 cte	Tepinapa Chinantec
 ctg	Chittagonian
+cth	Thai Phum
 cti	Tila Chol
 ctl	Tlacoatzintepec Chinantec
 ctm	Chitimacha
@@ -2171,11 +2174,13 @@ dne	Ndendeule
 dng	Хуэйзў йүян
 dng-Cyrl	Хуэйзў йүян
 dni	Lower Grand Valley Dani
+dnj	Dan
 dnk	Dengka
 dnn	Dzùùngoo
 dnr	Danaru
 dnt	Mid Grand Valley Dani
 dnu	Danau
+dnv	Danu
 dnw	Western Dani
 dny	Dení
 doa	Dom
@@ -2259,12 +2264,14 @@ duw	Dusun Witu
 dux	Duungooma
 duy	Dicamay Agta
 duz	Duli
+dv	Dhivehi
 dva	Duau
 dwa	Diri
 dwl	Walo Kumbe Dogon
 # addition from eBible repo
 dwr	Dawro
 dws	Dutton World Speedwords
+dwu	Ḻiyagawumirr (Dhuwal)
 dww	Dawawa
 dwy	Dhuwaya
 dya	Dyan
@@ -2292,6 +2299,7 @@ ebu	Embu
 ecr	Eteocretan
 ecs	Ecuadorian Sign Language
 ecy	Eteocypriot
+ee	eʋegbe
 eee	E
 efa	Efai
 efe	Efe
@@ -2368,6 +2376,7 @@ ers	Ersu
 ert	Eritai
 erw	Erokwanas
 ese	Ese Ejja
+esg	Aheri Gondi
 esh	Eshtehardi
 esi	North Alaskan Inupiatun
 esk	Northwest Alaska Inupiatun
@@ -2818,9 +2827,11 @@ gym	Ngäbere
 gyn	Guyanese Creole English
 gyr	Guarayu
 gyy	Gunya
+gyz	Geji
 gza	Ganza
 gzi	Gazi
 gzn	Gane
+ha	Hausa
 haa	Han
 hab	Hanoi Sign Language
 hac	Gurani
@@ -2967,6 +2978,7 @@ hrr	Horuru
 hrt	Hértevin
 hru	Hruso
 hrv	Croatian
+hrw	Feni (Warwar Feni)
 hrx	Hunsrik
 hrz	Harzani
 hsb	Upper Sorbian
@@ -3058,6 +3070,7 @@ ifk	Tuwali Ifugao
 ifm	Teke-Fuumu
 ifu	Mayoyao Ifugao
 ify	Keley-I Kallahan
+ig	Igbo
 igb	Ebira
 ige	Igede
 igg	Igana
@@ -3130,6 +3143,7 @@ ipi	Ipili
 ipk	Inupiaq
 ipo	Ipiko
 iqu	Iquito
+iqw	Ikwo
 ire	Iresim
 irh	Irarutu
 iri	Irigwe
@@ -3186,6 +3200,7 @@ iyx	Yaka (Congo)
 izh	Ingrian
 izi	Izi-Ezaa-Ikwo-Mgbo
 izr	Izere
+izz	Izii
 jaa	Jamamadí
 jab	Hyam
 jac	Eastern Jacalteco
@@ -4096,6 +4111,7 @@ lez	Lezghian
 lez-Cyrl	Лезги чIал
 lfa	Lefa
 lfn	Lingua Franca Nova
+lg	Luganda
 lga	Lungga
 lgb	Laghu
 lgg	Lugbara
@@ -4277,6 +4293,7 @@ lso	Laos Sign Language
 lsr	Aruop
 lss	Lasi
 ltc	Late Middle Chinese
+lth	Thur
 lti	Leti (Indonesia)
 ltn	Latundê
 lto	Tsotso
@@ -5050,6 +5067,7 @@ ncm	Nambo
 ncn	Nauna
 nco	Sibe
 ncp	Ndaktup
+ncq	Northern Katang
 ncr	Ncane
 ncs	Nicaraguan Sign Language
 nct	Chothe Naga
@@ -5419,6 +5437,7 @@ nwe	Ngwe
 nwi	Southwest Tanna
 nwm	Nyamusa-Molo
 nwr	Nawaru
+nww	Ndwewe
 nwx	Middle Newar
 nwy	Nottoway-Meherrin
 nxa	Nauete
@@ -6847,6 +6866,7 @@ tgf	Chalikha
 tgg	Tangga
 tgh	Tobagonian Creole English
 tgi	Lawunuia
+tgj	Tagin
 tgk	Tajik
 tgl	Tagalog
 tgo	Sudest
@@ -7356,6 +7376,7 @@ usp	Uspanteco
 usu	Uya
 uta	Otank
 ute	Ute-Southern Paiute
+uth	u̱t-Hun
 utp	Amba (Solomon Islands)
 utr	Etulo
 utu	Utu
@@ -7823,6 +7844,7 @@ xna	Ancient North Arabian
 xnb	Kanakanabu
 xng	Middle Mongolian
 xnh	Kuanhua
+xnj	Chingoni (Ngoni)
 xnn	Northern Kankanay
 xno	Anglo-Norman
 xnr	Kangri
@@ -8183,6 +8205,7 @@ zbc	Central Berawan
 zbe	East Berawan
 zbl	Blissymbols
 zbt	Batui
+zbu	Zbu
 zbw	West Berawan
 zca	Coatecas Altas Zapotec
 zch	Central Hongshuihe Zhuang

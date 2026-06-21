@@ -139,18 +139,20 @@ using namespace std;
 // user annotation cache filling.
 //
 
-#define NUM_REPLACE 4
+#define NUM_REPLACE 6
 
 struct replace
 {
 	gchar c;
 	gchar *s;
 } replacement[NUM_REPLACE] = {
-      // < and > must be first.
+      // & must be first to avoid double-encoding
+      {'&', (gchar *)"&amp;"},
       {'<', (gchar *)"&lt;"},
       {'>', (gchar *)"&gt;"},
       {'\n', (gchar *)"<br />"},
       {'"', (gchar *)"&quot;"},
+      {'\'', (gchar *)"&apos;"},
 };
 
 // a macro to substitute the visually ugly presentation below.
@@ -1610,13 +1612,16 @@ GTKChapDisp::display(SWModule &imodule)
 
 		// insert the userfootnote reference
 		if (e) {
+			gchar *escaped_value = g_uri_escape_string(
+				e->annotation->str, NULL, TRUE);
 			buf = g_strdup_printf("<span class=\"word\">"
 					      "<a href=\"passagestudy.jsp?action=showUserNote&"
 					      "module=%s&passage=%s&value=%s\"><small>"
 					      "<sup>*u</sup></small></a></span>&nbsp;",
 					      settings.MainWindowModule,
 					      (char *)key->getShortText(),
-					      e->annotation->str);
+					      escaped_value);
+			g_free(escaped_value);
 			swbuf.append(buf);
 			g_free(buf);
 		}
@@ -2048,13 +2053,16 @@ DialogChapDisp::display(SWModule &imodule)
 
 		// insert the userfootnote reference
 		if (e) {
+			gchar *escaped_value = g_uri_escape_string(
+				e->annotation->str, NULL, TRUE);
 			buf = g_strdup_printf("<span class=\"word\">"
 					      "<a href=\"passagestudy.jsp?action=showUserNote&"
 					      "module=%s&passage=%s&value=%s\">"
 					      "<small><sup>*u</sup></small></a></span> ",
 					      /*xxx*/ settings.MainWindowModule,
 					      (char *)key->getShortText(),
-					      e->annotation->str);
+					      escaped_value);
+			g_free(escaped_value);
 			swbuf.append(buf);
 			g_free(buf);
 		}
