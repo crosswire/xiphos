@@ -874,6 +874,8 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 
 	XI_message(("main_url_handler => %s", url));
 
+#define HAS_URL_PARAM(s) ((s) && *(s))
+
 	if (strstr(url, "sword://") ||
 	    strstr(url, "bible://")) {
 		GString *url_clean = hex_decode(url);
@@ -942,49 +944,78 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 		XI_message(("module = %s", module));
 		XI_message(("passage = %s", passage));
 
-		if (!strcmp(action, "showStrongs")) {
-			show_strongs(stype, svalue, clicked);
+		if (!HAS_URL_PARAM(action)) {
+			XI_warning(("URL action missing: %s", url));
+		} else if (!strcmp(action, "showStrongs")) {
+			if (HAS_URL_PARAM(svalue)) {
+				show_strongs(stype, svalue, clicked);
+				retval = 1;
+			}
 		}
 
 		else if (!strcmp(action, "showMorph")) {
-			show_morph(module, stype, svalue, clicked);
+			if (HAS_URL_PARAM(stype) && HAS_URL_PARAM(svalue)) {
+				show_morph(module, stype, svalue, clicked);
+				retval = 1;
+			}
 		}
 
 		else if (!strcmp(action, "showNote")) {
-			show_note(module, passage, stype, svalue, clicked);
+			if (HAS_URL_PARAM(passage) && HAS_URL_PARAM(stype) &&
+			    HAS_URL_PARAM(svalue)) {
+				show_note(module, passage, stype, svalue, clicked);
+				retval = 1;
+			}
 		}
 
 		else if (!strcmp(action, "showUserNote")) {
-			// need localized key, not the osisref that we've got.
-			ModMap::iterator it = backend->get_mgr()->Modules.find(module);
-			SWModule *m = (*it).second;
-			VerseKey *vk = (VerseKey *)m->getKey();
-			*vk = passage;
+			if (HAS_URL_PARAM(passage) && HAS_URL_PARAM(svalue)) {
+				// need localized key, not the osisref that we've got.
+				ModMap::iterator it = backend->get_mgr()->Modules.find(module);
+				if (it != backend->get_mgr()->Modules.end()) {
+					SWModule *m = (*it).second;
+					VerseKey *vk = (VerseKey *)m->getKey();
+					*vk = passage;
 
-			main_information_viewer(module,
-						(gchar *)svalue,
-						(gchar *)m->getKeyText(),
-						"showUserNote",
-						(gchar *)"u",
-						NULL,
-						NULL);
+					main_information_viewer(module,
+								(gchar *)svalue,
+								(gchar *)m->getKeyText(),
+								"showUserNote",
+								(gchar *)"u",
+								NULL,
+								NULL);
+					retval = 1;
+				}
+			}
 		}
 
 		else if (!strcmp(action, "showRef")) {
-			if (!strcmp(stype, "scripRef"))
+			if (!strcmp(stype ? stype : "", "scripRef") &&
+			    HAS_URL_PARAM(svalue)) {
 				show_ref(module, svalue, clicked);
+				retval = 1;
+			}
 		}
 
 		else if (!strcmp(action, "showBookmark")) {
-			show_module_and_key(module, svalue, stype, clicked);
+			if (HAS_URL_PARAM(svalue) && HAS_URL_PARAM(stype)) {
+				show_module_and_key(module, svalue, stype, clicked);
+				retval = 1;
+			}
 		}
 
 		else if (!strcmp(action, "showModInfo")) {
-			show_mod_info(module, svalue, clicked);
+			if (HAS_URL_PARAM(svalue)) {
+				show_mod_info(module, svalue, clicked);
+				retval = 1;
+			}
 		}
 
 		else if (!strcmp(action, "showParallel")) {
-			show_parallel(svalue, stype, clicked);
+			if (HAS_URL_PARAM(svalue) && HAS_URL_PARAM(stype)) {
+				show_parallel(svalue, stype, clicked);
+				retval = 1;
+			}
 		}
 
 		else if (!strcmp(action, "showStudypad")) {
@@ -992,23 +1023,27 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 			    !g_path_is_absolute(svalue) &&
 			    strchr(svalue, G_DIR_SEPARATOR) == NULL) {
 				show_studypad(svalue, clicked);
+				retval = 1;
 			}
 		}
 
 		else if (!strcmp(action, "showImage")) {
-			const gchar *img_path = (!strncmp(svalue, "file:", 5)
-						 ? svalue + 5
-						 : svalue);
-			gboolean is_image = (g_str_has_suffix(img_path, ".png") ||
-					     g_str_has_suffix(img_path, ".jpg") ||
-					     g_str_has_suffix(img_path, ".jpeg") ||
-					     g_str_has_suffix(img_path, ".gif") ||
-					     g_str_has_suffix(img_path, ".bmp") ||
-					     g_str_has_suffix(img_path, ".svg") ||
-					     g_str_has_suffix(img_path, ".tiff") ||
-					     g_str_has_suffix(img_path, ".webp"));
-			if (is_image) {
-				show_separate_image(img_path, clicked);
+			if (HAS_URL_PARAM(svalue)) {
+				const gchar *img_path = (!strncmp(svalue, "file:", 5)
+							 ? svalue + 5
+							 : svalue);
+				gboolean is_image = (g_str_has_suffix(img_path, ".png") ||
+						     g_str_has_suffix(img_path, ".jpg") ||
+						     g_str_has_suffix(img_path, ".jpeg") ||
+						     g_str_has_suffix(img_path, ".gif") ||
+						     g_str_has_suffix(img_path, ".bmp") ||
+						     g_str_has_suffix(img_path, ".svg") ||
+						     g_str_has_suffix(img_path, ".tiff") ||
+						     g_str_has_suffix(img_path, ".webp"));
+				if (is_image) {
+					show_separate_image(img_path, clicked);
+					retval = 1;
+				}
 			}
 		}
 
@@ -1028,9 +1063,10 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 			g_free(passage);
 
 		g_string_free(tmpstr, TRUE);
-		retval = 1;
 	} else if (clicked)
 		xiphos_open_default(url);
+
+#undef HAS_URL_PARAM
 
 	return retval;
 }
