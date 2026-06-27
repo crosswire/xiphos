@@ -80,8 +80,8 @@ ceb	Sinugboanon
 ch	Chamoru
 # Corsican
 co	Corsu
-# Coptic - disabled because this causes some grief.
-#cop	Ⲙⲉⲧⲣⲉⲙ̀ⲛⲭⲏⲙⲓ
+# Coptic
+cop	Ⲙⲉⲧⲣⲉⲙ̀ⲛⲭⲏⲙⲓ
 cop-sa	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
 # Czech
 #cs	Česky
@@ -1876,8 +1876,6 @@ col	Columbia-Wenatchi
 com	Comanche
 con	Cofán
 coo	Comox
-# enabled plain latin name because font-specific name causes grief.
-cop	Coptic
 # addition from Sahidic module, name determined from wikipedia.
 copt	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
 coq	Coquille
@@ -2315,7 +2313,7 @@ eja	Ejamat
 eka	Ekajuk
 eke	Ekit
 ekg	Ekari
-ekk Eesti Keel
+ekk	Eesti Keel
 eki	Eki
 ekm	Elip
 eko	Koti
