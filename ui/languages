@@ -81,8 +81,8 @@ ch	Chamoru
 # Corsican
 co	Corsu
 # Coptic - disabled because this causes some grief.
-#cop	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
 #cop	Ⲙⲉⲧⲣⲉⲙ̀ⲛⲭⲏⲙⲓ
+cop-sa	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
 # Czech
 #cs	Česky
 cs	Čeština
@@ -192,6 +192,7 @@ ki	Gĩkũyũ
 kj	Oshikwanyama
 # Kazakh
 kk	Қазақша
+kk-Cyrl	Қазақша
 kl	Kalaallisut
 # Khmer
 km	ភាសាខ្មែរ
@@ -2314,7 +2315,7 @@ eja	Ejamat
 eka	Ekajuk
 eke	Ekit
 ekg	Ekari
-ekk	Eesti Keel
+ekk Eesti Keel
 eki	Eki
 ekm	Elip
 eko	Koti
@@ -6946,6 +6947,7 @@ tkn	Toku-No-Shima
 tkp	Tikopia
 tkq	Tee
 tkr	Tsakhur
+tkr-Latn	Tsakhur
 tkr-Cyrl	ЦIаьхна миз
 tks	Takestani
 tkt	Kathoriya Tharu
@@ -8353,5 +8355,104 @@ zyn	Yongnan Zhuang
 zyp	Zyphe
 zza	Zaza
 zzj	Zuojiang Zhuang
+#Step Bible
+# Arabic
+ar-Arab-EG	العربية
+# Bengali
+ben-Beng-IN	বাংলা
+cs-Latn-CZ	Čeština
+# Simplified Chinese
+zh-Hans-CN	简体中文
+# Traditional Chinese
+zh-Hant-HK	繁体中文
+# Central Kurdish
+ku-Arab-IQ	سۆرانی
+et-Latn-EE	Eesti keel
+ee-Latn-GH	Èʋegbe
+fi-Latn-FI	Suomi
+# Oromo (Ge'ez Script)
+om-Ethi-ET	ኦሮሞ
+om-Latn-ET	Afaan Oromoo
+ha-Latn-NG	Hausa
+# Hebrew
+he-Hebr-IL	עברית
+# Hindi
+hi-Deva-IN	हिन्दी
+# Chhattisgarhi
+hne-Deva-IN	छत्तीसगढ़ी
+hr-Latn-HR	Hrvatski
+hu-Latn-HU	Magyar
+ig-Latn-NG	Asụsụ Igbo
+is-Latn-IS	Íslenska
+# Kannada
+kn-Knda-IN	ಕನ್ನಡ
+ki-Latn-KE	Gĩkũyũ
+ln-Latn-CD	Lingála
+lg-Latn-UG	Oluganda
+luo-Latn-KE	Dholuo
+# Malayalam
+ml-Mlym-IN	മലയാളം
+# Marathi
+mr-Deva-IN	मराठी
+nd-Latn-ZW	isiNdebele
+nb-Latn-NO	Norsk Bokmål
+# Nepali
+npi-Deva-NP	नेपाली
+ny-Latn-MW	Chicheŵa
+# Persian
+fa-Arab-IR	فارسی
+pl-Latn-PL	Polski
+# Russian
+ru-Cyrl-RU	Русский
+sk-Latn-SK	Slovenčina
+sn-Latn-ZW	chiShona
+# Serbian (Cyrillic)
+sr-Cyrl-RS	Српски
+sr-Latn-RS	Srpski
+sw-Latn-KE	Kiswahili
+# Tamil
+ta-Taml-IN	தமிழ்
+# Telugu
+te-Telu-IN	తెలుగు
+tn-Latn-BW	Setswana
+tr-Latn-FR	Türkçe
+twi-Latn-GH	Twi
+# Ukrainian
+uk-Cyrl-UA	Українська
+# Urdu
+ur-Arab-PK	اردو
+vi-Zinh-VN	Tiếng Việt
+yom-Latn-CD	Kiyombe
+yo-Latn-NG	Yorùbá
+#addition from ebible.org
+aqk	Dha-Anywaa
+# Eastern Khanty
+cek	Ханты ясаң
+cth	Chothe
+# Maldivian (Dhivehi)
+dv	ދިވެހި
+dnj	Danwɛ
+# Danu
+dnv	ဓနု
+dwu	Dhuwal
+esg	Aheri Gondi
+ee	Èʋegbe
+# Ge'ez
+gyz	ግዕዝ
+ha	Hausa
+hrw	Warwar Feni
+ig	Asụsụ Igbo
+iqw	Ikwo
+izz	Izii
+Thur	Luthigh
+lg	Oluganda
+lth	Luthigh
+# Northern Katang
+ncq	ກະຕາງ
+nww	Cwi Bwamu
+tgj	Tagin
+uth	ut-Hun
+xnj	Kingoni
+zbu	Zbu
 #
 # end monster SIL list.
