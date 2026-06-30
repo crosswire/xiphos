@@ -165,14 +165,16 @@ void main_display_verse_list_in_sidebar(gchar *key,
 		list_of_verses = NULL;
 	}
 
-	strcpy(settings.sb_search_mod, module_name);
+	g_strlcpy(settings.sb_search_mod, module_name,
+		  sizeof(settings.sb_search_mod));
 
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
 
-	strcpy(sidebar.mod_name, module_name);
+	g_strlcpy(sidebar.mod_name, module_name,
+		  sizeof(sidebar.mod_name));
 
 	if (!strncmp(verse_list, "See ", 4))
 		verse_list += 4;
