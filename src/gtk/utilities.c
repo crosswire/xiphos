@@ -1299,11 +1299,21 @@ HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor)
 		len -= offset;
 
 		// now write the javascript snippet.
+		// escape the anchor for safe interpolation into a JS
+		// string literal.  special_anchor can originate from
+		// untrusted BibleSync navigation packets whose ref
+		// field carries the '#' fragment; without escaping a
+		// crafted value can break out of the string and inject
+		// script into the WebKit view.
+		const gchar *raw_anchor =
+		    (settings.special_anchor ? settings.special_anchor : anchor);
+		gchar *esc_anchor = g_strescape(raw_anchor, NULL);
 		buf =
 		    g_strdup_printf("<script type=\"text/javascript\" language=\"javascript\">"
 				    " window.onload = function () { window.location.hash = \"%s\"; }"
 				    " </script>",
-				    (settings.special_anchor ? settings.special_anchor : anchor));
+				    esc_anchor);
+		g_free(esc_anchor);
 		XIPHOS_HTML_WRITE(html, buf, strlen(buf));
 		g_free(buf);
 	}
