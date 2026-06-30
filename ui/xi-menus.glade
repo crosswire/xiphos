@@ -1775,6 +1775,17 @@
   </child>
 
   <child>
+    <widget class="GtkCheckMenuItem" id="crossref_popup">
+      <property name="visible">True</property>
+      <property name="tooltip" translatable="yes">Open cross-references in a popup menu</property>
+      <property name="label" translatable="yes">Open cross-references in a popup menu</property>
+      <property name="use_underline">True</property>
+      <property name="active">False</property>
+      <signal name="activate" handler="on_crossref_popup_activate" last_modification_time="Tue, 07 Apr 2009 23:56:38 GMT"/>
+    </widget>
+  </child>
+  
+  <child>
     <widget class="GtkSeparatorMenuItem" id="separator12">
       <property name="visible">True</property>
     </widget>
