@@ -1304,16 +1304,28 @@ HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor)
 		// untrusted BibleSync navigation packets whose ref
 		// field carries the '#' fragment; without escaping a
 		// crafted value can break out of the string and inject
-		// script into the WebKit view.
+		// script into the WebKit view.  g_strescape escapes
+		// backslash, double-quote, and C0 control bytes but
+		// leaves '<', '>', and '/' untouched, so a value of
+		// "</script><script>PAYLOAD</script>" would end the
+		// inline <script> block and start a new one with
+		// attacker-controlled contents.  Substitute '</' with
+		// '<\/' (OWASP recommendation) to neutralise the
+		// breakout.
 		const gchar *raw_anchor =
 		    (settings.special_anchor ? settings.special_anchor : anchor);
 		gchar *esc_anchor = g_strescape(raw_anchor, NULL);
+		gchar *safe_anchor = g_strdup(esc_anchor);
+		gchar *q;
+		for (q = safe_anchor; (q = strstr(q, "</")) != NULL; q += 2)
+			q[1] = '\\';
+		g_free(esc_anchor);
 		buf =
 		    g_strdup_printf("<script type=\"text/javascript\" language=\"javascript\">"
 				    " window.onload = function () { window.location.hash = \"%s\"; }"
 				    " </script>",
-				    esc_anchor);
-		g_free(esc_anchor);
+				    safe_anchor);
+		g_free(safe_anchor);
 		XIPHOS_HTML_WRITE(html, buf, strlen(buf));
 		g_free(buf);
 	}
