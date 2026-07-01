@@ -33,6 +33,7 @@
 #include <glib.h>
 #include <gio/gio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "gui/ipc.h"
 #include "marshal.h"
 #include "ipc-gdbus.h"
@@ -220,17 +221,59 @@ gboolean ipc_object_set_current_reference(IpcObject *obj,
 	 * Restrict remote callers to navigation references only: the URL must
 	 * use one of the known navigation schemes/markers and must not request
 	 * a local-file action.  Reject everything else (fail closed).
+	 *
+	 * The action check has to look at the decoded action, not the raw
+	 * reference bytes: a reference like
+	 * "passagestudy.jsp?action=show%53tudypad" contains no literal
+	 * "showStudypad" substring, but libsword's URL::getParameterValue
+	 * percent-decodes the action before main_url_handler dispatches it,
+	 * so a substring denylist on the raw reference is bypassable.
 	 */
 	if (!reference ||
 	    (!g_strstr_len(reference, -1, "sword://") &&
 	     !g_strstr_len(reference, -1, "bible://") &&
 	     !g_strstr_len(reference, -1, "passagestudy.jsp") &&
-	     !g_strstr_len(reference, -1, "xiphos.url")) ||
-	    g_strstr_len(reference, -1, "showStudypad") ||
-	    g_strstr_len(reference, -1, "showImage")) {
+	     !g_strstr_len(reference, -1, "xiphos.url"))) {
 		g_warning("ipc: rejected non-navigation reference: %s",
 			  reference ? reference : "(null)");
 		return FALSE;
+	}
+	{
+		const char *p = strstr(reference, "action=");
+		gchar *action = NULL;
+		if (p) {
+			p += 7; /* strlen("action=") */
+			const char *end = p;
+			while (*end && *end != '&' && *end != '#')
+				end++;
+			gsize len = end - p;
+			action = g_malloc(len + 1);
+			gsize i = 0, j = 0;
+			while (i < len) {
+				if (p[i] == '+') {
+					action[j++] = ' ';
+					i++;
+				} else if (p[i] == '%' && i + 2 < len &&
+					   g_ascii_isxdigit(p[i+1]) &&
+					   g_ascii_isxdigit(p[i+2])) {
+					gchar hex[3] = { p[i+1], p[i+2], 0 };
+					action[j++] = (gchar)strtoul(hex, NULL, 16);
+					i += 3;
+				} else {
+					action[j++] = p[i++];
+				}
+			}
+			action[j] = '\0';
+		}
+		if (action && *action &&
+		    (!strcmp(action, "showStudypad") ||
+		     !strcmp(action, "showImage"))) {
+			g_warning("ipc: rejected local-file action: %s",
+				  action);
+			g_free(action);
+			return FALSE;
+		}
+		g_free(action);
 	}
 
 	main_url_handler((const gchar *)reference, TRUE);
