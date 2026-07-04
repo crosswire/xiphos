@@ -933,6 +933,9 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL,
 			(const xmlChar *)"justifymargins",
 			(const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL,
+			(const xmlChar *)"crossref_popup",
+			(const xmlChar *)"0");
 
 	section_node =
 	    xmlNewChild(root_node, NULL, (const xmlChar *)"modules",
