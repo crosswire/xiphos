@@ -943,67 +943,18 @@ static gboolean button_release_event(GtkWidget *widget,
 				g_free(range_start);
 				range_start = NULL;
 			} else if (multi && button_one && settings.crossref_popup) {
-				/* split on ";" first, then expand "book ch:v1,v2" */
-				GList *refs = NULL;
-				gchar **semis = g_strsplit(key, ";", -1);
-				gchar *last_book = NULL;
-				for (gint si = 0; semis[si]; si++) {
-					gchar *part = g_strstrip(semis[si]);
-					if (!*part) continue;
-					gchar *full_part;
-					/* if no space in part but has colon, prepend last book */
-					if (last_book && strchr(part, ':') && !strchr(part, ' '))
-						full_part = g_strdup_printf("%s %s", last_book, part);
-					else {
-						full_part = g_strdup(part);
-						/* extract book name: before last space before colon */
-						const gchar *col = strchr(full_part, ':');
-						if (col) {
-							const gchar *sp = col;
-							while (sp > full_part && *sp != ' ') sp--;
-							if (sp > full_part) {
-								g_free(last_book);
-								last_book = g_strndup(full_part, sp - full_part);
-							}
-						}
-					}
-					/* handle comma-separated verses */
-					const gchar *colon = strchr(full_part, ':');
-					const gchar *comma = strchr(full_part, ',');
-					if (colon && comma && comma > colon) {
-						gchar *prefix = g_strndup(full_part, colon - full_part + 1);
-						gchar **vnums = g_strsplit(colon + 1, ",", -1);
-						for (gint vi = 0; vnums[vi]; vi++) {
-							gchar *vn = g_strstrip(vnums[vi]);
-							if (*vn)
-								refs = g_list_append(refs,
-									g_strdup_printf("%s%s", prefix, vn));
-						}
-						g_strfreev(vnums);
-						g_free(prefix);
-					} else {
-						refs = g_list_append(refs, g_strdup(full_part));
-					}
-					g_free(full_part);
-				}
-				g_free(last_book);
-				g_strfreev(semis);
+				GList *refs = main_parse_verse_list(module, key,
+								    settings.currentverse);
 				GtkWidget *popup = gtk_menu_new();
 				for (GList *l = refs; l; l = l->next) {
-					gchar *ref = (gchar *)l->data;
+					const gchar *ref = (const gchar *)l->data;
 					GtkWidget *item = gtk_menu_item_new_with_label(ref);
-					const gchar *dash = strchr(ref, '-');
-					const gchar *colon = strchr(ref, ':');
-					gchar *nav_ref = (dash && colon && dash > colon)
-						? g_strndup(ref, dash - ref)
-						: g_strdup(ref);
 					gchar *url = g_strdup_printf(
 						"passagestudy.jsp?action=showBookmark&"
 						"type=%s&value=%s&module=%s",
 						"currentTab",
-						main_url_encode(nav_ref),
+						main_url_encode(ref),
 						main_url_encode((real_mod ? real_mod : module)));
-					g_free(nav_ref);
 					g_object_set_data_full(G_OBJECT(item), "url", url, g_free);
 					g_signal_connect(item, "activate",
 						G_CALLBACK(lambda_open_url), NULL);

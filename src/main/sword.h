@@ -71,6 +71,7 @@ void main_add_abbreviation(const char *name,
 void main_clear_abbreviations(void);
 const char *main_name_to_abbrev(const char *name);
 const char *main_abbrev_to_name(const char *abbreviation);
+GList *main_parse_verse_list(const char *module, const char *key, const char *current_verse);
 
 void main_book_heading(char *mod_name);
 void main_chapter_heading(char *mod_name);
