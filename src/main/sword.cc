@@ -220,6 +220,29 @@ const char *main_abbrev_to_name(const char *abbreviation)
 
 /******************************************************************************
  * Name
+ *   main_parse_verse_list
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   GList *main_parse_verse_list(const char *module, const char *key,
+ *                                const char *current_verse)
+ *
+ * Description
+ *   parses a verse list string using Sword, resolving partial references
+ *   contextually (e.g. "18:10" resolved as "Matt 18:10").
+ *
+ * Return value
+ *   GList *
+ */
+GList *main_parse_verse_list(const char *module, const char *key,
+			      const char *current_verse)
+{
+	return backend->parse_verse_list(module, key, (char *)current_verse);
+}
+
+/******************************************************************************
+ * Name
  *   main_book_heading
  *
  * Synopsis
