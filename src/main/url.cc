@@ -845,6 +845,88 @@ gint sword_uri(const gchar *url, gboolean clicked)
 	return 1;
 }
 
+/**
+ * passagestudy_query_reencode:
+ * @url: a passagestudy.jsp/xiphos.url style URL
+ *
+ * Sword's URL class treats '/', ':' and ' ' in the query string
+ * specially, so main_url_handler() -- and anyone else who needs to know,
+ * in advance, which action a URL will dispatch to -- must re-encode them
+ * exactly the same way before handing the URL to Sword's URL parser.
+ * This is factored out into a single helper so the IPC security gate in
+ * ipc.c (via main_url_get_action(), below) and the actual dispatch here
+ * always see the identical query string and can never disagree about
+ * what "action" means.
+ *
+ * Return value: a newly allocated GString holding the URL up to and
+ * including the first '?', followed by the re-encoded query string, or
+ * NULL if @url has no '?' (no query string).  Caller must
+ * g_string_free() the result.
+ */
+static GString *passagestudy_query_reencode(const gchar *url)
+{
+	gchar *place = (gchar *)strchr(url, '?'); // url's beginning, as-is.
+	if (!place)
+		return NULL;
+
+	GString *tmpstr = g_string_new(NULL);
+	++place;
+	tmpstr = g_string_append_len(tmpstr, url, place - url);
+	for (/* */; *place; ++place) {
+		switch (*place) {
+		case '/':
+			tmpstr = g_string_append(tmpstr, "%2F");
+			break;
+		case ':':
+			tmpstr = g_string_append(tmpstr, "%3A");
+			break;
+		case ' ':
+			tmpstr = g_string_append(tmpstr, "%20");
+			break;
+		default:
+			tmpstr = g_string_append_c(tmpstr, *place);
+		}
+	}
+	return tmpstr;
+}
+
+/******************************************************************************
+ * Name
+ *   main_url_get_action
+ *
+ * Synopsis
+ *   #include "main/url.hh"
+ *
+ *   gchar *main_url_get_action(const gchar *url)
+ *
+ * Description
+ *   Extracts the "action" query parameter using the exact same parsing
+ *   path (query re-encoding + Sword's URL class) that main_url_handler()
+ *   itself uses to select which action to dispatch.  Any code that needs
+ *   to decide whether a URL is safe to hand to main_url_handler() --
+ *   such as the D-Bus IPC security gate in ipc.c -- must use this
+ *   function rather than re-implementing URL/query parsing, so the
+ *   check and the actual dispatch can never disagree on what the
+ *   action is.
+ *
+ * Return value
+ *   gchar * (newly allocated, g_free() by caller), or NULL if @url has
+ *   no query string or no "action" parameter.
+ */
+gchar *main_url_get_action(const gchar *url)
+{
+	GString *tmpstr = passagestudy_query_reencode(url);
+	if (!tmpstr)
+		return NULL;
+
+	URL m_url((const char *)tmpstr->str);
+	const char *action = m_url.getParameterValue("action");
+	gchar *result = (action && *action) ? g_strdup(action) : NULL;
+
+	g_string_free(tmpstr, TRUE);
+	return result;
+}
+
 /******************************************************************************
  * Name
  *   main_url_handler
@@ -887,31 +969,9 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 		   strstr(url, "xiphos.url")) {
 
 		// another minor nightmare: re-encode / and : in hex.
-		gchar *place;
-		GString *tmpstr = g_string_new(NULL);
-
-		place = (char *)strchr(url, '?'); // url's beginning, as-is.
-		if (!place) {
-			g_string_free(tmpstr, TRUE);
+		GString *tmpstr = passagestudy_query_reencode(url);
+		if (!tmpstr)
 			return 0;
-		}
-		++place;
-		tmpstr = g_string_append_len(tmpstr, url, place - url);
-		for (/* */; *place; ++place) {
-			switch (*place) {
-			case '/':
-				tmpstr = g_string_append(tmpstr, "%2F");
-				break;
-			case ':':
-				tmpstr = g_string_append(tmpstr, "%3A");
-				break;
-			case ' ':
-				tmpstr = g_string_append(tmpstr, "%20");
-				break;
-			default:
-				tmpstr = g_string_append_c(tmpstr, *place);
-			}
-		}
 
 		/* passagestudy.jsp?action=showStrongs&type= */
 		URL m_url((const char *)tmpstr->str);
