@@ -1063,8 +1063,17 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 			g_free(passage);
 
 		g_string_free(tmpstr, TRUE);
-	} else if (clicked)
-		xiphos_open_default(url);
+	} else if (clicked) {
+		/* Only allow http:// and https:// URIs through the system
+		 * URI handler.  Bible/commentary/dictionary module content
+		 * is rendered HTML that is not otherwise sanitized, so an
+		 * attacker-controlled module could embed a link with a
+		 * dangerous scheme (file://, etc.) to disclose local files
+		 * or otherwise abuse the system's default URI handler. */
+		if (g_str_has_prefix(url, "http://") ||
+		    g_str_has_prefix(url, "https://"))
+			xiphos_open_default(url);
+	}
 
 #undef HAS_URL_PARAM
 
