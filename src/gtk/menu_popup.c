@@ -1308,9 +1308,11 @@ G_MODULE_EXPORT void on_lookup_google_activate(GtkMenuItem *menuitem,
 	if ((dict_key == NULL) || (*dict_key == '\0')) {
 		gui_generic_warning("No selection made");
 	} else {
+		gchar *enc_key = g_uri_escape_string(dict_key, NULL, FALSE);
 		gchar *showstr =
-		    g_strconcat("http://www.biblemap.org/#", dict_key, NULL);
+		    g_strconcat("http://www.biblemap.org/#", enc_key, NULL);
 		xiphos_open_default(showstr);
+		g_free(enc_key);
 		g_free(showstr);
 	}
 	g_free(dict_key);
