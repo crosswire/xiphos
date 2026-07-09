@@ -102,9 +102,19 @@ void gui_set_html_item(GString *str,
 	} else
 		scripture = g_strdup("");
 
-	buf = g_strdup_printf("<li>%s<ul><li>%s %s</li>%s</ul><br/></li>",
-			      description,
-			      module, key, (scripture ? scripture : ""));
+	{
+		gchar *desc_esc = g_markup_escape_text(description, -1);
+		gchar *mod_esc = g_markup_escape_text(module, -1);
+		gchar *key_esc = g_markup_escape_text(key, -1);
+
+		buf = g_strdup_printf("<li>%s<ul><li>%s %s</li>%s</ul><br/></li>",
+				      desc_esc,
+				      mod_esc, key_esc, (scripture ? scripture : ""));
+
+		g_free(desc_esc);
+		g_free(mod_esc);
+		g_free(key_esc);
+	}
 
 	g_string_append(str, buf);
 	g_free(buf);
@@ -152,11 +162,11 @@ static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
 	//xmlAttrPtr root_attr;
-	gchar filename[256];
+	gchar *filename;
 	GString *name = g_string_new(NULL);
 	GString *str = g_string_new("");
 
-	sprintf(filename, "%s.xml", data->filename);
+	filename = g_strdup_printf("%s.xml", data->filename);
 
 	root_doc = xmlNewDoc((const xmlChar *)"1.0");
 
@@ -191,12 +201,13 @@ static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 
 	xmlSaveFormatFile(filename, root_doc, 1);
 	xmlFreeDoc(root_doc);
+	g_free(filename);
 	return 1;
 }
 
 static gboolean _save_verselist_2_html(BK_EXPORT *data)
 {
-	gchar filename[256];
+	gchar *filename = NULL;
 	GString *name = g_string_new(NULL);
 	GString *str = g_string_new("");
 	GString *des = g_string_new("");
@@ -209,11 +220,11 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 	switch (data->type) {
 	case HTML:
 		catenate = gui_set_html_item;
-		sprintf(filename, "%s.html", data->filename);
+		filename = g_strdup_printf("%s.html", data->filename);
 		break;
 	case PLAIN:
 		catenate = gui_set_plain_text_item;
-		sprintf(filename, "%s.txt", data->filename);
+		filename = g_strdup_printf("%s.txt", data->filename);
 		break;
 	}
 
@@ -232,11 +243,14 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 			g_string_printf(name, _("Verse List"));
 
 		switch (data->type) {
-		case HTML:
+		case HTML: {
+			gchar *name_esc = g_markup_escape_text(name->str, -1);
 			buf =
 			    g_strdup_printf("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b><br/><br/>",
-					    name->str);
+					    name_esc);
+			g_free(name_esc);
 			break;
+		}
 		case PLAIN:
 			buf = g_strdup_printf("%s\n\n", name->str);
 			break;
@@ -275,6 +289,7 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 		XI_warning(("Unable to save %s", filename));
 
 	g_string_free(str, 1);
+	g_free(filename);
 	return 1;
 }
 
@@ -342,11 +357,14 @@ static void _parse_treeview(GString *str, GtkTreeIter *tree_parent,
 				   5, &mod_desc, 6, &description, -1);
 		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &child)) {
 			switch (data->type) {
-			case HTML:
+			case HTML: {
+				gchar *caption_esc = g_markup_escape_text(caption, -1);
 				buf =
 				    g_strdup_printf("<ul><b>%s</b>",
-						    caption);
+						    caption_esc);
+				g_free(caption_esc);
 				break;
+			}
 			case PLAIN:
 				buf = g_strdup_printf("%s\n\n", caption);
 				break;
@@ -402,7 +420,7 @@ static void save_iter_to_xml(GtkTreeIter *iter, BK_EXPORT *data)
 	xmlDocPtr root_doc;
 	//      xmlAttrPtr root_attr;
 	gchar *caption = NULL;
-	gchar filename[256];
+	gchar *filename;
 	GtkTreeModel *tm;
 
 	if (data->verselist == VERSE_LIST_EXPORT)
@@ -411,7 +429,7 @@ static void save_iter_to_xml(GtkTreeIter *iter, BK_EXPORT *data)
 		tm = GTK_TREE_MODEL(model);
 
 	gtk_tree_model_get(tm, iter, 2, &caption, -1);
-	sprintf(filename, "%s.xml", data->filename);
+	filename = g_strdup_printf("%s.xml", data->filename);
 
 	root_doc = xmlNewDoc((const xmlChar *)"1.0");
 
@@ -430,6 +448,7 @@ static void save_iter_to_xml(GtkTreeIter *iter, BK_EXPORT *data)
 	g_free(caption);
 	xmlSaveFormatFile(filename, root_doc, 1);
 	xmlFreeDoc(root_doc);
+	g_free(filename);
 
 	bookmarks_changed = FALSE;
 }
@@ -453,27 +472,30 @@ static void save_iter_to_xml(GtkTreeIter *iter, BK_EXPORT *data)
 static void _save_iter(GtkTreeIter *iter, BK_EXPORT *data)
 {
 	gchar *caption = NULL;
-	gchar filename[256];
+	gchar *filename = NULL;
 	GString *str = g_string_new(NULL);
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), iter, 2, &caption, -1);
 	switch (data->type) {
 	case HTML:
-		sprintf(filename, "%s.html", data->filename);
+		filename = g_strdup_printf("%s.html", data->filename);
 		break;
 	case PLAIN:
-		sprintf(filename, "%s.txt", data->filename);
+		filename = g_strdup_printf("%s.txt", data->filename);
 		break;
 	}
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), iter, 2, &caption, -1);
 	if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), iter)) {
 		switch (data->type) {
-		case HTML:
+		case HTML: {
+			gchar *caption_esc = g_markup_escape_text(caption, -1);
 			g_string_printf(str,
 					"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b><br/><br/>",
-					caption);
+					caption_esc);
+			g_free(caption_esc);
 			break;
+		}
 		case PLAIN:
 			g_string_printf(str, "%s\n\n\n", caption);
 			break;
@@ -497,6 +519,7 @@ static void _save_iter(GtkTreeIter *iter, BK_EXPORT *data)
 		XI_warning(("Unable to save %s", filename));
 
 	g_string_free(str, 1);
+	g_free(filename);
 }
 
 static void export_2_bookmarks(BK_EXPORT *data)
@@ -521,12 +544,10 @@ static void export_2_html(BK_EXPORT *data)
 {
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
-	gchar buf[256];
 
 	selection = gtk_tree_view_get_selection(bookmark_tree);
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
-	sprintf(buf, "%s.html", data->filename);
 	_save_iter(&selected, data);
 }
 
