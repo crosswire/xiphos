@@ -222,12 +222,25 @@ gboolean ipc_object_set_current_reference(IpcObject *obj,
 	 * use one of the known navigation schemes/markers and must not request
 	 * a local-file action.  Reject everything else (fail closed).
 	 *
-	 * The action check has to look at the decoded action, not the raw
-	 * reference bytes: a reference like
-	 * "passagestudy.jsp?action=show%53tudypad" contains no literal
-	 * "showStudypad" substring, but libsword's URL::getParameterValue
-	 * percent-decodes the action before main_url_handler dispatches it,
-	 * so a substring denylist on the raw reference is bypassable.
+	 * The action check must look at whatever action main_url_handler()
+	 * will actually dispatch to, not at a hand-rolled re-parse of the
+	 * raw reference bytes.  A previous version of this check used
+	 * strstr(reference, "action=") directly on the raw reference, which
+	 * disagreed with main_url_handler()'s Sword-URL-based parsing in two
+	 * different ways:
+	 *   - percent-encoding: "passagestudy.jsp?action=show%53tudypad" has
+	 *     no literal "showStudypad" substring, but Sword's
+	 *     URL::getParameterValue() percent-decodes the action before
+	 *     dispatch;
+	 *   - path/query ambiguity: "passagestudy.jsp/action=showBookmark?
+	 *     action=showImage&value=..." makes strstr() find the "action="
+	 *     that sits in the URL *path* while Sword's parser -- and hence
+	 *     the actual dispatch -- only looks at the *query string*, and
+	 *     picks up the real, later "action=showImage".
+	 * main_url_get_action() (main/url.cc) reuses the exact same
+	 * re-encoding + Sword URL parsing that main_url_handler() uses to
+	 * dispatch, so the check below can never disagree with the actual
+	 * dispatch again.
 	 */
 	if (!reference ||
 	    (!g_strstr_len(reference, -1, "sword://") &&
@@ -239,32 +252,7 @@ gboolean ipc_object_set_current_reference(IpcObject *obj,
 		return FALSE;
 	}
 	{
-		const char *p = strstr(reference, "action=");
-		gchar *action = NULL;
-		if (p) {
-			p += 7; /* strlen("action=") */
-			const char *end = p;
-			while (*end && *end != '&' && *end != '#')
-				end++;
-			gsize len = end - p;
-			action = g_malloc(len + 1);
-			gsize i = 0, j = 0;
-			while (i < len) {
-				if (p[i] == '+') {
-					action[j++] = ' ';
-					i++;
-				} else if (p[i] == '%' && i + 2 < len &&
-					   g_ascii_isxdigit(p[i+1]) &&
-					   g_ascii_isxdigit(p[i+2])) {
-					gchar hex[3] = { p[i+1], p[i+2], 0 };
-					action[j++] = (gchar)strtoul(hex, NULL, 16);
-					i += 3;
-				} else {
-					action[j++] = p[i++];
-				}
-			}
-			action[j] = '\0';
-		}
+		gchar *action = main_url_get_action(reference);
 		if (action && *action &&
 		    (!strcmp(action, "showStudypad") ||
 		     !strcmp(action, "showImage"))) {
