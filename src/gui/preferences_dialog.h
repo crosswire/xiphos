@@ -161,6 +161,7 @@ void ps_close(GtkButton *button, gpointer user_data);
 void ps_button_clear(GtkButton *button, gpointer user_data);
 void ps_button_cut(GtkButton *button, gpointer user_data);
 void ps_button_add(GtkButton *button, gpointer user_data);
+void gui_prefs_goto_parallel_page(void);
 
 #ifdef __cplusplus
 }

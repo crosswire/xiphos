@@ -35,6 +35,8 @@ struct _settings
 	    *CommWindowModule,    /* module to open at program startup  */
 	    *DictWindowModule,    /* module to open at program startup  */
 	    **parallel_list,      /* strsplit result from xml parallels */
+	    *parallel_set_names,  /* comma-separated list of saved parallel set names */
+	    *parallel_set_current, /* name of the currently active parallel set */
 	    *personalcommentsmod, /* module to open at program startup  */
 	    sb_search_mod[80],    /* module for sidebar search */
 	    *devotionalmod,       /* module for devotional */
@@ -233,6 +235,8 @@ extern SETTINGS settings;
 int settings_init(int argc, char **argv, int new_configs,
 		  int new_bookmarks);
 void load_settings_structure(void);
+char **get_parallel_set(const char *name);
+void save_parallel_set(const char *name, char **modules);
 
 #ifdef __cplusplus
 }

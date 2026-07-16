@@ -171,6 +171,8 @@ struct _parallel_select
 	GtkWidget *mod_sel_close;
 	GtkWidget *mod_sel_add;
 	GtkWidget *mod_sel_treeview;
+	GtkWidget *sets_combo;
+	GtkWidget *sets_hbox; 
 };
 static GtkWidget *dialog_prefs = NULL;
 
@@ -3170,6 +3172,134 @@ void ps_button_add(GtkButton *button, gpointer user_data)
 	g_free(glade_file);
 }
 
+static void on_parallel_sets_combo_changed(GtkComboBox *combo,
+					   gpointer user_data)
+{
+	gchar *name = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo));
+
+	if (!name)
+		return;
+
+	if (g_strcmp0(name, _("New set...")) == 0) {
+		/* dialog to enter new set name */
+		GtkWidget *dialog = gtk_dialog_new_with_buttons(
+		    _("New Parallel Set"),
+		    GTK_WINDOW(dialog_prefs),
+		    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		    _("Cancel"), GTK_RESPONSE_CANCEL,
+		    _("Create"), GTK_RESPONSE_OK,
+		    NULL);
+		GtkWidget *content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+		GtkWidget *hbox;
+		UI_HBOX(hbox, FALSE, 6);
+		GtkWidget *label = gtk_label_new(_("Set name:"));
+		GtkWidget *entry = gtk_entry_new();
+		gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 6);
+		gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 6);
+		gtk_box_pack_start(GTK_BOX(content), hbox, FALSE, FALSE, 6);
+		gtk_widget_show_all(dialog);
+
+		if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
+			const gchar *setname = gtk_entry_get_text(GTK_ENTRY(entry));
+			if (setname && *setname) {
+				/* build new set_names */
+				gchar *new_names;
+				if (settings.parallel_set_names && *settings.parallel_set_names)
+					new_names = g_strdup_printf("%s,%s",
+					    settings.parallel_set_names, setname);
+				else
+					new_names = g_strdup(setname);
+
+				g_free(settings.parallel_set_names);
+				settings.parallel_set_names = new_names;
+				xml_set_new_element("modules", "parallel_set_names", new_names);
+
+				/* save current parallel_list as the new set */
+				if (settings.parallel_list)
+					save_parallel_set(setname, settings.parallel_list);
+
+				/* switch to new set */
+				g_free(settings.parallel_set_current);
+				settings.parallel_set_current = g_strdup(setname);
+				xml_set_new_element("modules", "parallel_set_current", setname);
+
+				/* rebuild combo */
+				g_signal_handlers_block_by_func(
+				    parallel_select.sets_combo,
+				    on_parallel_sets_combo_changed, NULL);
+				#if GTK_CHECK_VERSION(3, 0, 0)
+					gtk_combo_box_text_remove_all(
+						GTK_COMBO_BOX_TEXT(parallel_select.sets_combo));
+				#else
+					{
+						GtkTreeModel *m = gtk_combo_box_get_model(
+							GTK_COMBO_BOX(parallel_select.sets_combo));
+						gtk_list_store_clear(GTK_LIST_STORE(m));
+					}
+				#endif
+				gchar **names = g_strsplit(settings.parallel_set_names, ",", -1);
+				for (gint i = 0; names[i]; ++i)
+					gtk_combo_box_text_append_text(
+					    GTK_COMBO_BOX_TEXT(parallel_select.sets_combo),
+					    names[i]);
+				g_strfreev(names);
+				gtk_combo_box_text_append_text(
+				    GTK_COMBO_BOX_TEXT(parallel_select.sets_combo),
+				    _("New set..."));
+				/* select the new set */
+				gchar **all = g_strsplit(settings.parallel_set_names, ",", -1);
+				for (gint i = 0; all[i]; ++i) {
+					if (g_strcmp0(all[i], setname) == 0) {
+						gtk_combo_box_set_active(
+						    GTK_COMBO_BOX(parallel_select.sets_combo), i);
+						break;
+					}
+				}
+				g_strfreev(all);
+				g_signal_handlers_unblock_by_func(
+				    parallel_select.sets_combo,
+				    on_parallel_sets_combo_changed, NULL);
+			}
+		}
+		gtk_widget_destroy(dialog);
+		g_free(name);
+		return;
+	}
+
+	/* save current list into the previously active set before switching */
+	if (settings.parallel_set_current && settings.parallel_list)
+		save_parallel_set(settings.parallel_set_current, settings.parallel_list);
+
+	/* load the new set */
+	gchar **modules = get_parallel_set(name);
+	if (modules) {
+		g_strfreev(settings.parallel_list);
+		settings.parallel_list = modules;
+	}
+
+	if (settings.parallel_set_current)
+		g_free(settings.parallel_set_current);
+	settings.parallel_set_current = name;
+	xml_set_new_element("modules", "parallel_set_current", name);
+
+	/* refresh listview */
+	ps_setup_listview();
+
+	/* refresh parallel view */
+	main_update_parallel_page();
+	if (!settings.dockedInt && settings.parallel_list && settings.parallel_list[0]) {
+		gui_navbar_parallel_set_module(settings.parallel_list[0]);
+		settings.cvparallel = settings.currentverse;
+		main_update_parallel_page_detached();
+	}
+}
+
+void gui_prefs_goto_parallel_page(void)
+{
+	if (notebook)
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), 6);
+}
+
 /******************************************************************************
  * Name
  *   gui_create_preferences_dialog
@@ -3407,6 +3537,48 @@ static void create_preferences_dialog(void)
 			 G_CALLBACK(ps_button_add), NULL);
 
 	ps_setup_listview();
+	{
+		GtkWidget *vbox10 = UI_GET_ITEM(gxml, "vbox10");
+		GtkWidget *hbox;
+		UI_HBOX(hbox, FALSE, 6);
+		GtkWidget *label = gtk_label_new(_("Set:"));
+		GtkWidget *combo = gtk_combo_box_text_new();
+
+		parallel_select.sets_hbox = hbox;
+		parallel_select.sets_combo = combo;
+
+		gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(hbox), combo, TRUE, TRUE, 0);
+		gtk_widget_show_all(hbox);
+
+		/* populate with existing set names */
+		if (settings.parallel_set_names && *settings.parallel_set_names) {
+			gchar **names = g_strsplit(settings.parallel_set_names, ",", -1);
+			for (gint i = 0; names[i]; ++i)
+				gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo), names[i]);
+			g_strfreev(names);
+		}
+		/* add "New set..." entry */
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo), _("New set..."));
+
+		/* select current set */
+		if (settings.parallel_set_current) {
+			gchar **names = g_strsplit(settings.parallel_set_names ? settings.parallel_set_names : "", ",", -1);
+			for (gint i = 0; names[i]; ++i) {
+				if (g_strcmp0(names[i], settings.parallel_set_current) == 0) {
+					gtk_combo_box_set_active(GTK_COMBO_BOX(combo), i);
+					break;
+				}
+			}
+			g_strfreev(names);
+		}
+
+		g_signal_connect(combo, "changed",
+				 G_CALLBACK(on_parallel_sets_combo_changed), NULL);
+
+		gtk_box_pack_start(GTK_BOX(vbox10), hbox, FALSE, FALSE, 0);
+		gtk_box_reorder_child(GTK_BOX(vbox10), hbox, 0);
+	}
 
 	/* enable drag-and-drop reordering of parallel versions */
 	gtk_tree_view_set_reorderable(GTK_TREE_VIEW(parallel_select.listview), TRUE);
