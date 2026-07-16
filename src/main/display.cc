@@ -52,6 +52,7 @@
 #include "main/xml.h"
 
 #include "gui/utilities.h"
+#include "gui/bookmarks_treeview.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
 
@@ -98,6 +99,7 @@ body { background-color:%s; color:%s; -webkit-column-count: %d ; margin-top: 0.1
 td { %s } \
 .introMaterial { font-style: italic; } \
 a:link{ color:%s } %s %s \
+.tagcolor a:link{ color:inherit !important } \
 h3 { font-style: %s } --> \
 %s</style> %s </head><body>"
 // 11 interpolable values: bg/txt/link colors, columns, justify (2x, body+td),
@@ -1424,6 +1426,115 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 	}
 }
 
+/* Returns white or black depending on background luminance */
+static const char *text_color_for_bg(const gchar *hex_color)
+{
+	if (!hex_color || hex_color[0] != '#' || strlen(hex_color) < 7)
+		return "#000000";
+	int r = 0, g = 0, b = 0;
+	sscanf(hex_color + 1, "%02x%02x%02x", &r, &g, &b);
+	/* relative luminance (ITU-R BT.709) */
+	double lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+	return (lum < 128.0) ? "#FFFFFF" : "#000000";
+}
+
+/* Returns the tag color for a given VerseKey by comparing OSIS refs.
+ * Walks the GtkTreeStore directly from C++. */
+static gchar *get_tag_color_for_versekey(VerseKey *vk)
+{
+	extern GtkTreeStore *model;
+	if (!settings.tag_colorize) return NULL;
+	if (!model || !vk) return NULL;
+
+	gchar *osisref = g_strdup_printf("%s.%d.%d",
+		vk->getOSISBookName(),
+		vk->getChapter(),
+		vk->getVerse());
+
+	GtkTreeIter root;
+	if (!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &root)) {
+		g_free(osisref); return NULL;
+	}
+
+	GQueue *stack = g_queue_new();
+	GQueue *colors = g_queue_new();
+	GtkTreeIter child;
+	if (gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child, &root)) {
+		do {
+			GtkTreeIter *copy = g_new(GtkTreeIter, 1);
+			*copy = child;
+			g_queue_push_tail(stack, copy);
+			g_queue_push_tail(colors, NULL);
+		} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+	}
+
+	gchar *result = NULL;
+	while (!g_queue_is_empty(stack) && !result) {
+		GtkTreeIter *iter = (GtkTreeIter *)g_queue_pop_head(stack);
+		gchar *inherited = (gchar *)g_queue_pop_head(colors);
+		gchar *node_color = NULL, *node_key = NULL;
+		gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
+				   COL_COLOR, &node_color,
+				   COL_KEY,   &node_key, -1);
+		const gchar *effective = (node_color && *node_color)
+			? node_color : inherited;
+		if (node_key) {
+			/* Let Sword resolve the (possibly multi-reference, possibly
+			 * partial) bookmark key into individual, fully-qualified
+			 * verses -- same mechanism used for the verse-list popup. */
+			if (effective) {
+				/* parse_verse_list() repositions the SWModule's own
+				 * key, which is the SAME key object being iterated
+				 * by the enclosing display loop. Save and restore
+				 * it around the call so we don't corrupt that
+				 * outer iteration (was causing freezes/GTK asserts
+				 * with multi-reference bookmarks). */
+				gchar *saved_pos = g_strdup((const char *)vk->getText());
+				GList *verses = backend->parse_verse_list(
+					settings.MainWindowModule, node_key,
+					(char *)settings.currentverse);
+				vk->setText(saved_pos);
+				g_free(saved_pos);
+				for (GList *l = verses; l && !result; l = l->next) {
+					VerseKey vk2;
+					vk2.setLocale(vk->getLocale());
+					vk2.setText((const char *)l->data);
+					gchar *ref2 = g_strdup_printf("%s.%d.%d",
+						vk2.getOSISBookName(),
+						vk2.getChapter(),
+						vk2.getVerse());
+					if (!g_ascii_strcasecmp(osisref, ref2))
+						result = g_strdup(effective);
+					g_free(ref2);
+				}
+				for (GList *l = verses; l; l = l->next)
+					g_free(l->data);
+				g_list_free(verses);
+			}
+			g_free(node_key);
+		} else {
+			if (gtk_tree_model_iter_children(GTK_TREE_MODEL(model),
+							 &child, iter)) {
+				do {
+					GtkTreeIter *copy = g_new(GtkTreeIter, 1);
+					*copy = child;
+					g_queue_push_tail(stack, copy);
+					g_queue_push_tail(colors,
+						effective ? g_strdup(effective) : NULL);
+				} while (gtk_tree_model_iter_next(
+						GTK_TREE_MODEL(model), &child));
+			}
+		}
+		g_free(node_color);
+		g_free(inherited);
+		g_free(iter);
+	}
+	g_queue_free_full(stack, g_free);
+	g_queue_free_full(colors, g_free);
+	g_free(osisref);
+	return result;
+}
+
 char
 GTKChapDisp::display(SWModule &imodule)
 {
@@ -1560,10 +1671,23 @@ GTKChapDisp::display(SWModule &imodule)
 
 		// special contrasty highlighting
 		marked_element *e;
+		gchar *tag_color = get_tag_color_for_versekey(key);
+		/* tag-group color highlight */
+		if (tag_color) {
+			const char *fg = text_color_for_bg(tag_color);
+			buf = g_strdup_printf(
+			    "<span class=\"tagcolor\" style=\"background-color: %s; "
+			    "color: %s; "
+			    "border-left: 3px solid %s; padding-left: 2px\">",
+			    tag_color, fg, tag_color);
+			swbuf.append(buf);
+			g_free(buf);
+		}
+
 		if (((e = marked_cache_check(key->getVerse())) &&
 		     settings.annotate_highlight) ||
 		    ((key->getVerse() == curVerse) &&
-		     settings.versehighlight)) {
+		     settings.versehighlight && !tag_color)) {
 			buf = g_strdup_printf(
 			    "<span style=\"background-color: %s\">"
 			    "<font face=\"%s\" size=\"%+d\">",
@@ -1626,8 +1750,14 @@ GTKChapDisp::display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if ((key->getVerse() == curVerse) ||
-		    (e && settings.annotate_highlight)) {
+		/* Current-verse/annotation font color: skip entirely when a
+		 * bookmark tag color is active, so it can't override the
+		 * contrast color we already computed for the tag background
+		 * (was causing e.g. dark text on a dark tag background). */
+		gboolean curverse_font_open = FALSE;
+		if (!tag_color &&
+		    ((key->getVerse() == curVerse) ||
+		     (e && settings.annotate_highlight))) {
 			buf = g_strdup_printf("<font color=\"%s\">",
 					      ((settings.versehighlight ||
 						(e && settings.annotate_highlight))
@@ -1637,6 +1767,7 @@ GTKChapDisp::display(SWModule &imodule)
 						   : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
+			curverse_font_open = TRUE;
 		}
 
 		swbuf.append(settings.imageresize
@@ -1645,8 +1776,16 @@ GTKChapDisp::display(SWModule &imodule)
 				 : rework->str /* left as-is */);
 
 		if (key->getVerse() == curVerse) {
-			swbuf.append("</font>");
+			if (curverse_font_open)
+				swbuf.append("</font>");
 			ReadAloud(curVerse, rework->str);
+		}
+
+		/* close tag-group color span */
+		if (tag_color) {
+			swbuf.append("</span>");
+			g_free(tag_color);
+			tag_color = NULL;
 		}
 
 		if (settings.versestyle) {

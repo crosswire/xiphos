@@ -104,6 +104,7 @@ struct _settings
 	    versehighlight,		 /* do special fg/bg for current verse */
 	    annotate_highlight,		 /* do special bg/fg for user annotations */
 	    crossref_popup,		 /* open cross-references in a popup menu */
+	    tag_colorize,		 /* colorize verses by bookmark folder color (default on) */
 					 /* saved startup displays */
 	    display_parallel,		 /* detached parallel */
 	    display_modmgr,		 /* mod.mgr */

@@ -924,11 +924,18 @@ GList *BackEnd::parse_verse_list(const char *module_name, const char *list, char
 	key->setText(current_key);
 	vs = key->parseVerseList(list, *key, TRUE);
 
-	if (!vs.getCount())
+	int count = vs.getCount();
+	if (!count)
 		return retlist;
-	while (!vs.popError()) {
-		retlist = g_list_append(retlist, strdup((char *)vs.getText()));
-		vs++;
+	/* Use indexed access rather than popError()-driven iteration:
+	 * popError() stops the whole walk as soon as ANY single element
+	 * fails to resolve, silently dropping every element after it,
+	 * even when they are perfectly valid. Indexed access lets us
+	 * simply skip a bad element and keep going. */
+	for (int i = 0; i < count; i++) {
+		SWKey *elem = vs.getElement(i);
+		if (elem)
+			retlist = g_list_append(retlist, strdup((char *)elem->getText()));
 	}
 	return retlist;
 }

@@ -702,6 +702,7 @@ static gint show_in_previewer(const gchar *url)
  *   gint
  */
 
+extern "C" gchar *bookmark_get_tag_info_for_key(const gchar *versekey_text);
 gint sword_uri(const gchar *url, gboolean clicked)
 {
 	const gchar *key = NULL;
@@ -738,8 +739,15 @@ gint sword_uri(const gchar *url, gboolean clicked)
 
 			if (mod_type == DICTIONARY_TYPE)
 				show_in_previewer(url);
-			else
-				gui_set_statusbar(name + ((*name == '/') ? 1 : 0));
+			else {
+				const gchar *ref_text = name + ((*name == '/') ? 1 : 0);
+				gchar *tag_info = bookmark_get_tag_info_for_key(ref_text);
+				if (tag_info) {
+					gui_set_statusbar(tag_info);
+					g_free(tag_info);
+				} else
+					gui_set_statusbar(ref_text);
+			}
 		}
 		handling_uri = FALSE;
 		return 1;

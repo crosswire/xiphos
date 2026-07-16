@@ -43,6 +43,7 @@ struct _bookmark_menu
 	GtkWidget *remove;
 	GtkWidget *set_color;
 	GtkWidget *crossref_popup;
+	GtkWidget *tag_colorize;
 };
 typedef struct _bookmark_menu BOOKMARK_MENU;
 extern BOOKMARK_MENU menu;
@@ -63,6 +64,8 @@ void on_allow_reordering_activate(GtkMenuItem *menuitem,
 				  gpointer user_data);
 void on_crossref_popup_activate(GtkMenuItem *menuitem,
 				gpointer user_data);
+void on_tag_colorize_activate(GtkMenuItem *menuitem,
+			      gpointer user_data);
 void on_dialog_activate(GtkMenuItem *menuitem,
 			gpointer user_data);
 void on_edit_item_activate(GtkMenuItem *menuitem,
