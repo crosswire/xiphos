@@ -400,7 +400,9 @@ static void on_entry_activate(GtkEntry *entry, gpointer user_data)
 	rawtext =
 	    main_get_raw_text(navbar_versekey.module_name->str,
 			      (gchar *)buf);
+
 	if (!rawtext || (rawtext && (strlen(rawtext) < 2))) {
+
 		gtk_entry_set_text(entry, navbar_versekey.key->str);
 		g_free(rawtext);
 		return;

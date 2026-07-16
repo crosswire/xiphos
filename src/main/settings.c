@@ -425,6 +425,15 @@ void load_settings_structure(void)
 	/* parallel sets */
 	settings.parallel_set_names = xml_get_value("modules", "parallel_set_names");
 	settings.parallel_set_current = xml_get_value("modules", "parallel_set_current");
+	settings.parallel_set_current = xml_get_value("modules", "parallel_set_current");
+	/* load active parallel set at startup */
+	if (settings.parallel_set_current && *settings.parallel_set_current) {
+		char **set_modules = get_parallel_set(settings.parallel_set_current);
+		if (set_modules) {
+			g_strfreev(settings.parallel_list);
+			settings.parallel_list = set_modules;
+		}
+	}
 	settings.personalcommentsmod = xml_get_value("modules", "percomm");
 	settings.devotionalmod = xml_get_value("modules", "devotional");
 	settings.book_mod = xml_get_value("modules", "book");
@@ -1228,7 +1237,8 @@ void save_parallel_set(const gchar *name, gchar **modules)
 
 	key = g_strdup_printf("parallel_set_%s", name);
 	value = g_strjoinv(",", modules);
-	xml_set_new_element("modules", key, value);
+	xml_set_or_create_value("modules", key, value);
 	g_free(key);
 	g_free(value);
 }
+

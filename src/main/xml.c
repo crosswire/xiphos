@@ -1543,6 +1543,35 @@ void xml_set_value(const char *type_doc, const char *section,
 
 /******************************************************************************
  * Name
+ *   xml_set_or_create_value
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_set_or_create_value(const char *section, const char *item,
+ *                                const char *value)
+ *
+ * Description
+ *   Set an existing node's content (even if empty) or create it if absent.
+ *
+ * Return value
+ *   void
+ */
+void xml_set_or_create_value(const char *section, const char *item,
+			     const char *value)
+{
+	xmlNodePtr cur =
+	    xml_find_prop(xml_settings_doc, "Xiphos", section, item);
+	if (cur)
+		xmlNodeSetContent(cur, (const xmlChar *)value);
+	else
+		xml_add_new_item_to_section((char *)section,
+					    (char *)item,
+					    (char *)value);
+}
+
+/******************************************************************************
+ * Name
  *   xml_parse_settings_file
  *
  * Synopsis

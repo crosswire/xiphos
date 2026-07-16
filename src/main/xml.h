@@ -79,6 +79,8 @@ void xml_remove_node(const char *section, const char *item,
 		     const char *label);
 void xml_remove_section(const char *section);
 void xml_convert_to_osisref(void);
+void xml_set_or_create_value(const char *section, const char *item,
+			     const char *value);
 
 #ifdef __cplusplus
 }
