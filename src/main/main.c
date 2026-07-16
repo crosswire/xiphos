@@ -21,6 +21,8 @@
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
+#include <glib/gi18n.h>
+#include <locale.h>
 #endif
 
 #include <fcntl.h>
@@ -246,6 +248,36 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	/*
+	 * Initialize the locale and gettext as early as possible, before
+	 * any code that generates translatable content (e.g.
+	 * settings_init() -> init_bookmarks(), which writes the default
+	 * bookmarks.xml using _()-wrapped strings). Previously this only
+	 * happened later, implicitly via gtk_init_with_args() inside
+	 * gui_init(), so the default bookmarks were always generated
+	 * while the process was still in the "C" locale (English),
+	 * regardless of the user's actual language. setlocale() and the
+	 * later bindtextdomain/textdomain calls in gui_init() remain
+	 * harmless to repeat (idempotent).
+	 */
+	setlocale(LC_ALL, "");
+#ifdef ENABLE_NLS
+	bindtextdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+	textdomain(GETTEXT_PACKAGE);
+#endif
+#ifdef WIN32
+	{
+		gchar *locale_dir =
+		    g_win32_get_package_installation_directory_of_module(NULL);
+		locale_dir = g_strconcat(locale_dir, "\0", NULL);
+		locale_dir = g_build_filename(locale_dir, "share", "locale", NULL);
+		bindtextdomain(GETTEXT_PACKAGE, locale_dir);
+		bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+		textdomain(GETTEXT_PACKAGE);
+		g_free(locale_dir);
+	}
+#endif
 	/*
 	 * check for directories and files
 	 */
