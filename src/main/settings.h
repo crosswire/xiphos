@@ -208,6 +208,10 @@ struct _settings
 	int mod_mgr_destination; /* if = 0 destination is .sword
 						   else sword directory  */
 
+	/* module tree display grouping: 0 = category+language (default),
+	   1 = category only, 2 = language+category */
+	int module_tree_grouping;
+
 	/* if true use prayerlist */
 	int prayerlist;
 

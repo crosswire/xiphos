@@ -48,6 +48,8 @@ void main_display_verse_list_in_sidebar(gchar *key,
 					gchar *verse_list);
 void main_create_pixbufs(void);
 void main_load_module_tree(GtkWidget *tree);
+void main_load_module_tree_flat(GtkWidget *tree);
+void main_load_module_tree_by_language(GtkWidget *tree);
 void main_add_mod_tree_columns(GtkTreeView *tree);
 void main_mod_treeview_button_one(GtkTreeModel *model,
 				  GtkTreeIter selected);

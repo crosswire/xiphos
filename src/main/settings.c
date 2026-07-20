@@ -518,6 +518,16 @@ if (!settings.morph_heb_lex || strlen(settings.morph_heb_lex) == 0) {
 		settings.mod_mgr_remote_source_index = 0;
 	}
 
+	/* module tree display grouping */
+	/* note: the "modules" section already exists (bible/comm/dict/...),
+	   so we only add the item, never re-create the section. */
+	if ((buf = xml_get_value("modules", "grouping")))
+		settings.module_tree_grouping = atoi(buf);
+	else {
+		xml_add_new_item_to_section("modules", "grouping", "0");
+		settings.module_tree_grouping = 0;
+	}
+
 	/* current verse & keys */
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");

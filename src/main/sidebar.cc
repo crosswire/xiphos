@@ -911,6 +911,186 @@ static void add_module_to_language_folder(GtkTreeModel *model,
 	}
 }
 
+static const gchar *category_caption(MOD_MGR *info)
+{
+	if (info->is_cult)
+		return _("Cult/Unorthodox");
+	if (info->type[0] == 'B')
+		return _("Biblical Texts");
+	if (info->type[0] == 'C')
+		return _("Commentaries");
+	if (info->is_maps)
+		return _("Maps");
+	if (info->is_images)
+		return _("Images");
+	if (info->is_devotional)
+		return _("Daily Devotionals");
+	if (info->is_glossary)
+		return _("Glossaries");
+	if (info->type[0] == 'L')
+		return _("Dictionaries");
+	if (info->type[0] == 'G')
+		return _("General Books");
+	return NULL;
+}
+
+static const gchar *module_language_caption(MOD_MGR *info)
+{
+	const gchar *lang = info->language;
+	if (!lang || !g_utf8_validate(lang, -1, NULL))
+		return _("Unknown");
+	if (!g_unichar_isalnum(g_utf8_get_char(lang)))
+		return _("Unknown");
+	return lang;
+}
+
+static GtkTreeIter get_or_create_folder(GtkTreeStore *store,
+					GtkTreeIter *parent,
+					const gchar *caption)
+{
+	GtkTreeIter iter;
+	gboolean valid = gtk_tree_model_iter_children(GTK_TREE_MODEL(store), &iter, parent);
+	while (valid) {
+		gchar *str_data = NULL;
+		gboolean match;
+		gtk_tree_model_get(GTK_TREE_MODEL(store), &iter, COL_CAPTION, &str_data, -1);
+		match = (str_data && !strcmp(str_data, caption));
+		g_free(str_data);
+		if (match)
+			return iter;
+		valid = gtk_tree_model_iter_next(GTK_TREE_MODEL(store), &iter);
+	}
+	gtk_tree_store_append(store, &iter, parent);
+	gtk_tree_store_set(store, &iter,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, caption,
+			   COL_MODULE, NULL,
+			   COL_OFFSET, caption, -1);
+	return iter;
+}
+
+static void append_module_row(GtkTreeStore *store, GtkTreeIter *parent, MOD_MGR *info)
+{
+	GtkTreeIter child;
+	const gchar *abbreviation = main_name_to_abbrev(info->name);
+	gchar *content = g_strdup_printf("%s: %s",
+					 (abbreviation ? abbreviation : info->name),
+					 info->description);
+	gtk_tree_store_append(store, &child, parent);
+	gtk_tree_store_set(store, &child,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, (gchar *)content,
+			   COL_MODULE, (gchar *)info->name,
+			   COL_OFFSET, NULL, -1);
+	g_free(content);
+}
+
+static int module_lang_cmpstringp(gconstpointer p1, gconstpointer p2)
+{
+	return ucol_strcollUTF8(collator, (const char *)p1, -1, (const char *)p2, -1, &collator_status);
+}
+
+void main_load_module_tree_flat(GtkWidget *tree)
+{
+	GtkTreeStore *store = gtk_tree_store_new(N_COLUMNS,
+						 GDK_TYPE_PIXBUF, GDK_TYPE_PIXBUF,
+						 G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+	GList *tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
+	GList *tmp2;
+	GHashTable *cat_iters = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+	for (tmp2 = tmp; tmp2; tmp2 = g_list_next(tmp2)) {
+		MOD_MGR *info = (MOD_MGR *)tmp2->data;
+		const gchar *cat = category_caption(info);
+		GtkTreeIter *cat_iter;
+		if (!cat) {
+			XI_warning(("mod `%s' unknown type `%s'", info->name, info->type));
+			continue;
+		}
+		cat_iter = (GtkTreeIter *)g_hash_table_lookup(cat_iters, cat);
+		if (!cat_iter) {
+			cat_iter = g_new(GtkTreeIter, 1);
+			gtk_tree_store_append(store, cat_iter, NULL);
+			gtk_tree_store_set(store, cat_iter,
+					   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+					   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+					   COL_CAPTION, cat,
+					   COL_MODULE, NULL,
+					   COL_OFFSET, cat, -1);
+			g_hash_table_insert(cat_iters, (gpointer)cat, cat_iter);
+		}
+		append_module_row(store, cat_iter, info);
+		g_free(info->name);
+		g_free(info->type);
+		g_free(info->new_version);
+		g_free(info->old_version);
+		g_free(info->installsize);
+		g_free(info);
+	}
+	g_list_free(tmp);
+	g_hash_table_destroy(cat_iters);
+	gtk_tree_view_set_model(GTK_TREE_VIEW(tree), GTK_TREE_MODEL(store));
+}
+
+void main_load_module_tree_by_language(GtkWidget *tree)
+{
+	GtkTreeStore *store = gtk_tree_store_new(N_COLUMNS,
+						 GDK_TYPE_PIXBUF, GDK_TYPE_PIXBUF,
+						 G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+	GList *tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
+	GList *tmp2, *languages = NULL;
+	GHashTable *lang_iters = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+	if (!collator) {
+		char *locale = getenv("LANG");
+		collator = ucol_open((locale ? locale : ""), &collator_status);
+	}
+	for (tmp2 = tmp; tmp2; tmp2 = g_list_next(tmp2)) {
+		MOD_MGR *info = (MOD_MGR *)tmp2->data;
+		const gchar *lang = module_language_caption(info);
+		if (!g_list_find_custom(languages, lang, (GCompareFunc)strcmp)) {
+			languages = g_list_insert_sorted(languages, g_strdup(lang),
+							 (GCompareFunc)module_lang_cmpstringp);
+		}
+	}
+	for (tmp2 = languages; tmp2; tmp2 = g_list_next(tmp2)) {
+		gchar *lang = (gchar *)tmp2->data;
+		GtkTreeIter *iter = g_new(GtkTreeIter, 1);
+		gtk_tree_store_append(store, iter, NULL);
+		gtk_tree_store_set(store, iter,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, lang,
+				   COL_MODULE, NULL,
+				   COL_OFFSET, lang, -1);
+		g_hash_table_insert(lang_iters, g_strdup(lang), iter);
+	}
+	g_list_free_full(languages, g_free);
+	for (tmp2 = tmp; tmp2; tmp2 = g_list_next(tmp2)) {
+		MOD_MGR *info = (MOD_MGR *)tmp2->data;
+		const gchar *cat = category_caption(info);
+		const gchar *lang = module_language_caption(info);
+		GtkTreeIter *lang_iter;
+		GtkTreeIter cat_iter;
+		if (!cat) {
+			XI_warning(("mod `%s' unknown type `%s'", info->name, info->type));
+			continue;
+		}
+		lang_iter = (GtkTreeIter *)g_hash_table_lookup(lang_iters, lang);
+		cat_iter = get_or_create_folder(store, lang_iter, cat);
+		append_module_row(store, &cat_iter, info);
+		g_free(info->name);
+		g_free(info->type);
+		g_free(info->new_version);
+		g_free(info->old_version);
+		g_free(info->installsize);
+		g_free(info);
+	}
+	g_list_free(tmp);
+	g_hash_table_destroy(lang_iters);
+	gtk_tree_view_set_model(GTK_TREE_VIEW(tree), GTK_TREE_MODEL(store));
+}
+
 /******************************************************************************
  * Name
  *   main_load_module_tree
@@ -929,6 +1109,16 @@ static void add_module_to_language_folder(GtkTreeModel *model,
 
 void main_load_module_tree(GtkWidget *tree)
 {
+	switch (settings.module_tree_grouping) {
+	case 1:
+		main_load_module_tree_flat(tree);
+		return;
+	case 2:
+		main_load_module_tree_by_language(tree);
+		return;
+	default:
+		break; /* mode 0: category+language, unchanged below */
+	}
 	GtkTreeStore *store;
 
 	GtkTreeIter text;

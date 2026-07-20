@@ -81,6 +81,7 @@ struct _preferences_combo
 	GtkWidget *special_locale;
 	GtkWidget *font_prefs;
 	GtkWidget *display_columns;
+	GtkWidget *module_grouping;
 };
 
 typedef struct _preferences_color_pickers COLOR_PICKERS;
@@ -1602,6 +1603,18 @@ void on_columncountvalue_changed(GtkComboBox *combobox, gpointer user_data)
 	settings.display_columns = atoi(buf);
 	g_free(buf);
 	redisplay_to_realign();
+}
+
+void on_combobox_module_grouping_changed(GtkComboBox *combobox, gpointer user_data)
+{
+	gint mode = gtk_combo_box_get_active(combobox);
+	gchar buf[4];
+	if (mode < 0)
+		return;
+	g_snprintf(buf, sizeof(buf), "%d", mode);
+	xml_set_value("Xiphos", "modules", "grouping", buf);
+	settings.module_tree_grouping = mode;
+	main_load_module_tree(sidebar.module_list);
 }
 
 /******************************************************************************
@@ -3338,6 +3351,12 @@ static void create_preferences_dialog(void)
 				 settings.display_columns - 1);
 	g_signal_connect(combo.display_columns, "changed",
 			 G_CALLBACK(on_columncountvalue_changed), NULL);
+
+	combo.module_grouping = UI_GET_ITEM(gxml, "combobox_module_grouping");
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo.module_grouping),
+				 settings.module_tree_grouping);
+	g_signal_connect(combo.module_grouping, "changed",
+			 G_CALLBACK(on_combobox_module_grouping_changed), NULL);
 
 	/* module combos */
 	combo.default_dictionary_module = UI_GET_ITEM(gxml, "combobox5");

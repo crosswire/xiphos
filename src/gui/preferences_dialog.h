@@ -94,6 +94,8 @@ void on_combobox20_changed(GtkComboBox *combobox,
 			   gpointer user_data);
 void on_columncountvalue_changed(GtkComboBox *combobox,
 				 gpointer user_data);
+void on_combobox_module_grouping_changed(GtkComboBox *combobox,
+					 gpointer user_data);
 
 void on_colorbutton1_color_set(GtkColorButton *colorbutton,
 			       gpointer user_data);

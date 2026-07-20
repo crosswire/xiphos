@@ -541,6 +541,21 @@ static void on_search_results_activate(GtkToggleButton *button,
  *   gboolean
  */
 
+static void on_module_grouping_menu_toggled(GtkCheckMenuItem *item, gpointer user_data)
+{
+	gint mode;
+	gchar buf[4];
+
+	if (!gtk_check_menu_item_get_active(item))
+		return;
+
+	mode = GPOINTER_TO_INT(user_data);
+	g_snprintf(buf, sizeof(buf), "%d", mode);
+	xml_set_value("Xiphos", "modules", "grouping", buf);
+	settings.module_tree_grouping = mode;
+	main_load_module_tree(sidebar.module_list);
+}
+
 static gboolean on_modules_list_button_release(GtkWidget *widget,
 					       GdkEventButton *event,
 					       gpointer user_data)
@@ -647,6 +662,40 @@ gint depth = gtk_tree_path_get_depth(path);
 			gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist_mod), NULL,
 				       NULL, NULL, NULL, 0,
 				       gtk_get_current_event_time());
+#endif
+			g_free(caption);
+			return FALSE;
+		}
+		if (!mod && caption) {
+			GtkWidget *group_menu = gtk_menu_new();
+			GtkWidget *item_catlang = gtk_radio_menu_item_new_with_label(NULL, _("Category, then Language"));
+			GtkWidget *item_cat = gtk_radio_menu_item_new_with_label_from_widget(
+			    GTK_RADIO_MENU_ITEM(item_catlang), _("Category only"));
+			GtkWidget *item_langcat = gtk_radio_menu_item_new_with_label_from_widget(
+			    GTK_RADIO_MENU_ITEM(item_catlang), _("Language, then Category"));
+
+			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item_catlang),
+						       settings.module_tree_grouping == 0);
+			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item_cat),
+						       settings.module_tree_grouping == 1);
+			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item_langcat),
+						       settings.module_tree_grouping == 2);
+
+			gtk_menu_shell_append(GTK_MENU_SHELL(group_menu), item_catlang);
+			gtk_menu_shell_append(GTK_MENU_SHELL(group_menu), item_cat);
+			gtk_menu_shell_append(GTK_MENU_SHELL(group_menu), item_langcat);
+			gtk_widget_show_all(group_menu);
+
+			g_signal_connect(item_catlang, "toggled",
+					 G_CALLBACK(on_module_grouping_menu_toggled), GINT_TO_POINTER(0));
+			g_signal_connect(item_cat, "toggled",
+					 G_CALLBACK(on_module_grouping_menu_toggled), GINT_TO_POINTER(1));
+			g_signal_connect(item_langcat, "toggled",
+					 G_CALLBACK(on_module_grouping_menu_toggled), GINT_TO_POINTER(2));
+#if GTK_CHECK_VERSION(3, 22, 0)
+			gtk_menu_popup_at_pointer(GTK_MENU(group_menu), (GdkEvent *)event);
+#else
+			gtk_menu_popup(GTK_MENU(group_menu), NULL, NULL, NULL, NULL, 0, gtk_get_current_event_time());
 #endif
 			g_free(caption);
 			return FALSE;
