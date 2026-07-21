@@ -50,6 +50,10 @@ void on_checkbutton9_toggled(GtkToggleButton *togglebutton,
 			     gpointer user_data);
 void on_justifybutton_toggled(GtkToggleButton *togglebutton,
 			      gpointer user_data);
+void on_show_hidden_modules_toggled(GtkToggleButton *togglebutton,
+				    gpointer user_data);
+void on_show_hidden_modules_toggled(GtkToggleButton *togglebutton,
+				    gpointer user_data);
 
 void on_folder_changed(GtkFileChooser *filechooser,
 		       gpointer user_data);

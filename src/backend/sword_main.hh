@@ -85,6 +85,8 @@ class BackEnd
 	int key_get_verse(const char *module_name, const char *key);
 	unsigned int key_chapter_count(const char *module_name, const char *key);
 	unsigned int key_verse_count(const char *module_name, const char *key);
+	char *key_get_chapter_ref(const char *module_name, const char *key, int chapter_ordinal);
+	char *key_get_verse_ref(const char *module_name, const char *key, int verse_ordinal);
 
 	char *get_module_key(void);
 	void save_entry(const char *entry);

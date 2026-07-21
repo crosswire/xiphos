@@ -972,6 +972,22 @@ on_about2_activate(GtkMenuItem *menuitem, gpointer user_data)
 }
 
 G_MODULE_EXPORT void
+on_toggle_favorite_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	module_toggle_favorite(buf_module);
+	g_free(buf_module);
+	buf_module = NULL;
+}
+
+G_MODULE_EXPORT void
+on_hide_module_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	module_toggle_hidden(buf_module);
+	g_free(buf_module);
+	buf_module = NULL;
+}
+
+G_MODULE_EXPORT void
 on_save_list_as_a_single_bookmark_activate(GtkMenuItem *menuitem,
 					   gpointer user_data)
 {
@@ -1152,6 +1168,23 @@ static GtkWidget *create_menu_modules(void)
 	g_return_val_if_fail((gxml != NULL), NULL);
 
 	GtkWidget *menu = UI_GET_ITEM(gxml, "menu_modules");
+#ifdef USE_GTKBUILDER
+	GtkWidget *fav_item = UI_GET_ITEM(gxml, "toggle_favorite1");
+	GtkWidget *hide_item = UI_GET_ITEM(gxml, "hide_module1");
+#else
+	GtkWidget *fav_item = UI_GET_ITEM(gxml, "toggle_favorite");
+	GtkWidget *hide_item = UI_GET_ITEM(gxml, "hide_module");
+#endif
+	if (fav_item)
+		gtk_menu_item_set_label(GTK_MENU_ITEM(fav_item),
+					module_is_favorite(buf_module)
+					    ? _("Remove from Favorites")
+					    : _("Add to Favorites"));
+	if (hide_item)
+		gtk_menu_item_set_label(GTK_MENU_ITEM(hide_item),
+					module_is_hidden(buf_module)
+					    ? _("Show this module")
+					    : _("Hide this module"));
 #ifdef USE_GTKBUILDER
 	gtk_builder_connect_signals(gxml, NULL);
 /*gtk_builder_connect_signals_full

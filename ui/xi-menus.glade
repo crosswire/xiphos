@@ -1889,6 +1889,24 @@
       </child>
     </widget>
   </child>
+
+  <child>
+    <widget class="GtkImageMenuItem" id="toggle_favorite">
+      <property name="visible">True</property>
+      <property name="label" translatable="yes">Add to Favorites</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_toggle_favorite_activate" last_modification_time="Mon, 20 Jul 2026 00:00:00 GMT"/>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkImageMenuItem" id="hide_module">
+      <property name="visible">True</property>
+      <property name="label" translatable="yes">Hide this module</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_hide_module_activate" last_modification_time="Mon, 20 Jul 2026 00:00:00 GMT"/>
+    </widget>
+  </child>
 </widget>
 
 <widget class="GtkMenu" id="menu_prayerlist">

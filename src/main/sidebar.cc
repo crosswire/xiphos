@@ -388,8 +388,6 @@ static void add_verses_to_chapter(GtkTreeModel *model,
 				  GtkTreeIter iter, const gchar *key)
 {
 	gchar **work_buf = NULL;
-	gchar *book = NULL;
-	gint chapter;
 	gint verses;
 	gint i;
 	GtkTreeIter child_iter;
@@ -401,19 +399,17 @@ static void add_verses_to_chapter(GtkTreeModel *model,
 	}
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
-	book = backend->key_get_book(settings.MainWindowModule, work_buf[3]);
-	chapter = backend->key_get_chapter(settings.MainWindowModule, work_buf[3]);
 	verses = backend->key_verse_count(settings.MainWindowModule, work_buf[3]);
 
 	for (i = 1; i < (verses + 1); i++) {
 		gchar *num = main_format_number(i);
 		gchar *buf = g_strdup_printf("%s %s", _("verse"), num);
 		g_free(num);
-		gchar *key = g_strdup_printf("sword://%s/%s %d:%d",
+		gchar *ref = backend->key_get_verse_ref(settings.MainWindowModule,
+							work_buf[3], i);
+		gchar *key = g_strdup_printf("sword://%s/%s",
 					     work_buf[2],
-					     book,
-					     chapter,
-					     i);
+					     ref);
 		gtk_tree_store_append(GTK_TREE_STORE(model),
 				      &child_iter, &iter);
 		gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
@@ -424,6 +420,7 @@ static void add_verses_to_chapter(GtkTreeModel *model,
 				   COL_OFFSET, (gchar *)key,
 				   -1);
 		g_free(key);
+		g_free(ref);
 		g_free(buf);
 	}
 	g_strfreev(work_buf);
@@ -450,7 +447,6 @@ static void add_chapters_to_book(GtkTreeModel *model, GtkTreeIter iter,
 				 const gchar *key)
 {
 	gchar **work_buf = NULL;
-	gchar *book = NULL;
 	gint chapters;
 	gint i;
 	GtkTreeIter child_iter;
@@ -462,17 +458,17 @@ static void add_chapters_to_book(GtkTreeModel *model, GtkTreeIter iter,
 	}
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
-	book = backend->key_get_book(settings.MainWindowModule, work_buf[3]);
 	chapters = backend->key_chapter_count(settings.MainWindowModule, work_buf[3]);
 
 	for (i = 1; i < (chapters + 1); i++) {
 		gchar *num = main_format_number(i);
 		gchar *buf = g_strdup_printf("%s %s", _("chapter"), num);
 		g_free(num);
-		gchar *key = g_strdup_printf("chapter://%s/%s %d:1",
+		gchar *ref = backend->key_get_chapter_ref(settings.MainWindowModule,
+							  work_buf[3], i);
+		gchar *key = g_strdup_printf("chapter://%s/%s",
 					     work_buf[2],
-					     book,
-					     i);
+					     ref);
 		gtk_tree_store_append(GTK_TREE_STORE(model),
 				      &child_iter, &iter);
 		gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
@@ -483,6 +479,7 @@ static void add_chapters_to_book(GtkTreeModel *model, GtkTreeIter iter,
 				   COL_OFFSET, (gchar *)key,
 				   -1);
 		g_free(key);
+		g_free(ref);
 		g_free(buf);
 	}
 	g_strfreev(work_buf);
@@ -911,6 +908,74 @@ static void add_module_to_language_folder(GtkTreeModel *model,
 	}
 }
 
+static gboolean semilist_contains(const char *list, const char *name)
+{
+	gchar *needle;
+	gboolean found;
+	if (!list || !*list || !name)
+		return FALSE;
+	needle = g_strdup_printf(";%s;", name);
+	found = (strstr(list, needle) != NULL);
+	g_free(needle);
+	return found;
+}
+
+static char *semilist_add(char *list, const char *name)
+{
+	gchar *result;
+	if (semilist_contains(list, name))
+		return list;
+	if (!list || !*list)
+		result = g_strdup_printf(";%s;", name);
+	else
+		result = g_strdup_printf("%s%s;", list, name);
+	g_free(list);
+	return result;
+}
+
+static char *semilist_remove(char *list, const char *name)
+{
+	gchar *needle, *pos, *result;
+	if (!semilist_contains(list, name))
+		return list;
+	needle = g_strdup_printf(";%s;", name);
+	pos = strstr(list, needle);
+	result = g_strdup_printf("%.*s%s", (int)(pos - list + 1), list, pos + strlen(needle));
+	g_free(needle);
+	g_free(list);
+	return result;
+}
+
+gboolean module_is_favorite(const gchar *name)
+{
+	return semilist_contains(settings.favorite_modules, name);
+}
+
+gboolean module_is_hidden(const gchar *name)
+{
+	return semilist_contains(settings.hidden_modules, name);
+}
+
+void module_toggle_favorite(const gchar *name)
+{
+	if (module_is_favorite(name))
+		settings.favorite_modules = semilist_remove(settings.favorite_modules, name);
+	else
+		settings.favorite_modules = semilist_add(settings.favorite_modules, name);
+	xml_set_value("Xiphos", "modules", "favorites", settings.favorite_modules);
+	main_load_module_tree(sidebar.module_list);
+}
+
+void module_toggle_hidden(const gchar *name)
+{
+	if (module_is_hidden(name))
+		settings.hidden_modules = semilist_remove(settings.hidden_modules, name);
+	else
+		settings.hidden_modules = semilist_add(settings.hidden_modules, name);
+	xml_set_value("Xiphos", "modules", "hidden", settings.hidden_modules);
+	main_load_module_tree(sidebar.module_list);
+}
+
 static const gchar *category_caption(MOD_MGR *info)
 {
 	if (info->is_cult)
@@ -1000,27 +1065,46 @@ void main_load_module_tree_flat(GtkWidget *tree)
 	GList *tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
 	GList *tmp2;
 	GHashTable *cat_iters = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+	GtkTreeIter favorites;
+	gboolean have_favorites = FALSE;
 	for (tmp2 = tmp; tmp2; tmp2 = g_list_next(tmp2)) {
 		MOD_MGR *info = (MOD_MGR *)tmp2->data;
 		const gchar *cat = category_caption(info);
 		GtkTreeIter *cat_iter;
+		gboolean hidden = module_is_hidden(info->name) && !settings.show_hidden_modules;
 		if (!cat) {
 			XI_warning(("mod `%s' unknown type `%s'", info->name, info->type));
 			continue;
 		}
-		cat_iter = (GtkTreeIter *)g_hash_table_lookup(cat_iters, cat);
-		if (!cat_iter) {
-			cat_iter = g_new(GtkTreeIter, 1);
-			gtk_tree_store_append(store, cat_iter, NULL);
-			gtk_tree_store_set(store, cat_iter,
-					   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-					   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-					   COL_CAPTION, cat,
-					   COL_MODULE, NULL,
-					   COL_OFFSET, cat, -1);
-			g_hash_table_insert(cat_iters, (gpointer)cat, cat_iter);
+		if (!hidden) {
+			cat_iter = (GtkTreeIter *)g_hash_table_lookup(cat_iters, cat);
+			if (!cat_iter) {
+				cat_iter = g_new(GtkTreeIter, 1);
+				gtk_tree_store_append(store, cat_iter, NULL);
+				gtk_tree_store_set(store, cat_iter,
+						   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+						   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+						   COL_CAPTION, cat,
+						   COL_MODULE, NULL,
+						   COL_OFFSET, cat, -1);
+				g_hash_table_insert(cat_iters, (gpointer)cat, cat_iter);
+			}
+			append_module_row(store, cat_iter, info);
+
+			if (module_is_favorite(info->name)) {
+				if (!have_favorites) {
+					gtk_tree_store_prepend(store, &favorites, NULL);
+					gtk_tree_store_set(store, &favorites,
+							   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+							   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+							   COL_CAPTION, _("Favorites"),
+							   COL_MODULE, NULL,
+							   COL_OFFSET, _("Favorites"), -1);
+					have_favorites = TRUE;
+				}
+				append_module_row(store, &favorites, info);
+			}
 		}
-		append_module_row(store, cat_iter, info);
 		g_free(info->name);
 		g_free(info->type);
 		g_free(info->new_version);
@@ -1041,6 +1125,8 @@ void main_load_module_tree_by_language(GtkWidget *tree)
 	GList *tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
 	GList *tmp2, *languages = NULL;
 	GHashTable *lang_iters = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+	GtkTreeIter favorites;
+	gboolean have_favorites = FALSE;
 	if (!collator) {
 		char *locale = getenv("LANG");
 		collator = ucol_open((locale ? locale : ""), &collator_status);
@@ -1072,13 +1158,30 @@ void main_load_module_tree_by_language(GtkWidget *tree)
 		const gchar *lang = module_language_caption(info);
 		GtkTreeIter *lang_iter;
 		GtkTreeIter cat_iter;
+		gboolean hidden = module_is_hidden(info->name) && !settings.show_hidden_modules;
 		if (!cat) {
 			XI_warning(("mod `%s' unknown type `%s'", info->name, info->type));
 			continue;
 		}
-		lang_iter = (GtkTreeIter *)g_hash_table_lookup(lang_iters, lang);
-		cat_iter = get_or_create_folder(store, lang_iter, cat);
-		append_module_row(store, &cat_iter, info);
+		if (!hidden) {
+			lang_iter = (GtkTreeIter *)g_hash_table_lookup(lang_iters, lang);
+			cat_iter = get_or_create_folder(store, lang_iter, cat);
+			append_module_row(store, &cat_iter, info);
+
+			if (module_is_favorite(info->name)) {
+				if (!have_favorites) {
+					gtk_tree_store_prepend(store, &favorites, NULL);
+					gtk_tree_store_set(store, &favorites,
+							   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+							   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+							   COL_CAPTION, _("Favorites"),
+							   COL_MODULE, NULL,
+							   COL_OFFSET, _("Favorites"), -1);
+					have_favorites = TRUE;
+				}
+				append_module_row(store, &favorites, info);
+			}
+		}
 		g_free(info->name);
 		g_free(info->type);
 		g_free(info->new_version);
@@ -1141,6 +1244,9 @@ void main_load_module_tree(GtkWidget *tree)
 	gboolean need_cult = 0;
 	GtkTreeIter prayerlist;
 	gboolean need_prayerlist = 0;
+
+	GtkTreeIter favorites;
+	gboolean have_favorites = FALSE;
 
 	GtkTreeIter child_iter;
 	GList *tmp = NULL;
@@ -1328,7 +1434,9 @@ void main_load_module_tree(GtkWidget *tree)
 	tmp2 = tmp;
 	while (tmp2 != NULL) {
 		MOD_MGR *info = (MOD_MGR *)tmp2->data;
+		gboolean hidden = module_is_hidden(info->name) && !settings.show_hidden_modules;
 
+		if (!hidden) {
 		if (info->is_cult) {
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      cult, info->language,
@@ -1368,6 +1476,21 @@ void main_load_module_tree(GtkWidget *tree)
 		} else {
 			XI_warning(("mod `%s' unknown type `%s'",
 				    info->name, info->type));
+		}
+
+		if (module_is_favorite(info->name)) {
+			if (!have_favorites) {
+				gtk_tree_store_prepend(store, &favorites, NULL);
+				gtk_tree_store_set(store, &favorites,
+						   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+						   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+						   COL_CAPTION, _("Favorites"),
+						   COL_MODULE, NULL,
+						   COL_OFFSET, _("Favorites"), -1);
+				have_favorites = TRUE;
+			}
+			append_module_row(store, &favorites, info);
+		}
 		}
 
 		g_free(info->name);

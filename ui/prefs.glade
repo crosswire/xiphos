@@ -2368,6 +2368,17 @@ Language, then Category</property>
                             <property name="position">8</property>
                           </packing>
                         </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="checkbutton_show_hidden_modules">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Show hidden modules</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                          </widget>
+                          <packing>
+                            <property name="position">9</property>
+                          </packing>
+                        </child>
                       </widget>
                       <packing>
                         <property name="expand">False</property>

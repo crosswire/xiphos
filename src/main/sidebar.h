@@ -50,6 +50,10 @@ void main_create_pixbufs(void);
 void main_load_module_tree(GtkWidget *tree);
 void main_load_module_tree_flat(GtkWidget *tree);
 void main_load_module_tree_by_language(GtkWidget *tree);
+gboolean module_is_favorite(const gchar *name);
+gboolean module_is_hidden(const gchar *name);
+void module_toggle_favorite(const gchar *name);
+void module_toggle_hidden(const gchar *name);
 void main_add_mod_tree_columns(GtkTreeView *tree);
 void main_mod_treeview_button_one(GtkTreeModel *model,
 				  GtkTreeIter selected);

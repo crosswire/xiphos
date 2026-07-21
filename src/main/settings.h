@@ -212,6 +212,12 @@ struct _settings
 	   1 = category only, 2 = language+category */
 	int module_tree_grouping;
 
+	/* semicolon-delimited lists of module names: ";modname;modname;" */
+	char *favorite_modules;
+	char *hidden_modules;
+	/* if true, modules in hidden_modules are shown anyway (temporarily) */
+	int show_hidden_modules;
+
 	/* if true use prayerlist */
 	int prayerlist;
 

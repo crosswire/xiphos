@@ -528,6 +528,27 @@ if (!settings.morph_heb_lex || strlen(settings.morph_heb_lex) == 0) {
 		settings.module_tree_grouping = 0;
 	}
 
+	if (xml_get_value("modules", "favorites"))
+		settings.favorite_modules = xml_get_value("modules", "favorites");
+	else {
+		xml_add_new_item_to_section("modules", "favorites", "");
+		settings.favorite_modules = xml_get_value("modules", "favorites");
+	}
+
+	if (xml_get_value("modules", "hidden"))
+		settings.hidden_modules = xml_get_value("modules", "hidden");
+	else {
+		xml_add_new_item_to_section("modules", "hidden", "");
+		settings.hidden_modules = xml_get_value("modules", "hidden");
+	}
+
+	if ((buf = xml_get_value("modules", "show_hidden")))
+		settings.show_hidden_modules = atoi(buf);
+	else {
+		xml_add_new_item_to_section("modules", "show_hidden", "0");
+		settings.show_hidden_modules = 0;
+	}
+
 	/* current verse & keys */
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");

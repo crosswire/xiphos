@@ -106,6 +106,10 @@ void on_open_in_tab_activate2(GtkMenuItem *menuitem,
 			      gpointer user_data);
 void on_about2_activate(GtkMenuItem *menuitem,
 			gpointer user_data);
+void on_toggle_favorite_activate(GtkMenuItem *menuitem,
+				 gpointer user_data);
+void on_hide_module_activate(GtkMenuItem *menuitem,
+			     gpointer user_data);
 void on_simple_activate(GtkMenuItem *menuitem,
 			gpointer user_data);
 void on_subject_activate(GtkMenuItem *menuitem,
