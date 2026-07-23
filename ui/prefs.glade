@@ -6,8 +6,8 @@
     <property name="visible">True</property>
     <property name="title" translatable="yes">Preferences</property>
     <property name="window_position">center</property>
-    <property name="default_width">590</property>
-    <property name="default_height">300</property>
+    <property name="default_width">600</property>
+    <property name="default_height">380</property>
     <property name="icon">xiphos-x-16.png</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
@@ -1635,6 +1635,26 @@
                           </packing>
                         </child>
                         <child>
+                          <widget class="GtkCheckButton" id="checkbutton_render_whole_books">
+                            <property name="label" translatable="yes">Display whole Bible books</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="tooltip" translatable="yes">Display entire Bible books, not just single chapters, in main window</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">Display Whole Book Checkbox</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">12</property>
+                          </packing>
+                        </child>
+                        <child>
                           <widget class="GtkHBox" id="hbox3">
                             <property name="visible">True</property>
                             <property name="homogeneous">True</property>
@@ -1725,7 +1745,7 @@
                             </child>
                           </widget>
                           <packing>
-                            <property name="position">12</property>
+                            <property name="position">13</property>
                           </packing>
                         </child>
                         <child>
@@ -1769,7 +1789,7 @@
                             </child>
                           </widget>
                           <packing>
-                            <property name="position">13</property>
+                            <property name="position">14</property>
                           </packing>
                         </child>
                       </widget>

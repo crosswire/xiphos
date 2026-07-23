@@ -2312,6 +2312,7 @@ on_notebook1_switch_page(GtkNotebook *notebook,
 #ifdef CHATTY
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
+	g_timer_destroy(t);
 	XI_message(("total time is %f", d));
 #endif
 }

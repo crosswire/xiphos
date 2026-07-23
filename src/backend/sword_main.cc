@@ -85,6 +85,7 @@ BackEnd::BackEnd()
 #ifdef CHATTY
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
+	g_timer_destroy(t);
 	XI_message(("create main_mgr time is %f", d));
 #endif
 

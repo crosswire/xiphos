@@ -350,15 +350,15 @@ void on_mark_verse_response(GtkDialog *dialog,
 		xml_set_list_item("osisrefmarkedverses", "markedverse",
 				  reference,
 				  (note ? note : "user content"));
-		marked_cache_fill(settings.MainWindowModule,
-				  settings.currentverse);
+		markedCacheFill(settings.MainWindowModule,
+				settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
 		break;
 	case GTK_RESPONSE_OK: /*  unmark the verse  */
 		xml_remove_node("osisrefmarkedverses", "markedverse",
 				reference);
-		marked_cache_fill(settings.MainWindowModule,
-				  settings.currentverse);
+		markedCacheFill(settings.MainWindowModule,
+				settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
 		break;
 	}

@@ -154,6 +154,8 @@ void on_checkbutton_statusbar_toggled(GtkToggleButton *togglebutton,
 				      gpointer user_data);
 void on_checkbutton_alternation_toggled(GtkToggleButton *togglebutton,
 					gpointer user_data);
+void on_checkbutton_render_whole_books_toggled(GtkToggleButton *togglebutton,
+					       gpointer user_data);
 void on_basecombobox1_changed(GtkComboBox *combobox,
 			      gpointer user_data);
 
