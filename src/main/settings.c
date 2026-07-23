@@ -1147,8 +1147,15 @@ if (!settings.morph_heb_lex || strlen(settings.morph_heb_lex) == 0) {
 	if ((buf = xml_get_value("misc", "justifymargins"))) {
 		settings.justify_margins = atoi(buf);
 	} else {
-		xml_add_new_item_to_section("misc", "justifymargins", "0");
-		settings.justify_margins = 0;
+		xml_add_new_item_to_section("misc", "justifymargins", "1");
+		settings.justify_margins = 1;
+	}
+
+	if ((buf = xml_get_value("misc", "renderwholebooks"))) {
+		settings.render_whole_books = atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc", "renderwholebooks", "0");
+		settings.render_whole_books = 0;
 	}
 
 #if 1

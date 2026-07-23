@@ -46,6 +46,8 @@ class GTKEntryDisp : public SWDisplay
 	      swbuf(""),
 	      mf(NULL),
 	      ops(NULL),
+	      buf(NULL),
+	      mod_column_count(NULL),
 	      is_rtol(FALSE),
 	      strongs_or_morph(FALSE),
 	      strongs_and_morph(FALSE),
@@ -62,10 +64,15 @@ class GTKEntryDisp : public SWDisplay
 	SWBuf swbuf;
 	MOD_FONT *mf;
 	GLOBAL_OPS *ops;
+
 	gboolean is_rtol;
+
 	gboolean strongs_or_morph;
 	gboolean strongs_and_morph;
+
 	int cache_flags;
+
+	gchar *buf, *mod_column_count;
 };
 
 class GTKChapDisp : public GTKEntryDisp
@@ -77,16 +84,15 @@ class GTKChapDisp : public GTKEntryDisp
 	{
 	}
 	virtual char display(SWModule &imodule);
-	virtual GString *intro_material(sword::VerseKey *key,
-					SWModule &imodule,
-					int chapter,
-					int curVerse,
-					int curBook,
-					int curTest);
+	virtual GString *introMaterial(SWModule &imodule, int chapter);
 	virtual void getVerseBefore(SWModule &imodule);
 	virtual void getVerseAfter(SWModule &imodule);
+	virtual void RenderOneChapter(SWModule &imodule, int chapter);
+	virtual void RenderWholeBook(SWModule &imodule);
 
       private:
+	int curTest, curBook, curChapter, curVerse;
+	VerseKey *key;
 };
 
 class DialogEntryDisp : public SWDisplay
@@ -98,8 +104,11 @@ class DialogEntryDisp : public SWDisplay
 	    : gtkText(_gtkText),
 	      d(_d),
 	      be(_be),
-	      ops(NULL),
 	      swbuf(""),
+	      mf(NULL),
+	      ops(NULL),
+	      buf(NULL),
+	      mod_column_count(NULL),
 	      is_rtol(FALSE),
 	      strongs_or_morph(FALSE),
 	      strongs_and_morph(FALSE),
@@ -114,13 +123,18 @@ class DialogEntryDisp : public SWDisplay
 	GtkWidget *gtkText;
 	DIALOG_DATA *d;
 	BackEnd *be;
-	GLOBAL_OPS *ops;
-	MOD_FONT *mf;
 	SWBuf swbuf;
+	MOD_FONT *mf;
+	GLOBAL_OPS *ops;
+
 	gboolean is_rtol;
+
 	gboolean strongs_or_morph;
 	gboolean strongs_and_morph;
+
 	int cache_flags;
+
+	gchar *buf, *mod_column_count;
 };
 
 class DialogChapDisp : public DialogEntryDisp
@@ -133,6 +147,10 @@ class DialogChapDisp : public DialogEntryDisp
 	{
 	}
 	virtual char display(SWModule &imodule);
+
+      private:
+	int curTest, curBook, curChapter, curVerse;
+	VerseKey *key;
 };
 
 class GTKPrintEntryDisp : public SWDisplay
@@ -166,7 +184,7 @@ class GTKPrintChapDisp : public GTKPrintEntryDisp
 extern "C" {
 #endif /* __cplusplus */
 
-void marked_cache_fill(const gchar *modname, gchar *key);
+void markedCacheFill(const gchar *modname, gchar *key);
 
 #ifdef __cplusplus
 }

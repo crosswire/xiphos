@@ -118,6 +118,7 @@ struct _preferences_check_buttons
 	GtkWidget *prayerlist;
 	GtkWidget *statusbar;
 	GtkWidget *alternation;
+	GtkWidget *render_whole_books;
 	GtkWidget *justify_margins;
 
 	GtkWidget *show_in_viewer;
@@ -1512,6 +1513,30 @@ on_checkbutton_alternation_toggled(GtkToggleButton *togglebutton, gpointer user_
 
 /******************************************************************************
  * Name
+ *   on_checkbutton_render_whole_books_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_checkbutton_render_whole_books_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_checkbutton_render_whole_books_toggled(GtkToggleButton *togglebutton, gpointer user_data)
+{
+	xml_set_value("Xiphos", "misc", "renderwholebooks",
+		      (gtk_toggle_button_get_active(togglebutton) ? "1" : "0"));
+	settings.render_whole_books = gtk_toggle_button_get_active(togglebutton);
+
+	main_display_bible(settings.MainWindowModule, settings.currentverse);
+}
+
+/******************************************************************************
+ * Name
  *   on_folder_changed
  *
  * Synopsis
@@ -2405,6 +2430,8 @@ static void setup_check_buttons(void)
 				     settings.statusbar);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check_button.alternation),
 				     settings.alternation);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check_button.render_whole_books),
+				     settings.render_whole_books);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check_button.justify_margins),
 				     settings.justify_margins);
 
@@ -2488,6 +2515,9 @@ static void setup_check_buttons(void)
 			 NULL);
 	g_signal_connect(check_button.alternation, "toggled",
 			 G_CALLBACK(on_checkbutton_alternation_toggled),
+			 NULL);
+	g_signal_connect(check_button.render_whole_books, "toggled",
+			 G_CALLBACK(on_checkbutton_render_whole_books_toggled),
 			 NULL);
 	g_signal_connect(check_button.justify_margins, "toggled",
 			 G_CALLBACK(on_justifybutton_toggled), NULL);
@@ -3262,6 +3292,7 @@ static void create_preferences_dialog(void)
 	check_button.prayerlist          = UI_GET_ITEM(gxml, "checkbutton_prayerlist");
 	check_button.statusbar           = UI_GET_ITEM(gxml, "checkbutton_statusbar");
 	check_button.alternation         = UI_GET_ITEM(gxml, "checkbutton_alternation");
+	check_button.render_whole_books  = UI_GET_ITEM(gxml, "checkbutton_render_whole_books");
 
 	/* v-- BibleSync --v */
 	check_button.bs_debug     = UI_GET_ITEM(gxml, "checkbutton_BSP_nav_debug");

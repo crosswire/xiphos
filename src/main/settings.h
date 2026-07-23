@@ -155,6 +155,9 @@ struct _settings
 
 	int comm_showing; /* whether comm or book is visible */
 
+	/* show 1 chapter vs show whole book */
+	int render_whole_books;
+
 	/* store program title */
 	char program_title[256];
 

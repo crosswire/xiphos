@@ -749,6 +749,7 @@ void backend_init_module_mgr(const char *dir,
 #ifdef CHATTY
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
+	g_timer_destroy(t);
 	XI_message(("create SWMgr time is %f", d));
 #endif
 
