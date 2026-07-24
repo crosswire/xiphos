@@ -2358,6 +2358,51 @@
                             <property name="position">7</property>
                           </packing>
                         </child>
+                        <child>
+                          <widget class="GtkHBox" id="hbox_module_grouping">
+                            <property name="visible">True</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <widget class="GtkLabel" id="label_module_grouping">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Module List Grouping</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkComboBox" id="combobox_module_grouping">
+                                <property name="visible">True</property>
+                                <property name="items" translatable="yes">Category, then Language
+Category only
+Language, then Category</property>
+                                <accessibility>
+                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Module List Grouping Combo</atkproperty>
+                                </accessibility>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="position">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="checkbutton_show_hidden_modules">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Show hidden modules</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                          </widget>
+                          <packing>
+                            <property name="position">9</property>
+                          </packing>
+                        </child>
                       </widget>
                       <packing>
                         <property name="expand">False</property>

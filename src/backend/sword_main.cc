@@ -483,6 +483,50 @@ unsigned int BackEnd::key_verse_count(const char *module_name, const char *key)
 	return max;
 }
 
+/* Build a fully-formed, re-parseable reference for the chapter at
+ * ordinal position 'chapter_ordinal' within the book identified by 'key'.
+ *
+ * NOTE: this deliberately positions with setChapter(), which moves by
+ * ORDINAL position and never parses text.  Some v11n systems (e.g.
+ * NRSVA's EsthGrk) label chapters alphanumerically (A, 1, B, 2, 3, ...),
+ * so the chapter's ordinal position and its displayed label can differ.
+ * Formatting a loop counter directly into a "Book %d:1" string and
+ * re-parsing it later via setText() silently jumps to the wrong chapter
+ * for such modules.  Returning SWORD's own getText() output instead
+ * guarantees the string round-trips correctly through setText() later,
+ * whatever the module's chapter-labeling scheme is. */
+char *BackEnd::key_get_chapter_ref(const char *module_name, const char *key, int chapter_ordinal)
+{
+	SWModule *mod = get_SWModule(module_name);
+	if (!mod)
+		return strdup(key);
+
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+
+	vkey->setAutoNormalize(0);
+	vkey->setText(key);
+	vkey->setChapter(chapter_ordinal);
+	vkey->setVerse(1);
+	return strdup((char *)vkey->getText());
+}
+
+/* Same idea as key_get_chapter_ref(), for verses within a chapter.
+ * 'key' is expected to already be a valid, correctly-positioned
+ * reference (e.g. one previously produced by key_get_chapter_ref()). */
+char *BackEnd::key_get_verse_ref(const char *module_name, const char *key, int verse_ordinal)
+{
+	SWModule *mod = get_SWModule(module_name);
+	if (!mod)
+		return strdup(key);
+
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+
+	vkey->setAutoNormalize(0);
+	vkey->setText(key);
+	vkey->setVerse(verse_ordinal);
+	return strdup((char *)vkey->getText());
+}
+
 char *BackEnd::get_module_key()
 {
 	display_mod->getRawEntry();

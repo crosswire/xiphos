@@ -50,6 +50,10 @@ void on_checkbutton9_toggled(GtkToggleButton *togglebutton,
 			     gpointer user_data);
 void on_justifybutton_toggled(GtkToggleButton *togglebutton,
 			      gpointer user_data);
+void on_show_hidden_modules_toggled(GtkToggleButton *togglebutton,
+				    gpointer user_data);
+void on_show_hidden_modules_toggled(GtkToggleButton *togglebutton,
+				    gpointer user_data);
 
 void on_folder_changed(GtkFileChooser *filechooser,
 		       gpointer user_data);
@@ -94,6 +98,8 @@ void on_combobox20_changed(GtkComboBox *combobox,
 			   gpointer user_data);
 void on_columncountvalue_changed(GtkComboBox *combobox,
 				 gpointer user_data);
+void on_combobox_module_grouping_changed(GtkComboBox *combobox,
+					 gpointer user_data);
 
 void on_colorbutton1_color_set(GtkColorButton *colorbutton,
 			       gpointer user_data);
