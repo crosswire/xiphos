@@ -79,6 +79,7 @@ struct _navbar_versekey
 	GtkWidget *verse_menu;
 
 	GtkWidget *lookup_entry;
+	GtkWidget *button_sets;    /* Sets menu button with current set name */
 	//GtkTooltips *tooltips;
 	GString *key;
 	gchar *book;

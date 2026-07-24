@@ -422,7 +422,18 @@ void load_settings_structure(void)
 	else
 		settings.parallel_list = NULL;
 	g_free(parallels);
-
+	/* parallel sets */
+	settings.parallel_set_names = xml_get_value("modules", "parallel_set_names");
+	settings.parallel_set_current = xml_get_value("modules", "parallel_set_current");
+	settings.parallel_set_current = xml_get_value("modules", "parallel_set_current");
+	/* load active parallel set at startup */
+	if (settings.parallel_set_current && *settings.parallel_set_current) {
+		char **set_modules = get_parallel_set(settings.parallel_set_current);
+		if (set_modules) {
+			g_strfreev(settings.parallel_list);
+			settings.parallel_list = set_modules;
+		}
+	}
 	settings.personalcommentsmod = xml_get_value("modules", "percomm");
 	settings.devotionalmod = xml_get_value("modules", "devotional");
 	settings.book_mod = xml_get_value("modules", "book");
@@ -1168,4 +1179,73 @@ if (!settings.morph_heb_lex || strlen(settings.morph_heb_lex) == 0) {
 		settings.browsing = 1;
 	}
 #endif
+
 }
+/******************************************************************************
+ * Name
+ *   get_parallel_set
+ *
+ * Synopsis
+ *   #include "main/settings.h"
+ *
+ *   gchar **get_parallel_set(const char *name)
+ *
+ * Description
+ *   Return the module list for a named parallel set, as a NULL-terminated
+ *   array of strings (g_strsplit result). Caller must g_strfreev() the result.
+ *   Returns NULL if the set does not exist.
+ *
+ * Return value
+ *   gchar ** or NULL
+ */
+char **get_parallel_set(const gchar *name)
+{
+	char *key, *value;
+
+	if (!name || !*name)
+		return NULL;
+
+	key = g_strdup_printf("parallel_set_%s", name);
+	value = xml_get_value("modules", key);
+	g_free(key);
+
+	if (!value || !*value) {
+		g_free(value);
+		return NULL;
+	}
+
+	char **result = g_strsplit(value, ",", -1);
+	g_free(value);
+	return result;
+}
+
+/******************************************************************************
+ * Name
+ *   save_parallel_set
+ *
+ * Synopsis
+ *   #include "main/settings.h"
+ *
+ *   void save_parallel_set(const gchar *name, char **modules)
+ *
+ * Description
+ *   Save a named parallel set to settings.conf.
+ *   modules is a NULL-terminated array of module name strings.
+ *
+ * Return value
+ *   void
+ */
+void save_parallel_set(const gchar *name, gchar **modules)
+{
+	char *key, *value;
+
+	if (!name || !*name || !modules)
+		return;
+
+	key = g_strdup_printf("parallel_set_%s", name);
+	value = g_strjoinv(",", modules);
+	xml_set_or_create_value("modules", key, value);
+	g_free(key);
+	g_free(value);
+}
+
