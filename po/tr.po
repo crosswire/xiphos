@@ -467,8 +467,8 @@ msgstr "Xiphos gelişme"
 
 #: ../src/gtk/about_xiphos.c:129
 #, fuzzy
-msgid "Copyright © 2000-2025 Xiphos Development Team"
-msgstr "Telif hakkı 2000-2025 Xiphos Geliştirme Ekibi"
+msgid "Copyright © 2000-2026 Xiphos Development Team"
+msgstr "Telif hakkı 2000-2026 Xiphos Geliştirme Ekibi"
 
 #: ../src/gtk/about_xiphos.c:131
 msgid ""
