@@ -56,6 +56,11 @@ pkg_check_modules(Sword REQUIRED IMPORTED_TARGET
   "sword>=1.8.1"
   )
 
+# Sqlite3 dependency (used to read AndBible bookmark backups for import)
+pkg_check_modules(Sqlite3 REQUIRED IMPORTED_TARGET
+  "sqlite3"
+  )
+
 
 # core dependencies
 if(WIN32)
