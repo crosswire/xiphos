@@ -84,6 +84,6 @@ if (WIN32)
   # add X11/keysymdefs.h
   target_include_directories(editor
     PRIVATE
-    ${PROJECT_SOURCE_DIR}/win32/include
+    ${X11_INCLUDE_DIR}
     )
 endif ()

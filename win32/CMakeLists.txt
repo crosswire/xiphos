@@ -45,12 +45,11 @@ if (WIN32)
   endif (CMAKE_CROSSCOMPILING)
 
   # add required files for cross-compiling
-  # X11/keysymdef.h
-  file (COPY ${CMAKE_SOURCE_DIR}/win32/include/X11
-    DESTINATION ${CMAKE_BINARY_DIR}/src/main)
-  file (COPY ${CMAKE_SOURCE_DIR}/win32/include/X11
-    DESTINATION ${CMAKE_BINARY_DIR}/src/gtk)
-
+  # X11/keysymdef.h - use host system's copy rather than vendored one
+  find_path(X11_INCLUDE_DIR X11/keysymdef.h
+  PATHS /usr/include /usr/local/include
+  NO_CMAKE_FIND_ROOT_PATH
+  REQUIRED)
 
   # install biblesync.dll
   if (EXISTS ../biblesync/libbiblesync.dll)
