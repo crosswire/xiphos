@@ -1320,19 +1320,34 @@ HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor)
 		for (q = safe_anchor; (q = strstr(q, "</")) != NULL; q += 2)
 			q[1] = '\\';
 		g_free(esc_anchor);
-
+#ifdef WIN32
+		// old windows webkit1 requires different attempt at scroll-to-anchor.
 		buf = g_strdup_printf("<script type=\"text/javascript\">"
 				      "window.onload = function() {"
 				      "  setTimeout(function() {"
-				      "    var el = document.getElementsByName('%s')[0] || "
-				      "             document.getElementById('%s');"
+				      "    var name = '%s';"
+				      "    var el = document.getElementsByName(name)[0] || document.getElementById(name);"
 				      "    if (el) {"
-				      "      el.scrollIntoView(true);"
+				      "      var y = 0;"
+				      "      var node = el;"
+				      "      while (node) {"
+				      "        y += node.offsetTop;"
+				      "        node = node.offsetParent;"
+				      "      }"
+				      "      window.scrollTo(0, y);"
+				      "      document.documentElement.scrollTop = y;"
+				      "      document.body.scrollTop = y;"
 				      "    }"
-				      "  }, 0);"
+				      "  }, 10);"
 				      "};"
-				      "</script>",
-				      safe_anchor, safe_anchor);
+				      "</script>", safe_anchor);
+#else
+		// the older location.hash method still works most reliably in modern webkit2.
+		buf = g_strdup_printf("<script type=\"text/javascript\" language=\"javascript\">"
+				      " window.onload = function () { window.location.hash = \"%s\"; }"
+				      " </script>",
+				      safe_anchor);
+#endif
 		g_free(safe_anchor);
 		XIPHOS_HTML_WRITE(html, buf, strlen(buf));
 		g_free(buf);
