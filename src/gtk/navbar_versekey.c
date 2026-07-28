@@ -387,7 +387,6 @@ static void on_button_history_back_clicked(GtkButton *button, gpointer user_data
 
 static void on_entry_activate(GtkEntry *entry, gpointer user_data)
 {
-	char *rawtext;
 	const gchar *gkey, *buf = gtk_entry_get_text(entry);
 
 	if (buf == NULL)
@@ -396,15 +395,6 @@ static void on_entry_activate(GtkEntry *entry, gpointer user_data)
 	if ((settings.special_anchor = strchr(buf, '#')) || /* thml */
 	    (settings.special_anchor = strchr(buf, '!')))   /* osisref */
 		*settings.special_anchor = '\0';
-
-	rawtext =
-	    main_get_raw_text(navbar_versekey.module_name->str,
-			      (gchar *)buf);
-	if (!rawtext || (rawtext && (strlen(rawtext) < 2))) {
-		gtk_entry_set_text(entry, navbar_versekey.key->str);
-		g_free(rawtext);
-		return;
-	}
 
 	gkey =
 	    main_get_valid_key(settings.MainWindowModule, (gchar *)buf);
@@ -416,8 +406,10 @@ static void on_entry_activate(GtkEntry *entry, gpointer user_data)
 
 	if (settings.special_anchor)
 		*settings.special_anchor = '#'; /* put it back. */
-	if (gkey == NULL)
+	if (gkey == NULL) {
+		gtk_entry_set_text(entry, navbar_versekey.key->str);
 		return;
+	}
 
 	gchar *url = g_strdup_printf("sword:///%s%s", gkey,
 				     (settings.special_anchor ? settings.special_anchor : ""));
