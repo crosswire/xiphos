@@ -1320,11 +1320,19 @@ HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor)
 		for (q = safe_anchor; (q = strstr(q, "</")) != NULL; q += 2)
 			q[1] = '\\';
 		g_free(esc_anchor);
-		buf =
-		    g_strdup_printf("<script type=\"text/javascript\" language=\"javascript\">"
-				    " window.onload = function () { window.location.hash = \"%s\"; }"
-				    " </script>",
-				    safe_anchor);
+
+		buf = g_strdup_printf("<script type=\"text/javascript\">"
+				      "window.onload = function() {"
+				      "  setTimeout(function() {"
+				      "    var el = document.getElementsByName('%s')[0] || "
+				      "             document.getElementById('%s');"
+				      "    if (el) {"
+				      "      el.scrollIntoView(true);"
+				      "    }"
+				      "  }, 0);"
+				      "};"
+				      "</script>",
+				      safe_anchor, safe_anchor);
 		g_free(safe_anchor);
 		XIPHOS_HTML_WRITE(html, buf, strlen(buf));
 		g_free(buf);
