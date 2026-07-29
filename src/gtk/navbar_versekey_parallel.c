@@ -816,8 +816,13 @@ static void on_parallel_set_activate(GtkMenuItem *item, gpointer user_data)
 	if (settings.parallel_set_current)
 		g_free(settings.parallel_set_current);
 	settings.parallel_set_current = g_strdup(name);
-	xml_set_new_element("modules", "parallel_set_current", name);
-
+	xml_set_or_create_value("modules", "parallel_set_current", name);
+	/* update Sets button label */
+	gchar *label = g_strdup_printf(_("Set: %s"), name);
+	gtk_button_set_label(GTK_BUTTON(navbar_parallel.button_sets), label);
+	g_free(label);
+	xml_save_settings_doc(settings.fnconfigure);
+	
 	main_update_parallel_page();
 	if (!settings.dockedInt && settings.parallel_list && settings.parallel_list[0]) {
 		gui_navbar_parallel_set_module(settings.parallel_list[0]);
@@ -1012,9 +1017,13 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(navbar_parallel.button_sync),
 				     settings.linkedtabs);
 	/* parallel sets button */
-	GtkWidget *button_sets = gtk_button_new_with_label(_("Sets"));
+	gchar *sets_label = g_strdup_printf(_("Set: %s"),
+	    settings.parallel_set_current ? settings.parallel_set_current : "—");
+	GtkWidget *button_sets = gtk_button_new_with_label(sets_label);
+	g_free(sets_label);
 	gtk_widget_set_tooltip_text(button_sets, _("Switch parallel module set"));
 	gtk_widget_show(button_sets);
+	navbar_parallel.button_sets = button_sets;
 	g_signal_connect(G_OBJECT(button_sets), "clicked",
 			 G_CALLBACK(on_parallel_sets_button_clicked), NULL);
 	gtk_box_pack_end(GTK_BOX(navbar_parallel.navbar), button_sets,
