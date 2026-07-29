@@ -1255,18 +1255,27 @@
 	  <child>
 	    <widget class="GtkMenuItem" id="use_current_dictionary">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Use Current Dictionary</property>
+	      <property name="label" translatable="yes">_Use Current Dictionary</property>
 	      <property name="use_underline">True</property>
 	      <signal name="activate" handler="on_use_current_dictionary_activate" last_modification_time="Sat, 28 Feb 2009 04:28:54 GMT"/>
 	    </widget>
 	  </child>
 
 	  <child>
-	    <widget class="GtkMenuItem" id="lookup_google">
+	    <widget class="GtkMenuItem" id="translate">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Browse in BibleMap.org</property>
+	      <property name="label" translatable="yes">_Translate selection</property>
 	      <property name="use_underline">True</property>
-	      <signal name="activate" handler="on_lookup_google_activate" last_modification_time="Tue, 23 Jun 2009 11:14:54 GMT"/>
+	      <signal name="activate" handler="on_translate_activate" last_modification_time="Tue, 23 Jun 2009 11:14:54 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="lookup_biblemap">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">_Browse in BibleMap.org</property>
+	      <property name="use_underline">True</property>
+	      <signal name="activate" handler="on_lookup_biblemap_activate" last_modification_time="Tue, 23 Jun 2009 11:14:54 GMT"/>
 	    </widget>
 	  </child>
 

@@ -801,19 +801,29 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Use Current Dictionary</property>
+                <property name="label" translatable="yes">_Use Current Dictionary</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_use_current_dictionary_activate" swapped="no"/>
               </object>
             </child>
             <child>
-              <object class="GtkMenuItem" id="lookup_google">
+              <object class="GtkMenuItem" id="translate">
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Browse in BibleMap.org</property>
+                <property name="label" translatable="yes">_Translate selection</property>
                 <property name="use_underline">True</property>
-                <signal name="activate" handler="on_lookup_google_activate" swapped="no"/>
+                <signal name="activate" handler="on_translate_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="lookup_biblemap">
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">_Browse in BibleMap.org</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_lookup_biblemap_activate" swapped="no"/>
               </object>
             </child>
             <child>
