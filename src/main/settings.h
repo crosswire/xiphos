@@ -212,6 +212,16 @@ struct _settings
 	int mod_mgr_destination; /* if = 0 destination is .sword
 						   else sword directory  */
 
+	/* module tree display grouping: 0 = category+language (default),
+	   1 = category only, 2 = language+category */
+	int module_tree_grouping;
+
+	/* semicolon-delimited lists of module names: ";modname;modname;" */
+	char *favorite_modules;
+	char *hidden_modules;
+	/* if true, modules in hidden_modules are shown anyway (temporarily) */
+	int show_hidden_modules;
+
 	/* if true use prayerlist */
 	int prayerlist;
 

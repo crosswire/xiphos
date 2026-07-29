@@ -66,6 +66,23 @@
       </row>
     </data>
   </object>
+  <object class="GtkListStore" id="model_module_grouping">
+    <columns>
+      <!-- column-name gchararray -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Category, then Language</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Category only</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Language, then Category</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkListStore" id="model3">
     <columns>
       <!-- column-name gchararray -->
@@ -2871,6 +2888,69 @@
                             <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="hbox_module_grouping">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="label_module_grouping">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Module List Grouping</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="combobox_module_grouping">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="model">model_module_grouping</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="renderer_module_grouping"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="combobox_module_grouping-atkobject">
+                                    <property name="AtkObject::accessible-name" translatable="yes">Module List Grouping Combo</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="checkbutton_show_hidden_modules">
+                            <property name="label" translatable="yes">Show hidden modules</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">9</property>
                           </packing>
                         </child>
                       </object>
