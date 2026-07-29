@@ -1281,41 +1281,79 @@ G_MODULE_EXPORT void on_use_current_dictionary_activate(GtkMenuItem *
 
 /******************************************************************************
  * Name
- *   on_lookup_google_activate
+ *   on_lookup_biblemap_activate
  *
  * Synopsis
  *   #include "gui/menu_popup.h"
  *
  * Description
- *   offer mouse-swept selection as a google maps browser reference.
+ *   offer mouse-swept selection as a biblemap browser reference.
  *
  * Return value
  *   void
  */
 
-G_MODULE_EXPORT void on_lookup_google_activate(GtkMenuItem *menuitem,
-					       gpointer user_data)
+G_MODULE_EXPORT void on_lookup_biblemap_activate(GtkMenuItem *menuitem,
+						 gpointer user_data)
 {
-	gchar *dict_key;
+	GtkWidget *html_widget = _get_html();
+	GdkDisplay *display = gtk_widget_get_display(html_widget);
 
-	XIPHOS_HTML_COPY_SELECTION(_get_html());
-	gtk_editable_select_region((GtkEditable *)widgets.entry_dict, 0,
-				   -1);
-	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
-	dict_key =
-	    g_strdup(gtk_editable_get_chars((GtkEditable *)widgets.entry_dict, 0, -1));
+	GtkClipboard *clipboard =
+		gtk_clipboard_get_for_display(display, GDK_SELECTION_PRIMARY);
 
-	if ((dict_key == NULL) || (*dict_key == '\0')) {
-		gui_generic_warning("No selection made");
-	} else {
-		gchar *enc_key = g_uri_escape_string(dict_key, NULL, FALSE);
-		gchar *showstr =
-		    g_strconcat("http://www.biblemap.org/#", enc_key, NULL);
+	gchar *text = gtk_clipboard_wait_for_text(clipboard);
+	int len = (text ? strlen(text) : 0);
+
+	if (text && len && *text) {
+		gchar *enc_key = g_uri_escape_string(text, NULL, FALSE);
+		gchar *showstr = g_strconcat("http://www.biblemap.org/#", enc_key, NULL);
 		xiphos_open_default(showstr);
 		g_free(enc_key);
 		g_free(showstr);
-	}
-	g_free(dict_key);
+	} else
+		gui_generic_warning("No selection made");
+}
+
+/******************************************************************************
+ * Name
+ *   on_translate_activate
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ * Description
+ *   offer mouse-swept selection as a google translation request.
+ *
+ * Return value
+ *   void
+ */
+
+G_MODULE_EXPORT void on_translate_activate(GtkMenuItem *menuitem,
+					   gpointer user_data)
+{
+	GtkWidget *html_widget = _get_html();
+	GdkDisplay *display = gtk_widget_get_display(html_widget);
+
+	GtkClipboard *clipboard =
+		gtk_clipboard_get_for_display(display, GDK_SELECTION_PRIMARY);
+
+	gchar *text = gtk_clipboard_wait_for_text(clipboard);
+	int len = (text ? strlen(text) : 0);
+
+	if (text && len && *text) {
+		gchar *enc_key = g_uri_escape_string(text, NULL, FALSE);
+		gchar *showstr = g_strconcat("https://translate.google.com/?sl=auto&tl=",
+					     (sword_locale ? sword_locale : ""),
+					     "&op=translate",
+					     "&text=",
+					     enc_key,
+					     NULL);
+		xiphos_open_default(showstr);
+		g_free(enc_key);
+		g_free(showstr);
+	} else
+		gui_generic_warning("No selection made");
 }
 
 /******************************************************************************

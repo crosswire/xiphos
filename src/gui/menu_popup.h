@@ -115,8 +115,10 @@ void on_display_chapter_heading_activate(GtkMenuItem *menuitem,
 					 gpointer user_data);
 void on_use_current_dictionary_activate(GtkMenuItem *menuitem,
 					gpointer user_data);
-void on_lookup_google_activate(GtkMenuItem *menuitem,
-			       gpointer user_data);
+void on_lookup_biblemap_activate(GtkMenuItem *menuitem,
+				 gpointer user_data);
+void on_translate_activate(GtkMenuItem *menuitem,
+			   gpointer user_data);
 void on_rename_perscomm_activate(GtkMenuItem *menuitem,
 				 gpointer user_data);
 void on_dump_perscomm_activate(GtkMenuItem *menuitem,
