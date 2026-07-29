@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * bookmarks_menu.h - gui for bookmarks in a menu
  *
- * Copyright (C) 2003-2026 Xiphos Developer Team
+ * Copyright (C) 2003-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +39,7 @@ struct _bookmark_menu
 	GtkWidget *reorder;
 	GtkWidget *save;
 	GtkWidget *bibletime;
+	GtkWidget *andbible;
 	GtkWidget *rr_submenu;
 	GtkWidget *remove;
 	GtkWidget *set_color;

@@ -152,6 +152,18 @@
       </object>
     </child>
     <child>
+      <object class="GtkImageMenuItem" id="import_andbible_bookmarks1">
+        <property name="label" translatable="yes">Import AndBible Bookmarks</property>
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Import bookmarks from an AndBible sqlite backup file (replaces any previous AndBible import - don't file things by hand into this folder)</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="andbible_bookmarks_activate" swapped="no"/>
+      </object>
+    </child>
+    <child>
       <object class="GtkImageMenuItem" id="remove_folder">
         <property name="label" translatable="yes">Export Folder</property>
         <property name="use_action_appearance">False</property>

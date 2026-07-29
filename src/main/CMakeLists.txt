@@ -26,6 +26,7 @@ add_library (main
   display.cc
   export_passage.cc
   global_ops.cc
+  import_andbible.cc
   lists.cc
   main.c
   mod_mgr.cc
@@ -63,6 +64,7 @@ target_include_directories(main
   PkgConfig::Soup
   PkgConfig::Sword
   PkgConfig::Biblesync
+  PkgConfig::Sqlite3
   )
 
 # specify libraries or flags to use when linking
@@ -75,6 +77,7 @@ target_link_libraries(main
   PkgConfig::Soup
   PkgConfig::Sword
   PkgConfig::Biblesync
+  PkgConfig::Sqlite3
   )
 
 IF (DBUS)

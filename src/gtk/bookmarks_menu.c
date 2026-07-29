@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * bookmarks_menu.c - gui for bookmarks using menu
  *
- * Copyright (C) 2003-2026 Xiphos Developer Team
+ * Copyright (C) 2003-2025 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <glib/gstdio.h>
 #include <libxml/parser.h>
 #ifndef USE_GTKBUILDER
 #include <glade/glade-xml.h>
@@ -40,6 +41,7 @@
 #include "gui/bookmarks_menu.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/export_bookmarks.h"
+#include "gui/import_andbible.h"
 #include "gui/utilities.h"
 #include "gui/main_window.h"
 #include "gui/dialog.h"
@@ -256,6 +258,195 @@ G_MODULE_EXPORT void bibletime_bookmarks_activate(GtkMenuItem *menuitem,
 		gui_parse_bookmarks(bookmark_tree, (const xmlChar *)fname,
 				    &iter);
 		g_free(fname);
+	}
+	gtk_widget_destroy(dialog);
+}
+
+
+static gboolean andbible_folder_exists(GtkTreeIter *parent)
+{
+	GtkTreeIter child;
+	gboolean valid;
+
+	valid = gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child, parent);
+	while (valid) {
+		gchar *caption = NULL;
+		gboolean match;
+
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
+				    COL_CAPTION, &caption, -1);
+		match = caption && !strcmp(caption, _("Import AndBible"));
+		g_free(caption);
+		if (match)
+			return TRUE;
+		valid = gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child);
+	}
+	return FALSE;
+}
+
+/******************************************************************************
+ * Name
+ *   remove_existing_andbible_folder
+ *
+ * Synopsis
+ *   #include "gui/import_andbible.h"
+ *
+ *   void remove_existing_andbible_folder(GtkTreeIter * parent)
+ *
+ * Description
+ *   The "Import AndBible" top-level folder is entirely owned/managed by
+ *   andbible_bookmarks_activate(): every import wipes it and rebuilds it
+ *   from scratch, rather than trying to patch it in place. That gives
+ *   predictable, duplicate-free behaviour (additions, edits and
+ *   removals on the AndBible side are all reflected simply by
+ *   reimporting) at the cost of not preserving manual edits made
+ *   directly inside that folder in Xiphos - which is why it is kept as
+ *   its own clearly-named folder rather than merged into the user's
+ *   own bookmarks.
+ *
+ * Return value
+ *   void
+ */
+
+static void remove_existing_andbible_folder(GtkTreeIter *parent)
+{
+	GtkTreeIter child;
+	gboolean valid;
+
+	valid = gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child,
+					     parent);
+	while (valid) {
+		gchar *caption = NULL;
+
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
+				    COL_CAPTION, &caption, -1);
+		if (caption && !strcmp(caption, _("Import AndBible"))) {
+			g_free(caption);
+			gtk_tree_store_remove(GTK_TREE_STORE(model), &child);
+			return;
+		}
+		g_free(caption);
+		valid = gtk_tree_model_iter_next(GTK_TREE_MODEL(model),
+						 &child);
+	}
+}
+
+/******************************************************************************
+ * Name
+ *   andbible_bookmarks_activate
+ *
+ * Synopsis
+ *   #include "gui/import_andbible.h"
+ *
+ *   void andbible_bookmarks_activate(GtkMenuItem * menuitem,
+ *				      gpointer user_data)
+ *
+ * Description
+ *   Prompts for an AndBible bookmarks backup (.sqlite3), converts it via
+ *   andbible_import_to_temp_xml() (main/import_andbible.cc - uses
+ *   libsword's own versification support to turn AndBible's ordinal
+ *   verse positions back into references), and merges the result into
+ *   the bookmarks tree the same way bibletime_bookmarks_activate() does.
+ *
+ * Return value
+ *   void
+ */
+
+G_MODULE_EXPORT void andbible_bookmarks_activate(GtkMenuItem *menuitem,
+						  gpointer user_data)
+{
+	GtkTreeIter iter;
+	GtkTreeIter parent;
+	GtkWidget *dialog;
+	GtkFileFilter *filter;
+
+	if (!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &parent))
+		return;
+
+	dialog = gtk_file_chooser_dialog_new(
+	    _("Select AndBible bookmarks backup (.sqlite3)"),
+	    GTK_WINDOW(widgets.app), GTK_FILE_CHOOSER_ACTION_OPEN,
+#if GTK_CHECK_VERSION(3, 10, 0)
+	    "_Cancel", GTK_RESPONSE_CANCEL, "_OK", GTK_RESPONSE_ACCEPT,
+#else
+	    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OK,
+	    GTK_RESPONSE_ACCEPT,
+#endif
+	    NULL);
+
+	filter = gtk_file_filter_new();
+	gtk_file_filter_set_name(filter, _("AndBible backup (*.sqlite3)"));
+	gtk_file_filter_add_pattern(filter, "*.sqlite3");
+	gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), filter);
+
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
+		gchar *sqlite_path, *tmp_xml = NULL, *summary;
+		gint n_imported = 0, n_skipped = 0;
+		GError *error = NULL;
+
+		sqlite_path =
+		    gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+
+		if (andbible_folder_exists(&parent)) {
+			GtkWidget *confirm = gtk_message_dialog_new(
+			    GTK_WINDOW(widgets.app), GTK_DIALOG_MODAL,
+			    GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s",
+			    _("An 'Import AndBible' folder already exists "
+			      "and will be replaced by this import. "
+			      "Continue?"));
+			gint resp = gtk_dialog_run(GTK_DIALOG(confirm));
+			gtk_widget_destroy(confirm);
+			if (resp != GTK_RESPONSE_YES) {
+				g_free(sqlite_path);
+				gtk_widget_destroy(dialog);
+				return;
+			}
+		}
+
+		if (!andbible_import_to_temp_xml(sqlite_path,
+						  _("Import AndBible"),
+						  &tmp_xml, &n_imported,
+						  &n_skipped, &error)) {
+			GtkWidget *msg = gtk_message_dialog_new(
+			    GTK_WINDOW(widgets.app), GTK_DIALOG_MODAL,
+			    GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "%s",
+			    error ? error->message : _("Unknown error"));
+			gtk_dialog_run(GTK_DIALOG(msg));
+			gtk_widget_destroy(msg);
+			g_clear_error(&error);
+			g_free(sqlite_path);
+			gtk_widget_destroy(dialog);
+			return;
+		}
+		g_free(sqlite_path);
+
+		/* This folder is fully managed by us: wipe any previous
+		 * import before rebuilding it, so re-importing the same
+		 * (or an updated) AndBible backup never creates duplicates. */
+		remove_existing_andbible_folder(&parent);
+
+		gtk_tree_store_append(GTK_TREE_STORE(model), &iter, &parent);
+		gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
+				   COL_OPEN_PIXBUF,
+				   bm_pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF,
+				   bm_pixbufs->pixbuf_closed, COL_CAPTION,
+				   _("Import AndBible"), COL_KEY, NULL,
+				   COL_MODULE, NULL, -1);
+		gui_parse_bookmarks(bookmark_tree, (const xmlChar *)tmp_xml,
+				    &iter);
+		g_unlink(tmp_xml);
+		g_free(tmp_xml);
+
+		summary = g_strdup_printf(
+		    _("%d bookmark(s) imported, %d skipped."), n_imported,
+		    n_skipped);
+		GtkWidget *msg = gtk_message_dialog_new(
+		    GTK_WINDOW(widgets.app), GTK_DIALOG_MODAL,
+		    GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "%s", summary);
+		gtk_dialog_run(GTK_DIALOG(msg));
+		gtk_widget_destroy(msg);
+		g_free(summary);
 	}
 	gtk_widget_destroy(dialog);
 }
@@ -1065,6 +1256,7 @@ void gui_create_bookmark_menu(void)
 	menu.delete = UI_GET_ITEM(gxml, "delete_item");
 	menu.reorder = UI_GET_ITEM(gxml, "allow_reordering");
 	menu.bibletime = UI_GET_ITEM(gxml, "import_bibletime_bookmarks1");
+	menu.andbible = UI_GET_ITEM(gxml, "import_andbible_bookmarks1");
 	menu.remove = UI_GET_ITEM(gxml, "remove_folder");
 	menu.set_color   = UI_GET_ITEM(gxml, "set_tag_color");
 	menu.crossref_popup = UI_GET_ITEM(gxml, "crossref_popup");
@@ -1079,6 +1271,7 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.edit, FALSE);
 	gtk_widget_set_sensitive(menu.delete, FALSE);
 	gtk_widget_set_sensitive(menu.bibletime, TRUE);
+	gtk_widget_set_sensitive(menu.andbible, TRUE);
 
 	gtk_widget_set_sensitive(menu.remove, TRUE);
 	gtk_widget_hide(menu.remove);
