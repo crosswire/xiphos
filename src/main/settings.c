@@ -425,7 +425,6 @@ void load_settings_structure(void)
 	/* parallel sets */
 	settings.parallel_set_names = xml_get_value("modules", "parallel_set_names");
 	settings.parallel_set_current = xml_get_value("modules", "parallel_set_current");
-	settings.parallel_set_current = xml_get_value("modules", "parallel_set_current");
 	/* load active parallel set at startup */
 	if (settings.parallel_set_current && *settings.parallel_set_current) {
 		char **set_modules = get_parallel_set(settings.parallel_set_current);
@@ -1279,4 +1278,20 @@ void save_parallel_set(const gchar *name, gchar **modules)
 	g_free(key);
 	g_free(value);
 }
+char *name_to_key(const char *name)
+{
+	char *key = g_strdup(name);
+	for (char *p = key; *p; ++p)
+		if (*p == ' ')
+			*p = '_';
+	return key;
+}
 
+char *key_to_name(const char *key)
+{
+	char *name = g_strdup(key);
+	for (char *p = name; *p; ++p)
+		if (*p == '_')
+			*p = ' ';
+	return name;
+}

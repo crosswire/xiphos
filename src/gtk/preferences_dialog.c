@@ -3276,48 +3276,61 @@ static void on_parallel_sets_combo_changed(GtkComboBox *combo,
 
 		if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
 			const gchar *setname = gtk_entry_get_text(GTK_ENTRY(entry));
-			if (setname && *setname) {
-				/* build new set_names */
+			/* validate: no spaces or XML-special characters */
+			gboolean valid = setname && *setname;
+			/* convert display name to XML key */
+			gchar *setkey = valid ? name_to_key(setname) : NULL;
+			if (!valid || !setkey || !*setkey) {
+				GtkWidget *err = gtk_message_dialog_new(
+				    GTK_WINDOW(dialog),
+				    GTK_DIALOG_MODAL,
+				    GTK_MESSAGE_ERROR,
+				    GTK_BUTTONS_OK,
+				    _("Please enter a valid set name."));
+				gtk_dialog_run(GTK_DIALOG(err));
+				gtk_widget_destroy(err);
+				g_free(setkey);
+			} else {
+				/* build new set_names using the key */
 				gchar *new_names;
 				if (settings.parallel_set_names && *settings.parallel_set_names)
 					new_names = g_strdup_printf("%s,%s",
-					    settings.parallel_set_names, setname);
+					    settings.parallel_set_names, setkey);
 				else
-					new_names = g_strdup(setname);
-
+					new_names = g_strdup(setkey);
 				g_free(settings.parallel_set_names);
 				settings.parallel_set_names = new_names;
 				xml_set_or_create_value("modules", "parallel_set_names", new_names);
-
 				/* save current parallel_list as the new set */
 				if (settings.parallel_list)
-					save_parallel_set(setname, settings.parallel_list);
-
+					save_parallel_set(setkey, settings.parallel_list);
 				/* switch to new set */
 				g_free(settings.parallel_set_current);
-				settings.parallel_set_current = g_strdup(setname);
-				xml_set_or_create_value("modules", "parallel_set_current", setname);
+				settings.parallel_set_current = g_strdup(setkey);
+				xml_set_or_create_value("modules", "parallel_set_current", setkey);
 				xml_save_settings_doc(settings.fnconfigure);
-				
 				/* rebuild combo */
 				g_signal_handlers_block_by_func(
 				    parallel_select.sets_combo,
 				    on_parallel_sets_combo_changed, NULL);
-				#if GTK_CHECK_VERSION(3, 0, 0)
-					gtk_combo_box_text_remove_all(
-						GTK_COMBO_BOX_TEXT(parallel_select.sets_combo));
-				#else
-					{
-						GtkTreeModel *m = gtk_combo_box_get_model(
-							GTK_COMBO_BOX(parallel_select.sets_combo));
-						gtk_list_store_clear(GTK_LIST_STORE(m));
-					}
-				#endif
+#if GTK_CHECK_VERSION(3, 0, 0)
+				gtk_combo_box_text_remove_all(
+				    GTK_COMBO_BOX_TEXT(parallel_select.sets_combo));
+#else
+				{
+					GtkTreeModel *m = gtk_combo_box_get_model(
+					    GTK_COMBO_BOX(parallel_select.sets_combo));
+					gtk_list_store_clear(GTK_LIST_STORE(m));
+				}
+#endif
 				gchar **names = g_strsplit(settings.parallel_set_names, ",", -1);
-				for (gint i = 0; names[i]; ++i)
+				for (gint i = 0; names[i]; ++i) {
+					gchar *display = key_to_name(names[i]);
 					gtk_combo_box_text_append_text(
 					    GTK_COMBO_BOX_TEXT(parallel_select.sets_combo),
-					    names[i]);
+					    display);
+					g_free(display);
+				}
 				g_strfreev(names);
 				gtk_combo_box_text_append_text(
 				    GTK_COMBO_BOX_TEXT(parallel_select.sets_combo),
@@ -3325,7 +3338,7 @@ static void on_parallel_sets_combo_changed(GtkComboBox *combo,
 				/* select the new set */
 				gchar **all = g_strsplit(settings.parallel_set_names, ",", -1);
 				for (gint i = 0; all[i]; ++i) {
-					if (g_strcmp0(all[i], setname) == 0) {
+					if (g_strcmp0(all[i], setkey) == 0) {
 						gtk_combo_box_set_active(
 						    GTK_COMBO_BOX(parallel_select.sets_combo), i);
 						break;
@@ -3335,6 +3348,7 @@ static void on_parallel_sets_combo_changed(GtkComboBox *combo,
 				g_signal_handlers_unblock_by_func(
 				    parallel_select.sets_combo,
 				    on_parallel_sets_combo_changed, NULL);
+				g_free(setkey);
 			}
 		}
 		gtk_widget_destroy(dialog);
@@ -3717,8 +3731,11 @@ static void create_preferences_dialog(void)
 		/* populate with existing set names */
 		if (settings.parallel_set_names && *settings.parallel_set_names) {
 			gchar **names = g_strsplit(settings.parallel_set_names, ",", -1);
-			for (gint i = 0; names[i]; ++i)
-				gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo), names[i]);
+			for (gint i = 0; names[i]; ++i) {
+				gchar *display = key_to_name(names[i]);
+				gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo), display);
+				g_free(display);
+			}
 			g_strfreev(names);
 		}
 		/* add "New set..." entry */
