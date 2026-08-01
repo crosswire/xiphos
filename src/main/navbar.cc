@@ -77,13 +77,13 @@ void main_navbar_set(NAVBAR navbar, const char *key)
 		vkey->setAutoNormalize(1);
 	vkey->setText(key);
 
-	fprintf(stderr,
-		"DEBUG navbar: module=%s key_in=%s testament=%d book=%d chapter=%d/%d verse=%d/%d text=%s\n",
-		navbar.module_name, key,
-		vkey->getTestament(), vkey->getBook(),
-		vkey->getChapter(), vkey->getChapterMax(),
-		vkey->getVerse(), vkey->getVerseMax(),
-		vkey->getText());
+	XI_message((stderr,
+		    "DEBUG navbar: module=%s key_in=%s testament=%d book=%d chapter=%d/%d verse=%d/%d text=%s\n",
+		    navbar.module_name, key,
+		    vkey->getTestament(), vkey->getBook(),
+		    vkey->getChapter(), vkey->getChapterMax(),
+		    vkey->getVerse(), vkey->getVerseMax(),
+		    vkey->getText()));
 		
 	// we need the book index to highlight "active" in the pulldown.
 	if ((backend->module_has_testament(navbar.module_name, 1)) && (vkey->getTestament() == 2))
