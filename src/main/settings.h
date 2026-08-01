@@ -248,6 +248,8 @@ extern SETTINGS settings;
 int settings_init(int argc, char **argv, int new_configs,
 		  int new_bookmarks);
 void load_settings_structure(void);
+char *name_to_key(const char *name);
+char *key_to_name(const char *key);
 char **get_parallel_set(const char *name);
 void save_parallel_set(const char *name, char **modules);
 
