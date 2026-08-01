@@ -38,6 +38,8 @@
 #include "main/url.hh"
 
 #include "gui/debug_glib_null.h"
+#include "main/xml.h"
+#include "gui/preferences_dialog.h"
 
 NAVBAR_VERSEKEY navbar_parallel;
 gboolean sync_on;
@@ -797,6 +799,99 @@ static void _connect_signals(NAVBAR_VERSEKEY navbar)
 #endif
 }
 
+static void on_parallel_set_activate(GtkMenuItem *item, gpointer user_data)
+{
+	gchar *name = (gchar *)user_data;
+	gchar **modules;
+
+	modules = get_parallel_set(name);
+	if (!modules) {
+		g_free(name);
+		return;
+	}
+
+	g_strfreev(settings.parallel_list);
+	settings.parallel_list = modules;
+
+	if (settings.parallel_set_current)
+		g_free(settings.parallel_set_current);
+	settings.parallel_set_current = g_strdup(name);
+	xml_set_or_create_value("modules", "parallel_set_current", name);
+	/* update Sets button label */
+	gchar *label = g_strdup_printf(_("Set: %s"), name);
+	gtk_button_set_label(GTK_BUTTON(navbar_parallel.button_sets), label);
+	g_free(label);
+	xml_save_settings_doc(settings.fnconfigure);
+	
+	main_update_parallel_page();
+	if (!settings.dockedInt && settings.parallel_list && settings.parallel_list[0]) {
+		gui_navbar_parallel_set_module(settings.parallel_list[0]);
+		settings.cvparallel = settings.currentverse;
+		main_update_parallel_page_detached();
+	}
+
+	g_free(name);
+}
+
+static void on_parallel_sets_manage_clicked(GtkMenuItem *item,
+					    gpointer user_data)
+{
+	gui_setup_preferences_dialog();
+	gui_prefs_goto_parallel_page();
+}
+
+/******************************************************************************
+ * Name
+ *   on_parallel_sets_button_clicked
+ *
+ * Description
+ *   show popup menu of saved parallel sets
+ *
+ * Return value
+ *   void
+ */
+static void on_parallel_sets_button_clicked(GtkWidget *widget,
+					    gpointer user_data)
+{
+	GtkWidget *menu, *item;
+	gchar **names;
+
+	if (!settings.parallel_set_names || !*settings.parallel_set_names)
+		return;
+
+	menu = gtk_menu_new();
+	names = g_strsplit(settings.parallel_set_names, ",", -1);
+
+	for (gint i = 0; names[i]; ++i) {
+		item = gtk_menu_item_new_with_label(names[i]);
+		g_signal_connect(G_OBJECT(item), "activate",
+				 G_CALLBACK(on_parallel_set_activate),
+				 g_strdup(names[i]));
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+		gtk_widget_show(item);
+	}
+	g_strfreev(names);
+
+	/* separator + Manage */
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu),
+			      gtk_separator_menu_item_new());
+	item = gtk_menu_item_new_with_label(_("Manage..."));
+	g_signal_connect(G_OBJECT(item), "activate",
+			 G_CALLBACK(on_parallel_sets_manage_clicked), NULL);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+	gtk_widget_show_all(menu);
+
+	#if GTK_CHECK_VERSION(3, 22, 0)
+	gtk_menu_popup_at_widget(GTK_MENU(menu), widget,
+				 GDK_GRAVITY_SOUTH_WEST,
+				 GDK_GRAVITY_NORTH_WEST, NULL);
+	#else
+		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
+					menu_position_under, widget, 0,
+					gtk_get_current_event_time());
+	#endif
+}
+
 /******************************************************************************
  * Name
  *
@@ -921,6 +1016,18 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	_connect_signals(navbar_parallel);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(navbar_parallel.button_sync),
 				     settings.linkedtabs);
+	/* parallel sets button */
+	gchar *sets_label = g_strdup_printf(_("Set: %s"),
+	    settings.parallel_set_current ? settings.parallel_set_current : "—");
+	GtkWidget *button_sets = gtk_button_new_with_label(sets_label);
+	g_free(sets_label);
+	gtk_widget_set_tooltip_text(button_sets, _("Switch parallel module set"));
+	gtk_widget_show(button_sets);
+	navbar_parallel.button_sets = button_sets;
+	g_signal_connect(G_OBJECT(button_sets), "clicked",
+			 G_CALLBACK(on_parallel_sets_button_clicked), NULL);
+	gtk_box_pack_end(GTK_BOX(navbar_parallel.navbar), button_sets,
+			 FALSE, FALSE, 2);
 	return navbar_parallel.navbar;
 }
 
