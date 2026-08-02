@@ -3358,16 +3358,18 @@ static void on_parallel_sets_combo_changed(GtkComboBox *combo,
 
 	/* the active set is saved automatically by on_parallel_reordered */
 	/* load the new set */
-	gchar **modules = get_parallel_set(name);
+	gchar *key = name_to_key(name);
+	gchar **modules = get_parallel_set(key);
+	g_free(key);
 	if (modules) {
 		g_strfreev(settings.parallel_list);
 		settings.parallel_list = modules;
 	}
-
 	if (settings.parallel_set_current)
 		g_free(settings.parallel_set_current);
-	settings.parallel_set_current = name;
-	xml_set_or_create_value("modules", "parallel_set_current", name);
+	settings.parallel_set_current = name_to_key(name);
+	xml_set_or_create_value("modules", "parallel_set_current", settings.parallel_set_current);
+	g_free(name);
 	xml_save_settings_doc(settings.fnconfigure);
 	
 	/* refresh listview */
