@@ -121,6 +121,7 @@ if (WIN32)
       ${SYS_ROOT_BIN}/libgtk-3-0.dll
       ${SYS_ROOT_BIN}/libjavascriptcoregtk-3.0-0.dll
       ${SYS_ROOT_BIN}/libwebkitgtk-3.0-0.dll
+      ${SYS_ROOT_BIN}/libepoxy-0.dll
       DESTINATION ${CMAKE_INSTALL_BINDIR}
       COMPONENT binaries
       )
