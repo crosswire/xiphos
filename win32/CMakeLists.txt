@@ -95,6 +95,7 @@ if (WIN32)
     install(FILES
       ${SYS_ROOT_BIN}/libglade-2.0-0.dll
       ${SYS_ROOT_BIN}/libgailutil-18.dll
+      ${SYS_ROOT_BIN}/libgdk-win32-2.0-0.dll
       ${SYS_ROOT_BIN}/libgtk-win32-2.0-0.dll
       ${SYS_ROOT_BIN}/libjavascriptcoregtk-1.0-0.dll
       ${SYS_ROOT_BIN}/libwebkitgtk-1.0-0.dll
@@ -178,7 +179,6 @@ if (WIN32)
     ${SYS_ROOT_BIN}/libpng16-16.dll
     ${SYS_ROOT_BIN}/libgdk_pixbuf-2.0-0.dll
     ${SYS_ROOT_BIN}/libgdk-3-0.dll
-    ${SYS_ROOT_BIN}/libgdk-win32-2.0-0.dll
     ${SYS_ROOT_BIN}/libgio-2.0-0.dll
     ${SYS_ROOT_BIN}/libglib-2.0-0.dll
     ${SYS_ROOT_BIN}/libgmodule-2.0-0.dll
