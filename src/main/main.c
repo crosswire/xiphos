@@ -166,25 +166,31 @@ int main(int argc, char *argv[])
 	   been set by some other program or set manually. In the case that
 	   it hasn't been set, it is set to the localized equivalent of
 	   C:/Documents and Settings/All Users/Application Data/Sword */
-	const gchar *const *strings;
-	strings = g_get_system_data_dirs();
-	g_setenv("SWORD_PATH", g_strdup_printf("%s\\Sword",
-					       //g_getenv("ALLUSERSPROFILE"),
-					       strings[0]),
+	/*
+	 * NOTE: SWORD_PATH is deliberately computed WITHOUT calling
+	 * g_get_system_data_dirs(). That function caches its result on
+	 * first call for the lifetime of the process (documented GLib
+	 * behavior), and GTK's internal icon theme lookup relies on the
+	 * same cached call. Calling it here — before or after setting
+	 * XDG_DATA_DIRS below — would poison that cache and make our
+	 * XDG_DATA_DIRS override invisible to GTK's icon search, which
+	 * is what caused icons to go missing again after a previous fix
+	 * to this same block. ALLUSERSPROFILE/PROGRAMDATA give the same
+	 * directory g_get_system_data_dirs() would have on Windows by
+	 * default, without touching the cache.
+	 */
+	const gchar *programdata = g_getenv("PROGRAMDATA");
+	if (!programdata)
+		programdata = g_getenv("ALLUSERSPROFILE");
+	g_setenv("SWORD_PATH", g_strdup_printf("%s\\Sword", programdata),
 		 FALSE);
 	/*
 	 * GTK3 needs to find its compiled GSettings schemas (used
 	 * internally e.g. by GtkFileChooserButton in the Preferences
 	 * dialog) and its icon theme (hicolor/Adwaita). Neither is
 	 * discovered automatically in this MinGW cross-compiled build,
-	 * so point GLib/GTK at them explicitly.
-	 *
-	 * This must happen AFTER the SWORD_PATH computation above, since
-	 * SWORD_PATH depends on g_get_system_data_dirs(), which itself
-	 * reads XDG_DATA_DIRS — setting it earlier changed where
-	 * SWORD_PATH pointed and moved installed modules unexpectedly.
-	 * We also append to, rather than replace, any existing
-	 * XDG_DATA_DIRS value so other consumers aren't disrupted.
+	 * so point GLib/GTK at them explicitly. Safe to do here since
+	 * nothing above has called g_get_system_data_dirs() yet.
 	 */
 	gchar *share_dir = xiphos_win32_get_subdir("share");
 	g_setenv("GSETTINGS_SCHEMA_DIR",
