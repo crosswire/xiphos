@@ -95,6 +95,7 @@ if (WIN32)
     install(FILES
       ${SYS_ROOT_BIN}/libglade-2.0-0.dll
       ${SYS_ROOT_BIN}/libgailutil-18.dll
+      ${SYS_ROOT_BIN}/libgdk-win32-2.0-0.dll
       ${SYS_ROOT_BIN}/libgtk-win32-2.0-0.dll
       ${SYS_ROOT_BIN}/libjavascriptcoregtk-1.0-0.dll
       ${SYS_ROOT_BIN}/libwebkitgtk-1.0-0.dll
@@ -120,6 +121,7 @@ if (WIN32)
       ${SYS_ROOT_BIN}/libgtk-3-0.dll
       ${SYS_ROOT_BIN}/libjavascriptcoregtk-3.0-0.dll
       ${SYS_ROOT_BIN}/libwebkitgtk-3.0-0.dll
+      ${SYS_ROOT_BIN}/libepoxy-0.dll
       DESTINATION ${CMAKE_INSTALL_BINDIR}
       COMPONENT binaries
       )
@@ -178,7 +180,6 @@ if (WIN32)
     ${SYS_ROOT_BIN}/libpng16-16.dll
     ${SYS_ROOT_BIN}/libgdk_pixbuf-2.0-0.dll
     ${SYS_ROOT_BIN}/libgdk-3-0.dll
-    ${SYS_ROOT_BIN}/libgdk-win32-2.0-0.dll
     ${SYS_ROOT_BIN}/libgio-2.0-0.dll
     ${SYS_ROOT_BIN}/libglib-2.0-0.dll
     ${SYS_ROOT_BIN}/libgmodule-2.0-0.dll
@@ -279,6 +280,36 @@ if (WIN32)
   install(FILES
     ${PROJECT_SOURCE_DIR}/pixmaps/xiphos.svg
     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps
+    COMPONENT data
+    )
+
+  # install icon theme (hicolor + adwaita, for GTK3 symbolic icons)
+  install(DIRECTORY
+    ${SYS_ROOT_SHARE}/icons
+    DESTINATION ${CMAKE_INSTALL_DATADIR}
+    COMPONENT data
+    )
+
+  # install gdk-pixbuf loaders (needed to render icons/pixbufs at runtime)
+  install(DIRECTORY
+    ${SYS_ROOT_LIB}/gdk-pixbuf-2.0
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    COMPONENT binaries
+    )
+
+  # install GSettings schemas (required by GtkFileChooserButton and others,
+  # otherwise fatal GLib-GIO-ERROR "No GSettings schemas are installed")
+  install(DIRECTORY
+    ${SYS_ROOT_SHARE}/glib-2.0/schemas
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/glib-2.0
+    COMPONENT data
+    )
+
+  # compile the schemas at build time (produces gschemas.compiled)
+  find_program(GLIB_COMPILE_SCHEMAS glib-compile-schemas)
+  install(CODE "
+    execute_process(COMMAND \${GLIB_COMPILE_SCHEMAS} \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/glib-2.0/schemas\")
+    "
     COMPONENT data
     )
 

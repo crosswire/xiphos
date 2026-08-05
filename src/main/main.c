@@ -172,6 +172,29 @@ int main(int argc, char *argv[])
 					       //g_getenv("ALLUSERSPROFILE"),
 					       strings[0]),
 		 FALSE);
+	/*
+	 * GTK3 needs to find its compiled GSettings schemas (used
+	 * internally e.g. by GtkFileChooserButton in the Preferences
+	 * dialog) and its icon theme (hicolor/Adwaita). Neither is
+	 * discovered automatically in this MinGW cross-compiled build,
+	 * so point GLib/GTK at them explicitly.
+	 *
+	 * This must happen AFTER the SWORD_PATH computation above, since
+	 * SWORD_PATH depends on g_get_system_data_dirs(), which itself
+	 * reads XDG_DATA_DIRS — setting it earlier changed where
+	 * SWORD_PATH pointed and moved installed modules unexpectedly.
+	 * We also append to, rather than replace, any existing
+	 * XDG_DATA_DIRS value so other consumers aren't disrupted.
+	 */
+	gchar *share_dir = xiphos_win32_get_subdir("share");
+	g_setenv("GSETTINGS_SCHEMA_DIR",
+		g_build_filename(share_dir, "glib-2.0", "schemas", NULL),
+		TRUE);
+	const gchar *existing_xdg_data_dirs = g_getenv("XDG_DATA_DIRS");
+	gchar *new_xdg_data_dirs = existing_xdg_data_dirs
+		? g_strdup_printf("%s;%s", share_dir, existing_xdg_data_dirs)
+		: share_dir;
+	g_setenv("XDG_DATA_DIRS", new_xdg_data_dirs, TRUE);
 
 	/*it is necessary to explicitly set LANG, because we depend on that
 	   variable to set the SWORD locale */
