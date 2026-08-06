@@ -1053,6 +1053,54 @@ void bookmark_debug_dump_colors(void)
 }
 
 
+/* Recursively search @folder (and its sub-folders) for a bookmark whose
+ * key resolves to @versekey_text. On match, returns "<immediate parent
+ * folder caption>: <bookmark caption>". Helper for
+ * bookmark_get_tag_info_for_key(). */
+static gchar *bookmark_find_in_folder(GtkTreeIter *folder, const gchar *versekey_text)
+{
+	gchar *folder_caption = NULL;
+	gtk_tree_model_get(GTK_TREE_MODEL(model), folder,
+			   COL_CAPTION, &folder_caption, -1);
+	GtkTreeIter child;
+	gchar *result = NULL;
+	if (gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child, folder)) {
+		do {
+			gchar *node_key = NULL, *node_caption = NULL;
+			gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
+					   COL_KEY, &node_key,
+					   COL_CAPTION, &node_caption, -1);
+			if (node_key) {
+				/* leaf: a bookmark. Resolve its (possibly
+				 * multi-reference) key via Sword and compare
+				 * each resolved verse to versekey_text. */
+				GList *verses = main_parse_verse_list(
+					settings.MainWindowModule, node_key,
+					(char *)settings.currentverse);
+				for (GList *l = verses; l && !result; l = l->next) {
+					gchar *v = g_strstrip(g_strdup((const char *)l->data));
+					gchar *q = g_strstrip(g_strdup(versekey_text));
+					if (!g_ascii_strcasecmp(v, q))
+						result = g_strdup_printf("%s: %s",
+							folder_caption ? folder_caption : "",
+							node_caption ? node_caption : node_key);
+					g_free(v);
+					g_free(q);
+				}
+				for (GList *l = verses; l; l = l->next)
+					g_free(l->data);
+				g_list_free(verses);
+			} else {
+				/* sub-folder: recurse */
+				result = bookmark_find_in_folder(&child, versekey_text);
+			}
+			g_free(node_key);
+			g_free(node_caption);
+		} while (!result && gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+	}
+	g_free(folder_caption);
+	return result;
+}
 gchar *bookmark_get_tag_color_for_key(const gchar *osiskey)
 {
 	GtkTreeIter folder, child;
@@ -1100,6 +1148,31 @@ gchar *bookmark_get_tag_color_for_key(const gchar *osiskey)
 		g_free(folder_color);
 	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &folder));
 
+	return NULL;
+}
+/**
+ * bookmark_get_tag_info_for_key:
+ * @versekey_text: a Sword-formatted verse key string, e.g. "Rom 16:23"
+ *
+ * Finds the first bookmark, anywhere in the tree, whose (possibly
+ * multi-reference) key resolves to @versekey_text, and returns
+ * "<containing folder>: <bookmark name>" -- just the single
+ * immediate parent folder, not the full nested path.
+ * Returns NULL if no bookmark matches.  Caller must g_free() the result.
+ */
+gchar *bookmark_get_tag_info_for_key(const gchar *versekey_text)
+{
+	if (!versekey_text || !model)
+		return NULL;
+	GtkTreeIter folder;
+	if (!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &folder))
+		return NULL;
+	gchar *result = NULL;
+	do {
+		result = bookmark_find_in_folder(&folder, versekey_text);
+		if (result)
+			return result;
+	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &folder));
 	return NULL;
 }
 
