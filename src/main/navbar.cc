@@ -77,8 +77,7 @@ void main_navbar_set(NAVBAR navbar, const char *key)
 		vkey->setAutoNormalize(1);
 	vkey->setText(key);
 
-	XI_message((stderr,
-		    "DEBUG navbar: module=%s key_in=%s testament=%d book=%d chapter=%d/%d verse=%d/%d text=%s\n",
+	XI_message(("DEBUG navbar: module=%s key_in=%s testament=%d book=%d chapter=%d/%d verse=%d/%d text=%s\n",
 		    navbar.module_name, key,
 		    vkey->getTestament(), vkey->getBook(),
 		    vkey->getChapter(), vkey->getChapterMax(),

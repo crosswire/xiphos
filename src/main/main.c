@@ -344,7 +344,7 @@ int main(int argc, char *argv[])
 #ifdef CHATTY
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
-	g_timer_destroy(t);
+	g_timer_destroy(total);
 	printf("total time is %f\n", d);
 #endif
 	g_idle_add((GSourceFunc)gui_splash_done, NULL);
