@@ -516,7 +516,7 @@
                         <child>
                           <widget class="GtkComboBox" id="basecombobox1">
                             <property name="visible">True</property>
-                            <property name="items" translatable="yes">-2
+                            <property name="items" translatable="no">-2
 -1
 +0
 +1
