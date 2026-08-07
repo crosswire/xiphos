@@ -172,10 +172,6 @@ const char *bold_start = "<b>",
 	   *superscript_start = "<sup>",
 	   *superscript_end = "</sup>";
 
-gboolean paragraph_end_pending;
-gchar *para_type;
-int para_len;
-
 enum { COLOR_NONE, COLOR_TEXT, COLOR_BOTH } color_choices;
 gchar    *color_chosen_fg, *color_chosen_bg;
 marked_element *e;
@@ -1262,9 +1258,9 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		num = main_format_number(key->getVerse());
 		swbuf.appendFormatted((settings.showversenum
-				       ? "&nbsp; <a name=\"0\" href=\"sword:///%s\">"
+				       ? "&nbsp;<a name=\"0\" href=\"sword:///%s\">"
 				       "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font>&nbsp;"
-				       : "&nbsp; <a name=\"0\"> </a>"),
+				       : "&nbsp;<a name=\"0\"> </a>"),
 				      (char *)key->getText(),
 				      (settings.versestyle
 				       ? settings.verse_num_font_size + settings.base_font_size
@@ -1309,9 +1305,9 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 		num = main_format_number(key->getVerse());
 		swbuf.appendFormatted((settings.showversenum
-				       ? "&nbsp; <a name=\"0\" href=\"sword:///%s\">"
+				       ? "&nbsp;<a name=\"0\" href=\"sword:///%s\">"
 				       "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font>&nbsp;"
-				       : "&nbsp; <a name=\"0\"> </a>"),
+				       : "&nbsp;<a name=\"0\"> </a>"),
 				      (char *)key->getText(),
 				      (settings.versestyle
 				       ? settings.verse_num_font_size + settings.base_font_size
@@ -1538,16 +1534,8 @@ static gchar *get_tag_color_for_versekey(VerseKey *vk)
 	return color ? g_strdup(color) : NULL;
 }
 
-// part of the deep ugliness below, for extracting bad paragraph endings.
-// this is empirically observed in some marginally broken module content.
-struct paragraph_endings
-{
-	int len;
-	gchar *p;
-} para_ends[2] = {
-	{7, (gchar *)"<p/><b>"},	// longer one first.
-	{4, (gchar *)"<p/>"}
-};
+// with/without a useless space, because it's what we've seen in the field. *sigh*
+const gchar *para_endings[] = { "<p/>", "<p />" };
 
 void
 GTKChapDisp::RenderOneChapter(SWModule &imodule,
@@ -1624,9 +1612,9 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 		// generate the verse number with color and decoration.
 		gchar *num = main_format_number(key->getVerse());
 		swbuf.appendFormatted((settings.showversenum
-				       ? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
+				       ? "&nbsp;<span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
 				       "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></span>&nbsp;"
-				       : "&nbsp; <a name=\"%d\"> </a>"),
+				       : "&nbsp;<a name=\"%d\"> </a>"),
 				      (thisChapter * 1000) + key->getVerse(),
 				      (char *)key->getText(),
 				      settings.verse_num_font_size + settings.base_font_size,
@@ -1677,27 +1665,24 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 		}
 
 		// ugly ... ugly ... ugly.
-		// some modules have verses that end in a paragraph marker.
-		// this mis-interacts with verse highlight, causing breakage of font
-		// closure, so that the entire rest of the chapter gets inadvertently
-		// background-highlighted.
+		// text containing <p/> in the middle of a <span> or <font> block
+		// induces a premature closure of the <span> or <font> content.
+		// this has follow-on effects, likely a webkit bug, where such
+		// background colorization is re-introduced in psychotic ways beyond
+		// the end of the </span> or </font>.
 		// solution is ... be still, my wretching stomach ...
-		// notice when an element ends this way, eliminate it, and then
-		// re-introduce it if necessary, after font closure.
-		paragraph_end_pending = FALSE;
+		// within any form of background colorization, hunt down all <p/>
+		// so as to replace them with <br/><br/>. just keep telling yourself,
+		// we do this for fun, we do this for fun, we do this for fun, we do...
 
-		// this bad effect occurs only for background colorization.
-		if (color_choices == COLOR_BOTH) {
+		if ((color_choices == COLOR_BOTH) || tag_color) {
 			for (int i = 0; i < 2; ++i) {
-				para_type = para_ends[i].p;
-				para_len  = para_ends[i].len;
-
-				if ((rework->len >= para_len) &&
-				    !strcasecmp(rework->str + rework->len - para_len, para_type))
-				{
-					paragraph_end_pending = TRUE;
-					g_string_erase(rework, rework->len - para_len, para_len);
-					break;
+				for (gchar *s = strstr(rework->str, para_endings[i]);
+				     s; 
+				     s = strstr(s + 1, para_endings[i])) {
+					// 4- & 5-char strings.
+					(void)g_string_erase(rework, s - rework->str, 4+i);
+					(void)g_string_insert(rework, s - rework->str, "<br/><br/>");
 				}
 			}
 		}
@@ -1729,9 +1714,6 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 			g_free(tag_color);
 			tag_color = NULL;
 		}
-
-		if (paragraph_end_pending)
-			swbuf.append(para_type);
 
 		if (settings.versestyle) {
 			if ((k != curVerse) ||
@@ -2237,13 +2219,11 @@ DialogChapDisp::display(SWModule &imodule)
 		if (*rework->str == '\0')
 			continue;		// no verse content there.
 
-		paragraph_end_pending = FALSE;
-
 		gchar *num = main_format_number(key->getVerse());
 		swbuf.appendFormatted((settings.showversenum
-				       ? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
+				       ? "&nbsp;<span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
 				       "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></span>&nbsp;"
-				       : "&nbsp; <a name=\"%d\"> </a>"),
+				       : "&nbsp;<a name=\"%d\"> </a>"),
 				      (curChapter * 1000) + key->getVerse(),
 				      (char *)key->getText(),
 				      settings.verse_num_font_size + settings.base_font_size,
@@ -2289,27 +2269,24 @@ DialogChapDisp::display(SWModule &imodule)
 		}
 
 		// ugly ... ugly ... ugly.
-		// some modules have verses that end in a paragraph marker.
-		// this mis-interacts with verse highlight, causing breakage of font
-		// closure, so that the entire rest of the chapter gets inadvertently
-		// background-highlighted.
+		// text containing <p/> in the middle of a <span> or <font> block
+		// induces a premature closure of the <span> or <font> content.
+		// this has follow-on effects, likely a webkit bug, where such
+		// background colorization is re-introduced in psychotic ways beyond
+		// the end of the </span> or </font>.
 		// solution is ... be still, my wretching stomach ...
-		// notice when an element ends this way, eliminate it, and then
-		// re-introduce it if necessary, after font closure.
-		paragraph_end_pending = FALSE;
+		// within any form of background colorization, hunt down all <p/>
+		// so as to replace them with <br/><br/>. just keep telling yourself,
+		// we do this for fun, we do this for fun, we do this for fun, we do...
 
-		// this bad effect occurs only for background colorization.
 		if (color_choices == COLOR_BOTH) {
 			for (int i = 0; i < 2; ++i) {
-				para_type = para_ends[i].p;
-				para_len  = para_ends[i].len;
-
-				if ((rework->len >= para_len) &&
-				    !strcasecmp(rework->str + rework->len - para_len, para_type))
-				{
-					paragraph_end_pending = TRUE;
-					g_string_erase(rework, rework->len - para_len, para_len);
-					break;
+				for (gchar *s = strstr(rework->str, para_endings[i]);
+				     s; 
+				     s = strstr(s + 1, para_endings[i])) {
+					// 4- & 5-char strings.
+					(void)g_string_erase(rework, s - rework->str, 4+i);
+					(void)g_string_insert(rework, s - rework->str, "<br/><br/>");
 				}
 			}
 		}
@@ -2334,9 +2311,6 @@ DialogChapDisp::display(SWModule &imodule)
 
 		if (color_choices == COLOR_BOTH)
 			swbuf.append("</span>");
-
-		if (paragraph_end_pending)
-			swbuf.append(para_type);
 
 		if (versestyle) {
 			if ((key->getVerse() != curVerse) ||
@@ -2506,9 +2480,9 @@ GTKPrintChapDisp::display(SWModule &imodule)
 
 		gchar *num = main_format_number(key->getVerse());
 		swbuf.appendFormatted(settings.showversenum
-				      ? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+				      ? "&nbsp;<a name=\"%d\" href=\"sword:///%s\">"
 				      "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
-				      : "&nbsp; <a name=\"%d\"> </a>",
+				      : "&nbsp;<a name=\"%d\"> </a>",
 				      key->getVerse(),
 				      (char *)key->getText(),
 				      settings.verse_num_font_size + settings.base_font_size,
