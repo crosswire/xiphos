@@ -523,7 +523,7 @@ _load_file(EDITOR *e, const gchar *filename)
 		g_error_free(error);
 	}
 
-	_load_text_into_buffer(e, text);
+	_load_text_into_buffer(e, text ? text : "");
 	if (text)
 		g_free(text);
 }
@@ -1383,7 +1383,7 @@ editor_load_note(EDITOR *e, const gchar *module_name, const gchar *key)
 	}
 
 	text = main_get_raw_text((gchar *)e->module, (gchar *)e->key);
-	_load_text_into_buffer(e, text);
+	_load_text_into_buffer(e, text ? text : "");
 	if (text)
 		g_free(text);
 
