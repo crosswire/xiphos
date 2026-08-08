@@ -142,33 +142,27 @@ void main_information_viewer(const gchar *mod_name,
 
 	str = g_string_new(tmp_str->str);
 
+	// header
 	if (type) {
-		if (*type == 'n') {
-			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s</font><hr/>",
+		if (*type == 'n')
+			g_string_printf(tmp_str, "<font color=\"grey\">%s</font><hr/>",
 					_("Footnote"));
-			str = g_string_append(str, tmp_str->str);
-		} else if (*type == 'u') {
-			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s:<br/>%s</font><hr/>",
+		else if (*type == 'u')
+			g_string_printf(tmp_str, "<font color=\"grey\">%s<br/>%s</font><hr/>",
 					_("User Annotation"), key);
-			str = g_string_append(str, tmp_str->str);
-		} else if (*type == 'x') {
-			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s</font><hr/>",
+		else if (*type == 'b')
+			g_string_printf(tmp_str, "<font color=\"grey\">%s<br/>%s</font><hr/>",
+					_("Bookmark List"), key);
+		else if (*type == 'x')
+			g_string_printf(tmp_str, "<font color=\"grey\">%s</font><hr/>",
 					_("Cross Reference"));
-			str = g_string_append(str, tmp_str->str);
-		} else if (!strcmp(action, "showStrongs")) {
-			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s</font><hr/>",
+		else if (!strcmp(action, "showStrongs"))
+			g_string_printf(tmp_str, "<font color=\"grey\">%s: %s</font><hr/>",
 					_("Strongs"), key);
-			str = g_string_append(str, tmp_str->str);
-		} else if (!strcmp(action, "showMorph")) {
-			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s</font><hr/>",
+		else if (!strcmp(action, "showMorph"))
+			g_string_printf(tmp_str, "<font color=\"grey\">%s: %s</font><hr/>",
 					_("Morphology"), key);
-			str = g_string_append(str, tmp_str->str);
-		}
+		str = g_string_append(str, tmp_str->str);
 	} else {
 		const char *abbreviation = main_name_to_abbrev(mod_name);
 		g_string_printf(tmp_str,
@@ -178,6 +172,7 @@ void main_information_viewer(const gchar *mod_name,
 		str = g_string_append(str, tmp_str->str);
 	}
 
+	// content
 	if (action && (!strcmp(action, "showStrongsMorph"))) {
 		g_string_printf(tmp_str,
 				"<font color=\"grey\">%s: %s</font><hr/>",
@@ -191,7 +186,30 @@ void main_information_viewer(const gchar *mod_name,
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
 	} else {
-		str = g_string_append(str, text);
+		if (*type != 'b')
+			str = g_string_append(str, text);
+		else {
+			gchar *s, *t;
+
+			// bookmark refs parse & display.
+			// magic @:@:@ separation, see build_tag_color_map().
+			for (s = (gchar*)text, t = strstr(s, "@:@:@");
+			     t;
+			     s = t + 5, t = strstr(s, "@:@:@")) {
+				*t = '\0';
+				// #xxxxxx-#yyyyyy-LabelData
+				// 0      7       F
+				*(s + 7)  = '\0';	// separate colors from words.
+				*(s + 15) = '\0';
+				g_string_printf(tmp_str,
+						"<span class=\"bookmarkcolor\" "
+						"style=\"background-color: %s; color: %s;\">"
+						"%s<br/></span>",
+						s, s + 8, s + 16);
+				str = g_string_append(str, tmp_str->str);
+				*t = '@';
+			}
+		}
 	}
 
 	str = g_string_append(str, "</font></body></html>");

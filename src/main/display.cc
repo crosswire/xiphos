@@ -1401,11 +1401,17 @@ static void build_tag_color_map(VerseKey *vk)
 	while (!g_queue_is_empty(stack)) {
 		GtkTreeIter *iter = (GtkTreeIter *)g_queue_pop_head(stack);
 		gchar *inherited = (gchar *)g_queue_pop_head(colors);
-		gchar *node_color = NULL, *node_key = NULL, *node_module = NULL;
+		gchar *node_color = NULL, *node_key = NULL, *node_module = NULL, *node_label = NULL;
 		gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
-				   COL_COLOR,  &node_color,
-				   COL_KEY,    &node_key,
-				   COL_MODULE, &node_module, -1);
+				   COL_COLOR,       &node_color,
+				   COL_KEY,         &node_key,
+				   COL_MODULE,      &node_module,
+				   COL_DESCRIPTION, &node_label,
+				   -1);
+		gchar *escaped_label = (node_label
+					? g_uri_escape_string(node_label, NULL, TRUE)
+					: NULL);
+
 		const gchar *effective = (node_color && *node_color)
 			? node_color : inherited;
 		if (node_key) {
@@ -1441,14 +1447,22 @@ static void build_tag_color_map(VerseKey *vk)
 						vk2.getOSISBookName(),
 						vk2.getChapter(),
 						vk2.getVerse());
-					/* first color wins for a given verse,
-					 * matching the previous traversal-order
-					 * semantics. */
-					if (!g_hash_table_contains(tag_color_map, ref2))
-						g_hash_table_insert(tag_color_map,
-							ref2, g_strdup(effective));
-					else
-						g_free(ref2);
+
+					/* first color wins for display of a given verse
+					 * but all other occurrences will be appended. */
+					const char *tc_fg = text_color_for_bg(effective);
+					gchar *element = (gchar *)g_hash_table_lookup(tag_color_map, ref2);
+					gchar *str = g_strconcat((element ? element : ""),
+								 effective,
+								 "-",		// arbitrary separators.
+								 tc_fg,
+								 "-",
+								 (escaped_label ? escaped_label : ""),
+								 "@:@:@",	// magic string, see main_info_viewer().
+								 NULL);
+					// insertion may supercede previous instance, freeing it.
+					// ownership of newly-allocated str is given to the map.
+					g_hash_table_insert(tag_color_map, ref2, str);
 
 					/* Sword's verse-list parser resolves a hyphenated
 					 * shorthand range like "15:1-4" to only its START
@@ -1507,6 +1521,8 @@ static void build_tag_color_map(VerseKey *vk)
 						GTK_TREE_MODEL(model), &child));
 			}
 		}
+		g_free(escaped_label);
+		g_free(node_label);
 		g_free(node_color);
 		g_free(node_module);
 		g_free(inherited);
@@ -1601,12 +1617,31 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 		// verse number, user-note reference, and verse text below.
 		gchar *tag_color = get_tag_color_for_versekey(key);
 		if (tag_color) {
-			const char *tc_fg = text_color_for_bg(tag_color);
-			swbuf.appendFormatted(
-			    "<span class=\"tagcolor\" style=\"background-color: %s; "
-			    "color: %s; "
-			    "border-left: 3px solid %s; padding-left: 2px\">",
-			    tag_color, tc_fg, tag_color);
+			// we own the tag_color data, so now we can mangle it for local purposes.
+			// color is 1st 7 characters (#ABCDEF). 8th becomes its terminator.
+			// similar foreground per luminance test, bytes 9-16.
+			// from tag_color+16 onward, it's bookmark reference data.
+			// this content was encoded when created, so we're safe pasting it in.
+			// format has bg+fg+label formatted as "#123456-#9ABCDE-LabelData".
+			//                                      0      7       FLabelData
+
+			*(tag_color + 7)  = '\0';		// terminate color strings
+			*(tag_color + 15) = '\0';
+
+			swbuf.appendFormatted("&nbsp;<span class=\"tagcolor\" style=\"background-color: %s; "
+					      "color: %s; \">",
+					      tag_color, tag_color + 8);
+
+			*(tag_color + 7)  = '-';		// restore format
+			*(tag_color + 15) = '-';		// for use in link data
+
+			swbuf.appendFormatted("<span class=\"bookmarkref\">"
+					      "<a href=\"passagestudy.jsp?action=showBookmark&"
+					      "module=%s&passage=%s&value=%s\">&nbsp;"
+					      "<small><sup>*b</sup></small></a></span>",
+					      settings.MainWindowModule,
+					      (char *)key->getShortText(),
+					      tag_color);	// includes all data, bg+fg+label
 		}
 
 		// generate the verse number with color and decoration.
@@ -1626,7 +1661,7 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 		if ((e = markedCacheCheck((thisChapter * 1000) + k))) {
 			gchar *escaped_value = g_uri_escape_string(
 				e->annotation->str, NULL, TRUE);
-			swbuf.appendFormatted("<span class=\"word\">"
+			swbuf.appendFormatted("<span class=\"annotation\">"
 					      "<a href=\"passagestudy.jsp?action=showUserNote&"
 					      "module=%s&passage=%s&value=%s\"><small>"
 					      "<sup>*u</sup></small></a></span>&nbsp;",
