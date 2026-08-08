@@ -910,7 +910,7 @@ static void on_parallel_sets_button_clicked(GtkWidget *widget,
  * Return value
  *   GtkWidget *
  */
-
+ 
 GtkWidget *gui_navbar_versekey_parallel_new(void)
 {
 	gchar *glade_file;
@@ -1028,8 +1028,12 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	} else {
 		sets_label = g_strdup_printf(_("Set: %s"), "—");
 	}
+	/* remove old button if it exists (navbar widget is recreated each call) */
+	if (navbar_parallel.button_sets) {
+		gtk_widget_destroy(navbar_parallel.button_sets);
+		navbar_parallel.button_sets = NULL;
+	}
 	GtkWidget *button_sets = gtk_button_new_with_label(sets_label);
-	g_free(sets_label);
 	gtk_widget_set_tooltip_text(button_sets, _("Switch parallel module set"));
 	gtk_widget_show(button_sets);
 	navbar_parallel.button_sets = button_sets;
@@ -1037,6 +1041,7 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 			 G_CALLBACK(on_parallel_sets_button_clicked), NULL);
 	gtk_box_pack_end(GTK_BOX(navbar_parallel.navbar), button_sets,
 			 FALSE, FALSE, 2);
+	g_free(sets_label);
 	return navbar_parallel.navbar;
 }
 

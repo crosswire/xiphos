@@ -90,13 +90,12 @@ _popupmenu_requested_cb(XiphosHtml *html, gchar *uri, gpointer user_data)
 
 static void on_parallel_tab_destroy(GObject *object, gpointer user_data)
 {
-
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				   TRUE);
-
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				      1);
 	settings.dockedInt = TRUE;
+	navbar_parallel.button_sets = NULL;  /* reset so it's recreated next time */
 	main_update_parallel_page();
 }
 
