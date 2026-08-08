@@ -1057,6 +1057,27 @@ gint main_url_handler(const gchar *url, gboolean clicked)
 			}
 		}
 
+		else if (!strcmp(action, "showBookmark")) {
+			if (HAS_URL_PARAM(passage) && HAS_URL_PARAM(svalue)) {
+				// need localized key, not the osisref that we've got.
+				ModMap::iterator it = backend->get_mgr()->Modules.find(module);
+				if (it != backend->get_mgr()->Modules.end()) {
+					SWModule *m = (*it).second;
+					VerseKey *vk = (VerseKey *)m->getKey();
+					*vk = passage;
+
+					main_information_viewer(module,
+								(gchar *)svalue,
+								(gchar *)m->getKeyText(),
+								"showBookmark",
+								(gchar *)"b",
+								NULL,
+								NULL);
+					retval = 1;
+				}
+			}
+		}
+
 		else if (!strcmp(action, "showRef")) {
 			if (!strcmp(stype ? stype : "", "scripRef") &&
 			    HAS_URL_PARAM(svalue)) {
