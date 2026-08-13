@@ -359,7 +359,7 @@ static void create_pixbufs(void)
 
 	INSTALLED = gtk_icon_theme_load_icon(icon_theme,
 #if GTK_CHECK_VERSION(3, 12, 0)
-					     "emblem-ok-symbolic",
+					     "emblem-default",
 #else
 					     "_Apply",
 #endif
@@ -546,7 +546,7 @@ static void add_columns(GtkTreeView *treeview, gboolean remove)
 	    (remove
 		 ? gtk_image_new_from_icon_name("",
 						GTK_ICON_SIZE_MENU)
-		 : gtk_image_new_from_icon_name("emblem-ok-symbolic",
+		 : gtk_image_new_from_icon_name("emblem-default",
 						GTK_ICON_SIZE_MENU));
 #else
 	    (remove

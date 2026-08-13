@@ -580,7 +580,7 @@ void biblesync_update_speaker()
 	column = gtk_tree_view_column_new();
 	image =
 #if GTK_CHECK_VERSION(3, 10, 0)
-	    gtk_image_new_from_icon_name("emblem-ok-symbolic", GTK_ICON_SIZE_MENU);
+	    gtk_image_new_from_icon_name("emblem-default", GTK_ICON_SIZE_MENU);
 #else
 	    gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_MENU);
 #endif
