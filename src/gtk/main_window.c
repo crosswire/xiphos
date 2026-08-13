@@ -1020,6 +1020,9 @@ void create_mainwindow(void)
 	widgets.studypad_dialog = NULL;
 	widgets.entry_devotional = NULL;
 
+	widgets.html_parallel = NULL;
+	widgets.html_parallel_dialog = NULL;
+
 	/* A rough scektch of the main window (widgets.app) and it's children
 	 *                widgets.app
 	 *                     |

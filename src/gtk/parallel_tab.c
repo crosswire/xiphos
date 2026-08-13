@@ -282,6 +282,7 @@ void gui_destroy_parallel_tab(void)
 	sync_on = FALSE;
 	gtk_widget_destroy(parallel_vbox);
 	gtk_widget_show(widgets.hpaned);
+	widgets.html_parallel_dialog = NULL;
 }
 
 /******   end of file   ******/
