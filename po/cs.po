@@ -1,15 +1,17 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Czech translation for Xiphos
+# Copyright (C) 2002-2026 The Xiphos Development Team
+# This file is distributed under the same license as the Xiphos package.
 #
 # Translators:
-# Martin Zibricky <mzibr.public@gmail.com>, 2014
+# Martin Zibricky <mzibr.public@gmail.com>, 2014.
+# Daniel Rusek <mail@asciiwolf.com>, 2025.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-20 09:16-0500\n"
-"PO-Revision-Date: 2025-02-24 21:38+0100\n"
+"PO-Revision-Date: 2026-08-24 14:32+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/xiphos/language/"
 "cs/)\n"
@@ -18,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.9\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -32,7 +34,7 @@ msgstr ""
 
 #: ../src/backend/sword_main.cc:1149
 msgid "Configuration not found"
-msgstr "Konfigurace nebyla nenalezena"
+msgstr "Konfigurace nebyla nalezena"
 
 #: ../src/editor/slib-editor.c:198 ../src/editor/webkit_editor.c:625
 #: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
