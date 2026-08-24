@@ -2,7 +2,6 @@
 # Copyright (C) 2003 Andy Piper
 # This file is distributed under the same license as the Xiphos package.
 # Andy Piper <andyp@users.sf.net> 2003
-# , fuzzy
 #
 #
 msgid ""

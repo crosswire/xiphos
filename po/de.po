@@ -4,7 +4,6 @@
 # This file is distributed under the same license as the Xiphos package.
 # Johannes Tanzler <johannes.tanzler@aon.at> 2004
 # Christoph Brill <egore911@egore911.de> 2007
-# , fuzzy
 #
 #
 msgid ""
