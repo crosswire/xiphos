@@ -1574,6 +1574,10 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 		ModuleCache::CacheVerse &cVerse =
 		    ModuleMap[ModuleName][curTest][curBook][thisChapter][k];
 
+		// put the navigable anchor above any header.
+		swbuf.appendFormatted("<a name=\"%d\"></a>",
+				      (thisChapter * 1000) + key->getVerse());
+
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.HeaderIsValid())
 			CacheHeader(cVerse, imodule, ops, be);
@@ -1621,10 +1625,9 @@ GTKChapDisp::RenderOneChapter(SWModule &imodule,
 		// generate the verse number with color and decoration.
 		gchar *num = main_format_number(key->getVerse());
 		swbuf.appendFormatted((settings.showversenum
-				       ? "&nbsp;<span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
+				       ? "&nbsp;<span class=\"word\"><a href=\"sword:///%s\">"
 				       "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></span>&nbsp;"
-				       : "&nbsp;<a name=\"%d\"> </a>"),
-				      (thisChapter * 1000) + key->getVerse(),
+				       : "&nbsp;"),
 				      (char *)key->getText(),
 				      settings.verse_num_font_size + settings.base_font_size,
 				      (tag_color ? (tag_color + 8) : settings.bible_verse_num_color),
