@@ -1921,7 +1921,10 @@ GTKChapDisp::display(SWModule &imodule)
 		if ((curVerse != 1) || (curChapter != 1))
 			buf = g_strdup_printf("%d",
 					      (curChapter * 1000) + 
-					      (curVerse == 1 ? 0 : curVerse));
+					      (((curVerse == 1) ||
+						(curVerse == 2))
+					       ? 0
+					       : curVerse - 2));
 	} else {
 		if (strongs_and_morph && (curVerse != 1))
 			buf = g_strdup_printf("%d", (curChapter * 1000) + curVerse);
