@@ -1917,7 +1917,7 @@ GTKChapDisp::display(SWModule &imodule)
 	swbuf.append("</div></font></body></html>");
 
 	buf = NULL;
-	if (settings.render_whole_books) {
+	if (settings.render_whole_books && !strongs_or_morph) {
 		if ((curVerse != 1) || (curChapter != 1))
 			buf = g_strdup_printf("%d",
 					      (curChapter * 1000) + 
