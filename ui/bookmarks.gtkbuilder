@@ -9,7 +9,7 @@
     <property name="title" translatable="yes">Add Bookmark</property>
     <property name="default_width">300</property>
     <property name="default_height">350</property>
-    <property name="icon">xiphos-x-16.png</property>
+    <property name="icon_name">xiphos</property>
     <property name="type_hint">dialog</property>
     <signal name="response" handler="on_dialog_response" swapped="no"/>
     <child internal-child="vbox">

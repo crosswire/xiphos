@@ -8,7 +8,7 @@
     <property name="title" translatable="yes">Advanced Search</property>
     <property name="default_width">665</property>
     <property name="default_height">465</property>
-    <property name="icon">xiphos-x-16.png</property>
+    <property name="icon_name">xiphos</property>
     <property name="type_hint">normal</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox1">
@@ -1927,7 +1927,7 @@ See Module Manager's maintenance functions</property>
     <property name="title" translatable="yes">Module Selection</property>
     <property name="default_width">222</property>
     <property name="default_height">300</property>
-    <property name="icon">xiphos-x-16.png</property>
+    <property name="icon_name">xiphos</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox2">
