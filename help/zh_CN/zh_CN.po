@@ -1,0 +1,4554 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2026-08-15 10:14+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr ""
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/index.page:10
+msgid ""
+"Bible study tool for reading, study, and research using modules from The "
+"SWORD Project and elsewhere."
+msgstr ""
+"用于阅读、研读和研究的圣经学习工具，使用来自 SWORD 项目及其他来源的模块。"
+
+#. (itstool) path: info/title
+#: /home/cyrille/Documents/github/build/help/C/index.page:17
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:13
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:16
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:13
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-20-modules-introduction.page:15
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-22-modules-install.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-23-modules-maintenance.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-24-modules-third-party.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:13
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:15
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:12
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:13
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:13
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:14
+#: /home/cyrille/Documents/github/build/help/C/xiphos-60-online-help.page:13
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:16
+msgctxt "text"
+msgid "Xiphos"
+msgstr "Xiphos"
+
+#. (itstool) path: media/span
+#: /home/cyrille/Documents/github/build/help/C/index.page:41
+msgid "Xiphos logo"
+msgstr "Xiphos 标志"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/index.page:45
+msgid ""
+"<app>Xiphos</app> is a Bible study tool, offering a rich and featureful "
+"environment for reading, study, and research using modules from The SWORD "
+"Project and elsewhere."
+msgstr ""
+"<app>Xiphos</app> 是一款圣经研读工具，为使用来自 SWORD 项目及其他来源的模块进"
+"行阅读、研读和研究，提供了功能丰富的环境。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/index.page:50
+msgid "First steps"
+msgstr "第一步"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/index.page:54
+msgid "Module Manager"
+msgstr "模块管理器"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/index.page:58
+msgid "Search Functions"
+msgstr "搜索功能"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/index.page:62
+msgid "Add Comments and Notes"
+msgstr "添加注释和笔记"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/index.page:66
+msgid "Preferences"
+msgstr "首选项"
+
+#. (itstool) path: p/link
+#: /home/cyrille/Documents/github/build/help/C/legal.xml:8
+msgid "link"
+msgstr "链接"
+
+#. (itstool) path: license/p
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/legal.xml:3
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:42
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU General Public License (GPL), Version 2 or any later "
+"version published by the Free Software Foundation. You can find a copy of "
+"the GPL at this <_:link-1/> or in the file COPYING distributed with this "
+"manual."
+msgstr ""
+"根据自由软件基金会发布的 GNU 通用公共许可证（GPL）第 2 版或任何更高版本的条"
+"款，你可以复制、分发和/或修改本文档。你可以通过此<_:link-1/>或本手册随附的 "
+"COPYING 文件获得 GPL 的副本。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:5
+msgid "A brief introduction to the Xiphos application."
+msgstr "Xiphos 应用程序简介。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:35
+msgid "Introduction"
+msgstr "简介"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:37
+msgid ""
+"<app>Xiphos</app> is a Bible study and research tool based upon the \"SWORD "
+"Project\" libraries and the GTK libraries. You can use <app>Xiphos</app> to "
+"do the following:"
+msgstr ""
+"<app>Xiphos</app> 是一款基于“SWORD 项目”库和 GTK 库的圣经研读和研究工具。你可"
+"以使用 <app>Xiphos</app> 完成以下事情："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:42
+msgid "View your favorite Scripture verse"
+msgstr "查看你喜爱的经文"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:45
+msgid "Make sermon or personal notes on selected passages"
+msgstr "为选定的经文段落撰写讲道笔记或个人笔记"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:48
+msgid "Automatically follow Bible footnotes and cross-references"
+msgstr "自动跟随圣经脚注和交叉引用"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:51
+msgid "Compare translations in parallel"
+msgstr "并行比较各种译本"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:54
+msgid ""
+"Work in original language study using the available Hebrew and Greek "
+"translations"
+msgstr "使用可用的希伯来文和希腊文译本进行原文语言研读"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:58
+msgid ""
+"<app>Xiphos</app> aims to provide a simple and clean user interface while "
+"providing a powerful tool allowing a personalized Bible study environment."
+msgstr ""
+"<app>Xiphos</app> 旨在提供简洁清晰的用户界面，同时提供功能强大的工具，让你打"
+"造个性化的圣经研读环境。"
+
+#. (itstool) path: page/media
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:64
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:91
+msgctxt "_"
+msgid ""
+"external ref='figures/interface.png' md5='2689bc36ff7849d61f3c97cc8767e854'"
+msgstr ""
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:68
+msgctxt "_"
+msgid ""
+"external ref='figures/sword3.png' md5='3d9c6ae738d16324db1e79e7ef9eff8b'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:70
+msgid ""
+"\"The SWORD Project\" is based at <link href=\"http://www.crosswire.org\"> "
+"http://www.crosswire.org</link>. Other apps under the same banner are "
+"<app>MacSword</app> for the Macintosh, <app>BibleDesktop</app>, a Java app, "
+"<app>BibleTime</app> (another Linux program), and <app>The SWORD Project for "
+"Windows</app> (aka <app>BibleCS</app> or <app>WinSword</app>)."
+msgstr ""
+"“SWORD 项目”的网站位于 <link href=\"http://www.crosswire.org\"> http://www."
+"crosswire.org</link>。同一旗下的其他应用程序包括：适用于 Macintosh 的 "
+"<app>MacSword</app>、Java 应用程序 <app>BibleDesktop</app>、<app>BibleTime</"
+"app>（另一个 Linux 程序），以及 <app>The SWORD Project for Windows</app>（又"
+"名 <app>BibleCS</app> 或 <app>WinSword</app>）。"
+
+#. (itstool) path: note/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-01-introduction.page:80
+msgid ""
+"<app>Xiphos</app> is currently in development, so this manual may not "
+"reflect the program as you see it. If it does not, please file a bug at the "
+"<link href=\"https://github.com/crosswire/xiphos\"> project website</link>, "
+"or email <sys>xiphos-devel@crosswire.org</sys>. All help is appreciated, as "
+"it will improve the software."
+msgstr ""
+"<app>Xiphos</app> 目前仍在开发中，因此本手册可能与你所见的程序不完全一致。如"
+"有不一致，请在<link href=\"https://github.com/crosswire/xiphos\"> 项目网站</"
+"link>上提交错误报告，或发送电子邮件至 <sys>xiphos-devel@crosswire.org</sys>。"
+"我们非常感谢任何帮助，因为这将改进软件。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:8
+msgid "Use keyboard shortcuts to help you work more quickly."
+msgstr "使用键盘快捷键让你工作得更快。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:38
+msgid "Shortcuts keys"
+msgstr "快捷键"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:40
+msgid ""
+"Use <gui>shortcut keys</gui> to perform common tasks more quickly than with "
+"the mouse and menus. The following tables list all of <app>Xiphos's</app> "
+"shortcut keys."
+msgstr ""
+"使用<gui>快捷键</gui>可以比使用鼠标和菜单更快地完成常见任务。下表列出了 "
+"<app>Xiphos</app> 的所有快捷键。"
+
+#. (itstool) path: table/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:45
+msgid "Window selection/opening and navbar selection"
+msgstr "窗口选择/打开和导航栏选择"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:48
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:118
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:216
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:304
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:334
+msgid "Action"
+msgstr "操作"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:49
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:119
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:217
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:305
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:335
+msgid "Keyboard shortcut"
+msgstr "键盘快捷键"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:55
+msgid ""
+"Focus and select the main verse navbar text. You can then immediately type "
+"in new verse selection text. Be aware that, as is the case with most Sword "
+"applications, <app>Xiphos</app> understands many abbreviations: \"G\" is "
+"adequate to specify Genesis, for example, and any book name by itself "
+"implies 1:1."
+msgstr ""
+"聚焦并选中主经文导航栏文本。之后可立即输入新的经文选择文本。请注意，与大多数 "
+"Sword 应用程序一样，<app>Xiphos</app> 能识别许多缩写：例如，“G”就足以指定创世"
+"记，任何单独的书卷名称都表示 1:1。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:65
+msgid ""
+"Bring the Commentary View forward when previously obscured by the Book View."
+msgstr "当注释视图被书卷视图遮挡时，将其置于前台。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:72
+msgid "Focus on the general book."
+msgstr "聚焦到普通书卷。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:78
+msgid "Focus on the dictionary navbar text."
+msgstr "聚焦到字典导航栏文本。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:84
+msgid "Open a new tab."
+msgstr "打开一个新标签页。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:90
+msgid "Make the tab #1 current."
+msgstr "将 1 号标签页设为当前标签页。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:96
+msgid "Make the tab #2 current."
+msgstr "将 2 号标签页设为当前标签页。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:102
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:103
+msgid "..."
+msgstr "..."
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:106
+msgid "Make the tab #9 current."
+msgstr "将 9 号标签页设为当前标签页。"
+
+#. (itstool) path: table/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:115
+msgid "Verse navigation and Bible features"
+msgstr "经文导航和圣经功能"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:124
+msgid "Previous verse"
+msgstr "上一节经文"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:131
+msgid "Next verse"
+msgstr "下一节经文"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:138
+msgid "Previous chapter"
+msgstr "上一章"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:144
+msgid "Next chapter"
+msgstr "下一章"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:150
+msgid "Previous book"
+msgstr "上一卷书"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:156
+msgid "Next book"
+msgstr "下一卷书"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:162
+msgid "Bring up the context menu for the Bible pane."
+msgstr "调出圣经窗格的上下文菜单。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:168
+msgid "Toggle Strong's display."
+msgstr "切换斯特朗编号显示。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:174
+msgid "Toggle morphology display."
+msgstr "切换形态标签显示。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:180
+msgid "Toggle lemma display."
+msgstr "切换词元显示。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:186
+msgid "Toggle \"red words of Christ\" display."
+msgstr "切换“基督的话语用红字显示”。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:192
+msgid "Toggle cross-references display."
+msgstr "切换交叉引用显示。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:198
+msgid "Toggle footnotes display."
+msgstr "切换脚注显示。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:204
+msgid "Toggle transliteration."
+msgstr "切换音译显示。"
+
+#. (itstool) path: table/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:213
+msgid "Opening special windows"
+msgstr "打开特殊窗口"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:222
+msgid "Open this manual."
+msgstr "打开本手册。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:228
+msgid "Open the <gui>Preferences</gui> dialog."
+msgstr "打开<gui>首选项</gui>对话框。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:234
+msgid "Open <gui>Advanced Search</gui>."
+msgstr "打开<gui>高级搜索</gui>。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:240
+msgid "Bring forward the simple sidebar search."
+msgstr "将简易侧边栏搜索置于前台。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:246
+msgid "Open the <gui>Module Manager</gui>."
+msgstr "打开<gui>模块管理器</gui>。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:252
+msgid "Open the current Bible as a separate window."
+msgstr "将当前圣经在单独的窗口中打开。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:258
+msgid "Open an annotation dialog on the current verse."
+msgstr "在当前经文上打开注解对话框。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:264
+msgid "Open a bookmark dialog on the current verse."
+msgstr "在当前经文上打开书签对话框。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:270
+msgid ""
+"Open the \"Find\" dialog. The subwindow to which it applies depends on which "
+"of them are visible: The Bible is first preference, then the commentary or "
+"general book, then the dictionary. So a tab can be dedicated to just a book, "
+"and the \"Find\" will be performed within that pane."
+msgstr ""
+"打开“查找”对话框。它作用于哪个子窗口，取决于哪些窗口可见：首选圣经，其次是注"
+"释或普通书卷，最后是字典。因此，可以让一个标签页专门用于一本书，“查找”将在该"
+"窗格内执行。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:280
+msgid "Detach/re-attach the parallel view dialog."
+msgstr "分离/重新附加类似视图对话框。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:286
+msgid "Open editor on the personal commentary named Personal."
+msgstr "打开名为 Personal 的个人注释的编辑器。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:292
+msgid "Toggle visibility of the side panel."
+msgstr "切换侧边栏的可见性。"
+
+#. (itstool) path: table/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:301
+msgid "Font size control"
+msgstr "字体大小控制"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:310
+msgid "Increase the base font size."
+msgstr "增大基础字体大小。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:316
+msgid "Decrease the base font size."
+msgstr "减小基础字体大小。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:322
+msgid "Set the base font size to zero."
+msgstr "将基础字体大小设为零。"
+
+#. (itstool) path: table/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:331
+msgid "BibleSync"
+msgstr "BibleSync"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:340
+msgid "Put BibleSync into Personal mode."
+msgstr "将 BibleSync 切换到个人模式。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:347
+msgid "Put BibleSync into Speaker mode."
+msgstr "将 BibleSync 切换到演讲者模式。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:354
+msgid "Put BibleSync into Audience mode."
+msgstr "将 BibleSync 切换到听众模式。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:361
+msgid "Turn off BibleSync."
+msgstr "关闭 BibleSync。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:368
+msgid ""
+"Cause BibleSync to navigate your current point as a one-shot event. "
+"BibleSync must be transmit-ready, that is, in Personal or Speaker mode. Use "
+"this when you have set BibleSync for \"keyboard only\" in Preferences."
+msgstr ""
+"让 BibleSync 将你当前的位置作为一次性事件发送导航。BibleSync 必须处于可发送状"
+"态，即处于个人模式或演讲者模式。当你在首选项中将 BibleSync 设置为“仅键盘”时使"
+"用此功能。"
+
+#. (itstool) path: td/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-02-shortcut-keys.page:378
+msgid "Provide for sending chat messages to others."
+msgstr "提供向他人发送聊天消息的功能。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:5
+msgid "Running Xiphos."
+msgstr "运行 Xiphos。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:36
+msgid "Starting Xiphos"
+msgstr "启动 Xiphos"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:40
+msgid "How to start Xiphos"
+msgstr "如何启动 Xiphos"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:41
+msgid "You can start <app>Xiphos</app> in the following ways:"
+msgstr "你可以通过以下方式启动 <app>Xiphos</app>："
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:44
+msgid "Applications menu"
+msgstr "应用程序菜单"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:45
+msgid ""
+"Choose <guiseq><gui>Education</gui> <gui>Xiphos Bible Guide</gui> </guiseq>."
+msgstr "选择 <guiseq><gui>教育</gui> <gui>Xiphos Bible Guide</gui> </guiseq>。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:52
+msgid "Command line"
+msgstr "命令行"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:53
+msgid "Type <cmd>xiphos</cmd>, then press <key>Return</key>."
+msgstr "输入 <cmd>xiphos</cmd>，然后按 <key>Return</key>。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:56
+msgid "Windows"
+msgstr "Windows"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:57
+msgid ""
+"Go to <guiseq><gui>All Programs</gui><gui>Xiphos</gui><gui>Xiphos</gui></"
+"guiseq>."
+msgstr ""
+"转到 <guiseq><gui>所有程序</gui><gui>Xiphos</gui><gui>Xiphos</gui></guiseq>。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:66
+msgid "First Start"
+msgstr "首次启动"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:68
+msgid ""
+"When you start <app>Xiphos</app> for the first time, <app>Xiphos</app> "
+"creates a default selection of options for display. Also, if no other Sword "
+"application has ever been run, and thus there are no Bible modules "
+"installed, then <app>Xiphos</app> starts the Module Manager so that you can "
+"select and install a Bible module in your language preference."
+msgstr ""
+"首次启动 <app>Xiphos</app> 时，<app>Xiphos</app> 会创建一组默认的显示选项。此"
+"外，如果从未运行过其他 Sword 应用程序，因而没有安装任何圣经模块，"
+"<app>Xiphos</app> 将启动模块管理器，以便你选择并安装符合你语言偏好的圣经模"
+"块。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:74
+msgctxt "_"
+msgid ""
+"external ref='figures/first_start.png' md5='69d5c34ac05637124bca6036dbda52d8'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:76
+msgid ""
+"<app>Xiphos</app> then opens its interface with one tab displayed, showing "
+"Romans 8:28. Once the interface is open, you can use <guiseq><gui>Edit</"
+"gui><gui>Preferences</gui></guiseq> to change any of the selections already "
+"made by default."
+msgstr ""
+"随后，<app>Xiphos</app> 会打开界面，显示一个标签页，内容为罗马书 8:28。界面打"
+"开后，你可以使用 <guiseq><gui>编辑</gui><gui>首选项</gui></guiseq> 更改任何已"
+"默认选定的选项。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:87
+msgid "Launching Xiphos"
+msgstr "运行 Xiphos"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:88
+msgid "When you start <app>Xiphos</app>, the following interface is displayed:"
+msgstr "启动 <app>Xiphos</app> 时，会显示以下界面："
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:93
+msgid "The <app>Xiphos</app> interface contains the following elements:"
+msgstr "<app>Xiphos</app> 界面包含以下元素："
+
+#. (itstool) path: item/title
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:96
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:41
+msgid "Menubar"
+msgstr "菜单栏"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:97
+msgid ""
+"The menus on the menubar contain several commands which extend the use of "
+"<app>Xiphos</app>. These include the StudyPad and advanced search functions. "
+"The menus also help you to customize your use of <app>Xiphos</app>."
+msgstr ""
+"菜单栏中的菜单包含多个扩展 <app>Xiphos</app> 用途的命令，其中包括学习笔记和高"
+"级搜索功能。这些菜单还可以帮助你自定义 <app>Xiphos</app> 的使用。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:103
+msgid "Toolbar"
+msgstr "工具栏"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:104
+msgid ""
+"The <gui>toolbar</gui> contains buttons that let you quickly navigate "
+"through the Bible."
+msgstr "<gui>工具栏</gui>包含可让你在圣经中快速导航的按钮。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:108
+msgid "Sidebar"
+msgstr "侧边栏"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:109
+msgid ""
+"The <gui>Sidebar</gui> provides access to several features. It contains your "
+"bookmarks and the list of installed books. It can also be used to perform "
+"simple searches."
+msgstr ""
+"<gui>侧边栏</gui>提供对多项功能的访问。它包含你的书签和已安装书卷的列表，也可"
+"用于执行简单搜索。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:114
+msgid "Bible Text Pane"
+msgstr "圣经文本窗格"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:115
+msgid ""
+"The <gui>Bible Text pane</gui> displays the Bible text which is currently "
+"being viewed."
+msgstr "<gui>圣经文本窗格</gui>显示当前正在查看的圣经文本。"
+
+#. (itstool) path: item/title
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:119
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:449
+msgid "Previewer"
+msgstr "预览器"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:120
+msgid ""
+"The <gui>Previewer</gui> displays Bible text module options. These include "
+"Strong's numbers, footnotes and morphological tags. It is located below the "
+"Bible Text Pane."
+msgstr ""
+"<gui>预览器</gui>显示圣经文本模块的选项，包括斯特朗编号、脚注和形态标签。它位"
+"于圣经文本窗格下方。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:125
+msgid "Commentary Pane"
+msgstr "注释窗格"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:126
+msgid ""
+"The <gui>Commentary pane</gui> displays commentaries on the current Bible "
+"Text being used."
+msgstr "<gui>注释窗格</gui>显示针对当前所用圣经文本的注释。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:130
+msgid "Book Pane"
+msgstr "书卷窗格"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:131
+msgid ""
+"The <gui>Book Pane</gui> displays general books available from the Sword "
+"Project. These include modules like \"Calvin's Institutes\", \"Josephus: The "
+"Complete Works\" etc. This Pane can be accessed via the Book View tab just "
+"below the Commentary Pane."
+msgstr ""
+"<gui>书卷窗格</gui>显示 Sword 项目提供的普通书卷，包括“加尔文《基督教要"
+"义》”“约瑟夫斯全集”等模块。可以通过注释窗格正下方的书卷视图标签页访问此窗格。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:137
+msgid "Dictionary/Book Pane"
+msgstr "字典/书卷窗格"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:138
+msgid ""
+"The <gui>Dictionary/Book Pane</gui> displays dictionary information on "
+"selected words in the <gui>Bible Text Pane</gui>. It is located just below "
+"the Commentary Pane."
+msgstr ""
+"<gui>字典/书卷窗格</gui>显示<gui>圣经文本窗格</gui>中所选单词的字典信息。它位"
+"于注释窗格正下方。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-10-start.page:143
+msgid ""
+"When you right-click in the different interface sections, the interface "
+"displays a context popup menu, which provides access to more module-specific "
+"options, including display controls and printing services."
+msgstr ""
+"在界面的不同区域右键单击时，界面会显示上下文弹出菜单，其中提供更多针对模块的"
+"选项，包括显示控制和打印服务。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:5
+msgid "An explanation of the areas shown in the <app>Xiphos</app> window."
+msgstr "对 <app>Xiphos</app> 窗口中各区域的说明。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:36
+msgid "Xiphos Main Window"
+msgstr "Xiphos 主窗口"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:42
+msgid ""
+"At the top of the <app>Xiphos</app> main window is the menubar. Almost all "
+"of the functions are available by activating the appropriate menu item. The "
+"functions have been grouped according to their type. For example, the file "
+"operations have been grouped into the <gui>File</gui> menu."
+msgstr ""
+"<app>Xiphos</app> 主窗口的顶部是菜单栏。几乎所有功能都可以通过激活相应的菜单"
+"项来使用。这些功能已按类型分组。例如，文件操作被归入<gui>文件</gui>菜单。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:46
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_menubar.png' "
+"md5='c42df339dbdea68d5e5915bbb9e6cdde'"
+msgstr ""
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:52
+msgid "Toolbars"
+msgstr "工具栏"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:53
+msgid ""
+"The function of the Toolbar is to provide control over the Bible and "
+"Commentary Panes. Activation of the Toolbar option is done by moving the "
+"mouse cursor over the desired toolbar button and selecting it. A tooltip "
+"will appear if the mouse cursor is held stationary over a toolbar button, "
+"describing the function of the button."
+msgstr ""
+"工具栏的作用是提供对圣经窗格和注释窗格的控制。将鼠标光标移到所需的工具栏按钮"
+"上并选择它，即可激活该工具栏选项。如果鼠标光标在工具栏按钮上保持不动，会出现"
+"工具提示，说明该按钮的功能。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:58
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_toolbar.png' "
+"md5='3ab14988344fd6bbef9cfa43c53dd064'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:60
+msgid "The <gui>Toolbar</gui> consists of the following functions:"
+msgstr "<gui>工具栏</gui>由以下功能组成："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:63
+msgid "History View Toggle and drop-down menu"
+msgstr "历史记录视图切换和下拉菜单"
+
+#. (itstool) path: item/p
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:66
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:85
+msgid "Bible Book Selector"
+msgstr "圣经书卷选择器"
+
+#. (itstool) path: item/p
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:69
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:91
+msgid "Bible Chapter Selector"
+msgstr "圣经章选择器"
+
+#. (itstool) path: item/p
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:72
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:98
+msgid "Bible Verse Selector"
+msgstr "圣经节选择器"
+
+#. (itstool) path: item/p
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:75
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:105
+msgid "Bible Passage Summary"
+msgstr "圣经经文段落摘要"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:80
+msgid "History Forward/Backward Selector"
+msgstr "历史记录前进/后退选择器"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:81
+msgid "Switches between current and previous passage selections."
+msgstr "在当前与之前选择的经文段落之间切换。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:86
+msgid ""
+"Selects the Biblical book to be displayed in the <gui>Bible Text Pane </gui> "
+"and <gui>Commentary Pane</gui>. Changes take immediate effect."
+msgstr ""
+"选择要在<gui>圣经文本窗格</gui>和<gui>注释窗格</gui>中显示的圣经书卷。更改立"
+"即生效。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:92
+msgid ""
+"Selects the Biblical chapter of current book to be displayed in the "
+"<gui>Bible Text Pane</gui> and <gui>Commentary Pane</gui>. Changes take "
+"immediate effect."
+msgstr ""
+"选择当前书卷中要在<gui>圣经文本窗格</gui>和<gui>注释窗格</gui>中显示的章。更"
+"改立即生效。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:99
+msgid ""
+"Selects the Biblical verse of current chapter to be displayed in the "
+"<gui>Bible Text Pane</gui> and <gui>Commentary Pane</gui>. Changes take "
+"immediate effect."
+msgstr ""
+"选择当前章中要在<gui>圣经文本窗格</gui>和<gui>注释窗格</gui>中显示的节。更改"
+"立即生效。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:106
+msgid ""
+"Allows manual editing of passages which are displayed in the <gui>Bible Text "
+"Pane</gui> and <gui>Commentary Pane</gui>. Changes take effect once Enter is "
+"typed."
+msgstr ""
+"允许手动编辑在<gui>圣经文本窗格</gui>和<gui>注释窗格</gui>中显示的经文段落。"
+"输入回车后更改生效。"
+
+#. (itstool) path: note/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:110
+msgid ""
+"Ensure that edited book,chapter and verse naming is correct, otherwise the "
+"wrong or no information will be displayed."
+msgstr ""
+"请确保编辑后的书卷、章和节名称正确，否则将显示错误的信息或不显示任何信息。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:120
+msgid "The Sidebar"
+msgstr "侧边栏"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:121
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_sidepane.png' "
+"md5='2b583406033dea06d706d2967f9e4b38'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:123
+msgid ""
+"On the left hand side of <app>Xiphos</app> there is the Sidebar. Here the "
+"user can switch between the different Sword modules, view bookmarks, do "
+"simple searches and view verse lists. In the Modules listing, a module may "
+"be chosen for viewing in the current tab of the main window by clicking it. "
+"Using the context (right-click) menu, other options are to open a new tab "
+"using the module, open a separate (i.e. detached) window, or to view the "
+"\"About\" information for the module."
+msgstr ""
+"<app>Xiphos</app> 的左侧是侧边栏。用户可以在此切换不同的 Sword 模块、查看书"
+"签、进行简单搜索以及查看经文列表。在模块列表中，单击某个模块即可在主窗口的当"
+"前标签页中查看该模块。通过右键单击菜单，还可以选择其他选项：使用该模块打开新"
+"标签页、打开单独（即分离的）窗口，或查看该模块的“关于”信息。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:131
+msgid ""
+"To switch between all Sidebar functions, buttons have been placed at the top "
+"of the Sidebar."
+msgstr "要在侧边栏的各项功能之间切换，侧边栏顶部放置了按钮。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:133
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_shortcut.png' "
+"md5='33d63d1883d66e57bdfdc11d77e5e8d7'"
+msgstr ""
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:138
+msgid "Organizing The Module Tree"
+msgstr "整理模块树"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:139
+msgid ""
+"Right-clicking anywhere in the Modules listing brings up a context menu with "
+"options for organizing a long list of installed modules:"
+msgstr ""
+"在模块列表中的任意位置右键单击，会弹出上下文菜单，其中的选项可用于整理较长的"
+"已安装模块列表："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:143
+msgid ""
+"<gui>Add to Favorites</gui> / <gui>Remove from Favorites</gui> - marks a "
+"module so that it also appears under a dedicated <gui>Favorites</gui> entry "
+"at the top of the module tree, for quick access to the modules you use most."
+msgstr ""
+"<gui>添加到收藏夹</gui> / <gui>从收藏夹中移除</gui> - 标记某个模块，使其同时"
+"出现在模块树顶部专用的<gui>收藏夹</gui>条目下，方便快速访问你最常用的模块。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:149
+msgid ""
+"<gui>Hide</gui> / <gui>Show Hidden Modules</gui> - removes a rarely-used "
+"module from the visible tree without uninstalling it. Hidden modules can be "
+"shown again, and un-hidden, from the same context menu."
+msgstr ""
+"<gui>隐藏</gui> / <gui>显示隐藏的模块</gui> - 将不常用的模块从可见的树中移除"
+"而不卸载。可通过同一上下文菜单重新显示并取消隐藏这些模块。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:155
+msgid ""
+"<gui>Group By</gui> - chooses how the tree is organized: by <gui>Category</"
+"gui> (Biblical Texts, Commentaries, Dictionaries, General Books, etc.), by "
+"<gui>Language</gui>, or by <gui>Both</gui> (language within category). This "
+"is useful once many modules in several languages are installed."
+msgstr ""
+"<gui>分组方式</gui> - 选择树的组织方式：按<gui>类别</gui>（圣经文本、注释、字"
+"典、普通书卷等）、按<gui>语言</gui>，或按<gui>两者</gui>（类别内再按语言）。"
+"当安装了多种语言的大量模块时，这很有用。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:169
+msgid "The Bible Text Pane"
+msgstr "圣经文本窗格"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:170
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_biblepane.png' "
+"md5='f15efb9a54db053efeac7966f4a8e89d'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:171
+msgid ""
+"Positioned to the right of the Shortcut bar is the Bible text pane. All "
+"translations are displayed here. When starting <app>Xiphos</app>, the "
+"translation last used in the leftmost tab will be displayed."
+msgstr ""
+"圣经文本窗格位于快捷栏的右侧，所有译本都在此显示。启动 <app>Xiphos</app> 时，"
+"将显示最左侧标签页中上次使用的译本。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:176
+msgid "Opening A Specific Bible Translation"
+msgstr "打开特定的圣经译本"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:177
+msgid ""
+"In order to change the current Bible translation to another of your choice:"
+msgstr "要将当前圣经译本更改为你选择的另一个译本："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:181
+msgid ""
+"right-click in the <gui>Bible Text Pane</gui>. In the popup menu choose "
+"<guiseq><gui>File</gui><gui>Open Module</gui></guiseq> and select your "
+"specific translation that you want to view."
+msgstr ""
+"在<gui>圣经文本窗格</gui>中右键单击。在弹出菜单中选择 <guiseq><gui>文件</"
+"gui><gui>打开模块</gui></guiseq>，然后选择你想查看的特定译本。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:186
+msgid ""
+"under the <gui>Modules</gui> option in the <gui>Sidebar</gui>, choose "
+"<guiseq><gui>Biblical Texts</gui><gui>language choice</gui> </guiseq> and "
+"select your specific translation."
+msgstr ""
+"在<gui>侧边栏</gui>的<gui>模块</gui>选项下，选择 <guiseq><gui>圣经文本</"
+"gui><gui>语言选项</gui> </guiseq>，然后选择你想要的特定译本。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:194
+msgid "Using the Parallel View Mode"
+msgstr "使用类似视图模式"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:196
+msgid ""
+"A nice function in <app>Xiphos</app> is the ability to view your specified "
+"bible text in several parallel translations of your choice. The Parallel "
+"View mode can be accessed by selecting <gui>Parallel View</gui> just below "
+"the <gui>Bible Text Pane</gui>, next to the <gui>Standard View </gui> tab."
+msgstr ""
+"<app>Xiphos</app> 的一项很棒的功能是，可以以你选择的多个并行译本查看你指定的"
+"圣经文本。选择<gui>圣经文本窗格</gui>正下方、<gui>标准视图 </gui>标签页旁边的"
+"<gui>类似视图</gui>，即可进入类似视图模式。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:202
+msgid ""
+"You must choose which modules to display in parallel with the <gui> "
+"Preferences</gui> dialog found under the <gui>Edit</gui> menu. In the "
+"dialog, choose Modules, then Parallel. You can add or subtract from the list "
+"of modules that will be shown in the parallel view. The toolbar gives you a "
+"selector tool to erase the list, delete a module from the list, and add "
+"modules to the list. Up to 8 modules can be shown side by side."
+msgstr ""
+"你必须在<gui>编辑</gui>菜单下的<gui> 首选项</gui>对话框中选择要并行显示的模"
+"块。在对话框中依次选择“模块”和“类似”。你可以在类似视图中显示的模块列表里增加"
+"或减少模块。工具栏提供了清空列表、从列表中删除模块以及向列表添加模块的选择工"
+"具。最多可以并排显示 8 个模块。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:211
+msgid ""
+"Instead of rebuilding this list every time you want to switch between "
+"different combinations of translations (for example, one set for original-"
+"language study and another for a reading group), you can save the current "
+"list of parallel modules as a named <gui>Set</gui>. Once you have several "
+"sets saved, a drop-down selector lets you switch between them instantly, and "
+"the parallel view is rebuilt with the modules belonging to the chosen set. "
+"Sets can be renamed or deleted from the same selector."
+msgstr ""
+"无需每次想在不同的译本组合之间切换时重建这个列表（例如，一组用于原文研读，另"
+"一组用于读经小组），你可以将当前的类似模块列表保存为一个具名的<gui>集合</"
+"gui>。保存多个集合后，通过下拉选择器即可在它们之间立即切换，类似视图会用所选"
+"集合中的模块重新构建。集合可以在同一选择器中重命名或删除。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:220
+msgid ""
+"The <gui>Parallel View</gui> shows just one verse at a time. You can change "
+"the verse by selecting another verse, chapter, or book at the toolbar. Also "
+"note that modules that are Old Testament or New Testament only (e.g. "
+"Westminster Leningrad Codex, Byzantine Majority Text) will not be able to "
+"display books that they don't have."
+msgstr ""
+"<gui>类似视图</gui>一次只显示一节经文。你可以通过在工具栏上选择另一节经文、另"
+"一章或另一卷书来更改经文。另外请注意，仅含旧约或仅含新约的模块（例如 "
+"Westminster Leningrad Codex、Byzantine Majority Text）无法显示它们所没有的书"
+"卷。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:225
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_parallel.png' "
+"md5='4901130512d4cb5864620b960a3252ad'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:227
+msgid ""
+"Additionally, a separate Parallel View window can be selected from the right "
+"click menu with <gui>Detach/Attach</gui>. Your Bible pane will return to its "
+"normal single text view, and the new Parallel View window will show the "
+"complete chapter, showing the same translations."
+msgstr ""
+"此外，可以通过右键菜单中的<gui>分离/附加</gui>选择单独的类似视图窗口。你的圣"
+"经窗格将恢复为正常的单文本视图，新的类似视图窗口将显示完整的一章，并显示相同"
+"的译本。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:231
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_parallel-separate.png' "
+"md5='31f905c62b5676dd39583150eee9bbfa'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:233
+msgid ""
+"Be aware that Bibles have different versification schemes. That is, most "
+"obviously some Bibles have only Old or New Testament. Beyond that, there are "
+"historically varying ways of dividing the Bible into chapters and verses. "
+"Within the parallel view, the first Bible controls what versification is in "
+"use for all Bibles displayed. This means that if the 1st Bible is limited to "
+"the Old Testament, none of the other Bibles in parallel views will be able "
+"to navigate outisde the OT. There are other subtler differences, such as KJV "
+"versification versus NRSV versification, where 3 John has a 15th verse and "
+"Revelation 12 has an 18th verse."
+msgstr ""
+"请注意，不同的圣经具有不同的分章分节体系。最明显的是，有些圣经只有旧约或新"
+"约。除此之外，历史上将圣经划分为章和节的方式也各不相同。在类似视图中，第一本"
+"圣经决定所有显示圣经所使用的分章分节体系。这意味着，如果第一本圣经仅限于旧"
+"约，那么类似视图中的其他圣经都无法导航到旧约之外。还有其他更细微的差异，例如 "
+"KJV 与 NRSV 的分节体系：约翰三书有第 15 节，启示录第 12 章有第 18 节。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:245
+msgid "Opening A Separate Bible Translation"
+msgstr "打开单独的圣经译本"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:246
+msgid ""
+"In order to view a Bible translation separate from the <app>Xiphos </app> "
+"main window interface, under the <gui>Modules</gui> option in the "
+"<gui>Sidebar</gui>, choose <guiseq><gui>Biblical Texts</gui><gui>language "
+"choice</gui></guiseq>. Then right-click on a translation and choose <gui> "
+"Open in dialog</gui>. The module will open in a separate, detached window of "
+"its own."
+msgstr ""
+"要在 <app>Xiphos </app>主窗口界面之外单独查看某个圣经译本，请在<gui>侧边栏</"
+"gui>的<gui>模块</gui>选项下选择 <guiseq><gui>圣经文本</gui><gui>语言选项</"
+"gui></guiseq>。然后右键单击某个译本，选择<gui> 在对话框中打开</gui>。该模块将"
+"在其自己的独立分离窗口中打开。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:253
+msgid ""
+"Detached Bible and commentary windows have a synchronization button in the "
+"upper-left position beside the navigation bar. When this button is "
+"depressed, the main window Bible and commentary will synchronize with "
+"detached Bible and commentary windows. The synchronization goes both ways: "
+"Any detached window will synchronize navigation with all other detached "
+"Bibles and commentaries plus the main window, and the main window will drive "
+"all detached Bibles and commentaries whose synchronization button is "
+"depressed."
+msgstr ""
+"分离的圣经和注释窗口在导航栏旁边的左上角有一个同步按钮。按下此按钮后，主窗口"
+"的圣经和注释将与分离的圣经和注释窗口同步。同步是双向的：任何分离的窗口都会与"
+"所有其他分离的圣经和注释以及主窗口同步导航，而主窗口会带动所有已按下同步按钮"
+"的分离圣经和注释。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:264
+msgid "Finding Out About The Current Translation"
+msgstr "了解当前译本的信息"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:265
+msgid "To find out about the Bible translation currently being displayed:"
+msgstr "要了解当前显示的圣经译本的信息："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:268
+msgid ""
+"right-click in the <gui>Bible Text pane</gui>. In the popup menu choose "
+"<gui>About </gui> module name."
+msgstr ""
+"在<gui>圣经文本窗格</gui>中右键单击。在弹出菜单中选择<gui>关于 </gui>模块名"
+"称。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:272
+msgid ""
+"Under the <gui>Modules</gui> option in the <gui>Sidebar</gui>, choose "
+"<guiseq><gui>Biblical Texts</gui><gui>language choice</gui> </guiseq>. Then "
+"right-click on a translation and choose the <gui> About</gui> option."
+msgstr ""
+"在<gui>侧边栏</gui>的<gui>模块</gui>选项下，选择 <guiseq><gui>圣经文本</"
+"gui><gui>语言选项</gui> </guiseq>。然后右键单击某个译本，选择<gui>关于</gui>"
+"选项。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:281
+msgid "Module Options"
+msgstr "模块选项"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:282
+msgid ""
+"Most Bible translations have additional options which the user can select."
+msgstr "大多数圣经译本都有用户可以选择的附加选项。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:286
+msgid "Words Of Christ In Red"
+msgstr "基督的话语用红字显示"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:289
+msgid "Strong's Numbers"
+msgstr "斯特朗编号"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:292
+msgid "Morphological Tags"
+msgstr "形态标签"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:295
+msgid "Footnotes"
+msgstr "脚注"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:298
+msgid "Scripture Cross-Reference"
+msgstr "圣经交叉引用"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:301
+msgid "Headings"
+msgstr "标题"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:304
+msgid "Image Content"
+msgstr "图片内容"
+
+#. (itstool) path: note/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:308
+msgid ""
+"Translations in other languages such as Greek or Hebrew have specific "
+"options which deal only with the specific language."
+msgstr "其他语言（例如希腊文或希伯来文）的译本具有仅针对该语言的特定选项。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:311
+msgid "In order to access these options:"
+msgstr "要访问这些选项："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:314
+msgid ""
+"right-click in the <gui>Bible Text pane</gui>. In the popup menu (example "
+"shown), choose <gui>Module Options</gui> and select the specific option."
+msgstr ""
+"在<gui>圣经文本窗格</gui>中右键单击。在弹出菜单（如示例所示）中选择<gui>模块"
+"选项</gui>，然后选择具体的选项。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:319
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_biblepane-options.png' "
+"md5='2d0e96f726a466a77aa6291fd44f5ffb'"
+msgstr ""
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:323
+msgid "View Options"
+msgstr "查看选项"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:324
+msgid ""
+"There are several additional modes that can be selected from the menubar's "
+"<gui>View</gui> pulldown."
+msgstr "在菜单栏的<gui>查看</gui>下拉菜单中，还可以选择若干附加模式。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:326
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_menubar-view.png' "
+"md5='98bf0107ad7034d727425f4f188fc3ef'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:328
+msgid ""
+"The first 4 checkboxes control whether each named subwindow is displayed. "
+"The viewable state of the subwindows is remembered on a per-tab basis. This "
+"makes it possible, for example, to have a tab dedicated to a maps module "
+"alone (in a dictionary module, having alphabetically-listed places), by "
+"turning off the display of Bible, Previewer, and Commentary for that tab."
+msgstr ""
+"前 4 个复选框控制是否显示相应名称的子窗口。子窗口的可见状态按标签页分别记忆。"
+"例如，通过在某个标签页中关闭圣经、预览器和注释的显示，就可以让该标签页专门用"
+"于地图模块（其中的字典模块按字母顺序列出地点）。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:335
+msgid "The remaining checkboxes control these other display features:"
+msgstr "其余的复选框控制以下其他显示功能："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:338
+msgid ""
+"Link Tabs - When more than one tab is open, each one's verse is navigated "
+"separately in the disabled case. If tab linking is enabled, then all tabs "
+"navigate together, keeping all translations on the same verse."
+msgstr ""
+"链接标签 - 当打开多个标签页时，在禁用的情况下，每个标签页的经文各自单独导航。"
+"如果启用了标签页链接，则所有标签页一起导航，使所有译本保持在同一节经文。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:344
+msgid ""
+"Read Aloud - If you enable this, then <app>Xiphos</app> will funnel all "
+"selected verses through a text-to-speech system. On Linux, <app>Xiphos</app> "
+"uses the <app>festival</app> TTS, often installed by default in Linux "
+"distributions. On Windows, and on Linux systems that provide it, "
+"<app>Xiphos</app> can instead use the operating system's own text-to-speech "
+"(\"System TTS\"), so no separate speech engine needs to be installed."
+msgstr ""
+"朗读 - 启用此项后，<app>Xiphos</app> 会将所有选中的经文送入文本转语音系统。"
+"在 Linux 上，<app>Xiphos</app> 使用 <app>festival</app> 语音合成，它通常在 "
+"Linux 发行版中默认安装。在 Windows 以及提供该功能的 Linux 系统上，"
+"<app>Xiphos</app> 也可以改用操作系统自带的文本转语音（“系统 TTS”），因此无需"
+"另外安装语音引擎。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:352
+msgid ""
+"Also, mouse-selected text may be read aloud from Bibles, commentaries, and "
+"general books, using the right-click menu, regardless of whether Read Aloud "
+"is selected."
+msgstr ""
+"此外，无论是否选中“朗读”，都可以使用右键菜单朗读在圣经、注释和普通书卷中用鼠"
+"标选中的文本。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:357
+msgid ""
+"Show Verse Numbers - Normally enabled, this toggle can be disabled to "
+"prevent display of verse numbers within the text."
+msgstr ""
+"显示经文小节号码 - 通常处于启用状态，可以禁用此开关，以防止在文本中显示经文小"
+"节号码。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:361
+msgid ""
+"Highlight Current Verse - Initially disabled, this toggle replaces mere "
+"alternate colorization of the current verse with a substitute high-contrast "
+"highlight. The colors used may be selected from the Preferences dialog."
+msgstr ""
+"高亮显示当前经文 - 最初处于禁用状态，此开关将当前经文原本仅有的交替着色替换为"
+"高对比度的高亮显示。所用的颜色可以在首选项对话框中选择。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:370
+msgid "Display Control with CSS"
+msgstr "使用 CSS 控制显示"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:371
+msgid ""
+"Users familiar with CSS (cascading style sheets) may wish to create the file "
+"\"default-style.css\" in the .xiphos directory to contain whatever CSS "
+"controls are desired. Beware, it is very easy to shoot oneself in the foot "
+"with CSS, and this will affect all modules' display. The facility exists to "
+"provide the capability that advanced users may wish."
+msgstr ""
+"熟悉 CSS（层叠样式表）的用户可以在 .xiphos 目录中创建文件“default-style."
+"css”，用于包含所需的任何 CSS 控制。请注意，使用 CSS 很容易适得其反，而且这会"
+"影响所有模块的显示。提供此功能是为了满足高级用户可能需要的能力。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:379
+msgid "User Annotation"
+msgstr "用户注解"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:380
+msgid ""
+"Many users wish to make personal annotations on individual verses, without "
+"the need to put a full \"personal commentary\" module to use. <app>Xiphos</"
+"app> provides this in the right-click context menu in the Bible pane. This "
+"brings up a dialog showing the current verse reference and offering a text "
+"box into which to enter a brief personal note. Once the user closes the "
+"dialog with \"Annotate Verse,\" the verse will be displayed in reverse-"
+"highlight (default, blue on yellow) and a marker <gui>*u</gui> will be "
+"inserted at the verse's beginning. This is metaphorically similar for users "
+"who mark verses in paper Bibles with a yellow highlighter and write personal "
+"notes in the margins."
+msgstr ""
+"许多用户希望对个别经文做个人注解，而不必使用完整的“个人注释”模块。"
+"<app>Xiphos</app> 在圣经窗格的右键上下文菜单中提供了此功能。它会弹出一个对话"
+"框，显示当前经文的引用，并提供一个文本框，用于输入简短的个人笔记。用户用“注释"
+"经文”关闭对话框后，该经文将以反色高亮显示（默认为黄底蓝字），并在经文开头插入"
+"标记 <gui>*u</gui>。这类似于用户在纸质圣经上用黄色荧光笔标记经文并在页边空白"
+"处写下个人笔记。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:391
+msgid ""
+"Selecting an already-annotated verse will (in the usual case) bring up the "
+"existing content for re-editing. An already-annotated verse can be unmarked; "
+"the verse will cease to show in reverse-highlight."
+msgstr ""
+"选择一节已有注解的经文时，（通常情况下）会调出已有内容供重新编辑。已有注解的"
+"经文可以取消标记；该经文将不再以反色高亮显示。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:395
+msgid ""
+"If the user deletes the module name from the reference at the top of the "
+"dialog, then the annotation will apply to any Bible module at the selected "
+"verse. However, in this case, re-selecting the annotated verse will not "
+"initialize with the existing content, because the dialog is created based on "
+"the specific module reference."
+msgstr ""
+"如果用户从对话框顶部的引用中删除模块名称，则该注解将应用于所选经文处的任何圣"
+"经模块。不过，在这种情况下，重新选择已注解的经文时不会载入已有内容，因为对话"
+"框是根据特定模块的引用创建的。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:403
+msgid "Geography Support"
+msgstr "地理支持"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:404
+msgid ""
+"A connection to browsing BibleMap.org is available by mouse-selecting a "
+"place name in any text. Use the right-click context menu to select "
+"<guiseq><gui>Lookup Selection</gui><gui>Browse in BibleMap.org</gui> </"
+"guiseq>. A web browser will be brought up to show the selected name's "
+"geography via BibleMap, which provides Biblical detail overlaid on a Google "
+"Maps interface."
+msgstr ""
+"用鼠标选中任意文本中的地名，即可连接到 BibleMap.org 进行浏览。使用右键上下文"
+"菜单选择 <guiseq><gui>查找选择</gui><gui>在 BibleMap.org 中浏览</gui> </"
+"guiseq>。系统将打开网页浏览器，通过 BibleMap 显示所选名称的地理位置，"
+"BibleMap 在 Google 地图界面上叠加了圣经相关的详细信息。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:415
+msgid "Translate Selection"
+msgstr "翻译所选内容"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:416
+msgid ""
+"To get a quick machine translation of a word or phrase, mouse-select the "
+"text anywhere it can be selected (Bible, commentary, general book, or "
+"dictionary panes) and use the right-click context menu to choose "
+"<guiseq><gui>Lookup Selection</gui><gui>Translate Selection</gui> </guiseq>. "
+"A web browser will open with the selection submitted to an online "
+"translation service."
+msgstr ""
+"要快速获得某个单词或短语的机器翻译，请在任何可选择的位置（圣经、注释、普通书"
+"卷或字典窗格）用鼠标选中文本，然后使用右键上下文菜单选择 <guiseq><gui>查找选"
+"择</gui><gui>翻译所选内容</gui> </guiseq>。网页浏览器将打开，并将所选内容提交"
+"给在线翻译服务。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:425
+msgid "Specific Word Meanings"
+msgstr "特定词语的含义"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:426
+msgid ""
+"In order to check the meaning of a specific word, double-click on the word "
+"you wish to lookup. The word should then highlight itself and the "
+"explanation should be displayed, if available, in the <gui>Dictionary Pane</"
+"gui>."
+msgstr ""
+"要查看某个特定单词的含义，请双击你想查找的单词。该单词随后应会自动高亮，并且"
+"如果有解释的话，将显示在<gui>字典窗格</gui>中。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:433
+msgid "Finding A Specific Word"
+msgstr "查找特定的单词"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:434
+msgid "To find a specific word within a passage:"
+msgstr "要在某段经文中查找特定的单词："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:437
+msgid ""
+"right-click in the <gui>Bible Text Pane</gui>. In the popup menu, choose "
+"<guiseq><gui>Edit</gui><gui>Find</gui></guiseq>. A dialog will appear, which "
+"provides text searches. Fill out dialog and click the <gui>Find</gui> and "
+"<gui>Find Next</gui> buttons."
+msgstr ""
+"在<gui>圣经文本窗格</gui>中右键单击。在弹出菜单中选择 <guiseq><gui>编辑</"
+"gui><gui>查找</gui></guiseq>。将出现一个提供文本搜索的对话框。填写对话框并单"
+"击<gui>查找</gui>和<gui>查找下一个</gui>按钮。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:450
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_viewer.png' "
+"md5='09cef9f090800bdab9d3fc3675c80039'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:452
+msgid ""
+"The Previewer is where the user sees Strong's numbers, morphological tags, "
+"footnotes, and cross-references that the <gui>Bible Text Pane</gui> provides."
+msgstr ""
+"预览器用于显示<gui>圣经文本窗格</gui>所提供的斯特朗编号、形态标签、脚注和交叉"
+"引用。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:456
+msgid ""
+"Footnote content is displayed in the Previewer when you hover over the "
+"indicator <gui>*n</gui> in the Bible text; it remains visible until your "
+"mouse moves over another indicator, Strong's number, etc. Sometimes you may "
+"want the text to remain anchored until you can move the mouse to the "
+"previewer to click on a link or to read large footnotes. To anchor the text "
+"so that you can scroll it in the Previewer, middle-click the indicator (or "
+"hold down the <gui>Shift key</gui>) and move to the Previewer."
+msgstr ""
+"当鼠标悬停在圣经文本中的标记 <gui>*n</gui> 上时，脚注内容会显示在预览器中；它"
+"会一直保持可见，直到鼠标移到另一个标记、斯特朗编号等上。有时你可能希望文本保"
+"持固定，以便将鼠标移到预览器中点击链接或阅读较长的脚注。要固定文本以便在预览"
+"器中滚动，请用鼠标中键单击该标记（或按住 <gui>Shift 键</gui>），然后移动到预"
+"览器。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:464
+msgid ""
+"Cross-reference indicators <gui>*x</gui> work much the same way. Clicking "
+"the indicator will send the set of references to the <gui>Verse List</gui> "
+"in the <gui>Sidebar</gui>, where you can click them individually for reading "
+"in the Previewer. Alternately, a Preferences selector is available, so that "
+"cross-reference lists are sent to the verse list instead. When a cross-"
+"reference resolves to more than one verse, a popup menu also lets you jump "
+"straight to any one of the listed references without first sending the whole "
+"set to the verse list; this also works for references given only as partial "
+"verse ranges."
+msgstr ""
+"交叉引用标记 <gui>*x</gui> 的工作方式大致相同。单击该标记会将这组引用发送到"
+"<gui>侧边栏</gui>中的<gui>经文列表</gui>，你可以在那里逐个点击它们，在预览器"
+"中阅读。或者，也可以通过首选项中的选项，将交叉引用列表改为发送到经文列表。当"
+"某个交叉引用对应多节经文时，还可通过弹出菜单直接跳转到所列的任意一个引用，而"
+"无需先将整组引用发送到经文列表；对于仅给出部分经文范围的引用，这同样适用。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:474
+msgid ""
+"Any verses shown in reverse-highlight have personal annotation associated "
+"with them, and such verses will include <gui>*u</gui> at the beginning of "
+"the verse. Hovering on this marker will show the annotation in the "
+"previewer, just as for publisher's footnotes."
+msgstr ""
+"任何以反色高亮显示的经文都带有个人注解，这类经文的开头会包含 <gui>*u</gui>。"
+"将鼠标悬停在此标记上会在预览器中显示注解，就像出版商的脚注一样。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:479
+msgid ""
+"If a devotional has been set via the Preferences dialog, then the day's "
+"devotional reference will also appear in the previewer, either on program "
+"startup or when the user requests it via the <gui>View</gui> menu."
+msgstr ""
+"如果已通过首选项对话框设置了灵修模块，则当天的灵修引用也会显示在预览器中，既"
+"可在程序启动时显示，也可在用户通过<gui>查看</gui>菜单请求时显示。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:487
+msgid "The Commentary Pane"
+msgstr "注释窗格"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:488
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_commentarypane.png' "
+"md5='6c760646a244785dff155beeb6e3ba8f'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:490
+msgid ""
+"The <gui>Commentary pane</gui> is where the commentary modules are "
+"displayed. This provides easy reading, reference, and access to different "
+"commentaries currently installed. The passage viewed by the <gui>Commentary "
+"pane</gui> is directly controlled by the current passage viewed in the "
+"<gui>Bible Text pane</gui>, so in order to change to a different passage "
+"commentary, select the desired passage on the <gui>Toolbar</gui>."
+msgstr ""
+"<gui>注释窗格</gui>用于显示注释模块。这样可以方便地阅读、参考以及访问当前已安"
+"装的各种注释。<gui>注释窗格</gui>中查看的经文段落由<gui>圣经文本窗格</gui>中"
+"当前查看的经文段落直接控制，因此，要切换到其他经文段落的注释，请在<gui>工具栏"
+"</gui>上选择所需的经文段落。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:497
+msgid ""
+"If there are images that are part of a commentary, general book, or "
+"dictionary/lexicon, they may be clicked to invoke a viewer on that single "
+"image, in order to get a better view. This is particularly useful if image "
+"resizing has been enabled with the result that images are made very small in "
+"the subwindow."
+msgstr ""
+"如果注释、普通书卷或字典/词典中包含图片，可以单击这些图片，调用查看器单独查看"
+"该图片，以获得更清晰的视图。如果启用了图像大小调整，导致图片在子窗口中变得非"
+"常小，这一点尤其有用。"
+
+#. (itstool) path: note/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:503
+msgid ""
+"By changing to passage settings on the <gui>Toolbar</gui>, the contents in "
+"the <gui>Bible Text pane</gui> and the <gui>Commentary Pane</gui> will be "
+"changed."
+msgstr ""
+"通过更改<gui>工具栏</gui>上的经文段落设置，<gui>圣经文本窗格</gui>和<gui>注释"
+"窗格</gui>中的内容都会随之更改。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:509
+msgid "Finding Out About The Commentary Module"
+msgstr "了解注释模块的信息"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:510
+msgid "To find out about the commentary currently being displayed:"
+msgstr "要了解当前显示的注释的信息："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:513
+msgid ""
+"right-click in the <gui>Commentary Pane</gui>. In the popup menu choose "
+"<gui>About </gui> module name."
+msgstr ""
+"在<gui>注释窗格</gui>中右键单击。在弹出菜单中选择<gui>关于 </gui>模块名称。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:520
+msgid "Commentary Headings"
+msgstr "注释标题"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:521
+msgid ""
+"Many commentaries have additional headings which enable introductory "
+"information about the book and chapter currently being displayed in the "
+"<gui>Bible Text pane</gui>. In order to view them:"
+msgstr ""
+"许多注释带有附加的标题，提供关于<gui>圣经文本窗格</gui>中当前所显示书卷和章的"
+"介绍性信息。要查看它们："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:526
+msgid ""
+"right-click in the <gui>Commentary Pane</gui>. In the popup menu choose "
+"<gui>Display Book Heading</gui> or <gui>Display Chapter Heading</gui>."
+msgstr ""
+"在<gui>注释窗格</gui>中右键单击。在弹出菜单中选择<gui>显示书卷标题</gui>或"
+"<gui>显示章节标题</gui>。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:535
+msgid "Dictionary Pane"
+msgstr "字典窗格"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:536
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_dictionary.png' "
+"md5='d702fcc80d3183099cbe8374c5a8cb3b'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:538
+msgid ""
+"The Dictionary Pane's content is driven by its up/down selectors, typing in "
+"its navbar text, or double-clicks in the Bible, Commentary, or Book Panes."
+msgstr ""
+"字典窗格的内容由其上/下选择器、在其导航栏中输入文本，或在圣经、注释或书卷窗格"
+"中双击来驱动。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:548
+msgid "Daily Devotional Tab"
+msgstr "每日灵修标签页"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:549
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_devotional.png' "
+"md5='1c2272f9e2abe1d3c2f967ca047425db'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:550
+msgid ""
+"If a <gui>Daily Devotional</gui> module is installed and selected as your "
+"preferred devotional (see <link xref=\"xiphos-50-preferences-general-"
+"settings\"/> and the <gui>Special</gui> tab in <link xref=\"xiphos-53-"
+"preferences-modules\"/>), a dedicated <gui>Devotional </gui> tab is "
+"available alongside the <gui>Book View</gui> tab below the <gui>Commentary "
+"Pane</gui>. It shows the reading for the current date by default."
+msgstr ""
+"如果已安装<gui>每日灵修</gui>模块并将其选为你的首选灵修（参见 <link "
+"xref=\"xiphos-50-preferences-general-settings\"/>，以及 <link "
+"xref=\"xiphos-53-preferences-modules\"/> 中的<gui>特殊</gui>标签页），则在"
+"<gui>注释窗格</gui>下方的<gui>书卷视图</gui>标签页旁会出现一个专用的<gui>灵"
+"修 </gui>标签页。它默认显示当前日期的阅读内容。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-11-interface.page:558
+msgid ""
+"To read a devotional for a different day, click the date shown at the top of "
+"the tab; a calendar popover lets you pick the day directly, or you may type "
+"a date in manually. This is in addition to, and independent of, the day's "
+"devotional reference optionally shown in the Previewer at <app>Xiphos</app> "
+"startup (see above)."
+msgstr ""
+"要阅读另一天的灵修，请单击标签页顶部显示的日期；弹出的日历可让你直接选择日"
+"期，你也可以手动输入日期。这是对 <app>Xiphos</app> 启动时在预览器中可选显示的"
+"当天灵修引用（见上文）的补充，且与之相互独立。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-20-modules-introduction.page:6
+msgid "How to manage modules."
+msgstr "如何管理模块。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-20-modules-introduction.page:39
+msgid "Introduction To The Module Manager"
+msgstr "模块管理器简介"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-20-modules-introduction.page:41
+msgid ""
+"The \"module\" is the unit of content in <app>Xiphos</app>, and Sword "
+"generally; a Sword module is a resource available for viewing in Sword "
+"applications. There are several varieties: Most importantly, Bible texts, as "
+"well as dictionaries and lexicons, commentaries, and general books, any of "
+"which may include image content (e.g. atlases). They are installed either "
+"from a local directory structure (typically on removable media, such as a "
+"CDROM distribution) or remotely via ftp from a repository such as Crosswire, "
+"which is the home of Sword, and from which all officially Sword-sanctioned "
+"modules are available. Also, many other modules are available from non-"
+"Crosswire repositories. In particular, there is the Xiphos repository, "
+"containing a variety of otherwise-unofficial modules produced primarily by "
+"contributors to <app>Xiphos</app> itself."
+msgstr ""
+"“模块”是 <app>Xiphos</app> 乃至 Sword 中的内容单元；Sword 模块是可在 Sword 应"
+"用程序中查看的资源。有多种类型：最重要的是圣经文本，还有字典和词典、注释以及"
+"普通书卷，其中任何一种都可能包含图片内容（例如地图集）。模块可以从本地目录结"
+"构（通常位于可移动介质上，例如光盘发行版）安装，或通过 ftp 从 Crosswire 等软"
+"件库远程安装；Crosswire 是 Sword 的发源地，所有官方认可的 Sword 模块都可以从"
+"那里获得。此外，许多其他模块可从非 Crosswire 的软件库获得。特别是 Xiphos 软件"
+"库，其中包含各种非官方模块，主要由 <app>Xiphos</app> 本身的贡献者制作。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-20-modules-introduction.page:54
+msgid ""
+"If you have other Sword applications installed, they will all share the same "
+"set of Sword modules that you install through the Module Manager."
+msgstr ""
+"如果你安装了其他 Sword 应用程序，它们都将共享你通过模块管理器安装的同一组 "
+"Sword 模块。"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-20-modules-introduction.page:56
+msgctxt "_"
+msgid ""
+"external ref='figures/module.png' md5='8fc6a3c1630aa4274328ed54b9dd866c'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-20-modules-introduction.page:58
+msgid ""
+"Notice the <gui>View Intro</gui> button above. You may see an introductory "
+"explanation of Module Manager operation at any time."
+msgstr ""
+"请注意上方的<gui>查看简介</gui>按钮。你可以随时查看模块管理器操作的介绍性说"
+"明。"
+
+#. (itstool) path: note/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-20-modules-introduction.page:62
+msgid ""
+"Once the module tree has focus, the <key>Left</key> and <key>Right</key> "
+"arrow keys collapse and expand a module group, which is convenient when many "
+"languages and categories are installed. The list of languages offered by the "
+"Module Manager has also been substantially extended, so modules in less "
+"common languages are now easier to find and select."
+msgstr ""
+"模块树获得焦点后，<key>Left</key> 和 <key>Right</key> 方向键可折叠和展开模块"
+"组，这在安装了多种语言和类别时非常方便。模块管理器提供的语言列表也已大幅扩"
+"充，因此现在更容易找到并选择使用较少见语言的模块。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-20-modules-introduction.page:69
+msgid ""
+"See <link xref=\"xiphos-11-interface#xiphos-module-tree-organize\"/> for "
+"ways to organize a long module list, including <gui>Favorites</gui>, hiding "
+"rarely-used modules, and grouping by category and/or language."
+msgstr ""
+"有关整理较长模块列表的方法，包括<gui>收藏夹</gui>、隐藏不常用的模块以及按类别"
+"和/或语言分组，请参见 <link xref=\"xiphos-11-interface#xiphos-module-tree-"
+"organize\"/>。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:6
+msgid "Configure the modules sources."
+msgstr "配置模块来源。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:38
+msgid "Sword Modules Configuration"
+msgstr "Sword 模块配置"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:41
+msgid "Module Sources Settings"
+msgstr "模块数据源设置"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:42
+msgctxt "_"
+msgid ""
+"external ref='figures/sword_sources.png' "
+"md5='4ff51ecb87737d8d611cdbfd8c0be02b'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:44
+msgid ""
+"There are other repositories available besides CrossWire's own, though the "
+"modules available from other repositories do not represent content "
+"officially sanctioned by Crosswire. On the web, see this page for list of "
+"those repositories known: <link href=\"http://www.crosswire.org/wiki/"
+"Module_Repositories\"> http://www.crosswire.org/wiki/Module_Repositories</"
+"link>"
+msgstr ""
+"除 CrossWire 自己的软件库外，还有其他软件库可用，不过其他软件库中的模块所代表"
+"的内容并未得到 Crosswire 的官方认可。在网上，请参阅此页面获取已知软件库的列"
+"表：<link href=\"http://www.crosswire.org/wiki/Module_Repositories\"> http://"
+"www.crosswire.org/wiki/Module_Repositories</link>"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:51
+msgid ""
+"The list of standard repositories is maintained at CrossWire. <app>Xiphos</"
+"app> normally auto-synchronizes with that list one time, when the user first "
+"puts the Module Manager to use. The list may change, as new repositories "
+"come into existence; occasional re-synchronization with the list is "
+"suggested, which is accomplished by clicking <gui>Load Standard </gui>."
+msgstr ""
+"标准软件库列表由 CrossWire 维护。<app>Xiphos</app> 通常会在用户第一次使用模块"
+"管理器时与该列表自动同步一次。随着新软件库的出现，列表可能会发生变化；建议偶"
+"尔重新与该列表同步，方法是单击<gui>载入标准 </gui>。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:60
+msgid "Sword Module Installations"
+msgstr "Sword 模块安装"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:61
+msgctxt "_"
+msgid ""
+"external ref='figures/sword_config.png' "
+"md5='cb36ea840290530b4912feef4f2c5079'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:63
+msgid ""
+"After you have selected your Install Source, click the <gui>Refresh</gui> "
+"button to cause <app>Xiphos</app> to find the module summary available from "
+"that source before moving on."
+msgstr ""
+"选择安装数据源后，请先单击<gui>刷新</gui>按钮，让 <app>Xiphos</app> 找到该来"
+"源提供的模块摘要，然后再继续。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:67
+msgid ""
+"Take note of the \"Install Destination\". In most cases, you will have a "
+"choice of a personal area or a system area. The details vary according to "
+"your operating system."
+msgstr ""
+"请注意“安装目标”。在大多数情况下，你可以选择个人区域或系统区域。具体细节因操"
+"作系统而异。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:72
+msgid "Linux"
+msgstr "Linux"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:73
+msgid ""
+"Unless you run as root (via su or sudo) you will only be able to install in "
+"your personal area, under ~/.sword. If you run as root, or change "
+"permissions on the shared directory, you will also be able to install "
+"modules for all users, typically in /usr/share/sword. There have been some "
+"requests for <app>Xiphos</app> to provide a means by which an ordinary (non-"
+"root) user could start the program, gain temporary write access to the "
+"system area while installing modules, and then revoke that access after "
+"installation is complete. Attempting to devise a scheme to do this has "
+"proven quite difficult, given the different superuser management schemes "
+"employed by various Linux distributions. Therefore, at this time there are "
+"no ongoing plans to try to solve this problem, and users are advised to "
+"enable write access to the system area outside <app>Xiphos</app>."
+msgstr ""
+"除非以 root 身份运行（通过 su 或 sudo），否则你只能安装到个人区域，即 ~/."
+"sword 下。如果以 root 身份运行，或更改共享目录的权限，你也可以为所有用户安装"
+"模块，通常位于 /usr/share/sword。有些用户曾要求 <app>Xiphos</app> 提供一种方"
+"式，使普通（非 root）用户可以启动程序，在安装模块时临时获得系统区域的写入权"
+"限，并在安装完成后撤销该权限。鉴于各种 Linux 发行版采用的超级用户管理方案不"
+"同，设计这样一种方案已被证明相当困难。因此，目前没有继续尝试解决此问题的计"
+"划，建议用户在 <app>Xiphos</app> 之外为系统区域启用写入权限。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:89
+msgid "Windows XP"
+msgstr "Windows XP"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:90
+msgid ""
+"You may install modules to a shared folder so the modules are available to "
+"all users. If you have previously used \"The Sword Project for Windows\", "
+"this folder will be \"C:\\Program Files\\Crosswire\\The Sword "
+"Project\\Sword\". Otherwise it will be \"C:\\Documents and Settings\\All "
+"Users\\Application Data\\Sword\". You may also install modules to a location "
+"that can only be seen by you. This location is \"C:\\Documents and "
+"Settings\\YOUR NAME\\Application Data\\Sword\"."
+msgstr ""
+"你可以将模块安装到共享文件夹，这样所有用户都可以使用这些模块。如果你以前使用"
+"过“The Sword Project for Windows”，该文件夹为“C:\\Program "
+"Files\\Crosswire\\The Sword Project\\Sword”。否则为“C:\\Documents and "
+"Settings\\All Users\\Application Data\\Sword”。你也可以将模块安装到仅你自己可"
+"见的位置。该位置为“C:\\Documents and Settings\\YOUR NAME\\Application "
+"Data\\Sword”。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:100
+msgid "Windows Vista 7, 8 and 10"
+msgstr "Windows Vista 7、8 和 10"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-21-modules-configuration.page:101
+msgid ""
+"The other versions of Windows works much the same as XP, except for the "
+"locations. The private location is \"C:\\Users\\YOUR "
+"NAME\\AppData\\Roaming\\Sword\". The shared location is \"C:"
+"\\ProgramData\\Sword\"."
+msgstr ""
+"其他版本的 Windows 与 XP 的工作方式大致相同，只是位置不同。私有位置为“C:"
+"\\Users\\YOUR NAME\\AppData\\Roaming\\Sword”。共享位置为“C:"
+"\\ProgramData\\Sword”。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-22-modules-install.page:6
+msgid "Installing and Updating Modules."
+msgstr "安装和更新模块。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-22-modules-install.page:38
+msgid "Sword Modules Installation"
+msgstr "Sword 模块安装"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-22-modules-install.page:40
+msgctxt "_"
+msgid ""
+"external ref='figures/sword_install.png' "
+"md5='4df85591fd8121255b1bbc498960f9f9'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-22-modules-install.page:42
+msgid ""
+"The module manager generates both a per-type module list as well as a "
+"parallel availability list. The latter is intended to make it easier to find "
+"new items without having to work one's way through the per-type list, one "
+"subtree at a time. Modules which are either not yet installed or updated "
+"beyond what is currently installed will appear in both lists."
+msgstr ""
+"模块管理器会生成按类型分类的模块列表，以及一个并行的可用模块列表。后者旨在让"
+"你更容易发现新项目，而无需逐个子树地翻阅按类型分类的列表。尚未安装或其更新版"
+"本高于当前已安装版本的模块，会同时出现在两个列表中。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-22-modules-install.page:48
+msgid ""
+"Modules that are already installed will show a checkmark beside them. If a "
+"fast search (\"lucene\") index is available, a magnifying glass will be "
+"displayed, otherwise an \"X\" will be shown; creation of the index is "
+"available on the Maintenance pane. Locked modules, which require that you "
+"purchase an unlock key from the module's copyright holder, will show a lock "
+"symbol. If there are modules installed for which a more recent version is "
+"available, a refresh icon will appear between the differing old and new "
+"version stamps. There may be an approximate size displayed, if the "
+"repository management provides this information, otherwise a question mark "
+"(\"-?-\") will be shown."
+msgstr ""
+"已安装的模块旁会显示一个对勾。如果存在快速搜索（“lucene”）索引，会显示放大"
+"镜，否则显示“X”；可在维护窗格中创建索引。需要向模块版权持有者购买解锁密钥的锁"
+"定模块，会显示锁形符号。如果已安装的模块有更新的版本，新旧版本标记之间会出现"
+"一个刷新图标。如果软件库管理提供了此信息，可能会显示大致的大小，否则将显示问"
+"号（“-?-”）。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-22-modules-install.page:59
+msgid ""
+"Select new modules to be installed by clicking the checkboxes and then the "
+"Install button at the bottom. Any number of modules may be requested for "
+"installation at one time."
+msgstr ""
+"单击复选框选择要安装的新模块，然后单击底部的“安装”按钮。一次可以请求安装任意"
+"数量的模块。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-22-modules-install.page:63
+msgid ""
+"If you acquire a locked module and have obtained the cipher key for it, the "
+"module is then unlocked in the main window: Open the module, which will "
+"probably appear blank, then using the right-click context menu, choose "
+"\"Unlock This Module.\""
+msgstr ""
+"如果你获得了锁定的模块并取得了它的密钥，则可在主窗口中解锁该模块：打开该模块"
+"（它可能显示为空白），然后使用右键上下文菜单，选择“解锁此模块”。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-23-modules-maintenance.page:6
+msgid "Removal, Archival and Indexing tasks."
+msgstr "移除、存档和索引任务。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-23-modules-maintenance.page:38
+msgid "Sword Modules Maintenance"
+msgstr "Sword 模块维护"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-23-modules-maintenance.page:40
+msgctxt "_"
+msgid ""
+"external ref='figures/sword_remove.png' "
+"md5='4f113313748744fc55817623327eabc6'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-23-modules-maintenance.page:42
+msgid ""
+"Several maintenance functions are available: Removal, archival, index, and "
+"index deletion."
+msgstr "提供多项维护功能：移除、存档、索引和删除索引。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-23-modules-maintenance.page:45
+msgid ""
+"Removal disposes of a module entirely. There is no recovery of the module "
+"unless you have previously archived a copy of it."
+msgstr ""
+"移除会彻底删除一个模块。除非你事先存档了该模块的副本，否则无法恢复该模块。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-23-modules-maintenance.page:48
+msgid ""
+"Archival is available for any module, although it is provided with personal "
+"commentaries specifically in mind. A *.zip of the module is left in the "
+"directory ~/.sword/zip. Archival prior to removal of personal commentaries "
+"is recommended, in order to be available for future re-install if the "
+"subject matter of the personal commentary becomes important again."
+msgstr ""
+"任何模块都可以存档，不过此功能主要是针对个人注释而设计的。模块的 *.zip 文件会"
+"保存在目录 ~/.sword/zip 中。建议在移除个人注释之前先存档，以便在个人注释的主"
+"题再次变得重要时可重新安装。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-23-modules-maintenance.page:54
+msgid ""
+"Indexing is provided so that the underlying Sword search support can create "
+"the index needed for the \"lucene\" fast-search functions. If the index is "
+"not created, plain multi-word search will still be available, but it will be "
+"much slower. With the index in place, searches through an entire Bible can "
+"take just a few seconds."
+msgstr ""
+"提供索引功能，是为了让底层的 Sword 搜索支持能创建“lucene”快速搜索功能所需的索"
+"引。如果未创建索引，仍可使用普通的多词搜索，但速度会慢得多。有了索引，搜索整"
+"本圣经只需几秒钟。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-23-modules-maintenance.page:60
+msgid "Indexes may be deleted as well."
+msgstr "索引也可以删除。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-24-modules-third-party.page:6
+msgid "Installing Non-Standard Modules."
+msgstr "安装非标准模块。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-24-modules-third-party.page:38
+msgid "Third-Party Modules"
+msgstr "第三方模块"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-24-modules-third-party.page:40
+msgid ""
+"Some resource modules in Sword Project format are available from sources "
+"other than Crosswire and not from a module manager-ready repository. "
+"Necessarily, installing such a module is a manual task."
+msgstr ""
+"一些 Sword 项目格式的资源模块可从 Crosswire 以外的来源获得，而不在可由模块管"
+"理器使用的软件库中。安装这类模块必然是一项手动任务。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-24-modules-third-party.page:44
+msgid ""
+"Modules are normally packaged as *.zip files; they contain a configuration "
+"file plus a number of data files. Installation of such a module is done by "
+"cd'ing to your personal Sword (not <app>Xiphos</app>) configuration "
+"directory, ~/.sword, and unzipping the file there. The configuration file "
+"will be left in \"mods.d\", and the module's data files will go into a "
+"subdirectory of \"modules\". Alternatively, if you have write access to the "
+"system Sword directory, typically /usr/share/sword, you may cd there instead "
+"before unzipping."
+msgstr ""
+"模块通常打包为 *.zip 文件；其中包含一个配置文件和若干数据文件。安装此类模块的"
+"方法是：cd 到你个人的 Sword（而非 <app>Xiphos</app>）配置目录 ~/.sword，并在"
+"该处解压文件。配置文件将放在“mods.d”中，模块的数据文件将放入“modules”的某个子"
+"目录中。或者，如果你对系统 Sword 目录（通常为 /usr/share/sword）有写入权限，"
+"也可以 cd 到那里再解压。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-24-modules-third-party.page:53
+msgid ""
+"Restart <app>Xiphos</app> after installing such a module, so that a fresh "
+"instance of the program can notice the new module in place."
+msgstr ""
+"安装此类模块后，请重新启动 <app>Xiphos</app>，以便程序的新实例能够发现新模"
+"块。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:5
+msgid "To conduct a quick search."
+msgstr "进行快速搜索。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:37
+msgid "Simple Searches"
+msgstr "简单搜索"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:39
+msgid ""
+"To conduct a quick search within the current Bible or commentary module, the "
+"Search Bar in the Sidebar should usually be adequate. Click either in the "
+"menu bar <guiseq><gui>Edit </gui><gui>Search</gui></guiseq> or in the "
+"Sidebar <guiseq><gui>Modules</gui><gui>Search</gui></guiseq> to access it."
+msgstr ""
+"要在当前圣经或注释模块中进行快速搜索，通常使用侧边栏中的搜索栏即可。在菜单栏"
+"中单击 <guiseq><gui>编辑 </gui><gui>搜索</gui></guiseq>，或在侧边栏中单击 "
+"<guiseq><gui>模块</gui><gui>搜索</gui></guiseq>，即可访问它。"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:44
+msgctxt "_"
+msgid ""
+"external ref='figures/interface_searchpane.png' "
+"md5='e053538e93543df454b3e9889630f6f2'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:46
+msgid "The <gui>Search Dialog</gui> consists of the following parts:"
+msgstr "<gui>搜索对话框</gui>由以下部分组成："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:50
+msgid "Search Key Entry box"
+msgstr "搜索关键字输入框"
+
+#. (itstool) path: item/p
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:53
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:87
+msgid "Search Module Selector"
+msgstr "搜索模块选择器"
+
+#. (itstool) path: item/p
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:56
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:97
+msgid "Search Type Selector"
+msgstr "搜索类型选择器"
+
+#. (itstool) path: item/p
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:59
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:140
+msgid "Search Options Checkbox"
+msgstr "搜索选项复选框"
+
+#. (itstool) path: item/p
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:62
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:148
+msgid "Search Scope Selector"
+msgstr "搜索范围选择器"
+
+#. (itstool) path: item/p
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:65
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:186
+msgid "Search Results View"
+msgstr "搜索结果视图"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:71
+msgid "Search Key Entry Box"
+msgstr "搜索关键字输入框"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:73
+msgid ""
+"Allows entry of the key for which you would like to search. The search key "
+"can be a word, part of a word, several words, a phrase, or a regular "
+"expression depending on the type of search selected. When the search key is "
+"entered and all other selections in the search dialog are complete, click "
+"the <gui>Find</gui> button to begin the search."
+msgstr ""
+"允许输入你想要搜索的关键字。根据所选的搜索类型，搜索关键字可以是一个单词、单"
+"词的一部分、多个单词、一个短语或一个正则表达式。输入搜索关键字并完成搜索对话"
+"框中的所有其他选择后，单击<gui>查找</gui>按钮开始搜索。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:79
+msgid ""
+"This search uses the optimized search method (see next section) if the "
+"module has previously been indexed, and will use AND semantics by default "
+"(matched verses contain all words you entered)."
+msgstr ""
+"如果模块之前已建立索引，此搜索将使用优化的搜索方法（见下一节），并且默认使用 "
+"AND 语义（匹配的经文包含你输入的所有单词）。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:89
+msgid ""
+"Allows selection of which modules you would like to search. Select "
+"<gui>Bible</gui> to search Bible versions or <gui>Commentary</gui> to search "
+"commentaries. Only the currently active module will be searched."
+msgstr ""
+"允许选择你想搜索的模块。选择<gui>圣经</gui>可搜索圣经译本，选择<gui>注释</"
+"gui>可搜索注释。仅搜索当前处于活动状态的模块。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:99
+msgid ""
+"Allows selection of the type of search. There are three search types "
+"available:"
+msgstr "允许选择搜索类型。共有三种搜索类型："
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:104
+msgid "<gui>Multi word</gui>"
+msgstr "<gui>多词组</gui>"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:106
+msgid ""
+"This type will match any verse that has all the words in the search key, "
+"regardless of where they appear in the verse. By default, \"lucene\" fast "
+"search will be used, with fallback to the slower plain version of multi-word "
+"search in the absence of an index."
+msgstr ""
+"此类型会匹配包含搜索关键字中所有单词的任何经文，而不论这些单词出现在经文中的"
+"什么位置。默认使用“lucene”快速搜索，在没有索引时则回退到较慢的普通多词搜索。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:113
+msgid "<gui>Regular expression</gui>"
+msgstr "<gui>正则表达式</gui>"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:114
+msgid ""
+"This search uses a regular expression as a search key. A regular expression "
+"is a pattern used to match a string of text. A regular expression can be "
+"used to find verses with words that match a particular pattern. For example "
+"the regular expression <input>[a-z]*iah </input> will match verses that "
+"contain the words Aiah, Ahaziah, Athaliah and Amariah."
+msgstr ""
+"此搜索使用正则表达式作为搜索关键字。正则表达式是用于匹配文本字符串的模式。正"
+"则表达式可用于查找包含与特定模式相匹配的单词的经文。例如，正则表达式 "
+"<input>[a-z]*iah </input> 将匹配包含单词 Aiah、Ahaziah、Athaliah 和 Amariah "
+"的经文。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:121
+msgid ""
+"A complete discussion of regular expressions is beyond the scope of this "
+"manual, but more information can be found in the grep man page."
+msgstr ""
+"关于正则表达式的完整讨论超出了本手册的范围，但更多信息可以在 grep 手册页中找"
+"到。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:126
+msgid "<gui>Exact phrase</gui>"
+msgstr "<gui>精确短语</gui>"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:128
+msgid ""
+"This type will match the search key exatly as entered. If the search key is "
+"<input>it is good</input>, this search would match a verse which contains "
+"\"<em>it is good</em>,\" but would not match a verse which contains "
+"\"<em>good</em>, and doeth <em>it</em> not, to him it <em>is</em> sin.\""
+msgstr ""
+"此类型会完全按照输入的内容匹配搜索关键字。如果搜索关键字是 <input>it is "
+"good</input>，此搜索将匹配包含“<em>it is good</em>,”的经文，但不会匹配包"
+"含“<em>good</em>, and doeth <em>it</em> not, to him it <em>is</em> sin.”的经"
+"文。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:142
+msgid ""
+"Allows selecting of search options. The only available option is <gui>Match "
+"case</gui>. Check this box to make the search case sensitive."
+msgstr ""
+"允许选择搜索选项。唯一可用的选项是<gui>区分大小写</gui>。选中此框可使搜索区分"
+"大小写。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:150
+msgid ""
+"Allows defining the range within the specificed module that will be "
+"searched. There are three search scopes available:"
+msgstr "允许在指定模块内定义要搜索的范围。共有三种搜索范围："
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:155
+msgid "<gui>No scope</gui>"
+msgstr "<gui>无范围</gui>"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:157
+msgid "This button causes the search to include the entire module."
+msgstr "此按钮使搜索包含整个模块。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:161
+msgid "<gui>Use bounds</gui>"
+msgstr "<gui>使用范围限制</gui>"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:163
+msgid ""
+"Selecting this button produces two dropdown selector boxes marked "
+"<gui>Lower</gui> and <gui>Upper</gui>. Select the first book to search in "
+"the <gui>Lower</gui> box and the last book to search in the <gui>Upper</gui> "
+"box. The search will begin with the <gui>Lower</gui> book and end with the "
+"<gui>Upper</gui> book and include all books in between."
+msgstr ""
+"选择此按钮会出现两个下拉选择框，分别标有<gui>下限</gui>和<gui>上限</gui>。在"
+"<gui>下限</gui>框中选择要搜索的第一卷书，在<gui>上限</gui>框中选择最后一卷"
+"书。搜索将从<gui>下限</gui>书卷开始，到<gui>上限</gui>书卷结束，并包含两者之"
+"间的所有书卷。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:170
+msgid ""
+"Chapter and verse numbers can be entered into the search bound boxes as well "
+"to further narrow the search."
+msgstr "还可以在搜索范围框中输入章和节的编号，以进一步缩小搜索范围。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:175
+msgid "<gui>Last search</gui>"
+msgstr "<gui>上次搜索</gui>"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:177
+msgid ""
+"Select this button to do a new search including only the verses returned as "
+"a result of the last search. Use this with a new search key to narrow the "
+"search further."
+msgstr ""
+"选择此按钮可进行一次新搜索，仅包含上次搜索所返回的经文。将其与新的搜索关键字"
+"一起使用，可进一步缩小搜索范围。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:188
+msgid ""
+"This shows a list of the current search results for previewing, navigation, "
+"or saving."
+msgstr "这里显示当前搜索结果的列表，可用于预览、导航或保存。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:192
+msgid "Preview"
+msgstr "预览"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:194
+msgid ""
+"To preview the search result, simply click on an individual result. The "
+"entry will show in the preview pane."
+msgstr "要预览搜索结果，只需单击某个结果。该条目将显示在预览窗格中。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:199
+msgid "Navigation"
+msgstr "导航"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:201
+msgid ""
+"Navigation to the search result can be done in two ways. To open the result "
+"in a new tab, middle-click the mouse. To open the result in the current tab, "
+"double-click the result."
+msgstr ""
+"有两种方式可以导航到搜索结果。要在新标签页中打开结果，请单击鼠标中键。要在当"
+"前标签页中打开结果，请双击该结果。"
+
+#. (itstool) path: item/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:207
+msgid "Save Results"
+msgstr "保存结果"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-30-search.page:209
+msgid ""
+"You may save your results as a list of bookmarks. To do this, right-click "
+"and select <gui>Save List</gui>. You will be prompted to enter a name for "
+"the folder that your results will be saved to. After you have saved the "
+"results, you may view them by going to your bookmarks and finding the folder "
+"you just named."
+msgstr ""
+"你可以将结果保存为书签列表。为此，请右键单击并选择<gui>保存列表</gui>。系统将"
+"提示你输入保存结果的文件夹名称。保存结果后，你可以到书签中找到刚才命名的文件"
+"夹来查看它们。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:6
+msgid "For complicated searches in the Advanced Search window."
+msgstr "在高级搜索窗口中进行复杂搜索。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:38
+msgid "Advanced Searches"
+msgstr "高级搜索"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:40
+msgid ""
+"More complicated searches might require the use of the advanced search "
+"functions, found under <guiseq><gui>Edit</gui><gui>Advanced Search</gui></"
+"guiseq>."
+msgstr ""
+"更复杂的搜索可能需要使用高级搜索功能，位于 <guiseq><gui>编辑</gui><gui>高级搜"
+"索</gui></guiseq>。"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:44
+msgctxt "_"
+msgid ""
+"external ref='figures/search_search.png' "
+"md5='0b59e6b35a7b8cac184fc8207780f489'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:46
+msgid ""
+"In <gui>Advanced Search</gui>, much more complex queries can be constructed, "
+"involving custom search ranges, custom lists of modules over which to "
+"search, regular expression matching (see next section), and attribute-based "
+"searches such as are found in footnotes or Strong's Hebrew and Greek "
+"dictionary references."
+msgstr ""
+"在<gui>高级搜索</gui>中，可以构建复杂得多的查询，包括自定义搜索范围、自定义要"
+"搜索的模块列表、正则表达式匹配（见下一节），以及基于属性的搜索，例如脚注或斯"
+"特朗希伯来文和希腊文词典引用中的内容。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:52
+msgid ""
+"The default search uses \"lucene\" fast searching. It is an optimized search "
+"requiring a pre-built index; see the <gui>Module Manager's</gui> Maintenance "
+"page for index creation. In the absence of an index, fallback to the slower, "
+"plain multi-word search will be done, or can be selected deliberately here. "
+"A web search will provide several references to the syntax needed to put to "
+"use the power of optimized Lucene search. A few examples follow:"
+msgstr ""
+"默认搜索使用“lucene”快速搜索。这是一种需要预先建立索引的优化搜索；请参阅<gui>"
+"模块管理器</gui>的维护页面了解如何创建索引。在没有索引时，会回退到较慢的普通"
+"多词搜索，也可以在此处特意选择该方式。在网上搜索可找到若干关于如何利用优化 "
+"Lucene 搜索强大功能所需语法的参考资料。下面给出一些示例："
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:59
+msgid ""
+"Simple Searches: just type in the words you want to search for. To return "
+"only verses that include all of the words, prefix the word with \"+\". So, "
+"in the KJV, you could find Psalm 23 by searching for \"+Lord +shepherd "
+"+want\". To search for an entire phrase, surround the entire phrase with "
+"quotes, like \"maketh me to lie down\" (note that quotes are unnecessary in "
+"all of the other examples)."
+msgstr ""
+"简单搜索：只需输入你要搜索的单词。要仅返回包含所有这些单词的经文，请在单词前"
+"加上“+”。因此，在 KJV 中，你可以通过搜索“+Lord +shepherd +want”找到诗篇 23 "
+"篇。要搜索整个短语，请用引号将整个短语括起来，例如“maketh me to lie down”（请"
+"注意，在所有其他示例中都不需要引号）。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:66
+msgid ""
+"Single Letter Wildcard: to search for \"veil\" or \"vail\", use this syntax "
+"\"v?il\". The \"?\" represents a single character that could be anything. A "
+"more complex example returns both spellings for Isaiah used in the KJV. \"?"
+"saia?\" will return results for \"Isaiah\" and \"Esaias\"."
+msgstr ""
+"单字母通配符：要搜索“veil”或“vail”，请使用语法“v?il”。“?”代表可以是任何字符的"
+"单个字符。一个更复杂的例子可以同时返回 KJV 中使用的以赛亚的两种拼写。“?"
+"saia?”将返回“Isaiah”和“Esaias”的结果。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:71
+msgid ""
+"Multiple Letter Wildcard: to search for \"prophet\" or \"prophesy\" or "
+"\"prophecy\" or \"prophesied\", use this syntax \"prophe*\"."
+msgstr ""
+"多字母通配符：要搜索“prophet”、“prophesy”、“prophecy”或“prophesied”，请使用语"
+"法“prophe*”。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:74
+msgid ""
+"AND syntax: in the advanced search to return results for all of the search "
+"terms, you must put \"AND\" in between the terms. To continue our example, "
+"if we wish to search for any occurrence of Isaiah or Esaias that also "
+"mention either prophet, or prophecy, or prophesy, we can do a search like "
+"this: \"?saia? AND prophe*\"."
+msgstr ""
+"AND 语法：在高级搜索中，要返回包含所有搜索词的结果，必须在这些词之间加"
+"上“AND”。继续我们的例子，如果我们希望搜索同时提到 prophet、prophecy 或 "
+"prophesy 的、出现 Isaiah 或 Esaias 的任何位置，可以这样搜索：“?saia? AND "
+"prophe*”。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:80
+msgid ""
+"By default, two standard search ranges are defined, for Old and New "
+"Testament; you may wish to define others for e.g. \"Gospels\" or \"Paul's "
+"Epistles\". One custom module list containing only the first Bible found "
+"will be present. If desired, new searches can be performed across only the "
+"current results of the previous search. Any modules may be searched, "
+"including general books and even dictionaries, in any combination."
+msgstr ""
+"默认定义了两个标准搜索范围，分别用于旧约和新约；你可能希望再定义其他范围，例"
+"如“福音书”或“保罗书信”。系统会提供一个自定义模块列表，其中仅包含找到的第一本"
+"圣经。如果需要，可以仅在上一次搜索的当前结果中执行新的搜索。可以搜索任何模"
+"块，包括普通书卷甚至字典，也可以任意组合。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:87
+msgid ""
+"Note the tooltip in the screenshot above, for Attributes search. This "
+"qualifier is used to perform searches on attributes that are carried with "
+"verses, instead of verse content proper, such as footnote content or "
+"Strong's Hebrew and Greek references. If this button is selected, specific "
+"attribute qualifiers must be made in the Attribute Search tab, at the right "
+"end of the tab set. Strong's references are identified with a leading \"H\" "
+"or \"G\" and the numeric Strong's identifier. Thus, a search of KJV for "
+"Strong's Greek #140, using \"G140\", will return the single result of "
+"Matthew 12:18."
+msgstr ""
+"请注意上面截图中“属性”搜索的工具提示。此限定符用于对随经文携带的属性（而非经"
+"文内容本身）进行搜索，例如脚注内容或斯特朗希伯来文和希腊文引用。如果选中此按"
+"钮，则必须在位于标签页组最右端的“属性搜索”标签页中设定具体的属性限定符。斯特"
+"朗引用以前导的“H”或“G”加上斯特朗的数字编号来标识。因此，在 KJV 中使用“G140”搜"
+"索斯特朗希腊文 #140，将返回马太福音 12:18 这一个结果。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:96
+msgid ""
+"If you have indexed your modules, there is a much faster way to search for "
+"Strong's references. Enter your search preceded by \"lemma:\", so to search "
+"for Strong's Greek #140, enter \"lemma:G140\". You must have selected "
+"<gui>Optimized (\"Lucene\")</gui> for this to work."
+msgstr ""
+"如果你已为模块建立了索引，则有更快得多的方法搜索斯特朗引用。输入搜索内容时在"
+"前面加上“lemma:”，因此要搜索斯特朗希腊文 #140，请输入“lemma:G140”。你必须已选"
+"择<gui>已优化(\"Lucene\")</gui>才能使其生效。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:101
+msgid ""
+"Explanations of search syntax are available when either Optimized or "
+"Attribute search is selected."
+msgstr "选择“优化”或“属性”搜索时，可以查看搜索语法的说明。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:104
+msgid ""
+"The \"Find\" button also stops an in-progress search, as its tooltip "
+"indicates."
+msgstr "如其工具提示所示，“查找”按钮也可以停止正在进行的搜索。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:107
+msgid ""
+"Results will show in the <gui>Results</gui> tab. If you wish to show "
+"Strongs, Morphology, or Footnote tags, make those selections on the "
+"<gui>Attributes Search</gui> tab. Clicking once on the result will show the "
+"result in the <gui>Advanced Search</gui> previewer. Hovering over Strongs, "
+"Morphology, Footnote, or Cross-reference tags will show the results in the "
+"main previewer. Double-clicking a result will cause the current tab to "
+"navigate to that result. This applies to search results in general books and "
+"commentaries as well, but note that the respective tab must be visible."
+msgstr ""
+"结果将显示在<gui>结果</gui>标签页中。如果你想显示斯特朗、形态或脚注标签，请在"
+"<gui>属性搜索</gui>标签页中进行选择。单击一次结果会在<gui>高级搜索</gui>预览"
+"器中显示该结果。将鼠标悬停在斯特朗、形态、脚注或交叉引用标签上会在主预览器中"
+"显示结果。双击某个结果会使当前标签页导航到该结果。这同样适用于普通书卷和注释"
+"中的搜索结果，但请注意，相应的标签页必须可见。"
+
+#. (itstool) path: note/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-31-advanced-search.page:117
+msgid ""
+"Changes to some of the settings (e.g. scope of search, searched modules, "
+"etc.) in Advanced Search will affect the simple search via the side pane but "
+"not vice versa."
+msgstr ""
+"在高级搜索中更改某些设置（例如搜索范围、所搜索的模块等）会影响通过侧边栏进行"
+"的简单搜索，反之则不然。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:6
+msgid "Search Syntax using Regular Expression."
+msgstr "使用正则表达式的搜索语法。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:38
+msgid "Search Syntax"
+msgstr "搜索语法"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:40
+msgid ""
+"Regular expression searches provide a way to do simple or complex searches "
+"for strings that match a pattern or set of patterns (branches) separated by "
+"vertical bars \"|\". While a pattern can be built to look for a word or "
+"phrase, a simple pattern that consists of a word does not look for only that "
+"word but for any place the string of letters that make that word are found. "
+"A search for \"right\" will return verses that contain the word \"right\", "
+"but also \"<em>right</em>eous\", \"<em>right</em> eousness\", \"un<em>right</"
+"em>eous\", \"up<em>right</em>\" and even \"b<em>right</em>\". A search for "
+"\"hall not\" is not a search for \"hall\" AND \"not\" but for the string "
+"\"hall not\" with a space between the second \"l\" and the \"n\". The search "
+"for \"hall not\" will find occurrences of \"s<em>hall not</em>\"."
+msgstr ""
+"正则表达式搜索提供了一种方式，可以对匹配某个模式或由竖线“|”分隔的一组模式（分"
+"支）的字符串进行简单或复杂的搜索。虽然可以构建模式来查找某个单词或短语，但由"
+"单个单词构成的简单模式查找的并不只是该单词，而是任何出现构成该单词的字母串的"
+"地方。搜索“right”不仅会返回包含单词“right”的经文，还会返回包含“<em>right</"
+"em>eous”、“<em>right</em> eousness”、“un<em>right</em>eous”、“up<em>right</"
+"em>”甚至“b<em>right</em>”的经文。搜索“hall not”并不是搜索“hall”和“not”，而是"
+"搜索第二个“l”和“n”之间带一个空格的字符串“hall not”。搜索“hall not”会找"
+"到“s<em>hall not</em>”的出现之处。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:54
+msgid ""
+"The power of Regular Expressions is in the patterns (or templates) used to "
+"define a search. A pattern consists of ordinary characters and some special "
+"characters that are used and interpreted by a set of rules. Special "
+"characters include .\\[^*$?+. Ordinary (or simple) characters are any "
+"characters that are not special. The backslash, \"\\\", is used to convert "
+"special characters to ordinary and ordinary characters to special."
+msgstr ""
+"正则表达式的强大之处在于用来定义搜索的模式（或模板）。模式由普通字符和一些特"
+"殊字符组成，特殊字符按一套规则使用和解释。特殊字符包括 .\\[^*$?+。普通（或简"
+"单）字符是任何非特殊的字符。反斜杠“\\”用于将特殊字符转换为普通字符，以及将普"
+"通字符转换为特殊字符。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:61
+msgid ""
+"Example: the pattern \"<em>i. love\\.</em>\" will find sentences that end "
+"with \"h<em>i</em>s <em>love</em>\" or \"<em>i</em>n <em>love</em>\" or \" "
+"<em>i</em>s <em>love</em>\" followed by a period. The first period in \"i. "
+"love \\.\" is a special character that means allow any character in this "
+"position. The backslash in \"i. love\\.\" means that the period following it "
+"is not to be considered a special character, but is an ordinary period."
+msgstr ""
+"示例：模式“<em>i. love\\.</em>”将找到以“h<em>i</em>s <em>love</em>”、“<em>i</"
+"em>n <em>love</em>”或“ <em>i</em>s <em>love</em>”结尾并后跟句号的句子。“i. "
+"love \\.”中的第一个句点是特殊字符，表示在此位置允许任何字符。“i. love\\.”中的"
+"反斜杠表示其后的句点不应被视为特殊字符，而是一个普通的句点。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:71
+msgid "Rules for Regular Expression Search Requests"
+msgstr "正则表达式搜索请求的规则"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:74
+msgid ". The period matches any character."
+msgstr ". 句点匹配任何字符。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:77
+msgid ""
+"* The asterisk matches 0 or more characters of the preceding: set, character "
+"or indicated character."
+msgstr "* 星号匹配前面的集合、字符或所指定字符的 0 个或多个。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:81
+msgid ""
+"+ The plus sign matches 1 or more characters of the preceding: set, "
+"character or indicated character."
+msgstr "+ 加号匹配前面的集合、字符或所指定字符的 1 个或多个。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:85
+msgid ""
+"? The question mark matches 0 or 1 character of the preceding: set, "
+"character or indicated character."
+msgstr "? 问号匹配前面的集合、字符或所指定字符的 0 个或 1 个。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:89
+msgid ""
+"[ ] Square brackets match any one of the characters specified inside [ ]."
+msgstr "[ ] 方括号匹配括号内所指定字符中的任意一个。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:93
+msgid "^ A caret as the first character inside [ ] means NOT."
+msgstr "^ 位于 [ ] 内第一个位置的插入符表示“非”。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:96
+msgid "^ A caret beginning a pattern anchors the beginning of a line."
+msgstr "^ 位于模式开头的插入符锚定行的开头。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:100
+msgid "$ A dollar at the end of a pattern anchors the end of a line."
+msgstr "$ 位于模式末尾的美元符号锚定行的末尾。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:104
+msgid "| A vertical bar means logical OR."
+msgstr "| 竖线表示逻辑“或”。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:107
+msgid ""
+"( ) Parentheses enclose expressions for grouping. <em>Not supported!</em>"
+msgstr "( ) 圆括号用于括起表达式以进行分组。<em>不支持！</em>"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:111
+msgid ""
+"\\ A backslash can be used prior to any special character to match that "
+"character."
+msgstr "\\ 反斜杠可置于任何特殊字符之前，以匹配该字符本身。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:115
+msgid ""
+"\\ A backslash can be used prior to an ordinary character to make it a "
+"special character."
+msgstr "\\ 反斜杠可置于普通字符之前，使其成为特殊字符。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:122
+msgid "The Period"
+msgstr "句点"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:124
+msgid ""
+"The Period \".\" will match any single character even a space or other non-"
+"alphabet character. <em>s.t</em> matches <em>s</em>i<em>t</em>, <em>s</"
+"em>e<em>t</em>,<em> s</em>o<em>t</em>, etc., which could be located in "
+"<em>s</em>i<em>t</em>ting, compas<em>s</em>e<em>t</em>h and <em>s</"
+"em>o<em>t</em>tish <em>b..t</em> matches <em>b</em>oo<em>t</em>, <em>b</"
+"em>oa<em>t</em> and <em>b</em>ea<em>t foot.tool </em>matches <em>foot</"
+"em>s<em>tool </em>and <em>foot tool</em>."
+msgstr ""
+"句点“.”可匹配任何单个字符，甚至空格或其他非字母字符。<em>s.t</em> 匹配 "
+"<em>s</em>i<em>t</em>、<em>s</em>e<em>t</em>、<em> s</em>o<em>t</em> 等，这些"
+"可能位于 <em>s</em>i<em>t</em>ting、compas<em>s</em>e<em>t</em>h 和 <em>s</"
+"em>o<em>t</em>tish 中，<em>b..t</em> 匹配 <em>b</em>oo<em>t</em>、<em>b</"
+"em>oa<em>t</em> 和 <em>b</em>ea<em>t foot.tool </em>匹配 <em>foot</"
+"em>s<em>tool </em>和 <em>foot tool</em>。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:139
+msgid "The Asterisk"
+msgstr "星号"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:141
+msgid ""
+"The asterisk \"*\" matches zero or more characters of the preceding: set, "
+"character or indicated character. Using a period asterisk combination \".*\" "
+"after a commonly found pattern can cause the search to take a very long "
+"time, making the program seem to freeze. <em>be*n</em> matches<em> beeen, "
+"been, ben</em>, and <em>bn</em> which could locate Reu<em>ben</em> and "
+"She<em>bn</em>a."
+msgstr ""
+"星号“*”匹配前面的集合、字符或所指定字符的零个或多个。在常见模式之后使用句点星"
+"号组合“.*”可能导致搜索耗时很长，使程序看起来像是卡住了。<em>be*n</em> 匹配"
+"<em> beeen, been, ben</em> 和 <em>bn</em>，可定位到 Reu<em>ben</em> 和 "
+"She<em>bn</em>a。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:152
+msgid "The Plus Sign"
+msgstr "加号"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:154
+msgid ""
+"The Plus Sign \"+\" matches one or more characters of the preceding: set, "
+"character or indicated character. Using a period and plus sign combination "
+"\".+\" after a commonly found pattern can cause the search to take a very "
+"long time, making the program seem to freeze. <em>be+n</em> matches "
+"<em>beeen, been</em> and <em>ben</em>, but not <em>bn</em>."
+msgstr ""
+"加号“+”匹配前面的集合、字符或所指定字符的一个或多个。在常见模式之后使用句点加"
+"号组合“.+”可能导致搜索耗时很长，使程序看起来像是卡住了。<em>be+n</em> 匹配 "
+"<em>beeen, been</em> 和 <em>ben</em>，但不匹配 <em>bn</em>。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:165
+msgid "The Question Mark"
+msgstr "问号"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:167
+msgid ""
+"The Question Mark \"?\"matches zero or one character of the preceding: set, "
+"character or indicated character. <em>be?n</em> matches <em>ben</em> and "
+"<em>bn</em> but not <em>been</em>. <em>trees?</em> matches <em>trees</em> or "
+"<em>tree</em>."
+msgstr ""
+"问号“?”匹配前面的集合、字符或所指定字符的零个或一个。<em>be?n</em> 匹配 "
+"<em>ben</em> 和 <em>bn</em>，但不匹配 <em>been</em>。<em>trees?</em> 匹配 "
+"<em>trees</em> 或 <em>tree</em>。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:176
+msgid "The Square Brackets"
+msgstr "方括号"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:178
+msgid ""
+"The Square Brackets \"[]\" enclose a set of characters that can match. The "
+"period, asterisk, plus sign and question mark are not special inside the "
+"brackets. A minus sign can be used to indicate a range. If you want a caret "
+"\"^\" to be part of the range do not place it first after the left bracket "
+"or it will be a special character. To include a \"]\" in the set make it the "
+"first (or second after a special \"^\") character in the set. To include a "
+"minus sign in the set make it the first (or second after a special \"^\") or "
+"last character in the set. <em>s[eia]t</em> matches <em>set</em>, <em>sit</"
+"em>, and <em>sat</em>, but not <em>s</em>o<em>t</em>. <em>s[eia]+t </"
+"em>matches as above but also, <em>seat, seet, siet</em>, etc. <em>[a-d]</em> "
+"matches <em>a, b, c,</em> or <em>d</em>. <em>[A-Z]</em> matches any "
+"uppercase letter. [.;:?!] matches ., ;, :, ?, or ! but not a comma. [ ]^-] "
+"matches ] or ^ or -"
+msgstr ""
+"方括号“[]”括起一组可以匹配的字符。句点、星号、加号和问号在方括号内不是特殊字"
+"符。减号可用于表示范围。如果希望插入符“^”成为范围的一部分，请不要将其放在左括"
+"号后的第一个位置，否则它将成为特殊字符。要在集合中包含“]”，请将其放在集合的第"
+"一个位置（或在特殊的“^”之后的第二个位置）。要在集合中包含减号，请将其放在集合"
+"的第一个位置（或在特殊的“^”之后的第二个位置）或最后一个位置。<em>s[eia]t</"
+"em> 匹配 <em>set</em>、<em>sit</em> 和 <em>sat</em>，但不匹配 <em>s</"
+"em>o<em>t</em>。<em>s[eia]+t </em>的匹配与上述相同，另外还匹配 <em>seat, "
+"seet, siet</em> 等。<em>[a-d]</em> 匹配 <em>a, b, c,</em> 或 <em>d</em>。"
+"<em>[A-Z]</em> 匹配任何大写字母。[.;:?!] 匹配 .、;、:、? 或 !，但不匹配逗号。"
+"[ ]^-] 匹配 ] 或 ^ 或 -"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:200
+msgid "The Caret first in Square Brackets"
+msgstr "方括号内第一个位置的插入符"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:202
+msgid ""
+"If the Caret is the first character after the left bracket (\"[^\") it means "
+"NOT. <em>s[^io]t</em> matches <em>set, sat</em>, etc., but not <em>s</"
+"em>i<em>t</em> and <em>s</em>o<em>t</em>."
+msgstr ""
+"如果插入符是左括号后的第一个字符（“[^”），则表示“非”。<em>s[^io]t</em> 匹配 "
+"<em>set, sat</em> 等，但不匹配 <em>s</em>i<em>t</em> 和 <em>s</em>o<em>t</"
+"em>。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:210
+msgid "The Caret as Start of Line Anchor"
+msgstr "作为行首锚点的插入符"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:212
+msgid ""
+"If the Caret is the first character in a pattern (\"^xxx\") it anchors the "
+"pattern to the start of a line. Any match must be at the beginning of a "
+"line. Because of unfiltered formatting characters in some texts, this "
+"feature does not always work, but may if a few periods are placed after the "
+"caret to account for the formatting characters. <em>^In the beginning</em> "
+"matches lines that start with \"<em>In the beginning</em>\". (May need to "
+"use: <em>^.....In the beginning</em>)"
+msgstr ""
+"如果插入符是模式中的第一个字符（“^xxx”），则它将模式锚定到行的开头。任何匹配"
+"都必须位于行首。由于某些文本中存在未过滤的格式字符，此功能并不总是有效，但如"
+"果在插入符后放置几个句点来代表格式字符，则可能有效。<em>^In the beginning</"
+"em> 匹配以“<em>In the beginning</em>”开头的行。（可能需要使用：<em>^.....In "
+"the beginning</em>）"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:225
+msgid "The Dollar Sign as End of Line Anchor"
+msgstr "作为行尾锚点的美元符号"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:227
+msgid ""
+"If the Dollar Sign is the last character (\"xxx$\") in a pattern it anchors "
+"the pattern to the end of a line. Any match must be at the end of a line. "
+"Because of unfiltered formatting characters in some texts, this feature does "
+"not always work, but may if a few periods are placed before the dollar sign "
+"to account for the formatting characters. <em>Amen\\.$</em> matches lines "
+"that end with \"<em>Amen.</em>\" (May need to use Amen\\....$, "
+"Amen\\..........$, or even Amen\\....................$)"
+msgstr ""
+"如果美元符号是模式中的最后一个字符（“xxx$”），则它将模式锚定到行的末尾。任何"
+"匹配都必须位于行尾。由于某些文本中存在未过滤的格式字符，此功能并不总是有效，"
+"但如果在美元符号前放置几个句点来代表格式字符，则可能有效。<em>Amen\\.$</em> "
+"匹配以“<em>Amen.</em>”结尾的行（可能需要使用 Amen\\....$、Amen\\..........$，"
+"甚至 Amen\\....................$）"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:240
+msgid "The Vertical Bar"
+msgstr "竖线"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:242
+msgid ""
+"The Vertical Bar \"|\" between patterns means OR. <em>John|Peter</em> "
+"matches <em>John</em> or <em>Peter. John .*Peter|Peter .*John</em> matches "
+"<em>John</em> ... <em>Peter</em> or <em>Peter</em> ... <em>John</em>. (.* "
+"slows a search) <em>pain|suffering|sorrow</em> matches <em>pain</em>, or "
+"<em>suffering</em>, or <em>sorrow</em>."
+msgstr ""
+"模式之间的竖线“|”表示“或”。<em>John|Peter</em> 匹配 <em>John</em> 或 "
+"<em>Peter. John .*Peter|Peter .*John</em> 匹配 <em>John</em> ... <em>Peter</"
+"em> 或 <em>Peter</em> ... <em>John</em>。（.* 会减慢搜索速度）<em>pain|"
+"suffering|sorrow</em> 匹配 <em>pain</em>、<em>suffering</em> 或 <em>sorrow</"
+"em>。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:254
+msgid "The Parentheses"
+msgstr "圆括号"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:256
+msgid "<em>The use of Parentheses \"( )\" is not supported!</em>"
+msgstr "<em>不支持使用圆括号“( )”！</em>"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:262
+msgid "The Backslash Prior to a Special Character"
+msgstr "特殊字符前的反斜杠"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:263
+msgid ""
+"The Backslash prior to a special character (\"\\*\") indicates that the "
+"character is not being used in its special meaning, but is just to match "
+"itself. <em>amen\\.</em> matches <em>amen.</em> but not <em>amen</em>t and "
+"will not locate firm<em>amen</em>t."
+msgstr ""
+"特殊字符前的反斜杠（“\\*”）表示该字符不按其特殊含义使用，而只是匹配其本身。"
+"<em>amen\\.</em> 匹配 <em>amen.</em>，但不匹配 <em>amen</em>t，也不会定位到 "
+"firm<em>amen</em>t。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:271
+msgid "The Backslash Prior to an Ordinary Character"
+msgstr "普通字符前的反斜杠"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:274
+msgid ""
+"The Backslash prior to an ordinary character (\"\\o\") indicates that the "
+"character is not being used to match itself, but has special meaning."
+msgstr ""
+"普通字符前的反斜杠（“\\o”）表示该字符不再用于匹配其本身，而具有特殊含义。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:280
+msgid ""
+"\\b if use outside [ ] means word boundary. If used inside [ ] means "
+"backspace. <em>\\brighteous\\b</em> matches <em>righteous</em> but not "
+"un<em>righteous</em> or <em>righteous</em>ness."
+msgstr ""
+"\\b 在 [ ] 之外使用时表示单词边界。在 [ ] 之内使用时表示退格。"
+"<em>\\brighteous\\b</em> 匹配 <em>righteous</em>，但不匹配 un<em>righteous</"
+"em> 或 <em>righteous</em>ness。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:285
+msgid ""
+"\\B means non-word boundary. <em>\\Brighteous\\B</em> matches "
+"un<em>righteous</em>ness and un<em>righteous</em>ly but not <em>righteous</"
+"em>, un<em>righteous</em> or <em>righteous</em>ness."
+msgstr ""
+"\\B 表示非单词边界。<em>\\Brighteous\\B</em> 匹配 un<em>righteous</em>ness "
+"和 un<em>righteous</em>ly，但不匹配 <em>righteous</em>、un<em>righteous</em> "
+"或 <em>righteous</em>ness。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:291
+msgid "\\d means digit; same as [0-9]."
+msgstr "\\d 表示数字；等同于 [0-9]。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:294
+msgid "\\D means non-digit, same as [^0-9]."
+msgstr "\\D 表示非数字，等同于 [^0-9]。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:297
+msgid "\\s means space."
+msgstr "\\s 表示空格。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:300
+msgid "\\S means not a space."
+msgstr "\\S 表示非空格。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:303
+msgid "\\w means alphanumeric; same as [a-zA-Z0-9_]."
+msgstr "\\w 表示字母数字；等同于 [a-zA-Z0-9_]。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-32-search-syntax.page:306
+msgid "\\W means not alphanumeric; same as [^a-zA-Z0-9_]."
+msgstr "\\W 表示非字母数字；等同于 [^a-zA-Z0-9_]。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:6
+msgid "Study the original Greek and Hebrew Texts."
+msgstr "研究希腊文和希伯来文原文。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:39
+msgid "Original Language Research"
+msgstr "原文语言研究"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:43
+msgid "Installing Needed Modules"
+msgstr "安装所需的模块"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:45
+msgid ""
+"<app>Xiphos</app> is ideally suited for studying the original Greek and "
+"Hebrew. To get started, you will want the following modules:"
+msgstr ""
+"<app>Xiphos</app> 非常适合研究希腊文和希伯来文原文。要开始使用，你需要以下模"
+"块："
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:48
+msgid "From Crosswire Repository:"
+msgstr "来自 Crosswire 软件库："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:51
+msgid ""
+"StrongsHebrew Dictionary (or get StrongsRealHebrew from the Xiphos "
+"Repository)"
+msgstr "StrongsHebrew 字典（或从 Xiphos 软件库获取 StrongsRealHebrew）"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:55
+msgid ""
+"StrongsGreek Dictionary (or get StrongsRealGreek from the Xiphos Repository)"
+msgstr "StrongsGreek 字典（或从 Xiphos 软件库获取 StrongsRealGreek）"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:59
+msgid "Robinson Dictionary"
+msgstr "Robinson 字典"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:62
+msgid "KJV Bible"
+msgstr "KJV 圣经"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:66
+msgid "From Xiphos Repository:"
+msgstr "来自 Xiphos 软件库："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:69
+msgid ""
+"StrongsRealGreek Dictionary (same as StrongsGreek, but with Greek "
+"characters, B-Greek transliteration, and self-referencing links)"
+msgstr ""
+"StrongsRealGreek 字典（与 StrongsGreek 相同，但使用希腊文字符、B-Greek 音译以"
+"及自引用链接）"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:73
+msgid ""
+"StrongsRealHebrew Dictionary (same as StrongsHebrew, but with Hebrew "
+"characters and self-referencing links)"
+msgstr ""
+"StrongsRealHebrew 字典（与 StrongsHebrew 相同，但使用希伯来文字符以及自引用链"
+"接）"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:77
+msgid ""
+"InvertedStrongsRealGreek (key in or copy actual Greek word, rather than "
+"number)"
+msgstr "InvertedStrongsRealGreek（输入或复制实际的希腊文单词，而不是编号）"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:85
+msgid "Setting Up"
+msgstr "设置"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:87
+msgid ""
+"While still in the module manager, create indexes for all of the modules you "
+"just installed. Then close the module manager and open <guiseq><gui>Edit </"
+"gui><gui> Preferences</gui></guiseq> and go to <guiseq><gui>Modules</gui> "
+"<gui>Special</gui></guiseq> (see <link xref=\"xiphos-53-preferences-"
+"modules#xiphos-modules-special\"/>). Set your Hebrew and Greek lexicons "
+"according to what you installed, and while there, also set <gui>Default "
+"Hebrew Old Testament Morphology</gui> and <gui>Default Greek New Testament "
+"Morphology</gui> so that morphological codes resolve to their meaning even "
+"in modules without their own morphology dictionary link. Close preferences "
+"and open the KJV module. Turn on the module options <guiseq><gui>Right "
+"Click</gui><gui>Module Options</gui><gui>Show Strongs </gui></guiseq> and "
+"<guiseq><gui>Right Click</gui><gui>Module Options </gui><gui>Show "
+"Morphology</gui></guiseq>. You should see the Bible text change to show "
+"Strongs numbers underneath the appropriate English words. Hover over the "
+"numbers (or letters for morphology) with the mouse and you will see the "
+"definition displayed in the previewer pane. Click on the link and the "
+"definition will show in the dictionary pane. If you are using "
+"StrongsRealGreek or StrongsRealHebrew, you can click on any other number "
+"referenced in the definition and you will be taken to that entry."
+msgstr ""
+"仍在模块管理器中时，为刚刚安装的所有模块创建索引。然后关闭模块管理器，打开 "
+"<guiseq><gui>编辑 </gui><gui> 首选项</gui></guiseq>，转到 <guiseq><gui>模块</"
+"gui> <gui>特殊</gui></guiseq>（参见 <link xref=\"xiphos-53-preferences-"
+"modules#xiphos-modules-special\"/>）。根据你所安装的内容设置希伯来文和希腊文"
+"词典，同时还要设置<gui>默认希伯来文旧约形态</gui>和<gui>默认希腊文新约形态</"
+"gui>，这样即使在没有自带形态词典链接的模块中，形态代码也能解析为其含义。关闭"
+"首选项并打开 KJV 模块。打开模块选项 <guiseq><gui>右键单击</gui><gui>模块选项"
+"</gui><gui>显示斯特朗编号 </gui></guiseq> 和 <guiseq><gui>右键单击</gui><gui>"
+"模块选项 </gui><gui>显示形态</gui></guiseq>。你应该会看到圣经文本发生变化，在"
+"相应的英文单词下方显示斯特朗编号。将鼠标悬停在这些数字（或形态字母）上，你会"
+"看到定义显示在预览器窗格中。单击链接，定义将显示在字典窗格中。如果你使用的是 "
+"StrongsRealGreek 或 StrongsRealHebrew，可以单击定义中引用的任何其他编号，随即"
+"会转到该条目。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:111
+msgid "Searching for Strongs Numbers"
+msgstr "搜索斯特朗编号"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:113
+msgid ""
+"Choose <guiseq><gui>Edit</gui><gui>Advanced Search</gui></guiseq> or press "
+"<key>F3</key>. Under <gui>Search Type</gui>, select <gui>Optimized "
+"(\"Lucene\")</gui>. Click on the <gui>Attribute Search</gui> tab, and make "
+"check the box that says <gui>Strongs Numbers</gui>. Now click in the entry "
+"field at the top and search for the number you are looking for preceded by "
+"\"lemma:\" and \"G\" for Greek or \"H\" for Hebrew. So to look for the "
+"Hebrew word tsad-deek (6662), enter \"lemma:H6662\". Once the search is "
+"done, the results pane will be shown. Notice that when you click on a "
+"result, it will show the result in the preview pane, and the strong's "
+"numbers will show as well, following immediately after the words they match. "
+"Also note that hovering over these numbers will show the definition in the "
+"main preview pane."
+msgstr ""
+"选择 <guiseq><gui>编辑</gui><gui>高级搜索</gui></guiseq> 或按 <key>F3</key>。"
+"在<gui>搜索类型</gui>下，选择<gui>已优化(\"Lucene\")</gui>。单击<gui>属性搜索"
+"</gui>标签页，并勾选<gui>斯特朗编号</gui>复选框。现在，在顶部的输入框中单击，"
+"搜索你要查找的编号，前面加上“lemma:”，希腊文加“G”，希伯来文加“H”。因此，要查"
+"找希伯来文单词 tsad-deek (6662)，请输入“lemma:H6662”。搜索完成后，将显示结果"
+"窗格。请注意，单击某个结果时，会在预览窗格中显示该结果，斯特朗编号也会显示，"
+"紧跟在其所匹配的单词之后。另请注意，将鼠标悬停在这些数字上会在主预览窗格中显"
+"示定义。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:128
+msgid "Additional Modules"
+msgstr "附加模块"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:130
+msgid "For more advanced research, the following modules are also available:"
+msgstr "对于更高级的研究，还可以使用以下模块："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:134
+msgid ""
+"2TGreek (Xiphos Repository) : This module contains the entire Bible in "
+"Greek. It combines the LXX and Tischendorf8 NT into one easy-to-use module. "
+"In addition, it contains Strongs, Morphology,Greek Accents, and primary/"
+"secondary readings. As with all modules that include Strongs, <app>Xipho</"
+"app> displays 2TGreek in beautiful interlinear form."
+msgstr ""
+"2TGreek（Xiphos 软件库）：此模块包含完整的希腊文圣经。它将 LXX 和 "
+"Tischendorf8 新约合并为一个易于使用的模块。此外，它还包含斯特朗编号、形态、希"
+"腊文重音符号以及主要/次要读法。与所有包含斯特朗编号的模块一样，<app>Xipho</"
+"app> 以美观的逐行对照形式显示 2TGreek。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:142
+msgid ""
+"Elzevir Textus Receptus (Crosswire Repository) : 1624 edition with Strongs "
+"and Morphology"
+msgstr ""
+"Elzevir Textus Receptus（Crosswire 软件库）：1624 年版，含斯特朗编号和形态"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:145
+msgid ""
+"LXX (Crosswire Repository) : the Septuagint with Strongs, Morphology, and "
+"footnotes"
+msgstr "LXX（Crosswire 软件库）：七十士译本，含斯特朗编号、形态和脚注"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:149
+msgid ""
+"MorphGNT (Crosswire Repository) : This is derived from the morphologically "
+"parsed GNT provided by UPenn's CCAT. It was reformatted and error-corrected "
+"by James Tauber. It includes Greek accents and Morphology."
+msgstr ""
+"MorphGNT（Crosswire 软件库）：派生自宾夕法尼亚大学 CCAT 提供的形态标注 GNT。"
+"由 James Tauber 重新排版并纠错。包含希腊文重音符号和形态。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:155
+msgid ""
+"TR (Crosswire Repository) : This is the Textus Receptus with Strongs and "
+"Morphology"
+msgstr "TR（Crosswire 软件库）：带有斯特朗编号和形态的 Textus Receptus"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:159
+msgid ""
+"TischMorph (Xiphos Repository) : As described above, this has Strongs, "
+"Morphology, accents, and alternate readings."
+msgstr ""
+"TischMorph（Xiphos 软件库）：如上所述，包含斯特朗编号、形态、重音符号和异读。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:163
+msgid ""
+"WHNU (Crosswire Repository) : Westcott-Hort of 1881 with Strongs and "
+"Morphology"
+msgstr ""
+"WHNU（Crosswire 软件库）：1881 年的 Westcott-Hort 版，含斯特朗编号和形态"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:167
+msgid ""
+"GreekHebrew (Crosswire Repository) : This is a dictionary keyed to Strongs. "
+"It contains words in the LXX that are also found in the New Testament. In "
+"addition, it contains the equivalent Hebrew words also keyed to Strongs."
+msgstr ""
+"GreekHebrew（Crosswire 软件库）：这是一部以斯特朗编号为索引的字典。它包含七十"
+"士译本中同样出现在新约里的词语。此外，还包含同样以斯特朗编号为索引的对应希伯"
+"来文词语。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-33-original-language.page:173
+msgid ""
+"Didache (Crosswire Repository) : This is an early Christian treatise in "
+"Greek dated to the late first or early second century. It includes Strongs, "
+"Morphology, and Greek accents."
+msgstr ""
+"Didache（Crosswire 软件库）：这是一部早期基督教的希腊文论著，成书于一世纪末或"
+"二世纪初。包含斯特朗编号、形态和希腊文重音符号。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:5
+msgid "Build up a personal commentary."
+msgstr "建立个人注释。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:36
+msgid "Personal Commentary Editor"
+msgstr "个人注释编辑器"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:40
+msgid ""
+"To build up a personal commentary you will need to install the editable "
+"'Personal' sword module from the English Commentaries section. Right click "
+"it and choose <guiseq><gui>Edit</gui><gui>Note</gui><gui>Personal</gui></"
+"guiseq> in the menu."
+msgstr ""
+"要建立个人注释，你需要从英文注释部分安装可编辑的“Personal”Sword 模块。右键单"
+"击它，在菜单中选择 <guiseq><gui>编辑</gui><gui>笔记</gui><gui>Personal</"
+"gui></guiseq>。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:45
+msgid ""
+"An editor window similar to the <gui>Study Pad</gui> will appear. Edit your "
+"comment and save it; in the future it will appear as your comment to the "
+"relevant verse."
+msgstr ""
+"将出现一个类似<gui>学习笔记</gui>的编辑器窗口。编辑你的注释并保存；今后它将显"
+"示为你对相关经文的注释。"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:49
+msgctxt "_"
+msgid ""
+"external ref='figures/personal.png' md5='7de9e0ebcd82fc0c2440242f768db906'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:55
+msgid "Locationbar"
+msgstr "位置栏"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:58
+msgid "Synchronise Button"
+msgstr "同步按钮"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:61
+msgid "Bible Book, Chapter and Verse Selectors"
+msgstr "圣经书卷、章和节选择器"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:63
+msgid "Location Summary"
+msgstr "位置摘要"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:67
+msgid ""
+"Use the <gui>Synchronise Button</gui> to quickly change location of your "
+"editor to that of the underlying Bibletext or use the <gui>Book</gui>, "
+"<gui>Chapter</gui>, and <gui>Verse</gui> selectors to choose to edit your "
+"comment to one particular verse."
+msgstr ""
+"使用<gui>同步按钮</gui>可快速将编辑器的位置更改为底层圣经文本的位置，也可以使"
+"用<gui>书卷</gui>、<gui>章</gui>和<gui>节</gui>选择器，选择将你的注释编辑到某"
+"一节特定的经文。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:72
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:51
+msgid "Toolbar 1"
+msgstr "工具栏 1"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:75
+msgid "Font Size and Environment"
+msgstr "字体大小和环境"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:78
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:60
+msgid "Font Type"
+msgstr "字体类型"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:81
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:57
+msgid "Bold, Italics, Underscored, Crossed Out"
+msgstr "粗体、斜体、下划线、删除线"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:84
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:79
+msgid "Left, Centre and Right Bound"
+msgstr "左对齐、居中和右对齐"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:87
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:82
+msgid "Shift Paragraph Right or Left"
+msgstr "向右或向左移动段落"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:90
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:63
+msgid "Colour Selector"
+msgstr "颜色选择器"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:94
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:67
+msgid "Toolbar 2"
+msgstr "工具栏 2"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:97
+msgid "Save, Delete and Print"
+msgstr "保存、删除和打印"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:100
+msgid "Cut, Copy, Paste and Undo"
+msgstr "剪切、复制、粘贴和撤销"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:103
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:76
+msgid "Find and 'Find and Replace'"
+msgstr "查找和“查找并替换”"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:106
+msgid "Spellcheck"
+msgstr "拼写检查"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:110
+msgid ""
+"In order for spellcheck to be available, one of the languages under "
+"<guiseq><gui>Edit</gui><gui>Current languages</gui></guiseq> must be set."
+msgstr ""
+"要使用拼写检查，必须在 <guiseq><gui>编辑</gui><gui>当前语言</gui></guiseq> 下"
+"设置其中一种语言。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:113
+msgid ""
+"To create a link to other verses right click the text and choose <gui>Link.."
+"</gui>. In the pop-up window enter the link location and the module linked "
+"to."
+msgstr ""
+"要创建指向其他经文的链接，请右键单击文本并选择<gui>链接..</gui>。在弹出窗口中"
+"输入链接位置以及所链接的模块。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:117
+msgid ""
+"It is possible to rename a personal commentary to suit a particular subject "
+"of study for that commentary. Thus, multiple personal commentaries may be "
+"installed: Rename the existing personal commentary, and then re-install "
+"another instance of the personal commentary if desired. Personal commentary "
+"names can consist only of letters and digits, and cannot duplicate an "
+"existing module's name. Rename is accessible off the right-click menu."
+msgstr ""
+"可以重命名个人注释，使其适合该注释所研究的特定主题。因此，可以安装多个个人注"
+"释：重命名现有的个人注释，然后根据需要再重新安装另一个个人注释实例。个人注释"
+"的名称只能由字母和数字组成，且不能与现有模块的名称重复。可通过右键菜单进行重"
+"命名。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:124
+msgid ""
+"If the study embodied in a particular personal commentary is no longer "
+"needed, archival is available in the module manager, prior to removal, for "
+"possible future re-installation. See the module manager's Remove/Archive "
+"page. Any module may be archived, not just personal commentaries."
+msgstr ""
+"如果某个个人注释所体现的研究不再需要，可在移除之前在模块管理器中存档，以备将"
+"来可能重新安装。请参见模块管理器的“移除/存档”页面。任何模块都可以存档，而不仅"
+"限于个人注释。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:129
+msgid ""
+"Although there are 31,102 verses in standard versification, it is unlikely "
+"that more than a tiny fraction of all verses will have personal commentary "
+"attached to them. A verse list showing where personal commentary notes exist "
+"is available from <guiseq><gui>Right Click</gui><gui>Dump Pers.Comm.</gui></"
+"guiseq>."
+msgstr ""
+"虽然标准分节体系中共有 31,102 节经文，但不太可能有超过极小一部分经文附带个人"
+"注释。可通过 <guiseq><gui>右键单击</gui><gui>转储个人注释</gui></guiseq> 获得"
+"显示个人注释所在位置的经文列表。"
+
+#. (itstool) path: note/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-40-personal-commentary.page:136
+msgid ""
+"The created commentary page will be attached to an individual verse only. To "
+"write commentary pages from within <app>Xiphos</app>, attached to longer "
+"stretches of text use the <gui>Link</gui> function to link several pages "
+"together."
+msgstr ""
+"所创建的注释页面仅附加到单节经文。要在 <app>Xiphos</app> 中编写附加到较长文本"
+"段落的注释页面，请使用<gui>链接</gui>功能将多个页面链接在一起。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:5
+msgid ""
+"Collect and export Bible study material from Xiphos into other programmes."
+msgstr "收集 Xiphos 中的圣经研读资料并导出到其他程序。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:38
+msgid "The Studypad"
+msgstr "学习笔记"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:40
+msgid ""
+"The Studypad can be opened by choosing <guiseq><gui>File</gui><gui>Open "
+"StudyPad</gui></guiseq>"
+msgstr ""
+"可通过选择 <guiseq><gui>文件</gui><gui>打开学习笔记</gui></guiseq> 来打开学习"
+"笔记"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:43
+msgid "This is what the Studypad typically looks like:"
+msgstr "学习笔记通常如下所示："
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:45
+msgctxt "_"
+msgid ""
+"external ref='figures/studypad.png' md5='7a5daab71e5e7f830fab8edbaf3a2f11'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:47
+msgid ""
+"The Studypad will save into your working directory, making it useful for "
+"collecting and exporting information and Bible study material from "
+"<app>Xiphos</app> into other programmes."
+msgstr ""
+"学习笔记会保存到你的工作目录，因此可用于收集信息和圣经研读资料，并将其从 "
+"<app>Xiphos</app> 导出到其他程序。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:54
+msgid "Font Size and Level"
+msgstr "字体大小和级别"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:70
+msgid "New, Open, Save, Undo and Redo"
+msgstr "新建、打开、保存、撤销和重做"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-41-studypad.page:73
+msgid "Cut, Copy, Paste"
+msgstr "剪切、复制、粘贴"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:5
+msgid "Creating a journal or prayer list."
+msgstr "创建日记或祷告名单。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:38
+msgid "Journals and Prayer Lists"
+msgstr "日记和祷告名单"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:40
+msgid ""
+"<app>Xiphos</app> supports user-created and -editable modules to contain "
+"general content. Initially conceived as simple prayer lists, they have "
+"expanded to include daily journals and topic-outline content. The user can "
+"maintain prayer lists, or prepare sermons, or write any structured content "
+"desired."
+msgstr ""
+"<app>Xiphos</app> 支持由用户创建并可编辑的模块，用于包含一般内容。它们最初被"
+"设想为简单的祷告名单，后来扩展到包括每日日记和主题大纲内容。用户可以维护祷告"
+"名单，或准备讲道，或撰写任何所需的结构化内容。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:46
+msgid ""
+"To enable prayer list and journal support, see the Preferences dialog as "
+"previously described. There, in <guiseq><gui>General</gui><gui> Options </"
+"gui></guiseq>, check the item labeled <gui>Enable Prayer Lists</gui>. You "
+"will see a new item appear at the bottom of the sidebar's module list for "
+"\"Prayer Lists/Journals\"."
+msgstr ""
+"要启用祷告名单和日记支持，请参阅前面介绍的首选项对话框。在 <guiseq><gui>常规"
+"</gui><gui> 选项 </gui></guiseq> 中，勾选标有<gui>启用祷告名单</gui>的项。你"
+"会看到侧边栏模块列表底部出现一个新项目“祷告名单/日记”。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:52
+msgid ""
+"Right-click on this entry, and you will be offered a context menu to create "
+"new modules. All the offered options are of the same type, but what is "
+"offered is a variety of templates from which to work. There are 6 templates "
+"at this time."
+msgstr ""
+"右键单击该条目，将出现用于创建新模块的上下文菜单。所提供的所有选项属于同一类"
+"型，只是提供了多种可供使用的模板。目前共有 6 个模板。"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:57
+msgctxt "_"
+msgid ""
+"external ref='figures/journal.png' md5='a30886d47f4f7ea3ac190ccfe005904f'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:59
+msgid ""
+"Their structure is the same, but the offered templates provide a variety of "
+"hints regarding ways to organize content. <gui>Simple</gui> is trivial, and "
+"can be considered a mental Post-It note. <gui>Subject</gui> is useful as a "
+"more organized version. <gui>Monthly</gui> provides a per-month structure in "
+"which to track needed content. <gui>Daily Journal</gui> is a full 365-day "
+"calendar in which to track a personal journal or ongoing prayer needs. "
+"<gui>Outlined Topic</gui> is a full, expandable outline suitable for topics "
+"and subtopics. <gui>Book/Chapter</gui> is a book and chapter outline from "
+"Genesis through Revelation."
+msgstr ""
+"它们的结构相同，但所提供的模板就如何组织内容给出了各种提示。<gui>简单</gui>非"
+"常简单，可以看作一张心理便利贴。<gui>主题</gui>是更有条理的版本。<gui>每月</"
+"gui>提供按月划分的结构，用于记录所需内容。<gui>每日日记</gui>是完整的 365 天"
+"日历，可用于记录个人日记或持续的祷告需要。<gui>大纲主题</gui>是完整的可展开大"
+"纲，适用于主题和子主题。<gui>书卷/章节</gui>是从创世记到启示录的书卷和章节大"
+"纲。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:72
+msgid ""
+"Journals and prayer lists have the structure of a general book: If simply "
+"selected for display from the module list, they will appear in the usual "
+"subwindow for general books."
+msgstr ""
+"日记和祷告名单具有普通书卷的结构：如果只是在模块列表中选择它们进行显示，它们"
+"会出现在普通书卷常用的子窗口中。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:76
+msgid ""
+"Editing a journal or prayer list is done by right-clicking the module name "
+"to get its context menu, whose middle item is <gui>Open in Editor</gui> "
+"(also offered as a dedicated <gui>Edit</gui> item on the same context menu, "
+"for quicker access). The sections and subsections will be listed in the left "
+"margin. Click one, and the editor navigates to that section. The context "
+"menu on right-click of section keys provides for adding, deleting, and "
+"editing the names of sections and subsections."
+msgstr ""
+"编辑日记或祷告名单的方法是：右键单击模块名称以打开其上下文菜单，其中间项为"
+"<gui>在编辑器中打开</gui>（同一上下文菜单中也提供专用的<gui>编辑</gui>项，以"
+"便更快访问）。章节和子章节将列在左侧边栏中。单击其中一个，编辑器就会导航到该"
+"章节。在章节键上右键单击出现的上下文菜单，可用于添加、删除和编辑章节和子章节"
+"的名称。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:84
+msgid ""
+"If the general book subwindow is currently displaying the journal or prayer "
+"list being edited, it will synchronize with new content when <gui>Save</gui> "
+"is used."
+msgstr ""
+"如果普通书卷子窗口当前正在显示正在编辑的日记或祷告名单，则在使用<gui>保存</"
+"gui>时，它会与新内容同步。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:88
+msgid ""
+"As mentioned, these user-edited modules are in effect general books. This "
+"means they can be viewed in any Sword Project application. Thus, you can use "
+"these modules immediately in <app>BibleTime</app>, for example; or from the "
+"Module Manager's <gui>Maintenance</gui> page, you can archive a zip file to "
+"copy to a Windows system where you can then install the zip content as a "
+"module for the Windows user interface. Few other Sword Project applications "
+"provide for editing these modules, however, meaning that they will appear in "
+"such other applications as just ordinary general books."
+msgstr ""
+"如前所述，这些由用户编辑的模块实际上是普通书卷。这意味着可以在任何 Sword 项目"
+"应用程序中查看它们。因此，你可以立即在 <app>BibleTime</app> 中使用这些模块；"
+"或者在模块管理器的<gui>维护</gui>页面中，存档一个 zip 文件，复制到 Windows 系"
+"统，然后在那里将 zip 内容安装为 Windows 用户界面的模块。不过，很少有其他 "
+"Sword 项目应用程序提供编辑这些模块的功能，这意味着它们在其他应用程序中只会显"
+"示为普通书卷。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-42-journals.page:97
+msgid ""
+"In the future, it is planned that a module sharing facility will become "
+"available, by which user-edited modules such as these can be uploaded to "
+"become available to a wide audience. The current install repository facility "
+"will be expanded to provide upload as well as the existing download "
+"capability in order to support this. Thus, users will be able to share their "
+"sermons, Bible studies, and other personally-authored content with other "
+"Sword application users."
+msgstr ""
+"计划在将来提供模块共享功能，通过它可以上传此类由用户编辑的模块，使广大用户都"
+"能使用。为此，现有的安装软件库功能将得到扩展，除现有的下载功能外还提供上传功"
+"能。这样，用户就可以与其他 Sword 应用程序用户分享自己的讲道、圣经研读和其他个"
+"人创作的内容。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:5
+msgid ""
+"Bookmark verses, organize them with colored tags, and import bookmarks from "
+"other applications."
+msgstr "为经文添加书签，用彩色标签整理它们，并从其他应用程序导入书签。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:34
+msgid "Bookmarks and Tags"
+msgstr "书签和标签"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:36
+msgid ""
+"Bookmarks let you mark individual verses for quick return later. Press "
+"<keyseq><key>Alt</key><key>B</key></keyseq>, or use the right-click context "
+"menu in the <gui>Bible Text Pane</gui>, to open the bookmark dialog on the "
+"current verse. Bookmarks are listed in the <gui>Sidebar</gui>, where they "
+"can be organized into folders."
+msgstr ""
+"书签可让你标记个别经文，以便日后快速返回。按 <keyseq><key>Alt</key><key>B</"
+"key></keyseq>，或使用<gui>圣经文本窗格</gui>中的右键上下文菜单，即可在当前经"
+"文上打开书签对话框。书签列在<gui>侧边栏</gui>中，可在其中将它们整理到文件夹"
+"里。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:45
+msgid "Coloring Tag Folders"
+msgstr "为标签文件夹着色"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:46
+msgctxt "_"
+msgid ""
+"external ref='figures/bookmarks.png' md5='8b89efc549eb95c2f5b50e134316f768'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:47
+msgid ""
+"Bookmark folders (also called tag folders) can now be given a color. Right-"
+"click a folder in the bookmark list and choose a color for it. Every verse "
+"bookmarked into that folder is then highlighted in the chosen color directly "
+"in the <gui>Bible Text Pane</gui>, giving you an at-a-glance picture of how "
+"your tags are distributed through a passage, similar to highlighting a paper "
+"Bible with different colored pens for different themes."
+msgstr ""
+"书签文件夹（也称为标签文件夹）现在可以设置颜色。在书签列表中右键单击某个文件"
+"夹，并为其选择一种颜色。之后，加入该文件夹书签的每一节经文都会直接在<gui>圣经"
+"文本窗格</gui>中以所选颜色高亮显示，让你一目了然地看到标签在一段经文中的分布"
+"情况，类似于用不同颜色的笔为不同主题标记纸质圣经。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:54
+msgid ""
+"A verse that belongs to more than one colored tag folder, or that also "
+"carries a personal annotation, is resolved consistently so that only one "
+"color is shown; the bookmark dialog always shows you exactly which folder(s) "
+"a verse belongs to."
+msgstr ""
+"如果某节经文属于多个彩色标签文件夹，或者还带有个人注解，系统会以一致的方式处"
+"理，使其只显示一种颜色；书签对话框始终会准确显示某节经文属于哪些文件夹。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:61
+msgid "Navigating Multi-Verse References"
+msgstr "导航多节经文引用"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:62
+msgid ""
+"Bookmarks and cross-references that point to more than one verse (for "
+"example, a reference spanning several verses, or several distinct references "
+"bundled together) can be navigated one at a time from a popup menu, without "
+"first sending the whole list to the sidebar's verse list. Partial verse "
+"references are also resolved correctly when building this popup, instead of "
+"only whole-verse or whole-chapter references."
+msgstr ""
+"指向多节经文的书签和交叉引用（例如，跨越多节经文的引用，或捆绑在一起的多个不"
+"同引用），可以通过弹出菜单逐个导航，而无需先将整个列表发送到侧边栏的经文列"
+"表。构建此弹出菜单时，也能正确解析部分经文引用，而不仅仅是整节或整章的引用。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:75
+msgid "Importing Bookmarks From AndBible"
+msgstr "从 AndBible 导入书签"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-43-bookmarks.page:76
+msgid ""
+"If you also use <app>AndBible</app> (a Sword-compatible Bible app for "
+"Android) and want to bring its bookmarks into <app>Xiphos</app>, use the "
+"bookmark import function to read an AndBible bookmarks database file and "
+"convert it into <app>Xiphos</app> bookmarks. Locate the AndBible database "
+"file (copied from your Android device) when prompted, and the bookmarks it "
+"contains will be added to your existing <app>Xiphos</app> bookmarks."
+msgstr ""
+"如果你同时使用 <app>AndBible</app>（一款兼容 Sword 的 Android 圣经应用），并"
+"想将其书签导入 <app>Xiphos</app>，请使用书签导入功能读取 AndBible 书签数据库"
+"文件，并将其转换为 <app>Xiphos</app> 书签。出现提示时，请找到 AndBible 数据库"
+"文件（从你的 Android 设备复制而来），其中包含的书签将添加到你现有的 "
+"<app>Xiphos</app> 书签中。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:5
+msgid "Locale, General Preferences and StudyPad directory."
+msgstr "区域设置、常规首选项和学习笔记目录。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:38
+msgid "General Settings"
+msgstr "常规设置"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:41
+msgctxt "_"
+msgid ""
+"external ref='figures/preferences_general-misc.png' "
+"md5='55e7add8363577553e1f6f9a7740595c'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:43
+msgid ""
+"If you wish <app>Xiphos</app> to display its interface in a language other "
+"than the default, you may select one here. A restart will be required, so "
+"that the locale can be initialized."
+msgstr ""
+"如果你希望 <app>Xiphos</app> 以默认语言以外的语言显示其界面，可以在此处选择。"
+"需要重新启动，以便初始化区域设置。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:47
+msgid ""
+"If you enable <gui>Default Dictionary</gui>, then that named dictionary "
+"(chosen on the <gui>Special</gui> tab, see <link xref=\"xiphos-53-"
+"preferences-modules#xiphos-modules-special\"/>) module will always be used "
+"when double-clicking a word anywhere in <app>Xiphos</app>."
+msgstr ""
+"如果启用<gui>默认字典</gui>，则在 <app>Xiphos</app> 中任何位置双击单词时，将"
+"始终使用该指定字典（在<gui>特殊</gui>标签页中选择，参见 <link "
+"xref=\"xiphos-53-preferences-modules#xiphos-modules-special\"/>）模块。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:52
+msgid ""
+"Certain dictionary-style modules are <gui>Daily Devotionals</gui> whose keys "
+"are numerically in the form \"Month.Day\". If you have such a module "
+"installed and it has been selected as your preferred devotional (also on the "
+"<gui>Special</gui> tab), then you can ask that <app>Xiphos</app> display "
+"today's selection during startup, and it also populates the <link "
+"xref=\"xiphos-11-interface#xiphos-devotional\">Devotional tab</link>."
+msgstr ""
+"某些字典式模块是<gui>每日灵修</gui>，其键值为“月.日”形式的数字。如果你安装了"
+"此类模块，并已将其选为首选灵修（同样在<gui>特殊</gui>标签页中），则可以让 "
+"<app>Xiphos</app> 在启动时显示今天的内容，同时它也会填充<link "
+"xref=\"xiphos-11-interface#xiphos-devotional\">灵修标签页</link>。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:59
+msgid ""
+"If you enable <gui>Resize images</gui>, <app>Xiphos</app> will automatically "
+"resize image content in commentaries, general books, and dictionaries so as "
+"to fit the subwindow which contains them."
+msgstr ""
+"如果启用<gui>调整图片大小</gui>，<app>Xiphos</app> 将自动调整注释、普通书卷和"
+"字典中的图片内容大小，使其适应所在的子窗口。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:63
+msgid ""
+"<gui>Highlight current verse</gui>, if enabled, will cause <app>Xiphos </"
+"app> to substitute mere current verse colorization with a high-contrast "
+"alternate color scheme on the current verse. The colors used may be chosen "
+"from the color selector pane (see below)."
+msgstr ""
+"<gui>高亮显示当前经文</gui>启用后，将使 <app>Xiphos </app>用高对比度的替代配"
+"色方案，取代当前经文原本仅有的着色。所用的颜色可从颜色选择窗格中选择（见下"
+"文）。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:68
+msgid ""
+"<gui>Highlight user annotations</gui> uses inverted highlight color choices "
+"when marking user-annotated verses."
+msgstr ""
+"<gui>高亮用户注解</gui>在标记用户注解过的经文时，使用反色的高亮颜色选择。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:71
+msgid ""
+"By default, <gui>Cross-references</gui> go into the Previewer. Selecting "
+"this checkbox puts them into the verse list instead."
+msgstr ""
+"默认情况下，<gui>交叉引用</gui>会进入预览器。选中此复选框则改为放入经文列表。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:74
+msgid ""
+"Verse number display can be offset in several ways provided by the "
+"checkboxes."
+msgstr "可通过这些复选框，以多种方式偏移经文小节号码的显示。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:80
+msgid "Viewing A Whole Book"
+msgstr "查看整卷书"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-50-preferences-general-settings.page:81
+msgid ""
+"Normally the <gui>Bible Text Pane</gui> shows one chapter at a time. For "
+"continuous reading, or for searching visually through a book enable "
+"<gui>Display Whole Bible books</gui>, which renders every chapter of the "
+"current book in the pane at once. Unselect the option again to return to "
+"normal chapter-at-a-time display."
+msgstr ""
+"通常，<gui>圣经文本窗格</gui>一次显示一章。若要连续阅读，或在整卷书中直观地查"
+"找，请启用<gui>显示整卷圣经书卷</gui>，它会在窗格中一次性呈现当前书卷的所有"
+"章。再次取消选择该选项，即可恢复为一次显示一章的正常模式。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:5
+msgid "Controls for BibleSync."
+msgstr "BibleSync 的控制项。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:37
+msgid "BibleSync Settings"
+msgstr "BibleSync 设置"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:40
+msgctxt "_"
+msgid ""
+"external ref='figures/preferences_general-biblesync.png' "
+"md5='085cfd1f4fa059faebb0fe90ed10556d'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:42
+msgid ""
+"BibleSync is a shared navigation protocol using LAN multicast. It is useful "
+"for a single person when running Bible programs on multiple machines or "
+"devices, all of which you wish to navigate through the Bible together, or "
+"for a group working closely together, such as translators. Also, it has a "
+"\"lecture\" mode, where a speaker's Bible program induces the audience's "
+"programs to follow along. The difference in the modes regards who transmits "
+"and who receives navigation. In Personal mode, BibleSync navigation is both "
+"transmitted and received; as Speaker, it transmits only; as Audience, it "
+"receives only. The difference in the modes regards who transmits and who "
+"receives navigation. In Personal mode, BibleSync navigation is both "
+"transmitted and received; as Speaker, it transmits only; as Audience, it "
+"receives only."
+msgstr ""
+"BibleSync 是一种使用局域网多播的共享导航协议。当一个人在多台机器或设备上运行"
+"圣经程序、并希望它们一起在圣经中导航时，或者对于翻译人员等紧密合作的小组，它"
+"都很有用。此外，它还有“讲座”模式，由演讲者的圣经程序带动听众的程序同步跟随。"
+"各模式的区别在于谁发送、谁接收导航。在个人模式下，BibleSync 导航既发送又接"
+"收；作为演讲者时，仅发送；作为听众时，仅接收。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:55
+msgid ""
+"To enable BibleSync, select a mode from the radio buttons. Also, choose "
+"whether to accept navigation directly, so that <app>Xiphos</app> moves "
+"immediately to a specified verse, or whether incoming navigation is instead "
+"sent to the verse list, where you can decide whether to follow."
+msgstr ""
+"要启用 BibleSync，请通过单选按钮选择一种模式。另外，还要选择是直接接受导航，"
+"让 <app>Xiphos</app> 立即跳转到指定的经文，还是将传入的导航发送到经文列表，由"
+"你决定是否跟随。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:60
+msgid "If you use a firewall, you must punch a hole in it for UDP port 22272."
+msgstr "如果你使用防火墙，则必须为 UDP 端口 22272 开放通行。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:62
+msgid ""
+"If you run more than one BibleSync-compatible program on your computer and "
+"do not wish your activity among them to be shared on the local net, you can "
+"use Personal mode combined with the Private checkbox. This will tell "
+"<app>Xiphos</app> not to broadcast outside your system."
+msgstr ""
+"如果你在计算机上运行多个兼容 BibleSync 的程序，又不希望它们之间的活动在本地网"
+"络上共享，可以使用个人模式并配合“私有”复选框。这将告知 <app>Xiphos</app> 不要"
+"向系统外部广播。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:67
+msgid ""
+"You can send a verse list from the sidebar search or Advanced Search window "
+"via BibleSync; see the context (right-click) menu. A particularly good use "
+"case for this is when using a simpler Bible program, such as on a mobile "
+"device, with another such as <app>Xiphos</app> that has significant search "
+"capability: Do searches in <app>Xiphos</app> and send the resulting verse "
+"list to the mobile device. Be aware that size limitations on the protocol "
+"are small, and though a search may generate hundreds of results in the verse "
+"list, at most a few dozen will pass in the protocol to the receivers. For "
+"<app>Xiphos</app>, receipt of multi-references always induces indirect verse "
+"list navigation."
+msgstr ""
+"你可以通过 BibleSync 发送侧边栏搜索或高级搜索窗口中的经文列表；请参见上下文"
+"（右键单击）菜单。一个特别好的使用场景是：在使用较简单的圣经程序（例如移动设"
+"备上的程序）时，配合像 <app>Xiphos</app> 这样具有强大搜索功能的另一个程序："
+"在 <app>Xiphos</app> 中进行搜索，并将得到的经文列表发送到移动设备。请注意，该"
+"协议的大小限制很小，虽然一次搜索可能在经文列表中产生数百个结果，但协议中最多"
+"只能向接收方传递几十个。对于 <app>Xiphos</app>，收到多重引用时总是会引发间接"
+"的经文列表导航。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:78
+msgid ""
+"As of Biblesync 2.0.0, a simple chat facility is available, accessed using "
+"<keyseq><key>Ctrl</key><key>Alt</key><key>Shift</key><key>C</key> </keyseq>."
+msgstr ""
+"自 Biblesync 2.0.0 起，提供简单的聊天功能，可通过 <keyseq><key>Ctrl</"
+"key><key>Alt</key><key>Shift</key><key>C</key> </keyseq> 访问。"
+
+#. (itstool) path: page/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-51-preferences-biblesync.page:83
+msgid ""
+"<app>Xiphos</app> is the first Bible program with a BibleSync "
+"implementation; as such, its utility may be limited for now. Another Sword "
+"Project application, Bishop (for Android and iOS), also has gained support "
+"for BibleSync. Watch for other applications (not all being Sword "
+"applications) to provide support."
+msgstr ""
+"<app>Xiphos</app> 是第一个拥有 BibleSync 实现的圣经程序；因此，目前它的用途可"
+"能有限。另一个 Sword 项目应用程序 Bishop（适用于 Android 和 iOS）也已获得 "
+"BibleSync 支持。请留意其他应用程序（并非都是 Sword 应用程序）提供支持。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:5
+msgid "Setting Font Colors."
+msgstr "设置字体颜色。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:37
+msgid "Fonts And Colors"
+msgstr "字体和颜色"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:41
+msgid "Setting Font Colors"
+msgstr "设置字体颜色"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:44
+msgctxt "_"
+msgid ""
+"external ref='figures/preferences_fonts-color.png' "
+"md5='e0c49f18ad2977c89911ccc8bd69dcdd'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:46
+msgid ""
+"The <gui>Invert color pairs</gui> buttons are provided to make it easy, for "
+"example, to move the main window into \"night mode,\" with white text on "
+"black background."
+msgstr ""
+"<gui>反转颜色对</gui>按钮的作用是方便地将主窗口切换到“夜间模式”，即黑底白字。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:54
+msgid "Miscellaneous Font Settings"
+msgstr "其他字体设置"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:57
+msgctxt "_"
+msgid ""
+"external ref='figures/preferences_fonts-misc.png' "
+"md5='d4e558a85bae2fd4010deaba6a838680'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:59
+msgid ""
+"In individual modules' display, the right-click menu's <gui>Module Options</"
+"gui> selector provides font name and size selection."
+msgstr ""
+"在各个模块的显示中，右键菜单的<gui>模块选项</gui>选择器提供字体名称和大小的选"
+"择。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:62
+msgid ""
+"The base font size is the size initially chosen for all modules displayed by "
+"<app>Xiphos</app>. The verse number and individual modules' font size "
+"choices are relative to the base font size."
+msgstr ""
+"基础字体大小是 <app>Xiphos</app> 显示的所有模块最初选定的大小。经文小节号码和"
+"各个模块的字体大小选择都是相对于基础字体大小的。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:66
+msgid "The font name and size used for display is chosen from this order:"
+msgstr "显示所用的字体名称和大小按以下顺序选择："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:70
+msgid ""
+"The selection made via the context menu for the specific module, under "
+"<gui>Module Options</gui>."
+msgstr "通过该特定模块的上下文菜单，在<gui>模块选项</gui>下所做的选择。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:74
+msgid "The per-language selection made under Preferences, here."
+msgstr "此处在首选项中按语言所做的选择。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:77
+msgid "The module's own default selection, in its configuration file."
+msgstr "模块自身在其配置文件中的默认选择。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-52-preferences-fonts-colors.page:80
+msgid "The application default."
+msgstr "应用程序默认值。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:5
+msgid "Modules preferences."
+msgstr "模块首选项。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:38
+msgid "Module Settings"
+msgstr "模块设置"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:41
+msgid "Parallel"
+msgstr "类似"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:44
+msgctxt "_"
+msgid ""
+"external ref='figures/preferences_modules-parallel.png' "
+"md5='e5c9696ed867f1ce56cc73f438495348'"
+msgstr ""
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:45
+msgid ""
+"The <gui>Parallel</gui> tab lets you create sets of Bible books that you "
+"want to view side by side."
+msgstr "<gui>类似</gui>标签页可让你创建想要并排查看的圣经书卷集合。"
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:48
+msgctxt "_"
+msgid ""
+"external ref='figures/preferences_modules-misc.png' "
+"md5='cd4f698c54f54e511360d511a85ccdce'"
+msgstr ""
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:52
+msgid "Special"
+msgstr "特殊"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:54
+msgid ""
+"The <gui>Special</gui> tab gathers the default modules <app>Xiphos</app> "
+"falls back on for particular kinds of lookups, so you do not have to choose "
+"a source module every time:"
+msgstr ""
+"<gui>特殊</gui>标签页汇集了 <app>Xiphos</app> 在特定类型的查询时所采用的默认"
+"模块，这样你就不必每次都选择来源模块："
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:60
+msgid ""
+"<gui>Daily Devotional</gui> - the Daily Devotional module used to populate "
+"the <link xref=\"xiphos-11-interface#xiphos-devotional\">Devotional tab</"
+"link>."
+msgstr ""
+"<gui>每日灵修</gui> - 用于填充<link xref=\"xiphos-11-interface#xiphos-"
+"devotional\">灵修标签页</link>的每日灵修模块。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:65
+msgid ""
+"<gui>Hebrew Lexicon</gui> - the module consulted when you hover over a "
+"Strong number, so that Hebrew strong codes are shown."
+msgstr ""
+"<gui>希伯来文词典</gui> - 当你将鼠标悬停在斯特朗编号上时所查询的模块，用于显"
+"示希伯来文的斯特朗编码。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:70
+msgid ""
+"<gui>Greek Lexicon</gui> - the module consulted when you hover over a Strong "
+"number, so that Greek strong codes are shown."
+msgstr ""
+"<gui>希腊文词典</gui> - 当你将鼠标悬停在斯特朗编号上时所查询的模块，用于显示"
+"希腊文的斯特朗编码。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:77
+msgid ""
+"<gui>Hebrew Morphology Lexicon</gui> - the module consulted when you hover "
+"over an Old Testament in Hebrew morphology tag, so that Hebrew morphological "
+"codes resolve to their meaning even in Bible modules that do not carry their "
+"own morphology dictionary link."
+msgstr ""
+"<gui>希伯来文形态词典</gui> - 当你将鼠标悬停在希伯来文旧约形态标签上时所查询"
+"的模块，使希伯来文形态代码即使在没有自带形态词典链接的圣经模块中也能解析为其"
+"含义。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:83
+msgid ""
+"<gui>OT Greek Morphology Lexicon</gui> - the equivalent setting for Old "
+"Testament morphology tags, resolving Greek morphological codes (parts of "
+"speech, tense, case, etc.)."
+msgstr ""
+"<gui>旧约希腊文形态词典</gui> - 旧约形态标签的对应设置，用于解析希腊文形态代"
+"码（词性、时态、格等）。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:88
+msgid ""
+"<gui>NT Greek Morphology Lexicon</gui> - the equivalent setting for New "
+"Testament morphology tags, resolving Greek morphological codes (parts of "
+"speech, tense, case, etc.)."
+msgstr ""
+"<gui>新约希腊文形态词典</gui> - 新约形态标签的对应设置，用于解析希腊文形态代"
+"码（词性、时态、格等）。"
+
+#. (itstool) path: item/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:93
+msgid ""
+"<gui>Default Dictionary</gui> - the dictionary module used when you double-"
+"click a word anywhere in <app>Xiphos</app>, if the <gui>Default Dictionary</"
+"gui> option is enabled in <link xref=\"xiphos-50-preferences-general-"
+"settings\"/>."
+msgstr ""
+"<gui>默认字典</gui> - 如果在 <link xref=\"xiphos-50-preferences-general-"
+"settings\"/> 中启用了<gui>默认字典</gui>选项，则在 <app>Xiphos</app> 中任何位"
+"置双击单词时所使用的字典模块。"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-53-preferences-modules.page:100
+msgid ""
+"These selectors are populated from whatever suitable dictionary and "
+"devotional modules you already have installed; install one first from the "
+"Module Manager if the list is empty. See also <link xref=\"xiphos-33-"
+"original-language\"/> for setting these up as part of original-language "
+"study."
+msgstr ""
+"这些选择器会从你已安装的所有合适的字典和灵修模块中填充；如果列表为空，请先从"
+"模块管理器中安装一个。另请参见 <link xref=\"xiphos-33-original-language\"/>，"
+"了解如何在原文语言研究中设置这些选项。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-60-online-help.page:5
+msgid "Get help."
+msgstr "获取帮助。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-60-online-help.page:37
+msgid "Online Help"
+msgstr "在线帮助"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-60-online-help.page:41
+msgid "Users Mailing List"
+msgstr "用户邮件列表"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-60-online-help.page:43
+msgid ""
+"One way you can get help with <app>Xiphos</app> is using our low-traffic "
+"users' mailing list. You can sign up by clicking <link href=\"http://www."
+"crosswire.org/mailman/listinfo/xiphos-users/\">this link</link>. Once you "
+"are signed up, you can email the list with any problems you are having and "
+"other users or the developers will respond, typically within a day."
+msgstr ""
+"获得 <app>Xiphos</app> 帮助的一种方式是使用我们流量很低的用户邮件列表。你可以"
+"通过单击<link href=\"http://www.crosswire.org/mailman/listinfo/xiphos-users/"
+"\">此链接</link>注册。注册后，你可以向该列表发送电子邮件，说明你遇到的任何问"
+"题，其他用户或开发人员通常会在一天内回复。"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-60-online-help.page:53
+msgid "Live Chat"
+msgstr "在线聊天"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-60-online-help.page:55
+msgid ""
+"Another way to get help is with online chat. <app>Xiphos</app> has an IRC "
+"channel on libera.chat, #xiphos. If you don't know what that means, it's ok. "
+"Pull down the Help menu in <app>Xiphos</app> and use the Live Chat "
+"selection. It will open a browser window connected to the #xiphos channel. "
+"The chat name it gives you includes the version of <app>Xiphos</app> you're "
+"using. Accept that default or type a nickname, and join the chat. This is a "
+"chatroom where the developers and other users are available to help you with "
+"issues you may be having. Although many times someone will answer your "
+"question immediately, sometimes you may have to wait a few minutes or longer."
+msgstr ""
+"获得帮助的另一种方式是在线聊天。<app>Xiphos</app> 在 libera.chat 上有一个 "
+"IRC 频道 #xiphos。如果你不知道这是什么意思，没关系。拉下 <app>Xiphos</app> "
+"的“帮助”菜单，使用“在线聊天”选项。它会打开一个连接到 #xiphos 频道的浏览器窗"
+"口。它给你的聊天名称包含你所使用的 <app>Xiphos</app> 的版本。接受该默认名称，"
+"或输入一个昵称，然后加入聊天。这是一个聊天室，开发人员和其他用户可以在这里帮"
+"助你解决可能遇到的问题。虽然很多时候会有人立即回答你的问题，但有时你可能需要"
+"等待几分钟甚至更长时间。"
+
+#. (itstool) path: info/desc
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:8
+msgid "Credits and contact information."
+msgstr "致谢和联系信息。"
+
+#. (itstool) path: page/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:38
+msgid "Credits and Acknowledgment"
+msgstr "致谢和鸣谢"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:41
+msgid "License"
+msgstr "许可证"
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:53
+msgid "Authors of the <app>Xiphos</app> User Documentation"
+msgstr "<app>Xiphos</app> 用户文档的作者"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:54
+msgid "This manual was written by:"
+msgstr "本手册由以下人员撰写："
+
+#. (itstool) path: section/title
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:76
+msgid "Contact information"
+msgstr "联系信息"
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:77
+msgid "The <app>Xiphos</app> software and Manual:"
+msgstr "<app>Xiphos</app> 软件和手册："
+
+#. (itstool) path: section/p
+#: /home/cyrille/Documents/github/build/help/C/xiphos-90-credits.page:104
+msgid "The SWORD Project:"
+msgstr "SWORD 项目："
