@@ -91,30 +91,19 @@ src/main/xml.c
 src/webkit/wk-html.c
 src/xiphos_html/xiphos_html.c
 ## Glade files
-ui/bookmarks.glade
 [type: gettext/glade]ui/bookmarks.gtkbuilder
 [type: gettext/glade]ui/editor_link_dialog.gtkbuilder
 ui/editor_note.xml
 ui/editor_studypad.xml
-ui/export-dialog.glade
 [type: gettext/glade]ui/export-dialog.gtkbuilder
 [type: gettext/glade]ui/folder.gtkbuilder
-[type: gettext/glade]ui/gtk2_webedit.ui
 [type: gettext/glade]ui/gtk_webedit.ui
-ui/markverse.glade
 [type: gettext/glade]ui/markverse.gtkbuilder
-ui/module-manager.glade
 [type: gettext/glade]ui/module-manager.gtkbuilder
-ui/navbar_versekey.glade
 [type: gettext/glade]ui/navbar_versekey.gtkbuilder
-ui/prefs.glade
 [type: gettext/glade]ui/prefs.gtkbuilder
-ui/search-dialog.glade
 [type: gettext/glade]ui/search-dialog.gtkbuilder
-ui/selector-prefs.glade
 [type: gettext/glade]ui/selector-prefs.gtkbuilder
-ui/xi-export-bookmarks.glade
-ui/xi-menus.glade
 [type: gettext/glade]ui/xi-menus.gtkbuilder
 [type: gettext/glade]ui/xi-menus-popup.gtkbuilder
 
