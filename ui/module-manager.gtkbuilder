@@ -8,7 +8,7 @@
     <property name="title" translatable="yes">Module Manager</property>
     <property name="default_width">710</property>
     <property name="default_height">450</property>
-    <property name="icon">xiphos-x-16.png</property>
+    <property name="icon_name">xiphos</property>
     <property name="type_hint">normal</property>
     <signal name="destroy" handler="on_dialog_destroy" swapped="no"/>
     <child internal-child="vbox">
@@ -361,7 +361,7 @@
                           <object class="GtkImage" id="image2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="pixbuf">sword3.png</property>
+                            <property name="resource">/org/xiphos/ui/sword3.png</property>
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -1088,7 +1088,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Local Install Folder</property>
-    <property name="icon">xiphos-x-16.png</property>
+    <property name="icon_name">xiphos</property>
     <property name="type_hint">dialog</property>
     <property name="action">select-folder</property>
     <signal name="response" handler="on_filechooserdialog_response" swapped="no"/>

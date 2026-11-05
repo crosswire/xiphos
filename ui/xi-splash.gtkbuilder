@@ -22,7 +22,7 @@
               <object class="GtkImage" id="image1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">splash.png</property>
+                <property name="resource">/org/xiphos/ui/splash.png</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -40,7 +40,7 @@
                   <object class="GtkImage" id="image2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">gnome-windows.png</property>
+                    <property name="resource">/org/xiphos/ui/gnome-windows.png</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -52,7 +52,7 @@
                   <object class="GtkImage" id="image3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">sword.png</property>
+                    <property name="resource">/org/xiphos/ui/sword.png</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -64,7 +64,7 @@
                   <object class="GtkImage" id="image4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">gnome-session.png</property>
+                    <property name="resource">/org/xiphos/ui/gnome-session.png</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -76,7 +76,7 @@
                   <object class="GtkImage" id="image5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">gs2-48x48.png</property>
+                    <property name="resource">/org/xiphos/ui/gs2-48x48.png</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
