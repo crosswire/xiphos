@@ -115,6 +115,8 @@ es	Español
 et	Eesti Keel
 # Basque
 eu	Euskara
+# Even
+eve-Cyrl	Эвэды төрэн
 # Farsi (Persian)
 fa	فارسی
 # Finnish
@@ -182,6 +184,8 @@ iu	ᐃᓄᒃᑎᑐᑦ
 ja	日本語
 # Georgian
 ka	ქართული
+#Kabardian
+kbd-Cyrl	Адыгэбзэ
 # Kekchi
 kek	Q'eqchi'
 # Kikongo
