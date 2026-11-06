@@ -90,25 +90,24 @@ on_help_contents_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 #ifdef WIN32
 	const char *lang = g_getenv("LANG");
-	gchar *help_file =
-	    g_win32_get_package_installation_directory_of_module(NULL);
-	help_file = g_strconcat(help_file, "\0", NULL);
+	gchar *install_dir =
+		g_win32_get_package_installation_directory_of_module(NULL);
+	const char *chm = "xiphos_C.chm";
+	gchar *help_file;
+
+	if (lang == NULL)
+		lang = "C";
 	if (!strncmp(lang, "fr", 2))
-		help_file =
-		    g_build_filename(help_file, "share", "help",
-				     "xiphos_fr.chm", NULL);
+		chm = "xiphos_fr.chm";
 	else if (!strncmp(lang, "fa", 2))
-		help_file =
-		    g_build_filename(help_file, "share", "help",
-				     "xiphos_fa.chm", NULL);
+		chm = "xiphos_fa.chm";
 	else if (!strncmp(lang, "it", 2))
-		help_file =
-		    g_build_filename(help_file, "share", "help",
-				     "xiphos_it.chm", NULL);
-	else
-		help_file =
-		    g_build_filename(help_file, "share", "help",
-				     "xiphos_C.chm", NULL);
+		chm = "xiphos_it.chm";
+	else if (!strncmp(lang, "zh_CN", 5))
+		chm = "xiphos_zh_CN.chm";
+
+	help_file = g_build_filename(install_dir, "share", "help", chm, NULL);
+	g_free(install_dir);
 	xiphos_open_default(help_file);
 	g_free(help_file);
 #else
