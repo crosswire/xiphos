@@ -256,17 +256,16 @@ static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA *data)
  *    get date from xml bookmark and put into BOOKMARK_DATA structure
  *
  * Return value
- *   void
+ *   TRUE when the bookmark has the required attributes
  */
 
-static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA *data)
+static gboolean get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA *data)
 {
 	xmlChar *mod1;
 	xmlChar *key;
-	xmlChar *caption;
 	xmlChar *mod_desc;
 	xmlChar *description;
-	gchar buf[500];
+	gboolean valid = FALSE;
 
 	data->opened = bm_pixbufs->pixbuf_helpdoc;
 	data->closed = NULL;
@@ -274,13 +273,16 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA *data)
 	key = xmlGetProp(cur, (const xmlChar *)"key");
 	mod_desc = xmlGetProp(cur, (const xmlChar *)"moduledescription");
 	description = xmlGetProp(cur, (const xmlChar *)"description");
-	caption = xmlGetProp(cur, (const xmlChar *)"description");
-	if ((char *)caption) {
-		if (strlen((char *)caption) > 0) {
-			data->caption = g_strdup((char *)caption);
+
+	if (!mod1 || !key)
+		goto out;
+
+	if (description) {
+		if (*description) {
+			data->caption = g_strdup((char *)description);
 		} else {
-			sprintf(buf, "%s, %s", key, mod1);
-			data->caption = g_strdup((char *)buf);
+			data->caption = g_strdup_printf("%s, %s",
+						       (char *)key, (char *)mod1);
 		}
 	} else
 		data->caption = g_strdup((char *)key);
@@ -290,6 +292,18 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA *data)
 	data->module_desc = g_strdup((char *)mod_desc);
 	data->is_leaf = TRUE;
 	data->color = NULL;  /* leaves (bookmarks) never carry a color */
+	valid = TRUE;
+
+out:
+	if (mod1)
+		xmlFree(mod1);
+	if (key)
+		xmlFree(key);
+	if (mod_desc)
+		xmlFree(mod_desc);
+	if (description)
+		xmlFree(description);
+	return valid;
 }
 
 /******************************************************************************
@@ -371,9 +385,11 @@ static void add_node(xmlNodePtr cur, GtkTreeIter *parent)
 
 	for (work = cur->xmlChildrenNode; work; work = work->next) {
 		if (!xmlStrcmp(work->name, (const xmlChar *)"Bookmark")) {
-			p = g_new(BOOKMARK_DATA, 1);
-			get_xml_bookmark_data(work, p);
-			gui_add_item_to_tree(&iter, parent, p);
+			p = g_new0(BOOKMARK_DATA, 1);
+			if (get_xml_bookmark_data(work, p))
+				gui_add_item_to_tree(&iter, parent, p);
+			else
+				g_free(p);
 		} else if (!xmlStrcmp(work->name, (const xmlChar *)"Folder")) {
 			p = g_new(BOOKMARK_DATA, 1);
 			get_xml_folder_data(work, p);
@@ -411,9 +427,11 @@ void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar *file,
 
 	while (cur != NULL) {
 		if (!xmlStrcmp(cur->name, (const xmlChar *)"Bookmark")) {
-			p = g_new(BOOKMARK_DATA, 1);
-			get_xml_bookmark_data(cur, p);
-			gui_add_item_to_tree(&iter, parent, p);
+			p = g_new0(BOOKMARK_DATA, 1);
+			if (get_xml_bookmark_data(cur, p))
+				gui_add_item_to_tree(&iter, parent, p);
+			else
+				g_free(p);
 		} else {
 			p = g_new(BOOKMARK_DATA, 1);
 			get_xml_folder_data(cur, p);
