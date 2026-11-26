@@ -60,6 +60,13 @@ pkg_check_modules(Sqlite3 REQUIRED IMPORTED_TARGET
   "sqlite3"
   )
 
+# Speech Dispatcher (system TTS, Linux only; Windows uses SAPI)
+if(NOT WIN32)
+  pkg_check_modules(Speechd REQUIRED IMPORTED_TARGET
+    "speech-dispatcher"
+    )
+endif()
+
 
 # core dependencies
 if(WIN32)

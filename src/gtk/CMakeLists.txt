@@ -284,7 +284,7 @@ else()
   # only Linux builds link against speech lib.
   target_link_libraries(xiphos
     PRIVATE
-    -lspeechd
+    PkgConfig::Speechd
   )
 endif ()
 
@@ -293,13 +293,3 @@ endif ()
 install (TARGETS ${PROJECT_NAME}
   DESTINATION ${CMAKE_INSTALL_BINDIR}
   COMPONENT binaries)
-
-# Find Speech Dispatcher for TTS
-# pkg_check_modules(SPEECHD libspeechd)  # Commenté car .pc manquant
-if(TRUE)  # Force l'activation
-    target_include_directories(xiphos PRIVATE /usr/include/libspeechd)
-    add_definitions(-DHAVE_LIBSPEECHD)
-    message(STATUS "Speech Dispatcher found (manual) - TTS support enabled")
-else()
-    message(WARNING "Speech Dispatcher not found - TTS support disabled")
-endif()
