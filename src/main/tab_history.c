@@ -44,6 +44,15 @@
 #define BUTTON_BACK navbar_versekey.button_history_back
 #define BUTTON_FORW navbar_versekey.button_history_next
 
+static gboolean
+history_item_fits(const gchar *reference, const gchar *textmod,
+		  const gchar *commod)
+{
+	return reference && strlen(reference) < TABELEMENTLENGTH &&
+	       (!textmod || strlen(textmod) < TABELEMENTLENGTH) &&
+	       (!commod || strlen(commod) < TABELEMENTLENGTH);
+}
+
 /******************************************************************************
  * Name
  *  on_menu_historyitem_activate
@@ -147,6 +156,13 @@ void main_add_tab_history_item(gpointer data)
 	gint i;
 	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO *)data;
 
+	if (!history_item_fits(tab->text_commentary_key, tab->text_mod,
+			       tab->commentary_mod)) {
+		g_warning("Refusing invalid or oversized tab history item");
+		main_update_tab_history_menu(data);
+		return;
+	}
+
 	/* check to see if item is already in list
 	   if so do nothing except set button sensitivity */
 	for (i = 0; i < tab->history_items; ++i) {
@@ -167,14 +183,17 @@ void main_add_tab_history_item(gpointer data)
 	}
 
 	/* add item to history menu */
-	strcpy(tab->history_list[tab->history_items].verseref,
-	       tab->text_commentary_key);
+	g_strlcpy(tab->history_list[tab->history_items].verseref,
+		  tab->text_commentary_key,
+		  sizeof(tab->history_list[tab->history_items].verseref));
 	if (tab->text_mod)
-		strcpy(tab->history_list[tab->history_items].textmod,
-		       tab->text_mod);
+		g_strlcpy(tab->history_list[tab->history_items].textmod,
+			  tab->text_mod,
+			  sizeof(tab->history_list[tab->history_items].textmod));
 	if (tab->commentary_mod)
-		strcpy(tab->history_list[tab->history_items].commod,
-		       tab->commentary_mod);
+		g_strlcpy(tab->history_list[tab->history_items].commod,
+			  tab->commentary_mod,
+			  sizeof(tab->history_list[tab->history_items].commod));
 
 	tab->current_history_item = tab->history_items;
 	++tab->history_items;
@@ -202,6 +221,13 @@ void main_fake_tab_history_item(char *reference)
 {
 	PASSAGE_TAB_INFO *tab = cur_passage_tab;
 
+	if (!history_item_fits(reference, tab->text_mod,
+			       tab->commentary_mod)) {
+		g_warning("Refusing invalid or oversized tab history item");
+		main_update_tab_history_menu(tab);
+		return;
+	}
+
 	/* if we have hit max length, dispose of oldest */
 	if (tab->history_items == TABHISTORYLENGTH) {
 		int i;
@@ -212,13 +238,16 @@ void main_fake_tab_history_item(char *reference)
 	}
 
 	/* add item to history menu */
-	strcpy(tab->history_list[tab->history_items].verseref, reference);
+	g_strlcpy(tab->history_list[tab->history_items].verseref, reference,
+		  sizeof(tab->history_list[tab->history_items].verseref));
 	if (tab->text_mod)
-		strcpy(tab->history_list[tab->history_items].textmod,
-		       tab->text_mod);
+		g_strlcpy(tab->history_list[tab->history_items].textmod,
+			  tab->text_mod,
+			  sizeof(tab->history_list[tab->history_items].textmod));
 	if (tab->commentary_mod)
-		strcpy(tab->history_list[tab->history_items].commod,
-		       tab->commentary_mod);
+		g_strlcpy(tab->history_list[tab->history_items].commod,
+			  tab->commentary_mod,
+			  sizeof(tab->history_list[tab->history_items].commod));
 
 	++tab->history_items;
 	/* do not update what's current in history list. */
