@@ -435,6 +435,7 @@ GList *backend_module_mgr_list_remote_sources(void)
 					      (StatusReporter *)0,
 					      (SWBuf) "ftp",
 					      (SWBuf) ftp_password());
+	inst_mgr->setUnverifiedPeerAllowed(false);
 	inst_mgr->setUserDisclaimerConfirmed(true);
 
 	for (InstallSourceMap::iterator it =
@@ -568,6 +569,7 @@ void backend_init_module_mgr_config(void)
 	is.directory = "/ftpmirror/pub/sword/raw";
 
 	config["General"]["PassiveFTP"] = "true";
+	config["General"]["UnverifiedPeerAllowed"] = "false";
 	config["Sources"]["HTTPSSource"] = is.getConfEnt();
 	config.save();
 
@@ -764,6 +766,7 @@ void backend_init_module_mgr(const char *dir,
 				    statusReporter,
 				    (SWBuf) "ftp",
 				    (SWBuf) ftp_password());
+	installMgr->setUnverifiedPeerAllowed(false);
 	installMgr->setUserDisclaimerConfirmed(true);
 }
 
