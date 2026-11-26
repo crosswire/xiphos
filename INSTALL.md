@@ -81,6 +81,7 @@ dependencies installed:
     minizip                Minizip contrib in zlib
     sword >= 1.8.1         CrossWire Bible Society's Bible software
     sqlite                 SQLite database engine
+    speech-dispatcher      System text-to-speech (Linux only)
     xmllint                Validates an XML file against an XSD schema
     yelp-build             Creates HTML, EPUB, and other files from help files
 
@@ -235,7 +236,7 @@ Create a build directory as a sibling of the xiphos directory:
 
 ## 3. Install dependencies
 
-    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel webkit2gtk4.1-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel appstream desktop-file-utils itstool yelp yelp-tools libsoup3-devel libsqlite3-dev
+    $ sudo dnf install cmake gcc-c++ intltool make gtk3-devel webkit2gtk4.1-devel libidn-devel libxml2-devel libgsf-devel minizip-devel sword-devel libuuid-devel biblesync-devel appstream desktop-file-utils itstool yelp yelp-tools libsoup3-devel libsqlite3-dev speech-dispatcher-devel
 > **Note:** `gtkhtml3-devel` was retired in Fedora 41+ and must be installed manually to enable the cmake flag `-DGTKHTML`.
 
 
@@ -259,7 +260,7 @@ Build Xiphos On *Debian*, *Ubuntu*, or *Linux Mint*:
 
 ## 2. Install the required dependencies:
 
-    $ sudo apt-get install appstream cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libbiblesync-dev libenchant-2-dev libgail-3-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python3-dev swig uuid-dev uuid-runtime yelp-tools xzip libsqlite3-dev
+    $ sudo apt-get install appstream cmake g++ desktop-file-utils fp-utils git gsettings-desktop-schemas-dev intltool itstool libbiblesync-dev libenchant-2-dev libgail-3-dev libgtk-3-dev libminizip-dev libsword-dev libwebkit2gtk-4.1-dev libxml2-dev libxml2-utils make python3-dev swig uuid-dev uuid-runtime yelp-tools xzip libsqlite3-dev libspeechd-dev
 
 ## 3. Build and install:
 
