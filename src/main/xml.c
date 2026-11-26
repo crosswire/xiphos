@@ -263,7 +263,10 @@ void xml_add_bookmark_to_parent(xmlNodePtr parent,
 
 void xml_free_bookmark_doc(void)
 {
-	xmlFreeDoc(bookmark_doc);
+	if (bookmark_doc) {
+		xmlFreeDoc(bookmark_doc);
+		bookmark_doc = NULL;
+	}
 }
 
 /******************************************************************************
@@ -303,7 +306,6 @@ xmlNodePtr xml_load_bookmark_file(const xmlChar *bookmark_file)
 	if (xmlStrcmp(cur->name, (const xmlChar *)"SwordBookmarks")) {
 		fprintf(stderr,
 			_("wrong type, root node != SwordBookmarks\n"));
-		xmlFreeDoc(bookmark_doc);
 		return NULL;
 	}
 

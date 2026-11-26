@@ -562,12 +562,10 @@ void gui_load_tabs(const gchar *filename)
 			tmp_node = xmlDocGetRootElement(xml_doc);
 			if (tmp_node == NULL) {
 				gui_generic_warning_modal("Tabs document is empty.");
-				xmlFreeDoc(xml_doc);
 				error = TRUE;
 			} else if (xmlStrcmp(tmp_node->name,
 					     (const xmlChar *)"Xiphos_Tabs")) {
 				gui_generic_warning_modal("Tabs document has wrong type, root node != Xiphos_Tabs");
-				xmlFreeDoc(xml_doc);
 				error = TRUE;
 			}
 		}
