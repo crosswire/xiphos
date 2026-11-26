@@ -126,6 +126,7 @@ const char *AnalyzeForImageSize(const char *origtext,
 				GdkWindow *window);
 
 #ifdef WIN32
+gchar *main_local_media_url(const gchar *path);
 gchar *xiphos_win32_get_subdir(const gchar *subdir);
 #endif
 void utilities_parse_treeview(xmlNodePtr parent,

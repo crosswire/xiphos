@@ -350,13 +350,17 @@ const gchar *get_css_references(SWModule &module)
 					  default_stylefile, NULL);
 
 	if (g_file_test(css_file, G_FILE_TEST_EXISTS)) {
-		css += (string) "<link rel=\"stylesheet\" type=\"text/css\" href=\""
 #ifdef WIN32
-		       + "http://127.0.0.1:7878/" // see main.c (sob)
+		gchar *url = main_local_media_url(css_file);
+		if (url) {
+			css += (string) "<link rel=\"stylesheet\" type=\"text/css\" href=\""
+			       + url + "\" />";
+			g_free(url);
+		}
 #else
-		       + "file:"
+		css += (string) "<link rel=\"stylesheet\" type=\"text/css\" href=\""
+		       + "file:" + css_file + "\" />";
 #endif
-		       + css_file + "\" />";
 	}
 	g_free(css_file);
 
@@ -368,13 +372,17 @@ const gchar *get_css_references(SWModule &module)
 	css_file = g_build_filename(datapath, (prefcss ? prefcss : stylefile), NULL);
 
 	if (g_file_test(css_file, G_FILE_TEST_EXISTS)) {
-		css += (string) "<link rel=\"stylesheet\" type=\"text/css\" href=\""
 #ifdef WIN32
-		       + "http://127.0.0.1:7878/" // see main.c (sob)
+		gchar *url = main_local_media_url(css_file);
+		if (url) {
+			css += (string) "<link rel=\"stylesheet\" type=\"text/css\" href=\""
+			       + url + "\" />";
+			g_free(url);
+		}
 #else
-		       + "file:"
+		css += (string) "<link rel=\"stylesheet\" type=\"text/css\" href=\""
+		       + "file:" + css_file + "\" />";
 #endif
-		       + css_file + "\" />";
 	}
 	g_free(css_file); // get rid of old one first.
 
