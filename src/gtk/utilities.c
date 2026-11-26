@@ -1933,6 +1933,10 @@ const char *AnalyzeForImageSize(const char *origtext, int columns, GdkWindow *wi
 	gint image_x, image_y, window_x = -999, window_y = -999;
 	int image_retval;
 	gboolean warned_once = FALSE;
+#ifdef WIN32
+	gboolean local_media;
+	gchar *media_url;
+#endif
 
 	if (!resized_init) {
 		resized = g_string_new("");
@@ -1948,6 +1952,11 @@ const char *AnalyzeForImageSize(const char *origtext, int columns, GdkWindow *wi
 	for (resized = g_string_assign(resized, ""), trail = origtext
 						     /* and path was initialized just above */;
 	     path; path = (char *)strcasestr(path, IMGSRC_STRING)) {
+
+#ifdef WIN32
+		local_media = FALSE;
+		media_url = NULL;
+#endif
 
 		if (window_y == -999) {
 /* we have images, but we don't know bounds yet */
@@ -1987,11 +1996,8 @@ const char *AnalyzeForImageSize(const char *origtext, int columns, GdkWindow *wi
 		// some modules play fast-n-loose with proper file spec.
 		if (strncmp(path, "file://", 7) == 0) {
 #ifdef WIN32
-			/* due to need for local soup server */
 			path += 5;
-			resized =
-			    g_string_append(resized,
-					    "http://127.0.0.1:7878/");
+			local_media = TRUE;
 #else
 			path += 7;
 			resized = g_string_append(resized, "file://");
@@ -1999,9 +2005,7 @@ const char *AnalyzeForImageSize(const char *origtext, int columns, GdkWindow *wi
 		} else if (strncmp(path, "file:", 5) == 0) {
 			path += 5;
 #ifdef WIN32
-			resized =
-			    g_string_append(resized,
-					    "http://127.0.0.1:7878/");
+			local_media = TRUE;
 #else
 			resized = g_string_append(resized, "file:");
 #endif
@@ -2018,14 +2022,23 @@ const char *AnalyzeForImageSize(const char *origtext, int columns, GdkWindow *wi
 
 		*end = '\0';
 #ifdef WIN32
-		resized =
-		    g_string_append(resized,
-				    g_strdelimit(path, "\\", '/'));
+		g_strdelimit(path, "\\", '/');
+		image_retval = ImageDimensions(path, &image_x, &image_y);
+		if (local_media)
+			media_url = main_local_media_url(path);
+		resized = g_string_append(resized,
+					  local_media
+					      ? (media_url ? media_url : "about:blank")
+					      : path);
 #else
 		resized = g_string_append(resized, path);
-#endif
 		image_retval = ImageDimensions(path, &image_x, &image_y);
+#endif
 		*end = '"';
+
+#ifdef WIN32
+		g_free(media_url);
+#endif
 
 		resized = g_string_append_c(resized, '"');
 		path = end + 1;

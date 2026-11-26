@@ -64,7 +64,46 @@ GPid dbus_pid;
  * whose size we have already otherwise determined using local path.
  */
 
+#include <gio/gio.h>
 #include <libsoup/soup.h>
+
+static GHashTable *local_media_files;
+static gboolean local_media_server_ready;
+
+gchar *main_local_media_url(const gchar *path)
+{
+	gchar *canonical_path;
+	gchar *token;
+	gchar *basename;
+	gchar *escaped_basename;
+	gchar *url;
+
+	if (!local_media_server_ready || !path)
+		return NULL;
+	canonical_path = g_canonicalize_filename(path, NULL);
+	if (!g_file_test(canonical_path, G_FILE_TEST_IS_REGULAR)) {
+		g_free(canonical_path);
+		return NULL;
+	}
+
+	if (!local_media_files)
+		local_media_files =
+		    g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+
+	token = g_compute_checksum_for_string(G_CHECKSUM_SHA256,
+					      canonical_path, -1);
+	g_hash_table_replace(local_media_files, g_strdup(token), canonical_path);
+
+	basename = g_path_get_basename(canonical_path);
+	escaped_basename = g_uri_escape_string(basename, NULL, FALSE);
+	url = g_strdup_printf("http://127.0.0.1:7878/%s/%s", token,
+			      escaped_basename);
+
+	g_free(escaped_basename);
+	g_free(basename);
+	g_free(token);
+	return url;
+}
 
 static void
 server_callback_media(SoupServer *server,
@@ -76,12 +115,59 @@ server_callback_media(SoupServer *server,
 	char *contents;
 	gsize length;
 	GError *error = NULL;
-	gchar *real_path = path + 1;
+	gchar token[65];
+	const gchar *real_path;
+	const gchar *requested_name;
+	gchar *registered_name;
+	gchar *content_type;
+	gchar *mime_type;
 
-	if (!g_file_test(real_path, G_FILE_TEST_EXISTS))
+	if (g_strcmp0(msg->method, SOUP_METHOD_GET)) {
+		soup_message_set_status(msg, SOUP_STATUS_METHOD_NOT_ALLOWED);
 		return;
-	g_file_get_contents(real_path, &contents, &length, &error);
-	g_assert(!error);
+	}
+
+	/* Only serve paths explicitly registered by Xiphos itself. */
+	if (!path || path[0] != '/' || strlen(path) < 66 || path[65] != '/') {
+		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
+		return;
+	}
+	memcpy(token, path + 1, 64);
+	token[64] = '\0';
+	requested_name = path + 66;
+	real_path = local_media_files
+		? (const gchar *)g_hash_table_lookup(local_media_files, token)
+		: NULL;
+	registered_name = real_path ? g_path_get_basename(real_path) : NULL;
+	if (!real_path || !requested_name[0] || strchr(requested_name, '/') ||
+	    strchr(requested_name, '\\') ||
+	    g_strcmp0(requested_name, registered_name) ||
+	    !g_file_test(real_path, G_FILE_TEST_IS_REGULAR)) {
+		g_free(registered_name);
+		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
+		return;
+	}
+	g_free(registered_name);
+
+	if (!g_file_get_contents(real_path, &contents, &length, &error)) {
+		g_warning("Unable to read local media: %s",
+			  error ? error->message : "unknown error");
+		g_clear_error(&error);
+		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
+		return;
+	}
+
+	content_type = g_content_type_guess(real_path,
+					    (const guchar *)contents,
+					    length, NULL);
+	mime_type = content_type
+		? g_content_type_get_mime_type(content_type)
+		: NULL;
+	if (mime_type)
+		soup_message_headers_set_content_type(msg->response_headers,
+					      mime_type, NULL);
+	g_free(mime_type);
+	g_free(content_type);
 
 	soup_message_body_append(msg->response_body, SOUP_MEMORY_TAKE,
 				 contents, length);
@@ -113,7 +199,9 @@ int main(int argc, char *argv[])
 	gint base_step = 0; //needed for splash
 #ifdef WIN32
 	/* see comments on function immediately preceding. */
-	SoupServer *server;
+	SoupServer *server = NULL;
+	SoupAddress *loopback = NULL;
+	guint server_status;
 #endif
 #ifdef CHATTY
 	GTimer *total;
@@ -218,10 +306,31 @@ int main(int argc, char *argv[])
 	g_setenv("HOME", g_getenv("APPDATA"), TRUE);
 
 	/* see comments near top of file. */
-	server = soup_server_new(SOUP_SERVER_PORT, 7878, NULL);
-	soup_server_add_handler(server, "/", server_callback_media,
-				NULL, NULL);
-	soup_server_run_async(server);
+	loopback = soup_address_new("127.0.0.1", 7878);
+	if (loopback) {
+		server_status = soup_address_resolve_sync(loopback, NULL);
+		if (server_status == SOUP_STATUS_OK)
+			server = soup_server_new(SOUP_SERVER_INTERFACE,
+						 loopback, NULL);
+		else
+			g_warning("Unable to resolve local media address: %s",
+				  soup_status_get_phrase(server_status));
+		g_object_unref(loopback);
+	}
+	if (server) {
+		soup_server_add_handler(server, "/", server_callback_media,
+					NULL, NULL);
+		soup_server_run_async(server);
+		if (soup_server_get_listener(server))
+			local_media_server_ready = TRUE;
+		else {
+			g_warning("Unable to listen for local media requests");
+			g_object_unref(server);
+			server = NULL;
+		}
+	} else {
+		g_warning("Unable to create local media server");
+	}
 
 #ifdef HAVE_DBUS
 	/* we must start dbus-daemon on our own as well */
